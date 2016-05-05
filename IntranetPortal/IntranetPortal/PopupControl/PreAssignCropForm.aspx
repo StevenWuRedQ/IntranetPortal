@@ -38,28 +38,7 @@
                     <input  type="text" hidden="hidden" value="1234"/>
                     <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">
-                       <%-- <div data-options="dxTemplate: {name: 'detail'}">
-                            <div class="internal-grid-container">
-                                <div>Checks :</div>
-                                <div class="internal-grid" dx-data-grid="{
-				                    dataSource: data.Checks,
-				                    columnAutoWidth: true,
-                                    columns: ['PaybleTo', {
-                                        dataField: 'Amount',
-                                        format: 'currency', dataType: 'number', precision: 2
-                                        
-                                    }, {
-                                        dataField: 'Date',
-                                        caption:'Check Date',
-                                        dataType: 'date',
-                                        format: 'shortDate'
-                                    },{
-                                        dataField: 'Description'  
-                                    }]                
-			                    }">
-                                </div>
-                            </div>
-                        </div>--%>
+                      
                     </div>
                 </div>
             </div>
