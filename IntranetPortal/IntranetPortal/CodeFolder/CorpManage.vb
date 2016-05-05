@@ -37,11 +37,11 @@ Public Class CorpManage
         Dim count = CorporationEntity.GetAvailableCorpAmount(team)
 
         If count <= 5 Then
-            NotifyCorpIsLow(team)
+            NotifyCorpIsLow(team, count)
         End If
     End Function
 
-    Private Shared Sub NotifyCorpIsLow(team As String)
+    Private Shared Sub NotifyCorpIsLow(team As String, count As Integer)
         Dim templateName = "AvailableCorpsIsLowNotify"
 
         Dim users = Roles.GetUsersInRole("Entity-Manager")
@@ -55,6 +55,7 @@ Public Class CorpManage
         Dim emailData As New Dictionary(Of String, String)
         emailData.Add("UserName", emp.Name)
         emailData.Add("Team", team)
+        emailData.Add("Count", count)
 
         IntranetPortal.Core.EmailService.SendMail(Employee.GetEmpsEmails(emp), Employee.GetEmpsEmails(users), templateName, emailData)
     End Sub

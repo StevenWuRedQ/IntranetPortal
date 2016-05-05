@@ -35,6 +35,11 @@ Imports IntranetPortal.Data
 
     End Sub
 
+    <TestMethod>
+    Public Sub TestLowCorpEmail_SendEmailWithCount()
+        CorpManage.CheckAvailableCorp("GaliTeam")
+    End Sub
+
     ''' <summary>
     ''' AssignCorp testing
     ''' </summary>
