@@ -76,8 +76,8 @@ Public Class RulesService
         'Legal
         Rules.Add(New LegalFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Legal Follow up Rule"})
         Rules.Add(New ScanECourtsRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:10:00"), .RuleName = "Legal eCourt Email Scan Rule", .ExecuteNow = True})
-        Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Noon", .ExecuteOnWeekend = True})
-        Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Evening", .ExecuteOnWeekend = True})
+        'Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Noon", .ExecuteOnWeekend = True})
+        'Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Evening", .ExecuteOnWeekend = True})
         Rules.Add(New NoticeECourtRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Send ECourt Notify Email Rules", .ExecuteOnWeekend = True})
 
         'ShortSale
@@ -91,6 +91,10 @@ Public Class RulesService
 
         Dim days = 7 - DateTime.Today.DayOfWeek
         Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", days)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "Auction Properties Weekly Notify Rule", .ExecuteOnWeekend = True, .IsWeekly = True})
+
+        ' Auto Assign
+        Rules.Add(New AutoAssignRule With {.ExecuteOn = TimeSpan.Parse(String.Format("16:00:00", days)), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auto Sign Leads"})
+
         'Construction
         'Rules.Add(New ConstructionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("06:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Construction Notify Rule"})
 
@@ -162,7 +166,7 @@ Public Class RulesService
         Try
             If WorkingHours.IsWorkingDay(DateTime.Now) Then
                 'Run Rules
-                State.Rule.Execute()
+                ' State.Rule.Execute()
             Else
                 If State.Rule.ExecuteOnWeekend Then
                     State.Rule.Execute()

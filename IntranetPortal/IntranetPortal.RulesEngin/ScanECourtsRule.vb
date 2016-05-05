@@ -31,37 +31,39 @@ Public Class ScanECourtsRule
                     Log("There are an error happan get woring BBLE eCourt id: " & eCourt.Id)
                 End If
                 Dim SendList = {lcase.Attorney, lcase.ResearchBy}
-                    Dim eList = SendList.Where(Function(e) Not String.IsNullOrEmpty(e)).Select(Function(e) Employee.GetInstance(e)).ToList
+                Dim eList = SendList.Where(Function(e) Not String.IsNullOrEmpty(e)).Select(Function(e) Employee.GetInstance(e)).ToList
 
-                    eList.Add(legalManger)
-                    Dim emails = String.Join(";", eList.Select(Function(e) e.Email).Distinct.ToArray)
-                    Dim Users = String.Join(";", eList.Select(Function(e) e.Name).Distinct.ToArray)
-                    Dim maildata = New Dictionary(Of String, String)
-                    maildata.Add("IndexNumber", eCourt.IndexNumber)
-                    maildata.Add("Users", Users)
-                    maildata.Add("CaseName", lcase.CaseName)
-                    maildata.Add("BBLE", eCourt.BBLE)
-                    maildata.Add("AppearanceDate", eCourt.AppearanceDate)
+                eList.Add(legalManger)
+                Dim emails = String.Join(";", eList.Select(Function(e) e.Email).Distinct.ToArray)
+                Dim Users = String.Join(";", eList.Select(Function(e) e.Name).Distinct.ToArray)
+                Dim maildata = New Dictionary(Of String, String)
+                maildata.Add("IndexNumber", eCourt.IndexNumber)
+                maildata.Add("Users", Users)
+                maildata.Add("CaseName", lcase.CaseName)
+                maildata.Add("BBLE", eCourt.BBLE)
+                maildata.Add("AppearanceDate", eCourt.AppearanceDate)
 
-                    If (String.IsNullOrEmpty(Users)) Then
-                        Log("Can't get users for case BBLE: " & eCourt.BBLE)
-                    End If
-                    If (String.IsNullOrEmpty(emails)) Then
-                        Log("Can't get emails for case BBLE: " & eCourt.BBLE)
-                    End If
-                    Using client As New PortalService.CommonServiceClient
-                        client.SendEmailByTemplate(Users, "LegalScanECourtNotify", maildata)
-                    End Using
-                    'Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
-                    Log("Send email to  :" & Users & " for BBLE: " & lcase.BBLE)
+                If (String.IsNullOrEmpty(Users)) Then
+                    Log("Can't get users for case BBLE: " & eCourt.BBLE)
+                End If
+                If (String.IsNullOrEmpty(emails)) Then
+                    Log("Can't get emails for case BBLE: " & eCourt.BBLE)
+                End If
+                Using client As New PortalService.CommonServiceClient
+                    client.SendEmailByTemplate(Users, "LegalScanECourtNotify", maildata)
+                End Using
+                'Core.EmailService.SendMail(emails, Nothing, "LegalScanECourtNotify", maildata)
+                Log("Send email to  :" & Users & " for BBLE: " & lcase.BBLE)
 
-                Else
-                    Log("Can not find legal didn't send email please notice !")
+            Else
+                Log("Can not find legal didn't send email please notice !")
             End If
 
         Else
-            Log("Parse mail Failed ! email subject : " & msg.Subject & " Recived Date: " & msg.Date)
+            If (msg.Date IsNot Nothing AndAlso msg.Date > Date.Now.AddMinutes(-30)) Then
+                Log("Parse mail Failed ! email subject : " & msg.Subject & " Recived Date: " & msg.Date)
 
+            End If
         End If
         Return parseSuccess
     End Function

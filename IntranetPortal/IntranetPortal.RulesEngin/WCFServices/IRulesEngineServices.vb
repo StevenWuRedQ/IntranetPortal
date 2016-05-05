@@ -18,6 +18,7 @@ Imports System.Runtime.Serialization
 <ServiceKnownType(GetType(DOBComplaintsCheckingRule))>
 <ServiceKnownType(GetType(ScanECourtsRule))>
 <ServiceKnownType(GetType(ConstructionNotifyRule))>
+<ServiceKnownType(GetType(AutoAssignRule))>
 Public Interface IRulesEngineServices
 
     <OperationContract()>
