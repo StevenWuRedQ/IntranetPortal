@@ -17,6 +17,42 @@ Public Class DeedCorp
         End Using
     End Function
 
+
+    ''' <summary>
+    ''' Return all the DeepCorps
+    ''' </summary>
+    ''' <returns>The Corp List</returns>
+    Public Shared Function GetDeedCorps() As DeedCorp()
+        Using ctx As New PortalEntities
+            Return ctx.DeedCorps.ToArray
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Load the properties assigned to current Deed Corp
+    ''' </summary>
+    Public Sub LoadProperties()
+        Using ctx As New PortalEntities
+            Properties = ctx.DeedCorpProperties.Where(Function(d) d.EntityId = Me.EntityId).ToList
+        End Using
+    End Sub
+
+    ''' <summary>
+    ''' Return available deed corp to assign by randomly
+    ''' </summary>
+    ''' <returns>The Corp List</returns>
+    Public Shared Function GetNextAvailableCorp() As DeedCorp
+        Using ctx As New PortalEntities
+            Dim result = From dc In ctx.DeedCorps
+                         Let Amount = ctx.DeedCorpProperties.Where(Function(dcp) dcp.EntityId = dc.EntityId).Count
+                         Order By Amount Ascending
+                         Select dc
+                         Take (1)
+
+            Return result.FirstOrDefault
+        End Using
+    End Function
+
     ''' <summary> 
     ''' Return DeepCorp instance by Corp Id
     ''' </summary>

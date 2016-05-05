@@ -17,6 +17,24 @@ Imports IntranetPortal.Data
         Next
     End Sub
 
+    <TestMethod()> Public Sub GetNextAvailableCorps_ReturnCorp()
+
+        Dim corp = DeedCorp.GetNextAvailableCorp
+
+        Assert.IsNotNull(corp)
+
+        Dim corps = DeedCorp.GetDeedCorps().Select(Function(dc)
+                                                       dc.LoadProperties()
+                                                       Return dc
+                                                   End Function).OrderBy(Function(dc) dc.Properties.Count)
+
+        corp.LoadProperties()
+
+        Assert.AreEqual(corp.EntityId, corps(0).EntityId)
+
+        Assert.AreEqual(corp.Properties.Count, corps(0).Properties.Count)
+    End Sub
+
     ''' <summary>
     ''' Assign property Test
     ''' </summary>

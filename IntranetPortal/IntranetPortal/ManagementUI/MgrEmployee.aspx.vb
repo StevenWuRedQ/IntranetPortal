@@ -97,8 +97,8 @@ Public Class MgrEmployee
             emp.Description = e.NewValues("Description")
             emp.Active = e.NewValues("Active")
 
-            emp.CreateDate = DateTime.Now
-            emp.CreateBy = Page.User.Identity.Name
+            'emp.CreateDate = DateTime.Now
+            'emp.CreateBy = Page.User.Identity.Name
 
             Context.SaveChanges()
         End Using

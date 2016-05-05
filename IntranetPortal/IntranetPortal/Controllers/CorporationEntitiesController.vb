@@ -22,13 +22,27 @@ Namespace Controllers
         ' GET /api/CorporationEntities/DeedCorpsByTeam?team=GukasyanTeam
         <Route("api/CorporationEntities/DeedCorpsByTeam")>
         Function GetDeedCorpsByTeam(team As String) As IHttpActionResult
-            Dim corps = DeedCorp.GetTeamDeedCorps(team)
+            'Dim corps = DeedCorp.GetTeamDeedCorps(team)
 
-            If corps Is Nothing OrElse corps.Count = 0 Then
+            'If corps Is Nothing OrElse corps.Count = 0 Then
+            '    Return NotFound()
+            'End If
+            'Dim rand As New Random
+            'Return Ok(corps(rand.Next(corps.Count)))
+
+            Return GetAvailableDeedCorp()
+        End Function
+
+        ' GET /api/CorporationEntities/AvailableDeedCorp
+        <Route("api/CorporationEntities/AvailableDeedCorp")>
+        Function GetAvailableDeedCorp() As IHttpActionResult
+            Dim corp = DeedCorp.GetNextAvailableCorp
+
+            If corp Is Nothing Then
                 Return NotFound()
             End If
-            Dim rand As New Random
-            Return Ok(corps(rand.Next(corps.Count)))
+
+            Return Ok(corp)
         End Function
 
         ' POST /api/CorporationEntities/AssignDeedCorp?bble=4025010109 
