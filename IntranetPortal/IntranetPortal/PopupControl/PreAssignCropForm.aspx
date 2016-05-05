@@ -121,12 +121,13 @@
                             </li>--%>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
-                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
+                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask  />
                                     </li>
                                     <div ng-show="preAssign.NeedCheck">
                                         <li class="ss_form_item">
                                             <label class="ss_form_input_title">Type of Check request</label>
-                                            <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" ng-disabled="mode=='Edit'">
+                                            <%--ng-disabled="mode=='Edit'"--%>
+                                            <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" disabled="disabled">
                                                 <option>Short Sale</option>
                                                 <option>Straight Sale</option>
                                                 <option>Other</option>
