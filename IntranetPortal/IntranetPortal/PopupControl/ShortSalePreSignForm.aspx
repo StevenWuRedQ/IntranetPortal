@@ -325,7 +325,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <%--Deal Sheet--%>
