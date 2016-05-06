@@ -68,9 +68,8 @@ Public Class ImportAgentData
                 LoadLeads = LoadAgentLeads(agent, empId, ConvertLeadStatus(cbStatusFrom.Text))
             End If
 
-
-
         End If
+
         If (Not String.IsNullOrEmpty(BBLEList.Text)) Then
             LoadLeads = LoadBBLEsLeads(BBLEList.Text)
 
