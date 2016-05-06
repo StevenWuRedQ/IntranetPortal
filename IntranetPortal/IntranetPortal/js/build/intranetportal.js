@@ -1,3 +1,40 @@
+/*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
+
+function dxModel() {
+
+
+}
+
+function dxGridModel() {
+
+
+
+}
+
+
+/**
+ * [dxGridColumnModel description]
+ * @param  {dxGridColumn Option} opt [dxGridColumn Option]
+ * @return {[dxGridColumnModel]}     [return model have dx Grid column with special handler]
+ */
+function dxGridColumnModel(opt) {
+
+    _.extend(this, opt);
+    if (this.dataType == 'date') {
+
+        this.customizeText = this.customizeTextDateFunc;
+    }
+
+}
+dxGridColumnModel.prototype.customizeTextDateFunc = function(e) {
+
+    var date = e.value
+    if (date) {
+        return PortalUtility.FormatISODate(new Date(date));
+    } 
+    return ''
+}
+
 //test watch1
 var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase']);
 angular.module('PortalApp').
@@ -3179,6 +3216,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         $http.get(checksListApi).success(function (data) {
             $scope.preSignList = _.map(data, function (p) {
                 p.ChecksTotal = _.sum(p.Checks, 'Amount');
+               
                 return p;
             });
         });
@@ -3505,15 +3543,15 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         }, {
             dataField: 'CreateBy',
             caption: 'Request By'
-        }, {
+        }, new dxGridColumnModel( {
             dataField: 'CreateDate',
             caption: 'Request Date',
             dataType: 'date'
-        }, {
+        }), new dxGridColumnModel({
             dataField: 'ExpectedDate',
             caption: 'Expected Date Of Sign',
             dataType: 'date'
-        }, {
+        }), {
             dataField: 'DealAmount',
             format: 'currency',
             dataType: 'number',
@@ -3527,7 +3565,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         wordWrapEnabled: true
     }
 
-   
+
 
 
     $scope.partiesGridOptions = {
@@ -3602,14 +3640,15 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             validationRules: [{
                 type: "required"
             }]
-        }, {
+        }, new dxGridColumnModel( 
+        {
             dataField: 'Date',
             dataType: 'date',
-            caption: 'Date of release',
+            caption: 'Date of Release',
             validationRules: [{
                 type: "required"
             }]
-        }, {
+        }), {
             dataField: 'Description',
             validationRules: [{
                 type: "required"
@@ -3657,14 +3696,16 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 var opt = {
                     dataSource: options.data.Checks,
                     columnAutoWidth: true,
-                    columns: ['PaybleTo', {
-                        dataField: 'Amount',
+                    columns: [{
+                        dataField: 'PaybleTo',
                         caption: 'Payable To',
+                    }, {
+                        dataField: 'Amount',                       
                         format: 'currency', dataType: 'number', precision: 2
 
                     }, {
                         dataField: 'Date',
-                        caption: 'Date of release',
+                        caption: 'Date of Release',
                         dataType: 'date',
                         format: 'shortDate'
                     }, {

@@ -34,6 +34,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         $http.get(checksListApi).success(function (data) {
             $scope.preSignList = _.map(data, function (p) {
                 p.ChecksTotal = _.sum(p.Checks, 'Amount');
+               
                 return p;
             });
         });
@@ -360,15 +361,15 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         }, {
             dataField: 'CreateBy',
             caption: 'Request By'
-        }, {
+        }, new dxGridColumnModel( {
             dataField: 'CreateDate',
             caption: 'Request Date',
             dataType: 'date'
-        }, {
+        }), new dxGridColumnModel({
             dataField: 'ExpectedDate',
             caption: 'Expected Date Of Sign',
             dataType: 'date'
-        }, {
+        }), {
             dataField: 'DealAmount',
             format: 'currency',
             dataType: 'number',
@@ -382,7 +383,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         wordWrapEnabled: true
     }
 
-   
+
 
 
     $scope.partiesGridOptions = {
@@ -457,14 +458,15 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             validationRules: [{
                 type: "required"
             }]
-        }, {
+        }, new dxGridColumnModel( 
+        {
             dataField: 'Date',
             dataType: 'date',
             caption: 'Date of Release',
             validationRules: [{
                 type: "required"
             }]
-        }, {
+        }), {
             dataField: 'Description',
             validationRules: [{
                 type: "required"

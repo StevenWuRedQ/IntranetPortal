@@ -11,7 +11,11 @@
                         dest: 'js/build/controllers.js'
                     },
                     {
-                        src: ['js/app.js', 'js/services.js', 'js/filters.js', 'js/directives.js', 'js/build/controllers.js'],
+                        src: ['js/models/*.js', ],
+                        dest: 'js/build/model.js'
+                    },
+                    {
+                        src: ['js/build/model.js','js/app.js', 'js/services.js', 'js/filters.js', 'js/directives.js', 'js/build/controllers.js'],
                         dest: 'js/build/<%= pkg.name %>.js'
                     }
                 ]
