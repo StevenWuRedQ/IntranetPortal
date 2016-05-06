@@ -268,8 +268,8 @@
                                         <label class="ss_form_input_title">Is wells fargo</label>
                                         <pt-radio name="AssignCropWellFrago" model="SSpreSign.assignCrop.isWellsFargo" ng-disabled="SSpreSign.assignCrop.Crop"></pt-radio>
                                     </li>
-                                    <li class="ss_form_item " ng-show="SSpreSign.assignCrop.isWellsFargo">
-                                        <label class="ss_form_input_title " ng-class="{ss_warning:SSpreSign.assignCrop.isWellsFargo && !SSpreSign.assignCrop.Signer}" data-message="If Servicer is Wells Fargo Please select signer">signer </label>
+                                    <li class="ss_form_item " >
+                                        <label class="ss_form_input_title " ng-class="{ss_warning: !SSpreSign.assignCrop.Signer}" data-message="If Servicer is Wells Fargo Please select signer">signer </label>
                                         <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Signer" ng-disabled="SSpreSign.assignCrop.Crop">
                                             <option ng-repeat="s in  SSpreSign.assignCrop.signers track by $index">{{s}}</option>
                                         </select>

@@ -1173,7 +1173,10 @@ var PortalUtility = {
         // return time as a string
         return utc
     },
-
+    FormatISODate:function(utcDate)
+    {
+        return moment(PortalUtility.FormatLocalDateTime(utcDate)).format('MM/DD/YYYY');
+    },
     GoToCase: function (url) {
         window.location.href = url;
     },

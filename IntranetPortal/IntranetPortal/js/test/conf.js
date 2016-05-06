@@ -18,6 +18,7 @@ module.exports = function (config) {
             'http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/globalize/0.1.1/globalize.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js',
+            'bower_components/moment/moment.js',
             'https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js',
             'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.js',
             'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular-route.min.js',
@@ -40,9 +41,11 @@ module.exports = function (config) {
             'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
             'Scripts/*.js',
             'js/*.js',
+            'js/models/*.js',
             'js/controllers/*.js',
             'js/test/*.js',
             'js/test/controllers/*.js',
+            'js/test/models/*.js',
             'js/templates/*.html'
         ],
 
