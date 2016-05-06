@@ -460,7 +460,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         }, {
             dataField: 'Date',
             dataType: 'date',
-            caption: 'Date of release',
+            caption: 'Date of Release',
             validationRules: [{
                 type: "required"
             }]
@@ -512,14 +512,16 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 var opt = {
                     dataSource: options.data.Checks,
                     columnAutoWidth: true,
-                    columns: ['PaybleTo', {
-                        dataField: 'Amount',
+                    columns: [{
+                        dataField: 'PaybleTo',
                         caption: 'Payable To',
+                    }, {
+                        dataField: 'Amount',                       
                         format: 'currency', dataType: 'number', precision: 2
 
                     }, {
                         dataField: 'Date',
-                        caption: 'Date of release',
+                        caption: 'Date of Release',
                         dataType: 'date',
                         format: 'shortDate'
                     }, {
