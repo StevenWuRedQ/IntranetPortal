@@ -178,10 +178,10 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
     }
     $scope.getErrorMessage = function(id) {
         var eMessages = [];
-
-        $('#' + id + ' .ss_warning').each(function() {
+        /*ignore every parent of has form-ignore*/
+        $('#' + id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
             eMessages.push($(this).attr('data-message'));
-        })
+        });
         return eMessages
     }
     $scope.ContractNext = function() {

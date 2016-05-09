@@ -3440,7 +3440,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     //    AngularRoot.alert("Updated success!");
                     //}
                     //for unit test
-                    $scope.localhref = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + $scope.preAssign.Id
+                    $scope.localhref = '/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + $scope.preAssign.Id
                     window.location.href = $scope.localhref
                 });
             }
@@ -3450,7 +3450,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function (data) {
                     //AngularRoot.alert("Submit success !");
                     $scope.preAssign = data;
-                    window.location.href = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + data.Id
+                    window.location.href = '/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + data.Id
                 });
             }
 
@@ -3464,7 +3464,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
 
     $scope.onSelectedChanged = function (e) {
         var request = e.selectedRowsData[0];
-        PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
+        PortalUtility.OpenWindow('/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
     }
 
 
@@ -3499,7 +3499,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                         //Do something with options.data;
                         //ShowCaseInfo(options.data.BBLE);
                         var request = options.data;
-                        PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
+                        PortalUtility.OpenWindow('/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
                     })
                     .appendTo(container);
             }
@@ -4074,7 +4074,7 @@ angular.module("PortalApp")
         $scope.ptCom = ptCom;
         $scope.MortgageTabs = [];
         $scope.SsCase = {
-            PropertyInfo: { Owners: [{}] },
+            PropertyInfo: { Owners: [{ isCorp: false }] },
             CaseData: {},
             Mortgages: [{}]
         };
@@ -4082,10 +4082,14 @@ angular.module("PortalApp")
         $scope.Approval_popupVisible = false;
         $http.get('/Services/ContactService.svc/getbanklist').success(function (data) {
             $scope.bankNameOptions = data;
+            if ($scope.bankNameOptions) {
+                $scope.bankNameOptions.push({Name:'N/A'});
+            }
+ 
         }).error(function (data) {
             $scope.bankNameOptions = [];
         });
-
+        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
         //move to construction - add by chris
         $scope.MoveToConstruction = function (scuessfunc) {
             var json = $scope.SsCase;
@@ -4536,9 +4540,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
                                     //Do something with options.data;
                                     //ShowCaseInfo(options.data.BBLE);
                                     var request = options.data;
-                                    //PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + leadsInfoBBLE)
-                                    PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + request.BBLE);
-                                    //PortalUtility.OpenWindow('/PopupControl/ShortSalePreSignForm.aspx?BBLE=' + request.BBLE, 'Pre Sign ' + request.BBLE, 800, 900);
+                                    
+                                    PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
                                 })
                                 .appendTo(container);
                         }
@@ -4665,10 +4668,10 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
     }
     $scope.getErrorMessage = function(id) {
         var eMessages = [];
-
-        $('#' + id + ' .ss_warning').each(function() {
+        /*ignore every parent of has form-ignore*/
+        $('#' + id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
             eMessages.push($(this).attr('data-message'));
-        })
+        });
         return eMessages
     }
     $scope.ContractNext = function() {

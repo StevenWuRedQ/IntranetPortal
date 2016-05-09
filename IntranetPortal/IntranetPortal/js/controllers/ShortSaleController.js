@@ -9,7 +9,7 @@ angular.module("PortalApp")
         $scope.ptCom = ptCom;
         $scope.MortgageTabs = [];
         $scope.SsCase = {
-            PropertyInfo: { Owners: [{isCrop:false}] },
+            PropertyInfo: { Owners: [{ isCorp: false }] },
             CaseData: {},
             Mortgages: [{}]
         };
@@ -17,10 +17,14 @@ angular.module("PortalApp")
         $scope.Approval_popupVisible = false;
         $http.get('/Services/ContactService.svc/getbanklist').success(function (data) {
             $scope.bankNameOptions = data;
+            if ($scope.bankNameOptions) {
+                $scope.bankNameOptions.push({Name:'N/A'});
+            }
+ 
         }).error(function (data) {
             $scope.bankNameOptions = [];
         });
-
+        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
         //move to construction - add by chris
         $scope.MoveToConstruction = function (scuessfunc) {
             var json = $scope.SsCase;
