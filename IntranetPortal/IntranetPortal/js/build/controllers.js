@@ -1981,7 +1981,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 $http.post('/api/PreSign', JSON.stringify($scope.preAssign)).success(function (data) {
                     //AngularRoot.alert("Submit success !");
                     $scope.preAssign = data;
-                    window.location.href = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + data.Id
+                    window.location.href = '/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + data.Id
                 });
             }
 
@@ -1995,7 +1995,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
 
     $scope.onSelectedChanged = function (e) {
         var request = e.selectedRowsData[0];
-        PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
+        PortalUtility.OpenWindow('/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
     }
 
 

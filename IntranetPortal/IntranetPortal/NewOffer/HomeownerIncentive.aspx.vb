@@ -25,7 +25,7 @@ Public Class HomeownerIncentivePage
                 Dim record = IntranetPortal.Data.PreSignRecord.GetInstanceByBBLE(bble)
 
                 If record IsNot Nothing Then
-                    Response.Redirect("/PopupControl/PreAssignCropForm.aspx?model=View&Id=" & record.Id)
+                    Response.Redirect("/NewOffer/HomeownerIncentive.aspx?model=View&Id=" & record.Id)
                 End If
 
             End If
