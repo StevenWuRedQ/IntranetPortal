@@ -1668,6 +1668,13 @@
       <DependentUpon>MyDefault.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="NewOffer\NewOfferPreview.aspx.designer.vb">
+      <DependentUpon>NewOfferPreview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferPreview.aspx.vb">
+      <DependentUpon>NewOfferPreview.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.designer.vb">
       <DependentUpon>LoadFileFromSharepoint.aspx</DependentUpon>
     </Compile>
@@ -7119,6 +7126,7 @@
     <Content Include="Mobile\Construction\SpotCheck.aspx" />
     <Content Include="Mobile\default.aspx" />
     <Content Include="MyDefault.aspx" />
+    <Content Include="NewOffer\NewOfferPreview.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />

@@ -1971,7 +1971,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     //    AngularRoot.alert("Updated success!");
                     //}
                     //for unit test
-                    $scope.localhref = '/popupControl/preAssignCropForm.aspx?model=View&Id=' + $scope.preAssign.Id
+                    $scope.localhref = '/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + $scope.preAssign.Id
                     window.location.href = $scope.localhref
                 });
             }
@@ -2030,7 +2030,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                         //Do something with options.data;
                         //ShowCaseInfo(options.data.BBLE);
                         var request = options.data;
-                        PortalUtility.OpenWindow('/PopupControl/PreAssignCropForm.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
+                        PortalUtility.OpenWindow('/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
                     })
                     .appendTo(container);
             }
@@ -2605,7 +2605,7 @@ angular.module("PortalApp")
         $scope.ptCom = ptCom;
         $scope.MortgageTabs = [];
         $scope.SsCase = {
-            PropertyInfo: { Owners: [{}] },
+            PropertyInfo: { Owners: [{isCrop:false}] },
             CaseData: {},
             Mortgages: [{}]
         };
@@ -3067,9 +3067,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
                                     //Do something with options.data;
                                     //ShowCaseInfo(options.data.BBLE);
                                     var request = options.data;
-                                    //PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + leadsInfoBBLE)
-                                    PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + request.BBLE);
-                                    //PortalUtility.OpenWindow('/PopupControl/ShortSalePreSignForm.aspx?BBLE=' + request.BBLE, 'Pre Sign ' + request.BBLE, 800, 900);
+                                    
+                                    PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
                                 })
                                 .appendTo(container);
                         }
@@ -3150,7 +3149,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
 
         _dealSheet.ContractOrMemo.Sellers = $.extend(true, _dealSheet.ContractOrMemo.Sellers || [], _sellers);
         _dealSheet.Deed.Sellers = $.extend(true, _dealSheet.Deed.Sellers || [], _sellers);
-        _dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
+        _dealSheet.CorrectionDeed.Sellers = _dealSheet.CorrectionDeed.Sellers || [];
+        //_dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
         _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
         return true;
     }
@@ -3293,7 +3293,7 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
         }
         //var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
         var assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
-        
+
         var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
 
         if (_assignCrop.isWellsFargo) {
