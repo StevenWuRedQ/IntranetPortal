@@ -21,7 +21,7 @@
             <li class="ss_form_item">
 
                <label class="ss_form_input_title "  >Is Corp</label>
-               <pt-radio model="owner.isCop"></pt-radio>
+               <pt-radio model="owner.isCorp"></pt-radio>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title"  ng-class="{ss_warning:!owner.DOB}" data-message="Please fill seller {{$index+1}} DOB">DOB *</label>
