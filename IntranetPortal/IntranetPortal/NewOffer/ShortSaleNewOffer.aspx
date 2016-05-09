@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="ShortSalePreSignForm.aspx.vb" Inherits="IntranetPortal.ShortSalePreSignForm" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="ShortSaleNewOffer.aspx.vb" Inherits="IntranetPortal.ShortSaleNewOfferPage" %>
 
 <%@ Register Src="~/ShortSale/NGShortSaleHomewonerTab.ascx" TagPrefix="uc1" TagName="NGShortSaleHomewonerTab" %>
 <%@ Register Src="~/ShortSale/NGShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="NGShortSaleMortgageTab" %>
@@ -461,8 +461,7 @@
                                                             <input class="ss_form_input" ng-model="d.Name" /></li>
                                                     <li class="ss_form_item ">
                                                         <label class="ss_form_input_title"  ng-class="{ss_warning:!d.SSN}" data-message="Please fill Seller {{$index+1}} SSN!">Seller {{$index+1}} SSN</label>
-                                                        <input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" /></li>
-                                                    
+                                                        <input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" /></li>                                                    
                                                 </ul>
                                             </div>
                                         </div>

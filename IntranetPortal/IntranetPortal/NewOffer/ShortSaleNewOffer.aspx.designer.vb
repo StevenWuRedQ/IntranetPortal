@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ShortSalePreSignForm
+Partial Public Class ShortSaleNewOfferPage
     
     '''<summary>
     '''divMsg control.

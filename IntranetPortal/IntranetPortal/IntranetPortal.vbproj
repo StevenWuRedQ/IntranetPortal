@@ -1738,11 +1738,11 @@
       <DependentUpon>MapsPopup.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="PopupControl\PreAssignCropForm.aspx.designer.vb">
-      <DependentUpon>PreAssignCropForm.aspx</DependentUpon>
+    <Compile Include="NewOffer\HomeownerIncentive.aspx.designer.vb">
+      <DependentUpon>HomeownerIncentive.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PopupControl\PreAssignCropForm.aspx.vb">
-      <DependentUpon>PreAssignCropForm.aspx</DependentUpon>
+    <Compile Include="NewOffer\HomeownerIncentive.aspx.vb">
+      <DependentUpon>HomeownerIncentive.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\PreAssignPopup.ascx.designer.vb">
@@ -1794,11 +1794,11 @@
       <DependentUpon>ShareLeads.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="PopupControl\ShortSalePreSignForm.aspx.designer.vb">
-      <DependentUpon>ShortSalePreSignForm.aspx</DependentUpon>
+    <Compile Include="NewOffer\ShortSaleNewOffer.aspx.designer.vb">
+      <DependentUpon>ShortSaleNewOffer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PopupControl\ShortSalePreSignForm.aspx.vb">
-      <DependentUpon>ShortSalePreSignForm.aspx</DependentUpon>
+    <Compile Include="NewOffer\ShortSaleNewOffer.aspx.vb">
+      <DependentUpon>ShortSaleNewOffer.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\testPopup.aspx.designer.vb">
@@ -7216,7 +7216,7 @@
     <Content Include="PopupControl\LeadSearchSummery.ascx" />
     <Content Include="PopupControl\LeadTaxSearchRequest.aspx" />
     <Content Include="PopupControl\MapsPopup.ascx" />
-    <Content Include="PopupControl\PreAssignCropForm.aspx" />
+    <Content Include="NewOffer\HomeownerIncentive.aspx" />
     <Content Include="PopupControl\PreAssignPopup.ascx" />
     <Content Include="PopupControl\PropertyMap.aspx" />
     <Content Include="PopupControl\SearchRecodingPopupCtrl.ascx" />
@@ -7224,7 +7224,7 @@
     <Content Include="PopupControl\SendMailWithAttach.ascx" />
     <Content Include="PopupControl\SendMail.ascx" />
     <Content Include="PopupControl\ShareLeads.aspx" />
-    <Content Include="PopupControl\ShortSalePreSignForm.aspx" />
+    <Content Include="NewOffer\ShortSaleNewOffer.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
