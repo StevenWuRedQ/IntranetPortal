@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="PreAssignCropForm.aspx.vb" Inherits="IntranetPortal.PerAssignCropForm" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="HomeownerIncentive.aspx.vb" Inherits="IntranetPortal.HomeownerIncentivePage" %>
 
 <%@ Register Src="~/UserControl/AuditLogs.ascx" TagPrefix="uc1" TagName="AuditLogs" %>
 
@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-md-12" ng-hide="!preSignList">
                 <div style="padding: 20px">
-                    <h2 ng-if="role==null">Home Owner Incentive Request List</h2>
+                    <h2 ng-if="role==null">Homeowner Incentive Request List</h2>
                     <input  type="text" hidden="hidden" value="1234"/>
                     <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">

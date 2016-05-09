@@ -1,6 +1,6 @@
 ﻿Imports IntranetPortal.Data
 
-Public Class ShortSalePreSignForm
+Public Class ShortSaleNewOfferPage
     Inherits System.Web.UI.Page
 
     Public Property CorpData As IntranetPortal.Data.CorporationEntity
@@ -24,7 +24,7 @@ Public Class ShortSalePreSignForm
                     Dim Corp = IntranetPortal.Data.CorporationEntity.GetCorpByBBLE(bble)
                     If Corp IsNot Nothing Then
                         CorpData = Corp
-                        content.Visible = False
+                        Content.Visible = False
                         divMsg.Visible = True
 
                         Return

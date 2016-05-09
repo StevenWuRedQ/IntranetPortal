@@ -623,19 +623,19 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="PreDealsMenu" Text="HOI" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List" ShowAmount="false">
+      <PortalNavItem Name="PreDealsMenu" Text="HOI" NavigationUrl="/NewOffer/HomeownerIncentive.aspx?model=List" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="NewOffers" Text="New Offers" NavigationUrl="/PopupControl/ShortSalePreSignForm.aspx?model=List" ShowAmount="false">
+      <PortalNavItem Name="NewOffers" Text="New Offers" NavigationUrl="/NewOffer/ShortSaleNewOffer.aspx?model=List" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-bullseye"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="CheckRequest" Text="Check Requests" NavigationUrl="/PopupControl/PreAssignCropForm.aspx?model=List&amp;role=finance" ShowAmount="false">
+      <PortalNavItem Name="CheckRequest" Text="Check Requests" NavigationUrl="/NewOffer/HomeownerIncentive.aspx?model=List&amp;role=finance" ShowAmount="false">
         <UserRoles>Accounting-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-flag-checkered"></i>]]>
