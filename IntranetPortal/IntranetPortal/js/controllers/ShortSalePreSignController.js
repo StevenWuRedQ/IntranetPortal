@@ -50,9 +50,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
                                     //Do something with options.data;
                                     //ShowCaseInfo(options.data.BBLE);
                                     var request = options.data;
-                                    //PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + leadsInfoBBLE)
-                                    PortalUtility.ShowPopWindow("New Offer", "/PopupControl/ShortSalePreSignForm.aspx?BBLE=" + request.BBLE);
-                                    //PortalUtility.OpenWindow('/PopupControl/ShortSalePreSignForm.aspx?BBLE=' + request.BBLE, 'Pre Sign ' + request.BBLE, 800, 900);
+                                    
+                                    PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
                                 })
                                 .appendTo(container);
                         }
