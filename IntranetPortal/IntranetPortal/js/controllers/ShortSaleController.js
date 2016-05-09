@@ -9,7 +9,7 @@ angular.module("PortalApp")
         $scope.ptCom = ptCom;
         $scope.MortgageTabs = [];
         $scope.SsCase = {
-            PropertyInfo: { Owners: [{}] },
+            PropertyInfo: { Owners: [{isCrop:false}] },
             CaseData: {},
             Mortgages: [{}]
         };

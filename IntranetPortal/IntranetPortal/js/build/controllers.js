@@ -3016,27 +3016,27 @@ angular.module("PortalApp")
     }]);
 
 ScopeHelper = {
-    getShortSaleScope: function () {
+    getShortSaleScope: function() {
 
         //return angular.element(document.getElementById('ShortSaleCtrl')).scope();
         return ScopeHelper.getScope('ShortSaleCtrl');
     },
-    getLeadsSearchScope: function () {
+    getLeadsSearchScope: function() {
         return ScopeHelper.getScope('LeadTaxSearchCtrl');
     },
-    getScope: function (id) {
+    getScope: function(id) {
         return angular.element(document.getElementById(id)).scope();
     }
 };
 
 var portalApp = angular.module('PortalApp');
 
-portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, $q) {
+portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptContactServices, $q) {
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
 
     if ($scope.QueryUrl.model == 'List') {
-        $http.get('/api/PropertyOffer').success(function (data) {
+        $http.get('/api/PropertyOffer').success(function(data) {
             $scope.newOfferGridOpt = {
                 dataSource: data,
                 headerFilter: {
@@ -3051,20 +3051,19 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                 },
                 columnAutoWidth: true,
                 wordWrapEnabled: true,
-                onRowPrepared: function (rowInfo) {
+                onRowPrepared: function(rowInfo) {
                     if (rowInfo.rowType != 'data')
                         return;
                     rowInfo.rowElement
-                    .addClass('myRow');
+                        .addClass('myRow');
                 },
-                columns: [
-                    {
+                columns: [{
                         dataField: 'Title',
                         caption: 'Address',
-                        cellTemplate: function (container, options) {
+                        cellTemplate: function(container, options) {
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
-                                .on('dxclick', function () {
+                                .on('dxclick', function() {
                                     //Do something with options.data;
                                     //ShowCaseInfo(options.data.BBLE);
                                     var request = options.data;
@@ -3075,10 +3074,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                                 .appendTo(container);
                         }
                     },
-                    'OfferType',
-                    { dataField: 'CreateBy', caption: 'Submit By' },
-                    {
-                        dataField: 'CreateDate', caption: 'Contract Date', dataType: 'date',
+                    'OfferType', {
+                        dataField: 'CreateBy',
+                        caption: 'Submit By'
+                    }, {
+                        dataField: 'CreateDate',
+                        caption: 'Contract Date',
+                        dataType: 'date',
                         sortOrder: 'desc',
                         format: 'shortDate'
                     },
@@ -3086,36 +3088,48 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             }
         });
     }
-    
+
     $scope.SSpreSign = {
         Type: 'Short Sale',
         FormName: 'PropertyOffer',
         DealSheet: {
-            ContractOrMemo: { Sellers: [{}], Buyers: [{}] },
-            Deed: { Sellers: [{}] },
-            CorrectionDeed: { Sellers: [{}], Buyers: [{}] }
+            ContractOrMemo: {
+                Sellers: [{}],
+                Buyers: [{}]
+            },
+            Deed: {
+                Sellers: [{}]
+            },
+            CorrectionDeed: {
+                Sellers: [{}],
+                Buyers: [{}]
+            }
         }
     };
     $scope.DeadType = {
         Contract: true,
         Memo: false,
-        Deed: false, CorrectionDeed: false, POA: false
+        Deed: false,
+        CorrectionDeed: false,
+        POA: false
     };
-    $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); };
+    $scope.ensurePush = function(modelName, data) {
+        ptCom.ensurePush($scope, modelName, data);
+    };
     $scope.arrayRemove = ptCom.arrayRemove;
     $scope.NGAddArraryItem = ptCom.AddArraryItem;
-    $scope.GenerateDocument = function () {
-        $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url) {
+    $scope.GenerateDocument = function() {
+        $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function(url) {
             STDownloadFile('/TempDataFile/OfferDoc/' + $scope.SSpreSign.BBLE.trim() + '.zip', $scope.SSpreSign.BBLE.trim() + '.zip');
             $scope.SSpreSign.Status = 2;
             $scope.constractFromData();
-            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function(formdata) {
                 $scope.refreshSave(formdata);
                 location.reload();
             });
         })
     }
-    $scope.shortSaleInfoNext = function () {
+    $scope.shortSaleInfoNext = function() {
 
         var ss = ScopeHelper.getShortSaleScope();
         var _sellers = ss.SsCase.PropertyInfo.Owners;
@@ -3127,30 +3141,35 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             return false;
         }
         _dealSheet.CorrectionDeed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
-        var _sellers = _.map(_sellers, function (o) {
+        var _sellers = _.map(_sellers, function(o) {
             o.Name = ss.formatName(o.FirstName, o.MiddleName, o.LastName);
-            o.Address = $scope.SSpreSign.PropertyAddress;//ss.formatAddr(o.MailNumber, o.MailStreetName, o.MailApt, o.MailCity, o.MailState, o.MailZip);
+            o.Address = $scope.SSpreSign.PropertyAddress; //ss.formatAddr(o.MailNumber, o.MailStreetName, o.MailApt, o.MailCity, o.MailState, o.MailZip);
             o.PropertyAddress = $scope.SSpreSign.PropertyAddress;
             return o
         });
-        
+
         _dealSheet.ContractOrMemo.Sellers = $.extend(true, _dealSheet.ContractOrMemo.Sellers || [], _sellers);
         _dealSheet.Deed.Sellers = $.extend(true, _dealSheet.Deed.Sellers || [], _sellers);
         _dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
         _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
         return true;
     }
-    
-    $scope.$watch('SSpreSign.assignCrop.Name', function (newValue, oldValue) {
-        if (newValue) {
-            var team = newValue;
-            $http.get('/api/CorporationEntities/CorpSigners?team=' + team).success(function (signers) {
-                $scope.SSpreSign.assignCrop.signers = signers
-            });
-        }
-    });
-   
-    $scope.constractFromData = function () {
+
+    $scope.SelectTeamChange = function() {
+        var team = $scope.SSpreSign.assignCrop.Name;
+        $scope.SSpreSign.assignCrop.Signer  = null;
+        $http.get('/api/CorporationEntities/CorpSigners?team=' + team).success(function(signers) {
+            $scope.SSpreSign.assignCrop.signers = signers
+        });
+    }
+
+    // $scope.$watch('SSpreSign.assignCrop.Name', function(newValue, oldValue) {
+    //     if (newValue) {
+
+    //     }
+    // });
+
+    $scope.constractFromData = function() {
         var ss = ScopeHelper.getShortSaleScope();
 
         //var _sellers = ss.SsCase.PropertyInfo.Owners;
@@ -3161,7 +3180,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         $scope.SSpreSign.FormData = null;
         $scope.SSpreSign.FormData = JSON.stringify($scope.SSpreSign);
     }
-    $scope.searchInfoNext = function () {
+    $scope.searchInfoNext = function() {
         var eMessages = $scope.getErrorMessage('preSignSearchInfo');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
@@ -3169,18 +3188,20 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
         var leadSearch = ScopeHelper.getLeadsSearchScope();
 
-        $.extend($scope.SSpreSign.assignCrop, { isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo })
+        $.extend($scope.SSpreSign.assignCrop, {
+            isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo
+        })
         return true;
     }
-    $scope.getErrorMessage = function (id) {
+    $scope.getErrorMessage = function(id) {
         var eMessages = [];
 
-        $('#' + id + ' .ss_warning').each(function () {
+        $('#' + id + ' .ss_warning').each(function() {
             eMessages.push($(this).attr('data-message'));
         })
         return eMessages
     }
-    $scope.ContractNext = function () {
+    $scope.ContractNext = function() {
         var eMessages = $scope.getErrorMessage('preSignContract');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
@@ -3190,7 +3211,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
 
 
-    $scope.DeedNext = function () {
+    $scope.DeedNext = function() {
         var deedCrop = $scope.SSpreSign.DealSheet.Deed;
         /*use like synchronously call*/
 
@@ -3230,7 +3251,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
         return true;
     }
-    $scope.preAssignCorrectionDeed = function () {
+    $scope.preAssignCorrectionDeed = function() {
         var eMessages = $scope.getErrorMessage('preAssignCorrectionDeed');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
@@ -3240,7 +3261,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         return true;
     }
 
-    $scope.preAssignCorrectionPOA = function () {
+    $scope.preAssignCorrectionPOA = function() {
         var eMessages = $scope.getErrorMessage('preSignPOA');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
@@ -3248,40 +3269,42 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
         return true;
     }
-    $scope.AssignCorpSuccessed = function (data) {
+    $scope.AssignCorpSuccessed = function(data) {
         var _assignCrop = $scope.SSpreSign.assignCrop;
-        $http.post('/api/CorporationEntities/Assign?bble=' + $scope.SSpreSign.BBLE, JSON.stringify(data)).success(function () {
+        $http.post('/api/CorporationEntities/Assign?bble=' + $scope.SSpreSign.BBLE, JSON.stringify(data)).success(function() {
             _assignCrop.Crop = data.CorpName;
             _assignCrop.CropData = data;
             $scope.SSpreSign.Status = 1;
             /*should save to data base*/
             $scope.constractFromData();
             //console.log( JSON.stringify($scope.SSpreSign));
-            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function(formdata) {
                 $scope.refreshSave(formdata);
             });
         });
     }
 
-    $scope.assginCropClick = function () {
+    $scope.assginCropClick = function() {
         var _assignCrop = $scope.SSpreSign.assignCrop;
         var eMessages = $scope.getErrorMessage('assignBtnForm');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
         }
-        var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
-
+        //var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
+        var assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
+        
         var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
 
         if (_assignCrop.isWellsFargo) {
-            assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
+            
             confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + '';
         }
 
-        $http.get(assignApi).success(function (data) {
+       
+        $http.get(assignApi).success(function(data) {
 
-            AngularRoot.confirm(confirmMsg).then(function (r) {
+            AngularRoot.confirm(confirmMsg).then(function(r) {
                 if (r) {
                     $scope.AssignCorpSuccessed(data);
                 }
@@ -3289,11 +3312,11 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         });
 
     }
-    $http.get('/api/CorporationEntities/Teams').success(function (data) {
+    $http.get('/api/CorporationEntities/Teams').success(function(data) {
         $scope.CorpTeam = data;
 
     })
-    $scope.AssignCropsNext = function () {
+    $scope.AssignCropsNext = function() {
 
         var eMessages = $scope.getErrorMessage('preSignAssignCrops');
         if (_.any(eMessages)) {
@@ -3309,7 +3332,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
 
 
-    $scope.DocRequiredNext = function (noAlert) {
+    $scope.DocRequiredNext = function(noAlert) {
 
         if (!_.any($scope.DeadType)) {
             if (!noAlert) {
@@ -3319,36 +3342,68 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
         return true;
     }
-    $scope.DeedWizardInit = function () {
+    $scope.DeedWizardInit = function() {
         var deedCrop = $scope.SSpreSign.DealSheet.Deed;
         /*use like synchronously call*/
 
         if (!deedCrop.EntityId) {
-            $http.get('/api/CorporationEntities/DeedCorpsByTeam?team=' + $scope.SSpreSign.assignCrop.Name).success(function (data) {
+            $http.get('/api/CorporationEntities/DeedCorpsByTeam?team=' + $scope.SSpreSign.assignCrop.Name).success(function(data) {
                 $scope.SSpreSign.DealSheet.Deed.Buyer = data;
 
             });
         }
 
     }
-    $scope.steps = [
-      { title: "New Offer", next: function () { return true; } },
+    $scope.steps = [{
+            title: "New Offer",
+            next: function() {
+                return true;
+            }
+        },
 
-      { title: "Pre Sign", caption: 'SS Info', next: $scope.shortSaleInfoNext, },
-      { title: "Assign Crops", caption: 'Assign Corp', next: $scope.AssignCropsNext },
-      {
-          title: "Documents Required", caption: 'Doc Required', next: $scope.DocRequiredNext
-      },
+        {
+            title: "Pre Sign",
+            caption: 'SS Info',
+            next: $scope.shortSaleInfoNext,
+        }, {
+            title: "Assign Crops",
+            caption: 'Assign Corp',
+            next: $scope.AssignCropsNext
+        }, {
+            title: "Documents Required",
+            caption: 'Doc Required',
+            next: $scope.DocRequiredNext
+        },
 
-      //{ title: "Deal Sheet" },
-      { title: 'Contract', caption: 'Contract Or Memo', sheet: 'Contract', next: $scope.ContractNext },
-      { title: 'Deed', sheet: 'Deed', next: $scope.DeedNext, init: $scope.DeedWizardInit },
-      { title: 'CorrectionDeed', caption: 'Correction Deed', sheet: 'CorrectionDeed', next: $scope.preAssignCorrectionDeed },
-      { title: 'POA', sheet: 'POA', next: $scope.preAssignCorrectionPOA },
-      { title: "Finish" },
+        //{ title: "Deal Sheet" },
+        {
+            title: 'Contract',
+            caption: 'Contract Or Memo',
+            sheet: 'Contract',
+            next: $scope.ContractNext
+        }, {
+            title: 'Deed',
+            sheet: 'Deed',
+            next: $scope.DeedNext,
+            init: $scope.DeedWizardInit
+        }, {
+            title: 'CorrectionDeed',
+            caption: 'Correction Deed',
+            sheet: 'CorrectionDeed',
+            next: $scope.preAssignCorrectionDeed
+        }, {
+            title: 'POA',
+            sheet: 'POA',
+            next: $scope.preAssignCorrectionPOA
+        }, {
+            title: "Finish"
+        },
     ];
-    $scope.CheckSearchInfo = function (needSearch, searchCompleted) {
-        var searchWized = { title: "Search Info", next: $scope.searchInfoNext };
+    $scope.CheckSearchInfo = function(needSearch, searchCompleted) {
+        var searchWized = {
+            title: "Search Info",
+            next: $scope.searchInfoNext
+        };
         if (needSearch || searchCompleted) {
             $scope.steps.splice(1, 0, searchWized)
         } else {
@@ -3357,8 +3412,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
     }
     $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val())
-    $scope.CheckCurrentStep = function (BBLE) {
-        $http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
+    $scope.CheckCurrentStep = function(BBLE) {
+        $http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function(data) {
             if (data.FormData) {
 
                 $scope.SSpreSign = data.FormData;
@@ -3384,7 +3439,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
 
     var BBLE = $("#BBLE").val();
     if (BBLE) {
-        $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
+        $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function(data) {
             $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
             $scope.SSpreSign.BBLE = BBLE
         })
@@ -3394,24 +3449,24 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
 
     $scope.step = 1
     $scope.filteredSteps = [];
-    $scope.MaxStep = function () {
+    $scope.MaxStep = function() {
         return $scope.filteredSteps.length;
     }
-    $scope.currentStep = function () {
+    $scope.currentStep = function() {
         return $scope.filteredSteps[$scope.step - 1];
     }
-    $scope.refreshSave = function (formdata) {
+    $scope.refreshSave = function(formdata) {
         $scope.SSpreSign.DataId = formdata.DataId;
         $scope.SSpreSign.Tag = formdata.Tag;
         $scope.SSpreSign.CreateDate = formdata.CreateDate;
         $scope.SSpreSign.CreateBy = formdata.CreateBy;
     }
-    $scope.NextStep = function () {
+    $scope.NextStep = function() {
         var cStep = $scope.currentStep();
         if (cStep.next) {
             if (cStep.next()) {
                 $scope.constractFromData();
-                $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+                $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function(formdata) {
                     $scope.refreshSave(formdata);
                     $scope.step++;
                     cStep = $scope.currentStep();
@@ -3426,11 +3481,18 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
 
     }
-    $scope.PrevStep = function () {
+    $scope.PrevStep = function() {
         $scope.step--;
     }
     $scope.borrwerGrid = {
-        dataSource: [{ Name: "Borrower 1", "Address": "123 Main ST, New York NY 10001", "SSN": "123456789", "Phone": "212 123456", "Email": "email@gmail.com", "MailAddress": "123 Main ST, New York NY 10001" }],
+        dataSource: [{
+            Name: "Borrower 1",
+            "Address": "123 Main ST, New York NY 10001",
+            "SSN": "123456789",
+            "Phone": "212 123456",
+            "Email": "email@gmail.com",
+            "MailAddress": "123 Main ST, New York NY 10001"
+        }],
         columns: ['Name', 'Address', 'SSN', 'Email', 'Phone', {
             dataField: "Type",
             lookup: {
@@ -3444,10 +3506,10 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
     }
 })
-portalApp.filter('wizardFilter', function () {
-    return function (items, sheetFilter) {
+portalApp.filter('wizardFilter', function() {
+    return function(items, sheetFilter) {
         var filtered = [];
-        angular.forEach(items, function (item) {
+        angular.forEach(items, function(item) {
             if (typeof item.sheet != 'undefined') {
                 if (!sheetFilter) {
                     console.error("there are no filter please check filter")
@@ -3465,10 +3527,14 @@ portalApp.filter('wizardFilter', function () {
         return filtered;
     };
 });
-portalApp.filter('ordered', function () {
-    return function (item) {
+portalApp.filter('ordered', function() {
+    return function(item) {
 
-        var orderDic = { "1": '1st', "2": "2nd", "3": "3rd" };
+        var orderDic = {
+            "1": '1st',
+            "2": "2nd",
+            "3": "3rd"
+        };
 
         return orderDic[item];
     };

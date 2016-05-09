@@ -1,8 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortPreSignControl.ascx.vb" Inherits="IntranetPortal.ShortPreSignControl" %>
 <style>
-    .ss_warning2
-    {
-        color:red;
+    .ss_warning2 {
+        color: red;
     }
 </style>
 <uib-tabset class="tab-switch">
@@ -20,6 +19,11 @@
                 <input class="ss_form_input ss_not_empty" ng-value="formatName(owner.FirstName,owner.MiddleName,owner.LastName)" readonly>
             </li>
             <li class="ss_form_item">
+
+               <label class="ss_form_input_title "  >Is Corp</label>
+               <pt-radio model="owner.isCop"></pt-radio>
+            </li>
+            <li class="ss_form_item">
                 <label class="ss_form_input_title"  ng-class="{ss_warning:!owner.DOB}" data-message="Please fill seller {{$index+1}} DOB">DOB *</label>
                 <input class="ss_form_input" ng-model="owner.DOB" ss-date readonly>
             </li>
@@ -32,7 +36,7 @@
                 <input class="ss_form_input" ng-value="formatAddr(owner.MailNumber, owner.MailStreetName, owner.MailApt, owner.MailCity, owner.MailState, owner.MailZip)" style="width: 96.66%" readonly>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.Phone}" data-message="Please fill seller {{$index+1}} Cell Number">Cell Number *</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.Phone}" data-message="Please fill seller {{$index+1}} Cell Number">Phone Number *</label>
                 <input class="ss_form_input" ng-model="owner.Phone" mask="(999) 999-9999" clean="true" readonly>
             </li>
             <li class="ss_form_item">
@@ -215,7 +219,7 @@
     </div>
 </div>
         </uib-tab>
-    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="NGAddArraryItem(SsCase.PropertyInfo.Owners, 'SsCase.PropertyInfo.Owners')"  title="Add" style="font-size: 18px"></i>
+    <i class="fa fa-plus-circle btn color_blue tooltip-examples" ng-click="ptCom.ensurePush('SsCase.PropertyInfo.Owners',{isCorp:false})"  title="Add" style="font-size: 18px"></i>
     </uib-tabset>
 
 

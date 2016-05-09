@@ -82,7 +82,10 @@
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
-                                        <input class="ss_form_input" value="<%=Page.User.Identity.Name %>" disabled />
+                                        <%--Page.User.Identity.Name--%> 
+
+                                        <input class="ss_form_input" ng-show="!model" value="<%= Page.User.Identity.Name %>" disabled />
+                                        <input class="ss_form_input" ng-show="model" ng-value="preAssign.CreateBy" disabled />
                                     </li>
                                     <%-- <li class="ss_form_item ">
                                 <label class="ss_form_input_title "># of checks</label>
