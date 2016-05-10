@@ -19,8 +19,7 @@
     <div class="ss_border" style="border-top-color: transparent" >
         <%--owner person corp form--%>
         
-       <%-- <div ng-class="{ss_warning:owner.isCorp===null||owner.isCorp===false}">{{owner.isCorp}}</div>--%>
-        <ul class="ss_form_box clearfix" ng-class="{form_ignore: owner.isCorp}" >
+        <ul class="ss_form_box clearfix" ng-class="{form_ignore: owner.isCorp}" ng-show="!owner.isCorp">
             <li class="ss_form_item">
 
                <label class="ss_form_input_title">Is Corp</label>
@@ -33,7 +32,7 @@
             
             <li class="ss_form_item">
                 <label class="ss_form_input_title"  ng-class="{ss_warning:!owner.DOB}" data-message="Please fill seller {{$index+1}} DOB">DOB *</label>
-                <input class="ss_form_input" ng-model="owner.DOB" ss-date readonly>
+                <input class="ss_form_input" ng-model="owner.DOB" mask="99/99/9999" readonly>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title" ng-class="{ss_warning:!owner.SSN}" data-message="Please fill seller {{$index+1}} SSN">SSN *</label>
@@ -44,7 +43,7 @@
                 <input class="ss_form_input" ng-value="formatAddr(owner.MailNumber, owner.MailStreetName, owner.MailApt, owner.MailCity, owner.MailState, owner.MailZip)" style="width: 96.66%" readonly>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.Phone}" data-message="Please fill seller {{$index+1}} Cell Number">Phone Number *</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.Phone}" data-message="Please fill seller {{$index+1}} Phone Number">Phone Number *</label>
                 <input class="ss_form_input" ng-model="owner.Phone" mask="(999) 999-9999" clean="true" readonly>
             </li>
             <li class="ss_form_item">
@@ -94,15 +93,16 @@
         </ul>
         <%--end person type form--%>
         <%--corp type form--%>
-        <ul class="ss_form_box clearfix"  ng-class="{ form_ignore:!owner.isCorp}">
-             <li class="ss_form_item">
-                <label class="ss_form_input_title " ng-class="{ss_warning:!owner.FirstName}" data-message="Please fill seller {{$index+1}} name">Name *</label>
-                <input class="ss_form_input ss_not_empty" ng-value="owner.FirstName" readonly>
-            </li>
+        <ul class="ss_form_box clearfix"  ng-class="{ form_ignore:!owner.isCorp}" ng-show="owner.isCorp">
             <li class="ss_form_item">
                <label class="ss_form_input_title">Is Corp</label>
                <pt-radio model="owner.isCorp" ng-disabled="true"></pt-radio>
             </li>
+             <li class="ss_form_item">
+                <label class="ss_form_input_title " ng-class="{ss_warning:!owner.FirstName}" data-message="Please fill seller {{$index+1}} name">Name *</label>
+                <input class="ss_form_input ss_not_empty" ng-value="owner.FirstName" readonly>
+            </li>
+            
             <li class="ss_form_item">
                 <label class="ss_form_input_title" ng-class="{ss_warning:!owner.SSN}" data-message="Please fill seller {{$index+1}} EIN">EIN *</label>
                 <input class="ss_form_input" ng-model="owner.SSN" readonly>
@@ -112,7 +112,7 @@
                 <input class="ss_form_input" ng-value="formatAddr(owner.MailNumber, owner.MailStreetName, owner.MailApt, owner.MailCity, owner.MailState, owner.MailZip)" style="width: 96.66%" readonly>
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.Phone}" data-message="Please fill seller {{$index+1}} Cell Number">Phone Number *</label>
+                <label class="ss_form_input_title" ng-class="{ss_warning:!owner.Phone}" data-message="Please fill seller {{$index+1}} Phone Number">Phone Number *</label>
                 <input class="ss_form_input" ng-model="owner.Phone" mask="(999) 999-9999" clean="true" readonly>
             </li>
             <li class="ss_form_item">
@@ -156,7 +156,7 @@
             <div class="row form-group" ng-show="!owner.isCorp">
                <div class="col-sm-4">
                    <label ng-class="{ss_warning2:!owner.isCorp===null||owner.isCorp===undefined}">Is Corp *</label> <br />
-                   <pt-radio model="owner.isCorp"></pt-radio>
+                   <pt-radio model="owner.isCorp" name="owner{{$index}}1"></pt-radio>
                </div>
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:!owner.FirstName}">First Name *</label>
@@ -180,7 +180,7 @@
                     <input class="form-control" ng-model="owner.SSN" mask="999-99-9999" clean="true">
                 </div>
                 <div class="col-sm-4">
-                    <label ng-class="{ss_warning2:!owner.Phone}">Cell Number *</label>
+                    <label ng-class="{ss_warning2:!owner.Phone}">Phone Number *</label>
                     <input class="form-control" ng-model="owner.Phone" mask="(999) 999-9999" clean="true">
                 </div>
                 <div class="col-sm-4">
@@ -196,7 +196,7 @@
             <div class="row form-group" ng-show="owner.isCorp">
                <div class="col-sm-4">
                    <label ng-class="{ss_warning2:!owner.isCorp===null||owner.isCorp===undefined}">Is Corp *</label> <br />
-                   <pt-radio model="owner.isCorp"></pt-radio>
+                   <pt-radio model="owner.isCorp" name="owner{{$index}}1"></pt-radio>
                </div>
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:!owner.FirstName}">Name *</label>
@@ -254,7 +254,7 @@
             <div class="row form-group" ng-show="!owner.isCorp">
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:owner.Bankruptcy===null||owner.Bankruptcy===undefined}">Bankruptcy *</label><br />
-                    <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
+                    <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}2"></pt-radio>
                 </div>
                 <div class="col-sm-4" ng-show="owner.Bankruptcy">
                     <label ng-class="{ss_warning2:!owner.BankruptcyChapter}">Bankruptcy Chapter *</label><br />
@@ -265,15 +265,15 @@
                 </div>
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:owner.Bankaccount===null||owner.Bankaccount===undefined}">Bank account</label><br />
-                    <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
+                    <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}2"></pt-radio>
                 </div>
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:owner.ActiveMilitar===null||owner.ActiveMilitar===undefined}">Active Military *</label><br />
-                    <pt-radio model="owner.ActiveMilitar" name="ActiveMilitar{{$index}}"></pt-radio>
+                    <pt-radio model="owner.ActiveMilitar" name="ActiveMilitar{{$index}}2"></pt-radio>
                 </div>
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:owner.TaxReturn===null||owner.TaxReturn===undefined}">Tax Returns *</label><br />
-                    <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
+                    <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}2"></pt-radio>
                 </div>
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:!owner.Employed}">Employed *</label><br />
@@ -288,7 +288,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label >Paystubs </label><br />
-                    <pt-radio model="owner.Paystubs" name="Paystubs{{$index}}"></pt-radio>
+                    <pt-radio model="owner.Paystubs" name="Paystubs{{$index}}2"></pt-radio>
                 </div>
             </div>
             

@@ -82,14 +82,19 @@ namespace DroneManage
         public delegate void StatusChangeDelegate(String status);
         private StatusChangeDelegate statusChangeListener;
         private int DroneResponseCount = 0;
-        private const string MAIN_DRONE_PATH = "C:\\VS2013 Development\\TestComponent_VB\\TestComponent_VB\\bin\\Debug\\TestComponent_VB.exe";
+        private string MAIN_DRONE_PATH = "C:\\VS2013 Development\\TestComponent_VB\\TestComponent_VB\\bin\\Debug\\TestComponent_VB.exe";
         private bool is_resarting = false;
 
 
         public void OnStart()
         {
+            
+
+
             try
             {
+                
+                MAIN_DRONE_PATH = tbFilePath.Text;
                 System.Timers.Timer timer = new System.Timers.Timer();
                 int interval = ReadAppSettings();
                 log.Debug("set timer interval is " + interval);
@@ -114,6 +119,22 @@ namespace DroneManage
                    ConfigurationManager.AppSettings;
 
                 return Int32.Parse(appSettings.Get("TimerInterval"));
+
+            }
+            catch (ConfigurationErrorsException e)
+            {
+                throw e;
+            }
+        }
+        private static string ReadDronePath()
+        {
+            try
+            {
+                // Get the AppSettings section.
+                NameValueCollection appSettings =
+                   ConfigurationManager.AppSettings;
+
+                return appSettings.Get("DronePath");
 
             }
             catch (ConfigurationErrorsException e)
@@ -375,7 +396,27 @@ namespace DroneManage
 
         }
 
-       
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void openFIle_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = @"C:/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/TestComponent_VB";
+            DialogResult result = openFileDialog1.ShowDialog();
+            if(result== DialogResult.OK)
+            {
+                log.Debug("select dialog file " + openFileDialog1.FileName);
+                MAIN_DRONE_PATH = openFileDialog1.FileName;
+                tbFilePath.Text = openFileDialog1.FileName;
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }

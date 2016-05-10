@@ -34,6 +34,10 @@
             this.StartMonitoring = new System.Windows.Forms.Button();
             this.AutoSetTask = new System.Windows.Forms.Button();
             this.btnCloseDialog = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openFIle = new System.Windows.Forms.Button();
+            this.tbFilePath = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProcessGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +54,7 @@
             // ProcessGrid
             // 
             this.ProcessGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ProcessGrid.Location = new System.Drawing.Point(1, 84);
+            this.ProcessGrid.Location = new System.Drawing.Point(0, 117);
             this.ProcessGrid.Name = "ProcessGrid";
             this.ProcessGrid.Size = new System.Drawing.Size(811, 150);
             this.ProcessGrid.TabIndex = 1;
@@ -96,11 +100,46 @@
             this.btnCloseDialog.UseVisualStyleBackColor = true;
             this.btnCloseDialog.Click += new System.EventHandler(this.btnCloseDialog_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // openFIle
+            // 
+            this.openFIle.Location = new System.Drawing.Point(376, 41);
+            this.openFIle.Name = "openFIle";
+            this.openFIle.Size = new System.Drawing.Size(75, 23);
+            this.openFIle.TabIndex = 7;
+            this.openFIle.Text = "Open File";
+            this.openFIle.UseVisualStyleBackColor = true;
+            this.openFIle.Click += new System.EventHandler(this.openFIle_Click);
+            // 
+            // tbFilePath
+            // 
+            this.tbFilePath.Location = new System.Drawing.Point(107, 82);
+            this.tbFilePath.Name = "tbFilePath";
+            this.tbFilePath.Size = new System.Drawing.Size(366, 20);
+            this.tbFilePath.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 85);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Drone File path";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(811, 519);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbFilePath);
+            this.Controls.Add(this.openFIle);
             this.Controls.Add(this.btnCloseDialog);
             this.Controls.Add(this.AutoSetTask);
             this.Controls.Add(this.StartMonitoring);
@@ -124,6 +163,10 @@
         private System.Windows.Forms.Button StartMonitoring;
         private System.Windows.Forms.Button AutoSetTask;
         private System.Windows.Forms.Button btnCloseDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button openFIle;
+        private System.Windows.Forms.TextBox tbFilePath;
+        private System.Windows.Forms.Label label1;
     }
 }
 
