@@ -6,7 +6,7 @@
 <%@ Register Src="~/ShortSale/ShortPreSignControl.ascx" TagPrefix="uc1" TagName="ShortPreSignControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
+    <style type="text/css">
         .fix-add-btn i {
             margin-top: 10px;
             margin-left: 10px;
@@ -337,7 +337,6 @@
                     <div ng-show="currentStep().title=='Contract'" class="view-animate" id="preSignContract">
                         <div>
                             <div>
-
                                 <%-- <div class="sub-form-title">
                                 <h3 class="wizard-title"><span ng-if="DeadType.Contract">Contract </span> <span ng-if="DeadType.Contract&&DeadType.Memo">&</span> <span ng-if="DeadType.Memo">Memo</span>  </h3>
                             </div>--%>

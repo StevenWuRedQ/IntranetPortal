@@ -730,11 +730,12 @@ angular.module('PortalApp')
 
         $scope.DocSearch.IsSave = isSave
             var PostData = {};
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
             _.extend(PostData, $scope.DocSearch);
             if (!isSave) {
                 PostData.Status = 1;
             }
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+           
 
             $http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
                 alert(isSave ? 'Save success!' : 'Lead info search completed !');
@@ -2605,7 +2606,7 @@ angular.module("PortalApp")
         $scope.ptCom = ptCom;
         $scope.MortgageTabs = [];
         $scope.SsCase = {
-            PropertyInfo: { Owners: [{isCrop:false}] },
+            PropertyInfo: { Owners: [{ isCorp: false }] },
             CaseData: {},
             Mortgages: [{}]
         };
@@ -2613,10 +2614,14 @@ angular.module("PortalApp")
         $scope.Approval_popupVisible = false;
         $http.get('/Services/ContactService.svc/getbanklist').success(function (data) {
             $scope.bankNameOptions = data;
+            if ($scope.bankNameOptions) {
+                $scope.bankNameOptions.push({Name:'N/A'});
+            }
+ 
         }).error(function (data) {
             $scope.bankNameOptions = [];
         });
-
+        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
         //move to construction - add by chris
         $scope.MoveToConstruction = function (scuessfunc) {
             var json = $scope.SsCase;
@@ -3195,10 +3200,10 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
     }
     $scope.getErrorMessage = function(id) {
         var eMessages = [];
-
-        $('#' + id + ' .ss_warning').each(function() {
+        /*ignore every parent of has form-ignore*/
+        $('#' + id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
             eMessages.push($(this).attr('data-message'));
-        })
+        });
         return eMessages
     }
     $scope.ContractNext = function() {

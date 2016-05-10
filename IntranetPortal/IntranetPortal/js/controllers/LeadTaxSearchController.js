@@ -53,11 +53,12 @@
 
         $scope.DocSearch.IsSave = isSave
             var PostData = {};
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
             _.extend(PostData, $scope.DocSearch);
             if (!isSave) {
                 PostData.Status = 1;
             }
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+           
 
             $http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
                 alert(isSave ? 'Save success!' : 'Lead info search completed !');

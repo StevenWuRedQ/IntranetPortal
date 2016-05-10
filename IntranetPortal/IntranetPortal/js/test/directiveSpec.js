@@ -17,9 +17,7 @@
             scope.xdate = "2015-12-14T18:05:36.934Z";
             scope.$digest();
             expect(cscope.xdate).toBe("12/14/2015");
-
         });
-
     })
 
     describe('ptInitModel', function() {
