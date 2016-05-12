@@ -379,7 +379,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
             sheet: 'POA',
             next: $scope.preAssignCorrectionPOA
         }, {
-            title: "Finish"
+            title: "Finish",
+            init: previewForm
         },
     ];
     $scope.CheckSearchInfo = function(needSearch, searchCompleted) {

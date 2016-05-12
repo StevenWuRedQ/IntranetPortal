@@ -317,10 +317,7 @@
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title" ng-class="{ss_warning:!mortgage.LenderName }" data-message="Please fill {{$index+1|ordered}} Mortgage Company">Company</label>
                                     <input class="ss_form_input " ng-model="mortgage.LenderName" typeahead="bank.Name for bank in bankNameOptions|filter:$viewValue" typeahead-on-select="mortgage.Lender=$item;mortgage.LenderId=$item.ContactId">
-                                </li>
-                                
-
-                               
+                                </li>                               
                                 <li class="ss_form_item"  ng-show="mortgage.LenderName!='N/A'">
                                     <label class="ss_form_input_title" ng-class="{ss_warning:mortgage.LenderName!='N/A' && !mortgage.Loan }" data-message="Please fill {{$index+1|ordered}} Mortgage Loan Number">Loan #</label>
                                     <input class="ss_form_input " ng-model="mortgage.Loan">

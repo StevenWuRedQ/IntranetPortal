@@ -39,14 +39,13 @@
             margin: 20px 0;
         }
         /*base item styles*/
-        
+
         .wizardbar-item {
             display: inline-block;
             padding: 0.5em 0.8em;
             padding-left: 1.8em;
             text-decoration: none;
             transition: all .15s;
-           
             /*default styles*/
             background-color: #76a9dd;
             color: rgba(255, 255, 255, 0.8);
@@ -55,17 +54,17 @@
             position: relative;
             margin-right: 2px;
         }
-        .wizardbar-item:hover
-        {
-             /*disable hever*/
-            text-decoration:none !important;
-            color:rgba(255, 255, 255, 0.8) !important;
-        }
-        .wizardbar-item:focus
-        {
-            text-decoration:none !important;
-            color:rgba(255, 255, 255, 0.8) !important;
-        }
+
+            .wizardbar-item:hover {
+                /*disable hever*/
+                text-decoration: none !important;
+                color: rgba(255, 255, 255, 0.8) !important;
+            }
+
+            .wizardbar-item:focus {
+                text-decoration: none !important;
+                color: rgba(255, 255, 255, 0.8) !important;
+            }
             /*arrow styles*/
             .wizardbar-item:before,
             .wizardbar-item:after {
@@ -188,7 +187,6 @@
     <input runat="server" id="txtSearchCompleted" type="hidden" class="pt-search-completed" />
     <div id="content" runat="server">
         <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
-
         <div style="padding: 20px" ng-controller="shortSalePreSignCtrl">
             <div class="container" ng-hide="QueryUrl.model!='List'">
                 <div>
@@ -268,7 +266,7 @@
                                         <label class="ss_form_input_title">Is wells fargo</label>
                                         <pt-radio name="AssignCropWellFrago" model="SSpreSign.assignCrop.isWellsFargo" ng-disabled="SSpreSign.assignCrop.Crop"></pt-radio>
                                     </li>
-                                    <li class="ss_form_item " >
+                                    <li class="ss_form_item ">
                                         <label class="ss_form_input_title " ng-class="{ss_warning: !SSpreSign.assignCrop.Signer}" data-message="Please select signer">signer </label>
                                         <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Signer" ng-disabled="SSpreSign.assignCrop.Crop">
                                             <option ng-repeat="s in  SSpreSign.assignCrop.signers track by $index">{{s}}</option>
@@ -283,8 +281,10 @@
                             <div class="ss_form" ng-show="SSpreSign.assignCrop.Crop" ng-class="{ss_warning:!SSpreSign.assignCrop.Crop}" data-message="Please assign Corp to continue!">
                                 <div class="alert alert-success" role="alert">
                                     Corp: <strong>{{SSpreSign.assignCrop.Crop}}</strong> is assigned to property at, <strong>{{SSpreSign.PropertyAddress}}</strong> . <%--corp--%>
-                                    <span ng-show="SSpreSign.assignCrop.CropData.Signer"> The signer for the corp is: <strong>{{SSpreSign.assignCrop.CropData.Signer}} </strong></span>  <br /> <%--signer--%>
-                                    </div>
+                                    <span ng-show="SSpreSign.assignCrop.CropData.Signer">The signer for the corp is: <strong>{{SSpreSign.assignCrop.CropData.Signer}} </strong></span>
+                                    <br />
+                                    <%--signer--%>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -350,8 +350,7 @@
                                             <div >
                                                 <ul class="ss_form_box clearfix">
                                                     <li class="ss_form_item">
-                                                        <label class="ss_form_input_title" ng-class="{ss_warning:!d.Name}" data-message="Please fill Seller {{$index+1}} Name">Seller {{$index+1}} Name</label><input class="ss_form_input" ng-model="d.Name" /></li>
-                                                    
+                                                        <label class="ss_form_input_title" ng-class="{ss_warning:!d.Name}" data-message="Please fill Seller {{$index+1}} Name">Seller {{$index+1}} Name</label><input class="ss_form_input" ng-model="d.Name" /></li>                                                    
                                                     <li class="ss_form_item ">
                                                         <label class="ss_form_input_title" ng-class="{ss_warning:!d.sellerAttorney}" data-message="Please fill Seller {{$index+1}} Attorney">Seller {{$index+1}} Attorney</label>
                                                         <%--<input class="ss_form_input" ng-model="d.sellerAttorney" />--%>
@@ -416,9 +415,7 @@
                                 <span class="fix-add-btn">
                                     <pt-add ng-click="ensurePush('SSpreSign.DealSheet.ContractOrMemo.Buyers')" style="font-size:18px"></pt-add>
                                 </span>
-                            </uib-tabset>
-
-                               
+                            </uib-tabset>                               
                             </div>--%>
                                 <div class="ss_form">
                                     <h4 class="ss_form_title ">Bill Info </h4>
@@ -638,20 +635,31 @@
                         </div>
                     </div>
                     <div ng-show="currentStep().title=='Finish'" class="view-animate">
-                        <h3 class="wizard-title">Finish</h3>
-                        <div>
+                        <%-- <h3 class="wizard-title">Please review the information entered, before Generating Contracts.</h3>--%>
+                        <div class="alert alert-warning" role="alert">
+                            <i class="fa fa-warning"></i>&nbsp;Warning! Please review the information entered, before Generating Contracts.
+                        </div>
+                        <div style="display: none">
                             <div class="well">
                                 Congratulations! You are in the last step. Please click <strong>Generate document</strong> to download document(s).
                             </div>
                             <div class="alert alert-warning" role="alert">
-                                <i class="fa fa-warning"></i> Warning! This Step is not Reversible. Press <strong>Previous</strong> button below to review the data before Generating Documents.
+                                <i class="fa fa-warning"></i>Warning! This Step is not Reversible. Press <strong>Previous</strong> button below to review the data before Generating Documents.
                             </div>
                         </div>
+                        <div style="width: 100%; height: 600px">
+                            <iframe id="previewForm" style="width: 100%; height: 100%; border: none"></iframe>
+                        </div>
+                        <script>
+                            function previewForm(bble) {
+                                document.getElementById('previewForm').src = 'NewOfferPreview.aspx?bble=<%= Request.QueryString("BBLE")%>';
+                            }
+                        </script>
                     </div>
                 </div>
                 <div class="modal-footer" style="margin-top: 30px;">
                     <button type="button" class="btn btn-default" ng-show="step>1" ng-click="PrevStep()">< Previous</button>
-                    <button type="button" class="btn btn-default" ng-click="GenerateDocument()" ng-show="step==MaxStep()" style="background-color:rgb(43, 137, 54);color:white"><strong>Generate Docs</strong> </button>
+                    <button type="button" class="btn btn-default" ng-click="GenerateDocument()" ng-show="step==MaxStep()" style="background-color: rgb(43, 137, 54); color: white"><strong>Generate Docs</strong> </button>
                     <button type="button" class="btn btn-default" ng-show="step<MaxStep()" ng-click="NextStep()">Next ></button>
                 </div>
             </div>

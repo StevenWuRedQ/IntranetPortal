@@ -17,12 +17,10 @@
 
         //def function here
         //NewOfferBusinessForm.prototype.func =
-
-        var BBLE = '4161340041';
-
+        var BBLE = '<%= Request.QueryString("BBLE")%>';
         var angularApp = angular.module('PortalApp')
                  .controller('NewOfferPreviewController', ['$scope', '$http', 'ptCom', function ($scope, $http, ptCom) {
-                     me = this;                   
+                     me = this;
                      $scope.formatName = ptCom.formatName;
 
                      $http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
@@ -81,19 +79,17 @@
                     </li>
                 </ul>
                 <ul class="ss_form_box clearfix">
-
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Bankruptcy</label>
-                        <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{$index}}"></pt-radio>
+                        <pt-radio model="owner.Bankruptcy" name="ownerBankruptcy{{index}}"></pt-radio>
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Bank account</label>
-                        <pt-radio model="owner.Bankaccount" name="Bankaccount{{$index}}"></pt-radio>
-
+                        <pt-radio model="owner.Bankaccount" name="Bankaccount{{index}}"></pt-radio>
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Tax Returns</label>
-                        <pt-radio model="owner.TaxReturn" name="TaxReturn{{$index}}"></pt-radio>
+                        <pt-radio model="owner.TaxReturn" name="TaxReturn{{index}}"></pt-radio>
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Employed</label>
@@ -101,9 +97,8 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Paystubs</label>
-                        <pt-radio model="owner.Paystubs" name="Paystubs{{$index}}"></pt-radio>
+                        <pt-radio model="owner.Paystubs" name="Paystubs{{index}}"></pt-radio>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -124,6 +119,49 @@
                 }
             }
         });
+    </script>
+
+    <script type="text/ng-template" id="/templates/shortsale-mortgages.html">
+        <div class="ss_form">
+            <h4 class="ss_form_title">Mortgages</h4>
+            <div class="ss_border">
+                <div ng-repeat="mortgage in mortgages|filter:{DataStatus:'!3'}">
+                    <h4 class="ss_form_title" style="display: inline"><span style="text-transform: lowercase">{{$index+1|ordered}}</span> Mortgage </h4>
+                    <ul class="ss_form_box clearfix">
+                        <li class="ss_form_item">
+                            <label class="ss_form_input_title">Company</label>                            
+                            <input type="text" class="ss_form_input " ng-model="mortgage.LenderName" readonly="readonly">
+                        </li>
+                        <li class="ss_form_item" ng-show="mortgage.LenderName!='N/A'">
+                            <label class="ss_form_input_title">Loan #</label>
+                            <input type="text" class="ss_form_input" ng-model="mortgage.Loan" readonly="readonly">
+                        </li>
+
+                        <li class="ss_form_item" ng-show="mortgage.LenderName!='N/A'">
+                            <label class="ss_form_input_title">Loan Amount</label>
+                            <input type="text" class="ss_form_input" ng-model="mortgage.LoanAmount" money-mask readonly="readonly">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        // assign corp form
+        angularApp.directive("shortsaleMortgage", function (ptCom) {
+            return {
+                restrict: 'E',
+                scope: {
+                    mortgages: '=',
+                },
+                templateUrl: '/templates/shortsale-mortgages.html',
+                link: function (scope) {
+                    _.extend(scope, ptCom);
+                }
+            }
+        });
+
     </script>
 
     <script type="text/ng-template" id="/templates/assign-corp.html">
@@ -170,9 +208,9 @@
 
     </script>
 
-    <script type="text/ng-template" id="/templates/contact-memo.html">
+    <script type="text/ng-template" id="/templates/contract-memo.html">
         <div class="ss_form">
-            <h4 class="ss_form_title">Contact or Memo</h4>
+            <h4 class="ss_form_title">contract or Memo</h4>
             <div class="ss_border" style="">
                 <div ng-repeat="d in contract.Sellers">
                     <h4 class="ss_form_title">Seller {{$index+1}} </h4>
@@ -230,7 +268,7 @@
                 scope: {
                     contract: '=',
                 },
-                templateUrl: '/templates/contact-memo.html',
+                templateUrl: '/templates/contract-memo.html',
                 link: function (scope) {
                     _.extend(scope, ptCom);
                 }

@@ -2280,6 +2280,7 @@ angular.module('PortalApp')
             //});
         }
     });
+
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
@@ -4907,7 +4908,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
             sheet: 'POA',
             next: $scope.preAssignCorrectionPOA
         }, {
-            title: "Finish"
+            title: "Finish",
+            init: previewForm
         },
     ];
     $scope.CheckSearchInfo = function(needSearch, searchCompleted) {

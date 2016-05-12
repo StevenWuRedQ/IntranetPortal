@@ -166,7 +166,7 @@ Public Class RulesService
         Try
             If WorkingHours.IsWorkingDay(DateTime.Now) Then
                 'Run Rules
-                ' State.Rule.Execute()
+                State.Rule.Execute()
             Else
                 If State.Rule.ExecuteOnWeekend Then
                     State.Rule.Execute()
