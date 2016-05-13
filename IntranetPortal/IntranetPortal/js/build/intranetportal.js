@@ -155,12 +155,19 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource)
 {
     var BaseUri = '/api';
 
-    var PtBaseResource = function (apiName,key)
+    var PtBaseResource = function (apiName, key, paramDefaults, actions)
     {
         var uri = BaseUri + '/' + apiName + '/:' + key;
         var primaryKey = {};
-        primaryKey[key] = "@"+key;
-        var Resource = $resource(uri, primaryKey, { 'update': { method: 'PUT' } });
+        /*default param */
+
+        primaryKey[key] = "@" + key;
+        /*default actions add put */
+        var _actions = { 'update': { method: 'PUT' } };
+
+        angular.extend(primaryKey, paramDefaults)
+        angular.extend(_actions, actions);
+        var Resource = $resource(uri, primaryKey, _actions);
         
         //static function
         Resource.all =function()
@@ -191,7 +198,11 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource)
  */
 angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo) {
 
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE');
+    /*api service funciton declear*/
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE',null,
+        {
+            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
+        });
 
 
     docSearch.properties = {
@@ -226,6 +237,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         });
         return data1;
     }
+    
     docSearch.prototype.completed = function (isSave) {
 
         this.$update();
@@ -2412,14 +2424,22 @@ angular.module('PortalApp')
             $scope.DocSearch.IsSave = isSave
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
             var PostData = {};
+           
             _.extend(PostData, $scope.DocSearch);
             if (!isSave) {
                 PostData.Status = 1;
             }
+           
             
-            //$scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-
-            $scope.DocSearch.$update();
+            $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            if (isSave)
+            {
+                $scope.DocSearch.$update();
+            }else
+            {
+                $scope.DocSearch.$completed();
+            }
+            
 
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
@@ -2458,6 +2478,7 @@ angular.module('PortalApp')
             //});
         }
     });
+
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
@@ -5085,7 +5106,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
             sheet: 'POA',
             next: $scope.preAssignCorrectionPOA
         }, {
-            title: "Finish"
+            title: "Finish",
+            init: previewForm
         },
     ];
     $scope.CheckSearchInfo = function(needSearch, searchCompleted) {

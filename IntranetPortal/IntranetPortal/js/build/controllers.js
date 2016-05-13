@@ -739,14 +739,22 @@ angular.module('PortalApp')
             $scope.DocSearch.IsSave = isSave
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
             var PostData = {};
+           
             _.extend(PostData, $scope.DocSearch);
             if (!isSave) {
                 PostData.Status = 1;
             }
+           
             
-            //$scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-
-            $scope.DocSearch.$update();
+            $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            if (isSave)
+            {
+                $scope.DocSearch.$update();
+            }else
+            {
+                $scope.DocSearch.$completed();
+            }
+            
 
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
@@ -785,6 +793,7 @@ angular.module('PortalApp')
             //});
         }
     });
+
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
@@ -3412,7 +3421,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
             sheet: 'POA',
             next: $scope.preAssignCorrectionPOA
         }, {
-            title: "Finish"
+            title: "Finish",
+            init: previewForm
         },
     ];
     $scope.CheckSearchInfo = function(needSearch, searchCompleted) {

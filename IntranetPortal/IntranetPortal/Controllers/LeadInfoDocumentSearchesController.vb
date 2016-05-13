@@ -6,6 +6,7 @@ Imports System.Net
 Imports System.Net.Http
 Imports System.Web.Http
 Imports System.Web.Http.Description
+Imports System.Web.Http.Results
 Imports IntranetPortal.Data
 Imports IntranetPortal.LeadsActivityLog
 
@@ -74,13 +75,28 @@ Namespace Controllers
             Return StatusCode(HttpStatusCode.NoContent)
         End Function
 
-        <Route("api/LeadInfoDocumentSearches/Completed")>
+        <Route("api/LeadInfoDocumentSearches/{bble}/Completed")>
         <ResponseType(GetType(LeadInfoDocumentSearch))>
-        Function PostCompleted(ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
+        Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
             leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStauts.Completed
-            Dim putStatus = PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
 
-            Return putStatus
+            If (leadInfoDocumentSearch.ResutContent) Then
+                Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
+                Dim maildata As New Dictionary(Of String, String)
+                maildata.Add("Address", l.PropertyAddress)
+                maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
+                maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
+
+                If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
+                    Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+                                               Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy,
+                                                                      Employee.CEO.Name), "DocSearchCompleted", maildata)
+                End If
+            End If
+
+            'Dim j = Newtonsoft.Json.Linq.JObject.Parse("{Status:1}")
+            Return PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
+            'PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
         End Function
         ' POST: api/LeadInfoDocumentSearches
         <ResponseType(GetType(LeadInfoDocumentSearch))>
@@ -116,10 +132,9 @@ Namespace Controllers
                     End If
                 End If
 
-            Else
-                PutLeadInfoDocumentSearch(leadInfoDocumentSearch.BBLE, leadInfoDocumentSearch)
             End If
-
+            findSearch.UpdateBy = HttpContext.Current.User.Identity.Name
+            findSearch.UpdateDate = Date.Now
             Try
                 db.SaveChanges()
             Catch ex As DbUpdateException
