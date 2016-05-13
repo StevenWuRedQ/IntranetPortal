@@ -13,7 +13,7 @@
                 return;
             }
           
-            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE }, function () {
                 console.log("have space " + JSON.stringify($scope.DocSearch.BBLE));
                 $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
 

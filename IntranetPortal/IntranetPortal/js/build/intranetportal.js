@@ -2363,7 +2363,7 @@ angular.module('PortalApp')
                 return;
             }
           
-            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE }, function () {
                 console.log("have space " + JSON.stringify($scope.DocSearch.BBLE));
                 $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
 
@@ -2412,12 +2412,14 @@ angular.module('PortalApp')
             $scope.DocSearch.IsSave = isSave
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
             var PostData = {};
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
             _.extend(PostData, $scope.DocSearch);
             if (!isSave) {
                 PostData.Status = 1;
             }
+           
             
-            //$scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
 
             $scope.DocSearch.$update();
 
@@ -2458,6 +2460,7 @@ angular.module('PortalApp')
             //});
         }
     });
+
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
@@ -5085,7 +5088,8 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
             sheet: 'POA',
             next: $scope.preAssignCorrectionPOA
         }, {
-            title: "Finish"
+            title: "Finish",
+            init: previewForm
         },
     ];
     $scope.CheckSearchInfo = function(needSearch, searchCompleted) {
