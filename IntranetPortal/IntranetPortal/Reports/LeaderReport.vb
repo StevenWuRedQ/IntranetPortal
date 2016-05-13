@@ -1160,22 +1160,32 @@ Public Class LeaderReport
 
                     Dim expirationCell = New XRTableCell()
                     expirationCell.Font = New Font("Tohoma", 8)
-                    expirationCell.Text = lp.Expiration
+
+                    If lp.Expiration.HasValue Then
+                        expirationCell.Text = lp.Expiration
+                    End If
+
                     newRow.Cells.Add(expirationCell)
 
                     Dim plaintiffCell = New XRTableCell()
                     plaintiffCell.Font = New Font("Tohoma", 8)
-                    plaintiffCell.Text = lp.Plaintiff.Trim
+                    If Not String.IsNullOrEmpty(lp.Plaintiff) Then
+                        plaintiffCell.Text = lp.Plaintiff.Trim
+                    End If
                     newRow.Cells.Add(plaintiffCell)
 
                     Dim defendantCell = New XRTableCell()
                     defendantCell.Font = New Font("Tohoma", 8)
-                    defendantCell.Text = lp.Defendant.Trim
+                    If Not String.IsNullOrEmpty(lp.Defendant) Then
+                        defendantCell.Text = lp.Defendant.Trim
+                    End If
                     newRow.Cells.Add(defendantCell)
 
                     Dim indexCell = New XRTableCell()
                     indexCell.Font = New Font("Tohoma", 8)
-                    indexCell.Text = lp.Index.Trim
+                    If Not String.IsNullOrEmpty(lp.Index) Then
+                        indexCell.Text = lp.Index.Trim
+                    End If
                     newRow.Cells.Add(indexCell)
 
                     newRow.Cells(0).WidthF = 85

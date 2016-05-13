@@ -1,7 +1,19 @@
-﻿<h2>Property Address: {{formData.PropertyAddress}}</h2>
-<textarea>{{formData}}</textarea> 
+﻿<!--<h2>Property: {{formData.PropertyAddress}}</h2>-->
+<div class="input-group">
+    <label>Offer Type:&nbsp;</label><span>{{formData.Type}}</span>
+</div>
 <div ng-repeat="owner in formData.SsCase.PropertyInfo.Owners">
-    <pt-seller owner="owner" >
+    <pt-seller owner="owner" index="$index+1">
     </pt-seller>
 </div>
+<shortsale-mortgage mortgages="formData.SsCase.Mortgages">
+</shortsale-mortgage>
+<assign-corp-form assign-crop="formData.assignCrop">
+</assign-corp-form>
+<doc-contract-memo contract="formData.DealSheet.ContractOrMemo" ng-show="formData.DeadType.Contract||formData.DeadType.Memo">
+</doc-contract-memo>
 
+<doc-deed deed="formData.DealSheet.Deed" title="Deed" ng-show="formData.DeadType.Deed"></doc-deed>
+<doc-correction-deed deed="formData.DealSheet.CorrectionDeed" title="Correction Deed" ng-show="formData.DeadType.CorrectionDeed"></doc-correction-deed>
+<doc-poa giving-p-o-a="formData.DealSheet.GivingPOA" receiving-p-o-a="formData.DealSheet.ReceivingPOA" ng-show="formData.DeadType.POA"></doc-poa>
+<br />

@@ -100,15 +100,15 @@ Namespace Controllers
                 If (Not String.IsNullOrEmpty(EntityMananger)) Then
                     Dim LeadInfoSearchUser = Employee.GetInstance(EntityMananger) 'Employee.GetInstance("Elizabeth Rodriguez")
                     Dim empl = Employee.GetInstance(HttpContext.Current.User.Identity.Name)
-                    Dim mLead = Lead.GetInstance(leadInfoDocumentSearch.BBLE)
+                    Dim mLead = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
 
-                    If (LeadInfoSearchUser IsNot Nothing) Then
+                    If (LeadInfoSearchUser IsNot Nothing AndAlso mLead IsNot Nothing) Then
                         Core.EmailService.SendMail(Employee.GetEmpsEmails(LeadInfoSearchUser), Employee.GetEmpsEmails(empl),
                                                "DocSearchNotify",
                                                 New Dictionary(Of String, String) From
                                                 {
                                                     {"SubmitUser", empl.Name},
-                                                    {"Address", mLead.LeadsInfo.PropertyAddress},
+                                                    {"Address", mLead.PropertyAddress},
                                                     {"DocUser", LeadInfoSearchUser.Name},
                                                     {"BBLE", leadInfoDocumentSearch.BBLE},
                                                     {"ExpectedDate", IIf(leadInfoDocumentSearch.ExpectedSigningDate.HasValue, String.Format("{0:d}", leadInfoDocumentSearch.ExpectedSigningDate), "None")}

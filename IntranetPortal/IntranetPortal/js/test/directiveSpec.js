@@ -18,9 +18,7 @@
             scope.$digest();
             console.log(celem[0].value);
             expect(cscope.xdate).toBe("12/14/2015");
-
         });
-
     })
 
     describe('ptInitModel', function() {

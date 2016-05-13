@@ -62,10 +62,12 @@
             $scope.DocSearch.IsSave = isSave
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
             var PostData = {};
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
             _.extend(PostData, $scope.DocSearch);
             if (!isSave) {
                 PostData.Status = 1;
             }
+           
             
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
 
