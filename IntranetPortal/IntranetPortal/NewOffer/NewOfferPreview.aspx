@@ -44,10 +44,11 @@
         });
     </script>
 
+
     <script type="text/ng-template" id="/templates/short-sale-seller.html">
         <div class="ss_form">
-            <h4 class="ss_form_title">Owner {{index}}</h4>
-            <div class="ss_border" style="">
+            <h4 class="ss_form_title">Owner {{index}} ({{owner.isCorp ? "Corp" : "Individual"}})</h4>
+            <div class="ss_border" style="" ng-show="!owner.isCorp">
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title ">Name</label>
@@ -98,6 +99,34 @@
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Paystubs</label>
                         <pt-radio model="owner.Paystubs" name="Paystubs{{index}}"></pt-radio>
+                    </li>
+                </ul>
+            </div>
+            <div class="ss_border" style="" ng-show="owner.isCorp">
+                <ul class="ss_form_box clearfix">
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title ">Name</label>
+                        <input class="ss_form_input ss_not_empty" ng-value="formatName(owner.FirstName,owner.MiddleName,owner.LastName)" readonly>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">EIN</label>
+                        <input class="ss_form_input" ng-model="owner.SSN" mask="999-99-9999" clean="true" readonly>
+                    </li>
+                    <li class="ss_form_item" style="width: 100%">
+                        <label class="ss_form_input_title">Mail Address</label>
+                        <input class="ss_form_input" ng-value="formatAddr(owner.MailNumber, owner.MailStreetName, owner.MailApt, owner.MailCity, owner.MailState, owner.MailZip)" style="width: 96.66%" readonly>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Cell #</label>
+                        <input class="ss_form_input" ng-model="owner.Phone" mask="(999) 999-9999" clean="true" readonly>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Additional #</label>
+                        <input class="ss_form_input" ng-model="owner.AdlPhone" mask="(999) 999-9999" clean="true" readonly>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Email Address</label>
+                        <input class="ss_form_input" ng-model="owner.Email" type="email" readonly>
                     </li>
                 </ul>
             </div>
