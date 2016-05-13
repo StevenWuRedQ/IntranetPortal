@@ -7,7 +7,7 @@ var batch = require('gulp-batch');
 var rename = require('gulp-rename');
 var config = {
     //Include all js files 
-    src: ['js/*.js', 'js/controllers/*.js','js/models/*.js', '!js/PortalHttpFactory.js'],
+    src: ['js/*.js', 'js/controllers/*.js','js/models/*.js','js/Views/**/*.js','!js/PortalHttpFactory.js'],
 }
 
 //delete the output file(s)
@@ -25,6 +25,9 @@ gulp.task('watch', function () {
         gulp.start('scripts', done);
     }));
     watch('js/models/*.js', batch(function (events, done) {
+        gulp.start('scripts', done);
+    }));
+    watch('js/Views/**/*.js', batch(function (events, done) {
         gulp.start('scripts', done);
     }));
 });

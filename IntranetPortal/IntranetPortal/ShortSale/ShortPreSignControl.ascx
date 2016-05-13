@@ -125,19 +125,22 @@
             </li>
          </ul>
         <%-- end corp type form --%>
-        <div class="alert alert-warning" role="alert" ng-show="owner.Employed">
+        <div ng-show="!owner.isCorp">
+             <div class="alert alert-warning" role="alert" ng-show="owner.Employed">
            
-            <p ng-show="owner.Employed=='Employed'">  <i class="fa fa-warning"></i> 45 days of paystubs required</p>
-            <p ng-show="owner.Employed=='Self-Employed'">  <i class="fa fa-warning"></i> Profit and Loss required</p>
-            <p ng-show="owner.Employed=='Retired'||owner.Employed=='SSI / Disability'"> <i class="fa fa-warning"></i> Award Letter required</p>
-            <p ng-show="owner.Employed=='Unemployed'"> <i class="fa fa-warning"></i> Letter of explanation required</p>
+                <p ng-show="owner.Employed=='Employed'">  <i class="fa fa-warning"></i> 45 days of paystubs required</p>
+                <p ng-show="owner.Employed=='Self-Employed'">  <i class="fa fa-warning"></i> Profit and Loss required</p>
+                <p ng-show="owner.Employed=='Retired'||owner.Employed=='SSI / Disability'"> <i class="fa fa-warning"></i> Award Letter required</p>
+                <p ng-show="owner.Employed=='Unemployed'"> <i class="fa fa-warning"></i> Letter of explanation required</p>
+            </div>
+             <div class="alert alert-warning" role="alert" ng-show="owner.Bankaccount">
+                <i class="fa fa-warning"></i> 3 months of bank statements
+            </div>
+             <div class="alert alert-warning" role="alert" ng-show="owner.TaxReturn">
+                 <i class="fa fa-warning"></i> Last 2 Years of Tax Returns
+            </div>
         </div>
-         <div class="alert alert-warning" role="alert" ng-show="owner.Bankaccount">
-            <i class="fa fa-warning"></i> 3 months of bank statements
-        </div>
-         <div class="alert alert-warning" role="alert" ng-show="owner.TaxReturn">
-             <i class="fa fa-warning"></i> Last 2 Years of Tax Returns
-        </div>
+       
         
     </div>
 

@@ -7056,7 +7056,14 @@
     <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
     <Content Include="js\models\dxModel.js" />
+    <Content Include="js\models\HomeOwner.js" />
+    <Content Include="js\models\LeadsInfo.js" />
+    <Content Include="js\models\ptBaseResource.js" />
+    <Content Include="js\models\ptDocSearch.js" />
+    <Content Include="js\models\ptLeadResearch.js" />
     <Content Include="js\PortalHttpFactory.js" />
+    <Content Include="js\test\models\ptDocSearch.spec.js" />
+    <Content Include="js\Views\LeadDocSearch\dsSummary.html" />
     <Content Include="js\templates\ptEditor.html" />
     <Content Include="js\test\conf.js" />
     <Content Include="js\test\controllers\BuyerEntityControllerSpec.js" />
@@ -7066,6 +7073,7 @@
     <Content Include="js\test\controllers\NewOfferCtrlSpec.js" />
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="js\test\servicesSpec.js" />
+    <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />

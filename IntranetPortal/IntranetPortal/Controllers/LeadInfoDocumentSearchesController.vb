@@ -74,6 +74,14 @@ Namespace Controllers
             Return StatusCode(HttpStatusCode.NoContent)
         End Function
 
+        <Route("api/LeadInfoDocumentSearches/Completed")>
+        <ResponseType(GetType(LeadInfoDocumentSearch))>
+        Function PostCompleted(ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
+            leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStauts.Completed
+            Dim putStatus = PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
+
+            Return putStatus
+        End Function
         ' POST: api/LeadInfoDocumentSearches
         <ResponseType(GetType(LeadInfoDocumentSearch))>
         Function PostLeadInfoDocumentSearch(ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult

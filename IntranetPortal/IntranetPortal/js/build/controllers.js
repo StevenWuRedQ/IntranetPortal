@@ -676,77 +676,89 @@ angular.module('PortalApp')
 }]
 );
 angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch) {
         //New Model(this,arguments)
         $scope.ptContactServices = ptContactServices;
-    leadsInfoBBLE = $('#BBLE').val();
-       
-    //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
-    $scope.init = function (bble) {
+        leadsInfoBBLE = $('#BBLE').val();
 
-        leadsInfoBBLE = bble || $('#BBLE').val();
-        if (!leadsInfoBBLE) {
-            console.log("Can not load page without BBLE !")
-            return;
-        }
-        
-        $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-        success(function (data, status, headers, config) {
-            $scope.DocSearch = data;
-            $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-                $scope.DocSearch.team = data;
+        //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
+        $scope.init = function (bble) {
+
+            leadsInfoBBLE = bble || $('#BBLE').val();
+            if (!leadsInfoBBLE) {
+                console.log("Can not load page without BBLE !")
+                return;
+            }
+          
+            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                console.log("have space " + JSON.stringify($scope.DocSearch.BBLE));
+                $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
 
             });
 
-            $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-              success(function (data1, status, headers, config) {
-                  $scope.LeadsInfo = data1;
-                  $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
-                  $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
-                  $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
-                  $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
-                  $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
-                  $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data.C2ndMotgrAmt;
-                      var ownerName = $scope.DocSearch.LeadResearch.ownerName;
-                      if (ownerName) {
-                          $http.post("/api/homeowner/ssn/" + leadsInfoBBLE, JSON.stringify(ownerName)).
-                          success(function (ssn, status, headers, config) {
-                              $scope.DocSearch.LeadResearch.ownerSSN = ssn;
-                          }).error(function () {
+           
+            //$scope.DocSearch;
+            // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
+            // success(function (data, status, headers, config) {
+            //     $scope.DocSearch = data;
+            //     $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
+            //         $scope.DocSearch.team = data;
 
-                          });
-                      }
+            //     });
+
+            //     $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
+            //       success(function (data1, status, headers, config) {
+            //           $scope.LeadsInfo = data1;
+            //           $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
+            //           $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
+            //           $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
+            //           $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
+            //           $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
+            //           $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data1.C2ndMotgrAmt;
+            //           var ownerName = $scope.DocSearch.LeadResearch.ownerName;
+            //           if (ownerName) {
+            //               $http.post("/api/homeowner/ssn/" + leadsInfoBBLE, JSON.stringify(ownerName)).
+            //               success(function (ssn, status, headers, config) {
+            //                   $scope.DocSearch.LeadResearch.ownerSSN = ssn;
+            //               }).error(function () {
+
+            //               });
+            //           }
 
 
-              }).error(function (data, status, headers, config) {
-                  alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-              });
-        });
-    }
+            //       }).error(function (data, status, headers, config) {
+            //           alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
+            //       });
+            // });
+        }
 
-    $scope.init(leadsInfoBBLE)
+        $scope.init(leadsInfoBBLE)
 
-    $scope.SearchComplete = function (isSave) {
+        $scope.SearchComplete = function (isSave) {
 
-        $scope.DocSearch.IsSave = isSave
+            $scope.DocSearch.IsSave = isSave
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
             var PostData = {};
             _.extend(PostData, $scope.DocSearch);
             if (!isSave) {
                 PostData.Status = 1;
             }
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            
+            //$scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
 
-            $http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
-                alert(isSave ? 'Save success!' : 'Lead info search completed !');
-                if (typeof gridCase != 'undefined') {
-                    if (!isSave) {
-                        $scope.DocSearch.Status = 1;
-                    gridCase.Refresh();
-                }
-                }
-            }).error(function (data) {
-                alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            });
+            $scope.DocSearch.$update();
+
+            //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
+            //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
+            //    if (typeof gridCase != 'undefined') {
+            //        if (!isSave) {
+            //            $scope.DocSearch.Status = 1;
+            //            gridCase.Refresh();
+            //        }
+            //    }
+            //}).error(function (data) {
+            //    alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
+            //});
 
             //Ajax anonymous function not work for angular scope need check about this.
             //$.ajax({
@@ -771,8 +783,8 @@ angular.module('PortalApp')
             //    }
 
             //});
-    }
-});
+        }
+    });
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
@@ -2605,7 +2617,7 @@ angular.module("PortalApp")
         $scope.ptCom = ptCom;
         $scope.MortgageTabs = [];
         $scope.SsCase = {
-            PropertyInfo: { Owners: [{isCrop:false}] },
+            PropertyInfo: { Owners: [{ isCorp: false }] },
             CaseData: {},
             Mortgages: [{}]
         };
@@ -2613,10 +2625,14 @@ angular.module("PortalApp")
         $scope.Approval_popupVisible = false;
         $http.get('/Services/ContactService.svc/getbanklist').success(function (data) {
             $scope.bankNameOptions = data;
+            if ($scope.bankNameOptions) {
+                $scope.bankNameOptions.push({Name:'N/A'});
+            }
+ 
         }).error(function (data) {
             $scope.bankNameOptions = [];
         });
-
+        $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
         //move to construction - add by chris
         $scope.MoveToConstruction = function (scuessfunc) {
             var json = $scope.SsCase;
@@ -3195,10 +3211,10 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
     }
     $scope.getErrorMessage = function(id) {
         var eMessages = [];
-
-        $('#' + id + ' .ss_warning').each(function() {
+        /*ignore every parent of has form-ignore*/
+        $('#' + id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
             eMessages.push($(this).attr('data-message'));
-        })
+        });
         return eMessages
     }
     $scope.ContractNext = function() {

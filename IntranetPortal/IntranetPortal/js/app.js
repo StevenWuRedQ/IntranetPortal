@@ -1,5 +1,5 @@
 ﻿//test watch1
-var portalApp = angular.module('PortalApp', ['ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase']);
+var portalApp = angular.module('PortalApp', ['ngResource','ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase']);
 angular.module('PortalApp').
 controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
     $rootScope.AlertModal = null;
@@ -15,8 +15,6 @@ controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootSc
         });
     }
     
-
-   
 
     $rootScope.alertOK = function () {
         $rootScope.AlertModal.close();

@@ -268,7 +268,8 @@
                                 </ul>
 
                                 <div style="padding: 20px" id="searchReslut">
-                                    <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />
+                                    <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
+                                   <%-- <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />--%>
                                 </div>
                             </div>
 

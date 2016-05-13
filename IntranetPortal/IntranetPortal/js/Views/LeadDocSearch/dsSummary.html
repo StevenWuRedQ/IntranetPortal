@@ -1,0 +1,86 @@
+﻿<table class="table table-striped">
+    <tr>
+        <td>
+            Property tax search - {{summary.propertyTaxes?'':'No'}} {{summary.propertyTaxes | currency}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Water charges - {{summary.waterCharges?'':'No'}} {{summary.waterCharges | currency}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ECB Violation - {{summary.ecbViolation?'':'No'}} {{summary.ecbViolation | currency}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            DOB Violation - {{summary.dobWebsites?'':'No'}} {{summary.dobWebsites | currency}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Has Co - {{summary.hasCO?'Yes':'No'}}
+        </td>
+    </tr>
+    <tr>
+        <td>Has Judgment {{summary.judgments?'Yes':'No'}}</td>
+    </tr>
+    <tr>
+        <td>
+            Judgment Amount-  {{summary.judgments | currency}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ECB On JdmtSearch - {{summary.judgementSearch}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            IRS Tax Liens - {{summary.irsTaxLien?'':'No'}} {{summary.irsTaxLien | currency}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            NYS Tax Liens - {{summary.hasNysTaxLien?'Yes':'No'}}
+        </td>
+    </tr>
+
+    <tr>
+        <td>Judgement Doc - <a ng-if="summary.judgementSearchDoc.path" src="{{summary.judgementSearchDoc.path}}">Judgement Search </a></td>
+    </tr>
+    <tr>
+        <td>
+            Court Date - {{summary.courtDate | date:'MM/dd/yyyy'}}
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Mortgage - {{summary.mortgageAmount?'':'No'}} {{summary.mortgageAmount | currency}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            2nd Mortgage - {{summary.secondMortgageAmount?'':'No'}} {{summary.secondMortgageAmount | currency}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{ summary.fannie?"Has FANNIE":'Not Fannie' }} {{ summary.fha?" Has FHA":' Not FHA' }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Servicer - {{summary.servicer}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Servicer is Wells Fargo - {{ summary.wellsFargo?'Yes':'No'}}
+        </td>
+    </tr>
+</table>
+

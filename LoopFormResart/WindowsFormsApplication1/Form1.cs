@@ -379,6 +379,7 @@ namespace DroneManage
         {
            
             var main = GetDroneMainProcess();
+            
             List<SubWindows> wnds = 
             User32.FindWindowInProcess(main, (messagetext) =>
                     messagetext.Length > 0
