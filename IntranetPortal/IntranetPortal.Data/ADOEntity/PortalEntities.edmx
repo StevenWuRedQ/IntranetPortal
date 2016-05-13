@@ -350,6 +350,8 @@
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="LeadResearch" Type="nvarchar(max)" />
           <Property Name="ExpectedSigningDate" Type="datetime" />
+          <Property Name="CompletedOn" Type="datetime" />
+          <Property Name="CompletedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -2039,6 +2041,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="ExpectedSigningDate" Type="DateTime" Precision="3" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CheckingComplain">
           <Key>
@@ -3227,6 +3231,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="LeadInfoDocumentSearches">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadInfoDocumentSearch">
               <MappingFragment StoreEntitySet="LeadInfoDocumentSearch">
+                <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
                 <ScalarProperty Name="ExpectedSigningDate" ColumnName="ExpectedSigningDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
