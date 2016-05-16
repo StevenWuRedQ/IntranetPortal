@@ -27,12 +27,15 @@ Public Class LeadInfoDocumentSearch
         Dim judgementDoc = json("judgementSearchDoc")
 
         If judgementDoc IsNot Nothing Then
-            Dim path = judgementDoc("path").ToString
-            Dim name = judgementDoc("name").ToString
+            Dim path = judgementDoc("path")
+            Dim name = judgementDoc("name")
+            If path IsNot Nothing AndAlso Not String.IsNullOrEmpty(path) Then
+                Dim file = IntranetPortal.Core.DocumentService.GetPDFContent(path)
 
-            Dim file = IntranetPortal.Core.DocumentService.GetPDFContent(path)
-            Return New With {.Data = file, .Name = name}
-
+                If file IsNot Nothing AndAlso name IsNot Nothing Then
+                    Return New With {.Data = file, .Name = name.ToString}
+                End If
+            End If
         End If
 
         Return Nothing

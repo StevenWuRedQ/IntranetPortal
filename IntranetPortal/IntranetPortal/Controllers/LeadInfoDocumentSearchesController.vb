@@ -81,31 +81,8 @@ Namespace Controllers
         <Route("api/LeadInfoDocumentSearches/{bble}/Completed")>
         <ResponseType(GetType(LeadInfoDocumentSearch))>
         Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
+
             leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStauts.Completed
-
-            If (Not String.IsNullOrEmpty(leadInfoDocumentSearch.ResutContent)) Then
-                Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
-                Dim maildata As New Dictionary(Of String, String)
-                maildata.Add("Address", l.PropertyAddress)
-                maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
-                maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
-
-                If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
-
-                    Dim attachment As Mail.Attachment
-                    Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
-                    If judgeDoc IsNot Nothing Then
-                        attachment = New Mail.Attachment(New IO.MemoryStream(CType(judgeDoc.Data, Byte())), judgeDoc.Name.ToString)
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                                   Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name),
-                                                   "DocSearchCompleted", maildata, {attachment})
-                    Else
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                               Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy,
-                                                                      Employee.CEO.Name), "DocSearchCompleted", maildata)
-                    End If
-                End If
-            End If
             leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.CompletedOn = Date.Now
 
@@ -115,9 +92,42 @@ Namespace Controllers
                 Throw ex
             End Try
 
+            If (Not String.IsNullOrEmpty(leadInfoDocumentSearch.ResutContent)) Then
+                SendCompleteNotify(leadInfoDocumentSearch)
+            End If
+
             Return Ok(leadInfoDocumentSearch)
             'PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
         End Function
+
+        Private Sub SendCompleteNotify(leadInfoDocumentSearch As LeadInfoDocumentSearch)
+            Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
+            Dim maildata As New Dictionary(Of String, String)
+            If l IsNot Nothing Then
+                maildata.Add("Address", l.PropertyAddress)
+            Else
+                maildata.Add("Address", leadInfoDocumentSearch.BBLE)
+            End If
+
+            maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
+            maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
+
+            If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
+                Dim attachment As Mail.Attachment
+                Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
+                If judgeDoc IsNot Nothing Then
+                    attachment = New Mail.Attachment(New IO.MemoryStream(CType(judgeDoc.Data, Byte())), judgeDoc.Name.ToString)
+                    Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+                                               Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name),
+                                               "DocSearchCompleted", maildata, {attachment})
+                Else
+                    Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+                                           Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy,
+                                                                  Employee.CEO.Name), "DocSearchCompleted", maildata)
+                End If
+            End If
+        End Sub
+
         ' POST: api/LeadInfoDocumentSearches
         <ResponseType(GetType(LeadInfoDocumentSearch))>
         Function PostLeadInfoDocumentSearch(ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult

@@ -20,9 +20,10 @@ Imports IntranetPortal.Data
         Dim search = LeadInfoDocumentSearch.GetInstance(bble)
 
         Dim controller As New IntranetPortal.Controllers.LeadInfoDocumentSearchesController
-        Dim result = controller.PostCompleted(bble, search)
+        Dim objController As PrivateObject = New PrivateObject(GetType(IntranetPortal.Controllers.LeadInfoDocumentSearchesController))
 
-
+        objController.Invoke("SendCompleteNotify", search)
+        Assert.IsTrue(True)
     End Sub
 
 End Class
