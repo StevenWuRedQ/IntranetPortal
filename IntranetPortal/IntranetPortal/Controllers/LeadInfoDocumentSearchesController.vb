@@ -45,7 +45,7 @@ Namespace Controllers
             db.Entry(leadInfoDocumentSearch).State = EntityState.Modified
             leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.UpdateDate = Date.Now
-
+            'leadInfoDocumentSearch.LeadResearch
             If (leadInfoDocumentSearch.ResutContent IsNot Nothing) Then
                 If Not leadInfoDocumentSearch.IsSave Then
                     Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)

@@ -228,18 +228,6 @@ Public Class DocumentService
         Dim f = clientContext.Web.GetFileById(New Guid(uniqueId))
 
         Return f.ListItemAllFields
-
-        'Dim camlQuery As New CamlQuery
-        'camlQuery.ViewXml = String.Format("<View Scope='RecursiveAll'><RowLimit>1</RowLimit><Query><Where><Eq><FieldRef Name='UniqueId'/><Value Type='Guid'>{0}</Value></Eq></Where></Query></View>", uniqueId)
-        'Dim items = list.GetItems(camlQuery)
-        'clientContext.Load(items)
-        'clientContext.ExecuteQuery()
-
-        'If items.Count = 1 Then
-        '    Return items(0)
-        'End If
-
-        'Return Nothing
     End Function
 
     Private Shared Function GetFileByUrl(fileUrl As String, clientContext As ClientContext) As ListItem
@@ -254,19 +242,7 @@ Public Class DocumentService
         Dim fileUrl = String.Format("/{2}/{0}/{1}", folderPath, fileName, RootFolderName)
 
         Dim result = UploadFile(fileUrl, fileBytes, uploadBy)
-        'Using fs As New IO.MemoryStream(fileBytes)
-        '    Microsoft.SharePoint.Client.File.SaveBinaryDirect(GetClientContext, fileUrl, fs, True)
-        'End Using
 
-        'Using ctx = GetClientContext()
-        '    Dim file = ctx.Web.GetFileByServerRelativeUrl(fileUrl)
-        '    'ctx.Load(file)
-        '    'ctx.ExecuteQuery()
-
-        '    file.ListItemAllFields("UploadBy") = uploadBy
-        '    file.ListItemAllFields.Update()
-        '    ctx.ExecuteQuery()
-        'End Using
         Try
             CreateSharingLink(GetClientContext, fileUrl)
         Catch ex As Exception
@@ -302,27 +278,6 @@ Public Class DocumentService
 
         Return Nothing
     End Function
-
-    'Public Shared Sub UploadFile(folderPath As String, fileBytes As Byte(), fileName As String, uploadBy As String)
-    '    CreateFolder(folderPath)
-    '    Dim fileUrl = String.Format("/{0}/{1}", RootFolderName, folderPath)
-
-    '    Using ctx = GetClientContext()
-    '        Dim folder = ctx.Web.GetFolderByServerRelativeUrl(fileUrl)
-
-    '        Dim fileCreateInfo As New FileCreationInformation
-    '        fileCreateInfo.Content = fileBytes
-    '        fileCreateInfo.Overwrite = True
-    '        fileCreateInfo.Url = fileName
-
-    '        Dim file = folder.Files.Add(fileCreateInfo)
-    '        file.ListItemAllFields("UploadBy") = uploadBy
-    '        file.ListItemAllFields.Update()
-    '        ctx.ExecuteQuery()
-    '    End Using
-
-    '    CreateSharingLink(GetClientContext, fileUrl)
-    'End Sub
 
     Private Shared Function EnsureFolder(ctx As ClientContext, parentFolder As Folder, folderPath As String) As Folder
         Dim pathElements = folderPath.Split(New Char() {"/"}, StringSplitOptions.RemoveEmptyEntries)
