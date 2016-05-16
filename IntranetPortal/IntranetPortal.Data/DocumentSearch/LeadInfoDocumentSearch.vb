@@ -22,6 +22,21 @@ Public Class LeadInfoDocumentSearch
         End Using
     End Function
 
+    Public Function LoadJudgesearchDoc() As Object
+        Dim json = Newtonsoft.Json.Linq.JObject.Parse(LeadResearch)
+        Dim judgementDoc = json("judgementSearchDoc")
+
+        If judgementDoc IsNot Nothing Then
+            Dim path = judgementDoc("path").ToString
+            Dim name = judgementDoc("name").ToString
+
+            Dim file = IntranetPortal.Core.DocumentService.GetPDFContent(path)
+            Return New With {.Data = file, .Name = name}
+
+        End If
+
+        Return Nothing
+    End Function
 
     Public Sub Save()
         Using ctx As New PortalEntities
