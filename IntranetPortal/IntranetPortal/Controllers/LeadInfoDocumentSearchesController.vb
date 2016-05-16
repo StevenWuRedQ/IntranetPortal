@@ -7,6 +7,7 @@ Imports System.Net.Http
 Imports System.Web.Http
 Imports System.Web.Http.Description
 Imports System.Web.Http.Results
+Imports System.Web.Mail
 Imports IntranetPortal.Data
 Imports IntranetPortal.LeadsActivityLog
 
@@ -56,10 +57,12 @@ Namespace Controllers
                     maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
 
                     If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy), Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name), "DocSearchCompleted", maildata)
+
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+                                                   Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name),
+                                                   "DocSearchCompleted", maildata)
                     End If
                 End If
-
             End If
 
             Try
@@ -75,6 +78,8 @@ Namespace Controllers
             Return StatusCode(HttpStatusCode.NoContent)
         End Function
 
+
+
         <Route("api/LeadInfoDocumentSearches/{bble}/Completed")>
         <ResponseType(GetType(LeadInfoDocumentSearch))>
         Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
@@ -88,9 +93,19 @@ Namespace Controllers
                 maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
 
                 If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
-                    Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+
+                    Dim attachment As Mail.Attachment
+                    Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
+                    If judgeDoc IsNot Nothing Then
+                        attachment = New Mail.Attachment(New IO.MemoryStream(CType(judgeDoc.Data, Byte())), judgeDoc.Name.ToString)
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+                                                   Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name),
+                                                   "DocSearchCompleted", maildata, {attachment})
+                    Else
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
                                                Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy,
                                                                       Employee.CEO.Name), "DocSearchCompleted", maildata)
+                    End If
                 End If
             End If
 
