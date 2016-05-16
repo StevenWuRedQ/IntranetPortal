@@ -80,7 +80,7 @@ Namespace Controllers
         Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
             leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStauts.Completed
 
-            If (leadInfoDocumentSearch.ResutContent) Then
+            If (Not String.IsNullOrEmpty(leadInfoDocumentSearch.ResutContent)) Then
                 Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
                 Dim maildata As New Dictionary(Of String, String)
                 maildata.Add("Address", l.PropertyAddress)
@@ -93,9 +93,16 @@ Namespace Controllers
                                                                       Employee.CEO.Name), "DocSearchCompleted", maildata)
                 End If
             End If
+            leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
+            leadInfoDocumentSearch.CompletedOn = Date.Now
 
-            'Dim j = Newtonsoft.Json.Linq.JObject.Parse("{Status:1}")
-            Return PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
+            Try
+                leadInfoDocumentSearch.Save()
+            Catch ex As Exception
+                Throw ex
+            End Try
+
+            Return Ok(leadInfoDocumentSearch)
             'PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
         End Function
         ' POST: api/LeadInfoDocumentSearches
@@ -133,16 +140,12 @@ Namespace Controllers
                 End If
 
             End If
-            findSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-            findSearch.UpdateDate = Date.Now
+            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
+            leadInfoDocumentSearch.UpdateDate = Date.Now
             Try
                 db.SaveChanges()
             Catch ex As DbUpdateException
-                If (LeadInfoDocumentSearchExists(leadInfoDocumentSearch.BBLE)) Then
-                    Return Conflict()
-                Else
-                    Throw
-                End If
+
             End Try
 
             Return CreatedAtRoute("DefaultApi", New With {.id = leadInfoDocumentSearch.BBLE}, leadInfoDocumentSearch)

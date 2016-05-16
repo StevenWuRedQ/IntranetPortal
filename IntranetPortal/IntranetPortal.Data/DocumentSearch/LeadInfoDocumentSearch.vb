@@ -22,6 +22,7 @@ Public Class LeadInfoDocumentSearch
         End Using
     End Function
 
+
     Public Sub Save()
         Using ctx As New PortalEntities
             If ctx.LeadInfoDocumentSearches.Find(BBLE) IsNot Nothing Then

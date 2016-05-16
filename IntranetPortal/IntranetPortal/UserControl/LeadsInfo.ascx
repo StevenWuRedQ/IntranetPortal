@@ -167,7 +167,11 @@
 
     function ReloadPage(bbleToLoad) {
         if (bbleToLoad == leadsInfoBBLE) {
-            ContentCallbackPanel.PerformCallback(bbleToLoad);
+            if (typeof ContentCallbackPanel != undefined)
+            {
+                ContentCallbackPanel.PerformCallback(bbleToLoad);
+            }
+            
             return true;
         }
 

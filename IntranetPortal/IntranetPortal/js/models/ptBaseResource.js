@@ -18,8 +18,11 @@
         Resource.all = function () {
 
         }
-        Resource.cType = function (obj, Class) {
-
+        Resource.CType = function (obj, Class) {
+            var _new = new Class();
+            angular.extend(_new, obj);
+            obj = _new;
+            return _new;
         }
 
         /*base class instance function*/
@@ -27,6 +30,10 @@
 
         }
 
+        Resource.prototype.$cType = function(Class)
+        {
+            Resource.CType(this, Class);
+        }
         return Resource;
 
     }

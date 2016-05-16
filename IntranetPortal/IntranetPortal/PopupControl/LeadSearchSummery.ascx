@@ -41,7 +41,7 @@
     </tr>
     
     <tr>
-        <td>Judgement Doc - <a ng-if="DocSearch.LeadResearch.judgementSearchDoc.path" src="{{DocSearch.LeadResearch.judgementSearchDoc.path}}">Judgement Search </a></td>
+        <td>Judgement Doc - <a ng-if="DocSearch.LeadResearch.judgementSearchDoc.path" href="{{DocSearch.LeadResearch.judgementSearchDoc.path}}">Judgement Search </a></td>
     </tr>
     <tr>
         <td>Court Date - {{DocSearch.LeadResearch.courtDate | date:'MM/dd/yyyy'}}
