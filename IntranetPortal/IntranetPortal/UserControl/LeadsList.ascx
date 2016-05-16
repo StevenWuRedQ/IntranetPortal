@@ -11,17 +11,21 @@
         // The values will be returned to the OnGetRowValues() function 
         if (gridLeads.GetFocusedRowIndex() >= 0) {
 
-            if (ContentCallbackPanel.InCallback()) {
-                postponedCallbackRequired = true;
-            }
-            else {
-                if (gridLeads.GetFocusedRowIndex() >= 0) {
-                    //alert(gridLeads.GetFocusedRowIndex());
-                    var rowKey = gridLeads.GetRowKey(gridLeads.GetFocusedRowIndex());
-                    if (rowKey != null)
-                        OnGetRowValues(rowKey);
+            //if (typeof ContentCallbackPanel != 'undefined')
+            //{
+                if (ContentCallbackPanel.InCallback()) {
+                    postponedCallbackRequired = true;
                 }
-            }
+                else {
+                    if (gridLeads.GetFocusedRowIndex() >= 0) {
+                        //alert(gridLeads.GetFocusedRowIndex());
+                        var rowKey = gridLeads.GetRowKey(gridLeads.GetFocusedRowIndex());
+                        if (rowKey != null)
+                            OnGetRowValues(rowKey);
+                    }
+                }
+            //}
+            
         }
     }
 

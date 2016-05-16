@@ -689,14 +689,13 @@ angular.module('PortalApp')
                 console.log("Can not load page without BBLE !")
                 return;
             }
-          
-            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                console.log("have space " + JSON.stringify($scope.DocSearch.BBLE));
-                $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
 
+            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
+                $scope.DocSearch.initTeam();
             });
 
-           
+
             //$scope.DocSearch;
             // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
             // success(function (data, status, headers, config) {
@@ -736,25 +735,21 @@ angular.module('PortalApp')
 
         $scope.SearchComplete = function (isSave) {
 
-            $scope.DocSearch.IsSave = isSave
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
-            var PostData = {};
-           
-            _.extend(PostData, $scope.DocSearch);
-            if (!isSave) {
-                PostData.Status = 1;
-            }
-           
-            
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            if (isSave)
-            {
-                $scope.DocSearch.$update();
-            }else
-            {
-                $scope.DocSearch.$completed();
+            if (isSave) {
+                $scope.DocSearch.$update(null,function () {
+                    AngularRoot.alert("Save successfully!");
+                });
+            } else {
+
+                $scope.DocSearch.ResutContent = $("#searchReslut").html();
+                $scope.DocSearch.$completed(null,function () {
+                
+                    AngularRoot.alert("Document completed!")
+                    gridCase.Refresh();
+                });
             }
-            
+
 
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');

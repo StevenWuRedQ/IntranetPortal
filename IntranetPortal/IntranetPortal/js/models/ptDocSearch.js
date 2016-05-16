@@ -2,10 +2,10 @@
 /**
  * @return {[class]}                 DocSearch class
  */
-angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo) {
+angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo,$http) {
 
     /*api service funciton declear*/
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE',null,
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
         {
             completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
         });
@@ -15,7 +15,12 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         LeadResearch: "{LeadResearch}",
         LeadResearchs: "[LeadResearch]"
     }
-
+    docSearch.prototype.initTeam = function () {
+        var self = this
+        $http.get('/Services/TeamService.svc/GetTeam?userName=' + this.CreateBy).success(function (data) {
+            self.team = data;
+        });
+    }
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
         var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
@@ -43,11 +48,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         });
         return data1;
     }
-    
-    docSearch.prototype.completed = function (isSave) {
 
-        this.$update();
-    }
 
     /**
      * static function define use class object docSearch.static function;

@@ -151,12 +151,10 @@ dxGridColumnModel.prototype.customizeTextDateFunc = function(e) {
     return ''
 }
 
-angular.module('PortalApp').factory('ptBaseResource', function ($resource)
-{
+angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
     var BaseUri = '/api';
 
-    var PtBaseResource = function (apiName, key, paramDefaults, actions)
-    {
+    var PtBaseResource = function (apiName, key, paramDefaults, actions) {
         var uri = BaseUri + '/' + apiName + '/:' + key;
         var primaryKey = {};
         /*default param */
@@ -168,24 +166,32 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource)
         angular.extend(primaryKey, paramDefaults)
         angular.extend(_actions, actions);
         var Resource = $resource(uri, primaryKey, _actions);
-        
+
         //static function
-        Resource.all =function()
-        {
+        Resource.all = function () {
 
         }
-        
+        Resource.CType = function (obj, Class) {
+            var _new = new Class();
+            angular.extend(_new, obj);
+            obj = _new;
+            return _new;
+        }
+
         /*base class instance function*/
-        Resource.prototype.$put = function ()
-        {
+        Resource.prototype.$put = function () {
 
         }
-        
+
+        Resource.prototype.$cType = function(Class)
+        {
+            Resource.CType(this, Class);
+        }
         return Resource;
-       
+
     }
 
-  
+
     //leadResearch.prototype.func
     //def function
     //leadResearch.func
@@ -196,10 +202,10 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource)
 /**
  * @return {[class]}                 DocSearch class
  */
-angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo) {
+angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo,$http) {
 
     /*api service funciton declear*/
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE',null,
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
         {
             completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
         });
@@ -209,7 +215,12 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         LeadResearch: "{LeadResearch}",
         LeadResearchs: "[LeadResearch]"
     }
-
+    docSearch.prototype.initTeam = function () {
+        var self = this
+        $http.get('/Services/TeamService.svc/GetTeam?userName=' + this.CreateBy).success(function (data) {
+            self.team = data;
+        });
+    }
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
         var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
@@ -237,11 +248,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         });
         return data1;
     }
-    
-    docSearch.prototype.completed = function (isSave) {
 
-        this.$update();
-    }
 
     /**
      * static function define use class object docSearch.static function;
@@ -2374,14 +2381,13 @@ angular.module('PortalApp')
                 console.log("Can not load page without BBLE !")
                 return;
             }
-          
-            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                console.log("have space " + JSON.stringify($scope.DocSearch.BBLE));
-                $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
 
+            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
+                $scope.DocSearch.initTeam();
             });
 
-           
+
             //$scope.DocSearch;
             // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
             // success(function (data, status, headers, config) {
@@ -2421,25 +2427,21 @@ angular.module('PortalApp')
 
         $scope.SearchComplete = function (isSave) {
 
-            $scope.DocSearch.IsSave = isSave
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
-            var PostData = {};
-           
-            _.extend(PostData, $scope.DocSearch);
-            if (!isSave) {
-                PostData.Status = 1;
-            }
-           
-            
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            if (isSave)
-            {
-                $scope.DocSearch.$update();
-            }else
-            {
-                $scope.DocSearch.$completed();
+            if (isSave) {
+                $scope.DocSearch.$update(null,function () {
+                    AngularRoot.alert("Save successfully!");
+                });
+            } else {
+
+                $scope.DocSearch.ResutContent = $("#searchReslut").html();
+                $scope.DocSearch.$completed(null,function () {
+                
+                    AngularRoot.alert("Document completed!")
+                    gridCase.Refresh();
+                });
             }
-            
+
 
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');

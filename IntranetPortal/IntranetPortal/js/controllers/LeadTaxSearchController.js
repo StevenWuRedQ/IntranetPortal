@@ -14,9 +14,8 @@
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                console.log("have space " + JSON.stringify($scope.DocSearch.BBLE));
                 $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
-
+                $scope.DocSearch.initTeam();
             });
 
 
@@ -59,22 +58,18 @@
 
         $scope.SearchComplete = function (isSave) {
 
-            $scope.DocSearch.IsSave = isSave
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
-            var PostData = {};
-
-            _.extend(PostData, $scope.DocSearch);
-
-
-
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
             if (isSave) {
-                $scope.DocSearch.$update(function () {
+                $scope.DocSearch.$update(null,function () {
                     AngularRoot.alert("Save successfully!");
                 });
             } else {
-                $scope.DocSearch.$completed(function () {
+
+                $scope.DocSearch.ResutContent = $("#searchReslut").html();
+                $scope.DocSearch.$completed(null,function () {
+                
                     AngularRoot.alert("Document completed!")
+                    gridCase.Refresh();
                 });
             }
 

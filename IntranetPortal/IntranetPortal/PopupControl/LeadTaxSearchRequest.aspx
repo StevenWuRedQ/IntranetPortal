@@ -5,6 +5,7 @@
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="/js/PortalHttpFactory.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
@@ -48,7 +49,12 @@
                                        
                                         <div style="overflow: auto; height: 830px; padding: 0 20px">
 
-                                            <div class="alert alert-warning" style="margin-top:20px;font-size:16px" ng-show="DocSearch.Status != 1"> <i class="fa fa-warning"></i> <strong>Warning!</strong> Document search didn't completed yet!</div>
+                                            <div class="alert alert-warning" style="margin-top:20px;font-size:16px" ng-show="DocSearch.Status != 1"> 
+                                                <i class="fa fa-warning"></i> <strong>Warning!</strong> Document search didn't completed yet!
+                                            </div>
+                                            <div class="alert alert-success" style="margin-top:20px;font-size:16px" ng-show="DocSearch.Status == 1 && DocSearch.CompletedOn"> 
+                                                 Document search completed on {{DocSearch.CompletedOn|date:'shortDate'}} by {{DocSearch.CompletedBy}}!
+                                            </div>
                                             <div class="ss_form">
                                                 <h4 class="ss_form_title ">Request Info
                                                 <pt-collapse model="CollapseRequestInfo" />
