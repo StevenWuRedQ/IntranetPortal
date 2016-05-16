@@ -4,7 +4,11 @@
  */
 angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo) {
 
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE');
+    /*api service funciton declear*/
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE',null,
+        {
+            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
+        });
 
 
     docSearch.properties = {
@@ -39,6 +43,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         });
         return data1;
     }
+    
     docSearch.prototype.completed = function (isSave) {
 
         this.$update();

@@ -12,14 +12,14 @@
                 console.log("Can not load page without BBLE !")
                 return;
             }
-          
-            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE }, function () {
+
+            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
                 console.log("have space " + JSON.stringify($scope.DocSearch.BBLE));
                 $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
 
             });
 
-           
+
             //$scope.DocSearch;
             // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
             // success(function (data, status, headers, config) {
@@ -62,16 +62,22 @@
             $scope.DocSearch.IsSave = isSave
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
             var PostData = {};
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
-            _.extend(PostData, $scope.DocSearch);
-            if (!isSave) {
-                PostData.Status = 1;
-            }
-           
-            
-            $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
 
-            $scope.DocSearch.$update();
+            _.extend(PostData, $scope.DocSearch);
+
+
+
+            $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            if (isSave) {
+                $scope.DocSearch.$update(function () {
+                    AngularRoot.alert("Save successfully!");
+                });
+            } else {
+                $scope.DocSearch.$completed(function () {
+                    AngularRoot.alert("Document completed!")
+                });
+            }
+
 
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');

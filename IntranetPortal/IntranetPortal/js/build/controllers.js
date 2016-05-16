@@ -690,7 +690,7 @@ angular.module('PortalApp')
                 return;
             }
           
-            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE }, function () {
+            $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
                 console.log("have space " + JSON.stringify($scope.DocSearch.BBLE));
                 $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
 
@@ -739,7 +739,7 @@ angular.module('PortalApp')
             $scope.DocSearch.IsSave = isSave
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
             var PostData = {};
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+           
             _.extend(PostData, $scope.DocSearch);
             if (!isSave) {
                 PostData.Status = 1;
@@ -747,8 +747,14 @@ angular.module('PortalApp')
            
             
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-
-            $scope.DocSearch.$update();
+            if (isSave)
+            {
+                $scope.DocSearch.$update();
+            }else
+            {
+                $scope.DocSearch.$completed();
+            }
+            
 
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
