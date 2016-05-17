@@ -101,10 +101,10 @@ Partial Public Class PropertyOffer
             Me.Status = OfferStatus.Initial
             CreateDate = DateTime.Now
             CreateBy = itemData.CreateBy
+            Title = jsonCase.Item("PropertyAddress")
             Return
         End If
 
-        Title = jsonCase.Item("PropertyAddress")
         Dim jStatus = jsonCase.GetValue("Status")
         If jStatus IsNot Nothing AndAlso Not String.IsNullOrEmpty(jStatus.ToString) Then
             Dim tmpStatus As Integer
