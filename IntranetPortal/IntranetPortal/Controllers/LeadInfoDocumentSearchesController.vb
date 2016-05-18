@@ -48,22 +48,22 @@ Namespace Controllers
             leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.UpdateDate = Date.Now
             'leadInfoDocumentSearch.LeadResearch
-            If (leadInfoDocumentSearch.ResutContent IsNot Nothing) Then
-                If Not leadInfoDocumentSearch.IsSave Then
-                    Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
-                    Dim maildata As New Dictionary(Of String, String)
-                    maildata.Add("Address", l.PropertyAddress)
-                    maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
-                    maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
+            'If (leadInfoDocumentSearch.ResutContent IsNot Nothing) Then
+            '    If Not leadInfoDocumentSearch.IsSave Then
+            '        Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
+            '        Dim maildata As New Dictionary(Of String, String)
+            '        maildata.Add("Address", l.PropertyAddress)
+            '        maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
+            '        maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
 
-                    If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
+            '        If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
 
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                                   Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name),
-                                                   "DocSearchCompleted", maildata)
-                    End If
-                End If
-            End If
+            '            Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+            '                                       Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name),
+            '                                       "DocSearchCompleted", maildata)
+            '        End If
+            '    End If
+            'End If
 
             Try
                 db.SaveChanges()
@@ -93,7 +93,7 @@ Namespace Controllers
             End Try
 
             If (Not String.IsNullOrEmpty(leadInfoDocumentSearch.ResutContent)) Then
-                SendCompleteNotify(leadInfoDocumentSearch)
+                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, leadInfoDocumentSearch)
             End If
 
             Return Ok(leadInfoDocumentSearch)
@@ -101,31 +101,38 @@ Namespace Controllers
         End Function
 
         Private Sub SendCompleteNotify(leadInfoDocumentSearch As LeadInfoDocumentSearch)
-            Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
-            Dim maildata As New Dictionary(Of String, String)
-            If l IsNot Nothing Then
-                maildata.Add("Address", l.PropertyAddress)
-            Else
-                maildata.Add("Address", leadInfoDocumentSearch.BBLE)
-            End If
-
-            maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
-            maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
-
-            If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
-                Dim attachment As Mail.Attachment
-                Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
-                If judgeDoc IsNot Nothing Then
-                    attachment = New Mail.Attachment(New IO.MemoryStream(CType(judgeDoc.Data, Byte())), judgeDoc.Name.ToString)
-                    Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                               Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name),
-                                               "DocSearchCompleted", maildata, {attachment})
+            Try
+                Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
+                Dim maildata As New Dictionary(Of String, String)
+                If l IsNot Nothing Then
+                    maildata.Add("Address", l.PropertyAddress)
                 Else
-                    Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                           Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy,
-                                                                  Employee.CEO.Name), "DocSearchCompleted", maildata)
+                    maildata.Add("Address", leadInfoDocumentSearch.BBLE)
                 End If
-            End If
+
+                maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
+                maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
+
+                If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
+                    Dim attachment As Mail.Attachment
+                    Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
+
+                    Dim ccEmail = Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name)
+                    ccEmail = ccEmail & ";" & IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
+
+                    If judgeDoc IsNot Nothing Then
+                        attachment = New Mail.Attachment(New IO.MemoryStream(CType(judgeDoc.Data, Byte())), judgeDoc.Name.ToString)
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+                                                   ccEmail,
+                                                   "DocSearchCompleted", maildata, {attachment})
+                    Else
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
+                                               ccEmail, "DocSearchCompleted", maildata)
+                    End If
+                End If
+            Catch ex As Exception
+                IntranetPortal.Core.SystemLog.LogError("SendCompleteNotify", ex, Nothing, leadInfoDocumentSearch.CompletedBy, leadInfoDocumentSearch.BBLE)
+            End Try
         End Sub
 
         ' POST: api/LeadInfoDocumentSearches
@@ -140,16 +147,36 @@ Namespace Controllers
                 db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
                 leadInfoDocumentSearch.CreateBy = HttpContext.Current.User.Identity.Name
                 leadInfoDocumentSearch.CreateDate = Date.Now
+
+                Try
+                    db.SaveChanges()
+                Catch ex As DbUpdateException
+                    Throw
+                End Try
+
                 LeadsActivityLog.AddActivityLog(Date.Now(), "Create a search request to doc Search Agent ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
+
+                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendNewSearchNotify, leadInfoDocumentSearch)
+                'SendNewSearchNotify(leadInfoDocumentSearch)
+            End If
+
+            'leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
+            'leadInfoDocumentSearch.UpdateDate = Date.Now
+
+            Return CreatedAtRoute("DefaultApi", New With {.id = leadInfoDocumentSearch.BBLE}, leadInfoDocumentSearch)
+        End Function
+
+        Private Sub SendNewSearchNotify(leadInfoDocumentSearch As LeadInfoDocumentSearch)
+            Try
                 Dim EntityMananger = Roles.GetUsersInRole("Entity-Manager")(0)
 
                 If (Not String.IsNullOrEmpty(EntityMananger)) Then
-                    Dim LeadInfoSearchUser = Employee.GetInstance(EntityMananger) 'Employee.GetInstance("Elizabeth Rodriguez")
-                    Dim empl = Employee.GetInstance(HttpContext.Current.User.Identity.Name)
+                    Dim LeadInfoSearchUser = Employee.GetInstance(EntityMananger)
+                    Dim empl = Employee.GetInstance(leadInfoDocumentSearch.CreateBy)
                     Dim mLead = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
-
+                    Dim searchEmail = IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
                     If (LeadInfoSearchUser IsNot Nothing AndAlso mLead IsNot Nothing) Then
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(LeadInfoSearchUser), Employee.GetEmpsEmails(empl),
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(LeadInfoSearchUser) & ";" & searchEmail, empl.Email,
                                                "DocSearchNotify",
                                                 New Dictionary(Of String, String) From
                                                 {
@@ -161,18 +188,10 @@ Namespace Controllers
                                                 })
                     End If
                 End If
-
-            End If
-            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-            leadInfoDocumentSearch.UpdateDate = Date.Now
-            Try
-                db.SaveChanges()
-            Catch ex As DbUpdateException
-
+            Catch ex As Exception
+                IntranetPortal.Core.SystemLog.LogError("SendNewSearchNotify", ex, Nothing, leadInfoDocumentSearch.CreateBy, leadInfoDocumentSearch.BBLE)
             End Try
-
-            Return CreatedAtRoute("DefaultApi", New With {.id = leadInfoDocumentSearch.BBLE}, leadInfoDocumentSearch)
-        End Function
+        End Sub
 
         ' DELETE: api/LeadInfoDocumentSearches/5
         <ResponseType(GetType(LeadInfoDocumentSearch))>

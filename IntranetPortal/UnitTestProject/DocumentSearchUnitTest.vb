@@ -18,11 +18,23 @@ Imports IntranetPortal.Data
     <TestMethod()> Public Sub CompleteController_SendEmail()
         Dim bble = "3003820020 "
         Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+        search.ResutContent = "test"
 
         Dim controller As New IntranetPortal.Controllers.LeadInfoDocumentSearchesController
         Dim objController As PrivateObject = New PrivateObject(GetType(IntranetPortal.Controllers.LeadInfoDocumentSearchesController))
 
         objController.Invoke("SendCompleteNotify", search)
+        Assert.IsTrue(True)
+    End Sub
+
+    <TestMethod()> Public Sub NewSearchNotfify_SendEmail()
+        Dim bble = "3003820020 "
+        Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+
+        Dim controller As New IntranetPortal.Controllers.LeadInfoDocumentSearchesController
+        Dim objController As PrivateObject = New PrivateObject(GetType(IntranetPortal.Controllers.LeadInfoDocumentSearchesController))
+
+        objController.Invoke("SendNewSearchNotify", search)
         Assert.IsTrue(True)
     End Sub
 
