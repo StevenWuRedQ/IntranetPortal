@@ -794,6 +794,7 @@
     <Compile Include="Controllers\HomeownerController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
     <Compile Include="Controllers\LeadsController.vb" />
+    <Compile Include="Controllers\LeadsInfoController.vb" />
     <Compile Include="Controllers\LegalController.vb" />
     <Compile Include="Controllers\LegalECourtsController.vb" />
     <Compile Include="Controllers\ManagementController.vb" />
