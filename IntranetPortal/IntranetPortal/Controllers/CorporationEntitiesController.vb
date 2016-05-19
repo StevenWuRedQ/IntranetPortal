@@ -128,7 +128,6 @@ Namespace Controllers
             Return NotFound()
         End Function
 
-        ' GET /api/CorporationEntities/Assign/?id=1
         <Route("api/CorporationEntities/Assign/")>
         Function PostAssignCorp(bble As String, corp As CorporationEntity) As IHttpActionResult
             If Not ModelState.IsValid Then
@@ -140,12 +139,29 @@ Namespace Controllers
             End If
 
             Try
-                CorpManage.AssignCorp(bble, corp.EntityId)
+                CorpManage.AssignCorp(bble, corp.EntityId, HttpContext.Current.User.Identity.Name)
             Catch ex As Exception
                 Throw
             End Try
 
             Return StatusCode(HttpStatusCode.NoContent)
+        End Function
+
+        <Route("api/CorporationEntities/{EntityId}/Assign/{bble}")>
+        Function PostAssignCorp2(EntityId As Integer, bble As String) As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
+
+            If EntityId = 0 Then
+                Return BadRequest()
+            End If
+
+            Try
+                Return Ok(CorpManage.AssignCorp(bble, EntityId, HttpContext.Current.User.Identity.Name))
+            Catch ex As Exception
+                Throw
+            End Try
         End Function
 
         ' GET /api/CorporationEntities/Teams
