@@ -3051,7 +3051,7 @@ ScopeHelper = {
 
 var portalApp = angular.module('PortalApp');
 
-portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptContactServices, $q) {
+portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, DocSearch, $location) {
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
 
@@ -3125,6 +3125,10 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
             }
         }
     };
+    
+    $scope.SSpreSign.docSearch = DocSearch.get($location.search());
+   
+   
     $scope.DeadType = {
         Contract: true,
         Memo: false,
@@ -3206,11 +3210,12 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
         }
+        
         var leadSearch = ScopeHelper.getLeadsSearchScope();
-
-        $.extend($scope.SSpreSign.assignCrop, {
-            isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo
-        })
+        //do not copy lead search infomation to assignCrop WellsFargo
+        //$.extend($scope.SSpreSign.assignCrop, {
+        //    isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo
+        //});
         return true;
     }
     $scope.getErrorMessage = function(id) {

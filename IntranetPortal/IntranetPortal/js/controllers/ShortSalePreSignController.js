@@ -14,7 +14,8 @@
 
 var portalApp = angular.module('PortalApp');
 
-portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptContactServices, $q) {
+portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, DocSearch, $location) {
+    
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
 
@@ -88,6 +89,10 @@ portalApp.controller('shortSalePreSignCtrl', function($scope, ptCom, $http, ptCo
             }
         }
     };
+    var urlParam = $location.search();
+    $scope.DocSearch = DocSearch.get(urlParam);
+   
+   
     $scope.DeadType = {
         Contract: true,
         Memo: false,
@@ -524,3 +529,6 @@ portalApp.filter('ordered', function() {
         return orderDic[item];
     };
 });
+
+
+

@@ -55,7 +55,25 @@ Public Class LeadsInfo
 
         Return False
     End Function
+    ''' <summary>
+    ''' verify lead has right fomat bble  
+    ''' todo:
+    ''' if lead not exist in leads info table it should be create in leads info
+    ''' 
+    ''' </summary>
+    Public Sub verifiyAddress()
+        If (Not String.IsNullOrEmpty(Me.PropertyAddress)) Then
+            Try
+                Me.BBLE = Core.Utility.Address2BBLE(Me.PropertyAddress)
+            Catch ex As Exception
+                Throw ex
+            End Try
 
+        End If
+        If (String.IsNullOrEmpty(Me.BBLE)) Then
+            Throw New Exception("Can not find property address " & Me.PropertyAddress)
+        End If
+    End Sub
     Public ReadOnly Property IsApartment() As Boolean
         Get
             If Not String.IsNullOrEmpty(BBLE) Then

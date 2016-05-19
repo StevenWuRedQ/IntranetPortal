@@ -59,15 +59,6 @@ Partial Public Class ShortSaleNewOfferPage
     Protected WithEvents DivLeadTaxSearchCtrl As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''LeadSearchSummery control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LeadSearchSummery As Global.IntranetPortal.LeadSearchSummery
-    
-    '''<summary>
     '''ShortPreSignControl control.
     '''</summary>
     '''<remarks>
