@@ -93,7 +93,7 @@ Public Class CorporationEntity
     ''' <param name="bble">The property BBLE</param>
     ''' <param name="address">The property address</param>
     ''' <returns>The assigned Corp Object</returns>
-    Public Function AssignCorp(bble As String, address As String) As CorporationEntity
+    Public Function AssignCorp(bble As String, address As String, assignBy As String) As CorporationEntity
 
         Using db As New PortalEntities
             If db.CorporationEntities.Any(Function(a) a.BBLE = bble) Then
@@ -108,6 +108,9 @@ Public Class CorporationEntity
                 Me.BBLE = bble
                 Me.PropertyAssigned = address
                 Me.Status = "Assigned Out"
+                Me.AssignOn = DateTime.Now
+                Me.UpdateTime = DateTime.Now
+                Me.UpdateBy = assignBy
                 db.Entry(Me).State = Entity.EntityState.Modified
 
                 db.SaveChanges()

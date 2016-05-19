@@ -38,7 +38,6 @@
                 console.log(result);
                 me.scope.AuditLogs = result;
             });
-
         }
     };
 

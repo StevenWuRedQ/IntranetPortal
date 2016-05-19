@@ -20,7 +20,6 @@ Imports IntranetPortal.Data
 
         Assert.AreEqual("Available", corp.Status)
         Assert.AreEqual(team, corp.Office)
-
     End Sub
 
     ''' <summary>
@@ -32,13 +31,21 @@ Imports IntranetPortal.Data
             Assert.AreEqual("Available", corp.Status)
             Assert.AreEqual(team, corp.Office)
         Next
-
     End Sub
 
     <TestMethod>
     Public Sub TestLowCorpEmail_SendEmailWithCount()
         CorpManage.CheckAvailableCorp("GaliTeam")
     End Sub
+
+    <TestMethod>
+    Public Sub TestNotifyCorpIsAssigned_SendEmail()
+        Dim li = LeadsInfo.GetInstance(bble)
+        Dim corp = CorporationEntity.GetAvailableCorp(team, False)
+
+        CorpManage.NotifyCorpIsAssigned(li, corp, "GaliTeam")
+    End Sub
+
 
     ''' <summary>
     ''' AssignCorp testing
