@@ -4916,13 +4916,16 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     $scope.arrayRemove = ptCom.arrayRemove;
     $scope.NGAddArraryItem = ptCom.AddArraryItem;
     $scope.GenerateDocument = function() {
-        $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function(url) {
+        $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url) {
+            var oldUrl = window.location.href;
             STDownloadFile('/TempDataFile/OfferDoc/' + $scope.SSpreSign.BBLE.trim() + '.zip', $scope.SSpreSign.BBLE.trim() + '.zip');
             $scope.SSpreSign.Status = 2;
             $scope.constractFromData();
             $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function(formdata) {
                 $scope.refreshSave(formdata);
-                location.reload();
+                //location.reload();
+                window.location.href = oldUrl;
+
             });
         })
     }
