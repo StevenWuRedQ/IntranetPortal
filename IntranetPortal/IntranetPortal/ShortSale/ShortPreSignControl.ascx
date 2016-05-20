@@ -87,6 +87,7 @@
                     <option>Unemployed</option>
                     <option>Retired</option>
                     <option>SSI / Disability</option>
+                    <option>Not Apply</option>
                 </select>
             </li>
            
@@ -161,6 +162,7 @@
                    <label ng-class="{ss_warning2:!owner.isCorp===null||owner.isCorp===undefined}">Is Corp *</label> <br />
                    <pt-radio model="owner.isCorp" name="owner{{$index}}1"></pt-radio>
                </div>
+
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:!owner.FirstName}">First Name *</label>
                     <input class="form-control" ng-model="owner.FirstName">
@@ -287,6 +289,7 @@
                         <option>Unemployed</option>
                         <option>Retired</option>
                         <option>SSI / Disability</option>
+                        <option>Not Apply</option>
                     </select>
                 </div>
                 <div class="col-sm-4">

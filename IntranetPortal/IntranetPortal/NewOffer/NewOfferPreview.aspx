@@ -236,8 +236,8 @@
         });
 
     </script>
-
-    <script type="text/ng-template" id="/templates/contract-memo.html">
+    <%--  --%>
+    <script type="text/ng-template"  id="/templates/contract-memo.html">
         <div class="ss_form">
             <h4 class="ss_form_title">contract or Memo</h4>
             <div class="ss_border" style="">
@@ -248,11 +248,11 @@
                             <label class="ss_form_input_title">Seller {{$index+1}} Name</label><input class="ss_form_input" ng-model="d.Name" /></li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Seller {{$index+1}} Attorney</label>                            
-                            <input type="text" class="ss_form_input" ng-model="d.sellerAttorney">
+                            <input type="text" class="ss_form_input" ng-model="d.sellerAttorney"  readonly="readonly">
                         </li>
                         <li class="ss_form_item ss_form_item_line">
                             <label class="ss_form_input_title">Seller {{$index+1}} Address</label>
-                            <input class="ss_form_input" ng-model="d.Address" />
+                            <input class="ss_form_input" ng-model="d.Address" readonly="readonly"/>
                         </li>
                     </ul>
                 </div>
@@ -261,14 +261,14 @@
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Buyer Name</label>
-                            <input class="ss_form_input" ng-model="contract.Buyer.CorpName" /></li>
+                            <input class="ss_form_input" ng-model="contract.Buyer.CorpName" readonly="readonly"/></li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Buyer Attorney</label>
-                            <input class="ss_form_input" ng-model="contract.Buyer.buyerAttorney" />
+                            <input class="ss_form_input" ng-model="contract.Buyer.buyerAttorney" readonly="readonly"/>
                         </li>
                         <li class="ss_form_item " style="width: 96%">
                             <label class="ss_form_input_title">Buyer Address</label>
-                            <input class="ss_form_input" ng-model="contract.Buyer.Address" />
+                            <input class="ss_form_input" ng-model="contract.Buyer.Address" readonly="readonly"/>
                         </li>
                     </ul>
                 </div>
@@ -277,11 +277,11 @@
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Contract Price</label>
-                            <input class="ss_form_input" ng-model="contract.contractPrice" money-mask />
+                            <input class="ss_form_input" ng-model="contract.contractPrice" money-mask readonly="readonly"/>
                         </li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Down Payment</label>
-                            <input class="ss_form_input" ng-model="contract.downPayment" money-mask />
+                            <input class="ss_form_input" ng-model="contract.downPayment" money-mask readonly="readonly"/>
                         </li>
                     </ul>
                 </div>
@@ -314,30 +314,30 @@
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Seller {{$index+1}} Name</label>
-                            <input class="ss_form_input" ng-model="d.Name" /></li>
+                            <input class="ss_form_input" ng-model="d.Name" readonly="readonly"/></li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Seller {{$index+1}} SSN</label>
-                            <input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" /></li>
+                            <input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" readonly="readonly"/></li>
                     </ul>
                 </div>
                 <h4 class="ss_form_title ">Buyer</h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title">Buyer Name</label>
-                        <input class="ss_form_input" ng-model="deed.Buyer.CorpName" /></li>
+                        <input class="ss_form_input" ng-model="deed.Buyer.CorpName" readonly="readonly"/></li>
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title">Buyer SSN/EIN</label>
-                        <input class="ss_form_input" ng-model="deed.Buyer.EIN" />
+                        <input class="ss_form_input" ng-model="deed.Buyer.EIN" readonly="readonly"/>
                     </li>
                     <li class="ss_form_item ss_form_item_line">
                         <label class="ss_form_input_title">Buyer Address</label>
-                        <input class="ss_form_input " ng-model="deed.Buyer.Address" style="width: 96%" />
+                        <input class="ss_form_input " ng-model="deed.Buyer.Address" style="width: 96%" readonly="readonly"/>
                     </li>
                 </ul>                
                 <h4 class="ss_form_title ">Property Address </h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item  oneline">
-                        <input class="ss_form_input" ng-model="deed.PropertyAddress" />
+                        <input class="ss_form_input" ng-model="deed.PropertyAddress" readonly="readonly"/>
                     </li>
                 </ul>
             </div>
@@ -370,10 +370,10 @@
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Seller {{$index+1}} Name</label>
-                            <input class="ss_form_input" ng-model="d.Name" /></li>
+                            <input class="ss_form_input" ng-model="d.Name" readonly="readonly"/></li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Seller {{$index+1}} SSN</label>
-                            <input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" /></li>
+                            <input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" readonly="readonly"/></li>
                     </ul>
                 </div>
                 <div ng-repeat="d in deed.Buyers">
@@ -382,13 +382,13 @@
                         <ul class="ss_form_box clearfix">
                             <li class="ss_form_item">
                                 <label class="ss_form_input_title">Buyer {{$index+1}} Name</label>
-                                <input class="ss_form_input" ng-model="d.Name" /></li>
+                                <input class="ss_form_input" ng-model="d.Name" readonly="readonly"/></li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">Buyer {{$index+1}} SSN</label>
-                                <input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" /></li>
+                                <input class="ss_form_input" ng-model="d.SSN" mask="999-99-9999" readonly="readonly"/></li>
                             <li class="ss_form_item ss_form_item_line">
                                 <label class="ss_form_input_title">Buyer {{$index+1}} Address</label>
-                                <input class="ss_form_input" ng-model="d.Address" style="width: 96%" />
+                                <input class="ss_form_input" ng-model="d.Address" style="width: 96%" readonly="readonly"/>
                             </li>
                         </ul>
                     </div>
@@ -396,7 +396,7 @@
                 <h4 class="ss_form_title ">Property Address </h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item  oneline">
-                        <input class="ss_form_input" ng-model="deed.PropertyAddress" />
+                        <input class="ss_form_input" ng-model="deed.PropertyAddress" readonly="readonly"/>
                     </li>
                 </ul>
             </div>
@@ -428,19 +428,19 @@
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title">Name</label>
-                        <input class="ss_form_input" ng-model="givingPOA.Name" /></li>
+                        <input class="ss_form_input" ng-model="givingPOA.Name"  readonly="readonly"/></li>
                     <li class="ss_form_item ss_form_item2">
                         <label class="ss_form_input_title">Address</label>
-                        <input class="ss_form_input" ng-model="givingPOA.Address" /></li>
+                        <input class="ss_form_input" ng-model="givingPOA.Address" readonly="readonly"/></li>
                 </ul>
                 <h4 class="ss_form_title ">Receiving POA</h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item ">
                         <label class="ss_form_input_title">Name</label>
-                        <input class="ss_form_input" ng-model="receivingPOA.name" /></li>
+                        <input class="ss_form_input" ng-model="receivingPOA.name" readonly="readonly"/></li>
                     <li class="ss_form_item ss_form_item2">
                         <label class="ss_form_input_title">Address</label>
-                        <input class="ss_form_input" ng-model="receivingPOA.address" /></li>
+                        <input class="ss_form_input" ng-model="receivingPOA.address" readonly="readonly"/></li>
                 </ul>
             </div>
         </div>
