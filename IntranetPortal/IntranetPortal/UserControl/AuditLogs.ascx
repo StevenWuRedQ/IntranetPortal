@@ -43,27 +43,29 @@
 
     auditLog.init();
 </script>
+
 <style type="text/css">
+
     .audit_log_block {
         padding: 10px;
         border-bottom: 1px solid #ccc;
     }
 
-        .audit_log_block:hover {
-            background-color: #f5f5f5;
-            border-left: 5px solid #3572b0;
-            padding-left: 5px;
-        }
-        .frist-line-log{
-            background:blue;
-        }
+    .audit_log_block:hover {
+        background-color: #f5f5f5;
+        border-left: 5px solid #3572b0;
+        padding-left: 5px;
+    }
+
+    .frist-line-log{
+        background:blue;
+    }
+
 </style>
 
-<div ng-controller="AuditLogController" id="">    
-    
+<div ng-controller="AuditLogController" id="">
     <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block">
-        <h5 ng-class="{alert-success:$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </h5>
-        
+        <h5 ng-class="{alert-success:$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </h5>        
         <table class="" style="width: 100%" ng-show="prop[0].EventType!=0">
              <tr>
                 <th style="width: 20%">Field</th>
