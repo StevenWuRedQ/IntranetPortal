@@ -7056,6 +7056,7 @@
     <Content Include="js\e2etest\conf.js" />
     <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
+    <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\dxModel.js" />
     <Content Include="js\models\HomeOwner.js" />
     <Content Include="js\models\LeadsInfo.js" />

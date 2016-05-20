@@ -147,8 +147,8 @@ Namespace Controllers
             Return StatusCode(HttpStatusCode.NoContent)
         End Function
 
-        <Route("api/CorporationEntities/{EntityId}/Assign/{bble}")>
-        Function PostAssignCorp2(EntityId As Integer, bble As String) As IHttpActionResult
+        <Route("api/CorporationEntities/{EntityId}/BBLE")>
+        Function PostAssignCorp2(EntityId As Integer, corp As CorporationEntity) As IHttpActionResult
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
@@ -158,10 +158,18 @@ Namespace Controllers
             End If
 
             Try
-                Return Ok(CorpManage.AssignCorp(bble, EntityId, HttpContext.Current.User.Identity.Name))
+                Try
+                    Dim BBLE = Core.Utility.Address2BBLE(corp.PropertyAssigned)
+                    Dim Result = CorpManage.AssignCorp(BBLE, EntityId, HttpContext.Current.User.Identity.Name)
+                    Return Ok(Result)
+                Catch ex As Exception
+                    Throw
+                End Try
+
             Catch ex As Exception
-                Throw
+                Throw ex
             End Try
+
         End Function
 
         ' GET /api/CorporationEntities/Teams

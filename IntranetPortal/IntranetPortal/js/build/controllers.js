@@ -1,5 +1,5 @@
 angular.module("PortalApp")
-.controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', function ($scope, $http, ptContactServices) {
+.controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', 'CorpEntity', function ($scope, $http, ptContactServices, CorpEntity) {
     $scope.EmailTo = [];
     $scope.EmailCC = [];
     $scope.ptContactServices = ptContactServices;
@@ -7,14 +7,24 @@ angular.module("PortalApp")
     $scope.loadPanelVisible = true;
     //for view and upload document -- add by chris
     $scope.encodeURIComponent = window.encodeURIComponent;
-    $http.get('/Services/ContactService.svc/GetAllBuyerEntities')
-        .success(function (data) {
-            $scope.CorpEntites = data;
-            $scope.currentContact = $scope.CorpEntites[0];
-            $scope.loadPanelVisible = false;
-        }).error(function (data) {
-            alert('Get All buyers Entities error : ' + JSON.stringify(data));
-        });
+
+    /*new method*/
+    $scope.CorpEntites = CorpEntity.query(function () {
+        $scope.currentContact = $scope.CorpEntites[0];
+        $scope.loadPanelVisible = false;
+    }, function () {
+        alert('Get All buyers Entities error : ' + JSON.stringify(data));
+    });
+    /*old method*/
+    //$http.get('/Services/ContactService.svc/GetAllBuyerEntities')
+    //    .success(function (data) {
+    //        $scope.CorpEntites = data;
+    //        $scope.currentContact = $scope.CorpEntites[0];
+    //        $scope.loadPanelVisible = false;
+    //    }).error(function (data) {
+    //        alert('Get All buyers Entities error : ' + JSON.stringify(data));
+    //    });
+    
     $http.get('/Services/TeamService.svc/GetAllTeam')
         .success(function (data) {
             $scope.AllTeam = data;
@@ -181,15 +191,25 @@ angular.module("PortalApp")
         });
     }
     $scope.AssginEntity = function () {
+
         $scope.loadPanelVisible = true;
-        $http.post('/Services/ContactService.svc/AssginEntity', { c: JSON.stringify($scope.currentContact) }).success(function (data, status, headers, config) {
+       
+        $scope.currentContact.$assign(function () {
             $scope.loadPanelVisible = false;
-            $scope.currentContact.BBLE = data;
-            alert("Assigned succeed !")
-        }).error(function (data, status, headers, config) {
+            alert("Assigned succeed !");
+        },function () {
             $scope.loadPanelVisible = false;
             alert('Can not find BBLE of address:(' + $scope.currentContact.PropertyAssigned + ") Please make sure this address is available");
         });
+
+        //$http.post('/Services/ContactService.svc/AssginEntity', { c: JSON.stringify($scope.currentContact) }).success(function (data, status, headers, config) {
+        //    $scope.loadPanelVisible = false;
+        //    $scope.currentContact.BBLE = data;
+        //    alert("Assigned succeed !")
+        //}).error(function (data, status, headers, config) {
+        //    $scope.loadPanelVisible = false;
+        //    alert('Can not find BBLE of address:(' + $scope.currentContact.PropertyAssigned + ") Please make sure this address is available");
+        //});
     }
     $scope.ChangeTeam = function (team) {
         $scope.SelectedTeam = team;
@@ -3052,6 +3072,7 @@ ScopeHelper = {
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, DocSearch, $location) {
+    
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
 
@@ -3125,8 +3146,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             }
         }
     };
-    
-    $scope.SSpreSign.docSearch = DocSearch.get($location.search());
+    var urlParam = $location.search();
+    $scope.DocSearch = DocSearch.get(urlParam);
    
    
     $scope.DeadType = {
@@ -3565,6 +3586,10 @@ portalApp.filter('ordered', function() {
         return orderDic[item];
     };
 });
+
+
+
+
 angular.module("PortalApp")
 .controller("TitleController", ['$scope', '$http', 'ptCom', 'ptContactServices', 'ptLeadsService', 'ptShortsSaleService', function ($scope, $http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
     /* model define*/
