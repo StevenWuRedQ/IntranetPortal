@@ -182,8 +182,10 @@ angular.module("PortalApp")
                 alert("Already have a entitity named " + $scope.addContact.CorpName + "! please pick other name");
                 return;
             }
+            data = CorpEntity.CType(data, CorpEntity);
             $scope.currentContact = data;
-            $scope.CorpEntites.push($scope.addContact);
+
+            $scope.CorpEntites.push($scope.currentContact);
             alert("Add entity succeed !")
         }).error(function (data, status, headers, config) {
             $scope.loadPanelVisible = false;

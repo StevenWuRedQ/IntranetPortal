@@ -140,11 +140,11 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
             var milisec_diff = datetime - now;
         }
 
-        var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
+        var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24)) + 1;
 
         var date_diff = new Date(milisec_diff);
 
-        return days + " Days " + date_diff.getHours() + " Hours " + date_diff.getMinutes(); // + " Minutes " + date_diff.getSeconds() + " Seconds";
+        return days  + " Days " //+ date_diff.getHours() + " Hours " + date_diff.getMinutes(); // + " Minutes " + date_diff.getSeconds() + " Seconds";
     }
 
     return corpEntity;
@@ -1933,8 +1933,10 @@ angular.module("PortalApp")
                 alert("Already have a entitity named " + $scope.addContact.CorpName + "! please pick other name");
                 return;
             }
+            data = CorpEntity.CType(data, CorpEntity);
             $scope.currentContact = data;
-            $scope.CorpEntites.push($scope.addContact);
+
+            $scope.CorpEntites.push($scope.currentContact);
             alert("Add entity succeed !")
         }).error(function (data, status, headers, config) {
             $scope.loadPanelVisible = false;
