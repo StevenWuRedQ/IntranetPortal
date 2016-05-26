@@ -97,3 +97,4 @@ portalApp.config(function ($locationProvider)
         requireBase: false
     });
 })
+

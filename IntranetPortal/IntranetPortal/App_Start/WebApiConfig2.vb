@@ -18,21 +18,23 @@ Public Class WebApiConfig2
             routeTemplate:="api/{controller}/{id}",
             defaults:=New With {.id = RouteParameter.Optional}
         )
-        '''''''''Test url like api/xxx.json and api/xxx.xml
+        '''''''''Test url like api/xxx.json and api/xxx.xml''''
+        'Dim key = UriPathExtensionMapping.UriPathExtensionKey
+        'config.Formatters.XmlFormatter.AddUriPathExtensionMapping("xml", "application/xml")
+        'config.Formatters.JsonFormatter.AddUriPathExtensionMapping("json", "application/json")
         'config.Routes.MapHttpRoute(
         '    name:="Api UriPathExtension",
-        '    routeTemplate:="api/{controller}.{extension}/{id}",
-        '    defaults:=New With {.id = RouteParameter.Optional, .extension = RouteParameter.Optional}
+        '    routeTemplate:="api/{controller}.{ext}/{id}",
+        '    defaults:=New With {.id = RouteParameter.Optional, .ext = RouteParameter.Optional}
         ')
         'config.Routes.MapHttpRoute(
         '    name:="Api UriPathExtension ID",
-        '    routeTemplate:="api/{controller}/{id}.{extension}",
-        '    defaults:=New With {.id = RouteParameter.Optional, .extension = RouteParameter.Optional}
+        '    routeTemplate:="api/{controller}/{id}.{ext}",
+        '    defaults:=New With {.id = RouteParameter.Optional, .ext = RouteParameter.Optional}
         ')
 
-        'config.Formatters.XmlFormatter.AddUriPathExtensionMapping("xml", "application/xml")
-        'config.Formatters.JsonFormatter.AddUriPathExtensionMapping("json", "application/json; charset=utf-8")
-        ''''''''''''''''''end test
+
+        ''''''''''''''''''end test''''''''''''''''''''''''''
         Dim builder As New ODataConventionModelBuilder
         builder.EntitySet(Of NYC_Scan_TaxLiens_Per_Year)("TaxLiensOData")
         builder.EntitySet(Of IntranetPortal.Data.ShortSaleLeadsInfo)("ShortSaleLeadsInfoes")

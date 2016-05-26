@@ -46,7 +46,9 @@
     "literallycanvas": "~0.4.10",
     "prototypejs": "~1.7.0",
     "lodash": "*",
-    "moment": "*"
+    "moment": "*",
+    "requirejs": "*"
+    
   },
   "resolutions": {
     "jquery": "~2.1.4"

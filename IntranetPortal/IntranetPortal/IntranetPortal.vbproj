@@ -6606,6 +6606,7 @@
     <Content Include="bower_components\react\react-with-addons.min.js" />
     <Content Include="bower_components\react\react.js" />
     <Content Include="bower_components\react\react.min.js" />
+    <Content Include="bower_components\requirejs\require.js" />
     <Content Include="bower_components\signalr\jquery.signalR.js" />
     <Content Include="bower_components\signalr\jquery.signalR.min.js" />
     <Content Include="bower_components\webui-popover\demo\bootstrap.css" />
@@ -7257,6 +7258,7 @@
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
     <Content Include="CustomReport\ReportWizard.aspx" />
+    <Content Include="require.conf.js" />
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
     <Content Include="Scripts\ContactJs.js" />
@@ -7580,6 +7582,10 @@
     <Content Include="bower_components\moment\CHANGELOG.md" />
     <Content Include="bower_components\moment\LICENSE" />
     <Content Include="bower_components\moment\README.md" />
+    <Content Include="bower_components\requirejs\.bower.json" />
+    <Content Include="bower_components\requirejs\bower.json" />
+    <Content Include="bower_components\requirejs\LICENSE" />
+    <Content Include="bower_components\requirejs\README.md" />
     <None Include="Scripts\_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />
