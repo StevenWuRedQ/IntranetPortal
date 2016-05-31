@@ -1,7 +1,30 @@
 require.config({
-
+  baseUrl: "/",
   shim: {
-
+      "angular": {
+          exports: "angular"
+      },
+      "angular-resource": {
+          deps: ["angular"]
+      },
+      "angular-route": {
+          deps: ["angular"]
+      },
+      "angular-animate": {
+          deps: ["angular"]
+      },
+      "angular-sanitize": {
+          deps: ["angular"]
+      },
+      "angular-aria": {
+          deps: ["angular"]
+      },
+      "angular-bootstrap-tpls": {
+          deps: ["angular"]
+      },
+      "angular-bootstrap": {
+          deps: ["angular"]
+      },
   },
   paths: {
     "jquery-backstretch": "bower_components/jquery-backstretch/jquery.backstretch",
@@ -32,6 +55,15 @@ require.config({
     Ionicons: "bower_components/Ionicons/fonts/*",
     controllers: "js/controllers",
     models: "js/models",
+    js: "js",
+    "jquery.steps": "bower_components/jquery.steps/build/jquery.steps",
+    "angular-resource": "bower_components/angular-resource/angular-resource",
+    "angular-route": "bower_components/angular-route/angular-route",
+    "angular-animate": "bower_components/angular-animate/angular-animate",
+    "angular-sanitize": "bower_components/angular-sanitize/angular-sanitize",
+    "angular-aria": "bower_components/angular-aria/angular-aria",
+    "angular-bootstrap-tpls": "bower_components/angular-bootstrap/ui-bootstrap-tpls",
+    "angular-bootstrap": "bower_components/angular-bootstrap/ui-bootstrap"
   },
   packages: [
     {

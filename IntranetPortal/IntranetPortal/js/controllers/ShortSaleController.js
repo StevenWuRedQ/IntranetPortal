@@ -1,5 +1,4 @@
-﻿var i = 1;
-angular.module("PortalApp")
+﻿angular.module("PortalApp")
 .controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {
         $scope.ptContactServices = ptContactServices;

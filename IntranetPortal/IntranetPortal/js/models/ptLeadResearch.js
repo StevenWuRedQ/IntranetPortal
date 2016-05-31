@@ -1,17 +1,10 @@
 ﻿
-angular.module('PortalApp').factory('LeadResearch', function ($http) {
+angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
 
     var leadResearch = function () {
 
-
-        //constructor init model here
-        //this.bble = '12345'
-
     }
 
-    leadResearch.prototype.getBBLE = function () {
-        this.propertyTaxes;
-    }
 
     leadResearch.prototype.getOwnerSSN = function (BBLE) {
         var self = this;
@@ -19,6 +12,19 @@ angular.module('PortalApp').factory('LeadResearch', function ($http) {
             success(function (ssn, status, headers, config) {
                 self.ownerSSN = ssn;
             });
+    }
+
+    leadResearch.prototype.initFromLeadsInfo = function(BBLE)
+    {
+        var self = this;
+        var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
+            self.ownerName = data1.Owner;
+            self.waterCharges = data1.WaterAmt;
+            self.propertyTaxes = data1.TaxesAmt;
+            self.mortgageAmount = data1.C1stMotgrAmt;
+            self.secondMortgageAmount = data1.C2ndMotgrAmt;
+            self.getOwnerSSN(BBLE);
+        });
     }
     //leadResearch.prototype.func
     //def function

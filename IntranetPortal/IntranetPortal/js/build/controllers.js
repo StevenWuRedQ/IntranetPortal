@@ -2632,7 +2632,20 @@ angular.module('PortalApp')
         $scope.load({ReportId: PreLoadReportId,UseSql:true})
     }
 });
-var i = 1;
+
+if (typeof requirejs === "function")
+{
+    
+    define(['angular'], function (angular) {
+        function RequireController() {
+            alert("set up sucessfully !");
+        }
+
+        return RequireController
+    });
+}
+
+
 angular.module("PortalApp")
 .controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {

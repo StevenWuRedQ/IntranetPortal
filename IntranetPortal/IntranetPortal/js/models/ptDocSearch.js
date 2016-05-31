@@ -2,7 +2,7 @@
 /**
  * @return {[class]}                 DocSearch class
  */
-angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo,$http) {
+angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
 
     /*api service funciton declear*/
     var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
@@ -11,9 +11,14 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         });
 
 
-    docSearch.properties = {
-        LeadResearch: "{LeadResearch}",
-        LeadResearchs: "[LeadResearch]"
+    //docSearch.properties = {
+    //    LeadResearch: "{LeadResearch}",
+    //    LeadResearchs: "[LeadResearch]"
+    //}
+
+    docSearch.Stuats = {
+        New: 1,
+        Completed: 1
     }
     docSearch.prototype.initTeam = function () {
         var self = this
@@ -23,30 +28,26 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
-        var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
-            if (self.LeadResearch == null) {
-                self.LeadResearch = new LeadResearch();
-                self.ownerName = data1.Owner;
-                self.waterCharges = data1.WaterAmt;
-                self.propertyTaxes = data1.TaxesAmt;
-                self.mortgageAmount = data1.C1stMotgrAmt;
-                self.secondMortgageAmount = data1.C2ndMotgrAmt;
+        //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
+        if (self.LeadResearch == null) {
+            self.LeadResearch = new LeadResearch();
+            self.LeadResearch.initFromLeadsInfo(self.BBLE);
+        } else {
 
-            } else {
-
-                var _LeadSearch = new LeadResearch();
-                angular.extend(_LeadSearch, self.LeadResearch);
-                self.LeadResearch = _LeadSearch;
-            }
+            var _LeadSearch = new LeadResearch();
+            angular.extend(_LeadSearch, self.LeadResearch);
+            self.LeadResearch = _LeadSearch;
             /*always get refershed ssn*/
             if (self.LeadResearch.ownerName) {
 
                 self.LeadResearch.getOwnerSSN(self.BBLE);
             }
-            //self.LeadResearch = self.LeadResearch || new LeadResearch();
+        }
+       
+        //self.LeadResearch = self.LeadResearch || new LeadResearch();
 
-        });
-        return data1;
+        //});
+        return self.LeadResearch;
     }
 
 

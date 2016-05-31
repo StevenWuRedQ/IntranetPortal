@@ -435,7 +435,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="vendor_info" ng-if="currentContact && currentContact.AssignOn">
+                                <tr class="vendor_info" ng-if="currentContact && currentContact.AssignOn && currentContact.Status!='Available'">
                                     <td class="vendor_info_left">Days Assigned Out
                                     </td>
                                     <td>
@@ -447,7 +447,7 @@
                                         </div>
                                     </td>
                                 </tr>  
-                                <tr class="vendor_info" ng-if="currentContact && currentContact.AssignOn">
+                                <tr class="vendor_info" ng-if="currentContact && currentContact.AssignOn && currentContact.Status!='Available'">
                                     <td class="vendor_info_left">Assigned on
                                     </td>
                                     <td>
