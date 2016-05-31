@@ -25,6 +25,7 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
             self.secondMortgageAmount = data1.C2ndMotgrAmt;
             self.getOwnerSSN(BBLE);
         });
+        return data1;
     }
     //leadResearch.prototype.func
     //def function

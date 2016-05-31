@@ -18,7 +18,7 @@
             var now = Date.now();
             var assignOn = Date.parse(this.AssignOn);
             var times = now - assignOn;
-
+            
             return get_time_diff(assignOn);
         }
     }

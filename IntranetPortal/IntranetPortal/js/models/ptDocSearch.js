@@ -15,7 +15,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     //    LeadResearch: "{LeadResearch}",
     //    LeadResearchs: "[LeadResearch]"
     //}
-
+    
     docSearch.Stuats = {
         New: 1,
         Completed: 1
@@ -26,12 +26,14 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             self.team = data;
         });
     }
+    
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
         //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
+        var data1 = null
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
-            self.LeadResearch.initFromLeadsInfo(self.BBLE);
+            data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
         } else {
 
             var _LeadSearch = new LeadResearch();
@@ -47,7 +49,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         //self.LeadResearch = self.LeadResearch || new LeadResearch();
 
         //});
-        return self.LeadResearch;
+        return data1;
     }
 
 
