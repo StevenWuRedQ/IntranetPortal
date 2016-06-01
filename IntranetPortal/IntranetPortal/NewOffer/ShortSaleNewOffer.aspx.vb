@@ -43,4 +43,9 @@ Public Class ShortSaleNewOfferPage
             End If
         End If
     End Sub
+
+    Protected Sub btnEdit_Click(sender As Object, e As EventArgs)
+        content.Visible = True
+        divMsg.Visible = False
+    End Sub
 End Class

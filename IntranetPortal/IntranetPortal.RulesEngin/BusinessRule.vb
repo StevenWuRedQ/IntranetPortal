@@ -694,6 +694,8 @@ Public Class DOBComplaintsCheckingRule
             If Not String.IsNullOrEmpty(prop.NotifyUsers) Then
                 names.AddRange(prop.NotifyUsers.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries))
             End If
+
+            Thread.Sleep(1000)
         Next
 
         If SendingNotifyEmail Then

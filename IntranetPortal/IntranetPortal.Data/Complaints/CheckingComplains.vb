@@ -42,7 +42,6 @@ Partial Public Class CheckingComplain
         End Using
     End Function
 
-
     'Public Shared Function GetResultFromServices2(Optional bble As String = "") As DataAPI.SP_DOB_Complaints_By_BBLE_Result()
 
     '    Using client As New DataAPI.WCFMacrosClient
