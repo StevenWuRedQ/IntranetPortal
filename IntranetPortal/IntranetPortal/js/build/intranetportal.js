@@ -1,102 +1,131 @@
-var portalApp = angular.module('PortalApp', ['ngResource','ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase']);
-angular.module('PortalApp').
-controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
-    $rootScope.AlertModal = null;
-    $rootScope.ConfirmModal = null;
-    $rootScope.loadingCover = document.getElementById('LodingCover');
-    $rootScope.panelLoading = false;
 
-    $rootScope.alert = function (message) {
-        $rootScope.alertMessage = message ? message : '';
-        $rootScope.AlertModal = $uibModal.open({
-            templateUrl: 'AlertModal',
+function RequirePortalApp()
+{
+
+    var portalApp = angular.module('PortalApp', ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase']);
+    angular.module('PortalApp').
+    controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
+        $rootScope.AlertModal = null;
+        $rootScope.ConfirmModal = null;
+        $rootScope.loadingCover = document.getElementById('LodingCover');
+        $rootScope.panelLoading = false;
+
+        $rootScope.alert = function (message) {
+            $rootScope.alertMessage = message ? message : '';
+            $rootScope.AlertModal = $uibModal.open({
+                templateUrl: 'AlertModal',
            
-        });
-    }
+            });
+        }
     
 
-    $rootScope.alertOK = function () {
-        $rootScope.AlertModal.close();
-    }
-
-    $rootScope.confirm = function (message,confrimFunc) {
-        $rootScope.confirmMessage = message ? message : '';
-        $rootScope.ConfirmModal = $uibModal.open({
-            templateUrl: 'ConfirmModal'
-        });
-        $rootScope.ConfirmModal.confrimFunc = confrimFunc;
-        return $rootScope.ConfirmModal.result;
-    }
-
-    $rootScope.confirmYes = function () {
-        $rootScope.ConfirmModal.close(true);
-        if ($rootScope.ConfirmModal.confrimFunc)
-        {
-            $rootScope.ConfirmModal.confrimFunc(true);
+        $rootScope.alertOK = function () {
+            $rootScope.AlertModal.close();
         }
+
+        $rootScope.confirm = function (message,confrimFunc) {
+            $rootScope.confirmMessage = message ? message : '';
+            $rootScope.ConfirmModal = $uibModal.open({
+                templateUrl: 'ConfirmModal'
+            });
+            $rootScope.ConfirmModal.confrimFunc = confrimFunc;
+            return $rootScope.ConfirmModal.result;
+        }
+
+        $rootScope.confirmYes = function () {
+            $rootScope.ConfirmModal.close(true);
+            if ($rootScope.ConfirmModal.confrimFunc)
+            {
+                $rootScope.ConfirmModal.confrimFunc(true);
+            }
        
-    }
+        }
 
    
-    $rootScope.confirmNo = function () {
-        $rootScope.ConfirmModal.close(false);
-        if ($rootScope.ConfirmModal.confrimFunc) {
-            $rootScope.ConfirmModal.confrimFunc(false);
+        $rootScope.confirmNo = function () {
+            $rootScope.ConfirmModal.close(false);
+            if ($rootScope.ConfirmModal.confrimFunc) {
+                $rootScope.ConfirmModal.confrimFunc(false);
+            }
         }
-    }
 
-    $rootScope.prompt = function (message, promptFunc) {
-        $rootScope.promptMessage = message ? message : '';
-        $rootScope.promptModalTxt = '';
-        $rootScope.promptModal = $uibModal.open({
-            templateUrl: 'PromptModal'
-        });
-        $rootScope.promptModal.promptFunc = promptFunc;
-    }
-
-    $rootScope.promptYes = function () {
-        $rootScope.promptModal.close($rootScope.promptModalTxt);
-        if ($rootScope.promptModal.promptFunc) {
-            //UI Modal use async call send result so use jquery instand now 
-            $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
+        $rootScope.prompt = function (message, promptFunc) {
+            $rootScope.promptMessage = message ? message : '';
+            $rootScope.promptModalTxt = '';
+            $rootScope.promptModal = $uibModal.open({
+                templateUrl: 'PromptModal'
+            });
+            $rootScope.promptModal.promptFunc = promptFunc;
         }
+
+        $rootScope.promptYes = function () {
+            $rootScope.promptModal.close($rootScope.promptModalTxt);
+            if ($rootScope.promptModal.promptFunc) {
+                //UI Modal use async call send result so use jquery instand now 
+                $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
+            }
         
-    }
-
-    $rootScope.promptNo = function () {
-        $rootScope.promptModal.close(false);
-        if ($rootScope.promptModal.promptFunc) {
-            $rootScope.promptModal.promptFunc(null)
         }
-    }
-    $rootScope.showLoading = function (divId) {
-        $($rootScope.loadingCover).show();
-    }
 
-    $rootScope.hideLoading = function (divId) {
-        $($rootScope.loadingCover).hide();
-    }
+        $rootScope.promptNo = function () {
+            $rootScope.promptModal.close(false);
+            if ($rootScope.promptModal.promptFunc) {
+                $rootScope.promptModal.promptFunc(null)
+            }
+        }
+        $rootScope.showLoading = function (divId) {
+            $($rootScope.loadingCover).show();
+        }
 
-    $rootScope.toggleLoading = function () {
-        $rootScope.panelLoading = !$scope.panelLoading;
-    }
-    $rootScope.startLoading = function () {
-        $rootScope.panelLoading = true;
-    }
-    $rootScope.stopLoading = function () {
-        $timeout(function () {
-            $rootScope.panelLoading = false;
+        $rootScope.hideLoading = function (divId) {
+            $($rootScope.loadingCover).hide();
+        }
+
+        $rootScope.toggleLoading = function () {
+            $rootScope.panelLoading = !$scope.panelLoading;
+        }
+        $rootScope.startLoading = function () {
+            $rootScope.panelLoading = true;
+        }
+        $rootScope.stopLoading = function () {
+            $timeout(function () {
+                $rootScope.panelLoading = false;
+            });
+        }
+    }]);
+    
+
+    portalApp.config(function ($locationProvider) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
         });
-    }
-}]);
-
-portalApp.config(function ($locationProvider)
-{
-    $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
     });
-})
+    return portalApp;
+}
+
+function TestRequirePortalApp() {
+    var portalApp = angular.module('PortalApp', []);
+    
+    return portalApp;
+}
+
+/**
+  *this is model define has to be the last line
+  *like compile script will call when use require js solove the dependency 
+  Import xx  xx1
+  */
+if (typeof requirejs === "function") {
+    define(["jquery", "angular", "angular-resource", "angular-route", "angular-animate", "angular-sanitize"],
+        function ($, angular, ngResource, ngRoute, ngAnimate, ngSanitize) {
+        //the jquery.alpha.js and jquery.beta.js plugins have been loaded.
+       
+        return RequirePortalApp();
+    });
+} else {
+    var portalApp = RequirePortalApp();
+}
+
 angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, LeadsInfo) {
 
     var corpEntity = ptBaseResource('CorporationEntities', 'EntityId',null,
@@ -140,11 +169,11 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
             var milisec_diff = datetime - now;
         }
 
-        var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
+        var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24)) + 1;
 
         var date_diff = new Date(milisec_diff);
 
-        return days + " Days " + date_diff.getHours() + " Hours " + date_diff.getMinutes(); // + " Minutes " + date_diff.getSeconds() + " Seconds";
+        return days  + " Days " //+ date_diff.getHours() + " Hours " + date_diff.getMinutes(); // + " Minutes " + date_diff.getSeconds() + " Seconds";
     }
 
     return corpEntity;
@@ -261,7 +290,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 /**
  * @return {[class]}                 DocSearch class
  */
-angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo,$http) {
+angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
 
     /*api service funciton declear*/
     var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
@@ -270,9 +299,14 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         });
 
 
-    docSearch.properties = {
-        LeadResearch: "{LeadResearch}",
-        LeadResearchs: "[LeadResearch]"
+    //docSearch.properties = {
+    //    LeadResearch: "{LeadResearch}",
+    //    LeadResearchs: "[LeadResearch]"
+    //}
+
+    docSearch.Stuats = {
+        New: 1,
+        Completed: 1
     }
     docSearch.prototype.initTeam = function () {
         var self = this
@@ -282,30 +316,26 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
-        var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
-            if (self.LeadResearch == null) {
-                self.LeadResearch = new LeadResearch();
-                self.ownerName = data1.Owner;
-                self.waterCharges = data1.WaterAmt;
-                self.propertyTaxes = data1.TaxesAmt;
-                self.mortgageAmount = data1.C1stMotgrAmt;
-                self.secondMortgageAmount = data1.C2ndMotgrAmt;
+        //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
+        if (self.LeadResearch == null) {
+            self.LeadResearch = new LeadResearch();
+            self.LeadResearch.initFromLeadsInfo(this.BBLE);
+        } else {
 
-            } else {
-
-                var _LeadSearch = new LeadResearch();
-                angular.extend(_LeadSearch, self.LeadResearch);
-                self.LeadResearch = _LeadSearch;
-            }
+            var _LeadSearch = new LeadResearch();
+            angular.extend(_LeadSearch, self.LeadResearch);
+            self.LeadResearch = _LeadSearch;
             /*always get refershed ssn*/
             if (self.LeadResearch.ownerName) {
 
                 self.LeadResearch.getOwnerSSN(self.BBLE);
             }
-            //self.LeadResearch = self.LeadResearch || new LeadResearch();
+        }
+       
+        //self.LeadResearch = self.LeadResearch || new LeadResearch();
 
-        });
-        return data1;
+        //});
+        return self.LeadResearch;
     }
 
 
@@ -338,7 +368,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 
 
 
-angular.module('PortalApp').factory('LeadResearch', function ($http) {
+angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
 
     var leadResearch = function () {
 
@@ -348,9 +378,6 @@ angular.module('PortalApp').factory('LeadResearch', function ($http) {
 
     }
 
-    leadResearch.prototype.getBBLE = function () {
-        this.propertyTaxes;
-    }
 
     leadResearch.prototype.getOwnerSSN = function (BBLE) {
         var self = this;
@@ -358,6 +385,19 @@ angular.module('PortalApp').factory('LeadResearch', function ($http) {
             success(function (ssn, status, headers, config) {
                 self.ownerSSN = ssn;
             });
+    }
+
+    leadResearch.prototype.initFromLeadsInfo = function(BBLE)
+    {
+        var self = this;
+        var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
+            self.ownerName = data1.Owner;
+            self.waterCharges = data1.WaterAmt;
+            self.propertyTaxes = data1.TaxesAmt;
+            self.mortgageAmount = data1.C1stMotgrAmt;
+            self.secondMortgageAmount = data1.C2ndMotgrAmt;
+            self.getOwnerSSN(BBLE);
+        });
     }
     //leadResearch.prototype.func
     //def function
@@ -1933,8 +1973,10 @@ angular.module("PortalApp")
                 alert("Already have a entitity named " + $scope.addContact.CorpName + "! please pick other name");
                 return;
             }
+            data = CorpEntity.CType(data, CorpEntity);
             $scope.currentContact = data;
-            $scope.CorpEntites.push($scope.addContact);
+
+            $scope.CorpEntites.push($scope.currentContact);
             alert("Add entity succeed !")
         }).error(function (data, status, headers, config) {
             $scope.loadPanelVisible = false;
@@ -4381,7 +4423,20 @@ angular.module('PortalApp')
         $scope.load({ReportId: PreLoadReportId,UseSql:true})
     }
 });
-var i = 1;
+
+if (typeof requirejs === "function")
+{
+    
+    define(['angular'], function (angular) {
+        function RequireController() {
+            alert("set up sucessfully !");
+        }
+
+        return RequireController
+    });
+}
+
+
 angular.module("PortalApp")
 .controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {
@@ -4914,13 +4969,16 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     $scope.arrayRemove = ptCom.arrayRemove;
     $scope.NGAddArraryItem = ptCom.AddArraryItem;
     $scope.GenerateDocument = function() {
-        $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function(url) {
+        $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url) {
+            var oldUrl = window.location.href;
             STDownloadFile('/TempDataFile/OfferDoc/' + $scope.SSpreSign.BBLE.trim() + '.zip', $scope.SSpreSign.BBLE.trim() + '.zip');
             $scope.SSpreSign.Status = 2;
             $scope.constractFromData();
             $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function(formdata) {
                 $scope.refreshSave(formdata);
-                location.reload();
+                //location.reload();
+                window.location.href = oldUrl;
+
             });
         })
     }

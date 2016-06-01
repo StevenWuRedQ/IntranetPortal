@@ -435,20 +435,32 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="vendor_info" ng-if="currentContact && currentContact.AssignOn">
+                                <tr class="vendor_info" ng-if="currentContact && currentContact.AssignOn && currentContact.Status!='Available'">
                                     <td class="vendor_info_left">Days Assigned Out
                                     </td>
                                     <td>
                                         <div class="detail_right input_info_table">
-                                            <span>
-                                                <%-- |date:'m Months d day' --%>                                                 
-                                               <%-- {{currentContact.assignDateNow() |date:'MM'}} Months--%>
-                                                {{currentContact.assignDateNow()}} 
+                                            <span style="color:black">
+                                               <strong>{{currentContact.assignDateNow()}} </strong> 
                                                 <%--<input class="form-control " ss-date ng-model="currentContact.AssignOn" placeholder="Click to input">--%>
                                             </span>
                                         </div>
                                     </td>
-                                </tr>                               
+                                </tr>  
+                                <tr class="vendor_info" ng-if="currentContact && currentContact.AssignOn && currentContact.Status!='Available'">
+                                    <td class="vendor_info_left">Assigned on
+                                    </td>
+                                    <td>
+                                        <div class="detail_right input_info_table">
+                                            <span>
+                                                
+                                                <%-- |date:'m Months d day' --%>                                                 
+                                               {{currentContact.AssignOn |date:'MM/dd/yyyy'}}
+                                                <%--<input class="form-control " ss-date ng-model="currentContact.AssignOn" placeholder="Click to input">--%>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>                             
                             </table>
                         </div>
                         <div>

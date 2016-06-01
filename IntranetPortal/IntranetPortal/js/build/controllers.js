@@ -182,8 +182,10 @@ angular.module("PortalApp")
                 alert("Already have a entitity named " + $scope.addContact.CorpName + "! please pick other name");
                 return;
             }
+            data = CorpEntity.CType(data, CorpEntity);
             $scope.currentContact = data;
-            $scope.CorpEntites.push($scope.addContact);
+
+            $scope.CorpEntites.push($scope.currentContact);
             alert("Add entity succeed !")
         }).error(function (data, status, headers, config) {
             $scope.loadPanelVisible = false;
@@ -2630,7 +2632,20 @@ angular.module('PortalApp')
         $scope.load({ReportId: PreLoadReportId,UseSql:true})
     }
 });
-var i = 1;
+
+if (typeof requirejs === "function")
+{
+    
+    define(['angular'], function (angular) {
+        function RequireController() {
+            alert("set up sucessfully !");
+        }
+
+        return RequireController
+    });
+}
+
+
 angular.module("PortalApp")
 .controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {
@@ -3163,13 +3178,16 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     $scope.arrayRemove = ptCom.arrayRemove;
     $scope.NGAddArraryItem = ptCom.AddArraryItem;
     $scope.GenerateDocument = function() {
-        $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function(url) {
+        $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url) {
+            var oldUrl = window.location.href;
             STDownloadFile('/TempDataFile/OfferDoc/' + $scope.SSpreSign.BBLE.trim() + '.zip', $scope.SSpreSign.BBLE.trim() + '.zip');
             $scope.SSpreSign.Status = 2;
             $scope.constractFromData();
             $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function(formdata) {
                 $scope.refreshSave(formdata);
-                location.reload();
+                //location.reload();
+                window.location.href = oldUrl;
+
             });
         })
     }

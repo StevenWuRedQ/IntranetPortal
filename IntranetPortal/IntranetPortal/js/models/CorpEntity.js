@@ -18,7 +18,7 @@
             var now = Date.now();
             var assignOn = Date.parse(this.AssignOn);
             var times = now - assignOn;
-
+            
             return get_time_diff(assignOn);
         }
     }
@@ -41,11 +41,11 @@
             var milisec_diff = datetime - now;
         }
 
-        var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
+        var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24)) + 1;
 
         var date_diff = new Date(milisec_diff);
 
-        return days + " Days " + date_diff.getHours() + " Hours " + date_diff.getMinutes(); // + " Minutes " + date_diff.getSeconds() + " Seconds";
+        return days  + " Days " //+ date_diff.getHours() + " Hours " + date_diff.getMinutes(); // + " Minutes " + date_diff.getSeconds() + " Seconds";
     }
 
     return corpEntity;

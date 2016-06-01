@@ -292,6 +292,7 @@
         function LoadSearch(bble) {
             angular.element(document.getElementById('LeadTaxSearchCtrl')).scope().init(bble);
         }
+      
     </script>
 
 </asp:Content>
