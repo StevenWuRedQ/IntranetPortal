@@ -132,6 +132,10 @@ Public Class DocumentGenerator
         Me.BBLE = bble
     End Sub
 
+    Public Sub FillUpPdf(config As GenerateFileConfig)
+
+    End Sub
+
     Public Sub GenerateDocument(doc As DocX, config As GenerateFileConfig)
         Me.Data = Data
 
