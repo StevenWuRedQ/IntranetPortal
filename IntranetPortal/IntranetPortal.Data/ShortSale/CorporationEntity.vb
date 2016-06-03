@@ -96,7 +96,7 @@ Public Class CorporationEntity
     Public Function AssignCorp(bble As String, address As String, assignBy As String) As CorporationEntity
 
         Using db As New PortalEntities
-            If db.CorporationEntities.Any(Function(a) a.BBLE = bble) Then
+            If db.CorporationEntities.Any(Function(a) a.BBLE = bble AndAlso a.Status <> "Available") Then
                 Throw New Exception("Property was already assigned.")
             End If
 
@@ -112,8 +112,8 @@ Public Class CorporationEntity
                 Me.UpdateTime = DateTime.Now
                 Me.UpdateBy = assignBy
                 db.Entry(Me).State = Entity.EntityState.Modified
-
-                db.SaveChanges()
+                db.Entry(Me).OriginalValues.SetValues(db.Entry(Me).GetDatabaseValues)
+                db.SaveChanges(assignBy)
             Catch ex As Exception
                 Throw
             End Try
@@ -137,7 +137,7 @@ Public Class CorporationEntity
     Public ReadOnly Property AssignedOutDays As Integer
         Get
             If Status = "Assigned Out" AndAlso AssignOn.HasValue Then
-                Return CInt((AssignOn.Value - DateTime.Now).TotalDays)
+                Return CInt((AssignOn.Value - DateTime.Now).TotalDays) + 1
             End If
 
             Return 0

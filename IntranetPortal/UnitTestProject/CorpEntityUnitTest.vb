@@ -11,6 +11,29 @@ Imports IntranetPortal.Data
 
     Dim bble As String = "4089170024 "
     Dim team As String = "TomTeam"
+    Dim address As String = "80-70 87 ROAD, WOODHAVEN,NY 11421"
+
+    ''' <summary>
+    ''' Testing Corp Save function
+    ''' Check Auditlog data
+    ''' Check the assign out days
+    ''' Check Status change from Assigned Out to Available
+    ''' </summary>
+    <TestMethod()> Public Sub SaveCorp_returnCorp()
+        Dim corp = CorporationEntity.GetAvailableCorp(team, False)
+        Assert.AreEqual("Available", corp.Status)
+        Assert.AreEqual(team, corp.Office)
+        corp.AssignCorp(bble, address, "UnitTest")
+
+        Assert.AreEqual("Assigned Out", corp.Status)
+        Assert.AreEqual(address, corp.PropertyAssigned)
+        Assert.AreEqual(1, corp.AssignedOutDays)
+        Dim logs = AuditLog.GetLogs("CorporationEntity", corp.EntityId)
+        Assert.IsTrue(logs.Count > 0)
+        Assert.IsTrue(logs.Any(Function(a) a.ColumnName = "Status" AndAlso a.OriginalValue = "Available" AndAlso a.NewValue = "Assigned Out"))
+        corp.Status = "Available"
+        corp.Save("UnitTest")
+    End Sub
 
     ''' <summary>
     ''' GetAvailableCorp testing
