@@ -28,12 +28,13 @@ Partial Class FrmFillPDF
         Me.txtResult = New System.Windows.Forms.TextBox()
         Me.openDialog = New System.Windows.Forms.OpenFileDialog()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnTagFields = New System.Windows.Forms.Button()
-        Me.SaveDialog = New System.Windows.Forms.SaveFileDialog()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dgvFields = New System.Windows.Forms.DataGridView()
         Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SaveDialog = New System.Windows.Forms.SaveFileDialog()
+        Me.btnLabelFields = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvFields, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,6 +81,7 @@ Partial Class FrmFillPDF
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.btnLabelFields)
         Me.Panel1.Controls.Add(Me.btnTagFields)
         Me.Panel1.Controls.Add(Me.txtFileName)
         Me.Panel1.Controls.Add(Me.btnReadFields)
@@ -89,6 +91,15 @@ Partial Class FrmFillPDF
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(546, 75)
         Me.Panel1.TabIndex = 4
+        '
+        'btnTagFields
+        '
+        Me.btnTagFields.Location = New System.Drawing.Point(97, 39)
+        Me.btnTagFields.Name = "btnTagFields"
+        Me.btnTagFields.Size = New System.Drawing.Size(88, 23)
+        Me.btnTagFields.TabIndex = 3
+        Me.btnTagFields.Text = "Custom Fields"
+        Me.btnTagFields.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -101,20 +112,6 @@ Partial Class FrmFillPDF
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Fields List"
-        '
-        'btnTagFields
-        '
-        Me.btnTagFields.Location = New System.Drawing.Point(97, 39)
-        Me.btnTagFields.Name = "btnTagFields"
-        Me.btnTagFields.Size = New System.Drawing.Size(75, 23)
-        Me.btnTagFields.TabIndex = 3
-        Me.btnTagFields.Text = "Tag Fields"
-        Me.btnTagFields.UseVisualStyleBackColor = True
-        '
-        'SaveDialog
-        '
-        Me.SaveDialog.DefaultExt = "pdf"
-        Me.SaveDialog.Filter = "PDF files|*.pdf|All Files|*.*"
         '
         'dgvFields
         '
@@ -138,6 +135,20 @@ Partial Class FrmFillPDF
         '
         Me.colValue.HeaderText = "Field Value"
         Me.colValue.Name = "colValue"
+        '
+        'SaveDialog
+        '
+        Me.SaveDialog.DefaultExt = "pdf"
+        Me.SaveDialog.Filter = "PDF files|*.pdf|All Files|*.*"
+        '
+        'btnLabelFields
+        '
+        Me.btnLabelFields.Location = New System.Drawing.Point(191, 39)
+        Me.btnLabelFields.Name = "btnLabelFields"
+        Me.btnLabelFields.Size = New System.Drawing.Size(75, 23)
+        Me.btnLabelFields.TabIndex = 4
+        Me.btnLabelFields.Text = "Tag Fields"
+        Me.btnLabelFields.UseVisualStyleBackColor = True
         '
         'FrmFillPDF
         '
@@ -169,4 +180,5 @@ Partial Class FrmFillPDF
     Friend WithEvents dgvFields As DataGridView
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colValue As DataGridViewTextBoxColumn
+    Friend WithEvents btnLabelFields As Button
 End Class

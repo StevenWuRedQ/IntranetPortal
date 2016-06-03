@@ -130,10 +130,21 @@ Public Class CorporationEntity
         End Using
     End Function
 
+    ''' <summary>
+    ''' The Days count since corp assigned out
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property AssignedOutDays As Integer
+        Get
+            If Status = "Assigned Out" AndAlso AssignOn.HasValue Then
+                Return CInt((AssignOn.Value - DateTime.Now).TotalDays)
+            End If
+
+            Return 0
+        End Get
+    End Property
+
     Private Sub NotifyEntityManager()
-
-
-
 
         'IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", templateName, emailData)
     End Sub
@@ -153,19 +164,26 @@ Public Class CorporationEntity
 
     End Function
 
-    Public Sub Save()
+    Public Sub Save(saveby As String)
         Using context As New PortalEntities
 
-            If EntityId = 0 Then
+            If Not context.CorporationEntities.Any(Function(c) c.EntityId = EntityId) Then
                 CreateTime = DateTime.Now
+                CreateBy = saveby
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                Dim obj = context.CorporationEntities.Find(EntityId)
-                obj = Core.Utility.SaveChangesObj(obj, Me)
-                obj.UpdateTime = DateTime.Now
+                If Status = "Available" Then
+                    BBLE = Nothing
+                    PropertyAssigned = Nothing
+                    AssignOn = Nothing
+                End If
+                UpdateBy = saveby
+                UpdateTime = DateTime.Now
+                context.Entry(Me).State = Entity.EntityState.Modified
+                context.Entry(Me).OriginalValues.SetValues(context.Entry(Me).GetDatabaseValues)
             End If
 
-            context.SaveChanges()
+            context.SaveChanges(saveby)
         End Using
     End Sub
 

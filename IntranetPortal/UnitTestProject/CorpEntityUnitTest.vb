@@ -68,7 +68,7 @@ Imports IntranetPortal.Data
         corp.Status = "Available"
         corp.BBLE = Nothing
         corp.Address = Nothing
-        corp.Save()
+        corp.Save("UnitTest")
     End Sub
 
 End Class

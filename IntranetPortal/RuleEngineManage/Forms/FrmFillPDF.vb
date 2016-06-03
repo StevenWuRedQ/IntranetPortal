@@ -59,4 +59,29 @@ Public Class FrmFillPDF
             MessageBox.Show("Generate Successed.")
         End If
     End Sub
+
+    Private Sub btnLabelFields_Click(sender As Object, e As EventArgs) Handles btnLabelFields.Click
+        If String.IsNullOrEmpty(txtFileName.Text) Then
+            MessageBox.Show("Please select file.")
+            Return
+        End If
+
+        Dim pdfTemplate = txtFileName.Text
+        If SaveDialog.ShowDialog = DialogResult.OK Then
+            Dim newFile = SaveDialog.FileName
+            Dim pdfReader As New PdfReader(pdfTemplate)
+            Dim pdfNewFile = New PdfStamper(pdfReader, New FileStream(newFile, FileMode.Create))
+
+            Dim pdfFormFields = pdfNewFile.AcroFields
+
+            For Each row In txtResult.Lines
+                pdfFormFields.SetField(row, row)
+            Next
+
+            pdfNewFile.FormFlattening = False
+            pdfNewFile.Close()
+
+            MessageBox.Show("Generate Successed.")
+        End If
+    End Sub
 End Class
