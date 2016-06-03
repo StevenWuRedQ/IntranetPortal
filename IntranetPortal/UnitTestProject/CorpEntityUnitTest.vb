@@ -57,7 +57,7 @@ Imports IntranetPortal.Data
         Dim corp = CorporationEntity.GetAvailableCorp(team, False)
 
         Dim address = "116-55 Queens Blvd"
-        corp.AssignCorp(bble, address)
+        corp.AssignCorp(bble, address, "UnitTest")
 
         corp = CorporationEntity.GetEntity(corp.EntityId)
 
