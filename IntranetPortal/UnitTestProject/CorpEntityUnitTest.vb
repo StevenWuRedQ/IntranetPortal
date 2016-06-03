@@ -69,7 +69,6 @@ Imports IntranetPortal.Data
         CorpManage.NotifyCorpIsAssigned(li, corp, "GaliTeam")
     End Sub
 
-
     ''' <summary>
     ''' AssignCorp testing
     ''' </summary>
@@ -85,12 +84,11 @@ Imports IntranetPortal.Data
         corp = CorporationEntity.GetEntity(corp.EntityId)
 
         Assert.AreEqual(corp.BBLE, bble)
-        Assert.AreEqual(address, corp.Address)
+        Assert.AreEqual(address, corp.PropertyAssigned)
         Assert.AreEqual("Assigned Out", corp.Status)
 
         corp.Status = "Available"
         corp.BBLE = Nothing
-        corp.Address = Nothing
         corp.Save("UnitTest")
     End Sub
 
