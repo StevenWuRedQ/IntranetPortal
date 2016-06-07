@@ -316,13 +316,25 @@ Public Class DocumentGenerator
         _fileConfigures.Add(file)
 
         ' ShortSale Package
-        file = New GenerateFileConfig With {.FileName = "ShortSalePackage.pdf", .ConfigKey = "ShortSalePackage", .Type = GenerateFileConfig.FileType.Pdf}
+        'file = New GenerateFileConfig With {.FileName = "ShortSalePackage.pdf", .ConfigKey = "ShortSalePackage", .Type = GenerateFileConfig.FileType.Pdf}
+        'phs = {
+        '       New DocumentPlaceHolder("Property Address", "PropertyAddress")
+        '    }
+        'file.PlaceHolders = phs.ToList
+
+        '_fileConfigures.Add(file)
+
+        ' Client info
+        file = New GenerateFileConfig With {.FileName = "ClientInfo.docx", .ConfigKey = "ClientInfo"}
         phs = {
-               New DocumentPlaceHolder("Property Address", "PropertyAddress")
+                New DocumentPlaceHolder("PROPERTYADDRESS", "PropertyAddress"),
+                New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
+                New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
+                New DocumentPlaceHolder("OWNEREMAIL", "DealSheet.ContractOrMemo.Sellers[0].Email")
             }
         file.PlaceHolders = phs.ToList
-
         _fileConfigures.Add(file)
+
     End Sub
 
     Public Function GetValue(ph As DocumentPlaceHolder) As String
