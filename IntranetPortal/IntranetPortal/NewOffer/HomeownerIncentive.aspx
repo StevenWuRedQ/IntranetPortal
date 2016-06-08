@@ -28,6 +28,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="preSignId" value='<%= Request.QueryString("preSignId")%>' />
     <input type="hidden" id="BBLE" value='<%= Request.QueryString("BBLE")%>' />
+   
+    <div ng-view  class="container"></div>
+
     <div ng-controller="perAssignCtrl" class="container">
         <div class="row">
             <div class="col-md-12" ng-hide="!preSignList">

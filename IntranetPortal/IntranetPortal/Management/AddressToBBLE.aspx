@@ -9,7 +9,7 @@
     
      <div>
        
-         <asp:TextBox ID="JasonImportText" runat="server"></asp:TextBox>
+         <asp:TextBox ID="JasonImportText" runat="server" TextMode="MultiLine"></asp:TextBox>
          
          <asp:Button ID="Button1" runat="server" Text="GetBBLEs" OnClick="Button1_OnClick"/>
          <dx:ASPxCheckBox ID="aspShowError" runat="server" Text="Allow Show Error"></dx:ASPxCheckBox>

@@ -7067,6 +7067,7 @@
     <Content Include="js\app.js" />
     <Content Include="js\build\controllers.js" />
     <Content Include="js\build\intranetportal.js" />
+    <Content Include="js\common\portalRouteProvider.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
     <Content Include="js\controllers\LeadTaxSearchController.js" />
@@ -7085,6 +7086,7 @@
     <Content Include="js\models\dxModel.js" />
     <Content Include="js\models\HomeOwner.js" />
     <Content Include="js\models\LeadsInfo.js" />
+    <Content Include="js\models\PreSign.js" />
     <Content Include="js\models\ptBaseResource.js" />
     <Content Include="js\models\ptDocSearch.js" />
     <Content Include="js\models\ptLeadResearch.js" />
@@ -7101,6 +7103,7 @@
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="js\test\servicesSpec.js" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
+    <Content Include="js\Views\PerAssign\perassign-edit.tpl.html" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />

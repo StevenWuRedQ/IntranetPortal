@@ -1714,11 +1714,66 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 }]);
 var portalApp = angular.module('PortalApp');
 
+portalApp.config(function (portalRouteProvider) {
+    var BBLE = ['$route', function ($route) {
+        return $route.current.params.BBLE;
+    }];
+    /***
+     * Leave this for example that nomal router resgister   
+     **/
+    //$routeProvider.when('/perAssign/new', {
+    //    templateUrl: '/js/Views/perAssign/perassign-edit.tpl.html',
+    //    controller: 'perAssignEditCtrl',
+    //    resolve:{BBLE:BBLE},
+    //})
+    var config = portalRouteProvider.routesFor('perAssign')
+        // /perassign/new?BBLE=BBLE becuse javascript case sensitive
+        // so the portalRouteProvider url should be lower case
+        .whenNew({ BBLE: BBLE })
+        .whenList()
+        //.when({BBLE:BBLE})
+
+});
+
+portalApp.controller('perAssignEditCtrl', function ($scope, PreSign, BBLE) {
+    var i = 1;
+    
+    $scope.preAssign = new PreSign();
+    $scope.preAssign.BBLE = BBLE
+
+    $scope.partiesGridOptions = {
+        bindingOptions: {
+            dataSource: 'preAssign.Parties'
+        },
+        //dataSource: $scope.preAssign.CheckRequestData.Checks,
+        paging: {
+            pageSize: 10
+        },
+        editing: { insertEnabled: true},//$.extend({}, $scope.gridEdit),
+        pager: {
+            showPageSizeSelector: true,
+            allowedPageSizes: [5, 10, 20],
+            showInfo: true
+        },
+        columns: [{
+            dataField: "Name",
+            validationRules: [{
+                type: "required"
+            }]
+        }],
+        sorting: { mode: 'none' },
+        summary: {
+            totalItems: [{
+                column: "Name",
+                summaryType: "count"
+            }]
+        }
+    }
+});
+
+portalApp.controller('perAssignCtrl', function ($scope, ptCom, $http) {
 
 
-portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, $http, $httpBackend) {
-
-    //console.log($httpBackend);
     $scope.preAssign = {
         Parties: [],
         CheckRequestData: {
@@ -1748,7 +1803,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         $http.get(checksListApi).success(function (data) {
             $scope.preSignList = _.map(data, function (p) {
                 p.ChecksTotal = _.sum(p.Checks, 'Amount');
-               
+
                 return p;
             });
         });
@@ -1772,7 +1827,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             AngularRoot.alert(message)
         } else {
             _.extend($scope.preAssign, JSON.parse(preSignRespose.responseText));
-            
+
             $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [] }
             _BBLE = $scope.preAssign.BBLE
 
@@ -1783,7 +1838,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
 
         $http.get('/api/PreSign/' + preSignId).success(function (data) {
             $scope.preAssign = data;
-            
+
             $scope.preAssign.Parties = $scope.preAssign.Parties || [];
 
         });
@@ -1800,7 +1855,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
         $scope.checkGridOptions.editing.texts = {
             deleteRow: 'Void',
-            confirmDeleteMessage:'' //'Are you sure you want void this check?'
+            confirmDeleteMessage: '' //'Are you sure you want void this check?'
         }
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         $scope.checkGridOptions.onEditingStart = function (e) {
@@ -1858,14 +1913,12 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
     // {
     //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
     // })
-    $scope.clearCheckRequest = function(data)
-    {
+    $scope.clearCheckRequest = function (data) {
         _.remove(data, function (o) { return o["CheckId"] == null });
     }
     $scope.CancelCheck = function (e) {
         e.cancel = true;
-        if (e.data.Status == 1)
-        {
+        if (e.data.Status == 1) {
             $('#gridChecks').dxDataGrid('instance').refresh();
             return;
         }
@@ -1900,7 +1953,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     AngularRoot.alert(message);
 
                 };
-               
+
             }
         })
 
@@ -2075,7 +2128,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         }, {
             dataField: 'CreateBy',
             caption: 'Request By'
-        }, new dxGridColumnModel( {
+        }, new dxGridColumnModel({
             dataField: 'CreateDate',
             caption: 'Request Date',
             dataType: 'date'
@@ -2172,7 +2225,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             validationRules: [{
                 type: "required"
             }]
-        }, new dxGridColumnModel( 
+        }, new dxGridColumnModel(
         {
             dataField: 'Date',
             dataType: 'date',
@@ -2193,7 +2246,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             self.columns.push({
                 dataField: 'Comments',
                 caption: 'Void Reason',
-                allowEditing:false
+                allowEditing: false
             });
         },
         summary: {
@@ -2220,7 +2273,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             }]
         }
     };
-    
+
     if (_role == 'finance') {
         $scope.preSignRecordsGridOpt.masterDetail = {
             enabled: true,
@@ -2232,7 +2285,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                         dataField: 'PaybleTo',
                         caption: 'Payable To',
                     }, {
-                        dataField: 'Amount',                       
+                        dataField: 'Amount',
                         format: 'currency', dataType: 'number', precision: 2
 
                     }, {
@@ -2245,7 +2298,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     }, {
                         dataField: 'Comments',
                         caption: 'Void Reason'
-                    }], 
+                    }],
                     onRowPrepared: $scope.CheckRowPrepared,
                 }
                 $("<div>").text("Checks: ").appendTo(container);
@@ -3161,8 +3214,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             }
         }
     };
-    var urlParam = $location.search();
-    $scope.DocSearch = DocSearch.get(urlParam);
+    //var urlParam = //$location.search(); close html model use my libary
+    $scope.DocSearch = DocSearch.get(PortalUtility.QueryUrl());
    
    
     $scope.DeadType = {

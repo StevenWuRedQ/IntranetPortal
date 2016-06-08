@@ -6,6 +6,20 @@ Imports IntranetPortal.Data
 Namespace Controllers
     Public Class PreSignController
         Inherits ApiController
+        '' Restful api desgin suggestion 
+        '' Get api should use plural instand. like
+        '' /api/PreSigns to get list and can revice an query object
+        '' That client side can query use parameters
+
+        ''' <summary>
+        ''' Get PreSign Records by user permission Restful api for not use single 
+        ''' </summary>
+        ''' <returns></returns>
+        <ResponseType(GetType(PreSignRecord()))>
+        <Route("api/PreSign")>
+        Public Function GetPreSigns() As IHttpActionResult
+            Return Ok(GetPreSignRecordByUser())
+        End Function
 
         ''' <summary>
         ''' Get PreSign Records by user permission
@@ -25,7 +39,9 @@ Namespace Controllers
         End Function
 
         ''' <summary>
-        ''' Get all check request
+        ''' Get all check request in  
+        ''' by steven api design I should not need call this function 
+        ''' in client side or move this to client side model
         ''' </summary>
         ''' <returns></returns>
         <ResponseType(GetType(CheckRequest()))>

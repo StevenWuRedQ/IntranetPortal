@@ -89,8 +89,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             }
         }
     };
-    var urlParam = $location.search();
-    $scope.DocSearch = DocSearch.get(urlParam);
+    //var urlParam = //$location.search(); close html model use my libary
+    $scope.DocSearch = DocSearch.get(PortalUtility.QueryUrl());
    
    
     $scope.DeadType = {

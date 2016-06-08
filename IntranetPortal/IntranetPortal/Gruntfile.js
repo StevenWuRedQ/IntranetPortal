@@ -3,7 +3,7 @@
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        concat:{
+        concat: {
             generated: {
                 files: [
                     {
@@ -13,23 +13,27 @@
                     {
                         src: ['js/models/*.js', ],
                         dest: 'js/build/model.js'
-                    },{
+                    }, {
                         src: ['js/Views/**/*.js'],
                         dest: 'js/build/views.js'
                     },
                     {
-                        src: [ 'js/app.js', 'js/build/model.js', 'js/build/views.js','js/services.js', 'js/filters.js', 'js/directives.js', 'js/build/controllers.js'],
+                        src: ['js/app.js', 'js/common/*.js',
+                            'js/build/model.js',
+                            'js/build/views.js', 'js/services.js',
+                            'js/filters.js', 'js/directives.js',
+                            'js/build/controllers.js'],
                         dest: 'js/build/<%= pkg.name %>.js'
                     }
                 ]
-                
+
             }
         },
         watch: {
             scripts: {
                 files: ['js/controllers/*.js'],
                 tasks: ['concat', 'uglify', 'replace'],
-                
+
             },
         },
         uglify: {
@@ -48,7 +52,7 @@
         },
         replace: {
             change_content_master: {
-                src: ['Content.Master','Root.Master'],
+                src: ['Content.Master', 'Root.Master'],
                 overwrite: true,
                 replacements: [{
                     from: /src="\/js\/build\/intranetportal.js(\?v=\d{0,8})?"/g,
@@ -62,7 +66,7 @@
                 }, {
                     from: /src="\/Scripts\/autologout.js(\?v=\d{0,8})?"/g,
                     to: 'src="/Scripts\/autologout.js?v=<%= grunt.template.today("ddmmyyyy") %>"'
-                },{
+                }, {
                     from: /href="\/css\/stevencss.css(\?v=\d{0,8})?"/g,
                     to: 'href="/css\/stevencss.css?v=<%= grunt.template.today("ddmmyyyy") %>"'
                 }]
@@ -85,5 +89,5 @@
     grunt.registerTask('unittest', ['karma']);
     grunt.registerTask('e2etest', ['protractor']);
     grunt.registerTask('watch', ['watch'])
-   
+
 };

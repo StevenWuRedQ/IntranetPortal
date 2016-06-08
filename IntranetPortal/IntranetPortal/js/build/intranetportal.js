@@ -96,10 +96,16 @@ function RequirePortalApp()
     
 
     portalApp.config(function ($locationProvider) {
-        $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: false
-        });
+
+        /* because need use anguler support url parameters $location.search();
+         * but it only work when open html 5 model 
+         * so need open html 5 model 
+         **/
+
+        //$locationProvider.html5Mode({
+        //    enabled: true,
+        //    requireBase: false
+        //});
     });
     return portalApp;
 }
@@ -126,6 +132,122 @@ if (typeof requirejs === "function") {
     var portalApp = RequirePortalApp();
 }
 
+(function () {
+
+    function portalRouteProvider($routeProvider) {
+
+        // This $get noop is because at the moment in AngularJS "providers" must provide something
+        // via a $get method.
+        // When AngularJS has "provider helpers" then this will go away!
+        this.$get = angular.noop;
+
+        // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
+        // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
+        // like:
+        //
+        // ```
+        // myMod.config(function(portalRouteProvider) {
+        //   var routeProvider = portalRouteProvider.routesFor('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // but instead have something like:
+        //
+        //
+        // ```
+        // myMod.config(function(portalRouteProvider) {
+        //   var routeProvider = portalRouteProvider('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // In any case, the point is that this function is the key part of this "provider helper".
+        // We use it to create routes for CRUD operations.  We give it some basic information about
+        // the resource and the urls then it it returns our own special routeProvider.
+        this.routesFor = function (resourceName, urlPrefix, routePrefix) {
+            var baseUrl = resourceName.toLowerCase();
+
+            var baseRoute = '/' + resourceName.toLowerCase();
+            routePrefix = routePrefix || urlPrefix;
+
+            // Prepend the urlPrefix if available.
+            if (angular.isString(urlPrefix) && urlPrefix !== '') {
+                baseUrl = urlPrefix + '/' + baseUrl;
+            }
+
+            // Prepend the routePrefix if it was provided;
+            if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
+                baseRoute = '/' + routePrefix + baseRoute;
+            }
+
+            // Create the templateUrl for a route to our resource that does the specified operation.
+            var templateUrl = function (operation) {
+                return '/js/Views/' + resourceName.toLowerCase() + '/' + resourceName.toLowerCase() + '-' + operation.toLowerCase() + '.tpl.html';
+            };
+            // Create the controller name for a route to our resource that does the specified operation.
+            var controllerName = function (operation) {
+                return resourceName + operation + 'Ctrl';
+            };
+
+            // This is the object that our `routesFor()` function returns.  It decorates `$routeProvider`,
+            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
+            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
+            var routeBuilder = {
+                // Create a route that will handle showing a list of items
+                whenList: function (resolveFns) {
+                    routeBuilder.when(baseRoute, {
+                        templateUrl: templateUrl('List'),
+                        controller: controllerName('List'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Create a route that will handle creating a new item
+                whenNew: function (resolveFns) {
+                    routeBuilder.when(baseRoute + '/new', {
+                        templateUrl: templateUrl('Edit'),
+                        controller: controllerName('Edit'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Create a route that will handle editing an existing item
+                whenEdit: function (resolveFns) {
+                    routeBuilder.when(baseRoute + '/:itemId', {
+                        templateUrl: templateUrl('Edit'),
+                        controller: controllerName('Edit'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Pass-through to `$routeProvider.when()`
+                when: function (path, route) {
+                    $routeProvider.when(path, route);
+                    return routeBuilder;
+                },
+                // Pass-through to `$routeProvider.otherwise()`
+                otherwise: function (params) {
+                    $routeProvider.otherwise(params);
+                    return routeBuilder;
+                },
+                // Access to the core $routeProvider.
+                $routeProvider: $routeProvider
+            };
+            return routeBuilder;
+        };
+    }
+    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
+    // we add our injection dependencies using the $inject form
+    portalRouteProvider.$inject = ['$routeProvider'];
+
+    // Create our provider - it would be nice to be able to do something like this instead:
+    //
+    // ```
+    // angular.module('services.portalRouteProvider', [])
+    //   .configHelper('portalRouteProvider', ['$routeProvider, portalRouteProvider]);
+    // ```
+    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
+    angular.module('PortalApp').provider('portalRoute', portalRouteProvider);
+})();
 angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, LeadsInfo) {
 
     var corpEntity = ptBaseResource('CorporationEntities', 'EntityId',null,
@@ -146,7 +268,7 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
             var now = Date.now();
             var assignOn = Date.parse(this.AssignOn);
             var times = now - assignOn;
-
+            
             return get_time_diff(assignOn);
         }
     }
@@ -201,6 +323,24 @@ angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
     //leadResearch.func
     //constructor
     return leadsInfo;
+});
+/**
+ * @return {[class]}                 PreSign class
+ */
+angular.module('PortalApp').factory('PreSign', function (ptBaseResource) {
+
+    var preSign = ptBaseResource('PreSign', 'BBLE', null, {
+        BBLE: { method: "get", url: '/api/PreSign/BBLE/:BBLE' }
+    });
+
+    preSign.prototype.Parties = [];
+    //Later will change to Checks to Check Class
+    preSign.prototype.CheckRequestData = { Checks: [] };
+    preSign.prototype.NeedSearch = true;
+    preSign.prototype.NeedCheck = true;
+
+
+    return preSign;
 });
 /*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
 
@@ -303,7 +443,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     //    LeadResearch: "{LeadResearch}",
     //    LeadResearchs: "[LeadResearch]"
     //}
-
+    
     docSearch.Stuats = {
         New: 1,
         Completed: 1
@@ -314,12 +454,14 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             self.team = data;
         });
     }
+    
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
         //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
+        var data1 = null
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
-            self.LeadResearch.initFromLeadsInfo(this.BBLE);
+            data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
         } else {
 
             var _LeadSearch = new LeadResearch();
@@ -335,7 +477,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         //self.LeadResearch = self.LeadResearch || new LeadResearch();
 
         //});
-        return self.LeadResearch;
+        return data1;
     }
 
 
@@ -372,10 +514,6 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
 
     var leadResearch = function () {
 
-
-        //constructor init model here
-        //this.bble = '12345'
-
     }
 
 
@@ -398,6 +536,7 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
             self.secondMortgageAmount = data1.C2ndMotgrAmt;
             self.getOwnerSSN(BBLE);
         });
+        return data1;
     }
     //leadResearch.prototype.func
     //def function
@@ -3505,11 +3644,66 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 }]);
 var portalApp = angular.module('PortalApp');
 
+portalApp.config(function (portalRouteProvider) {
+    var BBLE = ['$route', function ($route) {
+        return $route.current.params.BBLE;
+    }];
+    /***
+     * Leave this for example that nomal router resgister   
+     **/
+    //$routeProvider.when('/perAssign/new', {
+    //    templateUrl: '/js/Views/perAssign/perassign-edit.tpl.html',
+    //    controller: 'perAssignEditCtrl',
+    //    resolve:{BBLE:BBLE},
+    //})
+    var config = portalRouteProvider.routesFor('perAssign')
+        // /perassign/new?BBLE=BBLE becuse javascript case sensitive
+        // so the portalRouteProvider url should be lower case
+        .whenNew({ BBLE: BBLE })
+        .whenList()
+        //.when({BBLE:BBLE})
+
+});
+
+portalApp.controller('perAssignEditCtrl', function ($scope, PreSign, BBLE) {
+    var i = 1;
+    
+    $scope.preAssign = new PreSign();
+    $scope.preAssign.BBLE = BBLE
+
+    $scope.partiesGridOptions = {
+        bindingOptions: {
+            dataSource: 'preAssign.Parties'
+        },
+        //dataSource: $scope.preAssign.CheckRequestData.Checks,
+        paging: {
+            pageSize: 10
+        },
+        editing: { insertEnabled: true},//$.extend({}, $scope.gridEdit),
+        pager: {
+            showPageSizeSelector: true,
+            allowedPageSizes: [5, 10, 20],
+            showInfo: true
+        },
+        columns: [{
+            dataField: "Name",
+            validationRules: [{
+                type: "required"
+            }]
+        }],
+        sorting: { mode: 'none' },
+        summary: {
+            totalItems: [{
+                column: "Name",
+                summaryType: "count"
+            }]
+        }
+    }
+});
+
+portalApp.controller('perAssignCtrl', function ($scope, ptCom, $http) {
 
 
-portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, $http, $httpBackend) {
-
-    //console.log($httpBackend);
     $scope.preAssign = {
         Parties: [],
         CheckRequestData: {
@@ -3539,7 +3733,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         $http.get(checksListApi).success(function (data) {
             $scope.preSignList = _.map(data, function (p) {
                 p.ChecksTotal = _.sum(p.Checks, 'Amount');
-               
+
                 return p;
             });
         });
@@ -3563,7 +3757,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             AngularRoot.alert(message)
         } else {
             _.extend($scope.preAssign, JSON.parse(preSignRespose.responseText));
-            
+
             $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [] }
             _BBLE = $scope.preAssign.BBLE
 
@@ -3574,7 +3768,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
 
         $http.get('/api/PreSign/' + preSignId).success(function (data) {
             $scope.preAssign = data;
-            
+
             $scope.preAssign.Parties = $scope.preAssign.Parties || [];
 
         });
@@ -3591,7 +3785,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
         $scope.checkGridOptions.editing.texts = {
             deleteRow: 'Void',
-            confirmDeleteMessage:'' //'Are you sure you want void this check?'
+            confirmDeleteMessage: '' //'Are you sure you want void this check?'
         }
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         $scope.checkGridOptions.onEditingStart = function (e) {
@@ -3649,14 +3843,12 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
     // {
     //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
     // })
-    $scope.clearCheckRequest = function(data)
-    {
+    $scope.clearCheckRequest = function (data) {
         _.remove(data, function (o) { return o["CheckId"] == null });
     }
     $scope.CancelCheck = function (e) {
         e.cancel = true;
-        if (e.data.Status == 1)
-        {
+        if (e.data.Status == 1) {
             $('#gridChecks').dxDataGrid('instance').refresh();
             return;
         }
@@ -3691,7 +3883,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     AngularRoot.alert(message);
 
                 };
-               
+
             }
         })
 
@@ -3866,7 +4058,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         }, {
             dataField: 'CreateBy',
             caption: 'Request By'
-        }, new dxGridColumnModel( {
+        }, new dxGridColumnModel({
             dataField: 'CreateDate',
             caption: 'Request Date',
             dataType: 'date'
@@ -3963,7 +4155,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             validationRules: [{
                 type: "required"
             }]
-        }, new dxGridColumnModel( 
+        }, new dxGridColumnModel(
         {
             dataField: 'Date',
             dataType: 'date',
@@ -3984,7 +4176,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             self.columns.push({
                 dataField: 'Comments',
                 caption: 'Void Reason',
-                allowEditing:false
+                allowEditing: false
             });
         },
         summary: {
@@ -4011,7 +4203,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             }]
         }
     };
-    
+
     if (_role == 'finance') {
         $scope.preSignRecordsGridOpt.masterDetail = {
             enabled: true,
@@ -4023,7 +4215,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                         dataField: 'PaybleTo',
                         caption: 'Payable To',
                     }, {
-                        dataField: 'Amount',                       
+                        dataField: 'Amount',
                         format: 'currency', dataType: 'number', precision: 2
 
                     }, {
@@ -4036,7 +4228,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     }, {
                         dataField: 'Comments',
                         caption: 'Void Reason'
-                    }], 
+                    }],
                     onRowPrepared: $scope.CheckRowPrepared,
                 }
                 $("<div>").text("Checks: ").appendTo(container);
@@ -4952,8 +5144,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             }
         }
     };
-    var urlParam = $location.search();
-    $scope.DocSearch = DocSearch.get(urlParam);
+    //var urlParam = //$location.search(); close html model use my libary
+    $scope.DocSearch = DocSearch.get(PortalUtility.QueryUrl());
    
    
     $scope.DeadType = {

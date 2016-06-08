@@ -96,10 +96,16 @@ function RequirePortalApp()
     
 
     portalApp.config(function ($locationProvider) {
-        $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: false
-        });
+
+        /* because need use anguler support url parameters $location.search();
+         * but it only work when open html 5 model 
+         * so need open html 5 model 
+         **/
+
+        //$locationProvider.html5Mode({
+        //    enabled: true,
+        //    requireBase: false
+        //});
     });
     return portalApp;
 }
