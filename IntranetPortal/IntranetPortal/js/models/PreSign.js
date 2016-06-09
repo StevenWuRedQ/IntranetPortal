@@ -3,7 +3,7 @@
  */
 angular.module('PortalApp').factory('PreSign', function (ptBaseResource) {
 
-    var preSign = ptBaseResource('PreSign', 'BBLE', null, {
+    var preSign = ptBaseResource('PreSign', 'Id', null, {
         BBLE: { method: "get", url: '/api/PreSign/BBLE/:BBLE' }
     });
 

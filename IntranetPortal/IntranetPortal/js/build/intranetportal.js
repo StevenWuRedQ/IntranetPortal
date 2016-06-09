@@ -133,14 +133,18 @@ if (typeof requirejs === "function") {
 }
 
 (function () {
+    /*define public shared var of class portalRouteProvider register var in the below*/
+    var ITEM_ID = 'itemId';
 
     function portalRouteProvider($routeProvider) {
 
         // This $get noop is because at the moment in AngularJS "providers" must provide something
         // via a $get method.
         // When AngularJS has "provider helpers" then this will go away!
+       
+        /**/
         this.$get = angular.noop;
-
+        this.ITEM_ID = ITEM_ID;
         // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
         // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
         // like:
@@ -212,7 +216,7 @@ if (typeof requirejs === "function") {
                 },
                 // Create a route that will handle editing an existing item
                 whenEdit: function (resolveFns) {
-                    routeBuilder.when(baseRoute + '/:itemId', {
+                    routeBuilder.when(baseRoute + '/:' + ITEM_ID, {
                         templateUrl: templateUrl('Edit'),
                         controller: controllerName('Edit'),
                         resolve: resolveFns
@@ -239,6 +243,8 @@ if (typeof requirejs === "function") {
     // we add our injection dependencies using the $inject form
     portalRouteProvider.$inject = ['$routeProvider'];
 
+    /*define public shared var of class portalRouteProvider*/
+    portalRouteProvider.ITEM_ID = ITEM_ID;
     // Create our provider - it would be nice to be able to do something like this instead:
     //
     // ```
@@ -300,6 +306,35 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
 
     return corpEntity;
 });
+
+angular.module('PortalApp').factory('DxGridModel', function ($location, $routeParams) {
+
+
+    var dxGridModel = function (opt) {
+        angular.extend(this, opt);
+        this.initFormUrl();
+    }
+    dxGridModel.prototype.editing = { editMode: "cell" };
+
+    /**
+     * In devextrme grid view model 
+     * The eidt permission should be handle by itself
+     **/
+    dxGridModel.prototype.initFormUrl = function () {
+        var path = '';
+
+        path = $location.path();
+
+        if (path.indexOf('new') >= 0 || parseInt($routeParams['itemId']) >= 0) {
+            this.editing.insertEnabled = true;
+            this.editing.removeEnabled = true;
+            this.editing.editEnabled = true;
+        }
+
+    }
+
+    return dxGridModel;
+});
 //Leads/LeadsInfo
 angular.module('PortalApp').factory('HomeOwner', function (ptBaseResource) {
 
@@ -329,7 +364,7 @@ angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
  */
 angular.module('PortalApp').factory('PreSign', function (ptBaseResource) {
 
-    var preSign = ptBaseResource('PreSign', 'BBLE', null, {
+    var preSign = ptBaseResource('PreSign', 'Id', null, {
         BBLE: { method: "get", url: '/api/PreSign/BBLE/:BBLE' }
     });
 
@@ -349,11 +384,11 @@ function dxModel() {
 
 }
 
-function dxGridModel() {
+//function dxGridModel() {
 
 
 
-}
+//}
 
 
 /**
@@ -3644,10 +3679,19 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 }]);
 var portalApp = angular.module('PortalApp');
 
-portalApp.config(function (portalRouteProvider) {
-    var BBLE = ['$route', function ($route) {
-        return $route.current.params.BBLE;
+portalApp.config( function (portalRouteProvider) {
+
+    var newPerSign = ['$route', 'PreSign', function ($route, PreSign) {
+        var p = new PreSign();
+        p.BBLE = $route.current.params.BBLE;
+        return p; //.$route.current.params.BBLE;
     }];
+    
+    var perSignItem = ['$route', 'PreSign', function ($route, PreSign) {
+        var perSignId = $route.current.params[portalRouteProvider.ITEM_ID]
+        return PreSign.get({ Id: perSignId });
+    }];
+
     /***
      * Leave this for example that nomal router resgister   
      **/
@@ -3656,49 +3700,136 @@ portalApp.config(function (portalRouteProvider) {
     //    controller: 'perAssignEditCtrl',
     //    resolve:{BBLE:BBLE},
     //})
+
     var config = portalRouteProvider.routesFor('perAssign')
         // /perassign/new?BBLE=BBLE becuse javascript case sensitive
         // so the portalRouteProvider url should be lower case
-        .whenNew({ BBLE: BBLE })
+        .whenNew({ PerSignItem: newPerSign })
+        .whenEdit({ PerSignItem: perSignItem })
         .whenList()
-        //.when({BBLE:BBLE})
+    //.when({BBLE:BBLE})
 
 });
 
-portalApp.controller('perAssignEditCtrl', function ($scope, PreSign, BBLE) {
-    var i = 1;
-    
-    $scope.preAssign = new PreSign();
-    $scope.preAssign.BBLE = BBLE
-
-    $scope.partiesGridOptions = {
-        bindingOptions: {
-            dataSource: 'preAssign.Parties'
-        },
-        //dataSource: $scope.preAssign.CheckRequestData.Checks,
-        paging: {
-            pageSize: 10
-        },
-        editing: { insertEnabled: true},//$.extend({}, $scope.gridEdit),
-        pager: {
-            showPageSizeSelector: true,
-            allowedPageSizes: [5, 10, 20],
-            showInfo: true
-        },
-        columns: [{
-            dataField: "Name",
-            validationRules: [{
-                type: "required"
-            }]
-        }],
-        sorting: { mode: 'none' },
-        summary: {
-            totalItems: [{
-                column: "Name",
-                summaryType: "count"
-            }]
-        }
+/* do not change constant value , if you want change make an corp and change copied object */
+var CONSTANT_ASSIGN_PARTIES_GRID_OPTION = {
+    bindingOptions: {
+        dataSource: 'preAssign.Parties'
+    },
+    //dataSource: $scope.preAssign.CheckRequestData.Checks,
+    paging: {
+        pageSize: 10
+    },
+    //editing: { insertEnabled: true },//$.extend({}, $scope.gridEdit),
+    pager: {
+        showPageSizeSelector: true,
+        allowedPageSizes: [5, 10, 20],
+        showInfo: true
+    },
+    columns: [{
+        dataField: "Name",
+        validationRules: [{
+            type: "required"
+        }]
+    }],
+    sorting: { mode: 'none' },
+    summary: {
+        totalItems: [{
+            column: "Name",
+            summaryType: "count"
+        }]
     }
+}
+var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
+{
+    bindingOptions: {
+        dataSource: 'preAssign.CheckRequestData.Checks'
+    },
+    sorting: { mode: 'none' },
+    //dataSource: $scope.preAssign.CheckRequestData.Checks,
+    paging: {
+        pageSize: 10
+    },
+
+   // editing: $scope.gridEdit,
+    pager: {
+
+        showInfo: true
+    },
+    wordWrapEnabled: true,
+    columns: [{
+        dataField: "PaybleTo",
+        caption: 'Payable To',
+        validationRules: [{
+            type: "required"
+        }]
+    }, {
+        dataField: 'Amount',
+        dataType: 'number',
+        format: 'currency',
+        precision: 2,
+        validationRules: [{
+            type: "required"
+        }]
+    }, new dxGridColumnModel(
+    {
+        dataField: 'Date',
+        dataType: 'date',
+        caption: 'Date of Release',
+        validationRules: [{
+            type: "required"
+        }]
+    }), {
+        dataField: 'Description',
+        validationRules: [{
+            type: "required"
+        }]
+    }, ],
+    //show avoid check any time
+   // "onRowPrepared": $scope.CheckRowPrepared,
+    initEdit: function () {
+        var self = this;
+        self.columns.push({
+            dataField: 'Comments',
+            caption: 'Void Reason',
+            allowEditing: false
+        });
+    },
+    summary: {
+        calculateCustomSummary: function (options) {
+
+
+            if (options.name == 'SumAmount') {
+                options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                    return o.Status != 1;
+                }), "Amount"); //$scope.CheckTotalAmount();
+            }
+        },
+        totalItems: [{
+            column: "Name",
+            summaryType: "count"
+        }, {
+            name: "SumAmount",
+            showInColumn: "Amount",
+            summaryType: "sum",
+            displayFormat: "Sum: {0}",
+            valueFormat: "currency",
+            precision: 2,
+            summaryType: "custom"
+        }]
+    }
+};
+/**************************************** end constant define ******************************/
+
+portalApp.controller('perAssignEditCtrl', function ($scope, PerSignItem, DxGridModel) {
+
+    $scope.preAssign = PerSignItem;
+    
+
+    $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
+    $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
+
+
 });
 
 portalApp.controller('perAssignCtrl', function ($scope, ptCom, $http) {

@@ -1,12 +1,16 @@
 ﻿(function () {
+    /*define public shared var of class portalRouteProvider register var in the below*/
+    var ITEM_ID = 'itemId';
 
     function portalRouteProvider($routeProvider) {
 
         // This $get noop is because at the moment in AngularJS "providers" must provide something
         // via a $get method.
         // When AngularJS has "provider helpers" then this will go away!
+       
+        /**/
         this.$get = angular.noop;
-
+        this.ITEM_ID = ITEM_ID;
         // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
         // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
         // like:
@@ -78,7 +82,7 @@
                 },
                 // Create a route that will handle editing an existing item
                 whenEdit: function (resolveFns) {
-                    routeBuilder.when(baseRoute + '/:itemId', {
+                    routeBuilder.when(baseRoute + '/:' + ITEM_ID, {
                         templateUrl: templateUrl('Edit'),
                         controller: controllerName('Edit'),
                         resolve: resolveFns
@@ -105,6 +109,8 @@
     // we add our injection dependencies using the $inject form
     portalRouteProvider.$inject = ['$routeProvider'];
 
+    /*define public shared var of class portalRouteProvider*/
+    portalRouteProvider.ITEM_ID = ITEM_ID;
     // Create our provider - it would be nice to be able to do something like this instead:
     //
     // ```

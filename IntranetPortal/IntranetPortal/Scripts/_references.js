@@ -54,6 +54,7 @@
 /// <reference path="../js/e2etest/ContructionController.js" />
 /// <reference path="../js/filters.js" />
 /// <reference path="../js/models/corpentity.js" />
+/// <reference path="../js/models/dxgridmodel.js" />
 /// <reference path="../js/models/dxmodel.js" />
 /// <reference path="../js/models/homeowner.js" />
 /// <reference path="../js/models/leadsinfo.js" />
