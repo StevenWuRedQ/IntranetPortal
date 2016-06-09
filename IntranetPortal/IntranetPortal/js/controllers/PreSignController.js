@@ -148,9 +148,6 @@ portalApp.controller('perAssignEditCtrl', function ($scope, PerSignItem, DxGridM
     
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
     $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
-
-
-
 });
 
 portalApp.controller('perAssignCtrl', function ($scope, ptCom, $http) {

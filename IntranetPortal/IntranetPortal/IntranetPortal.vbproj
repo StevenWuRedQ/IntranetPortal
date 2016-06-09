@@ -7073,6 +7073,7 @@
     <Content Include="js\controllers\LeadTaxSearchController.js" />
     <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\PreSignController.js" />
+    <Content Include="js\controllers\PreSignViewController.js" />
     <Content Include="js\controllers\ReportWizardController.js" />
     <Content Include="js\controllers\RequireController.js" />
     <Content Include="js\controllers\ShortSaleController.js" />
@@ -7105,6 +7106,7 @@
     <Content Include="js\test\servicesSpec.js" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
     <Content Include="js\Views\PerAssign\perassign-edit.tpl.html" />
+    <Content Include="js\Views\PerAssign\perassign-view.tpl.html" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />

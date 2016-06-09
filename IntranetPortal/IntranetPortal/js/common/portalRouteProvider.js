@@ -96,6 +96,7 @@
                         controller: controllerName('View'),
                         resolve: resolveFns
                     });
+                    return routeBuilder;
                 },
                 // Pass-through to `$routeProvider.when()`
                 when: function (path, route) {

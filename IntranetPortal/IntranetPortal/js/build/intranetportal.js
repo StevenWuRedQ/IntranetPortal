@@ -230,6 +230,7 @@ if (typeof requirejs === "function") {
                         controller: controllerName('View'),
                         resolve: resolveFns
                     });
+                    return routeBuilder;
                 },
                 // Pass-through to `$routeProvider.when()`
                 when: function (path, route) {
@@ -4414,6 +4415,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $http) {
         }
     }
 });
+var portalApp = angular.module('PortalApp');
+
+portalApp.controller('perAssignViewCtrl', function ($scope, PerSignItem, DxGridModel) {
+    $scope.PerSignItem = PerSignItem;
+})
 angular.module('PortalApp')
 .controller("ReportWizardCtrl", function ($scope, $http, $timeout, ptCom) {
     $scope.camel = _.camelCase;
