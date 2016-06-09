@@ -384,7 +384,6 @@ Public Class DocumentGenerator
         End Get
     End Property
 
-
 End Class
 
 Public Class GenerateFileConfig

@@ -202,11 +202,12 @@
                                                 </dx:ASPxImage>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataColumn FieldName="Comments" Width="60px" Caption="Recycle" Settings-HeaderFilterMode="CheckedList">
+                                        <dx:GridViewDataColumn FieldName="Comments" Width="60px" Caption="Recycle" Settings-HeaderFilterMode="CheckedList" Visible="false">
                                             <DataItemTemplate>
                                                 <dx:ASPxCheckBox runat="server" ID="chkRecycled" ToolTip="Recycled" Checked='<%# Eval("IsRecycled")%>' ReadOnly="true" Visible='<%# Eval("IsRecycled")%>'></dx:ASPxCheckBox>
                                             </DataItemTemplate>
                                         </dx:GridViewDataColumn>
+                                        <dx:GridViewDataTextColumn FieldName="RecycleFrom" Caption="Agent" Width="70px"></dx:GridViewDataTextColumn>
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true" EnableRowHotTrack="True" />
                                     <Settings ShowFilterRowMenu="true" ShowHeaderFilterButton="true" ShowColumnHeaders="true" GridLines="Both" VerticalScrollableHeight="1000"></Settings>
