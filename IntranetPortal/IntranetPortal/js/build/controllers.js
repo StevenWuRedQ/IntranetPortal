@@ -1717,9 +1717,9 @@ var portalApp = angular.module('PortalApp');
 portalApp.config( function (portalRouteProvider) {
 
     var newPerSign = ['$route', 'PreSign', function ($route, PreSign) {
-        var p = new PreSign();
-        p.BBLE = $route.current.params.BBLE;
-        return p; //.$route.current.params.BBLE;
+        var preSign = new PreSign();
+        preSign.BBLE = $route.current.params.BBLE;
+        return preSign; //.$route.current.params.BBLE;
     }];
     
     var perSignItem = ['$route', 'PreSign', function ($route, PreSign) {
@@ -1740,7 +1740,7 @@ portalApp.config( function (portalRouteProvider) {
         // /perassign/new?BBLE=BBLE becuse javascript case sensitive
         // so the portalRouteProvider url should be lower case
         .whenNew({ PerSignItem: newPerSign })
-        .whenEdit({ PerSignItem: perSignItem })
+        .whenEdit({ PerSignItem: perSignItem }).whenView({ PerSignItem: perSignItem })
         .whenList()
     //.when({BBLE:BBLE})
 
@@ -1860,9 +1860,9 @@ portalApp.controller('perAssignEditCtrl', function ($scope, PerSignItem, DxGridM
 
     $scope.preAssign = PerSignItem;
     
-
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
     $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
+
 
 
 });

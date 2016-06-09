@@ -26,7 +26,7 @@ portalApp.config( function (portalRouteProvider) {
         // /perassign/new?BBLE=BBLE becuse javascript case sensitive
         // so the portalRouteProvider url should be lower case
         .whenNew({ PerSignItem: newPerSign })
-        .whenEdit({ PerSignItem: perSignItem })
+        .whenEdit({ PerSignItem: perSignItem }).whenView({ PerSignItem: perSignItem })
         .whenList()
     //.when({BBLE:BBLE})
 

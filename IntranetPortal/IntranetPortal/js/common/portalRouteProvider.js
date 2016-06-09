@@ -89,6 +89,14 @@
                     });
                     return routeBuilder;
                 },
+                whenView: function (resolveFns)
+                {
+                    routeBuilder.when(baseRoute + '/view/:' + ITEM_ID, {
+                        templateUrl: templateUrl('View'),
+                        controller: controllerName('View'),
+                        resolve: resolveFns
+                    });
+                },
                 // Pass-through to `$routeProvider.when()`
                 when: function (path, route) {
                     $routeProvider.when(path, route);
