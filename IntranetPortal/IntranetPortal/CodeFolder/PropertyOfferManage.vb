@@ -3,6 +3,7 @@ Imports System.IO.Compression
 Imports Newtonsoft.Json.Linq
 Imports Novacode
 Imports IntranetPortal.Data
+Imports iTextSharp.text.pdf
 
 ''' <summary>
 ''' The action realted to PropertyOffer
@@ -59,7 +60,6 @@ Public Class PropertyOfferManage
         Return True
     End Function
 
-
     ''' <summary>
     ''' Generate Offer Package
     ''' </summary>
@@ -93,10 +93,21 @@ Public Class PropertyOfferManage
 
                         Dim finalpath = IO.Path.Combine(targetPath, f.Name)
 
-                        Using d = DocX.Load(f.FullName)
-                            generator.GenerateDocument(d, config)
-                            d.SaveAs(finalpath)
-                        End Using
+                        Select Case config.Type
+                            Case GenerateFileConfig.FileType.Word
+                                Using d = DocX.Load(f.FullName)
+                                    generator.GenerateDocument(d, config)
+                                    d.SaveAs(finalpath)
+                                End Using
+                            Case GenerateFileConfig.FileType.Pdf
+                                Dim pdfReader As New PdfReader(f.FullName)
+                                Dim pdfNewFile = New PdfStamper(pdfReader, New FileStream(finalpath, FileMode.Create))
+
+                                Dim pdfFormFields = pdfNewFile.AcroFields
+                                generator.GeneratePdf(pdfFormFields, config)
+                                pdfNewFile.FormFlattening = False
+                                pdfNewFile.Close()
+                        End Select
                     End If
                 End If
             Next
@@ -130,6 +141,12 @@ Public Class DocumentGenerator
     Public Sub New(data As JObject, bble As String)
         Me.Data = data
         Me.BBLE = bble
+    End Sub
+
+    Public Sub GeneratePdf(pdfFormFields As AcroFields, config As GenerateFileConfig)
+        For Each ph In config.PlaceHolders
+            pdfFormFields.SetField(ph.FieldName, GetValue(ph))
+        Next
     End Sub
 
     Public Sub GenerateDocument(doc As DocX, config As GenerateFileConfig)
@@ -296,8 +313,28 @@ Public Class DocumentGenerator
                 New DocumentPlaceHolder("RECEIVINGPOAADDRESS", "DealSheet.ReceivingPOA.address")
             }
         file.PlaceHolders = phs.ToList
-
         _fileConfigures.Add(file)
+
+        ' ShortSale Package
+        'file = New GenerateFileConfig With {.FileName = "ShortSalePackage.pdf", .ConfigKey = "ShortSalePackage", .Type = GenerateFileConfig.FileType.Pdf}
+        'phs = {
+        '       New DocumentPlaceHolder("Property Address", "PropertyAddress")
+        '    }
+        'file.PlaceHolders = phs.ToList
+
+        '_fileConfigures.Add(file)
+
+        ' Client info
+        file = New GenerateFileConfig With {.FileName = "ClientInfo.docx", .ConfigKey = "ClientInfo"}
+        phs = {
+                New DocumentPlaceHolder("PROPERTYADDRESS", "PropertyAddress"),
+                New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
+                New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
+                New DocumentPlaceHolder("OWNEREMAIL", "DealSheet.ContractOrMemo.Sellers[0].Email")
+            }
+        file.PlaceHolders = phs.ToList
+        _fileConfigures.Add(file)
+
     End Sub
 
     Public Function GetValue(ph As DocumentPlaceHolder) As String
@@ -347,17 +384,19 @@ Public Class DocumentGenerator
         End Get
     End Property
 
-
 End Class
 
 Public Class GenerateFileConfig
     Public Property ConfigKey As String
     Public Property FileName As String
-
     Public Property PlaceHolders As List(Of DocumentPlaceHolder)
-
     Public Property TagData As String
+    Public Property Type As FileType
 
+    Public Enum FileType
+        Word
+        Pdf
+    End Enum
 End Class
 
 Public Class DocumentPlaceHolder

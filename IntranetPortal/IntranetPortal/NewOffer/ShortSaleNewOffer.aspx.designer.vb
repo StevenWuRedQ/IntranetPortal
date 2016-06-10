@@ -23,6 +23,15 @@ Partial Public Class ShortSaleNewOfferPage
     Protected WithEvents divMsg As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''btnEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnEdit As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''NeedSearch control.
     '''</summary>
     '''<remarks>

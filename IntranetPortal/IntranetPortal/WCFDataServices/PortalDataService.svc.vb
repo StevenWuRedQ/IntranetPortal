@@ -351,29 +351,22 @@ Public Class PortalDataService
     End Sub
 
     Public Sub ComplaintsUpdatedNotify(complaint As CheckingComplain)
-        Dim usersEmails As New List(Of String)
+        Dim users As New List(Of String)
 
         If Not String.IsNullOrEmpty(complaint.NotifyUsers) Then
-            For Each user In complaint.NotifyUsers.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
-                Dim party = PartyContact.GetContactByName(user)
-                If party IsNot Nothing Then
-                    usersEmails.Add(party.Email)
-                End If
-            Next
+            users.AddRange(complaint.NotifyUsers.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries))
         End If
 
-        If Not String.IsNullOrEmpty(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails")) Then
-            usersEmails.AddRange(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails").Split(";"))
-        End If
-
-        If usersEmails.Count > 0 Then
+        If users.Count > 0 OrElse Not String.IsNullOrEmpty(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails")) Then
             Dim mailData As New Dictionary(Of String, String)
             mailData.Add("UserName", "All")
             mailData.Add("Address", complaint.Address)
             mailData.Add("BBLE", complaint.BBLE)
 
             Dim svr As New CommonService
-            svr.SendEmailByControl(String.Join(";", usersEmails), "DOB Complaint Update for: " & complaint.Address, "ComplaintsDetailNotify", mailData)
+            svr.SendEmailByControl(Employee.GetEmpsEmails(users.ToArray) & ";" & Core.PortalSettings.GetValue("ComplaitntsNotifyEmails"),
+                                   "DOB Complaint Update for: " & complaint.Address, "ComplaintsDetailNotify", mailData)
+
         End If
 
     End Sub

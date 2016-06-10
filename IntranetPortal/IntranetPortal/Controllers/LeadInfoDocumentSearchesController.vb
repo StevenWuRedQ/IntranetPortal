@@ -12,6 +12,7 @@ Imports IntranetPortal.Data
 Imports IntranetPortal.LeadsActivityLog
 
 Namespace Controllers
+
     Public Class LeadInfoDocumentSearchesController
         Inherits System.Web.Http.ApiController
 
@@ -117,7 +118,7 @@ Namespace Controllers
                     Dim attachment As Mail.Attachment
                     Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
 
-                    Dim ccEmail = Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name)
+                    Dim ccEmail = Employee.GetEmpsEmails(leadInfoDocumentSearch.CompletedBy, Employee.CEO.Name)
                     ccEmail = ccEmail & ";" & IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
 
                     If judgeDoc IsNot Nothing Then

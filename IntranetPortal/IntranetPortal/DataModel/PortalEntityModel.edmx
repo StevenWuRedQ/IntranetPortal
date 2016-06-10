@@ -820,6 +820,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <Property Name="AssignDate" Type="datetime" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="CreateDate" Type="datetime" />
+          <Property Name="RecycleFrom" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -972,7 +973,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
     [LeadsAssignView2].[UpdateUser] AS [UpdateUser], 
     [LeadsAssignView2].[AssignDate] AS [AssignDate], 
     [LeadsAssignView2].[LastUpdate] AS [LastUpdate], 
-    [LeadsAssignView2].[CreateDate] AS [CreateDate]
+    [LeadsAssignView2].[CreateDate] AS [CreateDate], 
+    [LeadsAssignView2].[RecycleFrom] AS [RecycleFrom]
     FROM [dbo].[LeadsAssignView2] AS [LeadsAssignView2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TeamLeadsInZip" EntityType="Self.TeamLeadsInZip" store:Type="Views" store:Schema="dbo">
@@ -1846,6 +1848,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="AssignDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="RecycleFrom" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MapDataSet">
           <Key>
@@ -2680,6 +2683,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="LeadsAssignView2">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsAssignView2">
               <MappingFragment StoreEntitySet="LeadsAssignView2">
+                <ScalarProperty Name="RecycleFrom" ColumnName="RecycleFrom" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />

@@ -42,7 +42,8 @@ Public Class Troubleshooting
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim rule As New IntranetPortal.RulesEngine.LoopServiceRule
-        rule.Execute()
+        ThreadPool.QueueUserWorkItem(AddressOf rule.Execute)
+        'rule.Execute()
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -748,9 +749,10 @@ Public Class Troubleshooting
         End If
     End Sub
 
-
     Private Sub btnRefreshComplains_Click(sender As Object, e As EventArgs) Handles btnRefreshComplains.Click
+
         Dim rule = New IntranetPortal.RulesEngine.DOBComplaintsCheckingRule
+        rule.SendingNotifyEmail = False
         rule.Execute()
     End Sub
 
@@ -1111,7 +1113,6 @@ Public Class Troubleshooting
             ctx.SaveChanges()
         End Using
 
-
     End Sub
 
     Private Sub CacheAllEmail_Click(sender As Object, e As EventArgs) Handles CacheAllEmail.Click
@@ -1134,7 +1135,7 @@ Public Class Troubleshooting
 
     End Sub
     Private Sub btnRefreshMtgs_Click(sender As Object, e As EventArgs) Handles btnRefreshMtgs.Click
-        MessageBox.Show(DataWCFService.UpdateLeadInfo(txtBBLE.Text, False, True, False, False, False, False, False))
+        MessageBox.Show(DataWCFService.UpdateLeadInfo(txtBBLE.Text, False, True, True, True, True, False, False))
     End Sub
 
     Private Sub btnOpenWindow_Click(sender As Object, e As EventArgs) Handles btnOpenWindow.Click

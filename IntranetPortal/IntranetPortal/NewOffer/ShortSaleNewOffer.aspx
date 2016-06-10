@@ -179,8 +179,12 @@
             </tr>
             <tr>
                 <td></td>
-                <td style="padding-top: 10px"><a href="/TempDataFile/OfferDoc/<%= CorpData.BBLE.Trim %>.zip">View Package</a></td>
-            </tr>
+                <td style="padding-top: 10px">
+                    <a href="/TempDataFile/OfferDoc/<%= CorpData.BBLE.Trim %>.zip">View Package</a>
+                    &nbsp;
+                    <asp:LinkButton runat="server" ID="btnEdit" OnClick="btnEdit_Click">Edit Offer</asp:LinkButton>
+                </td>
+            </tr>           
         </table>
     </div>
     <input runat="server" type="hidden" id="NeedSearch" class="pt-need-search-input" />

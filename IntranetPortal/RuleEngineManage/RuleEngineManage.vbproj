@@ -73,6 +73,10 @@
       <HintPath>..\packages\ImapX.2.0.0.16\lib\net45\ImapX.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\WorkFlow\SourceCode2\DLL\log4net.dll</HintPath>
     </Reference>
@@ -118,6 +122,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FrmFillPDF.Designer.vb">
+      <DependentUpon>FrmFillPDF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmFillPDF.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FrmAuction.Designer.vb">
       <DependentUpon>FrmAuction.vb</DependentUpon>
     </Compile>
@@ -160,6 +170,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\FrmAuction.resx">
       <DependentUpon>FrmAuction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmFillPDF.resx">
+      <DependentUpon>FrmFillPDF.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -1,7 +1,5 @@
 var portalApp = angular.module('PortalApp');
 
-
-
 portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, $http, $httpBackend) {
 
     //console.log($httpBackend);
