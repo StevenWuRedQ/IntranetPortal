@@ -41,7 +41,38 @@ Imports IntranetPortal.Data
 
         offer.UpdateFields(item)
 
-        Assert.AreEqual(offer.Status, Nothing)
+        Assert.IsNotNull(offer.Status)
+    End Sub
+
+    <TestMethod()> Public Sub UpdateAudit_ReturnData()
+        Dim prop = PropertyOffer.GetOffer("4070570032")
+        Dim seller1 = prop.ContractSeller1
+        Dim seller2 = prop.ContractSeller2
+        Dim seller3 = prop.ContractSeller3
+        Dim cp = prop.ContractPrice
+        Dim dp = prop.ContractDownPay
+
+        prop.ContractSeller1 = "Test Seller1"
+        prop.ContractSeller2 = "Test Seller2"
+        prop.ContractSeller3 = "Test Seller3"
+        prop.ContractPrice = 10000.0
+        prop.ContractDownPay = 6000
+
+        prop.SaveData("UnitTest")
+
+        Dim logs = AuditLog.GetLogs("PropertyOffer", prop.OfferId).ToList
+        Assert.IsTrue(logs IsNot Nothing)
+        Assert.IsTrue(logs.Where(Function(a) a.UserName = "UnitTest" AndAlso a.RecordId = prop.OfferId).Count > 0)
+        prop.ContractSeller1 = seller1
+        prop.ContractSeller2 = seller2
+        prop.ContractSeller3 = seller3
+        prop.ContractPrice = cp
+        prop.ContractDownPay = dp
+        prop.SaveData("UnitTest")
+
+        For Each log In logs
+            log.Delete()
+        Next
     End Sub
 
 End Class

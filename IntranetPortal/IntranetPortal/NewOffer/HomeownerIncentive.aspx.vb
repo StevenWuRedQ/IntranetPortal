@@ -10,12 +10,14 @@ Public Class HomeownerIncentivePage
             If Not String.IsNullOrEmpty(Request.QueryString("bble")) Then
                 Dim bble = Request.QueryString("bble")
 
+                If Not Employee.HasControlLeads(Page.User.Identity.Name, bble) Then
+                    Server.Transfer("/PortalError.aspx?code=1001")
+                End If
+
                 Dim search = LeadInfoDocumentSearch.GetInstance(bble)
 
                 If search Is Nothing Then
-
                     divSearchWarning.Visible = True
-
                 End If
 
                 'If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then

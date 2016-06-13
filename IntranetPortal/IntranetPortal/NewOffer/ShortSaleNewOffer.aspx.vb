@@ -12,6 +12,10 @@ Public Class ShortSaleNewOfferPage
 
                 Dim bble = Request.QueryString("bble").ToString
 
+                If Not Employee.HasControlLeads(Page.User.Identity.Name, bble) Then
+                    Server.Transfer("/PortalError.aspx?code=1001")
+                End If
+
                 ' check the if HOI exsited or not 
                 Dim record = PreSignRecord.GetInstanceByBBLE(bble)
                 If record Is Nothing Then

@@ -22,5 +22,10 @@ Partial Public Class PropertyOffer
     Public Property CreateBy As String
     Public Property UpdateBy As String
     Public Property UpdateDate As Nullable(Of Date)
+    Public Property ContractSeller1 As String
+    Public Property ContractSeller2 As String
+    Public Property ContractSeller3 As String
+    Public Property ContractPrice As Nullable(Of Decimal)
+    Public Property ContractDownPay As Nullable(Of Decimal)
 
 End Class

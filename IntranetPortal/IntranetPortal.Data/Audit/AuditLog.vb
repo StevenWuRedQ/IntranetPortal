@@ -41,6 +41,14 @@ Partial Class AuditLog
         End Get
     End Property
 
+    Public Sub Delete()
+
+        Using ctx As New PortalEntities
+            ctx.Entry(Me).State = System.Data.Entity.EntityState.Deleted
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Private Function FormatValue(value As String) As String
         If String.IsNullOrEmpty(value) Then
             Return value
