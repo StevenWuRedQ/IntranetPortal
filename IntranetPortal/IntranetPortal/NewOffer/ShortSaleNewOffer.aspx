@@ -386,7 +386,7 @@
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName}" data-message="Please fill Buyer Name">Buyer Name</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName" /></li>
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName" disabled="disabled"/></li>
 
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney}" data-message="Please fill Buyer Attorney">Buyer Attorney</label>
@@ -395,7 +395,7 @@
                                             </li>
                                             <li class="ss_form_item " style="width: 96%">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.Address}" data-message="Please fill Buyer Address">Buyer Address</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.Address" />
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.Address" disabled="disabled"/>
                                             </li>
                                         </ul>
                                     </div>
@@ -497,14 +497,14 @@
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.CorpName}" data-message="Please fill Buyer Name!">Buyer Name</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.CorpName" /></li>
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.CorpName" disabled="disabled"/></li>
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.EIN}" data-message="Please fill Buyer SSN/EIN!">Buyer SSN/EIN</label>
                                                 <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.EIN" />
                                             </li>
                                             <li class="ss_form_item ss_form_item_line">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.Address}" data-message="Please fill Buyer Address!">Buyer Address</label>
-                                                <input class="ss_form_input " ng-model="SSpreSign.DealSheet.Deed.Buyer.Address" style="width: 96%" />
+                                                <input class="ss_form_input " ng-model="SSpreSign.DealSheet.Deed.Buyer.Address" style="width: 96%"  disabled="disabled"/>
                                             </li>
                                         </ul>
                                     </div>
