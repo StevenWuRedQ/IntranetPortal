@@ -927,6 +927,20 @@ Public Class DataWCFService
         Try
             Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).FirstOrDefault
 
+            If String.IsNullOrEmpty(add1) OrElse String.IsNullOrEmpty(add1.Trim) Then
+                Dim ld = LeadsInfo.GetInstance(bble)
+                If ld IsNot Nothing Then
+                    add1 = ld.Address1
+                End If
+            End If
+
+            If String.IsNullOrEmpty(city) OrElse String.IsNullOrEmpty(city.Trim) Then
+                Dim ld = LeadsInfo.GetInstance(bble)
+                If ld IsNot Nothing Then
+                    city = ld.NeighName
+                End If
+            End If
+
             If bble.StartsWith("3") Then
                 If Not String.IsNullOrEmpty(city) Then
                     city = "Brooklyn"
@@ -937,28 +951,6 @@ Public Class DataWCFService
                 If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BX" Or city.Contains("BX")) Then
                     city = "Bronx"
                 End If
-            End If
-
-            'If bble.StartsWith("4") Then
-            '    If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BX") Then
-            '        city = "Bronx"
-            '    End If
-            'End If
-
-            If String.IsNullOrEmpty(add1) OrElse String.IsNullOrEmpty(add1.Trim) Then
-                Dim ld = LeadsInfo.GetInstance(bble)
-                If ld IsNot Nothing Then
-                    add1 = ld.Address1
-                End If
-
-            End If
-
-            If String.IsNullOrEmpty(city) OrElse String.IsNullOrEmpty(city.Trim) Then
-                Dim ld = LeadsInfo.GetInstance(bble)
-                If ld IsNot Nothing Then
-                    city = ld.NeighName
-                End If
-
             End If
 
             If localOwner IsNot Nothing Then
