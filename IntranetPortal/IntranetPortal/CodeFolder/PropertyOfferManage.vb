@@ -27,7 +27,7 @@ Public Class PropertyOfferManage
                 Return False
             End If
 
-            If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+            If search.Status <> LeadInfoDocumentSearch.SearchStatus.Completed Then
                 Return False
             End If
         End If
@@ -52,7 +52,7 @@ Public Class PropertyOfferManage
                 Return False
             End If
 
-            If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+            If search.Status <> LeadInfoDocumentSearch.SearchStatus.Completed Then
                 Return False
             End If
         End If

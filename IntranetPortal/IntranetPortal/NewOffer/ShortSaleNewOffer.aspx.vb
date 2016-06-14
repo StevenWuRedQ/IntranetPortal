@@ -38,7 +38,7 @@ Public Class ShortSaleNewOfferPage
                 ' check doc search status, show Search Tab if Doc search is completed
                 Dim search = LeadInfoDocumentSearch.GetInstance(bble)
                 If (search IsNot Nothing) Then
-                    If search.Status = LeadInfoDocumentSearch.SearchStauts.Completed Then
+                    If search.Status = LeadInfoDocumentSearch.SearchStatus.Completed Then
                         txtSearchCompleted.Value = True
                         NeedSearch.Value = True
                         DivLeadTaxSearchCtrl.Visible = True

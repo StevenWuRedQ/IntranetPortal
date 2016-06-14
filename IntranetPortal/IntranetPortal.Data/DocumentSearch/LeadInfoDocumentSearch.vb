@@ -52,7 +52,7 @@ Public Class LeadInfoDocumentSearch
         End Using
     End Sub
 
-    Public Enum SearchStauts
+    Public Enum SearchStatus
         NewSearch = 0
         Completed = 1
     End Enum

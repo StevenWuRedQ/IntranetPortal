@@ -83,7 +83,7 @@ Namespace Controllers
         <ResponseType(GetType(LeadInfoDocumentSearch))>
         Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
 
-            leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStauts.Completed
+            leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStatus.Completed
             leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.CompletedOn = Date.Now
 

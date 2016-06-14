@@ -377,13 +377,13 @@
                             <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
                             <% Dim docSearch = IntranetPortal.Data.LeadInfoDocumentSearch.GetInstance(hfBBLE.Value)  %>
 
-                            <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStauts.Completed Then %>
+                            <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.Completed Then %>
                             <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',667,900)"></i>
                             <%Else %>
                             <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
 
                            
-                            <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStauts.NewSearch Then %>
+                            <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then %>
 
                             <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
                             <span>search in processing </span>

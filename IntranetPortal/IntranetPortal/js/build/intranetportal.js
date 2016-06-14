@@ -132,13 +132,12 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
     { assign: { url: '/api/CorporationEntities/:EntityId/BBLE', method: 'Post' } });
 
     //corpEntity.prototype.assignCorp = function () {
-        
-        
     //    this
     //        self = corpEntity.assign(self.EntityId, JSON.stringify(leadInfo.BBLE));
     //        //return self.$assign(JSON.stringify(leadInfo.BBLE));
     //    });
     //}
+
     corpEntity.prototype.assignDateNow = function()
     {
         if(this.AssignOn)
@@ -146,7 +145,7 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
             var now = Date.now();
             var assignOn = Date.parse(this.AssignOn);
             var times = now - assignOn;
-
+            
             return get_time_diff(assignOn);
         }
     }
@@ -303,9 +302,9 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     //    LeadResearch: "{LeadResearch}",
     //    LeadResearchs: "[LeadResearch]"
     //}
-
-    docSearch.Stuats = {
-        New: 1,
+    
+    docSearch.Status = {
+        New: 0,
         Completed: 1
     }
     docSearch.prototype.initTeam = function () {
@@ -314,12 +313,14 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             self.team = data;
         });
     }
+    
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
         //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
+        var data1 = null
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
-            self.LeadResearch.initFromLeadsInfo(this.BBLE);
+            data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
         } else {
 
             var _LeadSearch = new LeadResearch();
@@ -335,7 +336,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         //self.LeadResearch = self.LeadResearch || new LeadResearch();
 
         //});
-        return self.LeadResearch;
+        return data1;
     }
 
 
@@ -372,10 +373,6 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
 
     var leadResearch = function () {
 
-
-        //constructor init model here
-        //this.bble = '12345'
-
     }
 
 
@@ -398,6 +395,7 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
             self.secondMortgageAmount = data1.C2ndMotgrAmt;
             self.getOwnerSSN(BBLE);
         });
+        return data1;
     }
     //leadResearch.prototype.func
     //def function
@@ -3504,8 +3502,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
     }
 }]);
 var portalApp = angular.module('PortalApp');
-
-
 
 portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, $http, $httpBackend) {
 
