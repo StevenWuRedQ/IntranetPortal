@@ -4056,7 +4056,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             dataField: 'RequestDate',
             caption: 'Request Date',
             dataType: 'date'
-        }, {
+        }, new dxGridColumnModel({
+            dataField: 'ExpectedDate',
+            caption: 'Expected Date',
+            dataType: 'date'
+        }), {
             dataField: 'CheckAmount',
             format: 'currency',
             dataType: 'number',
