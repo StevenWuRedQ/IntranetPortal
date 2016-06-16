@@ -29,7 +29,6 @@ Public Class HomeownerIncentivePage
                 If record IsNot Nothing Then
                     Response.Redirect("/NewOffer/HomeownerIncentive.aspx?model=View&Id=" & record.Id)
                 End If
-
             End If
         End If
     End Sub
