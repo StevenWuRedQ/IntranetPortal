@@ -9,6 +9,8 @@
 <body>
     <form id="form1" runat="server">
         <div style="background: url(/images/Background2.png) no-repeat center fixed; background-size: auto, auto; background-color: #dddddd; width: 100%; height: 100%;">
+            <asp:TextBox runat="server" ID="txtbbles"></asp:TextBox>
+            <asp:Button ID="btnLoadData" runat="server" Text="Load Data" OnClick="btnLoadData_Click" />
             <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
             <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false"
                 ID="gridHomeOwner" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE"
@@ -16,13 +18,15 @@
                 <Columns>
                     <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                     </dx:GridViewCommandColumn>
-                    <dx:GridViewDataColumn FieldName="BBLE" Caption="BBLE" Width="1px" ExportWidth="100">
+                    <dx:GridViewDataColumn FieldName="BBLE" Caption="BBLE" Width="100px" ExportWidth="100">
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataTextColumn FieldName="FirstName" Settings-AllowHeaderFilter="False" Visible="false">                       
+                    <dx:GridViewDataTextColumn FieldName="FirstName" Settings-AllowHeaderFilter="False">                       
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="LastName" Settings-AllowHeaderFilter="False" Visible="false">                       
+                    <dx:GridViewDataTextColumn FieldName="LastName" Settings-AllowHeaderFilter="False" >                       
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False">                       
+                    <dx:GridViewDataTextColumn FieldName="Last4SSN" Settings-AllowHeaderFilter="False" >                       
+                    </dx:GridViewDataTextColumn>
+                  <%--  <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False">                       
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Address1" Settings-AllowHeaderFilter="False">                       
                     </dx:GridViewDataTextColumn>
@@ -39,7 +43,7 @@
                     <dx:GridViewDataTextColumn FieldName="AddressHistory" PropertiesTextEdit-EncodeHtml="false"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Relatives1stNamePhone" PropertiesTextEdit-EncodeHtml="true"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Relatives2ndNamePhone" PropertiesTextEdit-EncodeHtml="true"></dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="Relatives3rdNamePhone" PropertiesTextEdit-EncodeHtml="true"></dx:GridViewDataTextColumn>                   
+                    <dx:GridViewDataTextColumn FieldName="Relatives3rdNamePhone" PropertiesTextEdit-EncodeHtml="true"></dx:GridViewDataTextColumn>                   --%>
                 </Columns>
                 <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
                     EnableRowHotTrack="True" />
