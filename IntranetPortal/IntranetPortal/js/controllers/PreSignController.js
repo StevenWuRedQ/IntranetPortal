@@ -5,6 +5,7 @@ portalApp.config( function (portalRouteProvider) {
     var newPerSign = ['$route', 'PreSign', function ($route, PreSign) {
         var preSign = new PreSign();
         preSign.BBLE = $route.current.params.BBLE;
+       
         return preSign; //.$route.current.params.BBLE;
     }];
     
@@ -142,14 +143,25 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
 };
 /**************************************** end constant define ******************************/
 
-portalApp.controller('perAssignEditCtrl', function ($scope, PerSignItem, DxGridModel) {
+portalApp.controller('perAssignEditCtrl', function ($scope, PerSignItem, DxGridModel, $location) {
 
     $scope.preAssign = PerSignItem;
     
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
     $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
-
-
+    
+    
+    $scope.checkGridOptions.form
+    $scope.CheckByBBLE = function()
+    {
+        var preAssign = $scope.preAssign;
+        if(preAssign.Id == null)
+        {
+            preAssign.$getByBBLE(function () {
+                $location.path('/perassign/' + preAssign.Id);
+            })
+        }
+    }
 
 });
 

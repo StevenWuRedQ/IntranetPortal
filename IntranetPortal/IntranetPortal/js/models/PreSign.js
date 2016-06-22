@@ -4,7 +4,7 @@
 angular.module('PortalApp').factory('PreSign', function (ptBaseResource) {
 
     var preSign = ptBaseResource('PreSign', 'Id', null, {
-        BBLE: { method: "get", url: '/api/PreSign/BBLE/:BBLE' }
+        getByBBLE: { method: "get", url: '/api/PreSign/BBLE/:BBLE' }
     });
 
     preSign.prototype.Parties = [];

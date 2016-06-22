@@ -16,6 +16,7 @@ Partial Public Class HomeOwner
 
     <IgnoreDataMember>
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
+
         Get
             If objLocateReport Is Nothing Then
 
