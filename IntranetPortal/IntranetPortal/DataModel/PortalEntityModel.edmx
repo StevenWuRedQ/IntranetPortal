@@ -203,6 +203,7 @@
           <Property Name="Active" Type="bit" />
           <Property Name="ReportToken" Type="nvarchar" MaxLength="50" />
           <Property Name="LocateReportContent" Type="nvarchar(max)" />
+          <Property Name="OwnerSSN" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Leads">
           <Key>
@@ -632,6 +633,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="UpdateTime" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="TLOData">
+          <Key>
+            <PropertyRef Name="OwnerId" />
+          </Key>
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="ReportToken" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SSN" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
         <EntityType Name="UserAppointments">
           <Key>
             <PropertyRef Name="AppoitID" />
@@ -881,6 +895,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="SearchResults" EntityType="Self.SearchResults" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SharedLeads" EntityType="Self.SharedLeads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TLOData" EntityType="Self.TLOData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAppointments" EntityType="Self.UserAppointments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInTeams" EntityType="Self.UserInTeams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMessages" EntityType="Self.UserMessages" Schema="dbo" store:Type="Tables" />
@@ -1071,6 +1086,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="LeadsActivityLogArchiveds" EntityType="IntranetPortalModel.LeadsActivityLogArchived" />
           <EntitySet Name="NYC_Scan_TaxLiens_Per_Year" EntityType="IntranetPortalModel.NYC_Scan_TaxLiens_Per_Year" />
           <EntitySet Name="InProcessBBLEs" EntityType="IntranetPortalModel.InProcessBBLE" />
+          <EntitySet Name="TLODatas" EntityType="IntranetPortalModel.TLOData" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1510,6 +1526,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="ReportToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LocateReportContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerSSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LoginLog">
           <Key>
@@ -1961,6 +1978,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="TLOData">
+          <Key>
+            <PropertyRef Name="OwnerId" />
+          </Key>
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="ReportToken" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2326,6 +2356,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="HomeOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwner">
               <MappingFragment StoreEntitySet="HomeOwners">
+                <ScalarProperty Name="OwnerSSN" ColumnName="OwnerSSN" />
                 <ScalarProperty Name="LocateReportContent" ColumnName="LocateReportContent" />
                 <ScalarProperty Name="ReportToken" ColumnName="ReportToken" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
@@ -2827,6 +2858,20 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
               <MappingFragment StoreEntitySet="InProcessBBLE">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TLODatas">
+            <EntityTypeMapping TypeName="IntranetPortalModel.TLOData">
+              <MappingFragment StoreEntitySet="TLOData">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ReportToken" ColumnName="ReportToken" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

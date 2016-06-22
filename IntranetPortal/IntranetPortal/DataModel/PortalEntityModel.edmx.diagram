@@ -62,6 +62,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsActivityLogArchived" Width="2.375" PointX="21.75" PointY="12.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.NYC_Scan_TaxLiens_Per_Year" Width="2.25" PointX="21.75" PointY="16.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.InProcessBBLE" Width="1.5" PointX="21.875" PointY="20.875" />
+        <EntityTypeShape EntityType="IntranetPortalModel.TLOData" Width="1.5" PointX="7.5" PointY="20.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

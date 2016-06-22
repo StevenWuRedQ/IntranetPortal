@@ -974,6 +974,9 @@
     <Compile Include="DataModel\TeamLeadsInZip.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\TLOData.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\UserAppointment.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

@@ -30,5 +30,6 @@ Partial Public Class HomeOwner
     Public Property LastUpdate As Nullable(Of Date)
     Public Property ReportToken As String
     Public Property LocateReportContent As String
+    Public Property OwnerSSN As String
 
 End Class
