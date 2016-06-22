@@ -111,7 +111,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         //$scope.gridEdit.editEnabled = false;
 
         $scope.init($scope.preAssign.Id);
-
     }
 
     $scope.AddCheck = function (e) {
@@ -219,7 +218,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
      * @param  {[type]}
      * @return {[type]}
      */
-
     $scope.initByBBLE = function (BBLE) {
         $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
             $scope.preAssign.Title = data.PropertyAddress
@@ -304,9 +302,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     window.location.href = '/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + data.Id
                 });
             }
-
         }
-
     }
 
     //var ref = new Firebase("https://sdatabasetest.firebaseio.com/qqq");

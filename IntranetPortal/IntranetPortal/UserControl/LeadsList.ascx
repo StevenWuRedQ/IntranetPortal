@@ -24,8 +24,7 @@
                             OnGetRowValues(rowKey);
                     }
                 }
-            //}
-            
+            //}            
         }
     }
 
@@ -72,61 +71,11 @@
         initToolTips();
         if (sortPhones) {
             sortPhones();
-
         }
     }
 
     function InitScrollBar() {
-        return;
-        $("#prioity_content").mCustomScrollbar(
-       {
-           theme: "minimal-dark"
-       }
-       );
-
-        $("#home_owner_content").mCustomScrollbar(
-            {
-                theme: "minimal-dark"
-            }
-         );
-
-        $("#scrollbar_homeowner").mCustomScrollbar(
-            {
-                theme: "minimal-dark"
-            }
-         );
-
-        $(".dxgvCSD").each(function (ind) {
-            var is_list = $(this).parents("#leads_list_left").length > 0;
-
-            var ladfucntion = {
-                onScroll: function () {
-                    var position = this.mcs.topPct;
-                    if (position > 90) {
-                        gridLeads.NextPage();
-                    }
-                }
-            }
-
-            if (is_list) {
-                $(this).mCustomScrollbar(
-                    {
-                        theme: "minimal-dark",
-                        callbacks: ladfucntion
-                    }
-                 );
-            } else {
-    
-            }
-        });
-
-
-        /*init the center panle's scrollbar */
-        $("#ctl00_MainContentPH_ASPxSplitter1_0i1_CC").mCustomScrollbar(
-            {
-                theme: "minimal-dark",
-                axis: "yx"
-            });
+        return;       
     }
 
     var mapContentframeID = "MapContent";
@@ -144,8 +93,7 @@
     }
 
     var tmpBBLE = null;
-
-
+    
     var tempAddress = null;
 
     function SearchGridLeads() {
@@ -154,7 +102,6 @@
         filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
         filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
         gridLeads.PerformCallback("Search|" + key);
-        //gridLeads.ApplyFilter(filterCondition);
     }
 
     var streets = null;
@@ -259,36 +206,16 @@
     }
 
     function AddScrollbarOnLeadsList() {
-        return;
-        $("#leads_list_left .dxgvCSD").each(function (ind) {
-            var is_list = $(this).parents("#leads_list_left").length > 0;
-
-            var ladfucntion = {
-                onScroll: function () {
-                    var position = this.mcs.topPct;
-                    if (position > 95) {
-                        gridLeads.NextPage();
-                    }
-                }
-            }
-
-            if (is_list) {
-                $(this).mCustomScrollbar(
-                    {
-                        theme: "minimal-dark",
-                        callbacks: ladfucntion
-                    }
-                 );
-            }
-        });
+        return;        
     }
 
     $(document).ready(function () {
         //Handler for .ready() called.
-        if (LeadCategory.GetText() != "Create") {//document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
+        if (LeadCategory.GetText() != "Create") {
             AddScrollbarOnLeadsList();
         }
     });
+
     var temBBLE = null;
     function OnColorMark(s, e) {
         var index = e.item.index;
@@ -317,7 +244,6 @@
         }
         $(temStar).css("color", GetMarkColor(index));
         debugger;
-        //gridLeads.PerformCallback("MarkColor|" + temBBLE + "|" + index)
         MarkColorCallBack.PerformCallback("MarkColor|" + temBBLE + "|" + index)
     }
     function PopupColorMark(e, BBLE) {
@@ -331,8 +257,7 @@
 
         $("#color_drop").css("top", "-1000px")
     }
-
-
+    
 </script>
 
 <style>
@@ -360,37 +285,36 @@
         border-radius: 4px;
     }
 
-        .arrow_box2:after, .arrow_box2:before {
-            bottom: 100%;
-            left: 15%;
-            border: solid transparent;
-            content: " ";
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-        }
+    .arrow_box2:after, .arrow_box2:before {
+        bottom: 100%;
+        left: 15%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
 
-        .arrow_box2:after {
-            border-color: rgba(255, 255, 255, 0);
-            border-bottom-color: #fff;
-            border-width: 10px;
-            margin-left: -10px;
-        }
+    .arrow_box2:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #fff;
+        border-width: 10px;
+        margin-left: -10px;
+    }
 
-        .arrow_box2:before {
-            border-color: rgba(205, 212, 216, 0);
-            border-bottom-color: #cdd4d8;
-            border-width: 11px;
-            margin-left: -11px;
-        }
+    .arrow_box2:before {
+        border-color: rgba(205, 212, 216, 0);
+        border-bottom-color: #cdd4d8;
+        border-width: 11px;
+        margin-left: -11px;
+    }
 
     .color_star {
         cursor: pointer;
     }
 </style>
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack"></dx:ASPxCallback>
-
 
 <div id="color_drop" class="arrow_box2" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;">
     <div style="padding: 10px 15px">
@@ -407,10 +331,6 @@
     </div>
 </div>
 
-
-
-
-<%--id="leads_list_left"--%>
 <div style="width: 100%; height: 100%;" class="color_gray">
     <div style="margin: 30px 10px 10px 10px; text-align: left;" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
@@ -426,10 +346,6 @@
                 </div>
             </div>
         </div>
-
-
-        <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
-        <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
     <div style="height: 768px; padding: 0px 0px;" id="leads_list_left">
         <dx:ASPxGridView EnableViewState="false" runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText"
@@ -761,9 +677,7 @@
             </Templates>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" />
-            <%--<SettingsPager Mode="ShowPager" PageSize="17" Position="Bottom" Summary-Visible="false" ShowDisabledButtons="false" NumericButtonCount="4"></SettingsPager>--%>
             <SettingsPager Mode="EndlessPaging" PageSize="16"></SettingsPager>
-            <%--   <SettingsPager Mode="ShowAllRecords"></SettingsPager>--%>
             <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
             <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
             <SettingsCommandButton CancelButton-ButtonType="Button" UpdateButton-ButtonType="Button">
@@ -793,7 +707,6 @@
         </dx:ASPxGridView>
     </div>
 
-    <%--now is wrong place--%>
     <div style="position: absolute; bottom: 0; padding-left: 34px; margin-bottom: 20px">
 
         <div style="position: relative; float: left">
@@ -818,83 +731,6 @@
     <asp:HiddenField ID="hfView" runat="server" EnableViewState="true" />
 
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
-
-    <%--<dx:ASPxPopupControl ClientInstanceName="ASPxPopupRequestUpdateControl" Width="500px" Height="420px"
-        MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3"
-        HeaderText="Request Update" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
-        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-        <ContentCollection>
-            <dx:PopupControlContentControl runat="server" Visible="false" ID="popContentRequestUpdate">
-                <asp:HiddenField runat="server" ID="hfRequestUpdateBBLE" />
-                <dx:ASPxFormLayout ID="requestUpdateFormlayout" runat="server" Width="100%">
-                    <Items>
-                        <dx:LayoutItem Caption="Leads Name">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateLeadsName" ReadOnly="true"></dx:ASPxTextBox>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Create By">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateCreateby" ReadOnly="true"></dx:ASPxTextBox>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Manager">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateManager" ReadOnly="true"></dx:ASPxTextBox>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Importance">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
-                                    <dx:ASPxComboBox runat="server" Width="100%" CssClass="edit_drop" ID="cbTaskImportant">
-                                        <Items>
-                                            <dx:ListEditItem Text="Normal" Value="Normal" Selected="true" />
-                                            <dx:ListEditItem Text="Important" Value="Important" />
-                                            <dx:ListEditItem Text="Urgent" Value="Urgent" />
-                                        </Items>
-                                    </dx:ASPxComboBox>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Description">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxMemo runat="server" Width="100%" CssClass="edit_drop" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
-                                        <ClientSideEvents Click="function(){                                                                                                                      
-                                                                                                                        ASPxPopupRequestUpdateControl.Hide();
-                                                                                                                        ASPxPopupRequestUpdateControl.PerformCallback('SendRequest');
-                                                                                                                        isSendRequest =true;                                                                                                                                                                                                                                         
-                                                                                                                        }"></ClientSideEvents>
-                                    </dx:ASPxButton>
-                                    &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupRequestUpdateControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                    </Items>
-                </dx:ASPxFormLayout>
-            </dx:PopupControlContentControl>
-        </ContentCollection>
-        <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
-    </dx:ASPxPopupControl>--%>
 
     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
         ShowPopOutImages="false" AutoPostBack="false"
@@ -921,9 +757,7 @@
     </dx:ASPxPopupMenu>
 </div>
 
-
 <script>
-
     //mouse move function 
     var tmpCursor = null;
     function star_mouseenter(e, bble) {
