@@ -44,6 +44,8 @@ Public Class ShortSaleNewOfferPage
                         DivLeadTaxSearchCtrl.Visible = True
                     End If
                 End If
+            Else
+                Server.Transfer("/PortalError.aspx?code=1001")
             End If
         End If
     End Sub

@@ -1,5 +1,6 @@
 ﻿Imports Newtonsoft.Json.Linq
 
+
 ''' <summary>
 ''' The property offer object
 ''' </summary>
@@ -20,8 +21,12 @@ Partial Public Class PropertyOffer
         End Using
     End Function
 
+    ''' <summary>
+    ''' Load Property offer data
+    ''' </summary>
+    ''' <param name="bble">The Property BBLE</param>
+    ''' <returns>The Property Offer</returns>
     Public Shared Function GetOffer(bble As String) As PropertyOffer
-
         Using ctx As New PortalEntities
             Dim offer = ctx.PropertyOffers.Where(Function(p) p.BBLE = bble).FirstOrDefault
             Return offer
@@ -61,7 +66,6 @@ Partial Public Class PropertyOffer
             Else
                 Me.CreateBy = saveBy
                 Me.CreateDate = DateTime.Now
-
                 ctx.PropertyOffers.Add(Me)
             End If
 
@@ -77,6 +81,11 @@ Partial Public Class PropertyOffer
     Public Overrides Function Save(itemData As FormDataItem) As String
         MyBase.Save(itemData)
 
+        If String.IsNullOrEmpty(BBLE) Then
+            Throw New Exception("can not find BBLE")
+        End If
+
+        Dim updateBy = itemData.UpdateBy
         Using ctx As New PortalEntities
             If ctx.PropertyOffers.Any(Function(t) t.FormItemId = itemData.DataId) Then
                 UpdateFields(itemData)
@@ -85,13 +94,19 @@ Partial Public Class PropertyOffer
             Else
                 UpdateFields(itemData, True)
                 ctx.PropertyOffers.Add(Me)
+                updateBy = itemData.CreateBy
             End If
 
-            ctx.SaveChanges(itemData.UpdateBy)
+            ctx.SaveChanges(updateBy)
             Return BBLE
         End Using
     End Function
 
+    ''' <summary>
+    ''' Update the New Offer report fields
+    ''' </summary>
+    ''' <param name="itemData">The Business Data Object</param>
+    ''' <param name="newCase">indicate if the object is new</param>
     Public Sub UpdateFields(itemData As FormDataItem, Optional newCase As Boolean = False)
         Dim jsonCase = Newtonsoft.Json.Linq.JObject.Parse(itemData.FormData)
 
@@ -149,5 +164,4 @@ Partial Public Class PropertyOffer
 
         Return Nothing
     End Function
-
 End Class
