@@ -61,15 +61,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             _BBLE = $scope.preAssign.BBLE
 
         }
-
     }
     $scope.init = function (preSignId) {
-
         $http.get('/api/PreSign/' + preSignId).success(function (data) {
-            $scope.preAssign = data;
-            
+            $scope.preAssign = data;            
             $scope.preAssign.Parties = $scope.preAssign.Parties || [];
-
         });
         //auditLog.show("PreSignRecord",preSignId);
     }
