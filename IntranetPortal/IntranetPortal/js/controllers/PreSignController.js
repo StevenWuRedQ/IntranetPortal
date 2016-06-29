@@ -123,18 +123,20 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             success: function (data, textStatus, xhr) {
                 $scope.addedCheck = data;
                 // Use client side model will solve this 
-                // But there should have better way to implement patch update in javascript 
+                // But there should have better way to implement put update in javascript 
                 // in restful client can check android update for put http://square.github.io/retrofit/
                 // find the batch update for angular services
                
                 ///////////////////////////////////////
                 //e.data = data;
+                e.cancel = true;
+                e.component.refresh();
                 $scope.preAssign.CheckRequestData.RequestId = data.RequestId
                 $scope.preAssign.CheckRequestId = data.RequestId
 
                 $scope.preAssign.CheckRequestData.Checks.push(data);
 
-                e.cancel = true;
+               
             }
         });
 

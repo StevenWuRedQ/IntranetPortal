@@ -1775,15 +1775,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             _BBLE = $scope.preAssign.BBLE
 
         }
-
     }
     $scope.init = function (preSignId) {
-
         $http.get('/api/PreSign/' + preSignId).success(function (data) {
-            $scope.preAssign = data;
-            
+            $scope.preAssign = data;            
             $scope.preAssign.Parties = $scope.preAssign.Parties || [];
-
         });
         //auditLog.show("PreSignRecord",preSignId);
     }
@@ -1825,7 +1821,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         //$scope.gridEdit.editEnabled = false;
 
         $scope.init($scope.preAssign.Id);
-
     }
 
     $scope.AddCheck = function (e) {
@@ -1842,16 +1837,20 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             success: function (data, textStatus, xhr) {
                 $scope.addedCheck = data;
                 // Use client side model will solve this 
-                // But there should have better way to implement patch update in javascript 
+                // But there should have better way to implement put update in javascript 
                 // in restful client can check android update for put http://square.github.io/retrofit/
                 // find the batch update for angular services
                
                 ///////////////////////////////////////
                 //e.data = data;
+                e.cancel = true;
+                e.component.refresh();
                 $scope.preAssign.CheckRequestData.RequestId = data.RequestId
+                $scope.preAssign.CheckRequestId = data.RequestId
+
                 $scope.preAssign.CheckRequestData.Checks.push(data);
 
-                e.cancel = true;
+               
             }
         });
 
@@ -1862,6 +1861,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         };
         return cancel;
     }
+   
     // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
     // {
     //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
@@ -1943,7 +1943,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
      * @param  {[type]}
      * @return {[type]}
      */
-
     $scope.initByBBLE = function (BBLE) {
         $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
             $scope.preAssign.Title = data.PropertyAddress
@@ -2028,9 +2027,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                     window.location.href = '/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + data.Id
                 });
             }
-
         }
-
     }
 
     //var ref = new Firebase("https://sdatabasetest.firebaseio.com/qqq");
