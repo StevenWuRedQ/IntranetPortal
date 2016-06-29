@@ -3619,17 +3619,27 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
 
     $scope.AddCheck = function (e) {
         var cancel = false;
-        e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
+        //e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
         e.data.Date = new Date(e.data.Date).toISOString();
         var response = $.ajax({
-            url: '/api/businesscheck',
+            //url: '/api/businesscheck',
+            url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
             type: 'POST',
             dataType: 'json',
             async: false,
             data: e.data,
             success: function (data, textStatus, xhr) {
                 $scope.addedCheck = data;
+                // Use client side model will solve this 
+                // But there should have better way to implement patch update in javascript 
+                // in restful client can check android update for put http://square.github.io/retrofit/
+                // find the batch update for angular services
+               
+                ///////////////////////////////////////
+                //e.data = data;
+                $scope.preAssign.CheckRequestData.RequestId = data.RequestId
                 $scope.preAssign.CheckRequestData.Checks.push(data);
+
                 e.cancel = true;
             }
         });
@@ -3742,7 +3752,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             $scope.preAssign.CheckRequestData.Checks = $scope.preAssign.CheckRequestData.Checks || [];
             $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
         }
-
     }
 
     if (_BBLE) {
@@ -3766,7 +3775,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             $scope.alert("Check Request is enabled. Please enter checks to be issued.");
             return false;
         }
-
         if ($scope.CheckTotalAmount() > $scope.preAssign.DealAmount) {
             $scope.alert("The check's total amount must less than the deal amount, Please correct! ");
             return false;
@@ -3883,10 +3891,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         ],
         wordWrapEnabled: true
     }
-
-
-
-
+    
     $scope.partiesGridOptions = {
         bindingOptions: {
             dataSource: 'preAssign.Parties'
@@ -4913,8 +4918,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                                 .on('dxclick', function() {
                                     //Do something with options.data;
                                     //ShowCaseInfo(options.data.BBLE);
-                                    var request = options.data;
-                                    
+                                    var request = options.data;                                    
                                     PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
                                 })
                                 .appendTo(container);

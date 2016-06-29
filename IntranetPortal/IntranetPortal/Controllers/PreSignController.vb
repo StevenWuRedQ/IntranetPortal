@@ -39,7 +39,25 @@ Namespace Controllers
                 Throw ex
             End Try
         End Function
+        <Route("api/PreSign/{Id}/AddCheck/{needCheck}")>
+        Public Function PostAddCheck(Id As Integer, needCheck As String, check As BusinessCheck) As IHttpActionResult
+            Try
+                Dim preSign = PreSignRecord.GetInstance(Id)
 
+                If (preSign Is Nothing) Then
+                    Return BadRequest()
+                End If
+
+                Dim isNeedCheck = Boolean.Parse(needCheck)
+
+                Dim addedCheck = preSign.AddCheck(isNeedCheck, check, HttpContext.Current.User.Identity.Name)
+
+                Return Ok(addedCheck)
+            Catch ex As Exception
+                Throw ex
+            End Try
+
+        End Function
         Public Function GetPreSignRecord(id As Integer) As IHttpActionResult
             Dim record = PreSignRecord.GetInstance(id)
             If IsNothing(record) Then

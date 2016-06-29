@@ -5,10 +5,11 @@
 Public Class CheckRequest
 
     ''' <summary>
-    ''' The Check list
+    ''' For UI purpose this version don't have client model so move model define in servier side,
+    ''' Can Move it to client side model later after we descusss but doing on server side is also okay.
+    ''' By Steven
     ''' </summary>
-    ''' <returns></returns>
-    Public Property Checks As List(Of BusinessCheck)
+    Public Property Checks As New List(Of BusinessCheck)
     Public Property PropertyAddress As String
     Public Property ExpectedDate As Date?
 
