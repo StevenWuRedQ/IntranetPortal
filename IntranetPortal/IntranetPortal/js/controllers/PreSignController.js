@@ -130,6 +130,8 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 ///////////////////////////////////////
                 //e.data = data;
                 $scope.preAssign.CheckRequestData.RequestId = data.RequestId
+                $scope.preAssign.CheckRequestId = data.RequestId
+
                 $scope.preAssign.CheckRequestData.Checks.push(data);
 
                 e.cancel = true;
@@ -143,6 +145,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         };
         return cancel;
     }
+   
     // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
     // {
     //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
