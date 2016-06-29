@@ -303,8 +303,8 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     //    LeadResearchs: "[LeadResearch]"
     //}
     
-    docSearch.Stuats = {
-        New: 1,
+    docSearch.Status = {
+        New: 0,
         Completed: 1
     }
     docSearch.prototype.initTeam = function () {
@@ -3622,8 +3622,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
         e.data.Date = new Date(e.data.Date).toISOString();
         var response = $.ajax({
-            //url: '/api/businesscheck',
-            url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
+            url: '/api/businesscheck',
             type: 'POST',
             dataType: 'json',
             async: false,
@@ -4057,7 +4056,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             dataField: 'RequestDate',
             caption: 'Request Date',
             dataType: 'date'
-        }, {
+        }, new dxGridColumnModel({
+            dataField: 'ExpectedDate',
+            caption: 'Expected Date',
+            dataType: 'date'
+        }), {
             dataField: 'CheckAmount',
             format: 'currency',
             dataType: 'number',

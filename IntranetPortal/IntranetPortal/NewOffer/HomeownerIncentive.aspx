@@ -33,10 +33,9 @@
             <div class="col-md-12" ng-hide="!preSignList">
                 <div style="padding: 20px">
                     <h2 ng-if="role==null">Homeowner Incentive Request List</h2>
-                    <input  type="text" hidden="hidden" value="1234"/>
+                    <input type="text" hidden="hidden" value="1234" />
                     <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">
-                      
                     </div>
                 </div>
             </div>
@@ -70,7 +69,7 @@
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required data-date-start-date="+0d" ng-if="model!='View'" />
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'" />
                                     </li>
-                                  <%--  <li class="ss_form_item">
+                                    <%--  <li class="ss_form_item">
                                         <label class="ss_form_input_title">Doc Search</label>
                                         <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
                                     </li>--%>
@@ -82,7 +81,7 @@
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
-                                        <%--Page.User.Identity.Name--%> 
+                                        <%--Page.User.Identity.Name--%>
 
                                         <input class="ss_form_input" ng-show="!model" value="<%= Page.User.Identity.Name %>" disabled />
                                         <input class="ss_form_input" ng-show="model" ng-value="preAssign.CreateBy" disabled />
@@ -103,7 +102,7 @@
                             </li>--%>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
-                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask  />
+                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
                                     </li>
                                     <div ng-show="preAssign.NeedCheck">
                                         <li class="ss_form_item">

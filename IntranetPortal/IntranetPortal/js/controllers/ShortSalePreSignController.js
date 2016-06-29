@@ -50,8 +50,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                                 .on('dxclick', function() {
                                     //Do something with options.data;
                                     //ShowCaseInfo(options.data.BBLE);
-                                    var request = options.data;
-                                    
+                                    var request = options.data;                                    
                                     PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
                                 })
                                 .appendTo(container);

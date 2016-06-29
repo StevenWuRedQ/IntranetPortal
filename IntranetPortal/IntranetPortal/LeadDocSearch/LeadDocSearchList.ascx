@@ -173,7 +173,7 @@
                         <div>
                             <table style="height: 30px">
                                 <tr>
-                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded, "down", "right") %> font_16" onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp; <i class="fa fa-bank font_16"></i>&nbsp; <%# CType(CInt(Container.GroupText), IntranetPortal.Data.LeadInfoDocumentSearch.SearchStauts).ToString%>
+                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded, "down", "right") %> font_16" onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp; <i class="fa fa-bank font_16"></i>&nbsp; <%# CType(CInt(Container.GroupText), IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus).ToString%>
                                     </span></td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "") %></span>

@@ -10,6 +10,7 @@ Public Class CheckRequest
     ''' <returns></returns>
     Public Property Checks As List(Of BusinessCheck)
     Public Property PropertyAddress As String
+    Public Property ExpectedDate As Date?
 
     ''' <summary>
     ''' Load all check request list
@@ -19,14 +20,17 @@ Public Class CheckRequest
         Using ctx As New PortalEntities
             Dim result = From ck In ctx.CheckRequests
                          From li In ctx.ShortSaleLeadsInfoes.Where(Function(li) li.BBLE = ck.BBLE).DefaultIfEmpty
+                         From expectedDate In ctx.PreSignRecords.Where(Function(pr) pr.CheckRequestId = ck.RequestId AndAlso pr.NeedCheck).Select(Function(pr) pr.ExpectedDate).DefaultIfEmpty
                          Let checks = ctx.BusinessChecks.Where(Function(b) b.RequestId = ck.RequestId)
-                         Select ck, checks, li.PropertyAddress
+                         Select ck, checks, li.PropertyAddress, expectedDate
 
             Return result.ToList.Select(Function(s)
                                             s.ck.Checks = s.checks.ToList
                                             s.ck.PropertyAddress = s.PropertyAddress
+                                            s.ck.ExpectedDate = s.expectedDate
                                             Return s.ck
                                         End Function).ToArray
+
         End Using
     End Function
 

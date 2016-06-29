@@ -57,6 +57,7 @@ Partial Public Class PropertyOffer
                 Me.UpdateBy = saveBy
 
                 ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
                 Me.CreateBy = saveBy
                 Me.CreateDate = DateTime.Now
@@ -64,7 +65,7 @@ Partial Public Class PropertyOffer
                 ctx.PropertyOffers.Add(Me)
             End If
 
-            ctx.SaveChanges()
+            ctx.SaveChanges(saveBy)
         End Using
     End Sub
 
@@ -80,18 +81,23 @@ Partial Public Class PropertyOffer
             If ctx.PropertyOffers.Any(Function(t) t.FormItemId = itemData.DataId) Then
                 UpdateFields(itemData)
                 ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
                 UpdateFields(itemData, True)
                 ctx.PropertyOffers.Add(Me)
             End If
 
-            ctx.SaveChanges()
+            ctx.SaveChanges(itemData.UpdateBy)
             Return BBLE
         End Using
     End Function
 
     Public Sub UpdateFields(itemData As FormDataItem, Optional newCase As Boolean = False)
         Dim jsonCase = Newtonsoft.Json.Linq.JObject.Parse(itemData.FormData)
+
+        If jsonCase Is Nothing Then
+            Return
+        End If
 
         If newCase Then
             FormItemId = itemData.DataId
@@ -112,6 +118,13 @@ Partial Public Class PropertyOffer
                 Me.Status = tmpStatus
             End If
         End If
+
+        ContractSeller1 = LoadJsonData(Of String)(jsonCase, "DealSheet.ContractOrMemo.Sellers[0].Name")
+        ContractSeller2 = LoadJsonData(Of String)(jsonCase, "DealSheet.ContractOrMemo.Sellers[1].Name")
+        ContractSeller3 = LoadJsonData(Of String)(jsonCase, "DealSheet.ContractOrMemo.Sellers[2].Name")
+        ContractPrice = LoadJsonData(Of Decimal)(jsonCase, "DealSheet.ContractOrMemo.contractPrice")
+        ContractDownPay = LoadJsonData(Of Decimal)(jsonCase, "DealSheet.ContractOrMemo.downPayment")
+
         UpdateBy = itemData.UpdateBy
         UpdateDate = DateTime.Now
     End Sub
@@ -121,5 +134,20 @@ Partial Public Class PropertyOffer
         Assigned = 1
         Completed = 2
     End Enum
+
+    Private Function LoadJsonData(Of T)(jsonCase As JObject, jpath As String) As T
+
+        Try
+            Dim field = jsonCase.SelectToken(jpath)
+
+            If field IsNot Nothing Then
+                Return CTypeDynamic(Of T)(field)
+            End If
+        Catch ex As Exception
+
+        End Try
+
+        Return Nothing
+    End Function
 
 End Class

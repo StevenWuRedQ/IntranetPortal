@@ -240,7 +240,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             $scope.preAssign.CheckRequestData.Checks = $scope.preAssign.CheckRequestData.Checks || [];
             $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
         }
-
     }
 
     if (_BBLE) {
@@ -264,7 +263,6 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             $scope.alert("Check Request is enabled. Please enter checks to be issued.");
             return false;
         }
-
         if ($scope.CheckTotalAmount() > $scope.preAssign.DealAmount) {
             $scope.alert("The check's total amount must less than the deal amount, Please correct! ");
             return false;
@@ -381,10 +379,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         ],
         wordWrapEnabled: true
     }
-
-
-
-
+    
     $scope.partiesGridOptions = {
         bindingOptions: {
             dataSource: 'preAssign.Parties'
@@ -554,7 +549,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             dataField: 'RequestDate',
             caption: 'Request Date',
             dataType: 'date'
-        }, {
+        }, new dxGridColumnModel({
+            dataField: 'ExpectedDate',
+            caption: 'Expected Date',
+            dataType: 'date'
+        }), {
             dataField: 'CheckAmount',
             format: 'currency',
             dataType: 'number',

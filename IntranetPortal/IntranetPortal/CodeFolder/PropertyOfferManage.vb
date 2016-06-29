@@ -27,7 +27,7 @@ Public Class PropertyOfferManage
                 Return False
             End If
 
-            If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+            If search.Status <> LeadInfoDocumentSearch.SearchStatus.Completed Then
                 Return False
             End If
         End If
@@ -52,7 +52,7 @@ Public Class PropertyOfferManage
                 Return False
             End If
 
-            If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+            If search.Status <> LeadInfoDocumentSearch.SearchStatus.Completed Then
                 Return False
             End If
         End If
@@ -247,6 +247,7 @@ Public Class DocumentGenerator
                                                                      Return ""
                                                                  End Function))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLER2NAME", "DealSheet.ContractOrMemo.Sellers[1].Name"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("SELLER3NAME", "DealSheet.ContractOrMemo.Sellers[2].Name"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLERATTORNEY", "DealSheet.ContractOrMemo.Sellers[0].sellerAttorneyObj.Name"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLERATTORNEYADDRESS", "DealSheet.ContractOrMemo.Sellers[0].sellerAttorneyObj.Office"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLERATTORNEYTEL", "DealSheet.ContractOrMemo.Sellers[0].sellerAttorneyObj.OfficeNO"))

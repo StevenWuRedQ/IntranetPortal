@@ -1714,8 +1714,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 }]);
 var portalApp = angular.module('PortalApp');
 
-
-
 portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, $http, $httpBackend) {
 
     //console.log($httpBackend);
@@ -2269,7 +2267,11 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             dataField: 'RequestDate',
             caption: 'Request Date',
             dataType: 'date'
-        }, {
+        }, new dxGridColumnModel({
+            dataField: 'ExpectedDate',
+            caption: 'Expected Date',
+            dataType: 'date'
+        }), {
             dataField: 'CheckAmount',
             format: 'currency',
             dataType: 'number',

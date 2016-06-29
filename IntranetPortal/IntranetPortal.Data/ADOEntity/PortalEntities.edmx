@@ -721,6 +721,11 @@
           <Property Name="Title" Type="nvarchar" MaxLength="256" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="OfferType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContractSeller1" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContractSeller2" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContractSeller3" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContractPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ContractDownPay" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Status" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
@@ -2578,6 +2583,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="ContractSeller1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContractSeller2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContractSeller3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContractPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ContractDownPay" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="AuditLog">
           <Key>
@@ -3786,6 +3796,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="PropertyOffers">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOffer">
               <MappingFragment StoreEntitySet="PropertyOffers">
+                <ScalarProperty Name="ContractDownPay" ColumnName="ContractDownPay" />
+                <ScalarProperty Name="ContractPrice" ColumnName="ContractPrice" />
+                <ScalarProperty Name="ContractSeller3" ColumnName="ContractSeller3" />
+                <ScalarProperty Name="ContractSeller2" ColumnName="ContractSeller2" />
+                <ScalarProperty Name="ContractSeller1" ColumnName="ContractSeller1" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />

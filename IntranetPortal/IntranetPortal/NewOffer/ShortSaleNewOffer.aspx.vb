@@ -12,6 +12,10 @@ Public Class ShortSaleNewOfferPage
 
                 Dim bble = Request.QueryString("bble").ToString
 
+                If Not Employee.HasControlLeads(Page.User.Identity.Name, bble) Then
+                    Server.Transfer("/PortalError.aspx?code=1001")
+                End If
+
                 ' check the if HOI exsited or not 
                 Dim record = PreSignRecord.GetInstanceByBBLE(bble)
                 If record Is Nothing Then
@@ -34,7 +38,7 @@ Public Class ShortSaleNewOfferPage
                 ' check doc search status, show Search Tab if Doc search is completed
                 Dim search = LeadInfoDocumentSearch.GetInstance(bble)
                 If (search IsNot Nothing) Then
-                    If search.Status = LeadInfoDocumentSearch.SearchStauts.Completed Then
+                    If search.Status = LeadInfoDocumentSearch.SearchStatus.Completed Then
                         txtSearchCompleted.Value = True
                         NeedSearch.Value = True
                         DivLeadTaxSearchCtrl.Visible = True
