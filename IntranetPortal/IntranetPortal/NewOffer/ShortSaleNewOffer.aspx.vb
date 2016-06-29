@@ -45,7 +45,13 @@ Public Class ShortSaleNewOfferPage
                     End If
                 End If
             Else
-                Server.Transfer("/PortalError.aspx?code=1001")
+                If Request.QueryString("model") IsNot Nothing Then
+                    If Request.QueryString("model") = "List" Then
+
+                    End If
+                Else
+                    Server.Transfer("/PortalError.aspx?code=1001")
+                End If
             End If
         End If
     End Sub

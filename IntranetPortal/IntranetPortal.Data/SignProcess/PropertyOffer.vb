@@ -1,6 +1,5 @@
 ﻿Imports Newtonsoft.Json.Linq
 
-
 ''' <summary>
 ''' The property offer object
 ''' </summary>

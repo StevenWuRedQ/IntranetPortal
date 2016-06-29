@@ -16,7 +16,7 @@ Namespace Controllers
         Public Function GetPreSignRecordByUser() As IHttpActionResult
             Dim name = HttpContext.Current.User.Identity.Name
 
-            If Employee.IsAdmin(name) Then
+            If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
                 name = "*"
             End If
 
