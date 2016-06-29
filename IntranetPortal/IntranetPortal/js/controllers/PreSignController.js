@@ -119,7 +119,8 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
         e.data.Date = new Date(e.data.Date).toISOString();
         var response = $.ajax({
-            url: '/api/businesscheck',
+            //url: '/api/businesscheck',
+            url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
             type: 'POST',
             dataType: 'json',
             async: false,
