@@ -127,7 +127,7 @@
                             <div class="ss_form">
                                 <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.Parties.length<1 }">Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>
                                 <ul class="ss_form_box clearfix">
-                                    <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
+                        <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
                                 <label class="ss_form_input_title ">Party {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.Parties, $index)"></i></label>
                                 <input class="ss_form_input " type="text" ng-model="p.Name" />
                             </li>--%>
