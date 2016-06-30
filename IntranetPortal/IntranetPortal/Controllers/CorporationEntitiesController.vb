@@ -169,7 +169,6 @@ Namespace Controllers
             Catch ex As Exception
                 Throw ex
             End Try
-
         End Function
 
         ' GET /api/CorporationEntities/Teams

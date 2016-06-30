@@ -36,6 +36,15 @@ Public Class PropertyOfferManage
     End Function
 
     ''' <summary>
+    ''' Return if hoi list can be viewable by current user
+    ''' </summary>
+    ''' <param name="username">the user name</param>
+    ''' <returns></returns>
+    Public Shared Function Viewable(username As String) As Boolean
+        Return Employee.IsAdmin(username) OrElse Roles.IsUserInRole(username, "NewOffer-Viewer")
+    End Function
+
+    ''' <summary>
     ''' Check the pre conditions for new offer
     ''' </summary>
     ''' <param name="bble">The property BBLE</param>
@@ -192,6 +201,8 @@ Public Class DocumentGenerator
                                                    End Function),
            New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
            New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
+           New DocumentPlaceHolder("SELLER2NAME", "DealSheet.ContractOrMemo.Sellers[1].Name"),
+           New DocumentPlaceHolder("SELLER3NAME", "DealSheet.ContractOrMemo.Sellers[2].Name"),
            New DocumentPlaceHolder("BUYERNAME", "DealSheet.ContractOrMemo.Buyer.CorpName"),
            New DocumentPlaceHolder("BUYERNAMESIGNER", Function(data As JObject)
                                                           Dim result = data.SelectToken("DealSheet.ContractOrMemo.Buyer.CorpName")
@@ -336,6 +347,23 @@ Public Class DocumentGenerator
         file.PlaceHolders = phs.ToList
         _fileConfigures.Add(file)
 
+        'Acris info
+        file = New GenerateFileConfig With {.FileName = "AcrisPreparing.docx", .ConfigKey = "Acris"}
+        phs = {
+                New DocumentPlaceHolder("PROPERTYADDRESS", "PropertyAddress"),
+                New DocumentPlaceHolder("BLOCK"),
+                New DocumentPlaceHolder("LOT"),
+                New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
+                New DocumentPlaceHolder("SELLER2NAME", "DealSheet.ContractOrMemo.Sellers[1].Name"),
+                New DocumentPlaceHolder("SELLER3NAME", "DealSheet.ContractOrMemo.Sellers[2].Name"),
+                New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
+                New DocumentPlaceHolder("OWNEREMAIL", "DealSheet.ContractOrMemo.Sellers[0].Email"),
+                New DocumentPlaceHolder("BUYERNAME", "DealSheet.ContractOrMemo.Buyer.CorpName"),
+                New DocumentPlaceHolder("BUYERNAMESIGNER", "DealSheet.ContractOrMemo.Buyer.Signer"),
+                New DocumentPlaceHolder("BUYERADDRESS", "DealSheet.ContractOrMemo.Buyer.Address")
+            }
+        file.PlaceHolders = phs.ToList
+        _fileConfigures.Add(file)
     End Sub
 
     Public Function GetValue(ph As DocumentPlaceHolder) As String
