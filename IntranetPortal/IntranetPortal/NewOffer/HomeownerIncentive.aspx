@@ -136,7 +136,6 @@
                                     </li>
                                 </ul>
                             </div>
-
                             <div class="ss_form" ng-if="preAssign.NeedCheck">
                                 <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.CheckRequestData.Checks.length<1}">Checks <%--({{preAssign.CheckRequestData.Checks.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.CheckRequestData.Checks')"></i>--%></h4>
                                 <ul class="ss_form_box clearfix">
