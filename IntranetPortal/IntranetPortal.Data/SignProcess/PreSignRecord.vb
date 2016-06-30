@@ -100,7 +100,7 @@ Partial Public Class PreSignRecord
 
         Me.NeedCheck = isNeedCheck
 
-        If (Me.CheckRequestId Is Nothing Or Me.CheckRequestId = 0) Then
+        If (Me.NeedCheck And (Me.CheckRequestId Is Nothing Or Me.CheckRequestId = 0)) Then
 
             Me.CheckRequestData = New CheckRequest()
             ' Can move this to Check request class wirte here just for speed 
