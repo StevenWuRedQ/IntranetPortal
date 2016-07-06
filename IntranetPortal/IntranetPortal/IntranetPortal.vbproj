@@ -7104,7 +7104,8 @@
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="js\test\servicesSpec.js" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
-    <Content Include="js\Views\PerAssign\perassign-edit.tpl.html" />
+    <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
+    <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />

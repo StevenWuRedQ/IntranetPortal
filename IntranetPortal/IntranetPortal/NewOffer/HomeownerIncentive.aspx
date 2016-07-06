@@ -31,7 +31,7 @@
    
     <div ng-view  class="container"></div>
 
-    <div ng-controller="perAssignCtrl" class="container">
+    <div ng-controller="preAssignCtrl" class="container">
         <div class="row">
             <div class="col-md-12" ng-hide="!preSignList">
                 <div style="padding: 20px">
@@ -58,15 +58,15 @@
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item online">
                                         <label class="ss_form_input_title">Property Address</label>
-                                        <input class="ss_form_input" <%--ng-model="perAssignCtrl.Property_Address"--%> ng-model="preAssign.Title" disabled>
+                                        <input class="ss_form_input" <%--ng-model="preAssignCtrl.Property_Address"--%> ng-model="preAssign.Title" disabled>
                                     </li>
                                     <%-- <li class="ss_form_item ">
                                 <label class="ss_form_input_title "># of Parties</label>
-                                <input class="ss_form_input " ng-model="perAssignCtrl.Numberof_Parties">
+                                <input class="ss_form_input " ng-model="preAssignCtrl.Numberof_Parties">
                             </li>--%>
                                     <%-- <li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Name Of parties</label>
-                                <input class="ss_form_input " ng-model="perAssignCtrl.Name_Of_parties">
+                                <input class="ss_form_input " ng-model="preAssignCtrl.Name_Of_parties">
                             </li>--%>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing </label>
@@ -90,11 +90,11 @@
                                     </li>
                                     <%-- <li class="ss_form_item ">
                                 <label class="ss_form_input_title "># of checks</label>
-                                <input class="ss_form_input " ng-model="perAssignCtrl.Number_of_checks">
+                                <input class="ss_form_input " ng-model="preAssignCtrl.Number_of_checks">
                             </li>--%>
                                     <%--<li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Total Check Amount</label>
-                                <input class="ss_form_input " money-mask ng-model="perAssignCtrl.Total_Check_Amount">
+                                <input class="ss_form_input " money-mask ng-model="preAssignCtrl.Total_Check_Amount">
                             </li>--%>
 
                                     <%--<li class="ss_form_item ">
@@ -119,7 +119,7 @@
                                     </div>
                                     <%--  <li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Name On Check</label>
-                                <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
+                                <input class="ss_form_input " ng-model="preAssignCtrl.Name_On_Check">
                             </li>--%>
                                 </ul>
                                 <div class="alert alert-warning" role="alert" id="divSearchWarning" runat="server" visible="false">
