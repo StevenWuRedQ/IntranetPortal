@@ -51,8 +51,7 @@ Namespace Controllers
                 Dim isNeedCheck = Boolean.Parse(needCheck)
 
                 Dim addedCheck = preSign.AddCheck(isNeedCheck, check, HttpContext.Current.User.Identity.Name)
-
-                Return Ok(addedCheck)
+                Return Ok(preSign)
             Catch ex As Exception
                 Throw ex
             End Try

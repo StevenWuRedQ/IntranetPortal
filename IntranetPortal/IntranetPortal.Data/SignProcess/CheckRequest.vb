@@ -78,6 +78,19 @@ Public Class CheckRequest
     End Sub
 
     ''' <summary>
+    ''' Add check to check request
+    ''' </summary>
+    ''' <param name="check"></param>
+    ''' <param name="createBy"></param>
+    Public Sub AddCheck(check As BusinessCheck, createBy As String)
+        check.RequestId = RequestId
+        check.Save(createBy)
+
+        Me.Checks.Add(check)
+        Me.Save(createBy)
+    End Sub
+
+    ''' <summary>
     ''' Saving the check request
     ''' </summary>
     ''' <param name="saveBy"></param>

@@ -3634,10 +3634,10 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
                 //e.data = data;
                 e.cancel = true;
                 e.component.refresh();
-                $scope.preAssign.CheckRequestData.RequestId = data.RequestId
-                $scope.preAssign.CheckRequestId = data.RequestId
-
-                $scope.preAssign.CheckRequestData.Checks.push(data);
+                //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
+                angular.extend($scope.preAssign,data) //.CheckRequestId = data.RequestId
+                
+                //$scope.preAssign.CheckRequestData.Checks.push(data);
 
                
             }
