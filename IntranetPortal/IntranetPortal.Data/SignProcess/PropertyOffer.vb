@@ -80,13 +80,13 @@ Partial Public Class PropertyOffer
     Public Overrides Function Save(itemData As FormDataItem) As String
         MyBase.Save(itemData)
 
-        If String.IsNullOrEmpty(BBLE) Then
-            Throw New Exception("can not find BBLE")
-        End If
-
         Dim updateBy = itemData.UpdateBy
         Using ctx As New PortalEntities
             If ctx.PropertyOffers.Any(Function(t) t.FormItemId = itemData.DataId) Then
+                If String.IsNullOrEmpty(BBLE) Then
+                    Throw New Exception("can not find BBLE")
+                End If
+
                 UpdateFields(itemData)
                 ctx.Entry(Me).State = Entity.EntityState.Modified
                 ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
@@ -124,6 +124,7 @@ Partial Public Class PropertyOffer
             Title = jsonCase.Item("PropertyAddress")
             Return
         End If
+
 
         Dim jStatus = jsonCase.GetValue("Status")
         If jStatus IsNot Nothing AndAlso Not String.IsNullOrEmpty(jStatus.ToString) Then
