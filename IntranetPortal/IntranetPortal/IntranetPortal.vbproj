@@ -8182,18 +8182,7 @@
     <Content Include="App_Data\TitleDoc\Hold Harmless Agreement.docx" />
     <Content Include="App_Data\TitleDoc\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
     <Content Include="App_Data\TitleDoc\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
-    <Content Include="TempDataFile\AuctionFiles\AuctionsPropList 3-06-2016.xls" />
-    <Content Include="TempDataFile\AuctionFiles\AuctionsPropList 5-01-2016.xls" />
-    <Content Include="TempDataFile\AuctionFiles\AuctionsPropTest.xls" />
-    <Content Include="TempDataFile\AuctionFiles\Leads Cleaning steps.docx" />
-    <Content Include="TempDataFile\AuctionFiles\LeadsNeedManuallyCheck_Send_Back.xlsx" />
     <Content Include="TempDataFile\LeadsList.xlsx" />
-    <Content Include="TempDataFile\TitleDocs\BILL OF SALE.docx" />
-    <Content Include="TempDataFile\TitleDocs\CANCELLING PRIOR MEMBERSHIP AGREEMENT AND RESIGNATION.docx" />
-    <Content Include="TempDataFile\TitleDocs\Hold Harmless Agreement.docx" />
-    <Content Include="TempDataFile\TitleDocs\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
-    <Content Include="TempDataFile\TitleDocs\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
-    <Content Include="TempDataFile\title_doc_package.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -8227,7 +8216,9 @@
     <Folder Include="Content\layouts\Simple\" />
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
+    <Folder Include="TempDataFile\AuctionFiles\" />
     <Folder Include="TempDataFile\OfferDoc\" />
+    <Folder Include="TempDataFile\TitleDocs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
