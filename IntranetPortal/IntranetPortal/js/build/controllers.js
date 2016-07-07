@@ -3184,19 +3184,17 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url) {
             var oldUrl = window.location.href;
             STDownloadFile(url, $scope.SSpreSign.BBLE.trim() + '.zip');
-           
-            setTimeout(function () {
-                $scope.SSpreSign.Status = 2;
+            $scope.SSpreSign.Status = 2;
 
-                $scope.constractFromData();
-                /*for dowload file frist wait 5 second then redecTo file*/
-                $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
-                    $scope.refreshSave(formdata);
-                    //location.reload();
-                    window.location.href = oldUrl;
+            $scope.constractFromData();
+            /*for dowload file frist wait 5 second then redecTo file*/
+            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+                $scope.refreshSave(formdata);
+                //location.reload();
+                window.location.href = oldUrl;
 
-                });
-            }, 5000)
+            });
+
 
         })
     }
