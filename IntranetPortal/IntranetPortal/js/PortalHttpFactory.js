@@ -87,7 +87,7 @@
 
         portalApp.factory('PortalHttpInterceptor', ['$log', '$q', function ($log, $q) {
             $log.debug('$log is here to show you that this is a regular factory with injection');
-            /***define myInterceptor as class just can use this key word ****/
+            /*** define myInterceptor as class just can use this key word ***/
             var myInterceptor = function () {
             };
             var _this = myInterceptor;
@@ -139,7 +139,7 @@
                 //    return $q.reject(rejection);
                 //}
             };
-            angular.extend(_this, that);
+            angular.extend(_this.prototype, that);
             return new _this();
         }]);
         portalApp.config(['$httpProvider', function ($httpProvider) {

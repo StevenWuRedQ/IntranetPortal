@@ -18,6 +18,11 @@ portalApp.config(function (portalRouteProvider) {
         return PreSign.get({ Id: preSignId });
     }];
 
+    var preSignFinanceList = ['PreSign', function (PreSign) {
+
+        return PreSign.financeList();
+    }];
+
     /***
      * Leave this for example that nomal router resgister   
      **/
@@ -30,10 +35,18 @@ portalApp.config(function (portalRouteProvider) {
     var config = portalRouteProvider.routesFor('preAssign')
         // /preassign/new?BBLE=BBLE becuse javascript case sensitive
         // so the portalRouteProvider url should be lower case
+        // #/preassign/new?BBLE=123456789
         .whenNew({ PreSignItem: newPreSign })
+        // #/preassign/28
         .whenEdit({ PreSignItem: preSignItem })
+        // #/preassign/view/28
         .whenView({ PreSignItem: preSignItem })
+        // #/preassign
         .whenList({ PreSignList: preSignList })
+        // #/preassign/finance/list
+        // I don not know why need the suffix url list
+        // otherwise it will go to edit view
+        .whenOther({ PreSignFinaceList: preSignFinanceList }, 'Finance', 'list')
     //.when({BBLE:BBLE})
 
 });
@@ -209,7 +222,7 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
 }
 /**************************************** end constant define ******************************/
 
-portalApp.controller('preAssignEditCtrl', function ($scope, PreSignItem, DxGridModel, $location) {
+portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, DxGridModel, $location) {
 
     $scope.preAssign = PreSignItem;
 
@@ -223,8 +236,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, PreSignItem, DxGridM
     $scope.CheckByBBLE = function () {
         var preAssign = $scope.preAssign;
         /**with id request cancel check*/
-        if (preAssign.$promise != null)
-        {
+        if (preAssign.$promise != null) {
             return;
         }
         if (preAssign.Id == 0 || preAssign.Id == null) {
@@ -232,12 +244,102 @@ portalApp.controller('preAssignEditCtrl', function ($scope, PreSignItem, DxGridM
             //console.log(preAssign.BBLE)
             //preAssign.BBLE = preAssign.BBLE.toString()
             preAssign.$getByBBLE(function () {
-                $location.path('/preassign/' + preAssign.Id);
+                $location.path('/preassign/view/' + preAssign.Id);
             })
         }
     }
 
     $scope.CheckByBBLE();
+
+    $scope.Save = function()
+    {
+        if ($scope.preAssign.validation())
+        {
+            $scope.preAssign.$save(function () {
+                $location.path('/preassign/view/' + preAssign.Id);
+            })
+        } else {
+            var msg = $scope.preAssign.getErrorMsgStr();
+            AngularRoot.alert(msg);
+        }
+       
+    }
+
+});
+
+portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridModel) {
+
+    $scope.preAssign = PreSignItem;
+    $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
+    $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
+    setTimeout(function () {
+        $("#preDealForm input").prop("disabled", true);
+        $("#preDealForm select").prop("disabled", true);
+    }, 1000);
+
+});
+portalApp.controller('preAssignFinanceCtrl', function ($scope, PreSignFinaceList) {
+    $scope.preSignList = PreSignFinaceList;
+    $scope.preSignRecordsGridOpt = angular.extend({}, CONSTANT_ASSIGN_LIST_GRID_OPTION);
+    $scope.preSignRecordsGridOpt.masterDetail = {
+        enabled: true,
+        template: function (container, options) {
+            var opt = {
+                dataSource: options.data.Checks,
+                columnAutoWidth: true,
+                columns: [{
+                    dataField: 'PaybleTo',
+                    caption: 'Payable To',
+                }, {
+                    dataField: 'Amount',
+                    format: 'currency', dataType: 'number', precision: 2
+
+                }, {
+                    dataField: 'Date',
+                    caption: 'Date of Release',
+                    dataType: 'date',
+                    format: 'shortDate'
+                }, {
+                    dataField: 'Description'
+                }, {
+                    dataField: 'Comments',
+                    caption: 'Void Reason'
+                }],
+                onRowPrepared: $scope.CheckRowPrepared,
+            }
+            $("<div>").text("Checks: ").appendTo(container);
+            $("<div>")
+                .addClass("internal-grid")
+                .dxDataGrid(opt).appendTo(container);
+
+        }
+    }
+    $scope.preSignRecordsGridOpt.selection = null;
+    $scope.preSignRecordsGridOpt.columns = [{
+        dataField: 'PropertyAddress',
+        caption: 'Address'
+    }, {
+        dataField: 'RequestBy',
+        caption: 'Request By'
+    }, {
+        dataField: 'Type',
+        caption: 'Request Type'
+    }, {
+        dataField: 'RequestDate',
+        caption: 'Request Date',
+        dataType: 'date'
+    }, {
+        dataField: 'CheckAmount',
+        format: 'currency',
+        dataType: 'number',
+        precision: 2
+    }, ]
+
+    $scope.CheckRowPrepared = function (e) {
+        if (e.data && e.data.Status == 1) {
+            e.rowElement.addClass('avoid-check');
+        }
+    }
 
 });
 

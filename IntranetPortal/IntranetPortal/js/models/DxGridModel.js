@@ -17,12 +17,16 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
 
         path = $location.path();
 
+        if (path.indexOf('view') >= 0) {
+            console.log("in view UI all input should be disabled");
+            return;
+        }
+
         if (path.indexOf('new') >= 0 || parseInt($routeParams['itemId']) >= 0) {
             this.editing.insertEnabled = true;
             this.editing.removeEnabled = true;
             this.editing.editEnabled = true;
         }
-
     }
 
     return dxGridModel;

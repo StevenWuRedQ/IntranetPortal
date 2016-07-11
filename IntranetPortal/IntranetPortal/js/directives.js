@@ -1,15 +1,15 @@
 ﻿angular.module("PortalApp")
-    .directive('ssDate', function() {
+    .directive('ssDate', function () {
         return {
             restrict: 'A',
             scope: true,
-            compile: function(tel, tAttrs) {
+            compile: function (tel, tAttrs) {
                 return {
-                    post: function(scope, el, attrs) {
+                    post: function (scope, el, attrs) {
                         $(el).datepicker({
                             forceParse: false,
                         });
-                        scope.$watch(attrs.ngModel, function(newValue, oldValue) {
+                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                             var dateStr = newValue;
                             if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
 
@@ -26,22 +26,22 @@
             }
         };
     })
-    .directive('inputMask', function() {
+    .directive('inputMask', function () {
         return {
             restrict: 'A',
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
                 $(el).mask(attrs.inputMask);
-                $(el).on('change', function() {
+                $(el).on('change', function () {
                     scope.$eval(attrs.ngModel + "='" + el.val() + "'");
                 });
             }
         };
     })
-    .directive('bindId', ['ptContactServices', function(ptContactServices) {
+    .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
             restrict: 'A',
             link: function postLink(scope, el, attrs) {
-                scope.$watch(attrs.bindId, function(newValue, oldValue) {
+                scope.$watch(attrs.bindId, function (newValue, oldValue) {
                     if (newValue !== oldValue) {
                         var contact = ptContactServices.getContactById(newValue);
                         if (contact) scope.$eval(attrs.ngModel + "='" + contact.Name + "'");
@@ -51,13 +51,13 @@
 
         }
     }])
-    .directive('ptInitModel', function() {
+    .directive('ptInitModel', function () {
         return {
             restrict: 'A',
             require: '?ngModel',
             priority: 99,
-            link: function(scope, el, attrs) {
-                scope.$watch(attrs.ptInitModel, function(newVal) {
+            link: function (scope, el, attrs) {
+                scope.$watch(attrs.ptInitModel, function (newVal) {
                     if (!scope.$eval(attrs.ngModel) && newVal) {
                         if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
                         scope.$eval(attrs.ngModel + "='" + newVal + "'");
@@ -66,12 +66,12 @@
             }
         }
     })
-    .directive('ptInitBind', function() { //one way bind of ptInitModel
+    .directive('ptInitBind', function () { //one way bind of ptInitModel
         return {
             restrict: 'A',
             require: '?ngBind',
-            link: function(scope, el, attrs) {
-                scope.$watch(attrs.ptInitBind, function(newVal) {
+            link: function (scope, el, attrs) {
+                scope.$watch(attrs.ptInitBind, function (newVal) {
                     if (!scope.$eval(attrs.ngBind) && newVal) {
                         if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
                         scope.$eval(attrs.ngBind + "='" + newVal + "'");
@@ -80,12 +80,12 @@
             }
         }
     })
-    .directive('radioInit', function() {
+    .directive('radioInit', function () {
         return {
             restrict: 'A',
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
                 scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?" + attrs.radioInit + ":" + attrs.ngModel);
-                scope.$watch(attrs.ngModel, function() {
+                scope.$watch(attrs.ngModel, function () {
                     var bVal = scope.$eval(attrs.ngModel);
                     bVal = bVal != null && (bVal == 'true' || bVal == true);
                     scope.$eval(attrs.ngModel + "=" + bVal.toString());
@@ -93,99 +93,99 @@
             }
         }
     })
-    .directive('moneyMask', function() {
+    .directive('moneyMask', function () {
         return {
             restrict: 'A',
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
 
-                scope.$watch(attrs.ngModel, function() {
+                scope.$watch(attrs.ngModel, function () {
                     if ($(el).is(":focus")) return;
                     $(el).formatCurrency();
                 });
-                $(el).on('blur', function() {
+                $(el).on('blur', function () {
                     $(this).formatCurrency();
                 });
-                $(el).on('focus', function() {
+                $(el).on('focus', function () {
                     $(this).toNumber()
                 });
 
             },
         };
     })
-    .directive('numberMask', function() {
+    .directive('numberMask', function () {
         return {
             restrict: 'A',
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
 
-                scope.$watch(attrs.ngModel, function() {
+                scope.$watch(attrs.ngModel, function () {
                     if ($(el).is(":focus")) return;
                     $(el).formatCurrency({
                         symbol: ""
                     });
                 });
-                $(el).on('blur', function() {
+                $(el).on('blur', function () {
                     $(this).formatCurrency({
                         symbol: ""
                     });
                 });
-                $(el).on('focus', function() {
+                $(el).on('focus', function () {
                     $(this).toNumber()
                 });
 
             },
         };
     })
-    .directive('integerMask', function() {
+    .directive('integerMask', function () {
         return {
             restrict: 'A',
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
 
-                scope.$watch(attrs.ngModel, function() {
+                scope.$watch(attrs.ngModel, function () {
                     if ($(el).is(":focus")) return;
                     $(el).formatCurrency({
                         symbol: "",
                         roundToDecimalPlace: 0
                     });
                 });
-                $(el).on('blur', function() {
+                $(el).on('blur', function () {
                     $(this).formatCurrency({
                         symbol: "",
                         roundToDecimalPlace: 0
                     });
                 });
-                $(el).on('focus', function() {
+                $(el).on('focus', function () {
                     $(this).toNumber()
                 });
 
             },
         };
     })
-    .directive('percentMask', function() {
+    .directive('percentMask', function () {
         return {
             restrict: 'A',
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
 
-                scope.$watch(attrs.ngModel, function() {
+                scope.$watch(attrs.ngModel, function () {
                     if ($(el).is(":focus")) return;
                     $(el).formatCurrency({
                         symbol: "%",
                         positiveFormat: '%n%s'
                     });
                 });
-                $(el).on('blur', function() {
+                $(el).on('blur', function () {
                     $(this).formatCurrency({
                         symbol: "%",
                         positiveFormat: '%n%s'
                     });
                 });
-                $(el).on('focus', function() {
+                $(el).on('focus', function () {
                     $(this).toNumber()
                 });
 
             },
         };
     })
-    .directive('ptRadio', function() {
+    .directive('ptRadio', function () {
         return {
             restrict: 'E',
             template: '<input type="checkbox" id="{{name}}Y" ng-model="model" class="ss_form_input" ng-disabled="ngDisabled">' +
@@ -200,7 +200,7 @@
                 falseValue: '@',
                 ngDisabled: '='
             },
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
                 //scope.ngDisabled = attrs.ngDisabled;
                 // scope.disabled = attrs.disabled;
                 scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
@@ -215,7 +215,7 @@
 
         }
     })
-    .directive('ptCollapse', function() {
+    .directive('ptCollapse', function () {
         return {
             restrict: 'E',
             template: '<i class="fa fa-compress icon_btn text-primary" ng-show="!model" ng-click="model=!model"></i>' +
@@ -230,7 +230,7 @@
 
         }
     })
-    .directive('ptEditor', [function() {
+    .directive('ptEditor', [function () {
         return {
 
             templateUrl: '/js/templates/ptEditor.html',
@@ -238,7 +238,7 @@
             scope: {
                 ptModel: '=ngModel'
             },
-            link: function(scope, el, attrs, ctrl) {
+            link: function (scope, el, attrs, ctrl) {
                 scope.contentShown = true;
                 var ckdiv = $(el).find("div.ptEditorCK")[0];
                 var ck = CKEDITOR.replace(ckdiv, {
@@ -247,22 +247,22 @@
                 });
                 scope.editorShown = false;
 
-                scope.showCK = function() {
+                scope.showCK = function () {
                     scope.contentShown = false;
                     scope.editorShown = true;
                 }
-                scope.closeCK = function() {
+                scope.closeCK = function () {
                     scope.contentShown = true;
                     scope.editorShown = false;
                 }
 
-                ck.on('pasteState', function() {
-                    scope.$apply(function() {
+                ck.on('pasteState', function () {
+                    scope.$apply(function () {
                         ctrl.$setViewValue(ck.getData());
                     });
                 });
 
-                ctrl.$render = function(value) {
+                ctrl.$render = function (value) {
                     ck.setData(ctrl.$modelValue);
                 };
 
@@ -270,19 +270,19 @@
             }
         };
     }])
-    .directive('ptAdd', function() {
+    .directive('ptAdd', function () {
         return {
             restrict: 'E',
             template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
         }
     })
-    .directive('ptDel', function() {
+    .directive('ptDel', function () {
         return {
             restrict: 'E',
             template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
         }
     })
-    .directive('ptFile', ['ptFileService', '$timeout', function(ptFileService, $timeout) {
+    .directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
         return {
             restrict: 'E',
             templateUrl: '/js/templates/ptfile.html',
@@ -293,42 +293,42 @@
                 fileId: '@',
                 uploadType: '@'
             },
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
                 scope.uploadType = scope.uploadType || 'construction';
                 scope.ptFileService = ptFileService;
                 scope.fileChoosed = false;
                 scope.loading = false;
-                scope.delFile = function() {
+                scope.delFile = function () {
                     scope.fileModel = null;
                 }
-                scope.delChoosed = function() {
+                scope.delChoosed = function () {
                     scope.File = null;
                     scope.fileChoosed = false;
                     var fileEl = el.find('input:file')[0]
                     fileEl.value = ''
                 }
-                scope.toggleLoading = function() {
+                scope.toggleLoading = function () {
                     scope.loading = !scope.loading;
                 }
-                scope.startLoading = function() {
+                scope.startLoading = function () {
                     scope.loading = true;
                 }
-                scope.stopLoading = function() {
-                    $timeout(function() {
+                scope.stopLoading = function () {
+                    $timeout(function () {
                         scope.loading = false;
                     });
                 }
-                scope.uploadFile = function() {
+                scope.uploadFile = function () {
                     scope.startLoading();
                     var data = new FormData();
                     data.append("file", scope.File);
                     var targetName = ptFileService.getFileName(scope.File.name);
-                    ptFileService.uploadFile(data, scope.fileBble, targetName, '', scope.uploadType, function(error, data) {
+                    ptFileService.uploadFile(data, scope.fileBble, targetName, '', scope.uploadType, function (error, data) {
                         scope.stopLoading();
                         if (error) {
                             alert(error);
                         } else {
-                            scope.$apply(function() {
+                            scope.$apply(function () {
                                 scope.fileModel = {}
                                 scope.fileModel.path = data[0];
                                 if (data[1]) scope.fileModel.thumb = data[1];
@@ -340,17 +340,17 @@
 
                     });
                 }
-                el.find('input:file').bind('change', function() {
+                el.find('input:file').bind('change', function () {
                     var file = this.files[0];
                     if (file) {
-                        scope.$apply(function() {
+                        scope.$apply(function () {
                             scope.File = file;
                             scope.fileChoosed = true;
                         });
                     }
                 });
 
-                scope.modifyName = function(mdl) {
+                scope.modifyName = function (mdl) {
                     if (mdl) {
                         scope.ModifyNamePop = true;
                         scope.NewFileName = mdl.name ? mdl.name : '';
@@ -359,14 +359,14 @@
                     }
 
                 }
-                scope.onModifyNamePopClose = function() {
+                scope.onModifyNamePopClose = function () {
                     scope.NewFileName = '';
                     scope.editingFileModel = null;
                     scope.editingFileExt = '';
                     scope.ModifyNamePop = false;
 
                 }
-                scope.onModifyNamePopSave = function() {
+                scope.onModifyNamePopSave = function () {
                     if (scope.NewFileName) {
                         if (scope.NewFileName.indexOf('.') > -1) {
                             scope.editingFileModel.name = scope.NewFileName;
@@ -384,7 +384,7 @@
             }
         }
     }])
-    .directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function($timeout, ptFileService, ptCom) {
+    .directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
         return {
             restrict: 'E',
             templateUrl: '/js/templates/ptfiles.html',
@@ -397,7 +397,7 @@
                 baseFolder: '@',
                 uploadType: '@' // control server folder
             },
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
                 scope.ptFileService = ptFileService;
                 scope.ptCom = ptCom;
 
@@ -415,38 +415,38 @@
 
                 if (scope.fileColumns) {
                     scope.columns = scope.fileColumns.split('|');
-                    _.each(scope.columns, function(elm) {
+                    _.each(scope.columns, function (elm) {
                         elm.trim();
                     });
                 }
 
                 scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
 
-                scope.$watch('fileModel', function() {
+                scope.$watch('fileModel', function () {
                     scope.currentFolder = '';
                     scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
                     scope.folders = _.without(_.uniq(_.pluck(scope.fileModel, 'folder')), undefined, '')
                 })
 
-                $(el).find('input:file').change(function() {
+                $(el).find('input:file').change(function () {
                     var files = this.files;
                     scope.addFiles(files);
                     this.value = '';
                 });
 
                 $(el).find('.drop-area')
-                    .on('dragenter', function(e) {
+                    .on('dragenter', function (e) {
                         e.preventDefault();
                         $(this).addClass('drop-area-hover');
                     })
-                    .on('dragover', function(e) {
+                    .on('dragover', function (e) {
                         e.preventDefault();
                         $(this).addClass('drop-area-hover');
                     })
-                    .on('dragleave', function(e) {
+                    .on('dragleave', function (e) {
                         $(this).removeClass('drop-area-hover');
                     })
-                    .on('drop', function(e) {
+                    .on('drop', function (e) {
                         e.stopPropagation();
                         e.preventDefault();
                         $(this).removeClass('drop-area-hover');
@@ -454,7 +454,7 @@
                         debugger;
                     });
 
-                scope.OnDropTextarea = function(event) {
+                scope.OnDropTextarea = function (event) {
                     if (event.originalEvent.dataTransfer) {
                         var files = event.originalEvent.dataTransfer.files;
                         scope.addFiles(files);
@@ -464,34 +464,34 @@
                 }
 
                 // utility functions
-                scope.changeFolder = function(folderName) {
+                scope.changeFolder = function (folderName) {
                     scope.currentFolder = folderName;
                     scope.showFolder = true;
                 }
-                scope.addFolder = function(folderName) {
+                scope.addFolder = function (folderName) {
                     if (scope.folders.indexOf(folderName) < 0) {
                         scope.folders.push(folderName);
                     }
                     scope.currentFolder = folderName;
                     scope.showFolder = true;
                 }
-                scope.hideFolder = function() {
+                scope.hideFolder = function () {
                     scope.currentFolder = "";
                     scope.showFolder = false;
                 }
-                scope.toggleNewFilePop = function() {
+                scope.toggleNewFilePop = function () {
                     scope.NewFolderPop = !scope.NewFolderPop
                     scope.NewFolderName = '';
                 }
-                scope.newFolderPopSave = function() {
+                scope.newFolderPopSave = function () {
                     scope.addFolder(scope.NewFolderName);
                     scope.NewFolderPop = false;
                 }
 
-                scope.addFiles = function(files) {
+                scope.addFiles = function (files) {
                     for (var i = 0; i < files.length; i++) {
                         var file = files[i];
-                        scope.$apply(function() {
+                        scope.$apply(function () {
                             if (scope.nameTable.indexOf(file.name) < 0) {
                                 scope.files.push(file);
                                 scope.nameTable.push(file.name);
@@ -500,35 +500,35 @@
                     }
                 }
 
-                scope.removeChoosed = function(index) {
+                scope.removeChoosed = function (index) {
                     scope.nameTable.splice(scope.nameTable.indexOf(scope.files[index].name), 1);
                     scope.files.splice(index, 1);
                 }
 
-                scope.clearChoosed = function() {
+                scope.clearChoosed = function () {
                     scope.nameTable = [];
                     scope.files = [];
                 }
 
-                scope.showUpoading = function() {
+                scope.showUpoading = function () {
                     scope.uploadProcess = true;
                     scope.dynamic = 1;
                 }
 
-                scope.hideUpoading = function() {
+                scope.hideUpoading = function () {
                     scope.clearChoosed();
                     scope.uploadProcess = false;
                 }
 
-                scope.showUploadErrors = function() {
-                    var error = _.some(scope.result, function(el) {
+                scope.showUploadErrors = function () {
+                    var error = _.some(scope.result, function (el) {
                         return el.error
                     });
                     return !scope.uploading && error;
                 }
 
 
-                scope.uploadFile = function() {
+                scope.uploadFile = function () {
 
                     var targetFolder = (scope.baseFolder ? scope.baseFolder + '/' : '') + (scope.currentFolder ? scope.currentFolder + '/' : '')
                     var len = scope.files.length;
@@ -559,7 +559,7 @@
                             var targetElement;
                             if (error) {
                                 scope.countCallback(len);
-                                targetElement = _.filter(scope.result, function(el) {
+                                targetElement = _.filter(scope.result, function (el) {
                                     return el.name == targetName
                                 })[0];
                                 if (targetElement) {
@@ -568,7 +568,7 @@
 
                             } else {
                                 scope.countCallback(len);
-                                targetElement = _.filter(scope.result, function(el) {
+                                targetElement = _.filter(scope.result, function (el) {
                                     return el.name == targetName
                                 })[0];
                                 if (targetElement) {
@@ -584,9 +584,9 @@
 
                 }
 
-                scope.countCallback = function(total) {
+                scope.countCallback = function (total) {
                     if (scope.count >= total - 1) {
-                        $timeout(function() {
+                        $timeout(function () {
                             scope.count = scope.count + 1;
                             scope.dynamic = Math.floor(scope.count / total * 100);
                             scope.count = 0;
@@ -594,14 +594,14 @@
                             scope.clearChoosed();
                         });
                     } else {
-                        $timeout(function() {
+                        $timeout(function () {
                             scope.count = scope.count + 1;
                             scope.dynamic = Math.floor(scope.count / total * 100);
                         })
                     }
                 }
 
-                scope.modifyName = function(mdl, indx) {
+                scope.modifyName = function (mdl, indx) {
                     if (mdl[indx]) {
                         scope.ModifyNamePop = true;
                         scope.NewFileName = mdl[indx].name ? mdl[indx].name : '';
@@ -612,7 +612,7 @@
 
                 }
 
-                scope.onModifyNamePopClose = function() {
+                scope.onModifyNamePopClose = function () {
                     scope.NewFileName = '';
                     scope.editingFileModel = null;
                     scope.editingIndx = null;
@@ -620,7 +620,7 @@
                     scope.editingFileExt = '';
                 }
 
-                scope.onModifyNamePopSave = function() {
+                scope.onModifyNamePopSave = function () {
                     if (scope.NewFileName) {
                         if (scope.NewFileName.indexOf('.') > -1) {
                             scope.editingFileModel[scope.editingIndx].name = scope.NewFileName;
@@ -634,7 +634,7 @@
                     scope.editingFileExt = '';
                 }
 
-                scope.getThumb = function(model) {
+                scope.getThumb = function (model) {
                     if (model && model.thumb) {
                         return ptFileService.getThumb(model.thumb);
                     } else {
@@ -643,13 +643,13 @@
 
                 }
 
-                scope.fancyPreview = function(file) {
+                scope.fancyPreview = function (file) {
                     if (ptFileService.isPicture(file.name)) {
                         $.fancybox.open(ptFileService.makePreviewUrl(file.path));
                     }
                 }
 
-                scope.filterError = function(v) {
+                scope.filterError = function (v) {
                     return v.error;
                 }
 
@@ -658,21 +658,21 @@
         }
 
     }])
-    .directive('ptLink', ['ptFileService', function(ptFileService) {
+    .directive('ptLink', ['ptFileService', function (ptFileService) {
         return {
             restrict: 'E',
             scope: {
                 ptModel: '='
             },
             template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
                 scope.onFilePreview = ptFileService.onFilePreview;
                 scope.trunc = ptFileService.trunc;
             }
 
         }
     }])
-    .directive('ptFinishedMark', [function() {
+    .directive('ptFinishedMark', [function () {
         return {
             restrict: 'E',
             template: '<span ng-if="ssStyle==0">' + '<button type="button" class="btn btn-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</button>' + '<button type="button" class="btn btn-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></button>' + '</span>' + '<span ng-if="ssStyle==1">' + '<span class="label label-default" ng-show="!ssModel" ng-click="confirm()">{{text1?text1:"Confirm"}}</span>' + '<span class="label label-success" ng-show="ssModel" ng-dblclick="deconfirm()">{{text2?text2:"Complete"}}&nbsp<i class="fa fa-check-circle"></i></span>' + '</span>',
@@ -682,19 +682,38 @@
                 text2: '@',
                 ssStyle: '@'
             },
-            link: function(scope, el, attrs) {
+            link: function (scope, el, attrs) {
                 if (!scope.ssModel) scope.ssModel = false;
                 if (scope.ssStyle && scope.ssStyle.toLowerCase() === 'label') {
                     scope.ssStyle = 1;
                 } else {
                     scope.ssStyle = 0;
                 }
-                scope.confirm = function() {
+                scope.confirm = function () {
                     scope.ssModel = true;
                 }
-                scope.deconfirm = function() {
+                scope.deconfirm = function () {
                     scope.ssModel = false;
                 }
             }
         }
+    }]).directive('auditLogs', ['AuditLog', function (AuditLog) {
+        return {
+            restrict: 'E',
+            templateUrl: '/js/Views/AuditLogs/AuditLogs.tpl.html',
+            scope: {
+                tableName: '@',
+                recordId: '=',
+            },
+            link: function (scope, el, attrs) {
+                AuditLog.load({ TableName: scope.tableName, RecordId: scope.recordId }, function (data) {
+                    var result = _.groupBy(data, function (item) {
+                        return item.EventDate;
+                    });
+                    scope.AuditLogs = result;
+                })
+               
+            }
+        }
+
     }])
