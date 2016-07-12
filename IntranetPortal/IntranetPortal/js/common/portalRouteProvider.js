@@ -7,7 +7,7 @@
         // This $get noop is because at the moment in AngularJS "providers" must provide something
         // via a $get method.
         // When AngularJS has "provider helpers" then this will go away!
-       
+
         /**/
         this.$get = angular.noop;
         this.ITEM_ID = ITEM_ID;
@@ -89,8 +89,17 @@
                     });
                     return routeBuilder;
                 },
-                whenView: function (resolveFns)
-                {
+                whenOther: function (resolveFns, name, suffixUrl) {
+                    var _url = suffixUrl ? suffixUrl : '';
+                    routeBuilder.when(baseRoute +'/'+ name.toLowerCase() +'/'+ _url, {
+                        templateUrl: templateUrl(name),
+                        controller: controllerName(name),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Readonly views and controllers
+                whenView: function (resolveFns) {
                     routeBuilder.when(baseRoute + '/view/:' + ITEM_ID, {
                         templateUrl: templateUrl('View'),
                         controller: controllerName('View'),

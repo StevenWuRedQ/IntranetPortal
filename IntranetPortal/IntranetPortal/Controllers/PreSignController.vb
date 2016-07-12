@@ -18,7 +18,7 @@ Namespace Controllers
         <ResponseType(GetType(PreSignRecord()))>
         <Route("api/PreSign")>
         Public Function GetPreSigns() As IHttpActionResult
-            Return Ok(GetPreSignRecordByUser())
+            Return GetPreSignRecordByUser()
         End Function
 
         ''' <summary>
@@ -65,6 +65,11 @@ Namespace Controllers
             Return Ok(record)
         End Function
 
+        ''' <summary>
+        ''' Resfult style API
+        ''' </summary>
+        ''' <param name="bble"></param>
+        ''' <returns></returns>
         <Route("api/PreSign/BBLE/{bble}")>
         Public Function GetPreSignRecordByBBLE(bble As String) As IHttpActionResult
             Dim record = PreSignRecord.GetInstanceByBBLE(bble)

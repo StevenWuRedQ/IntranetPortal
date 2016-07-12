@@ -30,7 +30,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
         //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
-        var data1 = null
+        var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
             data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);

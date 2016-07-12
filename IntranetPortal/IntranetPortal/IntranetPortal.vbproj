@@ -7073,7 +7073,6 @@
     <Content Include="js\controllers\LeadTaxSearchController.js" />
     <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\PreSignController.js" />
-    <Content Include="js\controllers\PreSignViewController.js" />
     <Content Include="js\controllers\ReportWizardController.js" />
     <Content Include="js\controllers\RequireController.js" />
     <Content Include="js\controllers\ShortSaleController.js" />
@@ -7083,6 +7082,9 @@
     <Content Include="js\e2etest\conf.js" />
     <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
+    <Content Include="js\models\AuditLog.js" />
+    <Content Include="js\models\BusinessCheck.js" />
+    <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DxGridModel.js" />
     <Content Include="js\models\dxModel.js" />
@@ -7094,6 +7096,7 @@
     <Content Include="js\models\ptLeadResearch.js" />
     <Content Include="js\PortalHttpFactory.js" />
     <Content Include="js\test\models\ptDocSearch.spec.js" />
+    <Content Include="js\Views\AuditLogs\AuditLogs.tpl.html" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.html" />
     <Content Include="js\templates\ptEditor.html" />
     <Content Include="js\test\conf.js" />
@@ -7105,8 +7108,10 @@
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="js\test\servicesSpec.js" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
-    <Content Include="js\Views\PerAssign\perassign-edit.tpl.html" />
-    <Content Include="js\Views\PerAssign\perassign-view.tpl.html" />
+    <Content Include="js\Views\PreAssign\preassign-finance.tpl.html" />
+    <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
+    <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
+    <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
@@ -7637,7 +7642,7 @@
     <Content Include="bower_components\angular-route\bower.json" />
     <Content Include="bower_components\angular-route\package.json" />
     <Content Include="bower_components\angular-route\README.md" />
-    <None Include="Scripts\_references.js" />
+    <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />
     <Content Include="ShortSale\ShortPreSignControl.ascx" />

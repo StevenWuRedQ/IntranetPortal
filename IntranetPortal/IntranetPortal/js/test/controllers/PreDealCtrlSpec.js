@@ -9,7 +9,7 @@ describe('Pre Assign Ctrl test', function() {
         $httpBackend.when('GET', '/api/PreSign/2').respond({
             Id: 2
         });
-        ctrl = $controller('perAssignCtrl', {
+        ctrl = $controller('preAssignCtrl', {
             $scope: scope
         });
     }));

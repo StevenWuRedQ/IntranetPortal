@@ -1714,39 +1714,58 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 }]);
 var portalApp = angular.module('PortalApp');
 
-portalApp.config( function (portalRouteProvider) {
+portalApp.config(function (portalRouteProvider) {
 
-    var newPerSign = ['$route', 'PreSign', function ($route, PreSign) {
+    var newPreSign = ['$route', 'PreSign', function ($route, PreSign) {
         var preSign = new PreSign();
-        preSign.BBLE = $route.current.params.BBLE;
+        preSign.BBLE = $route.current.params.BBLE.toString();
+
         return preSign; //.$route.current.params.BBLE;
     }];
-    
-    var perSignItem = ['$route', 'PreSign', function ($route, PreSign) {
-        var perSignId = $route.current.params[portalRouteProvider.ITEM_ID]
-        return PreSign.get({ Id: perSignId });
+
+    var preSignList = ['PreSign', function (PreSign) {
+
+        return PreSign.query();
+    }];
+    var preSignItem = ['$route', 'PreSign', function ($route, PreSign) {
+        var preSignId = $route.current.params[portalRouteProvider.ITEM_ID]
+        return PreSign.get({ Id: preSignId });
+    }];
+
+    var preSignFinanceList = ['PreSign', function (PreSign) {
+
+        return PreSign.financeList();
     }];
 
     /***
      * Leave this for example that nomal router resgister   
      **/
-    //$routeProvider.when('/perAssign/new', {
-    //    templateUrl: '/js/Views/perAssign/perassign-edit.tpl.html',
-    //    controller: 'perAssignEditCtrl',
+    //$routeProvider.when('/preAssign/new', {
+    //    templateUrl: '/js/Views/preAssign/preassign-edit.tpl.html',
+    //    controller: 'preAssignEditCtrl',
     //    resolve:{BBLE:BBLE},
     //})
 
-    var config = portalRouteProvider.routesFor('perAssign')
-        // /perassign/new?BBLE=BBLE becuse javascript case sensitive
+    var config = portalRouteProvider.routesFor('preAssign')
+        // /preassign/new?BBLE=BBLE becuse javascript case sensitive
         // so the portalRouteProvider url should be lower case
-        .whenNew({ PerSignItem: newPerSign })
-        .whenEdit({ PerSignItem: perSignItem }).whenView({ PerSignItem: perSignItem })
-        .whenList()
+        // #/preassign/new?BBLE=123456789
+        .whenNew({ PreSignItem: newPreSign })
+        // #/preassign/28
+        .whenEdit({ PreSignItem: preSignItem })
+        // #/preassign/view/28
+        .whenView({ PreSignItem: preSignItem })
+        // #/preassign
+        .whenList({ PreSignList: preSignList })
+        // #/preassign/finance/list
+        // I don not know why need the suffix url list
+        // otherwise it will go to edit view
+        .whenOther({ PreSignFinaceList: preSignFinanceList }, 'Finance', 'list')
     //.when({BBLE:BBLE})
 
 });
-
-/* do not change constant value , if you want change make an corp and change copied object */
+/**************************************** constant define *********************************/
+/* do not change constant value , if you want change make a copy and change copied object */
 var CONSTANT_ASSIGN_PARTIES_GRID_OPTION = {
     bindingOptions: {
         dataSource: 'preAssign.Parties'
@@ -1775,6 +1794,7 @@ var CONSTANT_ASSIGN_PARTIES_GRID_OPTION = {
         }]
     }
 }
+
 var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
 {
     bindingOptions: {
@@ -1786,7 +1806,7 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
         pageSize: 10
     },
 
-   // editing: $scope.gridEdit,
+    // editing: $scope.gridEdit,
     pager: {
 
         showInfo: true
@@ -1821,7 +1841,7 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
         }]
     }, ],
     //show avoid check any time
-   // "onRowPrepared": $scope.CheckRowPrepared,
+    // "onRowPrepared": $scope.CheckRowPrepared,
     initEdit: function () {
         var self = this;
         self.columns.push({
@@ -1854,20 +1874,259 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
         }]
     }
 };
+
+var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
+    bindingOptions: {
+        dataSource: 'preSignList'
+    },
+    headerFilter: {
+        visible: true
+    },
+    searchPanel: {
+        visible: true,
+        width: 250
+    },
+    paging: {
+        pageSize: 10
+    },
+    onRowPrepared: function (rowInfo) {
+        if (rowInfo.rowType != 'data')
+            return;
+        rowInfo.rowElement
+        .addClass('myRow');
+    },
+    columnAutoWidth: true,
+    columns: [{
+        dataField: 'Title',
+        caption: 'Address',
+        cellTemplate: function (container, options) {
+            $('<a/>').addClass('dx-link-MyIdealProp')
+                .text(options.value)
+                .on('dxclick', function () {
+                    //Do something with options.data;
+                    //ShowCaseInfo(options.data.BBLE);
+                    var request = options.data;
+                    PortalUtility.OpenWindow('/NewOffer/HomeownerIncentive.aspx#/view/' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
+                })
+                .appendTo(container);
+        }
+    }, {
+        dataField: 'CreateBy',
+        caption: 'Request By'
+    }, new dxGridColumnModel({
+        dataField: 'CreateDate',
+        caption: 'Request Date',
+        dataType: 'date'
+    }), new dxGridColumnModel({
+        dataField: 'ExpectedDate',
+        caption: 'Expected Date Of Sign',
+        dataType: 'date'
+    }), {
+        dataField: 'DealAmount',
+        format: 'currency',
+        dataType: 'number',
+        precision: 2
+    },
+    //{
+    //    dataField: 'NeedSearch',
+    //    caption: 'Search Request'
+        //},
+    ],
+    wordWrapEnabled: true
+}
 /**************************************** end constant define ******************************/
 
-portalApp.controller('perAssignEditCtrl', function ($scope, PerSignItem, DxGridModel) {
+portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, DxGridModel, $location) {
 
-    $scope.preAssign = PerSignItem;
-    
+    $scope.preAssign = PreSignItem;
+
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
     $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
 
 
+    // $scope.checkGridOptions.form
+    // if have with BBLE PreSign redirect to view page 
+    // this should be handle in error event
+    $scope.CheckByBBLE = function () {
+        var preAssign = $scope.preAssign;
+        /**with id request cancel check*/
+        if (preAssign.$promise != null) {
+            return;
+        }
+        if (preAssign.Id == 0 || preAssign.Id == null) {
+            //console.log(typeof preAssign.BBLE);
+            //console.log(preAssign.BBLE)
+            //preAssign.BBLE = preAssign.BBLE.toString()
+            preAssign.$getByBBLE(function () {
+                $location.path('/preassign/view/' + preAssign.Id);
+            })
+        }
+    }
+
+    $scope.CheckByBBLE();
+
+    $scope.Save = function()
+    {
+        if ($scope.preAssign.validation())
+        {
+            if ($scope.preAssign.hasId())
+            {
+                $scope.preAssign.$update(function () {
+                    $location.path('/preassign/view/' + preAssign.Id);
+                })
+            } else {
+                $scope.preAssign.$save(function () {
+                    $location.path('/preassign/view/' + preAssign.Id);
+                })
+            }
+
+           
+        } else {
+            var msg = $scope.preAssign.getErrorMsgStr();
+            AngularRoot.alert(msg);
+        }
+       
+    }
+
+    $scope.CheckRowPrepared = function (e) {
+        if (e.data && e.data.Status == 1) {
+            e.rowElement.addClass('avoid-check');
+        }
+    }
+
+    $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
+    $scope.checkGridOptions.editing.texts = {
+        deleteRow: 'Void',
+        confirmDeleteMessage: '' //'Are you sure you want void this check?'
+    }
+    $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+    $scope.checkGridOptions.onEditingStart = function (e) {
+        if (e.data.Status == 1 || e.data.CheckId) {
+            e.cancel = true;
+        }
+    }
+
+    $scope.AddCheck = function (e) {
+        var cancel = false;
+        e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
+        e.data.Date = new Date(e.data.Date).toISOString();
+        // can not use anguler model here
+        // for devextreme 15.1 only can use sync call for control the event of grid 
+        // when we moved to 16.1 grid view support 'promise' it can change to ng model function
+        var response = $.ajax({
+            url: '/api/businesscheck',
+            type: 'POST',
+            dataType: 'json',
+            async: false,
+            data: e.data,
+            success: function (data, textStatus, xhr) {
+                $scope.addedCheck = data;
+                $scope.preAssign.CheckRequestData.Checks.push(data);
+                e.cancel = true;
+            }
+        });
+
+        var message = PortalHttp.BuildAjaxErrorMessage(response);
+        if (message) {
+            AngularRoot.alert(message);
+            e.cancel = true;
+        };
+        return cancel;
+    }
+    $scope.checkGridOptions.initEdit();
 
 });
 
-portalApp.controller('perAssignCtrl', function ($scope, ptCom, $http) {
+portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridModel) {
+
+    $scope.preAssign = PreSignItem;
+    $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
+    $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
+    setTimeout(function () {
+        $("#preDealForm input").prop("disabled", true);
+        $("#preDealForm select").prop("disabled", true);
+    }, 1000);
+
+    $scope.CheckRowPrepared = function (e) {
+        if (e.data && e.data.Status == 1) {
+            e.rowElement.addClass('avoid-check');
+        }
+    }
+
+});
+
+portalApp.controller('preAssignFinanceCtrl', function ($scope, PreSignFinaceList) {
+    $scope.preSignList = PreSignFinaceList;
+    $scope.preSignRecordsGridOpt = angular.extend({}, CONSTANT_ASSIGN_LIST_GRID_OPTION);
+    $scope.preSignRecordsGridOpt.masterDetail = {
+        enabled: true,
+        template: function (container, options) {
+            var opt = {
+                dataSource: options.data.Checks,
+                columnAutoWidth: true,
+                columns: [{
+                    dataField: 'PaybleTo',
+                    caption: 'Payable To',
+                }, {
+                    dataField: 'Amount',
+                    format: 'currency', dataType: 'number', precision: 2
+
+                }, {
+                    dataField: 'Date',
+                    caption: 'Date of Release',
+                    dataType: 'date',
+                    format: 'shortDate'
+                }, {
+                    dataField: 'Description'
+                }, {
+                    dataField: 'Comments',
+                    caption: 'Void Reason'
+                }],
+                onRowPrepared: $scope.CheckRowPrepared,
+            }
+            $("<div>").text("Checks: ").appendTo(container);
+            $("<div>")
+                .addClass("internal-grid")
+                .dxDataGrid(opt).appendTo(container);
+
+        }
+    }
+    $scope.preSignRecordsGridOpt.selection = null;
+    $scope.preSignRecordsGridOpt.columns = [{
+        dataField: 'PropertyAddress',
+        caption: 'Address'
+    }, {
+        dataField: 'RequestBy',
+        caption: 'Request By'
+    }, {
+        dataField: 'Type',
+        caption: 'Request Type'
+    }, {
+        dataField: 'RequestDate',
+        caption: 'Request Date',
+        dataType: 'date'
+    }, {
+        dataField: 'CheckAmount',
+        format: 'currency',
+        dataType: 'number',
+        precision: 2
+    }, ]
+
+    $scope.CheckRowPrepared = function (e) {
+        if (e.data && e.data.Status == 1) {
+            e.rowElement.addClass('avoid-check');
+        }
+    }
+
+});
+
+portalApp.controller('preAssignListCtrl', function ($scope, PreSignList) {
+    $scope.preSignList = PreSignList;
+    $scope.preSignRecordsGridOpt = angular.extend({}, CONSTANT_ASSIGN_LIST_GRID_OPTION);
+});
+
+/*************************old style contoller******************************/
+portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
 
 
     $scope.preAssign = {
@@ -2441,11 +2700,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $http) {
         }
     }
 });
-var portalApp = angular.module('PortalApp');
-
-portalApp.controller('perAssignViewCtrl', function ($scope, PerSignItem, DxGridModel) {
-    $scope.PerSignItem = PerSignItem;
-})
+/*************************end old style contoller**************************/
 angular.module('PortalApp')
 .controller("ReportWizardCtrl", function ($scope, $http, $timeout, ptCom) {
     $scope.camel = _.camelCase;
