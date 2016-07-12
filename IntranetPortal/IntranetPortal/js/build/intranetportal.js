@@ -581,6 +581,10 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             angular.extend(obj, _new);
             return _new;
         }
+        Resource.prototype.hasId = function()
+        {
+            return this[key] != null && this[key]!=0;
+        }
         /*********Use for Derived class implement validation interface *************/
         /**************** string array to hold error messages **********************/
         Resource.prototype.errorMsg = [];
@@ -588,7 +592,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             /* maybe cause memory leak if javascript garbage collection is not good */
             this.errorMsg = []
         }
-
+        
         Resource.prototype.getErrorMsg = function () {
             return this.errorMsg;
         }
@@ -4117,15 +4121,71 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
     {
         if ($scope.preAssign.validation())
         {
-            $scope.preAssign.$save(function () {
-                $location.path('/preassign/view/' + preAssign.Id);
-            })
+            if ($scope.preAssign.hasId())
+            {
+                $scope.preAssign.$update(function () {
+                    $location.path('/preassign/view/' + preAssign.Id);
+                })
+            } else {
+                $scope.preAssign.$save(function () {
+                    $location.path('/preassign/view/' + preAssign.Id);
+                })
+            }
+
+           
         } else {
             var msg = $scope.preAssign.getErrorMsgStr();
             AngularRoot.alert(msg);
         }
        
     }
+
+    $scope.CheckRowPrepared = function (e) {
+        if (e.data && e.data.Status == 1) {
+            e.rowElement.addClass('avoid-check');
+        }
+    }
+
+    $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
+    $scope.checkGridOptions.editing.texts = {
+        deleteRow: 'Void',
+        confirmDeleteMessage: '' //'Are you sure you want void this check?'
+    }
+    $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+    $scope.checkGridOptions.onEditingStart = function (e) {
+        if (e.data.Status == 1 || e.data.CheckId) {
+            e.cancel = true;
+        }
+    }
+
+    $scope.AddCheck = function (e) {
+        var cancel = false;
+        e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
+        e.data.Date = new Date(e.data.Date).toISOString();
+        // can not use anguler model here
+        // for devextreme 15.1 only can use sync call for control the event of grid 
+        // when we moved to 16.1 grid view support 'promise' it can change to ng model function
+        var response = $.ajax({
+            url: '/api/businesscheck',
+            type: 'POST',
+            dataType: 'json',
+            async: false,
+            data: e.data,
+            success: function (data, textStatus, xhr) {
+                $scope.addedCheck = data;
+                $scope.preAssign.CheckRequestData.Checks.push(data);
+                e.cancel = true;
+            }
+        });
+
+        var message = PortalHttp.BuildAjaxErrorMessage(response);
+        if (message) {
+            AngularRoot.alert(message);
+            e.cancel = true;
+        };
+        return cancel;
+    }
+    $scope.checkGridOptions.initEdit();
 
 });
 
@@ -4139,7 +4199,14 @@ portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridM
         $("#preDealForm select").prop("disabled", true);
     }, 1000);
 
+    $scope.CheckRowPrepared = function (e) {
+        if (e.data && e.data.Status == 1) {
+            e.rowElement.addClass('avoid-check');
+        }
+    }
+
 });
+
 portalApp.controller('preAssignFinanceCtrl', function ($scope, PreSignFinaceList) {
     $scope.preSignList = PreSignFinaceList;
     $scope.preSignRecordsGridOpt = angular.extend({}, CONSTANT_ASSIGN_LIST_GRID_OPTION);

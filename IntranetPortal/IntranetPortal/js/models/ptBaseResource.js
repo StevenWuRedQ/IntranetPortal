@@ -32,6 +32,10 @@
             angular.extend(obj, _new);
             return _new;
         }
+        Resource.prototype.hasId = function()
+        {
+            return this[key] != null && this[key]!=0;
+        }
         /*********Use for Derived class implement validation interface *************/
         /**************** string array to hold error messages **********************/
         Resource.prototype.errorMsg = [];
@@ -39,7 +43,7 @@
             /* maybe cause memory leak if javascript garbage collection is not good */
             this.errorMsg = []
         }
-
+        
         Resource.prototype.getErrorMsg = function () {
             return this.errorMsg;
         }
