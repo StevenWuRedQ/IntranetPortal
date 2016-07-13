@@ -139,6 +139,7 @@ Public Class EditHomeOwner
                             Dim homeOwner = Newtonsoft.Json.JsonConvert.DeserializeObject(Of HomeOwner)(hfOwnerData.Value)
                             homeOwner.BBLE = bble
                             homeOwner.Name = newOwnerName
+                            homeOwner.Active = True
                             homeOwner.CreateBy = Page.User.Identity.Name
                             homeOwner.CreateDate = DateTime.Now
 
@@ -146,8 +147,9 @@ Public Class EditHomeOwner
                             If Not Context.HomeOwners.Any(Function(h) h.BBLE = bble AndAlso h.Name = newOwnerName) Then
                                 Context.HomeOwners.Add(homeOwner)
                                 homeOwner.UserModified = True
+                                homeOwner.Active = True
                                 'Load tlo report
-                                homeOwner.TLOLocateReport = DataWCFService.GetLocateReport(1, bble, homeOwner.Name, homeOwner.Address1, homeOwner.Address2, homeOwner.City, homeOwner.State, homeOwner.Zip, "USA", False)
+                                homeOwner.TLOLocateReport = DataWCFService.GetLocateReport((New Random).Next(1000), bble, homeOwner.Name, homeOwner.Address1, homeOwner.Address2, homeOwner.City, homeOwner.State, homeOwner.Zip, "USA", False)
                             Else
                                 'Throw New CallbackException("The owner already existed in system, please check.")
                             End If
@@ -169,6 +171,7 @@ Public Class EditHomeOwner
                                 homeOwner.Name = newOwnerName
                                 homeOwner.CreateBy = Page.User.Identity.Name
                                 homeOwner.CreateDate = DateTime.Now
+                                homeOwner.Active = True
                                 Context.HomeOwners.Add(homeOwner)
                             End If
 

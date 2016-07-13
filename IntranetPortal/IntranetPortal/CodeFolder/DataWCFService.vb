@@ -460,7 +460,7 @@ Public Class DataWCFService
 
             Dim loaded = False
             For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True And (ho.Name = li.Owner Or ho.Name = li.CoOwner)).ToList
-                If owner.LocateReport IsNot Nothing Then
+                If Not String.IsNullOrEmpty(owner.LocateReportContent) Then
                     If Not owner.LastUpdate.HasValue Then
                         owner.LastUpdate = DateTime.Now
                         loaded = True
@@ -487,7 +487,7 @@ Public Class DataWCFService
             If Not loaded Then
                 GetLatestSalesInfo(bble)
                 For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True).ToList
-                    If owner.LocateReport IsNot Nothing Then
+                    If Not String.IsNullOrEmpty(owner.LocateReportContent) Then
                         If Not owner.LastUpdate.HasValue Then
                             owner.LastUpdate = DateTime.Now
                             loaded = True
