@@ -698,7 +698,7 @@ angular.module('PortalApp')
 }]
 );
 angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo) {
         //New Model(this,arguments)
         $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
@@ -713,7 +713,8 @@ angular.module('PortalApp')
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
+                $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
             });
 
@@ -3479,6 +3480,23 @@ angular.module("PortalApp")
         }; /* end update mortage status*/
     }]);
 
+
+portalApp.config(function ($stateProvider) {
+
+    
+    $stateProvider
+      .state('route1', {
+          url: "/route1",
+          template: "route1"
+      })
+      .state('route2', {
+          url: "/route2",
+          template: "route 222222 2222 2 "
+      })
+       
+})
+
+/*************old style without model contoller *********************/
 ScopeHelper = {
     getShortSaleScope: function() {
 
@@ -3980,6 +3998,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
     }
 })
+/************* end old style without model contoller ****************/
 portalApp.filter('wizardFilter', function() {
     return function(items, sheetFilter) {
         var filtered = [];
@@ -4013,6 +4032,8 @@ portalApp.filter('ordered', function() {
         return orderDic[item];
     };
 });
+
+
 
 
 

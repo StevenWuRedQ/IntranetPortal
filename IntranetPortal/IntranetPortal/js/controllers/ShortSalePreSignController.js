@@ -1,4 +1,21 @@
-﻿ScopeHelper = {
+﻿
+portalApp.config(function ($stateProvider) {
+
+    
+    $stateProvider
+      .state('route1', {
+          url: "/route1",
+          template: "route1"
+      })
+      .state('route2', {
+          url: "/route2",
+          template: "route 222222 2222 2 "
+      })
+       
+})
+
+/*************old style without model contoller *********************/
+ScopeHelper = {
     getShortSaleScope: function() {
 
         //return angular.element(document.getElementById('ShortSaleCtrl')).scope();
@@ -499,6 +516,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
     }
 })
+/************* end old style without model contoller ****************/
 portalApp.filter('wizardFilter', function() {
     return function(items, sheetFilter) {
         var filtered = [];
@@ -532,6 +550,8 @@ portalApp.filter('ordered', function() {
         return orderDic[item];
     };
 });
+
+
 
 
 

@@ -17,12 +17,14 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     leadResearch.prototype.initFromLeadsInfo = function(BBLE)
     {
         var self = this;
+        
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
             self.ownerName = data1.Owner;
             self.waterCharges = data1.WaterAmt;
             self.propertyTaxes = data1.TaxesAmt;
             self.mortgageAmount = data1.C1stMotgrAmt;
             self.secondMortgageAmount = data1.C2ndMotgrAmt;
+           
             self.getOwnerSSN(BBLE);
         });
         return data1;

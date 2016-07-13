@@ -1,5 +1,5 @@
 ﻿angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo) {
         //New Model(this,arguments)
         $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
@@ -14,7 +14,8 @@
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
+                $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
             });
 

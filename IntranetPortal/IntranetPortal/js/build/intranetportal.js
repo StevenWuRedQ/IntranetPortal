@@ -2,7 +2,7 @@
 function RequirePortalApp()
 {
 
-    var portalApp = angular.module('PortalApp', ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase']);
+    var portalApp = angular.module('PortalApp', ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
     angular.module('PortalApp').
     controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
         $rootScope.AlertModal = null;
@@ -731,12 +731,14 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     leadResearch.prototype.initFromLeadsInfo = function(BBLE)
     {
         var self = this;
+        
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
             self.ownerName = data1.Owner;
             self.waterCharges = data1.WaterAmt;
             self.propertyTaxes = data1.TaxesAmt;
             self.mortgageAmount = data1.C1stMotgrAmt;
             self.secondMortgageAmount = data1.C2ndMotgrAmt;
+           
             self.getOwnerSSN(BBLE);
         });
         return data1;
@@ -2850,7 +2852,7 @@ angular.module('PortalApp')
 }]
 );
 angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo) {
         //New Model(this,arguments)
         $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
@@ -2865,7 +2867,8 @@ angular.module('PortalApp')
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = $scope.DocSearch.initLeadsResearch();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
+                $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
             });
 
@@ -5631,6 +5634,23 @@ angular.module("PortalApp")
         }; /* end update mortage status*/
     }]);
 
+
+portalApp.config(function ($stateProvider) {
+
+    
+    $stateProvider
+      .state('route1', {
+          url: "/route1",
+          template: "route1"
+      })
+      .state('route2', {
+          url: "/route2",
+          template: "route 222222 2222 2 "
+      })
+       
+})
+
+/*************old style without model contoller *********************/
 ScopeHelper = {
     getShortSaleScope: function() {
 
@@ -6132,6 +6152,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
     }
 })
+/************* end old style without model contoller ****************/
 portalApp.filter('wizardFilter', function() {
     return function(items, sheetFilter) {
         var filtered = [];
@@ -6165,6 +6186,8 @@ portalApp.filter('ordered', function() {
         return orderDic[item];
     };
 });
+
+
 
 
 

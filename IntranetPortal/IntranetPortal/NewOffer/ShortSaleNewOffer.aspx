@@ -187,6 +187,11 @@
     <input runat="server" id="txtSearchCompleted" type="hidden" class="pt-search-completed" />
     <div id="content" runat="server">
         <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
+        <div ui-view></div>
+        <a ui-sref="route1">State 1</a>
+        <a ui-sref="route2">State 2</a>
+        <!-- We'll also add some navigation: -->
+       
         <div style="padding: 20px" ng-controller="shortSalePreSignCtrl">
             <div class="container" ng-hide="QueryUrl.model!='List'">
                 <div>
