@@ -53,7 +53,8 @@
         },
         { GroupName: 'In House' },
         { GroupName: 'Agent Corps' },
-        { GroupName: 'Not for Use' }
+        { GroupName: 'Not for Use' },
+        { GroupName: 'Reserve' }
     ];
 
     $scope.ChangeGroups = function (name) {

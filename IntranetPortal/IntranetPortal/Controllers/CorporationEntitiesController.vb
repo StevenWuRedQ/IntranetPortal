@@ -91,6 +91,13 @@ Namespace Controllers
 
             If corp IsNot Nothing Then
                 Return Ok(corp)
+            Else
+                Dim reserve = CorporationEntity.GetReserveCorpBySigner(signer)
+                If reserve IsNot Nothing Then
+                    reserve.Office = team
+                    reserve.Save(HttpContext.Current.User.Identity.Name)
+                    Return Ok(reserve)
+                End If
             End If
 
             Return NotFound()
@@ -121,8 +128,11 @@ Namespace Controllers
         Function GetTeamCorpSigners(ByVal team As String) As IHttpActionResult
             Dim corp = CorporationEntity.GetTeamAvailableCorps(team)
 
-            If corp IsNot Nothing Then
+            If corp IsNot Nothing AndAlso corp.Count > 0 Then
                 Return Ok(corp.Select(Function(c) c.Signer).Distinct.ToArray)
+            Else
+                Dim reserveCorps = CorporationEntity.GetReserveCorps()
+                Return Ok(reserveCorps.Select(Function(c) c.Signer).Distinct.ToArray)
             End If
 
             Return NotFound()

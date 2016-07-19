@@ -30,6 +30,18 @@ Public Class HomeownerIncentivePage
                     Response.Redirect("/NewOffer/HomeownerIncentive.aspx?model=View&Id=" & record.Id)
                 End If
             End If
+
+            If Not String.IsNullOrEmpty(Request.QueryString("Id")) Then
+                Dim id = Request.QueryString("Id")
+                Dim record = IntranetPortal.Data.PreSignRecord.GetInstance(id)
+
+                ' check user permission
+                If record IsNot Nothing Then
+                    If Not Employee.GetManagedEmployees(Page.User.Identity.Name).Contains(record.Owner) Then
+                        linkEdit.Visible = False
+                    End If
+                End If
+            End If
         End If
     End Sub
 

@@ -18,6 +18,12 @@
                        "column": "CallbackDate",
                        "type": "date"
                    },
+                   {
+                       "name": "File Created Date",
+                       "table": "ShortSaleCases",
+                       "column": "CreateDate",
+                       "type": "date"
+                   },
                   {
                       "name": "Status",
                       "table": "SS_Status",

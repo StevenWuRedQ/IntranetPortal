@@ -95,6 +95,8 @@ Namespace Controllers
 
             If (Not String.IsNullOrEmpty(leadInfoDocumentSearch.ResutContent)) Then
                 Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, leadInfoDocumentSearch)
+            Else
+                IntranetPortal.Core.SystemLog.LogError("LeadsDocumentSearchContentError", New Exception("The content is null"), leadInfoDocumentSearch.ToJsonString, leadInfoDocumentSearch.CompletedBy, leadInfoDocumentSearch.BBLE)
             End If
 
             Return Ok(leadInfoDocumentSearch)
@@ -105,6 +107,7 @@ Namespace Controllers
             Try
                 Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
                 Dim maildata As New Dictionary(Of String, String)
+
                 If l IsNot Nothing Then
                     maildata.Add("Address", l.PropertyAddress)
                 Else

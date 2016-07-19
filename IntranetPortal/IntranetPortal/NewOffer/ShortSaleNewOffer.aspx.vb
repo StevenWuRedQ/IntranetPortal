@@ -24,11 +24,19 @@ Public Class ShortSaleNewOfferPage
 
                 ' check offer status
                 Dim offer = PropertyOffer.GetOffer(bble)
+
+                ' check user permission
+                If offer IsNot Nothing Then
+                    If Not Employee.GetManagedEmployees(Page.User.Identity.Name).Contains(offer.Owner) Then
+                        Server.Transfer("/NewOffer/NewOfferPreview.aspx?bble=" & bble)
+                    End If
+                End If
+
                 If offer IsNot Nothing AndAlso offer.Status = PropertyOffer.OfferStatus.Completed Then
                     Dim Corp = IntranetPortal.Data.CorporationEntity.GetCorpByBBLE(bble)
                     If Corp IsNot Nothing Then
                         CorpData = Corp
-                        Content.Visible = False
+                        content.Visible = False
                         divMsg.Visible = True
 
                         Return
