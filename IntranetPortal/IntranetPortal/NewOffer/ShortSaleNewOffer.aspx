@@ -188,12 +188,13 @@
     <div id="content" runat="server">
         <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
         <div ui-view></div>
-        <a ui-sref="route1">State 1</a>
-        <a ui-sref="route2">State 2</a>
+        <a ui-sref="newoffer">State 1</a>
+        <a ui-sref="newoffer.newoffer">State 2</a>
+        <a ui-sref="newoffer.ssinfo">State 3</a>
         <!-- We'll also add some navigation: -->
        
-        <div style="padding: 20px" ng-controller="shortSalePreSignCtrl">
-            <div class="container" ng-hide="QueryUrl.model!='List'">
+        <div style="padding: 20px" ng-controller="shortSalePreSignCtrl" >
+            <div class="container" ng-hide="QueryUrl.model!='List' && QueryUrl.BBLE">
                 <div>
                     <h2>New Offer Request List</h2>
                     <div dx-data-grid="newOfferGridOpt"></div>

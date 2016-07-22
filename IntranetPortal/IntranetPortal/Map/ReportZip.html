@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            left: 0px;
+        }
+
+        .count-icon {
+            background: #FF400D;
+            border: 5px solid rgba(255,255,255,0.5);
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 50%;
+            line-height: 30px;
+        }
+
+        #color_panle {
+            position: absolute;
+            left: 10px;
+            bottom: 0;
+            padding: 20px;
+            margin-bottom: 34px;
+            visibility: hidden;
+        }
+
+        .color_box {
+            display: inline-block;
+            padding: 0 5px;
+            cursor: pointer;
+        }
+
+        .color_dot {
+            text-align: center;
+        }
+
+        .color_dot_c {
+            padding: 0 6px;
+        }
+    </style>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+    <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+    <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="map"></div>
+     
+        <div id="color_panle" class="map-legends wax-legends leaflet-control" style="max-width: 1000px">
+        </div>
+    </div>
+    <script >
+        var rules = [{
+            name: "Team Mo", zips: ['10451', '10452', '10453', '10454', '10455', '10456', '10457', '10458', '10459', '10460', '10461', '10462', '10464', '10465', '10466', '10467', '10468', '10469', '10470', '10471', '10472', '10473', '10474',
+                '10475', '11354', '11355', '11356', '11357', '11358', '11360', '11361', '11364', '11101', '11362', '11363', '11102', '11103', '11104', '11105', '11106','11369','11368','11370','11372'
+            ],
+            color: 'red'
+        }, {
+            name: "Team Moshe", zips: ['11201', '11203', '11205', '11206', '11209', '11210', '11211', '11213', '11214', '11215', '11216',
+                '11217', '11220', '11221', '11222', '11223', '11224', '11225', '11226', '11228', '11229', '11231', '11232', '11234',
+                '11235', '11236', '11237', '11238', '11239', '11242', '11249'],
+            color: 'blue'
+        }, {
+            name: 'Team Eli', zips: ['11212', '11233', '11207', '11208', '11416', '11419', '11421', '11421', '11420',
+                '11368', '11369', '11370',
+                '11372', '11373', '11377', '11378'
+                ,'11374','11375','11379','11365','11367','11366','11385','11414','11417','11415','11418'
+            ], color: 'green'
+        },
+        {
+            name: 'Team Jamica', zips: ['11691', '11692', '11693', '11694', '11004', '11411', '11413','11412', '11422', '11426', '11427', '11428', '11429'
+                , '11423', '11430', '11432', '11434', '11433', '11435', '11436', '11385'//, '11430',
+            ], color: 'orange'
+        }
+        ]
+        var ZoomLevel = 11;
+        var map = null
+        var popup = new L.Popup({ autoPan: false });
+        function initMapBox() {
+            L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
+            map = L.mapbox.map('map', 'mapbox.streets', { loadingControl: true })
+                .addControl(L.mapbox.geocoderControl('mapbox.places').on("found", function (e) {
+
+                }))
+                .setView([40.7127, -74.0059], 11);
+
+            L.control.fullscreen().addTo(map);
+      
+        }
+
+        function onEachFeature(feature, layer) {
+            layer.on({
+              
+                click: ClickZip
+            });
+        }
+        function findRuleByZip(zip) {
+            var findObj = _.filter(rules, function (e) { return e.zips.indexOf(zip) >= 0 })
+            var rule = findObj[0];
+            if (rule) {
+                return rule
+            }
+            return null;
+        }
+        function ClickZip(e) {
+            
+            var zip = e.target.feature.properties.postalCode;
+            var rule = findRuleByZip(zip);
+            if(rule)
+            {
+                popup.setLatLng(e.latlng);
+                popup.setContent('Zip : ' + zip + 
+                    '<br />' + 
+                    'Group : ' + rule.name);
+                popup.openOn(map);
+            }
+
+        }
+        function getColor(zip) {
+            var rule = findRuleByZip(zip)
+            if (rule)
+            {
+                return rule.color;
+            }
+            return 'white';
+        }
+        function getStyle(feature) {
+            return {
+                weight: 2,
+                opacity: 0.1,
+                color: 'black',
+                fillOpacity: 0.7,
+                fillColor: getColor(feature.properties.postalCode)
+            };
+        }
+        initMapBox();
+        $.getJSON("/Map/MapData/nyc-zip-code.js", function (data) {
+           
+
+            ZipPolygonLayer = L.geoJson(data, {
+                style: getStyle,
+                onEachFeature: onEachFeature
+            })
+            ZipPolygonLayer.addTo(map);
+        });
+    </script>
+</body>
+</html>

@@ -63,6 +63,7 @@
             // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
             var routeBuilder = {
                 // Create a route that will handle showing a list of items
+                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
                 whenList: function (resolveFns) {
                     routeBuilder.when(baseRoute, {
                         templateUrl: templateUrl('List'),

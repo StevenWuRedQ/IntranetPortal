@@ -7068,6 +7068,7 @@
     <Content Include="js\build\controllers.js" />
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\common\portalRouteProvider.js" />
+    <Content Include="js\common\PortalUIRouteProvider.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
     <Content Include="js\controllers\LeadTaxSearchController.js" />
@@ -7108,6 +7109,9 @@
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="js\test\servicesSpec.js" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
+    <Content Include="js\Views\NewOffer\newoffer.tpl.html" />
+    <Content Include="js\Views\NewOffer\index.tpl.html" />
+    <Content Include="js\Views\NewOffer\ssinfo.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-finance.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
@@ -7165,6 +7169,7 @@
     <Content Include="MapTest.aspx" />
     <Content Include="Map\MapDataService.svc" />
     <Content Include="Map\MapData\nyc-zip-code.js" />
+    <Content Include="Map\ReportZip.html" />
     <Content Include="Map\ServiceTest.aspx" />
     <Content Include="Map\ZipMap.aspx" />
     <Content Include="Mobile\Construction\default.aspx" />

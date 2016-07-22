@@ -221,6 +221,19 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
     wordWrapEnabled: true
 }
 /**************************************** end constant define ******************************/
+/**
+ * HIO name histroy
+ * Now the pre Assign is named HIO
+ * But the version name history is 
+ * if in code or file named 
+ * please maintenance this list blow if the name changed again 
+ * pre sssign == pre sign ==  pre deal == HOI
+ * 1. pre assign
+ * 2. pre sign  
+ * 3. pre deal
+ * 4. HOI
+ *
+ **/
 
 portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, DxGridModel, $location) {
 

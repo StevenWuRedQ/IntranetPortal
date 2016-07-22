@@ -19,7 +19,8 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
   
     });
     /*** here use class desgin super key work spend 3 hours ***/
-    preSign.prototype.validation = function()
+
+    preSign.prototype.validation = function ()
     {
         this.clearErrorMsg();
         if (!this.ExpectedDate) {
