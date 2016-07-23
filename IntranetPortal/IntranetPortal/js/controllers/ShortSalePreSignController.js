@@ -65,9 +65,21 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                         dataType: 'date',
                         sortOrder: 'desc',
                         format: 'shortDate'
-                    },
+                    },{
+                        caption: 'History',
+                        width: 80,
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+                            $("<i>").attr("class", "fa fa-history")
+                                    .attr("style", "cursor:pointer")
+                                    .on('dxclick', function () {
+                                        auditLog.show('PropertyOffer', options.data.OfferId);
+                                        $("#divAuditLog").modal("show");
+                                    }).appendTo(container);
+                      }
+                    }
                 ]
-            }
+            }            
         });
     }
 

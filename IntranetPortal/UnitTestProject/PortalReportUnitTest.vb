@@ -14,7 +14,11 @@ Imports IntranetPortal
     <TestMethod()> Public Sub WeeklyTeamImportReport_Returnlast5WeekCount()
         Dim report = PortalReport.WeeklyTeamImportReport("Galiteam")
         Assert.IsTrue(report IsNot Nothing)
+    End Sub
 
+    <TestMethod()> Public Sub ShortSaleMissedFollowUpReport_returnFollowUps()
+        Dim report = ShortSaleManage.GetSSMissedFollowUp("Thomas Devivio", New Date(2016, 7, 19))
+        Assert.IsTrue(report IsNot Nothing)
     End Sub
 
 End Class

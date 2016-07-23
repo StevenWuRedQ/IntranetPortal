@@ -1746,8 +1746,7 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
         var checksListApi = $scope.role == 'finance' ? '/api/PreSign/CheckRequests' : '/api/presign/records';
         $http.get(checksListApi).success(function (data) {
             $scope.preSignList = _.map(data, function (p) {
-                p.ChecksTotal = _.sum(p.Checks, 'Amount');
-               
+                p.ChecksTotal = _.sum(p.Checks, 'Amount');               
                 return p;
             });
         });
@@ -1774,9 +1773,9 @@ portalApp.controller('perAssignCtrl', function ($scope, ptCom, $firebaseObject, 
             
             $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [] }
             _BBLE = $scope.preAssign.BBLE
-
         }
     }
+
     $scope.init = function (preSignId) {
         $http.get('/api/PreSign/' + preSignId).success(function (data) {
             $scope.preAssign = data;            
@@ -3142,9 +3141,21 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
                         dataType: 'date',
                         sortOrder: 'desc',
                         format: 'shortDate'
-                    },
+                    },{
+                        caption: 'History',
+                        width: 80,
+                        alignment: 'center',
+                        cellTemplate: function (container, options) {
+                            $("<i>").attr("class", "fa fa-history")
+                                    .attr("style", "cursor:pointer")
+                                    .on('dxclick', function () {
+                                        auditLog.show('PropertyOffer', options.data.OfferId);
+                                        $("#divAuditLog").modal("show");
+                                    }).appendTo(container);
+                      }
+                    }
                 ]
-            }
+            }            
         });
     }
 

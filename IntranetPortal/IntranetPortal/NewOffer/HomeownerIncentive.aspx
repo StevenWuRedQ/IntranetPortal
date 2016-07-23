@@ -118,9 +118,9 @@
                                         </li>
                                     </div>
                                     <%--  <li class="ss_form_item ">
-                                <label class="ss_form_input_title ">Name On Check</label>
-                                <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
-                            </li>--%>
+                                        <label class="ss_form_input_title ">Name On Check</label>
+                                        <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
+                                    </li>--%>
                                 </ul>
                                 <div class="alert alert-warning" role="alert" id="divSearchWarning" runat="server" visible="false">
                                     <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure that you have requested the Doc search already.

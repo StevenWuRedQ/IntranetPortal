@@ -4,6 +4,8 @@
 <%@ Register Src="~/ShortSale/NGShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="NGShortSaleMortgageTab" %>
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
 <%@ Register Src="~/ShortSale/ShortPreSignControl.ascx" TagPrefix="uc1" TagName="ShortPreSignControl" %>
+<%@ Register Src="~/UserControl/AuditLogs.ascx" TagPrefix="uc1" TagName="AuditLogs" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
@@ -184,7 +186,7 @@
                     &nbsp;
                     <asp:LinkButton runat="server" ID="btnEdit" OnClick="btnEdit_Click">Edit Offer</asp:LinkButton>
                 </td>
-            </tr>           
+            </tr>
         </table>
     </div>
     <input runat="server" type="hidden" id="NeedSearch" class="pt-need-search-input" />
@@ -194,7 +196,7 @@
         <div style="padding: 20px" ng-controller="shortSalePreSignCtrl">
             <div class="container" ng-hide="QueryUrl.model!='List'">
                 <div>
-                    <h2>New Offer Request List</h2>
+                    <h2>New Offer List</h2>
                     <div dx-data-grid="newOfferGridOpt"></div>
                 </div>
             </div>
@@ -240,11 +242,8 @@
                     <div ng-show="currentStep().title=='Pre Sign'" class="view-animate">
                         <h3 class="wizard-title">Short Sale Information</h3>
                         <div ng-controller="ShortSaleCtrl" id="ShortSaleCtrl">
-
                             <uc1:ShortPreSignControl runat="server" ID="ShortPreSignControl" />
-
                         </div>
-
                         <%--<div>
                         <h4 class="ss_form_title ">Borrowers</h4>
                         <div id="borrwerGrid" dx-data-grid="borrwerGrid"></div>
@@ -263,7 +262,7 @@
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.assignCrop.Name}" data-message="Please select team!">Team Name</label>
                                         <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Name" ng-disabled="SSpreSign.assignCrop.Crop" ng-change="SelectTeamChange()">
-                                            
+
                                             <option ng-repeat="n in CorpTeam track by $index">{{n}}</option>
                                         </select>
                                     </li>
@@ -277,13 +276,13 @@
                                             <option ng-repeat="s in  SSpreSign.assignCrop.signers track by $index">{{s}}</option>
                                         </select>
                                     </li>
-                                    <li class="ss_form_item " >
+                                    <li class="ss_form_item ">
                                         <label class="ss_form_input_title">&nbsp;</label>
                                         <input type="button" value="Assign Corp" class="rand-button rand-button-blue rand-button-pad" ng-click="assginCropClick()" ng-show="!SSpreSign.assignCrop.Crop">
                                     </li>
                                 </ul>
                             </div>
-                            <div class="ss_form" style="display:none">
+                            <div class="ss_form" style="display: none">
                                 <ul>
                                     <li class="ss_form_item " ng-class="{ss_warning:!SSpreSign.assignCrop.Crop}" data-message="Please assign Corp to continue!"></li>
                                 </ul>
@@ -386,7 +385,7 @@
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName}" data-message="Please fill Buyer Name">Buyer Name</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName" disabled="disabled"/></li>
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName" disabled="disabled" /></li>
 
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney}" data-message="Please fill Buyer Attorney">Buyer Attorney</label>
@@ -395,7 +394,7 @@
                                             </li>
                                             <li class="ss_form_item " style="width: 96%">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.Address}" data-message="Please fill Buyer Address">Buyer Address</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.Address" disabled="disabled"/>
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.Address" disabled="disabled" />
                                             </li>
                                         </ul>
                                     </div>
@@ -497,14 +496,14 @@
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.CorpName}" data-message="Please fill Buyer Name!">Buyer Name</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.CorpName" disabled="disabled"/></li>
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.CorpName" disabled="disabled" /></li>
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.EIN}" data-message="Please fill Buyer SSN/EIN!">Buyer SSN/EIN</label>
                                                 <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.EIN" />
                                             </li>
                                             <li class="ss_form_item ss_form_item_line">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.Address}" data-message="Please fill Buyer Address!">Buyer Address</label>
-                                                <input class="ss_form_input " ng-model="SSpreSign.DealSheet.Deed.Buyer.Address" style="width: 96%"  disabled="disabled"/>
+                                                <input class="ss_form_input " ng-model="SSpreSign.DealSheet.Deed.Buyer.Address" style="width: 96%" disabled="disabled" />
                                             </li>
                                         </ul>
                                     </div>
@@ -674,6 +673,21 @@
                 </div>
             </div>
         </div>
+
+        <div id="divAuditLog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Audit Logs</h4>
+                    </div>
+                    <div class="modal-body"  style="overflow: auto; max-height: 300px">
+                        <uc1:AuditLogs runat="server" ID="AuditLogs" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <%--help script for this page--%>
     </div>
     <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>

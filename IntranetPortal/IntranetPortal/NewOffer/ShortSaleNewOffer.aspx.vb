@@ -26,7 +26,7 @@ Public Class ShortSaleNewOfferPage
                 Dim offer = PropertyOffer.GetOffer(bble)
 
                 ' check user permission
-                If offer IsNot Nothing Then
+                If offer IsNot Nothing AndAlso Not Employee.IsAdmin(Page.User.Identity.Name) Then
                     If Not Employee.GetManagedEmployees(Page.User.Identity.Name).Contains(offer.Owner) Then
                         Server.Transfer("/NewOffer/NewOfferPreview.aspx?bble=" & bble)
                     End If

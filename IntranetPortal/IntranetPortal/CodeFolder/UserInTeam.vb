@@ -1,4 +1,5 @@
-﻿''' <summary>
+﻿
+''' <summary>
 ''' Represents the user belong to team
 ''' </summary>
 Partial Public Class UserInTeam
@@ -97,7 +98,7 @@ Partial Public Class UserInTeam
     End Function
 
     Public Shared Function GetTeamUnActiveUser(teamName As String) As String()
-        Return SelectEmployeeArray(GetTeamUsers(teamName).Where(Function(emp) emp.EmployeeActive = False))
+        Return SelectEmployeeArray(GetTeamUsers(teamName, True).Where(Function(emp) emp.EmployeeActive = False))
     End Function
 
     Private Shared Function SelectEmployeeArray(usersInTeam As IEnumerable(Of UserInTeam)) As String()
