@@ -7,6 +7,7 @@ Imports Legal = IntranetPortal.Data
 
 Public Class LegalUI
     Inherits System.Web.UI.Page
+
     Public SecondaryAction As Boolean = False
     Public Agent As Boolean = False
     Public InWorkflow As Boolean = True
