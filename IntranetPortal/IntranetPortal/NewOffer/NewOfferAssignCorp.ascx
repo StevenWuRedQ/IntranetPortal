@@ -10,7 +10,6 @@
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.assignCrop.Name}" data-message="Please select team!">Team Name</label>
                     <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Name" ng-disabled="SSpreSign.assignCrop.Crop" ng-change="SelectTeamChange()">
-
                         <option ng-repeat="n in CorpTeam track by $index">{{n}}</option>
                     </select>
                 </li>
