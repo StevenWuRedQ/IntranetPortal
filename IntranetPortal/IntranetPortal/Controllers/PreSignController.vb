@@ -16,7 +16,6 @@ Namespace Controllers
         ''' </summary>
         ''' <returns></returns>
         <ResponseType(GetType(PreSignRecord()))>
-        <Route("api/PreSign")>
         Public Function GetPreSigns() As IHttpActionResult
             Return GetPreSignRecordByUser()
         End Function
