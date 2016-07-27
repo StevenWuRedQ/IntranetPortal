@@ -66,4 +66,13 @@ Partial Public Class ShortSaleNewOfferPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ShortPreSignControl As Global.IntranetPortal.ShortPreSignControl
+    
+    '''<summary>
+    '''NewOfferAssignCorp control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NewOfferAssignCorp As Global.IntranetPortal.NewOfferAssignCorp
 End Class

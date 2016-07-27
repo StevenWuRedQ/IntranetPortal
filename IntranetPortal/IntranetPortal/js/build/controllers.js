@@ -3532,6 +3532,7 @@ portalApp.controller('newofferSsinfoCtrl', function ($scope) {
 portalApp.controller('newofferCtrl', function ($scope) {
     $scope.text = 'newofferCtrl';
 });
+
 /*************old style without model contoller *********************/
 ScopeHelper = {
     getShortSaleScope: function () {
@@ -3549,7 +3550,7 @@ ScopeHelper = {
 
 var portalApp = angular.module('PortalApp');
 
-portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, DocSearch, $location) {
+portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, DocSearch, $location,PropertyOffer) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
@@ -3607,23 +3608,25 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         });
     }
 
-    $scope.SSpreSign = {
-        Type: 'Short Sale',
-        FormName: 'PropertyOffer',
-        DealSheet: {
-            ContractOrMemo: {
-                Sellers: [{}],
-                Buyers: [{}]
-            },
-            Deed: {
-                Sellers: [{}]
-            },
-            CorrectionDeed: {
-                Sellers: [{}],
-                Buyers: [{}]
-            }
-        }
-    };
+    $scope.SSpreSign = new PropertyOffer();
+
+    //    {
+    //    Type: 'Short Sale',
+    //    FormName: 'PropertyOffer',
+    //    DealSheet: {
+    //        ContractOrMemo: {
+    //            Sellers: [{}],
+    //            Buyers: [{}]
+    //        },
+    //        Deed: {
+    //            Sellers: [{}]
+    //        },
+    //        CorrectionDeed: {
+    //            Sellers: [{}],
+    //            Buyers: [{}]
+    //        }
+    //    }
+    //};
     //var urlParam = //$location.search(); close html model use my libary
     if (PortalUtility.QueryUrl().BBLE)
     {
@@ -3995,22 +3998,23 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.NextStep = function () {
         var cStep = $scope.currentStep();
-        if (cStep.next) {
-            if (cStep.next()) {
-                $scope.constractFromData();
-                $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
-                    $scope.refreshSave(formdata);
-                    $scope.step++;
-                    cStep = $scope.currentStep();
-                    if (cStep.init) {
-                        cStep.init();
-                    }
-                })
-            }
+        $scope.step++;
+        //if (cStep.next) {
+        //    if (cStep.next()) {
+        //        $scope.constractFromData();
+        //        $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+        //            $scope.refreshSave(formdata);
+        //            $scope.step++;
+        //            cStep = $scope.currentStep();
+        //            if (cStep.init) {
+        //                cStep.init();
+        //            }
+        //        })
+        //    }
 
-        } else {
-            $scope.step++;
-        }
+        //} else {
+        //    $scope.step++;
+        //}
 
     }
     $scope.PrevStep = function () {

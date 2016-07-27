@@ -1669,6 +1669,13 @@
       <DependentUpon>MyDefault.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="NewOffer\NewOfferAssignCorp.ascx.designer.vb">
+      <DependentUpon>NewOfferAssignCorp.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferAssignCorp.ascx.vb">
+      <DependentUpon>NewOfferAssignCorp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="NewOffer\NewOfferPreview.aspx.designer.vb">
       <DependentUpon>NewOfferPreview.aspx</DependentUpon>
     </Compile>
@@ -7083,6 +7090,7 @@
     <Content Include="js\e2etest\conf.js" />
     <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
+    <Content Include="js\models\AssignCorp.js" />
     <Content Include="js\models\AuditLog.js" />
     <Content Include="js\models\BusinessCheck.js" />
     <Content Include="js\models\CheckRequest.js" />
@@ -7092,6 +7100,7 @@
     <Content Include="js\models\HomeOwner.js" />
     <Content Include="js\models\LeadsInfo.js" />
     <Content Include="js\models\PreSign.js" />
+    <Content Include="js\models\PropertyOffer.js" />
     <Content Include="js\models\ptBaseResource.js" />
     <Content Include="js\models\ptDocSearch.js" />
     <Content Include="js\models\ptLeadResearch.js" />
@@ -7109,6 +7118,7 @@
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="js\test\servicesSpec.js" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
+    <Content Include="js\Views\NewOffer\newoffer-assigncorp-tpl.bak.html" />
     <Content Include="js\Views\NewOffer\newoffer.tpl.html" />
     <Content Include="js\Views\NewOffer\index.tpl.html" />
     <Content Include="js\Views\NewOffer\ssinfo.tpl.html" />
@@ -7177,6 +7187,7 @@
     <Content Include="Mobile\Construction\SpotCheck.aspx" />
     <Content Include="Mobile\default.aspx" />
     <Content Include="MyDefault.aspx" />
+    <Content Include="NewOffer\NewOfferAssignCorp.ascx" />
     <Content Include="NewOffer\NewOfferPreview.aspx" />
     <Content Include="NewOffer\Templates\offer-business-form.html" />
     <Content Include="OneDrive\constants.js" />

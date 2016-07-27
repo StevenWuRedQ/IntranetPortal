@@ -143,6 +143,25 @@ if (typeof requirejs === "function") {
     /*define public shared var of class portalUIRouteProvider register var in the below*/
     var ITEM_ID = 'itemId';
 
+    /**
+     * @date 7/25/2016 - 7/26/2016  
+     * by the way 7/25/2016 have some time box to 
+     * monitor Drone make sure finished refresh leads we assgin to
+     * about full day
+     * 
+     * @class
+     * This should be my class in every other language 
+     * class name should be Name capital frist word.
+     * PortalUIRouteProvider
+     * I send two days to find this stupid bug.
+     * portalUIRouteProvider should be in class use 
+     * This should not portalUIRouteProvider
+     * but can not use no capital name like this 
+     * 
+     * @other
+     * also can not use model define such as we do before,
+     * Because this is special provide 
+     */
     function portalUIRouteProvider($stateProvider) {
 
         // This $get noop is because at the moment in AngularJS "providers" must provide something
@@ -476,6 +495,21 @@ if (typeof requirejs === "function") {
     angular.module('PortalApp').provider('portalRoute', portalRouteProvider);
 })();
 /**
+ * @return {[class]}                 AssignCorp class
+ */
+angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, CorpEntity) {
+    var _class = function()
+    {
+
+    }
+
+    _class.prototype.test = function()
+    {
+        this.text = "1234555";
+    }
+    return _class;
+});
+/**
  * rewite audit log in model view
  */
 /**
@@ -713,6 +747,54 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
 
 
     return preSign;
+});
+/**
+ * @return {[class]}                 PropertyOffer class
+ */
+angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, AssignCorp) {
+    var propertyOffer = ptBaseResource('PropertyOffer', 'OfferId', null, {
+
+
+    });
+    /**
+     * @todo 
+     * by Steven
+     * worng spelling sorry about that will fix it after we refactory all 
+     **/
+    
+    /**
+     * @todo
+     * by Steven
+     * for speed it should be assignCrop type is (AssignCorp) not an Instances 
+     */
+    propertyOffer.prototype.assignCrop = new AssignCorp();
+
+    
+    propertyOffer.prototype.Type =  'Short Sale';
+    propertyOffer.prototype.FormName = 'PropertyOffer';
+
+    /**
+     * @todo
+     * by steven
+     * for speed we define deal sheet class 
+     * like this will move out when I have time
+     * such as Seller class Buyer class and so on
+     */
+    propertyOffer.prototype.DealSheet = {
+        ContractOrMemo: {
+            Sellers: [{}],
+            Buyers: [{}]
+        },
+        Deed: {
+            Sellers: [{}]
+        },
+        CorrectionDeed: {
+            Sellers: [{}],
+            Buyers: [{}]
+        }
+    };
+
+    return propertyOffer;
 });
 /*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
 
@@ -5890,6 +5972,7 @@ portalApp.controller('newofferSsinfoCtrl', function ($scope) {
 portalApp.controller('newofferCtrl', function ($scope) {
     $scope.text = 'newofferCtrl';
 });
+
 /*************old style without model contoller *********************/
 ScopeHelper = {
     getShortSaleScope: function () {
@@ -5907,7 +5990,7 @@ ScopeHelper = {
 
 var portalApp = angular.module('PortalApp');
 
-portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, DocSearch, $location) {
+portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, DocSearch, $location,PropertyOffer) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
@@ -5965,23 +6048,25 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         });
     }
 
-    $scope.SSpreSign = {
-        Type: 'Short Sale',
-        FormName: 'PropertyOffer',
-        DealSheet: {
-            ContractOrMemo: {
-                Sellers: [{}],
-                Buyers: [{}]
-            },
-            Deed: {
-                Sellers: [{}]
-            },
-            CorrectionDeed: {
-                Sellers: [{}],
-                Buyers: [{}]
-            }
-        }
-    };
+    $scope.SSpreSign = new PropertyOffer();
+
+    //    {
+    //    Type: 'Short Sale',
+    //    FormName: 'PropertyOffer',
+    //    DealSheet: {
+    //        ContractOrMemo: {
+    //            Sellers: [{}],
+    //            Buyers: [{}]
+    //        },
+    //        Deed: {
+    //            Sellers: [{}]
+    //        },
+    //        CorrectionDeed: {
+    //            Sellers: [{}],
+    //            Buyers: [{}]
+    //        }
+    //    }
+    //};
     //var urlParam = //$location.search(); close html model use my libary
     if (PortalUtility.QueryUrl().BBLE)
     {
@@ -6353,22 +6438,23 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.NextStep = function () {
         var cStep = $scope.currentStep();
-        if (cStep.next) {
-            if (cStep.next()) {
-                $scope.constractFromData();
-                $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
-                    $scope.refreshSave(formdata);
-                    $scope.step++;
-                    cStep = $scope.currentStep();
-                    if (cStep.init) {
-                        cStep.init();
-                    }
-                })
-            }
+        $scope.step++;
+        //if (cStep.next) {
+        //    if (cStep.next()) {
+        //        $scope.constractFromData();
+        //        $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+        //            $scope.refreshSave(formdata);
+        //            $scope.step++;
+        //            cStep = $scope.currentStep();
+        //            if (cStep.init) {
+        //                cStep.init();
+        //            }
+        //        })
+        //    }
 
-        } else {
-            $scope.step++;
-        }
+        //} else {
+        //    $scope.step++;
+        //}
 
     }
     $scope.PrevStep = function () {

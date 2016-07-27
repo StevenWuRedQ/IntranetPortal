@@ -9,6 +9,25 @@
     /*define public shared var of class portalUIRouteProvider register var in the below*/
     var ITEM_ID = 'itemId';
 
+    /**
+     * @date 7/25/2016 - 7/26/2016  
+     * by the way 7/25/2016 have some time box to 
+     * monitor Drone make sure finished refresh leads we assgin to
+     * about full day
+     * 
+     * @class
+     * This should be my class in every other language 
+     * class name should be Name capital frist word.
+     * PortalUIRouteProvider
+     * I send two days to find this stupid bug.
+     * portalUIRouteProvider should be in class use 
+     * This should not portalUIRouteProvider
+     * but can not use no capital name like this 
+     * 
+     * @other
+     * also can not use model define such as we do before,
+     * Because this is special provide 
+     */
     function portalUIRouteProvider($stateProvider) {
 
         // This $get noop is because at the moment in AngularJS "providers" must provide something
