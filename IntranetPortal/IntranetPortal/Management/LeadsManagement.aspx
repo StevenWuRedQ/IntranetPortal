@@ -151,7 +151,7 @@
                                             </label>
                                         </span>
                                         <div style="float: right">
-                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
+                                            <asp:LinkButton ID="btnExport" Visible="false" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
                                             </asp:LinkButton>
                                             <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
                                         </div>

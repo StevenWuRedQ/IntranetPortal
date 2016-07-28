@@ -220,26 +220,52 @@ Public Class LeadsSubMenu
         If e.Parameter.StartsWith("Save") Then
             Dim reason = cbDeadReasons.Text
             Dim description = txtDeadLeadDescription.Text
+            Dim createby = Page.User.Identity.Name
+            Dim emp = Employee.GetInstance(createby)
 
-            Lead.SetDeadLeadsStatus(hfBBLE.Value, cbDeadReasons.Value, description)
-            'UpdateLeadStatus(hfBBLE.Value, LeadStatus.DeadEnd, Nothing)
+            Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:85px;"">Dead Reason:</td>" &
+                                        "<td style=""font-style: italic;font-weight:600;"">{0}</td></tr>" &
+                                        "<tr><td>Description:</td><td style=""font-style: italic;font-weight:600;"">{1}</td></tr>" &
+                                        "</table>", reason, description)
+            If emp.Position = "Finder" Then
+                Dim taskData = New With {.Reason = cbDeadReasons.Value, .Description = description}
+                comments = String.Format("{0} want to dead this leads. Please approval.", createby) + comments
+                LeadManage.DeadLeadProcess.ProcessStart(hfBBLE.Value, taskData.ToJsonString, createby, comments, Employee.GetReportToManger(createby).Name)
+            Else
+                Lead.SetDeadLeadsStatus(hfBBLE.Value, cbDeadReasons.Value, description)
+                'UpdateLeadStatus(hfBBLE.Value, LeadStatus.DeadEnd, Nothing)
 
-            Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Dead Reason:</td>" &
-                            "<td>{0}</td></tr>" &
-                            "<tr><td>Description:</td><td>{1}</td></tr>" &
-                          "</table>", reason, description)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeadLead)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeadLead)
+            End If
 
             cbDeadReasons.Text = ""
             txtDeadLeadDescription.Text = ""
         End If
-        If e.Parameter.StartsWith("DumpDeadLeads") Then
-            Dim comments = "Dump Dead Leads <br>Reason: " & cbDeadReasons.Text
 
-            Dim l = Lead.GetInstance(hfBBLE.Value)
-            l.ReAssignLeads("Dead Leads", Page.User.Identity.Name)
-            Lead.SetDeadLeadsStatus(l.BBLE, cbDeadReasons.Value, txtDeadLeadDescription.Text, True)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeadLead)
+        If e.Parameter.StartsWith("DumpDeadLeads") Then
+            Dim reason = cbDeadReasons.Text
+            Dim description = txtDeadLeadDescription.Text
+            Dim createby = Page.User.Identity.Name
+            Dim emp = Employee.GetInstance(createby)
+
+            Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:85px;"">Dead Reason:</td>" &
+                                        "<td style=""font-style: italic;font-weight:600;"">{0}</td></tr>" &
+                                        "<tr><td>Description:</td><td style=""font-style: italic;font-weight:600;"">{1}</td></tr>" &
+                                        "</table>", reason, description)
+
+            If emp.Position = "Finder" Then
+                Dim taskData = New With {.Reason = cbDeadReasons.Value, .Description = description}
+                comments = String.Format("{0} want to dead this leads. Please approval.", createby) + comments
+                LeadManage.DumpLeadProcess.ProcessStart(hfBBLE.Value, taskData.ToJsonString, createby, comments, Employee.GetReportToManger(createby).Name)
+            Else
+                Dim l = Lead.GetInstance(hfBBLE.Value)
+                l.ReAssignLeads("Dead Leads", Page.User.Identity.Name)
+                Lead.SetDeadLeadsStatus(l.BBLE, cbDeadReasons.Value, txtDeadLeadDescription.Text, True)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeadLead)
+            End If
+
+            cbDeadReasons.Text = ""
+            txtDeadLeadDescription.Text = ""
         End If
     End Sub
 

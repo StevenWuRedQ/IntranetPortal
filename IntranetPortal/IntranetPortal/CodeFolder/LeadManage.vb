@@ -1,4 +1,5 @@
 ﻿Imports IntranetPortal
+Imports Newtonsoft.Json.Linq
 ''' <summary>
 ''' Handle lead related action
 ''' </summary>
@@ -115,5 +116,40 @@ Public Class LeadManage
 
 #End Region
 
+    Public Shared ReadOnly Property DeadLeadProcess As ShortSaleProcess
+        Get
+            Dim proc = ShortSaleProcess.NewInstance("Dead Lead Request", Nothing, Nothing,
+                                                                                              Nothing, Sub(task)
+                                                                                                           Dim objData = JObject.Parse(task.TaskData)
+                                                                                                           Dim reason = CInt(objData("Reason"))
+                                                                                                           Dim description = objData("Description").ToString
+                                                                                                           Lead.SetDeadLeadsStatus(task.BBLE, reason, description)
+                                                                                                       End Sub, Nothing)
+            proc.ProcessName = "TaskProcess"
+            proc.Category = LeadsActivityLog.LogCategory.SalesAgent
+            proc.ApprovalUrl = "/ViewLeadsInfo.aspx"
+            proc.TaskUrlTemplate = "/ViewLeadsInfo.aspx?id={0}"
+            Return proc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property DumpLeadProcess As ShortSaleProcess
+        Get
+            Dim proc = ShortSaleProcess.NewInstance("Dump Dead Lead Request", Nothing, Nothing,
+                                                                                              Nothing, Sub(task)
+                                                                                                           Dim objData = JObject.Parse(task.TaskData)
+                                                                                                           Dim reason = CInt(objData("Reason"))
+                                                                                                           Dim description = objData("Description").ToString
+                                                                                                           Dim l = Lead.GetInstance(task.BBLE)
+                                                                                                           l.ReAssignLeads("Dead Leads", task.CreateBy)
+                                                                                                           Lead.SetDeadLeadsStatus(task.BBLE, reason, description)
+                                                                                                       End Sub, Nothing)
+            proc.ProcessName = "TaskProcess"
+            proc.Category = LeadsActivityLog.LogCategory.SalesAgent
+            proc.ApprovalUrl = "/ViewLeadsInfo.aspx"
+            proc.TaskUrlTemplate = "/ViewLeadsInfo.aspx?id={0}"
+            Return proc
+        End Get
+    End Property
 
 End Class
