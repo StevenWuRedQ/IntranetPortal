@@ -4,7 +4,7 @@
     <div class="ss_form">
         <h4 class="ss_form_title " ng-class="{ss_warning:!SSpreSign.assignCrop.Crop}">Assign </h4>
         <div class="ss_border" id="assignBtnForm">
-            {{SSpreSign.assignCrop.text}}
+            {{SSpreSign.assignCrop.newOfferId}}
             <input  type="button" ng-click="SSpreSign.assignCrop.test()" value="Test"/>
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item ">
