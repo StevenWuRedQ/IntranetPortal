@@ -63,7 +63,7 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
             if (_assignCrop.onAssignSucceed) {
                 _assignCrop.onAssignSucceed(data);               
             } else {
-                console.log("onAssignSucceed not implement.")
+                console.error("AssignCorp: onAssignSucceed not implement.")
             }
         });
     }
