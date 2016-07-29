@@ -107,6 +107,7 @@
                         <option value="Ginnie Mae">Ginnie Mae</option>
                         <option value="Conventional">Conventional</option>
                         <option value="Private">Private</option>
+                        <option value="Reverse Mortgage">Reverse Mortgage</option>
                     </select>
                 </li>
                 <li class="ss_form_item">
@@ -122,7 +123,6 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Short Sale Dept</label>
                     <input class="ss_form_input" ng-model="ptContactServices.getContactById(mortgage.LenderId).OfficeNO" readonly="readonly">
-
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Customer Service #</label>
@@ -135,7 +135,6 @@
             </ul>
         </div>
         </div>
-
             <div class="ss_form" uib-collapse="mortgageCompanyCollapse">
             <h4 class="ss_form_title">Mortgage Contacts&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" ng-click="NGAddArraryItem(mortgage.Contacts,'SsCase.Mortgages['+$index+'].Contacts')" title="Add"></i></h4>
 

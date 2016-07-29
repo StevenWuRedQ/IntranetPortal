@@ -12,6 +12,7 @@ Imports IntranetPortal.Data
 Imports IntranetPortal.LeadsActivityLog
 
 Namespace Controllers
+
     Public Class LeadInfoDocumentSearchesController
         Inherits System.Web.Http.ApiController
 
@@ -82,7 +83,7 @@ Namespace Controllers
         <ResponseType(GetType(LeadInfoDocumentSearch))>
         Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
 
-            leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStauts.Completed
+            leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStatus.Completed
             leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.CompletedOn = Date.Now
 
@@ -94,6 +95,8 @@ Namespace Controllers
 
             If (Not String.IsNullOrEmpty(leadInfoDocumentSearch.ResutContent)) Then
                 Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, leadInfoDocumentSearch)
+            Else
+                IntranetPortal.Core.SystemLog.LogError("LeadsDocumentSearchContentError", New Exception("The content is null"), leadInfoDocumentSearch.ToJsonString, leadInfoDocumentSearch.CompletedBy, leadInfoDocumentSearch.BBLE)
             End If
 
             Return Ok(leadInfoDocumentSearch)
@@ -104,6 +107,7 @@ Namespace Controllers
             Try
                 Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
                 Dim maildata As New Dictionary(Of String, String)
+
                 If l IsNot Nothing Then
                     maildata.Add("Address", l.PropertyAddress)
                 Else
@@ -117,7 +121,7 @@ Namespace Controllers
                     Dim attachment As Mail.Attachment
                     Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
 
-                    Dim ccEmail = Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name)
+                    Dim ccEmail = Employee.GetEmpsEmails(leadInfoDocumentSearch.CompletedBy, Employee.CEO.Name)
                     ccEmail = ccEmail & ";" & IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
 
                     If judgeDoc IsNot Nothing Then

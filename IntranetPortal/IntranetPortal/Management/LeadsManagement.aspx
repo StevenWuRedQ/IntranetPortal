@@ -151,7 +151,7 @@
                                             </label>
                                         </span>
                                         <div style="float: right">
-                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
+                                            <asp:LinkButton ID="btnExport" Visible="false" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
                                             </asp:LinkButton>
                                             <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
                                         </div>
@@ -202,11 +202,12 @@
                                                 </dx:ASPxImage>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataColumn FieldName="Comments" Width="60px" Caption="Recycle" Settings-HeaderFilterMode="CheckedList">
+                                        <dx:GridViewDataColumn FieldName="Comments" Width="60px" Caption="Recycle" Settings-HeaderFilterMode="CheckedList" Visible="false">
                                             <DataItemTemplate>
                                                 <dx:ASPxCheckBox runat="server" ID="chkRecycled" ToolTip="Recycled" Checked='<%# Eval("IsRecycled")%>' ReadOnly="true" Visible='<%# Eval("IsRecycled")%>'></dx:ASPxCheckBox>
                                             </DataItemTemplate>
                                         </dx:GridViewDataColumn>
+                                        <dx:GridViewDataTextColumn FieldName="RecycleFrom" Caption="Agent" Width="70px"></dx:GridViewDataTextColumn>
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true" EnableRowHotTrack="True" />
                                     <Settings ShowFilterRowMenu="true" ShowHeaderFilterButton="true" ShowColumnHeaders="true" GridLines="Both" VerticalScrollableHeight="1000"></Settings>

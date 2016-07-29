@@ -5,11 +5,13 @@
 Public Class CheckRequest
 
     ''' <summary>
-    ''' The Check list
+    ''' For UI purpose this version don't have client model so move model define in servier side,
+    ''' Can Move it to client side model later after we descusss but doing on server side is also okay.
+    ''' By Steven
     ''' </summary>
-    ''' <returns></returns>
-    Public Property Checks As List(Of BusinessCheck)
+    Public Property Checks As New List(Of BusinessCheck)
     Public Property PropertyAddress As String
+    Public Property ExpectedDate As Date?
 
     ''' <summary>
     ''' Load all check request list
@@ -19,14 +21,17 @@ Public Class CheckRequest
         Using ctx As New PortalEntities
             Dim result = From ck In ctx.CheckRequests
                          From li In ctx.ShortSaleLeadsInfoes.Where(Function(li) li.BBLE = ck.BBLE).DefaultIfEmpty
+                         From expectedDate In ctx.PreSignRecords.Where(Function(pr) pr.CheckRequestId = ck.RequestId AndAlso pr.NeedCheck).Select(Function(pr) pr.ExpectedDate).DefaultIfEmpty
                          Let checks = ctx.BusinessChecks.Where(Function(b) b.RequestId = ck.RequestId)
-                         Select ck, checks, li.PropertyAddress
+                         Select ck, checks, li.PropertyAddress, expectedDate
 
             Return result.ToList.Select(Function(s)
                                             s.ck.Checks = s.checks.ToList
                                             s.ck.PropertyAddress = s.PropertyAddress
+                                            s.ck.ExpectedDate = s.expectedDate
                                             Return s.ck
                                         End Function).ToArray
+
         End Using
     End Function
 
@@ -70,6 +75,19 @@ Public Class CheckRequest
                 check.Save(saveBy)
             Next
         End Using
+    End Sub
+
+    ''' <summary>
+    ''' Add check to check request
+    ''' </summary>
+    ''' <param name="check"></param>
+    ''' <param name="createBy"></param>
+    Public Sub AddCheck(check As BusinessCheck, createBy As String)
+        check.RequestId = RequestId
+        check.Save(createBy)
+
+        Me.Checks.Add(check)
+        Me.Save(createBy)
     End Sub
 
     ''' <summary>

@@ -270,63 +270,6 @@ Public Class PortalDataService
 
     Public Function UpdateOrderInfo(orderId As Integer, infoType As String, status As String) As Boolean
         Return APIOrder.UpdateOrderInfo(orderId, infoType, status)
-
-
-        'Using context As New Entities
-
-        '    Dim apiOrder = context.APIOrders.Where(Function(order) order.ApiOrderID = orderId).SingleOrDefault
-
-        '    If apiOrder IsNot Nothing Then
-
-        '        Select Case infoType
-        '            Case "AcrisMtgrs"
-        '                If status = "Task-Done" Then
-        '                    apiOrder.Acris = apiOrder.ItemStatus.Complete
-        '                End If
-
-        '            Case "ECB_Violations", "DOBPenalty"
-        '                If status = "Task-Done" Then
-        '                    apiOrder.ECBViolation = apiOrder.ItemStatus.Complete
-        '                End If
-
-        '            Case "PROP_TAX"
-        '                If status = "Task-Done" Then
-        '                    apiOrder.TaxBill = apiOrder.ItemStatus.Complete
-        '                End If
-
-        '            Case "WATER_SEWER"
-        '                If status = "Task-Done" Then
-        '                    apiOrder.WaterBill = apiOrder.ItemStatus.Complete
-        '                End If
-        '            Case "Zillow"
-        '                If status = "Task-Done" Then
-        '                    apiOrder.Zillow = apiOrder.ItemStatus.Complete
-        '                End If
-        '            Case "ACRIS_LatestSale"
-        '                If status = "Done" Then
-        '                    apiOrder.LatestSale = apiOrder.ItemStatus.Complete
-        '                End If
-        '        End Select
-
-        '        Dim result As Boolean = (Not (apiOrder.Acris.HasValue AndAlso apiOrder.Acris = apiOrder.ItemStatus.Calling) And
-        '                                 Not (apiOrder.ECBViolation.HasValue AndAlso apiOrder.ECBViolation = apiOrder.ItemStatus.Calling) And
-        '                                      Not (apiOrder.TaxBill.HasValue AndAlso apiOrder.TaxBill = apiOrder.ItemStatus.Calling) And
-        '                                      Not (apiOrder.WaterBill.HasValue AndAlso apiOrder.WaterBill = apiOrder.ItemStatus.Calling) And
-        '                                      Not (apiOrder.Zillow.HasValue AndAlso apiOrder.Zillow = apiOrder.ItemStatus.Calling) And
-        '                                      Not (apiOrder.LatestSale.HasValue AndAlso apiOrder.LatestSale = apiOrder.ItemStatus.Calling))
-
-        '        If result Then
-        '            apiOrder.Status = apiOrder.OrderStatus.Complete
-        '        Else
-        '            apiOrder.Status = apiOrder.OrderStatus.PartialComplete
-        '        End If
-
-        '        context.SaveChanges()
-        '        Return True
-        '    End If
-        'End Using
-
-        'Return False
     End Function
 
     Public Sub TriggerIsReady(data As TriggerData) Implements IPortalDataService.TriggerIsReady
@@ -351,31 +294,27 @@ Public Class PortalDataService
     End Sub
 
     Public Sub ComplaintsUpdatedNotify(complaint As CheckingComplain)
-        Dim usersEmails As New List(Of String)
+        Dim users As New List(Of String)
 
         If Not String.IsNullOrEmpty(complaint.NotifyUsers) Then
-            For Each user In complaint.NotifyUsers.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
-                Dim party = PartyContact.GetContactByName(user)
-                If party IsNot Nothing Then
-                    usersEmails.Add(party.Email)
-                End If
-            Next
+            users.AddRange(complaint.NotifyUsers.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries))
         End If
 
-        If Not String.IsNullOrEmpty(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails")) Then
-            usersEmails.AddRange(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails").Split(";"))
-        End If
-
-        If usersEmails.Count > 0 Then
+        If users.Count > 0 OrElse Not String.IsNullOrEmpty(Core.PortalSettings.GetValue("ComplaitntsNotifyEmails")) Then
             Dim mailData As New Dictionary(Of String, String)
             mailData.Add("UserName", "All")
             mailData.Add("Address", complaint.Address)
             mailData.Add("BBLE", complaint.BBLE)
 
-            Dim svr As New CommonService
-            svr.SendEmailByControl(String.Join(";", usersEmails), "DOB Complaint Update for: " & complaint.Address, "ComplaintsDetailNotify", mailData)
-        End If
+            Dim subject = "DOB Complaint Update for: " & complaint.Address
+            If complaint.ActiveComplaints.HasValue AndAlso complaint.ActiveComplaints = 0 Then
+                subject = "DOB Complaints Resolved for: " & complaint.Address
+            End If
 
+            Dim svr As New CommonService
+            svr.SendEmailByControl(Employee.GetEmpsEmails(users.ToArray) & ";" & Core.PortalSettings.GetValue("ComplaitntsNotifyEmails"),
+                                    subject, "ComplaintsDetailNotify", mailData)
+        End If
     End Sub
 
 End Class

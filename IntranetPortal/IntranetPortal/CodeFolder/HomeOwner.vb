@@ -39,6 +39,13 @@ Partial Public Class HomeOwner
             If value IsNot Nothing Then
                 objLocateReport = value
                 ReportToken = value.reportTokenField
+                If value.sSNField IsNot Nothing Then
+                    OwnerSSN = value.sSNField.sSNField
+                End If
+
+                'save tlo data
+                SaveTloData(value)
+
                 'save phone no to database
                 SavePhoneField(value)
 
@@ -52,9 +59,85 @@ Partial Public Class HomeOwner
                 '    LocateReport = writer.ToArray
                 'End Using
             End If
-
         End Set
     End Property
+
+    Public Sub SaveReportData()
+        Dim value = TLOLocateReport
+        If value IsNot Nothing Then
+            If value.sSNField IsNot Nothing Then
+                OwnerSSN = value.sSNField.sSNField
+            End If
+
+            'save tlo data
+            SaveTloData(value)
+
+            'LocateReportContent = Newtonsoft.Json.JsonConvert.SerializeObject(value)
+        End If
+    End Sub
+
+    Private Sub SaveTloData(ownerInfo As DataAPI.TLOLocateReportOutput)
+        If Not String.IsNullOrEmpty(ownerInfo.reportTokenField) Then
+            Using ctx As New Entities
+                Dim data = ctx.TLODatas.Find(OwnerID)
+
+                If data Is Nothing Then
+                    data = New TLOData
+                    data.BBLE = BBLE
+                    data.OwnerId = OwnerID
+                    data.CreateTime = DateTime.Now
+                    ctx.TLODatas.Add(data)
+                End If
+
+                data.ReportToken = ownerInfo.reportTokenField
+
+                If ownerInfo.namesField IsNot Nothing AndAlso ownerInfo.namesField.Count > 0 Then
+                    data.FirstName = ownerInfo.namesField(0).firstNameField
+                    data.LastName = ownerInfo.namesField(0).lastNameField
+                End If
+
+                If ownerInfo.sSNField IsNot Nothing Then
+                    data.SSN = ownerInfo.sSNField.sSNField
+                End If
+
+                ctx.SaveChanges()
+            End Using
+        End If
+    End Sub
+
+    Public Shared Sub InitOwnerSSN(ownerId As Integer)
+        Using ctx As New Entities
+            Dim owner = ctx.HomeOwners.Find(ownerId)
+            owner.SaveReportData()
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
+    Public Shared Function LoadOwnerIds() As Integer()
+        Using ctx As New Entities
+            Dim dataIds = ctx.TLODatas.Select(Function(t) t.OwnerId)
+            Dim owners = From ho In ctx.HomeOwners.Where(Function(h) h.ReportToken IsNot Nothing AndAlso
+                                                          h.UserModified = False)
+                         Where Not dataIds.Contains(ho.OwnerID)
+                         Select ho.OwnerID
+
+            Return owners.ToArray
+        End Using
+    End Function
+
+    Public Shared Sub BatchInitOwnerSSN(count As Integer)
+        Using ctx As New Entities
+            Dim owners = ctx.HomeOwners.Where(Function(h) String.IsNullOrEmpty(h.OwnerSSN) AndAlso
+                                                          h.ReportToken IsNot Nothing AndAlso
+                                                          h.UserModified = False).Take(count).ToList
+
+            For Each owner In owners
+                owner.TLOLocateReport = owner.TLOLocateReport
+            Next
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
 
     Public Shared Function GetHomeOwenrs(bble As String) As List(Of HomeOwner)
         Using ctx As New Entities

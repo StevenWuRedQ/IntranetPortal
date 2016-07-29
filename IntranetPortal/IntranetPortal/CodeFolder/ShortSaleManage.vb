@@ -535,6 +535,14 @@ Public Class ShortSaleProcess
     Public Delegate Sub Approved(task As UserTask)
     Public Delegate Sub Declined(task As UserTask)
 
+    Public Property ProcessName As String = "ShortSaleTask"
+
+    Public Property TaskUrlTemplate As String = "/ShortSale/ShortSale.aspx?bble={0}"
+
+    Public Property Category As LeadsActivityLog.LogCategory = LeadsActivityLog.LogCategory.ShortSale
+
+    Public Property ApprovalUrl As String = "/ShortSale/ShortSale.aspx"
+
     ''' <summary>
     ''' The Process Name
     ''' </summary>
@@ -581,6 +589,10 @@ Public Class ShortSaleProcess
             If task.Action = ShortSaleManage.ArchivedProcess.TaskName Then
                 proc = ShortSaleManage.ArchivedProcess
             End If
+
+            If task.Action = LeadManage.DeadLeadProcess.TaskName Then
+                proc = LeadManage.DeadLeadProcess
+            End If
         End If
 
         If proc IsNot Nothing Then
@@ -600,7 +612,7 @@ Public Class ShortSaleProcess
     ''' <param name="approvedAction">custom function on process approved</param>
     ''' <param name="declinedAction">custom function on process declined</param>
     ''' <returns>Process Instance</returns>
-    Public Shared Function NewInstance(name As String, roles As String, approvers As String, startAction As StartProcess, approvedAction As Approved, declinedAction As Declined)
+    Public Shared Function NewInstance(name As String, roles As String, approvers As String, startAction As StartProcess, approvedAction As Approved, declinedAction As Declined) As ShortSaleProcess
         Dim proc = ProcessTable.FirstOrDefault(Function(p) p.TaskName = name)
         If proc Is Nothing Then
             proc = New ShortSaleProcess
@@ -626,7 +638,7 @@ Public Class ShortSaleProcess
 
                 Dim ld = LeadsInfo.GetInstance(task.BBLE)
                 Dim msg = String.Format("Your {0}-{1} is approved by {2}.", task.Action, ld.StreetNameWithNo, task.CompleteBy)
-                UserMessage.AddNewMessage(task.CreateBy, "Approved", msg, task.BBLE, DateTime.Now, "Portal", "/ShortSale/ShortSale.aspx?bble=" & task.BBLE)
+                UserMessage.AddNewMessage(task.CreateBy, "Approved", msg, task.BBLE, DateTime.Now, "Portal", String.Format(TaskUrlTemplate, task.BBLE))
             Case UserTask.TaskStatus.Declined
                 If DeclinedAction IsNot Nothing Then
                     DeclinedAction(task)
@@ -634,7 +646,7 @@ Public Class ShortSaleProcess
 
                 Dim ld = LeadsInfo.GetInstance(task.BBLE)
                 Dim msg = String.Format("Your {0}-{1} is declined by {2}. Comments: {3}", task.Action, ld.StreetNameWithNo, task.CompleteBy, task.Comments)
-                UserMessage.AddNewMessage(task.CreateBy, "Declined", msg, task.BBLE, DateTime.Now, "Portal", "/ShortSale/ShortSale.aspx?bble=" & task.BBLE)
+                UserMessage.AddNewMessage(task.CreateBy, "Declined", msg, task.BBLE, DateTime.Now, "Portal", String.Format(TaskUrlTemplate, task.BBLE))
         End Select
     End Sub
 
@@ -645,7 +657,7 @@ Public Class ShortSaleProcess
 
         'Dim comments = String.Format("{0} want to move this case to ShortSale. Please approval.", createBy)
         Dim emp = Employee.GetInstance(createBy)
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.ShortSale.ToString, emp.EmployeeID, createBy, LeadsActivityLog.EnumActionType.SetAsTask)
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, Category.ToString, emp.EmployeeID, createBy, LeadsActivityLog.EnumActionType.SetAsTask)
         'For testing purpose, need change to ShortSale-Manager
 
         Dim names = If(Not String.IsNullOrEmpty(RoleName), String.Join(";", Roles.GetUsersInRole(RoleName)), UserNames)
@@ -657,6 +669,10 @@ Public Class ShortSaleProcess
         Dim task = UserTask.AddUserTask(bble, names, TaskName, "Normal", "In Office", DateTime.Now, comments, log.LogID, createBy, UserTask.UserTaskMode.Approval, taskData)
 
         Dim ld = LeadsInfo.GetInstance(bble)
-        WorkflowService.StartTaskProcess("ShortSaleTask", TaskName & " " & ld.StreetNameWithNo, task.TaskID, bble, names, "Normal")
+        If ProcessName = "ShortSaleTask" Then
+            WorkflowService.StartTaskProcess(ProcessName, TaskName & " " & ld.StreetNameWithNo, task.TaskID, bble, names, "Normal")
+        Else
+            WorkflowService.StartTaskProcess(ProcessName, TaskName & " " & ld.StreetNameWithNo, task.TaskID, bble, names, "Normal", Nothing, ApprovalUrl)
+        End If
     End Sub
 End Class

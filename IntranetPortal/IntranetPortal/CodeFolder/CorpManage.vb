@@ -15,6 +15,8 @@ Public Class CorpManage
             Throw New PortalException("Can not find the property. BBLE: " & bble)
         End If
 
+        Dim isReserve = corp.IsReserve
+
         Try
             corp.AssignCorp(li.BBLE, li.PropertyAddress, assignBy)
         Catch ex As Exception
@@ -35,6 +37,15 @@ Public Class CorpManage
                             IntranetPortal.Core.SystemLog.LogError("NotifyCorpIsAssigned", ex,
                                                                    team, Nothing, bble)
                         End Try
+
+                        Try
+                            If isReserve Then
+                                ReserveCorpIsAssigned(li, corp, team)
+                            End If
+                        Catch ex As Exception
+                            IntranetPortal.Core.SystemLog.LogError("NotifyReserveCorpIsAssigned", ex,
+                                                                   team, Nothing, bble)
+                        End Try
                     End Sub
 
         System.Threading.ThreadPool.QueueUserWorkItem(check, corp.Office)
@@ -52,6 +63,27 @@ Public Class CorpManage
 
     Public Shared Sub NotifyCorpIsAssigned(li As LeadsInfo, corp As CorporationEntity, team As String)
         Dim templateName = "CorpAssignedNotify"
+
+        Dim users = Roles.GetUsersInRole("Entity-Manager")
+
+        If users Is Nothing OrElse users.Count = 0 Then
+            Return
+        End If
+
+        Dim emp = Employee.GetInstance(users(0))
+
+        Dim emailData As New Dictionary(Of String, String)
+        emailData.Add("CorpName", corp.CorpName)
+        emailData.Add("UserName", emp.Name)
+        emailData.Add("Team", team)
+        emailData.Add("Signer", corp.Signer)
+        emailData.Add("PropertyAddress", li.PropertyAddress)
+
+        IntranetPortal.Core.EmailService.SendMail(Employee.GetEmpsEmails(emp), Employee.GetEmpsEmails(users), templateName, emailData)
+    End Sub
+
+    Private Shared Sub ReserveCorpIsAssigned(li As LeadsInfo, corp As CorporationEntity, team As String)
+        Dim templateName = "ReserveCorpIsAssigned"
 
         Dim users = Roles.GetUsersInRole("Entity-Manager")
 

@@ -337,6 +337,11 @@ Partial Public Class Employee
         Return GetManagedEmployees(managerName, True)
     End Function
 
+    Public Shared Function IsUserManager(manager As String, username As String) As Boolean
+        Dim users = GetManagedEmployees(manager, False)
+        Return users.Contains(username)
+    End Function
+
     Public Shared Function GetManagedEmployeeList(managerName As String) As List(Of Employee)
         Dim emps As New List(Of Employee)
         Dim mgr = GetInstance(managerName)

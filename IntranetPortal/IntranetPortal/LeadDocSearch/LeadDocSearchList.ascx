@@ -1,9 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LeadDocSearchList.ascx.vb" Inherits="IntranetPortal.LeadDocSearchList" %>
+
 <script type="text/javascript">
     var postponedCallbackRequired = false;
     var leadsInfoBBLE = null;
 
-    //function is called on changing focused row
+    // function is called on changing focused row
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
         if (gridCase.GetFocusedRowIndex() >= 0) {
@@ -29,7 +30,7 @@
 
     function OnGetRowValues(values) {
         if (values == null) {
-            //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
+            // gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
         }
         else {
             leadsInfoBBLE = values;
@@ -38,12 +39,11 @@
             //ContentCallbackPanel.PerformCallback(values);
             if (typeof cbpLogs != 'undefined')
                 cbpLogs.PerformCallback(leadsInfoBBLE);
-                       
+
             LoadSearch(leadsInfoBBLE);
         }
     }
-
-
+    
     function expandAllClick(s) {
         if (gridCase.IsGroupRowExpanded(0)) {
             gridCase.CollapseAll();
@@ -149,7 +149,7 @@
                 </div>
             </div>
         </div>
-        <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
+        <%-- <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
     <div style="overflow: auto; height: 798px; padding: 0px 10px;" id="leads_list_left">
@@ -173,7 +173,7 @@
                         <div>
                             <table style="height: 30px">
                                 <tr>
-                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded, "down", "right") %> font_16" onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp; <i class="fa fa-bank font_16"></i>&nbsp; <%# CType(CInt(Container.GroupText), IntranetPortal.Data.LeadInfoDocumentSearch.SearchStauts).ToString%>
+                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded, "down", "right") %> font_16" onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp; <i class="fa fa-bank font_16"></i>&nbsp; <%# CType(CInt(Container.GroupText), IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus).ToString%>
                                     </span></td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "") %></span>

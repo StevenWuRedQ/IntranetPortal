@@ -3,6 +3,8 @@ Imports System.Net.Http
 Imports System.Threading
 Imports System.Web.Http
 Imports System.Web.Http.Filters
+
+
 ''' <summary>
 ''' Represents an Exception which caused the call back from devexpress control
 ''' </summary>
@@ -35,6 +37,7 @@ Public Class CallbackException
         MyBase.New(message, innerException)
     End Sub
 End Class
+
 
 ''' <summary>
 ''' Represents an Exception which happend on Portal has specific code
@@ -95,5 +98,4 @@ Public Class WebApiException
         Dim errorId = Core.SystemLog.LogError("WebApiError", ex, context.Request.RequestUri.AbsoluteUri, HttpContext.Current.User.Identity.Name, Nothing)
         context.Response = context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, String.Format("Error Id: {0}, Message: {1}", errorId, message))
     End Sub
-
 End Class

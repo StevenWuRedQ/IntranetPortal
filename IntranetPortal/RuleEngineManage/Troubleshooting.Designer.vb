@@ -55,6 +55,7 @@ Partial Class Troubleshooting
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.AutoAssignRules = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.tabEmail = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -145,7 +146,7 @@ Partial Class Troubleshooting
         Me.tpAuction = New System.Windows.Forms.TabPage()
         Me.txtFiles = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.AutoAssignRules = New System.Windows.Forms.Button()
+        Me.btnComplaintEmail = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -490,6 +491,15 @@ Partial Class Troubleshooting
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Leads and Tasks"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'AutoAssignRules
+        '
+        Me.AutoAssignRules.Location = New System.Drawing.Point(222, 120)
+        Me.AutoAssignRules.Name = "AutoAssignRules"
+        Me.AutoAssignRules.Size = New System.Drawing.Size(153, 23)
+        Me.AutoAssignRules.TabIndex = 10
+        Me.AutoAssignRules.Text = "Auto Assign Rules"
+        Me.AutoAssignRules.UseVisualStyleBackColor = True
         '
         'Button11
         '
@@ -1053,6 +1063,7 @@ Partial Class Troubleshooting
         '
         'TabPage8
         '
+        Me.TabPage8.Controls.Add(Me.btnComplaintEmail)
         Me.TabPage8.Controls.Add(Me.btnRefreshComplaints)
         Me.TabPage8.Controls.Add(Me.txtNotifyNames)
         Me.TabPage8.Controls.Add(Me.btnNotifyAll)
@@ -1371,14 +1382,14 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'AutoAssignRules
+        'btnComplaintEmail
         '
-        Me.AutoAssignRules.Location = New System.Drawing.Point(222, 120)
-        Me.AutoAssignRules.Name = "AutoAssignRules"
-        Me.AutoAssignRules.Size = New System.Drawing.Size(153, 23)
-        Me.AutoAssignRules.TabIndex = 10
-        Me.AutoAssignRules.Text = "Auto Assign Rules"
-        Me.AutoAssignRules.UseVisualStyleBackColor = True
+        Me.btnComplaintEmail.Location = New System.Drawing.Point(138, 76)
+        Me.btnComplaintEmail.Name = "btnComplaintEmail"
+        Me.btnComplaintEmail.Size = New System.Drawing.Size(108, 29)
+        Me.btnComplaintEmail.TabIndex = 9
+        Me.btnComplaintEmail.Text = "Test Notify"
+        Me.btnComplaintEmail.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1555,4 +1566,5 @@ Partial Class Troubleshooting
     Friend WithEvents btnOpenWindow As Button
     Friend WithEvents cbForms As ComboBox
     Friend WithEvents AutoAssignRules As Button
+    Friend WithEvents btnComplaintEmail As Button
 End Class

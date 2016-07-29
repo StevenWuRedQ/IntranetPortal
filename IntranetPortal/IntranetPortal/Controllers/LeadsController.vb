@@ -3,7 +3,7 @@ Imports System.Web.Http
 Imports System.Web.Http.Description
 
 Namespace Controllers
-    <Authorize(Roles:="Admin,Auction-Manager,OfficeManager-*")>
+    <Authorize(Roles:="Admin,Auction-Manager,OfficeManager-*,HOI-Viewer,NewOffer-Viewer")>
     Public Class LeadsController
         Inherits ApiController
 

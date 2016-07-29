@@ -77,10 +77,11 @@ Public Class ContactService
                 entity.AppId = Employee.CurrentAppId
             End If
 
-            entity.Save()
-                Return entity.ToJson
-            End If
-            Return Nothing
+            entity.Save(HttpContext.Current.User.Identity.Name)
+            Return entity.ToJson
+        End If
+
+        Return Nothing
     End Function
     <OperationContract()>
   <WebInvoke(RequestFormat:=WebMessageFormat.Json, ResponseFormat:=WebMessageFormat.Json, BodyStyle:=WebMessageBodyStyle.WrappedRequest)>
@@ -92,7 +93,7 @@ Public Class ContactService
                 Dim BBLE = IntranetPortal.Core.Utility.Address2BBLE(entity.PropertyAssigned)
                 entity.BBLE = BBLE
 
-                entity.Save()
+                entity.Save(HttpContext.Current.User.Identity.Name)
                 Return entity.BBLE.ToJson
             Catch ex As Exception
                 Throw ex

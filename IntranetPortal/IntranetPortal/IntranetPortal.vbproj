@@ -252,6 +252,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="JWT">
       <HintPath>..\packages\JWT.1.3.2\lib\3.5\JWT.dll</HintPath>
     </Reference>
@@ -968,6 +972,9 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\TeamLeadsInZip.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\TLOData.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\UserAppointment.vb">
@@ -7671,6 +7678,7 @@
     <Content Include="ShortSale\GeneralParties.ascx" />
     <Content Include="ShortSale\ShortPreSignControl.ascx" />
     <Content Include="SQL\SearchReslut.sql" />
+    <Content Include="TempDataFile\reslut.docx" />
     <Content Include="TitleUI\TitleSummaryPage.aspx" />
     <Content Include="TitleUI\TitleSummaryView.ascx" />
     <Content Include="TitleUI\TitleCommentControl.ascx" />
@@ -8204,12 +8212,12 @@
     </Content>
     <Content Include="WCFDataServices\Web.config" />
     <Content Include="Task\Reports\WorkflowReprot.Master" />
-    <Content Include="TempDataFile\reslut.docx" />
     <Content Include="App_Data\TitleDoc\BILL OF SALE.docx" />
     <Content Include="App_Data\TitleDoc\CANCELLING PRIOR MEMBERSHIP AGREEMENT AND RESIGNATION.docx" />
     <Content Include="App_Data\TitleDoc\Hold Harmless Agreement.docx" />
     <Content Include="App_Data\TitleDoc\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
     <Content Include="App_Data\TitleDoc\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
+    <Content Include="TempDataFile\LeadsList.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

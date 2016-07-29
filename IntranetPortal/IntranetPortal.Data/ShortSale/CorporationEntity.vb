@@ -35,6 +35,12 @@ Public Class CorporationEntity
         End Using
     End Function
 
+    Public ReadOnly Property IsReserve As Boolean
+        Get
+            Return Status = "Reserve"
+        End Get
+    End Property
+
     ''' <summary>
     ''' Get team's available corp to sign
     ''' </summary>
@@ -76,6 +82,34 @@ Public Class CorporationEntity
     End Function
 
     ''' <summary>
+    ''' Return Reserve Corps
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function GetReserveCorps() As List(Of CorporationEntity)
+        Using db As New PortalEntities
+            Dim corps = db.CorporationEntities.Where(Function(c) c.Status = "Reserve").ToList
+            Return corps
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Get reserve corp by signer
+    ''' </summary>
+    ''' <param name="signer">Signer</param>
+    ''' <returns>The reserve corp</returns>
+    Public Shared Function GetReserveCorpBySigner(signer As String) As CorporationEntity
+
+        Dim corps = GetReserveCorps().Where(Function(a) a.Signer = signer).ToList
+
+        If corps IsNot Nothing AndAlso corps.Count > 0 Then
+            Dim rand As New Random
+            Return corps(rand.Next(corps.Count))
+        End If
+
+        Return Nothing
+    End Function
+
+    ''' <summary>
     ''' Return Team's Available Corps
     ''' </summary>
     ''' <param name="team">The Team Name</param>
@@ -96,11 +130,11 @@ Public Class CorporationEntity
     Public Function AssignCorp(bble As String, address As String, assignBy As String) As CorporationEntity
 
         Using db As New PortalEntities
-            If db.CorporationEntities.Any(Function(a) a.BBLE = bble) Then
+            If db.CorporationEntities.Any(Function(a) a.BBLE = bble AndAlso a.Status <> "Available") Then
                 Throw New Exception("Property was already assigned.")
             End If
 
-            If Status <> "Available" Then
+            If Status <> "Available" AndAlso Status <> "Reserve" Then
                 Throw New Exception("Corp is not available")
             End If
 
@@ -112,8 +146,8 @@ Public Class CorporationEntity
                 Me.UpdateTime = DateTime.Now
                 Me.UpdateBy = assignBy
                 db.Entry(Me).State = Entity.EntityState.Modified
-
-                db.SaveChanges()
+                db.Entry(Me).OriginalValues.SetValues(db.Entry(Me).GetDatabaseValues)
+                db.SaveChanges(assignBy)
             Catch ex As Exception
                 Throw
             End Try
@@ -130,10 +164,21 @@ Public Class CorporationEntity
         End Using
     End Function
 
+    ''' <summary>
+    ''' The Days count since corp assigned out
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property AssignedOutDays As Integer
+        Get
+            If Status = "Assigned Out" AndAlso AssignOn.HasValue Then
+                Return CInt((AssignOn.Value - DateTime.Now).TotalDays) + 1
+            End If
+
+            Return 0
+        End Get
+    End Property
+
     Private Sub NotifyEntityManager()
-
-
-
 
         'IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", templateName, emailData)
     End Sub
@@ -153,19 +198,26 @@ Public Class CorporationEntity
 
     End Function
 
-    Public Sub Save()
+    Public Sub Save(saveby As String)
         Using context As New PortalEntities
 
-            If EntityId = 0 Then
+            If Not context.CorporationEntities.Any(Function(c) c.EntityId = EntityId) Then
                 CreateTime = DateTime.Now
+                CreateBy = saveby
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                Dim obj = context.CorporationEntities.Find(EntityId)
-                obj = Core.Utility.SaveChangesObj(obj, Me)
-                obj.UpdateTime = DateTime.Now
+                If Status = "Available" OrElse Status = "Reserve" Then
+                    BBLE = Nothing
+                    PropertyAssigned = Nothing
+                    AssignOn = Nothing
+                End If
+                UpdateBy = saveby
+                UpdateTime = DateTime.Now
+                context.Entry(Me).State = Entity.EntityState.Modified
+                context.Entry(Me).OriginalValues.SetValues(context.Entry(Me).GetDatabaseValues)
             End If
 
-            context.SaveChanges()
+            context.SaveChanges(saveby)
         End Using
     End Sub
 

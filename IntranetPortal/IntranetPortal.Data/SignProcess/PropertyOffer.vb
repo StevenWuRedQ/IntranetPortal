@@ -20,8 +20,12 @@ Partial Public Class PropertyOffer
         End Using
     End Function
 
+    ''' <summary>
+    ''' Load Property offer data
+    ''' </summary>
+    ''' <param name="bble">The Property BBLE</param>
+    ''' <returns>The Property Offer</returns>
     Public Shared Function GetOffer(bble As String) As PropertyOffer
-
         Using ctx As New PortalEntities
             Dim offer = ctx.PropertyOffers.Where(Function(p) p.BBLE = bble).FirstOrDefault
             Return offer
@@ -57,14 +61,14 @@ Partial Public Class PropertyOffer
                 Me.UpdateBy = saveBy
 
                 ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
                 Me.CreateBy = saveBy
                 Me.CreateDate = DateTime.Now
-
                 ctx.PropertyOffers.Add(Me)
             End If
 
-            ctx.SaveChanges()
+            ctx.SaveChanges(saveBy)
         End Using
     End Sub
 
@@ -76,22 +80,38 @@ Partial Public Class PropertyOffer
     Public Overrides Function Save(itemData As FormDataItem) As String
         MyBase.Save(itemData)
 
+        Dim updateBy = itemData.UpdateBy
         Using ctx As New PortalEntities
             If ctx.PropertyOffers.Any(Function(t) t.FormItemId = itemData.DataId) Then
+                If String.IsNullOrEmpty(BBLE) Then
+                    Throw New Exception("can not find BBLE")
+                End If
+
                 UpdateFields(itemData)
                 ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
                 UpdateFields(itemData, True)
                 ctx.PropertyOffers.Add(Me)
+                updateBy = itemData.CreateBy
             End If
 
-            ctx.SaveChanges()
+            ctx.SaveChanges(updateBy)
             Return BBLE
         End Using
     End Function
 
+    ''' <summary>
+    ''' Update the New Offer report fields
+    ''' </summary>
+    ''' <param name="itemData">The Business Data Object</param>
+    ''' <param name="newCase">indicate if the object is new</param>
     Public Sub UpdateFields(itemData As FormDataItem, Optional newCase As Boolean = False)
         Dim jsonCase = Newtonsoft.Json.Linq.JObject.Parse(itemData.FormData)
+
+        If jsonCase Is Nothing Then
+            Return
+        End If
 
         If newCase Then
             FormItemId = itemData.DataId
@@ -105,6 +125,7 @@ Partial Public Class PropertyOffer
             Return
         End If
 
+
         Dim jStatus = jsonCase.GetValue("Status")
         If jStatus IsNot Nothing AndAlso Not String.IsNullOrEmpty(jStatus.ToString) Then
             Dim tmpStatus As Integer
@@ -112,6 +133,13 @@ Partial Public Class PropertyOffer
                 Me.Status = tmpStatus
             End If
         End If
+
+        ContractSeller1 = LoadJsonData(Of String)(jsonCase, "DealSheet.ContractOrMemo.Sellers[0].Name")
+        ContractSeller2 = LoadJsonData(Of String)(jsonCase, "DealSheet.ContractOrMemo.Sellers[1].Name")
+        ContractSeller3 = LoadJsonData(Of String)(jsonCase, "DealSheet.ContractOrMemo.Sellers[2].Name")
+        ContractPrice = LoadJsonData(Of Decimal)(jsonCase, "DealSheet.ContractOrMemo.contractPrice")
+        ContractDownPay = LoadJsonData(Of Decimal)(jsonCase, "DealSheet.ContractOrMemo.downPayment")
+
         UpdateBy = itemData.UpdateBy
         UpdateDate = DateTime.Now
     End Sub
@@ -122,4 +150,18 @@ Partial Public Class PropertyOffer
         Completed = 2
     End Enum
 
+    Private Function LoadJsonData(Of T)(jsonCase As JObject, jpath As String) As T
+
+        Try
+            Dim field = jsonCase.SelectToken(jpath)
+
+            If field IsNot Nothing Then
+                Return CTypeDynamic(Of T)(field)
+            End If
+        Catch ex As Exception
+
+        End Try
+
+        Return Nothing
+    End Function
 End Class

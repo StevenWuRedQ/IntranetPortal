@@ -13,15 +13,14 @@
             me.angularApp.module('PortalApp')
                      .controller('AuditLogController', ['$scope', '$http', function ($scope, $http) {
                          me.http = $http;
-                         me.scope = $scope;
-
+                         me.scope = $scope;                       
                          //me.http.get('/api/auditlog/' + me.objectName + "/" + me.recordId).success(function (data) {
                          //    var result = _.groupBy(data, function (item) {
                          //        return item.EventDate;
                          //    });                           
                          //    me.scope.AuditLogs = result;
                          //});
-                     }]);
+                     }]);          
         },
         show: function (objName, recordId) {
             me = this;
@@ -66,7 +65,7 @@
 <div ng-controller="AuditLogController" >
     <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block">
         <h5 ng-class="{alert-success:$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </h5>        
-        <table class="" style="width: 100%" ng-show="prop[0].EventType!=0">
+        <table class="" style="width: 100%; font-size:14px" ng-show="prop[0].EventType!=0">
              <tr>
                 <th style="width: 20%">Field</th>
                 <th style="width: 40%">Previous Value</th>

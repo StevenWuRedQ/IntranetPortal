@@ -1,5 +1,4 @@
-﻿
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
 Imports Newtonsoft.Json
 

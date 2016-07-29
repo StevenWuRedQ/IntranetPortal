@@ -8,7 +8,10 @@ Imports Newtonsoft.Json.Linq
 <MetadataType(GetType(PreSignRecordmMetaData))>
 Partial Public Class PreSignRecord
 
-    Public Property CheckRequestData As CheckRequest
+    ' For UI purpose this version don't have client model so move model define in servier side,
+    ' Can Move it to client side model later after we descusss but doing on server side is also okay.
+    ' By Steven
+    Public Property CheckRequestData As New CheckRequest
     Public Property SearchData As LeadInfoDocumentSearch
 
     ''' <summary>
@@ -42,7 +45,10 @@ Partial Public Class PreSignRecord
             End If
 
             If record.NeedCheck Then
-                record.CheckRequestData = CheckRequest.GetInstance(record.CheckRequestId)
+                If (record.CheckRequestId) Then
+                    record.CheckRequestData = CheckRequest.GetInstance(record.CheckRequestId)
+                End If
+
             End If
 
             Return record
@@ -68,11 +74,60 @@ Partial Public Class PreSignRecord
             End If
 
             If record.NeedCheck Then
-                record.CheckRequestData = CheckRequest.GetInstance(record.CheckRequestId)
+
+                If (record.CheckRequestId IsNot Nothing) Then
+                    record.CheckRequestData = CheckRequest.GetInstance(record.CheckRequestId)
+                End If
+
             End If
 
             Return record
         End Using
+    End Function
+
+    ''' <summary>
+    ''' Becuase backend model can not know UI change so pass client model property 
+    ''' may have other way doing better use cient side model
+    ''' By Steven
+    ''' </summary>
+    ''' <param name="isNeedCheck"></param>
+    ''' <param name="check"></param>
+    ''' <returns></returns>
+    Public Function AddCheck(isNeedCheck As Boolean, check As BusinessCheck, Optional saveBy As String = Nothing) As BusinessCheck
+
+        If (Not isNeedCheck) Then
+            Throw New Exception("Can not add check when need check is not selected")
+        End If
+
+        Me.NeedCheck = isNeedCheck
+
+        If (Me.NeedCheck And (Me.CheckRequestId Is Nothing Or Me.CheckRequestId = 0)) Then
+
+            Me.CheckRequestData = New CheckRequest()
+            Me.CheckRequestData.BBLE = BBLE
+            Me.CheckRequestData.Type = "Short Sale"
+            Me.CheckRequestData.Checks.Add(check)
+            Me.CheckRequestData.Create(saveBy)
+
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            Me.CheckRequestId = Me.CheckRequestData.RequestId
+            Me.Save(saveBy)
+            '' save twice for safety maybe other desgin will better or we don't need it even
+
+            '' not necessary Chris check it later
+            'Me.CheckRequestData.Save(saveBy)
+            '' not necessary Chris check it later
+
+        Else
+            Me.CheckRequestData.AddCheck(check, saveBy)
+        End If
+
+        'check.RequestId = Me.CheckRequestId
+
+        ''not necessary Chris check it later
+        'check.Save(saveBy)
+
+        Return check
     End Function
 
     ''' <summary>

@@ -24,7 +24,7 @@ Namespace Controllers
                 Dim path = HttpContext.Current.Server.MapPath("~/App_Data/OfferDoc")
                 Dim destPath = HttpContext.Current.Server.MapPath("/TempDataFile/OfferDoc/")
                 Dim fileName = PropertyOfferManage.GeneratePackage(bble, data, path, destPath)
-                Return Ok(destPath & fileName)
+                Return Ok("/TempDataFile/OfferDoc/" & fileName)
             Catch ex As Exception
                 Return BadRequest(ex.Message)
             End Try
@@ -40,7 +40,7 @@ Namespace Controllers
 
             Dim name = HttpContext.Current.User.Identity.Name
 
-            If Employee.IsAdmin(name) Then
+            If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
                 name = "*"
             End If
 

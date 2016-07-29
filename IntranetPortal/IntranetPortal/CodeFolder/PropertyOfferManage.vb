@@ -3,6 +3,7 @@ Imports System.IO.Compression
 Imports Newtonsoft.Json.Linq
 Imports Novacode
 Imports IntranetPortal.Data
+Imports iTextSharp.text.pdf
 
 ''' <summary>
 ''' The action realted to PropertyOffer
@@ -26,12 +27,21 @@ Public Class PropertyOfferManage
                 Return False
             End If
 
-            If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+            If search.Status <> LeadInfoDocumentSearch.SearchStatus.Completed Then
                 Return False
             End If
         End If
 
         Return True
+    End Function
+
+    ''' <summary>
+    ''' Return if hoi list can be viewable by current user
+    ''' </summary>
+    ''' <param name="username">the user name</param>
+    ''' <returns></returns>
+    Public Shared Function Viewable(username As String) As Boolean
+        Return Employee.IsAdmin(username) OrElse Roles.IsUserInRole(username, "NewOffer-Viewer")
     End Function
 
     ''' <summary>
@@ -51,14 +61,13 @@ Public Class PropertyOfferManage
                 Return False
             End If
 
-            If search.Status <> LeadInfoDocumentSearch.SearchStauts.Completed Then
+            If search.Status <> LeadInfoDocumentSearch.SearchStatus.Completed Then
                 Return False
             End If
         End If
 
         Return True
     End Function
-
 
     ''' <summary>
     ''' Generate Offer Package
@@ -93,10 +102,21 @@ Public Class PropertyOfferManage
 
                         Dim finalpath = IO.Path.Combine(targetPath, f.Name)
 
-                        Using d = DocX.Load(f.FullName)
-                            generator.GenerateDocument(d, config)
-                            d.SaveAs(finalpath)
-                        End Using
+                        Select Case config.Type
+                            Case GenerateFileConfig.FileType.Word
+                                Using d = DocX.Load(f.FullName)
+                                    generator.GenerateDocument(d, config)
+                                    d.SaveAs(finalpath)
+                                End Using
+                            Case GenerateFileConfig.FileType.Pdf
+                                Dim pdfReader As New PdfReader(f.FullName)
+                                Dim pdfNewFile = New PdfStamper(pdfReader, New FileStream(finalpath, FileMode.Create))
+
+                                Dim pdfFormFields = pdfNewFile.AcroFields
+                                generator.GeneratePdf(pdfFormFields, config)
+                                pdfNewFile.FormFlattening = False
+                                pdfNewFile.Close()
+                        End Select
                     End If
                 End If
             Next
@@ -130,6 +150,12 @@ Public Class DocumentGenerator
     Public Sub New(data As JObject, bble As String)
         Me.Data = data
         Me.BBLE = bble
+    End Sub
+
+    Public Sub GeneratePdf(pdfFormFields As AcroFields, config As GenerateFileConfig)
+        For Each ph In config.PlaceHolders
+            pdfFormFields.SetField(ph.FieldName, GetValue(ph))
+        Next
     End Sub
 
     Public Sub GenerateDocument(doc As DocX, config As GenerateFileConfig)
@@ -175,6 +201,8 @@ Public Class DocumentGenerator
                                                    End Function),
            New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
            New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
+           New DocumentPlaceHolder("SELLER2NAME", "DealSheet.ContractOrMemo.Sellers[1].Name"),
+           New DocumentPlaceHolder("SELLER3NAME", "DealSheet.ContractOrMemo.Sellers[2].Name"),
            New DocumentPlaceHolder("BUYERNAME", "DealSheet.ContractOrMemo.Buyer.CorpName"),
            New DocumentPlaceHolder("BUYERNAMESIGNER", Function(data As JObject)
                                                           Dim result = data.SelectToken("DealSheet.ContractOrMemo.Buyer.CorpName")
@@ -230,6 +258,7 @@ Public Class DocumentGenerator
                                                                      Return ""
                                                                  End Function))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLER2NAME", "DealSheet.ContractOrMemo.Sellers[1].Name"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("SELLER3NAME", "DealSheet.ContractOrMemo.Sellers[2].Name"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLERATTORNEY", "DealSheet.ContractOrMemo.Sellers[0].sellerAttorneyObj.Name"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLERATTORNEYADDRESS", "DealSheet.ContractOrMemo.Sellers[0].sellerAttorneyObj.Office"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLERATTORNEYTEL", "DealSheet.ContractOrMemo.Sellers[0].sellerAttorneyObj.OfficeNO"))
@@ -296,7 +325,44 @@ Public Class DocumentGenerator
                 New DocumentPlaceHolder("RECEIVINGPOAADDRESS", "DealSheet.ReceivingPOA.address")
             }
         file.PlaceHolders = phs.ToList
+        _fileConfigures.Add(file)
 
+        ' ShortSale Package
+        'file = New GenerateFileConfig With {.FileName = "ShortSalePackage.pdf", .ConfigKey = "ShortSalePackage", .Type = GenerateFileConfig.FileType.Pdf}
+        'phs = {
+        '       New DocumentPlaceHolder("Property Address", "PropertyAddress")
+        '    }
+        'file.PlaceHolders = phs.ToList
+
+        '_fileConfigures.Add(file)
+
+        ' Client info
+        file = New GenerateFileConfig With {.FileName = "ClientInfo.docx", .ConfigKey = "ClientInfo"}
+        phs = {
+                New DocumentPlaceHolder("PROPERTYADDRESS", "PropertyAddress"),
+                New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
+                New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
+                New DocumentPlaceHolder("OWNEREMAIL", "DealSheet.ContractOrMemo.Sellers[0].Email")
+            }
+        file.PlaceHolders = phs.ToList
+        _fileConfigures.Add(file)
+
+        'Acris info
+        file = New GenerateFileConfig With {.FileName = "AcrisPreparing.docx", .ConfigKey = "Acris"}
+        phs = {
+                New DocumentPlaceHolder("PROPERTYADDRESS", "PropertyAddress"),
+                New DocumentPlaceHolder("BLOCK"),
+                New DocumentPlaceHolder("LOT"),
+                New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
+                New DocumentPlaceHolder("SELLER2NAME", "DealSheet.ContractOrMemo.Sellers[1].Name"),
+                New DocumentPlaceHolder("SELLER3NAME", "DealSheet.ContractOrMemo.Sellers[2].Name"),
+                New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
+                New DocumentPlaceHolder("OWNEREMAIL", "DealSheet.ContractOrMemo.Sellers[0].Email"),
+                New DocumentPlaceHolder("BUYERNAME", "DealSheet.ContractOrMemo.Buyer.CorpName"),
+                New DocumentPlaceHolder("BUYERNAMESIGNER", "DealSheet.ContractOrMemo.Buyer.Signer"),
+                New DocumentPlaceHolder("BUYERADDRESS", "DealSheet.ContractOrMemo.Buyer.Address")
+            }
+        file.PlaceHolders = phs.ToList
         _fileConfigures.Add(file)
     End Sub
 
@@ -347,17 +413,19 @@ Public Class DocumentGenerator
         End Get
     End Property
 
-
 End Class
 
 Public Class GenerateFileConfig
     Public Property ConfigKey As String
     Public Property FileName As String
-
     Public Property PlaceHolders As List(Of DocumentPlaceHolder)
-
     Public Property TagData As String
+    Public Property Type As FileType
 
+    Public Enum FileType
+        Word
+        Pdf
+    End Enum
 End Class
 
 Public Class DocumentPlaceHolder

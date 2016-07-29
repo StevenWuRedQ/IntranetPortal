@@ -5,6 +5,7 @@
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
 <%@ Register Src="~/ShortSale/ShortPreSignControl.ascx" TagPrefix="uc1" TagName="ShortPreSignControl" %>
 <%@ Register Src="~/NewOffer/NewOfferAssignCorp.ascx" TagPrefix="uc1" TagName="NewOfferAssignCorp" %>
+<%@ Register Src="~/UserControl/AuditLogs.ascx" TagPrefix="uc1" TagName="AuditLogs" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -181,7 +182,11 @@
             </tr>
             <tr>
                 <td></td>
-                <td style="padding-top: 10px"><a href="/TempDataFile/OfferDoc/<%= CorpData.BBLE.Trim %>.zip">View Package</a></td>
+                <td style="padding-top: 10px">
+                    <a href="/TempDataFile/OfferDoc/<%= CorpData.BBLE.Trim %>.zip">View Package</a>
+                    &nbsp;
+                    <asp:LinkButton runat="server" ID="btnEdit" OnClick="btnEdit_Click">Edit Offer</asp:LinkButton>
+                </td>
             </tr>
         </table>
     </div>
@@ -202,7 +207,7 @@
         <div style="padding: 20px" ng-controller="shortSalePreSignCtrl" >
             <div class="container" ng-hide="QueryUrl.model!='List' && QueryUrl.BBLE">
                 <div>
-                    <h2>New Offer Request List</h2>
+                    <h2>New Offer List</h2>
                     <div dx-data-grid="newOfferGridOpt"></div>
                 </div>
             </div>
@@ -248,11 +253,8 @@
                     <div ng-show="currentStep().title=='Pre Sign'" class="view-animate">
                         <h3 class="wizard-title">Short Sale Information</h3>
                         <div ng-controller="ShortSaleCtrl" id="ShortSaleCtrl">
-
                             <uc1:ShortPreSignControl runat="server" ID="ShortPreSignControl" />
-
                         </div>
-
                         <%--<div>
                         <h4 class="ss_form_title ">Borrowers</h4>
                         <div id="borrwerGrid" dx-data-grid="borrwerGrid"></div>
@@ -351,7 +353,7 @@
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName}" data-message="Please fill Buyer Name">Buyer Name</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName" /></li>
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.CorpName" disabled="disabled" /></li>
 
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.buyerAttorney}" data-message="Please fill Buyer Attorney">Buyer Attorney</label>
@@ -360,7 +362,7 @@
                                             </li>
                                             <li class="ss_form_item " style="width: 96%">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.Buyer.Address}" data-message="Please fill Buyer Address">Buyer Address</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.Address" />
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.Buyer.Address" disabled="disabled" />
                                             </li>
                                         </ul>
                                     </div>
@@ -462,14 +464,14 @@
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.CorpName}" data-message="Please fill Buyer Name!">Buyer Name</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.CorpName" /></li>
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.CorpName" disabled="disabled" /></li>
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.EIN}" data-message="Please fill Buyer SSN/EIN!">Buyer SSN/EIN</label>
                                                 <input class="ss_form_input" ng-model="SSpreSign.DealSheet.Deed.Buyer.EIN" />
                                             </li>
                                             <li class="ss_form_item ss_form_item_line">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.Deed.Buyer.Address}" data-message="Please fill Buyer Address!">Buyer Address</label>
-                                                <input class="ss_form_input " ng-model="SSpreSign.DealSheet.Deed.Buyer.Address" style="width: 96%" />
+                                                <input class="ss_form_input " ng-model="SSpreSign.DealSheet.Deed.Buyer.Address" style="width: 96%" disabled="disabled" />
                                             </li>
                                         </ul>
                                     </div>
@@ -639,6 +641,21 @@
                 </div>
             </div>
         </div>
+
+        <div id="divAuditLog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Audit Logs</h4>
+                    </div>
+                    <div class="modal-body"  style="overflow: auto; max-height: 300px">
+                        <uc1:AuditLogs runat="server" ID="AuditLogs" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <%--help script for this page--%>
     </div>
     <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>

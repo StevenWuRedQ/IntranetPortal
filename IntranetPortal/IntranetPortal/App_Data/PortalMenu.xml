@@ -615,7 +615,7 @@
   </PortalNavItem>
 
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager</UserRoles>
+    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer</UserRoles>
     <Items>
       <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
@@ -624,13 +624,13 @@
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="PreDealsMenu" Text="HOI" NavigationUrl="/NewOffer/HomeownerIncentive.aspx?model=List" ShowAmount="false">
-        <UserRoles>OfficeManager-*</UserRoles>
+        <UserRoles>OfficeManager-*,HOI-Viewer</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="NewOffers" Text="New Offers" NavigationUrl="/NewOffer/ShortSaleNewOffer.aspx?model=List" ShowAmount="false">
-        <UserRoles>OfficeManager-*</UserRoles>
+        <UserRoles>OfficeManager-*,NewOffer-Viewer</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-bullseye"></i>]]>
         </FontClass>

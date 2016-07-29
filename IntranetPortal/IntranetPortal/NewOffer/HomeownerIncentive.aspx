@@ -36,10 +36,9 @@
             <div class="col-md-12" ng-hide="!preSignList">
                 <div style="padding: 20px">
                     <h2 ng-if="role==null">Homeowner Incentive Request List</h2>
-                    <input  type="text" hidden="hidden" value="1234"/>
+                    <input type="text" hidden="hidden" value="1234" />
                     <h2 ng-if="role=='finance'">Check Requests List</h2>
                     <div dx-data-grid="preSignRecordsGridOpt">
-                      
                     </div>
                 </div>
             </div>
@@ -54,7 +53,9 @@
                     <div ng-show="step==1" class="wizard-content">
                         <section>
                             <div>
-                                <h4 class="ss_form_title ">Homeowner Incentive <a role="button" class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/NewOffer/HomeownerIncentive.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
+                                <h4 class="ss_form_title ">Homeowner Incentive                                                                         
+                                    <a role="button" class="btn btn-default pull-right" runat="server" id="linkEdit" ng-show="model=='View'&&allowEdit" href="/NewOffer/HomeownerIncentive.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a>
+                                </h4>
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item online">
                                         <label class="ss_form_input_title">Property Address</label>
@@ -73,17 +74,19 @@
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required data-date-start-date="+0d" ng-if="model!='View'" />
                                         <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'" />
                                     </li>
-                                  <%--  <li class="ss_form_item">
+                                    <%--  <li class="ss_form_item">
                                         <label class="ss_form_input_title">Doc Search</label>
                                         <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
                                     </li>--%>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Check request</label>
-                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ng-disabled="model=='Edit'"></pt-radio>
+                                        <%-- Fix portal #PORTAL-342 allow add check in edit model  --%>
+                                        <%--ng-disabled="model=='Edit'"--%>
+                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
-                                        <%--Page.User.Identity.Name--%> 
+                                        <%--Page.User.Identity.Name--%>
 
                                         <input class="ss_form_input" ng-show="!model" value="<%= Page.User.Identity.Name %>" disabled />
                                         <input class="ss_form_input" ng-show="model" ng-value="preAssign.CreateBy" disabled />
@@ -104,7 +107,7 @@
                             </li>--%>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
-                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask  />
+                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
                                     </li>
                                     <div ng-show="preAssign.NeedCheck">
                                         <li class="ss_form_item">
@@ -118,9 +121,9 @@
                                         </li>
                                     </div>
                                     <%--  <li class="ss_form_item ">
-                                <label class="ss_form_input_title ">Name On Check</label>
-                                <input class="ss_form_input " ng-model="preAssignCtrl.Name_On_Check">
-                            </li>--%>
+                                        <label class="ss_form_input_title ">Name On Check</label>
+                                        <input class="ss_form_input " ng-model="perAssignCtrl.Name_On_Check">
+                                    </li>--%>
                                 </ul>
                                 <div class="alert alert-warning" role="alert" id="divSearchWarning" runat="server" visible="false">
                                     <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure that you have requested the Doc search already.
@@ -129,7 +132,7 @@
                             <div class="ss_form">
                                 <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.Parties.length<1 }">Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>
                                 <ul class="ss_form_box clearfix">
-                                    <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
+                        <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
                                 <label class="ss_form_input_title ">Party {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.Parties, $index)"></i></label>
                                 <input class="ss_form_input " type="text" ng-model="p.Name" />
                             </li>--%>
@@ -138,8 +141,7 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            <div class="ss_form" ng-show="preAssign.NeedCheck">
+                            <div class="ss_form" ng-if="preAssign.NeedCheck">
                                 <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.CheckRequestData.Checks.length<1}">Checks <%--({{preAssign.CheckRequestData.Checks.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.CheckRequestData.Checks')"></i>--%></h4>
                                 <ul class="ss_form_box clearfix">
                                     <%-- <li class="ss_form_item" ng-repeat="p in preAssign.CheckRequestData.Checks">

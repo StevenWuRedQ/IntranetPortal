@@ -484,17 +484,14 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
 
             $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [] }
             _BBLE = $scope.preAssign.BBLE
-
         }
-
     }
-    $scope.init = function (preSignId) {
 
+    $scope.init = function (preSignId) {
         $http.get('/api/PreSign/' + preSignId).success(function (data) {
             $scope.preAssign = data;
 
             $scope.preAssign.Parties = $scope.preAssign.Parties || [];
-
         });
         //auditLog.show("PreSignRecord",preSignId);
     }
@@ -536,23 +533,36 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
         //$scope.gridEdit.editEnabled = false;
 
         $scope.init($scope.preAssign.Id);
-
     }
 
     $scope.AddCheck = function (e) {
         var cancel = false;
-        e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
+        //e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
         e.data.Date = new Date(e.data.Date).toISOString();
         var response = $.ajax({
-            url: '/api/businesscheck',
+            //url: '/api/businesscheck',
+            url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
             type: 'POST',
             dataType: 'json',
             async: false,
             data: e.data,
             success: function (data, textStatus, xhr) {
                 $scope.addedCheck = data;
-                $scope.preAssign.CheckRequestData.Checks.push(data);
+                // Use client side model will solve this 
+                // But there should have better way to implement put update in javascript 
+                // in restful client can check android update for put http://square.github.io/retrofit/
+                // find the batch update for angular services
+               
+                ///////////////////////////////////////
+                //e.data = data;
                 e.cancel = true;
+                e.component.refresh();
+                //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
+                angular.extend($scope.preAssign,data) //.CheckRequestId = data.RequestId
+                
+                //$scope.preAssign.CheckRequestData.Checks.push(data);
+
+               
             }
         });
 
@@ -563,6 +573,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
         };
         return cancel;
     }
+   
     // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
     // {
     //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
@@ -642,7 +653,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
      * @param  {[type]}
      * @return {[type]}
      */
-
     $scope.initByBBLE = function (BBLE) {
         $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
             $scope.preAssign.Title = data.PropertyAddress
@@ -662,7 +672,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
             $scope.preAssign.CheckRequestData.Checks = $scope.preAssign.CheckRequestData.Checks || [];
             $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
         }
-
     }
 
     if (_BBLE) {
@@ -686,7 +695,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
             $scope.alert("Check Request is enabled. Please enter checks to be issued.");
             return false;
         }
-
         if ($scope.CheckTotalAmount() > $scope.preAssign.DealAmount) {
             $scope.alert("The check's total amount must less than the deal amount, Please correct! ");
             return false;
@@ -729,9 +737,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
                     window.location.href = '/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + data.Id
                 });
             }
-
         }
-
     }
 
     //var ref = new Firebase("https://sdatabasetest.firebaseio.com/qqq");
@@ -803,10 +809,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
         ],
         wordWrapEnabled: true
     }
-
-
-
-
+    
     $scope.partiesGridOptions = {
         bindingOptions: {
             dataSource: 'preAssign.Parties'
@@ -976,7 +979,11 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
             dataField: 'RequestDate',
             caption: 'Request Date',
             dataType: 'date'
-        }, {
+        }, new dxGridColumnModel({
+            dataField: 'ExpectedDate',
+            caption: 'Expected Date',
+            dataType: 'date'
+        }), {
             dataField: 'CheckAmount',
             format: 'currency',
             dataType: 'number',

@@ -4,22 +4,16 @@ Public Class ShortSaleCaseList
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'BindCaseList()
 
         If Not Page.IsPostBack Then
-
             If Not String.IsNullOrEmpty(Request.QueryString("action")) Then
-
                 If Request.QueryString("action") = "Create" Then
                     Me.CreateNew.Visible = True
-
                     'If Not Page.ClientScript.IsStartupScriptRegistered("ShowCreateNewWindow") Then
-
                     '    Dim cstext1 As String = "<script type=""text/javascript"">" &
                     '                    String.Format("ShowCreateNew();") & "</script>"
                     '    Page.ClientScript.RegisterStartupScript(Me.GetType, "ShowCreateNewWindow", cstext1)
                     'End If
-
                 End If
             End If
         End If
@@ -73,9 +67,6 @@ Public Class ShortSaleCaseList
                 gridCase.GroupBy(gridCase.Columns("MortgageStatus"))
             End If
         End If
-
-
-
     End Sub
 
     Public Sub BindCaseList(status As CaseStatus, appId As Integer)

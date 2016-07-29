@@ -989,7 +989,7 @@ function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
 function STDownloadFile(url, fileName) {
     var link = document.createElement("a");
     link.href = url;
-
+    link.target = '_blank';
     //set the visibility hidden so it will not effect on your web-layout
     link.style = "visibility:hidden";
     link.download = fileName;

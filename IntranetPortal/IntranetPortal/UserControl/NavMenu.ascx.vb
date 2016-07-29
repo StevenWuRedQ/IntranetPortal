@@ -390,7 +390,6 @@ Public Class RefreshLeadsCountHandler
                     Return Utility.GetOfficeLeadsCount(Utility.GetLeadStatus(itemText), office)
             End Select
         End If
-
     End Function
 
     Function GetShortSaleCaseCount(name As String, itemText As String, userName As String) As Integer

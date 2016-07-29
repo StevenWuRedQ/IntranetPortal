@@ -42,7 +42,8 @@ Public Class Troubleshooting
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim rule As New IntranetPortal.RulesEngine.LoopServiceRule
-        rule.Execute()
+        ThreadPool.QueueUserWorkItem(AddressOf rule.Execute)
+        'rule.Execute()
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -748,9 +749,10 @@ Public Class Troubleshooting
         End If
     End Sub
 
-
     Private Sub btnRefreshComplains_Click(sender As Object, e As EventArgs) Handles btnRefreshComplains.Click
+
         Dim rule = New IntranetPortal.RulesEngine.DOBComplaintsCheckingRule
+        rule.SendingNotifyEmail = False
         rule.Execute()
     End Sub
 
@@ -885,9 +887,6 @@ Public Class Troubleshooting
             End If
 
         Next
-
-
-
     End Sub
 
     Private Sub btnNotifyAll_Click(sender As Object, e As EventArgs) Handles btnNotifyAll.Click
@@ -1085,7 +1084,6 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub TitleButton1_Click(sender As Object, e As EventArgs) Handles TitleButton1.Click
-
         Using ctx = New Data.PortalEntities
             Dim forms = From f In ctx.FormDataItems Select f
             For Each form In forms
@@ -1110,8 +1108,6 @@ Public Class Troubleshooting
 
             ctx.SaveChanges()
         End Using
-
-
     End Sub
 
     Private Sub CacheAllEmail_Click(sender As Object, e As EventArgs) Handles CacheAllEmail.Click
@@ -1119,6 +1115,7 @@ Public Class Troubleshooting
         If (Not serv.IsLogedIn()) Then
 
         End If
+
         Using ctx As New PortalEntities
             Dim allmessage = serv.GetAllEmail()
             For Each l In allmessage
@@ -1131,10 +1128,10 @@ Public Class Troubleshooting
             Next
             ctx.SaveChanges()
         End Using
-
     End Sub
+
     Private Sub btnRefreshMtgs_Click(sender As Object, e As EventArgs) Handles btnRefreshMtgs.Click
-        MessageBox.Show(DataWCFService.UpdateLeadInfo(txtBBLE.Text, False, True, False, False, False, False, False))
+        MessageBox.Show(DataWCFService.UpdateLeadInfo(txtBBLE.Text, False, True, True, True, True, False, False))
     End Sub
 
     Private Sub btnOpenWindow_Click(sender As Object, e As EventArgs) Handles btnOpenWindow.Click
@@ -1145,9 +1142,15 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub AutoAssignRules_Click(sender As Object, e As EventArgs) Handles AutoAssignRules.Click
-
         Dim rule = New AutoAssignRule()
         rule.Execute()
         MsgBox("auto assign finished !")
     End Sub
+
+    Private Sub btnComplaintEmail_Click(sender As Object, e As EventArgs) Handles btnComplaintEmail.Click
+        Dim complaint = Data.CheckingComplain.Instance(txtBBLE.Text)
+        Dim svc = New IntranetPortal.PortalDataService
+        svc.ComplaintsUpdatedNotify(complaint)
+    End Sub
+
 End Class

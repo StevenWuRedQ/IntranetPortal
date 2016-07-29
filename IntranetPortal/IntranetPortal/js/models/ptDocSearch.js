@@ -16,8 +16,8 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     //    LeadResearchs: "[LeadResearch]"
     //}
     
-    docSearch.Stuats = {
-        New: 1,
+    docSearch.Status = {
+        New: 0,
         Completed: 1
     }
     docSearch.prototype.initTeam = function () {
@@ -43,6 +43,10 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             if (self.LeadResearch.ownerName) {
 
                 self.LeadResearch.getOwnerSSN(self.BBLE);
+            }
+            if(self.LeadResearch.initFromLeadsInfo)
+            {
+                data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
             }
         }
        
