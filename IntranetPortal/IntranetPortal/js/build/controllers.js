@@ -1735,7 +1735,6 @@ portalApp.config(function (portalRouteProvider) {
     }];
 
     var preSignFinanceList = ['PreSign', function (PreSign) {
-
         return PreSign.financeList();
     }];
 
@@ -1846,11 +1845,16 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
     // "onRowPrepared": $scope.CheckRowPrepared,
     initEdit: function () {
         var self = this;
-        self.columns.push({
+        var voidReasonColumn = {
             dataField: 'Comments',
             caption: 'Void Reason',
             allowEditing: false
-        });
+        }
+        if (self.columns.indexOf(voidReasonColumn) < 0)
+        {
+            self.columns.push(voidReasonColumn)
+        }
+        
     },
     summary: {
         calculateCustomSummary: function (options) {
@@ -2009,12 +2013,12 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
         }
     }
 
-    $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
+    $scope.checkGridOptions.onRowPrepared = $scope.CheckRowPrepared;
     $scope.checkGridOptions.editing.texts = {
         deleteRow: 'Void',
         confirmDeleteMessage: '' //'Are you sure you want void this check?'
     }
-    $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+   
     $scope.checkGridOptions.onEditingStart = function (e) {
         if (e.data.Status == 1 || e.data.CheckId) {
             e.cancel = true;
@@ -2061,6 +2065,54 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
         };
         return cancel;
     }
+
+    $scope.CancelCheck = function (e) {
+        e.cancel = true;
+        if (e.data.Status == 1) {
+            $('#gridChecks').dxDataGrid('instance').refresh();
+            return;
+        }
+        AngularRoot.prompt("Please input void reason", function (voidReason) {
+            if (voidReason) {
+                var response = $.ajax({
+                    url: '/api/businesscheck/' + e.data.CheckId,
+                    type: 'DELETE',
+                    data: JSON.stringify(voidReason),
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: false,
+                    success: function (data, textStatus, xhr) {
+                        data.Comments = voidReason;
+                        //e.model = data;
+                        e.model.Status = 1;
+                        e.data.Status = 1;
+                        e.data.Comments = voidReason;
+                        // _.remove($scope.preAssign.CheckRequestData.Checks, {
+                        //     CheckId: e.data.CheckId
+                        // });
+                        //$scope.preAssign.CheckRequestData.Checks.push(data);
+                        //$scope.clearCheckRequest($scope.preAssign.CheckRequestData.Checks);
+                        //_.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o.CheckId == null});
+
+                        $('#gridChecks').dxDataGrid('instance').refresh();
+                        $scope.deletedCheck = data;
+                    }
+                });
+                var message = PortalHttp.BuildAjaxErrorMessage(response);
+                if (message) {
+                    AngularRoot.alert(message);
+
+                };
+
+            }
+        })
+
+        $('#gridChecks').dxDataGrid('instance').refresh();
+    }
+
+    $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+    $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
+
     $scope.checkGridOptions.initEdit();
 
 });
