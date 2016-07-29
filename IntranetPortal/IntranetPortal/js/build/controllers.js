@@ -3550,11 +3550,13 @@ ScopeHelper = {
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
-    ptContactServices, DocSearch, $location,
-    PropertyOffer
+    ptContactServices, $location,
+    
     /**** Models *****/
-    , WizardStep, Wizard, DivError, LeadsInfo
-    ) {
+    PropertyOffer
+    , WizardStep, Wizard, DivError, LeadsInfo, DocSearch
+
+   ) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();

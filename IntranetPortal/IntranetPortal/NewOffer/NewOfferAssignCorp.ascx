@@ -9,7 +9,7 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.assignCrop.Name}" data-message="Please select team!">Team Name</label>
-                    <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Name" ng-disabled="SSpreSign.assignCrop.Crop" ng-change="SSpreSign.assignCrop.SelectTeamChange()">
+                    <select class="ss_form_input" ng-model="SSpreSign.assignCrop.Name" ng-disabled="SSpreSign.assignCrop.Crop" ng-change="SSpreSign.assignCrop.selectTeamChange()">
                         <option ng-repeat="n in CorpTeam track by $index">{{n}}</option>
                     </select>
                 </li>
@@ -25,7 +25,7 @@
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title">&nbsp;</label>
-                    <input type="button" value="Assign Corp" class="rand-button rand-button-blue rand-button-pad" ng-click="assginCropClick()" ng-show="!SSpreSign.assignCrop.Crop">
+                    <input type="button" value="Assign Corp" class="rand-button rand-button-blue rand-button-pad" ng-click="SSpreSign.assignCrop.assginCorpClick()" ng-show="!SSpreSign.assignCrop.Crop">
                 </li>
             </ul>
         </div>
