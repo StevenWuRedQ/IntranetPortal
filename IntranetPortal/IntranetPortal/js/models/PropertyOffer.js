@@ -37,9 +37,10 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
      * 1. in check current step called this function
      * 2. maybe in new PropertyOffer also need call this function
      */
-    propertyOffer.prototype.assignOfferId = function () {
+    propertyOffer.prototype.assignOfferId = function (onAssignCorpSuccessed) {
         this.assignCrop.newOfferId = this.BusinessData.OfferId;
         this.assignCrop.BBLE = this.Tag;
+        this.assignCrop.onAssignCorpSuccessed = onAssignCorpSuccessed;
        
     }
     // propertyOffer.prototype.BusinessData = new BusinessForm();
