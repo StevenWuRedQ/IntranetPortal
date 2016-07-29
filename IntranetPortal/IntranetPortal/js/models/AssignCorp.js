@@ -12,9 +12,14 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
         this.text = "1234555";
     }
 
-    _class.prototype.AssingCorp = function()
+    _class.prototype.SelectTeamChange = function ()
     {
-
+        var team = this.Name;
+        this.Signer = null;
+        me = this;
+        $http.get('/api/CorporationEntities/CorpSigners?team=' + team).success(function (signers) {
+            this.signers = signers
+        });
     }
     /**
      * This is not right have parent ID

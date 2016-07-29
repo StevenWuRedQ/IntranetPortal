@@ -25,7 +25,6 @@ portalApp.config(function (portalUIRouteProvider) {
 portalApp.controller('newofferNewofferCtrl', function ($scope) {
     $scope.text = 'newofferNewofferCtrl';
 });
-
 portalApp.controller('newofferSsinfoCtrl', function ($scope) {
     $scope.text = 'newofferSsinfoCtrl';
 });
