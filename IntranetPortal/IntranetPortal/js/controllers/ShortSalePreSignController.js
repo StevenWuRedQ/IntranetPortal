@@ -55,8 +55,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     
     /**** Models *****/
     PropertyOffer
-    , WizardStep, Wizard, DivError, LeadsInfo, DocSearch
-
+    , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
+    Team
    ) {
 
     $scope.ptContactServices = ptContactServices;
@@ -357,10 +357,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         });
 
     }
-    $http.get('/api/CorporationEntities/Teams').success(function (data) {
+
+    Team.getTeams(function (data) {
         $scope.CorpTeam = data;
 
-    })
+    });
+    
+    //$http.get('/api/CorporationEntities/Teams').success()
     $scope.AssignCropsNext = function () {
 
         var eMessages = $scope.getErrorMessage('preSignAssignCrops');

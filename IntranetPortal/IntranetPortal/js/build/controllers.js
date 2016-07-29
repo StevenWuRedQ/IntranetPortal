@@ -3551,11 +3551,13 @@ ScopeHelper = {
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
-    ptContactServices, DocSearch, $location,
-    PropertyOffer
+    ptContactServices, $location,
+    
     /**** Models *****/
-    , WizardStep, Wizard, DivError, LeadsInfo
-    ) {
+    PropertyOffer
+    , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
+    Team
+   ) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
@@ -3855,10 +3857,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         });
 
     }
-    $http.get('/api/CorporationEntities/Teams').success(function (data) {
+
+    Team.getTeams(function (data) {
         $scope.CorpTeam = data;
 
-    })
+    });
+    
+    //$http.get('/api/CorporationEntities/Teams').success()
     $scope.AssignCropsNext = function () {
 
         var eMessages = $scope.getErrorMessage('preSignAssignCrops');

@@ -859,6 +859,26 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
     return propertyOffer;
 });
 /**
+ * @return {[class]}                 Team class
+ */
+angular.module('PortalApp').factory('Team', function ($http) {
+    var _class = function () {
+
+
+    }
+    _class.getTeams = function (successCall) {
+
+        $http.get('/api/CorporationEntities/Teams')
+            .success(successCall);
+
+    }
+
+    _class.prototype.isAvailable = function () {
+        return this.Available == true;
+    }
+    return _class;
+});
+/**
  * @return {[class]}                 Wizard class
  */
 angular.module('PortalApp').factory('Wizard', function (WizardStep) {
@@ -6110,11 +6130,13 @@ ScopeHelper = {
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
-    ptContactServices, DocSearch, $location,
-    PropertyOffer
+    ptContactServices, $location,
+    
     /**** Models *****/
-    , WizardStep, Wizard, DivError, LeadsInfo
-    ) {
+    PropertyOffer
+    , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
+    Team
+   ) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
@@ -6414,10 +6436,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         });
 
     }
-    $http.get('/api/CorporationEntities/Teams').success(function (data) {
+
+    Team.getTeams(function (data) {
         $scope.CorpTeam = data;
 
-    })
+    });
+    
+    //$http.get('/api/CorporationEntities/Teams').success()
     $scope.AssignCropsNext = function () {
 
         var eMessages = $scope.getErrorMessage('preSignAssignCrops');
