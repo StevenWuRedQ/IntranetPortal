@@ -2,9 +2,9 @@
  * @return {[class]}                 AssignCorp class
  */
 angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, CorpEntity, $http, DivError) {
-    var _class = function (onAssignSuccessedFunc)
-    {      
-        this.onAssignSucceed = onAssignSuccessedFunc || null;
+    var _class = function ()
+    {
+        this.onAssignSucceed = null;
         this.BBLE = null;
     }
     
@@ -60,7 +60,11 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
             _assignCrop.Crop = data.CorpName;
             _assignCrop.CropData = data;
 
-            _assignCrop.onAssignSucceed(data);
+            if (_assignCrop.onAssignSucceed) {
+                _assignCrop.onAssignSucceed(data);               
+            } else {
+                console.log("onAssignSucceed not implement.")
+            }
         });
     }
 
