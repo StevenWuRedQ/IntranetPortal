@@ -49,13 +49,22 @@ ScopeHelper = {
 
 var portalApp = angular.module('PortalApp');
 
-portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptContactServices, DocSearch, $location,PropertyOffer) {
+portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
+    ptContactServices, $location,
+    
+    /**** Models *****/
+    PropertyOffer
+    , WizardStep, Wizard, DivError, LeadsInfo, DocSearch
+
+   ) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.QueryUrl = PortalUtility.QueryUrl();
 
     if ($scope.QueryUrl.model == 'List') {
-        $http.get('/api/PropertyOffer').success(function (data) {
+
+        PropertyOffer.query(function (data) {
+            //$http.get('/api/PropertyOffer').success(function (data) {
             $scope.newOfferGridOpt = {
                 dataSource: data,
                 headerFilter: {
@@ -108,7 +117,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
 
     $scope.SSpreSign = new PropertyOffer();
-
+    /// old ////////////
     //    {
     //    Type: 'Short Sale',
     //    FormName: 'PropertyOffer',
@@ -126,12 +135,12 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     //        }
     //    }
     //};
+    ////////////////////////////
     //var urlParam = //$location.search(); close html model use my libary
-    if (PortalUtility.QueryUrl().BBLE)
-    {
+    if (PortalUtility.QueryUrl().BBLE) {
         $scope.DocSearch = DocSearch.get(PortalUtility.QueryUrl());
     }
-    
+
 
 
     $scope.DeadType = {
@@ -166,7 +175,9 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         var _sellers = ss.SsCase.PropertyInfo.Owners;
 
         var _dealSheet = $scope.SSpreSign.DealSheet;
-        var eMessages = $scope.getErrorMessage('ShortSaleCtrl');
+        var eMessages = new DivError('ShortSaleCtrl').getMessage();
+
+            //$scope.getErrorMessage('ShortSaleCtrl');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
@@ -387,51 +398,54 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
         }
 
     }
-    $scope.steps = [{
+    $scope.steps = [new WizardStep({
         title: "New Offer",
-        next: function () {
-            return true;
-        }
-    },
+    }),
 
-        {
+        new WizardStep({
             title: "Pre Sign",
             caption: 'SS Info',
             next: $scope.shortSaleInfoNext,
-        }, {
+        }),
+
+        new WizardStep({
             title: "Assign Crops",
             caption: 'Assign Corp',
             next: $scope.AssignCropsNext
-        }, {
+        }),
+        new WizardStep({
             title: "Documents Required",
             caption: 'Doc Required',
             next: $scope.DocRequiredNext
-        },
+        }),
 
         //{ title: "Deal Sheet" },
-        {
-            title: 'Contract',
-            caption: 'Contract Or Memo',
-            sheet: 'Contract',
-            next: $scope.ContractNext
-        }, {
-            title: 'Deed',
-            sheet: 'Deed',
-            next: $scope.DeedNext,
-            init: $scope.DeedWizardInit
-        }, {
-            title: 'CorrectionDeed',
-            caption: 'Correction Deed',
-            sheet: 'CorrectionDeed',
-            next: $scope.preAssignCorrectionDeed
-        }, {
-            title: 'POA',
-            sheet: 'POA',
-            next: $scope.preAssignCorrectionPOA
-        }, {
-            title: "Finish",
-            init: previewForm
-        },
+         new WizardStep({
+             title: 'Contract',
+             caption: 'Contract Or Memo',
+             sheet: 'Contract',
+             next: $scope.ContractNext
+         }),
+         new WizardStep({
+             title: 'Deed',
+             sheet: 'Deed',
+             next: $scope.DeedNext,
+             init: $scope.DeedWizardInit
+         }),
+         new WizardStep({
+             title: 'CorrectionDeed',
+             caption: 'Correction Deed',
+             sheet: 'CorrectionDeed',
+             next: $scope.preAssignCorrectionDeed
+         }),
+         new WizardStep({
+             title: 'POA',
+             sheet: 'POA',
+             next: $scope.preAssignCorrectionPOA
+         }), new WizardStep({
+             title: "Finish",
+             init: previewForm
+         }),
     ];
     $scope.CheckSearchInfo = function (needSearch, searchCompleted) {
         var searchWized = {
@@ -445,12 +459,25 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
             //$("#LeadTaxSearchCtrl").remove();
         }
     }
-    $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val())
+    $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val());
+
     $scope.CheckCurrentStep = function (BBLE) {
-        $http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
+
+        $scope.SSpreSign = PropertyOffer.getByBBLE({ BBLE: BBLE.trim() }, function (data) {
+
+            /**
+             * need carefully test 
+             * @see PropertyOffer assignOfferId function
+             **/
+            $scope.SSpreSign.assignOfferId();
+
+            //$scope.SSpreSign.getByBBLE(function (data) {
+            //$http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
+
             if (data.FormData) {
 
-                $scope.SSpreSign = data.FormData;
+                //$scope.SSpreSign = data.FormData;
+
                 $scope.refreshSave(data);
                 $scope.DeadType = data.FormData.DeadType;
                 $scope.SSpreSign.SsCase = data.FormData.SsCase;
@@ -473,22 +500,36 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
 
     var BBLE = $("#BBLE").val();
     if (BBLE) {
-        $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
+        LeadsInfo.get({ BBLE: BBLE.trim() }, function (data) {
             $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
-            $scope.SSpreSign.BBLE = BBLE
-        })
-
+            $scope.SSpreSign.BBLE = BBLE;
+        });
+        //$http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
+        //    $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
+        //    $scope.SSpreSign.BBLE = BBLE;
+        //})
+        /*anyc call need time out by Steven */
+        //setTimeout(function () {
         $scope.CheckCurrentStep(BBLE);
+        //}, 1000);
     }
 
-    $scope.step = 1
+    $scope.step = 1;
+
+    $scope.wizard = new Wizard();
     $scope.filteredSteps = [];
+
+    $scope.wizard.setFilteredSteps($scope.filteredSteps);
+    $scope.wizard.setScope($scope);
+
     $scope.MaxStep = function () {
         return $scope.filteredSteps.length;
     }
+
     $scope.currentStep = function () {
         return $scope.filteredSteps[$scope.step - 1];
     }
+
     $scope.refreshSave = function (formdata) {
         $scope.SSpreSign.DataId = formdata.DataId;
         $scope.SSpreSign.Tag = formdata.Tag;
@@ -497,23 +538,23 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http, ptC
     }
     $scope.NextStep = function () {
         var cStep = $scope.currentStep();
-        $scope.step++;
-        //if (cStep.next) {
-        //    if (cStep.next()) {
-        //        $scope.constractFromData();
-        //        $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
-        //            $scope.refreshSave(formdata);
-        //            $scope.step++;
-        //            cStep = $scope.currentStep();
-        //            if (cStep.init) {
-        //                cStep.init();
-        //            }
-        //        })
-        //    }
 
-        //} else {
-        //    $scope.step++;
-        //}
+        if (cStep.next) {
+            if (cStep.next()) {
+                $scope.constractFromData();
+                $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+                    $scope.SSpreSign.refreshSave(formdata);
+                    $scope.step++;
+                    cStep = $scope.currentStep();
+                    if (cStep.init) {
+                        cStep.init();
+                    }
+                })
+            }
+
+        } else {
+            $scope.step++;
+        }
 
     }
     $scope.PrevStep = function () {

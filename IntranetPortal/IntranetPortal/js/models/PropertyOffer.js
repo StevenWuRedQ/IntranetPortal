@@ -1,17 +1,29 @@
-﻿/**
+﻿
+/**
+ * in refactoring need spent time box 
+ * on 7/27/2016 after 1:30PM
+ * stop refactoring
+ */
+/**
  * @return {[class]}                 PropertyOffer class
  */
 angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, AssignCorp) {
     var propertyOffer = ptBaseResource('PropertyOffer', 'OfferId', null, {
-
+        getByBBLE: {
+            url: '/api/businessform/PropertyOffer/Tag/:BBLE',
+            params: {
+                BBLE: '@BBLE',
+                //Test: '@Test'
+            }
+        }
 
     });
     /**
-     * @todo 
+     * @todo
      * by Steven
      * worng spelling sorry about that will fix it after we refactory all 
      **/
-    
+
     /**
      * @todo
      * by Steven
@@ -19,10 +31,31 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
      */
     propertyOffer.prototype.assignCrop = new AssignCorp();
 
-    
-    propertyOffer.prototype.Type =  'Short Sale';
+    /**
+     * @data 7/28/2016
+     * need carefully test
+     * 1. in check current step called this function
+     * 2. maybe in new PropertyOffer also need call this function
+     */
+    propertyOffer.prototype.assignOfferId = function () {
+        this.assignCrop.newOfferId = this.BusinessData.OfferId;
+        this.assignCrop.BBLE = this.Tag;
+    }
+    // propertyOffer.prototype.BusinessData = new BusinessForm();
+
+    propertyOffer.prototype.Type = 'Short Sale';
     propertyOffer.prototype.FormName = 'PropertyOffer';
 
+    /**
+     * reload data
+     * @param {type} formdata
+     */
+    propertyOffer.prototype.refreshSave = function (formdata) {
+        this.DataId = formdata.DataId;
+        this.Tag = formdata.Tag;
+        this.CreateDate = formdata.CreateDate;
+        this.CreateBy = formdata.CreateBy;
+    }
     /**
      * @todo
      * by steven

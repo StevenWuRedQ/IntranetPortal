@@ -7095,6 +7095,7 @@
     <Content Include="js\models\BusinessCheck.js" />
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
+    <Content Include="js\models\DivError.js" />
     <Content Include="js\models\DxGridModel.js" />
     <Content Include="js\models\dxModel.js" />
     <Content Include="js\models\HomeOwner.js" />
@@ -7104,6 +7105,8 @@
     <Content Include="js\models\ptBaseResource.js" />
     <Content Include="js\models\ptDocSearch.js" />
     <Content Include="js\models\ptLeadResearch.js" />
+    <Content Include="js\models\Wizard.js" />
+    <Content Include="js\models\WizardStep.js" />
     <Content Include="js\PortalHttpFactory.js" />
     <Content Include="js\test\models\ptDocSearch.spec.js" />
     <Content Include="js\Views\AuditLogs\AuditLogs.tpl.html" />
