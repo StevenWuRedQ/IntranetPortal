@@ -19,7 +19,6 @@ portalApp.config(function (portalRouteProvider) {
     }];
 
     var preSignFinanceList = ['PreSign', function (PreSign) {
-
         return PreSign.financeList();
     }];
 
