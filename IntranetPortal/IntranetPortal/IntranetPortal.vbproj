@@ -7105,6 +7105,7 @@
     <Content Include="js\models\ptBaseResource.js" />
     <Content Include="js\models\ptDocSearch.js" />
     <Content Include="js\models\ptLeadResearch.js" />
+    <Content Include="js\models\Team.js" />
     <Content Include="js\models\Wizard.js" />
     <Content Include="js\models\WizardStep.js" />
     <Content Include="js\PortalHttpFactory.js" />
