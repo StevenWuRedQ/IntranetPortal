@@ -507,6 +507,20 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
     {
         this.text = "1234555";
     }
+
+    _class.prototype.SelectTeamChange = function ()
+    {
+        var team = this.Name;
+        this.Signer = null;
+        me = this;
+        $http.get('/api/CorporationEntities/CorpSigners?team=' + team).success(function (signers) {
+            this.signers = signers
+        });
+    }
+    /**
+     * This is not right have parent ID
+     * */
+    _class.prototype.newOfferId = 0
     return _class;
 });
 /**
@@ -5965,7 +5979,6 @@ portalApp.config(function (portalUIRouteProvider) {
 portalApp.controller('newofferNewofferCtrl', function ($scope) {
     $scope.text = 'newofferNewofferCtrl';
 });
-
 portalApp.controller('newofferSsinfoCtrl', function ($scope) {
     $scope.text = 'newofferSsinfoCtrl';
 });
