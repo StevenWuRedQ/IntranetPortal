@@ -4749,11 +4749,11 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
             if ($scope.preAssign.hasId())
             {
                 $scope.preAssign.$update(function () {
-                    $location.path('/preassign/view/' + preAssign.Id);
+                    $location.path('/preassign/view/' + $scope.preAssign.Id);
                 })
             } else {
                 $scope.preAssign.$save(function () {
-                    $location.path('/preassign/view/' + preAssign.Id);
+                    $location.path('/preassign/view/' + $scope.preAssign.Id);
                 })
             }
 
