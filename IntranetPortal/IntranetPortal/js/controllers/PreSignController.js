@@ -313,15 +313,28 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
         // for devextreme 15.1 only can use sync call for control the event of grid 
         // when we moved to 16.1 grid view support 'promise' it can change to ng model function
         var response = $.ajax({
-            url: '/api/businesscheck',
+            url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
             type: 'POST',
             dataType: 'json',
             async: false,
             data: e.data,
             success: function (data, textStatus, xhr) {
                 $scope.addedCheck = data;
-                $scope.preAssign.CheckRequestData.Checks.push(data);
+                // Use client side model will solve this 
+                // But there should have better way to implement put update in javascript 
+                // in restful client can check android update for put http://square.github.io/retrofit/
+                // find the batch update for angular services
+
+                ///////////////////////////////////////
+                //e.data = data;
                 e.cancel = true;
+                e.component.refresh();
+                //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
+                angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
+
+                //$scope.preAssign.CheckRequestData.Checks.push(data);
+
+
             }
         });
 
