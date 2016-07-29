@@ -142,7 +142,7 @@
                 <%--<span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>--%>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
-                <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx?popup=true&BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
+                <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx#/preassign/new?BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
                 <% End If %>
             </div>
