@@ -59,7 +59,7 @@
             </ul>
         </div>
 
-        <div class="ss_form" ng-show="preAssign.NeedCheck">
+        <div class="ss_form" ng-if="preAssign.NeedCheck">
             <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.CheckRequestData.Checks.length<1}">Checks </h4>
             <ul class="ss_form_box clearfix">
                
@@ -73,7 +73,9 @@
 
 <div class="alert alert-success" role="alert" ng-if="preAssign.Id">Your request submit succeeded on {{preAssign.CreateDate|date:'MM/dd/yyyy HH:mm'}} </div>
 <div class="row" style="font-size: 14px" >
-    <!--<button type="button" class="btn btn-default" ng-click="showHistroy()" style="margin-bottom: 20px">History</button>-->
+    <button type="button" class="btn btn-default" ng-click="showLog =! showLog" style="margin-bottom: 20px">History</button>
+    <div ng-show="showLog">
+        <audit-logs table-name="PreSignRecord" record-id="preAssign.Id"></audit-logs>
+    </div>
     
-    <audit-logs table-name="PreSignRecord" record-id="preAssign.Id"></audit-logs>
 </div>

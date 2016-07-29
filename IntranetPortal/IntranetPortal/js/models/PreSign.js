@@ -35,12 +35,12 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
         this.CheckRequestData = preSign.CType(this.CheckRequestData, CheckRequest);
 
         if (this.NeedCheck &&  this.CheckRequestData.Checks.length < 1) {
-            this.pushErrorMsg("Check Request is enabled. Please enter checks to be issued.");
+           this.pushErrorMsg("Check Request is enabled. Please enter checks to be issued.");
            
         }
 
         if (this.CheckRequestData && this.CheckRequestData.getTotalAmount() > this.DealAmount) {
-            this.pushErrorMsg("The check's total amount must less than the deal amount, Please correct! ");
+           this.pushErrorMsg("The check's total amount must less than the deal amount, Please correct! ");
            
         }
 
@@ -52,7 +52,7 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
 
     preSign.prototype.Parties = [];
     //Later will change to Checks to Check Class
-    preSign.prototype.CheckRequestData = { Checks: [] };
+    preSign.prototype.CheckRequestData = new CheckRequest();
     preSign.prototype.NeedSearch = true;
     preSign.prototype.NeedCheck = true;
 

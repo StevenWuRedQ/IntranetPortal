@@ -559,7 +559,7 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
             if (_assignCrop.onAssignSucceed) {
                 _assignCrop.onAssignSucceed(data);               
             } else {
-                console.log("onAssignSucceed not implement.")
+                console.error("AssignCorp: onAssignSucceed not implement.")
             }
         });
     }
@@ -636,6 +636,10 @@ angular.module('PortalApp').factory('CheckRequest', function (ptBaseResource, Bu
 
         return 0;
     }
+
+    checkRequest.prototype.Type = 'Short Sale';
+    checkRequest.prototype.Checks = [];
+
     return checkRequest;
 
 });
@@ -645,13 +649,12 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
     { assign: { url: '/api/CorporationEntities/:EntityId/BBLE', method: 'Post' } });
 
     //corpEntity.prototype.assignCorp = function () {
-        
-        
     //    this
     //        self = corpEntity.assign(self.EntityId, JSON.stringify(leadInfo.BBLE));
     //        //return self.$assign(JSON.stringify(leadInfo.BBLE));
     //    });
     //}
+
     corpEntity.prototype.assignDateNow = function()
     {
         if(this.AssignOn)
@@ -768,6 +771,67 @@ angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
     //constructor
     return leadsInfo;
 });
+/**
+ * @return {[class]}                 NewOfferListGrid class
+ */
+angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
+    var _class = function (data) {
+        
+        var opt =  {
+            dataSource: data,
+            headerFilter: {
+                visible: true
+            },
+            searchPanel: {
+                visible: true,
+                width: 250
+            },
+            paging: {
+                pageSize: 10
+            },
+            columnAutoWidth: true,
+            wordWrapEnabled: true,
+            onRowPrepared: this.onRowPrepared,
+            columns: [{
+                dataField: 'Title',
+                caption: 'Address',
+                cellTemplate: this.cellTemplate
+            },
+                'OfferType', {
+                    dataField: 'CreateBy',
+                    caption: 'Submit By'
+                }, {
+                    dataField: 'CreateDate',
+                    caption: 'Contract Date',
+                    dataType: 'date',
+                    sortOrder: 'desc',
+                    format: 'shortDate'
+                },
+            ]
+        };
+        angular.extend(this, opt)
+    }
+    _class.prototype.onRowPrepared = function (rowInfo) {
+        if (rowInfo.rowType != 'data')
+            return;
+        rowInfo.rowElement
+            .addClass('myRow');
+    }
+    _class.prototype.cellTemplate = function (container, options) {
+        $('<a/>').addClass('dx-link-MyIdealProp')
+            .text(options.value)
+            .on('dxclick', function () {
+                //Do something with options.data;
+                //ShowCaseInfo(options.data.BBLE);
+                var request = options.data;
+
+                PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
+            })
+            .appendTo(container);
+    }
+  
+    return _class;
+});
 
 /**
  * @return {[class]}                 PreSign class
@@ -822,7 +886,7 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
 
     preSign.prototype.Parties = [];
     //Later will change to Checks to Check Class
-    preSign.prototype.CheckRequestData = { Checks: [] };
+    preSign.prototype.CheckRequestData = new CheckRequest();
     preSign.prototype.NeedSearch = true;
     preSign.prototype.NeedCheck = true;
 
@@ -868,9 +932,11 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
      * 1. in check current step called this function
      * 2. maybe in new PropertyOffer also need call this function
      */
-    propertyOffer.prototype.assignOfferId = function () {
+    propertyOffer.prototype.assignOfferId = function (onAssignCorpSuccessed) {
         this.assignCrop.newOfferId = this.BusinessData.OfferId;
         this.assignCrop.BBLE = this.Tag;
+        this.assignCrop.onAssignSucceed = onAssignCorpSuccessed;
+       
     }
     // propertyOffer.prototype.BusinessData = new BusinessForm();
 
@@ -910,6 +976,63 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
 
     return propertyOffer;
 });
+
+/**
+ * @return {[class]}                 QueryUrl class
+ */
+
+angular.module('PortalApp').factory('QueryUrl', function ($http) {
+    var _class = function () {
+        // This function is anonymous, is executed immediately and 
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        }
+        return query_string;
+    }
+    
+
+    return _class;
+});
+
+/**
+ * @return {[class]}                 ScopeHelper class
+ */
+angular.module('PortalApp').factory('ScopeHelper', function ($http) {
+    var _class = function () {
+
+
+    }
+    _class.getScope = function (id) {
+        return angular.element(document.getElementById(id)).scope();
+    }
+    _class.getShortSaleScope = function () {
+
+        
+        return ScopeHelper.getScope('ShortSaleCtrl');
+    }
+    _class.getLeadsSearchScope = function()
+    {
+        return ScopeHelper.getScope('LeadTaxSearchCtrl');
+    }
+    return _class;
+});
+
+
 /**
  * @return {[class]}                 Team class
  */
@@ -1124,8 +1247,8 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     //    LeadResearchs: "[LeadResearch]"
     //}
     
-    docSearch.Stuats = {
-        New: 1,
+    docSearch.Status = {
+        New: 0,
         Completed: 1
     }
     docSearch.prototype.initTeam = function () {
@@ -1151,6 +1274,10 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             if (self.LeadResearch.ownerName) {
 
                 self.LeadResearch.getOwnerSSN(self.BBLE);
+            }
+            if(self.LeadResearch.initFromLeadsInfo)
+            {
+                data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
             }
         }
        
@@ -2684,7 +2811,8 @@ angular.module("PortalApp")
         },
         { GroupName: 'In House' },
         { GroupName: 'Agent Corps' },
-        { GroupName: 'Not for Use' }
+        { GroupName: 'Not for Use' },
+        { GroupName: 'Reserve' }
     ];
 
     $scope.ChangeGroups = function (name) {
@@ -4659,15 +4787,28 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
         // for devextreme 15.1 only can use sync call for control the event of grid 
         // when we moved to 16.1 grid view support 'promise' it can change to ng model function
         var response = $.ajax({
-            url: '/api/businesscheck',
+            url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
             type: 'POST',
             dataType: 'json',
             async: false,
             data: e.data,
             success: function (data, textStatus, xhr) {
                 $scope.addedCheck = data;
-                $scope.preAssign.CheckRequestData.Checks.push(data);
+                // Use client side model will solve this 
+                // But there should have better way to implement put update in javascript 
+                // in restful client can check android update for put http://square.github.io/retrofit/
+                // find the batch update for angular services
+
+                ///////////////////////////////////////
+                //e.data = data;
                 e.cancel = true;
+                e.component.refresh();
+                //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
+                angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
+
+                //$scope.preAssign.CheckRequestData.Checks.push(data);
+
+
             }
         });
 
@@ -4830,17 +4971,14 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
 
             $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [] }
             _BBLE = $scope.preAssign.BBLE
-
         }
-
     }
-    $scope.init = function (preSignId) {
 
+    $scope.init = function (preSignId) {
         $http.get('/api/PreSign/' + preSignId).success(function (data) {
             $scope.preAssign = data;
 
             $scope.preAssign.Parties = $scope.preAssign.Parties || [];
-
         });
         //auditLog.show("PreSignRecord",preSignId);
     }
@@ -4882,23 +5020,36 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
         //$scope.gridEdit.editEnabled = false;
 
         $scope.init($scope.preAssign.Id);
-
     }
 
     $scope.AddCheck = function (e) {
         var cancel = false;
-        e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
+        //e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
         e.data.Date = new Date(e.data.Date).toISOString();
         var response = $.ajax({
-            url: '/api/businesscheck',
+            //url: '/api/businesscheck',
+            url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
             type: 'POST',
             dataType: 'json',
             async: false,
             data: e.data,
             success: function (data, textStatus, xhr) {
                 $scope.addedCheck = data;
-                $scope.preAssign.CheckRequestData.Checks.push(data);
+                // Use client side model will solve this 
+                // But there should have better way to implement put update in javascript 
+                // in restful client can check android update for put http://square.github.io/retrofit/
+                // find the batch update for angular services
+               
+                ///////////////////////////////////////
+                //e.data = data;
                 e.cancel = true;
+                e.component.refresh();
+                //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
+                angular.extend($scope.preAssign,data) //.CheckRequestId = data.RequestId
+                
+                //$scope.preAssign.CheckRequestData.Checks.push(data);
+
+               
             }
         });
 
@@ -4909,6 +5060,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
         };
         return cancel;
     }
+   
     // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
     // {
     //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
@@ -4988,7 +5140,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
      * @param  {[type]}
      * @return {[type]}
      */
-
     $scope.initByBBLE = function (BBLE) {
         $http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
             $scope.preAssign.Title = data.PropertyAddress
@@ -5008,7 +5159,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
             $scope.preAssign.CheckRequestData.Checks = $scope.preAssign.CheckRequestData.Checks || [];
             $scope.preAssign.CheckRequestData.BBLE = $scope.preAssign.BBLE;
         }
-
     }
 
     if (_BBLE) {
@@ -5032,7 +5182,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
             $scope.alert("Check Request is enabled. Please enter checks to be issued.");
             return false;
         }
-
         if ($scope.CheckTotalAmount() > $scope.preAssign.DealAmount) {
             $scope.alert("The check's total amount must less than the deal amount, Please correct! ");
             return false;
@@ -5075,9 +5224,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
                     window.location.href = '/NewOffer/HomeownerIncentive.aspx?model=View&Id=' + data.Id
                 });
             }
-
         }
-
     }
 
     //var ref = new Firebase("https://sdatabasetest.firebaseio.com/qqq");
@@ -5149,10 +5296,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
         ],
         wordWrapEnabled: true
     }
-
-
-
-
+    
     $scope.partiesGridOptions = {
         bindingOptions: {
             dataSource: 'preAssign.Parties'
@@ -5322,7 +5466,11 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
             dataField: 'RequestDate',
             caption: 'Request Date',
             dataType: 'date'
-        }, {
+        }, new dxGridColumnModel({
+            dataField: 'ExpectedDate',
+            caption: 'Expected Date',
+            dataType: 'date'
+        }), {
             dataField: 'CheckAmount',
             format: 'currency',
             dataType: 'number',
@@ -6164,19 +6312,6 @@ portalApp.controller('newofferCtrl', function ($scope) {
 });
 
 /*************old style without model contoller *********************/
-ScopeHelper = {
-    getShortSaleScope: function () {
-
-        //return angular.element(document.getElementById('ShortSaleCtrl')).scope();
-        return ScopeHelper.getScope('ShortSaleCtrl');
-    },
-    getLeadsSearchScope: function () {
-        return ScopeHelper.getScope('LeadTaxSearchCtrl');
-    },
-    getScope: function (id) {
-        return angular.element(document.getElementById(id)).scope();
-    }
-};
 
 var portalApp = angular.module('PortalApp');
 
@@ -6186,64 +6321,65 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
-    Team
+    Team, NewOfferListGrid, ScopeHelper, QueryUrl, AssignCorp
    ) {
 
     $scope.ptContactServices = ptContactServices;
-    $scope.QueryUrl = PortalUtility.QueryUrl();
+    $scope.QueryUrl = new QueryUrl();
 
     if ($scope.QueryUrl.model == 'List') {
 
         PropertyOffer.query(function (data) {
             //$http.get('/api/PropertyOffer').success(function (data) {
-            $scope.newOfferGridOpt = {
-                dataSource: data,
-                headerFilter: {
-                    visible: true
-                },
-                searchPanel: {
-                    visible: true,
-                    width: 250
-                },
-                paging: {
-                    pageSize: 10
-                },
-                columnAutoWidth: true,
-                wordWrapEnabled: true,
-                onRowPrepared: function (rowInfo) {
-                    if (rowInfo.rowType != 'data')
-                        return;
-                    rowInfo.rowElement
-                        .addClass('myRow');
-                },
-                columns: [{
-                    dataField: 'Title',
-                    caption: 'Address',
-                    cellTemplate: function (container, options) {
-                        $('<a/>').addClass('dx-link-MyIdealProp')
-                            .text(options.value)
-                            .on('dxclick', function () {
-                                //Do something with options.data;
-                                //ShowCaseInfo(options.data.BBLE);
-                                var request = options.data;
+            $scope.newOfferGridOpt = new NewOfferListGrid(data);
+            //    {
+            //    dataSource: data,
+            //    headerFilter: {
+            //        visible: true
+            //    },
+            //    searchPanel: {
+            //        visible: true,
+            //        width: 250
+            //    },
+            //    paging: {
+            //        pageSize: 10
+            //    },
+            //    columnAutoWidth: true,
+            //    wordWrapEnabled: true,
+            //    onRowPrepared: function (rowInfo) {
+            //        if (rowInfo.rowType != 'data')
+            //            return;
+            //        rowInfo.rowElement
+            //            .addClass('myRow');
+            //    },
+            //    columns: [{
+            //        dataField: 'Title',
+            //        caption: 'Address',
+            //        cellTemplate: function (container, options) {
+            //            $('<a/>').addClass('dx-link-MyIdealProp')
+            //                .text(options.value)
+            //                .on('dxclick', function () {
+            //                    //Do something with options.data;
+            //                    //ShowCaseInfo(options.data.BBLE);
+            //                    var request = options.data;
 
-                                PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
-                            })
-                            .appendTo(container);
-                    }
-                },
-                    'OfferType', {
-                        dataField: 'CreateBy',
-                        caption: 'Submit By'
-                    }, {
-                        dataField: 'CreateDate',
-                        caption: 'Contract Date',
-                        dataType: 'date',
-                        sortOrder: 'desc',
-                        format: 'shortDate'
-                    },
-                ]
-            }
+            //                    PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
+            //                })
+            //                .appendTo(container);
+            //        }
+            //    },
+            //        'OfferType', {
+            //            dataField: 'CreateBy',
+            //            caption: 'Submit By'
+            //        }, {
+            //            dataField: 'CreateDate',
+            //            caption: 'Contract Date',
+            //            dataType: 'date',
+            //            sortOrder: 'desc',
+            //            format: 'shortDate'
+            //        },
+            //    ]
+            //}
         });
     }
 
@@ -6289,15 +6425,19 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     $scope.GenerateDocument = function () {
         $http.post('/api/PropertyOffer/GeneratePackage/' + $scope.SSpreSign.BBLE, JSON.stringify($scope.SSpreSign)).success(function (url) {
             var oldUrl = window.location.href;
-            STDownloadFile('/TempDataFile/OfferDoc/' + $scope.SSpreSign.BBLE.trim() + '.zip', $scope.SSpreSign.BBLE.trim() + '.zip');
+            STDownloadFile(url, $scope.SSpreSign.BBLE.trim() + '.zip');
             $scope.SSpreSign.Status = 2;
+
             $scope.constractFromData();
+            /*for dowload file frist wait 5 second then redecTo file*/
             $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
                 $scope.refreshSave(formdata);
                 //location.reload();
                 window.location.href = oldUrl;
 
             });
+
+
         })
     }
     $scope.shortSaleInfoNext = function () {
@@ -6444,18 +6584,25 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         }
         return true;
     }
+
+    $scope.onAssignCorpSuccessed = function(data)
+    {
+        $scope.SSpreSign.Status = 1;
+        /*should save to data base*/
+        $scope.constractFromData();
+        //console.log( JSON.stringify($scope.SSpreSign));
+        $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+            $scope.refreshSave(formdata);
+        });
+    }
     $scope.AssignCorpSuccessed = function (data) {
         var _assignCrop = $scope.SSpreSign.assignCrop;
         $http.post('/api/CorporationEntities/Assign?bble=' + $scope.SSpreSign.BBLE, JSON.stringify(data)).success(function () {
             _assignCrop.Crop = data.CorpName;
             _assignCrop.CropData = data;
-            $scope.SSpreSign.Status = 1;
-            /*should save to data base*/
-            $scope.constractFromData();
-            //console.log( JSON.stringify($scope.SSpreSign));
-            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
-                $scope.refreshSave(formdata);
-            });
+
+
+            
         });
     }
 
@@ -6603,7 +6750,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
              * need carefully test 
              * @see PropertyOffer assignOfferId function
              **/
-            $scope.SSpreSign.assignOfferId();
+            $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
             //$scope.SSpreSign.getByBBLE(function (data) {
             //$http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
