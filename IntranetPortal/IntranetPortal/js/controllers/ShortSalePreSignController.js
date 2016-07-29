@@ -42,7 +42,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
-    Team, NewOfferListGrid, ScopeHelper, QueryUrl
+    Team, NewOfferListGrid, ScopeHelper, QueryUrl, AssignCorp
    ) {
 
     $scope.ptContactServices = ptContactServices;

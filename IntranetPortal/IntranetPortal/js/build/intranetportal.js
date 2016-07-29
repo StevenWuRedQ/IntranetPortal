@@ -497,30 +497,73 @@ if (typeof requirejs === "function") {
 /**
  * @return {[class]}                 AssignCorp class
  */
-angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, CorpEntity) {
-    var _class = function()
-    {
-
+angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, CorpEntity, $http, DivError) {
+    var _class = function (onAssignSuccessedFunc)
+    {      
+        this.onAssignSucceed = onAssignSuccessedFunc || null;
+        this.BBLE = null;
     }
-
+    
     _class.prototype.test = function()
     {
         this.text = "1234555";
     }
 
-    _class.prototype.SelectTeamChange = function ()
+    _class.prototype.selectTeamChange = function ()
     {
         var team = this.Name;
         this.Signer = null;
         me = this;
         $http.get('/api/CorporationEntities/CorpSigners?team=' + team).success(function (signers) {
-            this.signers = signers
+            me.signers = signers
         });
     }
+
+    _class.prototype.assginCorpClick = function () {
+
+        var _assignCrop = this;
+
+        var eMessages = new DivError('assignBtnForm').getMessage();
+        //var eMessages = $scope.getErrorMessage('assignBtnForm');
+        if (_.any(eMessages)) {
+            AngularRoot.alert(eMessages.join(' <br />'));
+            return false;
+        }
+
+        //var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
+        var assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
+
+        var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
+
+        if (_assignCrop.isWellsFargo) {
+
+            confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + '';
+        }
+        
+        $http.get(assignApi).success(function (data) {
+
+            AngularRoot.confirm(confirmMsg).then(function (r) {
+                if (r) {
+                    _assignCrop.assignCorpSuccessed(data);
+                }
+            });
+        });
+    }
+
+    _class.prototype.assignCorpSuccessed = function (data) {
+        var _assignCrop = this;
+        $http.post('/api/CorporationEntities/Assign?bble=' + _assignCrop.BBLE, JSON.stringify(data)).success(function () {
+            _assignCrop.Crop = data.CorpName;
+            _assignCrop.CropData = data;
+
+            _assignCrop.onAssignSucceed(data);
+        });
+    }
+
     /**
      * This is not right have parent ID
      * */
-    _class.prototype.newOfferId = 0
+    _class.prototype.newOfferId = 0    
     return _class;
 });
 /**
@@ -882,9 +925,11 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
      * 1. in check current step called this function
      * 2. maybe in new PropertyOffer also need call this function
      */
-    propertyOffer.prototype.assignOfferId = function () {
+    propertyOffer.prototype.assignOfferId = function (onAssignCorpSuccessed) {
         this.assignCrop.newOfferId = this.BusinessData.OfferId;
         this.assignCrop.BBLE = this.Tag;
+        this.assignCrop.onAssignSucceed = onAssignCorpSuccessed;
+       
     }
     // propertyOffer.prototype.BusinessData = new BusinessForm();
 
@@ -924,6 +969,39 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
 
     return propertyOffer;
 });
+
+/**
+ * @return {[class]}                 QueryUrl class
+ */
+
+angular.module('PortalApp').factory('QueryUrl', function ($http) {
+    var _class = function () {
+        // This function is anonymous, is executed immediately and 
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        }
+        return query_string;
+    }
+    
+
+    return _class;
+});
+
 /**
  * @return {[class]}                 ScopeHelper class
  */
@@ -6211,11 +6289,11 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
-    Team, NewOfferListGrid, ScopeHelper
+    Team, NewOfferListGrid, ScopeHelper, QueryUrl
    ) {
 
     $scope.ptContactServices = ptContactServices;
-    $scope.QueryUrl = PortalUtility.QueryUrl();
+    $scope.QueryUrl = new QueryUrl();
 
     if ($scope.QueryUrl.model == 'List') {
 
@@ -6470,18 +6548,25 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         }
         return true;
     }
+
+    $scope.onAssignCorpSuccessed = function(data)
+    {
+        $scope.SSpreSign.Status = 1;
+        /*should save to data base*/
+        $scope.constractFromData();
+        //console.log( JSON.stringify($scope.SSpreSign));
+        $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+            $scope.refreshSave(formdata);
+        });
+    }
     $scope.AssignCorpSuccessed = function (data) {
         var _assignCrop = $scope.SSpreSign.assignCrop;
         $http.post('/api/CorporationEntities/Assign?bble=' + $scope.SSpreSign.BBLE, JSON.stringify(data)).success(function () {
             _assignCrop.Crop = data.CorpName;
             _assignCrop.CropData = data;
-            $scope.SSpreSign.Status = 1;
-            /*should save to data base*/
-            $scope.constractFromData();
-            //console.log( JSON.stringify($scope.SSpreSign));
-            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
-                $scope.refreshSave(formdata);
-            });
+
+
+            
         });
     }
 
@@ -6629,7 +6714,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
              * need carefully test 
              * @see PropertyOffer assignOfferId function
              **/
-            $scope.SSpreSign.assignOfferId();
+            $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
             //$scope.SSpreSign.getByBBLE(function (data) {
             //$http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {

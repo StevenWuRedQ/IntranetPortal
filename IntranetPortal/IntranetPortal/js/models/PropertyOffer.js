@@ -40,7 +40,7 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
     propertyOffer.prototype.assignOfferId = function (onAssignCorpSuccessed) {
         this.assignCrop.newOfferId = this.BusinessData.OfferId;
         this.assignCrop.BBLE = this.Tag;
-        this.assignCrop.onAssignCorpSuccessed = onAssignCorpSuccessed;
+        this.assignCrop.onAssignSucceed = onAssignCorpSuccessed;
        
     }
     // propertyOffer.prototype.BusinessData = new BusinessForm();

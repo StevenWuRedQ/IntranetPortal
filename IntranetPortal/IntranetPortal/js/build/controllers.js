@@ -3542,11 +3542,11 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
-    Team, NewOfferListGrid, ScopeHelper
+    Team, NewOfferListGrid, ScopeHelper, QueryUrl
    ) {
 
     $scope.ptContactServices = ptContactServices;
-    $scope.QueryUrl = PortalUtility.QueryUrl();
+    $scope.QueryUrl = new QueryUrl();
 
     if ($scope.QueryUrl.model == 'List') {
 
@@ -3801,18 +3801,25 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         }
         return true;
     }
+
+    $scope.onAssignCorpSuccessed = function(data)
+    {
+        $scope.SSpreSign.Status = 1;
+        /*should save to data base*/
+        $scope.constractFromData();
+        //console.log( JSON.stringify($scope.SSpreSign));
+        $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
+            $scope.refreshSave(formdata);
+        });
+    }
     $scope.AssignCorpSuccessed = function (data) {
         var _assignCrop = $scope.SSpreSign.assignCrop;
         $http.post('/api/CorporationEntities/Assign?bble=' + $scope.SSpreSign.BBLE, JSON.stringify(data)).success(function () {
             _assignCrop.Crop = data.CorpName;
             _assignCrop.CropData = data;
-            $scope.SSpreSign.Status = 1;
-            /*should save to data base*/
-            $scope.constractFromData();
-            //console.log( JSON.stringify($scope.SSpreSign));
-            $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
-                $scope.refreshSave(formdata);
-            });
+
+
+            
         });
     }
 
@@ -3960,7 +3967,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
              * need carefully test 
              * @see PropertyOffer assignOfferId function
              **/
-            $scope.SSpreSign.assignOfferId();
+            $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
             //$scope.SSpreSign.getByBBLE(function (data) {
             //$http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
