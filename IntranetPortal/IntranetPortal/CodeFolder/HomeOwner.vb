@@ -72,7 +72,12 @@ Partial Public Class HomeOwner
             'save tlo data
             SaveTloData(value)
 
-            'LocateReportContent = Newtonsoft.Json.JsonConvert.SerializeObject(value)
+            'save phone no to database
+            SavePhoneField(value)
+
+            If String.IsNullOrEmpty(LocateReportContent) Then
+                LocateReportContent = Newtonsoft.Json.JsonConvert.SerializeObject(value)
+            End If
         End If
     End Sub
 
@@ -108,6 +113,7 @@ Partial Public Class HomeOwner
     Public Shared Sub InitOwnerSSN(ownerId As Integer)
         Using ctx As New Entities
             Dim owner = ctx.HomeOwners.Find(ownerId)
+
             owner.SaveReportData()
             ctx.SaveChanges()
         End Using
@@ -138,6 +144,17 @@ Partial Public Class HomeOwner
             ctx.SaveChanges()
         End Using
     End Sub
+
+    Public Shared Function LoadOwnersNoPhone() As Integer()
+        Using ctx As New Entities
+            Dim bbles = ctx.HomeOwnerPhones.Select(Function(h) h.BBLE).Distinct
+            Dim owners = From owner In ctx.HomeOwners.Where(Function(h) h.ReportToken IsNot Nothing)
+                         Where Not bbles.Contains(owner.BBLE)
+                         Select owner.OwnerID
+
+            Return owners.ToArray
+        End Using
+    End Function
 
     Public Shared Function GetHomeOwenrs(bble As String) As List(Of HomeOwner)
         Using ctx As New Entities

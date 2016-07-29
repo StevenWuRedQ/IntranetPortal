@@ -28,13 +28,15 @@ Partial Class FrmHomeowner
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ServiceController1 = New System.ServiceProcess.ServiceController()
         Me.btnStop = New System.Windows.Forms.Button()
+        Me.btnLoadPhone = New System.Windows.Forms.Button()
+        Me.btnSavePhone = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnLoadOwner
         '
         Me.btnLoadOwner.Location = New System.Drawing.Point(12, 12)
         Me.btnLoadOwner.Name = "btnLoadOwner"
-        Me.btnLoadOwner.Size = New System.Drawing.Size(75, 23)
+        Me.btnLoadOwner.Size = New System.Drawing.Size(82, 23)
         Me.btnLoadOwner.TabIndex = 0
         Me.btnLoadOwner.Text = "Load SSN"
         Me.btnLoadOwner.UseVisualStyleBackColor = True
@@ -65,18 +67,38 @@ Partial Class FrmHomeowner
         '
         'btnStop
         '
-        Me.btnStop.Location = New System.Drawing.Point(12, 41)
+        Me.btnStop.Location = New System.Drawing.Point(12, 85)
         Me.btnStop.Name = "btnStop"
-        Me.btnStop.Size = New System.Drawing.Size(75, 23)
+        Me.btnStop.Size = New System.Drawing.Size(82, 23)
         Me.btnStop.TabIndex = 4
         Me.btnStop.Text = "Stop"
         Me.btnStop.UseVisualStyleBackColor = True
+        '
+        'btnLoadPhone
+        '
+        Me.btnLoadPhone.Location = New System.Drawing.Point(12, 41)
+        Me.btnLoadPhone.Name = "btnLoadPhone"
+        Me.btnLoadPhone.Size = New System.Drawing.Size(82, 23)
+        Me.btnLoadPhone.TabIndex = 5
+        Me.btnLoadPhone.Text = "Load Phones"
+        Me.btnLoadPhone.UseVisualStyleBackColor = True
+        '
+        'btnSavePhone
+        '
+        Me.btnSavePhone.Location = New System.Drawing.Point(100, 41)
+        Me.btnSavePhone.Name = "btnSavePhone"
+        Me.btnSavePhone.Size = New System.Drawing.Size(82, 23)
+        Me.btnSavePhone.TabIndex = 6
+        Me.btnSavePhone.Text = "Save Phones"
+        Me.btnSavePhone.UseVisualStyleBackColor = True
         '
         'FrmHomeowner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(304, 155)
+        Me.Controls.Add(Me.btnSavePhone)
+        Me.Controls.Add(Me.btnLoadPhone)
         Me.Controls.Add(Me.btnStop)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtTotal)
@@ -95,4 +117,6 @@ Partial Class FrmHomeowner
     Friend WithEvents Label1 As Label
     Friend WithEvents ServiceController1 As ServiceProcess.ServiceController
     Friend WithEvents btnStop As Button
+    Friend WithEvents btnLoadPhone As Button
+    Friend WithEvents btnSavePhone As Button
 End Class
