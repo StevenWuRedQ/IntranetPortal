@@ -3,9 +3,7 @@
     <h3 class="wizard-title">Select team and Assign corp</h3>
     <div class="ss_form">
         <h4 class="ss_form_title " ng-class="{ss_warning:!SSpreSign.assignCrop.Crop}">Assign </h4>
-        <div class="ss_border" id="assignBtnForm">
-            {{SSpreSign.assignCrop.newOfferId}}
-            <input  type="button" ng-click="SSpreSign.assignCrop.test()" value="Test"/>
+        <div class="ss_border" id="assignBtnForm">            
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.assignCrop.Name}" data-message="Please select team!">Team Name</label>
