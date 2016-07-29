@@ -44,6 +44,10 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 
                 self.LeadResearch.getOwnerSSN(self.BBLE);
             }
+            if(self.LeadResearch.initFromLeadsInfo)
+            {
+                data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
+            }
         }
        
         //self.LeadResearch = self.LeadResearch || new LeadResearch();
