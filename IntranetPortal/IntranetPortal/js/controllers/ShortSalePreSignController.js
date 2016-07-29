@@ -33,19 +33,6 @@ portalApp.controller('newofferCtrl', function ($scope) {
 });
 
 /*************old style without model contoller *********************/
-ScopeHelper = {
-    getShortSaleScope: function () {
-
-        //return angular.element(document.getElementById('ShortSaleCtrl')).scope();
-        return ScopeHelper.getScope('ShortSaleCtrl');
-    },
-    getLeadsSearchScope: function () {
-        return ScopeHelper.getScope('LeadTaxSearchCtrl');
-    },
-    getScope: function (id) {
-        return angular.element(document.getElementById(id)).scope();
-    }
-};
 
 var portalApp = angular.module('PortalApp');
 
@@ -55,64 +42,65 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
-    Team
+    Team, NewOfferListGrid, ScopeHelper, QueryUrl
    ) {
 
     $scope.ptContactServices = ptContactServices;
-    $scope.QueryUrl = PortalUtility.QueryUrl();
+    $scope.QueryUrl = new QueryUrl();
 
     if ($scope.QueryUrl.model == 'List') {
 
         PropertyOffer.query(function (data) {
             //$http.get('/api/PropertyOffer').success(function (data) {
-            $scope.newOfferGridOpt = {
-                dataSource: data,
-                headerFilter: {
-                    visible: true
-                },
-                searchPanel: {
-                    visible: true,
-                    width: 250
-                },
-                paging: {
-                    pageSize: 10
-                },
-                columnAutoWidth: true,
-                wordWrapEnabled: true,
-                onRowPrepared: function (rowInfo) {
-                    if (rowInfo.rowType != 'data')
-                        return;
-                    rowInfo.rowElement
-                        .addClass('myRow');
-                },
-                columns: [{
-                    dataField: 'Title',
-                    caption: 'Address',
-                    cellTemplate: function (container, options) {
-                        $('<a/>').addClass('dx-link-MyIdealProp')
-                            .text(options.value)
-                            .on('dxclick', function () {
-                                //Do something with options.data;
-                                //ShowCaseInfo(options.data.BBLE);
-                                var request = options.data;
+            $scope.newOfferGridOpt = new NewOfferListGrid(data);
+            //    {
+            //    dataSource: data,
+            //    headerFilter: {
+            //        visible: true
+            //    },
+            //    searchPanel: {
+            //        visible: true,
+            //        width: 250
+            //    },
+            //    paging: {
+            //        pageSize: 10
+            //    },
+            //    columnAutoWidth: true,
+            //    wordWrapEnabled: true,
+            //    onRowPrepared: function (rowInfo) {
+            //        if (rowInfo.rowType != 'data')
+            //            return;
+            //        rowInfo.rowElement
+            //            .addClass('myRow');
+            //    },
+            //    columns: [{
+            //        dataField: 'Title',
+            //        caption: 'Address',
+            //        cellTemplate: function (container, options) {
+            //            $('<a/>').addClass('dx-link-MyIdealProp')
+            //                .text(options.value)
+            //                .on('dxclick', function () {
+            //                    //Do something with options.data;
+            //                    //ShowCaseInfo(options.data.BBLE);
+            //                    var request = options.data;
 
-                                PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
-                            })
-                            .appendTo(container);
-                    }
-                },
-                    'OfferType', {
-                        dataField: 'CreateBy',
-                        caption: 'Submit By'
-                    }, {
-                        dataField: 'CreateDate',
-                        caption: 'Contract Date',
-                        dataType: 'date',
-                        sortOrder: 'desc',
-                        format: 'shortDate'
-                    },
-                ]
-            }
+            //                    PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
+            //                })
+            //                .appendTo(container);
+            //        }
+            //    },
+            //        'OfferType', {
+            //            dataField: 'CreateBy',
+            //            caption: 'Submit By'
+            //        }, {
+            //            dataField: 'CreateDate',
+            //            caption: 'Contract Date',
+            //            dataType: 'date',
+            //            sortOrder: 'desc',
+            //            format: 'shortDate'
+            //        },
+            //    ]
+            //}
         });
     }
 
