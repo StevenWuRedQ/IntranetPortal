@@ -717,13 +717,31 @@ angular.module('PortalApp').factory('DivError', function () {
 
 angular.module('PortalApp').factory('DxGridModel', function ($location, $routeParams) {
 
-
-    var dxGridModel = function (opt) {
+    var dxGridModel = function (opt, texts) {
         angular.extend(this, opt);
+        if (texts) {
+            this.editing = texts;
+        }
         this.initFormUrl();
-    }
-    dxGridModel.prototype.editing = { editMode: "cell" };
 
+    }
+
+    var EditingModel = function (texts) {
+        this.editMode = "cell";
+        if (texts)
+        {
+            this.texts = texts;
+        }
+        
+    }
+   
+    
+    // dxGridModel.prototype.editing = new EditingModel();
+
+    dxGridModel.prototype.setNewText = function(texts)
+    {
+        this.editing = new EditingModel(texts);
+    }
     /**
      * In devextrme grid view model 
      * The eidt permission should be handle by itself
@@ -4551,6 +4569,10 @@ var CONSTANT_ASSIGN_PARTIES_GRID_OPTION = {
             column: "Name",
             summaryType: "count"
         }]
+    },
+    initRowText: function () {
+        self = this;
+        self.editing.texts = { deleteRow: 'Delete' }
     }
 }
 
@@ -4608,11 +4630,11 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
             caption: 'Void Reason',
             allowEditing: false
         }
-        if (self.columns.indexOf(voidReasonColumn) < 0)
-        {
+        if (self.columns.indexOf(voidReasonColumn) < 0) {
             self.columns.push(voidReasonColumn)
         }
-        
+
+
     },
     summary: {
         calculateCustomSummary: function (options) {
@@ -4713,17 +4735,133 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
  *
  **/
 
-portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, DxGridModel, $location) {
+portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location) {
 
     $scope.preAssign = PreSignItem;
 
-    $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
-    $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
+    $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION, {
+        editMode: "cell"
+    });
+    //editing:{
+    //        editMode: "cell", texts: {
+    //        deleteRow: 'Void',
+    //        confirmDeleteMessage: ''
+    //        }
+
+    //},
+    $scope.checkGridOptions = {
+        bindingOptions: {
+            dataSource: 'preAssign.CheckRequestData.Checks'
+        },
+        editing: {
+            editMode: 'cell',
+            texts: {
+                deleteRow: 'Void',
+                confirmDeleteMessage: ''
+            },
+            editEnabled: true,
+            removeEnabled: true,
+            insertEnabled: true
+        },
+        sorting: { mode: 'none' },        
+        paging: {
+            pageSize: 10
+        },
+        pager: {
+
+            showInfo: true
+        },
+        wordWrapEnabled: true,
+        columns: [{
+            dataField: "PaybleTo",
+            caption: 'Payable To',
+            validationRules: [{
+                type: "required"
+            }]
+        }, {
+            dataField: 'Amount',
+            dataType: 'number',
+            format: 'currency',
+            precision: 2,
+            validationRules: [{
+                type: "required"
+            }]
+        }, new dxGridColumnModel(
+        {
+            dataField: 'Date',
+            dataType: 'date',
+            caption: 'Date of Release',
+            validationRules: [{
+                type: "required"
+            }]
+        }), {
+            dataField: 'Description',
+            validationRules: [{
+                type: "required"
+            }]
+        }],
+        initEdit: function () {
+            var self = this;
+            var voidReasonColumn = {
+                dataField: 'Comments',
+                caption: 'Void Reason',
+                allowEditing: false
+            };
+            if (self.columns.indexOf(voidReasonColumn) < 0) {
+                self.columns.push(voidReasonColumn)
+            }
+        },
+        summary: {
+            calculateCustomSummary: function (options) {
+                if (options.name == 'SumAmount') {
+                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                        return o.Status != 1;
+                    }), "Amount"); //$scope.CheckTotalAmount();
+                }
+            },
+            totalItems: [{
+                column: "Name",
+                summaryType: "count"
+            }, {
+                name: "SumAmount",
+                showInColumn: "Amount",
+                summaryType: "sum",
+                displayFormat: "Sum: {0}",
+                valueFormat: "currency",
+                precision: 2,
+                summaryType: "custom"
+            }]
+        }
+    };
+    //angular.extend($scope.checkGridOptions, CONSTANT_ASSIGN_CHECK_GRID_OPTION);
 
 
+    // new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION, {
+    //    editMode: "cell",
+    //    texts: {
+    //        deleteRow: 'Void',
+    //        confirmDeleteMessage: ''
+    //    }
+    //});
+
+    //$scope.checkGridOptions.editing = {}
+
+    //angular.extend($scope.checkGridOptions.editing, {
+    //    editMode: "cell",
+    //    texts: {
+    //        deleteRow: 'Void',
+    //        confirmDeleteMessage: ''
+    //    }
+    //});
     // $scope.checkGridOptions.form
     // if have with BBLE PreSign redirect to view page 
     // this should be handle in error event
+    //$scope.checkGridOptions.editing = 
+
+    ////$scope.partiesGridOptions.editing = {
+    //    editMode: "cell"
+    //}
+
     $scope.CheckByBBLE = function () {
         var preAssign = $scope.preAssign;
         /**with id request cancel check*/
@@ -4742,12 +4880,9 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
 
     $scope.CheckByBBLE();
 
-    $scope.Save = function()
-    {
-        if ($scope.preAssign.validation())
-        {
-            if ($scope.preAssign.hasId())
-            {
+    $scope.Save = function () {
+        if ($scope.preAssign.validation()) {
+            if ($scope.preAssign.hasId()) {
                 $scope.preAssign.$update(function () {
                     $location.path('/preassign/view/' + $scope.preAssign.Id);
                 })
@@ -4757,12 +4892,12 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
                 })
             }
 
-           
+
         } else {
             var msg = $scope.preAssign.getErrorMsgStr();
             AngularRoot.alert(msg);
         }
-       
+
     }
 
     $scope.CheckRowPrepared = function (e) {
@@ -4772,11 +4907,9 @@ portalApp.controller('preAssignEditCtrl', function ($scope,ptCom, PreSignItem, D
     }
 
     $scope.checkGridOptions.onRowPrepared = $scope.CheckRowPrepared;
-    $scope.checkGridOptions.editing.texts = {
-        deleteRow: 'Void',
-        confirmDeleteMessage: '' //'Are you sure you want void this check?'
-    }
-   
+    //$scope.checkGridOptions.setNewText({ deleteRow: 'Void' });
+    //$scope.checkGridOptions.editing.setText();
+    //$scope.partiesGridOptions.editing.texts = { deleteRow: 'Delete' };
     $scope.checkGridOptions.onEditingStart = function (e) {
         if (e.data.Status == 1 || e.data.CheckId) {
             e.cancel = true;
@@ -5091,17 +5224,17 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
                 // But there should have better way to implement put update in javascript 
                 // in restful client can check android update for put http://square.github.io/retrofit/
                 // find the batch update for angular services
-               
+
                 ///////////////////////////////////////
                 //e.data = data;
                 e.cancel = true;
                 e.component.refresh();
                 //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
-                angular.extend($scope.preAssign,data) //.CheckRequestId = data.RequestId
-                
+                angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
+
                 //$scope.preAssign.CheckRequestData.Checks.push(data);
 
-               
+
             }
         });
 
@@ -5112,7 +5245,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
         };
         return cancel;
     }
-   
+
     // $scope.$watch('preAssign.CheckRequestData.Checks', function(oldData,newData)
     // {
     //     _.remove($scope.preAssign.CheckRequestData.Checks,function(o){  return o["CheckId"] == null});
@@ -5348,7 +5481,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
         ],
         wordWrapEnabled: true
     }
-    
+
     $scope.partiesGridOptions = {
         bindingOptions: {
             dataSource: 'preAssign.Parties'
