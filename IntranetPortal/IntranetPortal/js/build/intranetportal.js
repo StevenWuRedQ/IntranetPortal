@@ -4757,7 +4757,11 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                 $scope.preAssign.Title = data.PropertyAddress
             });
         }
-       
+        if (!$scope.preAssign.CreateBy)
+        {
+            $scope.preAssign.CreateBy = $('#currentUser').val();
+            
+        }
     }, 1000);
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION, {
         editMode: "cell"
