@@ -706,12 +706,15 @@
                 recordId: '=',
             },
             link: function (scope, el, attrs) {
-                AuditLog.load({ TableName: scope.tableName, RecordId: scope.recordId }, function (data) {
-                    var result = _.groupBy(data, function (item) {
-                        return item.EventDate;
-                    });
-                    scope.AuditLogs = result;
-                })
+                setTimeout(function () {
+                    AuditLog.load({ TableName: scope.tableName, RecordId: scope.recordId }, function (data) {
+                        var result = _.groupBy(data, function (item) {
+                            return item.EventDate;
+                        });
+                        scope.AuditLogs = result;
+                    })
+                }, 1000);
+               
                
             }
         }
