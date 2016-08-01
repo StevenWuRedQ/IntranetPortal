@@ -1962,7 +1962,18 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
 portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location) {
 
     $scope.preAssign = PreSignItem;
+    setTimeout(function () {
+        if (!$scope.preAssign.CheckRequestData) {
+            $scope.preAssign.CheckRequestData = { Checks: [] };
+        }
+        var checkGrid = $('#gridChecks').dxDataGrid('instance');
+        if (checkGrid) {
+            checkGrid.refresh();
+        } else {
+            console.error("can not find checkGrid instance");
+        }
 
+    }, 1000);
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION, {
         editMode: "cell"
     });
@@ -2164,9 +2175,12 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                 //e.data = data;
                 e.cancel = true;
                 e.component.refresh();
+                var pageExpectedDate = $scope.preAssign.ExpectedDate;
                 //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
                 angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
-
+                if (pageExpectedDate) {
+                    $scope.preAssign.ExpectedDate = pageExpectedDate;
+                }
                 //$scope.preAssign.CheckRequestData.Checks.push(data);
 
 
@@ -2468,9 +2482,13 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
                 //e.data = data;
                 e.cancel = true;
                 e.component.refresh();
+                var pageExpectedDate = $scope.preAssign.ExpectedDate;
                 //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
                 angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
-
+                if(pageExpectedDate)
+                {
+                    $scope.preAssign.ExpectedDate = pageExpectedDate;
+                }
                 //$scope.preAssign.CheckRequestData.Checks.push(data);
 
 
