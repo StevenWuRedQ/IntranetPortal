@@ -1965,13 +1965,15 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
     setTimeout(function () {
 
         if (!$scope.preAssign.CheckRequestData) {
-            $scope.preAssign.CheckRequestData = { Checks: [] };
+            $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
         }
         
         if (!$scope.preAssign.Id)
         {
-            $scope.preAssign.CheckRequestData = { Checks: [] };
+            $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
             $scope.preAssign.Parties = [];
+            $scope.preAssign.NeedSearch = true;
+            $scope.preAssign.NeedCheck = true;
         }
        
 

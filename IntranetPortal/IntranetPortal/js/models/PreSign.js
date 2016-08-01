@@ -53,8 +53,9 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
     //preSign.prototype.Parties = [];
     //Later will change to Checks to Check Class
     //preSign.prototype.CheckRequestData = new CheckRequest();
-    preSign.prototype.NeedSearch = true;
-    preSign.prototype.NeedCheck = true;
+
+    //preSign.prototype.NeedSearch = true;
+    //preSign.prototype.NeedCheck = true;
 
 
     return preSign;

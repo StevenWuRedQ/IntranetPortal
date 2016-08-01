@@ -902,11 +902,12 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
     // preSign.prototype.Id = 0;
     preSign.prototype.BBLE = '';
 
-    preSign.prototype.Parties = [];
+    //preSign.prototype.Parties = [];
     //Later will change to Checks to Check Class
-    preSign.prototype.CheckRequestData = new CheckRequest();
-    preSign.prototype.NeedSearch = true;
-    preSign.prototype.NeedCheck = true;
+    //preSign.prototype.CheckRequestData = new CheckRequest();
+
+    //preSign.prototype.NeedSearch = true;
+    //preSign.prototype.NeedCheck = true;
 
 
     return preSign;
@@ -4744,13 +4745,15 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
     setTimeout(function () {
 
         if (!$scope.preAssign.CheckRequestData) {
-            $scope.preAssign.CheckRequestData = { Checks: [] };
+            $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
         }
         
         if (!$scope.preAssign.Id)
         {
-            $scope.preAssign.CheckRequestData = { Checks: [] };
+            $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
             $scope.preAssign.Parties = [];
+            $scope.preAssign.NeedSearch = true;
+            $scope.preAssign.NeedCheck = true;
         }
        
 
