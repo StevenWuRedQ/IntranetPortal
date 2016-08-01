@@ -38,7 +38,7 @@ var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     ptContactServices, $location,
-    
+
     /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
@@ -105,6 +105,25 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     }
 
     $scope.SSpreSign = new PropertyOffer();
+
+    setTimeout(function () {
+        $scope.SSpreSign.Type = 'Short Sale';
+        $scope.SSpreSign.FormName = 'PropertyOffer';
+        $scope.SSpreSign = {
+            ContractOrMemo: {
+                Sellers: [{}],
+                Buyers: [{}]
+            },
+            Deed: {
+                Sellers: [{}]
+            },
+            CorrectionDeed: {
+                Sellers: [{}],
+                Buyers: [{}]
+            }
+
+        }
+    }, 1000);
     /// old ////////////
     //    {
     //    Type: 'Short Sale',
@@ -169,7 +188,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         var _dealSheet = $scope.SSpreSign.DealSheet;
         var eMessages = new DivError('ShortSaleCtrl').getMessage();
 
-            //$scope.getErrorMessage('ShortSaleCtrl');
+        //$scope.getErrorMessage('ShortSaleCtrl');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
@@ -306,8 +325,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         return true;
     }
 
-    $scope.onAssignCorpSuccessed = function(data)
-    {
+    $scope.onAssignCorpSuccessed = function (data) {
         $scope.SSpreSign.Status = 1;
         /*should save to data base*/
         $scope.constractFromData();
@@ -323,7 +341,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             _assignCrop.CropData = data;
 
 
-            
+
         });
     }
 
@@ -360,7 +378,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         $scope.CorpTeam = data;
 
     });
-    
+
     //$http.get('/api/CorporationEntities/Teams').success()
     $scope.AssignCropsNext = function () {
 
