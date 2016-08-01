@@ -19,7 +19,7 @@ angular.module('PortalApp').factory('CheckRequest', function (ptBaseResource, Bu
     }
 
     checkRequest.prototype.Type = 'Short Sale';
-    checkRequest.prototype.Checks = [];
+    checkRequest.prototype.Checks = [{}];
 
     return checkRequest;
 

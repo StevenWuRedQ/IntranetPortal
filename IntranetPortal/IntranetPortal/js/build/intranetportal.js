@@ -638,7 +638,7 @@ angular.module('PortalApp').factory('CheckRequest', function (ptBaseResource, Bu
     }
 
     checkRequest.prototype.Type = 'Short Sale';
-    checkRequest.prototype.Checks = [];
+    checkRequest.prototype.Checks = [{}];
 
     return checkRequest;
 
@@ -5008,9 +5008,23 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
 
 });
 
-portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridModel) {
+portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridModel, CheckRequest) {
 
     $scope.preAssign = PreSignItem;
+    setTimeout(function () {
+        if (!$scope.preAssign.CheckRequestData) {
+            $scope.preAssign.CheckRequestData = { Checks: [{}]};
+        }
+        var checkGrid = $('#gridChecks').dxDataGrid('instance');
+        if (checkGrid)
+        {
+            checkGrid.refresh();
+        } else {
+            console.error("can not find checkGrid instance");
+        }
+        
+    }, 1000);
+    
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
     $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
     setTimeout(function () {
@@ -5023,6 +5037,7 @@ portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridM
             e.rowElement.addClass('avoid-check');
         }
     }
+    $scope.checkGridOptions.onRowPrepared = $scope.CheckRowPrepared;
 
 });
 
