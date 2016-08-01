@@ -2195,10 +2195,16 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                 e.cancel = true;
                 e.component.refresh();
                 var pageExpectedDate = $scope.preAssign.ExpectedDate;
+                var pageParties = $scope.preAssign.Parties;
                 //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
                 angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
                 if (pageExpectedDate) {
                     $scope.preAssign.ExpectedDate = pageExpectedDate;
+
+                }
+                if(pageParties)
+                {
+                    $scope.preAssign.Parties = pageParties;
                 }
                 //$scope.preAssign.CheckRequestData.Checks.push(data);
 
