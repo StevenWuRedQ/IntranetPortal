@@ -18,6 +18,7 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
         }
 
     });
+   
     /**
      * @todo
      * by Steven
@@ -45,7 +46,7 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
     }
     // propertyOffer.prototype.BusinessData = new BusinessForm();
 
-    propertyOffer.prototype.Type = 'Short Sale';
+    //propertyOffer.prototype.Type = 'Short Sale';
     propertyOffer.prototype.FormName = 'PropertyOffer';
 
     /**

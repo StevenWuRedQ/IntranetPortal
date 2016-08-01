@@ -3856,24 +3856,27 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     $scope.SSpreSign = new PropertyOffer();
 
-    setTimeout(function () {
-        $scope.SSpreSign.Type = 'Short Sale';
-        $scope.SSpreSign.FormName = 'PropertyOffer';
-        $scope.SSpreSign = {
-            ContractOrMemo: {
-                Sellers: [{}],
-                Buyers: [{}]
-            },
-            Deed: {
-                Sellers: [{}]
-            },
-            CorrectionDeed: {
-                Sellers: [{}],
-                Buyers: [{}]
-            }
+    //setTimeout(function () {
+    //    $scope.SSpreSign.Type = 'Short Sale';
+    //    $scope.SSpreSign.FormName = 'PropertyOffer';
+    //    angular.extend($scope.SSpreSign,
+    //        {
+    //            ContractOrMemo: {
+    //                Sellers: [{}],
+    //                Buyers: [{}]
+    //            },
+    //            Deed: {
+    //                Sellers: [{}]
+    //            },
+    //            CorrectionDeed: {
+    //                Sellers: [{}],
+    //                Buyers: [{}]
+    //            }
 
-        }
-    }, 1000);
+    //        })
+        
+    //    //$scope.SSpreSign = 
+    //}, 1000);
     /// old ////////////
     //    {
     //    Type: 'Short Sale',
@@ -4232,6 +4235,29 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val());
 
     $scope.CheckCurrentStep = function (BBLE) {
+        //var offer = new PropertyOffer()
+        //offer.BBLE = BBLE.trim();
+
+        //$scope.SSpreSign = offer
+        //offer.$getByBBLE(function (data) {
+
+        //    $scope.SSpreSign.Type = 'Short Sale';
+        //    $scope.SSpreSign.FormName = 'PropertyOffer';
+        //    anguler.extend($scope.SSpreSign,)
+        //    $scope.SSpreSign = {
+        //        ContractOrMemo: {
+        //            Sellers: [{}],
+        //            Buyers: [{}]
+        //        },
+        //        Deed: {
+        //            Sellers: [{}]
+        //        },
+        //        CorrectionDeed: {
+        //            Sellers: [{}],
+        //            Buyers: [{}]
+        //        }
+
+        //    }
 
         $scope.SSpreSign = PropertyOffer.getByBBLE({ BBLE: BBLE.trim() }, function (data) {
 
@@ -4239,6 +4265,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
              * need carefully test 
              * @see PropertyOffer assignOfferId function
              **/
+
             $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
             //$scope.SSpreSign.getByBBLE(function (data) {
