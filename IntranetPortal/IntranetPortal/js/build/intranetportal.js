@@ -638,7 +638,7 @@ angular.module('PortalApp').factory('CheckRequest', function (ptBaseResource, Bu
     }
 
     checkRequest.prototype.Type = 'Short Sale';
-    checkRequest.prototype.Checks = [{}];
+    checkRequest.prototype.Checks = [];
 
     return checkRequest;
 
@@ -854,7 +854,7 @@ angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
 /**
  * @return {[class]}                 PreSign class
  */
-angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckRequest) {
+angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckRequest,LeadsInfo) {
 
     var preSign = ptBaseResource('PreSign', 'Id', null, {
         getByBBLE: {
@@ -4735,7 +4735,7 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
  *
  **/
 
-portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location) {
+portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location,$http) {
 
     $scope.preAssign = PreSignItem;
     setTimeout(function () {
@@ -4748,7 +4748,13 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         } else {
             console.error("can not find checkGrid instance");
         }
-
+        if ($scope.preAssign.BBLE)
+        {
+            $http.get('/api/Leads/LeadsInfo/' + $scope.preAssign.BBLE).success(function (data) {
+                $scope.preAssign.Title = data.PropertyAddress
+            });
+        }
+       
     }, 1000);
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION, {
         editMode: "cell"

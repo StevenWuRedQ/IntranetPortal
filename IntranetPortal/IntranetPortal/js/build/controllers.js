@@ -1959,7 +1959,7 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
  *
  **/
 
-portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location) {
+portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location,$http) {
 
     $scope.preAssign = PreSignItem;
     setTimeout(function () {
@@ -1972,7 +1972,13 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         } else {
             console.error("can not find checkGrid instance");
         }
-
+        if ($scope.preAssign.BBLE)
+        {
+            $http.get('/api/Leads/LeadsInfo/' + $scope.preAssign.BBLE).success(function (data) {
+                $scope.preAssign.Title = data.PropertyAddress
+            });
+        }
+       
     }, 1000);
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION, {
         editMode: "cell"

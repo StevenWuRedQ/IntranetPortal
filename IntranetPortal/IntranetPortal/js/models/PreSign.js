@@ -2,7 +2,7 @@
 /**
  * @return {[class]}                 PreSign class
  */
-angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckRequest) {
+angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckRequest,LeadsInfo) {
 
     var preSign = ptBaseResource('PreSign', 'Id', null, {
         getByBBLE: {
