@@ -1963,9 +1963,18 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
 
     $scope.preAssign = PreSignItem;
     setTimeout(function () {
+
         if (!$scope.preAssign.CheckRequestData) {
             $scope.preAssign.CheckRequestData = { Checks: [] };
         }
+        
+        if (!$scope.preAssign.Id)
+        {
+            $scope.preAssign.CheckRequestData = { Checks: [] };
+            $scope.preAssign.Parties = [];
+        }
+       
+
         var checkGrid = $('#gridChecks').dxDataGrid('instance');
         if (checkGrid) {
             checkGrid.refresh();
