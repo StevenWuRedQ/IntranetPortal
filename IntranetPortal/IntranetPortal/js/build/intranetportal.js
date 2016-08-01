@@ -586,8 +586,8 @@ angular.module('PortalApp').factory('AuditLog', function (ptBaseResource) {
                TableName: '@TableName'
 
            },
-            isArray: true
-            // options: { noError: true }
+            isArray: true,
+            options: { noError: true }
         },
     });
 
