@@ -293,9 +293,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
             insertEnabled: true
         },
         sorting: { mode: 'none' },        
-        paging: {
-            pageSize: 10
-        },
+       
         pager: {
 
             showInfo: true
@@ -329,14 +327,14 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                 type: "required"
             }]
         }],
-        initEdit: function () {
+        initEdit: function (path) {
             var self = this;
             var voidReasonColumn = {
                 dataField: 'Comments',
                 caption: 'Void Reason',
                 allowEditing: false
             };
-            if (self.columns.indexOf(voidReasonColumn) < 0) {
+            if (self.columns.indexOf(voidReasonColumn) < 0 && path.indexOf('new') <0) {
                 self.columns.push(voidReasonColumn)
             }
         },
@@ -532,11 +530,15 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
 
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
+    path = $location.path();
+    if (path.indexOf('new') < 0)
+    {
+        $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
+        $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
+    }
+    
 
-    $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
-    $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
-
-    $scope.checkGridOptions.initEdit();
+    $scope.checkGridOptions.initEdit(path);
 
 });
 
