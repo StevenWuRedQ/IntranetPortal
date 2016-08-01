@@ -944,7 +944,8 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
      * by Steven
      * for speed it should be assignCrop type is (AssignCorp) not an Instances 
      */
-    propertyOffer.prototype.assignCrop = new AssignCorp();
+
+    //propertyOffer.prototype.assignCrop = new AssignCorp();
 
     /**
      * @data 7/28/2016
@@ -960,7 +961,7 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
     }
     // propertyOffer.prototype.BusinessData = new BusinessForm();
 
-    //propertyOffer.prototype.Type = 'Short Sale';
+    propertyOffer.prototype.Type = 'Short Sale';
     propertyOffer.prototype.FormName = 'PropertyOffer';
 
     /**
@@ -1043,11 +1044,11 @@ angular.module('PortalApp').factory('ScopeHelper', function ($http) {
     _class.getShortSaleScope = function () {
 
         
-        return ScopeHelper.getScope('ShortSaleCtrl');
+        return _class.getScope('ShortSaleCtrl');
     }
     _class.getLeadsSearchScope = function()
     {
-        return ScopeHelper.getScope('LeadTaxSearchCtrl');
+        return _class.getScope('LeadTaxSearchCtrl');
     }
     return _class;
 });
@@ -6635,8 +6636,26 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         });
     }
 
-    $scope.SSpreSign = new PropertyOffer();
+    $scope.SSpreSign =     {
+        Type: 'Short Sale',
+        FormName: 'PropertyOffer',
+        DealSheet: {
+            ContractOrMemo: {
+                Sellers: [{}],
+                Buyers: [{}]
+            },
+            Deed: {
+                Sellers: [{}]
+            },
+            CorrectionDeed: {
+                Sellers: [{}],
+                Buyers: [{}]
+            }
+        }
+    };
 
+    angular.extend($scope.SSpreSign,new PropertyOffer());
+    $scope.SSpreSign.assignCrop = new AssignCorp();
     //setTimeout(function () {
     //    $scope.SSpreSign.Type = 'Short Sale';
     //    $scope.SSpreSign.FormName = 'PropertyOffer';
@@ -6655,7 +6674,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     //            }
 
     //        })
-        
+
     //    //$scope.SSpreSign = 
     //}, 1000);
     /// old ////////////
@@ -7047,6 +7066,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
              * @see PropertyOffer assignOfferId function
              **/
 
+            if (!$scope.SSpreSign.assignCrop)
+            {
+                $scope.SSpreSign.assignCrop = new AssignCorp();
+            } else
+            {
+                angular.extend($scope.SSpreSign.assignCrop, new AssignCorp());
+            }
             $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
             //$scope.SSpreSign.getByBBLE(function (data) {
@@ -7054,13 +7080,21 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
             if (data.FormData) {
 
-                //$scope.SSpreSign = data.FormData;
+                angular.extend($scope.SSpreSign, data);
 
-                $scope.refreshSave(data);
+                if (!$scope.SSpreSign.assignCrop) {
+                    $scope.SSpreSign.assignCrop = new AssignCorp();
+                } else {
+                    angular.extend($scope.SSpreSign.assignCrop, new AssignCorp());
+                }
+                $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
+
+              
                 $scope.DeadType = data.FormData.DeadType;
                 $scope.SSpreSign.SsCase = data.FormData.SsCase;
                 $scope.SSpreSign.Status = data.BusinessData.Status;
 
+                $scope.refreshSave(data);
                 // setTimeout(function () {
 
                 var ss = ScopeHelper.getShortSaleScope();
@@ -7073,7 +7107,18 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             } else {
                 $scope.SSpreSign.BBLE = data.Tag;
             }
+
+            var BBLE = $("#BBLE").val();
+            if (BBLE) {
+                LeadsInfo.get({ BBLE: BBLE.trim() }, function (data) {
+                    $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
+                    $scope.SSpreSign.BBLE = BBLE;
+                });
+            }
+
         });
+
+        
     }
 
     var BBLE = $("#BBLE").val();

@@ -30,7 +30,8 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
      * by Steven
      * for speed it should be assignCrop type is (AssignCorp) not an Instances 
      */
-    propertyOffer.prototype.assignCrop = new AssignCorp();
+
+    //propertyOffer.prototype.assignCrop = new AssignCorp();
 
     /**
      * @data 7/28/2016
@@ -46,7 +47,7 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
     }
     // propertyOffer.prototype.BusinessData = new BusinessForm();
 
-    //propertyOffer.prototype.Type = 'Short Sale';
+    propertyOffer.prototype.Type = 'Short Sale';
     propertyOffer.prototype.FormName = 'PropertyOffer';
 
     /**

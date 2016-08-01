@@ -12,11 +12,11 @@ angular.module('PortalApp').factory('ScopeHelper', function ($http) {
     _class.getShortSaleScope = function () {
 
         
-        return ScopeHelper.getScope('ShortSaleCtrl');
+        return _class.getScope('ShortSaleCtrl');
     }
     _class.getLeadsSearchScope = function()
     {
-        return ScopeHelper.getScope('LeadTaxSearchCtrl');
+        return _class.getScope('LeadTaxSearchCtrl');
     }
     return _class;
 });
