@@ -51,7 +51,13 @@ Public Class FrmHomeowner
     End Sub
 
     Private Sub btnSavePhone_Click(sender As Object, e As EventArgs) Handles btnSavePhone.Click
-        Dim ids = HomeOwner.LoadOwnersNoPhone()
+        Dim ids() As Integer
+        If chkBBLes.Checked Then
+            ids = txtBBLEs.Lines.Select(Function(s) CInt(s)).ToArray
+        Else
+            ids = HomeOwner.LoadOwnersNoPhone()
+        End If
+
         txtTotal.Text = ids.Count
 
         For Each id In ids
@@ -63,5 +69,13 @@ Public Class FrmHomeowner
                                                                 initSSN(id)
                                                             End Sub)
         Next
+    End Sub
+
+    Private Sub chkBBLes_CheckedChanged(sender As Object, e As EventArgs) Handles chkBBLes.CheckedChanged
+        If chkBBLes.Checked Then
+            txtBBLEs.Visible = True
+        Else
+            txtBBLEs.Visible = False
+        End If
     End Sub
 End Class

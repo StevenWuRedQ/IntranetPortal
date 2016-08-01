@@ -67,7 +67,7 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
      * like this will move out when I have time
      * such as Seller class Buyer class and so on
      */
-    propertyOffer.prototype.DealSheet = {
+    propertyOffer.prototype.DealSheetMetaData = {
         ContractOrMemo: {
             Sellers: [{}],
             Buyers: [{}]
@@ -79,7 +79,7 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
             Sellers: [{}],
             Buyers: [{}]
         }
-    };
+    };   
 
     return propertyOffer;
 });

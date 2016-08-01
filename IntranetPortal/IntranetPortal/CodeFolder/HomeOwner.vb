@@ -148,6 +148,7 @@ Partial Public Class HomeOwner
     Public Shared Function LoadOwnersNoPhone() As Integer()
         Using ctx As New Entities
             Dim bbles = ctx.HomeOwnerPhones.Select(Function(h) h.BBLE).Distinct
+            ' Dim lds = ctx.Leads.Select(Function(l) l.BBLE).Where(Function(l) Not bbles.Contains(l))
             Dim owners = From owner In ctx.HomeOwners.Where(Function(h) h.ReportToken IsNot Nothing)
                          Where Not bbles.Contains(owner.BBLE)
                          Select owner.OwnerID
