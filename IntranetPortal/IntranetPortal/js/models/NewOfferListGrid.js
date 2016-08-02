@@ -3,8 +3,8 @@
  */
 angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
     var _class = function (data) {
-        
-        var opt =  {
+
+        var opt = {
             dataSource: data,
             headerFilter: {
                 visible: true
@@ -34,6 +34,19 @@ angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
                     sortOrder: 'desc',
                     format: 'shortDate'
                 },
+                {
+                    caption: 'History',
+                    width: 80,
+                    alignment: 'center',
+                    cellTemplate: function (container, options) {
+                        $("<i>").attr("class", "fa fa-history")
+                                .attr("style", "cursor:pointer")
+                                .on('dxclick', function () {
+                                    auditLog.show('PropertyOffer', options.data.OfferId);
+                                    $("#divAuditLog").modal("show");
+                                }).appendTo(container);
+                    }
+                }
             ]
         };
         angular.extend(this, opt)
@@ -56,6 +69,6 @@ angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
             })
             .appendTo(container);
     }
-  
+
     return _class;
 });
