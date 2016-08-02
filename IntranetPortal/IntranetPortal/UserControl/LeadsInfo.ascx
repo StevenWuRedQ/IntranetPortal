@@ -337,6 +337,9 @@
 
     function OnLeadsInfoEndCallBack(s, e) {
         if (leadsInfoBBLE) reloadHomeBreakCtrl(leadsInfoBBLE);
+        if (sortPhones) {
+            sortPhones();
+        }
     }
 
     function reloadHomeBreakCtrl(bble) {
