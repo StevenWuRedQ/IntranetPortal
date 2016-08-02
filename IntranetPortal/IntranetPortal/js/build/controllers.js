@@ -4293,12 +4293,16 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             }
             $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
+            if (!$scope.SSpreSign.DealSheet) {
+                $scope.SSpreSign.DealSheet = $scope.SSpreSign.DealSheetMetaData;
+            }
+
             //$scope.SSpreSign.getByBBLE(function (data) {
             //$http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
 
             if (data.FormData) {
 
-                angular.extend($scope.SSpreSign, data);
+                angular.extend($scope.SSpreSign, data.FormData);
 
                 if (!$scope.SSpreSign.assignCrop) {
                     $scope.SSpreSign.assignCrop = new AssignCorp();
@@ -4308,8 +4312,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                 $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
               
-                $scope.DeadType = data.FormData.DeadType;
-                $scope.SSpreSign.SsCase = data.FormData.SsCase;
+                $scope.DeadType = $scope.SSpreSign.DeadType;
+                //$scope.SSpreSign.SsCase = data.FormData.SsCase;
                 $scope.SSpreSign.Status = data.BusinessData.Status;
 
                 $scope.refreshSave(data);
@@ -4333,7 +4337,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                     $scope.SSpreSign.BBLE = BBLE;
                 });
             }
-
         });
 
         

@@ -948,7 +948,7 @@ Public Class DataWCFService
             End If
 
             If bble.StartsWith("2") Then
-                If Not String.IsNullOrEmpty(city) AndAlso (city.Trim = "BX" Or city.Contains("BX")) Then
+                If Not String.IsNullOrEmpty(city) Then
                     city = "Bronx"
                 End If
             End If
