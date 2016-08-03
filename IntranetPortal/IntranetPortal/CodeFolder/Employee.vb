@@ -551,6 +551,12 @@ Partial Public Class Employee
             Return True
         End If
 
+        Dim viewableRoles = Core.PortalSettings.GetValue("ShortSaleManagerRoles").Split(";")
+
+        If rs.Any(Function(a) viewableRoles.Any(Function(r) a.StartsWith(r.Replace("*", "")))) Then
+            Return True
+        End If
+
         If rs.Where(Function(r) r = "ShortSale-Manager").Count > 0 Then
             Return True
         End If

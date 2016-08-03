@@ -32,6 +32,7 @@ Partial Class FrmHomeowner
         Me.btnSavePhone = New System.Windows.Forms.Button()
         Me.txtBBLEs = New System.Windows.Forms.TextBox()
         Me.chkBBLes = New System.Windows.Forms.CheckBox()
+        Me.chkUseThreads = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'btnLoadOwner
@@ -114,11 +115,22 @@ Partial Class FrmHomeowner
         Me.chkBBLes.Text = "BBLEs"
         Me.chkBBLes.UseVisualStyleBackColor = True
         '
+        'chkUseThreads
+        '
+        Me.chkUseThreads.AutoSize = True
+        Me.chkUseThreads.Location = New System.Drawing.Point(13, 93)
+        Me.chkUseThreads.Name = "chkUseThreads"
+        Me.chkUseThreads.Size = New System.Drawing.Size(87, 17)
+        Me.chkUseThreads.TabIndex = 9
+        Me.chkUseThreads.Text = "Use Threads"
+        Me.chkUseThreads.UseVisualStyleBackColor = True
+        '
         'FrmHomeowner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(398, 155)
+        Me.Controls.Add(Me.chkUseThreads)
         Me.Controls.Add(Me.chkBBLes)
         Me.Controls.Add(Me.txtBBLEs)
         Me.Controls.Add(Me.btnSavePhone)
@@ -145,4 +157,5 @@ Partial Class FrmHomeowner
     Friend WithEvents btnSavePhone As Button
     Friend WithEvents txtBBLEs As TextBox
     Friend WithEvents chkBBLes As CheckBox
+    Friend WithEvents chkUseThreads As CheckBox
 End Class

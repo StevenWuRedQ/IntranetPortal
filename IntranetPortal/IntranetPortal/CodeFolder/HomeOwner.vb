@@ -119,6 +119,15 @@ Partial Public Class HomeOwner
         End Using
     End Sub
 
+    Public Shared Sub InitPhoneNums(ownerId As Integer)
+        Using ctx As New Entities
+            Dim owner = ctx.HomeOwners.Find(ownerId)
+
+            owner.SavePhoneField(owner.TLOLocateReport)
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Shared Function LoadOwnerIds() As Integer()
         Using ctx As New Entities
             Dim dataIds = ctx.TLODatas.Select(Function(t) t.OwnerId)

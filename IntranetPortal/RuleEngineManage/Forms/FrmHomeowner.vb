@@ -60,15 +60,29 @@ Public Class FrmHomeowner
 
         txtTotal.Text = ids.Count
 
-        For Each id In ids
-            If stopTag Then
-                Return
-            End If
+        If chkUseThreads.Checked Then
+            Threading.ThreadPool.SetMaxThreads(3, 3)
+            For Each id In ids
+                If stopTag Then
+                    Return
+                End If
 
-            Dim tp = Threading.ThreadPool.QueueUserWorkItem(Sub()
-                                                                initSSN(id)
-                                                            End Sub)
-        Next
+                Dim tp = Threading.ThreadPool.QueueUserWorkItem(Sub()
+                                                                    initSSN(id)
+                                                                End Sub)
+            Next
+        Else
+            Dim ts As New Thread(Sub()
+                                     For Each id In ids
+                                         If stopTag Then
+                                             Return
+                                         End If
+
+                                         initSSN(id)
+                                     Next
+                                 End Sub)
+            ts.Start()
+        End If
     End Sub
 
     Private Sub chkBBLes_CheckedChanged(sender As Object, e As EventArgs) Handles chkBBLes.CheckedChanged
