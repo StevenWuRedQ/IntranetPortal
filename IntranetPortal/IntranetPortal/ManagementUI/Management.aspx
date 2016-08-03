@@ -1510,7 +1510,6 @@
                 action: function () {
                     $('#mytab a[href="#Agent_Activity_Tab"]').tab('show');
                     agentActivityTab.ShowTab(currentTeamInfo.TeamName, true);
-
                 }
             },
             'Status Of Leads': {
