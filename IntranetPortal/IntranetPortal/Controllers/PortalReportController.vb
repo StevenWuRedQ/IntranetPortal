@@ -24,6 +24,7 @@ Namespace Controllers
                        .EmployeeName = ld.EmployeeName,
                        .LastUpdate = ld.LastUpdate,
                        .Callback = ld.CallbackDate,
+                       .Status = CType(ld.Status, LeadStatus).ToString,
                        .DeadReason = If(ld.DeadReason.HasValue, CType(ld.DeadReason, Lead.DeadReasonEnum).ToString, ""),
                        .Description = ld.Description
                                               }).ToArray

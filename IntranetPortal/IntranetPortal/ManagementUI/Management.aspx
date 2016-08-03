@@ -1007,6 +1007,12 @@
                                                     remoteOperations: {
                                                         sorting: false
                                                     },
+                                                    "export": {
+                                                        enabled: true,
+                                                        fileName: "leads"                                                        
+                                                    }, groupPanel: {
+                                                        visible: true
+                                                    },
                                                     columns: [{
                                                         dataField: "LeadsName",
                                                         caption: "Leads Name",
@@ -1024,6 +1030,9 @@
                                                     }, {
                                                         dataField: "EmployeeName",
                                                         caption: "Employee Name"
+                                                    }, {
+                                                        dataField: "Status",
+                                                        caption: "Status"
                                                     }, {
                                                         dataField: "LastUpdate",
                                                         caption: "Last Update",
