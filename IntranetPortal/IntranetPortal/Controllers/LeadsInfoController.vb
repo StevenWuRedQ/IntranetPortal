@@ -18,6 +18,7 @@ Namespace Controllers
 
         <Route("api/LeadsInfo/{bble}")>
         Public Function GetLeadsInfo(bble As String) As IHttpActionResult
+
             Try
                 Dim li = LeadsInfo.GetInstance(bble)
                 Return Ok(li)
