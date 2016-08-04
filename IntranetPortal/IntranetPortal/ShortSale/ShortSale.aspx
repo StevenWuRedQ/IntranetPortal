@@ -25,7 +25,6 @@
             var loadingCover = document.getElementById("LodingCover");
             loadingCover.style.display = "block";
         })();
-
     </script>
 
     <style>
@@ -114,14 +113,12 @@
                                                 <div class="font_size_bold">Eviction</div>
                                             </a>
                                         </li>
-
                                         <li class="short_sale_head_tab">
-                                            <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble={{SsCase.BBLE}}" data-href="#more_legal" onclick="LoadMoreFrame(this)">
+                                            <a class="tab_button_a" role="tab" data-toggle="tab"  href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble={{SsCase.BBLE}}" data-href="#more_legal" onclick="LoadMoreFrame(this)">
                                                 <i class="fa fa-university head_tab_icon_padding"></i>
                                                 <div class="font_size_bold">Legal</div>
                                             </a>
                                         </li>
-
                                     </ul>
                                 </div>
                             </li>

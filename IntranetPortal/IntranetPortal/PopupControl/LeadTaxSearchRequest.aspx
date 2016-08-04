@@ -154,18 +154,16 @@
                                                         <ul class="ss_form_box clearfix" collapse="LiensInfoCollapse">
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" money-mask /></li>
-
                                                             <li class="ss_form_item ">
-                                                                <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" money-mask /></li>
+                                                                <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" money-mask />
+                                                            </li>
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">NYS Tax Lien</label>
                                                                 <pt-radio name="has_NysTaxLien" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
-
                                                             </li>
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">Fannie</label>
                                                                 <pt-radio name="liens_info_fannie1" model="DocSearch.LeadResearch.fannie"></pt-radio>
-
                                                             </li>
                                                             <li class="ss_form_item ">
                                                                 <label class="ss_form_input_title">FHA</label>
