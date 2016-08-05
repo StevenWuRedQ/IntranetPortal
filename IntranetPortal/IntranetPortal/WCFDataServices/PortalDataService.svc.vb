@@ -237,13 +237,12 @@ Public Class PortalDataService
                     Case "WATER_SEWER"
                         If WaterAmt > 0 Then
                             lead.IsWaterOwed = True
+                            lead.WaterAmt = WaterAmt
+                            lead.WaterOrderDeliveryTime = updateTime
+                            lead.WaterOrderStatus = status
+
+                            LeadsInfo.AddIndicator("Water", lead, "DataService")
                         End If
-
-                        lead.WaterAmt = WaterAmt
-                        lead.WaterOrderDeliveryTime = updateTime
-                        lead.WaterOrderStatus = status
-
-                        LeadsInfo.AddIndicator("Water", lead, "DataService")
                     Case "Zillow"
                         If zEstimate > 0 Then
                             lead.EstValue = zEstimate
