@@ -246,8 +246,7 @@ Public Class PortalDataService
                     Case "Zillow"
                         If zEstimate > 0 Then
                             lead.EstValue = zEstimate
-                            'LeadsInfo.AddIndicator("UnderBuilt", lead)
-
+                            ' LeadsInfo.AddIndicator("UnderBuilt", lead)
                         End If
                     Case "ACRIS_LatestSale"
                         UpdateSalesInfo(salesInfo)

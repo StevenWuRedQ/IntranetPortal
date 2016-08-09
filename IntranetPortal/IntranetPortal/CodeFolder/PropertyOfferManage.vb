@@ -162,7 +162,12 @@ Public Class DocumentGenerator
         Me.Data = Data
 
         For Each ph In config.PlaceHolders
-            doc.ReplaceText(String.Format("[{0}]", ph.FieldName), GetValue(ph))
+            Try
+                doc.ReplaceText(String.Format("[{0}]", ph.FieldName), GetValue(ph))
+            Catch ex As Exception
+                Console.Write(ex.Message)
+            End Try
+
         Next
     End Sub
 
@@ -251,10 +256,19 @@ Public Class DocumentGenerator
                                                                      Dim contractPrice = data.SelectToken("DealSheet.ContractOrMemo.contractPrice")
                                                                      Dim downPayment = data.SelectToken("DealSheet.ContractOrMemo.downPayment")
                                                                      If contractPrice IsNot Nothing AndAlso downPayment IsNot Nothing Then
-                                                                         Dim balance = CDec(contractPrice) - CDec(downPayment)
+                                                                         Dim cPrice = contractPrice.ToString
+                                                                         If cPrice.Contains("$") Then
+                                                                             cPrice = cPrice.Replace("$", "")
+                                                                         End If
+
+                                                                         Dim dPrice = downPayment.ToString
+                                                                         If dPrice.Contains("$") Then
+                                                                             dPrice = dPrice.Replace("$", "")
+                                                                         End If
+
+                                                                         Dim balance = CDec(cPrice) - CDec(dPrice)
                                                                          Return String.Format("{0:N2}", balance)
                                                                      End If
-
                                                                      Return ""
                                                                  End Function))
         file.PlaceHolders.Add(New DocumentPlaceHolder("SELLER2NAME", "DealSheet.ContractOrMemo.Sellers[1].Name"))

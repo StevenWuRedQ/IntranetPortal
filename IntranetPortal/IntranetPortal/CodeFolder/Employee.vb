@@ -4,10 +4,18 @@ Imports System.IO
 Imports Newtonsoft.Json
 Imports System.ComponentModel.DataAnnotations
 
+
+''' <summary>
+''' The Employee Object
+''' </summary>
 <MetadataType(GetType(EmployeeMetaData))>
 Partial Public Class Employee
 
     Private Shared _ceo As Employee
+    ''' <summary>
+    ''' Get company CEO
+    ''' </summary>
+    ''' <returns>The Employee Object</returns>
     Public Shared ReadOnly Property CEO As Employee
         Get
             If _ceo Is Nothing Then
@@ -20,6 +28,10 @@ Partial Public Class Employee
         End Get
     End Property
 
+    ''' <summary>
+    ''' Get Current Application Id
+    ''' </summary>
+    ''' <returns>The Application Id</returns>
     Public Shared ReadOnly Property CurrentAppId As Integer
         Get
             Try
@@ -38,6 +50,11 @@ Partial Public Class Employee
         End Get
     End Property
 
+    ''' <summary>
+    ''' Get Employee User Profile Data
+    ''' </summary>
+    ''' <param name="name">The employee name</param>
+    ''' <returns>The Employee Profile Object</returns>
     Public Shared Function GetProfile(name As String) As EmployeeProfile
         Using context As New Entities
             Dim data = context.UserProfileDatas.Where(Function(up) up.UserName = name).Select(Function(up) up.ProfileData).SingleOrDefault
@@ -52,6 +69,11 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Save Employee Profile Object
+    ''' </summary>
+    ''' <param name="name">The employee name</param>
+    ''' <param name="profile">The employee profile object</param>
     Public Shared Sub SaveProfile(name As String, profile As EmployeeProfile)
         If profile IsNot Nothing Then
 
@@ -79,6 +101,10 @@ Partial Public Class Employee
         End If
     End Sub
 
+    ''' <summary>
+    ''' The employee office display name
+    ''' </summary>
+    ''' <returns>Return the string with format: Positon(Department)</returns>
     Public ReadOnly Property Office As String
         Get
             If Position IsNot Nothing AndAlso Position.Length > 0 Then
@@ -89,12 +115,20 @@ Partial Public Class Employee
         End Get
     End Property
 
+    ''' <summary>
+    ''' Return Current Application Object
+    ''' </summary>
+    ''' <returns>The Application Object</returns>
     Public Shared ReadOnly Property Application As Core.Application
         Get
             Return Core.Application.Instance(CurrentAppId)
         End Get
     End Property
 
+    ''' <summary>
+    ''' Return manager name if employee has reportTo manager, otherwise return empty string
+    ''' </summary>
+    ''' <returns>The manager name or empty string</returns>
     <JsonIgnoreAttribute>
     Public ReadOnly Property Manager As String
         Get
@@ -113,6 +147,10 @@ Partial Public Class Employee
 
     Private _performance As EmployeePerformance
 
+    ''' <summary>
+    ''' Get Employee Performance Overview
+    ''' </summary>
+    ''' <returns>The Employee Performance Object</returns>
     <JsonIgnoreAttribute>
     Public ReadOnly Property Performance As EmployeePerformance
         Get
@@ -124,6 +162,12 @@ Partial Public Class Employee
         End Get
     End Property
 
+    ''' <summary>
+    ''' Return if the given employee has permission on the given lead
+    ''' </summary>
+    ''' <param name="name">The Employee Name</param>
+    ''' <param name="bble">The Leads BBLE info</param>
+    ''' <returns>Boolean value to indicate the permission</returns>
     Public Shared Function HasControlLeads(name As String, bble As String) As Boolean
         If Roles.IsUserInRole(name, "Admin") Then
             Return True
@@ -135,46 +179,6 @@ Partial Public Class Employee
         End If
 
         Return ld.IsViewable(name)
-
-        'Using context As New Entities
-        '    If Roles.IsUserInRole(name, "Admin") Then
-        '        Return True
-        '    End If
-
-        '    If Roles.IsUserInRole(name, "Title-Users") Then
-        '        Return True
-        '    End If
-
-        '    Dim lead = context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
-
-        '    If lead IsNot Nothing Then
-        '        Dim owner = lead.EmployeeName
-
-        '        If owner = name Then
-        '            If lead.Status <> LeadStatus.MgrApproval And lead.Status <> LeadStatus.MgrApprovalInWf Then
-        '                Return True
-        '            Else
-        '                Return False
-        '            End If
-        '        End If
-
-        '        If GetManagedEmployees(name).Contains(owner) Then
-        '            Return True
-        '        End If
-
-        '        For Each rl In Roles.GetRolesForUser(name)
-        '            If rl.StartsWith("OfficeManager") Then
-        '                Dim dept = rl.Split("-")(1)
-
-        '                If GetDeptUsers(dept).Contains(owner) Then
-        '                    Return True
-        '                End If
-        '            End If
-        '        Next
-        '    End If
-
-        '    Return False
-        'End Using
     End Function
 
     ''' <summary>
@@ -216,6 +220,11 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return the managed employee list of the given employee
+    ''' </summary>
+    ''' <param name="userName">The Employee Name</param>
+    ''' <returns>The Employee Object List</returns>
     Public Shared Function GetMyEmployees(userName As String) As List(Of Employee)
 
         Using ctx As New Entities
@@ -249,9 +258,7 @@ Partial Public Class Employee
             End If
 
             Return emps.Distinct(New EmployeeItemComparer()).OrderBy(Function(em) em.Name).ToList
-
         End Using
-
     End Function
 
     ''' <summary>
@@ -272,6 +279,11 @@ Partial Public Class Employee
         Return emps.Distinct.ToArray
     End Function
 
+    ''' <summary>
+    ''' Return Employee Object by the employee Id
+    ''' </summary>
+    ''' <param name="id">The given employee Id</param>
+    ''' <returns>The Employee Object</returns>
     Public Shared Function GetInstance(id As Integer) As Employee
         Using context As New Entities
             Dim emp = context.Employees.Where(Function(em) em.EmployeeID = id).FirstOrDefault
@@ -279,6 +291,11 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return Employee Object by the employee name
+    ''' </summary>
+    ''' <param name="username">The Employee Name</param>
+    ''' <returns>The Employee Object</returns>
     Public Shared Function GetInstance(username As String) As Employee
         Using context As New Entities
             Dim emp = context.Employees.Where(Function(em) em.Name = username).FirstOrDefault
@@ -286,12 +303,22 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return Employee Object by the employee's email
+    ''' </summary>
+    ''' <param name="email">The Employee Email</param>
+    ''' <returns>The Employee Object</returns>
     Public Shared Function GetInstanceByEmail(email As String) As Employee
         Using ctx As New Entities
             Return ctx.Employees.Where(Function(em) em.Email = email).FirstOrDefault
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return employee object, which can used to JSON serialized
+    ''' </summary>
+    ''' <param name="username">The Employee Name</param>
+    ''' <returns>The Employee Object</returns>
     Public Shared Function GetInstanceData(username As String) As Employee
         Using context As New Entities
             Dim emp = context.Employees.Where(Function(em) em.Name = username).ToList.Select(Function(em)
@@ -304,6 +331,11 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return the list of sub ordinates  (include manager) of given manager name
+    ''' </summary>
+    ''' <param name="managerName">The Employee Name</param>
+    ''' <returns>The list of employee Id</returns>
     Public Shared Function GetSubOrdinate(managerName As String) As Integer()
         Dim emps As New List(Of Employee)
         Dim mgr = GetInstance(managerName)
@@ -313,6 +345,11 @@ Partial Public Class Employee
         Return emps.Select(Function(e) e.EmployeeID).ToArray
     End Function
 
+    ''' <summary>
+    ''' Return the list of sub ordinates (without manager) of given manager
+    ''' </summary>
+    ''' <param name="managerName">The Employee Name</param>
+    ''' <returns>The list of Employee Id</returns>
     Public Shared Function GetSubOrdinateWithoutMgr(managerName As String) As Integer()
         Dim emps As New List(Of Employee)
         Dim mgr = GetInstance(managerName)
@@ -320,13 +357,6 @@ Partial Public Class Employee
 
         Return emps.Select(Function(e) e.EmployeeID).ToArray
     End Function
-
-    'Public Shared Function GetEmployeeUnderManaged(managerName As String) As List(Of Employee)
-    '    If Roles.IsUserInRole(managerName, "Admin") Then
-    '        Return GetAllEmps()
-    '    End If
-
-    'End Function
 
     ''' <summary>
     ''' Get managed active employee through manager name
@@ -337,11 +367,22 @@ Partial Public Class Employee
         Return GetManagedEmployees(managerName, True)
     End Function
 
+    ''' <summary>
+    ''' Return if given manager has manage permission on given employee
+    ''' </summary>
+    ''' <param name="manager">The Manager Name</param>
+    ''' <param name="username">The Employee Name</param>
+    ''' <returns></returns>
     Public Shared Function IsUserManager(manager As String, username As String) As Boolean
         Dim users = GetManagedEmployees(manager, False)
         Return users.Contains(username)
     End Function
 
+    ''' <summary>
+    ''' Return list of employee object managed by the given manager
+    ''' </summary>
+    ''' <param name="managerName">The Employee Name</param>
+    ''' <returns>The list of Employee</returns>
     Public Shared Function GetManagedEmployeeList(managerName As String) As List(Of Employee)
         Dim emps As New List(Of Employee)
         Dim mgr = GetInstance(managerName)
@@ -351,6 +392,12 @@ Partial Public Class Employee
         Return emps
     End Function
 
+    ''' <summary>
+    ''' Return list of managed employee of given manager name
+    ''' </summary>
+    ''' <param name="managerName">The Manager Name</param>
+    ''' <param name="onlyActive">If include non-active user </param>
+    ''' <returns>The list of employee name</returns>
     Public Shared Function GetManagedEmployees(managerName As String, onlyActive As String) As String()
         Dim emps As New List(Of Employee)
         Dim mgr = GetInstance(managerName)
@@ -360,6 +407,11 @@ Partial Public Class Employee
         Return emps.Select(Function(e) e.Name).ToArray
     End Function
 
+    ''' <summary>
+    ''' Return list of employee under the given department
+    ''' </summary>
+    ''' <param name="deptName">The Department Name</param>
+    ''' <returns>The list of employee instance</returns>
     Public Shared Function GetUsersByDept(deptName As String) As List(Of Employee)
         Dim emps As New List(Of Employee)
         Using context As New Entities
@@ -367,10 +419,21 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the list of active employee which report to given employee
+    ''' </summary>
+    ''' <param name="employeeID">The Employee ID</param>
+    ''' <returns>The list of Employee Object</returns>
     Public Shared Function GetSubOrdinate(employeeID As Integer) As List(Of Employee)
         Return GetSubOrdinate(employeeID, True)
     End Function
 
+    ''' <summary>
+    ''' Get the list of employee which report to given employee and indicate if include non active
+    ''' </summary>
+    ''' <param name="employeeID">The given employee ID</param>
+    ''' <param name="onlyActive">To indicate if non-active users would included</param>
+    ''' <returns>The list of Employee Object</returns>
     Public Shared Function GetSubOrdinate(employeeID As Integer, onlyActive As Boolean) As List(Of Employee)
         Dim emps As New List(Of Employee)
         Using context As New Entities
@@ -390,6 +453,11 @@ Partial Public Class Employee
         Return emps
     End Function
 
+    ''' <summary>
+    ''' Return list of user name that belong to given role name
+    ''' </summary>
+    ''' <param name="roleName">The Role Name</param>
+    ''' <returns>The list of User Name</returns>
     Public Shared Function GetRoleUsers(roleName As String) As String()
         Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith(roleName))
 
@@ -401,22 +469,30 @@ Partial Public Class Employee
         Return users.Distinct.ToArray
     End Function
 
+    ''' <summary>
+    ''' Return list of user names that belong to given department
+    ''' </summary>
+    ''' <param name="deptName">The Department Name</param>
+    ''' <param name="onlyActive">Indicate if non active employee included</param>
+    ''' <returns></returns>
     Public Shared Function GetDeptUsers(deptName As String, Optional onlyActive As Boolean = True) As String()
         Return GetDeptUsersList(deptName, onlyActive).Select(Function(em) em.Name).ToArray
-
-        'Dim emps As New List(Of Employee)
-        'Using context As New Entities
-        '    Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = True).Select(Function(em) em.Name).ToArray
-        'End Using
     End Function
 
+    ''' <summary>
+    ''' Get all the user names that belong to given department, include non-active users
+    ''' </summary>
+    ''' <param name="deptName">The Department Name</param>
+    ''' <returns>The list of User Names</returns>
     Public Shared Function GetAllDeptUsers(deptName As String) As String()
         Return GetDeptUsers(deptName, False)
-        'Using context As New Entities
-        '    Return context.Employees.Where(Function(em) em.Department = deptName).Select(Function(em) em.Name).ToArray
-        'End Using
     End Function
 
+    ''' <summary>
+    ''' Get non-active users that belong to given department
+    ''' </summary>
+    ''' <param name="deptName">The Department Name</param>
+    ''' <returns>The list of employee name</returns>
     Public Shared Function GetUnActiveUser(deptName As String) As String()
         Return GetDeptUnActiveUserList(deptName).Select(Function(em) em.Name).ToArray
         'Using context As New Entities
@@ -424,18 +500,30 @@ Partial Public Class Employee
         'End Using
     End Function
 
+    ''' <summary>
+    ''' Get non-active employee objects that under given department
+    ''' </summary>
+    ''' <param name="deptName">The Department Name</param>
+    ''' <returns>The list of Employee Object</returns>
     Public Shared Function GetDeptUnActiveUserList(deptName As String) As List(Of Employee)
         Return GetDeptUsersList(deptName, False).Where(Function(em) em.Active = False).ToList
-
-        'Using context As New Entities
-        '    Return context.Employees.Where(Function(em) em.Department = deptName And (em.Active = False)).ToList
-        'End Using
     End Function
 
+    ''' <summary>
+    ''' Get the list of Employee Objects that under given department
+    ''' </summary>
+    ''' <param name="deptName">The Department Name</param>
+    ''' <returns>The list of Employee Object</returns>
     Public Shared Function GetDeptUsersList(deptName As String) As List(Of Employee)
         Return GetDeptUsersList(deptName, True)
     End Function
 
+    ''' <summary>
+    ''' Get the list of Employee Object that under given department
+    ''' </summary>
+    ''' <param name="deptName">The Department Name</param>
+    ''' <param name="isActive">Indicate if non-active employee included</param>
+    ''' <returns>The list of Employee Object</returns>
     Public Shared Function GetDeptUsersList(deptName As String, isActive As Boolean) As List(Of Employee)
         Dim emps As New List(Of Employee)
         Using context As New Entities
@@ -443,6 +531,11 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the given employee's manager instance
+    ''' </summary>
+    ''' <param name="employeeName">The Employee Name</param>
+    ''' <returns>The Employee Object</returns>
     Public Shared Function GetReportToManger(employeeName As String) As Employee
         Dim emp = GetInstance(employeeName)
 
@@ -454,24 +547,42 @@ Partial Public Class Employee
         End If
     End Function
 
+    ''' <summary>
+    ''' Get the list of all employee's name
+    ''' </summary>
+    ''' <returns>The list of employee name</returns>
     Public Shared Function GetAllEmps() As String()
         Using Context As New Entities
             Return Context.Employees.Select(Function(em) em.Name).ToArray
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the list of active employee's name
+    ''' </summary>
+    ''' <returns>The list of active employee name</returns>
     Public Shared Function GetAllActiveEmps() As String()
         Using Context As New Entities
             Return Context.Employees.Where(Function(em) em.Active = True).Select(Function(em) em.Name).ToArray
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the list of active employee's names under given application
+    ''' </summary>
+    ''' <param name="appId">The Application Id</param>
+    ''' <returns>The list of employee name</returns>
     Public Shared Function GetAllActiveEmps(appId As Integer) As String()
         Using Context As New Entities
             Return Context.Employees.Where(Function(em) em.Active = True And em.AppId = appId).Select(Function(em) em.Name).ToArray
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return if given employee is admin user
+    ''' </summary>
+    ''' <param name="empName">The Employee Name</param>
+    ''' <returns>True if employee is admin user</returns>
     Public Shared Function IsAdmin(empName As String) As Boolean
         Dim rs = Roles.GetRolesForUser(empName)
 
@@ -482,6 +593,11 @@ Partial Public Class Employee
         Return False
     End Function
 
+    ''' <summary>
+    ''' Return if given user is manager
+    ''' </summary>
+    ''' <param name="empName">The Employee Name</param>
+    ''' <returns></returns>
     Public Shared Function IsManager(empName As String) As Boolean
         Dim rs = Roles.GetRolesForUser(empName)
 
@@ -500,6 +616,11 @@ Partial Public Class Employee
         Return HasSubordinates(empName)
     End Function
 
+    ''' <summary>
+    ''' Return if the given employee has subordinates
+    ''' </summary>
+    ''' <param name="employeeName">The Employee Name</param>
+    ''' <returns></returns>
     Public Shared Function HasSubordinates(employeeName As String) As Boolean
         Using context As New Entities
             Dim emp = GetInstance(employeeName)
@@ -511,6 +632,11 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the list of active usernames in given team
+    ''' </summary>
+    ''' <param name="teamId">The given team ID</param>
+    ''' <returns>The list of employee name</returns>
     Public Shared Function GetTeamUsers(teamId As Integer) As String()
         Using ctx As New Entities
             Dim emps = (From user In ctx.UserInTeams.Where(Function(ut) ut.TeamId = teamId)
@@ -522,12 +648,22 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the list of all usernames in given team
+    ''' </summary>
+    ''' <param name="teamId">The team id</param>
+    ''' <returns>The list of username</returns>
     Public Shared Function GetAllTeamUsers(teamId As Integer) As String()
         Using ctx As New Entities
             Return ctx.UserInTeams.Where(Function(ut) ut.TeamId = teamId).Select(Function(ut) ut.EmployeeName).ToArray
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the list of employee objects in given team
+    ''' </summary>
+    ''' <param name="teamId">The team id</param>
+    ''' <returns>The list of employee object</returns>
     Public Shared Function GetTeamUserList(teamId As Integer) As List(Of Employee)
         Using ctx As New Entities
             Dim emps = ctx.UserInTeams.Where(Function(ut) ut.TeamId = teamId).ToList.Select(Function(ut) Employee.GetInstance(ut.EmployeeName)).ToList
@@ -564,6 +700,12 @@ Partial Public Class Employee
         Return False
     End Function
 
+    ''' <summary>
+    ''' Get ShortSaleRole type related to given employee, 
+    ''' if the given employee is not in ShortSale, return nothing
+    ''' </summary>
+    ''' <param name="userName">The given employee</param>
+    ''' <returns>The ShortSale Role Type</returns>
     Public Shared Function GetShortSaleRole(userName As String) As ShortSaleRole
         Dim rs = Roles.GetRolesForUser(userName)
 
@@ -586,6 +728,11 @@ Partial Public Class Employee
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' Get team/office assign folder account of the given employee
+    ''' </summary>
+    ''' <param name="empName">The Employee Name</param>
+    ''' <returns>The account name</returns>
     Public Shared Function GetOfficeAssignAccount(empName As String) As String
         Dim emp = GetInstance(empName)
         Dim recycleName = emp.Department & " Office"
@@ -612,15 +759,12 @@ Partial Public Class Employee
         Return empName
     End Function
 
+    ''' <summary>
+    ''' Get team/office managers of the given employee, if no manager found, return the given employee
+    ''' </summary>
+    ''' <param name="empName">The employee name</param>
+    ''' <returns>The manager names</returns>
     Public Shared Function GetEmpOfficeManagers(empName As String) As String()
-        'Dim depart = GetInstance(empName).Department
-
-        'Dim officeRole = "OfficeManager-" & depart
-
-        'If Roles.RoleExists(officeRole) Then
-        '    Return Roles.GetUsersInRole(officeRole)
-        'End If
-
         Dim teams = GetEmpTeams(empName)
         If teams IsNot Nothing AndAlso teams.Length > 0 Then
             Dim team = teams.First()
@@ -635,7 +779,6 @@ Partial Public Class Employee
         End If
 
         Return {empName}
-
     End Function
 
     ''' <summary>
@@ -679,6 +822,11 @@ Partial Public Class Employee
         Return Utility.IsTesting()
     End Function
 
+    ''' <summary>
+    ''' Get the list of team which the given employee belongs to
+    ''' </summary>
+    ''' <param name="empName">The Employee Name</param>
+    ''' <returns>The list of team name</returns>
     Public Shared Function GetEmpTeams(empName As String) As String()
         Using ctx As New Entities
             Dim team = (From t In ctx.Teams
@@ -694,11 +842,17 @@ Partial Public Class Employee
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get Employee Data, used for JSON serialized
+    ''' </summary>
+    ''' <returns></returns>
     Public Function GetData() As EmployeeData
-
         Return Core.Utility.CopyTo(Me, New EmployeeData())
     End Function
 
+    ''' <summary>
+    ''' The employee data object, used for JSON serialized
+    ''' </summary>
     Public Class EmployeeData
         Inherits Employee
 
@@ -732,9 +886,6 @@ Public Class EmployeeMetaData
     <JsonIgnoreAttribute>
     Public Property LeadsActivityLogs As ICollection(Of LeadsActivityLog)
 End Class
-
-
-
 
 Public Enum ShortSaleRole
     Processor
