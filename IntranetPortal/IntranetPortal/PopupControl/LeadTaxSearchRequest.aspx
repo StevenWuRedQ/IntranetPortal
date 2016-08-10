@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
 
-                                <uc1:DocSearchNewVersion runat="server" id="DocSearchNewVersion" Visible="False/>
+                                <uc1:DocSearchNewVersion runat="server" id="DocSearchNewVersion" Visible="False"/>
                                 <uc1:DocSearchOldVersion runat="server" id="DocSearchOldVersion" Visible="True"/>
 
                             </div>

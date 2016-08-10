@@ -41,6 +41,15 @@ Partial Public Class LeadTaxSearchRequest
     Protected WithEvents LeadDocSearchList As Global.IntranetPortal.LeadDocSearchList
     
     '''<summary>
+    '''DocSearchNewVersion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DocSearchNewVersion As Global.IntranetPortal.DocSearchNewVersion
+    
+    '''<summary>
     '''DocSearchOldVersion control.
     '''</summary>
     '''<remarks>

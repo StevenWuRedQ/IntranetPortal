@@ -4,11 +4,16 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If (Not IsPostBack) Then
-            Me.DocSearchOldVersion.SearchRecodingPopupCtrl1.BBLE = Request.QueryString("BBLE")
+            'Me.DocSearchOldVersion.SearchRecodingPopupCtrl1.BBLE = Request.QueryString("BBLE")
 
-            If (Me.DocSearchOldVersion.SearchRecodingPopupCtrl1.BBLE IsNot Nothing) Then
+            If (Request.QueryString("BBLE") IsNot Nothing) Then
                 ASPxSplitter1.GetPaneByName("listPanel").Visible = False
                 ASPxSplitter1.GetPaneByName("dataPane").Visible = False
+            End If
+
+            If Request.QueryString("v") IsNot Nothing Then
+                Me.DocSearchOldVersion.Visible = False
+                Me.DocSearchNewVersion.Visible = True
             End If
 
         End If
