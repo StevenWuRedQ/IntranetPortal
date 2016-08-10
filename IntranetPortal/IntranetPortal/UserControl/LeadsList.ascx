@@ -18,7 +18,7 @@
                 }
                 else {
                     if (gridLeads.GetFocusedRowIndex() >= 0) {
-                        //alert(gridLeads.GetFocusedRowIndex());
+                        // alert(gridLeads.GetFocusedRowIndex());
                         var rowKey = gridLeads.GetRowKey(gridLeads.GetFocusedRowIndex());
                         if (rowKey != null)
                             OnGetRowValues(rowKey);

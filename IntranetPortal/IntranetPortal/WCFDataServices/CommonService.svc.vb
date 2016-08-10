@@ -83,6 +83,11 @@ Public Class CommonService
         'toAdds.Add("ron@myidealprop.com")
         'toAdds.Add("chris@gvs4u.com")
 
+        Dim ccEmail = ""
+        If Employee.CEO IsNot Nothing Then
+            ccEmail = Employee.CEO.Email
+        End If
+
         Dim emailData As New Dictionary(Of String, String)
         'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
         emailData.Add("Date", DateTime.Today.ToString("m"))
@@ -91,9 +96,8 @@ Public Class CommonService
         Dim attachment As New System.Net.Mail.Attachment(GetPDf(teamName), name)
 
         If toAdds.Count > 0 Then
-            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), ccEmail, "TeamActivitySummary", emailData, {attachment})
         End If
-
     End Sub
 
     ''' <summary>

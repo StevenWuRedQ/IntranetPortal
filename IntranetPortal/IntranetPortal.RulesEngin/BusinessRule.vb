@@ -191,7 +191,7 @@ Public Class AgentActivitySummaryRule
     Inherits BaseRule
 
     Public Overrides Sub Execute()
-        Dim teams = IntranetPortal.Team.GetAllTeams()
+        Dim teams = IntranetPortal.Team.GetActiveTeams()
 
         Using client As New PortalService.CommonServiceClient
             For Each team In teams
@@ -334,12 +334,23 @@ InitialLine:
         End While
     End Sub
 
+    Private Sub ExecuteDataloopRule2(rule As Core.DataLoopRule)
+
+    End Sub
+
     Private Sub ExecuteDataloopRule(rule As Core.DataLoopRule)
         'check if server is busy
         While DataWCFService.IsServerBusy
             Log("Server is Busy. Try 30s later.")
             Thread.Sleep(30000)
         End While
+
+        If rule.LoopType >= 32 Then
+
+            ExecuteDataloopRule2(rule)
+            Return
+        End If
+
 
         Dim bble = rule.BBLE
         Select Case rule.LoopType

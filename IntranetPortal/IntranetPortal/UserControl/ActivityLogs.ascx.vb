@@ -153,23 +153,6 @@ Public Class ActivityLogs
         BindData(hfBBLE.Value)
     End Sub
 
-    'Public Function AddActivityLog2(logDate As DateTime, comments As String, bble As String, category As String) As LeadsActivityLog
-    '    Using Context As New Entities
-    '        Dim log As New LeadsActivityLog
-    '        log.BBLE = bble
-    '        log.EmployeeID = CInt(Membership.GetUser(Page.User.Identity.Name).ProviderUserKey)
-    '        log.EmployeeName = Page.User.Identity.Name
-    '        log.Category = category
-    '        log.ActivityDate = logDate
-    '        log.Comments = comments
-
-    '        Context.LeadsActivityLogs.Add(log)
-    '        Context.SaveChanges()
-
-    '        Return log
-    '    End Using
-    'End Function
-
     Protected Sub gridTracking_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs) Handles gridTracking.CustomCallback
         If (e.Parameters = "Task") Then
             SetAsTask()
@@ -221,8 +204,6 @@ Public Class ActivityLogs
                 comments = comments + "<br /> Comments: " & EmailBody2.Html
             End If
 
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
-
             If result = "Approved" Then
                 task.Status = UserTask.TaskStatus.Approved
             Else
@@ -232,6 +213,8 @@ Public Class ActivityLogs
             task.Comments = EmailBody2.Html
             task.ExecuteAction()
             CompleteWorklistItem(task.TaskID)
+
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LogCategory.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
             BindData(hfBBLE.Value)
         End If

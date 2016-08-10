@@ -593,6 +593,10 @@ Public Class ShortSaleProcess
             If task.Action = LeadManage.DeadLeadProcess.TaskName Then
                 proc = LeadManage.DeadLeadProcess
             End If
+
+            If task.Action = LeadManage.DumpLeadProcess.TaskName Then
+                proc = LeadManage.DumpLeadProcess
+            End If
         End If
 
         If proc IsNot Nothing Then

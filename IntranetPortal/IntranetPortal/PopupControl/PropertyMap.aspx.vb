@@ -12,7 +12,11 @@
                 Case ViewType.PropertyMap
                     contentSplitter.ClientSideEvents.Init = "function(s,e){popupControlMapTabClick(0);}"
                 Case ViewType.Acris
-                    contentSplitter.GetPaneByName("mapPane").ContentUrl = "https://a836-acris.nyc.gov/DS/DocumentSearch/BBL"
+                    Dim ld = LeadsInfo.GetInstance(Request.QueryString("bble"))
+                    If ld IsNot Nothing Then
+                        Dim link = "http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=" & ld.Borough & "&block=" & ld.Block & "&lot=" + ld.Lot
+                        contentSplitter.GetPaneByName("mapPane").ContentUrl = link
+                    End If
                 Case ViewType.DOB
                     Dim ld = LeadsInfo.GetInstance(Request.QueryString("bble"))
                     If ld IsNot Nothing Then

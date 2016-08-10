@@ -10,7 +10,8 @@
 <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
 <script type="text/javascript">
     function ShowAcrisMap(propBBLE, boro, block, lot) {
-
+        OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=1&bble=' + leadsInfoBBLE, 'Acris');
+        return;
         ShowPopupMap("http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=" + boro + "&block=" + block + "&lot=" + lot, "Acris");
         $("#addition_info").html($("#borugh_block_lot_data").val());
     }

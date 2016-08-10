@@ -19,8 +19,16 @@ Public Enum LeadStatus
     Published = 17
 End Enum
 
+''' <summary>
+''' The Portal Utility Class
+''' </summary>
 Public Class Utility
 
+    ''' <summary>
+    ''' Get leads status by status name
+    ''' </summary>
+    ''' <param name="cateName">The Status Name</param>
+    ''' <returns></returns>
     Public Shared Function GetLeadStatus(cateName As String) As LeadStatus
         Dim category As Integer = LeadStatus.NewLead
         Select Case cateName
@@ -46,23 +54,27 @@ Public Class Utility
 
         Return category
     End Function
+
+    ''' <summary>
+    ''' Convert enum type tp dictionary type
+    ''' </summary>
+    ''' <param name="cEnum">The enum type</param>
+    ''' <returns>The dictionary type</returns>
     Public Shared Function Enum2Dictinary(cEnum As Type) As Dictionary(Of Integer, String)
         Dim VenderTypes = New Dictionary(Of Integer, String)
 
         Dim vals = [Enum].GetValues(cEnum)
         For Each v In vals
-
             VenderTypes.Add(CInt(v), Core.Utility.GetEnumDescription(v))
         Next
         Return VenderTypes
     End Function
 
-    '<System.Runtime.CompilerServices.Extension> _
-    'Public Shared Function ToDictionary(enum__1 As Type) As Dictionary(Of Integer, String)
-    '    Dim type = enum__1.[GetType]()
-    '    Return [Enum].GetValues(type).Cast(Of Integer)().ToDictionary(Function(e) e, Function(e) [Enum].GetName(type, e))
-    'End Function
-
+    ''' <summary>
+    ''' Convert borough id (1,2,3,4,5) to borough name
+    ''' </summary>
+    ''' <param name="borough">The borough id</param>
+    ''' <returns>The borough name</returns>
     Public Shared Function Borough2BoroughName(borough As String) As String
         Dim boroughName = "undefine borough"
         Dim arraryDic As New Dictionary(Of String, String)
@@ -82,6 +94,10 @@ Public Class Utility
         Return data IsNot Nothing AndAlso data.Any()
     End Function
 
+    ''' <summary>
+    ''' Check if portal is on testing mode
+    ''' </summary>
+    ''' <returns></returns>
     Public Shared Function IsTesting() As Boolean
         Dim result = False
         If Boolean.TryParse(System.Configuration.ConfigurationManager.AppSettings("IsTesting"), result) Then
@@ -91,6 +107,11 @@ Public Class Utility
         Return result
     End Function
 
+    ''' <summary>
+    ''' Return leads display name from leads info
+    ''' </summary>
+    ''' <param name="leadData">Leads Info</param>
+    ''' <returns>Leads Display Name</returns>
     Public Shared Function GetLeadsName(leadData As LeadsInfo) As String
         Dim leadsName = ""
 
@@ -138,49 +159,12 @@ Public Class Utility
         'Return "<span style=""font-weight: 900;""> 720 QUINCY ST</span> - " & leadData
     End Function
 
-
-
-    'Public Shared Function BuildPropertyAddress(num As String, strname As String, borough As String, neighName As String, zip As String) As String
-    '    If String.IsNullOrEmpty(num) AndAlso String.IsNullOrEmpty(strname) Then
-    '        Return ""
-    '    End If
-
-    '    Dim result = String.Format("{0} {1},", num, strname)
-
-    '    If String.IsNullOrEmpty(borough) Then
-    '        Return result
-    '    End If
-
-    '    If borough = "4" Then
-    '        result = result & " " & neighName
-    '    Else
-    '        If BoroughNames(borough) IsNot Nothing Then
-    '            result = result & " " & BoroughNames(borough)
-    '        End If
-    '    End If
-
-    '    result = result & ",NY " & zip
-
-    '    Return result.TrimStart.TrimEnd
-    'End Function
-
-    'Private Shared _boroughNames As Hashtable
-    'Private Shared ReadOnly Property BoroughNames As Hashtable
-    '    Get
-    '        If _boroughNames Is Nothing Then
-    '            Dim ht As New Hashtable
-    '            ht.Add("1", "Manhattan")
-    '            ht.Add("2", "Bronx")
-    '            ht.Add("3", "Brooklyn")
-    '            ht.Add("5", "Staten Island")
-
-    '            _boroughNames = ht
-    '        End If
-
-    '        Return _boroughNames
-    '    End Get
-    'End Property
-
+    ''' <summary>
+    ''' Return count of employee's leads under certain status
+    ''' </summary>
+    ''' <param name="status">The Leads Status</param>
+    ''' <param name="emp">The Employee Name</param>
+    ''' <returns>The Count of Leads</returns>
     Public Shared Function GetLeadsCount(status As LeadStatus, emp As String) As Integer
         Using context As New Entities
             Return context.Leads.Where(Function(l) l.EmployeeName = emp And l.Status = status).Count
@@ -201,6 +185,12 @@ Public Class Utility
                                      New ToolbarFontColorButton()).CreateDefaultItems()
     End Function
 
+    ''' <summary>
+    ''' Get leads count of multiple employees under the given status
+    ''' </summary>
+    ''' <param name="status">Leads Status</param>
+    ''' <param name="emp">The Employee list</param>
+    ''' <returns></returns>
     Public Shared Function GetMgrLeadsCount(status As LeadStatus, emp As String()) As Integer
         Using context As New Entities
             If status = LeadStatus.ALL Then
@@ -211,6 +201,12 @@ Public Class Utility
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the count of leads under given status and office/team
+    ''' </summary>
+    ''' <param name="status">The leads status</param>
+    ''' <param name="officeName">Office/Team Name</param>
+    ''' <returns></returns>
     Public Shared Function GetOfficeLeadsCount(status As LeadStatus, officeName As String) As Integer
         If status = LeadStatus.InProcess Then
             Return GetMgrLeadsCount(status, Employee.GetAllDeptUsers(officeName))
@@ -224,6 +220,12 @@ Public Class Utility
         Return GetMgrLeadsCount(status, emps)
     End Function
 
+    ''' <summary>
+    ''' Get the count of leads under certain teams and status
+    ''' </summary>
+    ''' <param name="status">Leads Status</param>
+    ''' <param name="teamId">Team Id</param>
+    ''' <returns></returns>
     Public Shared Function GetTeamLeadsCount(status As LeadStatus, teamId As Integer) As Integer
         If status = LeadStatus.InProcess Then
             Return GetMgrLeadsCount(status, Employee.GetTeamUsers(teamId))
@@ -237,16 +239,31 @@ Public Class Utility
         Return GetMgrLeadsCount(status, emps)
     End Function
 
+    ''' <summary>
+    ''' Get the count of Unassigned leads under given team
+    ''' </summary>
+    ''' <param name="teamId">Team Id</param>
+    ''' <returns></returns>
     Public Shared Function GetTeamUnAssignedLeadsCount(teamId As Integer) As Integer
         Return Team.GetTeam(teamId).AssignLeadsCount
     End Function
 
+    ''' <summary>
+    ''' Get the count of manager's unassigned leads
+    ''' </summary>
+    ''' <param name="teamMgr">The Manager Name</param>
+    ''' <returns></returns>
     Public Shared Function GetTeamUnAssignedLeadsCount(teamMgr As String) As Integer
         Using context As New Entities
             Return context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = teamMgr And li.Lead.Status = LeadStatus.NewLead).Count
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the count of current user's unassign leads 
+    ''' </summary>
+    ''' <param name="userContext">The Httpcontext object</param>
+    ''' <returns></returns>
     Public Shared Function GetUnAssignedLeadsCount(Optional userContext As HttpContext = Nothing) As Integer
         Using context As New Entities
             If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
@@ -266,6 +283,11 @@ Public Class Utility
         End Using
     End Function
 
+    ''' <summary>
+    ''' Get the count of unassign leads under given office/team
+    ''' </summary>
+    ''' <param name="office">Office/Team Name</param>
+    ''' <returns></returns>
     Public Shared Function GetUnAssignedLeadsCount(office As String) As Integer
         Using context As New Entities
             Dim officeName = office & " Office"
