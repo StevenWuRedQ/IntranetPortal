@@ -11,7 +11,7 @@
                 Document search completed on {{DocSearch.CompletedOn|date:'shortDate'}} by {{DocSearch.CompletedBy}}!
             </div>
 
-           
+
 
             <%----------------------------Request Info----------------------------------------%>
             <div class="ss_form">
@@ -52,29 +52,28 @@
             <%-----------------------End Request Info----------------------------------------%>
 
             <%--- new version should have sub title so need deleted all ---%>
+            <ul class="ss_form_box clearfix">
+                <li class="ss_form_item ">
+                    <label class="ss_form_input_title ">Geodata</label>
+                    <button class="btn btn-secondary" type="button">
+                        <a href="http://www.geodataplus.com/" target="_blank">Go to Geodata</a>
 
+                    </button>
+                </li>
+                <li class="ss_form_item ">
+                    <label class="ss_form_input_title ">Acris</label>
+                    <button class="btn btn-secondary" type="button">
+                        <a href="https://a836-acris.nyc.gov/DS/DocumentSearch/BBL" target="_blank">Go to Acris</a>
+                    </button>
+                </li>
+
+            </ul>
             <div class="ss_form  ">
                 <h4 class="ss_form_title ">Ownership Mortgage Info
                     <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info"> </pt-collapse>
                 </h4>
                 <div class="ss_border" collapse="DocSearch.LeadResearch.Ownership_Mortgage_Info">
-                    <ul class="ss_form_box clearfix">
-                        <li class="ss_form_item ">
-                            <label class="ss_form_input_title ">Geodata</label>
-                            <button class="btn btn-secondary" type="button">
-                                <a href="http://www.geodataplus.com/" target="_blank">Go to Geodata</a>
-
-                            </button>
-                        </li>
-                        <li class="ss_form_item ">
-                            <label class="ss_form_input_title ">Acris</label>
-                            <button class="btn btn-secondary" type="button">
-                                <a href="https://a836-acris.nyc.gov/DS/DocumentSearch/BBL" target="_blank">Go to Acris</a>
-                            </button>
-                        </li>
-
-                    </ul>
-
+                    
 
                     <div class="ss_form ">
 
