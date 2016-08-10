@@ -12,10 +12,8 @@
 
                         <div class="ss_form " ng-repeat="form in FormItems">
 
-                            <h4 class="ss_form_title">{{form.head}} 
-                                 <pt-collapse model="{{GetUniqueId(form.head)}}" />
-                            </h4>
-                            <div class="ss_border" collapse="{{GetUniqueId(form.head)}}">
+                            <h4 class="ss_form_title">{{form.head}} <tp-pt-collapse model="{{GenerateModel(form.head)}}" /> </h4>
+                            <div class="ss_border" tp-collapse="{{GenerateModel(form.head)}}">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item" ng-repeat="item in form.items" ng-class="NeedChangeElement(item.type,'notes')?'ss_form_item_line':''">
                                         <label class="ss_form_input_title">{{item.label}}</label>
@@ -67,17 +65,101 @@
                    head: 'Ownership Mortgage Info',
                    items: [
                        { label: 'Purchase Deed' },
-                       { label: 'Date of Deed' },
+                       {label: 'Has Deed', type: 'radio'},
+                       { label: 'Date of Deed', type:'date' },
                        { label: 'Party 1' },
-                       { label: 'Check request', type: 'radio' },
-                       { label: '# of checks' },
-                       { label: 'Total Check Amount', type: 'money' },
+                       { label: 'Party 2' },
+                       { label: 'c 1st Mortgage' },
+                       { label: 'Has c 1st Mortgage', type: 'radio' },
+                       { label: 'c 1st Mortgage Amount', type: 'money' },
+                       { label: 'Has c 2nd Mortgage Amount', type: 'radio' },
+
+                       { label: 'c 2nd Mortgage Amount', type: 'money' },
+
                        { label: 'Check is in Office', type: 'radio' },
                        { label: 'Name On Check', },
                        { label: 'Need do search', type: 'radio' },
+                       { label: 'has Last Assignment', type: 'radio' },
+                       { label: 'Last Assignment date', type: 'date' },
+                       { label: 'Last Assignment Assigned To' },
+                       { label: 'LP Index number' },
+                       { label: 'LP Index notes', type: 'notes' },
+                       { label: 'Servicer' },
+                       { label: 'Servicer notes', type: 'notes' },
+                       { label: 'Fannie', type: 'radio' },
+                       { label: 'Freddie Mac ', type: 'radio' },
+                       //Last Assignment
                    ]
                },
+               {
+                   head: 'Property Dues Violations',
+                   items: [
+                       { label: 'Property Taxes per YR' },
+                       { label: 'Has Property Taxes Due', type: 'radio' },
+                       { label: 'Property Taxes Due', type: 'money' },
 
+                       { label: 'Has Water Charges Due', type: 'radio' },
+                       { label: 'Water Charges Due', type: 'money' },
+
+                       { label: 'ECB Violoations Open', type: 'radio' },
+                       { label: 'ECB Violoations Count' },
+                       { label: 'ECB Violoations Amount', type: 'money' },
+                       { label: 'DOB Violoations Open', type: 'radio' },
+                       { label: 'DOB Violoations Count' },
+                       { label: 'DOB Violoations Amount', type: 'money' },
+
+                       { label: 'Tax Classification' },
+
+                       { label: 'C O', type: 'radio' },
+                       { label: 'number of Units' },
+
+                       { label: 'HPD Number of Units' },
+                       { label: 'HPD Violations' },
+                       { label: 'Has HPD Violations', type: 'radio' },
+                       { label: 'HPD Violations A Class' },
+                       { label: 'HPD Violations B Class' },
+                       { label: 'HPD Violations C Class' },
+                       { label: 'HPD Violations I Class' },
+
+                       { label: 'HPD Charges Not Paid Transferred', type: 'radio' },
+                       { label: 'HPD Charges Amount', type: 'Amount:' },
+                   ]
+               },
+               //{
+               //    head: 'Property Dues Violations',
+               //    items: [
+               //        { label: 'Property Taxes per YR' },
+               //        { label: 'Has Property Taxes Due', type: 'radio' },
+               //        { label: 'Property Taxes Due', type: 'money' },
+
+               //        { label: 'Has Water Charges Due', type: 'radio' },
+               //        { label: 'Water Charges Due', type: 'money' },
+
+               //        { label: 'ECB Violoations Open', type: 'radio' },
+               //        { label: 'ECB Violoations Count' },
+               //        { label: 'ECB Violoations Amount', type: 'money' },
+               //        { label: 'DOB Violoations Open', type: 'radio' },
+               //        { label: 'DOB Violoations Count' },
+               //        { label: 'DOB Violoations Amount', type: 'money' },
+
+               //        { label: 'Tax Classification' },
+
+               //        { label: 'C O', type: 'radio' },
+               //        { label: 'number of Units' },
+
+               //        { label: 'HPD Number of Units' },
+               //        { label: 'HPD Violations' },
+               //        { label: 'Has HPD Violations', type: 'radio' },
+               //        { label: 'HPD Violations A Class' },
+               //        { label: 'HPD Violations B Class' },
+               //        { label: 'HPD Violations C Class' },
+               //        { label: 'HPD Violations I Class' },
+
+               //        { label: 'HPD Charges Not Paid Transferred', type: 'radio' },
+               //        { label: 'HPD Charges Amount', type: 'Amount:' },
+               //    ]
+               //},
+              
             ];
             $scope.GenerateModel = function () {
                 var model = $scope.pageModel + '.' + arguments[0].replace(/[-\/\\\.\s]/gi, "_")
@@ -116,6 +198,8 @@
 
                 html = html.replace(/tt-file/g, 'pt-file')
                 html = html.replace(/file-ng-model/g, 'file-model');
+                html = html.replace(/tp-pt-collapse/g, 'pt-collapse');
+                html = html.replace(/tp-collapse/g, 'collapse');
                 html = html.replace(/\n/g, '');
                 html = html.replace(/tempt-/g, '');
 

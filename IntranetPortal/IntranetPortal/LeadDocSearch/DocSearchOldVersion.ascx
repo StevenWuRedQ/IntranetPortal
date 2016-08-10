@@ -103,8 +103,7 @@
                     </div>
                 </div>
                 <div class="ss_form">
-                    <h4 class="ss_form_title ">Liens Info
-                                                        <pt-collapse model="LiensInfoCollapse" />
+                    <h4 class="ss_form_title ">Liens Info <pt-collapse model="LiensInfoCollapse" />
                     </h4>
                     <div class="ss_border">
                         <ul class="ss_form_box clearfix" collapse="LiensInfoCollapse">
