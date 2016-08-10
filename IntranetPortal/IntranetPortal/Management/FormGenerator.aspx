@@ -9,43 +9,51 @@
             <div class="row">
                 <div class="col-md-6">
                     <div id="template">
-                        <div class="ss_form" ng-repeat="form in FormItems">
-                            <h4 class="ss_form_title">{{form.head}}</h4>
-                            <ul class="ss_form_box clearfix">
-                                <li class="ss_form_item" ng-repeat="item in form.items" ng-class="NeedChangeElement(item.type,'notes')?'ss_form_item_line':''">
-                                    <label class="ss_form_input_title">{{item.label}}</label>
-                                    <input class="ss_form_input" tempt-type="{{GetType(item.type)}}{{'Quotation'}}" tempt-ng-model="{{GenerateModel(item.label)}}" ng-if="(!item.type)||(!NeedChangeElement(item.type))">
-                                    <select class="ss_form_input" tempt-ng-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'select')">
-                                        <option></option>
-                                        <option ng-repeat="option in item.options">{{option}}</option>
-                                    </select>
-                                    <tempt-pt-file file-bble="{{BBLEModel}}" file-id="{{GetUniqueId(form.head,item.label)}}" file-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'file')"></tempt-pt-file>
-                                    <textarea class="edit_text_area text_area_ss_form" model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'notes')"></textarea>
-                                    <input type="text" class="ss_form_input" tempt-ng-model="{{GenerateModel(item.label)}}" tempt-ng-change="{{GenerateModel(item.label)}}Id=null" tempt-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" tempt-typeahead-on-select="{{GenerateModel(item.label)}}Id=$item.ContactId" tempt-bind-id="{{GenerateModel(item.label)}}Id" ng-if="NeedChangeElement(item.type,'contact')">
-                                    <tempt-pt-radio name="{{GetUniqueId(form.head,item.label)}}" tempt-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'radio')"></tempt-pt-radio>
 
-                                </li>
-                            </ul>
+                        <div class="ss_form " ng-repeat="form in FormItems">
+
+                            <h4 class="ss_form_title">{{form.head}} 
+                                 <pt-collapse model="{{GetUniqueId(form.head)}}" />
+                            </h4>
+                            <div class="ss_border" collapse="{{GetUniqueId(form.head)}}">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item" ng-repeat="item in form.items" ng-class="NeedChangeElement(item.type,'notes')?'ss_form_item_line':''">
+                                        <label class="ss_form_input_title">{{item.label}}</label>
+                                        <input class="ss_form_input" tempt-type="{{GetType(item.type)}}{{'Quotation'}}" tempt-ng-model="{{GenerateModel(item.label)}}" ng-if="(!item.type)||(!NeedChangeElement(item.type))">
+                                        <select class="ss_form_input" tempt-ng-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'select')">
+                                            <option></option>
+                                            <option ng-repeat="option in item.options">{{option}} </option>
+                                        </select>
+                                        <tempt-pt-file file-bble="{{BBLEModel}}" file-id="{{GetUniqueId(form.head,item.label)}}" file-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'file')"></tempt-pt-file>
+                                        <textarea class="edit_text_area text_area_ss_form" model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'notes')"></textarea>
+                                        <input type="text" class="ss_form_input" tempt-ng-model="{{GenerateModel(item.label)}}" tempt-ng-change="{{GenerateModel(item.label)}}Id=null" tempt-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" tempt-typeahead-on-select="{{GenerateModel(item.label)}}Id=$item.ContactId" tempt-bind-id="{{GenerateModel(item.label)}}Id" ng-if="NeedChangeElement(item.type,'contact')">
+                                        <tempt-pt-radio name="{{GetUniqueId(form.head,item.label)}}" tempt-model="{{GenerateModel(item.label)}}" ng-if="NeedChangeElement(item.type,'radio')"></tempt-pt-radio>
+
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <p>
-                        BBLE model:
-                    <input type="text" class="form-control" ng-model="BBLEModel" />
-                    </p>
-                    <p>
-                        Page model:
-                    <input type="text" class="form-control" ng-model="pageModel" />
-                    </p>
-                    <button type="button" ng-click="GetReslut()">GetReslut</button><br />
-                    <textarea ng-model="Resluts"></textarea>
-                </div>
-
             </div>
-        </div>
+            <div class="col-md-6">
+                <p>
+                    BBLE model:
+                    <input type="text" class="form-control" ng-model="BBLEModel" />
+                </p>
+                <p>
+                    Page model:
+                    <input type="text" class="form-control" ng-model="pageModel" />
+                </p>
+                <button type="button" ng-click="GetReslut()">GetReslut</button><br />
+                <textarea ng-model="Resluts"></textarea>
+            </div>
 
+        </div>
     </div>
+
+
 
     <script>
         var portalApp = angular.module('PortalApp');
@@ -56,17 +64,17 @@
             $scope.RecordDocuments = {}
             $scope.FormItems = [
                {
-                   head: 'Pre Assign',
+                   head: 'Ownership Mortgage Info',
                    items: [
-                       { label: 'Property Address' },
-                       { label: '# of Parties' },
-                       { label: 'Name Of parties' },
+                       { label: 'Purchase Deed' },
+                       { label: 'Date of Deed' },
+                       { label: 'Party 1' },
                        { label: 'Check request', type: 'radio' },
                        { label: '# of checks' },
                        { label: 'Total Check Amount', type: 'money' },
-                       { label: 'Check is in Office', type: 'radio'},
-                       { label: 'Name On Check',  },
-                       { label: 'Need do search' , type: 'radio'},
+                       { label: 'Check is in Office', type: 'radio' },
+                       { label: 'Name On Check', },
+                       { label: 'Need do search', type: 'radio' },
                    ]
                },
 

@@ -41,11 +41,11 @@ Partial Public Class LeadTaxSearchRequest
     Protected WithEvents LeadDocSearchList As Global.IntranetPortal.LeadDocSearchList
     
     '''<summary>
-    '''SearchRecodingPopupCtrl1 control.
+    '''DocSearchOldVersion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SearchRecodingPopupCtrl1 As Global.IntranetPortal.SearchRecodingPopupCtrl
+    Protected WithEvents DocSearchOldVersion As Global.IntranetPortal.DocSearchOldVersion
 End Class
