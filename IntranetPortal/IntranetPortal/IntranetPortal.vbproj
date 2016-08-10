@@ -1201,6 +1201,20 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LeadDocSearch\DocSearchNewVersion.ascx.designer.vb">
+      <DependentUpon>DocSearchNewVersion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadDocSearch\DocSearchNewVersion.ascx.vb">
+      <DependentUpon>DocSearchNewVersion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LeadDocSearch\DocSearchOldVersion.ascx.designer.vb">
+      <DependentUpon>DocSearchOldVersion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadDocSearch\DocSearchOldVersion.ascx.vb">
+      <DependentUpon>DocSearchOldVersion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="LeadDocSearch\LeadDocSearchList.ascx.designer.vb">
       <DependentUpon>LeadDocSearchList.ascx</DependentUpon>
     </Compile>
@@ -7141,6 +7155,8 @@
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
+    <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
+    <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
