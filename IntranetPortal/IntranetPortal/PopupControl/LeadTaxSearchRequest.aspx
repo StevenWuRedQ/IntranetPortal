@@ -270,13 +270,11 @@
                                         </a>
                                     </li>
                                 </ul>
-
                                 <div style="padding: 20px" id="searchReslut">
                                     <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
                                    <%-- <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />--%>
                                 </div>
                             </div>
-
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
