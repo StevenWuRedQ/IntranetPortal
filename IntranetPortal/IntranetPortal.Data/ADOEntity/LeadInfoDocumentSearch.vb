@@ -21,5 +21,6 @@ Partial Public Class LeadInfoDocumentSearch
     Public Property ExpectedSigningDate As Nullable(Of Date)
     Public Property CompletedOn As Nullable(Of Date)
     Public Property CompletedBy As String
+    Public Property Version As Nullable(Of Integer)
 
 End Class

@@ -15,9 +15,7 @@
                 Me.DocSearchOldVersion.Visible = False
                 Me.DocSearchNewVersion.Visible = True
             End If
-
         End If
-
     End Sub
 
 End Class
