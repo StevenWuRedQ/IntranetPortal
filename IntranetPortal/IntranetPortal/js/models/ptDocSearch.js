@@ -10,12 +10,11 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
         });
 
-
     //docSearch.properties = {
     //    LeadResearch: "{LeadResearch}",
     //    LeadResearchs: "[LeadResearch]"
     //}
-    
+
     docSearch.Status = {
         New: 0,
         Completed: 1

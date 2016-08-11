@@ -28,9 +28,8 @@
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div>
-                                <div style="align-content: center; height: 100%">
-                                    <!-- Nav tabs -->
-                                    <div class="legal-menu row" style="margin-left: 0px; margin-right: 0px">
+                                <div style="align-content: center; height: 100%">                                    
+                                    <div class="legal-menu row " style="margin-left: 0px; margin-right: 0px">
                                         <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
                                             <li class="active short_sale_head_tab">
                                                 <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
@@ -39,18 +38,13 @@
                                                 </a>
                                             </li>
                                             <li style="margin-right: 30px; color: #ffa484; float: right">
-
                                                 <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="Save" ng-click="SearchComplete(true)"></i>
-
                                             </li>
-
                                         </ul>
                                     </div>
                                 </div>
-
                                 <uc1:DocSearchNewVersion runat="server" id="DocSearchNewVersion" Visible="False"/>
                                 <uc1:DocSearchOldVersion runat="server" id="DocSearchOldVersion" Visible="True"/>
-
                             </div>
                         </dx:SplitterContentControl>
                     </ContentCollection>
@@ -68,13 +62,11 @@
                                         </a>
                                     </li>
                                 </ul>
-
                                 <div style="padding: 20px" id="searchReslut">
                                     <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
                                    <%-- <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />--%>
                                 </div>
                             </div>
-
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>

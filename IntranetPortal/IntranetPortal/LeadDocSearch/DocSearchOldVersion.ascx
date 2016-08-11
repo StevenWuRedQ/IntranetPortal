@@ -2,9 +2,7 @@
 <%@ Register Src="~/PopupControl/SearchRecodingPopupCtrl.ascx" TagPrefix="uc1" TagName="SearchRecodingPopupCtrl" %>
 <div class="tab-content">
     <div class="tab-pane active" id="LegalTab">
-
         <div style="overflow: auto; height: 830px; padding: 0 20px">
-
             <div class="alert alert-warning" style="margin-top: 20px; font-size: 16px" ng-show="DocSearch.Status != 1">
                 <i class="fa fa-warning"></i><strong>Warning!</strong> Document search didn't completed yet!
             </div>
@@ -66,13 +64,10 @@
                             <label class="ss_form_input_title">C/O Date</label>
                             <input class="ss_form_input" ng-model="DocSearch.LeadResearch.CODate" ss-date />
                         </li>
-
                         <li class="ss_form_item " ng-show="DocSearch.LeadResearch.hasCO">
                             <label class="ss_form_input_title">C/O Class</label>
                             <input class="ss_form_input" ng-model="DocSearch.LeadResearch.COClass" />
                         </li>
-
-
                     </ul>
                     <h5 class="ss_form_title ">ECB Violation 
                                                         <pt-collapse model="ECBViolation" />
@@ -115,12 +110,10 @@
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">NYS Tax Lien</label>
                                 <pt-radio name="has_NysTaxLien" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
-
                             </li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">Fannie</label>
                                 <pt-radio name="liens_info_fannie1" model="DocSearch.LeadResearch.fannie"></pt-radio>
-
                             </li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">FHA</label>
@@ -135,7 +128,6 @@
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">Wells Fargo</label>
                                 <pt-radio name="liens_info_wellsFargo" model="DocSearch.LeadResearch.wellsFargo"></pt-radio>
-
                             </li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">Court Date</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.courtDate" ss-date /></li>
