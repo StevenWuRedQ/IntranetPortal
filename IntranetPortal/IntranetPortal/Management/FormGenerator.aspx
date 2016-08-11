@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="FormGenerator.aspx.vb" Inherits="IntranetPortal.FormGenerator" MasterPageFile="~/Content.Master" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
@@ -25,9 +26,10 @@
                                     </h5>
                                     <div class="ss_border" tp-collapse="{{GenerateModel(item.label,form.head)}}">
                                         <ul class="ss_form_box clearfix">
-                                            <li class="ss_form_item" ng-repeat="sitem in item.items" ng-class="NeedChangeElement(sitem.type,'notes')?'ss_form_item_line':''">
+                                            <li class="ss_form_item" tp-show="{{sitem.type == 'radio' ? true: GenerateModel(item.ngShow,item.label)}}" ng-repeat="sitem in item.items" ng-class="NeedChangeElement(sitem.type,'notes')?'ss_form_item_line':''" >
                                                 <label class="ss_form_input_title">{{sitem.label}}</label>
-                                                <input class="ss_form_input" tempt-type="{{GetType(sitem.type)}}{{'Quotation'}}" tempt-ng-model="{{GenerateModel(sitem.label,item.label)}}" ng-if="(!sitem.type)||(!NeedChangeElement(sitem.type))">
+                                                <%-- only enable the tp-ng-show when need have ng-show in the radio otherwise disable it --%>
+                                                <input class="ss_form_input" tempt-type="{{GetType(sitem.type)}}{{'Quotation'}}" tempt-ng-model="{{GenerateModel(sitem.label,item.label)}}"  ng-if="((!sitem.type)||(!NeedChangeElement(sitem.type))&&!sitem.head)" >
                                                 <select class="ss_form_input" tempt-ng-model="{{GenerateModel(sitem.label,item.label)}}" ng-if="NeedChangeElement(sitem.type,'select')">
                                                     <option></option>
                                                     <option ng-repeat="option in sitem.options">{{option}} </option>
@@ -97,7 +99,7 @@
                    head: 'Ownership Mortgage Info',
                    items: [
                        {
-                           label: 'Purchase Deed', head: 'Purchase Deed',
+                           label: 'Purchase Deed', head: 'Purchase Deed', ngShow: 'Has Deed',
                            items: [
                                { label: 'Has Deed', type: 'radio' },
                                { label: 'Date of Deed', type: 'date' },
@@ -110,7 +112,7 @@
 
                        {
                            label: 'c 1st Mortgage',
-                           head: 'c 1st Mortgage',
+                           head: 'c 1st Mortgage', ngShow: 'Has c 1st Mortgage',
                            items: [
                                {
                                    label: 'Has c 1st Mortgage', type: 'radio'
@@ -122,7 +124,7 @@
                        },
                        {
                            label: 'c 2nd Mortgage',
-                           head: 'c 2nd Mortgage',
+                           head: 'c 2nd Mortgage', ngShow: 'Has c 2nd Mortgage',
                            items: [
                                {
                                    label: 'Has c 2nd Mortgage', type: 'radio'
@@ -139,7 +141,7 @@
                        //{ label: 'c 2nd Mortgage Amount', type: 'money' },
                        {
                            label: 'Last Assignment',
-                           head: 'Last Assignment',
+                           head: 'Last Assignment', ngShow: 'has Last Assignment',
                            items: [
                                { label: 'has Last Assignment', type: 'radio' },
                                { label: 'Assignment date', type: 'date' },
@@ -173,7 +175,7 @@
                    items: [
                        {
                            label: 'Property Taxes Due',
-                           head: 'Property Taxes',
+                           head: 'Property Taxes', ngShow: 'Has Due',
                            items: [
                                { label: 'Property Taxes per YR' },
                                { label: 'Has Due', type: 'radio' },
@@ -183,16 +185,16 @@
 
                        {
                            label: 'Water Charges Due',
-                           head: 'Water Charges Due',
+                           head: 'Water Charges Due', ngShow: 'Has Water Due',
                            items: [
-                                { label: 'Has Due', type: 'radio' },
+                                { label: 'Has Water Due', type: 'radio' },
                                 { label: 'Due', type: 'money' },
                            ]
                        },
 
                        {
                            label: 'ECB Violoations',
-                           head: 'ECB Violoations',
+                           head: 'ECB Violoations', ngShow: 'Has Open',
                            items: [
                                 { label: 'Has Open', type: 'radio' },
                                 { label: 'Count' },
@@ -201,9 +203,9 @@
                        },
                        {
                            label: 'DOB Violoations',
-                           head: 'DOB Violoations',
+                           head: 'DOB Violoations', ngShow: 'Has DOB Open',
                            items: [
-                                { label: 'Has Open', type: 'radio' },
+                                { label: 'Has DOB Open', type: 'radio' },
                                 { label: 'Count' },
                                 { label: 'Amount', type: 'money' },
                            ]
@@ -214,8 +216,9 @@
                        { label: 'Tax Classification' },
 
                        {
-                           label: 'C O', head: 'C O', items: [
-                               { label: 'Has CO' },
+                           label: 'C O', head: 'C O', ngShow: 'Has CO',
+                           items: [
+                               { label: 'Has CO' ,type:'radio' },
                                { label: ' __Num of Units' },
                            ]
                        },
@@ -226,6 +229,7 @@
                        {
                            label: 'HPD Violations',
                            head: 'HPD Violations',
+                           ngShow: 'Has Violations',
                            items: [
                                {
                                    label: 'Has Violations',
@@ -241,8 +245,9 @@
                        {
                            label: 'HPD Charges Not Paid Transferred',
                            head: 'HPD Charges Not Paid Transferred',
+                           ngShow: 'Is Open',
                            items: [
-                               { label: 'Open Amount', type: 'radio' },
+                               { label: 'Is Open', type: 'radio' },
                                { label: 'Open Amount', type: 'money' },
                            ]
                        },
@@ -255,6 +260,7 @@
                         {
                             label: 'Personal Judgments',
                             head: 'Personal Judgments',
+                            ngShow: 'has Judgments',
                             items: [
                                 {
                                     label: 'has Judgments', type: 'radio'
@@ -270,9 +276,10 @@
                         {
                             label: 'HPD Judgments',
                             head: 'HPD Judgments',
+                            ngShow: 'has HPD Judgments',
                             items: [
                                 {
-                                    label: 'has Judgments', type: 'radio'
+                                    label: 'has HPD Judgments', type: 'radio'
                                 },
                                  {
                                      label: 'Count',
@@ -285,6 +292,7 @@
                         {
                             label: 'IRS Tax Lien',
                             head: 'IRS Tax Lien',
+                            ngShow: 'has IRS Tax Lien',
                             items: [
                                 {
                                     label: 'has IRS Tax Lien', type: 'radio'
@@ -300,6 +308,7 @@
                         {
                             label: 'NYS Tax Lien',
                             head: 'NYS Tax Lien',
+                            ngShow: 'has NYS Tax Lien',
                             items: [
                                 {
                                     label: 'has NYS Tax Lien', type: 'radio'
@@ -315,6 +324,7 @@
                         {
                             label: 'Sidewalk Liens',
                             head: 'Sidewalk Liens',
+                            ngShow: 'has Sidewalk Liens',
                             items: [
                                 {
                                     label: 'has Sidewalk Liens', type: 'radio'
@@ -330,6 +340,7 @@
                         {
                             label: 'Vacate Order',
                             head: 'Vacate Order',
+                            ngShow: 'has Vacate Order',
                             items: [
                                 {
                                     label: 'has Vacate Order', type: 'radio'
@@ -345,6 +356,7 @@
                         {
                             label: 'ECB Tickets',
                             head: 'ECB Tickets',
+                            ngShow: 'has ECB Tickets',
                             items: [
                                 {
                                     label: 'has ECB Tickets', type: 'radio'
@@ -360,6 +372,7 @@
                         {
                             label: 'ECB on Name other known address',
                             head: 'ECB on Name other known address',
+                            ngShow: 'has ECB on Name',
                             items: [
                                 {
                                     label: 'has ECB on Name', type: 'radio'
@@ -397,6 +410,8 @@
                 var iType = NeedChangeS.filter(function (o) { return o == type })[0];
                 return ElemType ? iType == ElemType : iType
             }
+
+           
             $scope.GetReslut = function () {
                 var t = $('#template').clone();
                 t.not(':visible').remove();
@@ -421,7 +436,8 @@
                 html = html.replace(/c 1st/g, '1st');
                 html = html.replace(/c 2nd/g, '2nd');
                 html = html.replace(/tempt-/g, '');
-
+                html = html.replace(/tp-show/g, 'ng-show');
+                
                 $scope.Resluts = html;
             }
         });
