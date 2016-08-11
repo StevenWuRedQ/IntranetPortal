@@ -1275,12 +1275,11 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
         });
 
-
     //docSearch.properties = {
     //    LeadResearch: "{LeadResearch}",
     //    LeadResearchs: "[LeadResearch]"
     //}
-    
+
     docSearch.Status = {
         New: 0,
         Completed: 1
@@ -2069,7 +2068,15 @@ angular.module("PortalApp")
         });
         return items.out;
     };
-}).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);
+}).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
+.filter('preCondition', function () {
+    return function (value, condition) {
+        if (!condition || condition == "no")
+            return "";
+
+        return value;
+    }
+});
 
 angular.module("PortalApp")
     .directive('ssDate', function () {
@@ -2093,9 +2100,6 @@ angular.module("PortalApp")
                         });
                     }
                 }
-
-
-
             }
         };
     })
@@ -2793,6 +2797,35 @@ angular.module("PortalApp")
         }
 
     }])
+    .directive('preCondition', function () {
+        return {
+            require: 'ngModel',           
+            link: function (scope, element, attrs, ngModelController) {
+                scope.$watch(attrs.preCondition, function (newVal, oldVal) {
+                    if (!newVal)
+                        eval('scope.' + attrs.ngModel + '=null');
+                    console.log(newVal);
+                }, true);
+
+                //ngModelController.$parsers.push(function (data) {
+                //    //convert data from view format to model format                    
+                //    return data;
+                //});
+
+                //ngModelController.$formatters.push(function (data) {
+                //    //convert data from model format to view format
+                //    console.log(element);
+                //    console.log(attrs);
+                //    var cond = eval('scope.' + attrs.preCondition);
+                //    console.log(cond);
+                //    if (cond)
+                //        return "formated";
+
+                //    return data;
+                //});
+            }
+        };
+    });
 angular.module("PortalApp")
 .controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', 'CorpEntity', function ($scope, $http, ptContactServices, CorpEntity) {
     $scope.EmailTo = [];
@@ -3513,7 +3546,6 @@ angular.module('PortalApp')
                 $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
             });
-
 
             //$scope.DocSearch;
             // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).

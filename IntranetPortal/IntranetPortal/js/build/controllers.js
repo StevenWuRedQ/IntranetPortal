@@ -719,7 +719,6 @@ angular.module('PortalApp')
                 $scope.DocSearch.initTeam();
             });
 
-
             //$scope.DocSearch;
             // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
             // success(function (data, status, headers, config) {

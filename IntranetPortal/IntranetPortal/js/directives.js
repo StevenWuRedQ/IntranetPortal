@@ -20,9 +20,6 @@
                         });
                     }
                 }
-
-
-
             }
         };
     })
@@ -720,3 +717,15 @@
         }
 
     }])
+    .directive('preCondition', function () {
+        return {
+            require: 'ngModel',           
+            link: function (scope, element, attrs, ngModelController) {
+                scope.$watch(attrs.preCondition, function (newVal, oldVal) {
+                    if (!newVal)
+                        eval('scope.' + attrs.ngModel + '=null');                  
+                }, true);
+
+            }
+        };
+    });

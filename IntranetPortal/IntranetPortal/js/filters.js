@@ -17,4 +17,4 @@
         });
         return items.out;
     };
-}).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);
+}).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])

@@ -24,7 +24,6 @@
     var isSave = false;
 
     function onSavePhoneComment() {
-
         var comment = $("#phone_comment").val();
         var temCommentSpan = $(temTelLink).children("span:first")
         if (temCommentSpan != null) {
