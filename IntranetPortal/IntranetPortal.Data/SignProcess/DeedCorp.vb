@@ -38,12 +38,12 @@ Public Class DeedCorp
     End Sub
 
     ''' <summary>
-    ''' Return available deed corp to assign by randomly
+    ''' Return available active deed corp to assign by randomly
     ''' </summary>
     ''' <returns>The Corp List</returns>
     Public Shared Function GetNextAvailableCorp() As DeedCorp
         Using ctx As New PortalEntities
-            Dim result = From dc In ctx.DeedCorps
+            Dim result = From dc In ctx.DeedCorps.Where(Function(a) a.Active)
                          Let Amount = ctx.DeedCorpProperties.Where(Function(dcp) dcp.EntityId = dc.EntityId).Count
                          Order By Amount Ascending
                          Select dc
