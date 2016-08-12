@@ -57,7 +57,6 @@
                     <label class="ss_form_input_title ">Geodata</label>
                     <button class="btn btn-secondary" type="button">
                         <a href="http://www.geodataplus.com/" target="_blank">Go to Geodata</a>
-
                     </button>
                 </li>
                 <li class="ss_form_item ">
@@ -66,10 +65,7 @@
                         <a href="https://a836-acris.nyc.gov/DS/DocumentSearch/BBL" target="_blank">Go to Acris</a>
                     </button>
                 </li>
-
             </ul>
-
-
             <div class="ss_form  ">
                 <h4 class="ss_form_title ">Ownership Mortgage Info                               
                     <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info">                            </pt-collapse>

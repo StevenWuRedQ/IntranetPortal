@@ -710,12 +710,9 @@
                         });
                         scope.AuditLogs = result;
                     })
-                }, 1000);
-               
-               
+                }, 1000);               
             }
         }
-
     }])
     .directive('preCondition', function () {
         return {
