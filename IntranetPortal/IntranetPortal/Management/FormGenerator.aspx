@@ -179,7 +179,7 @@
                            items: [
                                { label: 'Property Taxes per YR' },
                                { label: 'Has Due', type: 'radio' },
-                               { label: 'Due', type: 'money' },
+                               { label: 'Amount', type: 'money' },
                            ]
                        },
 
@@ -188,7 +188,7 @@
                            head: 'Water Charges Due', ngShow: 'Has Water Due',
                            items: [
                                 { label: 'Has Water Due', type: 'radio' },
-                                { label: 'Due', type: 'money' },
+                                { label: 'Amount', type: 'money' },
                            ]
                        },
 

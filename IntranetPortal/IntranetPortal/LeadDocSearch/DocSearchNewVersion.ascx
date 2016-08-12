@@ -52,12 +52,13 @@
             <%-----------------------End Request Info----------------------------------------%>
 
             <%--- new version should have sub title so need deleted all ---%>
+            <%-- links --%>
+
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Geodata</label>
                     <button class="btn btn-secondary" type="button">
                         <a href="http://www.geodataplus.com/" target="_blank">Go to Geodata</a>
-
                     </button>
                 </li>
                 <li class="ss_form_item ">
@@ -66,10 +67,199 @@
                         <a href="https://a836-acris.nyc.gov/DS/DocumentSearch/BBL" target="_blank">Go to Acris</a>
                     </button>
                 </li>
-
+                <li class="ss_form_item ">
+                    <label class="ss_form_input_title ">NYCSERV </label>
+                    <button class="btn btn-secondary" type="button">
+                        <a href="http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain" target="_blank">Go to NYCSERV</a>
+                    </button>
+                </li>
+                <li class="ss_form_item ">
+                    <label class="ss_form_input_title ">DOB </label>
+                    <button class="btn btn-secondary" type="button">
+                        <a href="http://www1.nyc.gov/site/buildings/index.page" target="_blank">Go to DOB</a>
+                    </button>
+                </li>
+                <li class="ss_form_item ">
+                    <label class="ss_form_input_title ">HPD </label>
+                    <button class="btn btn-secondary" type="button">
+                        <a href="https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx" target="_blank">Go to HPD</a>
+                    </button>
+                </li>
+                <li class="ss_form_item ">
+                    <label class="ss_form_input_title ">NY Data</label>
+                    <button class="btn btn-secondary" type="button">
+                        <a href="https://oma.edatatrace.com/oma/" target="_blank">Go to NY Data</a>
+                    </button>
+                </li>
             </ul>
+            <%-- --links ----%>
+            <a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a>
+            <a href="https://www.knowyouroptions.com/loanlookup" target="_blank">Fannie </a>
+            <a href="https://ww3.freddiemac.com/loanlookup/" target="_blank">Freddie Mac</a>
 
-            <%-- spend 2 hours add yes or no disable relatived filed and test if it's correct becusae the key vaule too long --%>
+
+            <%-- end links --%>
+            <%-- by steven
+                 used 5 hours in devextrem grid
+                 becuase the initinal of grid should take an array.
+                 and two way bind should use bindingOptions instand dataSource.
+                --%>
+            <div class="ss_form  ">
+                <h5 class="ss_form_title  ">Other Mortgage                                 
+                        <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
+                </h5>
+                <div collapse="DocSearch.LeadResearch.OtherMortgageDiv">
+                    <div dx-data-grid='{
+                        bindingOptions: {
+                            dataSource: "DocSearch.LeadResearch.OtherMortgage"
+                        },
+                        paging: {
+                            pageSize: 10
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [5, 10, 20],
+                            showInfo: true
+                        },
+                        editing: {
+                            editMode: "cell",
+                            editEnabled: true,
+                            insertEnabled: true,
+                            removeEnabled: true
+                        },
+                        columns: ["Amount"],
+                    }'>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ss_form  ">
+                <h5 class="ss_form_title  ">Other Liens                                 
+                        <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
+                </h5>
+                <div collapse="DocSearch.LeadResearch.OtherLiensDiv">
+                    <div dx-data-grid='{
+                        bindingOptions: {
+                            dataSource: "DocSearch.LeadResearch.OtherLiens"
+                        },
+                        paging: {
+                            pageSize: 10
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [5, 10, 20],
+                            showInfo: true
+                        },
+                        editing: {
+                            editMode: "cell",
+                            editEnabled: true,
+                            insertEnabled: true,
+                            removeEnabled: true
+                        },
+                        columns: ["Lien","Amount","Date"],
+                    }'>
+                    </div>
+                </div>
+
+            </div>
+            <div class="ss_form  ">
+                <h5 class="ss_form_title  ">Tax Lien Certificate                                
+                        <pt-collapse model="DocSearch.LeadResearch.TaxLienCertificateDiv"> </pt-collapse>
+                </h5>
+
+                <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv">
+                    <div dx-data-grid='{
+                        bindingOptions: {
+                            dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
+                        },
+                        paging: {
+                            pageSize: 10
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [5, 10, 20],
+                            showInfo: true
+                        },
+                        editing: {
+                            editMode: "cell",
+                            editEnabled: true,
+                            insertEnabled: true,
+                            removeEnabled: true
+                        },
+                        columns: ["Year","Amount"],
+                    }'>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="ss_form  ">
+                <h5 class="ss_form_title  ">COS Recorded                                
+                        <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
+                </h5>
+                <div collapse="DocSearch.LeadResearch.COSRecordedDiv">
+                    <div dx-data-grid='{
+                        bindingOptions: {
+                            dataSource: "DocSearch.LeadResearch.COSRecorded"
+                        },
+                        paging: {
+                            pageSize: 10
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [5, 10, 20],
+                            showInfo: true
+                        },
+                        editing: {
+                            editMode: "cell",
+                            editEnabled: true,
+                            insertEnabled: true,
+                            removeEnabled: true
+                        },
+                        columns: ["Date","Buyer"],
+                    }'>
+                    </div>
+                </div>
+
+            </div>
+            <div class="ss_form  ">
+                <h5 class="ss_form_title  ">Deed Recorded                                
+                        <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
+                </h5>
+                <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
+                    <div dx-data-grid='{
+                        bindingOptions: {
+                            dataSource: "DocSearch.LeadResearch.DeedRecorded"
+                        },
+                        paging: {
+                            pageSize: 10
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [5, 10, 20],
+                            showInfo: true
+                        },
+                        editing: {
+                            editMode: "cell",
+                            editEnabled: true,
+                            insertEnabled: true,
+                            removeEnabled: true
+                        },
+                        columns: ["Date","Buyer"],
+                    }'>
+                    </div>
+                </div>
+
+            </div>
+            
+            <%-- spent 2 hours add yes or no disable relatived filed and test if it's correct
+                 becusae the key vaule too long .
+                 it may cause some problem .
+                 @see /js/directives/preCondition for todo list
+            --%>
 
 
             <div class="ss_form  ">
@@ -89,7 +279,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Deed_Purchase_Deed">
                                     <label class="ss_form_input_title ">Date of Deed</label>
-                                    <input class="ss_form_input " ss-date  ng-model="DocSearch.LeadResearch.Date_of_Deed_Purchase_Deed">
+                                    <input class="ss_form_input " ss-date ng-model="DocSearch.LeadResearch.Date_of_Deed_Purchase_Deed">
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Deed_Purchase_Deed">
                                     <label class="ss_form_input_title ">Party 1</label>
@@ -136,6 +326,7 @@
                             </ul>
                         </div>
                     </div>
+                    <%-- other mortage --%>
                     <div class="ss_form  ">
                         <h5 class="ss_form_title  ">Last Assignment                                       
                             <pt-collapse model="DocSearch.LeadResearch.Last_Assignment_Ownership_Mortgage_Info"> </pt-collapse>
@@ -163,11 +354,11 @@
                         </h5>
                         <div class="ss_border" collapse="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix">
-                                <li class="ss_form_item " >
+                                <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">LP Index #</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.LP_Index___Num_LP_Index___Num">
                                 </li>
-                                <li class="ss_form_item  ss_form_item_line" >
+                                <li class="ss_form_item  ss_form_item_line">
                                     <label class="ss_form_input_title ">notes</label>
                                     <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.notes_LP_Index___Num"></textarea>
                                 </li>
@@ -175,11 +366,11 @@
                         </div>
                     </div>
                     <ul class="ss_form_box clearfix">
-                      
-                      
-                        
+
+
+
                         <li class="ss_form_item ">
-                            <label class="ss_form_input_title ">Servicer</label>
+                            <label class="ss_form_input_title "><a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a></label>
                             <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Servicer">
                         </li>
                         <li class="ss_form_item  ss_form_item_line">
@@ -187,11 +378,16 @@
                             <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.Servicer_notes"></textarea>
                         </li>
                         <li class="ss_form_item ">
-                            <label class="ss_form_input_title ">Fannie</label>
+                            <label class="ss_form_input_title ">
+                                <a href="https://www.knowyouroptions.com/loanlookup" target="_blank">Fannie </a>
+
+                            </label>
                             <pt-radio name="OwnershipMortgageInfo_Fannie0" model="DocSearch.LeadResearch.Fannie"></pt-radio>
                         </li>
                         <li class="ss_form_item ">
-                            <label class="ss_form_input_title ">Freddie Mac </label>
+                            <label class="ss_form_input_title ">
+                                <a href="https://ww3.freddiemac.com/loanlookup/" target="_blank">Freddie Mac</a>
+                            </label>
                             <pt-radio name="OwnershipMortgageInfo_FreddieMac0" model="DocSearch.LeadResearch.Freddie_Mac_"></pt-radio>
                         </li>
                         <li class="ss_form_item ">
@@ -203,7 +399,7 @@
             </div>
             <div class="ss_form  ">
                 <h4 class="ss_form_title ">Property Dues Violations                               
-                    <pt-collapse model="DocSearch.LeadResearch.Property_Dues_Violations">                            </pt-collapse>
+                    <pt-collapse model="DocSearch.LeadResearch.Property_Dues_Violations"></pt-collapse>
                 </h4>
                 <div class="ss_border" collapse="DocSearch.LeadResearch.Property_Dues_Violations">
                     <div class="ss_form  ">
@@ -212,16 +408,18 @@
                         </h5>
                         <div class="ss_border" collapse="DocSearch.LeadResearch.Property_Taxes_Due_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
-                                <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due">
-                                    <label class="ss_form_input_title ">Property Taxes per YR</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Property_Taxes_per_YR_Property_Taxes_Due">
-                                </li>
-                                <li class="ss_form_item " ng-show="true">
+
+                                <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Has Due</label>
                                     <pt-radio name="PropertyDuesViolations_HasDue2" model="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due">
-                                    <label class="ss_form_input_title ">Due</label>
+                                    <label class="ss_form_input_title ">Property Taxes per YR</label>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Property_Taxes_per_YR_Property_Taxes_Due">
+                                </li>
+
+                                <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due">
+                                    <label class="ss_form_input_title ">Amount</label>
                                     <input class="ss_form_input " money-mask ng-model="DocSearch.LeadResearch.Due_Property_Taxes_Due">
                                 </li>
                             </ul>
@@ -233,12 +431,12 @@
                         </h5>
                         <div class="ss_border" collapse="DocSearch.LeadResearch.Water_Charges_Due_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
-                                <li class="ss_form_item " >
+                                <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Has Due</label>
                                     <pt-radio name="PropertyDuesViolations_HasDue0" model="DocSearch.LeadResearch.Has_Due_Water_Charges_Due"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Water_Charges_Due">
-                                    <label class="ss_form_input_title ">Due</label>
+                                    <label class="ss_form_input_title ">Amount</label>
                                     <input class="ss_form_input " money-mask ng-model="DocSearch.LeadResearch.Due_Water_Charges_Due">
                                 </li>
                             </ul>
@@ -350,12 +548,12 @@
                         </div>
                     </div>
                     <ul class="ss_form_box clearfix">
-                       
+
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title ">Tax Classification</label>
                             <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Tax_Classification">
                         </li>
-                       
+
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title ">HPD Number of Units</label>
                             <input class="ss_form_input " ng-model="DocSearch.LeadResearch.HPD_Number_of_Units">
@@ -385,7 +583,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Judgments_Personal_Judgments">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Personal_Judgments">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Personal_Judgments" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -406,7 +604,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Judgments_HPD_Judgments">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_HPD_Judgments">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_HPD_Judgments" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -427,7 +625,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_IRS_Tax_Lien_IRS_Tax_Lien">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_IRS_Tax_Lien">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_IRS_Tax_Lien" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -448,7 +646,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_NYS_Tax_Lien_NYS_Tax_Lien">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_NYS_Tax_Lien">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_NYS_Tax_Lien" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -469,7 +667,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Sidewalk_Liens_Sidewalk_Liens">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Sidewalk_Liens">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Sidewalk_Liens" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -490,7 +688,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Vacate_Order_Vacate_Order">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Vacate_Order">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Vacate_Order" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -511,7 +709,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_ECB_Tickets_ECB_Tickets">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_ECB_Tickets">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_ECB_Tickets" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -532,12 +730,12 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_ECB_on_Name_ECB_on_Name_other_known_address">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_ECB_on_Name_other_known_address">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_ECB_on_Name_other_known_address" money-mask>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
 

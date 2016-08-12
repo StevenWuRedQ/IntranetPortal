@@ -655,6 +655,25 @@
         }
 
     }])
+    /**
+     * 
+     * @param {type} ptFileService) {
+        return {
+            restrict
+     * @param {type} scope
+     * @param {type} template
+     * @param {type} 20)}}</a>'
+     * @param {type} link
+     * @param {type} el
+     * @param {type} attrs) {
+                scope.onFilePreview = ptFileService.onFilePreview;
+                scope.trunc = ptFileService.trunc;
+            }
+
+        }
+    }]
+     * @returns {type} 
+     */
     .directive('ptLink', ['ptFileService', function (ptFileService) {
         return {
             restrict: 'E',
@@ -756,3 +775,5 @@
             }
         };
     });
+
+

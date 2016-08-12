@@ -705,6 +705,21 @@ angular.module('PortalApp')
         leadsInfoBBLE = $('#BBLE').val();
 
         //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
+        // for new version this is not right will suggest use .net MVC redo the page
+        $scope.DocSearch = {}
+       
+        
+        var INITS = {
+            OtherMortgage: [],
+            DeedRecorded: [],
+            COSRecorded: [],
+            OtherLiens: [],
+            TaxLienCertificate:[]
+        };
+        $scope.DocSearch.LeadResearch = {}
+        angular.extend($scope.DocSearch.LeadResearch, INITS);
+        //////////////////
+        //put here should not right
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
@@ -717,6 +732,12 @@ angular.module('PortalApp')
                 $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
                 $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
+                // put here should not right that not right it should like this 
+                // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
+                // and put it to model inside;
+                angular.extend($scope.DocSearch.LeadResearch, INITS);
+                
+                ///////
             });
 
             //$scope.DocSearch;
