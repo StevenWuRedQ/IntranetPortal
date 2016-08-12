@@ -771,6 +771,22 @@
 
             }
         };
+    })
+    .directive('initGrid', function () {
+        return {
+            link: function (scope, element, attrs, ngModelController) {                
+                var gridOptions = null;
+                eval("gridOptions =" + attrs.dxDataGrid);
+                if (gridOptions)
+                {                    
+                    var option = gridOptions.bindingOptions.dataSource;
+                    var array = eval('scope.' + option);
+
+                    if (array)
+                        eval('scope.' + option + '=[];');
+                }
+            }
+        };
     });
 
 
