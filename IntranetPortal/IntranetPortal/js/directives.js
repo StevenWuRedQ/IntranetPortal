@@ -772,6 +772,29 @@
             }
         };
     })
+
+    /**
+     * 
+     * @author Steven
+     * @date 8/11/2016
+     * 
+     * sent time to write this initGrid to fix the save bug 
+     * and init data bug
+     *
+     * @returns directive init Grid
+     * 
+     * 
+     * @*********************************************************
+     * @author Chris
+     * @datetime 8/12/2016 2:54
+     * @bug
+     *  When switch to other cases the grid dataSource is empty
+     *  It can not add new rows
+     *  
+     * @fix Steven
+     * @enddatetime 
+     * @*********************************************************
+     */
     .directive('initGrid', function () {
         return {
             link: function (scope, element, attrs, ngModelController) {                

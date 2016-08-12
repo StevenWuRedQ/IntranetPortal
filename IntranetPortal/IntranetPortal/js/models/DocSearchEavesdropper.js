@@ -58,8 +58,12 @@ angular.module('PortalApp')
                 || this.endorseCheckVersion())
             {
                 this.revFunc(true);
+            } else {
+                this.revFunc(false);
             }
+            
         }
+
         /**
          * @author steven
          * @date   8/12/2016

@@ -41,8 +41,12 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <uc1:DocSearchNewVersion runat="server" id="DocSearchNewVersion" Visible="False"/>
-                                <uc1:DocSearchOldVersion runat="server" id="DocSearchOldVersion" Visible="True"/>
+                                <div ng-show="newVersion">
+                                     <uc1:DocSearchNewVersion runat="server" id="DocSearchNewVersion" />
+                                </div>
+                                <div ng-show="!newVersion">
+                                    <uc1:DocSearchOldVersion runat="server" id="DocSearchOldVersion" />
+                                </div>
                             </div>
                         </dx:SplitterContentControl>
                     </ContentCollection>

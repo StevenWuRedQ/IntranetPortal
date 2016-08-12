@@ -108,7 +108,7 @@
                 <h5 class="ss_form_title  ">Other Mortgage                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.OtherMortgageDiv">
+                <div collapse="DocSearch.LeadResearch.OtherMortgageDiv"  class="ss_border">
                     <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.OtherMortgage"
@@ -128,7 +128,7 @@
                             removeEnabled: true
                         },
                         columns: ["Amount"]
-                    }'>
+                    }' ng-show="newVersion">
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                 <h5 class="ss_form_title  ">Other Liens                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.OtherLiensDiv">
+                <div collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
                     <div dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.OtherLiens"
@@ -156,7 +156,7 @@
                             removeEnabled: true
                         },
                         columns: ["Lien","Amount","Date"],
-                    }'>
+                    }' ng-show="newVersion">
                     </div>
                 </div>
 
@@ -166,7 +166,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.TaxLienCertificateDiv"> </pt-collapse>
                 </h5>
 
-                <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv">
+                <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
                     <div dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
@@ -198,7 +198,7 @@
                 <h5 class="ss_form_title  ">COS Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.COSRecordedDiv">
+                <div collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
                     <div dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.COSRecorded"
@@ -227,7 +227,7 @@
                 <h5 class="ss_form_title  ">Deed Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
+                <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border" >
                     <div dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.DeedRecorded"

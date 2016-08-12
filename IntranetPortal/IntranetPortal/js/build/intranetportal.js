@@ -714,6 +714,26 @@ angular.module('PortalApp').factory('DivError', function () {
 
     return _class;
 });
+angular.module('PortalApp')
+    /**
+     * @author steven
+     * @date   8/12/2016
+     * @returns class of Eaves dropper 
+     */
+    .factory('DocNewVersionConfig', function () {
+        CONSTANT_DATE = '8/11/2016';
+        var docNewVersionConfig = function()
+        {
+            this.date = CONSTANT_DATE;
+        }
+
+        docNewVersionConfig.getInstance = function()
+        {
+            return new docNewVersionConfig();
+        }
+        
+        return docNewVersionConfig
+    })
 
 
 angular.module('PortalApp')
@@ -722,7 +742,8 @@ angular.module('PortalApp')
      * @date   8/12/2016
      * @returns class of Eaves dropper 
      */
-    .factory('DocSearchEavesdropper', function () {
+
+    .factory('DocSearchEavesdropper', function (DocNewVersionConfig) {
         var docSearchEavesdropper = function () {
 
         }
@@ -731,25 +752,86 @@ angular.module('PortalApp')
          * @author steven
          * @date   8/12/2016
          * @description:
-         *  set evaesdrapper
+         *  set evaesdrapper public function very import
          */
-        docSearchEavesdropper.prototype.setEavesdropper(_eavesdropper)
+        docSearchEavesdropper.prototype.setEavesdropper = function(_eavesdropper,revFunc)
         {
             this.eavesDropper = _eavesdropper;
+            this.endorseCheckFuncs();
+            this._registerCheckFuncs();
+            this.endorse(revFunc);
         }
 
         /**
          * @author steven
          * @date   8/12/2016
          * @description:
-         *  endorse evaesdrapper
+         *  endorse evaesdropper
          */
-        docSearchEavesdropper.prototype.endorse = function()
-        {
-            if (!this.eavesDropper)
+        docSearchEavesdropper.prototype.endorse = function (revFunc) {
+            if (!this.eavesDropper) {
                 console.error('unable to eavesdropper it not set yet');
+            }
 
-            this.eavesDropper.endorseCheckDate = "";
+            if (typeof reFunc != 'function')
+                console.error("set rev function have been set up");
+
+            this.endorseCheckFuncs();
+            
+            this.revFunc = revFunc;
+        }
+
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description: 
+         *  public function very import start function
+         */
+        docSearchEavesdropper.prototype.start2Eaves = function () {
+            this.endorseCheckFuncs();
+
+            if (this.endorseCheckDate(DocNewVersionConfig.getInstance().date)
+                || this.endorseCheckVersion())
+            {
+                this.revFunc(true);
+            } else {
+                this.revFunc(false);
+            }
+            
+        }
+
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  check all necessary check function registered
+         */
+        docSearchEavesdropper.prototype.endorseCheckFuncs = function () {
+            var eaves = this.eavesDropper;
+           
+            if ( typeof eaves.endorseCheckDate != 'function')
+            {
+                console.error("eavesDropper functions is not null");
+            }
+
+            if (typeof eaves.endorseCheckVersion != 'function') {
+                console.error("eavesDropper functions is not null");
+            }
+           
+        }
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  registerd check functions
+         */
+        docSearchEavesdropper.prototype._registerCheckFuncs = function()
+        {
+            var eaves = this.eavesDropper;
+            this.endorseCheckFuncs();
+
+            this.endorseCheckDate = eaves.endorseCheckDate;
+            this.endorseCheckVersion = eaves.endorseCheckVersion;
         }
 
         /**
@@ -2894,6 +2976,17 @@ angular.module("PortalApp")
             }
         };
     })
+
+    /**
+     * 
+     * @author steven
+     * @date 8/11/2016
+     * 
+     * sent time to write this initGrid to fix the save bug 
+     * and init data bug
+     *
+     * @returns directive init Grid
+     */
     .directive('initGrid', function () {
         return {
             link: function (scope, element, attrs, ngModelController) {                
@@ -3614,29 +3707,68 @@ angular.module('PortalApp')
 }]
 );
 angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
+        ptContactServices, ptCom, DocSearch, LeadsInfo
+        , DocSearchEavesdropper
+        ) {
         //New Model(this,arguments)
         $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
 
+
+
         //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
-       
-        
-        //var INITS = {
+
+        /////////////////////////////////////////////////////////////////////
+        // @date 8/11/2016
+        // for devextrem angular bugs have to init array frist
+        // fast prototype of grid bug on 8/11/2016 may spend two hours on it
+        // var INITS = {
         //    // OtherMortgage: [],
         //    DeedRecorded: [],
         //    COSRecorded: [],
         //    OtherLiens: [],
         //    TaxLienCertificate:[]
-        //};
-        $scope.DocSearch.LeadResearch = {}
-        //angular.extend($scope.DocSearch.LeadResearch, INITS);
-        // 
-        // put here should not right
-        $scope.init = function (bble) {
+        // };
+         $scope.DocSearch.LeadResearch = {}
+        // angular.extend($scope.DocSearch.LeadResearch, INITS);
+        // ///////////////////////////////////////////////////////////////// 
+        // put here should not right for fast prototype ////////////////////
 
+        ////////// font end switch to new version //////////////
+        $scope.endorseCheckDate = function(date)
+        {
+            var that = $scope.DocSearch;
+
+            if (that.CreateDate > date)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        $scope.endorseCheckVersion = function()
+        {
+            var that = $scope.DocSearch;
+            if (that.Version)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        $scope.GoToNewVersion = function(versions)
+        {
+            $scope.newVersion = versions;
+        }
+        /////////////////// 8/12/2016 //////////////////////////
+
+        $scope.versionController = new DocSearchEavesdropper()
+        $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
+        $scope.init = function (bble) {
+            
             leadsInfoBBLE = bble || $('#BBLE').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
@@ -3647,14 +3779,25 @@ angular.module('PortalApp')
                 $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
                 $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
+
+                ////////// font end switch to new version //////////////
+                $scope.versionController.start2Eaves();
+                /////////////////// 8/12/2016 //////////////////////////
+
+                /////////////////////////////// saving and grid init bug for faster portotype ///////////////////
+                //
+                // use fast prototype it have same bug
+                // this is faster solution of grid init will remove to initGrid
                 // put here should not right that not right it should like this 
                 // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
                 // and put it to model inside;
                 // angular.extend($scope.DocSearch.LeadResearch, INITS);
-                
-                ///////
-            });
+                //
+                /////////////////////////////// end saving and grid init bug for faster portotype ////////////////
 
+
+            });
+            // ////remove all code to model version date is some time of June 2016 /////////////////////////////////////////////
             //$scope.DocSearch;
             // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
             // success(function (data, status, headers, config) {
@@ -3688,6 +3831,7 @@ angular.module('PortalApp')
             //           alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
             //       });
             // });
+            // ////////////////////////////////// remove all code to model version date is some time of June 2016 ////////////////////
         }
 
         $scope.init(leadsInfoBBLE)
