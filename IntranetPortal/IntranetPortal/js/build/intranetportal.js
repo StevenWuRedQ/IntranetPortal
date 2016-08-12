@@ -715,6 +715,56 @@ angular.module('PortalApp').factory('DivError', function () {
     return _class;
 });
 
+
+angular.module('PortalApp')
+    /**
+     * @author steven
+     * @date   8/12/2016
+     * @returns class of Eaves dropper 
+     */
+    .factory('DocSearchEavesdropper', function () {
+        var docSearchEavesdropper = function () {
+
+        }
+
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  set evaesdrapper
+         */
+        docSearchEavesdropper.prototype.setEavesdropper(_eavesdropper)
+        {
+            this.eavesDropper = _eavesdropper;
+        }
+
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  endorse evaesdrapper
+         */
+        docSearchEavesdropper.prototype.endorse = function()
+        {
+            if (!this.eavesDropper)
+                console.error('unable to eavesdropper it not set yet');
+
+            this.eavesDropper.endorseCheckDate = "";
+        }
+
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  unendorse evaesdrapper
+         */
+        docSearchEavesdropper.prototype.unendorse = function () {
+            this.eavesDropper = null;
+        }
+
+        return docSearchEavesdropper;
+    });
+
 angular.module('PortalApp').factory('DxGridModel', function ($location, $routeParams) {
 
     var dxGridModel = function (opt, texts) {
@@ -2727,6 +2777,25 @@ angular.module("PortalApp")
         }
 
     }])
+    /**
+     * 
+     * @param {type} ptFileService) {
+        return {
+            restrict
+     * @param {type} scope
+     * @param {type} template
+     * @param {type} 20)}}</a>'
+     * @param {type} link
+     * @param {type} el
+     * @param {type} attrs) {
+                scope.onFilePreview = ptFileService.onFilePreview;
+                scope.trunc = ptFileService.trunc;
+            }
+
+        }
+    }]
+     * @returns {type} 
+     */
     .directive('ptLink', ['ptFileService', function (ptFileService) {
         return {
             restrict: 'E',
@@ -2782,12 +2851,9 @@ angular.module("PortalApp")
                         });
                         scope.AuditLogs = result;
                     })
-                }, 1000);
-               
-               
+                }, 1000);               
             }
         }
-
     }])
     /**
      * @author steven
@@ -2827,7 +2893,26 @@ angular.module("PortalApp")
 
             }
         };
+    })
+    .directive('initGrid', function () {
+        return {
+            link: function (scope, element, attrs, ngModelController) {                
+                var gridOptions = null;
+                eval("gridOptions =" + attrs.dxDataGrid);
+                if (gridOptions)
+                {                    
+                    var option = gridOptions.bindingOptions.dataSource;
+                    var array = eval('scope.' + option);
+
+                    if (array)
+                        eval('scope.' + option + '=[];');
+                }
+            }
+        };
     });
+
+
+
 angular.module("PortalApp")
 .controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', 'CorpEntity', function ($scope, $http, ptContactServices, CorpEntity) {
     $scope.EmailTo = [];
@@ -3539,17 +3624,17 @@ angular.module('PortalApp')
         $scope.DocSearch = {}
        
         
-        var INITS = {
-            OtherMortgage: [],
-            DeedRecorded: [],
-            COSRecorded: [],
-            OtherLiens: [],
-            TaxLienCertificate:[]
-        };
+        //var INITS = {
+        //    // OtherMortgage: [],
+        //    DeedRecorded: [],
+        //    COSRecorded: [],
+        //    OtherLiens: [],
+        //    TaxLienCertificate:[]
+        //};
         $scope.DocSearch.LeadResearch = {}
-        angular.extend($scope.DocSearch.LeadResearch, INITS);
-        //////////////////
-        //put here should not right
+        //angular.extend($scope.DocSearch.LeadResearch, INITS);
+        // 
+        // put here should not right
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
@@ -3565,7 +3650,7 @@ angular.module('PortalApp')
                 // put here should not right that not right it should like this 
                 // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
                 // and put it to model inside;
-                angular.extend($scope.DocSearch.LeadResearch, INITS);
+                // angular.extend($scope.DocSearch.LeadResearch, INITS);
                 
                 ///////
             });

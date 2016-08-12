@@ -729,12 +729,9 @@
                         });
                         scope.AuditLogs = result;
                     })
-                }, 1000);
-               
-               
+                }, 1000);               
             }
         }
-
     }])
     /**
      * @author steven
@@ -772,6 +769,22 @@
                         eval('scope.' + attrs.ngModel + '=null');                  
                 }, true);
 
+            }
+        };
+    })
+    .directive('initGrid', function () {
+        return {
+            link: function (scope, element, attrs, ngModelController) {                
+                var gridOptions = null;
+                eval("gridOptions =" + attrs.dxDataGrid);
+                if (gridOptions)
+                {                    
+                    var option = gridOptions.bindingOptions.dataSource;
+                    var array = eval('scope.' + option);
+
+                    if (array)
+                        eval('scope.' + option + '=[];');
+                }
             }
         };
     });

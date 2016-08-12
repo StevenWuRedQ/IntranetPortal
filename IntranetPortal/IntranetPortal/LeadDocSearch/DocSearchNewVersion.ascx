@@ -109,7 +109,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
                 </h5>
                 <div collapse="DocSearch.LeadResearch.OtherMortgageDiv">
-                    <div dx-data-grid='{
+                    <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.OtherMortgage"
                         },
@@ -127,13 +127,11 @@
                             insertEnabled: true,
                             removeEnabled: true
                         },
-                        columns: ["Amount"],
+                        columns: ["Amount"]
                     }'>
                     </div>
                 </div>
-
             </div>
-
             <div class="ss_form  ">
                 <h5 class="ss_form_title  ">Other Liens                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>

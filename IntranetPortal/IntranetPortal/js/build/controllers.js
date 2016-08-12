@@ -709,17 +709,17 @@ angular.module('PortalApp')
         $scope.DocSearch = {}
        
         
-        var INITS = {
-            OtherMortgage: [],
-            DeedRecorded: [],
-            COSRecorded: [],
-            OtherLiens: [],
-            TaxLienCertificate:[]
-        };
+        //var INITS = {
+        //    // OtherMortgage: [],
+        //    DeedRecorded: [],
+        //    COSRecorded: [],
+        //    OtherLiens: [],
+        //    TaxLienCertificate:[]
+        //};
         $scope.DocSearch.LeadResearch = {}
-        angular.extend($scope.DocSearch.LeadResearch, INITS);
-        //////////////////
-        //put here should not right
+        //angular.extend($scope.DocSearch.LeadResearch, INITS);
+        // 
+        // put here should not right
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
@@ -735,7 +735,7 @@ angular.module('PortalApp')
                 // put here should not right that not right it should like this 
                 // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
                 // and put it to model inside;
-                angular.extend($scope.DocSearch.LeadResearch, INITS);
+                // angular.extend($scope.DocSearch.LeadResearch, INITS);
                 
                 ///////
             });
