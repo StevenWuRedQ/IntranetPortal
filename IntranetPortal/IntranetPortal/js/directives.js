@@ -655,6 +655,25 @@
         }
 
     }])
+    /**
+     * 
+     * @param {type} ptFileService) {
+        return {
+            restrict
+     * @param {type} scope
+     * @param {type} template
+     * @param {type} 20)}}</a>'
+     * @param {type} link
+     * @param {type} el
+     * @param {type} attrs) {
+                scope.onFilePreview = ptFileService.onFilePreview;
+                scope.trunc = ptFileService.trunc;
+            }
+
+        }
+    }]
+     * @returns {type} 
+     */
     .directive('ptLink', ['ptFileService', function (ptFileService) {
         return {
             restrict: 'E',
@@ -714,6 +733,33 @@
             }
         }
     }])
+    /**
+     * @author steven
+     * @date 8/11/2016
+     * @todo
+     *  the pre condition should will in the control which need
+     *  be controller and cleared by yes or no selected.
+     * 
+     * @param {'ngModel'} ) {
+        return {
+            require
+     * @param {function (scope} link
+     * @param element
+     * @param attrs
+     * @param ngModelController) {
+                scope.$watch(attrs.preCondition
+     * @param function (newVal
+     * @param oldVal) {
+                    if (!newVal)
+                        eval('scope.' + attrs.ngModel + '=null');                  
+                }
+     * @param true);
+
+            }
+        };
+    }
+     * @returns {type} 
+     */
     .directive('preCondition', function () {
         return {
             require: 'ngModel',           
@@ -726,3 +772,5 @@
             }
         };
     });
+
+

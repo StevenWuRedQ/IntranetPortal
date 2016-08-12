@@ -2069,14 +2069,6 @@ angular.module("PortalApp")
         return items.out;
     };
 }).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
-.filter('preCondition', function () {
-    return function (value, condition) {
-        if (!condition || condition == "no")
-            return "";
-
-        return value;
-    }
-});
 
 angular.module("PortalApp")
     .directive('ssDate', function () {
@@ -2797,32 +2789,42 @@ angular.module("PortalApp")
         }
 
     }])
+    /**
+     * @author steven
+     * @date 8/11/2016
+     * @todo
+     *  the pre condition should will in the control which need
+     *  be controller and cleared by yes or no selected.
+     * 
+     * @param {'ngModel'} ) {
+        return {
+            require
+     * @param {function (scope} link
+     * @param element
+     * @param attrs
+     * @param ngModelController) {
+                scope.$watch(attrs.preCondition
+     * @param function (newVal
+     * @param oldVal) {
+                    if (!newVal)
+                        eval('scope.' + attrs.ngModel + '=null');                  
+                }
+     * @param true);
+
+            }
+        };
+    }
+     * @returns {type} 
+     */
     .directive('preCondition', function () {
         return {
             require: 'ngModel',           
             link: function (scope, element, attrs, ngModelController) {
                 scope.$watch(attrs.preCondition, function (newVal, oldVal) {
                     if (!newVal)
-                        eval('scope.' + attrs.ngModel + '=null');
-                    console.log(newVal);
+                        eval('scope.' + attrs.ngModel + '=null');                  
                 }, true);
 
-                //ngModelController.$parsers.push(function (data) {
-                //    //convert data from view format to model format                    
-                //    return data;
-                //});
-
-                //ngModelController.$formatters.push(function (data) {
-                //    //convert data from model format to view format
-                //    console.log(element);
-                //    console.log(attrs);
-                //    var cond = eval('scope.' + attrs.preCondition);
-                //    console.log(cond);
-                //    if (cond)
-                //        return "formated";
-
-                //    return data;
-                //});
             }
         };
     });
@@ -3533,6 +3535,21 @@ angular.module('PortalApp')
         leadsInfoBBLE = $('#BBLE').val();
 
         //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
+        // for new version this is not right will suggest use .net MVC redo the page
+        $scope.DocSearch = {}
+       
+        
+        var INITS = {
+            OtherMortgage: [],
+            DeedRecorded: [],
+            COSRecorded: [],
+            OtherLiens: [],
+            TaxLienCertificate:[]
+        };
+        $scope.DocSearch.LeadResearch = {}
+        angular.extend($scope.DocSearch.LeadResearch, INITS);
+        //////////////////
+        //put here should not right
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
@@ -3545,6 +3562,12 @@ angular.module('PortalApp')
                 $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
                 $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
+                // put here should not right that not right it should like this 
+                // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
+                // and put it to model inside;
+                angular.extend($scope.DocSearch.LeadResearch, INITS);
+                
+                ///////
             });
 
             //$scope.DocSearch;
