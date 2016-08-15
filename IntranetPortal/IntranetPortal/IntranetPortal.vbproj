@@ -7117,6 +7117,7 @@
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
+    <Content Include="js\models\DocNewVersionConfig.js" />
     <Content Include="js\models\DocSearchEavesdropper.js" />
     <Content Include="js\models\DxGridModel.js" />
     <Content Include="js\models\dxModel.js" />

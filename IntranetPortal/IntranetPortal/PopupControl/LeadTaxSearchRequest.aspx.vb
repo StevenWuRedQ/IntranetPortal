@@ -11,10 +11,15 @@
                 ASPxSplitter1.GetPaneByName("dataPane").Visible = False
             End If
 
-            If Request.QueryString("v") IsNot Nothing Then
-                Me.DocSearchOldVersion.Visible = False
-                Me.DocSearchNewVersion.Visible = True
-            End If
+            ' '''''''''''''''''''''''''''''''''''''''''''''''
+            ' disable server side control
+            ' date 8/12/2016
+            ' 
+            ' If Request.QueryString("v") IsNot Nothing Then
+            '    Me.DocSearchOldVersion.Visible = False
+            '    Me.DocSearchNewVersion.Visible = True
+            ' End If
+            ' ''''''''''''''''''''''''''''''''''''''''''''''''
         End If
     End Sub
 
