@@ -2978,7 +2978,7 @@ angular.module("PortalApp")
     })
 
     /**
-     * *********************************************************
+     * 
      * @author Steven
      * @date 8/11/2016
      * 
@@ -2989,21 +2989,21 @@ angular.module("PortalApp")
      * 
      * 
      * @*********************************************************
-     * @author Steven
+     * @author Chris
      * @datetime 8/12/2016 2:54
      * @bug
      *  When switch to other cases the grid dataSource is empty
      *  It can not add new rows
      *  
      * @fix Steven
-     * @end datetime 
+     * @enddatetime 
      * @*********************************************************
      */
     .directive('initGrid', function () {
         return {
             link: function (scope, element, attrs, ngModelController) {                
-                var gridOptions = null;                
-                eval("gridOptions =" + attrs.dxDataGrid);                
+                var gridOptions = null;
+                eval("gridOptions =" + attrs.dxDataGrid);
                 if (gridOptions)
                 {                    
                     var option = gridOptions.bindingOptions.dataSource;
@@ -3807,7 +3807,7 @@ angular.module('PortalApp')
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
         $scope.init = function (bble) {
-
+            
             leadsInfoBBLE = bble || $('#BBLE').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
@@ -3936,7 +3936,7 @@ angular.module('PortalApp')
 
                 $scope.DocSearch.ResutContent = $("#searchReslut").html();
                 $scope.DocSearch.$completed(null, function () {
-
+                
                     AngularRoot.alert("Document completed!")
                     gridCase.Refresh();
                 });
@@ -5053,6 +5053,15 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION =
     }
 };
 
+
+// with void reason as default display
+var CONSTANT_ASSIGN_CHECK_GRID_OPTION_2 = _.extend({}, CONSTANT_ASSIGN_CHECK_GRID_OPTION);
+
+CONSTANT_ASSIGN_CHECK_GRID_OPTION_2.columns.push({
+    dataField: 'Comments',
+    caption: 'Void Reason'
+});
+
 var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
     bindingOptions: {
         dataSource: 'preSignList'
@@ -5127,7 +5136,7 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
  *
  **/
 
-portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location,$http) {
+portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location, $http) {
 
     $scope.preAssign = PreSignItem;
     setTimeout(function () {
@@ -5136,8 +5145,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
             $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
         }
         
-        if (!$scope.preAssign.Id)
-        {
+        if (!$scope.preAssign.Id) {
             $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
             $scope.preAssign.Parties = [];
             $scope.preAssign.NeedSearch = true;
@@ -5151,14 +5159,12 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         } else {
             console.error("can not find checkGrid instance");
         }
-        if ($scope.preAssign.BBLE)
-        {
+        if ($scope.preAssign.BBLE) {
             $http.get('/api/Leads/LeadsInfo/' + $scope.preAssign.BBLE).success(function (data) {
                 $scope.preAssign.Title = data.PropertyAddress
             });
         }
-        if (!$scope.preAssign.CreateBy)
-        {
+        if (!$scope.preAssign.CreateBy) {
             $scope.preAssign.CreateBy = $('#currentUser').val();
             
         }
@@ -5166,13 +5172,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION, {
         editMode: "cell"
     });
-    //editing:{
-    //        editMode: "cell", texts: {
-    //        deleteRow: 'Void',
-    //        confirmDeleteMessage: ''
-    //        }
 
-    //},
     $scope.checkGridOptions = {
         bindingOptions: {
             dataSource: 'preAssign.CheckRequestData.Checks'
@@ -5221,18 +5221,12 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
             validationRules: [{
                 type: "required"
             }]
-        }],
-        initEdit: function (path) {
-            var self = this;
-            var voidReasonColumn = {
+        }, {
                 dataField: 'Comments',
                 caption: 'Void Reason',
                 allowEditing: false
-            };
-            if (self.columns.indexOf(voidReasonColumn) < 0 && path.indexOf('new') <0) {
-                self.columns.push(voidReasonColumn)
-            }
-        },
+        }],
+
         summary: {
             calculateCustomSummary: function (options) {
                 if (options.name == 'SumAmount') {
@@ -5255,34 +5249,6 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
             }]
         }
     };
-    //angular.extend($scope.checkGridOptions, CONSTANT_ASSIGN_CHECK_GRID_OPTION);
-
-
-    // new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION, {
-    //    editMode: "cell",
-    //    texts: {
-    //        deleteRow: 'Void',
-    //        confirmDeleteMessage: ''
-    //    }
-    //});
-
-    //$scope.checkGridOptions.editing = {}
-
-    //angular.extend($scope.checkGridOptions.editing, {
-    //    editMode: "cell",
-    //    texts: {
-    //        deleteRow: 'Void',
-    //        confirmDeleteMessage: ''
-    //    }
-    //});
-    // $scope.checkGridOptions.form
-    // if have with BBLE PreSign redirect to view page 
-    // this should be handle in error event
-    //$scope.checkGridOptions.editing = 
-
-    ////$scope.partiesGridOptions.editing = {
-    //    editMode: "cell"
-    //}
 
     $scope.CheckByBBLE = function () {
         var preAssign = $scope.preAssign;
@@ -5329,9 +5295,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
     }
 
     $scope.checkGridOptions.onRowPrepared = $scope.CheckRowPrepared;
-    //$scope.checkGridOptions.setNewText({ deleteRow: 'Void' });
-    //$scope.checkGridOptions.editing.setText();
-    //$scope.partiesGridOptions.editing.texts = { deleteRow: 'Delete' };
+
     $scope.checkGridOptions.onEditingStart = function (e) {
         if (e.data.Status == 1 || e.data.CheckId) {
             e.cancel = true;
@@ -5370,8 +5334,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                     $scope.preAssign.ExpectedDate = pageExpectedDate;
 
                 }
-                if(pageParties)
-                {
+                if (pageParties) {
                     $scope.preAssign.Parties = pageParties;
                 }
                 //$scope.preAssign.CheckRequestData.Checks.push(data);
@@ -5431,15 +5394,14 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
 
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
+
     path = $location.path();
-    if (path.indexOf('new') < 0)
-    {
+
+    if (path.indexOf('new') < 0) {
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
     }
     
-
-    $scope.checkGridOptions.initEdit(path);
 
 });
 
@@ -5448,11 +5410,10 @@ portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridM
     $scope.preAssign = PreSignItem;
     setTimeout(function () {
         if (!$scope.preAssign.CheckRequestData) {
-            $scope.preAssign.CheckRequestData = { Checks: [{}]};
+            $scope.preAssign.CheckRequestData = { Checks: [{}] };
         }
         var checkGrid = $('#gridChecks').dxDataGrid('instance');
-        if (checkGrid)
-        {
+        if (checkGrid) {
             checkGrid.refresh();
         } else {
             console.error("can not find checkGrid instance");
@@ -5461,7 +5422,10 @@ portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridM
     }, 1000);
     
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
-    $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
+
+    $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION_2);
+
+
     setTimeout(function () {
         $("#preDealForm input").prop("disabled", true);
         $("#preDealForm select").prop("disabled", true);
@@ -5682,8 +5646,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
                 var pageExpectedDate = $scope.preAssign.ExpectedDate;
                 //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
                 angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
-                if(pageExpectedDate)
-                {
+                if (pageExpectedDate) {
                     $scope.preAssign.ExpectedDate = pageExpectedDate;
                 }
                 //$scope.preAssign.CheckRequestData.Checks.push(data);

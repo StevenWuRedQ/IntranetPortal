@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="HomeownerIncentive.aspx.vb" Inherits="IntranetPortal.HomeownerIncentivePage" %>
+
 <%@ Register Src="~/UserControl/AuditLogs.ascx" TagPrefix="uc1" TagName="AuditLogs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -28,7 +29,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="preSignId" value='<%= Request.QueryString("preSignId")%>' />
     <input type="hidden" id="BBLE" value='<%= Request.QueryString("BBLE")%>' />
-    <input type="hidden" id="currentUser" value='<%=Page.User.Identity.Name %>' />
+   <input type="hidden" id="currentUser" value='<%=Page.User.Identity.Name %>' />
     <div ng-view  class="container"></div>
     <div ng-controller="preAssignCtrl" class="container">
         <div class="row">
@@ -81,7 +82,7 @@
                                         <label class="ss_form_input_title">Check request</label>
                                         <%-- Fix portal #PORTAL-342 allow add check in edit model  --%>
                                         <%--ng-disabled="model=='Edit'"--%>
-                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ></pt-radio>
+                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck"></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
