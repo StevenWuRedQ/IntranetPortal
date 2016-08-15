@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="HomeownerIncentive.aspx.vb" Inherits="IntranetPortal.HomeownerIncentivePage" %>
+
 <%@ Register Src="~/UserControl/AuditLogs.ascx" TagPrefix="uc1" TagName="AuditLogs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -28,8 +29,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="preSignId" value='<%= Request.QueryString("preSignId")%>' />
     <input type="hidden" id="BBLE" value='<%= Request.QueryString("BBLE")%>' />
-   <input type="hidden" id="currentUser" value='<%=Page.User.Identity.Name %>' />
-    <div ng-view  class="container"></div>
+    <input type="hidden" id="currentUser" value='<%=Page.User.Identity.Name %>' />
+    <div ng-view class="container"></div>
 
     <div ng-controller="preAssignCtrl" class="container">
         <div class="row">
@@ -49,7 +50,7 @@
                     <%--<div class="wizardbar">
                 <a class="wizardbar-item {{step==$index+1?'current':'' }}" href="#" ng-repeat="s in steps|filter:{show:true}">{{s.title}} {{$index +1}}
                 </a>
-            </div>--%>
+                </div>--%>
                     <div ng-show="step==1" class="wizard-content">
                         <section>
                             <div>
@@ -82,7 +83,7 @@
                                         <label class="ss_form_input_title">Check request</label>
                                         <%-- Fix portal #PORTAL-342 allow add check in edit model  --%>
                                         <%--ng-disabled="model=='Edit'"--%>
-                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck" ></pt-radio>
+                                        <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck"></pt-radio>
                                     </li>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title">Manager </label>
@@ -132,7 +133,7 @@
                             <div class="ss_form">
                                 <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.Parties.length<1 }">Parties <%--({{preAssign.Parties.length}})--%> <%--<i class="fa fa-plus-circle icon_btn" title="Add" ng-click="ensurePush('preAssign.Parties')">--%></i></h4>
                                 <ul class="ss_form_box clearfix">
-                        <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
+                                    <%--<li class="ss_form_item" ng-repeat="p in preAssign.Parties">
                                 <label class="ss_form_input_title ">Party {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.Parties, $index)"></i></label>
                                 <input class="ss_form_input " type="text" ng-model="p.Name" />
                             </li>--%>
