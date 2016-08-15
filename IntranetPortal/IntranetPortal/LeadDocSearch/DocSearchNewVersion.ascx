@@ -109,7 +109,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
                 </h5>
                 <div collapse="DocSearch.LeadResearch.OtherMortgageDiv"  class="ss_border">
-                    <div init-grid dx-data-grid='{
+                    <div ng-if="DocSearch.LeadResearch" init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.OtherMortgage"
                         },
