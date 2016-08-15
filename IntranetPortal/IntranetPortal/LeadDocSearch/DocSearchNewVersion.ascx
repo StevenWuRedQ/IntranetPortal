@@ -357,7 +357,7 @@
                             <%-- case we use ng if fix bug so the mutiple mybe can not have yes no
                                  by steven
                                  --%>
-                            <div ng-if="DocSearch.LeadResearch" init-grid dx-data-grid='{
+                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherMortgage"
                                 },
@@ -385,7 +385,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
                         </h5>
                         <div collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
-                            <div ng-if="DocSearch.LeadResearch" init-grid dx-data-grid='{
+                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherLiens"
                                 },
@@ -416,7 +416,7 @@
                         </h5>
 
                         <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
-                            <div ng-if="DocSearch.LeadResearch" init-grid dx-data-grid='{
+                            <div init-grid="DocSearch.BBLE"  dx-data-grid='{
                                     bindingOptions: {
                                         dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
                                     },
@@ -446,7 +446,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
                         </h5>
                         <div collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
-                            <div ng-if="DocSearch.LeadResearch" init-grid dx-data-grid='{
+                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
                                         bindingOptions: {
                                             dataSource: "DocSearch.LeadResearch.COSRecorded"
                                         },
@@ -475,7 +475,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
                         </h5>
                         <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
-                            <div ng-if="DocSearch.LeadResearch" init-grid dx-data-grid='{
+                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
                                         bindingOptions: {
                                             dataSource: "DocSearch.LeadResearch.DeedRecorded"
                                         },
