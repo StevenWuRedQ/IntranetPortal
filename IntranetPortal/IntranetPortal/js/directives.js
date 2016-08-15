@@ -795,51 +795,28 @@
      * @end datetime 
      * @*********************************************************
      */
-    .directive('initGrid', function () {
+    .directive('initGrid', ['$parse', function ($parse) {
         return {
             link: function (scope, element, attrs, ngModelController) {                
-                var gridOptions = null;                
-                eval("gridOptions =" + attrs.dxDataGrid);                
+                var gridOptions = null;               
+                eval("gridOptions =" + attrs.dxDataGrid);
                 if (gridOptions)
-                {                    
+                {
                     var option = gridOptions.bindingOptions.dataSource;
                     var array = scope.$eval(option);
 
                     if (array == null || array == undefined)
                         scope.$eval(option + '=[];');
-
-                    //    scope.$watch(option, function (newValue, oldValue) {
-                    //    if (newValue == null || newValue == undefined)
-                    //    {
-                    //        scope.$eval(option + '=[];');
-                    //    }
-
-                    //    /**
-                    //     * debug for two hours find out way to clear the grid after clear the data source
-                    //     * other bug for tow way binding unlike the can not add.
-                    //     **/
-                    //    if(newValue == null || newValue == undefined || newValue == [])
-                    //    {
-                    //        var grid = $(element).dxDataGrid('instance');
-                    //        // refresh and repaint not work
-                    //        //grid.refresh();
-                    //        //grid.repaint();
-
-                    //        /**
-                    //         * call remove rows need disable popup then you can enable popup after 
-                    //         * you remove row !
-                    //         **/
-                    //        var rows = grid.totalCount();
-                    //        for(var i = 0 ;i<rows;i++)
-                    //        {
-                    //            grid.removeRow(i);
-                    //        }
-                    //    }
-                    //})
+                    
+                    scope.$watch(attrs.initGrid, function (newValue) {
+                        var array = scope.$eval(option);
+                        if (array == null || array == undefined)
+                            eval('scope.' + option + '=[];');
+                            // scope.$eval(option + '=[];');
+                    });
                 }
-                
             }
         };
-    });
+    }]);
 
 
