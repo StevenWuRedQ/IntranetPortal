@@ -54,7 +54,7 @@
             <%--- new version should have sub title so need deleted all ---%>
             <%-- links --%>
 
-            <ul class="ss_form_box clearfix">
+            <%--<ul class="ss_form_box clearfix">
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Geodata</label>
                     <button class="btn btn-secondary" type="button">
@@ -91,11 +91,11 @@
                         <a href="https://oma.edatatrace.com/oma/" target="_blank">Go to NY Data</a>
                     </button>
                 </li>
-            </ul>
+            </ul>--%>
             <%-- --links ----%>
-            <a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a>
+            <%--  <a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a>
             <a href="https://www.knowyouroptions.com/loanlookup" target="_blank">Fannie </a>
-            <a href="https://ww3.freddiemac.com/loanlookup/" target="_blank">Freddie Mac</a>
+            <a href="https://ww3.freddiemac.com/loanlookup/" target="_blank">Freddie Mac</a>--%>
 
 
             <%-- end links --%>
@@ -103,12 +103,13 @@
                  used 5 hours in devextrem grid
                  becuase the initinal of grid should take an array.
                  and two way bind should use bindingOptions instand dataSource.
-                --%>
+            --%>
+            <%--
             <div class="ss_form  ">
                 <h5 class="ss_form_title  ">Other Mortgage                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.OtherMortgageDiv"  class="ss_border">
+                <div collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
                     <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.OtherMortgage"
@@ -128,7 +129,7 @@
                             removeEnabled: true
                         },
                         columns: ["Amount"]
-                    }' >
+                    }'>
                     </div>
                 </div>
             </div>
@@ -137,7 +138,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
                 </h5>
                 <div collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
-                    <div dx-data-grid='{
+                    <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.OtherLiens"
                         },
@@ -156,7 +157,8 @@
                             removeEnabled: true
                         },
                         columns: ["Lien","Amount","Date"],
-                    }' ng-show="newVersion">
+                    }'
+                        ng-show="newVersion">
                     </div>
                 </div>
 
@@ -167,7 +169,7 @@
                 </h5>
 
                 <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
-                    <div dx-data-grid='{
+                    <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
                         },
@@ -199,7 +201,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
                 </h5>
                 <div collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
-                    <div dx-data-grid='{
+                    <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.COSRecorded"
                         },
@@ -227,8 +229,8 @@
                 <h5 class="ss_form_title  ">Deed Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border" >
-                    <div dx-data-grid='{
+                <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
+                    <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.DeedRecorded"
                         },
@@ -252,27 +254,48 @@
                 </div>
 
             </div>
-            
+            --%>
             <%-- spent 2 hours add yes or no disable relatived filed and test if it's correct
                  becusae the key vaule too long .
                  it may cause some problem .
                  @see /js/directives/preCondition for todo list
             --%>
 
-
+            <%-- Ownership Mortgage Info --%>
             <div class="ss_form  ">
                 <h4 class="ss_form_title ">Ownership Mortgage Info                               
                     <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info">                            </pt-collapse>
                 </h4>
+
+
                 <div class="ss_border" collapse="DocSearch.LeadResearch.Ownership_Mortgage_Info">
+                    <div>
+                        <ul class="ss_form_box clearfix">
+                            <li class="ss_form_item ">
+                                <label class="ss_form_input_title ">Geodata</label>
+                                <button class="btn btn-secondary" type="button">
+                                    <a href="http://www.geodataplus.com/" target="_blank">Go to Geodata</a>
+                                </button>
+                            </li>
+                            <li class="ss_form_item ">
+                                <label class="ss_form_input_title ">Acris</label>
+                                <button class="btn btn-secondary" type="button">
+                                    <a href="https://a836-acris.nyc.gov/DS/DocumentSearch/BBL" target="_blank">Go to Acris</a>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div class="ss_form  ">
                         <h5 class="ss_form_title  ">Purchase Deed                                       
                             <pt-collapse model="DocSearch.LeadResearch.Purchase_Deed_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
                         <div class="ss_border" collapse="DocSearch.LeadResearch.Purchase_Deed_Ownership_Mortgage_Info">
+
+
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Has Deed</label>
+                                    <label class="ss_form_input_title ">Has Deed *</label>
                                     <pt-radio name="OwnershipMortgageInfo_HasDeed0" model="DocSearch.LeadResearch.Has_Deed_Purchase_Deed"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Deed_Purchase_Deed">
@@ -326,6 +349,155 @@
                     </div>
                     <%-- other mortage --%>
                     <div class="ss_form  ">
+                        <h5 class="ss_form_title  ">Other Mortgage                                 
+                        <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
+                        </h5>
+                        <div collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
+                            <div ng-if="DocSearch.LeadResearch.OtherMortgage" init-grid dx-data-grid='{
+                                bindingOptions: {
+                                    dataSource: "DocSearch.LeadResearch.OtherMortgage"
+                                },
+                                paging: {
+                                    pageSize: 10
+                                },
+                                pager: {
+                                    showPageSizeSelector: true,
+                                    allowedPageSizes: [5, 10, 20],
+                                    showInfo: true
+                                },
+                                editing: {
+                                    editMode: "cell",
+                                    editEnabled: true,
+                                    insertEnabled: true,
+                                    removeEnabled: true
+                                },
+                                columns: ["Amount"]
+                            }'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ss_form  ">
+                        <h5 class="ss_form_title  ">Other Liens                                 
+                        <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
+                        </h5>
+                        <div collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
+                            <div ng-if="DocSearch.LeadResearch.OtherLiens" init-grid dx-data-grid='{
+                                bindingOptions: {
+                                    dataSource: "DocSearch.LeadResearch.OtherLiens"
+                                },
+                                paging: {
+                                    pageSize: 10
+                                },
+                                pager: {
+                                    showPageSizeSelector: true,
+                                    allowedPageSizes: [5, 10, 20],
+                                    showInfo: true
+                                },
+                                editing: {
+                                    editMode: "cell",
+                                    editEnabled: true,
+                                    insertEnabled: true,
+                                    removeEnabled: true
+                                },
+                                columns: ["Lien","Amount","Date"],
+                            }'
+                                ng-show="newVersion">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="ss_form  ">
+                        <h5 class="ss_form_title  ">Tax Lien Certificate                                
+                        <pt-collapse model="DocSearch.LeadResearch.TaxLienCertificateDiv"> </pt-collapse>
+                        </h5>
+
+                        <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
+                            <div ng-if="DocSearch.LeadResearch.TaxLienCertificate" init-grid dx-data-grid='{
+                                    bindingOptions: {
+                                        dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
+                                    },
+                                    paging: {
+                                        pageSize: 10
+                                    },
+                                    pager: {
+                                        showPageSizeSelector: true,
+                                        allowedPageSizes: [5, 10, 20],
+                                        showInfo: true
+                                    },
+                                    editing: {
+                                        editMode: "cell",
+                                        editEnabled: true,
+                                        insertEnabled: true,
+                                        removeEnabled: true
+                                    },
+                                    columns: ["Year","Amount"],
+                                }'>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="ss_form  ">
+                        <h5 class="ss_form_title  ">COS Recorded                                
+                        <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
+                        </h5>
+                        <div collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
+                            <div ng-if="DocSearch.LeadResearch.COSRecorded" init-grid dx-data-grid='{
+                                        bindingOptions: {
+                                            dataSource: "DocSearch.LeadResearch.COSRecorded"
+                                        },
+                                        paging: {
+                                            pageSize: 10
+                                        },
+                                        pager: {
+                                            showPageSizeSelector: true,
+                                            allowedPageSizes: [5, 10, 20],
+                                            showInfo: true
+                                        },
+                                        editing: {
+                                            editMode: "cell",
+                                            editEnabled: true,
+                                            insertEnabled: true,
+                                            removeEnabled: true
+                                        },
+                                        columns: ["Date","Buyer"],
+                                    }'>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="ss_form  ">
+                        <h5 class="ss_form_title  ">Deed Recorded                                
+                        <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
+                        </h5>
+                        <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
+                            <div ng-if="DocSearch.LeadResearch.DeedRecorded" init-grid dx-data-grid='{
+                                        bindingOptions: {
+                                            dataSource: "DocSearch.LeadResearch.DeedRecorded"
+                                        },
+                                        paging: {
+                                            pageSize: 10
+                                        },
+                                        pager: {
+                                            showPageSizeSelector: true,
+                                            allowedPageSizes: [5, 10, 20],
+                                            showInfo: true
+                                        },
+                                        editing: {
+                                            editMode: "cell",
+                                            editEnabled: true,
+                                            insertEnabled: true,
+                                            removeEnabled: true
+                                        },
+                                        columns: ["Date","Buyer"],
+                                    }'>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="ss_form  ">
                         <h5 class="ss_form_title  ">Last Assignment                                       
                             <pt-collapse model="DocSearch.LeadResearch.Last_Assignment_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
@@ -365,8 +537,6 @@
                     </div>
                     <ul class="ss_form_box clearfix">
 
-
-
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title "><a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a></label>
                             <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Servicer">
@@ -395,16 +565,44 @@
                     </ul>
                 </div>
             </div>
+
+            <%-- Property Dues Violations --%>
             <div class="ss_form  ">
                 <h4 class="ss_form_title ">Property Dues Violations                               
                     <pt-collapse model="DocSearch.LeadResearch.Property_Dues_Violations"></pt-collapse>
                 </h4>
+
+
                 <div class="ss_border" collapse="DocSearch.LeadResearch.Property_Dues_Violations">
+                    <div>
+                        <ul class="ss_form_box clearfix">
+                            <li class="ss_form_item ">
+                                <label class="ss_form_input_title ">NYCSERV </label>
+                                <button class="btn btn-secondary" type="button">
+                                    <a href="http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain" target="_blank">Go to NYCSERV</a>
+                                </button>
+                            </li>
+                            <li class="ss_form_item ">
+                                <label class="ss_form_input_title ">DOB </label>
+                                <button class="btn btn-secondary" type="button">
+                                    <a href="http://www1.nyc.gov/site/buildings/index.page" target="_blank">Go to DOB</a>
+                                </button>
+                            </li>
+                            <li class="ss_form_item ">
+                                <label class="ss_form_input_title ">HPD </label>
+                                <button class="btn btn-secondary" type="button">
+                                    <a href="https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx" target="_blank">Go to HPD</a>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="ss_form  ">
                         <h5 class="ss_form_title  ">Property Taxes                                       
                             <pt-collapse model="DocSearch.LeadResearch.Property_Taxes_Due_Property_Dues_Violations"> </pt-collapse>
                         </h5>
                         <div class="ss_border" collapse="DocSearch.LeadResearch.Property_Taxes_Due_Property_Dues_Violations">
+
+
                             <ul class="ss_form_box clearfix">
 
                                 <li class="ss_form_item ">
@@ -560,11 +758,26 @@
                     </ul>
                 </div>
             </div>
+
             <div class="ss_form  ">
-                <h4 class="ss_form_title ">Judgements Liens                               
-                    <pt-collapse model="DocSearch.LeadResearch.Judgements_Liens">                            </pt-collapse>
+                <h4 class="ss_form_title ">Judgements & Liens                               
+                    <pt-collapse model="DocSearch.LeadResearch.Judgements_Liens"> </pt-collapse>
                 </h4>
+
+
                 <div class="ss_border" collapse="DocSearch.LeadResearch.Judgements_Liens">
+
+                    <div>
+                        <ul class="ss_form_box clearfix">
+                            <li class="ss_form_item ">
+                                <label class="ss_form_input_title ">NY Data</label>
+                                <button class="btn btn-secondary" type="button">
+                                    <a href="https://oma.edatatrace.com/oma/" target="_blank">Go to NY Data</a>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div class="ss_form  ">
                         <h5 class="ss_form_title  ">Personal Judgments                                       
                             <pt-collapse model="DocSearch.LeadResearch.Personal_Judgments_Judgements_Liens"> </pt-collapse>
