@@ -131,8 +131,8 @@ Public Class Utility
             If Not String.IsNullOrEmpty(leadData.CoOwner) AndAlso leadData.Owner.TrimStart.TrimEnd <> leadData.CoOwner.TrimStart.TrimEnd Then
                 leadsName += "; " & leadData.CoOwner.TrimEnd
             End If
-
         End If
+
         Return leadsName
     End Function
 
