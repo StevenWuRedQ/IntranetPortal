@@ -717,15 +717,15 @@ angular.module('PortalApp')
         // @date 8/11/2016
         // for devextrem angular bugs have to init array frist
         // fast prototype of grid bug on 8/11/2016 may spend two hours on it
-        // var INITS = {
-        //    // OtherMortgage: [],
-        //    DeedRecorded: [],
-        //    COSRecorded: [],
-        //    OtherLiens: [],
-        //    TaxLienCertificate:[]
-        // };
-         $scope.DocSearch.LeadResearch = {}
-        // angular.extend($scope.DocSearch.LeadResearch, INITS);
+         //var INITS = {
+         //   OtherMortgage: [],
+         //   DeedRecorded: [],
+         //   COSRecorded: [],
+         //   OtherLiens: [],
+         //   TaxLienCertificate:[]
+         //};
+         //$scope.DocSearch.LeadResearch = {}
+         //angular.extend($scope.DocSearch.LeadResearch, INITS);
         // ///////////////////////////////////////////////////////////////// 
         // put here should not right for fast prototype ////////////////////
 

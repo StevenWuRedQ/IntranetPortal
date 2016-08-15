@@ -774,7 +774,7 @@
     })
 
     /**
-     * 
+     * *********************************************************
      * @author Steven
      * @date 8/11/2016
      * 
@@ -785,14 +785,14 @@
      * 
      * 
      * @*********************************************************
-     * @author Chris
+     * @author Steven
      * @datetime 8/12/2016 2:54
      * @bug
      *  When switch to other cases the grid dataSource is empty
      *  It can not add new rows
      *  
      * @fix Steven
-     * @enddatetime 
+     * @end datetime 
      * @*********************************************************
      */
     .directive('initGrid', function () {
@@ -800,14 +800,46 @@
             link: function (scope, element, attrs, ngModelController) {                
                 var gridOptions = null;
                 eval("gridOptions =" + attrs.dxDataGrid);
+                
                 if (gridOptions)
                 {                    
                     var option = gridOptions.bindingOptions.dataSource;
-                    var array = eval('scope.' + option);
+                    var array = scope.$eval(option);
 
-                    if (array)
-                        eval('scope.' + option + '=[];');
+                    if (array == null || array == undefined)
+                        scope.$eval(option + '=[];');
+
+                    scope.$watch(option, function (newValue, oldValue) {
+                        if (newValue == null || newValue == undefined)
+                        {
+                            scope.$eval(option + '=[];');
+
+                        }
+
+                        /**
+                         * debug for two hours find out way to clear the grid after clear the data source
+                         * other bug for tow way binding unlike the can not add.
+                         **/
+                        if(newValue == null || newValue == undefined || newValue == [])
+                        {
+                            var grid = $(element).dxDataGrid('instance');
+                            // refresh and repaint not work
+                            //grid.refresh();
+                            //grid.repaint();
+
+                            /**
+                             * call remove rows need disable popup then you can enable popup after 
+                             * you remove row !
+                             **/
+                            var rows = grid.totalCount();
+                            for(var i = 0 ;i<rows;i++)
+                            {
+                                grid.removeRow(i);
+                            }
+                        }
+                    })
                 }
+                
             }
         };
     });

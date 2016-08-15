@@ -37,7 +37,7 @@ angular.module('PortalApp')
                 console.error('unable to eavesdropper it not set yet');
             }
 
-            if (typeof reFunc != 'function')
+            if (typeof revFunc != 'function')
                 console.error("set rev function have been set up");
 
             this.endorseCheckFuncs();

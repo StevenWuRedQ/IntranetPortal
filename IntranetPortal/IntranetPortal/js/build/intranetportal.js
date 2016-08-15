@@ -773,7 +773,7 @@ angular.module('PortalApp')
                 console.error('unable to eavesdropper it not set yet');
             }
 
-            if (typeof reFunc != 'function')
+            if (typeof revFunc != 'function')
                 console.error("set rev function have been set up");
 
             this.endorseCheckFuncs();
@@ -2978,28 +2978,66 @@ angular.module("PortalApp")
     })
 
     /**
-     * 
-     * @author steven
+     * *********************************************************
+     * @author Steven
      * @date 8/11/2016
      * 
      * sent time to write this initGrid to fix the save bug 
      * and init data bug
      *
      * @returns directive init Grid
+     * 
+     * 
+     * @*********************************************************
+     * @author Steven
+     * @datetime 8/12/2016 2:54
+     * @bug
+     *  When switch to other cases the grid dataSource is empty
+     *  It can not add new rows
+     *  
+     * @fix Steven
+     * @end datetime 
+     * @*********************************************************
      */
     .directive('initGrid', function () {
         return {
             link: function (scope, element, attrs, ngModelController) {                
                 var gridOptions = null;
                 eval("gridOptions =" + attrs.dxDataGrid);
+                
                 if (gridOptions)
                 {                    
                     var option = gridOptions.bindingOptions.dataSource;
-                    var array = eval('scope.' + option);
+                    var array = scope.$eval(option);
 
-                    if (array)
-                        eval('scope.' + option + '=[];');
+                    if (array == null || array == undefined)
+                        scope.$eval(option + '=[];');
+
+                    scope.$watch(option, function (newValue, oldValue) {
+                        if (newValue == null || newValue == undefined)
+                        {
+                            scope.$eval(option + '=[];');
+
+                        }
+
+                        /**
+                         * debug for two hours find out way to clear the grid after clear the data source
+                         * other bug for tow way binding unlike the can not add.
+                         **/
+                        if(newValue == null || newValue == undefined || newValue == [])
+                        {
+                            var grid = $(element).dxDataGrid('instance');
+                            grid.refresh();
+                            grid.repaint();
+                            //var rows = grid.totalCount();
+                            //for(var i = 0 ;i<rows;i++)
+                            //{
+                            //    grid.removeRow(i);
+                            //}
+                        }
+                    })
                 }
+                
             }
         };
     });
@@ -3725,15 +3763,15 @@ angular.module('PortalApp')
         // @date 8/11/2016
         // for devextrem angular bugs have to init array frist
         // fast prototype of grid bug on 8/11/2016 may spend two hours on it
-        // var INITS = {
-        //    // OtherMortgage: [],
-        //    DeedRecorded: [],
-        //    COSRecorded: [],
-        //    OtherLiens: [],
-        //    TaxLienCertificate:[]
-        // };
-         $scope.DocSearch.LeadResearch = {}
-        // angular.extend($scope.DocSearch.LeadResearch, INITS);
+         //var INITS = {
+         //   OtherMortgage: [],
+         //   DeedRecorded: [],
+         //   COSRecorded: [],
+         //   OtherLiens: [],
+         //   TaxLienCertificate:[]
+         //};
+         //$scope.DocSearch.LeadResearch = {}
+         //angular.extend($scope.DocSearch.LeadResearch, INITS);
         // ///////////////////////////////////////////////////////////////// 
         // put here should not right for fast prototype ////////////////////
 

@@ -128,7 +128,7 @@
                             removeEnabled: true
                         },
                         columns: ["Amount"]
-                    }' ng-show="newVersion">
+                    }' >
                     </div>
                 </div>
             </div>

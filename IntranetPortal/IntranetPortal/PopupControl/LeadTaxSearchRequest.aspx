@@ -41,7 +41,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div ng-show="newVersion">
+                                <div ng-if="newVersion">
                                      <uc1:DocSearchNewVersion runat="server" id="DocSearchNewVersion" />
                                 </div>
                                 <div ng-show="!newVersion">
