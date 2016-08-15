@@ -806,7 +806,7 @@
                     var array = scope.$eval(option);
 
                     if (array == null || array == undefined)
-                        scope.$eval(option + '=[];');
+                        eval('scope.' + option + '=[];');
                     
                     scope.$watch(attrs.initGrid, function (newValue) {
                         var array = scope.$eval(option);
