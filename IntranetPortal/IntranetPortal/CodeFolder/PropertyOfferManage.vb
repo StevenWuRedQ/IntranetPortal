@@ -431,6 +431,14 @@ Public Class DocumentGenerator
         file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERATTORNEY", "DealSheet.ContractOrMemo.Buyer.buyerAttorney"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERATTORNEYNUM", "DealSheet.ContractOrMemo.Buyer.buyerAttorneyObj.Cell"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("TODAY"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("BLOCK"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("LOT"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("DAY"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("MONTH"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("SELLERNAMES", Function(data As JObject)
+                                                                         Dim names = data.SelectToken("DealSheet.ContractOrMemo.Sellers").Select(Function(s) s.SelectToken("Name").ToString).Where(Function(s) Not String.IsNullOrEmpty(s)).ToArray
+                                                                         Return String.Join(" & ", names)
+                                                                     End Function))
         _fileConfigures.Add(file)
 
         'Acris info
