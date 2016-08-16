@@ -129,7 +129,6 @@
             if (!$scope.newVersion) {
                 return true;
             }
-
             var validateFields = [
                 "Has_Deed_Purchase_Deed",
                 "Has_c_1st_Mortgage_c_1st_Mortgage",
@@ -172,7 +171,15 @@
             return true;
 
         }
+
+
+
         $scope.SearchComplete = function (isSave) {
+
+            var isValidated = fales;
+            var errorMsg = '';
+
+
             if (!$scope.newVersionValidate())
             {
                 AngularRoot.alert("The fields marked * must been filled please check them before submit!");

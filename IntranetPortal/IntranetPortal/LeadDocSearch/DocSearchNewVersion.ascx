@@ -574,7 +574,8 @@
                                     <label class="ss_form_input_title ">LP Index #</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.LP_Index___Num_LP_Index___Num">
                                 </li>
-                                <li class="ss_form_item  ss_form_item_line">
+                                <li class="clear-fix"></li>
+                                <li class="ss_form_item_line">
                                     <label class="ss_form_input_title ">notes</label>
                                     <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.notes_LP_Index___Num"></textarea>
                                 </li>
@@ -587,7 +588,8 @@
                             <label class="ss_form_input_title "><a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a></label>
                             <input class="ss_form_input " ng-model="DocSearch.LeadResearch.servicer">
                         </li>
-                        <li class="ss_form_item  ss_form_item_line">
+                        <li class="clear-fix"></li>
+                        <li class="ss_form_item_line">
                             <label class="ss_form_input_title ">Servicer notes</label>
                             <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.Servicer_notes"></textarea>
                         </li>
@@ -998,7 +1000,7 @@
                 </div>
             </div>
 
-
+            <hr />
             <div class="ss_form" ng-show="DocSearch.Status!=1">
 
                 <div>
