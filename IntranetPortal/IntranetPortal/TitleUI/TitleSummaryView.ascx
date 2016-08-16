@@ -33,10 +33,6 @@
 </style>
 
 <input type="text" style="display: none" />
-<div class="apply-filter-option">
-    <%= Category %>
-    <%--<div id="useFilterApplyButton"></div>--%>
-</div>
 <div id="gridContainer" style="margin: 10px"></div>
 <script>
     $(document).ready(function () {
@@ -50,7 +46,7 @@
             PortalUtility.ShowPopWindow("View Title Case - " + CaseId, url);
         }
 
-        var url = "/api/Title/TitleCases/<%=CategoryId%>";
+        var url = "/api/LeadInfoDocumentSearches";
         $.getJSON(url).done(function (data) {
             var dataGrid = $("#gridContainer").dxDataGrid({
                 dataSource: data,
