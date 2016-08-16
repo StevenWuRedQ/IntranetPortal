@@ -356,8 +356,16 @@
                         <div collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
                             <%-- case we use ng if fix bug so the mutiple mybe can not have yes no
                                  by steven
-                                 --%>
-                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
+                            --%>
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has Other Mortgage *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_HasOtherMortgage2" model="DocSearch.LeadResearch.Has_Other_Mortgage"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div init-grid="DocSearch.BBLE" ng-if="DocSearch.LeadResearch.Has_Other_Mortgage" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherMortgage"
                                 },
@@ -384,8 +392,17 @@
                         <h5 class="ss_form_title  ">Other Liens                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
                         </h5>
+
                         <div collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
-                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has Other Liens *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_Has_Other_Liens2" model="DocSearch.LeadResearch.Has_Other_Liens"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div init-grid="DocSearch.BBLE" ng-if="DocSearch.LeadResearch.Has_Other_Liens" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherLiens"
                                 },
@@ -416,7 +433,15 @@
                         </h5>
 
                         <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
-                            <div init-grid="DocSearch.BBLE"  dx-data-grid='{
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has Tax Lien Certificate  *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_Has_TaxLiensCertifcate3" model="DocSearch.LeadResearch.Has_TaxLiensCertifcate"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-if="DocSearch.LeadResearch.Has_TaxLiensCertifcate" init-grid="DocSearch.BBLE" dx-data-grid='{
                                     bindingOptions: {
                                         dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
                                     },
@@ -445,8 +470,17 @@
                         <h5 class="ss_form_title  ">COS Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
                         </h5>
+
                         <div collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
-                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has COS Recorded *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_Has_COS_Recorded2" model="DocSearch.LeadResearch.Has_COS_Recorded"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-if="DocSearch.LeadResearch.Has_COS_Recorded" init-grid="DocSearch.BBLE" dx-data-grid='{
                                         bindingOptions: {
                                             dataSource: "DocSearch.LeadResearch.COSRecorded"
                                         },
@@ -474,8 +508,17 @@
                         <h5 class="ss_form_title  ">Deed Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
                         </h5>
-                        <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
-                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
+
+                        <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border" >
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has Deed Recorded *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_Has_Deed_Recorded1" model="DocSearch.LeadResearch.Has_Deed_Recorded"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-if="DocSearch.LeadResearch.Has_Deed_Recorded" init-grid="DocSearch.BBLE" dx-data-grid='{
                                         bindingOptions: {
                                             dataSource: "DocSearch.LeadResearch.DeedRecorded"
                                         },
@@ -955,26 +998,26 @@
             </div>
 
 
-             <div class="ss_form" ng-show="DocSearch.Status!=1">
-                    
-                    <div class="ss_border" >
-                        <ul class="ss_form_box clearfix">
-                            <li class="ss_form_item " style="visibility:hidden">
-                                <label class="ss_form_input_title">Documents Received</label>
-                                </li>
-                            <li class="ss_form_item " style="visibility:hidden">
-                                <label class="ss_form_input_title">Documents Received On</label>
-                                
-                            </li>
-                        
-                            <li class="ss_form_item " >
-                                <label class="ss_form_input_title">&nbsp;</label>
-                                <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
-                            </li>
+            <div class="ss_form" ng-show="DocSearch.Status!=1">
 
-                        </ul>
-                    </div>
+                <div>
+                    <ul class="ss_form_box clearfix">
+                        <li class="ss_form_item " style="visibility: hidden">
+                            <label class="ss_form_input_title">Documents Received</label>
+                        </li>
+                        <li class="ss_form_item " style="visibility: hidden">
+                            <label class="ss_form_input_title">Documents Received On</label>
+
+                        </li>
+
+                        <li class="ss_form_item ">
+                            <label class="ss_form_input_title">&nbsp;</label>
+                            <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
+                        </li>
+
+                    </ul>
                 </div>
+            </div>
         </div>
 
     </div>
