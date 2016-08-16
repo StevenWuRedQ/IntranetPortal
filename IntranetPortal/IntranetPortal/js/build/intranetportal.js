@@ -2978,7 +2978,7 @@ angular.module("PortalApp")
     })
 
     /**
-     * 
+     * *********************************************************
      * @author Steven
      * @date 8/11/2016
      * 
@@ -2989,62 +2989,39 @@ angular.module("PortalApp")
      * 
      * 
      * @*********************************************************
-     * @author Chris
+     * @author Steven
      * @datetime 8/12/2016 2:54
      * @bug
      *  When switch to other cases the grid dataSource is empty
      *  It can not add new rows
      *  
      * @fix Steven
-     * @enddatetime 
+     * @end datetime 
      * @*********************************************************
      */
-    .directive('initGrid', function () {
+    .directive('initGrid', ['$parse', function ($parse) {
         return {
             link: function (scope, element, attrs, ngModelController) {                
-                var gridOptions = null;
+                var gridOptions = null;               
                 eval("gridOptions =" + attrs.dxDataGrid);
                 if (gridOptions)
-                {                    
+                {
                     var option = gridOptions.bindingOptions.dataSource;
                     var array = scope.$eval(option);
 
                     if (array == null || array == undefined)
-                        scope.$eval(option + '=[];');
-
-                    //    scope.$watch(option, function (newValue, oldValue) {
-                    //    if (newValue == null || newValue == undefined)
-                    //    {
-                    //        scope.$eval(option + '=[];');
-                    //    }
-
-                    //    /**
-                    //     * debug for two hours find out way to clear the grid after clear the data source
-                    //     * other bug for tow way binding unlike the can not add.
-                    //     **/
-                    //    if(newValue == null || newValue == undefined || newValue == [])
-                    //    {
-                    //        var grid = $(element).dxDataGrid('instance');
-                    //        // refresh and repaint not work
-                    //        //grid.refresh();
-                    //        //grid.repaint();
-
-                    //        /**
-                    //         * call remove rows need disable popup then you can enable popup after 
-                    //         * you remove row !
-                    //         **/
-                    //        var rows = grid.totalCount();
-                    //        for(var i = 0 ;i<rows;i++)
-                    //        {
-                    //            grid.removeRow(i);
-                    //        }
-                    //    }
-                    //})
+                        eval('scope.' + option + '=[];');
+                    
+                    scope.$watch(attrs.initGrid, function (newValue) {
+                        var array = scope.$eval(option);
+                        if (array == null || array == undefined)
+                            eval('scope.' + option + '=[];');
+                            // scope.$eval(option + '=[];');
+                    });
                 }
-                
             }
         };
-    });
+    }]);
 
 
 
@@ -3807,7 +3784,7 @@ angular.module('PortalApp')
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
         $scope.init = function (bble) {
-            
+
             leadsInfoBBLE = bble || $('#BBLE').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
@@ -3883,7 +3860,9 @@ angular.module('PortalApp')
             var validateFields = [
                 "Has_Deed_Purchase_Deed",
                 "Has_c_1st_Mortgage_c_1st_Mortgage",
+                "fha",
                 "Has_c_2nd_Mortgage_c_2nd_Mortgage",
+                "has_Last_Assignment_Last_Assignment",
                 "fannie",
                 "Freddie_Mac_",
                 "Has_Due_Property_Taxes_Due",
@@ -3936,7 +3915,7 @@ angular.module('PortalApp')
 
                 $scope.DocSearch.ResutContent = $("#searchReslut").html();
                 $scope.DocSearch.$completed(null, function () {
-                
+
                     AngularRoot.alert("Document completed!")
                     gridCase.Refresh();
                 });
@@ -5144,14 +5123,14 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         if (!$scope.preAssign.CheckRequestData) {
             $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
         }
-        
+
         if (!$scope.preAssign.Id) {
             $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
             $scope.preAssign.Parties = [];
             $scope.preAssign.NeedSearch = true;
             $scope.preAssign.NeedCheck = true;
         }
-       
+
 
         var checkGrid = $('#gridChecks').dxDataGrid('instance');
         if (checkGrid) {
@@ -5166,7 +5145,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         }
         if (!$scope.preAssign.CreateBy) {
             $scope.preAssign.CreateBy = $('#currentUser').val();
-            
+
         }
     }, 1000);
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION, {
@@ -5187,8 +5166,8 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
             removeEnabled: true,
             insertEnabled: true
         },
-        sorting: { mode: 'none' },        
-       
+        sorting: { mode: 'none' },
+
         pager: {
 
             showInfo: true
@@ -5222,9 +5201,9 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                 type: "required"
             }]
         }, {
-                dataField: 'Comments',
-                caption: 'Void Reason',
-                allowEditing: false
+            dataField: 'Comments',
+            caption: 'Void Reason',
+            allowEditing: false
         }],
 
         summary: {
@@ -5401,7 +5380,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
     }
-    
+
 
 });
 
@@ -5418,9 +5397,9 @@ portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridM
         } else {
             console.error("can not find checkGrid instance");
         }
-        
+
     }, 1000);
-    
+
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
 
     $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION_2);
@@ -7415,12 +7394,14 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
              * @see PropertyOffer assignOfferId function
              **/
 
-            if (!$scope.SSpreSign.assignCrop)
-            {
+            if (!$scope.SSpreSign.assignCrop) {
                 $scope.SSpreSign.assignCrop = new AssignCorp();
-            } else
-            {
-                angular.extend($scope.SSpreSign.assignCrop, new AssignCorp());
+            } else {
+                var _new = new AssignCorp();
+                var obj = $scope.SSpreSign.assignCrop;
+                angular.extend(_new, obj);
+                angular.extend(obj, _new);
+                $scope.SSpreSign.assignCrop = _new;
             }
             $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
@@ -7438,8 +7419,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                 if (!$scope.SSpreSign.assignCrop) {
                     $scope.SSpreSign.assignCrop = new AssignCorp();
                 } else {
-                    angular.extend($scope.SSpreSign.assignCrop, new AssignCorp());
+                    var _new = new AssignCorp();
+                    var obj = $scope.SSpreSign.assignCrop;
+                    angular.extend(_new, obj);
+                    angular.extend(obj, _new);
+                    $scope.SSpreSign.assignCrop = _new;
                 }
+
                 $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
               
@@ -7510,6 +7496,16 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         $scope.SSpreSign.Tag = formdata.Tag;
         $scope.SSpreSign.CreateDate = formdata.CreateDate;
         $scope.SSpreSign.CreateBy = formdata.CreateBy;
+
+        if (!$scope.SSpreSign.assignCrop) {
+            $scope.SSpreSign.assignCrop = new AssignCorp();
+        } else {
+            var _new = new AssignCorp();
+            var obj = $scope.SSpreSign.assignCrop;
+            angular.extend(_new, obj);
+            angular.extend(obj, _new);
+            $scope.SSpreSign.assignCrop = _new;
+        }
     }
     $scope.NextStep = function () {
         var cStep = $scope.currentStep();

@@ -19,8 +19,8 @@ Namespace Controllers
         Private db As New PortalEntities
 
         ' GET: api/LeadInfoDocumentSearches
-        Function GetLeadInfoDocumentSearches() As IQueryable(Of LeadInfoDocumentSearch)
-            Return db.LeadInfoDocumentSearches
+        Function GetLeadInfoDocumentSearches() As List(Of LeadInfoDocumentSearch)
+            Return LeadInfoDocumentSearch.GetDocumentSearchs()
         End Function
 
         ' GET: api/LeadInfoDocumentSearches/5

@@ -341,24 +341,96 @@ Public Class DocumentGenerator
         file.PlaceHolders = phs.ToList
         _fileConfigures.Add(file)
 
-        ' ShortSale Package
+        ' ShortSale PDF Package
         'file = New GenerateFileConfig With {.FileName = "ShortSalePackage.pdf", .ConfigKey = "ShortSalePackage", .Type = GenerateFileConfig.FileType.Pdf}
         'phs = {
         '       New DocumentPlaceHolder("Property Address", "PropertyAddress")
         '    }
         'file.PlaceHolders = phs.ToList
-
         '_fileConfigures.Add(file)
 
-        ' Client info
-        file = New GenerateFileConfig With {.FileName = "ClientInfo.docx", .ConfigKey = "ClientInfo"}
-        phs = {
-                New DocumentPlaceHolder("PROPERTYADDRESS", "PropertyAddress"),
-                New DocumentPlaceHolder("SELLER1NAME", "DealSheet.ContractOrMemo.Sellers[0].Name"),
-                New DocumentPlaceHolder("SELLERADDRESS", "DealSheet.ContractOrMemo.Sellers[0].Address"),
-                New DocumentPlaceHolder("OWNEREMAIL", "DealSheet.ContractOrMemo.Sellers[0].Email")
-            }
+        ' ShortSale Package
+        file = New GenerateFileConfig With {.FileName = "ShortSalePackage.docx", .ConfigKey = "ShortSale"}
+        phs = {New DocumentPlaceHolder("PROPERTYADDRESS", "PropertyAddress")}
         file.PlaceHolders = phs.ToList
+
+        ' Add Seller
+        Dim sellerProps = {"Name", "SSN", "Address", "DOB", "Email", "Phone",
+                           "Employed", "Bankaccount|YesNo", "TaxReturn|YesNo", "Bankruptcy|YesNo", "ActiveMilitar|YesNo"}
+        For i = 0 To 3
+            For Each item In sellerProps
+                Dim data = item.Split("|")
+                Dim prop = data(0)
+                Dim place = String.Format("SELLER{0}{1}", i + 1, prop.ToUpper)
+                Dim holder = String.Format("SsCase.PropertyInfo.Owners[{0}].{1}", i, prop)
+                Dim ph = New DocumentPlaceHolder(place, holder)
+
+                If data.Count > 1 Then
+                    ph.Format = data(1)
+                End If
+
+                file.PlaceHolders.Add(ph)
+            Next
+
+            'phs = {
+            '        New DocumentPlaceHolder(String.Format("SELLER{0}NAME", i + 1),
+            '                                String.Format("SsCase.PropertyInfo.Owners[0].Name", i)),
+            '        New DocumentPlaceHolder("SELLER1SSN", "SsCase.PropertyInfo.Owners[0].SSN"),
+            '        New DocumentPlaceHolder("SELLER1ADDRESS", "SsCase.PropertyInfo.Owners[0].Address"),
+            '        New DocumentPlaceHolder("SELLER1DOB", "SsCase.PropertyInfo.Owners[0].DOB"),
+            '        New DocumentPlaceHolder("SELLER1EMAIL", "SsCase.PropertyInfo.Owners[0].Email"),
+            '        New DocumentPlaceHolder("SELLER1PHONE", "SsCase.PropertyInfo.Owners[0].Phone"),
+            '        New DocumentPlaceHolder("SELLER1EMPLOYED", "SsCase.PropertyInfo.Owners[0].Employed"),
+            '        New DocumentPlaceHolder("SELLER1BANKACCOUNT", "SsCase.PropertyInfo.Owners[0].Bankaccount"),
+            '        New DocumentPlaceHolder("SELLER1TAXRETURNS", "SsCase.PropertyInfo.Owners[0].TaxReturn"),
+            '        New DocumentPlaceHolder("SELLER1BANKRUPTCY", "SsCase.PropertyInfo.Owners[0].Bankruptcy"),
+            '        New DocumentPlaceHolder("SELLER1MILITARY", "SsCase.PropertyInfo.Owners[0].ActiveMilitar")
+            '    }
+            'file.PlaceHolders.AddRange(phs.ToList)
+        Next
+
+        ' Add mortgage
+        Dim mortProps = {"LenderName", "Loan", "LoanAmount|Currency"}
+
+        For i = 0 To 3
+            For Each item In mortProps
+                Dim data = item.Split("|")
+                Dim prop = data(0)
+                Dim place = String.Format("MORTGAGE{0}{1}", i + 1, prop.ToUpper)
+                Dim holder = String.Format("SsCase.Mortgages[{0}].{1}", i, prop)
+                Dim ph = New DocumentPlaceHolder(place, holder)
+
+                If data.Count > 1 Then
+                    ph.Format = data(1)
+                End If
+
+                file.PlaceHolders.Add(ph)
+            Next
+        Next
+
+        ' Add Referral info
+        file.PlaceHolders.Add(New DocumentPlaceHolder("REFERRALOFFICE", "assignCrop.Name"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("REFERRALAGENT", Function(data As JObject)
+                                                                           Dim bble = data.SelectToken("BBLE")
+                                                                           If bble IsNot Nothing Then
+                                                                               Dim ld = Lead.GetInstance(bble.ToString)
+                                                                               If ld IsNot Nothing Then
+                                                                                   Return ld.EmployeeName
+                                                                               End If
+                                                                           End If
+                                                                           Return ""
+                                                                       End Function))
+
+        file.PlaceHolders.Add(New DocumentPlaceHolder("REFERRALATTORNEY", "DealSheet.ContractOrMemo.Sellers[0].sellerAttorney"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("REFERRALATTORNEYNUM", "DealSheet.ContractOrMemo.Sellers[0].sellerAttorneyObj.Cell"))
+        ' Add buyer info
+        file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERNAME", "DealSheet.ContractOrMemo.Buyer.CorpName"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERSIGNER", "DealSheet.ContractOrMemo.Buyer.Signer"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERFORMATIONDATE", "DealSheet.ContractOrMemo.Buyer.FillingDate|Date"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERADDRESS", "DealSheet.ContractOrMemo.Buyer.Address"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERATTORNEY", "DealSheet.ContractOrMemo.Buyer.buyerAttorney"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERATTORNEYNUM", "DealSheet.ContractOrMemo.Buyer.buyerAttorneyObj.Cell"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("TODAY"))
         _fileConfigures.Add(file)
 
         'Acris info
@@ -387,6 +459,33 @@ Public Class DocumentGenerator
             Case DocumentPlaceHolder.ValueType.JSON
                 Dim field = Me.Data.SelectToken(ph.ValueField)
                 If field IsNot Nothing Then
+                    Select Case ph.Format
+                        Case "YesNo"
+                            Dim result As Boolean = False
+                            If Boolean.TryParse(field.ToString, result) Then
+                                If result Then
+                                    Return "Yes"
+                                Else
+                                    Return "No"
+                                End If
+                            End If
+
+                            Return field.ToString
+                        Case "Currency"
+                            Dim result = 0
+                            If Decimal.TryParse(field.ToString, result) Then
+                                Return String.Format("{0:N2}", result)
+                            End If
+                            Return field.ToString
+                        Case "Date"
+                            Dim result As DateTime
+                            If DateTime.TryParse(field.ToString, result) Then
+                                Return String.Format("{0:d}", result)
+                            End If
+
+                            Return field.ToString
+                    End Select
+
                     Return field.ToString
                 End If
 
@@ -450,8 +549,14 @@ Public Class DocumentPlaceHolder
 
     Public Sub New(name As String, value As String)
         Me.FieldName = name
-        Me.ValueField = value
         Me.Type = ValueType.JSON
+
+        Dim data = value.Split("|")
+        Me.ValueField = data(0)
+
+        If data.Count > 1 Then
+            Me.Format = data(1)
+        End If
     End Sub
 
     Public Sub New(name As String, value As String, type As ValueType)
@@ -469,8 +574,8 @@ Public Class DocumentPlaceHolder
     Public Property FieldName As String
     Public Property ValueField As String
     Public Property ValueFormat As String
-
     Public Property Type As ValueType
+    Public Property Format As String
     Public Property CustomFunction As Func(Of Object, String)
     Public Enum ValueType
         JSON
