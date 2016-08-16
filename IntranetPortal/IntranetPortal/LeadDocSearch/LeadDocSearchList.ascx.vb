@@ -16,7 +16,14 @@
                 Dim BBlEs = Searches.Select(Function(s) s.BBLE).ToList
                 Dim leads = ctx.Leads.Where(Function(l) BBlEs.Contains(l.BBLE)).ToList
 
-                gridDocSearch.DataSource = (From s In Searches Join l In leads On s.BBLE Equals l.BBLE Select New With {.BBLE = s.BBLE, .Name = l.LeadsName, .Status = s.Status, .UpdateDate = s.UpdateDate, .ExpectedSigningDate = s.ExpectedSigningDate})
+                gridDocSearch.DataSource = (From s In Searches
+                                            Join l In leads On s.BBLE Equals l.BBLE
+                                            Select New With
+                                                {.BBLE = s.BBLE,
+                                                 .Name = l.LeadsName,
+                                                 .Status = s.Status,
+                                                 .UpdateDate = s.UpdateDate,
+                                                 .ExpectedSigningDate = s.ExpectedSigningDate})
 
                 gridDocSearch.DataBind()
 
