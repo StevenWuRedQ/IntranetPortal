@@ -2978,7 +2978,7 @@ angular.module("PortalApp")
     })
 
     /**
-     * 
+     * *********************************************************
      * @author Steven
      * @date 8/11/2016
      * 
@@ -2989,62 +2989,39 @@ angular.module("PortalApp")
      * 
      * 
      * @*********************************************************
-     * @author Chris
+     * @author Steven
      * @datetime 8/12/2016 2:54
      * @bug
      *  When switch to other cases the grid dataSource is empty
      *  It can not add new rows
      *  
      * @fix Steven
-     * @enddatetime 
+     * @end datetime 
      * @*********************************************************
      */
-    .directive('initGrid', function () {
+    .directive('initGrid', ['$parse', function ($parse) {
         return {
             link: function (scope, element, attrs, ngModelController) {                
-                var gridOptions = null;
+                var gridOptions = null;               
                 eval("gridOptions =" + attrs.dxDataGrid);
                 if (gridOptions)
-                {                    
+                {
                     var option = gridOptions.bindingOptions.dataSource;
                     var array = scope.$eval(option);
 
                     if (array == null || array == undefined)
-                        scope.$eval(option + '=[];');
-
-                    //    scope.$watch(option, function (newValue, oldValue) {
-                    //    if (newValue == null || newValue == undefined)
-                    //    {
-                    //        scope.$eval(option + '=[];');
-                    //    }
-
-                    //    /**
-                    //     * debug for two hours find out way to clear the grid after clear the data source
-                    //     * other bug for tow way binding unlike the can not add.
-                    //     **/
-                    //    if(newValue == null || newValue == undefined || newValue == [])
-                    //    {
-                    //        var grid = $(element).dxDataGrid('instance');
-                    //        // refresh and repaint not work
-                    //        //grid.refresh();
-                    //        //grid.repaint();
-
-                    //        /**
-                    //         * call remove rows need disable popup then you can enable popup after 
-                    //         * you remove row !
-                    //         **/
-                    //        var rows = grid.totalCount();
-                    //        for(var i = 0 ;i<rows;i++)
-                    //        {
-                    //            grid.removeRow(i);
-                    //        }
-                    //    }
-                    //})
+                        eval('scope.' + option + '=[];');
+                    
+                    scope.$watch(attrs.initGrid, function (newValue) {
+                        var array = scope.$eval(option);
+                        if (array == null || array == undefined)
+                            eval('scope.' + option + '=[];');
+                            // scope.$eval(option + '=[];');
+                    });
                 }
-                
             }
         };
-    });
+    }]);
 
 
 
@@ -3807,7 +3784,7 @@ angular.module('PortalApp')
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
         $scope.init = function (bble) {
-            
+
             leadsInfoBBLE = bble || $('#BBLE').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
@@ -3880,10 +3857,14 @@ angular.module('PortalApp')
                 return true;
             }
 
+            var errormsg = '';
+
             var validateFields = [
                 "Has_Deed_Purchase_Deed",
                 "Has_c_1st_Mortgage_c_1st_Mortgage",
+                "fha",
                 "Has_c_2nd_Mortgage_c_2nd_Mortgage",
+                "has_Last_Assignment_Last_Assignment",
                 "fannie",
                 "Freddie_Mac_",
                 "Has_Due_Property_Taxes_Due",
@@ -3901,30 +3882,55 @@ angular.module('PortalApp')
                 "has_Vacate_Order_Vacate_Order",
                 "has_ECB_Tickets_ECB_Tickets",
                 "has_ECB_on_Name_ECB_on_Name_other_known_address",
-                
+                //under are one to multiple//
+                "Has_Other_Mortgage",
+                "Has_Other_Liens",
+                "Has_TaxLiensCertifcate",
+                "Has_COS_Recorded",
+                "Has_Deed_Recorded",
+                ///////////////////////////
 
             ];
+            var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
+                                ["Has_Other_Liens", "OtherLiens"],
+                                ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
+                                ["Has_COS_Recorded", "COSRecorded"],
+                                ["Has_Deed_Recorded", "DeedRecorded"]];
 
             var fields = $scope.DocSearch.LeadResearch
-            if (fields)
-            {
+            if (fields) {
                 for (var i = 0; i < validateFields.length; i++) {
                     var f = validateFields[i];
-                    if(fields[f] == undefined)
-                    {
-                        return false;
+                    if (fields[f] === undefined) {
+                        errormsg += "The fields marked * must been filled please check them before submit!<br>"
+                        break;
+                    }
+                }
+
+                for (var j = 0; j < checkedAttrs.length; j++) {
+                    var f1 = checkedAttrs[j];
+                    if( ( fields[f1[0]] === true && !Array.isArray(fields[f1[1]]) ) || (fields[f1[0]] === true && fields[f1[1]].length === 0)){
+                        errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
                     }
                 }
             }
-            
-            return true;
+
+
+
+            return errormsg;
 
         }
+
+
+
+
         $scope.SearchComplete = function (isSave) {
-            if (!$scope.newVersionValidate())
-            {
-                AngularRoot.alert("The fields marked * must been filled please check them before submit!");
-                return;
+
+            var msg = $scope.newVersionValidate();
+
+            if (msg) {
+                AngularRoot.alert(msg);
+                return
             }
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
@@ -3936,7 +3942,7 @@ angular.module('PortalApp')
 
                 $scope.DocSearch.ResutContent = $("#searchReslut").html();
                 $scope.DocSearch.$completed(null, function () {
-                
+
                     AngularRoot.alert("Document completed!")
                     gridCase.Refresh();
                 });
@@ -5144,14 +5150,14 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         if (!$scope.preAssign.CheckRequestData) {
             $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
         }
-        
+
         if (!$scope.preAssign.Id) {
             $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
             $scope.preAssign.Parties = [];
             $scope.preAssign.NeedSearch = true;
             $scope.preAssign.NeedCheck = true;
         }
-       
+
 
         var checkGrid = $('#gridChecks').dxDataGrid('instance');
         if (checkGrid) {
@@ -5166,7 +5172,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         }
         if (!$scope.preAssign.CreateBy) {
             $scope.preAssign.CreateBy = $('#currentUser').val();
-            
+
         }
     }, 1000);
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION, {
@@ -5187,8 +5193,8 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
             removeEnabled: true,
             insertEnabled: true
         },
-        sorting: { mode: 'none' },        
-       
+        sorting: { mode: 'none' },
+
         pager: {
 
             showInfo: true
@@ -5222,9 +5228,9 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                 type: "required"
             }]
         }, {
-                dataField: 'Comments',
-                caption: 'Void Reason',
-                allowEditing: false
+            dataField: 'Comments',
+            caption: 'Void Reason',
+            allowEditing: false
         }],
 
         summary: {
@@ -5401,7 +5407,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
         $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
     }
-    
+
 
 });
 
@@ -5418,9 +5424,9 @@ portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridM
         } else {
             console.error("can not find checkGrid instance");
         }
-        
+
     }, 1000);
-    
+
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
 
     $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION_2);

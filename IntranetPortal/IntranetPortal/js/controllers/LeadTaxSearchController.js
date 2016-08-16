@@ -129,6 +129,9 @@
             if (!$scope.newVersion) {
                 return true;
             }
+
+            var errormsg = '';
+
             var validateFields = [
                 "Has_Deed_Purchase_Deed",
                 "Has_c_1st_Mortgage_c_1st_Mortgage",
@@ -161,35 +164,46 @@
                 ///////////////////////////
 
             ];
+            var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
+                                ["Has_Other_Liens", "OtherLiens"],
+                                ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
+                                ["Has_COS_Recorded", "COSRecorded"],
+                                ["Has_Deed_Recorded", "DeedRecorded"]];
 
             var fields = $scope.DocSearch.LeadResearch
-            if (fields)
-            {
+            if (fields) {
                 for (var i = 0; i < validateFields.length; i++) {
                     var f = validateFields[i];
-                    if(fields[f] == undefined)
-                    {
-                        return false;
+                    if (fields[f] === undefined) {
+                        errormsg += "The fields marked * must been filled please check them before submit!<br>"
+                        break;
+                    }
+                }
+
+                for (var j = 0; j < checkedAttrs.length; j++) {
+                    var f1 = checkedAttrs[j];
+                    if( ( fields[f1[0]] === true && !Array.isArray(fields[f1[1]]) ) || (fields[f1[0]] === true && fields[f1[1]].length === 0)){
+                        errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
                     }
                 }
             }
-            
-            return true;
+
+
+
+            return errormsg;
 
         }
 
 
 
+
         $scope.SearchComplete = function (isSave) {
 
-            var isValidated = fales;
-            var errorMsg = '';
+            var msg = $scope.newVersionValidate();
 
-
-            if (!$scope.newVersionValidate())
-            {
-                AngularRoot.alert("The fields marked * must been filled please check them before submit!");
-                return;
+            if (msg) {
+                AngularRoot.alert(msg);
+                return
             }
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
