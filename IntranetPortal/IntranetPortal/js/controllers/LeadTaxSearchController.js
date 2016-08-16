@@ -153,7 +153,13 @@
                 "has_Vacate_Order_Vacate_Order",
                 "has_ECB_Tickets_ECB_Tickets",
                 "has_ECB_on_Name_ECB_on_Name_other_known_address",
-                
+                //under are one to multiple//
+                "Has_Other_Mortgage",
+                "Has_Other_Liens",
+                "Has_TaxLiensCertifcate",
+                "Has_COS_Recorded",
+                "Has_Deed_Recorded",
+                ///////////////////////////
 
             ];
 
