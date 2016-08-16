@@ -7443,12 +7443,14 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
              * @see PropertyOffer assignOfferId function
              **/
 
-            if (!$scope.SSpreSign.assignCrop)
-            {
+            if (!$scope.SSpreSign.assignCrop) {
                 $scope.SSpreSign.assignCrop = new AssignCorp();
-            } else
-            {
-                angular.extend($scope.SSpreSign.assignCrop, new AssignCorp());
+            } else {
+                var _new = new AssignCorp();
+                var obj = $scope.SSpreSign.assignCrop;
+                angular.extend(_new, obj);
+                angular.extend(obj, _new);
+                $scope.SSpreSign.assignCrop = _new;
             }
             $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
@@ -7466,8 +7468,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                 if (!$scope.SSpreSign.assignCrop) {
                     $scope.SSpreSign.assignCrop = new AssignCorp();
                 } else {
-                    angular.extend($scope.SSpreSign.assignCrop, new AssignCorp());
+                    var _new = new AssignCorp();
+                    var obj = $scope.SSpreSign.assignCrop;
+                    angular.extend(_new, obj);
+                    angular.extend(obj, _new);
+                    $scope.SSpreSign.assignCrop = _new;
                 }
+
                 $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
 
               
@@ -7538,6 +7545,16 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         $scope.SSpreSign.Tag = formdata.Tag;
         $scope.SSpreSign.CreateDate = formdata.CreateDate;
         $scope.SSpreSign.CreateBy = formdata.CreateBy;
+
+        if (!$scope.SSpreSign.assignCrop) {
+            $scope.SSpreSign.assignCrop = new AssignCorp();
+        } else {
+            var _new = new AssignCorp();
+            var obj = $scope.SSpreSign.assignCrop;
+            angular.extend(_new, obj);
+            angular.extend(obj, _new);
+            $scope.SSpreSign.assignCrop = _new;
+        }
     }
     $scope.NextStep = function () {
         var cStep = $scope.currentStep();

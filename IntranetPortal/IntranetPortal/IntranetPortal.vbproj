@@ -1215,6 +1215,13 @@
       <DependentUpon>DocSearchOldVersion.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="LeadDocSearch\DocSearchSummary.aspx.designer.vb">
+      <DependentUpon>DocSearchSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadDocSearch\DocSearchSummary.aspx.vb">
+      <DependentUpon>DocSearchSummary.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="LeadDocSearch\LeadDocSearchList.ascx.designer.vb">
       <DependentUpon>LeadDocSearchList.ascx</DependentUpon>
     </Compile>
@@ -7159,6 +7166,7 @@
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
+    <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
@@ -7691,6 +7699,7 @@
     <Content Include="bower_components\angular-route\bower.json" />
     <Content Include="bower_components\angular-route\package.json" />
     <Content Include="bower_components\angular-route\README.md" />
+    <Content Include="App_Data\OfferDoc\ShortSalePackage.docx" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />

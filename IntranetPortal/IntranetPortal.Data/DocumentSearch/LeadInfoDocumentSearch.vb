@@ -4,6 +4,8 @@
 Public Class LeadInfoDocumentSearch
     Public Property ResutContent As String
     Public Property IsSave As Boolean
+    Public Property CaseName As String
+
     Public Shared Function Exist(bble As String) As Boolean
         Using ctx As New PortalEntities
             Return ctx.LeadInfoDocumentSearches.Find(bble) IsNot Nothing
@@ -13,6 +15,34 @@ Public Class LeadInfoDocumentSearch
     Public Shared Function GetInstance(bble As String) As LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Return ctx.LeadInfoDocumentSearches.Find(bble)
+        End Using
+    End Function
+
+    Public Shared Function GetDocumentSearchs() As List(Of LeadInfoDocumentSearch)
+        Using ctx As New PortalEntities
+            Dim result = From search In ctx.LeadInfoDocumentSearches
+                         Join ld In ctx.ShortSaleLeadsInfoes On search.BBLE Equals ld.BBLE
+                         Select search, ld.PropertyAddress
+            'New With {
+            '   .BBLE = search.BBLE,
+            '   .CaseName = ld.PropertyAddress,
+            '   .ExpectedSigningDate = search.ExpectedSigningDate,
+            '   .CompletedBy = search.CompletedBy,
+            '   .CompletedOn = search.CompletedOn,
+            '   .CreateBy = search.CreateBy,
+            '   .CreateDate = search.CreateDate,
+            '   .LeadResearch = search.LeadResearch,
+            '   .Status = search.Status,
+            '   .UpdateBy = search.UpdateBy,
+            '   .UpdateDate = search.UpdateDate
+            '}
+
+            'Return result.ToList
+
+            Return result.AsEnumerable().Select(Function(data)
+                                                    data.search.CaseName = data.PropertyAddress
+                                                    Return data.search
+                                                End Function).ToList
         End Using
     End Function
 
