@@ -8289,9 +8289,6 @@
   <ItemGroup>
     <None Include="bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
   </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="bower_components\moment\moment.d.ts" />
-  </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>-->
