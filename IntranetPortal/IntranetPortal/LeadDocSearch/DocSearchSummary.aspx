@@ -41,10 +41,11 @@
     <script>
         $(document).ready(function () {
 
-            var url = "/api/Title/TitleCases/??";
+            var url = "/api/LeadInfoDocumentSearches";
 
             $.getJSON(url).done(function (data) {
                 var dataGrid = $("#gridContainer").dxDataGrid({
+
                     dataSource: data,
                     rowAlternationEnabled: true,
 
@@ -95,27 +96,29 @@
                     },
 
                     columns: [{
-                        dataField: "BBLE",
-                        caption: "BBLE",
-                        /* cellTemplate: function (container, options) {
+                        dataField: "CaseName",
+                        caption: "CaseName",
+                         cellTemplate: function (container, options) {
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
                                 .on('dxclick', function () {
-                                    //Do something with options.data;
-                                    ShowCaseInfo(options.data.BBLE);
+                                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?bble=' + options.data.BBLE;
+                                    PortalUtility.ShowPopWindow("View Title Case - " + options.data.BBLE, url);
                                 })
                                 .appendTo(container);
-                        } */
+                        } 
                     }, {
                         dataField: "Status",
                         caption: "Status",
+                        customizeText: function (cell) {
+                            return cell.value === 1 ? "Completed" : "New Search";
+                        }
                     }, {
-                        dataField: "StatusStr",
-                        caption: "Title Status",
-                        groupIndex: 0
+                        dataField: "CreateBy",
+                        caption: "Create By",
                     }, {
-                        caption: "CreateDate",
-                        dataField: "Create Date",
+                        dataField: "CreateDate",
+                        caption: "Create Date",
                         dataType: "date",
                         customizeText: function (cellInfo) {
                             if (!cellInfo.value) return "";
@@ -124,12 +127,12 @@
                             return "";
                         }
                     }, {
-                        caption: "CompletedBy",
-                        dataField: "Create By",
-                        visible: false
+                        dataField: "CompletedBy",
+                        caption: "Completed By",
+
                     }, {
-                        caption: "CompletedOn",
-                        dataField: "Completed On",
+                        dataField: "CompletedOn",
+                        caption: "Completed On",
                         dataType: "date",
                         customizeText: function (cellInfo) {
                             if (!cellInfo.value) return "";
@@ -139,15 +142,6 @@
                         }
                     }]
                 }).dxDataGrid('instance');
-
-                /* if (url == "/api/Title/TitleCases/") {
-                    dataGrid.columnOption("Owner", "visible", true);
-                    dataGrid.columnOption("StatusStr", "groupIndex", null);
-                }
-
-                if (url == "/api/Title/TitleCases/-1")
-                    dataGrid.columnOption("StatusStr", "groupIndex", null);
-                    */
             });
         })
 
