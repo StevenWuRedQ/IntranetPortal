@@ -18,7 +18,7 @@
                 <h4 class="ss_form_title ">Request Info
                     <pt-collapse model="CollapseRequestInfo" />
                 </h4>
-                <div class="ss_border" collapse="CollapseRequestInfo">
+                <div class="ss_border" uib-collapse="CollapseRequestInfo">
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Requested On</label><input class="ss_form_input" ng-model="DocSearch.CreateDate" ss-date disabled="disabled" /></li>
@@ -109,7 +109,7 @@
                 <h5 class="ss_form_title  ">Other Mortgage                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
+                <div uib-collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
                     <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.OtherMortgage"
@@ -137,7 +137,7 @@
                 <h5 class="ss_form_title  ">Other Liens                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
+                <div uib-collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
                     <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.OtherLiens"
@@ -168,7 +168,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.TaxLienCertificateDiv"> </pt-collapse>
                 </h5>
 
-                <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
+                <div uib-collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
                     <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
@@ -200,7 +200,7 @@
                 <h5 class="ss_form_title  ">COS Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
+                <div uib-collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
                     <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.COSRecorded"
@@ -229,7 +229,7 @@
                 <h5 class="ss_form_title  ">Deed Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
                 </h5>
-                <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
+                <div uib-collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
                     <div init-grid dx-data-grid='{
                         bindingOptions: {
                             dataSource: "DocSearch.LeadResearch.DeedRecorded"
@@ -262,13 +262,15 @@
             --%>
 
             <%-- Ownership Mortgage Info --%>
+
+
             <div class="ss_form  ">
                 <h4 class="ss_form_title ">Ownership Mortgage Info                               
                     <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info">                            </pt-collapse>
                 </h4>
 
 
-                <div class="ss_border" collapse="DocSearch.LeadResearch.Ownership_Mortgage_Info">
+                <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Ownership_Mortgage_Info">
                     <div>
                         <ul class="ss_form_box clearfix">
                             <li class="ss_form_item ">
@@ -290,7 +292,7 @@
                         <h5 class="ss_form_title  ">Purchase Deed                                       
                             <pt-collapse model="DocSearch.LeadResearch.Purchase_Deed_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.Purchase_Deed_Ownership_Mortgage_Info">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Purchase_Deed_Ownership_Mortgage_Info">
 
 
                             <ul class="ss_form_box clearfix">
@@ -318,7 +320,7 @@
                         <h5 class="ss_form_title  ">1st Mortgage                                       
                             <pt-collapse model="DocSearch.LeadResearch.c_1st_Mortgage_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.c_1st_Mortgage_Ownership_Mortgage_Info">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.c_1st_Mortgage_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">Has 1st Mortgage *</label>
@@ -335,7 +337,7 @@
                         <h5 class="ss_form_title  ">2nd Mortgage                                       
                             <pt-collapse model="DocSearch.LeadResearch.c_2nd_Mortgage_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.c_2nd_Mortgage_Ownership_Mortgage_Info">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.c_2nd_Mortgage_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">Has 2nd Mortgage *</label>
@@ -353,11 +355,19 @@
                         <h5 class="ss_form_title  ">Other Mortgage                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
                         </h5>
-                        <div collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
+                        <div uib-collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
                             <%-- case we use ng if fix bug so the mutiple mybe can not have yes no
                                  by steven
-                                 --%>
-                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
+                            --%>
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has Other Mortgage *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_HasOtherMortgage2" model="DocSearch.LeadResearch.Has_Other_Mortgage"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div init-grid="DocSearch.BBLE" ng-if="DocSearch.LeadResearch.Has_Other_Mortgage" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherMortgage"
                                 },
@@ -384,8 +394,16 @@
                         <h5 class="ss_form_title  ">Other Liens                                 
                         <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
                         </h5>
-                        <div collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
-                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
+                        <div uib-collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has Other Liens *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_Has_Other_Liens2" model="DocSearch.LeadResearch.Has_Other_Liens"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div init-grid="DocSearch.BBLE" ng-if="DocSearch.LeadResearch.Has_Other_Liens" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherLiens"
                                 },
@@ -415,8 +433,16 @@
                         <pt-collapse model="DocSearch.LeadResearch.TaxLienCertificateDiv"> </pt-collapse>
                         </h5>
 
-                        <div collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
-                            <div init-grid="DocSearch.BBLE"  dx-data-grid='{
+                        <div uib-collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has Tax Lien Certificate  *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_Has_TaxLiensCertifcate3" model="DocSearch.LeadResearch.Has_TaxLiensCertifcate"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-if="DocSearch.LeadResearch.Has_TaxLiensCertifcate" init-grid="DocSearch.BBLE" dx-data-grid='{
                                     bindingOptions: {
                                         dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
                                     },
@@ -445,8 +471,17 @@
                         <h5 class="ss_form_title  ">COS Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
                         </h5>
-                        <div collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
-                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
+
+                        <div uib-collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has COS Recorded *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_Has_COS_Recorded2" model="DocSearch.LeadResearch.Has_COS_Recorded"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-if="DocSearch.LeadResearch.Has_COS_Recorded" init-grid="DocSearch.BBLE" dx-data-grid='{
                                         bindingOptions: {
                                             dataSource: "DocSearch.LeadResearch.COSRecorded"
                                         },
@@ -474,8 +509,17 @@
                         <h5 class="ss_form_title  ">Deed Recorded                                
                         <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
                         </h5>
-                        <div collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
-                            <div init-grid="DocSearch.BBLE" dx-data-grid='{
+
+                        <div uib-collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border" >
+                            <div class="ss_form ">
+                                <ul class="ss_form_box clearfix">
+                                    <li class="ss_form_item ">
+                                        <label class="ss_form_input_title ">Has Deed Recorded *</label>
+                                        <pt-radio name="OwnershipMortgageInfo_Has_Deed_Recorded1" model="DocSearch.LeadResearch.Has_Deed_Recorded"></pt-radio>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-if="DocSearch.LeadResearch.Has_Deed_Recorded" init-grid="DocSearch.BBLE" dx-data-grid='{
                                         bindingOptions: {
                                             dataSource: "DocSearch.LeadResearch.DeedRecorded"
                                         },
@@ -503,7 +547,7 @@
                         <h5 class="ss_form_title  ">Last Assignment                                       
                             <pt-collapse model="DocSearch.LeadResearch.Last_Assignment_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.Last_Assignment_Ownership_Mortgage_Info">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Last_Assignment_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has Last Assignment *</label>
@@ -524,13 +568,14 @@
                         <h5 class="ss_form_title  ">LP Index #                                       
                             <pt-collapse model="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">LP Index #</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.LP_Index___Num_LP_Index___Num">
                                 </li>
-                                <li class="ss_form_item  ss_form_item_line">
+                                <li class="clear-fix"></li>
+                                <li class="ss_form_item_line">
                                     <label class="ss_form_input_title ">notes</label>
                                     <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.notes_LP_Index___Num"></textarea>
                                 </li>
@@ -543,7 +588,8 @@
                             <label class="ss_form_input_title "><a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a></label>
                             <input class="ss_form_input " ng-model="DocSearch.LeadResearch.servicer">
                         </li>
-                        <li class="ss_form_item  ss_form_item_line">
+                        <li class="clear-fix"></li>
+                        <li class="ss_form_item_line">
                             <label class="ss_form_input_title ">Servicer notes</label>
                             <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.Servicer_notes"></textarea>
                         </li>
@@ -575,7 +621,7 @@
                 </h4>
 
 
-                <div class="ss_border" collapse="DocSearch.LeadResearch.Property_Dues_Violations">
+                <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Property_Dues_Violations">
                     <div>
                         <ul class="ss_form_box clearfix">
                             <li class="ss_form_item ">
@@ -602,7 +648,7 @@
                         <h5 class="ss_form_title  ">Property Taxes                                       
                             <pt-collapse model="DocSearch.LeadResearch.Property_Taxes_Due_Property_Dues_Violations"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.Property_Taxes_Due_Property_Dues_Violations">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Property_Taxes_Due_Property_Dues_Violations">
 
 
                             <ul class="ss_form_box clearfix">
@@ -627,7 +673,7 @@
                         <h5 class="ss_form_title  ">Water Charges Due                                       
                             <pt-collapse model="DocSearch.LeadResearch.Water_Charges_Due_Property_Dues_Violations"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.Water_Charges_Due_Property_Dues_Violations">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Water_Charges_Due_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Has Due *</label>
@@ -644,7 +690,7 @@
                         <h5 class="ss_form_title  ">ECB Violoations                                       
                             <pt-collapse model="DocSearch.LeadResearch.ECB_Violoations_Property_Dues_Violations"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.ECB_Violoations_Property_Dues_Violations">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.ECB_Violoations_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">Has Open *</label>
@@ -665,7 +711,7 @@
                         <h5 class="ss_form_title  ">DOB Violoations                                       
                             <pt-collapse model="DocSearch.LeadResearch.DOB_Violoations_Property_Dues_Violations"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.DOB_Violoations_Property_Dues_Violations">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.DOB_Violoations_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">Has Open *</label>
@@ -686,7 +732,7 @@
                         <h5 class="ss_form_title  ">C O                                       
                             <pt-collapse model="DocSearch.LeadResearch.C_O_Property_Dues_Violations"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.C_O_Property_Dues_Violations">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.C_O_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">Has CO *</label>
@@ -703,7 +749,7 @@
                         <h5 class="ss_form_title  ">HPD Violations                                       
                             <pt-collapse model="DocSearch.LeadResearch.HPD_Violations_Property_Dues_Violations"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.HPD_Violations_Property_Dues_Violations">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.HPD_Violations_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">Has Violations *</label>
@@ -732,7 +778,7 @@
                         <h5 class="ss_form_title  ">HPD Charges Not Paid Transferred                                       
                             <pt-collapse model="DocSearch.LeadResearch.HPD_Charges_Not_Paid_Transferred_Property_Dues_Violations"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.HPD_Charges_Not_Paid_Transferred_Property_Dues_Violations">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.HPD_Charges_Not_Paid_Transferred_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">Is Open *</label>
@@ -767,7 +813,7 @@
                 </h4>
 
 
-                <div class="ss_border" collapse="DocSearch.LeadResearch.Judgements_Liens">
+                <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Judgements_Liens">
 
                     <div>
                         <ul class="ss_form_box clearfix">
@@ -784,7 +830,7 @@
                         <h5 class="ss_form_title  ">Personal Judgments                                       
                             <pt-collapse model="DocSearch.LeadResearch.Personal_Judgments_Judgements_Liens"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.Personal_Judgments_Judgements_Liens">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Personal_Judgments_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has Judgments *</label>
@@ -805,7 +851,7 @@
                         <h5 class="ss_form_title  ">HPD Judgments                                       
                             <pt-collapse model="DocSearch.LeadResearch.HPD_Judgments_Judgements_Liens"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.HPD_Judgments_Judgements_Liens">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.HPD_Judgments_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has Judgments *</label>
@@ -826,7 +872,7 @@
                         <h5 class="ss_form_title  ">IRS Tax Lien                                       
                             <pt-collapse model="DocSearch.LeadResearch.IRS_Tax_Lien_Judgements_Liens"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.IRS_Tax_Lien_Judgements_Liens">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.IRS_Tax_Lien_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has IRS Tax Lien *</label>
@@ -847,7 +893,7 @@
                         <h5 class="ss_form_title  ">NYS Tax Lien                                       
                             <pt-collapse model="DocSearch.LeadResearch.NYS_Tax_Lien_Judgements_Liens"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.NYS_Tax_Lien_Judgements_Liens">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.NYS_Tax_Lien_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has NYS Tax Lien *</label>
@@ -868,7 +914,7 @@
                         <h5 class="ss_form_title  ">Sidewalk Liens                                       
                             <pt-collapse model="DocSearch.LeadResearch.Sidewalk_Liens_Judgements_Liens"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.Sidewalk_Liens_Judgements_Liens">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Sidewalk_Liens_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has Sidewalk Liens *</label>
@@ -889,7 +935,7 @@
                         <h5 class="ss_form_title  ">Vacate Order                                       
                             <pt-collapse model="DocSearch.LeadResearch.Vacate_Order_Judgements_Liens"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.Vacate_Order_Judgements_Liens">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Vacate_Order_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has Vacate Order *</label>
@@ -910,7 +956,7 @@
                         <h5 class="ss_form_title  ">ECB Tickets                                       
                             <pt-collapse model="DocSearch.LeadResearch.ECB_Tickets_Judgements_Liens"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.ECB_Tickets_Judgements_Liens">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.ECB_Tickets_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has ECB Tickets *</label>
@@ -931,7 +977,7 @@
                         <h5 class="ss_form_title  ">ECB on Name other known address                                       
                             <pt-collapse model="DocSearch.LeadResearch.ECB_on_Name_other_known_address_Judgements_Liens"> </pt-collapse>
                         </h5>
-                        <div class="ss_border" collapse="DocSearch.LeadResearch.ECB_on_Name_other_known_address_Judgements_Liens">
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.ECB_on_Name_other_known_address_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
                                     <label class="ss_form_input_title ">has ECB on Name *</label>
@@ -954,27 +1000,27 @@
                 </div>
             </div>
 
+            <hr />
+            <div class="ss_form" ng-show="DocSearch.Status!=1">
 
-             <div class="ss_form" ng-show="DocSearch.Status!=1">
-                    
-                    <div class="ss_border" >
-                        <ul class="ss_form_box clearfix">
-                            <li class="ss_form_item " style="visibility:hidden">
-                                <label class="ss_form_input_title">Documents Received</label>
-                                </li>
-                            <li class="ss_form_item " style="visibility:hidden">
-                                <label class="ss_form_input_title">Documents Received On</label>
-                                
-                            </li>
-                        
-                            <li class="ss_form_item " >
-                                <label class="ss_form_input_title">&nbsp;</label>
-                                <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
-                            </li>
+                <div>
+                    <ul class="ss_form_box clearfix">
+                        <li class="ss_form_item " style="visibility: hidden">
+                            <label class="ss_form_input_title">Documents Received</label>
+                        </li>
+                        <li class="ss_form_item " style="visibility: hidden">
+                            <label class="ss_form_input_title">Documents Received On</label>
 
-                        </ul>
-                    </div>
+                        </li>
+
+                        <li class="ss_form_item ">
+                            <label class="ss_form_input_title">&nbsp;</label>
+                            <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
+                        </li>
+
+                    </ul>
                 </div>
+            </div>
         </div>
 
     </div>
