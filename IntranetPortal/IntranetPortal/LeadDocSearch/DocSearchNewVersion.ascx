@@ -2,7 +2,7 @@
 <div class="tab-content">
     <div class="tab-pane active" id="LegalTab">
 
-        <div style="overflow: auto; height: 830px; padding: 0 20px">
+        <div style="overflow: auto; height: 830px; padding: 0 20px" class="shortSaleUI">
 
             <div class="alert alert-warning" style="margin-top: 20px; font-size: 16px" ng-show="DocSearch.Status != 1">
                 <i class="fa fa-warning"></i><strong>Warning!</strong> Document search didn't completed yet!
@@ -955,7 +955,7 @@
             </div>
 
 
-             <div class="ss_form">
+             <div class="ss_form" ng-show="DocSearch.Status!=1">
                     
                     <div class="ss_border" >
                         <ul class="ss_form_box clearfix">
@@ -967,7 +967,7 @@
                                 
                             </li>
                         
-                            <li class="ss_form_item " ng-show="DocSearch.Status!=1">
+                            <li class="ss_form_item " >
                                 <label class="ss_form_input_title">&nbsp;</label>
                                 <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
                             </li>
