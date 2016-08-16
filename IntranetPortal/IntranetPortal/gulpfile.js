@@ -5,6 +5,7 @@ var del = require('del');
 var watch = require('gulp-watch');
 var batch = require('gulp-batch');
 var rename = require('gulp-rename');
+
 var config = {
     //Include all js files 
     src: ['js/*.js', 'js/controllers/*.js','js/models/*.js','js/Views/**/*.js','!js/PortalHttpFactory.js'],
@@ -17,6 +18,7 @@ gulp.task('clean', function () {
     //  so gulp knows when the delete is complete
     //return del(['js/build/intranetportal.min.js']);
 });
+
 gulp.task('watch', function () {
     watch('js/controllers/*.js', batch(function (events, done) {
         gulp.start('scripts', done);
