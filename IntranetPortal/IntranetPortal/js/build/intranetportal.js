@@ -749,7 +749,7 @@ angular.module('PortalApp')
     {
         var boolVal = base[boolKey];
 
-        return boolVal == null;
+        return boolVal === undefined;
     }
     /**
      * @author steven
