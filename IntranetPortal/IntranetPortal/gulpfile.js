@@ -57,28 +57,28 @@ gulp.task('replace', function () {
 
     gulp.src('Content.Master')
         .pipe(replace(/src="\/js\/build\/intranetportal.js(\?v=\d{0,8})?"/g,
-        'src="/js/build\/intranetportal.js?v=' + getTimeString()))
+        'src="/js/build\/intranetportal.js?v=' + getTimeString() + '"'))
         .pipe(replace(/src="\/Scripts\/autosave.js(\?v=\d{0,8})?"/g,
-        'src="/Scripts\/autosave.js?v=' + getTimeString()))
+        'src="/Scripts\/autosave.js?v=' + getTimeString() + '"'))
         .pipe(replace(/src="\/Scripts\/stevenjs.js(\?v=\d{0,8})?"/g,
-        'src="/Scripts\/stevenjs.js?v=' + getTimeString()))
+        'src="/Scripts\/stevenjs.js?v=' + getTimeString() + '"'))
         .pipe(replace(/src="\/Scripts\/autologout.js(\?v=\d{0,8})?"/g,
-        'src="/Scripts\/autologout.js?v=' + getTimeString()))
+        'src="/Scripts\/autologout.js?v=' + getTimeString() + '"'))
         .pipe(replace(/href="\/css\/stevencss.css(\?v=\d{0,8})?"/g,
-        'href="/css\/stevencss.css?v=' + getTimeString()))
+        'href="/css\/stevencss.css?v=' + getTimeString() + '"'))
         .pipe(gulp.dest(''), {overwrite:true})
 
     gulp.src('Root.Master')
         .pipe(replace(/src="\/js\/build\/intranetportal.js(\?v=\d{0,8})?"/g,
-        'src="/js/build\/intranetportal.js?v=' + getTimeString()))
+        'src="/js/build\/intranetportal.js?v=' + getTimeString() + '"'))
         .pipe(replace(/src="\/Scripts\/autosave.js(\?v=\d{0,8})?"/g,
-        'src="/Scripts\/autosave.js?v=' + getTimeString()))
+        'src="/Scripts\/autosave.js?v=' + getTimeString() + '"'))
         .pipe(replace(/src="\/Scripts\/stevenjs.js(\?v=\d{0,8})?"/g,
-        'src="/Scripts\/stevenjs.js?v=' + getTimeString()))
+        'src="/Scripts\/stevenjs.js?v=' + getTimeString() + '"'))
         .pipe(replace(/src="\/Scripts\/autologout.js(\?v=\d{0,8})?"/g,
-        'src="/Scripts\/autologout.js?v=' + getTimeString()))
+        'src="/Scripts\/autologout.js?v=' + getTimeString() + '"'))
         .pipe(replace(/href="\/css\/stevencss.css(\?v=\d{0,8})?"/g,
-        'href="/css\/stevencss.css?v=' + getTimeString()))
+        'href="/css\/stevencss.css?v=' + getTimeString() + '"'))
         .pipe(gulp.dest(''), {overwrite:true})
 
 })

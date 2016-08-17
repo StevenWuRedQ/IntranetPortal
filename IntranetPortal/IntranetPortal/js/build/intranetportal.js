@@ -132,147 +132,6 @@ if (typeof requirejs === "function") {
     var portalApp = RequirePortalApp();
 }
 
-(function () {
-    /*define public shared var of class portalRouteProvider register var in the below*/
-    var ITEM_ID = 'itemId';
-
-    function portalRouteProvider($routeProvider) {
-
-        // This $get noop is because at the moment in AngularJS "providers" must provide something
-        // via a $get method.
-        // When AngularJS has "provider helpers" then this will go away!
-
-        /**/
-        this.$get = angular.noop;
-        this.ITEM_ID = ITEM_ID;
-        // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
-        // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
-        // like:
-        //
-        // ```
-        // myMod.config(function(portalRouteProvider) {
-        //   var routeProvider = portalRouteProvider.routesFor('MyBook', '/myApp');
-        // });
-        // ```
-        //
-        // but instead have something like:
-        //
-        //
-        // ```
-        // myMod.config(function(portalRouteProvider) {
-        //   var routeProvider = portalRouteProvider('MyBook', '/myApp');
-        // });
-        // ```
-        //
-        // In any case, the point is that this function is the key part of this "provider helper".
-        // We use it to create routes for CRUD operations.  We give it some basic information about
-        // the resource and the urls then it it returns our own special routeProvider.
-        this.routesFor = function (resourceName, urlPrefix, routePrefix) {
-            var baseUrl = resourceName.toLowerCase();
-
-            var baseRoute = '/' + resourceName.toLowerCase();
-            routePrefix = routePrefix || urlPrefix;
-
-            // Prepend the urlPrefix if available.
-            if (angular.isString(urlPrefix) && urlPrefix !== '') {
-                baseUrl = urlPrefix + '/' + baseUrl;
-            }
-
-            // Prepend the routePrefix if it was provided;
-            if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
-                baseRoute = '/' + routePrefix + baseRoute;
-            }
-
-            // Create the templateUrl for a route to our resource that does the specified operation.
-            var templateUrl = function (operation) {
-                return '/js/Views/' + resourceName.toLowerCase() + '/' + resourceName.toLowerCase() + '-' + operation.toLowerCase() + '.tpl.html';
-            };
-            // Create the controller name for a route to our resource that does the specified operation.
-            var controllerName = function (operation) {
-                return resourceName + operation + 'Ctrl';
-            };
-
-            // This is the object that our `routesFor()` function returns.  It decorates `$routeProvider`,
-            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
-            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
-            var routeBuilder = {
-                // Create a route that will handle showing a list of items
-                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
-                whenList: function (resolveFns) {
-                    routeBuilder.when(baseRoute, {
-                        templateUrl: templateUrl('List'),
-                        controller: controllerName('List'),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                // Create a route that will handle creating a new item
-                whenNew: function (resolveFns) {
-                    routeBuilder.when(baseRoute + '/new', {
-                        templateUrl: templateUrl('Edit'),
-                        controller: controllerName('Edit'),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                // Create a route that will handle editing an existing item
-                whenEdit: function (resolveFns) {
-                    routeBuilder.when(baseRoute + '/:' + ITEM_ID, {
-                        templateUrl: templateUrl('Edit'),
-                        controller: controllerName('Edit'),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                whenOther: function (resolveFns, name, suffixUrl) {
-                    var _url = suffixUrl ? suffixUrl : '';
-                    routeBuilder.when(baseRoute +'/'+ name.toLowerCase() +'/'+ _url, {
-                        templateUrl: templateUrl(name),
-                        controller: controllerName(name),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                // Readonly views and controllers
-                whenView: function (resolveFns) {
-                    routeBuilder.when(baseRoute + '/view/:' + ITEM_ID, {
-                        templateUrl: templateUrl('View'),
-                        controller: controllerName('View'),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                // Pass-through to `$routeProvider.when()`
-                when: function (path, route) {
-                    $routeProvider.when(path, route);
-                    return routeBuilder;
-                },
-                // Pass-through to `$routeProvider.otherwise()`
-                otherwise: function (params) {
-                    $routeProvider.otherwise(params);
-                    return routeBuilder;
-                },
-                // Access to the core $routeProvider.
-                $routeProvider: $routeProvider
-            };
-            return routeBuilder;
-        };
-    }
-    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
-    // we add our injection dependencies using the $inject form
-    portalRouteProvider.$inject = ['$routeProvider'];
-
-    /*define public shared var of class portalRouteProvider*/
-    portalRouteProvider.ITEM_ID = ITEM_ID;
-    // Create our provider - it would be nice to be able to do something like this instead:
-    //
-    // ```
-    // angular.module('services.portalRouteProvider', [])
-    //   .configHelper('portalRouteProvider', ['$routeProvider, portalRouteProvider]);
-    // ```
-    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
-    angular.module('PortalApp').provider('portalRoute', portalRouteProvider);
-})();
 /*
  * Portal UI Route will be the main router we use base on UI-router
  * The Portal Route will be Deprecated
@@ -493,6 +352,147 @@ if (typeof requirejs === "function") {
     // ```
     // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
     angular.module('PortalApp').provider('portalUIRoute', portalUIRouteProvider);
+})();
+(function () {
+    /*define public shared var of class portalRouteProvider register var in the below*/
+    var ITEM_ID = 'itemId';
+
+    function portalRouteProvider($routeProvider) {
+
+        // This $get noop is because at the moment in AngularJS "providers" must provide something
+        // via a $get method.
+        // When AngularJS has "provider helpers" then this will go away!
+
+        /**/
+        this.$get = angular.noop;
+        this.ITEM_ID = ITEM_ID;
+        // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
+        // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
+        // like:
+        //
+        // ```
+        // myMod.config(function(portalRouteProvider) {
+        //   var routeProvider = portalRouteProvider.routesFor('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // but instead have something like:
+        //
+        //
+        // ```
+        // myMod.config(function(portalRouteProvider) {
+        //   var routeProvider = portalRouteProvider('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // In any case, the point is that this function is the key part of this "provider helper".
+        // We use it to create routes for CRUD operations.  We give it some basic information about
+        // the resource and the urls then it it returns our own special routeProvider.
+        this.routesFor = function (resourceName, urlPrefix, routePrefix) {
+            var baseUrl = resourceName.toLowerCase();
+
+            var baseRoute = '/' + resourceName.toLowerCase();
+            routePrefix = routePrefix || urlPrefix;
+
+            // Prepend the urlPrefix if available.
+            if (angular.isString(urlPrefix) && urlPrefix !== '') {
+                baseUrl = urlPrefix + '/' + baseUrl;
+            }
+
+            // Prepend the routePrefix if it was provided;
+            if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
+                baseRoute = '/' + routePrefix + baseRoute;
+            }
+
+            // Create the templateUrl for a route to our resource that does the specified operation.
+            var templateUrl = function (operation) {
+                return '/js/Views/' + resourceName.toLowerCase() + '/' + resourceName.toLowerCase() + '-' + operation.toLowerCase() + '.tpl.html';
+            };
+            // Create the controller name for a route to our resource that does the specified operation.
+            var controllerName = function (operation) {
+                return resourceName + operation + 'Ctrl';
+            };
+
+            // This is the object that our `routesFor()` function returns.  It decorates `$routeProvider`,
+            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
+            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
+            var routeBuilder = {
+                // Create a route that will handle showing a list of items
+                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
+                whenList: function (resolveFns) {
+                    routeBuilder.when(baseRoute, {
+                        templateUrl: templateUrl('List'),
+                        controller: controllerName('List'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Create a route that will handle creating a new item
+                whenNew: function (resolveFns) {
+                    routeBuilder.when(baseRoute + '/new', {
+                        templateUrl: templateUrl('Edit'),
+                        controller: controllerName('Edit'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Create a route that will handle editing an existing item
+                whenEdit: function (resolveFns) {
+                    routeBuilder.when(baseRoute + '/:' + ITEM_ID, {
+                        templateUrl: templateUrl('Edit'),
+                        controller: controllerName('Edit'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                whenOther: function (resolveFns, name, suffixUrl) {
+                    var _url = suffixUrl ? suffixUrl : '';
+                    routeBuilder.when(baseRoute +'/'+ name.toLowerCase() +'/'+ _url, {
+                        templateUrl: templateUrl(name),
+                        controller: controllerName(name),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Readonly views and controllers
+                whenView: function (resolveFns) {
+                    routeBuilder.when(baseRoute + '/view/:' + ITEM_ID, {
+                        templateUrl: templateUrl('View'),
+                        controller: controllerName('View'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Pass-through to `$routeProvider.when()`
+                when: function (path, route) {
+                    $routeProvider.when(path, route);
+                    return routeBuilder;
+                },
+                // Pass-through to `$routeProvider.otherwise()`
+                otherwise: function (params) {
+                    $routeProvider.otherwise(params);
+                    return routeBuilder;
+                },
+                // Access to the core $routeProvider.
+                $routeProvider: $routeProvider
+            };
+            return routeBuilder;
+        };
+    }
+    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
+    // we add our injection dependencies using the $inject form
+    portalRouteProvider.$inject = ['$routeProvider'];
+
+    /*define public shared var of class portalRouteProvider*/
+    portalRouteProvider.ITEM_ID = ITEM_ID;
+    // Create our provider - it would be nice to be able to do something like this instead:
+    //
+    // ```
+    // angular.module('services.portalRouteProvider', [])
+    //   .configHelper('portalRouteProvider', ['$routeProvider, portalRouteProvider]);
+    // ```
+    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
+    angular.module('PortalApp').provider('portalRoute', portalRouteProvider);
 })();
 /**
  * @return {[class]}                 AssignCorp class
@@ -769,7 +769,7 @@ angular.module('PortalApp')
              * @solution
              *  
              */
-            var hasWarning = (boolVal === undefined) || (boolVal && arrayVal == false);
+            var hasWarning = (boolVal == null ) || (boolVal && arrayVal == false);
             return hasWarning;
         }
 
@@ -970,43 +970,6 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
 
     return dxGridModel;
 });
-/*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
-
-function dxModel() {
-
-
-}
-
-//function dxGridModel() {
-
-
-
-//}
-
-
-/**
- * [dxGridColumnModel description]
- * @param  {dxGridColumn Option} opt [dxGridColumn Option]
- * @return {[dxGridColumnModel]}     [return model have dx Grid column with special handler]
- */
-function dxGridColumnModel(opt) {
-
-    _.extend(this, opt);
-    if (this.dataType == 'date') {
-
-        this.customizeText = this.customizeTextDateFunc;
-    }
-
-}
-dxGridColumnModel.prototype.customizeTextDateFunc = function(e) {
-
-    var date = e.value
-    if (date) {
-        return PortalUtility.FormatISODate(new Date(date));
-    } 
-    return ''
-}
-
 //Leads/LeadsInfo
 angular.module('PortalApp').factory('HomeOwner', function (ptBaseResource) {
 
@@ -1252,6 +1215,177 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
 
     return propertyOffer;
 });
+
+/**
+ * @return {[class]}                 QueryUrl class
+ */
+
+angular.module('PortalApp').factory('QueryUrl', function ($http) {
+    var _class = function () {
+        // This function is anonymous, is executed immediately and 
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        }
+        return query_string;
+    }
+    
+
+    return _class;
+});
+
+/**
+ * @return {[class]}                 ScopeHelper class
+ */
+angular.module('PortalApp').factory('ScopeHelper', function ($http) {
+    var _class = function () {
+
+
+    }
+    _class.getScope = function (id) {
+        return angular.element(document.getElementById(id)).scope();
+    }
+    _class.getShortSaleScope = function () {
+
+        
+        return _class.getScope('ShortSaleCtrl');
+    }
+    _class.getLeadsSearchScope = function()
+    {
+        return _class.getScope('LeadTaxSearchCtrl');
+    }
+    return _class;
+});
+
+
+/**
+ * @return {[class]}                 Team class
+ */
+angular.module('PortalApp').factory('Team', function ($http) {
+    var _class = function () {
+
+
+    }
+    _class.getTeams = function (successCall) {
+
+        $http.get('/api/CorporationEntities/Teams')
+            .success(successCall);
+
+    }
+
+    _class.prototype.isAvailable = function () {
+        return this.Available == true;
+    }
+    return _class;
+});
+/**
+ * @return {[class]}                 Wizard class
+ */
+angular.module('PortalApp').factory('Wizard', function (WizardStep) {
+
+    var _class = function () {
+       
+    }
+
+    _class.prototype.filteredSteps = [];
+
+    _class.prototype.setFilteredSteps = function(filteredSteps)
+    {
+        this.filteredSteps = filteredSteps;
+    }
+    _class.prototype.scope = { step: 1 };
+
+    _class.prototype.MaxStep = function()
+    {
+        return this.filteredSteps.length;
+    }
+    _class.prototype.setScope = function (scope)
+    {
+        this.scope = scope;
+    }
+    _class.prototype.currentStep = function()
+    {
+        return this.filteredSteps[this.scope.step - 1];
+    }
+    
+    //return $scope.filteredSteps.length;
+    return _class;
+});
+/**
+ * @return {[class]}                 WizardStep class
+ */
+angular.module('PortalApp').factory('WizardStep', function () {
+    var _class = function (step) {
+        
+        this.title = step.title;
+        this.next = step.next;
+        this.init = step.init;
+        angular.extend(this, step);
+    }
+    _class.prototype.title = "";
+
+    _class.prototype.next = function ()
+    {
+        return true;
+    }
+    _class.prototype.init = function()
+    {
+        return true;
+    }
+
+    return _class;
+});
+/*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
+
+function dxModel() {
+
+
+}
+
+//function dxGridModel() {
+
+
+
+//}
+
+
+/**
+ * [dxGridColumnModel description]
+ * @param  {dxGridColumn Option} opt [dxGridColumn Option]
+ * @return {[dxGridColumnModel]}     [return model have dx Grid column with special handler]
+ */
+function dxGridColumnModel(opt) {
+
+    _.extend(this, opt);
+    if (this.dataType == 'date') {
+
+        this.customizeText = this.customizeTextDateFunc;
+    }
+
+}
+dxGridColumnModel.prototype.customizeTextDateFunc = function(e) {
+
+    var date = e.value
+    if (date) {
+        return PortalUtility.FormatISODate(new Date(date));
+    } 
+    return ''
+}
+
 angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
     var BaseUri = '/api';
 
@@ -1456,140 +1590,6 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     //leadResearch.func
     //constructor
     return leadResearch;
-});
-
-/**
- * @return {[class]}                 QueryUrl class
- */
-
-angular.module('PortalApp').factory('QueryUrl', function ($http) {
-    var _class = function () {
-        // This function is anonymous, is executed immediately and 
-        // the return value is assigned to QueryString!
-        var query_string = {};
-        var query = window.location.search.substring(1);
-        var vars = query.split("&");
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split("=");
-            // If first entry with this name
-            if (typeof query_string[pair[0]] === "undefined") {
-                query_string[pair[0]] = decodeURIComponent(pair[1]);
-                // If second entry with this name
-            } else if (typeof query_string[pair[0]] === "string") {
-                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
-                query_string[pair[0]] = arr;
-                // If third or later entry with this name
-            } else {
-                query_string[pair[0]].push(decodeURIComponent(pair[1]));
-            }
-        }
-        return query_string;
-    }
-    
-
-    return _class;
-});
-
-/**
- * @return {[class]}                 ScopeHelper class
- */
-angular.module('PortalApp').factory('ScopeHelper', function ($http) {
-    var _class = function () {
-
-
-    }
-    _class.getScope = function (id) {
-        return angular.element(document.getElementById(id)).scope();
-    }
-    _class.getShortSaleScope = function () {
-
-        
-        return _class.getScope('ShortSaleCtrl');
-    }
-    _class.getLeadsSearchScope = function()
-    {
-        return _class.getScope('LeadTaxSearchCtrl');
-    }
-    return _class;
-});
-
-
-/**
- * @return {[class]}                 Team class
- */
-angular.module('PortalApp').factory('Team', function ($http) {
-    var _class = function () {
-
-
-    }
-    _class.getTeams = function (successCall) {
-
-        $http.get('/api/CorporationEntities/Teams')
-            .success(successCall);
-
-    }
-
-    _class.prototype.isAvailable = function () {
-        return this.Available == true;
-    }
-    return _class;
-});
-/**
- * @return {[class]}                 Wizard class
- */
-angular.module('PortalApp').factory('Wizard', function (WizardStep) {
-
-    var _class = function () {
-       
-    }
-
-    _class.prototype.filteredSteps = [];
-
-    _class.prototype.setFilteredSteps = function(filteredSteps)
-    {
-        this.filteredSteps = filteredSteps;
-    }
-    _class.prototype.scope = { step: 1 };
-
-    _class.prototype.MaxStep = function()
-    {
-        return this.filteredSteps.length;
-    }
-    _class.prototype.setScope = function (scope)
-    {
-        this.scope = scope;
-    }
-    _class.prototype.currentStep = function()
-    {
-        return this.filteredSteps[this.scope.step - 1];
-    }
-    
-    //return $scope.filteredSteps.length;
-    return _class;
-});
-/**
- * @return {[class]}                 WizardStep class
- */
-angular.module('PortalApp').factory('WizardStep', function () {
-    var _class = function (step) {
-        
-        this.title = step.title;
-        this.next = step.next;
-        this.init = step.init;
-        angular.extend(this, step);
-    }
-    _class.prototype.title = "";
-
-    _class.prototype.next = function ()
-    {
-        return true;
-    }
-    _class.prototype.init = function()
-    {
-        return true;
-    }
-
-    return _class;
 });
 angular.module("PortalApp")
 .directive('dsSummary', function () {
@@ -7173,6 +7173,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
+        ShortSale: true,
         Contract: true,
         Memo: false,
         Deed: false,
