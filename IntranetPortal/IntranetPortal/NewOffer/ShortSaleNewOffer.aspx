@@ -271,12 +271,7 @@
                         <h3 class="wizard-title" ng-class="{ss_warning:!DocRequiredNext(true)}">{{currentStep().title}}</h3>
                         <div id="todo-list">
                             <div class="dx-fieldset">
-                                 <div class="dx-field">
-                                    <div class="dx-field-label">ShortSale Package</div>
-                                    <div class="dx-field-value">
-                                        <div dx-check-box="{ bindingOptions: { value: 'DeadType.ShortSale' }}"></div>
-                                    </div>
-                                </div>
+                                
                                 <div class="dx-field">
                                     <div class="dx-field-label">Contract</div>
                                     <div class="dx-field-value">
@@ -306,7 +301,13 @@
                                     <div class="dx-field-value">
                                         <div dx-check-box="{ bindingOptions: { value: 'DeadType.POA' }}"></div>
                                     </div>
-                                </div>                               
+                                </div>  
+                               <div class="dx-field">
+                                    <div class="dx-field-label">ShortSale Package</div>
+                                    <div class="dx-field-value">
+                                        <div dx-check-box="{ bindingOptions: { value: 'DeadType.ShortSale' }}"></div>
+                                    </div>
+                                </div>                             
                             </div>
                         </div>
                     </div>

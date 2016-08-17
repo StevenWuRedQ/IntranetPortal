@@ -172,7 +172,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
-        ShortSale: true,
+        ShortSale: false,
         Contract: true,
         Memo: false,
         Deed: false,
