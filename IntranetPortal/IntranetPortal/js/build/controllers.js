@@ -764,10 +764,10 @@ angular.module('PortalApp')
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
             /**
-             * bugs over here boolVal can not check with null
-             * @see Jira #P
+             * bugs over here bool value can not check with null
+             * @see Jira #PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
              */
-            var hasWarning = (boolVal == null) || (boolVal && arrayVal == false);
+            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
             return hasWarning;
         }
         $scope.init = function (bble) {
@@ -848,6 +848,7 @@ angular.module('PortalApp')
 
             if (!$scope.DivError.passValidate())
             {
+               
                 return false;
             }
 
@@ -925,6 +926,8 @@ angular.module('PortalApp')
             if (!$scope.newVersionValidate())
             {
                 var msg = $scope.DivError.getMessage();
+
+                AngularRoot.alert(msg[0]);
                 return;
             };
             // $scope.DivError.getMessage();
@@ -989,7 +992,6 @@ angular.module('PortalApp')
             //});
         }
     });
-node
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {

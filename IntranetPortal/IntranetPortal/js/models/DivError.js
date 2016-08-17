@@ -36,6 +36,7 @@ angular.module('PortalApp')
     _class.prototype.passValidate = function () {
         return this.getMessage().length == 0;
     }
+
     /**
      * @author steven
      * @date   8/17/2016
@@ -54,7 +55,7 @@ angular.module('PortalApp')
              * @solution
              * 
              */
-            var hasWarning = (boolVal === undefined) || (boolVal && arrayVal == false);
+            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
             return hasWarning;
         }
 

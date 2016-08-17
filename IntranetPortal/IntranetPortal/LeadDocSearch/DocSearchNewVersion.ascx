@@ -368,7 +368,7 @@
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title "
                                             ng-class="{ss_warning:multipleValidated(DocSearch.LeadResearch,'Has_Other_Mortgage','OtherMortgage')}" 
-                                            data-message="Please check there is Other Mortgage or not .">Has Other Mortgage *</label>
+                                            data-message="Please check Other Mortgage selected and if it's select make sure there are at least one mortgage been filled .">Has Other Mortgage *</label>
                                         <pt-radio name="OwnershipMortgageInfo_HasOtherMortgage2" model="DocSearch.LeadResearch.Has_Other_Mortgage"></pt-radio>
                                     </li>
                                 </ul>

@@ -148,6 +148,7 @@
 
             if (!$scope.DivError.passValidate())
             {
+               
                 return false;
             }
 
@@ -225,6 +226,8 @@
             if (!$scope.newVersionValidate())
             {
                 var msg = $scope.DivError.getMessage();
+
+                AngularRoot.alert(msg[0]);
                 return;
             };
             // $scope.DivError.getMessage();

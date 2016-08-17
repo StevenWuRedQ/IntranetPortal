@@ -695,14 +695,28 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
     return corpEntity;
 });
 /**
- * @return {[class]}                 DivError class
+ * @author Steven
+ * @date   8/17/2016 
+ * @todo
+ *  right now we using this in contoller javascript code
+ *  but it better warp it to Angular directive let it handle by itself.  
+ * @description
+ *  DivError model class
+ * @return {DivError Class}
  */
 
-angular.module('PortalApp').factory('DivError', function () {
+angular.module('PortalApp')
+    .factory('DivError', function () {
     var _class = function (id) {
         this.id = id;
     }
-
+    /**
+     * @author Steven
+     * @date   8/16/2016
+     * @description
+     *  return all error messages under div
+     *  which need validate
+     */
     _class.prototype.getMessage = function () {
         var eMessages = [];
         /*ignore every parent of has form-ignore */
@@ -718,15 +732,24 @@ angular.module('PortalApp').factory('DivError', function () {
     _class.prototype.passValidate = function () {
         return this.getMessage().length == 0;
     }
+
     /**
-     * @return {[class]}
+     * @author steven
+     * @date   8/17/2016
+     * @description
+     *  check both have yes no and have related array must have at lest one
+     *  row of date
+     * 
+     * @return {boolen} true if it pass validate
      */
     _class.prototype.multipleValidated = function (base, boolKey, arraykey) {
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
             /**
              * bugs over here boolVal can not check with null
-             * refer to Jira #P
+             * @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+             * @solution
+             * 
              */
             var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
             return hasWarning;
@@ -749,7 +772,7 @@ angular.module('PortalApp')
         }
         /**
          * CONSTANT value do not allow to change
-         * @returns {type} 
+         * @returns {DocNewVersionConfig object} 
          */
         docNewVersionConfig.getInstance = function()
         {
@@ -2232,7 +2255,16 @@ angular.module("PortalApp")
         });
         return items.out;
     };
-}).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
+})
+.filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
+.filter('booleanToString', function () {
+
+    return function (v) {
+        if (v == undefined) return "N/A"
+        else if(v) return "Yes"
+        else return "No"
+    }
+})
 
 angular.module("PortalApp")
     .directive('ssDate', function () {
@@ -3823,10 +3855,10 @@ angular.module('PortalApp')
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
             /**
-             * bugs over here boolVal can not check with null
-             * @see Jira #P
+             * bugs over here bool value can not check with null
+             * @see Jira #PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
              */
-            var hasWarning = (boolVal == null) || (boolVal && arrayVal == false);
+            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
             return hasWarning;
         }
         $scope.init = function (bble) {
@@ -3907,6 +3939,7 @@ angular.module('PortalApp')
 
             if (!$scope.DivError.passValidate())
             {
+               
                 return false;
             }
 
@@ -3984,6 +4017,8 @@ angular.module('PortalApp')
             if (!$scope.newVersionValidate())
             {
                 var msg = $scope.DivError.getMessage();
+
+                AngularRoot.alert(msg[0]);
                 return;
             };
             // $scope.DivError.getMessage();
@@ -4048,7 +4083,6 @@ angular.module('PortalApp')
             //});
         }
     });
-node
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
