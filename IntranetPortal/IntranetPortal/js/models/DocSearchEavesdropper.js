@@ -4,6 +4,14 @@ angular.module('PortalApp')
     /**
      * @author steven
      * @date   8/12/2016
+     * @description
+     *  we have do this becuase can not use server side to contorl
+     *  to switch new version.
+     *  and we can not use ng-view and ng-router beacuse we want to it 
+     *  faster we decide to mix ascx and angular.
+     *  
+     *  so we have to wirte a small switch by our self.
+     * 
      * @returns class of Eaves dropper 
      */
 
