@@ -758,6 +758,18 @@ angular.module('PortalApp')
 
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
+       
+        $scope.multipleValidated = function (base, boolKey, arraykey)
+        {
+            var boolVal = base[boolKey];
+            var arrayVal = base[arraykey];
+            /**
+             * bugs over here bool value can not check with null
+             * @see Jira #PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+             */
+            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
+            return hasWarning;
+        }
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
@@ -834,8 +846,9 @@ angular.module('PortalApp')
                 return true;
             }
 
-            if (!$scope.passValidate())
+            if (!$scope.DivError.passValidate())
             {
+               
                 return false;
             }
 
@@ -881,7 +894,7 @@ angular.module('PortalApp')
                                 ["Has_COS_Recorded", "COSRecorded"],
                                 ["Has_Deed_Recorded", "DeedRecorded"]];
 
-            var fields = $scope.DocSearch.LeadResearch
+            var fields = $scope.DocSearch.LeadResearch;
             if (fields) {
                 for (var i = 0; i < validateFields.length; i++) {
                     var f = validateFields[i];
@@ -913,6 +926,8 @@ angular.module('PortalApp')
             if (!$scope.newVersionValidate())
             {
                 var msg = $scope.DivError.getMessage();
+
+                AngularRoot.alert(msg[0]);
                 return;
             };
             // $scope.DivError.getMessage();
@@ -977,7 +992,6 @@ angular.module('PortalApp')
             //});
         }
     });
-node
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
@@ -4050,7 +4064,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
-        ShortSale: true,
         Contract: true,
         Memo: false,
         Deed: false,

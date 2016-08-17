@@ -695,13 +695,28 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
     return corpEntity;
 });
 /**
- * @return {[class]}                 DivError class
+ * @author Steven
+ * @date   8/17/2016 
+ * @todo
+ *  right now we using this in contoller javascript code
+ *  but it better warp it to Angular directive let it handle by itself.  
+ * @description
+ *  DivError model class
+ * @return {DivError Class}
  */
-angular.module('PortalApp').factory('DivError', function () {
+
+angular.module('PortalApp')
+    .factory('DivError', function () {
     var _class = function (id) {
         this.id = id;
     }
-    
+    /**
+     * @author Steven
+     * @date   8/16/2016
+     * @description
+     *  return all error messages under div
+     *  which need validate
+     */
     _class.prototype.getMessage = function () {
         var eMessages = [];
         /*ignore every parent of has form-ignore */
@@ -714,11 +729,32 @@ angular.module('PortalApp').factory('DivError', function () {
     /**
      * @returns {boolen} true if the div pass the validate 
      */
-    _class.prototype.passValidate = function()
-    {
+    _class.prototype.passValidate = function () {
         return this.getMessage().length == 0;
     }
-    
+
+    /**
+     * @author steven
+     * @date   8/17/2016
+     * @description
+     *  check both have yes no and have related array must have at lest one
+     *  row of date
+     * 
+     * @return {boolen} true if it pass validate
+     */
+    _class.prototype.multipleValidated = function (base, boolKey, arraykey) {
+            var boolVal = base[boolKey];
+            var arrayVal = base[arraykey];
+            /**
+             * bugs over here boolVal can not check with null
+             * @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+             * @solution
+             * 
+             */
+            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
+            return hasWarning;
+        }
+
 
     return _class;
 });
@@ -726,7 +762,7 @@ angular.module('PortalApp')
     /**
      * @author steven
      * @date   8/12/2016
-     * @returns class of Eaves dropper 
+     * @returns class of DocNewVersionConfig 
      */
     .factory('DocNewVersionConfig', function () {
         CONSTANT_DATE = '8/11/2016';
@@ -734,7 +770,10 @@ angular.module('PortalApp')
         {
             this.date = CONSTANT_DATE;
         }
-
+        /**
+         * CONSTANT value do not allow to change
+         * @returns {DocNewVersionConfig object} 
+         */
         docNewVersionConfig.getInstance = function()
         {
             return new docNewVersionConfig();
@@ -2216,7 +2255,16 @@ angular.module("PortalApp")
         });
         return items.out;
     };
-}).filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
+})
+.filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
+.filter('booleanToString', function () {
+
+    return function (v) {
+        if (v == undefined) return "N/A"
+        else if(v) return "Yes"
+        else return "No"
+    }
+})
 
 angular.module("PortalApp")
     .directive('ssDate', function () {
@@ -3801,6 +3849,18 @@ angular.module('PortalApp')
 
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
+       
+        $scope.multipleValidated = function (base, boolKey, arraykey)
+        {
+            var boolVal = base[boolKey];
+            var arrayVal = base[arraykey];
+            /**
+             * bugs over here bool value can not check with null
+             * @see Jira #PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+             */
+            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
+            return hasWarning;
+        }
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
@@ -3877,8 +3937,9 @@ angular.module('PortalApp')
                 return true;
             }
 
-            if (!$scope.passValidate())
+            if (!$scope.DivError.passValidate())
             {
+               
                 return false;
             }
 
@@ -3924,7 +3985,7 @@ angular.module('PortalApp')
                                 ["Has_COS_Recorded", "COSRecorded"],
                                 ["Has_Deed_Recorded", "DeedRecorded"]];
 
-            var fields = $scope.DocSearch.LeadResearch
+            var fields = $scope.DocSearch.LeadResearch;
             if (fields) {
                 for (var i = 0; i < validateFields.length; i++) {
                     var f = validateFields[i];
@@ -3956,6 +4017,8 @@ angular.module('PortalApp')
             if (!$scope.newVersionValidate())
             {
                 var msg = $scope.DivError.getMessage();
+
+                AngularRoot.alert(msg[0]);
                 return;
             };
             // $scope.DivError.getMessage();
@@ -4020,7 +4083,6 @@ angular.module('PortalApp')
             //});
         }
     });
-node
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
@@ -7093,7 +7155,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
-        ShortSale: true,
         Contract: true,
         Memo: false,
         Deed: false,
