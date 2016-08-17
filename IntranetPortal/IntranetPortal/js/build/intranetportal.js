@@ -740,7 +740,7 @@ angular.module('PortalApp')
             return new docNewVersionConfig();
         }
         
-        return docNewVersionConfig
+        return docNewVersionConfig;
     })
 
 
@@ -748,6 +748,14 @@ angular.module('PortalApp')
     /**
      * @author steven
      * @date   8/12/2016
+     * @description
+     *  we have do this becuase can not use server side to contorl
+     *  to switch new version.
+     *  and we can not use ng-view and ng-router beacuse we want to it 
+     *  faster we decide to mix ascx and angular.
+     *  
+     *  so we have to wirte a small switch by our self.
+     * 
      * @returns class of Eaves dropper 
      */
 
@@ -3766,6 +3774,8 @@ angular.module('PortalApp')
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
+            // form chris ask delpoy 8/16/2016
+            return false;
             var that = $scope.DocSearch;
 
             if (that.CreateDate > date) {
@@ -3862,6 +3872,7 @@ angular.module('PortalApp')
 
 
         $scope.newVersionValidate = function () {
+
             if (!$scope.newVersion) {
                 return true;
             }
@@ -3918,7 +3929,8 @@ angular.module('PortalApp')
                 for (var i = 0; i < validateFields.length; i++) {
                     var f = validateFields[i];
                     if (fields[f] === undefined) {
-                        errormsg += "The fields marked * must been filled please check them before submit!<br>"
+                        errormsg += "The fields marked * must been filled please check them before submit!<br>";
+
                         break;
                     }
                 }
@@ -3992,7 +4004,7 @@ angular.module('PortalApp')
             //    contentType: 'application/json',
             //    success: function (data) {
 
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');
+            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
             //        if (typeof gridCase != 'undefined') {
             //            if (!isSave) {
             //                $scope.DocSearch.Status = 1;
@@ -4008,7 +4020,7 @@ angular.module('PortalApp')
             //});
         }
     });
-
+node
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
@@ -7081,6 +7093,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
+        ShortSale: true,
         Contract: true,
         Memo: false,
         Deed: false,
