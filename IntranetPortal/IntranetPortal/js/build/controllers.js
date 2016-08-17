@@ -826,6 +826,7 @@ angular.module('PortalApp')
         $scope.init(leadsInfoBBLE)
 
         $scope.newVersionValidate = function () {
+
             if (!$scope.newVersion) {
                 return true;
             }
@@ -875,7 +876,8 @@ angular.module('PortalApp')
                 for (var i = 0; i < validateFields.length; i++) {
                     var f = validateFields[i];
                     if (fields[f] === undefined) {
-                        errormsg += "The fields marked * must been filled please check them before submit!<br>"
+                        errormsg += "The fields marked * must been filled please check them before submit!<br>";
+
                         break;
                     }
                 }
@@ -887,7 +889,6 @@ angular.module('PortalApp')
                     }
                 }
             }
-
 
 
             return errormsg;
@@ -943,7 +944,7 @@ angular.module('PortalApp')
             //    contentType: 'application/json',
             //    success: function (data) {
 
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');
+            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
             //        if (typeof gridCase != 'undefined') {
             //            if (!isSave) {
             //                $scope.DocSearch.Status = 1;
@@ -959,7 +960,6 @@ angular.module('PortalApp')
             //});
         }
     });
-
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
