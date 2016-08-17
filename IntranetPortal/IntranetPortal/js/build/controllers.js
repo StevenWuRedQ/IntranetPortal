@@ -731,6 +731,8 @@ angular.module('PortalApp')
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
+            // form chris ask delpoy 8/16/2016
+            return false;
             var that = $scope.DocSearch;
 
             if (that.CreateDate > date) {
