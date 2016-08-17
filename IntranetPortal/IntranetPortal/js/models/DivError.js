@@ -73,7 +73,7 @@ angular.module('PortalApp')
              * @solution
              *  
              */
-            var hasWarning = (boolVal == null ) || (boolVal && arrayVal == false);
+            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
             return hasWarning;
         }
 

@@ -749,7 +749,7 @@ angular.module('PortalApp')
     {
         var boolVal = base[boolKey];
 
-        return boolVal == null;
+        return boolVal === undefined;
     }
     /**
      * @author steven
@@ -769,7 +769,7 @@ angular.module('PortalApp')
              * @solution
              *  
              */
-            var hasWarning = (boolVal === undefined) || (boolVal && arrayVal == false);
+            var hasWarning = (boolVal == null ) || (boolVal && arrayVal == false);
             return hasWarning;
         }
 
@@ -7173,6 +7173,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
+        ShortSale: true,
         Contract: true,
         Memo: false,
         Deed: false,
