@@ -699,7 +699,8 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
  * @date   8/17/2016 
  * @todo
  *  right now we using this in contoller javascript code
- *  but it better warp it to Angular directive let it handle by itself.  
+ *  but it better warp it to Angular directive let it handle error by itself.  
+ * 
  * @description
  *  DivError model class
  * @return {DivError Class}
@@ -732,7 +733,24 @@ angular.module('PortalApp')
     _class.prototype.passValidate = function () {
         return this.getMessage().length == 0;
     }
+   /**
+     * @author steven
+     * @date   8/17/2016
+     * @description
+     *  check both have yes no bool type with date
+     * @bug
+     *  bugs over here boolVal can not check with null
+     *  @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+     *  @solution
+     * 
+     * @return {boolen} true if it pass validate
+     */
+    _class.prototype.boolValidate = function(base,boolKey)
+    {
+        var boolVal = base[boolKey];
 
+        return boolVal === undefined;
+    }
     /**
      * @author steven
      * @date   8/17/2016
@@ -749,9 +767,9 @@ angular.module('PortalApp')
              * bugs over here boolVal can not check with null
              * @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
              * @solution
-             * 
+             *  
              */
-            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
+            var hasWarning = (boolVal == null ) || (boolVal && arrayVal == false);
             return hasWarning;
         }
 
