@@ -1601,6 +1601,16 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     return leadResearch;
 });
 angular.module("PortalApp")
+.directive('newDsSummary', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            summary: '='
+        },
+        templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html'
+    };
+})
+angular.module("PortalApp")
 .directive('dsSummary', function () {
     return {
         restrict: 'E',
@@ -7182,7 +7192,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
-        ShortSale: true,
+        ShortSale: false,
         Contract: true,
         Memo: false,
         Deed: false,
