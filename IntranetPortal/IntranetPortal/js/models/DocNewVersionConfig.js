@@ -16,5 +16,5 @@
             return new docNewVersionConfig();
         }
         
-        return docNewVersionConfig
+        return docNewVersionConfig;
     })
