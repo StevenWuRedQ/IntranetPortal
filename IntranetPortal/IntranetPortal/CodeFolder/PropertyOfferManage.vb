@@ -388,7 +388,7 @@ Public Class DocumentGenerator
         file.PlaceHolders = phs.ToList
 
         ' Add Seller
-        Dim sellerProps = {"Name", "SSN", "Address", "DOB", "Email", "Phone",
+        Dim sellerProps = {"Name", "SSN|SSN", "Address", "DOB", "Email", "Phone|Phone",
                            "Employed", "Bankaccount|YesNo", "TaxReturn|YesNo", "Bankruptcy|YesNo", "ActiveMilitar|YesNo"}
         For i = 0 To 3
             For Each item In sellerProps
@@ -530,6 +530,14 @@ Public Class DocumentGenerator
                             End If
 
                             Return field.ToString
+                        Case "SSN"
+                            Dim result = field.ToString
+                            If result.Length = 9 Then
+                                Return String.Format("{0}-{1}-{2}", result.Substring(0, 3), result.Substring(3, 2), result.Substring(5))
+                            End If
+
+                        Case "Phone"
+                            Return Utility.FormatPhone(field.ToString)
                     End Select
 
                     Return field.ToString
