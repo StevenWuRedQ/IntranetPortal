@@ -67,10 +67,10 @@
                                 <div style="padding: 20px" id="searchReslut">
                                     
                                     
-                                    <div ng-if="DocSearch.newVersion">
+                                    <div ng-if="newVersion">
                                         <new-ds-summary summary="DocSearch.LeadResearch"></new-ds-summary>
                                     </div>
-                                    <div ng-if="!DocSearch.newVersion">
+                                    <div ng-if="!newVersion">
                                         <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
                                     </div>
                                     
