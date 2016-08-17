@@ -2,7 +2,7 @@
 <div class="tab-content">
     <div class="tab-pane active" id="LegalTab">
 
-        <div style="overflow: auto; height: 830px; padding: 0 20px" class="shortSaleUI">
+        <div style="overflow: auto; height: 830px; padding: 0 20px" class="shortSaleUI" id="DocSearchErrorDiv">
 
             <div class="alert alert-warning" style="margin-top: 20px; font-size: 16px" ng-show="DocSearch.Status != 1">
                 <i class="fa fa-warning"></i><strong>Warning!</strong> Document search didn't completed yet!
@@ -340,7 +340,11 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.c_2nd_Mortgage_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Has 2nd Mortgage *</label>
+                                    <%-- ||owner.Bankruptcy===undefined --%>
+                                    <label class="ss_form_input_title " 
+                                        ng-class="{ss_warning:DocSearch.LeadResearch.Has_c_2nd_Mortgage_c_2nd_Mortgage===null}" 
+                                        data-message="Please check there is 2nd Mortgage or not ."
+                                        >Has 2nd Mortgage *</label>
                                     <pt-radio name="OwnershipMortgageInfo_Hasc2ndMortgage0" model="DocSearch.LeadResearch.Has_c_2nd_Mortgage_c_2nd_Mortgage"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_c_2nd_Mortgage_c_2nd_Mortgage">
@@ -362,7 +366,9 @@
                             <div class="ss_form ">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title ">Has Other Mortgage *</label>
+                                        <label class="ss_form_input_title "
+                                            ng-class="{ss_warning:DocSearch.LeadResearch.Has_Other_Mortgage===null||DocSearch.LeadResearch.Has_Other_Mortgage===undefined}" 
+                                            data-message="Please check there is Other Mortgage or not .">Has Other Mortgage *</label>
                                         <pt-radio name="OwnershipMortgageInfo_HasOtherMortgage2" model="DocSearch.LeadResearch.Has_Other_Mortgage"></pt-radio>
                                     </li>
                                 </ul>

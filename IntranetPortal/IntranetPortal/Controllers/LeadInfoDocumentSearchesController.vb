@@ -48,6 +48,7 @@ Namespace Controllers
             db.Entry(leadInfoDocumentSearch).State = EntityState.Modified
             leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.UpdateDate = Date.Now
+
             'leadInfoDocumentSearch.LeadResearch
             'If (leadInfoDocumentSearch.ResutContent IsNot Nothing) Then
             '    If Not leadInfoDocumentSearch.IsSave Then
@@ -149,8 +150,8 @@ Namespace Controllers
 
             If (findSearch Is Nothing) Then
                 db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
-                leadInfoDocumentSearch.CreateBy = HttpContext.Current.User.Identity.Name
-                leadInfoDocumentSearch.CreateDate = Date.Now
+                leadInfoDocumentSearch.SubmitSearch(HttpContext.Current.User.Identity.Name)
+                'leadInfoDocumentSearch.CreateDate = Date.Now
 
                 Try
                     db.SaveChanges()

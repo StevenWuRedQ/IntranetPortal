@@ -142,9 +142,24 @@ Public Class PropertyOfferManage
     End Function
 End Class
 
+''' <summary>
+''' The document generator, support word and pdf
+''' </summary>
 Public Class DocumentGenerator
+    ''' <summary>
+    ''' The JSON data
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Data As JObject
+    ''' <summary>
+    ''' The file path
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Path As String
+    ''' <summary>
+    ''' The document related property BBLE
+    ''' </summary>
+    ''' <returns></returns>
     Public Property BBLE As String
 
     Public Sub New(data As JObject, bble As String)
@@ -152,12 +167,22 @@ Public Class DocumentGenerator
         Me.BBLE = bble
     End Sub
 
+    ''' <summary>
+    ''' Generate the PDF by file config
+    ''' </summary>
+    ''' <param name="pdfFormFields">The pdf field collections</param>
+    ''' <param name="config"></param>
     Public Sub GeneratePdf(pdfFormFields As AcroFields, config As GenerateFileConfig)
         For Each ph In config.PlaceHolders
             pdfFormFields.SetField(ph.FieldName, GetValue(ph))
         Next
     End Sub
 
+    ''' <summary>
+    ''' Generate word document by file config
+    ''' </summary>
+    ''' <param name="doc">The document name</param>
+    ''' <param name="config">The file configration</param>
     Public Sub GenerateDocument(doc As DocX, config As GenerateFileConfig)
         Me.Data = Data
 
@@ -171,6 +196,11 @@ Public Class DocumentGenerator
         Next
     End Sub
 
+    ''' <summary>
+    ''' load file configratins by config name
+    ''' </summary>
+    ''' <param name="configName"></param>
+    ''' <returns></returns>
     Public Function LoadFileConfigration(configName As String) As GenerateFileConfig
         If _fileConfigures Is Nothing Then
             InitConfigures()
@@ -183,6 +213,9 @@ Public Class DocumentGenerator
 
     Private Shared _fileConfigures As List(Of GenerateFileConfig)
 
+    ''' <summary>
+    ''' Init file configuration and fields mapping
+    ''' </summary>
     Private Sub InitConfigures()
         If _fileConfigures IsNot Nothing Then
             Return
@@ -431,6 +464,14 @@ Public Class DocumentGenerator
         file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERATTORNEY", "DealSheet.ContractOrMemo.Buyer.buyerAttorney"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("BUYERATTORNEYNUM", "DealSheet.ContractOrMemo.Buyer.buyerAttorneyObj.Cell"))
         file.PlaceHolders.Add(New DocumentPlaceHolder("TODAY"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("BLOCK"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("LOT"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("DAY"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("MONTH"))
+        file.PlaceHolders.Add(New DocumentPlaceHolder("SELLERNAMES", Function(data As JObject)
+                                                                         Dim names = data.SelectToken("DealSheet.ContractOrMemo.Sellers").Select(Function(s) s.SelectToken("Name").ToString).Where(Function(s) Not String.IsNullOrEmpty(s)).ToArray
+                                                                         Return String.Join(" & ", names)
+                                                                     End Function))
         _fileConfigures.Add(file)
 
         'Acris info
@@ -452,6 +493,11 @@ Public Class DocumentGenerator
         _fileConfigures.Add(file)
     End Sub
 
+    ''' <summary>
+    ''' Load placeholder value
+    ''' </summary>
+    ''' <param name="ph">The Placeholder value</param>
+    ''' <returns></returns>
     Public Function GetValue(ph As DocumentPlaceHolder) As String
         Select Case ph.Type
             Case DocumentPlaceHolder.ValueType.Predefined
@@ -525,28 +571,65 @@ Public Class DocumentGenerator
             Return _predefinedValues
         End Get
     End Property
-
 End Class
 
+''' <summary>
+''' The document configuration object
+''' </summary>
 Public Class GenerateFileConfig
+    ''' <summary>
+    ''' The config key
+    ''' </summary>
+    ''' <returns></returns>
     Public Property ConfigKey As String
+    ''' <summary>
+    ''' The file name
+    ''' </summary>
+    ''' <returns></returns>
     Public Property FileName As String
+    ''' <summary>
+    ''' The related place holders
+    ''' </summary>
+    ''' <returns></returns>
     Public Property PlaceHolders As List(Of DocumentPlaceHolder)
+    ''' <summary>
+    ''' The file tag data
+    ''' </summary>
+    ''' <returns></returns>
     Public Property TagData As String
+    ''' <summary>
+    ''' the file content type
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Type As FileType
 
+    ''' <summary>
+    ''' The content type
+    ''' </summary>
     Public Enum FileType
         Word
         Pdf
     End Enum
 End Class
 
+''' <summary>
+''' The placeholder object
+''' </summary>
 Public Class DocumentPlaceHolder
+    ''' <summary>
+    ''' Create predefined placeholder
+    ''' </summary>
+    ''' <param name="name">Predefined holder name</param>
     Public Sub New(name As String)
         Me.FieldName = name
         Me.Type = ValueType.Predefined
     End Sub
 
+    ''' <summary>
+    ''' Create JSON placeholder
+    ''' </summary>
+    ''' <param name="name">The field name</param>
+    ''' <param name="value">The JOSN value and format data: [jsonvalue|format]</param>
     Public Sub New(name As String, value As String)
         Me.FieldName = name
         Me.Type = ValueType.JSON
@@ -559,24 +642,63 @@ Public Class DocumentPlaceHolder
         End If
     End Sub
 
+    ''' <summary>
+    ''' The placeholder with specific value type
+    ''' </summary>
+    ''' <param name="name">The field name</param>
+    ''' <param name="value">The value</param>
+    ''' <param name="type">The value type </param>
     Public Sub New(name As String, value As String, type As ValueType)
         Me.FieldName = name
         Me.ValueField = value
         Me.Type = type
     End Sub
 
+    ''' <summary>
+    ''' The placeholder with custom function
+    ''' </summary>
+    ''' <param name="name">The field name</param>
+    ''' <param name="customeFun">The custom function</param>
     Public Sub New(name As String, customeFun As Func(Of Object, String))
         Me.FieldName = name
         Me.Type = ValueType.Custom
         Me.CustomFunction = customeFun
     End Sub
 
+    ''' <summary>
+    ''' The field name
+    ''' </summary>
+    ''' <returns></returns>
     Public Property FieldName As String
+    ''' <summary>
+    ''' The value fields 
+    ''' </summary>
+    ''' <returns></returns>
     Public Property ValueField As String
+    ''' <summary>
+    ''' The custom format
+    ''' </summary>
+    ''' <returns></returns>
     Public Property ValueFormat As String
+    ''' <summary>
+    ''' The value type
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Type As ValueType
+    ''' <summary>
+    ''' The format info
+    ''' </summary>
+    ''' <returns></returns>
     Public Property Format As String
+    ''' <summary>
+    ''' The custom function to provide the placeholder data
+    ''' </summary>
+    ''' <returns></returns>
     Public Property CustomFunction As Func(Of Object, String)
+
+    ''' <summary>
+    ''' The value type enum
+    ''' </summary>
     Public Enum ValueType
         JSON
         Predefined

@@ -704,11 +704,19 @@ angular.module('PortalApp').factory('DivError', function () {
     
     _class.prototype.getMessage = function () {
         var eMessages = [];
-        /*ignore every parent of has form-ignore*/
+        /*ignore every parent of has form-ignore */
         $('#' + this.id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
             eMessages.push($(this).attr('data-message'));
         });
-        return eMessages
+        return eMessages;
+    }
+
+    /**
+     * @returns {boolen} true if the div pass the validate 
+     */
+    _class.prototype.passValidate = function()
+    {
+        return this.getMessage().length == 0;
     }
     
 
@@ -3737,13 +3745,13 @@ angular.module('PortalApp')
 angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
         ptContactServices, ptCom, DocSearch, LeadsInfo
-        , DocSearchEavesdropper
+        , DocSearchEavesdropper, DivError
         ) {
         //New Model(this,arguments)
         $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
 
-
+        $scope.DivError = new DivError('DocSearchErrorDiv');
 
         //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
         // for new version this is not right will suggest use .net MVC redo the page
@@ -3861,12 +3869,20 @@ angular.module('PortalApp')
 
         $scope.init(leadsInfoBBLE)
 
+
         $scope.newVersionValidate = function () {
 
             if (!$scope.newVersion) {
                 return true;
             }
 
+            if (!$scope.passValidate())
+            {
+                return false;
+            }
+
+            return true;
+            ////////////under are old validate///////////////////
             var errormsg = '';
 
             var validateFields = [
@@ -3936,14 +3952,21 @@ angular.module('PortalApp')
 
         $scope.SearchComplete = function (isSave) {
 
-            var msg = $scope.newVersionValidate();
+            if (!$scope.newVersionValidate())
+            {
+                var msg = $scope.DivError.getMessage();
+                return;
+            };
+            // $scope.DivError.getMessage();
+            // $scope.newVersionValidate();
 
-            if (msg) {
-                AngularRoot.alert(msg);
-                return
-            }
+            //if (msg) {
+            //    AngularRoot.alert(msg);
+            //    return;
+            //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
                     AngularRoot.alert("Save successfully!");

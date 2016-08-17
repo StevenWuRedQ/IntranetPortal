@@ -71,6 +71,17 @@ Public Class LeadInfoDocumentSearch
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' Submit new search
+    ''' </summary>
+    ''' <param name="submitBy"></param>
+    Public Sub SubmitSearch(submitBy As String)
+        Status = SearchStatus.NewSearch
+        CreateDate = Date.Now
+        CreateBy = submitBy
+        ' As deploy request 8/16/2016 
+        ' Version = 1
+    End Sub
     Public Sub Save()
         Using ctx As New PortalEntities
             If ctx.LeadInfoDocumentSearches.Find(BBLE) IsNot Nothing Then
