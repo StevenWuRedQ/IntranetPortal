@@ -1,4 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="DocSearchNewVersion.ascx.vb" Inherits="IntranetPortal.DocSearchNewVersion" %>
+<style>
+    .ss_warning a
+    {
+        color:red !important;
+    }
+</style>
 <div class="tab-content">
     <div class="tab-pane active" id="LegalTab">
 
@@ -297,7 +303,10 @@
 
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Has Deed *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_Deed_Purchase_Deed')}" 
+                                        data-message="Please check purchase has deed marked in red."
+                                        >Has Deed *</label>
                                     <pt-radio name="OwnershipMortgageInfo_HasDeed0" model="DocSearch.LeadResearch.Has_Deed_Purchase_Deed"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Deed_Purchase_Deed">
@@ -317,13 +326,18 @@
                     </div>
 
                     <div class="ss_form  ">
-                        <h5 class="ss_form_title  ">1st Mortgage                                       
+                        <h5 class="ss_form_title  "
+                           
+                            >1st Mortgage                                       
                             <pt-collapse model="DocSearch.LeadResearch.c_1st_Mortgage_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.c_1st_Mortgage_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Has 1st Mortgage *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_c_1st_Mortgage_c_1st_Mortgage')}" 
+                                        data-message="Please check 1st Mortgage marked in red."
+                                        >Has 1st Mortgage *</label>
                                     <pt-radio name="OwnershipMortgageInfo_Hasc1stMortgage0" model="DocSearch.LeadResearch.Has_c_1st_Mortgage_c_1st_Mortgage"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_c_1st_Mortgage_c_1st_Mortgage">
@@ -342,8 +356,8 @@
                                 <li class="ss_form_item " ng-show="true">
                                     <%-- ||owner.Bankruptcy===undefined --%>
                                     <label class="ss_form_input_title " 
-                                        ng-class="{ss_warning:DivError.(boolValidate.LeadResearch,'Has_c_2nd_Mortgage_c_2nd_Mortgage')}" 
-                                        data-message="Please check there is 2nd Mortgage or not."
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_c_2nd_Mortgage_c_2nd_Mortgage')}" 
+                                        data-message="Please check 2nd Mortgage marked in red."
                                         >Has 2nd Mortgage *</label>
                                     <pt-radio name="OwnershipMortgageInfo_Hasc2ndMortgage0" model="DocSearch.LeadResearch.Has_c_2nd_Mortgage_c_2nd_Mortgage"></pt-radio>
                                 </li>
@@ -368,7 +382,8 @@
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title "
                                             ng-class="{ss_warning:DivError.multipleValidated(DocSearch.LeadResearch,'Has_Other_Mortgage','OtherMortgage')}" 
-                                            data-message="Please check Other Mortgage selected and if it's select make sure there are at least one mortgage been filled .">Has Other Mortgage *</label>
+                                            data-message="Other Mortgage has been selected, please add at least 1 item"
+                                            >Has Other Mortgage *</label>
                                         <pt-radio name="OwnershipMortgageInfo_HasOtherMortgage2" model="DocSearch.LeadResearch.Has_Other_Mortgage"></pt-radio>
                                     </li>
                                 </ul>
@@ -404,7 +419,10 @@
                             <div class="ss_form ">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title ">Has Other Liens *</label>
+                                        <label class="ss_form_input_title "
+                                            ng-class="{ss_warning:DivError.multipleValidated(DocSearch.LeadResearch,'Has_Other_Liens','OtherLiens')}" 
+                                            data-message="Other Liens has been selected, please add at least 1 item"
+                                            >Has Other Liens *</label>
                                         <pt-radio name="OwnershipMortgageInfo_Has_Other_Liens2" model="DocSearch.LeadResearch.Has_Other_Liens"></pt-radio>
                                     </li>
                                 </ul>
@@ -443,7 +461,10 @@
                             <div class="ss_form ">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title ">Has Tax Lien Certificate  *</label>
+                                        <label class="ss_form_input_title "
+                                            ng-class="{ss_warning:DivError.multipleValidated(DocSearch.LeadResearch,'Has_TaxLiensCertifcate','TaxLienCertificate')}" 
+                                            data-message="Tax Lien Certificate has been selected, please add at least 1 item"
+                                            >Has Tax Lien Certificate  *</label>
                                         <pt-radio name="OwnershipMortgageInfo_Has_TaxLiensCertifcate3" model="DocSearch.LeadResearch.Has_TaxLiensCertifcate"></pt-radio>
                                     </li>
                                 </ul>
@@ -482,7 +503,10 @@
                             <div class="ss_form ">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title ">Has COS Recorded *</label>
+                                        <label class="ss_form_input_title "
+                                            ng-class="{ss_warning:DivError.multipleValidated(DocSearch.LeadResearch,'Has_COS_Recorded','COSRecorded')}" 
+                                            data-message="COS Recorded has been selected, please add at least 1 item"
+                                            >Has COS Recorded *</label>
                                         <pt-radio name="OwnershipMortgageInfo_Has_COS_Recorded2" model="DocSearch.LeadResearch.Has_COS_Recorded"></pt-radio>
                                     </li>
                                 </ul>
@@ -520,7 +544,10 @@
                             <div class="ss_form ">
                                 <ul class="ss_form_box clearfix">
                                     <li class="ss_form_item ">
-                                        <label class="ss_form_input_title ">Has Deed Recorded *</label>
+                                        <label class="ss_form_input_title "
+                                            ng-class="{ss_warning:DivError.multipleValidated(DocSearch.LeadResearch,'Has_Deed_Recorded','DeedRecorded')}" 
+                                            data-message="Deed Recorded has been selected, please add at least 1 item"
+                                            >Has Deed Recorded *</label>
                                         <pt-radio name="OwnershipMortgageInfo_Has_Deed_Recorded1" model="DocSearch.LeadResearch.Has_Deed_Recorded"></pt-radio>
                                     </li>
                                 </ul>
@@ -556,7 +583,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Last_Assignment_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has Last Assignment *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'has_Last_Assignment_Last_Assignment')}" 
+                                        data-message="Please check Last Assignment marked in red."
+                                        >has Last Assignment *</label>
                                     <pt-radio name="OwnershipMortgageInfo_hasLastAssignment0" model="DocSearch.LeadResearch.has_Last_Assignment_Last_Assignment"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Last_Assignment_Last_Assignment">
@@ -575,20 +605,20 @@
                             <pt-collapse model="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info">
-                            <ul class="ss_form_box clearfix">
+                            <ul class="ss_form_box clearfix" style="list-style:none">
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">LP Index #</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.LP_Index___Num_LP_Index___Num">
                                 </li>
                                 <li class="clear-fix"></li>
                                 <li class="ss_form_item_line">
-                                    <label class="ss_form_input_title ">notes</label>
+                                    <label class="ss_form_input_title " >notes</label>
                                     <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.notes_LP_Index___Num"></textarea>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <ul class="ss_form_box clearfix">
+                    <ul class="ss_form_box clearfix" style="list-style:none">
 
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title "><a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a></label>
@@ -600,20 +630,29 @@
                             <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.Servicer_notes"></textarea>
                         </li>
                         <li class="ss_form_item ">
-                            <label class="ss_form_input_title ">
-                                <a href="https://www.knowyouroptions.com/loanlookup" target="_blank">Fannie *</a>
+                            <label class="ss_form_input_title "
+                                ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'fannie')}" 
+                                data-message="Please check Fannie marked in red."
+                                >
+                                <a href="https://www.knowyouroptions.com/loanlookup" target="_blank">Fannie </a>*
 
                             </label>
                             <pt-radio name="OwnershipMortgageInfo_Fannie0" model="DocSearch.LeadResearch.fannie"></pt-radio>
                         </li>
                         <li class="ss_form_item ">
-                            <label class="ss_form_input_title ">
-                                <a href="https://ww3.freddiemac.com/loanlookup/" target="_blank">Freddie Mac *</a>
+                            <label class="ss_form_input_title "
+                                ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Freddie_Mac_')}" 
+                                data-message="Please check Freddie Mac marked in red."
+                                >
+                                <a href="https://ww3.freddiemac.com/loanlookup/" target="_blank">Freddie Mac </a> *
                             </label>
                             <pt-radio name="OwnershipMortgageInfo_FreddieMac0" model="DocSearch.LeadResearch.Freddie_Mac_"></pt-radio>
                         </li>
                         <li class="ss_form_item ">
-                            <label class="ss_form_input_title ">FHA *</label>
+                            <label class="ss_form_input_title "
+                                ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'fha')}" 
+                                data-message="Please check FHA marked in red."
+                                >FHA *</label>
                             <pt-radio name="OwnershipMortgageInfo_FHA0" model="DocSearch.LeadResearch.fha"></pt-radio>
                         </li>
                     </ul>
@@ -660,7 +699,10 @@
                             <ul class="ss_form_box clearfix">
 
                                 <li class="ss_form_item ">
-                                    <label class="ss_form_input_title ">Has Due *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_Due_Property_Taxes_Due')}" 
+                                        data-message="Please check Property Taxes Due marked in red."
+                                        >Has Due *</label>
                                     <pt-radio name="PropertyDuesViolations_HasDue2" model="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due">
@@ -682,7 +724,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Water_Charges_Due_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item ">
-                                    <label class="ss_form_input_title ">Has Due *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_Due_Water_Charges_Due')}" 
+                                        data-message="Please check Water Charges Due marked in red."
+                                        >Has Due *</label>
                                     <pt-radio name="PropertyDuesViolations_HasDue0" model="DocSearch.LeadResearch.Has_Due_Water_Charges_Due"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Water_Charges_Due">
@@ -699,7 +744,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.ECB_Violoations_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Has Open *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_Open_ECB_Violoations')}" 
+                                        data-message="Please check ECB Violoations Open marked in red."
+                                        >Has Open *</label>
                                     <pt-radio name="PropertyDuesViolations_HasOpen0" model="DocSearch.LeadResearch.Has_Open_ECB_Violoations"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Open_ECB_Violoations">
@@ -720,7 +768,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.DOB_Violoations_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Has Open *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_Open_DOB_Violoations')}" 
+                                        data-message="Please check DOB Violoations Open marked in red."
+                                        >Has Open *</label>
                                     <pt-radio name="PropertyDuesViolations_HasOpen3" model="DocSearch.LeadResearch.Has_Open_DOB_Violoations"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Open_DOB_Violoations">
@@ -741,7 +792,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.C_O_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Has CO *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'hasCO')}" 
+                                        data-message="Please check Has CO marked in red."
+                                        >Has CO *</label>
                                     <pt-radio name="PropertyDuesViolations_HasCO4" model="DocSearch.LeadResearch.hasCO"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.hasCO">
@@ -758,7 +812,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.HPD_Violations_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Has Violations *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_Violations_HPD_Violations')}" 
+                                        data-message="Please check Has HPD Violations marked in red."
+                                        >Has Violations *</label>
                                     <pt-radio name="PropertyDuesViolations_HasViolations6" model="DocSearch.LeadResearch.Has_Violations_HPD_Violations"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Violations_HPD_Violations">
@@ -787,7 +844,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.HPD_Charges_Not_Paid_Transferred_Property_Dues_Violations">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">Is Open *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Is_Open_HPD_Charges_Not_Paid_Transferred')}" 
+                                        data-message="Please check HPD Charges Not Paid Transferred Is Open marked in red."
+                                        >Is Open *</label>
                                     <pt-radio name="PropertyDuesViolations_IsOpen7" model="DocSearch.LeadResearch.Is_Open_HPD_Charges_Not_Paid_Transferred"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Is_Open_HPD_Charges_Not_Paid_Transferred">
@@ -839,7 +899,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Personal_Judgments_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has Judgments *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'has_Judgments_Personal_Judgments')}" 
+                                        data-message="Please check Personal Judgments marked in red."
+                                        >has Judgments *</label>
                                     <pt-radio name="JudgementsLiens_hasJudgments0" model="DocSearch.LeadResearch.has_Judgments_Personal_Judgments"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Judgments_Personal_Judgments">
@@ -860,7 +923,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.HPD_Judgments_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has Judgments *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'has_Judgments_HPD_Judgments')}" 
+                                        data-message="Please check HPD Judgments marked in red."
+                                        >has Judgments *</label>
                                     <pt-radio name="JudgementsLiens_hasJudgments2" model="DocSearch.LeadResearch.has_Judgments_HPD_Judgments"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Judgments_HPD_Judgments">
@@ -881,7 +947,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.IRS_Tax_Lien_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has IRS Tax Lien *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'has_IRS_Tax_Lien_IRS_Tax_Lien')}" 
+                                        data-message="Please check IRS Tax Lien marked in red."
+                                        >has IRS Tax Lien *</label>
                                     <pt-radio name="JudgementsLiens_hasIRSTaxLien0" model="DocSearch.LeadResearch.has_IRS_Tax_Lien_IRS_Tax_Lien"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_IRS_Tax_Lien_IRS_Tax_Lien">
@@ -902,7 +971,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.NYS_Tax_Lien_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has NYS Tax Lien *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'hasNysTaxLien')}" 
+                                        data-message="Please check NYS Tax Lien marked in red."
+                                        >has NYS Tax Lien *</label>
                                     <pt-radio name="JudgementsLiens_hasNYSTaxLien0" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.hasNysTaxLien">
@@ -923,7 +995,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Sidewalk_Liens_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has Sidewalk Liens *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'has_Sidewalk_Liens_Sidewalk_Liens')}" 
+                                        data-message="Please check Sidewalk Liens marked in red."
+                                        >has Sidewalk Liens *</label>
                                     <pt-radio name="JudgementsLiens_hasSidewalkLiens0" model="DocSearch.LeadResearch.has_Sidewalk_Liens_Sidewalk_Liens"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Sidewalk_Liens_Sidewalk_Liens">
@@ -944,7 +1019,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Vacate_Order_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has Vacate Order *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'has_Vacate_Order_Vacate_Order')}" 
+                                        data-message="Please check Vacate Order marked in red."
+                                        >has Vacate Order *</label>
                                     <pt-radio name="JudgementsLiens_hasVacateOrder0" model="DocSearch.LeadResearch.has_Vacate_Order_Vacate_Order"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Vacate_Order_Vacate_Order">
@@ -965,7 +1043,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.ECB_Tickets_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has ECB Tickets *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'has_ECB_Tickets_ECB_Tickets')}" 
+                                        data-message="Please check ECB Tickets marked in red."
+                                        >has ECB Tickets *</label>
                                     <pt-radio name="JudgementsLiens_hasECBTickets0" model="DocSearch.LeadResearch.has_ECB_Tickets_ECB_Tickets"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_ECB_Tickets_ECB_Tickets">
@@ -986,7 +1067,10 @@
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.ECB_on_Name_other_known_address_Judgements_Liens">
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item " ng-show="true">
-                                    <label class="ss_form_input_title ">has ECB on Name *</label>
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'has_ECB_on_Name_ECB_on_Name_other_known_address')}" 
+                                        data-message="Please check ECB on Name other known address marked in red."
+                                        >has ECB on Name *</label>
                                     <pt-radio name="JudgementsLiens_hasECBonName0" model="DocSearch.LeadResearch.has_ECB_on_Name_ECB_on_Name_other_known_address"></pt-radio>
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_ECB_on_Name_ECB_on_Name_other_known_address">
