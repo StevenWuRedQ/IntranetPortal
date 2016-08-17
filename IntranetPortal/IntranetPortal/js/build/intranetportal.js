@@ -697,11 +697,12 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
 /**
  * @return {[class]}                 DivError class
  */
+
 angular.module('PortalApp').factory('DivError', function () {
     var _class = function (id) {
         this.id = id;
     }
-    
+
     _class.prototype.getMessage = function () {
         var eMessages = [];
         /*ignore every parent of has form-ignore */
@@ -714,11 +715,23 @@ angular.module('PortalApp').factory('DivError', function () {
     /**
      * @returns {boolen} true if the div pass the validate 
      */
-    _class.prototype.passValidate = function()
-    {
+    _class.prototype.passValidate = function () {
         return this.getMessage().length == 0;
     }
-    
+    /**
+     * @return {[class]}
+     */
+    _class.prototype.multipleValidated = function (base, boolKey, arraykey) {
+            var boolVal = base[boolKey];
+            var arrayVal = base[arraykey];
+            /**
+             * bugs over here boolVal can not check with null
+             * refer to Jira #P
+             */
+            var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
+            return hasWarning;
+        }
+
 
     return _class;
 });
@@ -726,7 +739,7 @@ angular.module('PortalApp')
     /**
      * @author steven
      * @date   8/12/2016
-     * @returns class of Eaves dropper 
+     * @returns class of DocNewVersionConfig 
      */
     .factory('DocNewVersionConfig', function () {
         CONSTANT_DATE = '8/11/2016';
@@ -734,13 +747,16 @@ angular.module('PortalApp')
         {
             this.date = CONSTANT_DATE;
         }
-
+        /**
+         * CONSTANT value do not allow to change
+         * @returns {type} 
+         */
         docNewVersionConfig.getInstance = function()
         {
             return new docNewVersionConfig();
         }
         
-        return docNewVersionConfig
+        return docNewVersionConfig;
     })
 
 
@@ -748,6 +764,14 @@ angular.module('PortalApp')
     /**
      * @author steven
      * @date   8/12/2016
+     * @description
+     *  we have do this becuase can not use server side to contorl
+     *  to switch new version.
+     *  and we can not use ng-view and ng-router beacuse we want to it 
+     *  faster we decide to mix ascx and angular.
+     *  
+     *  so we have to wirte a small switch by our self.
+     * 
      * @returns class of Eaves dropper 
      */
 
@@ -3766,6 +3790,8 @@ angular.module('PortalApp')
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
+            // form chris ask delpoy 8/16/2016
+            return false;
             var that = $scope.DocSearch;
 
             if (that.CreateDate > date) {
@@ -3791,6 +3817,18 @@ angular.module('PortalApp')
 
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
+       
+        $scope.multipleValidated = function (base, boolKey, arraykey)
+        {
+            var boolVal = base[boolKey];
+            var arrayVal = base[arraykey];
+            /**
+             * bugs over here boolVal can not check with null
+             * @see Jira #P
+             */
+            var hasWarning = (boolVal == null) || (boolVal && arrayVal == false);
+            return hasWarning;
+        }
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
@@ -3862,11 +3900,12 @@ angular.module('PortalApp')
 
 
         $scope.newVersionValidate = function () {
+
             if (!$scope.newVersion) {
                 return true;
             }
 
-            if (!$scope.passValidate())
+            if (!$scope.DivError.passValidate())
             {
                 return false;
             }
@@ -3913,12 +3952,13 @@ angular.module('PortalApp')
                                 ["Has_COS_Recorded", "COSRecorded"],
                                 ["Has_Deed_Recorded", "DeedRecorded"]];
 
-            var fields = $scope.DocSearch.LeadResearch
+            var fields = $scope.DocSearch.LeadResearch;
             if (fields) {
                 for (var i = 0; i < validateFields.length; i++) {
                     var f = validateFields[i];
                     if (fields[f] === undefined) {
-                        errormsg += "The fields marked * must been filled please check them before submit!<br>"
+                        errormsg += "The fields marked * must been filled please check them before submit!<br>";
+
                         break;
                     }
                 }
@@ -3992,7 +4032,7 @@ angular.module('PortalApp')
             //    contentType: 'application/json',
             //    success: function (data) {
 
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');
+            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
             //        if (typeof gridCase != 'undefined') {
             //            if (!isSave) {
             //                $scope.DocSearch.Status = 1;
@@ -4008,7 +4048,7 @@ angular.module('PortalApp')
             //});
         }
     });
-
+node
 /* global LegalShowAll */
 /* global angular */
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
