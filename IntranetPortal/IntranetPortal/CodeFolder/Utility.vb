@@ -329,6 +329,87 @@ Public Class Utility
         Return mynewNumber
     End Function
 
+    ''' <summary>
+    '''  returned formats are: 
+    '''  example1               (620) 123-4567 Ext: 890
+    '''  example2                     123-4567 Ext: 890
+    '''  example3               (620) 123-4567 
+    '''  example4                     123-4567
+    '''  The user can input a 7 or 10 digit number followed by a character(s) and digits for the extension
+    ''' 
+    ''' </summary>
+    ''' <param name="OriginalNumber"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function FormatPhone(ByVal OriginalNumber As String) As String
+
+        Dim sReturn As String
+        Dim tester() As String
+        Dim R As Regex
+        Dim M As Match
+        Dim sTemp As String
+
+        sReturn = ""
+        ' removes anything that is not a digit or letter
+        sTemp = UnFormatPhone(OriginalNumber)
+        ' splits sTemp based on user input of character(s) to signify an extension i.e. x or ext or anything else you can think of (abcdefg...)
+        tester = Regex.Split(sTemp, "\D+")
+        ' if the string was split then replace sTemp with the first part, i.e. the phone number less the extension
+        If tester.Count > 1 Then
+            sTemp = tester(0)
+        End If
+        ' Based on the NANP (North American Numbering Plan),  we better have a 7 or 10 digit number.  anything else will not parse
+        If sTemp.Length = 7 Then
+            R = New Regex("^(?<First>\d{3})(?<Last>\d{4})")
+        ElseIf sTemp.Length = 10 Then
+            R = New Regex("^(?<AC>\d{3})(?<First>\d{3})(?<Last>\d{4})")
+        Else
+            Return OriginalNumber
+        End If
+        ' now format the phone number nice and purtee...
+        M = R.Match(sTemp)
+        If M.Groups("AC").Length > 0 Then
+            sReturn &= String.Format("({0}) {1}-{2}", CStr(M.Groups("AC").Value), CStr(M.Groups("First").Value), CStr(M.Groups("Last").Value))
+        Else
+            sReturn &= String.Format("{0}-{1}", CStr(M.Groups("First").Value), CStr(M.Groups("Last").Value))
+        End If
+        If tester.Count > 1 Then
+            sReturn &= " Ext: " + tester(1)
+        End If
+        Return sReturn
+
+    End Function
+
+    ''' <summary>
+    ''' Strips NON ALPHANUMERICS from a string
+    ''' 
+    ''' </summary>
+    ''' <param name="sTemp"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function UnFormatPhone(ByVal sTemp As String) As String
+        sTemp = ClearNull(sTemp)
+        Dim sb As New System.Text.StringBuilder
+        For Each ch As Char In sTemp
+            If Char.IsLetterOrDigit(ch) OrElse ch = " "c Then
+                sb.Append(ch)
+            End If
+        Next
+        UnFormatPhone = sb.ToString
+
+    End Function
+
+    ''' <summary>
+    ''' Returns a trimmed string with vbNullChar replaced by a blank
+    ''' </summary>
+    ''' <param name="sTemp"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function ClearNull(ByRef sTemp As String) As String
+        sTemp = Replace(sTemp, vbNullChar, "")
+        ClearNull = Trim(sTemp)
+    End Function
+
     Public Shared Function RemoveHtmlTags(html As String) As String
         Dim text = Regex.Replace(html, "<[^>]*>", String.Empty)
         Return text
