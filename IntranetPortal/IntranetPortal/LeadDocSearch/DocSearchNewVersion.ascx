@@ -5,8 +5,6 @@
     }
 </style>
 <div class="tab-content">
-
-    <button type="button" ng-click="test()">test</button>
     <div class="tab-pane active" id="LegalTab">
 
         <div style="overflow: auto; height: 830px; padding: 0 20px" class="shortSaleUI" id="DocSearchErrorDiv">
@@ -612,7 +610,7 @@
                                 <li class="clear-fix"></li>
                                 <li class="ss_form_item_line">
                                     <label class="ss_form_input_title ">notes</label>
-                                    <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.notes_LP_Index___Num"></textarea>
+                                    <textarea class="edit_text_area text_area_ss_form " ng-model="DocSearch.LeadResearch.notes_LP_Index___Num"></textarea>
                                 </li>
                             </ul>
                         </div>
@@ -626,7 +624,7 @@
                         <li class="clear-fix"></li>
                         <li class="ss_form_item_line">
                             <label class="ss_form_input_title ">Servicer notes</label>
-                            <textarea class="edit_text_area text_area_ss_form " model="DocSearch.LeadResearch.Servicer_notes"></textarea>
+                            <textarea class="edit_text_area text_area_ss_form " ng-model="DocSearch.LeadResearch.Servicer_notes"></textarea>
                         </li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title "
