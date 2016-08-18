@@ -1583,7 +1583,7 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     {
         var self = this;
         
-        // bug fix for mortgageAmount secondMortgageAmount not get back
+        // bug fix for mortgageAmount secondMortgageAmount not saving
         // 8/26/2016
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
             self.ownerName = self.ownerName || data1.Owner;
@@ -1619,7 +1619,7 @@ angular.module("PortalApp")
         scope: {
             summary:'='
         },
-        templateUrl:'/js/Views/LeadDocSearch/new_ds_summary.html'
+        templateUrl:'/js/Views/LeadDocSearch/dsSummary.html'
     };
 })
 angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
