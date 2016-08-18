@@ -780,6 +780,7 @@ angular.module('PortalApp')
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
                 $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
+                debugger;
                 $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
 
@@ -954,7 +955,9 @@ angular.module('PortalApp')
                 });
             }
 
-
+            $scope.test = function () {
+                $scope.$digest();
+            }
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
             //    if (typeof gridCase != 'undefined') {
