@@ -1584,11 +1584,11 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
         var self = this;
         
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
-            self.ownerName = data1.Owner;
-            self.waterCharges = data1.WaterAmt;
-            self.propertyTaxes = data1.TaxesAmt;
-            self.mortgageAmount = data1.C1stMotgrAmt;
-            self.secondMortgageAmount = data1.C2ndMotgrAmt;
+            self.ownerName = self.ownerName || data1.Owner;
+            self.waterCharges = self.waterCharges || data1.WaterAmt;
+            self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
+            self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
+            self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
            
             self.getOwnerSSN(BBLE);
         });
@@ -1617,7 +1617,7 @@ angular.module("PortalApp")
         scope: {
             summary:'='
         },
-        templateUrl:'/js/Views/LeadDocSearch/dsSummary.html'
+        templateUrl:'/js/Views/LeadDocSearch/new_ds_summary.html'
     };
 })
 angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
