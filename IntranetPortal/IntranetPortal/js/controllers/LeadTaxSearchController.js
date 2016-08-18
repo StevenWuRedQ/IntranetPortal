@@ -254,7 +254,9 @@
                 });
             }
 
-
+            $scope.test = function () {
+                $scope.$digest();
+            }
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
             //    if (typeof gridCase != 'undefined') {

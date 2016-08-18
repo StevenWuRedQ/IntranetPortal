@@ -954,7 +954,9 @@ angular.module('PortalApp')
                 });
             }
 
-
+            $scope.test = function () {
+                $scope.$digest();
+            }
             //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
             //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
             //    if (typeof gridCase != 'undefined') {
@@ -4064,7 +4066,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
-        ShortSale: true,
+        ShortSale: false,
         Contract: true,
         Memo: false,
         Deed: false,

@@ -65,7 +65,15 @@
                                     </li>
                                 </ul>
                                 <div style="padding: 20px" id="searchReslut">
-                                    <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
+                                    
+                                    
+                                    <div ng-if="newVersion">
+                                        <new-ds-summary summary="DocSearch.LeadResearch"></new-ds-summary>
+                                    </div>
+                                    <div ng-if="!newVersion">
+                                        <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
+                                    </div>
+                                    
                                    <%-- <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />--%>
                                 </div>
                             </div>

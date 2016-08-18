@@ -18,12 +18,14 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     {
         var self = this;
         
+        // bug fix for mortgageAmount secondMortgageAmount not saving
+        // 8/26/2016
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
-            self.ownerName = data1.Owner;
-            self.waterCharges = data1.WaterAmt;
-            self.propertyTaxes = data1.TaxesAmt;
-            self.mortgageAmount = data1.C1stMotgrAmt;
-            self.secondMortgageAmount = data1.C2ndMotgrAmt;
+            self.ownerName = self.ownerName || data1.Owner;
+            self.waterCharges = self.waterCharges || data1.WaterAmt;
+            self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
+            self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
+            self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
            
             self.getOwnerSSN(BBLE);
         });

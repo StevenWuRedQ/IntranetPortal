@@ -387,13 +387,13 @@
                             <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then %>
 
                             <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
-                            <span>search in processing </span>
+                            <span>search in process </span>
                             <% Else %>
                                <i class="fa fa-search-plus color_blue_edit collapse_btn tooltip-examples" title="Request a search" id="btnRequest" onclick="RequestDocSearch()"></i>
                             <%End if %>
                             <span id="waitingSearch" style="display: none">
                                 <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
-                                <span>search in processing </span>
+                                <span>search in process </span>
                             </span>
                             <span style="display: none" id="docSearchLoading">
                                 <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>

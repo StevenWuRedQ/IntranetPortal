@@ -79,8 +79,8 @@ Public Class LeadInfoDocumentSearch
         Status = SearchStatus.NewSearch
         CreateDate = Date.Now
         CreateBy = submitBy
-        ' As deploy request 8/16/2016 
-        ' Version = 1
+        ' As deploy 8/18/2016 open new version switch
+        Version = 1
     End Sub
     Public Sub Save()
         Using ctx As New PortalEntities

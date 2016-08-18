@@ -35,7 +35,7 @@
                                                     <option ng-repeat="option in sitem.options">{{option}} </option>
                                                 </select>
                                                 <tempt-pt-file file-bble="{{BBLEModel}}" file-id="{{GetUniqueId(form.head,sitem.label)}}" file-model="{{GenerateModel(sitem.label,item.label)}}" ng-if="NeedChangeElement(sitem.type,'file')"></tempt-pt-file>
-                                                <textarea class="edit_text_area text_area_ss_form" model="{{GenerateModel(sitem.label,item.label)}}" ng-if="NeedChangeElement(sitem.type,'notes')"></textarea>
+                                                <textarea class="edit_text_area text_area_ss_form" tempt-ng-model="{{GenerateModel(sitem.label,item.label)}}" ng-if="NeedChangeElement(sitem.type,'notes')"></textarea>
                                                 <input type="text" class="ss_form_input" tempt-ng-model="{{GenerateModel(sitem.label,item.label)}}" tempt-ng-change="{{GenerateModel(sitem.label,item.label)}}Id=null" tempt-typeahead="contact.Name for contact in ptContactServices.getContacts($viewValue)" tempt-typeahead-on-select="{{GenerateModel(sitem.label,item.label)}}Id=$sitem.ContactId" tempt-bind-id="{{GenerateModel(sitem.label,item.label)}}Id" ng-if="NeedChangeElement(sitem.type,'contact')">
                                                 <tempt-pt-radio name="{{GetUniqueId(form.head,sitem.label)}}" tempt-model="{{GenerateModel(sitem.label,item.label)}}" ng-if="NeedChangeElement(sitem.type,'radio')"></tempt-pt-radio>
 

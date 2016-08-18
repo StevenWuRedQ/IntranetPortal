@@ -51,6 +51,10 @@ angular.module('PortalApp')
           * @return {boolen} true if it pass validate
           */
         _class.prototype.boolValidate = function (base, boolKey) {
+            if (!base)
+            {
+                return false;
+            }
             var boolVal = base[boolKey];
 
             return boolVal === undefined;
@@ -66,6 +70,10 @@ angular.module('PortalApp')
          * @return {boolen} true if it pass validate
          */
         _class.prototype.multipleValidated = function (base, boolKey, arraykey) {
+            if (!base)
+            {
+                return false;
+            }
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
             /**
