@@ -1619,7 +1619,7 @@ angular.module("PortalApp")
         scope: {
             summary:'='
         },
-        templateUrl:'/js/Views/LeadDocSearch/dsSummary.html'
+        templateUrl: '/js/Views/LeadDocSearch/dsSummary.html'
     };
 })
 angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
