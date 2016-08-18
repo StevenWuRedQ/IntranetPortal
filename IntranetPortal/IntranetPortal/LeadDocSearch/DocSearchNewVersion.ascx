@@ -86,15 +86,12 @@
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">HPD </label>
-                    <button class="btn btn-secondary" type="button">
+            
                         <a href="https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx" target="_blank">Go to HPD</a>
-                    </button>
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">NY Data</label>
-                    <button class="btn btn-secondary" type="button">
                         <a href="https://oma.edatatrace.com/oma/" target="_blank">Go to NY Data</a>
-                    </button>
                 </li>
             </ul>--%>
             <%-- --links ----%>
@@ -880,9 +877,7 @@
                         <ul class="ss_form_box clearfix">
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title ">NY Data</label>
-                                <button class="btn btn-secondary" type="button">
                                     <a href="https://oma.edatatrace.com/oma/" target="_blank">Go to NY Data</a>
-                                </button>
                             </li>
                         </ul>
                     </div>
