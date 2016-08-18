@@ -1583,6 +1583,8 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     {
         var self = this;
         
+        // bug fix for mortgageAmount secondMortgageAmount not get back
+        // 8/26/2016
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
             self.ownerName = self.ownerName || data1.Owner;
             self.waterCharges = self.waterCharges || data1.WaterAmt;
@@ -3908,7 +3910,6 @@ angular.module('PortalApp')
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
                 $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                debugger;
                 $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
 

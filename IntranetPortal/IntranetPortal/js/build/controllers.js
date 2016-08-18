@@ -780,7 +780,6 @@ angular.module('PortalApp')
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
                 $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                debugger;
                 $scope.DocSearch.initLeadsResearch();
                 $scope.DocSearch.initTeam();
 
