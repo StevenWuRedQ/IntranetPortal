@@ -152,6 +152,7 @@ Public Class EmailSummaryRule
                 Try
                     If HasTask(emp) Then
                         client.SendTaskSummaryEmail(emp)
+                        Thread.Sleep(1000)
                     End If
 
                 Catch ex As Exception
@@ -197,6 +198,7 @@ Public Class AgentActivitySummaryRule
             For Each team In teams
                 Try
                     client.SendTeamActivityEmail(team.Name)
+                    Thread.Sleep(1000)
                 Catch ex As Exception
                     Log("AgentActivitySummaryRule Error. TeamName: " & team.Name, ex)
                 End Try
@@ -517,6 +519,10 @@ Public Class CompleteTaskRule
             End If
 
             Dim ld = Lead.GetInstance(bble)
+            If ld Is Nothing Then
+                Return True
+            End If
+
             If Not tk.EmployeeName.ToLower.Contains(ld.EmployeeName.ToLower) Then
                 Return True
             End If
@@ -719,7 +725,7 @@ Public Class DOBComplaintsCheckingRule
                         Dim mailData As New Dictionary(Of String, String)
                         mailData.Add("UserName", name)
                         client.SendEmailByTemplate(name, "ComplaintsRefreshed", mailData)
-
+                        Thread.Sleep(1000)
                     End Using
                 Catch ex As Exception
                     Log("Sending Notify Email " & name, ex)
@@ -758,11 +764,15 @@ Public Class ShortSaleFollowUpRule
                 Dim users = ShortSaleManage.GetShortSaleUsers
                 For Each ssUser In users
                     SendEmail(ssUser, PortalReport.CaseActivityData.ActivityType.ShortSale)
+
+                    Thread.Sleep(1000)
                 Next
 
                 users = TitleManage.TitleUsers
                 For Each tUsers In users
                     SendEmail(tUsers, PortalReport.CaseActivityData.ActivityType.Title)
+
+                    Thread.Sleep(1000)
                 Next
             Catch ex As Exception
                 Log("ShortSale user followup rule error", ex)
