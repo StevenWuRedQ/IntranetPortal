@@ -4,7 +4,7 @@ Imports Newtonsoft.Json.Linq
 Imports Newtonsoft.Json
 
 ''' <summary>
-''' To handle the short sale managment function
+''' To handle the short sale management function
 ''' </summary>
 Public Class ShortSaleManage
 
@@ -43,10 +43,20 @@ Public Class ShortSaleManage
         Return _viewable
     End Function
 
+    ''' <summary>
+    ''' Return if given property in the ShortSale
+    ''' </summary>
+    ''' <param name="bble">The Property BBLE</param>
+    ''' <returns></returns>
     Public Shared Function IsInShortSale(bble As String) As Boolean
         Return ShortSaleCase.IsExist(bble)
     End Function
 
+    ''' <summary>
+    ''' Return if given case was changed
+    ''' </summary>
+    ''' <param name="changedCase">The Given ShortSale Case</param>
+    ''' <returns></returns>
     Public Shared Function IsOriginalCase(changedCase As ShortSaleCase) As Boolean
         Dim oCase = ShortSaleCase.GetCase(changedCase.CaseId)
 
@@ -57,6 +67,12 @@ Public Class ShortSaleManage
         Return True
     End Function
 
+    ''' <summary>
+    ''' Save ShortSale Case
+    ''' </summary>
+    ''' <param name="caseData">The Case Data, JSON format</param>
+    ''' <param name="saveBy">The User who save the data</param>
+    ''' <returns></returns>
     Public Shared Function SaveCase(caseData As String, saveBy As String) As ShortSaleCase
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
 
@@ -159,7 +175,14 @@ Public Class ShortSaleManage
         End If
     End Sub
 
-    Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String, appid As Integer)
+    ''' <summary>
+    ''' Move to Leads to ShortSale
+    ''' </summary>
+    ''' <param name="bble">The Property BBLE</param>
+    ''' <param name="createBy">The Create User</param>
+    ''' <param name="appid">The Application Id</param>
+    ''' <param name="newOfferData">The New Offer Data Optional</param>
+    Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String, appid As Integer, Optional newOfferData As JObject = Nothing)
         Dim li = LeadsInfo.GetInstance(bble)
 
         If li Is Nothing Then
@@ -192,12 +215,29 @@ Public Class ShortSaleManage
                     NewCaseProcess.ProcessStart(bble, bble, createBy, String.Format("{0} want to move this case to ShortSale. Please approval.", createBy))
                 End If
 
-                'NewCaseWithWF(bble, createBy)
+                ' NewCaseWithWF(bble, createBy)
             End If
         Else
             Throw New CallbackException("This address alread in system. please check.")
         End If
     End Sub
+
+    Public Shared Function InitFromNewOffer(ssCase As ShortSaleCase, offerData As String) As ShortSaleCase
+        If String.IsNullOrEmpty(offerData) Then
+            Return ssCase
+        End If
+
+        Dim jsObj = JsonConvert.DeserializeObject(Of ShortSaleCase)(offerData)
+
+        ' load owners
+        For Each owner In jsObj.PropertyInfo.Owners
+            owner.BBLE = ssCase.BBLE
+            owner.Save()
+        Next
+
+        ' Dim owners = offerData.Select("SsCase.PropertyInfo.Owners")
+        Return ssCase
+    End Function
 
     Public Shared Function GetShortSaleUsers() As String()
         Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("ShortSale-"))
