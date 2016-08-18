@@ -1,4 +1,11 @@
-﻿
+﻿<!--  
+    
+createby: shaopeng zhang
+date: 2016/08/18
+
+a template to display new doc search.
+        
+-->
 <style>
     tr.newsec {
         background-color: #87cefa;
@@ -177,7 +184,7 @@
             <span ng-bind="summary.Assigned_To_Last_Assignment" />
         </td>
     </tr>
-    <tr>
+    <tr ng-show="summary.LP_Index___Num_LP_Index___Num || summary.notes_LP_Index___Num">
         <td>
             <label>LP Index #: </label>
             <span ng-bind="summary.LP_Index___Num_LP_Index___Num"></span>
@@ -187,7 +194,7 @@
             <textarea class="form-control" ng-model="summary.notes_LP_Index___Num"></textarea>
         </td>
     </tr>
-    <tr>
+    <tr ng-show="summary.servicer || summary.Servicer_notes">
         <td>
             <label>Servicer: </label>
             <span ng-bind="summary.servicer" />
@@ -198,15 +205,15 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td ng-show="summary.fannie != undefined">
             <label>Fannie: </label>
             <span ng-bind="summary.fannie | booleanToString"></span>
         </td>
-        <td>
+        <td ng-show="summary.Freddie_Mac_ != undefined">
             <label>Freddie Mac: </label>
             <span ng-bind="summary.Freddie_Mac_ | booleanToString"></span>
         </td>
-        <td>
+        <td ng-show="summary.fha != undefined">
             <label>FHA: </label>
             <span ng-bind="summary.fha | booleanToString"></span>
         </td>
@@ -291,12 +298,12 @@
     </tr>
     <tr>
 
-        <td>
+        <td ng-show="summary.Tax_Classification">
             <label>Tax Classification: </label>
             <span ng-bind="summary.Tax_Classification"></span>
         </td>
 
-        <td>
+        <td ng-show="summary.HPD_Number_of_Units">
             <label>HPD Number of Units: </label>
             <span ng-bind="summary.HPD_Number_of_Units"></span>
         </td>

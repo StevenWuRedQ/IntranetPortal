@@ -9,12 +9,21 @@
     .myRow:hover {
         background-color: #efefef;
    }
+    label.xlink {
+        color: black;
+    }
+    label.xlink:hover {
+        color: blue;
+    }
+
 </style>
 <h4 id="title_<%= ClientID %>" style="padding-top: 5px">
     <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
     <label class='grid-title-icon <%= If(Not IsTitleStatus, "", "grid-title-title") %>'><%= If(Not IsTitleStatus, "SS", "TI") %></label>
-    <a href="/TitleUI/TitleSummaryPage.aspx?c=<%= CategoryId %>"><label style="color: black">&nbsp;<%= Category %></label>
-        <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label></a>
+    <a href="/TitleUI/TitleSummaryPage.aspx?c=<%= CategoryId %>">
+        <label class="xlink">&nbsp;<%= Category %></label>
+        <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label>
+    </a>
 </h4>
 <div id="gridContainer" runat="server" style="margin: 3px; height: 330px"></div>
 <script>
