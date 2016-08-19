@@ -113,7 +113,7 @@
             <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" TextField="Name" ValueField="EmployeeID"
                 SelectedIndex="0" Width="100%">
             </dx:ASPxListBox>
-            <table style="margin-top:3px;">
+            <table style="margin-top: 3px;">
                 <tr>
                     <td style="width: 100px">
                         <dx:ASPxCheckBox runat="server" Text="Archive Logs" ID="cbArchived"></dx:ASPxCheckBox>
@@ -249,35 +249,70 @@
                 function ConfirmClick() {
                     popupShow = false;
                     var selected = lbSelectionModeClient.GetSelectedValues();
-                    var index3 = selected.indexOf("3");
-                    if (index3 >= 0) {
+                    var legalSelected = selected.indexOf("3");
+                    var ssSelected = selected.indexOf("0");
+                    debugger;
+                    if (ssSelected >= 0) {   // check if move to shortsale in process
                         aspxPopupInprocessClient.Hide();
-                        // aspxPopupLegalInfoClient.Show();                        
-                        // ASPLegalPopupClient.SetContentUrl('/LegalUI/LegalUI.aspx?InPopUp=true&bble=' + bble);
-                        // $("#LegalPopUp").modal();
-                        // ASPLegalPopupClient.Show();
                         var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
-                        window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=1024, height=800");
-                        aspxPopupInprocessClient.PerformCallback('Save');
-                    } else {
+                        checkNewOffer(bble).done(function (resp) {
+                            if (resp) {
+                                if (legalSelected >= 0) {
 
-                        aspxPopupInprocessClient.PerformCallback('Save');
+                                    // aspxPopupLegalInfoClient.Show();                        
+                                    // ASPLegalPopupClient.SetContentUrl('/LegalUI/LegalUI.aspx?InPopUp=true&bble=' + bble);
+                                    // $("#LegalPopUp").modal();
+                                    // ASPLegalPopupClient.Show();
+
+                                    window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=1024, height=800");
+                                    aspxPopupInprocessClient.PerformCallback('Save');
+                                } else aspxPopupInprocessClient.PerformCallback('Save');
+                            } else {
+
+                                ConfirmMessager.Show();
+
+                            }
+
+                        })
                     }
+
+
+                }
+
+                /*  function to check if the New Offer done on a lead
+                *   @return: a promise for caller to check the new offer status
+                */
+                function checkNewOffer(id) {
+                    return $.ajax({
+                        url: "api/PropertyOffer/IsCompleted/" + id,
+                        type: 'GET',
+                    });
                 }
             </script>
             <span class="time_buttons" onclick="aspxPopupInprocessClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="ConfirmClick();">Confirm</span>
         </div>
     </FooterContentTemplate>
-    <ClientSideEvents EndCallback="function(s,e){
-        if(popupShow)
-            s.Show();
-        else{
-            s.Hide();
-            OnSetStatusComplete(s,e);
-        }
-        }" />
+    <ClientSideEvents EndCallback="function(s,e){ if(popupShow) s.Show(); else { s.Hide(); OnSetStatusComplete(s,e);} }" />
 </dx:ASPxPopupControl>
+
+<dx:ASPxPopupControl ID="ASPxPopupControlConfirm" runat="server" PopupElementID="popupArea" CloseAction="CloseButton" Width="320" Height="240"
+    AllowDragging="true" ShowOnPageLoad="false" ClientInstanceName="ConfirmMessager" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter">
+    <HeaderContentTemplate>
+        <h3 style="color: red">Attention!</h3>
+    </HeaderContentTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" ClientInstanceName="ConfirmMessagerContent">
+            <div>
+                <div>
+                    <h5><b>New offer</b> is not done on this lead!</h5>
+                </div>
+                <h5>Please finish <b>new offer</b> before move it to short sale process.</h5>
+            </div>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
+
 
 <dx:ASPxPopupControl ClientInstanceName="ASPLegalPopupClient" ID="ASPLegalPopup" Width="670" Height="550"
     Modal="true" ShowFooter="true" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentUrl="about:blank">
@@ -309,7 +344,6 @@
     </FooterContentTemplate>
 </dx:ASPxPopupControl>
 
-
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupDeadLeadsClient" Width="356px" Height="350px" ID="ASPxPopupControl5" Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl5_WindowCallback"
     runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
@@ -329,7 +363,7 @@
             <div style="color: #b1b2b7;">
                 <div class="form-group ">
                     <label class="upcase_text">Select Reason</label>
-                    <dx:ASPxComboBox ID="cbDeadReasons" ClientInstanceName="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">                        
+                    <dx:ASPxComboBox ID="cbDeadReasons" ClientInstanceName="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
                         <Items>
                             <dx:ListEditItem Text="Full Sale Completed" Value="8" />
                             <dx:ListEditItem Text="Dead Recorded with Other Party" Value="1" />
@@ -340,7 +374,7 @@
                             <dx:ListEditItem Text="Unable to contact" Value="6" />
                             <dx:ListEditItem Text="Manager disapproved" Value="7" />
                         </Items>
-                        <ClientSideEvents SelectedIndexChanged="function(s,e){}" />                        
+                        <ClientSideEvents SelectedIndexChanged="function(s,e){}" />
                     </dx:ASPxComboBox>
                 </div>
                 <div class="form-group ">
@@ -357,17 +391,10 @@
             <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>
         </div>
     </FooterContentTemplate>
-    <ClientSideEvents EndCallback="function(s,e){
-        if(popupShow)
-            s.Show();
-        else{
-            s.Hide();
-            OnSetStatusComplete(s,e);
-        }
-        }" />
+    <ClientSideEvents EndCallback="function(s,e){if(popupShow) s.Show();  else{ s.Hide(); OnSetStatusComplete(s,e); } }" />
 </dx:ASPxPopupControl>
 
-<dx:ASPxPopupControl ClientInstanceName="aspxPopupChangeLeadsStatusClient" Width="356px" Height="350px" ID="aspxPopupChangeLeadsStatus" Modal="true" ShowFooter="true" 
+<dx:ASPxPopupControl ClientInstanceName="aspxPopupChangeLeadsStatusClient" Width="356px" Height="350px" ID="aspxPopupChangeLeadsStatus" Modal="true" ShowFooter="true"
     runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
         <div class="clearfix">
@@ -381,15 +408,15 @@
         </div>
     </HeaderTemplate>
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server" ID="PopupControlContentControl1" >
-           
+        <dx:PopupControlContentControl runat="server" ID="PopupControlContentControl1">
+
             <div style="color: #b1b2b7;">
-                
+
                 <div class="form-group ">
                     <label class="upcase_text" style="display: block">Reason</label>
                     <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="ChangeStatusResonText" ClientInstanceName="ChangeStatusResonTextClient" CssClass="edit_text_area"></dx:ASPxMemo>
                 </div>
-               
+
             </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
@@ -397,10 +424,10 @@
         <div style="height: 30px; vertical-align: central">
             <span class="time_buttons" onclick="aspxPopupChangeLeadsStatusClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="CofrimLeadStatusChange();">Confirm</span>
-          
+
         </div>
     </FooterContentTemplate>
-    
+
 </dx:ASPxPopupControl>
 
 <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"
@@ -473,19 +500,12 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
                                 <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
-                                    <ClientSideEvents Click="function(){      if(txtRequestUpdateDescription.GetIsValid()) {                                                                                                               
-                                                                                                                        ASPxPopupRequestUpdateControl.Hide();
-                                                                                                                        ASPxPopupRequestUpdateControl.PerformCallback('SendRequest');
-                                                                                                                        isSendRequest =true;  } 
-                                                                                                                        }"></ClientSideEvents>
+                                    <ClientSideEvents Click="function(){if(txtRequestUpdateDescription.GetIsValid()) {  ASPxPopupRequestUpdateControl.Hide();ASPxPopupRequestUpdateControl.PerformCallback('SendRequest'); isSendRequest =true;  }   }"></ClientSideEvents>
                                 </dx:ASPxButton>
                                 &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupRequestUpdateControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
+                                <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
+                                    <ClientSideEvents Click="function(){   ASPxPopupRequestUpdateControl.Hide(); }"></ClientSideEvents>
+                                </dx:ASPxButton>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
@@ -511,6 +531,9 @@
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="function(s,e) {OnSetStatusComplete(s,e)}" />
 </dx:ASPxCallback>
+
 <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback">
     <ClientSideEvents CallbackComplete="function(s,e){OnGetAddressCallbackComplete(s,e);}" CallbackError="function(s,e){OnGetAddressCallbackError(s,e)}" />
 </dx:ASPxCallback>
+
+
