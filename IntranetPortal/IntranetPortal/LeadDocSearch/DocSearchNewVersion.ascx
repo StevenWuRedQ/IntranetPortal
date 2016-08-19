@@ -389,6 +389,11 @@
                                 fix git commit cc18bff grid yes no 
                                 add yes no control with grid in new version doc search edit page. 
                                 --%>
+                            <%-- 
+                                fix git commit 72ece32 check test
+                                test init-grid and remove the soution to use ng-if to solve dx-data-grid with 
+                                data init bug with anuglar in new version doc search.
+                                 --%>
                             <div init-grid="DocSearch.BBLE" ng-if="DocSearch.LeadResearch.Has_Other_Mortgage" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherMortgage"

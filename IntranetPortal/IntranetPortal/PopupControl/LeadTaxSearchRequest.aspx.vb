@@ -14,7 +14,7 @@
             ' '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             ' fix git commit 71d019b push
             ' push test becuase Chris and Stephen have push problem 
-            ' the problem is G changing bitbucket setting without asking us
+            ' the reason is G changing bitbucket setting without asking us
             '
             ' disable server side control
             ' date 8/12/2016
