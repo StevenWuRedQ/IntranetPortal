@@ -774,6 +774,14 @@
     })
 
     /**
+     * @author  Steven
+     * @date    8/19/2016
+     * 
+     * @fix git commit c0d7695 'mortage'
+     *  add initGrid directive to solve angular mutiple data initial in new version doc search
+     */
+     
+    /**
      * *********************************************************
      * @author Steven
      * @date 8/11/2016
