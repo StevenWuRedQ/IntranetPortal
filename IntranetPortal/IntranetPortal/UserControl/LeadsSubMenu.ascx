@@ -248,32 +248,29 @@
             <script>
                 function ConfirmClick() {
                     popupShow = false;
+                    aspxPopupInprocessClient.Hide();
                     var selected = lbSelectionModeClient.GetSelectedValues();
                     var legalSelected = selected.indexOf("3");
                     var ssSelected = selected.indexOf("0");
-                    debugger;
-                    if (ssSelected >= 0) {   // check if move to shortsale in process
-                        aspxPopupInprocessClient.Hide();
-                        var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
+                    var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
+
+                    if (ssSelected >= 0) {   // check if move to shortsale in process  
                         checkNewOffer(bble).done(function (resp) {
                             if (resp) {
                                 if (legalSelected >= 0) {
-
-                                    // aspxPopupLegalInfoClient.Show();                        
-                                    // ASPLegalPopupClient.SetContentUrl('/LegalUI/LegalUI.aspx?InPopUp=true&bble=' + bble);
-                                    // $("#LegalPopUp").modal();
-                                    // ASPLegalPopupClient.Show();
-
                                     window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=1024, height=800");
                                     aspxPopupInprocessClient.PerformCallback('Save');
                                 } else aspxPopupInprocessClient.PerformCallback('Save');
                             } else {
-
                                 ConfirmMessager.Show();
-
                             }
 
                         })
+                    } else {
+                        if (legalSelected >= 0) {
+                            window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=1024, height=800");
+                            aspxPopupInprocessClient.PerformCallback('Save');
+                        } else aspxPopupInprocessClient.PerformCallback('Save');
                     }
 
 
