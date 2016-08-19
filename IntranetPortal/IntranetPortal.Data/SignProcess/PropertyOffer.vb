@@ -20,6 +20,14 @@ Partial Public Class PropertyOffer
         End Using
     End Function
 
+    Public Function LoadFormData() As FormDataItem
+        If FormItemId.HasValue Then
+            Return FormDataItem.Instance(FormItemId)
+        End If
+
+        Return Nothing
+    End Function
+
     ''' <summary>
     ''' Load Property offer data
     ''' </summary>
