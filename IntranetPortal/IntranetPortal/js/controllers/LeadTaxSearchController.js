@@ -139,9 +139,28 @@
 
         $scope.init(leadsInfoBBLE)
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         * @fix
+         *  git commit f679a81 'finish the new doc search page'
+         *  add javascript version of validate in new version of doc search
+         *  it's not right to add the goal in git commit should create jira task.
+         */
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         *  
+         * @description
+         *  new version validate javascript version validate
+         * @returns {bool} true then pass validate
+         */
         $scope.newVersionValidate = function () {
-
+            /**
+             * change java script version validate 
+             * to oop model version validate
+             */
             if (!$scope.newVersion) {
                 return true;
             }
