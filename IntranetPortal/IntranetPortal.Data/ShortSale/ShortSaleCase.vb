@@ -1022,6 +1022,26 @@ Partial Public Class ShortSaleCase
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Delete ShortSaleCase with Mortgage data, property info and Owners
+    ''' </summary>
+    Public Sub Delete()
+        Using ctx As New PortalEntities
+
+            Dim mortgages = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = CaseId)
+            ctx.PropertyMortgages.RemoveRange(mortgages)
+
+            Dim propBaseInfo = ctx.PropertyBaseInfoes.Where(Function(pb) pb.BBLE = BBLE)
+            ctx.PropertyBaseInfoes.RemoveRange(propBaseInfo)
+
+            Dim owners = ctx.PropertyOwners.Where(Function(po) po.BBLE = BBLE)
+            ctx.PropertyOwners.RemoveRange(owners)
+
+            ctx.Entry(Me).State = Entity.EntityState.Deleted
+            ctx.SaveChanges()
+
+        End Using
+    End Sub
 
     Public Shared Function DeleteCase(caseId As Integer) As Boolean
         Return True
