@@ -6,7 +6,10 @@
 </style>
 <div class="tab-content">
     <div class="tab-pane active" id="LegalTab">
-
+        <%-- 
+            fix git commit 4357930 Check in style 
+            Change new version doc search edit page gap, make it compact.
+             --%>
         <div style="overflow: auto; height: 830px; padding: 0 20px" class="shortSaleUI" id="DocSearchErrorDiv">
 
             <div class="alert alert-warning" style="margin-top: 20px; font-size: 16px" ng-show="DocSearch.Status != 1">
