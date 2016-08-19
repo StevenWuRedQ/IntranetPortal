@@ -5,6 +5,9 @@ Imports IntranetPortal
 
 <TestClass()> Public Class ShortSaleManageUnitTest
 
+    ''' <summary>
+    ''' Test Init data from new offer feature
+    ''' </summary>
     <TestMethod()> Public Sub InitFromNewOffer_Test()
         Dim prop As New PropertyBaseInfo
         prop.BBLE = "1017700038"
@@ -24,6 +27,10 @@ Imports IntranetPortal
         Assert.IsTrue(ssCase.Mortgages.Count > 0)
     End Sub
 
+    ''' <summary>
+    ''' Test move leads to shortsale function 
+    ''' ShortSale data should init from New Offer
+    ''' </summary>
     <TestMethod()> Public Sub MoveLeadsToShortSale_Test()
 
         Dim BBLE = "1017700038"
