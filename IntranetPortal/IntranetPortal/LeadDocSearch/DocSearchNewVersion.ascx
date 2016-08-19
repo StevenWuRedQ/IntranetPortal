@@ -368,7 +368,7 @@
                         <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
                         </h5>
                         <div uib-collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
-                            <%-- case we use ng if fix bug so the mutiple mybe can not have yes no
+                            <%-- cause we use ng if fix bug so the mutiple mybe can not have yes no
                                  by steven
                             --%>
                             <div class="ss_form ">
@@ -382,6 +382,10 @@
                                     </li>
                                 </ul>
                             </div>
+                            <%-- 
+                                fix git commit cc18bff grid yes no 
+                                add yes no control with grid in new version doc search edit page. 
+                                --%>
                             <div init-grid="DocSearch.BBLE" ng-if="DocSearch.LeadResearch.Has_Other_Mortgage" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherMortgage"
