@@ -179,7 +179,17 @@
                 "has_Vacate_Order_Vacate_Order",
                 "has_ECB_Tickets_ECB_Tickets",
                 "has_ECB_on_Name_ECB_on_Name_other_known_address",
-                //under are one to multiple//
+               
+                /**
+                 * @author Steven
+                 * @date   8/19/2016
+                 * 
+                 * @fix 
+                 * git commit bde6b6d tax search
+                 * add validated to new version doc search at least one item add 
+                 * when select yes control grid
+                 */ 
+                // under are one to multiple//
                 "Has_Other_Mortgage",
                 "Has_Other_Liens",
                 "Has_TaxLiensCertifcate",
