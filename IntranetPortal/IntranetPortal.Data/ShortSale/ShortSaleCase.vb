@@ -27,8 +27,11 @@ Partial Public Class ShortSaleCase
         Get
             If _statuStr Is Nothing Then
                 Try
-                    Dim caseStatusE = CType(Status, CaseStatus)
-                    _statuStr = caseStatusE.ToString()
+                    If (Status IsNot Nothing) Then
+                        Dim caseStatusE = CType(Status, CaseStatus)
+                        _statuStr = caseStatusE.ToString()
+                    End If
+
                 Catch ex As Exception
 
                 End Try

@@ -121,8 +121,17 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             }
         }
     };
-
-    angular.extend($scope.SSpreSign,new PropertyOffer());
+    
+    angular.extend($scope.SSpreSign, new PropertyOffer());
+    /**
+     * @author Steven
+     * @date   8/19/2016
+     * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
+     * @description
+     *  fix the new doc search can not save type
+     *  1.It maybe the bug of NG-resource or angular.extend
+     */
+    $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
     $scope.SSpreSign.assignCrop = new AssignCorp();
     //setTimeout(function () {
     //    $scope.SSpreSign.Type = 'Short Sale';
@@ -595,6 +604,15 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                     $scope.SSpreSign.BBLE = BBLE;
                 });
             }
+            /**
+             * @author Steven
+             * @date   8/19/2016
+             * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
+             * @description
+             *  fix the new doc search can not save type
+             *  1.It maybe the bug of NG-resource or angular.extend
+             */
+            $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
         });
 
         
