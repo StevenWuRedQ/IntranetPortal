@@ -9,7 +9,7 @@
         <%-- 
             fix git commit 4357930 Check in style 
             Change new version doc search edit page gap, make it compact.
-             --%>
+        --%>
         <div style="overflow: auto; height: 830px; padding: 0 20px" class="shortSaleUI" id="DocSearchErrorDiv">
 
             <div class="alert alert-warning" style="margin-top: 20px; font-size: 16px" ng-show="DocSearch.Status != 1">
@@ -337,9 +337,16 @@
                                         Has 1st Mortgage *</label>
                                     <pt-radio name="OwnershipMortgageInfo_Hasc1stMortgage0" model="DocSearch.LeadResearch.Has_c_1st_Mortgage_c_1st_Mortgage"></pt-radio>
                                 </li>
-                                <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_c_1st_Mortgage_c_1st_Mortgage">
+                                <li class="ss_form_item" ng-show="DocSearch.LeadResearch.Has_c_1st_Mortgage_c_1st_Mortgage">
                                     <label class="ss_form_input_title ">Amount</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.mortgageAmount" money-mask>
+                                </li>
+                                <li class="ss_form_item">
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'fha')}"
+                                        data-message="Please check FHA marked in red.">
+                                        FHA *</label>
+                                    <pt-radio name="OwnershipMortgageInfo_FHA0" model="DocSearch.LeadResearch.fha"></pt-radio>
                                 </li>
                             </ul>
                         </div>
@@ -362,6 +369,7 @@
                                     <label class="ss_form_input_title ">Amount</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.secondMortgageAmount" money-mask>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
@@ -388,12 +396,12 @@
                             <%-- 
                                 fix git commit cc18bff grid yes no 
                                 add yes no control with grid in new version doc search edit page. 
-                                --%>
+                            --%>
                             <%-- 
                                 fix git commit 72ece32 check test
                                 test init-grid and remove the soution to use ng-if to solve dx-data-grid with 
                                 data init bug with anuglar in new version doc search.
-                                 --%>
+                            --%>
                             <div init-grid="DocSearch.BBLE" ng-if="DocSearch.LeadResearch.Has_Other_Mortgage" dx-data-grid='{
                                 bindingOptions: {
                                     dataSource: "DocSearch.LeadResearch.OtherMortgage"
@@ -656,13 +664,7 @@
                             </label>
                             <pt-radio name="OwnershipMortgageInfo_FreddieMac0" model="DocSearch.LeadResearch.Freddie_Mac_"></pt-radio>
                         </li>
-                        <li class="ss_form_item ">
-                            <label class="ss_form_input_title "
-                                ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'fha')}"
-                                data-message="Please check FHA marked in red.">
-                                FHA *</label>
-                            <pt-radio name="OwnershipMortgageInfo_FHA0" model="DocSearch.LeadResearch.fha"></pt-radio>
-                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -893,7 +895,7 @@
                         <ul class="ss_form_box clearfix">
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title ">NY Data</label>
-                                    <a href="https://oma.edatatrace.com/oma/" target="_blank">Go to NY Data</a>
+                                <a href="https://oma.edatatrace.com/oma/" target="_blank">Go to NY Data</a>
                             </li>
                         </ul>
                     </div>
