@@ -463,7 +463,13 @@
                                     insertEnabled: true,
                                     removeEnabled: true
                                 },
-                                columns: ["Lien","Amount","Date"],
+                                columns: ["Lien",{
+                                 dataType: "number",
+                                 format:"currency",
+                                 precision: 2,
+                                 dataField:"Amount"},{
+                                 dataType: "date",
+                                 dataField:"Date"}],
                             }'
                                 ng-show="newVersion">
                             </div>
@@ -505,7 +511,11 @@
                                         insertEnabled: true,
                                         removeEnabled: true
                                     },
-                                    columns: ["Year","Amount"],
+                                    columns: ["Year",{
+                                 dataType: "number",
+                                 format:"currency",
+                                 precision: 2,
+                                 dataField:"Amount"}],
                                 }'>
                             </div>
                         </div>
@@ -547,7 +557,10 @@
                                             insertEnabled: true,
                                             removeEnabled: true
                                         },
-                                        columns: ["Date","Buyer"],
+                                        columns: [{
+                                         dataType: "date",
+                                         dataField:"Date"},
+                                        "Buyer"],
                                     }'>
                             </div>
                         </div>
@@ -588,7 +601,10 @@
                                             insertEnabled: true,
                                             removeEnabled: true
                                         },
-                                        columns: ["Date","Buyer"],
+                                        columns: [{
+                                                     dataType: "date",
+                                                     dataField:"Date"}
+                                                    ,"Buyer"],
                                     }'>
                             </div>
                         </div>
