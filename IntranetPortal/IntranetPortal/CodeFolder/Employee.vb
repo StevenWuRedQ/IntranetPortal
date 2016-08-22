@@ -468,7 +468,15 @@ Partial Public Class Employee
 
         Return users.Distinct.ToArray
     End Function
-
+    ''' <summary>
+    ''' get all user email split with ; in role 
+    ''' </summary>
+    ''' <param name="roleName">Role Name</param>
+    ''' <returns>user emails split with ; </returns>
+    Public Shared Function GetRoleUserEmails(roleName As String) As String
+        Dim users = GetRoleUsers(roleName)
+        Return GetEmpsEmails(users)
+    End Function
     ''' <summary>
     ''' Return list of user names that belong to given department
     ''' </summary>
@@ -841,6 +849,7 @@ Partial Public Class Employee
             Return Nothing
         End Using
     End Function
+
 
     ''' <summary>
     ''' Get Employee Data, used for JSON serialized
