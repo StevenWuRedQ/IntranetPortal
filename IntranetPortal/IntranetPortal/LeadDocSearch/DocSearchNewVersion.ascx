@@ -339,7 +339,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_c_1st_Mortgage_c_1st_Mortgage">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.mortgageAmount">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.mortgageAmount" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -360,7 +360,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_c_2nd_Mortgage_c_2nd_Mortgage">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.secondMortgageAmount">
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.secondMortgageAmount" money-mask>
                                 </li>
                             </ul>
                         </div>
@@ -412,7 +412,11 @@
                                     insertEnabled: true,
                                     removeEnabled: true
                                 },
-                                columns: ["Amount"]
+                                columns: [{
+                                 dataType: "number",
+                                 format:"currency",
+                                 precision: 2,
+                                 dataField:"Amount"}]
                             }'>
                             </div>
                         </div>
@@ -709,7 +713,7 @@
                                         Has Due *</label>
                                     <pt-radio name="PropertyDuesViolations_HasDue2" model="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due"></pt-radio>
                                 </li>
-                                <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due">
+                                <li class="ss_form_item " >
                                     <label class="ss_form_input_title ">Property Taxes per YR</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Property_Taxes_per_YR_Property_Taxes_Due">
                                 </li>
