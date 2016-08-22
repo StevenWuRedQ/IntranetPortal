@@ -3081,6 +3081,15 @@ angular.module("PortalApp")
     })
 
     /**
+     * @author  Steven
+     * @date    8/19/2016
+     * 
+     * @fix git commit c0d7695 'mortage'
+     *  add initGrid directive to solve angular mutiple 
+     *  data initial in new version doc search
+     */
+     
+    /**
      * *********************************************************
      * @author Steven
      * @date 8/11/2016
@@ -3969,9 +3978,28 @@ angular.module('PortalApp')
 
         $scope.init(leadsInfoBBLE)
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         * @fix
+         *  git commit f679a81 'finish the new doc search page'
+         *  add javascript version of validate in new version of doc search
+         *  it's not right to add the goal in git commit should create jira task.
+         */
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         *  
+         * @description
+         *  new version validate javascript version validate
+         * @returns {bool} true then pass validate
+         */
         $scope.newVersionValidate = function () {
-
+            /**
+             * change java script version validate 
+             * to oop model version validate
+             */
             if (!$scope.newVersion) {
                 return true;
             }
@@ -4009,7 +4037,17 @@ angular.module('PortalApp')
                 "has_Vacate_Order_Vacate_Order",
                 "has_ECB_Tickets_ECB_Tickets",
                 "has_ECB_on_Name_ECB_on_Name_other_known_address",
-                //under are one to multiple//
+               
+                /**
+                 * @author Steven
+                 * @date   8/19/2016
+                 * 
+                 * @fix 
+                 * git commit bde6b6d tax search
+                 * add validated to new version doc search at least one item add 
+                 * when select yes control grid
+                 */ 
+                // under are one to multiple//
                 "Has_Other_Mortgage",
                 "Has_Other_Liens",
                 "Has_TaxLiensCertifcate",
@@ -4069,6 +4107,7 @@ angular.module('PortalApp')
             //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
@@ -4076,7 +4115,7 @@ angular.module('PortalApp')
                 });
             } else {
 
-                $scope.DocSearch.ResutContent = $("#searchReslut").html();
+                
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -7152,7 +7191,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
      * @date   8/19/2016
      * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
      * @description
-     *  fix the new doc search can not save type
+     *  fix the new offer can not save type
      *  1.It maybe the bug of NG-resource or angular.extend
      */
     $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
@@ -7633,7 +7672,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
              * @date   8/19/2016
              * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
              * @description
-             *  fix the new doc search can not save type
+             *  fix the new offer can not save type
              *  1.It maybe the bug of NG-resource or angular.extend
              */
             $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'

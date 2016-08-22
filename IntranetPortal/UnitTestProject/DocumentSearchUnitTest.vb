@@ -38,4 +38,16 @@ Imports IntranetPortal.Data
         Assert.IsTrue(True)
     End Sub
 
+    <TestMethod()> Public Sub TestNeedNotifyWhenSaving()
+        Dim search = New LeadInfoDocumentSearch()
+        search.Status = LeadInfoDocumentSearch.SearchStatus.NewSearch
+        ' it should not need notify when new search
+        Assert.IsFalse(search.isNeedNotifyWhenSaving())
+
+        search.Status = LeadInfoDocumentSearch.SearchStatus.Completed
+
+        ' it should need notify when after completed search
+        Assert.IsTrue(search.isNeedNotifyWhenSaving())
+
+    End Sub
 End Class

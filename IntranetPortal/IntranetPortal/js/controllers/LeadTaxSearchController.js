@@ -268,6 +268,7 @@
             //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
@@ -275,7 +276,7 @@
                 });
             } else {
 
-                $scope.DocSearch.ResutContent = $("#searchReslut").html();
+                
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
