@@ -1607,9 +1607,15 @@ angular.module("PortalApp")
     return {
         restrict: 'E',
         scope: {
-            summary: '='
+            summary: '=',
+            updateby: '=',
+            updateon:'='
         },
-        templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html'
+        templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
+        link: function (scope)
+        {
+
+        }
     };
 })
 angular.module("PortalApp")

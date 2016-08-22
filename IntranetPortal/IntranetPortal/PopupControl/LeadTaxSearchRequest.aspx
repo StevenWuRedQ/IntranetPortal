@@ -68,10 +68,10 @@
                                     
                                     
                                     <div ng-if="newVersion">
-                                        <new-ds-summary summary="DocSearch.LeadResearch"></new-ds-summary>
+                                        <new-ds-summary summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate"></new-ds-summary>
                                     </div>
                                     <div ng-if="!newVersion">
-                                        <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
+                                        <ds-summary summary="DocSearch.LeadResearch" ></ds-summary>
                                     </div>
                                     
                                    <%-- <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />--%>
