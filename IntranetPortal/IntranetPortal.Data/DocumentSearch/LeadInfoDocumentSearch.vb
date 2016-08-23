@@ -133,7 +133,7 @@ Public Class LeadInfoDocumentSearch
     ''' Check if need notify user when need search
     ''' 1. Before completed no need send notify
     ''' 2. after completed when saving send notify to 
-    ''' user in rule  <see cref=""/>
+    ''' user in rule
     ''' <todo>
     ''' this function should be private or p not for unit test 
     ''' I doing it for public.
