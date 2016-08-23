@@ -210,7 +210,11 @@ Public Class ShortSaleManage
                 If offer IsNot Nothing AndAlso offer.Status = PropertyOffer.OfferStatus.Completed Then
                     Dim form = offer.LoadFormData()
                     If form IsNot Nothing AndAlso Not String.IsNullOrEmpty(form.FormData) Then
-                        ssCase = InitFromNewOffer(ssCase, form.FormData)
+                        Try
+                            ssCase = InitFromNewOffer(ssCase, form.FormData)
+                        Catch ex As Exception
+                            Core.SystemLog.LogError("InitFromNewOffer", ex, Nothing, createBy, bble)
+                        End Try
                     End If
                 End If
 
