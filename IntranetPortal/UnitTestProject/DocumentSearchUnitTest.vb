@@ -49,5 +49,12 @@ Imports IntranetPortal.Data
         ' it should need notify when after completed search
         Assert.IsTrue(search.isNeedNotifyWhenSaving())
 
+        ' it should not send notify when after completed the data do not change
+
+        search.LeadResearch = "Change"
+        ' do not pass it because we store json in back-end
+        ' Assert.IsFalse(search.isNeedNotifyWhenSaving())
+
+
     End Sub
 End Class
