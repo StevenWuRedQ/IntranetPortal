@@ -25,6 +25,11 @@ Imports IntranetPortal
         Assert.AreEqual(ssCase.PropertyInfo.Owners.Length, 3)
         Assert.IsNotNull(ssCase.Mortgages)
         Assert.IsTrue(ssCase.Mortgages.Count > 0)
+        Assert.IsNotNull(ssCase.BuyerAttorney)
+        Assert.IsNotNull(ssCase.BuyerAttorneyName)
+        Assert.IsNotNull(ssCase.BuyerEntity)
+        Assert.AreEqual(ssCase.BuyerEntity.Entity, "Hancock 10 Holdings LLC")
+        Assert.AreEqual(ssCase.BuyerAttorneyName, "Henry Graham, Esq.")
     End Sub
 
     ''' <summary>
@@ -46,6 +51,12 @@ Imports IntranetPortal
         Assert.AreEqual(ssCase.PropertyInfo.Owners.Length, 3)
         Assert.IsNotNull(ssCase.Mortgages)
         Assert.IsTrue(ssCase.Mortgages.Count > 0)
+        Assert.IsNotNull(ssCase.BuyerAttorney)
+        Assert.IsNotNull(ssCase.BuyerAttorneyName)
+        Assert.IsNotNull(ssCase.BuyerEntity)
+        Assert.AreEqual(ssCase.BuyerEntity.Entity, "Hancock 10 Holdings LLC")
+        Assert.AreEqual(ssCase.BuyerAttorneyName, "Henry Graham, Esq.")
+        Assert.IsNotNull(ssCase.Referral)
 
         ssCase.Delete()
     End Sub

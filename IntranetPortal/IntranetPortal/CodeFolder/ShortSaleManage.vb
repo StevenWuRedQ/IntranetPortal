@@ -249,9 +249,13 @@ Public Class ShortSaleManage
         If jsOwners IsNot Nothing AndAlso jsOwners.Children.Count > 0 Then
             Dim owners As New List(Of PropertyOwner)
             For Each item In jsOwners.Children(Of JObject)
-                Dim owner = JsonConvert.DeserializeObject(Of PropertyOwner)(item.ToString)
-                owner.BBLE = ssCase.BBLE
-                owners.Add(owner)
+                Try
+                    Dim owner = JsonConvert.DeserializeObject(Of PropertyOwner)(item.ToString)
+                    owner.BBLE = ssCase.BBLE
+                    owners.Add(owner)
+                Catch ex As Exception
+
+                End Try
             Next
             ssCase.PropertyInfo.Owners = owners.ToArray
         End If
@@ -272,7 +276,47 @@ Public Class ShortSaleManage
             ssCase.Mortgages = mortgages.ToArray
         End If
 
+        ' load buyer
+        Dim jsBuyer = jsObj.SelectToken("DealSheet.ContractOrMemo.Buyer")
+        If jsBuyer IsNot Nothing AndAlso jsBuyer.Children.Count > 0 Then
+            Dim buyer = ssCase.BuyerEntity
+            With buyer
+                .Entity = jsBuyer.Value(Of String)("CorpName")
+                .EntityAddress = jsBuyer.Value(Of String)("Address")
+                .DateOpened = jsBuyer.Value(Of Date)("FillingDate")
+                .Office = jsBuyer.Value(Of String)("Patchen")
+                .TaxId = jsBuyer.Value(Of String)("EIN")
+            End With
+
+            Dim signerName = jsBuyer.Value(Of String)("Signer")
+            If Not String.IsNullOrEmpty(signerName) Then
+                Dim signer = PartyContact.GetContactByName(signerName)
+                If signer IsNot Nothing Then
+                    buyer.SignorId = signer.ContactId
+                    buyer.Signor = signer.Name
+                End If
+            End If
+
+            Dim jsAttorney = jsBuyer.Value(Of JObject)("buyerAttorneyObj")
+            If jsAttorney IsNot Nothing Then
+                ssCase.BuyerAttorney = jsAttorney.Value(Of Integer)("ContactId")
+                ssCase.BuyerAttorneyName = jsAttorney.Value(Of String)("Name")
+            End If
+        End If
+
         Return ssCase
+    End Function
+
+    Private Function LoadJsonData(Of T)(jsonCase As JToken, jpath As String) As T
+        Try
+            Dim field = jsonCase.Value(Of T)(jpath)
+
+            Return field
+        Catch ex As Exception
+
+        End Try
+
+        Return Nothing
     End Function
 
     Public Shared Function GetShortSaleUsers() As String()
@@ -410,7 +454,7 @@ Public Class ShortSaleManage
             ssCase.UpdateBy = updateBy
         End If
 
-        ssCase.Save()
+        ssCase.SaveEntity()
     End Sub
 
     Public Shared Sub UpdateReferral()
@@ -443,6 +487,7 @@ Public Class ShortSaleManage
             Dim referral = ShortSale.PartyContact.GetContactByName(ld.EmployeeName)
             If referral IsNot Nothing Then
                 ssCase.Referral = referral.ContactId
+                ssCase.ReferralUserName = referral.Name
             End If
         End If
 

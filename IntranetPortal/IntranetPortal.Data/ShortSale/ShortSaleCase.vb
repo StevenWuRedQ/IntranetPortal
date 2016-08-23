@@ -886,7 +886,7 @@ Partial Public Class ShortSaleCase
                     _buyerEntity.BBLE = BBLE
                 End If
 
-                _buyerEntity.Save()
+                _buyerEntity.Save(userName)
             End If
 
         End Using
@@ -1036,6 +1036,9 @@ Partial Public Class ShortSaleCase
 
             Dim owners = ctx.PropertyOwners.Where(Function(po) po.BBLE = BBLE)
             ctx.PropertyOwners.RemoveRange(owners)
+
+            Dim buyer = ctx.ShortSaleBuyers.Find(BBLE)
+            ctx.ShortSaleBuyers.Remove(buyer)
 
             ctx.Entry(Me).State = Entity.EntityState.Deleted
             ctx.SaveChanges()
