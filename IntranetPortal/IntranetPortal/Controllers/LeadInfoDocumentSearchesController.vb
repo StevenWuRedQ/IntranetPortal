@@ -46,8 +46,22 @@ Namespace Controllers
             End If
 
             db.Entry(leadInfoDocumentSearch).State = EntityState.Modified
-            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-            leadInfoDocumentSearch.UpdateDate = Date.Now
+
+            Dim docSearch = leadInfoDocumentSearch
+            docSearch.Update(HttpContext.Current.User.Identity.Name)
+
+            If (docSearch.isNeedNotifyWhenSaving()) Then
+                Dim mailData = docSearch.buildEmailMessge()
+                Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
+                mailData.Add("Address", l.PropertyAddress)
+                Dim users = Employee.GetRoleUsers(LeadInfoDocumentSearch.NOTIFY_ROLE_WHEN_UPDATING)
+
+                mailData.Add("UserName", String.Join(", ", users))
+                Core.EmailService.SendMail(
+                                           Employee.GetRoleUserEmails(LeadInfoDocumentSearch.NOTIFY_ROLE_WHEN_UPDATING),
+                                           Nothing, LeadInfoDocumentSearch.EMAIL_TEMPLATE_UPADATING,
+                                           mailData)
+            End If
 
             'leadInfoDocumentSearch.LeadResearch
             'If (leadInfoDocumentSearch.ResutContent IsNot Nothing) Then
