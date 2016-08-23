@@ -64,9 +64,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <div style="padding: 20px" id="searchReslut">
-                                    
-                                    
+                                <div style="padding: 20px;max-height:830px; overflow-y:scroll" id="searchReslut">
                                     <div ng-if="newVersion">
                                         <new-ds-summary summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate"></new-ds-summary>
                                     </div>
