@@ -176,7 +176,7 @@ Public Class ShortSaleManage
     End Sub
 
     ''' <summary>
-    ''' Move to Leads to ShortSale
+    ''' Move Leads to ShortSale
     ''' </summary>
     ''' <param name="bble">The Property BBLE</param>
     ''' <param name="createBy">The Create User</param>
