@@ -4,13 +4,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglifyjs');
 var replace = require('gulp-replace');
-
 var buffer = '';
-var config = {
-    //Include all js files 
-    src: ['js/*.js', 'js/controllers/*.js', 'js/models/*.js', 'js/Views/**/*.js', '!js/PortalHttpFactory.js'],
-}
-
 
 var getTimeString = function () {
     if (buffer) return buffer;
@@ -24,24 +18,15 @@ gulp.task('clean', function () {
 })
 
 gulp.task('concat', function () {
-    gulp.src('js/controllers/*.js')
-       .pipe(concat('controllers.js'))
-       .pipe(gulp.dest('js/build/'))
 
-    gulp.src('js/models/*.js')
-       .pipe(concat('model.js'))
-       .pipe(gulp.dest('js/build/'))
-
-
-    gulp.src('js/Views/**/*.js')
-       .pipe(concat('views.js'))
-       .pipe(gulp.dest('js/build/'))
-
-    gulp.src(['js/app.js', 'js/common/*.js',
-                'js/build/model.js',
-                'js/build/views.js', 'js/services.js',
-                'js/filters.js', 'js/directives.js',
-                'js/build/controllers.js'])
+    gulp.src(['js/app.js',
+                'js/common/*.js',
+                'js/models/*.js',
+                'js/Views/**/*.js',
+                'js/services/*.js',
+                'js/filters/*.js',
+                'js/directives/*.js',
+                'js/controllers/*.js'])
         .pipe(concat(p.name + '.js'))
         .pipe(gulp.dest('js/build/'))
 })
@@ -66,7 +51,7 @@ gulp.task('replace', function () {
         'src="/Scripts\/autologout.js?v=' + getTimeString() + '"'))
         .pipe(replace(/href="\/css\/stevencss.css(\?v=\d{0,8})?"/g,
         'href="/css\/stevencss.css?v=' + getTimeString() + '"'))
-        .pipe(gulp.dest(''), {overwrite:true})
+        .pipe(gulp.dest(''), { overwrite: true })
 
     gulp.src('Root.Master')
         .pipe(replace(/src="\/js\/build\/intranetportal.js(\?v=\d{0,8})?"/g,
@@ -79,7 +64,7 @@ gulp.task('replace', function () {
         'src="/Scripts\/autologout.js?v=' + getTimeString() + '"'))
         .pipe(replace(/href="\/css\/stevencss.css(\?v=\d{0,8})?"/g,
         'href="/css\/stevencss.css?v=' + getTimeString() + '"'))
-        .pipe(gulp.dest(''), {overwrite:true})
+        .pipe(gulp.dest(''), { overwrite: true })
 
 })
 

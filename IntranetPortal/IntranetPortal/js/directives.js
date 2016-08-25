@@ -548,10 +548,10 @@
                         scope.result.push(f);
                     }
 
-                    for (var i = 0; i < len; i++) {
+                    for (var j = 0; j < len; j++) {
                         var data = new FormData();
-                        data.append("file", scope.files[i]);
-                        var targetName = ptFileService.getFileName(scope.files[i].name);
+                        data.append("file", scope.files[j]);
+                        var targetName = ptFileService.getFileName(scope.files[j].name);
                         ptFileService.uploadFile(data, scope.fileBble, targetName, targetFolder, scope.uploadType, function callback(error, data, targetName) {
                             var targetElement;
                             if (error) {
@@ -713,7 +713,8 @@
                 }
             }
         }
-    }]).directive('auditLogs', ['AuditLog', function (AuditLog) {
+    }])
+    .directive('auditLogs', ['AuditLog', function (AuditLog) {
         return {
             restrict: 'E',
             templateUrl: '/js/Views/AuditLogs/AuditLogs.tpl.html',
@@ -773,15 +774,6 @@
         };
     })
 
-    /**
-     * @author  Steven
-     * @date    8/19/2016
-     * 
-     * @fix git commit c0d7695 'mortage'
-     *  add initGrid directive to solve angular mutiple 
-     *  data initial in new version doc search
-     */
-     
     /**
      * *********************************************************
      * @author Steven
