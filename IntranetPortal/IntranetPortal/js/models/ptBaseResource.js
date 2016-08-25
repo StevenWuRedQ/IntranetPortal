@@ -3,9 +3,8 @@
 
     var PtBaseResource = function (apiName, key, paramDefaults, actions) {
         var uri = BaseUri + '/' + apiName + '/:' + key;
-        var primaryKey = {
-            key: "@" + key
-        };
+        var primaryKey = {};
+        primaryKey[key] = '@' + key;
  
         /*default actions add put */
         var _actions = {

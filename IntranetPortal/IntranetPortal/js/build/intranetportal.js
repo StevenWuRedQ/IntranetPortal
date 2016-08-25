@@ -1,105 +1,101 @@
-function RequirePortalApp() {
+var portalApp = angular.module('PortalApp',
+    ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
 
-    var portalApp = angular.module('PortalApp', ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
-    angular.module('PortalApp')
-        .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
-            $rootScope.AlertModal = null;
-            $rootScope.ConfirmModal = null;
-            $rootScope.loadingCover = document.getElementById('LodingCover');
-            $rootScope.panelLoading = false;
+angular.module('PortalApp')
+    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
+        $rootScope.AlertModal = null;
+        $rootScope.ConfirmModal = null;
+        $rootScope.loadingCover = document.getElementById('LodingCover');
+        $rootScope.panelLoading = false;
 
-            $rootScope.alert = function (message) {
-                $rootScope.alertMessage = message ? message : '';
-                $rootScope.AlertModal = $uibModal.open({
-                    templateUrl: 'AlertModal',
+        $rootScope.alert = function (message) {
+            $rootScope.alertMessage = message ? message : '';
+            $rootScope.AlertModal = $uibModal.open({
+                templateUrl: 'AlertModal',
 
-                });
-            }
-            $rootScope.alertOK = function () {
-                $rootScope.AlertModal.close();
-            }
+            });
+        }
+        $rootScope.alertOK = function () {
+            $rootScope.AlertModal.close();
+        }
 
-            $rootScope.confirm = function (message, confrimFunc) {
-                $rootScope.confirmMessage = message ? message : '';
-                $rootScope.ConfirmModal = $uibModal.open({
-                    templateUrl: 'ConfirmModal'
-                });
-                $rootScope.ConfirmModal.confrimFunc = confrimFunc;
-                return $rootScope.ConfirmModal.result;
-            }
-            $rootScope.confirmYes = function () {
-                $rootScope.ConfirmModal.close(true);
-                if ($rootScope.ConfirmModal.confrimFunc) {
-                    $rootScope.ConfirmModal.confrimFunc(true);
-                }
-
-            }
-            $rootScope.confirmNo = function () {
-                $rootScope.ConfirmModal.close(false);
-                if ($rootScope.ConfirmModal.confrimFunc) {
-                    $rootScope.ConfirmModal.confrimFunc(false);
-                }
+        $rootScope.confirm = function (message, confrimFunc) {
+            $rootScope.confirmMessage = message ? message : '';
+            $rootScope.ConfirmModal = $uibModal.open({
+                templateUrl: 'ConfirmModal'
+            });
+            $rootScope.ConfirmModal.confrimFunc = confrimFunc;
+            return $rootScope.ConfirmModal.result;
+        }
+        $rootScope.confirmYes = function () {
+            $rootScope.ConfirmModal.close(true);
+            if ($rootScope.ConfirmModal.confrimFunc) {
+                $rootScope.ConfirmModal.confrimFunc(true);
             }
 
-            $rootScope.prompt = function (message, promptFunc) {
-                $rootScope.promptMessage = message ? message : '';
-                $rootScope.promptModalTxt = '';
-                $rootScope.promptModal = $uibModal.open({
-                    templateUrl: 'PromptModal'
-                });
-                $rootScope.promptModal.promptFunc = promptFunc;
+        }
+        $rootScope.confirmNo = function () {
+            $rootScope.ConfirmModal.close(false);
+            if ($rootScope.ConfirmModal.confrimFunc) {
+                $rootScope.ConfirmModal.confrimFunc(false);
             }
-            $rootScope.promptYes = function () {
-                $rootScope.promptModal.close($rootScope.promptModalTxt);
-                if ($rootScope.promptModal.promptFunc) {
-                    //UI Modal use async call send result so use jquery instand now 
-                    $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
-                }
+        }
 
-            }
-            $rootScope.promptNo = function () {
-                $rootScope.promptModal.close(false);
-                if ($rootScope.promptModal.promptFunc) {
-                    $rootScope.promptModal.promptFunc(null)
-                }
+        $rootScope.prompt = function (message, promptFunc) {
+            $rootScope.promptMessage = message ? message : '';
+            $rootScope.promptModalTxt = '';
+            $rootScope.promptModal = $uibModal.open({
+                templateUrl: 'PromptModal'
+            });
+            $rootScope.promptModal.promptFunc = promptFunc;
+        }
+        $rootScope.promptYes = function () {
+            $rootScope.promptModal.close($rootScope.promptModalTxt);
+            if ($rootScope.promptModal.promptFunc) {
+                //UI Modal use async call send result so use jquery instand now 
+                $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
             }
 
-            $rootScope.showLoading = function (divId) {
-                $($rootScope.loadingCover).show();
+        }
+        $rootScope.promptNo = function () {
+            $rootScope.promptModal.close(false);
+            if ($rootScope.promptModal.promptFunc) {
+                $rootScope.promptModal.promptFunc(null)
             }
-            $rootScope.hideLoading = function (divId) {
-                $($rootScope.loadingCover).hide();
-            }
-            $rootScope.toggleLoading = function () {
-                $rootScope.panelLoading = !$scope.panelLoading;
-            }
-            $rootScope.startLoading = function () {
-                $rootScope.panelLoading = true;
-            }
-            $rootScope.stopLoading = function () {
-                $timeout(function () {
-                    $rootScope.panelLoading = false;
-                });
-            }
-        }]);
+        }
 
-
-    portalApp.config(function ($locationProvider) {
-
-        /* because need use anguler support url parameters $location.search();
-         * but it only work when open html 5 model 
-         * so need open html 5 model 
-         **/
-
-        //$locationProvider.html5Mode({
-        //    enabled: true,
-        //    requireBase: false
-        //});
-    });
-    return portalApp;
-}
+        $rootScope.showLoading = function (divId) {
+            $($rootScope.loadingCover).show();
+        }
+        $rootScope.hideLoading = function (divId) {
+            $($rootScope.loadingCover).hide();
+        }
+        $rootScope.toggleLoading = function () {
+            $rootScope.panelLoading = !$scope.panelLoading;
+        }
+        $rootScope.startLoading = function () {
+            $rootScope.panelLoading = true;
+        }
+        $rootScope.stopLoading = function () {
+            $timeout(function () {
+                $rootScope.panelLoading = false;
+            });
+        }
+    }]);
 
 /**
+
+portalApp.config(function ($locationProvider) {
+
+    /* because need use anguler support url parameters $location.search();
+     * but it only work when open html 5 model 
+     * so need open html 5 model 
+
+
+//$locationProvider.html5Mode({
+//    enabled: true,
+//    requireBase: false
+//});
 
 function TestRequirePortalApp() {
     var portalApp = angular.module('PortalApp', []);
@@ -107,9 +103,9 @@ function TestRequirePortalApp() {
 }
 
 
-  *this is model define has to be the last line
-  *like compile script will call when use require js solove the dependency 
-  Import xx  xx1
+*this is model define has to be the last line
+*like compile script will call when use require js solove the dependency 
+Import xx  xx1
  
 if (typeof requirejs === "function") {
     define(["jquery", "angular", "angular-resource", "angular-route", "angular-animate", "angular-sanitize"],
@@ -120,7 +116,7 @@ if (typeof requirejs === "function") {
 } else {
     var portalApp = RequirePortalApp();
 }
- */
+*/
 (function () {
     /*define public shared var of class portalRouteProvider register var in the below*/
     var ITEM_ID = 'itemId';
@@ -1255,9 +1251,8 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 
     var PtBaseResource = function (apiName, key, paramDefaults, actions) {
         var uri = BaseUri + '/' + apiName + '/:' + key;
-        var primaryKey = {
-            key: "@" + key
-        };
+        var primaryKey = {};
+        primaryKey[key] = '@' + key;
  
         /*default actions add put */
         var _actions = {
@@ -1816,38 +1811,94 @@ angular.module("PortalApp").service('ptConstructionService', ['$http', function 
     };
 }
 ])
-angular.module("PortalApp").service('ptShortsSaleService', ['$http', function ($http) {
-    this.getShortSaleCase = function (caseId, callback) {
-        var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
-        $http.get(url)
-            .success(function (data) {
-                callback(data);
+angular.module("PortalApp")
+    .service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
+
+    var allContact;
+    var allTeam;
+
+    (function () {
+        if (!allContact) {
+            $http.get('/Services/ContactService.svc/LoadContacts')
+           .success(function (data, status) {
+               allContact = data;
+           }).error(function (data, status) {
+               allContact = [];
+           });
+        }
+
+        if (!allTeam) {
+            $http.get('/Services/TeamService.svc/GetAllTeam')
+            .success(function (data, status) {
+                allTeam = data;
             })
-            .error(function (data) {
-                console.log("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
+            .error(function (data, status) {
+                allTeam = [];
+            });
+        }
+
+    }());
+
+    this.getAllContacts = function () {
+        if (allContact) return allContact;
+        return $http.get('/Services/ContactService.svc/LoadContacts')
+            .then(function (response) {
+                return limitToFilter(response.data, 10);
             });
     };
-    this.getShortSaleCaseByBBLE = function (bble, callback) {
-        var url = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + bble;
-        $http.get(url)
-            .success(function (data) {
-                callback(data);
-            }).error(function () {
-                console.log("Get Short Sale By BBLE fails.");
-            }
-        );
+
+    this.getContacts = function (args, /* optional */ groupId) {
+        groupId = groupId === undefined ? null : groupId;
+        return $http.get('/Services/ContactService.svc/GetContacts?args=' + args, { noIndicator:true})
+            .then(function (response) {
+                if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
+                return limitToFilter(response.data, 10);
+            });
+    };
+    this.getContactsByID = function (id) {
+        if (allContact) return allContact.filter(function (o) { return o.ContactId == key });
+        return $http.get('/Services/ContactService.svc/GetAllContacts?id=' + id)
+            .then(function (response) {
+                return limitToFilter(response.data, 10);
+            });
+    };
+    this.getContactsByGroup = function (groupId) {
+        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
+    };
+    
+    
+    this.getContact = function (id, name) {
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
+        return {};
+    };
+    this.getContactById = function (id) {
+        if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
+        return null;
+    };
+
+    this.getContactByName = function (name) {
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+        return {};
+    };
+    
+    
+    this.getEntities = function (name, status) {
+        status = status === undefined ? 'Available' : status;
+        name = name ? '' : name;
+        return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
+            .then(function (res) {
+                return limitToFilter(res.data, 10);
+            });
+    };
+    
+    this.getTeamByName = function (teamName) {
+        if (allTeam) {
+            return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
+        }
+        return {};
 
     };
-    this.getBuyerTitle = function (bble, callback) {
-        var url = "/api/ShortSale/GetBuyerTitle?bble=";
-        $http.get(url + bble)
-        .then(function succ(res) {
-            if (callback) callback(null, res);
-        }, function error() {
-            if (callback) callback("Fail to get buyer title for bble: " + bble, null);
-        });
-    };
-}])
+    }])
 angular.module("PortalApp")
     .factory('ptEntityService', ['$http', function ($http) {
     return {
