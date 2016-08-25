@@ -13,16 +13,17 @@
         End Using
     End Function
 
-    Public Sub Save()
+    Public Sub Save(Optional saveby As String = Nothing)
         Using context As New PortalEntities
             'context.ShortSaleCases.Attach(Me)
-            Dim buyer = context.ShortSaleBuyers.Find(BBLE)
-
-            If buyer Is Nothing Then
+            If Not context.ShortSaleBuyers.Any(Function(ss) ss.BBLE = BBLE) Then
                 CreateDate = DateTime.Now
+                Me.CreateBy = saveby
                 context.ShortSaleBuyers.Add(Me)
             Else
-                buyer = ShortSaleUtility.SaveChangesObj(buyer, Me)
+                context.Entry(Me).State = System.Data.Entity.EntityState.Modified
+                ' context.Entry(Me).OriginalValues.SetValues(context.Entry(Me).GetDatabaseValues)
+                ' buyer = ShortSaleUtility.SaveChangesObj(buyer, Me)
             End If
 
             context.SaveChanges()

@@ -89,6 +89,7 @@ Public Class LeadInfoDocumentSearch
         End If
         UpdateDate = Date.Now
         Me.UpdateBy = updateBy
+
     End Sub
 
 
@@ -114,8 +115,6 @@ Public Class LeadInfoDocumentSearch
 
         Return mailData
     End Function
-
-
 
     ''' <summary>
     ''' Submit new search
