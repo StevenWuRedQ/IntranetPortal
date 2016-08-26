@@ -1,8 +1,16 @@
+/**
+ * a utility library provide common function in angular
+ * 
+ **/
+
 angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
     var that = this;
 
     this.DocGenerator = function (tplName, data, successFunc) {
-        $http.post("/Services/Documents.svc/DocGenrate", { "tplName": tplName, "data": JSON.stringify(data) }).success(function (data) {
+        $http.post("/Services/Documents.svc/DocGenrate", {
+            "tplName": tplName,
+            "data": JSON.stringify(data)
+        }).success(function (data) {
             successFunc(data);
         }).error(function (data, status) {
             alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
@@ -15,6 +23,9 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
             model.push(data);
         }
     };
+
+
+    // delete a element from a array with promte
     this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
             if (confirm) {
@@ -30,6 +41,7 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         }
     };
 
+    // concat a validate address string by giving infomation
     this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
         var result = '';
         if (strNO) result += strNO + ' ';
@@ -40,6 +52,7 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         if (zip) result += zip;
         return result;
     };
+
     this.capitalizeFirstLetter = function (string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };

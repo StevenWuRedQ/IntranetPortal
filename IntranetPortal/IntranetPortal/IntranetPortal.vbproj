@@ -7099,17 +7099,17 @@
     <Content Include="img\TreeView\treeview-red-line.gif" />
     <Content Include="img\TreeView\treeview-red.gif" />
     <Content Include="js\app.js" />
-    <Content Include="js\build\controllers.js" />
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\common\portalRouteProvider.js" />
     <Content Include="js\common\PortalUIRouteProvider.js" />
+    <Content Include="js\common\test.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
+    <Content Include="js\controllers\es6\TestController.js" />
     <Content Include="js\controllers\LeadTaxSearchController.js" />
     <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\PreSignController.js" />
     <Content Include="js\controllers\ReportWizardController.js" />
-    <Content Include="js\controllers\RequireController.js" />
     <Content Include="js\controllers\ShortSaleController.js" />
     <Content Include="js\controllers\ShortSalePreSignController.js" />
     <Content Include="js\controllers\TitleController.js" />
@@ -7388,7 +7388,6 @@
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
     <Content Include="CustomReport\ReportWizard.aspx" />
-    <Content Include="require.conf.js" />
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
     <Content Include="Scripts\ContactJs.js" />

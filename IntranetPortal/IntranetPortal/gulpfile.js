@@ -1,10 +1,20 @@
-﻿var p = require('./package.json')
+﻿var p = require('./package.json');
 var del = require('del')
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglifyjs');
 var replace = require('gulp-replace');
+var babel = require('gulp-babel');
 var buffer = '';
+var angularPath = ['js/app.js',
+                'js/common/*.js',
+                'js/models/*.js',
+                'js/Views/**/*.js',
+                'js/services/*.js',
+                'js/filters/*.js',
+                'js/directives/*.js',
+                'js/controllers/*.js'];
+
 
 var getTimeString = function () {
     if (buffer) return buffer;
@@ -19,14 +29,7 @@ gulp.task('clean', function () {
 
 gulp.task('concat', function () {
 
-    gulp.src(['js/app.js',
-                'js/common/*.js',
-                'js/models/*.js',
-                'js/Views/**/*.js',
-                'js/services/*.js',
-                'js/filters/*.js',
-                'js/directives/*.js',
-                'js/controllers/*.js'])
+    gulp.src(angularPath)
         .pipe(concat(p.name + '.js'))
         .pipe(gulp.dest('js/build/'))
 })
@@ -69,3 +72,7 @@ gulp.task('replace', function () {
 })
 
 gulp.task('default', ['concat', 'uglify', 'replace'])
+
+gulp.task('watch', function () {
+    gulp.watch(angularPath, ['concat'])
+});
