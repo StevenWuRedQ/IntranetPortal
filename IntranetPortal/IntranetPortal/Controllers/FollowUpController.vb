@@ -40,10 +40,25 @@ Namespace Controllers
 
         <ResponseType(GetType(Data.UserFollowUp))>
         <Route("api/Followup/")>
-        Public Function DeleteFollowUp(followUpId As Integer) As IHttpActionResult
+        Public Function DeleteFollowUp(<FromBody> followUpId As Integer) As IHttpActionResult
             Try
                 Dim fp = UserFollowUpManage.ClearFollowUp(followUpId, HttpContext.Current.User.Identity.Name)
                 Return Ok(fp)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+        <Route("api/Followup/")>
+        Public Function GetFollowUp() As IHttpActionResult
+            Try
+                Dim fps = Data.UserFollowUp.GetTodayFollowUps(HttpContext.Current.User.Identity.Name)
+                Dim result = New With {
+                    .data = fps.Take(10).ToArray,
+                    .count = fps.Count
+                }
+
+                Return Ok(result)
             Catch ex As Exception
                 Throw ex
             End Try

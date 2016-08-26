@@ -2548,6 +2548,13 @@
       <DependentUpon>TaskItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\SummaryItem\FollowUpItem2.ascx.designer.vb">
+      <DependentUpon>FollowUpItem2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\FollowUpItem2.ascx.vb">
+      <DependentUpon>FollowUpItem2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx.designer.vb">
       <DependentUpon>TitlesByCategoryItem.ascx</DependentUpon>
     </Compile>
@@ -7717,6 +7724,7 @@
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
+    <Content Include="UserControl\SummaryItem\FollowUpItem2.ascx" />
     <Content Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />

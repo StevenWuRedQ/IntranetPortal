@@ -32,7 +32,7 @@
     }
 </script>
 
-<h4>
+<h4 style="padding-top:5px">
     <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span></h4>
 
 <dx:ASPxGridView runat="server" Width="100%" ID="gridFollowUp" ClientInstanceName="gridFollowUp" KeyFieldName="BBLE" AutoGenerateColumns="false" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6" OnCustomCallback="gridFollowUp_CustomCallback">
