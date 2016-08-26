@@ -3,9 +3,20 @@ Imports System.Web.Http
 Imports System.Web.Http.Description
 
 Namespace Controllers
+    ''' <summary>
+    ''' The Follow Up Controller
+    ''' </summary>
     Public Class FollowUpController
         Inherits ApiController
 
+        ''' <summary>
+        ''' Create the new follow up
+        ''' </summary>
+        ''' <param name="bble"></param>
+        ''' <param name="type"></param>
+        ''' <param name="category"></param>
+        ''' <param name="followUpdate"></param>
+        ''' <returns></returns>
         <ResponseType(GetType(Data.UserFollowUp))>
         <Route("api/Followup/")>
         Public Function PostFollowUp(bble As String, type As Integer, category As String, <FromBody> followUpdate As String) As IHttpActionResult
@@ -38,6 +49,11 @@ Namespace Controllers
             End Try
         End Function
 
+        ''' <summary>
+        ''' Clear follow up
+        ''' </summary>
+        ''' <param name="followUpId"></param>
+        ''' <returns></returns>
         <ResponseType(GetType(Data.UserFollowUp))>
         <Route("api/Followup/")>
         Public Function DeleteFollowUp(<FromBody> followUpId As Integer) As IHttpActionResult
@@ -49,6 +65,10 @@ Namespace Controllers
             End Try
         End Function
 
+        ''' <summary>
+        ''' Load follow up lists
+        ''' </summary>
+        ''' <returns></returns>
         <Route("api/Followup/")>
         Public Function GetFollowUp() As IHttpActionResult
             Try

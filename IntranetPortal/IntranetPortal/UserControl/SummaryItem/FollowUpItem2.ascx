@@ -8,7 +8,7 @@
 
     .myRow:hover {
         background-color: #efefef;
-   }
+    }
     label.xlink {
         color: black;
     }
@@ -17,22 +17,22 @@
     }
 
     .round-button {
-	width:25%;
-}
-.round-button-circle {
-	width: 100%;
-	height:0;
-	padding-bottom: 100%;
-    border-radius: 50%;	
-    overflow:hidden;    
-    background: #4679BD; 
-    text-align:center;
-    vertical-align:baseline;
-    color:white
-}
-.round-button-circle:hover {
-	background:#30588e;
-}
+	    width:25%;
+    }
+    .round-button-circle {
+	    width: 100%;
+	    height:0;
+	    padding-bottom: 100%;
+        border-radius: 50%;	
+        overflow:hidden;    
+        background: #4679BD; 
+        text-align:center;
+        vertical-align:baseline;
+        color:white
+    }
+    .round-button-circle:hover {
+	    background:#30588e;
+    }
 
 </style>
 <h4 id="FollowUp_<%= ClientID %>" style="padding-top: 5px">
@@ -130,7 +130,7 @@
 
                                     AngularRoot.alert('Some error Occurred!');
                                 }
-                            });
+                          });
                 }
             });
         }
