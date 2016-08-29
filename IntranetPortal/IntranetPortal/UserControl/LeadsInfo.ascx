@@ -155,7 +155,7 @@
             return;
         else
             window.parent.agentTreeCallbackPanel.PerformCallback("");
-    } 
+    }
 
     function PrintLeadInfo() {
         if (leadsInfoBBLE != null) {
@@ -166,11 +166,10 @@
 
     function ReloadPage(bbleToLoad) {
         if (bbleToLoad == leadsInfoBBLE) {
-            if (typeof ContentCallbackPanel != undefined)
-            {
+            if (typeof ContentCallbackPanel != undefined) {
                 ContentCallbackPanel.PerformCallback(bbleToLoad);
             }
-            
+
             return true;
         }
 
@@ -344,7 +343,7 @@
     function reloadHomeBreakCtrl(bble) {
         var homeBreakDownCtrl = document.getElementById('homeBreakDownCtrl');
         // in hot leads, there is not homeBreakDownCtrl
-        if (homeBreakDownCtrl) {        
+        if (homeBreakDownCtrl) {
             var target = angular.element(homeBreakDownCtrl);
             var $injector = target.injector();
             $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
@@ -387,6 +386,16 @@
     }
     angular.module('PortalApp').controller('homeBreakDownCtrl', function () { })
 
+
+    //
+    otherFolderPopupCtrl = {
+        show: function() {
+        
+        },
+        otherFolderPopup: function(){
+    
+        }
+    }
 </script>
 
 <script src="/Scripts/stevenjs.js"></script>
@@ -616,7 +625,7 @@
                                                 <div class="tooltip-inner" style="background-color: #ff400d;">Show Property Info</div>
                                             </div>
                                             <% End If%>
-
+                                            <i class="fa fa-folder-open-o sale_head_button sale_head_button_left tooltip-examples" title="Add to folder" onclick="otherFolderPopupCtrl.show()"></i>
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                                             <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus('5|'+leadsInfoBBLE);"></i>
                                             <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
@@ -629,7 +638,7 @@
 
                                 </div>
 
-                                <div class="clearfix">                                
+                                <div class="clearfix">
                                     <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
                                 </div>
                                 <dx:ASPxCallback ID="callPhoneCallback" runat="server" ClientInstanceName="callPhoneCallbackClient" OnCallback="callPhoneCallback_Callback">
@@ -651,6 +660,17 @@
                                         </dx:MenuItem>
                                     </Items>
                                     <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+                                </dx:ASPxPopupMenu>
+
+                                <dx:ASPxPopupMenu ID="OtherFolderPopup" runat="server" ClientInstanceName="otherFolderPopup"
+                                    AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                    <ItemStyle Paddings-PaddingLeft="20px" />
+                                    <Items>
+                                        <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
+                                        <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
+                                    </Items>
+                                    <ClientSideEvents ItemClick="otherFolderPopup.onClick" />
                                 </dx:ASPxPopupMenu>
 
                                 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
@@ -677,7 +697,7 @@
                                                         </dx:ASPxButton>
                                                         &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                                            <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
+                                                                <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
                                                             </dx:ASPxButton>
                                                     </td>
                                                 </tr>
