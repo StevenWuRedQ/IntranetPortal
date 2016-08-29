@@ -7102,7 +7102,6 @@
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\common\portalRouteProvider.js" />
     <Content Include="js\common\PortalUIRouteProvider.js" />
-    <Content Include="js\common\test.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
     <Content Include="js\controllers\es6\TestController.js" />

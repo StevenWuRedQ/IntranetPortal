@@ -47,7 +47,6 @@
     $scope.initGroups();
     $scope.InitDataFunc = function (data) {
         var gropData = $scope.InitData(data.d);
-        //debugger;
         var allContacts = gropData;
         if (allContacts.length > 0) {
             $scope.currentContact = gropData[0];
