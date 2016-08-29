@@ -38,7 +38,7 @@
 <h4 id="FollowUp_<%= ClientID %>" style="padding-top: 5px">
     <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
     <label class='grid-title-icon '>TF</label>
-    <a href="#">
+    <a href="/TitleUI/TitleSummaryPage.aspx?f=title">
         <label class="xlink">&nbsp;Today's FollowUp</label>
         <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label>
     </a>
@@ -68,7 +68,7 @@
                         .addClass('myRow');
                         rowInfo.rowElement.on('mouseenter', function () {
                             var btn = $(this).find('.round-button-circle')[0];                            
-                            $(btn).css('display', 'block');
+                            $(btn).css('display', 'none');
                         }).on('mouseleave', function () {
                             var btn = $(this).find('.round-button-circle')[0];
                             $(btn).css('display', 'none');

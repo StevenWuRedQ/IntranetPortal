@@ -3,6 +3,9 @@ Imports MyIdealProp.Workflow.DBPersistence
 Imports System.Runtime.Serialization
 Imports System.Configuration
 
+''' <summary>
+''' The base rule definition
+''' </summary>
 <KnownType(GetType(LegalFollowUpRule))>
 <KnownType(GetType(LeadsAndTaskRule))>
 <KnownType(GetType(EmailSummaryRule))>

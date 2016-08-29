@@ -17,6 +17,8 @@ Public Enum LeadStatus
     Declined = 15
     Publishing = 16
     Published = 17
+    LoadMod = 20
+    Warmer = 21
 End Enum
 
 ''' <summary>
@@ -68,6 +70,11 @@ Public Class Utility
             VenderTypes.Add(CInt(v), Core.Utility.GetEnumDescription(v))
         Next
         Return VenderTypes
+    End Function
+
+    Public Shared Function GetLeadsCustomStatus() As LeadStatus()
+        Dim vals = [Enum].GetValues(GetType(LeadStatus)).Cast(Of LeadStatus).Where(Function(l) l >= 20)
+        Return vals.ToArray
     End Function
 
     ''' <summary>

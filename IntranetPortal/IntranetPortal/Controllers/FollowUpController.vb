@@ -72,13 +72,22 @@ Namespace Controllers
         <Route("api/Followup/")>
         Public Function GetFollowUp() As IHttpActionResult
             Try
-                Dim fps = Data.UserFollowUp.GetTodayFollowUps(HttpContext.Current.User.Identity.Name)
-                Dim result = New With {
-                    .data = fps.Take(10).ToArray,
-                    .count = fps.Count
-                }
+                If String.IsNullOrEmpty(HttpContext.Current.Request.QueryString("filter")) Then
+                    Dim fps = Data.UserFollowUp.GetTodayFollowUps(HttpContext.Current.User.Identity.Name)
+                    Dim result = New With {
+                        .data = fps.Take(10).ToArray,
+                        .count = fps.Count
+                    }
 
-                Return Ok(result)
+                    Return Ok(result)
+                Else
+                    If HttpContext.Current.Request.QueryString("filter") = "title" Then
+                        Dim fps = Data.UserFollowUp.GetMyTitleFollowUps(HttpContext.Current.User.Identity.Name)
+                        Return Ok(fps)
+                    End If
+                End If
+
+                Return Ok()
             Catch ex As Exception
                 Throw ex
             End Try

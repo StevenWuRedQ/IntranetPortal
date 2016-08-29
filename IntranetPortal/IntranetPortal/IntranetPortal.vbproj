@@ -813,6 +813,7 @@
     <Compile Include="Controllers\TitleController.vb" />
     <Compile Include="Controllers\TwilioController.vb" />
     <Compile Include="Controllers\UserInfoController.vb" />
+    <Compile Include="Controllers\WorkflowController.vb" />
     <Compile Include="Controllers\WorkingLogController.vb" />
     <Compile Include="DataAPITesting.aspx.designer.vb">
       <DependentUpon>DataAPITesting.aspx</DependentUpon>
@@ -2210,6 +2211,13 @@
     </Compile>
     <Compile Include="Task\MyApp.aspx.vb">
       <DependentUpon>MyApp.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Task\MyTask2.aspx.designer.vb">
+      <DependentUpon>MyTask2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\MyTask2.aspx.vb">
+      <DependentUpon>MyTask2.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Task\MyTask.aspx.designer.vb">
@@ -7715,6 +7723,7 @@
     <Content Include="ShortSale\GeneralParties.ascx" />
     <Content Include="ShortSale\ShortPreSignControl.ascx" />
     <Content Include="SQL\SearchReslut.sql" />
+    <Content Include="Task\MyTask2.aspx" />
     <Content Include="TempDataFile\reslut.docx" />
     <Content Include="TitleUI\TitleSummaryPage.aspx" />
     <Content Include="TitleUI\TitleSummaryView.ascx" />
