@@ -49,9 +49,43 @@
 
     End Sub
 
+    ''' <summary>
+    ''' Get user's all follow ups
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <returns></returns>
     Public Shared Function GetMyFollowUps(userName As String) As List(Of UserFollowUp)
         Using ctx As New PortalEntities
             Dim followups = ctx.UserFollowUps.Where(Function(u) u.UserName = userName And u.Status = FollowUpStatus.Active).ToList
+            Return followups
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Get user's all follow ups
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <returns></returns>
+    Public Shared Function GetMyTitleFollowUps(userName As String) As List(Of TitleCase)
+        Using ctx As New PortalEntities
+            Dim result = From fu In ctx.UserFollowUps.Where(Function(u) u.UserName = userName And u.Status = FollowUpStatus.Active)
+                         Join t In ctx.TitleCases On fu.BBLE Equals t.BBLE
+                         Where fu.Type = 15
+                         Select t
+
+            Return result.Distinct.ToList
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Get user's today's follow ups
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <returns></returns>
+    Public Shared Function GetTodayFollowUps(userName As String) As List(Of UserFollowUp)
+        Using ctx As New PortalEntities
+            Dim dt = DateTime.Today.AddDays(1)
+            Dim followups = ctx.UserFollowUps.Where(Function(u) u.UserName = userName AndAlso u.Status = FollowUpStatus.Active AndAlso u.FollowUpDate < dt).OrderBy(Function(u) u.FollowUpDate).ToList
             Return followups
         End Using
     End Function

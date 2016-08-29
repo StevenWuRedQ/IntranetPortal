@@ -3,6 +3,9 @@ Imports MyIdealProp.Workflow.DBPersistence
 Imports System.Runtime.Serialization
 Imports System.Configuration
 
+''' <summary>
+''' The base rule definition
+''' </summary>
 <KnownType(GetType(LegalFollowUpRule))>
 <KnownType(GetType(LeadsAndTaskRule))>
 <KnownType(GetType(EmailSummaryRule))>
@@ -67,6 +70,10 @@ Public Class BaseRule
     End Enum
 End Class
 
+''' <summary>
+''' The leads and task related rule
+''' Notify user base on the active tasks and leads info
+''' </summary>
 Public Class LeadsAndTaskRule
     Inherits BaseRule
 
@@ -140,6 +147,11 @@ Public Class LeadsAndTaskRule
 
 End Class
 
+''' <summary>
+''' The user's daily summary email rule
+''' The summary email is send every morning include the
+''' follow ups, tasks and appointments
+''' </summary>
 Public Class EmailSummaryRule
     Inherits BaseRule
 
@@ -177,8 +189,6 @@ Public Class EmailSummaryRule
         If followUps.Count > 0 Then
             Return True
         End If
-
-
 
         Return False
     End Function
@@ -229,6 +239,10 @@ Public Class AgentActivitySummaryRule
     End Sub
 End Class
 
+''' <summary>
+''' Legal user activity report rule
+''' The report is send every night.
+''' </summary>
 Public Class LegalActivityReportRule
     Inherits BaseRule
 
@@ -263,6 +277,10 @@ Public Class ShortSaleActivityReportRule
     End Sub
 End Class
 
+''' <summary>
+''' The rule to prepare the leads data
+''' This rule is running every 5 mins
+''' </summary>
 Public Class LoopServiceRule
     Inherits BaseRule
 
@@ -471,6 +489,10 @@ InitialLine:
     'End Enum
 End Class
 
+''' <summary>
+''' The rule is running along with LeadsAndTaskRule to automatically 
+''' complete or expire the reminder and related task
+''' </summary>
 Public Class CompleteTaskRule
     Inherits BaseRule
 
@@ -534,6 +556,9 @@ Public Class CompleteTaskRule
     End Function
 End Class
 
+''' <summary>
+''' The Rule to expired all the reminder rules
+''' </summary>
 Public Class ExpiredAllReminderRule
     Inherits BaseRule
 
@@ -600,6 +625,9 @@ Public Class CreateReminderBaseOnErrorProcess
 
 End Class
 
+''' <summary>
+''' The rule to recycle the leads
+''' </summary>
 Public Class RecycleProcessRule
     Inherits BaseRule
 
@@ -641,6 +669,10 @@ Public Class RefreshDataRule
 
 End Class
 
+''' <summary>
+''' The rule will prepare the leads data and assign to agents base on the configuration
+''' This rule will running every 5 mins
+''' </summary>
 Public Class PendingAssignRule
     Inherits BaseRule
 
@@ -684,6 +716,11 @@ Public Class PendingAssignRule
     End Sub
 End Class
 
+''' <summary>
+''' The rule to check properties' DOB complaints 
+''' The rule will run 4 times a day to monitor the DOB complaints
+''' Once the complaints was found, notify the property owner and related users
+''' </summary>
 Public Class DOBComplaintsCheckingRule
     Inherits BaseRule
 

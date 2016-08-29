@@ -157,7 +157,13 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                            <label class="btn btn-default">
+                                <input type="checkbox" name="123" style="display:inline;margin:5px">
+                                Mark as LoanMod   
+                            </label>                                                 
+                        </div>
+                        <% i += 1%>
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
@@ -210,7 +216,6 @@
             <div class="note_item" style="background: white">
                 <%--<button class="btn" data-container="body" type="button" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">--%>
                 <i class="fa fa-plus-circle note_img tooltip-examples" title="Add Notes" style="color: #3993c1; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)"></i>
-
                 <%--</button>--%>
             </div>
         </div>
@@ -383,13 +388,13 @@
                             <%Else %>
                             <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
 
-                           
+
                             <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then %>
 
                             <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
                             <span>search in process </span>
                             <% Else %>
-                               <i class="fa fa-search-plus color_blue_edit collapse_btn tooltip-examples" title="Request a search" id="btnRequest" onclick="RequestDocSearch()"></i>
+                            <i class="fa fa-search-plus color_blue_edit collapse_btn tooltip-examples" title="Request a search" id="btnRequest" onclick="RequestDocSearch()"></i>
                             <%End if %>
                             <span id="waitingSearch" style="display: none">
                                 <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>

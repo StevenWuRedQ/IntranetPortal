@@ -1,8 +1,8 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleSummaryView.ascx.vb" Inherits="IntranetPortal.TitleSummaryView" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MyTask2.aspx.vb" Inherits="IntranetPortal.MyTask2" MasterPageFile="~/Content.Master" %>
+<%@ Register Src="~/Task/TasklistControl.ascx" TagPrefix="uc1" TagName="TasklistControl" %>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.0/moment-timezone.min.js" type="text/javascript"></script>
-
+<asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+    
 <style type="text/css">
     a.dx-link-MyIdealProp:hover {
         font-weight: 500;
@@ -31,10 +31,9 @@
             line-height: normal;
         }
 </style>
-
 <input type="text" style="display: none" />
 <div class="apply-filter-option">
-    <%= Category %>
+    Task
     <%--<div id="useFilterApplyButton"></div>--%>
 </div>
 <div id="gridContainer" style="margin: 10px"></div>
@@ -45,16 +44,11 @@
             window.location.href = url;
         }
         
-        function ShowCaseInfo(CaseId) {         
-            var url = '/BusinessForm/Default.aspx?tag=' + CaseId;
-            PortalUtility.ShowPopWindow("View Title Case - " + CaseId, url);
+        function ShowCaseInfo(sn, url) {                 
+            PortalUtility.ShowPopWindow("View Task " + sn, url);
         }
-        <% If Category = "Follow Up" %>
-        var url = "/api/Followup?filter=title"
-        <% Else %>
-        var url = "/api/Title/TitleCases/<%=CategoryId%>";
-        <% End If %>
-        
+
+        var url = "/api/workflow";                
         $.getJSON(url).done(function (data) {
             var dataGrid = $("#gridContainer").dxDataGrid({
                 dataSource: data,
@@ -96,12 +90,12 @@
                 },
                 summary: {
                     groupItems: [{
-                        column: "BBLE",
+                        column: "SeriesNumber",
                         summaryType: "count",
                         displayFormat: "{0}",
                     }]},
                 columns: [{
-                    dataField: "CaseName",
+                    dataField: "DisplayName",
                     width: 450,
                     caption: "Case Name",
                     cellTemplate: function (container, options) {
@@ -109,20 +103,30 @@
                             .text(options.value)
                             .on('dxclick', function () {
                                 //Do something with options.data;
-                                ShowCaseInfo(options.data.BBLE);
+                                ShowCaseInfo(options.data.SeriesNumber, options.data.ItemData);
                             })
                             .appendTo(container);
                     }
                 }, {
-                    dataField: "TitleCategory",
-                    caption: "ShortSale Category",
+                    dataField: "Priority",
+                    caption: "Priority",
+                    customizeText: function (cellInfo) {
+                        //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
+                        if (cellInfo.value == null)
+                            return ""
+                        
+                        if (cellInfo.value == 0)
+                            return "Normal";
+
+                        if (cellInfo.value == 1)
+                            return "High";
+
+                        if (cellInfo.value == 2)
+                            return "Urgent";
+                    }
                 }, {
-                    dataField: "StatusStr",
-                    caption: "Title Status",
-                    groupIndex:0
-                }, {
-                    caption: "Last Update",
-                    dataField: "UpdateDate",
+                    dataField: "StartDate",
+                    caption: "Date Created",
                     dataType: "date",
                     customizeText: function (cellInfo) {
                         //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
@@ -136,20 +140,45 @@
                         return ""
                     }
                 }, {
-                    caption: "Owner",
-                    dataField: "Owner",
-                    visible: false
+                    caption: "Due Date",
+                    dataField: "DueDate",
+                    dataType: "date",
+                    customizeText: function (cellInfo) {
+                        //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
+                        if (!cellInfo.value)
+                            return ""
+
+                        var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+                        if (dt)
+                            return moment(dt).format('MM/DD/YYYY');
+
+                        return ""
+                    }
+                }, {
+                    caption: "Process",
+                    dataField: "ProcSchemeDisplayName",
+                    groupIndex: 0
+                }, {
+                    caption: "Applicant",
+                    dataField: "Originator",                 
+                }, {
+                    caption: "Status",
+                    dataField: "Status",
+                    customizeText: function (cellInfo) {
+                        //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
+                        if (cellInfo.value == null)
+                            return ""
+
+                        if (cellInfo.value == 0)
+                            return "Available";
+
+                        if (cellInfo.value == 1)
+                            return "Open";
+
+                        return "Closed";
+                    }
                 }]
             }).dxDataGrid('instance');
-
-            if (url == "/api/Title/TitleCases/")
-            {
-                dataGrid.columnOption("Owner", "visible", true);
-                dataGrid.columnOption("StatusStr", "groupIndex", null);
-            }
-
-            if (url == "/api/Title/TitleCases/-1")
-                dataGrid.columnOption("StatusStr", "groupIndex", null);
             
         <%-- var applyFilterTypes = [{
             key: "AllCases",
@@ -177,3 +206,4 @@
 
 
 </script>
+</asp:Content>
