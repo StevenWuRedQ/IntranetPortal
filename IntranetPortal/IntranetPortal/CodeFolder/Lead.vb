@@ -237,20 +237,26 @@ Partial Public Class Lead
     ''' <param name="createUser"></param>
     ''' <param name="logCategory"></param>
     ''' <returns>Task Id</returns>
-    Public Shared Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String, logCategory As LeadsActivityLog.LogCategory) As UserTask
-        Dim scheduleDate = DateTime.Now
+    Public Shared Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String, logCategory As LeadsActivityLog.LogCategory, Optional dueDate As DateTime = Nothing) As UserTask
+        Dim scheduleDate As DateTime
+        If Not dueDate = Nothing Then
+            scheduleDate = dueDate
+        Else
+            scheduleDate = DateTime.Now
 
-        If taskPriority = "Normal" Then
-            scheduleDate = scheduleDate.AddDays(3)
+            If taskPriority = "Normal" Then
+                scheduleDate = scheduleDate.AddDays(3)
+            End If
+
+            If taskPriority = "Important" Then
+                scheduleDate = scheduleDate.AddDays(1)
+            End If
+
+            If taskPriority = "Urgent" Then
+                scheduleDate = scheduleDate.AddHours(2)
+            End If
         End If
 
-        If taskPriority = "Important" Then
-            scheduleDate = scheduleDate.AddDays(1)
-        End If
-
-        If taskPriority = "Urgent" Then
-            scheduleDate = scheduleDate.AddHours(2)
-        End If
 
         Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
                                      "<td>{0}</td></tr>" &
