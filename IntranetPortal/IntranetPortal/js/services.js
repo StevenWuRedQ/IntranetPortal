@@ -1,4 +1,5 @@
-﻿angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
+﻿angular.module("PortalApp")
+    .service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
     var that = this;
 
     this.DocGenerator = function (tplName, data, successFunc) {
@@ -147,7 +148,8 @@
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
-}]).service('ptFileService', function () {
+}])
+    .service('ptFileService', function () {
     
     this.isIE = function (fileName) {
         return fileName.indexOf(':\\') > -1;
@@ -331,7 +333,8 @@
         }
     };
 
-}).service('ptConstructionService', ['$http', function ($http) {
+    })
+    .service('ptConstructionService', ['$http', function ($http) {
     this.getConstructionCases = function (bble, callback) {
         var url = "/api/ConstructionCases/" + bble;
         $http.get(url)
@@ -378,7 +381,8 @@
         }
     };
 }
-]).service("ptTime", [function () {
+    ])
+    .service("ptTime", [function () {
     var that = this;
 
     this.isPassByDays = function (start, end, count) {
@@ -443,7 +447,8 @@
         else return false;
     }
 
-}]).service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
+    }])
+    .service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
 
     var allContact;
     var allTeam;
@@ -529,7 +534,8 @@
         return {};
 
     };
-}]).service('ptShortsSaleService', ['$http', function ($http) {
+    }])
+    .service('ptShortsSaleService', ['$http', function ($http) {
     this.getShortSaleCase = function (caseId, callback) {
         var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
         $http.get(url)
@@ -560,7 +566,8 @@
             if (callback) callback("Fail to get buyer title for bble: " + bble, null);
         });
     };
-}]).service('ptLeadsService', ["$http", function ($http) {
+    }])
+    .service('ptLeadsService', ["$http", function ($http) {
     this.getLeadsByBBLE = function (bble, callback) {
         var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
         $http.get(leadsInfoUrl)
@@ -571,7 +578,8 @@
         });
     };
 }
-]).factory('ptHomeBreakDownService', ["$http", function ($http) {
+    ])
+    .factory('ptHomeBreakDownService', ["$http", function ($http) {
     return {
         loadByBBLE: function (bble, callback) {
             var url = '/ShortSale/ShortSaleServices.svc/LoadHomeBreakData?bble=' + bble;
@@ -598,7 +606,8 @@
         }
     };
 }
-]).factory('ptLegalService', function () {
+    ])
+    .factory('ptLegalService', function () {
     return {
         load: function (bble, callback) {
             var url = '/LegalUI/LegalUI.aspx/GetCaseData';
@@ -639,7 +648,8 @@
             });
         }
     };
-}).factory('ptEntityService', ['$http', function ($http) {
+    })
+    .factory('ptEntityService', ['$http', function ($http) {
     return {
         getEntityByBBLE: function (bble, callback) {
             var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;

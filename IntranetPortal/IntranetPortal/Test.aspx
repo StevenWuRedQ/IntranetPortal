@@ -4,12 +4,12 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/jasmine.js"></script>
+    <script src="js/es6bootstrap.js"></script>
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
-    <uc1:TitleDocTab runat="server" ID="TitleDocTab" />
-    <script type="text/javascript">
-        
-    </script>
+    <div ng-controller="TestController">
+        {{helloworld}}
+    </div>
 </asp:Content>
 

@@ -16,8 +16,8 @@
 
     var tmpPhoneNo = null;
     var temTelLink = null;
-    var temCommentSpan = null;
-    var tmpEmail = null;
+    var tmpEmail = null;;
+    var temCommentSpan = null
     var tempEmailLink = null;
     var tmpAddress = null;
     var currOwner = "";

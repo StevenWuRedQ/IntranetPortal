@@ -4,20 +4,20 @@
     var PtBaseResource = function (apiName, key, paramDefaults, actions) {
         var uri = BaseUri + '/' + apiName + '/:' + key;
         var primaryKey = {};
-        /*default param */
-
-        primaryKey[key] = "@" + key;
+        primaryKey[key] = '@' + key;
+ 
         /*default actions add put */
-        var _actions = { 'update': { method: 'PUT' } };
+        var _actions = {
+            'update': { method: 'PUT' }
+        };
 
         angular.extend(primaryKey, paramDefaults)
         angular.extend(_actions, actions);
+
         var Resource = $resource(uri, primaryKey, _actions);
 
         //static function
-        Resource.all = function () {
-
-        }
+        Resource.all = function () {}
         Resource.CType = function (obj, Class) {
 
             if (obj == null || obj == undefined) {
