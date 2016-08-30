@@ -17,7 +17,7 @@ Public Enum LeadStatus
     Declined = 15
     Publishing = 16
     Published = 17
-    LoadMod = 20
+    LoanMod = 20
     Warmer = 21
 End Enum
 
@@ -54,7 +54,17 @@ Public Class Utility
                 category = LeadStatus.NewLead
         End Select
 
+        For Each o In [Enum].GetValues(GetType(LeadStatus))
+            If cateName.Equals(o.ToString) Then
+                category = o
+            End If
+        Next
+
         Return category
+    End Function
+
+    Public Shared Function getLeadStatusByCode(statusCode As String) As LeadStatus
+        Return CType([Enum].Parse(GetType(LeadStatus), statusCode), LeadStatus)
     End Function
 
     ''' <summary>
@@ -301,8 +311,8 @@ Public Class Utility
             Dim unActiveUser = Employee.GetDeptUnActiveUserList(office).Select(Function(emp) emp.Name).ToArray
 
             Dim count = (From ld In context.Leads
-                                   Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
-                                   Select ld).Count
+                         Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
+                         Select ld).Count
             Return count
         End Using
     End Function

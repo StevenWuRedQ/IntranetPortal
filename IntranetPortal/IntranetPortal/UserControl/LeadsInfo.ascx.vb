@@ -16,6 +16,18 @@ Public Class LeadsInfo1
             If Not String.IsNullOrEmpty(Request.QueryString("c")) Then
                 CategoryName = Request.QueryString("c")
                 category = Utility.GetLeadStatus(CategoryName)
+                Dim folders = Utility.GetLeadsCustomStatus()
+                If folders.Length > 0 Then
+                    For Each o In folders
+                        OtherFolderPopup.Items.Add(New MenuItem With {
+                                                   .Text = o.ToString,
+                                                   .Name = o.ToString & "|" & Int(o).ToString})
+                    Next
+                Else
+                    otherFolderIcon.Visible = False
+                End If
+
+
 
                 If CategoryName = "Door Knock" Then
                     doorKnockMapPanel.Visible = True

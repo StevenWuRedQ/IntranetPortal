@@ -8,6 +8,8 @@ Public Class LeadsSubMenu
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             MenuControl()
+
+
         End If
     End Sub
 
@@ -78,7 +80,13 @@ Public Class LeadsSubMenu
             If e.Parameter.Length > 0 Then
                 Dim AddComment = Nothing
                 If e.Parameter.Split("|").Count > 2 Then
-                    AddComment = e.Parameter.Split("|").ToList.Item(2)
+                    If e.Parameter.StartsWith("x") Then
+                        AddComment = e.Parameter.Split("|").ToList.Item(4)
+                    Else
+
+                        AddComment = e.Parameter.Split("|").ToList.Item(2)
+
+                    End If
                 End If
 
                 If e.Parameter.StartsWith("Tomorrow") Then
@@ -173,6 +181,16 @@ Public Class LeadsSubMenu
                         UpdateLeadStatus(bble, LeadStatus.Deleted, Nothing, AddComment)
                     End If
                 End If
+
+                ' format will be "x|21|bble" , x indicates this is a special request
+                If e.Parameter.StartsWith("x") Then
+                    If e.Parameter.Contains("|") Then
+                        Dim status = e.Parameter.Split("|")(2)
+                        Dim bble = e.Parameter.Split("|")(3)
+                        UpdateLeadStatus(bble, status, Nothing, AddComment)
+                    End If
+                End If
+
             End If
 
         Catch ex As Exception

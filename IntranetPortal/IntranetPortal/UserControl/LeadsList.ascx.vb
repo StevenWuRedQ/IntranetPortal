@@ -286,7 +286,15 @@ Public Class LeadsList
             Return
         End If
 
-        Dim category = Utility.GetLeadStatus(CategoryName)
+        Dim category As LeadStatus
+
+        If (CategoryName.StartsWith("other")) Then
+            Dim cat_num = CategoryName.Split("|")(1)
+            category = Utility.getLeadStatusByCode(cat_num)
+            lblLeadCategory.Text = category.ToString
+        Else
+            category = Utility.GetLeadStatus(CategoryName)
+        End If
 
         If CategoryName = "Create" AndAlso Not Page.IsCallback Then
             gridLeads.SettingsBehavior.AllowClientEventsOnLoad = False

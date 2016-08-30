@@ -6866,6 +6866,8 @@
     <Content Include="images\EmailAlertMsg.png" />
     <Content Include="images\Evication.jpg" />
     <Content Include="images\Evication.png" />
+    <Content Include="images\fa-circle-o.png" />
+    <Content Include="images\fa-money.png" />
     <Content Include="images\flag.png" />
     <Content Include="images\flag1.png" />
     <Content Include="images\goto.png" />

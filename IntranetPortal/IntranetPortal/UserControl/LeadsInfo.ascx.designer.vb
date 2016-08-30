@@ -167,6 +167,15 @@ Partial Public Class LeadsInfo1
     Protected WithEvents SplitterContentControl4 As Global.DevExpress.Web.SplitterContentControl
     
     '''<summary>
+    '''otherFolderIcon control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents otherFolderIcon As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''ActivityLogs control.
     '''</summary>
     '''<remarks>

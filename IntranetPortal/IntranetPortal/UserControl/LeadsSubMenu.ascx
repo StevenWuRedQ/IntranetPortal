@@ -15,6 +15,25 @@
         <dx:MenuItem GroupName="Sort" Text="Hot Leads" Name="Priority" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drap_prority_icons.png"></Image>
         </dx:MenuItem>
+
+        <dx:MenuItem GroupName="Sort" Text="Warmer" Name="Warmer">
+            <Template>
+                <div class="dxm-content dxm-hasText" style="float: none">
+                    <i class="fa fa-circle-o dxm-image dx-vam"></i>
+                    <span class="dx-vam"><%# Container.Item.Text %></span>
+                </div>
+            </Template>
+
+        </dx:MenuItem>
+        <dx:MenuItem GroupName="Sort" Text="LoanMod" Name="LoanMod">
+            <Template>
+                <div class="dxm-content dxm-hasText" style="float: none">
+                    <i class="fa fa-money dxm-image dx-vam"></i>
+                    <span class="dx-vam"><%# Container.Item.Text %></span>
+                </div>
+            </Template>
+        </dx:MenuItem>
+
         <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drap_doorknock_icons.png"></Image>
         </dx:MenuItem>

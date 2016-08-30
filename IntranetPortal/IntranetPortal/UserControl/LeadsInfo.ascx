@@ -387,13 +387,17 @@
     angular.module('PortalApp').controller('homeBreakDownCtrl', function () { })
 
 
-    //
+    // change leads status to additional folder
     otherFolderPopupCtrl = {
-        show: function() {
-        
+        show: function (elm) {
+            otherFolderPopup.ShowAtElement(elm);
         },
-        otherFolderPopup: function(){
-    
+        onClick: function (s, e) {
+            //debugger;
+            var args = e.item.name.split('|');
+            // pass request fomat will be "x|{leadstatuscode}|{bble}"
+            SetLeadStatus("x" + "|" + e.item.name + "|" + leadsInfoBBLE);
+
         }
     }
 </script>
@@ -625,7 +629,7 @@
                                                 <div class="tooltip-inner" style="background-color: #ff400d;">Show Property Info</div>
                                             </div>
                                             <% End If%>
-                                            <i class="fa fa-folder-open-o sale_head_button sale_head_button_left tooltip-examples" title="Add to folder" onclick="otherFolderPopupCtrl.show()"></i>
+                                            <i class="fa fa-folder-open-o sale_head_button sale_head_button_left tooltip-examples" title="Add to folder" onclick="otherFolderPopupCtrl.show(this)" runat="server" id="otherFolderIcon"></i>
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                                             <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus('5|'+leadsInfoBBLE);"></i>
                                             <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
@@ -666,11 +670,8 @@
                                     AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                     ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                     <ItemStyle Paddings-PaddingLeft="20px" />
-                                    <Items>
-                                        <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
-                                        <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
-                                    </Items>
-                                    <ClientSideEvents ItemClick="otherFolderPopup.onClick" />
+                                    <Items></Items>
+                                    <ClientSideEvents ItemClick="otherFolderPopupCtrl.onClick" />
                                 </dx:ASPxPopupMenu>
 
                                 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
