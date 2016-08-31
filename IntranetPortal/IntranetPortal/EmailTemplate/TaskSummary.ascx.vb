@@ -6,6 +6,10 @@ Public Class TaskSummary
     Public Property DestinationUser As String
     Public Property TaskCount As Integer
     Public Property followUpCount As Integer = 0
+
+    Public Property hotCount As Integer = 0
+    Public Property loanModCount As Integer = 0
+
     Protected Property Worklist As List(Of MyIdealProp.Workflow.Client.WorklistItem)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -16,8 +20,8 @@ Public Class TaskSummary
         Dim wls = WorkflowService.GetUserWorklist(DestinationUser)
         TaskCount = wls.Count
         Dim procList = (From proc In wls
-                       Group proc By proc.ProcSchemeDisplayName Into Data = Group
-                       Select New With {
+                        Group proc By proc.ProcSchemeDisplayName Into Data = Group
+                        Select New With {
                            .ProcSchemeDisplayName = ProcSchemeDisplayName,
                            .Data = Data,
                            .Count = Data.Count
@@ -41,8 +45,27 @@ Public Class TaskSummary
             rptFollowUp.DataBind()
         End If
 
+        bindHot()
+        bindLoanMod()
+
         Me.DataBind()
     End Sub
+
+    Public Sub bindHot()
+        Dim hots = Lead.GetHotLeadsDue(DestinationUser)
+        hotCount = hots.Count
+        HotLeadsReapter.DataSource = hots
+        HotLeadsReapter.DataBind()
+
+    End Sub
+
+    Public Sub bindLoanMod()
+        Dim loanMods = Lead.GetLoanModDue(DestinationUser)
+        loanModCount = loanMods.Count
+        LoanModReapter.DataSource = loanMods
+        LoanModReapter.DataBind()
+    End Sub
+
 
     Protected Sub rptWorklist_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
         If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
