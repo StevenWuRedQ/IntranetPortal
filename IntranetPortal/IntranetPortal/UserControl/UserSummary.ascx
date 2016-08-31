@@ -7,7 +7,24 @@
 
 <link rel="stylesheet" href="/css/right-pane.css" />
 <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
-<script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+
+    $("#right-pane-button").mouseenter(function () {
+        $("#right-pane-container").css("right", "0");
+    });
+
+    $('body').click(function (e) {
+        if (e.target.id == 'right-pane-container')
+        { return true; }
+        else
+        {
+            $("#right-pane-container").css("right", "-290px");
+        }
+
+    });
+})
+</script>
 
 <script type="text/javascript">
     function OnNotesKeyDown(s, e) {

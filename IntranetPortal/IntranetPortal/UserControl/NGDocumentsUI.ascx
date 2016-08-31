@@ -2,7 +2,7 @@
 
 <script src="/Scripts/stevenjs.js"></script>
 <script type="text/javascript">
-
+    init_tooltip_and_scroll();
     var IsDocumentLoaded = false;
     var tmpFileId = null;
 

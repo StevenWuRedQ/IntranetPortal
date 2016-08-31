@@ -7,7 +7,11 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <link href="/css/Contacts.css" rel="stylesheet" type="text/css" />
-    <script src="/Scripts/ContactJs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-sidebar').accordion();
+        });
+    </script>
     <div ng-controller="VendorCtrl" id="VendorCtrl">
         <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
@@ -205,8 +209,8 @@
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
                             <div style="margin-top: 10px; height: 350px; overflow: auto" id="employee_list">
                                 <div>
-                                  
-                                    <ul class="list-group" style="box-shadow: none" >
+
+                                    <ul class="list-group" style="box-shadow: none">
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>

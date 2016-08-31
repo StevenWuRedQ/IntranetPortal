@@ -7406,9 +7406,7 @@
     <Content Include="CustomReport\ReportWizard.aspx" />
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
-    <Content Include="Scripts\ContactJs.js" />
     <Content Include="js\directives.js" />
-    <Content Include="Scripts\filterLLC.js" />
     <Content Include="Content.Master" />
     <Content Include="css\Web.config" />
     <Content Include="pdfViewer\LICENSE" />
@@ -8035,8 +8033,6 @@
     <Content Include="bower_components\prototypejs\.bower.json" />
     <Content Include="bower_components\prototypejs\bower.json" />
     <Content Include="bower_components\prototypejs\LICENSE" />
-    <Content Include="Scripts\js\main.js" />
-    <Content Include="Scripts\js\right_pane.js" />
     <Content Include="Scripts\LeadsSubMenu.js" />
     <Content Include="Scripts\PortalMessager.js" />
     <Content Include="js\services.js" />
@@ -8271,7 +8267,6 @@
     <Content Include="Light.Master" />
     <Content Include="Main.Master" />
     <Content Include="Account\Web.config" />
-    <Content Include="Scripts\script.js" />
     <Content Include="ShowReport.aspx" />
     <Content Include="css\styles.css" />
     <None Include="My Project\Application.myapp">
