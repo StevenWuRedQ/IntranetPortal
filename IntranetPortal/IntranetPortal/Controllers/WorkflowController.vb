@@ -29,7 +29,7 @@ Namespace Controllers
                                  End Function).toarray
         End Function
 
-        Private Function LoadDueDate(procInstId As Integer) As DateTime?
+        Private Function LoadDueDate(procInstId As Integer) As String
             Dim procInst = WorkflowService.LoadProcInstById(procInstId)
 
             If procInst Is Nothing Then
@@ -45,7 +45,11 @@ Namespace Controllers
                         Return Nothing
                     End If
 
-                    Return tk.Schedule
+                    If tk.Schedule.HasValue Then
+                        Return String.Format("{0:d}", tk.Schedule)
+                    End If
+
+                    Return Nothing
                 End If
             End If
 

@@ -17,7 +17,7 @@ Public Enum LeadStatus
     Declined = 15
     Publishing = 16
     Published = 17
-    LoadMod = 20
+    LoanMod = 20
     Warmer = 21
 End Enum
 
@@ -52,6 +52,10 @@ Public Class Utility
                 category = LeadStatus.Closed
             Case "Create" 'Save as new leads
                 category = LeadStatus.NewLead
+            Case Else
+                If [Enum].TryParse(Of LeadStatus)(cateName, category) Then
+                    Return category
+                End If
         End Select
 
         Return category

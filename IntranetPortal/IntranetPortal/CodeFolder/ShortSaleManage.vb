@@ -274,7 +274,12 @@ Public Class ShortSaleManage
                 mort.Lender = item.Value(Of String)("LenderName")
                 mort.LenderId = item.Value(Of Integer)("LenderId")
                 mort.Loan = item.Value(Of String)("Loan")
-                mort.LoanAmount = item.Value(Of Decimal)("LoanAmount")
+
+                Dim loanAmount = 0
+                If Decimal.TryParse(item.Value(Of String)("LoanAmount"), loanAmount) Then
+                    mort.LoanAmount = loanAmount
+                End If
+
                 mortgages.Add(mort)
             Next
             ssCase.Mortgages = mortgages.ToArray
@@ -347,7 +352,7 @@ Public Class ShortSaleManage
             TitleManage.StartTitle(bble, ssCase.CaseName, userName, titleUser)
         Else
             Throw New Exception("Address can't found in ShortSale. BBLE: " & bble)
-        End If
+                End If
     End Sub
 
     Public Shared Sub NewCaseApproved(bble As String, approvedBy As String)

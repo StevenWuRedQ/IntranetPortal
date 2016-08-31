@@ -270,6 +270,14 @@ Partial Public Class Lead
         Return task
     End Function
 
+    Public Shared Function GetLoanModDueToday(userName As String) As List(Of Lead)
+        Dim lds = Lead.GetUserLeadsData(userName, LeadStatus.LoanMod)
+        Return lds
+    End Function
+
+    Public Shared Function GetHotLeadsDueToday(userName As String) As List(Of Lead)
+        Return Lead.GetUserLeadsData(userName, LeadStatus.Priority)
+    End Function
 
     'Get user data by status
     Public Shared Function GetUserLeadsData(name As String, status As LeadStatus) As List(Of Lead)
