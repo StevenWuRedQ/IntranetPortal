@@ -270,12 +270,42 @@ Partial Public Class Lead
         Return task
     End Function
 
-    Public Shared Function GetLoanModDueToday(userName As String) As List(Of Lead)
+    '''' <summary>
+    '''' Return the given user's LoanMod leads which need followup on today
+    '''' </summary>
+    '''' <param name="userName">The given username</param>
+    '''' <returns></returns>
+    'Public Shared Function GetLoanModDueToday(userName As String) As List(Of Lead)
+    '    Dim lds = Lead.GetLoanModDue(userName, DateTime.Today)
+    '    Return lds
+    'End Function
+
+    ''' <summary>
+    ''' Return the given user's LoanMod leads which need followup on due date
+    ''' </summary>
+    ''' <param name="userName">The given username</param>
+    ''' <param name="dueDate">The given datetime</param>
+    ''' <returns></returns>
+    Public Shared Function GetLoanModDue(userName As String, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
         Dim lds = Lead.GetUserLeadsData(userName, LeadStatus.LoanMod)
         Return lds
     End Function
 
-    Public Shared Function GetHotLeadsDueToday(userName As String) As List(Of Lead)
+    '''' <summary>
+    '''' Return the given user's hot leads which need followup today
+    '''' </summary>
+    '''' <param name="userName"></param>
+    '''' <returns></returns>
+    'Public Shared Function GetHotLeadsDueToday(userName As String) As List(Of Lead)
+    '    Return Lead.GetUserLeadsData(userName, LeadStatus.Priority)
+    'End Function
+
+    ''' <summary>
+    ''' Return the given user's LoanMod leads which need followup on given date
+    ''' </summary>
+    ''' <param name="userName"></param>
+    ''' <returns></returns>
+    Public Shared Function GetHotLeadsDue(userName As String, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
         Return Lead.GetUserLeadsData(userName, LeadStatus.Priority)
     End Function
 
