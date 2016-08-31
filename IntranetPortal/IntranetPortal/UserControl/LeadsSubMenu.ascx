@@ -16,9 +16,9 @@
             <Image Url="/images/drap_prority_icons.png"></Image>
         </dx:MenuItem>
 
-        <dx:MenuItem GroupName="Sort" Text="Warmer" Name="Warmer">
+        <dx:MenuItem GroupName="Sort" Text="Warmer" Name="Warmer" Image-Url="">
             <Template>
-                <div class="dxm-content dxm-hasText" style="float: none">
+                <div class="dxm-content dxm-hasText" style="float: none; ">
                     <i class="fa fa-circle-o dxm-image dx-vam"></i>
                     <span class="dx-vam"><%# Container.Item.Text %></span>
                 </div>

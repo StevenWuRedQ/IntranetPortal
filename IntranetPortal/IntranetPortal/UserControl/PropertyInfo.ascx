@@ -157,12 +157,14 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
+                        <%-- 
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <label class="btn btn-default">
                                 <input type="checkbox" name="123" style="display:inline;margin:5px">
                                 Mark as LoanMod   
                             </label>                                                 
                         </div>
+                        --%>
                         <% i += 1%>
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
