@@ -7,7 +7,24 @@
 
 <link rel="stylesheet" href="/css/right-pane.css" />
 <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
-<script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#right-pane-button").mouseenter(function () {
+            $("#right-pane-container").css("right", "0");
+        });
+
+        $('body').click(function (e) {
+            if (e.target.id == 'right-pane-container')
+            { return true; }
+            else
+            {
+                $("#right-pane-container").css("right", "-290px");
+            }
+
+        });
+    })
+</script>
 
 <script type="text/javascript">
     function OnNotesKeyDown(s, e) {
@@ -185,20 +202,30 @@
                             </span>
 
                         </div>
+
+                        <div align="center" style="background-color: #ff851b; margin-left: 10px;" class="label-summary-info">
+
+                            <span class="icon_btn" style="font-weight: 200" data-toggle="modal" data-target="#calendar-modal">Show Calendar
+                            </span>
+
+                    </div>
+                        <div align="center" style="background-color: #3c8dbc; margin-left: 10px;" class="label-summary-info">
+
+                            <span class="icon_btn" style="font-weight: 200" onclick="show_chart_modal()">Show Peformance
+                            </span>
+
+                        </div>
                     </div>
 
-
-                    <%------end------%>
-                    <div class="content" style="float: left; margin-right: 10px; margin-left: 35px;">
+                    <div class="content" style="float: left">
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
                                 <div class="row under_line" style="min-height: 360px">
-                                    <div class="col-md-6 " style="width: 380px; vertical-align: top">
-
-                                        <%--add image by steven--%>
-                                        <%--ments--%>
+                                    <div class="col-md-6 " style="vertical-align: top">
                                         <h4>
-                                            <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
+                                            <img src="../images/grid_upcoming_icon.png" class="vertical-img">
+                                            <span class="heading_text">Upcoming Appointments</span>
+                                        </h4>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridAppointment" ClientInstanceName="gridAppointmentClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" SettingsPager-PageSize="5" OnDataBinding="gridAppointment_DataBinding">
                                             <Columns>
@@ -248,8 +275,8 @@
                                             </Styles>
                                         </dx:ASPxGridView>
                                     </div>
-                                    <%--fix the disteance between the two grid by steven--%>
-                                    <div class="col-md-6" style="width: 380px; vertical-align: top">
+
+                                    <div class="col-md-6" style="vertical-align: top">
                                         <%--add icon by steven--%>
                                         <h4>
                                             <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Hot</span>
@@ -281,9 +308,11 @@
                                     </div>
                                 </div>
                                 <div class="row under_line">
-                                    <div style="width: 380px; vertical-align: top" class="col-md-6 ">
+                                    <div class="col-md-6" style="vertical-align: top">
                                         <h4>
-                                            <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
+                                            <img src="../images/grid_task_icon.png" class="vertical-img" />
+                                            <span class="heading_text">Task</span>
+                                        </h4>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="ProcInstId;ActInstId" ClientInstanceName="gridTaskClient"
                                             OnDataBinding="gridTask_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
@@ -336,8 +365,9 @@
                                             </Styles>
                                         </dx:ASPxGridView>
                                     </div>
-                                    <div class="col-md-6" style="width: 380px; vertical-align: top">
-                                        <%--add icon by steven--%>
+
+                                    <div class="col-md-6" style="vertical-align: top">
+
                                         <h4>
                                             <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span> </h4>
                                         <%--------end-------%>
@@ -394,23 +424,31 @@
                                             </GroupSummary>
                                         </dx:ASPxGridView>
 
-
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-10" style="background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 30px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 19px;">
-                                        <div style="float: left; font-size: 60px; margin-left: 30px; margin-top: 5px;">“</div>
-                                        <p style="width: 90%; padding-top: 20px; padding-bottom: 20px; padding-left: 65px;">
-                                            <%= HtmlBlackQuote(Quote)%>
-                                        </p>
                                     </div>
+
+
+                            <div class="col-md-6 col-lg-6">
+                                <div>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-lg-2" style="width: 380px">
-                                <h4>
-                                    <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span>
-                                </h4>
-                                <div style="margin-top: 60px">
+                        </div>
+
+
+                        <div id="calendar-modal" class="modal" style="width: 380px">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h3>Today's Calendar
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </h3>
+
+                                </div>
+
+                                <div class="modal-body">
                                     <dx:ASPxScheduler ID="todayScheduler" runat="server" Width="100%" ActiveViewType="Day" OnPopupMenuShowing="todayScheduler_PopupMenuShowing"
                                         ClientInstanceName="ASPxClientScheduler1">
                                         <Views>
@@ -455,10 +493,43 @@
                                     </dx:ASPxScheduler>
                                 </div>
                             </div>
+                        </div>
+                        <div id="chart-modal" class="modal">
+                            <div class="modal-content" style="width: 375px">
+                                <!--div class="modal-header">
 
-                            <div class="col-md-3 col-lg-3" style="vertical-align: top; min-width: 380px; padding-top: 40px;">
-                                <div style="width: 375px; background-color: #F2F2F2; -webkit-border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border-radius: 10px;">
-                                    <div style="background-color: #D9F1FD; -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                    <h3>Perfomance
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </h3>
+
+                                </div-->
+
+                                <style>
+                                    .modal-body-chart {
+                                        width: 375px;
+                                        background-color: #F2F2F2;
+                                        -webkit-border-radius: 10px;
+                                        -webkit-border-radius: 10px;
+                                        -moz-border-radius: 10px;
+                                        -moz-border-radius: 10px;
+                                        border-radius: 10px;
+                                        border-radius: 10px;
+                                    }
+
+                                    .modal-body-charte {
+                                        background-color: #D9F1FD;
+                                        -webkit-border-top-left-radius: 10px;
+                                        -webkit-border-top-right-radius: 10px;
+                                        -moz-border-radius-topleft: 10px;
+                                        -moz-border-radius-topright: 10px;
+                                        border-top-left-radius: 10px;
+                                        border-top-right-radius: 10px;
+                                    }
+                                </style>
+                                <div class="modal-body modal-body-chart">
+                                    <div class="modal-body-charte">
                                         <div id="dateRange" class="containers" style="width: 100%;"></div>
                                     </div>
                                     <div style="padding: 10px 10px;">
@@ -466,12 +537,26 @@
                                         <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>
                                     </div>
                                 </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 2px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 19px;">
+                                <div style="float: left; font-size: 30px; margin-left: 30px; margin-top: 5px;">“</div>
+                                <p style="width: 90%; padding-top: 5px; padding-bottom: 5px; padding-left: 65px;">
+                                    <%= HtmlBlackQuote(Quote)%>
+                                </p>
+                            </div>
+                        </div>
                                 <script type="text/javascript">
                                     var agentSummaryReport = {
                                         ActivityDataSource: null,
                                         LeadsDataSource: null,
                                         AgentName: null,
-                                        DateRange: function () { return $('#dateRange').has("svg").length ? $('#dateRange').dxRangeSelector('instance') : null },
+                                DateRange: function () {
+                                    return $('#dateRange').has("svg").length ? $('#dateRange').dxRangeSelector('instance') : null;
+
+                                },
                                         BarChart: function () {
                                             if ($("#agentActivityChart").has("svg").length)
                                                 return $("#agentActivityChart").dxChart("instance");
@@ -544,14 +629,10 @@
                                             endDate = endDate.setDate(dateNow.getDate() + 1);
                                             var scaleStart = new Date();
                                             scaleStart.setMonth(scaleStart.getMonth() - 3);
-                                            var startDate = dateNow; //new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                    var startDate = dateNow;
                                             $("#dateRange").dxRangeSelector({
-                                                margin: {
-                                                    top: 5
-                                                },
-                                                size: {
-                                                    height: 150
-                                                },
+                                        margin: { top: 5 },
+                                        size: { height: 150 },
                                                 background: { color: '#ff400d' },
                                                 width: 375,
                                                 scale: {
@@ -584,7 +665,6 @@
                                         },
                                         LoadAgentActivityDs: function (startDate, endDate) {
                                             var url = "/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-");
-
                                             this.ActivityDataSource = new DevExpress.data.DataSource(url);
                                             this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.AgentName);
                                         },
@@ -642,19 +722,28 @@
                                             };
 
                                             $("#ProcessStatusChart").dxPieChart(option);
+                                },
+
+                                Render: function () {
+                                    this.InitalTab();
+                                    var name = $("#spanUserName").html();
+                                    this.ShowTab(name);
                                         }
                                     };
 
-                                    $(document).ready(function () {
-                                        agentSummaryReport.InitalTab();
-                                        var name = $("#spanUserName").html();
-                                        agentSummaryReport.ShowTab(name);
-                                    });
+                            function show_chart_modal() {
+
+                                $('#chart-modal').on('shown.bs.modal', function (event) {
+                                    agentSummaryReport.Render();
+                                    debugger;
+                                }).modal('show')
+                            }
+
+
+
                                 </script>
                             </div>
 
-                        </div>
-                    </div>
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>

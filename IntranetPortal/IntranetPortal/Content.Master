@@ -52,13 +52,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.20/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.20/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.20/angular-sanitize.js"></script>
-    
-    <%--use pleace which stauation angular default route not enough to handle --%> 
+
+    <%--use pleace which stauation angular default route not enough to handle --%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
 
-    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.debug.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.all.js"></script>
 
-<%--    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/16.1.5/css/dx.common.css" type="text/css" />
+    <%--    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/16.1.5/css/dx.common.css" type="text/css" />
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/16.1.5/css/dx.light.css" />
     <script src="http://cdn3.devexpress.com/jslib/16.1.5/js/dx.all.js"></script>--%>
 
@@ -173,5 +173,8 @@
     <script src="/Scripts/autosave.js?v=2016826"></script>
     <script src="/Scripts/stevenjs.js?v=2016826"></script>
     <script src="/Scripts/autologout.js?v=2016826"></script>
+    <script>
+        init_tooltip_and_scroll();
+    </script>
 </body>
 </html>

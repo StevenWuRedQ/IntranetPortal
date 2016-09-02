@@ -5,9 +5,26 @@
 
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
-    <link rel="stylesheet" href="/css/right-pane.css">
-    <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+    <link rel="stylesheet" href="/css/right-pane.css" />
+
     <script>
+        $(document).ready(function () {
+
+            $("#right-pane-button").mouseenter(function () {
+                $("#right-pane-container").css("right", "0");
+            });
+
+            $('body').click(function (e) {
+                if (e.target.id == 'right-pane-container')
+                { return true; }
+                else
+                {
+                    $("#right-pane-container").css("right", "-290px");
+                }
+
+            });
+        });
+
         function SearchGrid() {
 
             var filterCondition = "";

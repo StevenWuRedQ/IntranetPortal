@@ -2,6 +2,7 @@
 
 <script src="/Scripts/stevenjs.js"></script>
 <script type="text/javascript">
+    init_tooltip_and_scroll();
     function UploadFiles() {
         var url = "";
         if (typeof leadsInfoBBLE == undefined || leadsInfoBBLE == null)

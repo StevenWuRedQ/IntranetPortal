@@ -1,4 +1,5 @@
-﻿angular.module("PortalApp")
+﻿/* a directive to bind contact with it's contact it*/
+angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
             restrict: 'A',

@@ -7,8 +7,9 @@
 <%@ Register Src="~/PopupControl/EditHomeOwner.ascx" TagPrefix="uc1" TagName="EditHomeOwner" %>
 <%@ Register Src="~/UserControl/TitleInLeadsControl.ascx" TagPrefix="uc1" TagName="TitleControl" %>
 <%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
-
+<script src="/Scripts/stevenjs.js"></script>
 <script type="text/javascript">
+    init_tooltip_and_scroll();
     // <![CDATA[
     function OnClick(s, e) {
         ASPxPopupMenuPhone.ShowAtElement(s.GetMainElement());
@@ -402,7 +403,6 @@
     }
 </script>
 
-<script src="/Scripts/stevenjs.js"></script>
 
 <style type="text/css">
     .UpdateInfoAlign {
