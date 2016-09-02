@@ -39,6 +39,7 @@
         /*********Use for Derived class implement validation interface *************/
         /**************** string array to hold error messages **********************/
         Resource.prototype.errorMsg = [];
+
         Resource.prototype.clearErrorMsg = function () {
             /* maybe cause memory leak if javascript garbage collection is not good */
             this.errorMsg = []
@@ -59,6 +60,7 @@
             if (!this.errorMsg) { this.errorMsg = [] };
             this.errorMsg.push(msg);
         }
+
         /***************************************************************************/
         /*base class instance function*/
         Resource.prototype.$put = function () {
@@ -72,11 +74,5 @@
 
     }
 
-   
-
-    //leadResearch.prototype.func
-    //def function
-    //leadResearch.func
-    //constructor
     return PtBaseResource;
 });

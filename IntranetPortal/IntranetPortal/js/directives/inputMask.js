@@ -1,4 +1,5 @@
-﻿angular.module("PortalApp")
+﻿/* a mask to automaticly convert number to money value*/
+angular.module("PortalApp")
     .directive('inputMask', function () {
         return {
             restrict: 'A',
