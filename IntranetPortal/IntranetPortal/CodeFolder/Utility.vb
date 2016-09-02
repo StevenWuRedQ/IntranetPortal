@@ -1,4 +1,7 @@
-﻿Imports DevExpress.Web.ASPxHtmlEditor
+﻿Imports System.ComponentModel
+Imports System.Globalization
+Imports DevExpress.Web.ASPxHtmlEditor
+Imports IntranetPortal
 
 Public Enum LeadStatus
     NewLead = 0
@@ -20,6 +23,40 @@ Public Enum LeadStatus
     LoanMod = 20
     Warmer = 21
 End Enum
+
+Public Class LeadSubStatus
+    Inherits Status
+
+    Public Shared Property LoanModInProcess As New LeadSubStatus With {
+        .Key = 0, .Name = "LoanMod In Process"}
+    Public Shared Property LoanModCompleted As New LeadSubStatus With {
+        .Key = 1, .Name = "LoanMod Completed"}
+
+    Public Shared Widening Operator CType(ByVal status As Integer) As LeadSubStatus
+        Select Case status
+            Case 0
+                Return LoanModInProcess
+            Case 1
+                Return LoanModCompleted
+        End Select
+
+        Return New Status
+    End Operator
+
+    Public Shared Narrowing Operator CType(v As LeadSubStatus) As Integer
+        Return v.Key
+    End Operator
+End Class
+
+Public Class Status
+    Protected Property Key As Integer
+    Protected Property Name As String
+    Protected Property DisplayName As String
+
+    Public Overrides Function ToString() As String
+        Return Name
+    End Function
+End Class
 
 ''' <summary>
 ''' The Portal Utility Class

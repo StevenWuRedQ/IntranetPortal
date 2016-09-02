@@ -252,7 +252,7 @@
                                     <div class="col-md-6" style="width: 380px; vertical-align: top">
                                         <%--add icon by steven--%>
                                         <h4>
-                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Priority</span>
+                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Hot</span>
                                         </h4>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5"
@@ -339,7 +339,7 @@
                                     <div class="col-md-6" style="width: 380px; vertical-align: top">
                                         <%--add icon by steven--%>
                                         <h4>
-                                            <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Call Backs</span> </h4>
+                                            <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span> </h4>
                                         <%--------end-------%>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridCallback" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false"

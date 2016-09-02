@@ -163,12 +163,12 @@
               <![CDATA[<i class="glyphicon glyphicon-fire"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="LoanModLeads" Text="LoanMod" NavigationUrl="/LeadAgent.aspx?c=other|20" ShowAmount="true">
+          <PortalNavItem Name="AgentLoanModLeads" Text="LoanMod" NavigationUrl="/LeadAgent.aspx?c=other|20" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-money"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="WarmLeads" Text="Warm Leads" NavigationUrl="/LeadAgent.aspx?c=other|21" ShowAmount="true">
+          <PortalNavItem Name="AgentWarmLeads" Text="Warmer" NavigationUrl="/LeadAgent.aspx?c=other|21" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-circle-o"></i>]]>
             </FontClass>

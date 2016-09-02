@@ -254,7 +254,13 @@ Public Class ShortSaleManage
             Dim owners As New List(Of PropertyOwner)
             For Each item In jsOwners.Children(Of JObject)
                 Try
-                    Dim owner = JsonConvert.DeserializeObject(Of PropertyOwner)(item.ToString)
+                    Dim jsonSettings As New JsonSerializerSettings With {
+                            .Error = Sub(obj, args)
+                                         Dim data = obj
+                                         args.ErrorContext.Handled = True
+                                     End Sub
+                        }
+                    Dim owner = JsonConvert.DeserializeObject(Of PropertyOwner)(item.ToString, jsonSettings)
                     owner.BBLE = ssCase.BBLE
                     owners.Add(owner)
                 Catch ex As Exception

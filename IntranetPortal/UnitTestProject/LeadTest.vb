@@ -4,6 +4,13 @@
 Public Class LeadTest
 
     <TestMethod()>
+    Public Sub SubStatus_Test()
+        Dim ld As New Lead
+        ld.SubStatus = CType(LeadSubStatus.LoanModCompleted, Integer)
+        Assert.AreEqual(ld.SubStatusStr, "LoanMod Completed")
+    End Sub
+
+    <TestMethod()>
     Public Sub GetCustomStatus_StatusArray()
         Dim ls = Utility.GetLeadsCustomStatus()
         Assert.IsTrue(ls.Count > 0)
@@ -16,6 +23,19 @@ Public Class LeadTest
 
         ls = Utility.GetLeadStatus("Warmer")
         Assert.AreEqual(Of LeadStatus)(ls, LeadStatus.Warmer)
+    End Sub
+
+    <TestMethod()>
+    Public Sub GetLoanModLeads_leadsArray()
+        Dim lds = Lead.GetLoanModDue("Chris Yan", New Date(2016, 12, 1))
+        Assert.AreEqual(lds.Count, 1)
+    End Sub
+
+    <TestMethod()>
+    Public Sub GetPriorityLeads_leadsArray()
+        Dim count = Lead.GetUserLeadsData("Chris Yan", LeadStatus.Priority).Count
+        Dim lds = Lead.GetHotLeadsDue("Chris Yan", New Date(2016, 12, 1))
+        Assert.AreEqual(lds.Count, count)
     End Sub
 
     <TestMethod()>

@@ -446,6 +446,24 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="SubStatusStr" Visible="false" VisibleIndex="6">
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 45px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                            <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn Width="40px" VisibleIndex="6">
                     <DataItemTemplate>

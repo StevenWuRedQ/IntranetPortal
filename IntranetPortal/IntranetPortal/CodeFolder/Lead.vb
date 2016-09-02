@@ -56,6 +56,16 @@ Partial Public Class Lead
         End Get
     End Property
 
+    Public ReadOnly Property SubStatusStr As String
+        Get
+            If SubStatus.HasValue Then
+                Return CType(SubStatus, LeadSubStatus).ToString
+            End If
+
+            Return ""
+        End Get
+    End Property
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property LastOwnerUpdate As DateTime
         Get
@@ -287,26 +297,56 @@ Partial Public Class Lead
     ''' <param name="dueDate">The given datetime</param>
     ''' <returns></returns>
     Public Shared Function GetLoanModDue(userName As String, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
-        Dim lds = Lead.GetUserLeadsData(userName, LeadStatus.LoanMod)
-        Return lds
+        Return GetLeadsDue(LeadStatus.LoanMod, userName, dueDate)
     End Function
-
-    '''' <summary>
-    '''' Return the given user's hot leads which need followup today
-    '''' </summary>
-    '''' <param name="userName"></param>
-    '''' <returns></returns>
-    'Public Shared Function GetHotLeadsDueToday(userName As String) As List(Of Lead)
-    '    Return Lead.GetUserLeadsData(userName, LeadStatus.Priority)
-    'End Function
 
     ''' <summary>
     ''' Return the given user's LoanMod leads which need followup on given date
     ''' </summary>
     ''' <param name="userName"></param>
+    ''' <param name="dueDate">The given datetime, default is today</param>
     ''' <returns></returns>
     Public Shared Function GetHotLeadsDue(userName As String, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
-        Return Lead.GetUserLeadsData(userName, LeadStatus.Priority)
+        Return GetLeadsDue(LeadStatus.Priority, userName, dueDate)
+    End Function
+
+    ''' <summary>
+    ''' Return the leads that need to follow up
+    ''' </summary>
+    ''' <param name="status">The leads statu</param>
+    ''' <param name="userName">The given user name</param>
+    ''' <param name="dueDate">The due date</param>
+    ''' <returns></returns>
+    Public Shared Function GetLeadsDue(status As LeadStatus, userName As String, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
+        If dueDate Is Nothing Then
+            dueDate = Date.Today
+        End If
+
+        Dim lds = Lead.GetUserLeadsData(userName, status)
+        Return lds.Where(Function(ld) ld.IsDueOn(dueDate, leadsStatusDueDays(status))).ToList
+    End Function
+
+    Private Shared dic As Dictionary(Of LeadStatus, Integer)
+    Private Shared ReadOnly Property leadsStatusDueDays As Dictionary(Of LeadStatus, Integer)
+        Get
+            If dic Is Nothing Then
+                dic = New Dictionary(Of LeadStatus, Integer)
+                dic.Add(LeadStatus.LoanMod, 30)
+                dic.Add(LeadStatus.Priority, 5)
+            End If
+
+            Return dic
+        End Get
+    End Property
+
+    Private Function IsDueOn(dueDate As DateTime, days As Integer) As Boolean
+        Dim ts = dueDate - LastOwnerUpdate
+
+        If ts.TotalDays > days Then
+            Return True
+        End If
+
+        Return False
     End Function
 
     'Get user data by status

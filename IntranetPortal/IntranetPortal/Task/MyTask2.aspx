@@ -87,8 +87,7 @@
                                 panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
                             }
                         }
-                    },
-                    
+                    },                    
                     columns: [{
                         dataField: "DisplayName",
                         width: 450,
@@ -118,6 +117,8 @@
 
                             if (cellInfo.value == 2)
                                 return "Urgent";
+
+                            return "Normal";
                         }
                     }, {
                         dataField: "StartDate",
@@ -151,9 +152,12 @@
                     }, {
                         caption: "Process",
                         dataField: "ProcSchemeDisplayName",
-                        groupIndex: 0
+                        groupIndex: 0,
+                        groupCellTemplate: function (groupCell, info) {                           
+                            $('<div>').html(info.text).css('font-style', 'italic').appendTo(groupCell);
+                        }
                     }, {
-                        caption: "Applicant",
+                        caption: "Created By",
                         dataField: "Originator",
                     }, {
                         caption: "Status",

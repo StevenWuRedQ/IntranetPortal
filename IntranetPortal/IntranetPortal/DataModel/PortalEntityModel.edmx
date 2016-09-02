@@ -215,6 +215,7 @@
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
           <Property Name="Process" Type="int" />
           <Property Name="Status" Type="int" />
+          <Property Name="SubStatus" Type="int" />
           <Property Name="CallbackDate" Type="date" />
           <Property Name="Neighborhood" Type="nvarchar" MaxLength="120" />
           <Property Name="DeadReason" Type="int" />
@@ -1150,6 +1151,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="MarkColor" Type="Int32" />
           <Property Name="AppId" Type="Int32" />
+          <Property Name="SubStatus" Type="Int32" />
         </EntityType>
         <EntityType Name="LeadsInfo">
           <Key>
@@ -2037,6 +2039,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="Leads">
             <EntityTypeMapping TypeName="IntranetPortalModel.Lead">
               <MappingFragment StoreEntitySet="Leads">
+                <ScalarProperty Name="SubStatus" ColumnName="SubStatus" />
                 <ScalarProperty Name="AppId" ColumnName="AppId" />
                 <ScalarProperty Name="MarkColor" ColumnName="MarkColor" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
