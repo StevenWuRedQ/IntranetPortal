@@ -214,6 +214,11 @@ Public Class LeadsSubMenu
             Dim bble = e.Parameter.Split("|")(1)
             hfBBLE.Value = bble
 
+            Dim ld = Lead.GetInstance(bble)
+            If ld.Status = LeadStatus.LoanMod AndAlso ld.SubStatus = LeadSubStatus.LoanModInProcess Then
+                Throw New CallbackException("LoanMod In Progress leads can't move to DeadLeads folder.")
+            End If
+
             cbDeadReasons.DataSource = GetType(Lead.DeadReasonEnum).GetEnumValues().OfType(Of Lead.DeadReasonEnum).ToDictionary(
               Function(key)
                   Return CInt(key).ToString

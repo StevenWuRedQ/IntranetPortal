@@ -3,6 +3,9 @@ Imports System.Globalization
 Imports DevExpress.Web.ASPxHtmlEditor
 Imports IntranetPortal
 
+''' <summary>
+''' Leads Status Enum
+''' </summary>
 Public Enum LeadStatus
     NewLead = 0
     Priority = 1
@@ -24,11 +27,21 @@ Public Enum LeadStatus
     Warmer = 21
 End Enum
 
+''' <summary>
+''' Represents SubStatus of leads
+''' </summary>
 Public Class LeadSubStatus
     Inherits Status
-
+    ''' <summary>
+    ''' Represents the LoanMod In Process status
+    ''' </summary>
+    ''' <returns></returns>
     Public Shared Property LoanModInProcess As New LeadSubStatus With {
         .Key = 0, .Name = "LoanMod In Process"}
+    ''' <summary>
+    ''' Represents the LoanMod Completed Status
+    ''' </summary>
+    ''' <returns></returns>
     Public Shared Property LoanModCompleted As New LeadSubStatus With {
         .Key = 1, .Name = "LoanMod Completed"}
 
@@ -40,17 +53,48 @@ Public Class LeadSubStatus
                 Return LoanModCompleted
         End Select
 
-        Return New Status
+        Return Nothing
     End Operator
 
     Public Shared Narrowing Operator CType(v As LeadSubStatus) As Integer
         Return v.Key
     End Operator
+
+    Public Shared Operator =(ByVal v As LeadSubStatus, ByVal i As Integer?) As Boolean
+        If Not i.HasValue Then
+            Return False
+        End If
+
+        Return v.Key = i
+    End Operator
+
+    Public Shared Operator <>(ByVal v As LeadSubStatus, ByVal i As Integer?) As Boolean
+        If Not i.HasValue Then
+            Return True
+        End If
+
+        Return v.Key <> i
+    End Operator
 End Class
 
+''' <summary>
+''' The base class of Status
+''' </summary>
 Public Class Status
+    ''' <summary>
+    ''' The key of status
+    ''' </summary>
+    ''' <returns></returns>
     Protected Property Key As Integer
+    ''' <summary>
+    ''' The name of status
+    ''' </summary>
+    ''' <returns></returns>
     Protected Property Name As String
+    ''' <summary>
+    ''' The display name of status
+    ''' </summary>
+    ''' <returns></returns>
     Protected Property DisplayName As String
 
     Public Overrides Function ToString() As String
