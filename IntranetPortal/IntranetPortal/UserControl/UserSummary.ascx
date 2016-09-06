@@ -208,10 +208,10 @@
                             <span class="icon_btn" style="font-weight: 200" data-toggle="modal" data-target="#calendar-modal">Show Calendar
                             </span>
 
-                    </div>
+                        </div>
                         <div align="center" style="background-color: #3c8dbc; margin-left: 10px;" class="label-summary-info">
 
-                            <span class="icon_btn" style="font-weight: 200" onclick="show_chart_modal()">Show Peformance
+                            <span class="icon_btn" style="font-weight: 200" onclick="show_chart_modal()">Show Performance
                             </span>
 
                         </div>
@@ -219,9 +219,9 @@
 
                     <div class="content" style="float: left">
                         <div class="row">
-                            <div class="col-md-6 col-lg-6">
+                            <div class="col-md-9 col-lg-9">
                                 <div class="row under_line" style="min-height: 360px">
-                                    <div class="col-md-6 " style="vertical-align: top">
+                                    <div class="col-md-4 " style="vertical-align: top">
                                         <h4>
                                             <img src="../images/grid_upcoming_icon.png" class="vertical-img">
                                             <span class="heading_text">Upcoming Appointments</span>
@@ -276,10 +276,10 @@
                                         </dx:ASPxGridView>
                                     </div>
 
-                                    <div class="col-md-6" style="vertical-align: top">
+                                    <div class="col-md-4" style="vertical-align: top">
                                         <%--add icon by steven--%>
                                         <h4>
-                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Hot</span>
+                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Hot Leads</span>
                                         </h4>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5"
@@ -304,11 +304,40 @@
                                                 <RowHotTrack BackColor="#ff400d"></RowHotTrack>
                                             </Styles>
                                         </dx:ASPxGridView>
+                                    </div>
 
+                                    <div class="col-md-4" style="vertical-align: top">
+                                        <%--add icon by steven--%>
+                                        <h4>
+                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Warmer</span>
+                                        </h4>
+
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridWarmer" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5"
+                                            OnDataBinding="gridWarmer_DataBinding">
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                    <DataItemTemplate>
+                                                        <div style="cursor: pointer; height: 38px; padding-left: 20px; line-height: 38px;" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Priority", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                    <DataItemTemplate>
+                                                        <%--change the image and the size by steven--%>
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataColumn>
+                                            </Columns>
+                                            <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
+                                            <Styles>
+                                                <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
+                                                <RowHotTrack BackColor="#ff400d"></RowHotTrack>
+                                            </Styles>
+                                        </dx:ASPxGridView>
                                     </div>
                                 </div>
                                 <div class="row under_line">
-                                    <div class="col-md-6" style="vertical-align: top">
+                                    <div class="col-md-4" style="vertical-align: top">
                                         <h4>
                                             <img src="../images/grid_task_icon.png" class="vertical-img" />
                                             <span class="heading_text">Task</span>
@@ -366,7 +395,7 @@
                                         </dx:ASPxGridView>
                                     </div>
 
-                                    <div class="col-md-6" style="vertical-align: top">
+                                    <div class="col-md-4" style="vertical-align: top">
 
                                         <h4>
                                             <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span> </h4>
@@ -425,11 +454,65 @@
                                         </dx:ASPxGridView>
 
                                     </div>
-                                </div>
+
+                                    <div class="col-md-4" style="vertical-align: top">
+                                        <h4>
+                                            <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">LoanMod</span> </h4>
+                                        <%--------end-------%>
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridLoanMod" ClientInstanceName="gridLoanModClient" KeyFieldName="BBLE" AutoGenerateColumns="false"
+                                            OnDataBinding="gridLoanMod_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
+                                                    <DataItemTemplate>
+                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Call Back", Eval("BBLE"))%>'><%#  HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataTextColumn>
+
+                                                <dx:GridViewDataColumn FieldName="SubStatusStr" Visible="false" VisibleIndex="6">
+                                                    <GroupRowTemplate>
+                                                        <div>
+                                                            <table style="height: 45px">
+                                                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                                                    <td style="width: 80px;">
+                                                                        <span class="font_black">
+                                                                            <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td style="padding-left: 10px">
+                                                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </GroupRowTemplate>
+                                                </dx:GridViewDataColumn>
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                    <DataItemTemplate>
+                                                        <%--change the image and the size by steven--%>
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataColumn>
+                                            </Columns>
+                                            <SettingsBehavior AutoExpandAllGroups="true"
+                                                EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                                            <Styles>
+                                                <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
+                                                <RowHotTrack BackColor="#ff400d"></RowHotTrack>
+
+                                            </Styles>
+                                            <SettingsPager ShowNumericButtons="false">
+                                            </SettingsPager>
+                                            <GroupSummary>
+                                                <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />
+                                            </GroupSummary>
+                                        </dx:ASPxGridView>
+
                                     </div>
+                                </div>
+                            </div>
 
 
-                            <div class="col-md-6 col-lg-6">
+                            <div class="col-md-9 col-lg-9">
                                 <div>
                                 </div>
                             </div>
@@ -509,24 +592,21 @@
                                 <style>
                                     .modal-body-chart {
                                         width: 375px;
-                                        background-color: #F2F2F2;
-                                        -webkit-border-radius: 10px;
-                                        -webkit-border-radius: 10px;
-                                        -moz-border-radius: 10px;
-                                        -moz-border-radius: 10px;
-                                        border-radius: 10px;
-                                        border-radius: 10px;
-                                    }
-
-                                    .modal-body-charte {
-                                        background-color: #D9F1FD;
-                                        -webkit-border-top-left-radius: 10px;
-                                        -webkit-border-top-right-radius: 10px;
-                                        -moz-border-radius-topleft: 10px;
-                                        -moz-border-radius-topright: 10px;
-                                        border-top-left-radius: 10px;
-                                        border-top-right-radius: 10px;
-                                    }
+                                        background-color: #F2F2
+                                           -webkit-border-radi s:  10
+                                           -webkit-border-r dius:
+                                              -moz-border-r dius:
+                                              -moz-bor er-ra
+                                                   bor er-ra
+                                     
+                                                                  .modal body-cha
+                                             background-color: #D9F1FD;
+    t-border-top-left-radius: 10px;                                             -border-top-right-radius: 1 px;                                        
+                                        oz-border-radius-topleft: 10 x;
+                                         z-border-radius-toprigh : 10p
+                                          border-top-left-radius  10px
+                                     
+                                                                    }
                                 </style>
                                 <div class="modal-body modal-body-chart">
                                     <div class="modal-body-charte">
@@ -548,188 +628,188 @@
                                 </p>
                             </div>
                         </div>
-                                <script type="text/javascript">
-                                    var agentSummaryReport = {
-                                        ActivityDataSource: null,
-                                        LeadsDataSource: null,
-                                        AgentName: null,
+                        <script type="text/javascript">
+                            var agentSummaryReport = {
+                                ActivityDataSource: null,
+                                LeadsDataSource: null,
+                                AgentName: null,
                                 DateRange: function () {
                                     return $('#dateRange').has("svg").length ? $('#dateRange').dxRangeSelector('instance') : null;
 
                                 },
-                                        BarChart: function () {
-                                            if ($("#agentActivityChart").has("svg").length)
-                                                return $("#agentActivityChart").dxChart("instance");
-                                            else {
-                                                var tab = this;
-                                                $("#agentActivityChart").dxChart({
-                                                    dataSource: {},
-                                                    commonSeriesSettings: {
-                                                        argumentField: "Category",
-                                                        type: "bar",
-                                                        hoverMode: "allArgumentPoints",
-                                                        selectionMode: "allArgumentPoints",
-                                                        label: {
-                                                            visible: true,
-                                                            format: "fixedPoint",
-                                                            precision: 0
-                                                        }
-                                                    },
-                                                    argumentAxis: {
-                                                        argumentType: 'string'
-                                                    },
-                                                    series: [
-                                                        { valueField: "User", name: "User", tag: "User" },
-                                                        { valueField: "Avg", name: "Team", tag: "TeamAverage" }
-                                                    ],
-                                                    title: {
-                                                        text: "Activity Summary",
-                                                        font: {
-                                                            family: 'Source Sans Pro, sans-serif',
-                                                            size: 21,
-                                                            weight: 900
-                                                        },
-                                                        horizontalAlignment: 'left',
-                                                        margin: {
-                                                            left: 20
-                                                        }
-                                                    },
-                                                    legend: {
-                                                        verticalAlignment: "bottom",
-                                                        horizontalAlignment: "center"
-                                                    },
-                                                    loadingIndicator: {
-                                                        show: true
-                                                    },
-                                                    onPointClick: function (info) {
-                                                        var clickedPoint = info.target;
-                                                        clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
+                                BarChart: function () {
+                                    if ($("#agentActivityChart").has("svg").length)
+                                        return $("#agentActivityChart").dxChart("instance");
+                                    else {
+                                        var tab = this;
+                                        $("#agentActivityChart").dxChart({
+                                            dataSource: {},
+                                            commonSeriesSettings: {
+                                                argumentField: "Category",
+                                                type: "bar",
+                                                hoverMode: "allArgumentPoints",
+                                                selectionMode: "allArgumentPoints",
+                                                label: {
+                                                    visible: true,
+                                                    format: "fixedPoint",
+                                                    precision: 0
+                                                }
+                                            },
+                                            argumentAxis: {
+                                                argumentType: 'string'
+                                            },
+                                            series: [
+                                                { valueField: "User", name: "User", tag: "User" },
+                                                { valueField: "Avg", name: "Team", tag: "TeamAverage" }
+                                            ],
+                                            title: {
+                                                text: "Activity Summary",
+                                                font: {
+                                                    family: 'Source Sans Pro, sans-serif',
+                                                    size: 21,
+                                                    weight: 900
+                                                },
+                                                horizontalAlignment: 'left',
+                                                margin: {
+                                                    left: 20
+                                                }
+                                            },
+                                            legend: {
+                                                verticalAlignment: "bottom",
+                                                horizontalAlignment: "center"
+                                            },
+                                            loadingIndicator: {
+                                                show: true
+                                            },
+                                            onPointClick: function (info) {
+                                                var clickedPoint = info.target;
+                                                clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
 
-                                                        if (clickedPoint.isSelected()) {
+                                                if (clickedPoint.isSelected()) {
 
-                                                        }
-                                                    },
-                                                    onPointSelectionChanged: function (info) {
-                                                        //var selectedPoint = info.target;
-                                                        //if (selectedPoint.isSelected()) {
+                                                }
+                                            },
+                                            onPointSelectionChanged: function (info) {
+                                                //var selectedPoint = info.target;
+                                                //if (selectedPoint.isSelected()) {
 
-                                                        //}
-                                                    },
-                                                    onLegendClick: function (info) {
+                                                //}
+                                            },
+                                            onLegendClick: function (info) {
 
-                                                    }
-                                                });
-                                                return $("#agentActivityChart").dxChart("instance");
                                             }
-                                        },
-                                        InitalTab: function () {
-                                            var tab = this;
-                                            var dateNow = new Date();
-                                            var endDate = new Date();
-                                            endDate = endDate.setDate(dateNow.getDate() + 1);
-                                            var scaleStart = new Date();
-                                            scaleStart.setMonth(scaleStart.getMonth() - 3);
+                                        });
+                                        return $("#agentActivityChart").dxChart("instance");
+                                    }
+                                },
+                                InitalTab: function () {
+                                    var tab = this;
+                                    var dateNow = new Date();
+                                    var endDate = new Date();
+                                    endDate = endDate.setDate(dateNow.getDate() + 1);
+                                    var scaleStart = new Date();
+                                    scaleStart.setMonth(scaleStart.getMonth() - 3);
                                     var startDate = dateNow;
-                                            $("#dateRange").dxRangeSelector({
+                                    $("#dateRange").dxRangeSelector({
                                         margin: { top: 5 },
                                         size: { height: 150 },
-                                                background: { color: '#ff400d' },
-                                                width: 375,
-                                                scale: {
-                                                    startValue: scaleStart,
-                                                    endValue: endDate,
-                                                    minorTickInterval: "day",
-                                                    majorTickInterval: 'week',
-                                                    minRange: "day",
-                                                    showMinorTicks: false
-                                                },
-                                                sliderMarker: {
-                                                    color: '#ff400d',
-                                                    format: "monthAndDay"
-                                                },
-                                                selectedRange: {
-                                                    startValue: startDate,
-                                                    endValue: endDate
-                                                },
-                                                onSelectedRangeChanged: function (e) {
-                                                    tab.UpdateActivityChart(e.startValue, e.endValue);
+                                        background: { color: '#ff400d' },
+                                        width: 375,
+                                        scale: {
+                                            startValue: scaleStart,
+                                            endValue: endDate,
+                                            minorTickInterval: "day",
+                                            majorTickInterval: 'week',
+                                            minRange: "day",
+                                            showMinorTicks: false
+                                        },
+                                        sliderMarker: {
+                                            color: '#ff400d',
+                                            format: "monthAndDay"
+                                        },
+                                        selectedRange: {
+                                            startValue: startDate,
+                                            endValue: endDate
+                                        },
+                                        onSelectedRangeChanged: function (e) {
+                                            tab.UpdateActivityChart(e.startValue, e.endValue);
+                                        }
+                                    });
+                                },
+                                ShowTab: function (name) {
+                                    this.AgentName = name;
+                                    var range = this.DateRange();
+                                    var selectedRange = range.getSelectedRange();
+                                    this.UpdateActivityChart(selectedRange.startValue, selectedRange.endValue);
+                                    this.LoadStatusChart();
+                                },
+                                LoadAgentActivityDs: function (startDate, endDate) {
+                                    var url = "/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-");
+                                    this.ActivityDataSource = new DevExpress.data.DataSource(url);
+                                    this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.AgentName);
+                                },
+                                UpdateActivityChart: function (startDate, endDate) {
+                                    var chart = this.BarChart();
+                                    chart.showLoadingIndicator();
+                                    this.LoadAgentActivityDs(startDate, endDate);
+                                    chart.beginUpdate();
+                                    chart.option("dataSource", this.ActivityDataSource);
+                                    chart.endUpdate();
+                                    //this.LoadStatusChart();
+                                },
+                                LoadStatusChart: function () {
+                                    var option = {
+                                        dataSource: this.LeadsDataSource,
+                                        tooltip: {
+                                            enabled: true,
+                                            percentPrecision: 0,
+                                            customizeText: function (arg) {
+                                                return {
+                                                    text: arg.argumentText + " (" + arg.percentText + ")"
+                                                };
+                                            }
+                                        },
+                                        legend: {
+                                            visible: true,
+                                            verticalAlignment: "bottom",
+                                            horizontalAlignment: "center"
+                                        },
+                                        series: [{
+                                            type: "doughnut",
+                                            argumentField: "Status",
+                                            valueField: "Count",
+                                            tagField: "StatusKey",
+                                            label: {
+                                                visible: true,
+                                                connector: {
+                                                    visible: true
                                                 }
-                                            });
+                                            }
+                                        }],
+                                        title: {
+                                            text: "Leads Status",
+                                            font: {
+                                                family: 'Source Sans Pro, sans-serif',
+                                                size: 21,
+                                                weight: 900
+                                            },
+                                            horizontalAlignment: 'left',
+                                            margin: {
+                                                left: 20
+                                            }
                                         },
-                                        ShowTab: function (name) {
-                                            this.AgentName = name;
-                                            var range = this.DateRange();
-                                            var selectedRange = range.getSelectedRange();
-                                            this.UpdateActivityChart(selectedRange.startValue, selectedRange.endValue);
-                                            this.LoadStatusChart();
-                                        },
-                                        LoadAgentActivityDs: function (startDate, endDate) {
-                                            var url = "/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-");
-                                            this.ActivityDataSource = new DevExpress.data.DataSource(url);
-                                            this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.AgentName);
-                                        },
-                                        UpdateActivityChart: function (startDate, endDate) {
-                                            var chart = this.BarChart();
-                                            chart.showLoadingIndicator();
-                                            this.LoadAgentActivityDs(startDate, endDate);
-                                            chart.beginUpdate();
-                                            chart.option("dataSource", this.ActivityDataSource);
-                                            chart.endUpdate();
-                                            //this.LoadStatusChart();
-                                        },
-                                        LoadStatusChart: function () {
-                                            var option = {
-                                                dataSource: this.LeadsDataSource,
-                                                tooltip: {
-                                                    enabled: true,
-                                                    percentPrecision: 0,
-                                                    customizeText: function (arg) {
-                                                        return {
-                                                            text: arg.argumentText + " (" + arg.percentText + ")"
-                                                        };
-                                                    }
-                                                },
-                                                legend: {
-                                                    visible: true,
-                                                    verticalAlignment: "bottom",
-                                                    horizontalAlignment: "center"
-                                                },
-                                                series: [{
-                                                    type: "doughnut",
-                                                    argumentField: "Status",
-                                                    valueField: "Count",
-                                                    tagField: "StatusKey",
-                                                    label: {
-                                                        visible: true,
-                                                        connector: {
-                                                            visible: true
-                                                        }
-                                                    }
-                                                }],
-                                                title: {
-                                                    text: "Leads Status",
-                                                    font: {
-                                                        family: 'Source Sans Pro, sans-serif',
-                                                        size: 21,
-                                                        weight: 900
-                                                    },
-                                                    horizontalAlignment: 'left',
-                                                    margin: {
-                                                        left: 20
-                                                    }
-                                                },
-                                                palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
-                                            };
+                                        palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
+                                    };
 
-                                            $("#ProcessStatusChart").dxPieChart(option);
+                                    $("#ProcessStatusChart").dxPieChart(option);
                                 },
 
                                 Render: function () {
                                     this.InitalTab();
                                     var name = $("#spanUserName").html();
                                     this.ShowTab(name);
-                                        }
-                                    };
+                                }
+                            };
 
                             function show_chart_modal() {
 
@@ -741,8 +821,8 @@
 
 
 
-                                </script>
-                            </div>
+                        </script>
+                    </div>
 
                 </dx:SplitterContentControl>
             </ContentCollection>

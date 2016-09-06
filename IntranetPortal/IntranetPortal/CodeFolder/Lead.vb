@@ -56,6 +56,10 @@ Partial Public Class Lead
         End Get
     End Property
 
+    ''' <summary>
+    ''' Get the SubStatus String
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property SubStatusStr As String
         Get
             If SubStatus.HasValue Then
@@ -296,8 +300,8 @@ Partial Public Class Lead
     ''' <param name="userName">The given username</param>
     ''' <param name="dueDate">The given datetime</param>
     ''' <returns></returns>
-    Public Shared Function GetLoanModDue(userName As String, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
-        Return GetLeadsDue(LeadStatus.LoanMod, userName, dueDate)
+    Public Shared Function GetLoanModDue(userName As String, Optional subStatus As LeadSubStatus = Nothing, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
+        Return GetLeadsDue(LeadStatus.LoanMod, userName, dueDate, subStatus)
     End Function
 
     ''' <summary>
@@ -317,22 +321,36 @@ Partial Public Class Lead
     ''' <param name="userName">The given user name</param>
     ''' <param name="dueDate">The due date</param>
     ''' <returns></returns>
-    Public Shared Function GetLeadsDue(status As LeadStatus, userName As String, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
+    Public Shared Function GetLeadsDue(status As LeadStatus, userName As String,
+                                       Optional dueDate As DateTime? = Nothing,
+                                       Optional subStatus As LeadSubStatus = Nothing) As List(Of Lead)
         If dueDate Is Nothing Then
             dueDate = Date.Today
         End If
 
         Dim lds = Lead.GetUserLeadsData(userName, status)
-        Return lds.Where(Function(ld) ld.IsDueOn(dueDate, leadsStatusDueDays(status))).ToList
+
+        If subStatus IsNot Nothing Then
+            lds = lds.Where(Function(ld) ld.SubStatus = subStatus).ToList
+        End If
+
+        If leadsStatusDueDays.ContainsKey(New Tuple(Of LeadStatus, LeadSubStatus)(status, subStatus)) Then
+            Dim days = leadsStatusDueDays(New Tuple(Of LeadStatus, LeadSubStatus)(status, subStatus))
+            Return lds.Where(Function(ld) ld.IsDueOn(dueDate, days)).ToList
+        End If
+
+        Return lds
     End Function
 
-    Private Shared dic As Dictionary(Of LeadStatus, Integer)
-    Private Shared ReadOnly Property leadsStatusDueDays As Dictionary(Of LeadStatus, Integer)
+    Private Shared dic As Dictionary(Of Tuple(Of LeadStatus, LeadSubStatus), Integer)
+    Private Shared ReadOnly Property leadsStatusDueDays As Dictionary(Of Tuple(Of LeadStatus, LeadSubStatus), Integer)
         Get
             If dic Is Nothing Then
-                dic = New Dictionary(Of LeadStatus, Integer)
-                dic.Add(LeadStatus.LoanMod, 30)
-                dic.Add(LeadStatus.Priority, 5)
+                dic = New Dictionary(Of Tuple(Of LeadStatus, LeadSubStatus), Integer)
+                dic.Add(New Tuple(Of LeadStatus, LeadSubStatus)(LeadStatus.LoanMod, Nothing), 30)
+                dic.Add(New Tuple(Of LeadStatus, LeadSubStatus)(LeadStatus.LoanMod, LeadSubStatus.LoanModCompleted), 60)
+                dic.Add(New Tuple(Of LeadStatus, LeadSubStatus)(LeadStatus.LoanMod, LeadSubStatus.LoanModInProcess), 30)
+                dic.Add(New Tuple(Of LeadStatus, LeadSubStatus)(LeadStatus.Priority, Nothing), 5)
             End If
 
             Return dic

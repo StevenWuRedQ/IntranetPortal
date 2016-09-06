@@ -7,6 +7,10 @@ Public Class LeadTest
     Public Sub SubStatus_Test()
         Dim ld As New Lead
         ld.SubStatus = CType(LeadSubStatus.LoanModCompleted, Integer)
+        ld.SubStatus = LeadSubStatus.LoanModCompleted
+        If ld.SubStatus = LeadSubStatus.LoanModCompleted Then
+            Assert.AreEqual(True, True)
+        End If
         Assert.AreEqual(ld.SubStatusStr, "LoanMod Completed")
     End Sub
 
@@ -27,7 +31,7 @@ Public Class LeadTest
 
     <TestMethod()>
     Public Sub GetLoanModLeads_leadsArray()
-        Dim lds = Lead.GetLoanModDue("Chris Yan", New Date(2016, 12, 1))
+        Dim lds = Lead.GetLoanModDue("Chris Yan", Nothing, New Date(2016, 12, 1))
         Assert.AreEqual(lds.Count, 1)
     End Sub
 
