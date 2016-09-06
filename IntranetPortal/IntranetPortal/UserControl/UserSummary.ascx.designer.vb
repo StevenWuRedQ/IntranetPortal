@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class UserSummary
-
+    
     '''<summary>
     '''LeadsSubMenu control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
-
+    
     '''<summary>
     '''contentSplitter control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter
-
+    
     '''<summary>
     '''gridAppointment control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridAppointment As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''gridPriority control.
     '''</summary>
@@ -48,7 +48,16 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridPriority As Global.DevExpress.Web.ASPxGridView
-
+    
+    '''<summary>
+    '''gridWarmer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridWarmer As Global.DevExpress.Web.ASPxGridView
+    
     '''<summary>
     '''gridTask control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridTask As Global.DevExpress.Web.ASPxGridView
-
+    
     '''<summary>
     '''gridCallback control.
     '''</summary>
@@ -66,7 +75,16 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridCallback As Global.DevExpress.Web.ASPxGridView
-
+    
+    '''<summary>
+    '''gridLoanMod control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridLoanMod As Global.DevExpress.Web.ASPxGridView
+    
     '''<summary>
     '''todayScheduler control.
     '''</summary>
@@ -75,7 +93,7 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents todayScheduler As Global.DevExpress.Web.ASPxScheduler.ASPxScheduler
-
+    
     '''<summary>
     '''notesCallbackPanel control.
     '''</summary>
@@ -84,7 +102,7 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents notesCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel
-
+    
     '''<summary>
     '''txtTitle control.
     '''</summary>
@@ -93,7 +111,7 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtTitle As Global.DevExpress.Web.ASPxMemo
-
+    
     '''<summary>
     '''txtNotesDescription control.
     '''</summary>
