@@ -158,7 +158,7 @@
               <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
             </FrontButton>
           </PortalNavItem>
-          <PortalNavItem Name="AgentHotLeads" Text="Hot" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+          <PortalNavItem Name="AgentHotLeads" Text="Hot Leads" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="glyphicon glyphicon-fire"></i>]]>
             </FontClass>

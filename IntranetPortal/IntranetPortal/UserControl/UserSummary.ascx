@@ -98,7 +98,7 @@
         font-weight: 900;
         /*background-color: #ededed;*/
         margin-top: 10px;
-        padding-top: 40px;
+        padding-top: 10px;
     }
 
     /*add by steven vertical image and text class*/
@@ -247,9 +247,7 @@
                                                                         <img src="../images/grid_call_backs_canlender.png" /></td>
                                                                     <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
                                                                     <td style="padding-left: 10px">
-                                                                        <div class="raund-label">
-                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                        </div>
+                                                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
                                                                     </td>
                                                                     <%--the round div--%>
                                                                 </tr>
@@ -317,7 +315,7 @@
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div style="cursor: pointer; height: 38px; padding-left: 20px; line-height: 38px;" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Priority", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div style="cursor: pointer; height: 38px; padding-left: 20px; line-height: 38px;" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Warmer", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
@@ -420,9 +418,7 @@
                                                                         <img src="../images/grid_call_backs_canlender.png" /></td>
                                                                     <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
                                                                     <td style="padding-left: 10px">
-                                                                        <div class="raund-label">
-                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                        </div>
+                                                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
                                                                     </td>
                                                                     <%--the round div--%>
                                                                 </tr>
@@ -464,7 +460,7 @@
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Call Back", Eval("BBLE"))%>'><%#  HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "LoanMod", Eval("BBLE"))%>'><%#  HtmlBlackInfo(Eval("LeadsName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
 
@@ -610,7 +606,7 @@
 
                                 </div-->
 
-
+                                     
                                 <div class="modal-body modal-body-chart">
                                     <div class="modal-body-charte">
                                         <div id="dateRange" class="containers" style="width: 100%;"></div>

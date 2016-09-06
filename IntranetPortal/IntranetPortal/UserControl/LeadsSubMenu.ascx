@@ -407,7 +407,7 @@
             <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>
         </div>
     </FooterContentTemplate>
-    <ClientSideEvents EndCallback="function(s,e){if(typeof cbDeadReasons == 'undefined')$('#divFoot').hide();  if(popupShow) s.Show();  else{ s.Hide(); OnSetStatusComplete(s,e); } }" />
+    <ClientSideEvents EndCallback="function(s,e){if(typeof cbDeadReasons == 'undefined')$('#divFoot').hide(); else {$('#divFoot').show();}  if(popupShow) s.Show();  else{ s.Hide(); OnSetStatusComplete(s,e); } }" />
 </dx:ASPxPopupControl>
 
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupChangeLeadsStatusClient" Width="356px" Height="350px" ID="aspxPopupChangeLeadsStatus" Modal="true" ShowFooter="true"
