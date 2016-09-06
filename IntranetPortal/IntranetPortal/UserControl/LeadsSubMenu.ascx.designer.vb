@@ -257,15 +257,6 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents PopupControlContentControl1 As Global.DevExpress.Web.PopupControlContentControl
     
     '''<summary>
-    '''ChangeStatusResonText control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ChangeStatusResonText As Global.DevExpress.Web.ASPxMemo
-    
-    '''<summary>
     '''Panel_LoanModSubStatus control.
     '''</summary>
     '''<remarks>
@@ -282,6 +273,15 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Radios_LoanModSubStatus As Global.DevExpress.Web.ASPxRadioButtonList
+    
+    '''<summary>
+    '''ChangeStatusResonText control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ChangeStatusResonText As Global.DevExpress.Web.ASPxMemo
     
     '''<summary>
     '''aspxPopupShareleads control.

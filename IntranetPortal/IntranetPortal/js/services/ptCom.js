@@ -3,19 +3,10 @@
  * 
  **/
 
-angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
+angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
     var that = this;
 
-    this.DocGenerator = function (tplName, data, successFunc) {
-        $http.post("/Services/Documents.svc/DocGenrate", {
-            "tplName": tplName,
-            "data": JSON.stringify(data)
-        }).success(function (data) {
-            successFunc(data);
-        }).error(function (data, status) {
-            alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
-        });
-    }; 
+
 
     this.arrayAdd = function (model, data) {
         if (model) {
@@ -95,19 +86,19 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         var divToPrint = document.getElementById(divID);
         var popupWin = window.open('', '_blank', 'width=300,height=300');
         popupWin.document.open();
-        popupWin.document.write('<html><head>'+
-        '<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" />'+
-        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />'+
-        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />'+
-        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />'+
-        '<link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />'+
-        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />'+
-        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />'+
-        '<link rel="stylesheet" href="/css/stevencss.css"type="text/css" />'+
+        popupWin.document.write('<html><head>' +
+        '<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" />' +
+        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />' +
+        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />' +
+        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />' +
+        '<link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />' +
+        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />' +
+        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />' +
+        '<link rel="stylesheet" href="/css/stevencss.css"type="text/css" />' +
         '</head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
         popupWin.document.close();
     };
-    
+
     this.postRequest = function (url, data) {
         $.post(url, data, function (retData) {
             $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");

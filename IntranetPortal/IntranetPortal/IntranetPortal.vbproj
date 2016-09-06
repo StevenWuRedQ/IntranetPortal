@@ -7172,6 +7172,7 @@
     <Content Include="js\services\ptHomeBreakDownService.js" />
     <Content Include="js\services\ptLeadsService.js" />
     <Content Include="js\services\ptLegalService.js" />
+    <Content Include="js\services\ptPortalHttpInterceptor.js" />
     <Content Include="js\services\ptShortsSaleService.js" />
     <Content Include="js\services\ptTime.js" />
     <Content Include="js\test\models\DivError.spec.js" />
