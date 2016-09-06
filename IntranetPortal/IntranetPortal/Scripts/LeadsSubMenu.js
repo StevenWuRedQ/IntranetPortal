@@ -259,22 +259,47 @@ function SetLeadStatus(status) {
     if (leadStatusCallbackClient.InCallback()) {
         alert("Server is busy! Please wait!")
     } else {
+
         SEND_STATUS = status;
         aspxPopupChangeLeadsStatusClient.Show();
-        //leadStatusCallbackClient.PerformCallback(status);
+
+        // show up substatus selection for loan mod
+        if (status.startsWith("x|LoanMod|20")) {
+            if (panel_LoanModSubStatus) {
+                //debugger;
+                panel_LoanModSubStatus.SetVisible(true);
+            }
+        } else {
+            if (panel_LoanModSubStatus) {
+
+                panel_LoanModSubStatus.SetVisible(false);
+            }
+            //leadStatusCallbackClient.PerformCallback(status);
+        }
     }
 }
 
 function CofrimLeadStatusChange() {
-
+    debugger;
     var comments = ChangeStatusResonTextClient.GetText();
+    var loanModSubStatus = "";
+
+    if (panel_LoanModSubStatus && panel_LoanModSubStatus.clientVisible) {
+        loanModSubStatus = String(radios_LoanModSubStatus.GetSelectedIndex().toString());
+    }
+
+
     if (!comments) {
         alert("The reason can not be empty please make sure you input change reason !");
-
         return;
     }
     if (SEND_STATUS) {
-        leadStatusCallbackClient.PerformCallback(SEND_STATUS + "|" + comments);
+        var sendData = SEND_STATUS + "|" + comments;
+        debugger;
+        if (loanModSubStatus != "") {
+            sendData += "|" + loanModSubStatus;
+        }
+        leadStatusCallbackClient.PerformCallback(sendData);
 
     } else {
         alert("Cofrim LeadStatus Change faled SEND_STATUS is null");

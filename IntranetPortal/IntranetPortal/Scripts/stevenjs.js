@@ -1,4 +1,77 @@
-﻿if (typeof $().formatCurrency != 'function') {
+﻿wx_deubg = true;
+wx_show_bug = false;
+PortalUtility = {
+    FormatLocalDateTime: function (utcDate) {
+        if (!utcDate)
+            return
+
+        // create Date object for current location
+        var d = new Date();
+
+        // convert to msec
+        // add local time zone offset
+        // get UTC time in msec
+        var utc = new Date(utcDate.getTime() + d.getTimezoneOffset() * 60000);
+
+        // return time as a string
+        return utc
+    },
+    FormatISODate: function (utcDate) {
+        return moment(PortalUtility.FormatLocalDateTime(utcDate)).format('MM/DD/YYYY');
+    },
+    GoToCase: function (url) {
+        window.location.href = url;
+    },
+    fileWindows: {},
+    ShowPopWindow: function (windowId, url) {
+        this.OpenWindow(url, windowId);
+    },
+    OpenWindow: function (url, title, width, height) {
+        for (var win in this.fileWindows) {
+            if (this.fileWindows.hasOwnProperty(win) && win == title) {
+                var caseWin = this.fileWindows[win];
+                if (!caseWin.closed) {
+                    caseWin.focus();
+                    return;
+                }
+            }
+        }
+
+        var vwidth = width ? width : 1350;
+        var vheight = height ? height : 930;
+        var left = (screen.width / 2) - (vwidth / 2);
+        var top = (screen.height / 2) - (vheight / 2);
+        this.fileWindows[title] = window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
+        return win;
+    },
+    QueryUrl: function () {
+        // This function is anonymous, is executed immediately and 
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        }
+        return query_string;
+    },
+    ShowConfirm: function () {
+
+    }
+}
+
+if (typeof $().formatCurrency != 'function') {
     $.getScript("/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js");
 }
 function clickCollapse(e) {
@@ -32,8 +105,8 @@ function collapse_all(collapse_all) {
     })
 
 }
-var wx_deubg = true;
-/*band data in short Sale*/
+
+
 function d_alert(s) {
     if (wx_deubg) {
         alert(s);
@@ -54,6 +127,7 @@ function d_log_assert(cond, s) {
         d_log(s)
     }
 }
+
 /*when has value then is send object by value */
 function get_sub_property(obj, id_str, value) {
 
@@ -314,7 +388,7 @@ function refreshDiv(field, obj) {
     //ShortSaleDataBand(2);
 
 }
-wx_show_bug = false;
+
 /*set or get short sale data if value is null get data*/
 function ss_field_data(elem, value) {
 
@@ -999,63 +1073,6 @@ function STDownloadFile(url, fileName) {
     link.click();
     document.body.removeChild(link);
 }
-
-jQuery.fn.fitToParent = function (options) {
-
-    this.each(function () {
-
-        // Cache the resize element
-        var $el = jQuery(this);
-
-        // Get size parent (box to fit element in)
-        var $box;
-        if ($el.closest('.size-parent').length) {
-            $box = $el.closest('.size-parent');
-        } else {
-            $box = $el.parent();
-        }
-
-        // These are the defaults.
-        var settings = jQuery.extend({
-            height_offset: 0,
-            width_offset: 0,
-            box_height: $box.height(),
-            box_width: $box.width(),
-            callback: null
-        }, options);
-
-        // Setup box and element widths
-        var width = $el.width();
-        var height = $el.height();
-        var parentWidth = settings.box_width - settings.width_offset;
-        var parentHeight = settings.box_height - settings.height_offset;
-
-        // Maintin aspect ratio
-        var aspect = width / height;
-        var parentAspect = parentWidth / parentHeight;
-
-        // Resize to fit box
-        if (aspect > parentAspect) {
-            newWidth = parentWidth;
-            newHeight = (newWidth / aspect);
-        } else {
-            newHeight = parentHeight;
-            newWidth = newHeight * aspect;
-        }
-
-        // Set new size of element
-        $el.width(newWidth);
-        $el.height(newHeight);
-
-        // Fire callback
-        if (typeof (settings.callback) == "function") {
-            settings.callback(newWidth, newHeight);
-        }
-
-    });
-};
-
-/*autodial*/
 function hashStr(str) {
     var hash = 0;
     for (i = 0; i < str.length; i++) {
@@ -1068,7 +1085,6 @@ function hashStr(str) {
     }
     return hash;
 };
-
 function popUpAtBottomRight(pageToLoad, winName, width, height) {
     xposition = 0; yposition = 0;
     if ((parseInt(navigator.appVersion) >= 4)) {
@@ -1094,7 +1110,6 @@ function popUpAtBottomRight(pageToLoad, winName, width, height) {
     var dmcaWin = window.open(pageToLoad, winName, args);
     dmcaWin.focus();
 };
-
 function sortPhones() {
     var colors = {}
     var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
@@ -1117,86 +1132,14 @@ function sortPhones() {
         phones.parent().html('<div>' + html + '</div>');
     });
 };
-
 function CallPhone(phone) {
     var url = '/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
     $("#AutoDialer").css('display', '');
     $("#AutoDialer").attr("src", encodeURI(url));
 };
-
 function endsWith(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
 };
-
-var PortalUtility = {
-    FormatLocalDateTime: function (utcDate) {
-        if (!utcDate)
-            return
-
-        // create Date object for current location
-        var d = new Date();
-
-        // convert to msec
-        // add local time zone offset
-        // get UTC time in msec
-        var utc = new Date(utcDate.getTime() + d.getTimezoneOffset() * 60000);
-
-        // return time as a string
-        return utc
-    },
-    FormatISODate: function (utcDate) {
-        return moment(PortalUtility.FormatLocalDateTime(utcDate)).format('MM/DD/YYYY');
-    },
-    GoToCase: function (url) {
-        window.location.href = url;
-    },
-    fileWindows: {},
-    ShowPopWindow: function (windowId, url) {
-        this.OpenWindow(url, windowId);
-    },
-    OpenWindow: function (url, title, width, height) {
-        for (var win in this.fileWindows) {
-            if (this.fileWindows.hasOwnProperty(win) && win == title) {
-                var caseWin = this.fileWindows[win];
-                if (!caseWin.closed) {
-                    caseWin.focus();
-                    return;
-                }
-            }
-        }
-
-        var vwidth = width ? width : 1350;
-        var vheight = height ? height : 930;
-        var left = (screen.width / 2) - (vwidth / 2);
-        var top = (screen.height / 2) - (vheight / 2);
-        this.fileWindows[title] = window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
-        return win;
-    },
-    QueryUrl: function () {
-        // This function is anonymous, is executed immediately and 
-        // the return value is assigned to QueryString!
-        var query_string = {};
-        var query = window.location.search.substring(1);
-        var vars = query.split("&");
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split("=");
-            // If first entry with this name
-            if (typeof query_string[pair[0]] === "undefined") {
-                query_string[pair[0]] = decodeURIComponent(pair[1]);
-                // If second entry with this name
-            } else if (typeof query_string[pair[0]] === "string") {
-                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
-                query_string[pair[0]] = arr;
-                // If third or later entry with this name
-            } else {
-                query_string[pair[0]].push(decodeURIComponent(pair[1]));
-            }
-        }
-        return query_string;
-    }
-}
-
-/**** resize all element unknow height scorll bar*******/
 function calc_scorll_heigh(elem) {
     //var elem = $(".wx_scorll_list")[0];
     var windowVisbleHeight = $(window.top).height();
@@ -1265,7 +1208,61 @@ $.fn.accordion = function (options) {
         }
     }
 };
-/******** end function **********/
+$.fn.fitToParent = function (options) {
+
+    this.each(function () {
+
+        // Cache the resize element
+        var $el = jQuery(this);
+
+        // Get size parent (box to fit element in)
+        var $box;
+        if ($el.closest('.size-parent').length) {
+            $box = $el.closest('.size-parent');
+        } else {
+            $box = $el.parent();
+        }
+
+        // These are the defaults.
+        var settings = jQuery.extend({
+            height_offset: 0,
+            width_offset: 0,
+            box_height: $box.height(),
+            box_width: $box.width(),
+            callback: null
+        }, options);
+
+        // Setup box and element widths
+        var width = $el.width();
+        var height = $el.height();
+        var parentWidth = settings.box_width - settings.width_offset;
+        var parentHeight = settings.box_height - settings.height_offset;
+
+        // Maintin aspect ratio
+        var aspect = width / height;
+        var parentAspect = parentWidth / parentHeight;
+
+        // Resize to fit box
+        if (aspect > parentAspect) {
+            newWidth = parentWidth;
+            newHeight = (newWidth / aspect);
+        } else {
+            newHeight = parentHeight;
+            newWidth = newHeight * aspect;
+        }
+
+        // Set new size of element
+        $el.width(newWidth);
+        $el.height(newHeight);
+
+        // Fire callback
+        if (typeof (settings.callback) == "function") {
+            settings.callback(newWidth, newHeight);
+        }
+
+    });
+};
+
 
 function mip() {
     if (window.devicePixelRatio > 1) {
@@ -1385,14 +1382,12 @@ function mip() {
         $('#portal-sign-in-form').ajaxForm(form_options);
     }
 }
-
 function afterloginsubmission() {
     $('.form-validation-message').animate({ "top": "0" }, 500, 'easeOutCirc');
     $(':input').focus(function () {
         if ($('.form-validation-message').is(':visible')) $('.form-validation-message').animate({ "top": "-80px" }, 500, 'easeOutCirc');
     });
 }
-
 
 /** combine old main.js and stevenjs.js document.ready init functions here **/
 function init_tooltip_and_scroll() {
@@ -1430,7 +1425,6 @@ function init_tooltip_and_scroll() {
         calc_scorll_heigh_all();
     });
 }
-
 function init_loading() {
     $(document).ready(
          function () {

@@ -187,7 +187,15 @@ Public Class LeadsSubMenu
                     If e.Parameter.Contains("|") Then
                         Dim status = e.Parameter.Split("|")(2)
                         Dim bble = e.Parameter.Split("|")(3)
-                        UpdateLeadStatus(bble, status, Nothing, AddComment)
+
+                        If (e.Parameter.StartsWith("x|LoanMod|20")) Then
+                            Dim substatus = e.Parameter.Split("|")(5)
+                            UpdateLeadStatus(bble, status, Nothing, AddComment, substatus)
+                        Else
+                            UpdateLeadStatus(bble, Status, Nothing, AddComment)
+                        End If
+
+
                     End If
                 End If
 
@@ -198,8 +206,14 @@ Public Class LeadsSubMenu
         End Try
     End Sub
 
-    Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, addCommend As String)
-        Lead.UpdateLeadStatus(bble, status, callbackDate, addCommend)
+    Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, addCommend As String, Optional subStatus As String = Nothing)
+        If Not String.IsNullOrEmpty(subStatus) Then
+            Lead.UpdateLeadStatus(bble, status, callbackDate, addCommend, subStatus)
+        Else
+            Lead.UpdateLeadStatus(bble, status, callbackDate, addCommend)
+        End If
+
+
     End Sub
 
     Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)

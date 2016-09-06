@@ -1,6 +1,8 @@
 ﻿Imports System.Net
+Imports System.Net.Http
 Imports System.Web.Http
 Imports System.Web.Http.Description
+Imports Newtonsoft.Json
 
 Namespace Controllers
     <Authorize(Roles:="Admin,Auction-Manager,OfficeManager-*,HOI-Viewer,NewOffer-Viewer")>
@@ -73,5 +75,22 @@ Namespace Controllers
                 Throw
             End Try
         End Function
+
+        <HttpPost>
+        <Route("api/Leads/UpdateLeadsSubstatus/{bble}/{newSubStatus}")>
+        Public Function PostUpdateLeadsSubstatus(bble As String, newSubStatus As String) As IHttpActionResult
+
+            Try
+                If Not String.IsNullOrEmpty(bble) AndAlso Not String.IsNullOrEmpty(newSubStatus) Then
+                    Lead.UpdateLeadSubStatus(bble, newSubStatus)
+                    Return Ok()
+                End If
+                Return BadRequest()
+            Catch ex As Exception
+
+                Return BadRequest(ex.ToString)
+            End Try
+        End Function
+
     End Class
 End Namespace

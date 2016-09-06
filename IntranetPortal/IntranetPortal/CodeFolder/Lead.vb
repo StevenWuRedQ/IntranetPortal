@@ -504,7 +504,7 @@ Partial Public Class Lead
         Return listProp.Create()
     End Function
 
-    Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, Optional addCommend As String = Nothing) As Boolean
+    Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, Optional addCommend As String = Nothing, Optional subStatus As String = Nothing) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
             Dim addComStr = If(String.IsNullOrEmpty(addCommend), "", "<br/>" & " Comments: " & addCommend)
@@ -513,6 +513,10 @@ Partial Public Class Lead
                 lead.Status = status
                 If Not callbackDate = Nothing Then
                     lead.CallbackDate = callbackDate
+                End If
+
+                If Not String.IsNullOrEmpty(subStatus) Then
+                    lead.SubStatus = CInt(subStatus)
                 End If
 
                 Context.SaveChanges()
@@ -886,6 +890,26 @@ Partial Public Class Lead
         Return True
     End Function
 
+    Public Shared Sub UpdateLeadSubStatus(bble As String, newSubStatus As String)
+        If newSubStatus = "0" OrElse newSubStatus = "1" Then
+            Using Context As New Entities
+
+                Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
+                If lead IsNot Nothing Then
+                    lead.SubStatus = CInt(newSubStatus)
+                    Context.SaveChanges()
+
+
+                    Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
+                    Dim empName = HttpContext.Current.User.Identity.Name
+                    Dim comments = "Lead Status changed to LoanMod(" & lead.SubStatusStr.ToString & ") on " & Date.Now.ToString("MM/dd/yyyy")
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, LeadsActivityLog.EnumActionType.RefreshLeads)
+                End If
+            End Using
+        End If
+
+
+    End Sub
 
     Public Sub StartRecycleProcess()
         If Not InRecycle Then

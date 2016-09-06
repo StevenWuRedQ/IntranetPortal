@@ -18,7 +18,7 @@
 
         <dx:MenuItem GroupName="Sort" Text="Warmer" Name="Warmer" Image-Url="">
             <Template>
-                <div class="dxm-content dxm-hasText" style="float: none; ">
+                <div class="dxm-content dxm-hasText" style="float: none;">
                     <i class="fa fa-circle-o dxm-image dx-vam"></i>
                     <span class="dx-vam"><%# Container.Item.Text %></span>
                 </div>
@@ -425,14 +425,25 @@
     </HeaderTemplate>
     <ContentCollection>
         <dx:PopupControlContentControl runat="server" ID="PopupControlContentControl1">
-
             <div style="color: #b1b2b7;">
-
                 <div class="form-group ">
                     <label class="upcase_text" style="display: block">Reason</label>
                     <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="ChangeStatusResonText" ClientInstanceName="ChangeStatusResonTextClient" CssClass="edit_text_area"></dx:ASPxMemo>
                 </div>
+                <dx:ASPxPanel runat="server" Id="Panel_LoanModSubStatus" ClientInstanceName="panel_LoanModSubStatus" ClientVisible="false">
+                    <PanelCollection>
+                        <dx:PanelContent>
+                            <label class="upcase_text" style="display: block">Please select status for Loan Mod</label>
+                            <dx:ASPxRadioButtonList runat="server" ID="Radios_LoanModSubStatus" ClientInstanceName="radios_LoanModSubStatus" RepeatLayout="Flow" RepeatDirection="Horizontal">
+                                <Items>
+                                    <dx:ListEditItem Text="In Progress" Value="0" Selected="true" />
+                                    <dx:ListEditItem Text="Completed" Value="1" />
+                                </Items>
+                            </dx:ASPxRadioButtonList>
+                        </dx:PanelContent>
+                    </PanelCollection>
 
+                </dx:ASPxPanel>
             </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
@@ -440,7 +451,6 @@
         <div style="height: 30px; vertical-align: central">
             <span class="time_buttons" onclick="aspxPopupChangeLeadsStatusClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="CofrimLeadStatusChange();">Confirm</span>
-
         </div>
     </FooterContentTemplate>
 
@@ -531,18 +541,6 @@
     </ContentCollection>
     <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
 </dx:ASPxPopupControl>
-
-<%--<dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="popupMenuLeads"
-    AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-    <ItemStyle Paddings-PaddingLeft="20px" />
-    <Items>
-        <dx:MenuItem Text="Leads" Name="Leads"></dx:MenuItem>
-        <dx:MenuItem Text="Short Sale" Name="ShortSale"></dx:MenuItem>
-        <dx:MenuItem Text="Eviction" Name="Eviction"></dx:MenuItem>
-        <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>
-    </Items>
-    <ClientSideEvents ItemClick="OnPopupMenuLeadsClick" />
-</dx:ASPxPopupMenu>--%>
 
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="function(s,e) {OnSetStatusComplete(s,e)}" />

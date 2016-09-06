@@ -339,6 +339,11 @@
         if (sortPhones) {
             sortPhones();
         }
+
+        // reload callback on get lead status in propertyinfo
+        if(LoanModStatusCtrl){
+            LoanModStatusCtrl.reload();
+        }
     }
 
     function reloadHomeBreakCtrl(bble) {

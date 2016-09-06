@@ -266,6 +266,24 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents ChangeStatusResonText As Global.DevExpress.Web.ASPxMemo
     
     '''<summary>
+    '''Panel_LoanModSubStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Panel_LoanModSubStatus As Global.DevExpress.Web.ASPxPanel
+    
+    '''<summary>
+    '''Radios_LoanModSubStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Radios_LoanModSubStatus As Global.DevExpress.Web.ASPxRadioButtonList
+    
+    '''<summary>
     '''aspxPopupShareleads control.
     '''</summary>
     '''<remarks>

@@ -28,13 +28,13 @@ Public Class LeadsInfo1
                 End If
 
 
-
                 If CategoryName = "Door Knock" Then
                     doorKnockMapPanel.Visible = True
                     ClientVisible = False
                 Else
                     doorKnockMapPanel.Visible = False
                 End If
+
             End If
 
             If Not ShowLogPanel Then
