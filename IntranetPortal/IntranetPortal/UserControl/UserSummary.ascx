@@ -517,7 +517,27 @@
                                 </div>
                             </div>
                         </div>
+                        <style>
+                            @media screen and (min-width: 768px) {
+                                #calendar-modal {
+                                    left: 40%;
+                                    right: auto;
+                                    width: 624px;
+                                }
 
+                                #chart-modal {
+                                    left: 40%;
+                                    right: auto;
+                                    width: 624px;
+                                }
+                            }
+
+                            .modal-body-chart {
+                                width: 375px;
+                                background-color: #D9F1FD;
+                                border-radius: 10px;
+                            }
+                        </style>
 
                         <div id="calendar-modal" class="modal" style="width: 380px">
                             <div class="modal-content">
@@ -578,6 +598,7 @@
                             </div>
                         </div>
                         <div id="chart-modal" class="modal">
+
                             <div class="modal-content" style="width: 375px">
                                 <!--div class="modal-header">
 
@@ -589,25 +610,7 @@
 
                                 </div-->
 
-                                <style>
-                                    .modal-body-chart {
-                                        width: 375px;
-                                        background-color: #F2F2
-                                           -webkit-border-radi s:  10
-                                           -webkit-border-r dius:
-                                              -moz-border-r dius:
-                                              -moz-bor er-ra
-                                                   bor er-ra
-                                     
-                                                                  .modal body-cha
-                                             background-color: #D9F1FD;
-    t-border-top-left-radius: 10px;                                             -border-top-right-radius: 1 px;                                        
-                                        oz-border-radius-topleft: 10 x;
-                                         z-border-radius-toprigh : 10p
-                                          border-top-left-radius  10px
-                                     
-                                                                    }
-                                </style>
+
                                 <div class="modal-body modal-body-chart">
                                     <div class="modal-body-charte">
                                         <div id="dateRange" class="containers" style="width: 100%;"></div>
