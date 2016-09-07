@@ -1691,6 +1691,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="MyFollowup.aspx.designer.vb">
+      <DependentUpon>MyFollowup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyFollowup.aspx.vb">
+      <DependentUpon>MyFollowup.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="MyDefault.aspx.designer.vb">
       <DependentUpon>MyDefault.aspx</DependentUpon>
     </Compile>
@@ -7280,6 +7287,7 @@
     <Content Include="Mobile\Construction\InitialForm.aspx" />
     <Content Include="Mobile\Construction\SpotCheck.aspx" />
     <Content Include="Mobile\default.aspx" />
+    <Content Include="MyFollowup.aspx" />
     <Content Include="MyDefault.aspx" />
     <Content Include="NewOffer\NewOfferAssignCorp.ascx" />
     <Content Include="NewOffer\NewOfferPreview.aspx" />
