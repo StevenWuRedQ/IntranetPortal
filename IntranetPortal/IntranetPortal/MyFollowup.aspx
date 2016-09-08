@@ -168,7 +168,6 @@
                                 tab.loadData();
                             },
                             error: function (data) {
-
                                 AngularRoot.alert('Some error Occurred!');
                             }
                         });

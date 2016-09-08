@@ -112,14 +112,14 @@ Public Class UserSummary
 
     Protected Sub gridWarmer_DataBinding(sender As Object, e As EventArgs)
         If gridWarmer.DataSource Is Nothing Then
-            Dim priorityData = Lead.GetUserLeadsData(Page.User.Identity.Name, LeadStatus.Warmer)
+            Dim priorityData = Lead.GetUserLeadsData(Page.User.Identity.Name, LeadStatus.Warm)
             gridWarmer.DataSource = priorityData
         End If
     End Sub
 
     Protected Sub gridLoanMod_DataBinding(sender As Object, e As EventArgs)
         If gridLoanMod.DataSource Is Nothing Then
-            Dim loanModleads = Lead.GetLoanModDue(Page.User.Identity.Name, Nothing, New Date(2017, 10, 1)) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
+            Dim loanModleads = Lead.GetLoanModDue(Page.User.Identity.Name) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
             gridLoanMod.DataSource = loanModleads
         End If
     End Sub

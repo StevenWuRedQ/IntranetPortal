@@ -725,8 +725,7 @@
     </div>
 
     <div style="position: absolute; bottom: 0; padding-left: 34px; margin-bottom: 20px">
-
-        <div style="position: relative; float: left">
+        <div style="position: relative; float: left; display:none">
             <table>
                 <tbody>
                     <tr>

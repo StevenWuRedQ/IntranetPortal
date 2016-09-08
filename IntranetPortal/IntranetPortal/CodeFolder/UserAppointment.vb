@@ -55,11 +55,26 @@
         Using Context As New Entities
 
             Dim appoints = (From appoint In Context.UserAppointments
-                           Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = name Or appoint.Manager = name)
-                           Select appoint).Distinct.ToList.Where(Function(api) api.ScheduleDate.Value.Date = DateTime.Today).ToList
+                            Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = name Or appoint.Manager = name)
+                            Select appoint).Distinct.ToList.Where(Function(api) api.ScheduleDate.Value.Date = DateTime.Today).ToList
 
             Return appoints
         End Using
+    End Function
+
+    Public Shared Function GetUpcomingAppointment(name As String)
+        Dim Context As New Entities
+        'Bind Appointment
+        Dim leads = (From al In Context.Leads
+                     Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
+                     Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = name Or appoint.Manager = name) And appoint.ScheduleDate >= Today
+                     Select New With {
+                         .BBLE = al.BBLE,
+                         .LeadsName = al.LeadsName,
+                         .ScheduleDate = appoint.ScheduleDate
+                      }).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
+
+        Return leads
     End Function
 
     Public Shared Function GetAppointmentBylogID(logId As Integer) As UserAppointment

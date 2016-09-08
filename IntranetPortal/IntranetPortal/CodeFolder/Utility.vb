@@ -24,7 +24,7 @@ Public Enum LeadStatus
     Publishing = 16
     Published = 17
     LoanMod = 20
-    Warmer = 21
+    Warm = 21
 End Enum
 
 ''' <summary>

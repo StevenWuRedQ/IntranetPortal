@@ -367,6 +367,21 @@ Partial Public Class Lead
         Return False
     End Function
 
+    Public Shared Function GetUpcomingAppointmentsCount(name As String) As Integer
+        Dim Context As New Entities
+        'Bind Appointment
+        Dim leads = (From al In Context.Leads
+                     Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
+                     Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = name Or appoint.Manager = name) And appoint.ScheduleDate >= Today
+                     Select New With {
+                         .BBLE = al.BBLE,
+                         .LeadsName = al.LeadsName,
+                         .ScheduleDate = appoint.ScheduleDate
+                         }).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
+
+        Return leads.Count
+    End Function
+
     'Get user data by status
     Public Shared Function GetUserLeadsData(name As String, status As LeadStatus) As List(Of Lead)
         Return GetUserLeadsData({name}, status)
