@@ -161,6 +161,7 @@
     <Compile Include="Construction\ConstructionViolations.vb" />
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
     <Compile Include="Exception\DataException.vb" />
+    <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
     <Compile Include="FollowUps\UserFollowUp.vb" />
@@ -355,6 +356,7 @@
     <Compile Include="SignProcess\PropertyOffer.vb" />
     <Compile Include="Title\TitleCase.vb" />
     <Compile Include="Twilio\TwilioClient.vb" />
+    <Compile Include="Underwriter\NewTest.vb" />
     <Compile Include="Underwriter\UnderwriterForm.vb" />
   </ItemGroup>
   <ItemGroup>

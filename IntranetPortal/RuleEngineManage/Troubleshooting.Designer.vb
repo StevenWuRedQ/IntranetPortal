@@ -115,6 +115,7 @@ Partial Class Troubleshooting
         Me.btnFollowUp = New System.Windows.Forms.Button()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.btnComplaintEmail = New System.Windows.Forms.Button()
         Me.btnRefreshComplaints = New System.Windows.Forms.Button()
         Me.txtNotifyNames = New System.Windows.Forms.TextBox()
         Me.btnNotifyAll = New System.Windows.Forms.Button()
@@ -146,7 +147,7 @@ Partial Class Troubleshooting
         Me.tpAuction = New System.Windows.Forms.TabPage()
         Me.txtFiles = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.btnComplaintEmail = New System.Windows.Forms.Button()
+        Me.TestEntitiesBtn = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -1080,6 +1081,15 @@ Partial Class Troubleshooting
         Me.TabPage8.Text = "Complaints"
         Me.TabPage8.UseVisualStyleBackColor = True
         '
+        'btnComplaintEmail
+        '
+        Me.btnComplaintEmail.Location = New System.Drawing.Point(138, 76)
+        Me.btnComplaintEmail.Name = "btnComplaintEmail"
+        Me.btnComplaintEmail.Size = New System.Drawing.Size(108, 29)
+        Me.btnComplaintEmail.TabIndex = 9
+        Me.btnComplaintEmail.Text = "Test Notify"
+        Me.btnComplaintEmail.UseVisualStyleBackColor = True
+        '
         'btnRefreshComplaints
         '
         Me.btnRefreshComplaints.Location = New System.Drawing.Point(262, 15)
@@ -1337,6 +1347,7 @@ Partial Class Troubleshooting
         '
         'TitleTab
         '
+        Me.TitleTab.Controls.Add(Me.TestEntitiesBtn)
         Me.TitleTab.Controls.Add(Me.TitleButton1)
         Me.TitleTab.Location = New System.Drawing.Point(4, 22)
         Me.TitleTab.Name = "TitleTab"
@@ -1382,14 +1393,14 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'btnComplaintEmail
+        'TestEntitiesBtn
         '
-        Me.btnComplaintEmail.Location = New System.Drawing.Point(138, 76)
-        Me.btnComplaintEmail.Name = "btnComplaintEmail"
-        Me.btnComplaintEmail.Size = New System.Drawing.Size(108, 29)
-        Me.btnComplaintEmail.TabIndex = 9
-        Me.btnComplaintEmail.Text = "Test Notify"
-        Me.btnComplaintEmail.UseVisualStyleBackColor = True
+        Me.TestEntitiesBtn.Location = New System.Drawing.Point(132, 22)
+        Me.TestEntitiesBtn.Name = "TestEntitiesBtn"
+        Me.TestEntitiesBtn.Size = New System.Drawing.Size(75, 23)
+        Me.TestEntitiesBtn.TabIndex = 1
+        Me.TestEntitiesBtn.Text = "TestEntities"
+        Me.TestEntitiesBtn.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1567,4 +1578,5 @@ Partial Class Troubleshooting
     Friend WithEvents cbForms As ComboBox
     Friend WithEvents AutoAssignRules As Button
     Friend WithEvents btnComplaintEmail As Button
+    Friend WithEvents TestEntitiesBtn As Button
 End Class
