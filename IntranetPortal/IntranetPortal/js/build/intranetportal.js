@@ -3206,7 +3206,6 @@ angular.module("PortalApp")
                         scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                             var dateStr = newValue;
                             if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-
                                 var dd = new Date(dateStr);
                                 dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
                                 $(el).datepicker('update', new Date(dd))
@@ -8352,11 +8351,41 @@ angular.module("PortalApp")
 
 
 }])
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', function ($scope, ptCom) {
+angular.module("PortalApp").config(function ($stateProvider) {
+
+    var dataInput = {
+        name: 'datainput',
+        url: '/datainput',
+        templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
+    }
+    var flipsheets = {
+        name: 'flipsheets',
+        url: '/flipsheets',
+        templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
+    }
+    var rentalmodels = {
+        name: 'rentalmodels',
+        url: '/rentalmodels',
+        templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
+    }
+    var tables = {
+        name: 'tables',
+        url: '/tables',
+        templateUrl: '/js/Views/Underwriter/tables.tpl.html'
+    }
+    $stateProvider.state(dataInput);
+    $stateProvider.state(flipsheets);
+    $stateProvider.state(rentalmodels);
+    $stateProvider.state(tables);
+
+});
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', function ($scope, ptCom, $location) {
 
     $scope.model = {};
 
-
+    $scope.isActive = function (viewLocation) {
+        return viewLocation === $location.path();
+    };
 
 }])
 angular.module("PortalApp")

@@ -7226,6 +7226,10 @@
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
+    <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
+    <Content Include="js\Views\Underwriter\tables.tpl.html" />
+    <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
+    <Content Include="js\Views\Underwriter\datainput.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
