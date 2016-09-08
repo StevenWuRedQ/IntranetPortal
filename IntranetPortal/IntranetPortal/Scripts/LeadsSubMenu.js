@@ -42,7 +42,7 @@ function popupControlMapTabClick(index) {
                 alert("Server is busy, try later!");
             }
             else {
-                var url = "/StreetView.aspx"
+                var url = "/StreetView.aspx?bble=" + tmpBBLE
                 SetPopupControlMapURL(url);
             }
         }
@@ -54,7 +54,7 @@ function popupControlMapTabClick(index) {
                 alert("Server is busy, try later!");
             }
             else {
-                var url = "/StreetView.aspx?t=map";
+                var url = "/StreetView.aspx?t=map&bble=" + tmpBBLE;
                 SetPopupControlMapURL(url);
             }
         }
@@ -112,7 +112,7 @@ function ShowPropertyMap(propBBLE) {
             alert("Server is busy, try later!");
         }
         else {
-            var url = "/StreetView.aspx"
+            var url = "/StreetView.aspx?bble=" + tmpBBLE.trim() 
             ASPxPopupMapControl.SetContentUrl(url);
             //var streetViewFrm = "streetViewFrm";
             var iframe = ASPxPopupMapControl.GetContentIFrame();

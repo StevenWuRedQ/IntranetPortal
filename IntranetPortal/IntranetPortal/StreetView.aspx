@@ -17,6 +17,7 @@
         var myPano = null;
         var geocoder;
         var isMap = false;
+
         function initialize() {
             geocoder = new google.maps.Geocoder();
 
@@ -50,13 +51,13 @@
         }
 
         window.showAddress = function (address) {
-            //alert(geocoder.geocode);
+            // alert(geocoder.geocode);
+            // debugger;
             geocoder.geocode({ 'address': address }, function (results, status) {
                 //alert(status);
                 if (status == google.maps.GeocoderStatus.OK) {
                     //alert(isMap);
                     if (isMap) {
-
                         if (myPano != null) {
                             myPano.setCenter(results[0].geometry.location, 12);
                             var marker = new google.maps.Marker({
@@ -66,13 +67,10 @@
 
                             marker.setMap(myPano);
                             myPano.setZoom(17);
-                            //alert("Finish");
                         }
                     }
                     else {
                         if (myPano != null) {
-                            //alert(results[0].formatted_address);
-                            //alert(address);
                             myPano.setPosition(results[0].geometry.location);
 
                         }
@@ -85,7 +83,7 @@
 
         }
 
-        google.maps.event.addDomListener(window, 'load', initialize);             
+        google.maps.event.addDomListener(window, 'load', initialize);
 
 
     </script>

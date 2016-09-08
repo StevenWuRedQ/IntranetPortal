@@ -427,14 +427,10 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server" ID="PopupControlContentControl1">
             <div style="color: #b1b2b7;">
-                <div class="form-group ">
-                    <label class="upcase_text" style="display: block">Reason</label>
-                    <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="ChangeStatusResonText" ClientInstanceName="ChangeStatusResonTextClient" CssClass="edit_text_area"></dx:ASPxMemo>
-                </div>
-                <dx:ASPxPanel runat="server" Id="Panel_LoanModSubStatus" ClientInstanceName="panel_LoanModSubStatus" ClientVisible="false">
+                <dx:ASPxPanel runat="server" ID="Panel_LoanModSubStatus" ClientInstanceName="panel_LoanModSubStatus" ClientVisible="false">
                     <PanelCollection>
                         <dx:PanelContent>
-                            <label class="upcase_text" style="display: block">Please select status for Loan Mod</label>
+                            <label class="upcase_text" style="display: block">Current Loan Mod Status:</label>
                             <dx:ASPxRadioButtonList runat="server" ID="Radios_LoanModSubStatus" ClientInstanceName="radios_LoanModSubStatus" RepeatLayout="Flow" RepeatDirection="Horizontal">
                                 <Items>
                                     <dx:ListEditItem Text="In Progress" Value="0" Selected="true" />
@@ -443,8 +439,12 @@
                             </dx:ASPxRadioButtonList>
                         </dx:PanelContent>
                     </PanelCollection>
-
                 </dx:ASPxPanel>
+                <div class="form-group ">
+                    <label class="upcase_text" style="display: block">Reason</label>
+                    <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="ChangeStatusResonText" ClientInstanceName="ChangeStatusResonTextClient" CssClass="edit_text_area"></dx:ASPxMemo>
+                </div>
+
             </div>
         </dx:PopupControlContentControl>
     </ContentCollection>

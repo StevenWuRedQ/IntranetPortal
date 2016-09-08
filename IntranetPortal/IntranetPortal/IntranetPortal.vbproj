@@ -2374,6 +2374,13 @@
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UnderWriter\UnderwriterClac.aspx.designer.vb">
+      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\UnderwriterClac.aspx.vb">
+      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
     </Compile>
@@ -7136,6 +7143,7 @@
     <Content Include="js\controllers\ShortSaleController.js" />
     <Content Include="js\controllers\ShortSalePreSignController.js" />
     <Content Include="js\controllers\TitleController.js" />
+    <Content Include="js\controllers\UnderwriterController.js" />
     <Content Include="js\controllers\VendorController.js" />
     <Content Include="js\directives\auditLogs.js" />
     <Content Include="js\directives\bindId.js" />
@@ -7179,6 +7187,7 @@
     <Content Include="js\services\ptHomeBreakDownService.js" />
     <Content Include="js\services\ptLeadsService.js" />
     <Content Include="js\services\ptLegalService.js" />
+    <Content Include="js\services\ptPortalHttpInterceptor.js" />
     <Content Include="js\services\ptShortsSaleService.js" />
     <Content Include="js\services\ptTime.js" />
     <Content Include="js\test\models\DivError.spec.js" />
@@ -7224,6 +7233,10 @@
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
+    <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
+    <Content Include="js\Views\Underwriter\tables.tpl.html" />
+    <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
+    <Content Include="js\Views\Underwriter\datainput.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
@@ -7770,6 +7783,7 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
+    <Content Include="UnderWriter\UnderwriterClac.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />

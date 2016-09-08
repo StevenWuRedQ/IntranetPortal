@@ -644,7 +644,17 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 
         }
         ];
-        var tpl = Tpls.filter(function (o) { return o.tplName == tplName })[0]
+        $scope.DocGenerator2 = function (tplName, data, successFunc) {
+            $http.post("/Services/Documents.svc/DocGenrate", {
+                "tplName": tplName,
+                "data": JSON.stringify(data)
+            }).success(function (data) {
+                successFunc(data);
+            }).error(function (data, status) {
+                alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
+            });
+        };
+        var tpl = Tpls.filter(function (o) { return o.tplName == tplName })[0];
 
         if (tpl) {
             for (var v in tpl.data) {
@@ -654,7 +664,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                     return;
                 }
             }
-            ptCom.DocGenerator(tpl.tplName, tpl.data, function (url) {
+            $scope.DocGenerator2(tpl.tplName, tpl.data, function (url) {
                 //window.open(url,'blank');
                 STDownloadFile(url, tpl.tplName.replace("Template", ""));
             });

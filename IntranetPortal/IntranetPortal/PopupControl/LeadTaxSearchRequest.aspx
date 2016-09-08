@@ -7,7 +7,6 @@
 <%@ Register Src="~/LeadDocSearch/DocSearchNewVersion.ascx" TagPrefix="uc1" TagName="DocSearchNewVersion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="/js/PortalHttpFactory.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
@@ -26,7 +25,7 @@
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div>
-                                <div style="align-content: center; height: 100%">                                    
+                                <div style="align-content: center; height: 100%">
                                     <div class="legal-menu row " style="margin-left: 0px; margin-right: 0px">
                                         <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
                                             <li class="active short_sale_head_tab">
@@ -42,10 +41,10 @@
                                     </div>
                                 </div>
                                 <div ng-if="newVersion">
-                                     <uc1:DocSearchNewVersion runat="server" id="DocSearchNewVersion" />
+                                    <uc1:DocSearchNewVersion runat="server" ID="DocSearchNewVersion" />
                                 </div>
                                 <div ng-show="!newVersion">
-                                    <uc1:DocSearchOldVersion runat="server" id="DocSearchOldVersion" />
+                                    <uc1:DocSearchOldVersion runat="server" ID="DocSearchOldVersion" />
                                 </div>
                             </div>
                         </dx:SplitterContentControl>
@@ -64,15 +63,15 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <div style="padding: 20px;max-height:830px; overflow-y:scroll" id="searchReslut">
+                                <div style="padding: 20px; max-height: 830px; overflow-y: scroll" id="searchReslut">
                                     <div ng-if="newVersion">
                                         <new-ds-summary summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate"></new-ds-summary>
                                     </div>
                                     <div ng-if="!newVersion">
-                                        <ds-summary summary="DocSearch.LeadResearch" ></ds-summary>
+                                        <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
                                     </div>
-                                    
-                                   <%-- <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />--%>
+
+                                    <%-- <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />--%>
                                 </div>
                             </div>
                         </dx:SplitterContentControl>
@@ -88,7 +87,11 @@
         function LoadSearch(bble) {
             angular.element(document.getElementById('LeadTaxSearchCtrl')).scope().init(bble);
         }
-      
+        portalApp.config(['$httpProvider', function ($httpProvider) {
+            $httpProvider.interceptors.push('PortalHttpInterceptor');
+        }]);
+
+
     </script>
 
 </asp:Content>

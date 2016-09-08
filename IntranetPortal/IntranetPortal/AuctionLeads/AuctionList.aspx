@@ -168,8 +168,10 @@
                    });
              }]);
         /************end router map config *******************/
-
+        portalApp.config(['$httpProvider', function ($httpProvider) {
+            $httpProvider.interceptors.push('PortalHttpInterceptor');
+        }]);
 
     </script>
-    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
+
 </asp:Content>

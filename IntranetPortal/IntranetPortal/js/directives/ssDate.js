@@ -12,7 +12,6 @@
                         scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                             var dateStr = newValue;
                             if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-
                                 var dd = new Date(dateStr);
                                 dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
                                 $(el).datepicker('update', new Date(dd))
