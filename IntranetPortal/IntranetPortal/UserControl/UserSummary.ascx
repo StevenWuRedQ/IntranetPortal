@@ -184,7 +184,7 @@
                         <div style="float: left; font-weight: 300; font-size: 48px; color: #234b60">
                             <span style="text-transform: capitalize" id="spanUserName"><%= Page.User.Identity.Name %></span>'s Summary &nbsp;
                         </div>
-                        <div align="center" style="background-color: #ff400d;" class="label-summary-info">
+                        <%--<div align="center" style="background-color: #ff400d;" class="label-summary-info">
 
                             <span style="font-weight: 900">
                                 <%= IntranetPortal.Utility.TotalLeadsCount%>
@@ -192,8 +192,8 @@
                             <span style="font-weight: 200">&nbsp;Leads
                             </span>
 
-                        </div>
-                        <div align="center" style="background-color: #1a3847; margin-left: 10px;" class="label-summary-info">
+                        </div>--%>
+                        <%--<div align="center" style="background-color: #1a3847; margin-left: 10px;" class="label-summary-info">
 
                             <span style="font-weight: 900">
                                 <%= IntranetPortal.Utility.TotalDealsCount %>
@@ -201,7 +201,7 @@
                             <span style="font-weight: 200">&nbsp;Deals
                             </span>
 
-                        </div>
+                        </div>--%>
 
                         <div align="center" style="background-color: #ff851b; margin-left: 10px;" class="label-summary-info">
 
@@ -224,9 +224,10 @@
                                     <div class="col-md-4 " style="vertical-align: top">
                                         <h4>
                                             <img src="../images/grid_upcoming_icon.png" class="vertical-img">
-                                            <span class="heading_text">Upcoming Appointments</span>
+                                            <span class="heading_text">Upcoming Appointments
+                                                <span class="employee_lest_head_number_label"><%= IntranetPortal.Lead.GetUpcomingAppointmentsCount(Page.User.Identity.Name) %></span>
+                                            </span>
                                         </h4>
-
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridAppointment" ClientInstanceName="gridAppointmentClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" SettingsPager-PageSize="5" OnDataBinding="gridAppointment_DataBinding">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -277,7 +278,9 @@
                                     <div class="col-md-4" style="vertical-align: top">
                                         <%--add icon by steven--%>
                                         <h4>
-                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Hot Leads</span>
+                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Hot Leads
+                                                <span class="employee_lest_head_number_label"><%= IntranetPortal.Lead.GetUserLeadsData(Page.User.Identity.Name, IntranetPortal.LeadStatus.Priority).Count %></span>
+                                                                                                         </span>
                                         </h4>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5"
@@ -307,7 +310,11 @@
                                     <div class="col-md-4" style="vertical-align: top">
                                         <%--add icon by steven--%>
                                         <h4>
-                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Warmer</span>
+                                            <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">
+                                                Warm Leads
+                                                <span class="employee_lest_head_number_label"><%= IntranetPortal.Lead.GetUserLeadsData(Page.User.Identity.Name, IntranetPortal.LeadStatus.Warm).Count %></span>
+
+                                                                                                         </span>
                                         </h4>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridWarmer" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5"
@@ -338,7 +345,7 @@
                                     <div class="col-md-4" style="vertical-align: top">
                                         <h4>
                                             <img src="../images/grid_task_icon.png" class="vertical-img" />
-                                            <span class="heading_text">Task</span>
+                                            <span class="heading_text">Tasks <span class="employee_lest_head_number_label"><%= IntranetPortal.WorkflowService.GetMyWorklist().Count %></span></span>
                                         </h4>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="ProcInstId;ActInstId" ClientInstanceName="gridTaskClient"
@@ -396,7 +403,12 @@
                                     <div class="col-md-4" style="vertical-align: top">
 
                                         <h4>
-                                            <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span> </h4>
+                                            <img src="../images/grid_call_back_icon.png" class="vertical-img" />
+                                            <span class="heading_text">Follow Ups
+                                                <span class="employee_lest_head_number_label"><%= IntranetPortal.Lead.GetUserLeadsData(Page.User.Identity.Name, IntranetPortal.LeadStatus.Callback).Count %></span>
+                                            </span>
+
+                                        </h4>
                                         <%--------end-------%>
 
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridCallback" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false"
@@ -453,7 +465,10 @@
 
                                     <div class="col-md-4" style="vertical-align: top">
                                         <h4>
-                                            <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">LoanMod</span> </h4>
+                                            <img src="../images/grid_call_back_icon.png" class="vertical-img" />
+                                            <span class="heading_text">LoanMods
+                                                <span class="employee_lest_head_number_label"><%= IntranetPortal.Lead.GetLoanModDue(Page.User.Identity.Name).Count %></span>
+                                            </span> </h4>
                                         <%--------end-------%>
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridLoanMod" ClientInstanceName="gridLoanModClient" KeyFieldName="BBLE" AutoGenerateColumns="false"
                                             OnDataBinding="gridLoanMod_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
@@ -463,7 +478,6 @@
                                                         <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "LoanMod", Eval("BBLE"))%>'><%#  HtmlBlackInfo(Eval("LeadsName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-
                                                 <dx:GridViewDataColumn FieldName="SubStatusStr" Visible="false" VisibleIndex="6">
                                                     <GroupRowTemplate>
                                                         <div>
@@ -494,7 +508,6 @@
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d"></RowHotTrack>
-
                                             </Styles>
                                             <SettingsPager ShowNumericButtons="false">
                                             </SettingsPager>
@@ -502,12 +515,9 @@
                                                 <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />
                                             </GroupSummary>
                                         </dx:ASPxGridView>
-
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="col-md-9 col-lg-9">
                                 <div>
                                 </div>

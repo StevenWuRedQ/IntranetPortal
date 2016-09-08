@@ -38,7 +38,7 @@
 <h4 id="FollowUp_<%= ClientID %>" style="padding-top: 5px">
     <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
     <label class='grid-title-icon '>TF</label>
-    <a href="/TitleUI/TitleSummaryPage.aspx?f=title">
+    <a href="/MyFollowUp.aspx">
         <label class="xlink">&nbsp;Today's FollowUp</label>
         <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label>
     </a>

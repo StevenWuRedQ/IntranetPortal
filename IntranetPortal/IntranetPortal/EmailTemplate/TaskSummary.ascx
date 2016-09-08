@@ -255,9 +255,9 @@
                                 </td>
                             </tr>
                             <!-- hot leads -->
-                            <tr style='<%= if(hotCount = 0, "display:none", "") %>'>
+                            <tr runat="server" visible="<%# hotCount > 0 %>">
                                 <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
-                                    <span class="email_title">Hot Leads <b>(Have no action more than 5 days)</b>:</span>&nbsp&nbsp;
+                                    <span class="email_title">Hot Leads:</span>&nbsp&nbsp;
                                     <span class="index_bullet"> (<%# hotCount %>)</span>
                                     <asp:Repeater runat="server" ID="HotLeadsReapter">
                                         <HeaderTemplate>
@@ -287,9 +287,9 @@
                                 </td>
                             </tr>
                             <!-- loan mod -->
-                            <tr style='<%= if(loanModCount = 0, "display:none", "") %>'>
+                            <tr runat="server" visible="<%# loanModCount > 0 %>">
                                 <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
-                                    <span class="email_title">LoadMod Leads <b>(Have no action more than 30 days)</b>:</span>&nbsp&nbsp;
+                                    <span class="email_title">LoadMod Leads:</span>&nbsp&nbsp;
                                     <span class="index_bullet"> (<%# loanModCount %>)</span>
                                     <asp:Repeater runat="server" ID="LoanModReapter">
                                         <HeaderTemplate>
