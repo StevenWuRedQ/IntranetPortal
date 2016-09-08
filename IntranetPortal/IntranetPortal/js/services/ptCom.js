@@ -6,8 +6,6 @@
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
     var that = this;
 
-
-
     this.arrayAdd = function (model, data) {
         if (model) {
             data = data ? data : {};

@@ -1618,8 +1618,6 @@ angular.module("PortalApp")
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
     var that = this;
 
-
-
     this.arrayAdd = function (model, data) {
         if (model) {
             data = data ? data : {};
@@ -8351,6 +8349,13 @@ angular.module("PortalApp")
         $scope.data = $scope.$parent.Form.FormData.docs;
         $scope.ReloadedData = {};
     })
+
+
+}])
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', function ($scope, ptCom) {
+
+    $scope.model = {};
+
 
 
 }])

@@ -2367,6 +2367,13 @@
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UnderWriter\UnderwriterClac.aspx.designer.vb">
+      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\UnderwriterClac.aspx.vb">
+      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
     </Compile>
@@ -7129,6 +7136,7 @@
     <Content Include="js\controllers\ShortSaleController.js" />
     <Content Include="js\controllers\ShortSalePreSignController.js" />
     <Content Include="js\controllers\TitleController.js" />
+    <Content Include="js\controllers\UnderwriterController.js" />
     <Content Include="js\controllers\VendorController.js" />
     <Content Include="js\directives\auditLogs.js" />
     <Content Include="js\directives\bindId.js" />
@@ -7763,6 +7771,7 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
+    <Content Include="UnderWriter\UnderwriterClac.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
