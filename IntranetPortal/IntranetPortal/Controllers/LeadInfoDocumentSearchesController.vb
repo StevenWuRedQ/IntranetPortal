@@ -113,7 +113,8 @@ Namespace Controllers
             leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStatus.Completed
             leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.CompletedOn = Date.Now
-
+            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
+            leadInfoDocumentSearch.UpdateDate = Date.Now
             Try
                 leadInfoDocumentSearch.Save()
             Catch ex As Exception

@@ -34,11 +34,24 @@
                 width: 100%;
             }
 
-            div textarea {
-                width: 100%;
-                min-height: 300px;
-                resize: vertical;
-            }
+        div textarea {
+            width: 100%;
+            min-height: 300px;
+            resize: vertical;
+        }
+
+        .excel-green{
+            background:green;
+        }
+        .excel-yellow{
+            background:yellow;
+        }
+        .excel-blue{
+            background:#00b0f0;
+        }
+        .excel-oragne{
+            background:orange;
+        }
     </style>
     <div id="underwrite_clac" ng-controller="UnderwriterController">
 
