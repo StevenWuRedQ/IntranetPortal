@@ -31,26 +31,34 @@ Public Class LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Dim result = From search In ctx.LeadInfoDocumentSearches
                          Join ld In ctx.ShortSaleLeadsInfoes On search.BBLE Equals ld.BBLE
-                         Select search, ld.PropertyAddress
-            'New With {
-            '   .BBLE = search.BBLE,
-            '   .CaseName = ld.PropertyAddress,
-            '   .ExpectedSigningDate = search.ExpectedSigningDate,
-            '   .CompletedBy = search.CompletedBy,
-            '   .CompletedOn = search.CompletedOn,
-            '   .CreateBy = search.CreateBy,
-            '   .CreateDate = search.CreateDate,
-            '   .LeadResearch = search.LeadResearch,
-            '   .Status = search.Status,
-            '   .UpdateBy = search.UpdateBy,
-            '   .UpdateDate = search.UpdateDate
-            '}
+                         Select New With {
+               .BBLE = search.BBLE,
+               .CaseName = ld.PropertyAddress,
+               .ExpectedSigningDate = search.ExpectedSigningDate,
+               .CompletedBy = search.CompletedBy,
+               .CompletedOn = search.CompletedOn,
+               .CreateBy = search.CreateBy,
+               .CreateDate = search.CreateDate,
+               .Status = search.Status,
+               .UpdateBy = search.UpdateBy,
+               .UpdateDate = search.UpdateDate
+            }
 
             'Return result.ToList
 
-            Return result.AsEnumerable().Select(Function(data)
-                                                    data.search.CaseName = data.PropertyAddress
-                                                    Return data.search
+            Return result.AsEnumerable().Select(Function(search)
+                                                    Return New LeadInfoDocumentSearch With {
+                                                                   .BBLE = search.BBLE,
+                                                                   .CaseName = search.CaseName,
+                                                                   .ExpectedSigningDate = search.ExpectedSigningDate,
+                                                                   .CompletedBy = search.CompletedBy,
+                                                                   .CompletedOn = search.CompletedOn,
+                                                                   .CreateBy = search.CreateBy,
+                                                                   .CreateDate = search.CreateDate,
+                                                                   .Status = search.Status,
+                                                                   .UpdateBy = search.UpdateBy,
+                                                                   .UpdateDate = search.UpdateDate
+                                                        }
                                                 End Function).ToList
         End Using
     End Function

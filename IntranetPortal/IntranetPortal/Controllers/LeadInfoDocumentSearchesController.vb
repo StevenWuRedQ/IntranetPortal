@@ -19,8 +19,20 @@ Namespace Controllers
         Private db As New PortalEntities
 
         ' GET: api/LeadInfoDocumentSearches
-        Function GetLeadInfoDocumentSearches() As List(Of LeadInfoDocumentSearch)
-            Return LeadInfoDocumentSearch.GetDocumentSearchs()
+        Function GetLeadInfoDocumentSearches() As IHttpActionResult
+            Dim status = HttpContext.Current.Request.QueryString("status")
+            If Not String.IsNullOrEmpty(status) Then
+                Dim view As LeadInfoDocumentSearch.SearchStatus
+                If Integer.TryParse(status, view) Then
+                    Dim result = LeadInfoDocumentSearch.GetDocumentSearchs
+                    Dim completedlist = result.Where(Function(ls) ls.Status = view).ToList
+                    Return Ok(completedlist)
+                End If
+
+                Return Ok()
+            End If
+
+            Return Ok(LeadInfoDocumentSearch.GetDocumentSearchs())
         End Function
 
         ' GET: api/LeadInfoDocumentSearches/5

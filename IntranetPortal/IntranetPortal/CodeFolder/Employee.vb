@@ -172,7 +172,7 @@ Partial Public Class Employee
         If Roles.IsUserInRole(name, "Admin") Then
             Return True
         End If
-
+        ' Roles.GetUsersInRole("ShortSale-")
         Dim ld = Lead.GetInstance(bble)
         If ld Is Nothing Then
             Return False

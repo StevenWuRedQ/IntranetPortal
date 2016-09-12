@@ -359,6 +359,28 @@
           <Property Name="Version" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Leads">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="LeadsName" Type="nvarchar" MaxLength="120" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Process" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="SubStatus" Type="int" />
+          <Property Name="CallbackDate" Type="date" />
+          <Property Name="Neighborhood" Type="nvarchar" MaxLength="120" />
+          <Property Name="DeadReason" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="AssignDate" Type="datetime" />
+          <Property Name="AssignBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="MarkColor" Type="int" />
+          <Property Name="AppId" Type="int" />
+        </EntityType>
         <EntityType Name="LeadsInfo">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -438,6 +460,18 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LeadsStatusLogs">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="LegalCase">
           <Key>
@@ -1208,7 +1242,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="GroupTypes" EntityType="Self.GroupTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LawReferences" EntityType="Self.LawReferences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadInfoDocumentSearch" EntityType="Self.LeadInfoDocumentSearch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leads" EntityType="Self.Leads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsStatusLogs" EntityType="Self.LeadsStatusLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalCase" EntityType="Self.LegalCase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalECourts" EntityType="Self.LegalECourts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalECourtsAll" EntityType="Self.LegalECourtsAll" Schema="dbo" store:Type="Tables" />
@@ -1432,6 +1468,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="ShortSaleLeadsInfoes" EntityType="IntranetPortalModel.ShortSaleLeadsInfo" />
           <EntitySet Name="PropertyOffers" EntityType="IntranetPortalModel.PropertyOffer" />
           <EntitySet Name="AuditLogs" EntityType="IntranetPortalModel.AuditLog" />
+          <EntitySet Name="SSLeads" EntityType="IntranetPortalModel.SSLead" />
+          <EntitySet Name="SSLeadsStatusLogs" EntityType="IntranetPortalModel.SSLeadsStatusLog" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2604,6 +2642,40 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="ColumnName" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="OriginalValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SSLead">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="LeadsName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Process" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="SubStatus" Type="Int32" />
+          <Property Name="CallbackDate" Type="DateTime" Precision="0" />
+          <Property Name="Neighborhood" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="DeadReason" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssignDate" Type="DateTime" Precision="3" />
+          <Property Name="AssignBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarkColor" Type="Int32" />
+          <Property Name="AppId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SSLeadsStatusLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3830,6 +3902,42 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
                 <ScalarProperty Name="EventDate" ColumnName="EventDate" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SSLeads">
+            <EntityTypeMapping TypeName="IntranetPortalModel.SSLead">
+              <MappingFragment StoreEntitySet="Leads">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="MarkColor" ColumnName="MarkColor" />
+                <ScalarProperty Name="AssignBy" ColumnName="AssignBy" />
+                <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DeadReason" ColumnName="DeadReason" />
+                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+                <ScalarProperty Name="CallbackDate" ColumnName="CallbackDate" />
+                <ScalarProperty Name="SubStatus" ColumnName="SubStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Process" ColumnName="Process" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="LeadsName" ColumnName="LeadsName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SSLeadsStatusLogs">
+            <EntityTypeMapping TypeName="IntranetPortalModel.SSLeadsStatusLog">
+              <MappingFragment StoreEntitySet="LeadsStatusLogs">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

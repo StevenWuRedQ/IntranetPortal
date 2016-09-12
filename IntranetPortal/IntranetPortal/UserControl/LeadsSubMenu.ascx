@@ -15,7 +15,6 @@
         <dx:MenuItem GroupName="Sort" Text="Hot Leads" Name="Priority" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drap_prority_icons.png"></Image>
         </dx:MenuItem>
-
         <dx:MenuItem GroupName="Sort" Text="Warmer" Name="Warmer" Image-Url="">
             <Template>
                 <div class="dxm-content dxm-hasText" style="float: none;">
@@ -23,7 +22,6 @@
                     <span class="dx-vam"><%# Container.Item.Text %></span>
                 </div>
             </Template>
-
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="LoanMod" Name="LoanMod">
             <Template>
