@@ -864,7 +864,7 @@
                         </div>
                     </div>
                     <div class="ss_form  ">
-                        <h5 class="ss_form_title  ">HPD Charges Not Paid Transferred                                       
+                        <h5 class="ss_form_title  ">HPD Charges Paid, Not Transferred                                  
                             <pt-collapse model="DocSearch.LeadResearch.HPD_Charges_Not_Paid_Transferred_Property_Dues_Violations"> </pt-collapse>
                         </h5>
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.HPD_Charges_Not_Paid_Transferred_Property_Dues_Violations">
