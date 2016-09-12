@@ -1712,11 +1712,25 @@
       <DependentUpon>NewOfferAssignCorp.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="NewOffer\NewOfferList.aspx.designer.vb">
+      <DependentUpon>NewOfferList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferList.aspx.vb">
+      <DependentUpon>NewOfferList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="NewOffer\NewOfferPreview.aspx.designer.vb">
       <DependentUpon>NewOfferPreview.aspx</DependentUpon>
     </Compile>
     <Compile Include="NewOffer\NewOfferPreview.aspx.vb">
       <DependentUpon>NewOfferPreview.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferTracking.aspx.designer.vb">
+      <DependentUpon>NewOfferTracking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferTracking.aspx.vb">
+      <DependentUpon>NewOfferTracking.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.designer.vb">
@@ -2374,6 +2388,13 @@
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UnderWriter\DocSearchList.aspx.designer.vb">
+      <DependentUpon>DocSearchList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\DocSearchList.aspx.vb">
+      <DependentUpon>DocSearchList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UnderWriter\UnderwriterClac.aspx.designer.vb">
       <DependentUpon>UnderwriterClac.aspx</DependentUpon>
     </Compile>
@@ -2575,6 +2596,13 @@
     </Compile>
     <Compile Include="UserControl\SummaryItem\FollowUpItem2.ascx.vb">
       <DependentUpon>FollowUpItem2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\NewOfferItem.ascx.designer.vb">
+      <DependentUpon>NewOfferItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\NewOfferItem.ascx.vb">
+      <DependentUpon>NewOfferItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx.designer.vb">
@@ -7303,8 +7331,10 @@
     <Content Include="MyFollowup.aspx" />
     <Content Include="MyDefault.aspx" />
     <Content Include="NewOffer\NewOfferAssignCorp.ascx" />
+    <Content Include="NewOffer\NewOfferList.aspx" />
     <Content Include="NewOffer\NewOfferPreview.aspx" />
     <Content Include="NewOffer\Templates\offer-business-form.html" />
+    <Content Include="NewOffer\NewOfferTracking.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />
@@ -7783,11 +7813,13 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
+    <Content Include="UnderWriter\DocSearchList.aspx" />
     <Content Include="UnderWriter\UnderwriterClac.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem2.ascx" />
+    <Content Include="UserControl\SummaryItem\NewOfferItem.ascx" />
     <Content Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />

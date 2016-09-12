@@ -4,6 +4,22 @@
 ''' The team object and related actions
 ''' </summary>
 Partial Public Class Team
+
+    ''' <summary>
+    ''' Return all the user names in the team which given user is assistant
+    ''' </summary>
+    ''' <param name="assistantName">The Assistant Name</param>
+    ''' <returns>The User Names</returns>
+    Public Shared Function GetTeamUsersByAssistant(assistantName As String) As String()
+        Using ctx As New Entities
+            Dim result = (From tm In ctx.Teams.Where(Function(t) t.Assistant = assistantName)
+                          Join emp In ctx.UserInTeams On tm.TeamId Equals emp.TeamId
+                          Select emp.EmployeeName).Distinct.ToArray
+
+            Return result
+        End Using
+    End Function
+
     Public Shared Function GetAllTeams() As List(Of Team)
         Using ctx As New Entities
             Return ctx.Teams.ToList
@@ -36,7 +52,6 @@ Partial Public Class Team
                 ctx.SaveChanges()
             End If
         End Using
-
     End Sub
 
     Public Sub Save(saveBy As String)

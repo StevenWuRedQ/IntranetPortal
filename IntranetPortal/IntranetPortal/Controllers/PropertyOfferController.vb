@@ -37,8 +37,17 @@ Namespace Controllers
         ''' <returns>Property Offer list</returns>
         <Route("api/PropertyOffer/")>
         Public Function GetPropertyOffers() As IHttpActionResult
-
             Dim name = HttpContext.Current.User.Identity.Name
+
+            Dim mgrView = HttpContext.Current.Request.QueryString("mgrview")
+            If Not String.IsNullOrEmpty(mgrView) Then
+                Dim view As PropertyOfferManage.ManagerView = 0
+                If Integer.TryParse(mgrView, view) Then
+                    Return Ok(PropertyOfferManage.GetOffersByManagerView(name, view))
+                End If
+
+                Return Ok()
+            End If
 
             If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
                 name = "*"
@@ -46,7 +55,6 @@ Namespace Controllers
 
             Dim records = PropertyOffer.GetOffers(name)
             Return Ok(records)
-
         End Function
 
         ''' <summary>

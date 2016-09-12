@@ -439,7 +439,6 @@
                         <Paddings Padding="0px"></Paddings>
                     </Pane>
                 </Styles>
-
                 <Panes>
                     <dx:SplitterPane ShowCollapseBackwardButton="True" AutoHeight="true" Name="paneInfo">
                         <PaneStyle Paddings-Padding="0">
@@ -644,7 +643,6 @@
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                         </li>
                                     </ul>
-
                                 </div>
 
                                 <div class="clearfix">

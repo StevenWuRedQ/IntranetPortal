@@ -11,6 +11,128 @@ Imports iTextSharp.text.pdf
 Public Class PropertyOfferManage
 
     ''' <summary>
+    ''' The office manager view enum
+    ''' </summary>
+    Public Class ManagerView
+        Inherits Status
+        ''' <summary>
+        ''' Represents the New Offer Completed status
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Property AllCompleted As New ManagerView With {
+        .Key = 0, .Name = "All"}
+        ''' <summary>
+        ''' Represents the New Offer Completed status
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Property Completed As New ManagerView With {
+        .Key = 1, .Name = "New Offer"}
+        ''' <summary>
+        ''' Represents the InProcess Status
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Property InProcess As New ManagerView With {
+        .Key = 2, .Name = "In Process"}
+        ''' <summary>
+        ''' Represents the ShortSale Accepted Status
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Property SSAccepted As New ManagerView With {
+        .Key = 3, .Name = "SS Accepted"}
+
+        Public Shared Widening Operator CType(ByVal status As Integer) As ManagerView
+            Select Case status
+                Case 0
+                    Return AllCompleted
+                Case 1
+                    Return Completed
+                Case 2
+                    Return InProcess
+                Case 3
+                    Return SSAccepted
+            End Select
+
+            Return Nothing
+        End Operator
+
+        Public Shared Narrowing Operator CType(v As ManagerView) As Integer
+            Return v.Key
+        End Operator
+
+        Public Shared Operator =(ByVal v As ManagerView, ByVal i As Integer?) As Boolean
+            If Not i.HasValue Then
+                Return False
+            End If
+
+            Return v.Key = i
+        End Operator
+
+        Public Shared Operator <>(ByVal v As ManagerView, ByVal i As Integer?) As Boolean
+            If Not i.HasValue Then
+                Return True
+            End If
+
+            Return v.Key <> i
+        End Operator
+    End Class
+
+    ''' <summary>
+    ''' Return offer list that return manager
+    ''' </summary>
+    ''' <param name="name">The manager name</param>
+    ''' <param name="view">The view type</param>
+    ''' <returns></returns>
+    Public Shared Function GetOffersByManagerView(name As String, view As ManagerView) As PropertyOffer()
+        Dim emps = New List(Of String)
+        emps.Add(name)
+
+        If Roles.IsUserInRole(name, "Admin") OrElse Roles.IsUserInRole(name, "Office-Executive") Then
+            For Each tm In Team.GetActiveTeams
+                emps.AddRange(tm.AllUsers)
+            Next
+        Else
+            emps.AddRange(Team.GetTeamUsersByAssistant(name))
+        End If
+
+        Select Case view
+            Case ManagerView.Completed
+                Return CompletedPropertyOffers(emps.ToArray)
+            Case ManagerView.InProcess
+                Return InProcessOffers(emps.ToArray)
+            Case ManagerView.SSAccepted
+                Return SSAcceptedOffers(emps.ToArray)
+        End Select
+
+        Return Nothing
+    End Function
+
+    ''' <summary>
+    ''' Return Complated property offers
+    ''' </summary>
+    ''' <param name="names"></param>
+    ''' <returns></returns>
+    Public Shared Function CompletedPropertyOffers(names As String()) As PropertyOffer()
+        Dim offer = PropertyOffer.GetCompleted(names)
+        Return offer
+    End Function
+
+    ''' <summary>
+    ''' Return propertyoffers which is in process 
+    ''' but not accepted by shortsale
+    ''' </summary>
+    ''' <param name="names">The Owner Names</param>
+    ''' <returns></returns>
+    Public Shared Function InProcessOffers(names As String()) As PropertyOffer()
+        Dim offer = PropertyOffer.GetInProcess(names)
+        Return offer
+    End Function
+
+    Public Shared Function SSAcceptedOffers(names As String()) As PropertyOffer()
+        Dim offer = PropertyOffer.GetSSAccepted(names)
+        Return offer
+    End Function
+
+    ''' <summary>
     ''' Check the pre conditions for new offer
     ''' </summary>
     ''' <param name="bble">The property BBLE</param>
@@ -192,7 +314,6 @@ Public Class DocumentGenerator
             Catch ex As Exception
                 Console.Write(ex.Message)
             End Try
-
         Next
     End Sub
 
