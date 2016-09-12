@@ -603,6 +603,7 @@
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
     <Compile Include="CodeFolder\HomeOwner.vb" />
     <Compile Include="CodeFolder\ActivityManageBase.vb" />
+    <Compile Include="CodeFolder\HomeOwnerPhone.vb" />
     <Compile Include="CodeFolder\INavMenuAmount.vb" />
     <Compile Include="CodeFolder\Lead.vb" />
     <Compile Include="CodeFolder\LeadManage.vb" />
@@ -934,8 +935,8 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Context.vb">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>PortalEntityModel.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Designer.vb">

@@ -26,7 +26,7 @@ Public Class LeadTest
         Assert.AreEqual(Of LeadStatus)(ls, LeadStatus.LoanMod)
 
         ls = Utility.GetLeadStatus("Warmer")
-        Assert.AreEqual(Of LeadStatus)(ls, LeadStatus.Warmer)
+        Assert.AreEqual(Of LeadStatus)(ls, LeadStatus.Warm)
     End Sub
 
     <TestMethod()>
