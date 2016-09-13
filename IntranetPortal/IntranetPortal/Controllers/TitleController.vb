@@ -132,7 +132,7 @@ Namespace Controllers
         <Route("api/Title/GenerateExcel")>
         Function GenerateExcel(<FromBody> queryString As JObject) As IHttpActionResult
 
-            Dim bytes = Core.ExcelBuilder.BuildTitleReport(queryString)
+            Dim bytes = ExcelBuilder.BuildTitleReport(queryString)
             If bytes.Length > 0 Then
                 Using fs = File.Open(HttpContext.Current.Server.MapPath("~/TempDataFile/checkrequest.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                     fs.Write(bytes, 0, bytes.Length)

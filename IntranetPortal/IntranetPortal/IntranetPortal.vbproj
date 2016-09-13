@@ -601,6 +601,7 @@
     <Compile Include="CodeFolder\EmployeeItemComparer.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
+    <Compile Include="CodeFolder\ExcelBuilder.vb" />
     <Compile Include="CodeFolder\HomeOwner.vb" />
     <Compile Include="CodeFolder\ActivityManageBase.vb" />
     <Compile Include="CodeFolder\INavMenuAmount.vb" />
@@ -812,6 +813,7 @@
     <Compile Include="Controllers\TaxLiensODataController.vb" />
     <Compile Include="Controllers\TitleController.vb" />
     <Compile Include="Controllers\TwilioController.vb" />
+    <Compile Include="Controllers\UnderwriterController.vb" />
     <Compile Include="Controllers\UserInfoController.vb" />
     <Compile Include="Controllers\WorkflowController.vb" />
     <Compile Include="Controllers\WorkingLogController.vb" />
@@ -7771,6 +7773,7 @@
     <Content Include="bower_components\angular-route\package.json" />
     <Content Include="bower_components\angular-route\README.md" />
     <Content Include="App_Data\OfferDoc\ShortSalePackage.docx" />
+    <Content Include="App_Data\underwriter.xlsx" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />

@@ -84,56 +84,11 @@
 
                 ////////// font end switch to new version //////////////
                 $scope.versionController.start2Eaves();
-                /////////////////// 8/12/2016 //////////////////////////
 
-                /////////////////////////////// saving and grid init bug for faster portotype ///////////////////
-                //
-                // use fast prototype it have same bug
-                // this is faster solution of grid init will remove to initGrid
-                // put here should not right that not right it should like this 
-                // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
-                // and put it to model inside;
-                // angular.extend($scope.DocSearch.LeadResearch, INITS);
-                //
-                /////////////////////////////// end saving and grid init bug for faster portotype ////////////////
 
 
             });
-            // ////remove all code to model version date is some time of June 2016 /////////////////////////////////////////////
-            //$scope.DocSearch;
-            // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-            // success(function (data, status, headers, config) {
-            //     $scope.DocSearch = data;
-            //     $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-            //         $scope.DocSearch.team = data;
 
-            //     });
-
-            //     $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-            //       success(function (data1, status, headers, config) {
-            //           $scope.LeadsInfo = data1;
-            //           $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
-            //           $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
-            //           $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
-            //           $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
-            //           $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
-            //           $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data1.C2ndMotgrAmt;
-            //           var ownerName = $scope.DocSearch.LeadResearch.ownerName;
-            //           if (ownerName) {
-            //               $http.post("/api/homeowner/ssn/" + leadsInfoBBLE, JSON.stringify(ownerName)).
-            //               success(function (ssn, status, headers, config) {
-            //                   $scope.DocSearch.LeadResearch.ownerSSN = ssn;
-            //               }).error(function () {
-
-            //               });
-            //           }
-
-
-            //       }).error(function (data, status, headers, config) {
-            //           alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-            //       });
-            // });
-            // ////////////////////////////////// remove all code to model version date is some time of June 2016 ////////////////////
         }
 
         $scope.init(leadsInfoBBLE)

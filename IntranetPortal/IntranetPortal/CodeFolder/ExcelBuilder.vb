@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports ClosedXML.Excel
+Imports IntranetPortal.Data
 Imports Newtonsoft.Json.Linq
 
 
@@ -209,6 +210,173 @@ Public Class ExcelBuilder
 
 
     End Function
+
+
+    Public Shared Function fillUpUnderWriterSheet(fs As MemoryStream, li As LeadsInfo, ds As LeadInfoDocumentSearch) As Byte()
+        Using wb = New XLWorkbook(fs)
+            Dim ws = wb.Worksheet("Data Input")
+            Dim jsonStr = ds.LeadResearch
+            Dim jobj = JObject.Parse(jsonStr)
+            jobj.Add("LeadsInfo", JObject.Parse(li.ToJsonString))
+
+
+            Dim fileConfig As New GenerateFileConfig
+            Dim file = New GenerateFileConfig With {.ConfigKey = "Test"}
+            Dim phs = {
+                        New DocumentPlaceHolder("C3", "LeadsInfo.PropertyAddress"),
+                        New DocumentPlaceHolder("C4", "LeadsInfo.TaxClass"),
+                        New DocumentPlaceHolder("C5", "LeadsInfo.BuildingDem"),
+                        New DocumentPlaceHolder("C6", "LeadsInfo.Lot"),
+                        New DocumentPlaceHolder("C7", "LeadsInfo.Zoning"),
+                        New DocumentPlaceHolder("C8", "", DocumentPlaceHolder.ValueType.FixedString),
+                        New DocumentPlaceHolder("C9", "Property_Taxes_per_YR_Property_Taxes_Due"),
+                        New DocumentPlaceHolder("F3", decideBBaseOnA("Has_c_1st_Mortgage_c_1st_Mortgage", "mortgageAmount")),
+                        New DocumentPlaceHolder("F4", decideBBaseOnA("Has_c_2nd_Mortgage_c_2nd_Mortgage", "secondMortgageAmount")),
+                        New DocumentPlaceHolder("F5", booleanToYN("Has_COS_Recorded")),
+                        New DocumentPlaceHolder("F6", booleanToYN("Has_Deed_Recorded")),
+                        New DocumentPlaceHolder("F7", concatOtherLiens()),
+                        New DocumentPlaceHolder("F8", booleanToYN("fha")),
+                        New DocumentPlaceHolder("F9", booleanToYN("fannie")),
+                        New DocumentPlaceHolder("F10", booleanToYN("Freddie_Mac_")),
+                        New DocumentPlaceHolder("F11", "servicer"),
+                        New DocumentPlaceHolder("F12", "LP_Index___Num_LP_Index___Num"),
+                        New DocumentPlaceHolder("F13", "", DocumentPlaceHolder.ValueType.FixedString),
+                        New DocumentPlaceHolder("F11", "Servicer_notes"),
+                        New DocumentPlaceHolder("F16", "", DocumentPlaceHolder.ValueType.FixedString),
+                        New DocumentPlaceHolder("F17", "", DocumentPlaceHolder.ValueType.FixedString),
+                        New DocumentPlaceHolder("F18", "", DocumentPlaceHolder.ValueType.FixedString),
+                        New DocumentPlaceHolder("F19", "", DocumentPlaceHolder.ValueType.FixedString),
+                        New DocumentPlaceHolder("I3", addUpTaxLienCertificate()),
+                        New DocumentPlaceHolder("I4", decideBBaseOnA("Has_Due_Property_Taxes_Due", "propertyTaxes")),
+                         New DocumentPlaceHolder("I5", decideBBaseOnA("Has_Due_Water_Charges_Due", "waterCharges")),
+                         New DocumentPlaceHolder("I6", decideBBaseOnA("Is_Open_HPD_Charges_Not_Paid_Transferred", "Open_Amount_HPD_Charges_Not_Paid_Transferred")),
+                         New DocumentPlaceHolder("I7", decideBBaseOnA("has_ECB_Tickets_ECB_Tickets", "Amount_ECB_Tickets")),
+                         New DocumentPlaceHolder("I8", decideBBaseOnA("Has_Open_DOB_Violoations", "dobWebsites")),
+                         New DocumentPlaceHolder("I9", decideBBaseOnA("has_Judgments_Personal_Judgments", "Amount_Personal_Judgments")),
+                         New DocumentPlaceHolder("I10", decideBBaseOnA("has_Judgments_HPD_Judgments", "HPDjudgementAmount")),
+                         New DocumentPlaceHolder("I11", addIRSNYS()),
+                         New DocumentPlaceHolder("I12", "has_Vacate_Order_Vacate_Order"),
+                         New DocumentPlaceHolder("I13", decideBBaseOnA("has_Vacate_Order_Vacate_Order", "Amount_Vacate_Order")),
+                         New DocumentPlaceHolder("I14", "", DocumentPlaceHolder.ValueType.FixedString)
+           }
+
+            file.PlaceHolders = phs.ToList
+
+            Dim gene As New DocumentGenerator(jobj, "1017700038")
+            gene.GenerateExcel(ws, file)
+            Using ms As New MemoryStream
+                wb.SaveAs(ms)
+                Return ms.ToArray()
+            End Using
+
+        End Using
+
+    End Function
+
+    Shared Function addIRSNYS() As Func(Of Object, String)
+        Dim temp = Function(data As JObject)
+                       Dim total = 0.0
+                       Dim hasIRS = data.SelectToken("has_IRS_Tax_Lien_IRS_Tax_Lien")
+                       Dim hasNYS = data.SelectToken("hasNysTaxLien")
+                       If Not hasIRS Is Nothing AndAlso hasIRS.ToString.Equals("True") Then
+                           Dim irsv = data.SelectToken("irsTaxLien")
+                           If irsv IsNot Nothing Then
+                               total = total + CType(irsv.ToString, Double)
+                           End If
+                       End If
+                       If Not hasNYS Is Nothing AndAlso hasNYS.ToString.Equals("True") Then
+                           Dim nysv = data.SelectToken("Amount_NYS_Tax_Lien")
+                           If nysv IsNot Nothing Then
+                               total = total + CType(nysv.ToString, Double)
+                           End If
+                       End If
+                       Return total.ToString
+                   End Function
+        Return temp
+    End Function
+
+    Shared Function decideBBaseOnA(field1 As String, field2 As String) As Func(Of Object, String)
+        Dim temp = Function(data)
+                       Dim Has1st = data.SelectToken(field1)
+                       If Has1st Is Nothing OrElse Has1st.ToString.Equals("False") Then
+                           Return ""
+                       Else
+                           Dim Has1stMg = data.SelectToken(field2)
+                           If Not Has1stMg Is Nothing Then
+                               Return Has1stMg.ToString
+                           Else
+                               Return "0.0"
+                           End If
+
+                       End If
+                   End Function
+        Return temp
+    End Function
+
+    Shared Function booleanToYN(field1 As String) As Func(Of Object, String)
+        Dim temp = Function(data)
+                       Dim Has1st = data.SelectToken(field1)
+                       If Has1st Is Nothing Then
+                           Return ""
+                       ElseIf Has1st.ToString.Equals("True") Then
+                           Return "Yes"
+                       Else
+                           Return "No"
+                       End If
+                   End Function
+        Return temp
+    End Function
+
+    Shared Function concatOtherLiens() As Func(Of Object, String)
+        Dim temp = Function(d As JObject)
+                       Dim hasother = d.SelectToken("Has_Other_Liens")
+                       If hasother IsNot Nothing AndAlso hasother.ToString.Equals("True") Then
+                           Dim otherliens = d.SelectToken("OtherLiens")
+                           If Not otherliens Is Nothing Then
+                               Dim liens = From lien In otherliens
+                                           Select lien("Lien")
+                               If liens.Count > 0 Then
+                                   Return String.Join(", ", liens)
+                               Else
+                                   Return ""
+                               End If
+                           Else
+                               Return ""
+                           End If
+                       Else
+                           Return ""
+                       End If
+                   End Function
+        Return temp
+    End Function
+
+    Shared Function addUpTaxLienCertificate() As Func(Of Object, String)
+        Dim temp = Function(d As JObject)
+                       Dim hasother = d.SelectToken("Has_TaxLiensCertifcate")
+                       If hasother IsNot Nothing AndAlso hasother.ToString.Equals("True") Then
+                           Dim xliens = d.SelectToken("TaxLienCertificate")
+                           If Not xliens Is Nothing Then
+                               Dim liens = From lien In xliens
+                                           Select lien("Amount")
+                               If liens.Count > 0 Then
+                                   Dim total = 0.0
+                                   For Each lien In liens
+                                       total = total + CType(lien, Double)
+                                   Next
+                                   Return total.ToString
+                               Else
+                                   Return "0.0"
+                               End If
+                           Else
+                               Return "0.0"
+                           End If
+                       Else
+                           Return "0.0"
+                       End If
+                   End Function
+        Return temp
+    End Function
+
     Class BudgetRow
         Public balance As Double
         Public contract As Double
@@ -216,4 +384,10 @@ Public Class ExcelBuilder
         Public paid As Double
         Public description As String
     End Class
+
+
+
 End Class
+
+
+

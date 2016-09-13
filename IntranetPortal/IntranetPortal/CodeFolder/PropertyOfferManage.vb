@@ -4,6 +4,7 @@ Imports Newtonsoft.Json.Linq
 Imports Novacode
 Imports IntranetPortal.Data
 Imports iTextSharp.text.pdf
+Imports ClosedXML.Excel
 
 ''' <summary>
 ''' The action realted to PropertyOffer
@@ -175,6 +176,12 @@ Public Class DocumentGenerator
     Public Sub GeneratePdf(pdfFormFields As AcroFields, config As GenerateFileConfig)
         For Each ph In config.PlaceHolders
             pdfFormFields.SetField(ph.FieldName, GetValue(ph))
+        Next
+    End Sub
+
+    Public Sub GenerateExcel(wb As IXLWorksheet, config As GenerateFileConfig)
+        For Each ph In config.PlaceHolders
+            wb.Cell(ph.FieldName).Value = GetValue(ph)
         Next
     End Sub
 
