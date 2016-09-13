@@ -20,7 +20,14 @@
             Return ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE AndAlso p.Phone = phoneNumber).FirstOrDefault
         End Using
     End Function
-
+    ''' <summary>
+    ''' @todo
+    ''' some of phones save in owner contact 
+    ''' so that it may not working for sort and count.
+    ''' </summary>
+    ''' <param name="BBLE"></param>
+    ''' <param name="phoneNumber"></param>
+    ''' <returns></returns>
     Public Shared Function GetAllPhones(BBLE As String, phoneNumber As String) As List(Of HomeOwnerPhone)
         Using ctx As New Entities
             Return ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE AndAlso p.Phone = phoneNumber).ToList()
