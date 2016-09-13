@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="DocSearchList.aspx.vb" Inherits="IntranetPortal.DocSearchList" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -50,8 +51,7 @@
             }
 
             function ShowCaseInfo(CaseId) {
-                // var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId;
-                var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
+                var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId;
                 PortalUtility.ShowPopWindow("View Case - " + CaseId, url);
             }
 
@@ -110,7 +110,6 @@
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
                                 .on('dxclick', function () {
-                                    //Do something with options.data;
                                     ShowCaseInfo(options.data.BBLE);
                                 })
                                 .appendTo(container);
@@ -144,36 +143,22 @@
                                        .attr('type', 'button')
                                        .attr('title', 'Export')
                                        .attr('value', 'Export')
-                                       .on('dxclick', function () {
-                                            alert("exported.")
-                                       })
-                                       .appendTo(container);                                   
-                    }
-                  }]
-                }).dxDataGrid('instance');
-                
- <%--               var applyFilterTypes = [{
-                    key: "AllCases",
-                    name: "All Cases"
-                }, {
-                    key: "MyCases",
-                    name: "My Cases"
-                }];
+                                       .on('dxclick', function (e ) {
 
-                $("#useFilterApplyButton").dxSelectBox({
-                    items: applyFilterTypes,
-                    value: applyFilterTypes[0].key,
-                    valueExpr: "key",
-                    displayExpr: "name",
-                    onValueChanged: function (data) {
-                        if (data.value == "AllCases") {
-                            dataGrid.clearFilter();
-                        } else {
-                            dataGrid.filter(["Owner", "=", "<%= Page.User.Identity.Name%>"]);
-                    }
-                }
-            }); --%>
-        });
+                                           var url = "/api/underwriter/generatexml/" + options.data.BBLE;
+                                           $.ajax({
+                                               method: "GET",
+                                               url: url,
+                                           }).then(function (res) {
+                                               STDownloadFile("/api/underwriter/getgeneratedxml/" + options.data.BBLE, "underwriter.xlsx" + new Date().toLocaleDateString)
+                                           })
+
+                                       })
+                                       .appendTo(container);
+                        }
+                    }]
+                }).dxDataGrid('instance');
+            });
         })
 
     </script>

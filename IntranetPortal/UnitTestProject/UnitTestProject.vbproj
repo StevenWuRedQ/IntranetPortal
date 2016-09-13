@@ -199,7 +199,7 @@
     <Compile Include="DocumentSearchUnitTest.vb" />
     <Compile Include="ShortSaleManageUnitTest.vb" />
     <Compile Include="SMTPUnitTest.vb" />
-    <Compile Include="UnitTest1.vb" />
+    <Compile Include="ExcelBuilderTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />

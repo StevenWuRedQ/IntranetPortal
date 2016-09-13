@@ -17,7 +17,8 @@ Namespace Controllers
         End Function
 
 
-        <Route("api/underwriter/generatexml/bble")>
+        <Route("api/underwriter/generatexml/{bble}")>
+        <HttpGet>
         Function GenerateExcel(bble As String) As IHttpActionResult
 
 
@@ -26,7 +27,7 @@ Namespace Controllers
 
                 Dim ms As New MemoryStream
 
-                Using fs = File.Open(HttpContext.Current.Server.MapPath("~/App_Data/underwrite.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                Using fs = File.Open(HttpContext.Current.Server.MapPath("~/App_Data/underwriter.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                     fs.CopyTo(ms)
                 End Using
 
@@ -57,13 +58,13 @@ Namespace Controllers
             Return Ok()
         End Function
 
-        <Route("api/underwriter/getgeneratedxml")>
-        Function GetGeneratedExcel(<FromBody> queryString As JToken) As HttpResponseMessage
+        <Route("api/underwriter/getgeneratedxml/{bble}")>
+        Function GetGeneratedExcel(bble As String, <FromBody> queryString As JToken) As HttpResponseMessage
             Dim response = New HttpResponseMessage(HttpStatusCode.OK)
             Dim fs = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/underwriter.xlsx"), FileMode.Open)
             Dim bfs = New BinaryReader(fs).ReadBytes(fs.Length)
             response.Content = New ByteArrayContent(bfs)
-            response.Content.Headers.Add("Content-Disposition", "inline; filename=budget.xlsx")
+            response.Content.Headers.Add("Content-Disposition", "inline; filename=underwriter-" & bble & ".xlsx")
             response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             response.Content.Headers.ContentLength = bfs.Length
             Return response

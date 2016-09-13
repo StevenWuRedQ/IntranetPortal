@@ -241,7 +241,7 @@ Public Class ExcelBuilder
                         New DocumentPlaceHolder("F11", "servicer"),
                         New DocumentPlaceHolder("F12", "LP_Index___Num_LP_Index___Num"),
                         New DocumentPlaceHolder("F13", "", DocumentPlaceHolder.ValueType.FixedString),
-                        New DocumentPlaceHolder("F11", "Servicer_notes"),
+                        New DocumentPlaceHolder("F14", "Servicer_notes"),
                         New DocumentPlaceHolder("F16", "", DocumentPlaceHolder.ValueType.FixedString),
                         New DocumentPlaceHolder("F17", "", DocumentPlaceHolder.ValueType.FixedString),
                         New DocumentPlaceHolder("F18", "", DocumentPlaceHolder.ValueType.FixedString),
@@ -255,7 +255,7 @@ Public Class ExcelBuilder
                          New DocumentPlaceHolder("I9", decideBBaseOnA("has_Judgments_Personal_Judgments", "Amount_Personal_Judgments")),
                          New DocumentPlaceHolder("I10", decideBBaseOnA("has_Judgments_HPD_Judgments", "HPDjudgementAmount")),
                          New DocumentPlaceHolder("I11", addIRSNYS()),
-                         New DocumentPlaceHolder("I12", "has_Vacate_Order_Vacate_Order"),
+                         New DocumentPlaceHolder("I12", booleanToYN("has_Vacate_Order_Vacate_Order")),
                          New DocumentPlaceHolder("I13", decideBBaseOnA("has_Vacate_Order_Vacate_Order", "Amount_Vacate_Order")),
                          New DocumentPlaceHolder("I14", "", DocumentPlaceHolder.ValueType.FixedString)
            }
@@ -273,7 +273,11 @@ Public Class ExcelBuilder
 
     End Function
 
-    Shared Function addIRSNYS() As Func(Of Object, String)
+    ''' <summary>
+    ''' add up NYS and IRS value in the json string
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function addIRSNYS() As Func(Of Object, String)
         Dim temp = Function(data As JObject)
                        Dim total = 0.0
                        Dim hasIRS = data.SelectToken("has_IRS_Tax_Lien_IRS_Tax_Lien")
@@ -295,7 +299,15 @@ Public Class ExcelBuilder
         Return temp
     End Function
 
-    Shared Function decideBBaseOnA(field1 As String, field2 As String) As Func(Of Object, String)
+
+    ''' <summary>
+    ''' if filed a in json is not false or nothing
+    ''' then with return b's value
+    ''' </summary>
+    ''' <param name="field1"></param>
+    ''' <param name="field2"></param>
+    ''' <returns></returns>
+    Public Shared Function decideBBaseOnA(field1 As String, field2 As String) As Func(Of Object, String)
         Dim temp = Function(data)
                        Dim Has1st = data.SelectToken(field1)
                        If Has1st Is Nothing OrElse Has1st.ToString.Equals("False") Then
@@ -313,7 +325,14 @@ Public Class ExcelBuilder
         Return temp
     End Function
 
-    Shared Function booleanToYN(field1 As String) As Func(Of Object, String)
+
+    ''' <summary>
+    ''' convert boolean true/false to yes/no
+    ''' if nothing, return blank string
+    ''' </summary>
+    ''' <param name="field1"></param>
+    ''' <returns></returns>
+    Public Shared Function booleanToYN(field1 As String) As Func(Of Object, String)
         Dim temp = Function(data)
                        Dim Has1st = data.SelectToken(field1)
                        If Has1st Is Nothing Then
@@ -327,7 +346,13 @@ Public Class ExcelBuilder
         Return temp
     End Function
 
-    Shared Function concatOtherLiens() As Func(Of Object, String)
+    ''' <summary>
+    ''' concat other liens with ',' as seperator
+    ''' for example
+    ''' "lien1, line2, line3"
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function concatOtherLiens() As Func(Of Object, String)
         Dim temp = Function(d As JObject)
                        Dim hasother = d.SelectToken("Has_Other_Liens")
                        If hasother IsNot Nothing AndAlso hasother.ToString.Equals("True") Then
@@ -350,7 +375,11 @@ Public Class ExcelBuilder
         Return temp
     End Function
 
-    Shared Function addUpTaxLienCertificate() As Func(Of Object, String)
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <returns>double format number in string format</returns>
+    Public Shared Function addUpTaxLienCertificate() As Func(Of Object, String)
         Dim temp = Function(d As JObject)
                        Dim hasother = d.SelectToken("Has_TaxLiensCertifcate")
                        If hasother IsNot Nothing AndAlso hasother.ToString.Equals("True") Then
