@@ -20,6 +20,74 @@ Partial Public Class PropertyOffer
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return completed new offer but didn't move to ShortSale
+    ''' </summary>
+    ''' <param name="names">The Owner Names</param>
+    ''' <returns></returns>
+    Public Shared Function GetCompleted(names As String()) As PropertyOffer()
+        Using ctx As New PortalEntities
+            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
+                         Join ld In ctx.SSLeads.Where(Function(p) Not ({5, 7}).Contains(p.Status)) On offer.BBLE Equals ld.BBLE
+                         Select offer
+
+            Return offers.ToArray
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Get Completed NewOffer which is in process but not in ShortSale
+    ''' </summary>
+    ''' <param name="names"></param>
+    ''' <returns></returns>
+    Public Shared Function GetInProcess(names As String()) As PropertyOffer()
+        Using ctx As New PortalEntities
+            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
+                         Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5) On offer.BBLE Equals ld.BBLE
+                         From ss In ctx.ShortSaleCases.Where(Function(s) s.BBLE = offer.BBLE).DefaultIfEmpty()
+                         Where ss.Status Is Nothing OrElse ss.Status = 0
+                         Select offer
+
+            Return offers.ToArray
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Get completed new offer which accepted by ShortSale manager
+    ''' </summary>
+    ''' <param name="names"></param>
+    ''' <returns></returns>
+    Public Shared Function GetSSAccepted(names As String()) As PropertyOffer()
+        Using ctx As New PortalEntities
+            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
+                         Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5) On offer.BBLE Equals ld.BBLE
+                         Join ss In ctx.ShortSaleCases.Where(Function(s) s.Status = 1) On offer.BBLE Equals ss.BBLE
+                         Select offer
+
+            Return offers.ToArray
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Get completed new offer
+    ''' </summary>
+    ''' <param name="names"></param>
+    ''' <returns></returns>
+    Public Shared Function GetAllCompleted(names As String()) As PropertyOffer()
+        Using ctx As New PortalEntities
+            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
+                         From ld In ctx.SSLeads.Where(Function(p) p.Status = 5 AndAlso p.BBLE = offer.BBLE)
+                         From ss In ctx.ShortSaleCases.Where(Function(s) s.BBLE = offer.BBLE).DefaultIfEmpty()
+                         Select offer
+
+            Return offers.ToArray
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Return the form data item
+    ''' </summary>
+    ''' <returns></returns>
     Public Function LoadFormData() As FormDataItem
         If FormItemId.HasValue Then
             Return FormDataItem.Instance(FormItemId)

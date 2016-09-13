@@ -148,6 +148,12 @@
     <Compile Include="ADOEntity\SSFirstMortgage.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\SSLead.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\SSLeadsStatusLog.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="Auction\AuctionProperty.vb" />
     <Compile Include="Audit\AuditLog.vb" />
     <Compile Include="BusinessForm\BusinessDataBase.vb" />

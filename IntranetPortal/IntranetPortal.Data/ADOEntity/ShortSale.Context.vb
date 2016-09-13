@@ -75,5 +75,7 @@ Partial Public Class PortalEntities
     Public Overridable Property ShortSaleLeadsInfoes() As DbSet(Of ShortSaleLeadsInfo)
     Public Overridable Property PropertyOffers() As DbSet(Of PropertyOffer)
     Public Overridable Property AuditLogs() As DbSet(Of AuditLog)
+    Public Overridable Property SSLeads() As DbSet(Of SSLead)
+    Public Overridable Property SSLeadsStatusLogs() As DbSet(Of SSLeadsStatusLog)
 
 End Class

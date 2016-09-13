@@ -25,14 +25,14 @@ Public Class LeadTest
         Dim ls = Utility.GetLeadStatus("LoanMod")
         Assert.AreEqual(Of LeadStatus)(ls, LeadStatus.LoanMod)
 
-        ls = Utility.GetLeadStatus("Warmer")
+        ls = Utility.GetLeadStatus("Warm")
         Assert.AreEqual(Of LeadStatus)(ls, LeadStatus.Warm)
     End Sub
 
     <TestMethod()>
     Public Sub GetLoanModLeads_leadsArray()
         Dim lds = Lead.GetLoanModDue("Chris Yan", Nothing, New Date(2016, 12, 1))
-        Assert.AreEqual(lds.Count, 1)
+        Assert.IsTrue(lds.Count > 1)
     End Sub
 
     <TestMethod()>

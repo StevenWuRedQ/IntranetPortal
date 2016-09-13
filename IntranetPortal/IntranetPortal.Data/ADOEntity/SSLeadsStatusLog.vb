@@ -10,15 +10,13 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class HomeOwnerPhone
-    Public Property PhoneID As Integer
+Partial Public Class SSLeadsStatusLog
+    Public Property LogId As Integer
     Public Property BBLE As String
-    Public Property OwnerName As String
-    Public Property Phone As String
-    Public Property Type As String
-    Public Property Source As Nullable(Of Integer)
+    Public Property Type As Nullable(Of Integer)
+    Public Property Employee As String
+    Public Property CreateDate As Nullable(Of Date)
+    Public Property CreateBy As String
     Public Property Description As String
-    Public Property Comment As String
-    Public Property LastCalledDate As Nullable(Of Date)
 
 End Class

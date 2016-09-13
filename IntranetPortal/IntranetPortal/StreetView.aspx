@@ -53,33 +53,35 @@
         window.showAddress = function (address) {
             // alert(geocoder.geocode);
             // debugger;
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                //alert(status);
-                if (status == google.maps.GeocoderStatus.OK) {
-                    //alert(isMap);
-                    if (isMap) {
-                        if (myPano != null) {
-                            myPano.setCenter(results[0].geometry.location, 12);
-                            var marker = new google.maps.Marker({
-                                position: results[0].geometry.location,
-                                title: address
-                            });
+            if (address && address != "") {
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    //alert(status);
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        //alert(isMap);
+                        if (isMap) {
+                            if (myPano != null) {
+                                myPano.setCenter(results[0].geometry.location, 12);
+                                var marker = new google.maps.Marker({
+                                    position: results[0].geometry.location,
+                                    title: address
+                                });
 
-                            marker.setMap(myPano);
-                            myPano.setZoom(17);
+                                marker.setMap(myPano);
+                                myPano.setZoom(17);
+                            }
                         }
-                    }
-                    else {
-                        if (myPano != null) {
-                            myPano.setPosition(results[0].geometry.location);
-
+                        else {
+                            if (myPano != null) {
+                                myPano.setPosition(results[0].geometry.location);
+                            }
                         }
-                    }
 
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status + ". Address is " + address);
-                }
-            });
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status + ". Address is " + address);
+                    }
+                });
+            }
+
 
         }
 

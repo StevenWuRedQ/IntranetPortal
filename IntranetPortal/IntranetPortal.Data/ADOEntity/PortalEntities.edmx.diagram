@@ -28,7 +28,9 @@
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleOffer" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="false" />
         <EntityTypeShape EntityType="IntranetPortalModel.CorporationEntity" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="false" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCheckList" Width="1.75" PointX="9.75" PointY="4.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleLeadsInfo" Width="1.5" PointX="9" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleLeadsInfo" Width="1.5" PointX="9" PointY="8.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.SSLead" Width="1.5" PointX="10" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.SSLeadsStatusLog" Width="1.5" PointX="9" PointY="9.375" />
       </Diagram>
       <Diagram DiagramId="2cdf7606e6c24dc895f31f0e80a0c4dd" Name="Legal" >
         <EntityTypeShape EntityType="IntranetPortalModel.LegalCase" Width="1.5" PointX="0.75" PointY="0.5" />

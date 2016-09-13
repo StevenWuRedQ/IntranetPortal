@@ -6,4 +6,4 @@
 }
 
 TestController.$inject=['$scope']
-export default TestController;
+export default TestController;          
