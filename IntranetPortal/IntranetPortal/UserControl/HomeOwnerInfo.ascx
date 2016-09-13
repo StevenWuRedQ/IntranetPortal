@@ -24,6 +24,11 @@
         cursor: pointer;
         color: green;
     }
+
+
+    .phone-text {
+        display: block;
+    }
 </style>
 <script type="text/javascript">
     function ConfrimReport() {
@@ -42,7 +47,7 @@
 <% End If%>
 <div style='vertical-align: top; margin: 0; font-size: 18px; <%= if(IsNeedAddHomeOwner(),"visibility:hidden","") %>'>
     <div style="font-size: 30px; color: #2e2f31">
-        <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
+        <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}", "Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
         <% Dim needreport = IsEmptyReport AndAlso Not Utility.IsCompany(OwnerName)%>
         <% If needreport Then%>
         <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ConfrimReport()">&nbsp;</i>
@@ -226,8 +231,16 @@
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
-                                        <%=FormatPhoneNumber(phone.Phone)%>
-                                        <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span> </span>
+
+                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.Phone)%></span>
+                                        <span class="phone-call-count">
+                                            <%Dim count = GetCallCount(phone.Phone) %>
+                                            <%If Not String.IsNullOrEmpty(count) Then %>
+                                            Count : <%=count%> 
+                                            <%End If %>
+
+                                        </span>
                                     </a>
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
@@ -249,9 +262,16 @@
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                        <%=FormatPhoneNumber(phone.phoneField)%>
-                                        <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
 
+                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                        <span class="phone-call-count">
+                                            <%Dim count = GetCallCount(phone.phoneField) %>
+                                            <%If Not String.IsNullOrEmpty(count) Then %>
+                                            Count : <%=count%> 
+                                            <%End If %>
+
+                                        </span>
                                     </a>
 
                                 </div>
@@ -276,9 +296,16 @@
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                        <%=FormatPhoneNumber(phone.phoneField)%>
-                                        <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
 
+                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+
+                                        <span class="phone-call-count">
+                                            <%Dim count = GetCallCount(phone.phoneField) %>
+                                            <%If not String.IsNullOrEmpty(count) Then %>
+                                            Count : <%=count%> 
+                                            <%End If %>
+                                        </span>
                                     </a>
 
                                 </div>
@@ -357,7 +384,7 @@
             <i class="fa fa-chain color_gray homeowner_info_icon"></i>
             <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
                 <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField%></span><br />
-                <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
+                <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField Is Nothing, " ", relative.dateOfBirthField.currentAgeField) %></span></span>
             </div>
         </div>
 
@@ -409,7 +436,7 @@
             <div class="color_gray clearfix textMargin homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing," " & relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
+                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField %></span><br />
                     <br />
                     <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField Is Nothing, ";", relative.dateOfBirthField.currentAgeField)%></span></span>
                 </div>
@@ -462,8 +489,8 @@
             <div class="color_gray clearfix textMargin homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
-                    <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
+                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField %></span><br />
+                    <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField Is Nothing, " ", relative.dateOfBirthField.currentAgeField) %></span></span>
                 </div>
             </div>
             <div class="homeowner_expanll_border" style="margin-left: 20px">

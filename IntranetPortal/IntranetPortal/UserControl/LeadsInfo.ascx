@@ -26,11 +26,10 @@
 
     function onSavePhoneComment() {
         var comment = $("#phone_comment").val();
-        var temCommentSpan = $(temTelLink).children("span:first")
+        var temCommentSpan = $(temTelLink).children(".phone_comment")
         if (temCommentSpan != null) {
             //$(".phone_comment").text("-" + comment); 
             temCommentSpan.text("-" + comment);
-        } else {
         }
         OnCallPhoneCallback("SaveComment|" + tmpPhoneNo + "|" + comment);
     }
@@ -54,6 +53,11 @@
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
                 OnCallPhoneCallback("CallPhone|" + tmpPhoneNo);
+                OnCallPhone();
+                if(sortPhones != undefined)
+                {
+                    sortPhones();
+                }
             }
 
             if (e.item.index == 1) {
@@ -68,7 +72,7 @@
                 //telphoneLine.style.color = "green";
                 //telphoneLine.style.textDecoration = "none";                
                 OnCallPhoneCallback("RightPhone|" + tmpPhoneNo);
-                SetSameStyle("PhoneLink", "color:green;text-decoration:none;", tmpPhoneNo);
+                SetSameStyle("PhoneLink", "color:green;text-decoration:none;font-weight:bold", tmpPhoneNo);
             }
 
             if (e.item.index == 3) {
@@ -213,11 +217,40 @@
         AspxPopupMenuAddress.ShowAtElement(s);
     }
 
+    function OnCallPhone() {
+        if (temTelLink) {
+            var lastCallSpan = $(temTelLink).children(".phone-last-called");
+            var callCountSpan = $(temTelLink).children(".phone-call-count");
+            if (callCountSpan) {
+                var countText = callCountSpan.text().trim();
+                countText = countText.length > 0 ? countText : "Count: 0";
+                var countInt = countText.match(/\d+/);
+                if (countInt) {
+                    countInt = countInt || 0;
+                    var count = parseInt(countInt);
+                    count++;
+                    countText = countText.replace(countInt, count);
+                    callCountSpan.text(countText);
+                }
+
+
+            }
+
+            if (lastCallSpan) {
+                var d = new Date();
+                lastCallSpan.text(d.toLocaleDateString() + " " + d.getHours() + ':' + d.getSeconds())
+            }
+
+        } else {
+            console.error("temTelLink is null");
+        }
+    }
     function OnAddressPopupMenuClick(s, e) {
 
         if (tmpAddress != null) {
             if (e.item.index == 0) {
                 OnCallPhoneCallback("DoorKnock|" + tmpAddress);
+
                 SetLeadStatus(4);
             }
 
@@ -341,7 +374,7 @@
         }
 
         // reload callback on get lead status in propertyinfo
-        if(LoanModStatusCtrl){
+        if (LoanModStatusCtrl) {
             LoanModStatusCtrl.reload();
         }
     }
