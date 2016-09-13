@@ -21,5 +21,9 @@
     "protractor": "^3.0.0",
     "webpack": "^1.13.2"
   },
-  "author": "Steven wu"
+  "author": "Steven wu",
+  "dependencies": {
+    "sequelize": "^3.24.3",
+    "tedious": "^1.14.0"
+  }
 }

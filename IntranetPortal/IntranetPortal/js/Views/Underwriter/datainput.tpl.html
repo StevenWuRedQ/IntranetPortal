@@ -1,7 +1,7 @@
 ﻿
 <div class="container" style="width: 90%; margin-top: 20px">
     <div class="row">
-        <div id="data_input_area" class="col-md-9 col-lg-9" style="border: 1px dotted black">
+        <div id="data_input_area" class="col-md-9 col-lg-9">
             <div class="row">
                 <div class="col-md-3 col-lg-3">
                     <div class="panel panel-default" style="margin-top: 10px">
@@ -11,10 +11,16 @@
                         <div class="panel-body">
                             <table>
                                 <tr>
-                                    <td class="td-label">
+                                    <td class="td-label" colspan="2">
                                         Property Address:
                                     </td>
-                                    <td class="td-value"><input /></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="td-value" colspan="2">
+                                        <input />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
@@ -476,124 +482,123 @@
 
 
         <div id="calc_summary affix" class="col-md-3 col-lg-3">
-            <div style="border: 1px dotted black">
 
 
-                <div class="panel panel-default" style="margin-top: 10px">
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td class="td-label">
-                                    Maximum Lien Payoff
-                                </td>
-                                <td class="td-value"><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Maximum SS Price
-                                </td>
-                                <td class="td-value"></td>
-                            </tr>
-                        </table>
-                    </div>
+            <div class="panel panel-default" style="margin-top: 10px">
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td class="td-label">
+                                Maximum Lien Payoff
+                            </td>
+                            <td class="td-value"><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">
+                                Maximum SS Price
+                            </td>
+                            <td class="td-value"></td>
+                        </tr>
+                    </table>
                 </div>
-
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">MINIMUM BASELINE SCENARIO</h5>
-                    </div>
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td class="td-label">Purchase Price (All In)</td>
-                                <td class="td-value"><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Total Investment</td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Cash Requirement</td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Net Profit</td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">ROI (Loan)</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">BEST CASE SCENARIO</h5>
-                    </div>
-                    <div class="panel-body">
-                        <table>
-                            <tr class="success">
-                                <td class="td-label">Purchase Price (All In)</td>
-                                <td class="td-value"><input /></td>
-                            </tr>
-                            <tr class="success">
-                                <td class="td-label">Total Investment</td>
-                            </tr>
-                            <tr class="success">
-                                <td class="td-label">Cash Requirement</td>
-                            </tr>
-                            <tr class="success">
-                                <td class="td-label">Net Profit</td>
-                            </tr>
-                            <tr class="success">
-                                <td class="td-label">ROI (Loan)</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">RENTAL BRAEKDOWN</h5>
-                    </div>
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td class="td-label">Purchase Price (All In)</td>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Total Investment</td>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Cash Requirement</td>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Net Profit</td>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">ROI (Loan)</td>
-                                <td><input /></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="panel panel-primary">
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td class="td-label">MAX HOI</td>
-                                <td><input /></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr />
-                <div class="clearfix">
-                    <span class="btn btn-primary">calculate</span>
-                </div>
-
             </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h5 class="panel-title">MINIMUM BASELINE SCENARIO</h5>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td class="td-label">Purchase Price (All In)</td>
+                            <td class="td-value"><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Total Investment</td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Cash Requirement</td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Net Profit</td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">ROI (Loan)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h5 class="panel-title">BEST CASE SCENARIO</h5>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <tr class="success">
+                            <td class="td-label">Purchase Price (All In)</td>
+                            <td class="td-value"><input /></td>
+                        </tr>
+                        <tr class="success">
+                            <td class="td-label">Total Investment</td>
+                        </tr>
+                        <tr class="success">
+                            <td class="td-label">Cash Requirement</td>
+                        </tr>
+                        <tr class="success">
+                            <td class="td-label">Net Profit</td>
+                        </tr>
+                        <tr class="success">
+                            <td class="td-label">ROI (Loan)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h5 class="panel-title">RENTAL BRAEKDOWN</h5>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td class="td-label">Purchase Price (All In)</td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Total Investment</td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Cash Requirement</td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Net Profit</td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">ROI (Loan)</td>
+                            <td><input /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td class="td-label">MAX HOI</td>
+                            <td><input /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr />
+            <div class="clearfix">
+                <span class="btn btn-primary">calculate</span>
+            </div>
+
+
         </div>
     </div>
 </div>
