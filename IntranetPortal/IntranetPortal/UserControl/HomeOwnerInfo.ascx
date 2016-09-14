@@ -29,6 +29,15 @@
     .phone-text {
         display: block;
     }
+
+    .phone-last-called, .phone-call-count {
+        font-size: 14px;
+        color: #2e2f31;
+    }
+
+    a .phone-last-called:hover, a .phone-call-count:hover {
+        text-decoration: none !important;
+    }
 </style>
 <script type="text/javascript">
     function ConfrimReport() {
@@ -233,15 +242,16 @@
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span> </span>
 
-                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.Phone)%></span>
-                                        <span class="phone-call-count">
-                                            <%Dim count = GetCallCount(phone.Phone) %>
-                                            <%If Not String.IsNullOrEmpty(count) Then %>
-                                            Count : <%=count%> 
+
+                                    </a>
+                                    <span class="phone-last-called"><%=GetAllLastCalled(phone.Phone)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.Phone) %>
+                                        <%If Not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>) 
                                             <%End If %>
 
-                                        </span>
-                                    </a>
+                                    </span>
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     &nbsp;
@@ -264,16 +274,17 @@
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
 
-                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
-                                        <span class="phone-call-count">
-                                            <%Dim count = GetCallCount(phone.phoneField) %>
-                                            <%If Not String.IsNullOrEmpty(count) Then %>
-                                            Count : <%=count%> 
+                                       
+
+                                    </a>
+                                     <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.phoneField) %>
+                                        <%If Not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
                                             <%End If %>
 
-                                        </span>
-                                    </a>
-
+                                    </span>
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -298,16 +309,15 @@
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
 
-                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
 
-                                        <span class="phone-call-count">
-                                            <%Dim count = GetCallCount(phone.phoneField) %>
-                                            <%If not String.IsNullOrEmpty(count) Then %>
-                                            Count : <%=count%> 
-                                            <%End If %>
-                                        </span>
                                     </a>
-
+                                     <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.phoneField) %>
+                                        <%If not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
+                                            <%End If %>
+                                    </span>
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)

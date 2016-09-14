@@ -1131,8 +1131,8 @@ function sortPhones() {
 
             if (diff == 0) {
 
-                var dateA = Date.parse(phoneLinkA.find(".phone-last-called:first").text());
-                var dateB = Date.parse(phoneLinkB.find(".phone-last-called:first").text());
+                var dateA = Date.parse($(a).find(".phone-last-called:first").text());
+                var dateB = Date.parse($(b).find(".phone-last-called:first").text());
 
                 var dateATime = 0;
                 var dateBTime = 0;

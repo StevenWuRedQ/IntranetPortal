@@ -26,7 +26,7 @@
 
     function onSavePhoneComment() {
         var comment = $("#phone_comment").val();
-        var temCommentSpan = $(temTelLink).children(".phone_comment")
+        var temCommentSpan = $(temTelLink).find(".phone_comment:first")
         if (temCommentSpan != null) {
             //$(".phone_comment").text("-" + comment); 
             temCommentSpan.text("-" + comment);
@@ -219,11 +219,12 @@
 
     function OnCallPhone() {
         if (temTelLink) {
-            var lastCallSpan = $(temTelLink).children(".phone-last-called");
-            var callCountSpan = $(temTelLink).children(".phone-call-count");
+            var parent = $(temTelLink).parent().parent();
+            var lastCallSpan = parent.find(".phone-last-called:first");
+            var callCountSpan = parent.find(".phone-call-count:first");
             if (callCountSpan) {
                 var countText = callCountSpan.text().trim();
-                countText = countText.length > 0 ? countText : "Count: 0";
+                countText = countText.length > 0 ? countText : "(0)";
                 var countInt = countText.match(/\d+/);
                 if (countInt) {
                     countInt = countInt || 0;
