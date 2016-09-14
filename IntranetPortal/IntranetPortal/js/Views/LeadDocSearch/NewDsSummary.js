@@ -5,7 +5,10 @@
         scope: {
             summary: '=',
             updateby: '=',
-            updateon:'='
+            updateon: '=',
+            docsearch: '=',
+            leadsinfo: '=',
+            showinfo: '='
         },
         templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
         link: function (scope)

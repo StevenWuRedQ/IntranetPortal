@@ -167,6 +167,11 @@ Public Class LeadInfoDocumentSearch
         NewSearch = 0
         Completed = 1
     End Enum
+
+    Public Shared Sub oldToNew()
+
+
+    End Sub
 End Class
 
 Public Class LeadInfoDocumentSearchCaseMetaData

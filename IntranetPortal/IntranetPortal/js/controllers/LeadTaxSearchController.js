@@ -4,8 +4,11 @@
         , DocSearchEavesdropper, DivError
         ) {
         //New Model(this,arguments)
-        $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
+        $scope.ShowInfo = $('#ShowInfo').val();
+        $scope.ptContactServices = ptContactServices;
+
+
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
@@ -13,21 +16,6 @@
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
 
-        /////////////////////////////////////////////////////////////////////
-        // @date 8/11/2016
-        // for devextrem angular bugs have to init array frist
-        // fast prototype of grid bug on 8/11/2016 may spend two hours on it
-        //var INITS = {
-        //   OtherMortgage: [],
-        //   DeedRecorded: [],
-        //   COSRecorded: [],
-        //   OtherLiens: [],
-        //   TaxLienCertificate:[]
-        //};
-        //$scope.DocSearch.LeadResearch = {}
-        //angular.extend($scope.DocSearch.LeadResearch, INITS);
-        // ///////////////////////////////////////////////////////////////// 
-        // put here should not right for fast prototype ////////////////////
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -72,6 +60,7 @@
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
+            $scope.ShowInfo = $('#ShowInfo').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
                 return;
@@ -84,9 +73,6 @@
 
                 ////////// font end switch to new version //////////////
                 $scope.versionController.start2Eaves();
-
-
-
             });
 
         }
@@ -208,13 +194,7 @@
                 AngularRoot.alert(msg[0]);
                 return;
             };
-            // $scope.DivError.getMessage();
-            // $scope.newVersionValidate();
 
-            //if (msg) {
-            //    AngularRoot.alert(msg);
-            //    return;
-            //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
@@ -236,47 +216,11 @@
             $scope.test = function () {
                 $scope.$digest();
             }
-            //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
-            //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
-            //    if (typeof gridCase != 'undefined') {
-            //        if (!isSave) {
-            //            $scope.DocSearch.Status = 1;
-            //            gridCase.Refresh();
-            //        }
-            //    }
-            //}).error(function (data) {
-            //    alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //});
 
-            //Ajax anonymous function not work for angular scope need check about this.
-            //$.ajax({
-            //    type: "PUT",
-            //    url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
-            //    data: JSON.stringify(PostData),
-            //    dataType: 'json',
-            //    contentType: 'application/json',
-            //    success: function (data) {
-
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
-            //        if (typeof gridCase != 'undefined') {
-            //            if (!isSave) {
-            //                $scope.DocSearch.Status = 1;
-            //                gridCase.Refresh();
-            //            }
-
-            //        }
-            //    },
-            //    error: function (data) {
-            //        alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //    }
-
-            //});
         }
 
         $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
-        // under the $watch, in the listener function
-        // this.eq is the evaled value
-        // this.exp is the watched field
+
         for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
             $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
                 if (nv) {
