@@ -18,32 +18,38 @@
             background-color: #efefef;
         }
 
-        .apply-filter-option {
-            margin-top: 10px;
-            margin-left: 10px;
-            position: absolute;
-            z-index: 1;
-            top: 0;
-            line-height: 38px;
-            font-size: 20px;
-            font-weight: 600;
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
         }
 
-            .apply-filter-option > div:last-child {
-                display: inline-block;
-                vertical-align: top;
-                margin-left: 20px;
-                line-height: normal;
-            }
+        #xwrapper {
+            float: left;
+            height: 875px;
+        }
+
+        #preview {
+            float: left;
+            height: 875px;
+        }
     </style>
 
     <input type="text" style="display: none" />
-    <div class="apply-filter-option">
-        Files
-    <div id="useFilterApplyButton"></div>
+    <div class="content">
+        <div id="xwrapper">
+            <div id="gridContainer" style="margin: 10px"></div>
+        </div>
+
+        <div id="preview" style="visibility: hidden">
+            <iframe id="previewWindow""></iframe>
+        </div>
     </div>
-    <div id="gridContainer" style="margin: 10px"></div>
     <script>
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        }
+
         $(document).ready(function () {
             function GoToCase(CaseId) {
                 var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
@@ -51,8 +57,12 @@
             }
 
             function ShowCaseInfo(CaseId) {
-                var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId;
-                PortalUtility.ShowPopWindow("View Case - " + CaseId, url);
+                $("#xwrapper").css("width", "50%");
+                $("#preview").css("visibility", "visible");
+                $("#preview").css("width", "50%");
+
+                var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + CaseId;
+                $("#previewWindow").attr("src", url)
             }
 
             var url = "/api/LeadInfoDocumentSearches?status=1";
@@ -135,29 +145,32 @@
                     }, {
                         caption: "Create By",
                         dataField: "CreateBy"
-                    }, {
-                        caption: '',
-                        width: 80,
-                        cellTemplate: function (container, options) {
-                            var div = $('<input />')
-                                       .attr('type', 'button')
-                                       .attr('title', 'Export')
-                                       .attr('value', 'Export')
-                                       .on('dxclick', function (e ) {
+                    }
 
-                                           var url = "/api/underwriter/generatexml/" + options.data.BBLE;
-                                           $.ajax({
-                                               method: "GET",
-                                               url: url,
-                                           }).then(function (res) {
-                                               STDownloadFile("/api/underwriter/getgeneratedxml/" + options.data.BBLE, "underwriter.xlsx" + new Date().toLocaleDateString)
-                                           })
+                    //{
+                    //    caption: '',
+                    //    width: 80,
+                    //    cellTemplate: function (container, options) {
+                    //        var div = $('<input />')
+                    //                   .attr('type', 'button')
+                    //                   .attr('title', 'Export')
+                    //                   .attr('value', 'Export')
+                    //                   .on('dxclick', function (e ) {
 
-                                       })
-                                       .appendTo(container);
-                        }
-                    }]
+                    //                       var url = "/api/underwriter/generatexml/" + options.data.BBLE;
+                    //                       $.ajax({
+                    //                           method: "GET",
+                    //                           url: url,
+                    //                       }).then(function (res) {
+                    //                           STDownloadFile("/api/underwriter/getgeneratedxml/" + options.data.BBLE, "underwriter.xlsx" + new Date().toLocaleDateString)
+                    //                       })
+
+                    //                   })
+                    //                   .appendTo(container);
+                    //    }}
+                    ]
                 }).dxDataGrid('instance');
+                $(".dx-datagrid-header-panel").prepend($("<h4 style='display: inline-block'>UnderWriter</h4>"))
             });
         })
 

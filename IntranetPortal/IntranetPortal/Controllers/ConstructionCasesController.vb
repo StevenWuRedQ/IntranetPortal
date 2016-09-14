@@ -220,6 +220,7 @@ Namespace Controllers
             Dim response = New HttpResponseMessage(HttpStatusCode.OK)
             Dim fs = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.Open)
             Dim bfs = New BinaryReader(fs).ReadBytes(fs.Length)
+
             response.Content = New ByteArrayContent(bfs)
             response.Content.Headers.Add("Content-Disposition", "inline; filename=budget.xlsx")
             response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
