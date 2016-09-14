@@ -19,7 +19,6 @@ Namespace Controllers
         ''' <returns>The generated file link</returns>
         <Route("api/PropertyOffer/GeneratePackage/{bble}")>
         Public Function PostGeneratePackage(bble As String, <FromBody> data As JObject) As IHttpActionResult
-
             Try
                 Dim path = HttpContext.Current.Server.MapPath("~/App_Data/OfferDoc")
                 Dim destPath = HttpContext.Current.Server.MapPath("/TempDataFile/OfferDoc/")
@@ -28,7 +27,6 @@ Namespace Controllers
             Catch ex As Exception
                 Return BadRequest(ex.Message)
             End Try
-
         End Function
 
         ''' <summary>

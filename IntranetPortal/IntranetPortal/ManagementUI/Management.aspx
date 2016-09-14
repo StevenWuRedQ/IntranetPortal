@@ -754,8 +754,7 @@
                                                                 }
                                                             },
                                                         }],
-                                                        title: "In Process Leads",
-                                                        palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
+                                                        title: "In Process Leads"                                                        
                                                     }
 
                                                     option.onDone = function (e) {
@@ -778,14 +777,17 @@
                                                         $("#gridTitle").html(point.originalArgument);
                                                         //point.isVisible() ? point.hide() : point.show();
                                                     };
-                                                    $("#ProcessStatusChart").dxPieChart(option);
+                                                    option.series[0].type = 'bar';
+                                                    option.rotated = true;
+                                                    option.legend.visible = false;
+                                                    $("#ProcessStatusChart").dxChart(option);
                                                 }
                                                 else {
                                                     var chart = $("#InProcessLeadsChart").dxPieChart("instance");
                                                     chart.option("dataSource", tab.DisplayView.LeadsInProcessDataSource);
                                                     //chart.render({ force: true });
 
-                                                    chart = $("#ProcessStatusChart").dxPieChart("instance");
+                                                    chart = $("#ProcessStatusChart").dxChart("instance");
                                                     chart.option("dataSource", tab.DisplayView.LeadsDataSource);
                                                     //chart.render({ force: true });
                                                 }

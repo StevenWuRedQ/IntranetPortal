@@ -37,7 +37,7 @@ Public Class LeadSubStatus
     ''' </summary>
     ''' <returns></returns>
     Public Shared Property LoanModInProcess As New LeadSubStatus With {
-        .Key = 0, .Name = "LoanMod In Process"}
+        .Key = 0, .Name = "LoanMod In Progress"}
     ''' <summary>
     ''' Represents the LoanMod Completed Status
     ''' </summary>

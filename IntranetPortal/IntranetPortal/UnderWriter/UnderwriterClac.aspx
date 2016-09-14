@@ -18,21 +18,20 @@
             border-top: 1px solid grey;
         }
 
-            td.td-label {
-                padding-right: 10px;
-                border-right: 1px solid grey;
-                width: 160px;
-                height: 100%;
-                font-weight: bold;
-            }
-
-
-            td input {
-                border: none;
-                padding: 0;
-                text-align: right;
-                width: 100%;
-            }
+        td.td-label {
+            padding-right: 10px;
+            border-right: 1px solid grey;
+            width: 160px;
+            height: 100%;
+            font-weight: bold;
+        }
+        
+        td input {
+            border: none;
+            padding: 0;
+            text-align: right;
+            width: 100%;
+        }
 
         div textarea {
             width: 100%;
@@ -54,7 +53,6 @@
         }
     </style>
     <div id="underwrite_clac" ng-controller="UnderwriterController">
-
         <ui-view></ui-view>
         <nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container-fluid">

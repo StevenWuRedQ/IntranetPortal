@@ -5,7 +5,7 @@ Imports System.Web.Http.Description
 Imports Newtonsoft.Json
 
 Namespace Controllers
-    <Authorize(Roles:="Admin,Auction-Manager,OfficeManager-*,HOI-Viewer,NewOffer-Viewer")>
+
     Public Class LeadsController
         Inherits ApiController
 
