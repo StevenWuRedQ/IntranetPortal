@@ -524,7 +524,9 @@
   </PortalNavItem>
 
   <!--<PortalNavItem Name="Eviction" Text="Eviction" NavigationUrl="#" ShowAmount="false" Expanded="false" visiable="false">
-    --><!--Temporarily use Admin roles for Eviction--><!--
+    -->
+  <!--Temporarily use Admin roles for Eviction-->
+  <!--
     <UserRoles>Eviction-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="Eviction" Text="Eviction Leads" NavigationUrl="/ShortSale/ShortSale.aspx?isEviction=true" ShowAmount="true">
@@ -535,7 +537,7 @@
     </Items>
   </PortalNavItem>-->
   <PortalNavItem Name="PreShortSale" Text="New Offer" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <!--Temporarily use Admin roles for Eviction-->
+    <!--Temporarily use Admin roles for Eviction-->    
     <UserRoles>OfficeManager-*,OfficeExecutive</UserRoles>
     <Items>
       <PortalNavItem Name="PSS-Summary" Text="Summary" NavigationUrl="/mydefault.aspx?name=NewOffer" ShowAmount="false">
@@ -664,6 +666,17 @@
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-*,OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
     <Items>
+    </Items>
+  </PortalNavItem>
+  <PortalNavItem Name="Underwriter" Text="Underwriter" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <UserRoles>Underwriter</UserRoles>
+    <Items>
+      <PortalNavItem Name="UnderwriterSummary" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
+        <UserRoles>Underwriter</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pencil"></i>]]>
+        </FontClass>
+      </PortalNavItem>
     </Items>
   </PortalNavItem>
 

@@ -1254,7 +1254,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
         var uri = BaseUri + '/' + apiName + '/:' + key;
         var primaryKey = {};
         primaryKey[key] = '@' + key;
- 
+
         /*default actions add put */
         var _actions = {
             'update': { method: 'PUT' }
@@ -1266,7 +1266,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
         var Resource = $resource(uri, primaryKey, _actions);
 
         //static function
-        Resource.all = function () {}
+        Resource.all = function () { }
         Resource.CType = function (obj, Class) {
 
             if (obj == null || obj == undefined) {
@@ -1281,9 +1281,9 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             angular.extend(obj, _new);
             return _new;
         }
-        Resource.prototype.hasId = function()
-        {
-            return this[key] != null && this[key]!=0;
+
+        Resource.prototype.hasId = function () {
+            return this[key] != null && this[key] != 0;
         }
         /*********Use for Derived class implement validation interface *************/
         /**************** string array to hold error messages **********************/
@@ -1293,7 +1293,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             /* maybe cause memory leak if javascript garbage collection is not good */
             this.errorMsg = []
         }
-        
+
         Resource.prototype.getErrorMsg = function () {
             return this.errorMsg;
         }
@@ -1337,10 +1337,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
         });
 
-    //docSearch.properties = {
-    //    LeadResearch: "{LeadResearch}",
-    //    LeadResearchs: "[LeadResearch]"
-    //}
 
     docSearch.Status = {
         New: 0,
@@ -1355,7 +1351,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
-        //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
+
         var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
@@ -1376,9 +1372,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             }
         }
        
-        //self.LeadResearch = self.LeadResearch || new LeadResearch();
-
-        //});
         return data1;
     }
 
@@ -1404,9 +1397,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         return this.LeadResearch;
     }
 
-    //def function
-    //leadResearch.func
-    //constructor
     return docSearch;
 });
 
@@ -1439,17 +1429,84 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
             self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
             self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
             self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
-           
             self.getOwnerSSN(BBLE);
         });
         return data1;
     }
-    //leadResearch.prototype.func
-    //def function
-    //leadResearch.func
-    //constructor
+
     return leadResearch;
 });
+angular.module('PortalApp').factory('ptUnderwriter', function ($http) {
+
+    var Model = function() {
+        this.PropertyAddress = undefined;
+        this.TaxClass = undefined;
+        this.BuildingDimension = undefined;
+        this.LotSize = undefined;
+        this.Zoning = undefined;
+        this.ActualNumOfUnits = undefined;
+        this.PropertyTaxYear = undefined;
+        this.OccupancyStatus = undefined;
+        this.SellerOccupied = undefined;
+        this.NumOfTenants = undefined;
+        this.MoneySpent = undefined;
+        this.HOI = undefined;
+        this.COSTermination = undefined;
+        this.AgentCommission = undefined;
+        this.AverageLowValue = undefined;
+        this.RenovatedValue = undefined;
+        this.RepairBid = undefined;
+        this.DealTimeMonths = undefined;
+        this.SalesCommission = undefined;
+        this.DealROICash = undefined;
+        this.DeedPurchase = undefined;
+        this.CurrentlyRented = undefined;
+        this.RepairBidTotal = undefined;
+        this.NumOfUnits = undefined;
+        this.MarketRentTotal = undefined;
+        this.RentalTime = undefined;
+        this.FirstMortgage = undefined;
+        this.SecondMortgage = undefined;
+        this.COSRecorded = undefined;
+        this.DeedRecorded = undefined;
+        this.OtherLiens = undefined;
+        this.FHA = undefined;
+        this.FannieMae = undefined;
+        this.FreddieMac = undefined;
+        this.Servicer = undefined;
+        this.ForeclosureIndexNum = undefined;
+        this.ForeclosureStatus = undefined;
+        this.ForeclosureNote = undefined;
+        this.AuctionDate = undefined;
+        this.DefaultDate = undefined;
+        this.CurrentPayoff = undefined;
+        this.PayoffDate = undefined;
+        this.CurrentSSValue = undefined;
+        this.TaxLienCertificate = undefined;
+        this.PropertyTaxes = undefined;
+        this.WaterCharges = undefined;
+        this.HPDCharges = undefined;
+        this.ECBDOBViolations = undefined;
+        this.DOBCivilPenalty = undefined;
+        this.PersonalJudgements = undefined;
+        this.HPDJudgements = undefined;
+        this.IRSNYSTaxLiens = undefined;
+        this.VacateOrder = undefined;
+        this.RelocationLien = undefined;
+        this.RelocationLienDate = undefined;
+
+    }
+
+    return {
+        createNew: function() {
+            return new Model();
+        }
+
+    }
+
+});
+
+
 
 /**
  * @return {[class]}                 QueryUrl class
@@ -1601,7 +1658,10 @@ angular.module("PortalApp")
         scope: {
             summary: '=',
             updateby: '=',
-            updateon:'='
+            updateon: '=',
+            docsearch: '=',
+            leadsinfo: '=',
+            showinfo: '='
         },
         templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
         link: function (scope)
@@ -1610,6 +1670,7 @@ angular.module("PortalApp")
         }
     };
 })
+
 /**
  * a utility library provide common function in angular
  * 
@@ -3922,8 +3983,11 @@ angular.module('PortalApp')
         , DocSearchEavesdropper, DivError
         ) {
         //New Model(this,arguments)
-        $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
+        $scope.ShowInfo = $('#ShowInfo').val();
+        $scope.ptContactServices = ptContactServices;
+
+
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
@@ -3931,21 +3995,6 @@ angular.module('PortalApp')
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
 
-        /////////////////////////////////////////////////////////////////////
-        // @date 8/11/2016
-        // for devextrem angular bugs have to init array frist
-        // fast prototype of grid bug on 8/11/2016 may spend two hours on it
-        //var INITS = {
-        //   OtherMortgage: [],
-        //   DeedRecorded: [],
-        //   COSRecorded: [],
-        //   OtherLiens: [],
-        //   TaxLienCertificate:[]
-        //};
-        //$scope.DocSearch.LeadResearch = {}
-        //angular.extend($scope.DocSearch.LeadResearch, INITS);
-        // ///////////////////////////////////////////////////////////////// 
-        // put here should not right for fast prototype ////////////////////
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -3990,6 +4039,7 @@ angular.module('PortalApp')
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
+            $scope.ShowInfo = $('#ShowInfo').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
                 return;
@@ -4002,56 +4052,8 @@ angular.module('PortalApp')
 
                 ////////// font end switch to new version //////////////
                 $scope.versionController.start2Eaves();
-                /////////////////// 8/12/2016 //////////////////////////
-
-                /////////////////////////////// saving and grid init bug for faster portotype ///////////////////
-                //
-                // use fast prototype it have same bug
-                // this is faster solution of grid init will remove to initGrid
-                // put here should not right that not right it should like this 
-                // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
-                // and put it to model inside;
-                // angular.extend($scope.DocSearch.LeadResearch, INITS);
-                //
-                /////////////////////////////// end saving and grid init bug for faster portotype ////////////////
-
-
             });
-            // ////remove all code to model version date is some time of June 2016 /////////////////////////////////////////////
-            //$scope.DocSearch;
-            // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-            // success(function (data, status, headers, config) {
-            //     $scope.DocSearch = data;
-            //     $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-            //         $scope.DocSearch.team = data;
 
-            //     });
-
-            //     $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-            //       success(function (data1, status, headers, config) {
-            //           $scope.LeadsInfo = data1;
-            //           $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
-            //           $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
-            //           $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
-            //           $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
-            //           $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
-            //           $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data1.C2ndMotgrAmt;
-            //           var ownerName = $scope.DocSearch.LeadResearch.ownerName;
-            //           if (ownerName) {
-            //               $http.post("/api/homeowner/ssn/" + leadsInfoBBLE, JSON.stringify(ownerName)).
-            //               success(function (ssn, status, headers, config) {
-            //                   $scope.DocSearch.LeadResearch.ownerSSN = ssn;
-            //               }).error(function () {
-
-            //               });
-            //           }
-
-
-            //       }).error(function (data, status, headers, config) {
-            //           alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-            //       });
-            // });
-            // ////////////////////////////////// remove all code to model version date is some time of June 2016 ////////////////////
         }
 
         $scope.init(leadsInfoBBLE)
@@ -4171,13 +4173,7 @@ angular.module('PortalApp')
                 AngularRoot.alert(msg[0]);
                 return;
             };
-            // $scope.DivError.getMessage();
-            // $scope.newVersionValidate();
 
-            //if (msg) {
-            //    AngularRoot.alert(msg);
-            //    return;
-            //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
@@ -4199,47 +4195,11 @@ angular.module('PortalApp')
             $scope.test = function () {
                 $scope.$digest();
             }
-            //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
-            //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
-            //    if (typeof gridCase != 'undefined') {
-            //        if (!isSave) {
-            //            $scope.DocSearch.Status = 1;
-            //            gridCase.Refresh();
-            //        }
-            //    }
-            //}).error(function (data) {
-            //    alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //});
 
-            //Ajax anonymous function not work for angular scope need check about this.
-            //$.ajax({
-            //    type: "PUT",
-            //    url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
-            //    data: JSON.stringify(PostData),
-            //    dataType: 'json',
-            //    contentType: 'application/json',
-            //    success: function (data) {
-
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
-            //        if (typeof gridCase != 'undefined') {
-            //            if (!isSave) {
-            //                $scope.DocSearch.Status = 1;
-            //                gridCase.Refresh();
-            //            }
-
-            //        }
-            //    },
-            //    error: function (data) {
-            //        alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //    }
-
-            //});
         }
 
         $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
-        // under the $watch, in the listener function
-        // this.eq is the evaled value
-        // this.exp is the watched field
+
         for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
             $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
                 if (nv) {
@@ -8379,14 +8339,44 @@ angular.module("PortalApp").config(function ($stateProvider) {
     $stateProvider.state(tables);
 
 });
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', function ($scope, ptCom, $location) {
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', 'ptUnderwriter', 'DocSearch', 'LeadsInfo', function ($scope, ptCom, $location, ptUnderwriter, DocSearch, LeadsInfo) {
 
-    $scope.model = {};
+    $scope.data = {};
 
     $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
 
+    $scope.init = function (bble, isImport) {
+        ptCom.startLoading()
+        $scope.data = ptUnderwriter.createNew();
+        if (isImport) {
+            $scope.importData(bble);
+        } else {
+
+        }
+
+    }
+
+    $scope.importData = function (bble) {
+        $scope.leadsInfo = undefined;
+        $scope.docSearch = undefined;
+        $scope.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
+
+            $scope.docSearch.initLeadsResearch();
+            $scope.leadsInfo = $scope.LeadsInfo.get({ BBLE: bble.trim() }, function () {
+                debugger;
+            })
+
+        });
+
+    };
+
+
+    $scope.save = function () {
+
+
+    }
 }])
 angular.module("PortalApp")
     .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {

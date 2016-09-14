@@ -26,11 +26,10 @@
 
     function onSavePhoneComment() {
         var comment = $("#phone_comment").val();
-        var temCommentSpan = $(temTelLink).children("span:first")
+        var temCommentSpan = $(temTelLink).find(".phone_comment:first")
         if (temCommentSpan != null) {
             //$(".phone_comment").text("-" + comment); 
             temCommentSpan.text("-" + comment);
-        } else {
         }
         OnCallPhoneCallback("SaveComment|" + tmpPhoneNo + "|" + comment);
     }
@@ -49,11 +48,29 @@
         currOwner = ownerName;
         EmailPopupClient.ShowAtElement(emailink);
     }
+    function OnSortPhoneClick(s, e) {
+        if (sortPhoneFunc == undefined) {
+            console.error("sortPhoneFunc is null please check javascript import stevenjs");
+            return;
+        }
+        if (e.item.index == 0) {
 
+            sortPhoneFunc(compareLastCalledDate);
+
+        }
+
+        if (e.item.index == 1) {
+            sortPhoneFunc(compareByCallCount);
+        }
+    }
     function OnPhoneNumberClick(s, e) {
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
                 OnCallPhoneCallback("CallPhone|" + tmpPhoneNo);
+                OnCallPhone();
+                //if (sortPhones != undefined) {
+                //    sortPhones();
+                //}
             }
 
             if (e.item.index == 1) {
@@ -61,14 +78,15 @@
                 //telphoneLine.style.color = "red";
 
                 OnCallPhoneCallback("BadPhone|" + tmpPhoneNo);
-                SetSameStyle("PhoneLink", "color:red;text-decoration:line-through;", tmpPhoneNo);
+
+                SetSameStyle("PhoneLink", "phone-wrong", tmpPhoneNo);
             }
 
             if (e.item.index == 2) {
                 //telphoneLine.style.color = "green";
                 //telphoneLine.style.textDecoration = "none";                
                 OnCallPhoneCallback("RightPhone|" + tmpPhoneNo);
-                SetSameStyle("PhoneLink", "color:green;text-decoration:none;", tmpPhoneNo);
+                SetSameStyle("PhoneLink", "phone-working", tmpPhoneNo);
             }
 
             if (e.item.index == 3) {
@@ -99,7 +117,9 @@
 
             if (item.innerText.trim().indexOf(value) == 0) {
 
-                $(item).attr("style", style);
+                $(item).removeClass("phone-wrong");
+                $(item).removeClass("phone-working");
+                $(item).addClass(style);
             }
         }
     }
@@ -213,22 +233,55 @@
         AspxPopupMenuAddress.ShowAtElement(s);
     }
 
+
+
+    function OnCallPhone() {
+        if (temTelLink) {
+            var parent = $(temTelLink).parent().parent();
+            var lastCallSpan = parent.find(".phone-last-called:first");
+            var callCountSpan = parent.find(".phone-call-count:first");
+            if (callCountSpan) {
+                var countText = callCountSpan.text().trim();
+                countText = countText.length > 0 ? countText : "(0)";
+                var countInt = countText.match(/\d+/);
+                if (countInt) {
+                    countInt = countInt || 0;
+                    var count = parseInt(countInt);
+                    count++;
+                    countText = countText.replace(countInt, count);
+                    callCountSpan.text(countText);
+                }
+
+
+            }
+
+            if (lastCallSpan) {
+                var d = new Date();
+                lastCallSpan.text(d.toLocaleDateString() + " " + d.getHours() + ':' + d.getSeconds())
+            }
+
+        } else {
+            console.error("temTelLink is null");
+        }
+    }
+
     function OnAddressPopupMenuClick(s, e) {
 
         if (tmpAddress != null) {
             if (e.item.index == 0) {
                 OnCallPhoneCallback("DoorKnock|" + tmpAddress);
+
                 SetLeadStatus(4);
             }
 
             if (e.item.index == 1) {
                 OnCallPhoneCallback("BadAddress|" + tmpAddress);
-                SetSameStyle("AddressLink", "color:red;text-decoration:line-through;", tmpAddress);
+                SetSameStyle("AddressLink", "phone-wrong", tmpAddress);
             }
 
             if (e.item.index == 2) {
                 OnCallPhoneCallback("RightAddress|" + tmpAddress);
-                SetSameStyle("AddressLink", "color:green;text-decoration:none;", tmpAddress);
+                SetSameStyle("AddressLink", "phone-working", tmpAddress);
             }
 
             if (e.item.index == 3) {
@@ -341,7 +394,7 @@
         }
 
         // reload callback on get lead status in propertyinfo
-        if(LoanModStatusCtrl){
+        if (LoanModStatusCtrl) {
             LoanModStatusCtrl.reload();
         }
     }
@@ -553,7 +606,20 @@
                                             <uc1:TitleControl runat="server" ID="TitleControl" />
                                         </div>
                                     </div>
+                                    <dx:ASPxPopupMenu ID="ASPxPopupSortPhone" runat="server" ClientInstanceName="ASPxPopupSortPhoneClient"
+                                        PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
+                                        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                        <ItemStyle Paddings-PaddingLeft="20px" />
+                                        <Items>
+                                            <dx:MenuItem Text="last called date" Name="LastCalledDate">
+                                            </dx:MenuItem>
+                                            <dx:MenuItem Text="call count" Name="CallCount">
+                                            </dx:MenuItem>
 
+                                        </Items>
+                                        <ClientSideEvents ItemClick="OnSortPhoneClick" />
+                                    </dx:ASPxPopupMenu>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
                                         PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
                                         PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"

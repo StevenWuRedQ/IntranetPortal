@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="DocSearchList.aspx.vb" Inherits="IntranetPortal.DocSearchList" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -17,32 +18,38 @@
             background-color: #efefef;
         }
 
-        .apply-filter-option {
-            margin-top: 10px;
-            margin-left: 10px;
-            position: absolute;
-            z-index: 1;
-            top: 0;
-            line-height: 38px;
-            font-size: 20px;
-            font-weight: 600;
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
         }
 
-            .apply-filter-option > div:last-child {
-                display: inline-block;
-                vertical-align: top;
-                margin-left: 20px;
-                line-height: normal;
-            }
+        #xwrapper {
+            float: left;
+            height: 875px;
+        }
+
+        #preview {
+            float: left;
+            height: 875px;
+        }
     </style>
 
     <input type="text" style="display: none" />
-    <div class="apply-filter-option">
-        Files
-    <div id="useFilterApplyButton"></div>
+    <div class="content">
+        <div id="xwrapper">
+            <div id="gridContainer" style="margin: 10px"></div>
+        </div>
+
+        <div id="preview" style="visibility: hidden">
+            <iframe id="previewWindow"></iframe>
+        </div>
     </div>
-    <div id="gridContainer" style="margin: 10px"></div>
     <script>
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        }
+
         $(document).ready(function () {
             function GoToCase(CaseId) {
                 var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
@@ -50,9 +57,12 @@
             }
 
             function ShowCaseInfo(CaseId) {
-                // var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId;
-                var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
-                PortalUtility.ShowPopWindow("View Case - " + CaseId, url);
+                $("#xwrapper").css("width", "50%");
+                $("#preview").css("visibility", "visible");
+                $("#preview").css("width", "50%");
+
+                var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + CaseId;
+                $("#previewWindow").attr("src", url)
             }
 
             var url = "/api/LeadInfoDocumentSearches?status=1";
@@ -105,18 +115,17 @@
                     columns: [{
                         dataField: "CaseName",
                         width: 450,
-                        caption: "Case Name",
+                        caption: "Property Address",
                         cellTemplate: function (container, options) {
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
                                 .on('dxclick', function () {
-                                    //Do something with options.data;
                                     ShowCaseInfo(options.data.BBLE);
                                 })
                                 .appendTo(container);
                         }
                     }, {
-                        caption: "Completed On",
+                        caption: "Completion Date",
                         dataField: "CompletedOn",
                         dataType: "date",
                         customizeText: function (cellInfo) {
@@ -130,50 +139,18 @@
 
                             return ""
                         }
-                    }, {
-                        caption: "Completed By",
-                        dataField: "CompletedBy"
-                    }, {
-                        caption: "Create By",
+                    },
+                    //{
+                    //    caption: "Completed By",
+                    //    dataField: "CompletedBy"
+                    //},
+                    {
+                        caption: "Requested By",
                         dataField: "CreateBy"
-                    }, {
-                        caption: '',
-                        width: 80,
-                        cellTemplate: function (container, options) {
-                            var div = $('<input />')
-                                       .attr('type', 'button')
-                                       .attr('title', 'Export')
-                                       .attr('value', 'Export')
-                                       .on('dxclick', function () {
-                                            alert("exported.")
-                                       })
-                                       .appendTo(container);                                   
-                    }
-                  }]
+                    }]
                 }).dxDataGrid('instance');
-                
- <%--               var applyFilterTypes = [{
-                    key: "AllCases",
-                    name: "All Cases"
-                }, {
-                    key: "MyCases",
-                    name: "My Cases"
-                }];
-
-                $("#useFilterApplyButton").dxSelectBox({
-                    items: applyFilterTypes,
-                    value: applyFilterTypes[0].key,
-                    valueExpr: "key",
-                    displayExpr: "name",
-                    onValueChanged: function (data) {
-                        if (data.value == "AllCases") {
-                            dataGrid.clearFilter();
-                        } else {
-                            dataGrid.filter(["Owner", "=", "<%= Page.User.Identity.Name%>"]);
-                    }
-                }
-            }); --%>
-        });
+                $(".dx-datagrid-header-panel").prepend($("<label class='grid-title-icon' style='display: inline-block'>UW</label>"))
+            });
         })
 
     </script>

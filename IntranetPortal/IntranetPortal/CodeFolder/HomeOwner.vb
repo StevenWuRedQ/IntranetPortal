@@ -266,8 +266,12 @@ Partial Public Class HomeOwner
         Using context As New Entities
 
             If ownerInfo.phonesField IsNot Nothing Then
+                Dim phones = New List(Of DataAPI.BasicPhoneListing)
+                phones.AddRange(ownerInfo.phonesField)
+                phones.AddRange(ownerInfo.businessPhonesField)
+
                 'Owner phones info
-                For Each item In ownerInfo.phonesField
+                For Each item In phones
                     Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Phone = item.phoneField).FirstOrDefault
 
                     If phone Is Nothing Then

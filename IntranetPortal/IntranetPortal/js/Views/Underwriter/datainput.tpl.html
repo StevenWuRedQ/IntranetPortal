@@ -1,7 +1,7 @@
 ﻿
 <div class="container" style="width: 90%; margin-top: 20px">
     <div class="row">
-        <div id="data_input_area" class="col-md-9 col-lg-9" style="border: 1px dotted black">
+        <div id="data_input_area" class="col-md-9 col-lg-9">
             <div class="row">
                 <div class="col-md-3 col-lg-3">
                     <div class="panel panel-default" style="margin-top: 10px">
@@ -11,64 +11,72 @@
                         <div class="panel-body">
                             <table>
                                 <tr>
-                                    <td class="td-label">
+                                    <td class="td-label" colspan="2">
                                         Property Address:
                                     </td>
-                                    <td class="td-value"><input /></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="td-value" colspan="2">
+                                        <input ng-model="PropertyAddress" />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Tax Class:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        <input ng-model='data.TaxClass' />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Building Dimension:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.BuildingDimension' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Lot Size:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.LotSize' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Zoning:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.Zoning' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Actual # of Units:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.ActualNumOfUnits' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Property Tax (Year):
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.PropertyTaxYear' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Occupancy Status:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.OccupancyStatus' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Seller Occupied:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.SellerOccupied' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         # of Tenants:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.NumOfTenants' /></td>
                                 </tr>
 
                             </table>
@@ -86,25 +94,27 @@
                                         Money Spent:
 
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        <input ng-model='data.MoneySpent' />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         HOI:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.HOI' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         COS Termination:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.COSTermination' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Agent Commission:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.AgentCommission' /></td>
                                 </tr>
 
 
@@ -123,37 +133,37 @@
                                         Average Low Value:
 
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.AverageLowValue' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Renovated Value:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.RenovatedValue' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Repair Bid:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.RepairBid' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Deal Time (Months):
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.DealTimeMonths' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Sales Commission:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.SalesCommission' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Deal ROI (Cash):
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.DealROICash' /></td>
                                 </tr>
 
 
@@ -172,37 +182,37 @@
                                         Deed Purchase:
 
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.DeedPurchase' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Currently Rented:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.CurrentlyRented' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Repair Bid Total:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.RepairBidTotal' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         # of Units
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.NumOfUnits' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Market Rent Total:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.MarketRentTotal' /></td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Rental Time:
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value"><input ng-model='data.RentalTime' /></td>
                                 </tr>
 
                             </table>
@@ -225,14 +235,7 @@
                                                 1st Mortgage:
 
                                             </td>
-                                            <td class="td-value"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-label">
-                                                1st Mortgage:
-
-                                            </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.FirstMortgage' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
@@ -240,111 +243,111 @@
 
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.SecondMortgage' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 COS Recorded:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.COSRecorded' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Deed Recorded:
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.DeedRecorded' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Other Liens:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.OtherLiens' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 FHA:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.FHA' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Fannie Mae:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.FannieMae' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Freddie Mac:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.FreddieMac' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Servicer:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.Servicer' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Foreclosure Index #:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.ForeclosureIndexNum' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Foreclosure Status:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.ForeclosureStatus' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Foreclosure Note:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.ForeclosureNote' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Auction Date:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.AuctionDate' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Default Date:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.DefaultDate' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Current Payoff:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.CurrentPayoff' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Payoff Date:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.PayoffDate' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Current SS Value:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.CurrentSSValue' /></td>
                                         </tr>
 
                                     </table>
@@ -365,14 +368,14 @@
                                                 Tax Lien Certificate:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.TaxLienCertificate' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Property Taxes:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.PropertyTaxes' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
@@ -380,69 +383,69 @@
 
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.WaterCharges' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 HPD Charges:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.HPDCharges' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 ECB/DOB Violations:
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.ECBDOBViolations' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 DOB Civil Penalty
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.DOBCivilPenalty' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Personal Judgements:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.PersonalJudgements' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 HPD Judgements:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.HPDJudgements' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 IRS/NYS Tax Liens:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.IRSNYSTaxLiens' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Vacate Order:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.VacateOrder' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Relocation Lien:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.RelocationLien' /></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Relocation Lien Date:
 
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value"><input ng-model='data.RelocationLienDate' /></td>
                                         </tr>
 
                                     </table>
@@ -460,7 +463,7 @@
                                     <h5 class="panel-title">Notes</h5>
                                 </div>
                                 <div class="panel-body">
-                                    <textarea></textarea>
+                                    <textarea ng-model="data.notes"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -476,124 +479,123 @@
 
 
         <div id="calc_summary affix" class="col-md-3 col-lg-3">
-            <div style="border: 1px dotted black">
 
 
-                <div class="panel panel-default" style="margin-top: 10px">
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td class="td-label">
-                                    Maximum Lien Payoff
-                                </td>
-                                <td class="td-value"><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Maximum SS Price
-                                </td>
-                                <td class="td-value"></td>
-                            </tr>
-                        </table>
-                    </div>
+            <div class="panel panel-default" style="margin-top: 10px">
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td class="td-label">
+                                Maximum Lien Payoff
+                            </td>
+                            <td class="td-value"><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">
+                                Maximum SS Price
+                            </td>
+                            <td class="td-value"></td>
+                        </tr>
+                    </table>
                 </div>
-
-                <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">MINIMUM BASELINE SCENARIO</h5>
-                    </div>
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td class="td-label">Purchase Price (All In)</td>
-                                <td class="td-value"><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Total Investment</td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Cash Requirement</td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Net Profit</td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">ROI (Loan)</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">BEST CASE SCENARIO</h5>
-                    </div>
-                    <div class="panel-body">
-                        <table>
-                            <tr class="success">
-                                <td class="td-label">Purchase Price (All In)</td>
-                                <td class="td-value"><input /></td>
-                            </tr>
-                            <tr class="success">
-                                <td class="td-label">Total Investment</td>
-                            </tr>
-                            <tr class="success">
-                                <td class="td-label">Cash Requirement</td>
-                            </tr>
-                            <tr class="success">
-                                <td class="td-label">Net Profit</td>
-                            </tr>
-                            <tr class="success">
-                                <td class="td-label">ROI (Loan)</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <h5 class="panel-title">RENTAL BRAEKDOWN</h5>
-                    </div>
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td class="td-label">Purchase Price (All In)</td>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Total Investment</td>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Cash Requirement</td>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">Net Profit</td>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">ROI (Loan)</td>
-                                <td><input /></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="panel panel-primary">
-                    <div class="panel-body">
-                        <table>
-                            <tr>
-                                <td class="td-label">MAX HOI</td>
-                                <td><input /></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <hr />
-                <div class="clearfix">
-                    <span class="btn btn-primary">calculate</span>
-                </div>
-
             </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h5 class="panel-title">MINIMUM BASELINE SCENARIO</h5>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td class="td-label">Purchase Price (All In)</td>
+                            <td class="td-value"><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Total Investment</td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Cash Requirement</td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Net Profit</td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">ROI (Loan)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h5 class="panel-title">BEST CASE SCENARIO</h5>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <tr class="success">
+                            <td class="td-label">Purchase Price (All In)</td>
+                            <td class="td-value"><input /></td>
+                        </tr>
+                        <tr class="success">
+                            <td class="td-label">Total Investment</td>
+                        </tr>
+                        <tr class="success">
+                            <td class="td-label">Cash Requirement</td>
+                        </tr>
+                        <tr class="success">
+                            <td class="td-label">Net Profit</td>
+                        </tr>
+                        <tr class="success">
+                            <td class="td-label">ROI (Loan)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h5 class="panel-title">RENTAL BRAEKDOWN</h5>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td class="td-label">Purchase Price (All In)</td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Total Investment</td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Cash Requirement</td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">Net Profit</td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td class="td-label">ROI (Loan)</td>
+                            <td><input /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td class="td-label">MAX HOI</td>
+                            <td><input /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr />
+            <div class="clearfix">
+                <span class="btn btn-primary">calculate</span>
+            </div>
+
+
         </div>
     </div>
 </div>

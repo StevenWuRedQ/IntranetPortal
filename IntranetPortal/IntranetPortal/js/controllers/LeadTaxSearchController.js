@@ -4,8 +4,11 @@
         , DocSearchEavesdropper, DivError
         ) {
         //New Model(this,arguments)
-        $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
+        $scope.ShowInfo = $('#ShowInfo').val();
+        $scope.ptContactServices = ptContactServices;
+
+
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
@@ -13,21 +16,6 @@
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
 
-        /////////////////////////////////////////////////////////////////////
-        // @date 8/11/2016
-        // for devextrem angular bugs have to init array frist
-        // fast prototype of grid bug on 8/11/2016 may spend two hours on it
-        //var INITS = {
-        //   OtherMortgage: [],
-        //   DeedRecorded: [],
-        //   COSRecorded: [],
-        //   OtherLiens: [],
-        //   TaxLienCertificate:[]
-        //};
-        //$scope.DocSearch.LeadResearch = {}
-        //angular.extend($scope.DocSearch.LeadResearch, INITS);
-        // ///////////////////////////////////////////////////////////////// 
-        // put here should not right for fast prototype ////////////////////
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -72,6 +60,7 @@
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
+            $scope.ShowInfo = $('#ShowInfo').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
                 return;
@@ -84,56 +73,8 @@
 
                 ////////// font end switch to new version //////////////
                 $scope.versionController.start2Eaves();
-                /////////////////// 8/12/2016 //////////////////////////
-
-                /////////////////////////////// saving and grid init bug for faster portotype ///////////////////
-                //
-                // use fast prototype it have same bug
-                // this is faster solution of grid init will remove to initGrid
-                // put here should not right that not right it should like this 
-                // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
-                // and put it to model inside;
-                // angular.extend($scope.DocSearch.LeadResearch, INITS);
-                //
-                /////////////////////////////// end saving and grid init bug for faster portotype ////////////////
-
-
             });
-            // ////remove all code to model version date is some time of June 2016 /////////////////////////////////////////////
-            //$scope.DocSearch;
-            // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-            // success(function (data, status, headers, config) {
-            //     $scope.DocSearch = data;
-            //     $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-            //         $scope.DocSearch.team = data;
 
-            //     });
-
-            //     $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-            //       success(function (data1, status, headers, config) {
-            //           $scope.LeadsInfo = data1;
-            //           $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
-            //           $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
-            //           $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
-            //           $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
-            //           $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
-            //           $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data1.C2ndMotgrAmt;
-            //           var ownerName = $scope.DocSearch.LeadResearch.ownerName;
-            //           if (ownerName) {
-            //               $http.post("/api/homeowner/ssn/" + leadsInfoBBLE, JSON.stringify(ownerName)).
-            //               success(function (ssn, status, headers, config) {
-            //                   $scope.DocSearch.LeadResearch.ownerSSN = ssn;
-            //               }).error(function () {
-
-            //               });
-            //           }
-
-
-            //       }).error(function (data, status, headers, config) {
-            //           alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-            //       });
-            // });
-            // ////////////////////////////////// remove all code to model version date is some time of June 2016 ////////////////////
         }
 
         $scope.init(leadsInfoBBLE)
@@ -253,13 +194,7 @@
                 AngularRoot.alert(msg[0]);
                 return;
             };
-            // $scope.DivError.getMessage();
-            // $scope.newVersionValidate();
 
-            //if (msg) {
-            //    AngularRoot.alert(msg);
-            //    return;
-            //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
@@ -281,47 +216,11 @@
             $scope.test = function () {
                 $scope.$digest();
             }
-            //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
-            //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
-            //    if (typeof gridCase != 'undefined') {
-            //        if (!isSave) {
-            //            $scope.DocSearch.Status = 1;
-            //            gridCase.Refresh();
-            //        }
-            //    }
-            //}).error(function (data) {
-            //    alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //});
 
-            //Ajax anonymous function not work for angular scope need check about this.
-            //$.ajax({
-            //    type: "PUT",
-            //    url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
-            //    data: JSON.stringify(PostData),
-            //    dataType: 'json',
-            //    contentType: 'application/json',
-            //    success: function (data) {
-
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
-            //        if (typeof gridCase != 'undefined') {
-            //            if (!isSave) {
-            //                $scope.DocSearch.Status = 1;
-            //                gridCase.Refresh();
-            //            }
-
-            //        }
-            //    },
-            //    error: function (data) {
-            //        alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //    }
-
-            //});
         }
 
         $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
-        // under the $watch, in the listener function
-        // this.eq is the evaled value
-        // this.exp is the watched field
+
         for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
             $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
                 if (nv) {

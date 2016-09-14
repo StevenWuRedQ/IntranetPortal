@@ -5,7 +5,7 @@
         var uri = BaseUri + '/' + apiName + '/:' + key;
         var primaryKey = {};
         primaryKey[key] = '@' + key;
- 
+
         /*default actions add put */
         var _actions = {
             'update': { method: 'PUT' }
@@ -17,7 +17,7 @@
         var Resource = $resource(uri, primaryKey, _actions);
 
         //static function
-        Resource.all = function () {}
+        Resource.all = function () { }
         Resource.CType = function (obj, Class) {
 
             if (obj == null || obj == undefined) {
@@ -32,9 +32,9 @@
             angular.extend(obj, _new);
             return _new;
         }
-        Resource.prototype.hasId = function()
-        {
-            return this[key] != null && this[key]!=0;
+
+        Resource.prototype.hasId = function () {
+            return this[key] != null && this[key] != 0;
         }
         /*********Use for Derived class implement validation interface *************/
         /**************** string array to hold error messages **********************/
@@ -44,7 +44,7 @@
             /* maybe cause memory leak if javascript garbage collection is not good */
             this.errorMsg = []
         }
-        
+
         Resource.prototype.getErrorMsg = function () {
             return this.errorMsg;
         }

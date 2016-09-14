@@ -13,21 +13,32 @@
             table-layout: fixed;
         }
 
-        td {
-            border-bottom: 1px solid grey;
-            border-top: 1px solid grey;
+        th {
+            border: 1px solid #ddd;
+            padding-left: 2px;
         }
 
-        td.td-label {
-            padding-right: 10px;
-            border-right: 1px solid grey;
-            width: 160px;
-            height: 100%;
-            font-weight: bold;
+        td {
+            border: 1px solid #ddd;
+            padding-left: 2px;
         }
-        
-        td input {
-            border: none;
+
+            td.td-label {
+                padding-right: 10px;
+                width: 160px;
+                height: 100%;
+                font-weight: bold;
+            }
+
+            td input {
+                border: none;
+                padding: 0;
+                text-align: right;
+                width: 100%;
+            }
+
+        th input {
+            border: 1px solid #ddd;
             padding: 0;
             text-align: right;
             width: 100%;
@@ -39,17 +50,29 @@
             resize: vertical;
         }
 
-        .excel-green{
-            background:green;
+        div .pt-panel {
+            margin: 10px 2px;
         }
-        .excel-yellow{
-            background:yellow;
+
+        .excel-green {
+            background: #D4FFD4;
         }
-        .excel-blue{
-            background:#00b0f0;
+
+        .excel-yellow {
+            background: yellow;
         }
-        .excel-oragne{
-            background:orange;
+
+        .excel-blue {
+            background: #00b0f0;
+        }
+
+        .excel-oragne {
+            background: orange;
+        }
+
+        .excel-default {
+            background: black;
+            color: white;
         }
     </style>
     <div id="underwrite_clac" ng-controller="UnderwriterController">

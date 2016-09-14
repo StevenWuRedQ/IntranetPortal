@@ -1110,20 +1110,115 @@ function popUpAtBottomRight(pageToLoad, winName, width, height) {
     var dmcaWin = window.open(pageToLoad, winName, args);
     dmcaWin.focus();
 };
-function sortPhones() {
-    var colors = {}
+
+function wrongPhone(phone)
+{
+    var phoneLink = $(phone).find(".PhoneLink:first");
+    var color = phoneLink.css("color");
+    var hcolor = hashStr(color);
+    return hcolor == 1000;
+}
+
+function compareByActive(a,b)
+{
+    var colors = {};
+    var phoneLinkA = $(a).find(".PhoneLink:first");
+    var phoneLinkB = $(b).find(".PhoneLink:first");
+    var color = phoneLinkA.css("color");
+    var colorB = phoneLinkB.css("color");
+    var hcolor = hashStr(color);
+    var hcolorB = hashStr(colorB);
+    colors["cc" + hcolor] = hcolor + "-" + color;
+    colors["cc" + hcolorB] = hcolorB + "-" + colorB;
+
+    var diff = hcolor - hcolorB;
+
+    //if (diff == 0) {
+
+    //    var dateA = Date.parse($(a).find(".phone-last-called:first").text());
+    //    var dateB = Date.parse($(b).find(".phone-last-called:first").text());
+
+    //    var dateATime = 0;
+    //    var dateBTime = 0;
+
+    //    dateATime = dateA > 0 ? dateA : 0;
+    //    dateBTime = dateB > 0 ? dateB : 0;
+
+
+    //    diff = dateBTime - dateATime;
+
+    //}
+
+    return diff;
+}
+
+function GetCallCount(_temTelLink) {
+    var countInt = 0;
+    var parent = $(_temTelLink);
+    var callCountSpan = parent.find(".phone-call-count:first");
+    if (callCountSpan) {
+        var countText = callCountSpan.text().trim();
+        countText = countText.length > 0 ? countText : "(0)";
+        countInt = parseInt(countText.match(/\d+/));
+        if (countInt) {
+            countInt = countInt || 0;
+        }
+    }
+
+    return countInt;
+}
+
+function compareLastCalledDate(a,b)
+{
+    var diff = 0;
+    
+    var dateA = Date.parse($(a).find(".phone-last-called:first").text());
+    var dateB = Date.parse($(b).find(".phone-last-called:first").text());
+
+    var dateATime = 0;
+    var dateBTime = 0;
+
+    dateATime = dateA > 0 ? dateA : 0;
+    dateBTime = dateB > 0 ? dateB : 0;
+
+    if (wrongPhone(a))
+    {
+        dateATime = -1;
+    }
+
+    if (wrongPhone(b)) {
+        dateBTime = -1;
+    }
+
+    diff = dateBTime - dateATime;
+
+    return diff;
+}
+
+function compareByCallCount(a, b) {
+    var diff = 0;
+    var CountA = GetCallCount(a)
+    var CountB = GetCallCount(b);
+    if (wrongPhone(a)) {
+        CountA = -1;
+    }
+
+    if (wrongPhone(b)) {
+        CountB = -1;
+    }
+    diff = CountB - CountA;
+    return diff;
+}
+
+function sortPhoneFunc(compareFunc)
+{
+    var colors = {};
     var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
     var phones_div = $(".homeowner_info_label:has(.PhoneLink)").each(function (id) {
         var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
         var html = "";
         phones.sort(function (a, b) {
-            var color = $(a).find(".PhoneLink:first").css("color");
-            var colorB = $(b).find(".PhoneLink:first").css("color");
-            var hcolor = hashStr(color);
-            var hcolorB = hashStr(colorB);
-            colors["cc" + hcolor] = hcolor + "-" + color;
-            colors["cc" + hcolorB] = hcolorB + "-" + colorB;
-            return hcolor - hcolorB;
+            return compareFunc(a, b);
         });
         phones.each(function (ind) {
             var ptext = $(this).text();
@@ -1131,6 +1226,24 @@ function sortPhones() {
         });
         phones.parent().html('<div>' + html + '</div>');
     });
+}
+
+function sortPhones() {
+    sortPhoneFunc(compareByActive);
+    //var colors = {}
+    //var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
+    //var phones_div = $(".homeowner_info_label:has(.PhoneLink)").each(function (id) {
+    //    var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
+    //    var html = "";
+    //    phones.sort(function (a, b) {
+    //        return compareByActive(a, b);
+    //    });
+    //    phones.each(function (ind) {
+    //        var ptext = $(this).text();
+    //        html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
+    //    });
+    //    phones.parent().html('<div>' + html + '</div>');
+    //});
 };
 function CallPhone(phone) {
     var url = '/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();

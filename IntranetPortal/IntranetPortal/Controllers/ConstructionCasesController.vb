@@ -9,7 +9,7 @@ Imports System.Net.Http
 Imports System.Net.Http.Headers
 Imports Newtonsoft.Json.Linq
 Imports Newtonsoft.Json
-Imports IntranetPortal.Core.ExcelBuilder
+Imports IntranetPortal.ExcelBuilder
 
 Namespace Controllers
     Public Class ConstructionCasesController
@@ -202,7 +202,7 @@ Namespace Controllers
                         Using fs = File.Open(HttpContext.Current.Server.MapPath("~/App_Data/checkrequest.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                             fs.CopyTo(ms)
                         End Using
-                        Dim excelbytes = Core.ExcelBuilder.BuildBudgetReport(address, owner, JData, ms)
+                        Dim excelbytes = ExcelBuilder.BuildBudgetReport(address, owner, JData, ms)
                         ms.Close()
                         Using tempFile = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                             tempFile.Write(excelbytes, 0, excelbytes.Length)
@@ -220,6 +220,7 @@ Namespace Controllers
             Dim response = New HttpResponseMessage(HttpStatusCode.OK)
             Dim fs = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/budget.xlsx"), FileMode.Open)
             Dim bfs = New BinaryReader(fs).ReadBytes(fs.Length)
+
             response.Content = New ByteArrayContent(bfs)
             response.Content.Headers.Add("Content-Disposition", "inline; filename=budget.xlsx")
             response.Content.Headers.ContentType = New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

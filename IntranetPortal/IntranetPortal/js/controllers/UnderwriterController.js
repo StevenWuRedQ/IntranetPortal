@@ -26,12 +26,42 @@
     $stateProvider.state(tables);
 
 });
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', function ($scope, ptCom, $location) {
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', 'ptUnderwriter', 'DocSearch', 'LeadsInfo', function ($scope, ptCom, $location, ptUnderwriter, DocSearch, LeadsInfo) {
 
-    $scope.model = {};
+    $scope.data = {};
 
     $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
 
+    $scope.init = function (bble, isImport) {
+        ptCom.startLoading()
+        $scope.data = ptUnderwriter.createNew();
+        if (isImport) {
+            $scope.importData(bble);
+        } else {
+
+        }
+
+    }
+
+    $scope.importData = function (bble) {
+        $scope.leadsInfo = undefined;
+        $scope.docSearch = undefined;
+        $scope.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
+
+            $scope.docSearch.initLeadsResearch();
+            $scope.leadsInfo = $scope.LeadsInfo.get({ BBLE: bble.trim() }, function () {
+                debugger;
+            })
+
+        });
+
+    };
+
+
+    $scope.save = function () {
+
+
+    }
 }])

@@ -601,8 +601,10 @@
     <Compile Include="CodeFolder\EmployeeItemComparer.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
+    <Compile Include="CodeFolder\ExcelBuilder.vb" />
     <Compile Include="CodeFolder\HomeOwner.vb" />
     <Compile Include="CodeFolder\ActivityManageBase.vb" />
+    <Compile Include="CodeFolder\HomeOwnerPhone.vb" />
     <Compile Include="CodeFolder\INavMenuAmount.vb" />
     <Compile Include="CodeFolder\Lead.vb" />
     <Compile Include="CodeFolder\LeadManage.vb" />
@@ -812,6 +814,7 @@
     <Compile Include="Controllers\TaxLiensODataController.vb" />
     <Compile Include="Controllers\TitleController.vb" />
     <Compile Include="Controllers\TwilioController.vb" />
+    <Compile Include="Controllers\UnderwriterController.vb" />
     <Compile Include="Controllers\UserInfoController.vb" />
     <Compile Include="Controllers\WorkflowController.vb" />
     <Compile Include="Controllers\WorkingLogController.vb" />
@@ -934,8 +937,8 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Context.vb">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>PortalEntityModel.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Designer.vb">
@@ -7207,6 +7210,7 @@
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
+    <Content Include="js\models\ptUnderwriter.js" />
     <Content Include="js\services\ptCom.js" />
     <Content Include="js\services\ptConstructionService.js" />
     <Content Include="js\services\ptContactServices.js" />
@@ -7801,6 +7805,9 @@
     <Content Include="bower_components\angular-route\package.json" />
     <Content Include="bower_components\angular-route\README.md" />
     <Content Include="App_Data\OfferDoc\ShortSalePackage.docx" />
+    <Content Include="App_Data\underwriter.xlsx" />
+    <Content Include="App_Data\docsearchmap.csv" />
+    <Content Include="App_Data\test.csv" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />

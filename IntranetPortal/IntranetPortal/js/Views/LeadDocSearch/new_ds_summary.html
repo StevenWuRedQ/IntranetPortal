@@ -8,7 +8,8 @@ a template to display new doc search.
 -->
 <style>
     tr.newsec {
-        background-color: #87cefa;
+        background-color: #295268;
+        color: white;
         font-size: small;
         font-style: italic;
     }
@@ -30,53 +31,54 @@ a template to display new doc search.
 </style>
 <div>
     <div class="alert alert-warning" ng-show="updateon">The last updated on {{updateon | date:'MM/dd/yyyy'}} by {{updateby}}</div>
-    <table class="table summary">
-
-        <!--
+    <table class="table summary" ng-show="showinfo">
         <tr class="newsec">
             <td colspan="3"><b>Request Info</b></td>
         </tr>
 
         <tr>
             <td>
-                <label>Requested On: </label><span ng-bind="summary.CreateDate| date:'yyyy-MM-dd'" />
+                <label>Requested On: </label><span ng-bind="docsearch.CreateDate| date:'yyyy-MM-dd'" />
             </td>
             <td>
                 <label>Team: </label>
-                <span ng-bind="summary.team" />
+                <span ng-bind="docsearch.team" />
             </td>
             <td>
-                <label>Requested By: </label><span ng-bind="summary.CreateBy" />
+                <label>Requested By: </label><span ng-bind="docsearch.CreateBy" />
             </td>
         </tr>
         <tr>
             <td>
-                <label>Block: </label><span ng-bind="summary.Block" />
+                <label>Block: </label><span ng-bind="leadsinfo.Block" />
             </td>
             <td>
-                <label>Lot: </label><span ng-bind="summary.Lot" />
+                <label>Lot: </label><span ng-bind="leadsinfo.Lot" />
             </td>
             <td>
-                <label>Expected Signing Date: </label><span ng-bind="summary.ExpectedSigningDate | date:'yyyy-MM-dd' " />
+                <label>Expected Signing Date: </label><span ng-bind="docsearch.ExpectedSigningDate | date:'yyyy-MM-dd' " />
             </td>
         </tr>
         <tr>
             <td>
                 <label>Property Address: </label>
-                <span ng-bind="summary.PropertyAddress" />
+                <span ng-bind="leadsinfo.PropertyAddress" />
             </td>
         </tr>
         <tr>
-            <td><label>Owner Name: </label><span ng-bind="summary.ownerName" /></td>
-            <td><label>Owner SSN: </label><span ng-bind="summary.ownerSSN" /></td>
+            <td><label>Owner Name: </label><span ng-bind="docsearch.ownerName" /></td>
+            <td><label>Owner SSN: </label><span ng-bind="docsearch.ownerSSN" /></td>
         </tr>
         <tr>
             <td>
                 <label>Owner Address:</label>
-                <span ng-bind="summary.ownerAddress" />
+                <span ng-bind="docsearch.ownerAddress" />
             </td>
         </tr>
-            -->
+    </table>
+
+    <table class="table summary">
+
 
         <tr class="newsec">
             <td colspan="3"><b>Ownership Mortgage Info</b></td>
