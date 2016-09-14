@@ -26,8 +26,49 @@
     }
 
 
-    .phone-text {
+    /*.phone-text {
         display: block;
+    }*/
+    .PhoneLink {
+        display: block;
+    }
+
+    .phone-last-called, .phone-call-count {
+        font-size: 14px;
+        color: #2e2f31;
+    }
+
+    a .phone-last-called:hover, a .phone-call-count:hover {
+        text-decoration: none !important;
+    }
+
+    .phone-wrong {
+        color: red;
+        text-decoration: line-through;
+    }
+
+    .phone-working {
+        color: green;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .phone-working-text {
+        display: none;
+    }
+
+    .phone-working:hover .phone-working-text {
+        display: inline-block;
+    }
+
+    .phone-wrong:hover {
+        text-decoration: line-through;
+        color: red;
+    }
+
+    .phone-working:hover {
+        text-decoration: none;
+        color: green;
     }
 </style>
 <script type="text/javascript">
@@ -217,6 +258,7 @@
     <div>
         <div class="form_head homeowner_section_margin">
             <span runat="server" id="ulBestPhones">Best Phone Numbers &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color" style="cursor: pointer" onclick="<%= String.Format("AddBestPhoneNum('{0}','{1}','{2}', this)", BBLE, OwnerName, ulBestPhones.ClientID)%>"></i>
+            &nbsp;<i class="fa fa-sort-amount-desc homeowner_plus_color" style="cursor: pointer" onclick="ASPxPopupSortPhoneClient.ShowAtElement(this)"></i>
         </div>
         <div>
             <div class="clearfix homeowner_info_label">
@@ -230,18 +272,21 @@
                             <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.Phone)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
-                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
-                                        <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span> </span>
+                                    <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.Phone))%>" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")'>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone-working-text">Working phone</span> <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span> </span>
 
-                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.Phone)%></span>
-                                        <span class="phone-call-count">
-                                            <%Dim count = GetCallCount(phone.Phone) %>
-                                            <%If Not String.IsNullOrEmpty(count) Then %>
-                                            Count : <%=count%> 
-                                            <%End If %>
-
-                                        </span>
                                     </a>
+
+                                    <span class="phone-last-called"><%=GetAllLastCalled(phone.Phone)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.Phone) %>
+                                        <%If Not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>) 
+                                        <%End If %>
+
+                                    </span>
+
+
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     &nbsp;
@@ -261,20 +306,22 @@
                             <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
-                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
+                                    <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
-
-                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
-                                        <span class="phone-call-count">
-                                            <%Dim count = GetCallCount(phone.phoneField) %>
-                                            <%If Not String.IsNullOrEmpty(count) Then %>
-                                            Count : <%=count%> 
-                                            <%End If %>
-
-                                        </span>
+                                        <span class="phone-working-text">Working phone</span>
                                     </a>
 
+                                    <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.phoneField) %>
+                                        <%If Not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
+                                        <%End If %>
+
+                                    </span>
                                 </div>
+
+
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
                                 </div>
@@ -295,18 +342,19 @@
                             <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
-                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
+                                    <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
-
-                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
-
-                                        <span class="phone-call-count">
-                                            <%Dim count = GetCallCount(phone.phoneField) %>
-                                            <%If not String.IsNullOrEmpty(count) Then %>
-                                            Count : <%=count%> 
-                                            <%End If %>
-                                        </span>
+                                        <span class="phone-working-text">Working phone</span>
                                     </a>
+
+                                    <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.phoneField) %>
+                                        <%If not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
+                                        <%End If %>
+                                    </span>
+
 
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
