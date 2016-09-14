@@ -13,11 +13,11 @@
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.SystemLog" Width="1.5" PointX="4.75" PointY="3" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.TLOApiLog" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.PortalSetting" Width="1.5" PointX="6.75" PointY="5.75" />
-        <EntityTypeShape EntityType="IntranetPortal.Core.Model.CommonData" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.CommonData" Width="1.5" PointX="9" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.Application" Width="1.5" PointX="0.75" PointY="6.375" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.Thumbnail" Width="1.5" PointX="2.75" PointY="6.375" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.CustomReport" Width="1.5" PointX="4.75" PointY="5.625" />
-        <EntityTypeShape EntityType="IntranetPortal.Core.Model.WorkingLog" Width="1.5" PointX="8.75" PointY="2.75" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.WorkingLog" Width="1.5" PointX="9.25" PointY="2.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

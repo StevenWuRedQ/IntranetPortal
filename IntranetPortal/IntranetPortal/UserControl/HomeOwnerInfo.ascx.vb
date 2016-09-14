@@ -52,7 +52,7 @@ Public Class HomeOwnerInfo
             End If
 
             If ct.Status = OwnerContact.ContactStatus.Right Then
-                Return "style='color:green;text-decoration:none;'"
+                Return "style='color:green;text-decoration:none;font-weight: bold;'"
             End If
         End If
         Return ""
@@ -156,6 +156,23 @@ Public Class HomeOwnerInfo
         End If
 
         Return String.Format("{0}/{1}/{2}", dt.monthField, dt.dayField, dt.yearField)
+    End Function
+    ''' <summary>
+    ''' get last call by date by phone number
+    ''' </summary>
+    ''' <param name="phoneNumber"></param>
+    ''' <returns>string of last called date</returns>
+    Public Function GetAllLastCalled(phoneNumber As String) As String
+        Return HomeOwnerPhone.GetAllPhoneLastCall(BBLE, phoneNumber)
+    End Function
+
+    ''' <summary>
+    ''' get call count by number
+    ''' </summary>
+    ''' <param name="phoneNumber"></param>
+    ''' <returns></returns>
+    Public Function GetCallCount(phoneNumber As String) As String
+        Return HomeOwnerPhone.GetAllPhoneCount(BBLE, phoneNumber)
     End Function
 
     Function BuilderRelativeName(relative As DataAPI.TLOPhoneBookEntry) As String

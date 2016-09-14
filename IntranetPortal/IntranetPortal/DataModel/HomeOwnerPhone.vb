@@ -20,5 +20,6 @@ Partial Public Class HomeOwnerPhone
     Public Property Description As String
     Public Property Comment As String
     Public Property LastCalledDate As Nullable(Of Date)
+    Public Property CallCount As Nullable(Of Integer)
 
 End Class

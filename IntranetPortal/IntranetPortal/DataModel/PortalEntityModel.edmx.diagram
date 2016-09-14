@@ -36,7 +36,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.Office" Width="1.5" PointX="14.75" PointY="10.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsComment" Width="1.5" PointX="14.75" PointY="13.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PortalNote" Width="1.5" PointX="16.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyReferrel" Width="1.5" PointX="16.75" PointY="4.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyReferrel" Width="1.5" PointX="16.75" PointY="4.375" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsMortgageData" Width="1.5" PointX="16.75" PointY="7.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.HomeOwnerAddress" Width="1.75" PointX="16.75" PointY="12.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.AssginRulesLog" Width="1.5" PointX="14.75" PointY="16.75" />

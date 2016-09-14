@@ -1110,6 +1110,7 @@ function popUpAtBottomRight(pageToLoad, winName, width, height) {
     var dmcaWin = window.open(pageToLoad, winName, args);
     dmcaWin.focus();
 };
+
 function sortPhones() {
     var colors = {}
     var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
@@ -1117,13 +1118,34 @@ function sortPhones() {
         var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
         var html = "";
         phones.sort(function (a, b) {
-            var color = $(a).find(".PhoneLink:first").css("color");
-            var colorB = $(b).find(".PhoneLink:first").css("color");
+            var phoneLinkA = $(a).find(".PhoneLink:first");
+            var phoneLinkB = $(b).find(".PhoneLink:first");
+            var color = phoneLinkA.css("color");
+            var colorB = phoneLinkB.css("color");
             var hcolor = hashStr(color);
             var hcolorB = hashStr(colorB);
             colors["cc" + hcolor] = hcolor + "-" + color;
             colors["cc" + hcolorB] = hcolorB + "-" + colorB;
-            return hcolor - hcolorB;
+
+            var diff = hcolor - hcolorB;
+
+            if (diff == 0) {
+
+                var dateA = Date.parse(phoneLinkA.find(".phone-last-called:first").text());
+                var dateB = Date.parse(phoneLinkB.find(".phone-last-called:first").text());
+
+                var dateATime = 0;
+                var dateBTime = 0;
+               
+                dateATime = dateA > 0 ? dateA :0;
+                dateBTime = dateB > 0 ? dateB : 0;
+               
+
+                diff = dateBTime - dateATime ;
+
+            }
+
+            return diff;
         });
         phones.each(function (ind) {
             var ptext = $(this).text();
