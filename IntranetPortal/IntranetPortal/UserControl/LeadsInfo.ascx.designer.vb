@@ -131,6 +131,15 @@ Partial Public Class LeadsInfo1
     Protected WithEvents TitleControl As Global.IntranetPortal.TitleInLeads
     
     '''<summary>
+    '''ASPxPopupSortPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupSortPhone As Global.DevExpress.Web.ASPxPopupMenu
+    
+    '''<summary>
     '''ASPxPopupMenu1 control.
     '''</summary>
     '''<remarks>

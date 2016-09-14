@@ -48,11 +48,11 @@ Public Class HomeOwnerInfo
         Dim ct = Contacts.Where(Function(c) c.Contact.Contains(contact)).FirstOrDefault
         If ct IsNot Nothing Then
             If ct.Status = OwnerContact.ContactStatus.Wrong Then
-                Return "style='color:red;text-decoration:line-through;'"
+                Return "phone-wrong"
             End If
 
             If ct.Status = OwnerContact.ContactStatus.Right Then
-                Return "style='color:green;text-decoration:none;font-weight: bold;'"
+                Return "phone-working"
             End If
         End If
         Return ""
