@@ -9,7 +9,7 @@ Public Class DBJSONUtil
     Public Shared Function MapTo(ostr As String, mapPath As String) As String
         Dim jobj = JObject.Parse(ostr)
 
-        Using sr = New StreamReader(HttpContext.Current.Server.MapPath(mapPath))
+        Using sr = New StreamReader(mapPath)
             Dim line As String
             line = sr.ReadLine
             While line IsNot Nothing
@@ -17,14 +17,14 @@ Public Class DBJSONUtil
                 If token.Count = 2 Then
                     ReplaceField(jobj, token(0), token(1))
                 ElseIf token.Count = 3 Then
-                    Replace1AndUpdate2(jobj, token(0), token(1), token(3))
+                    Replace1AndUpdate2(jobj, token(0), token(1), token(2))
                 End If
 
                 line = sr.ReadLine
             End While
-
-
         End Using
+
+        Return jobj.ToJsonString
     End Function
 
     Public Shared Sub ReplaceField(jobj As JObject, fromField As String, toField As String)

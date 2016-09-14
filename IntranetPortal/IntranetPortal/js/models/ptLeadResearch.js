@@ -26,14 +26,10 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
             self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
             self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
             self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
-           
             self.getOwnerSSN(BBLE);
         });
         return data1;
     }
-    //leadResearch.prototype.func
-    //def function
-    //leadResearch.func
-    //constructor
+
     return leadResearch;
 });

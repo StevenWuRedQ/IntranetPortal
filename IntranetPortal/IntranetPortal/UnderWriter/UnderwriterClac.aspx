@@ -30,7 +30,6 @@
                 font-weight: bold;
             }
 
-
             td input {
                 border: none;
                 padding: 0;

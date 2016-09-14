@@ -670,7 +670,7 @@
   <PortalNavItem Name="Underwriter" Text="Underwriter" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Underwriter</UserRoles>
     <Items>
-      <PortalNavItem Name="UnderwriterSummary" Text="Summary" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
+      <PortalNavItem Name="UnderwriterSummary" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
         <UserRoles>Underwriter</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
