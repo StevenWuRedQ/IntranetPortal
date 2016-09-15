@@ -5,6 +5,12 @@
     -- Fix anuglar ng-if bug  mutiple date source have bug when switch yes no
     -- and fix committed cc18bff grid yes no
      --%>
+
+<%-- 
+    --author: Steven Wu
+    -- add css make ui compact in new version doc search
+    -- and fix committed 4357930 Check in style change
+     --%>
 <style>
     .ss_warning a {
         color: red !important;
