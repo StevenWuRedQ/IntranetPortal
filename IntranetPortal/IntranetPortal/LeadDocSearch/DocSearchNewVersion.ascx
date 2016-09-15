@@ -1,4 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="DocSearchNewVersion.ascx.vb" Inherits="IntranetPortal.DocSearchNewVersion" %>
+
+<%-- 
+    --author: Steven Wu
+    -- Fix anuglar ng-if bug  mutiple date source have bug when switch yes no
+    -- and fix committed cc18bff grid yes no
+     --%>
 <style>
     .ss_warning a {
         color: red !important;
