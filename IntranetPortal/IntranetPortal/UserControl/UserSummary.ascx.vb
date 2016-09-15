@@ -119,7 +119,7 @@ Public Class UserSummary
 
     Protected Sub gridLoanMod_DataBinding(sender As Object, e As EventArgs)
         If gridLoanMod.DataSource Is Nothing Then
-            Dim loanModleads = Lead.GetLoanModDue(Page.User.Identity.Name) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
+            Dim loanModleads = Lead.GetLoanModDue(Page.User.Identity.Name) ' , Nothing, New Date(2016, 12, 1)) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
             gridLoanMod.DataSource = loanModleads
         End If
     End Sub

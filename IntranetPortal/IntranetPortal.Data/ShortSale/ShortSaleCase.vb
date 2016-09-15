@@ -1050,6 +1050,12 @@ Partial Public Class ShortSaleCase
         Return True
     End Function
 
+    Public Shared Function IsInProcess(bble As String) As Boolean
+        Using ctx As New PortalEntities
+            Return ctx.ShortSaleCases.Any(Function(ss) ss.BBLE = bble And ss.Status > 0)
+        End Using
+    End Function
+
     Public Shared Function IsExist(bble As String) As Boolean
         Using ctx As New PortalEntities
             Return ctx.ShortSaleCases.Any(Function(ss) ss.BBLE = bble)

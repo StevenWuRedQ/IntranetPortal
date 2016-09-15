@@ -52,7 +52,7 @@ Public Class TaskSummary
     End Sub
 
     Public Sub bindHot()
-        Dim hots = Lead.GetHotLeadsDue(DestinationUser)
+        Dim hots = Lead.GetHotLeadsDue(DestinationUser, New Date(2016, 12, 31))
         hotCount = hots.Count
         HotLeadsReapter.DataSource = hots
         HotLeadsReapter.DataBind()

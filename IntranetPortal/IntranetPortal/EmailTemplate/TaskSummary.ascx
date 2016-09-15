@@ -10,7 +10,6 @@
         font-weight: 600;
     }
 
-
     body {
         font-family: Calibri 'Source Sans Pro';
     }

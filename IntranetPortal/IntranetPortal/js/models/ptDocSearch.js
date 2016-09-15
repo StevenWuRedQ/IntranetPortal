@@ -10,10 +10,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
         });
 
-    //docSearch.properties = {
-    //    LeadResearch: "{LeadResearch}",
-    //    LeadResearchs: "[LeadResearch]"
-    //}
 
     docSearch.Status = {
         New: 0,
@@ -28,7 +24,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
-        //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
+
         var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
@@ -49,9 +45,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             }
         }
        
-        //self.LeadResearch = self.LeadResearch || new LeadResearch();
-
-        //});
         return data1;
     }
 
@@ -77,9 +70,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         return this.LeadResearch;
     }
 
-    //def function
-    //leadResearch.func
-    //constructor
     return docSearch;
 });
 

@@ -45,132 +45,132 @@
     <div id="gridContainer" style="margin: 10px"></div>
     <script>
         $(document).ready(function () {
+            <% If Request.QueryString("view") IsNot Nothing %>
+            currentView = <%= Request.QueryString("view")%>;
+            <% Else %>
+            currentView = 1;
+            <% End if%>
+
             function GoToCase(CaseId) {
                 var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
                 window.location.href = url;
             }
-
+            
             function ShowCaseInfo(CaseId) {
                 var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
                 PortalUtility.ShowPopWindow("View Case - " + CaseId, url);
             }
-
-            var url = "/api/propertyoffer?mgrview=1";
-            $.getJSON(url).done(function (data) {
-                var dataGrid = $("#gridContainer").dxDataGrid({
-                    dataSource: data,
-                    searchPanel: {
-                        visible: true,
-                        width: 240,
-                        placeholder: "Search..."
-                    },
-                    headerFilter: {
-                        visible: true
-                    },
-                    rowAlternationEnabled: true,
-                    pager: {
-                        showInfo: true,
-                    },
-                    paging: {
-                        enabled: true,
-                        //pageSize: 10
-                    },
-                    onRowPrepared: function (rowInfo) {
-                        if (rowInfo.rowType != 'data')
-                            return;
-                        rowInfo.rowElement
-                        .addClass('myRow');
-                    },
-                    onContentReady: function (e) {
-                        var spanTotal = e.element.find('.spanTotal')[0];
-                        if (spanTotal) {
-                            $(spanTotal).html("Total Count: " + e.component.totalCount());
-                        } else {
-                            var panel = e.element.find('.dx-datagrid-pager');
-
-                            if (!panel.find(".dx-pages").length) {
-                                $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()).appendTo(e.element);
+            
+            function loadData(view){
+                var url = "/api/propertyoffer?mgrview=" + view;
+                $.getJSON(url).done(function (data) {
+                    var dataGrid = $("#gridContainer").dxDataGrid({
+                        dataSource: data,
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search..."
+                        },
+                        headerFilter: {
+                            visible: true
+                        },
+                        rowAlternationEnabled: true,
+                        pager: {
+                            showInfo: true,
+                        },
+                        paging: {
+                            enabled: true,
+                        },
+                        onRowPrepared: function (rowInfo) {
+                            if (rowInfo.rowType != 'data')
+                                return;
+                            rowInfo.rowElement.addClass('myRow');
+                        },
+                        onContentReady: function (e) {
+                            var spanTotal = e.element.find('.spanTotal')[0];
+                            if (spanTotal) {
+                                $(spanTotal).html("Total Count: " + e.component.totalCount());
                             } else {
-                                panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
+                                var panel = e.element.find('.dx-datagrid-pager');
+
+                                if (!panel.find(".dx-pages").length) {
+                                    $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()).appendTo(e.element);
+                                } else {
+                                    panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
+                                }
                             }
-                        }
-                    },
-                    summary: {
-                        groupItems: [{
-                            column: "BBLE",
-                            summaryType: "count",
-                            displayFormat: "{0}",
-                        }]
-                    },
-                    columns: [{
-                        dataField: "Title",
-                        width: 450,
-                        caption: "Case Name",
-                        cellTemplate: function (container, options) {
-                            $('<a/>').addClass('dx-link-MyIdealProp')
-                                .text(options.value)
-                                .on('dxclick', function () {
-                                    //Do something with options.data;
-                                    ShowCaseInfo(options.data.BBLE);
-                                })
-                                .appendTo(container);
-                        }
-                    }, {
-                        caption: "Completed On",
-                        dataField: "UpdateDate",
-                        dataType: "date",
-                        customizeText: function (cellInfo) {
-                            //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
-                            if (!cellInfo.value)
+                        },
+                        summary: {
+                            groupItems: [{
+                                column: "BBLE",
+                                summaryType: "count",
+                                displayFormat: "{0}",
+                            }]
+                        },
+                        columns: [{
+                            dataField: "Title",
+                            width: 450,
+                            caption: "Property Address",
+                            cellTemplate: function (container, options) {
+                                $('<a/>').addClass('dx-link-MyIdealProp')
+                                    .text(options.value)
+                                    .on('dxclick', function () {
+                                        //Do something with options.data;
+                                        ShowCaseInfo(options.data.BBLE);
+                                    })
+                                    .appendTo(container);
+                            }
+                        }, {
+                            caption: "Completed On",
+                            dataField: "UpdateDate",
+                            dataType: "date",
+                            customizeText: function (cellInfo) {
+                                //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
+                                if (!cellInfo.value)
+                                    return ""
+
+                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+                                if (dt)
+                                    return moment(dt).format('MM/DD/YYYY hh:mm a');
+
                                 return ""
+                            }
+                        }, {
+                            caption: "Completed By",
+                            dataField: "UpdateBy"}, {
+                                caption: "Lead Owner",
+                                dataField: "Owner"
+                            }]
+                    }).dxDataGrid('instance');});
+            }
 
-                            var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                            if (dt)
-                                return moment(dt).format('MM/DD/YYYY hh:mm a');
-
-                            return ""
-                        }
-                    }, {
-                        caption: "Completed By",
-                        dataField: "UpdateBy"},
-                    {
-                        caption: "Owner",
-                        dataField: "Owner"
-                    }]
-                }).dxDataGrid('instance');
-
-                if (url == "/api/Title/TitleCases/") {
-                    dataGrid.columnOption("Owner", "visible", true);
-                    dataGrid.columnOption("StatusStr", "groupIndex", null);
-                }
-
-                if (url == "/api/Title/TitleCases/-1")
-                    dataGrid.columnOption("StatusStr", "groupIndex", null);
-
-                var applyFilterTypes = [{
-                    key: "AllCases",
+            var applyFilterTypes = [
+                {
+                    key: 0,
                     name: "All Cases"
                 }, {
-                    key: "MyCases",
-                    name: "My Cases"
+                    key: 1,
+                    name: "New Offer"
+                }, {
+                    key: 2,
+                    name: "In Process"
+                }, {
+                    key: 3,
+                    name: "SS Accepted"
                 }];
 
-                $("#useFilterApplyButton").dxSelectBox({
-                    items: applyFilterTypes,
-                    value: applyFilterTypes[0].key,
-                    valueExpr: "key",
-                    displayExpr: "name",
-                    onValueChanged: function (data) {
-                        if (data.value == "AllCases") {
-                            dataGrid.clearFilter();
-                        } else {
-                            dataGrid.filter(["Owner", "=", "<%= Page.User.Identity.Name%>"]);
-                    }
+            $("#useFilterApplyButton").dxSelectBox({
+                items: applyFilterTypes,
+                value: currentView,
+                valueExpr: "key",
+                displayExpr: "name",
+                onValueChanged: function (data) {
+                    loadData(data.value);
                 }
             });
-        });
-        })
 
+            loadData(currentView);
+        });
     </script>
 
 </asp:Content>

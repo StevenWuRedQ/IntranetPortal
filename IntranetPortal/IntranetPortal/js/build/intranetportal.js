@@ -1254,7 +1254,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
         var uri = BaseUri + '/' + apiName + '/:' + key;
         var primaryKey = {};
         primaryKey[key] = '@' + key;
- 
+
         /*default actions add put */
         var _actions = {
             'update': { method: 'PUT' }
@@ -1266,7 +1266,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
         var Resource = $resource(uri, primaryKey, _actions);
 
         //static function
-        Resource.all = function () {}
+        Resource.all = function () { }
         Resource.CType = function (obj, Class) {
 
             if (obj == null || obj == undefined) {
@@ -1281,9 +1281,9 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             angular.extend(obj, _new);
             return _new;
         }
-        Resource.prototype.hasId = function()
-        {
-            return this[key] != null && this[key]!=0;
+
+        Resource.prototype.hasId = function () {
+            return this[key] != null && this[key] != 0;
         }
         /*********Use for Derived class implement validation interface *************/
         /**************** string array to hold error messages **********************/
@@ -1293,7 +1293,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             /* maybe cause memory leak if javascript garbage collection is not good */
             this.errorMsg = []
         }
-        
+
         Resource.prototype.getErrorMsg = function () {
             return this.errorMsg;
         }
@@ -1337,10 +1337,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
         });
 
-    //docSearch.properties = {
-    //    LeadResearch: "{LeadResearch}",
-    //    LeadResearchs: "[LeadResearch]"
-    //}
 
     docSearch.Status = {
         New: 0,
@@ -1355,7 +1351,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
-        //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
+
         var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
@@ -1376,9 +1372,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             }
         }
        
-        //self.LeadResearch = self.LeadResearch || new LeadResearch();
-
-        //});
         return data1;
     }
 
@@ -1404,9 +1397,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         return this.LeadResearch;
     }
 
-    //def function
-    //leadResearch.func
-    //constructor
     return docSearch;
 });
 
@@ -1439,17 +1429,84 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
             self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
             self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
             self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
-           
             self.getOwnerSSN(BBLE);
         });
         return data1;
     }
-    //leadResearch.prototype.func
-    //def function
-    //leadResearch.func
-    //constructor
+
     return leadResearch;
 });
+angular.module('PortalApp').factory('ptUnderwriter', function ($http) {
+
+    var Model = function() {
+        this.PropertyAddress = undefined;
+        this.TaxClass = undefined;
+        this.BuildingDimension = undefined;
+        this.LotSize = undefined;
+        this.Zoning = undefined;
+        this.ActualNumOfUnits = undefined;
+        this.PropertyTaxYear = undefined;
+        this.OccupancyStatus = undefined;
+        this.SellerOccupied = undefined;
+        this.NumOfTenants = undefined;
+        this.MoneySpent = undefined;
+        this.HOI = undefined;
+        this.COSTermination = undefined;
+        this.AgentCommission = undefined;
+        this.AverageLowValue = undefined;
+        this.RenovatedValue = undefined;
+        this.RepairBid = undefined;
+        this.DealTimeMonths = undefined;
+        this.SalesCommission = undefined;
+        this.DealROICash = undefined;
+        this.DeedPurchase = undefined;
+        this.CurrentlyRented = undefined;
+        this.RepairBidTotal = undefined;
+        this.NumOfUnits = undefined;
+        this.MarketRentTotal = undefined;
+        this.RentalTime = undefined;
+        this.FirstMortgage = undefined;
+        this.SecondMortgage = undefined;
+        this.COSRecorded = undefined;
+        this.DeedRecorded = undefined;
+        this.OtherLiens = undefined;
+        this.FHA = undefined;
+        this.FannieMae = undefined;
+        this.FreddieMac = undefined;
+        this.Servicer = undefined;
+        this.ForeclosureIndexNum = undefined;
+        this.ForeclosureStatus = undefined;
+        this.ForeclosureNote = undefined;
+        this.AuctionDate = undefined;
+        this.DefaultDate = undefined;
+        this.CurrentPayoff = undefined;
+        this.PayoffDate = undefined;
+        this.CurrentSSValue = undefined;
+        this.TaxLienCertificate = undefined;
+        this.PropertyTaxes = undefined;
+        this.WaterCharges = undefined;
+        this.HPDCharges = undefined;
+        this.ECBDOBViolations = undefined;
+        this.DOBCivilPenalty = undefined;
+        this.PersonalJudgements = undefined;
+        this.HPDJudgements = undefined;
+        this.IRSNYSTaxLiens = undefined;
+        this.VacateOrder = undefined;
+        this.RelocationLien = undefined;
+        this.RelocationLienDate = undefined;
+
+    }
+
+    return {
+        createNew: function() {
+            return new Model();
+        }
+
+    }
+
+});
+
+
 
 /**
  * @return {[class]}                 QueryUrl class
@@ -8282,14 +8339,44 @@ angular.module("PortalApp").config(function ($stateProvider) {
     $stateProvider.state(tables);
 
 });
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', function ($scope, ptCom, $location) {
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', 'ptUnderwriter', 'DocSearch', 'LeadsInfo', function ($scope, ptCom, $location, ptUnderwriter, DocSearch, LeadsInfo) {
 
-    $scope.model = {};
+    $scope.data = {};
 
     $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
 
+    $scope.init = function (bble, isImport) {
+        ptCom.startLoading()
+        $scope.data = ptUnderwriter.createNew();
+        if (isImport) {
+            $scope.importData(bble);
+        } else {
+
+        }
+
+    }
+
+    $scope.importData = function (bble) {
+        $scope.leadsInfo = undefined;
+        $scope.docSearch = undefined;
+        $scope.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
+
+            $scope.docSearch.initLeadsResearch();
+            $scope.leadsInfo = $scope.LeadsInfo.get({ BBLE: bble.trim() }, function () {
+                debugger;
+            })
+
+        });
+
+    };
+
+
+    $scope.save = function () {
+
+
+    }
 }])
 angular.module("PortalApp")
     .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {

@@ -326,7 +326,7 @@ Public Class LeadsSubMenu
             If Not String.IsNullOrEmpty(lbSelectionMode.Value) Then
                 If lbSelectionMode.SelectedValues.Contains("0") Then
                     'Add leads to short sale section
-                    If Not ShortSaleManage.IsInShortSale(hfInProcessBBLE.Value) Then
+                    If Not ShortSaleManage.IsInProcess(hfInProcessBBLE.Value) Then
                         ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name, Employee.CurrentAppId)
                     Else
 
@@ -334,7 +334,7 @@ Public Class LeadsSubMenu
                 End If
 
                 If lbSelectionMode.SelectedValues.Contains("1") Then
-                    If ShortSaleCase.GetCaseByBBLE(bble) Is Nothing Then
+                    If Not ShortSaleManage.IsInProcess(hfInProcessBBLE.Value) Then
                         ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name, Employee.CurrentAppId)
                     End If
 

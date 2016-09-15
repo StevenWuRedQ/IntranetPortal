@@ -7210,6 +7210,7 @@
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
+    <Content Include="js\models\ptUnderwriter.js" />
     <Content Include="js\services\ptCom.js" />
     <Content Include="js\services\ptConstructionService.js" />
     <Content Include="js\services\ptContactServices.js" />
@@ -7806,6 +7807,7 @@
     <Content Include="App_Data\OfferDoc\ShortSalePackage.docx" />
     <Content Include="App_Data\underwriter.xlsx" />
     <Content Include="App_Data\docsearchmap.csv" />
+    <Content Include="App_Data\test.csv" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />

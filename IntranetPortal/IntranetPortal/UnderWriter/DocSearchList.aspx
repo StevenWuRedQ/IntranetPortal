@@ -42,7 +42,7 @@
         </div>
 
         <div id="preview" style="visibility: hidden">
-            <iframe id="previewWindow""></iframe>
+            <iframe id="previewWindow"></iframe>
         </div>
     </div>
     <script>
@@ -115,7 +115,7 @@
                     columns: [{
                         dataField: "CaseName",
                         width: 450,
-                        caption: "Case Name",
+                        caption: "Property Address",
                         cellTemplate: function (container, options) {
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
@@ -125,7 +125,7 @@
                                 .appendTo(container);
                         }
                     }, {
-                        caption: "Completed On",
+                        caption: "Completion Date",
                         dataField: "CompletedOn",
                         dataType: "date",
                         customizeText: function (cellInfo) {
@@ -139,38 +139,17 @@
 
                             return ""
                         }
-                    }, {
-                        caption: "Completed By",
-                        dataField: "CompletedBy"
-                    }, {
-                        caption: "Create By",
-                        dataField: "CreateBy"
-                    }
-
+                    },
                     //{
-                    //    caption: '',
-                    //    width: 80,
-                    //    cellTemplate: function (container, options) {
-                    //        var div = $('<input />')
-                    //                   .attr('type', 'button')
-                    //                   .attr('title', 'Export')
-                    //                   .attr('value', 'Export')
-                    //                   .on('dxclick', function (e ) {
-
-                    //                       var url = "/api/underwriter/generatexml/" + options.data.BBLE;
-                    //                       $.ajax({
-                    //                           method: "GET",
-                    //                           url: url,
-                    //                       }).then(function (res) {
-                    //                           STDownloadFile("/api/underwriter/getgeneratedxml/" + options.data.BBLE, "underwriter.xlsx" + new Date().toLocaleDateString)
-                    //                       })
-
-                    //                   })
-                    //                   .appendTo(container);
-                    //    }}
-                    ]
+                    //    caption: "Completed By",
+                    //    dataField: "CompletedBy"
+                    //},
+                    {
+                        caption: "Requested By",
+                        dataField: "CreateBy"
+                    }]
                 }).dxDataGrid('instance');
-                $(".dx-datagrid-header-panel").prepend($("<h4 style='display: inline-block'>UnderWriter</h4>"))
+                $(".dx-datagrid-header-panel").prepend($("<label class='grid-title-icon' style='display: inline-block'>UW</label>"))
             });
         })
 

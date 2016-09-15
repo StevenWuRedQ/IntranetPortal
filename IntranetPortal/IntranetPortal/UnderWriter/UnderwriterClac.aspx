@@ -30,7 +30,6 @@
                 font-weight: bold;
             }
 
-
             td input {
                 border: none;
                 padding: 0;
@@ -77,7 +76,6 @@
         }
     </style>
     <div id="underwrite_clac" ng-controller="UnderwriterController">
-
         <ui-view></ui-view>
         <nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container-fluid">

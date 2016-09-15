@@ -22,7 +22,7 @@
 <h4 id="NewOffer_<%= ClientID %>" style="padding-top: 5px">
     <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
     <label class='grid-title-icon'>OF</label>
-    <a href="/NewOffer/NewOfferList.aspx">
+    <a href="/NewOffer/NewOfferList.aspx?view=<%=CInt(ManagerView)%>">
         <label class="xlink">&nbsp;<%= ManagerView.ToString %></label>
         <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label>
     </a>
