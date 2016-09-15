@@ -1,28 +1,32 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="DocSearchNewVersion.ascx.vb" Inherits="IntranetPortal.DocSearchNewVersion" %>
 
 <%-- 
-    --author: Steven Wu
+    -- author: Steven Wu
     -- Fix anuglar ng-if bug  mutiple date source have bug when switch yes no
     -- and fix committed cc18bff grid yes no
      --%>
 
 <%-- 
-    --author: Steven Wu
+    -- author: Steven Wu
     -- add css make ui compact in new version doc search
     -- and fix committed 4357930 Check in style change
      --%>
 <%-- 
-    --author: Steven Wu
+    -- author: Steven Wu
     -- test init-grid in new doc search to fix angular two way bind problem with Devextreme grid
     -- and fix committed 72ece32 check test
      --%>
 
 <%-- 
-    --author: Steven Wu
+    -- author: Steven Wu
     -- add DocSearchNewVersion start with new doc search html
     -- fix committed bf79f5e leads task search
      --%>
-
+<%-- 
+    -- author: Steven Wu
+    -- Change Doc search new version back-end control switch to new version
+    -- fix committed 5f8c1dd Switch to new views
+     --%>
 <style>
     .ss_warning a {
         color: red !important;
