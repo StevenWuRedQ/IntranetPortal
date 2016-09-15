@@ -57,8 +57,15 @@
         display: none;
     }
 
+    
+    .phone_comment
+    {
+        display:block;
+        color: #2e2f31;
+    }
     .phone_comment, .phone-working-text {
         font-size: 14px;
+        
     }
 
     .phone-working:hover .phone-working-text {
@@ -277,10 +284,10 @@
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.Phone))%>" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")'>
-                                        <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone-working-text">- Working phone</span> <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span> </span>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone-working-text">- Working phone</span>  </span>
 
                                     </a>
-
+                                    <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span>
                                     <span class="phone-last-called"><%=GetAllLastCalled(phone.Phone)%></span>
                                     <span class="phone-call-count">
                                         <%Dim count = GetCallCount(phone.Phone) %>
@@ -311,10 +318,13 @@
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
-                                        <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
-                                        <span class="phone-working-text">- Working phone</span>
-                                    </a>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
+                                            <span class="phone-working-text">- Working phone</span>
+                                            
+                                        </span>
 
+                                    </a>
+                                    <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
                                     <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
                                     <span class="phone-call-count">
                                         <%Dim count = GetCallCount(phone.phoneField) %>
@@ -347,10 +357,13 @@
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
-                                        <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
-                                        <span class="phone-working-text">- Working phone</span>
-                                    </a>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
+                                            <span class="phone-working-text">- Working phone</span>
+                                            
 
+                                        </span>
+                                    </a>
+                                    <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
                                     <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
                                     <span class="phone-call-count">
                                         <%Dim count = GetCallCount(phone.phoneField) %>
