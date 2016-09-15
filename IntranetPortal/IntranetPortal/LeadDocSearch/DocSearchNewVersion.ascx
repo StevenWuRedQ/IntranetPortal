@@ -17,6 +17,12 @@
     -- and fix committed 72ece32 check test
      --%>
 
+<%-- 
+    --author: Steven Wu
+    -- add DocSearchNewVersion start with new doc search html
+    -- fix committed bf79f5e leads task search
+     --%>
+
 <style>
     .ss_warning a {
         color: red !important;
