@@ -57,6 +57,10 @@
         display: none;
     }
 
+    .phone_comment, .phone-working-text {
+        font-size: 14px;
+    }
+
     .phone-working:hover .phone-working-text {
         display: inline-block;
     }
@@ -273,7 +277,7 @@
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.Phone))%>" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")'>
-                                        <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone-working-text">Working phone</span> <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span> </span>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone-working-text">- Working phone</span> <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span> </span>
 
                                     </a>
 
@@ -308,7 +312,7 @@
                                 <div>
                                     <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
-                                        <span class="phone-working-text">Working phone</span>
+                                        <span class="phone-working-text">- Working phone</span>
                                     </a>
 
                                     <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
@@ -344,7 +348,7 @@
                                 <div>
                                     <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%> <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span> </span>
-                                        <span class="phone-working-text">Working phone</span>
+                                        <span class="phone-working-text">- Working phone</span>
                                     </a>
 
                                     <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
