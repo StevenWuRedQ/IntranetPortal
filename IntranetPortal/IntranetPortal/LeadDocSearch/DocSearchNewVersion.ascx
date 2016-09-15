@@ -11,6 +11,12 @@
     -- add css make ui compact in new version doc search
     -- and fix committed 4357930 Check in style change
      --%>
+<%-- 
+    --author: Steven Wu
+    -- test init-grid in new doc search to fix angular two way bind problem with Devextreme grid
+    -- and fix committed 72ece32 check test
+     --%>
+
 <style>
     .ss_warning a {
         color: red !important;
