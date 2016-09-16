@@ -52,7 +52,6 @@
             return this.errorMsg.join('<br />');
         }
         Resource.prototype.hasErrorMsg = function () {
-
             return this.errorMsg && this.errorMsg.length > 0;
         }
 
@@ -63,9 +62,7 @@
 
         /***************************************************************************/
         /*base class instance function*/
-        Resource.prototype.$put = function () {
-
-        }
+        Resource.prototype.$put = function () {}
 
         Resource.prototype.$cType = function (_this, Class) {
             Resource.CType(this, Class);

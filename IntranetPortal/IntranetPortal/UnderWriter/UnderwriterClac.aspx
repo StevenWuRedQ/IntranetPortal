@@ -66,7 +66,7 @@
             background: #00b0f0;
         }
 
-        .excel-oragne {
+        .excel-orange {
             background: orange;
         }
 
@@ -76,15 +76,14 @@
         }
     </style>
     <div id="underwrite_clac" ng-controller="UnderwriterController">
-
         <ui-view></ui-view>
         <nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container-fluid">
                 <ul class=" nav navbar-nav">
-                    <li ng-class="{ active: isActive('/datainput')}"><a ui-sref="datainput" ui-sref-active="active">Data Input</a></li>
-                    <li ng-class="{ active: isActive('/flipsheets')}"><a ui-sref="flipsheets" ui-sref-active="active">FlipSheets</a></li>
-                    <li ng-class="{ active: isActive('/rentalmodels')}"><a ui-sref="rentalmodels" ui-sref-active="active">Rental Model</a></li>
-                    <li ng-class="{ active: isActive('/tables')}"><a ui-sref="tables" ui-sref-active="active">Tables</a></li>
+                    <li ng-class="{ active: isActive('datainput')}"><a ui-sref="datainput" ui-sref-active="active">Data Input</a></li>
+                    <li ng-class="{ active: isActive('flipsheets')}"><a ui-sref="flipsheets" ui-sref-active="active">FlipSheets</a></li>
+                    <li ng-class="{ active: isActive('rentalmodels')}"><a ui-sref="rentalmodels" ui-sref-active="active">Rental Model</a></li>
+                    <li ng-class="{ active: isActive('tables')}"><a ui-sref="tables" ui-sref-active="active">Tables</a></li>
                 </ul>
                 <!-- /.navbar-collapse -->
             </div>

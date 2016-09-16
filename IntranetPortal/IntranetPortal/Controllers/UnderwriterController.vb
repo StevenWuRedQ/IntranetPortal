@@ -13,7 +13,24 @@ Namespace Controllers
 
         ' GET: api/Underwriter
         Public Function GetValues() As IEnumerable(Of String)
-            Return New String() {"value1", "value2"}
+            Return New String() {""}
+        End Function
+
+
+        <Route("api/underwriter/{BBLE}")>
+        Public Function getUnderwriter(BBLE As String) As IHttpActionResult
+            Using ctx As New UnderwriterEntity
+                Dim result = From uw In ctx.underwriters
+                             Where uw.BBLE = BBLE
+
+                Return Ok(result.FirstOrDefault)
+            End Using
+        End Function
+
+        <Route("api/underwriter/{BBLE}")>
+        <HttpPost>
+        Public Function postUnderwriter(<FromBody> underwrite As Underwriter) As IHttpActionResult
+
         End Function
 
 

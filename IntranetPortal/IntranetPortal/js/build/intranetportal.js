@@ -1301,7 +1301,6 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             return this.errorMsg.join('<br />');
         }
         Resource.prototype.hasErrorMsg = function () {
-
             return this.errorMsg && this.errorMsg.length > 0;
         }
 
@@ -1312,9 +1311,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 
         /***************************************************************************/
         /*base class instance function*/
-        Resource.prototype.$put = function () {
-
-        }
+        Resource.prototype.$put = function () {}
 
         Resource.prototype.$cType = function (_this, Class) {
             Resource.CType(this, Class);
@@ -1342,13 +1339,14 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         New: 0,
         Completed: 1
     }
+
     docSearch.prototype.initTeam = function () {
         var self = this
         $http.get('/Services/TeamService.svc/GetTeam?userName=' + this.CreateBy).success(function (data) {
             self.team = data;
         });
     }
-    
+
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
 
@@ -1363,15 +1361,13 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             self.LeadResearch = _LeadSearch;
             /*always get refershed ssn*/
             if (self.LeadResearch.ownerName) {
-
                 self.LeadResearch.getOwnerSSN(self.BBLE);
             }
-            if(self.LeadResearch.initFromLeadsInfo)
-            {
+            if (self.LeadResearch.initFromLeadsInfo) {
                 data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
             }
         }
-       
+
         return data1;
     }
 
@@ -1436,9 +1432,12 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
 
     return leadResearch;
 });
-angular.module('PortalApp').factory('ptUnderwriter', function ($http) {
+angular.module('PortalApp').factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
 
-    var Model = function() {
+    var Underwriter = ptBaseResource('underwriter', 'BBLE', null, {});
+
+    /* constructor for empty model */
+    var _Model = function () {
         this.PropertyAddress = undefined;
         this.TaxClass = undefined;
         this.BuildingDimension = undefined;
@@ -1494,19 +1493,105 @@ angular.module('PortalApp').factory('ptUnderwriter', function ($http) {
         this.VacateOrder = undefined;
         this.RelocationLien = undefined;
         this.RelocationLienDate = undefined;
+        this.tables = {};
+        this.flipSheets = {};
+        this.rentalModel = {}
 
     }
 
-    return {
-        createNew: function() {
-            return new Model();
+    Underwriter.create = function () {
+        return new _Model();
+    }
+
+    /**
+     *
+     * if no bble present only recreate data with empty model
+     * if isImport present also load data from Doc Search and Leads Info
+     * 
+     **/
+    Underwriter.load = function (/* optional */ bble, /* optional */ isImport) {
+        var _data = this.create();
+        var data = Underwriter.get({ BBLE: bble.trim() }, function () {
+            angular.extend(data, _data)
+            if (isImport) {
+                data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
+                    data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {
+                        mapData(data);
+                    })
+
+                });
+            }
+
+        })
+        return data;
+    }
+
+    /* map rule from docsearch and leadsinfo to underwriting */
+    function mapData(d) {
+        if (d.docSearch && d.docSearch.LeadResearch) {
+            
+            var r = d.docSearch.LeadResearch;
+            d.PropertyTaxes = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due;
+            d.FirstMortgage = r.mortgageAmount;
+            d.SecondMortgage = r.secondMortgageAmount;
+            d.COSRecorded = r.Has_COS_Recorded;
+            d.DeedRecorded = r.Has_Deed_Recorded;
+            d.FHA = r.fha;
+            d.FannieMae = r.fannie;
+            d.FreddieMac = r.Freddie_Mac_;
+            d.Servicer = r.servicer;
+            d.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
+            d.ForeclosureNote = r.notes_LP_Index___Num;
+            d.TaxLienCertificate = (function () {
+                var total = 0.0;
+                if (r.TaxLienCertificate) {
+                    for (var i = 0; i < r.TaxLienCertificate.length; i++) {
+                        total += Number.parseFloat(r.TaxLienCertificate[i].Amount);
+                    }
+                }
+                return total;
+            })();
+            d.PropertyTaxes = r.propertyTaxes;
+            d.WaterCharges = r.waterCharges;
+            d.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred;
+            d.ECBDOBViolations = r.Amount_ECB_Tickets;
+            d.DOBCivilPenalty = r.dobWebsites;
+            d.PersonalJudgements = r.Amount_Personal_Judgments;
+            d.HPDJudgements = r.HPDjudgementAmount;
+            d.IRSNYSTaxLiens = (function () {
+                var total = 0.0;
+
+                if (r.irsTaxLien)
+                    total += Number.parseFloat(r.irsTaxLien);
+                if (r.Amount_NYS_Tax_Lien)
+                    total += Number.parseFloat(r.Amount_NYS_Tax_Lien);
+
+                return total;
+
+            })();
+            d.VacateOrder = r.has_Vacate_Order_Vacate_Order;
+            d.RelocationLien = (function () {
+                if (r.has_Vacate_Order_Vacate_Order)
+                    return r.Amount_Vacate_Order;
+            })()
+
         }
 
+
+
+        if (d.leadsInfo) {
+            d.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
+            d.TaxClass = d.leadsInfo.TaxClass.trim();
+            d.BuildingDimension = d.leadsInfo.BuildingDem.trim();
+            d.LotSize = d.leadsInfo.Lot;
+            d.Zoning = d.leadsInfo.Zoning.trim();
+        }
     }
 
-});
 
+    return Underwriter;
 
+}]);
 
 /**
  * @return {[class]}                 QueryUrl class
@@ -8313,35 +8398,54 @@ angular.module("PortalApp")
 }])
 angular.module("PortalApp").config(function ($stateProvider) {
 
+    var underwriter = {
+        name: 'underwriter',
+        url: '',
+        abstract: true,
+        controller: 'UnderwriterController',
+        templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
+    }
+
     var dataInput = {
         name: 'datainput',
         url: '/datainput',
+        parent: 'underwriter',
+        controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
     }
     var flipsheets = {
         name: 'flipsheets',
         url: '/flipsheets',
+        parent: 'underwriter',
+        controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
     }
     var rentalmodels = {
         name: 'rentalmodels',
         url: '/rentalmodels',
+        parent: 'underwriter',
+        controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
     }
     var tables = {
         name: 'tables',
         url: '/tables',
+        parent: 'underwriter',
+        controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/tables.tpl.html'
     }
-    $stateProvider.state(dataInput);
-    $stateProvider.state(flipsheets);
-    $stateProvider.state(rentalmodels);
-    $stateProvider.state(tables);
+
+    $stateProvider.state(underwriter)
+                    .state(dataInput)
+                    .state(flipsheets)
+                    .state(rentalmodels)
+                    .state(tables);
 
 });
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', 'ptUnderwriter', 'DocSearch', 'LeadsInfo', function ($scope, ptCom, $location, ptUnderwriter, DocSearch, LeadsInfo) {
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', 'ptUnderwriter', function ($scope, ptCom, $location, ptUnderwriter) {
 
     $scope.data = {};
+    $scope.uw = ptUnderwriter;
 
     $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
@@ -8349,34 +8453,31 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
 
     $scope.init = function (bble, isImport) {
         ptCom.startLoading()
-        $scope.data = ptUnderwriter.createNew();
-        if (isImport) {
-            $scope.importData(bble);
-        } else {
+        $scope.data = ptUnderwriter.load(bble, isImport);
+        $scope.data.$promise.then(function () {
+            $scope.applyRule();
+        }).finally(function () {
+            ptCom.stopLoading()
 
-        }
-
+        })
     }
-
-    $scope.importData = function (bble) {
-        $scope.leadsInfo = undefined;
-        $scope.docSearch = undefined;
-        $scope.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
-
-            $scope.docSearch.initLeadsResearch();
-            $scope.leadsInfo = $scope.LeadsInfo.get({ BBLE: bble.trim() }, function () {
-                debugger;
-            })
-
-        });
-
-    };
-
 
     $scope.save = function () {
-
-
     }
+
+
+    $scope.update = function () {
+        $scope.applyRule();
+    }
+
+    $scope.applyRule = function () {
+        var t = $scope.data.tables;
+        var d = $scope.data;
+        /** table **/
+        t.TaxLienSettlement = 0.09 / 12;
+        t.TaxLien = d.TaxLienCertificate * (1 + (t.TaxLienSettlement * d.DealTimeMonths));
+    }
+
 }])
 angular.module("PortalApp")
     .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {
