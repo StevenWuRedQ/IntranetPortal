@@ -379,7 +379,8 @@ Public Class ShortSaleManage
         If processor IsNot Nothing Then
             ssCase.Processor = processor.ContactId
         End If
-
+        ssCase.AcceptedDate = DateTime.Now
+        ssCase.AcceptedBy = approvedBy
         ssCase.Save()
 
         If ssCase.CaseId > 0 Then
@@ -415,6 +416,8 @@ Public Class ShortSaleManage
         Catch ex As Exception
             Core.SystemLog.LogError("New SS Case email notification", ex, Nothing, HttpContext.Current.User.Identity.Name, bble)
         End Try
+
+        LeadsActivityLog.AddActivityLog(Now, "Leads was accepted by " & approvedBy, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString)
     End Sub
 
     Public Shared Function UpdateCaseStatus(caseId As Integer, status As ShortSale.CaseStatus, createBy As String, objData As String) As Boolean

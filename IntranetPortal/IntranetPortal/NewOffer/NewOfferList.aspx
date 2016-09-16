@@ -48,7 +48,7 @@
             <% If Request.QueryString("view") IsNot Nothing %>
             currentView = <%= Request.QueryString("view")%>;
             <% Else %>
-            currentView = 1;
+            currentView = 0;
             <% End if%>
 
             function GoToCase(CaseId) {
@@ -56,9 +56,13 @@
                 window.location.href = url;
             }
             
-            function ShowCaseInfo(CaseId) {
+            function ShowCaseInfo(CaseId, stage) {
                 var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
-                PortalUtility.ShowPopWindow("View Case - " + CaseId, url);
+                if (stage == "SS Accepted")
+                {
+                    url = '/NewOffer/NewOfferAccepted.aspx?bble=' + CaseId;                    
+                }
+                PortalUtility.ShowPopWindow("View Case - " + CaseId, url);                
             }
             
             function loadData(view){
@@ -87,24 +91,28 @@
                             rowInfo.rowElement.addClass('myRow');
                         },
                         onContentReady: function (e) {
-                            var spanTotal = e.element.find('.spanTotal')[0];
-                            if (spanTotal) {
-                                $(spanTotal).html("Total Count: " + e.component.totalCount());
-                            } else {
-                                var panel = e.element.find('.dx-datagrid-pager');
+                            //var spanTotal = e.element.find('.spanTotal')[0];
+                            //if (spanTotal) {
+                            //    $(spanTotal).html("Total Count: " + e.component.totalCount());
+                            //} else {
+                            //    var panel = e.element.find('.dx-datagrid-pager');
 
-                                if (!panel.find(".dx-pages").length) {
-                                    $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()).appendTo(e.element);
-                                } else {
-                                    panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
-                                }
-                            }
+                            //    if (!panel.find(".dx-pages").length) {
+                            //        $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()).appendTo(e.element);
+                            //    } else {
+                            //        panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
+                            //    }
+                            //}
                         },
                         summary: {
                             groupItems: [{
                                 column: "BBLE",
                                 summaryType: "count",
                                 displayFormat: "{0}",
+                            }],
+                            totalItems: [{
+                                column: "Title",
+                                summaryType: "count"                                
                             }]
                         },
                         columns: [{
@@ -116,7 +124,7 @@
                                     .text(options.value)
                                     .on('dxclick', function () {
                                         //Do something with options.data;
-                                        ShowCaseInfo(options.data.BBLE);
+                                        ShowCaseInfo(options.data.BBLE, options.data.OfferStage);
                                     })
                                     .appendTo(container);
                             }
@@ -135,12 +143,19 @@
 
                                 return ""
                             }
-                        }, {
+                            }, {
                             caption: "Completed By",
-                            dataField: "UpdateBy"}, {
-                                caption: "Lead Owner",
-                                dataField: "Owner"
-                            }]
+                            dataField: "UpdateBy"
+                            }, {
+                            caption: "Lead Owner",
+                            dataField: "Owner"
+                            }, {
+                                caption: "Team",
+                                dataField: "Team"
+                            }, {
+                            caption: "Status",
+                            dataField: "OfferStage"
+                        }]
                     }).dxDataGrid('instance');});
             }
 

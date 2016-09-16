@@ -342,7 +342,7 @@ Public Class ActivityLogs
                 UserMessage.AddNewMessage(userApoint.Agent, title, msg, userApoint.BBLE)
             End If
 
-            Lead.UpdateLeadStatus(userApoint.BBLE, LeadStatus.Priority, Nothing)
+            ' Lead.UpdateLeadStatus(userApoint.BBLE, LeadStatus.Priority, Nothing)
 
             BindData(hfBBLE.Value)
         End If

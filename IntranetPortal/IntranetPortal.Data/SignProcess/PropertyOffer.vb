@@ -6,7 +6,10 @@
 Partial Public Class PropertyOffer
     Inherits BusinessDataBase
 
-    Public Property OfferStep As String
+    Public Property OfferStage As String
+    Public Property Team As String
+    Public Property LeadsStatus As Integer?
+    Public Property ShortSaleStatus As Integer?
 
     ''' <summary>
     ''' Return the PropertyOffer Array Owner Nmae
@@ -63,7 +66,7 @@ Partial Public Class PropertyOffer
         Using ctx As New PortalEntities
             Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
                          Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5) On offer.BBLE Equals ld.BBLE
-                         Join ss In ctx.ShortSaleCases.Where(Function(s) s.Status = 2) On offer.BBLE Equals ss.BBLE
+                         Join ss In ctx.ShortSaleCases.Where(Function(s) s.Status > 0) On offer.BBLE Equals ss.BBLE
                          Select offer
 
             Return offers.ToArray
@@ -78,11 +81,15 @@ Partial Public Class PropertyOffer
     Public Shared Function GetAllCompleted(names As String()) As PropertyOffer()
         Using ctx As New PortalEntities
             Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
-                         From ld In ctx.SSLeads.Where(Function(p) p.Status = 5 AndAlso p.BBLE = offer.BBLE)
+                         From ld In ctx.SSLeads.Where(Function(p) p.Status = 5 AndAlso p.BBLE = offer.BBLE).DefaultIfEmpty
                          From ss In ctx.ShortSaleCases.Where(Function(s) s.BBLE = offer.BBLE).DefaultIfEmpty()
-                         Select offer
+                         Select New With {offer, ld.Status, .ssStatue = ss.Status}
 
-            Return offers.ToArray
+            Return offers.AsEnumerable.Select(Function(f)
+                                                  f.offer.LeadsStatus = f.Status
+                                                  f.offer.ShortSaleStatus = f.ssStatue
+                                                  Return f.offer
+                                              End Function).ToArray
         End Using
     End Function
 

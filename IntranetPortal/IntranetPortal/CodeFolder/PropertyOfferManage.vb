@@ -83,7 +83,7 @@ Public Class PropertyOfferManage
     ''' <param name="name">The manager name</param>
     ''' <param name="view">The view type</param>
     ''' <returns></returns>
-    Public Shared Function GetOffersByManagerView(name As String, view As ManagerView) As PropertyOffer()
+    Public Shared Function GetOffersByManagerView(name As String, view As ManagerView, isSummary As Boolean) As PropertyOffer()
         Dim emps = New List(Of String)
         emps.Add(name)
 
@@ -96,15 +96,52 @@ Public Class PropertyOfferManage
         End If
 
         Select Case view
-            Case ManagerView.Completed
-                Return CompletedPropertyOffers(emps.ToArray)
-            Case ManagerView.InProcess
-                Return InProcessOffers(emps.ToArray)
-            Case ManagerView.SSAccepted
-                Return SSAcceptedOffers(emps.ToArray)
+            Case ManagerView.AllCompleted
+                Dim offers = PropertyOffer.GetAllCompleted(emps.ToArray)
+                offers.ForEach(Function(o)
+                                   If o.ShortSaleStatus > 0 Then
+                                       Return InitData(o, ManagerView.SSAccepted)
+                                   End If
+
+                                   If o.LeadsStatus = 5 Then
+                                       Return InitData(o, ManagerView.InProcess)
+                                   End If
+
+                                   Return InitData(o, ManagerView.Completed)
+                               End Function)
+                Return offers
+            Case Else
+                Return OffersByManagerView(emps.ToArray, view, isSummary)
         End Select
 
         Return Nothing
+    End Function
+
+    ''' <summary>
+    ''' Return property offers by ManagerView
+    ''' </summary>
+    ''' <param name="emps">The Employee Names</param>
+    ''' <param name="view">The ManagerView</param>
+    ''' <param name="isSummary">The Summary Indicator</param>
+    ''' <returns></returns>
+    Public Shared Function OffersByManagerView(emps As String(), view As ManagerView, isSummary As Boolean) As PropertyOffer()
+        Dim offer() As PropertyOffer = {}
+        Select Case view
+            Case ManagerView.Completed
+                offer = PropertyOffer.GetCompleted(emps)
+            Case ManagerView.InProcess
+                offer = PropertyOffer.GetInProcess(emps.ToArray)
+            Case ManagerView.SSAccepted
+                offer = PropertyOffer.GetSSAccepted(emps.ToArray)
+        End Select
+
+        If Not isSummary Then
+            offer.ForEach(Function(d)
+                              Return InitData(d, view)
+                          End Function)
+        End If
+
+        Return offer
     End Function
 
     ''' <summary>
@@ -114,6 +151,10 @@ Public Class PropertyOfferManage
     ''' <returns></returns>
     Public Shared Function CompletedPropertyOffers(names As String()) As PropertyOffer()
         Dim offer = PropertyOffer.GetCompleted(names)
+
+        offer.ForEach(Function(d)
+                          Return InitData(d, ManagerView.Completed)
+                      End Function)
         Return offer
     End Function
 
@@ -125,11 +166,28 @@ Public Class PropertyOfferManage
     ''' <returns></returns>
     Public Shared Function InProcessOffers(names As String()) As PropertyOffer()
         Dim offer = PropertyOffer.GetInProcess(names)
+        offer.ForEach(Function(d)
+                          Return InitData(d, ManagerView.InProcess)
+                      End Function)
         Return offer
     End Function
 
+    ''' <summary>
+    ''' Return completed property offers which were accepted by ShortSale
+    ''' </summary>
+    ''' <param name="names">The Owner Names</param>
+    ''' <returns></returns>
     Public Shared Function SSAcceptedOffers(names As String()) As PropertyOffer()
         Dim offer = PropertyOffer.GetSSAccepted(names)
+        offer.ForEach(Function(d)
+                          Return InitData(d, ManagerView.SSAccepted)
+                      End Function)
+        Return offer
+    End Function
+
+    Private Shared Function InitData(offer As PropertyOffer, view As ManagerView) As PropertyOffer
+        offer.OfferStage = view.ToString
+        offer.Team = Employee.GetEmpTeam(offer.Owner)
         Return offer
     End Function
 
