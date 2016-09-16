@@ -1073,8 +1073,12 @@ function STDownloadFile(url, fileName) {
     link.click();
     document.body.removeChild(link);
 }
+
 function hashStr(str) {
     var hash = 0;
+    //if (!str) {
+    //    return 2;
+    //}
     for (i = 0; i < str.length; i++) {
         char = str.charCodeAt(i);
         hash += char;
@@ -1082,9 +1086,43 @@ function hashStr(str) {
 
     if (hash == 800) {
         return 1000
+    } else {
+        // do not move working phone and normal phone
+        if (hash > 5000)
+        {
+            return hash;
+        }
+        return 2;
     }
     return hash;
 };
+
+// use bubble sor for quick sort for same color not move
+function swap(items, firstIndex, secondIndex) {
+    var temp = items[firstIndex];
+    items[firstIndex] = items[secondIndex];
+    items[secondIndex] = temp;
+    return items;
+}
+
+function bubbleSort(items, comFunc) {
+
+    var len = items.length;
+    var i = j = stop = 0;
+
+    for (i = 0; i < len; i++) {
+        for (j = 0, stop = len - i; j < stop; j++) {
+            var comp = comFunc(items[j], items[j + 1]);
+            if (comp > 0) {
+                items = swap(items, j, j + 1);
+            }
+        }
+    }
+
+    return items;
+}
+
+
 function popUpAtBottomRight(pageToLoad, winName, width, height) {
     xposition = 0; yposition = 0;
     if ((parseInt(navigator.appVersion) >= 4)) {
@@ -1111,43 +1149,39 @@ function popUpAtBottomRight(pageToLoad, winName, width, height) {
     dmcaWin.focus();
 };
 
-function wrongPhone(phone)
-{
+function wrongPhone(phone) {
     var phoneLink = $(phone).find(".PhoneLink:first");
     var color = phoneLink.css("color");
     var hcolor = hashStr(color);
     return hcolor == 1000;
 }
 
-function compareByActive(a,b)
+function GetPhoneNumber(span)
 {
-    var colors = {};
+    var text = span.find(".phone-text:first").text();
+    return text.match(/\d+/g).join("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+}
+
+function compareByActive(a, b) {
+
     var phoneLinkA = $(a).find(".PhoneLink:first");
     var phoneLinkB = $(b).find(".PhoneLink:first");
     var color = phoneLinkA.css("color");
     var colorB = phoneLinkB.css("color");
     var hcolor = hashStr(color);
     var hcolorB = hashStr(colorB);
-    colors["cc" + hcolor] = hcolor + "-" + color;
-    colors["cc" + hcolorB] = hcolorB + "-" + colorB;
+
 
     var diff = hcolor - hcolorB;
 
-    //if (diff == 0) {
-
-    //    var dateA = Date.parse($(a).find(".phone-last-called:first").text());
-    //    var dateB = Date.parse($(b).find(".phone-last-called:first").text());
-
-    //    var dateATime = 0;
-    //    var dateBTime = 0;
-
-    //    dateATime = dateA > 0 ? dateA : 0;
-    //    dateBTime = dateB > 0 ? dateB : 0;
-
-
-    //    diff = dateBTime - dateATime;
-
-    //}
+    if (diff == 0) {
+        // do not move working phone and normal phone
+        var phoneLinkStrA = GetPhoneNumber(phoneLinkA);
+        var phoneLinkStrB = GetPhoneNumber(phoneLinkB);
+        var phoneAHash = hashStr(phoneLinkStrA);
+        var phoneBHash = hashStr(phoneLinkStrB);
+        diff = phoneAHash - phoneBHash;
+    }
 
     return diff;
 }
@@ -1168,10 +1202,9 @@ function GetCallCount(_temTelLink) {
     return countInt;
 }
 
-function compareLastCalledDate(a,b)
-{
+function compareLastCalledDate(a, b) {
     var diff = 0;
-    
+
     var dateA = Date.parse($(a).find(".phone-last-called:first").text());
     var dateB = Date.parse($(b).find(".phone-last-called:first").text());
 
@@ -1181,8 +1214,7 @@ function compareLastCalledDate(a,b)
     dateATime = dateA > 0 ? dateA : 0;
     dateBTime = dateB > 0 ? dateB : 0;
 
-    if (wrongPhone(a))
-    {
+    if (wrongPhone(a)) {
         dateATime = -1;
     }
 
@@ -1210,16 +1242,18 @@ function compareByCallCount(a, b) {
     return diff;
 }
 
-function sortPhoneFunc(compareFunc)
-{
+function sortPhoneFunc(compareFunc) {
     var colors = {};
     var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
     var phones_div = $(".homeowner_info_label:has(.PhoneLink)").each(function (id) {
         var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
         var html = "";
+
         phones.sort(function (a, b) {
             return compareFunc(a, b);
         });
+
+
         phones.each(function (ind) {
             var ptext = $(this).text();
             html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
