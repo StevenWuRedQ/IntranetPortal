@@ -57,7 +57,7 @@
         display: none;
     }
 
-
+    /*color use boot strap warning text color */
     .phone_comment {
         display: block;
         color: #8a6d3b;
