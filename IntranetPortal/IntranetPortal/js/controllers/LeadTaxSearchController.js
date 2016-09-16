@@ -1,4 +1,12 @@
-﻿angular.module('PortalApp')
+﻿/**
+ * @author Steven Wu
+ * @date 9/15/2016
+ * @fix git committed bde6b6d
+ * add tax search js cotroller
+ * LeadTaxSearchController is doc search. 
+ * naming wrong becuase the name always change from spec guys.
+ */
+angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
         ptContactServices, ptCom, DocSearch, LeadsInfo
         , DocSearchEavesdropper, DivError

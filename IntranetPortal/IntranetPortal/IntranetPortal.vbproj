@@ -1708,6 +1708,13 @@
       <DependentUpon>MyDefault.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="NewOffer\NewOfferAccepted.aspx.designer.vb">
+      <DependentUpon>NewOfferAccepted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferAccepted.aspx.vb">
+      <DependentUpon>NewOfferAccepted.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="NewOffer\NewOfferAssignCorp.ascx.designer.vb">
       <DependentUpon>NewOfferAssignCorp.ascx</DependentUpon>
     </Compile>
@@ -7334,6 +7341,7 @@
     <Content Include="Mobile\default.aspx" />
     <Content Include="MyFollowup.aspx" />
     <Content Include="MyDefault.aspx" />
+    <Content Include="NewOffer\NewOfferAccepted.aspx" />
     <Content Include="NewOffer\NewOfferAssignCorp.ascx" />
     <Content Include="NewOffer\NewOfferList.aspx" />
     <Content Include="NewOffer\NewOfferPreview.aspx" />

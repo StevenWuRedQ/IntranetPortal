@@ -537,7 +537,8 @@
     </Items>
   </PortalNavItem>-->
   <PortalNavItem Name="PreShortSale" Text="New Offer" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <!--Temporarily use Admin roles for Eviction-->
+    <!--Temporarily use Admin roles for Eviction-->    
+    <UserRoles>OfficeManager-*,OfficeExecutive</UserRoles>
     <Items>
       <PortalNavItem Name="PSS-Summary" Text="Summary" NavigationUrl="/mydefault.aspx?name=NewOffer" ShowAmount="false">
         <FontClass>

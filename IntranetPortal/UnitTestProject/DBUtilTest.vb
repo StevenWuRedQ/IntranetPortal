@@ -58,10 +58,11 @@ Public Class DBUtilTest
 
             For Each d In data
 
+                If Not String.IsNullOrEmpty(d.LeadResearch) Then
+                    d.LeadResearch = DBJSONUtil.MapTo(d.LeadResearch, "G:/Working Folder/WebApp/IntranetPortalGit/IntranetPortal/IntranetPortal/App_Data/docsearchmap.csv")
+                    d.Version = 1
 
-
-                d.LeadResearch = DBJSONUtil.MapTo(d.LeadResearch, "D:/TasksWebApplication/IntranetPortal/IntranetPortal/App_Data/docsearchmap.csv")
-                d.Version = 1
+                End If
             Next
 
             ctx.SaveChanges()

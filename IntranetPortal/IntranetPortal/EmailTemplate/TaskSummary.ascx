@@ -10,7 +10,6 @@
         font-weight: 600;
     }
 
-
     body {
         font-family: Calibri 'Source Sans Pro';
     }
@@ -257,7 +256,7 @@
                             <!-- hot leads -->
                             <tr runat="server" visible="<%# hotCount > 0 %>">
                                 <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
-                                    <span class="email_title">Hot Leads:</span>&nbsp&nbsp;
+                                    <span class="email_title">Hot Leads</span>&nbsp&nbsp;
                                     <span class="index_bullet"> (<%# hotCount %>)</span>
                                     <asp:Repeater runat="server" ID="HotLeadsReapter">
                                         <HeaderTemplate>

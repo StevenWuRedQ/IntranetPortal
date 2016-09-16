@@ -53,6 +53,15 @@ Public Class ShortSaleManage
     End Function
 
     ''' <summary>
+    ''' Return if the property is in the shortsale process
+    ''' </summary>
+    ''' <param name="bble">The given BBLE</param>
+    ''' <returns></returns>
+    Public Shared Function IsInProcess(bble As String) As Boolean
+        Return ShortSaleCase.IsInProcess(bble)
+    End Function
+
+    ''' <summary>
     ''' Return if given case was changed
     ''' </summary>
     ''' <param name="changedCase">The Given ShortSale Case</param>
@@ -370,7 +379,8 @@ Public Class ShortSaleManage
         If processor IsNot Nothing Then
             ssCase.Processor = processor.ContactId
         End If
-
+        ssCase.AcceptedDate = DateTime.Now
+        ssCase.AcceptedBy = approvedBy
         ssCase.Save()
 
         If ssCase.CaseId > 0 Then
@@ -406,6 +416,8 @@ Public Class ShortSaleManage
         Catch ex As Exception
             Core.SystemLog.LogError("New SS Case email notification", ex, Nothing, HttpContext.Current.User.Identity.Name, bble)
         End Try
+
+        LeadsActivityLog.AddActivityLog(Now, "Leads was accepted by " & approvedBy, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString)
     End Sub
 
     Public Shared Function UpdateCaseStatus(caseId As Integer, status As ShortSale.CaseStatus, createBy As String, objData As String) As Boolean

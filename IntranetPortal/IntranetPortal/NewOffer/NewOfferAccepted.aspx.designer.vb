@@ -11,23 +11,14 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ViewLeadsInfo
+Partial Public Class NewOfferAccepted
     
     '''<summary>
-    '''LeadsInfo control.
+    '''divMsg control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LeadsInfo As Global.IntranetPortal.LeadsInfo1
-    
-    '''<summary>
-    '''LeadsSubMenu control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
+    Protected WithEvents divMsg As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

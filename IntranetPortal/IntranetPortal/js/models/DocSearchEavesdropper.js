@@ -1,4 +1,10 @@
-﻿
+﻿/**
+    * @author steven
+    * 
+    * @fix committed bf79f5e leads task search
+    *  add Doc search version switch
+    * 
+    */
 
 angular.module('PortalApp')
     /**
@@ -26,8 +32,7 @@ angular.module('PortalApp')
          * @description:
          *  set evaesdrapper public function very import
          */
-        docSearchEavesdropper.prototype.setEavesdropper = function(_eavesdropper,revFunc)
-        {
+        docSearchEavesdropper.prototype.setEavesdropper = function (_eavesdropper, revFunc) {
             this.eavesDropper = _eavesdropper;
             this.endorseCheckFuncs();
             this._registerCheckFuncs();
@@ -49,7 +54,7 @@ angular.module('PortalApp')
                 console.error("set rev function have been set up");
 
             this.endorseCheckFuncs();
-            
+
             this.revFunc = revFunc;
         }
 
@@ -63,13 +68,12 @@ angular.module('PortalApp')
             this.endorseCheckFuncs();
 
             if (this.endorseCheckDate(DocNewVersionConfig.getInstance().date)
-                || this.endorseCheckVersion())
-            {
+                || this.endorseCheckVersion()) {
                 this.revFunc(true);
             } else {
                 this.revFunc(false);
             }
-            
+
         }
 
         /**
@@ -80,16 +84,15 @@ angular.module('PortalApp')
          */
         docSearchEavesdropper.prototype.endorseCheckFuncs = function () {
             var eaves = this.eavesDropper;
-           
-            if ( typeof eaves.endorseCheckDate != 'function')
-            {
+
+            if (typeof eaves.endorseCheckDate != 'function') {
                 console.error("eavesDropper functions is not null");
             }
 
             if (typeof eaves.endorseCheckVersion != 'function') {
                 console.error("eavesDropper functions is not null");
             }
-           
+
         }
         /**
          * @author steven
@@ -97,8 +100,7 @@ angular.module('PortalApp')
          * @description:
          *  registerd check functions
          */
-        docSearchEavesdropper.prototype._registerCheckFuncs = function()
-        {
+        docSearchEavesdropper.prototype._registerCheckFuncs = function () {
             var eaves = this.eavesDropper;
             this.endorseCheckFuncs();
 

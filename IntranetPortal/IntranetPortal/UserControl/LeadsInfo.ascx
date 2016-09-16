@@ -17,8 +17,8 @@
 
     var tmpPhoneNo = null;
     var temTelLink = null;
-    var tmpEmail = null;;
-    var temCommentSpan = null
+    var tmpEmail = null;
+    var temCommentSpan = null;
     var tempEmailLink = null;
     var tmpAddress = null;
     var currOwner = "";
@@ -26,10 +26,17 @@
 
     function onSavePhoneComment() {
         var comment = $("#phone_comment").val();
-        var temCommentSpan = $(temTelLink).find(".phone_comment:first")
+        var temCommentSpan = $(temTelLink).parent().find(".phone_comment:first")
         if (temCommentSpan != null) {
             //$(".phone_comment").text("-" + comment); 
+            if (comment && comment.length > 30)
+            {
+                comment = comment.substring(0,30) + "..."
+            }
             temCommentSpan.text("-" + comment);
+        } else
+        {
+            console.error("Can not find temCommentSpan in onSavePhoneComment");
         }
         OnCallPhoneCallback("SaveComment|" + tmpPhoneNo + "|" + comment);
     }
@@ -612,7 +619,7 @@
                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                         <ItemStyle Paddings-PaddingLeft="20px" />
                                         <Items>
-                                            <dx:MenuItem Text="last called date" Name="LastCalledDate">
+                                            <dx:MenuItem Text="last called" Name="LastCalledDate">
                                             </dx:MenuItem>
                                             <dx:MenuItem Text="call count" Name="CallCount">
                                             </dx:MenuItem>

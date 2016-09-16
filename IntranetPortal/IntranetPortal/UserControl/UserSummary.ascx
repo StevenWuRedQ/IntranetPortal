@@ -4,7 +4,6 @@
 
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
-
 <link rel="stylesheet" href="/css/right-pane.css" />
 <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
 <script>
@@ -21,7 +20,6 @@
             {
                 $("#right-pane-container").css("right", "-290px");
             }
-
         });
     })
 </script>
@@ -460,15 +458,13 @@
                                                 <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />
                                             </GroupSummary>
                                         </dx:ASPxGridView>
-
                                     </div>
-
                                     <div class="col-md-4" style="vertical-align: top">
                                         <h4>
                                             <img src="../images/grid_call_back_icon.png" class="vertical-img" />
                                             <span class="heading_text">LoanMods
                                                 <span class="employee_lest_head_number_label"><%= IntranetPortal.Lead.GetLoanModDue(Page.User.Identity.Name).Count %></span>
-                                            </span> </h4>
+                                            </span></h4>
                                         <%--------end-------%>
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridLoanMod" ClientInstanceName="gridLoanModClient" KeyFieldName="BBLE" AutoGenerateColumns="false"
                                             OnDataBinding="gridLoanMod_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
