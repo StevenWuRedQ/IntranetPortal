@@ -92,6 +92,10 @@ Public Class HomeOwnerInfo
         Dim phoneStr = Regex.Replace(phone, "[^\d]+", "")
         Dim ownerPhone As HomeOwnerPhone = GetAllPhoneComments.FirstOrDefault(Function(p) p.Phone = phoneStr) 'ctx.HomeOwnerPhones.Where(Function(p) p.Phone = phoneStr And p.BBLE = BBLE And p.OwnerName = OwnerName).FirstOrDefault
         If (ownerPhone IsNot Nothing AndAlso ownerPhone.Comment IsNot Nothing) Then
+            Dim comment = ownerPhone.Comment
+            If comment.Length > 30 Then
+                comment = comment.Substring(0, 30) & " ..."
+            End If
             Return "-" + ownerPhone.Comment
         End If
         Return ""
