@@ -62,5 +62,7 @@ Partial Public Class ShortSaleCase
     Public Property CaseData As String
     Public Property Department As String
     Public Property AppId As Nullable(Of Integer)
+    Public Property AcceptedBy As String
+    Public Property AcceptedDate As Nullable(Of Date)
 
 End Class

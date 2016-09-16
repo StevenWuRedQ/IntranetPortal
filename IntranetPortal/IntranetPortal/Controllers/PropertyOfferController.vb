@@ -36,23 +36,40 @@ Namespace Controllers
         <Route("api/PropertyOffer/")>
         Public Function GetPropertyOffers() As IHttpActionResult
             Dim name = HttpContext.Current.User.Identity.Name
-
             Dim mgrView = HttpContext.Current.Request.QueryString("mgrview")
+            Dim summary = HttpContext.Current.Request.QueryString("summary")
+            Dim isSummary = False
+
+            If Boolean.TryParse(summary, isSummary) Then
+
+            End If
+
+
+            Dim result() As PropertyOffer = {}
             If Not String.IsNullOrEmpty(mgrView) Then
                 Dim view As PropertyOfferManage.ManagerView = 0
                 If Integer.TryParse(mgrView, view) Then
-                    Return Ok(PropertyOfferManage.GetOffersByManagerView(name, view))
+                    result = (PropertyOfferManage.GetOffersByManagerView(name, view, isSummary))
+                End If
+            Else
+                If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
+                    name = "*"
                 End If
 
-                Return Ok()
+                result = PropertyOffer.GetOffers(name)
             End If
 
-            If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
-                name = "*"
+            If result.Count > 0 AndAlso Not String.IsNullOrEmpty(summary) Then
+                If isSummary Then
+                    Dim data = New With {
+                            .data = result.OrderByDescending(Function(d) d.UpdateDate).Take(10).ToArray,
+                            .count = result.Count
+                        }
+                    Return Ok(data)
+                End If
             End If
 
-            Dim records = PropertyOffer.GetOffers(name)
-            Return Ok(records)
+            Return Ok(result)
         End Function
 
         ''' <summary>

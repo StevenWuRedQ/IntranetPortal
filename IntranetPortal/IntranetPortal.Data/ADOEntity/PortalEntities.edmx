@@ -935,6 +935,8 @@
           <Property Name="ApprovalChecklist" Type="nvarchar" MaxLength="1000" />
           <Property Name="CaseData" Type="nvarchar(max)" />
           <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="AcceptedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="AcceptedDate" Type="datetime" />
           <Property Name="AppId" Type="int" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
@@ -1608,6 +1610,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AppId" Type="Int32" />
+          <Property Name="AcceptedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AcceptedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -2771,6 +2775,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="AcceptedDate" ColumnName="AcceptedDate" />
+                <ScalarProperty Name="AcceptedBy" ColumnName="AcceptedBy" />
                 <ScalarProperty Name="AppId" ColumnName="AppId" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="CaseData" ColumnName="CaseData" />
