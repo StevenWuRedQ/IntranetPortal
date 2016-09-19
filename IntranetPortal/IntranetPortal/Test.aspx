@@ -10,6 +10,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <div ng-controller="TestController">
         {{helloworld}}
+        <test></test>
     </div>
 </asp:Content>
 
