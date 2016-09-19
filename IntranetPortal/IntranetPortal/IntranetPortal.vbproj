@@ -7226,6 +7226,7 @@
     <Content Include="js\filters.js" />
     <Content Include="js\filters\booleanToString.js" />
     <Content Include="js\filters\ByContact.js" />
+    <Content Include="js\filters\percentage.js" />
     <Content Include="js\filters\unsafe.js" />
     <Content Include="js\models\AssignCorp.js" />
     <Content Include="js\models\AuditLog.js" />

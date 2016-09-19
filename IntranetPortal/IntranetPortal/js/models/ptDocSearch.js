@@ -15,13 +15,14 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         New: 0,
         Completed: 1
     }
+
     docSearch.prototype.initTeam = function () {
         var self = this
         $http.get('/Services/TeamService.svc/GetTeam?userName=' + this.CreateBy).success(function (data) {
             self.team = data;
         });
     }
-    
+
     docSearch.prototype.initLeadsResearch = function () {
         var self = this;
 
@@ -36,15 +37,13 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             self.LeadResearch = _LeadSearch;
             /*always get refershed ssn*/
             if (self.LeadResearch.ownerName) {
-
                 self.LeadResearch.getOwnerSSN(self.BBLE);
             }
-            if(self.LeadResearch.initFromLeadsInfo)
-            {
+            if (self.LeadResearch.initFromLeadsInfo) {
                 data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
             }
         }
-       
+
         return data1;
     }
 
