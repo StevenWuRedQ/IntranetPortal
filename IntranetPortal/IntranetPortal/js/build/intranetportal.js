@@ -794,7 +794,13 @@ angular.module('PortalApp')
         
         return docNewVersionConfig;
     })
-
+/**
+    * @author steven
+    * 
+    * @fix committed bf79f5e leads task search
+    *  add Doc search version switch
+    * 
+    */
 
 angular.module('PortalApp')
     /**
@@ -822,8 +828,7 @@ angular.module('PortalApp')
          * @description:
          *  set evaesdrapper public function very import
          */
-        docSearchEavesdropper.prototype.setEavesdropper = function(_eavesdropper,revFunc)
-        {
+        docSearchEavesdropper.prototype.setEavesdropper = function (_eavesdropper, revFunc) {
             this.eavesDropper = _eavesdropper;
             this.endorseCheckFuncs();
             this._registerCheckFuncs();
@@ -845,7 +850,7 @@ angular.module('PortalApp')
                 console.error("set rev function have been set up");
 
             this.endorseCheckFuncs();
-            
+
             this.revFunc = revFunc;
         }
 
@@ -859,13 +864,12 @@ angular.module('PortalApp')
             this.endorseCheckFuncs();
 
             if (this.endorseCheckDate(DocNewVersionConfig.getInstance().date)
-                || this.endorseCheckVersion())
-            {
+                || this.endorseCheckVersion()) {
                 this.revFunc(true);
             } else {
                 this.revFunc(false);
             }
-            
+
         }
 
         /**
@@ -876,16 +880,15 @@ angular.module('PortalApp')
          */
         docSearchEavesdropper.prototype.endorseCheckFuncs = function () {
             var eaves = this.eavesDropper;
-           
-            if ( typeof eaves.endorseCheckDate != 'function')
-            {
+
+            if (typeof eaves.endorseCheckDate != 'function') {
                 console.error("eavesDropper functions is not null");
             }
 
             if (typeof eaves.endorseCheckVersion != 'function') {
                 console.error("eavesDropper functions is not null");
             }
-           
+
         }
         /**
          * @author steven
@@ -893,8 +896,7 @@ angular.module('PortalApp')
          * @description:
          *  registerd check functions
          */
-        docSearchEavesdropper.prototype._registerCheckFuncs = function()
-        {
+        docSearchEavesdropper.prototype._registerCheckFuncs = function () {
             var eaves = this.eavesDropper;
             this.endorseCheckFuncs();
 
@@ -1448,22 +1450,26 @@ angular.module('PortalApp').factory('ptUnderwriter', ['$http', 'ptBaseResource',
         this.OccupancyStatus = undefined;
         this.SellerOccupied = undefined;
         this.NumOfTenants = undefined;
+
         this.MoneySpent = undefined;
         this.HOI = undefined;
         this.COSTermination = undefined;
         this.AgentCommission = undefined;
+
         this.AverageLowValue = undefined;
         this.RenovatedValue = undefined;
         this.RepairBid = undefined;
         this.DealTimeMonths = undefined;
         this.SalesCommission = undefined;
         this.DealROICash = undefined;
+
         this.DeedPurchase = undefined;
         this.CurrentlyRented = undefined;
         this.RepairBidTotal = undefined;
         this.NumOfUnits = undefined;
         this.MarketRentTotal = undefined;
         this.RentalTime = undefined;
+
         this.FirstMortgage = undefined;
         this.SecondMortgage = undefined;
         this.COSRecorded = undefined;
@@ -1481,6 +1487,7 @@ angular.module('PortalApp').factory('ptUnderwriter', ['$http', 'ptBaseResource',
         this.CurrentPayoff = undefined;
         this.PayoffDate = undefined;
         this.CurrentSSValue = undefined;
+
         this.TaxLienCertificate = undefined;
         this.PropertyTaxes = undefined;
         this.WaterCharges = undefined;
@@ -1493,9 +1500,12 @@ angular.module('PortalApp').factory('ptUnderwriter', ['$http', 'ptBaseResource',
         this.VacateOrder = undefined;
         this.RelocationLien = undefined;
         this.RelocationLienDate = undefined;
-        this.tables = {};
-        this.flipSheets = {};
-        this.rentalModel = {}
+
+        this.Tables = {
+            Liens: {}
+        };
+        this.FlipSheets = {};
+        this.RentalModel = {}
 
     }
 
@@ -2538,6 +2548,18 @@ angular.module("PortalApp").filter("ByContact", function () {
         return items.out;
     };
 })
+angular.module("PortalApp").filter('percentage', function ($filter) {
+
+    return function (v) {
+        if (v) {
+            vf = parseFloat(v);
+            return $filter('number')(v * 100.0, 2) + "%";
+
+        }
+
+    }
+})
+
 angular.module("PortalApp")
 .filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
 angular.module("PortalApp")
@@ -4062,6 +4084,14 @@ angular.module('PortalApp')
     }
 }]
 );
+/**
+ * @author Steven Wu
+ * @date 9/15/2016
+ * @fix git committed bde6b6d
+ * add tax search js cotroller
+ * LeadTaxSearchController is doc search. 
+ * naming wrong becuase the name always change from spec guys.
+ */
 angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
         ptContactServices, ptCom, DocSearch, LeadsInfo
@@ -8400,38 +8430,32 @@ angular.module("PortalApp").config(function ($stateProvider) {
 
     var underwriter = {
         name: 'underwriter',
-        url: '',
-        abstract: true,
-        controller: 'UnderwriterController',
-        templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
+        url: '/underwriter',
+        controller: 'UnderwriterController'
     }
 
     var dataInput = {
-        name: 'datainput',
+        name: 'underwriter.datainput',
         url: '/datainput',
-        parent: 'underwriter',
-        controller: 'UnderwriterController',
+        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
     }
     var flipsheets = {
-        name: 'flipsheets',
+        name: 'underwriter.flipsheets',
         url: '/flipsheets',
-        parent: 'underwriter',
-        controller: 'UnderwriterController',
+        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
     }
     var rentalmodels = {
-        name: 'rentalmodels',
+        name: 'underwriter.rentalmodels',
         url: '/rentalmodels',
-        parent: 'underwriter',
-        controller: 'UnderwriterController',
+        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
     }
     var tables = {
-        name: 'tables',
+        name: 'underwriter.tables',
         url: '/tables',
-        parent: 'underwriter',
-        controller: 'UnderwriterController',
+        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/tables.tpl.html'
     }
 
@@ -8442,14 +8466,11 @@ angular.module("PortalApp").config(function ($stateProvider) {
                     .state(tables);
 
 });
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', 'ptUnderwriter', function ($scope, ptCom, $location, ptUnderwriter) {
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', 'ptUnderwriter', function ($scope, ptCom, ptUnderwriter) {
 
     $scope.data = {};
     $scope.uw = ptUnderwriter;
 
-    $scope.isActive = function (viewLocation) {
-        return viewLocation === $location.path();
-    };
 
     $scope.init = function (bble, isImport) {
         ptCom.startLoading()
@@ -8470,15 +8491,84 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         $scope.applyRule();
     }
 
+    $scope.applyFixedRules = function () {
+        var t = $scope.data.Tables;
+
+        if (!$scope.fixedRulesApplied) {
+            $scope.fixedRulesApplied = 1;
+
+            // Table -> liens
+            t.Liens.TaxLienSettlement = 0.09 / 12;
+            t.Liens.PropertyTaxesSettlement = 1.0;
+            t.Liens.WaterChargesSettlement = 1.0;
+            t.Liens.HPDChargesSettlement = 1.0;
+            t.Liens.ECBDOBViolationsSettlement = 0.35;
+            t.Liens.DOBCivilPenaltiesSettlement = 1.0;
+            t.Liens.PersonalJudgementsSettlement = 0.4;
+            t.Liens.HPDJudgementsSettlement = 0.15;
+            t.Liens.RelocationLienSettlement = .09 / 365;
+            t.Liens.HOILienSettlement = 0.75;
+
+
+
+        }
+    };
+
     $scope.applyRule = function () {
-        var t = $scope.data.tables;
+        var t = $scope.data.Tables;
         var d = $scope.data;
-        /** table **/
-        t.TaxLienSettlement = 0.09 / 12;
-        t.TaxLien = d.TaxLienCertificate * (1 + (t.TaxLienSettlement * d.DealTimeMonths));
+        var float = parseFloat;
+
+        $scope.applyFixedRules();
+
+        // DataInputs
+        d.PropertyInfo = (function () { return /.*(A|B|C0|21|R).*/.exec(d.TaxClass) ? "Residential" : "Not Residential" })();
+
+        // Tables -> Liens
+        t.Liens.TaxLien = float(d.TaxLienCertificate) * (1.0 + (t.Liens.TaxLienSettlement * float(d.DealTimeMonths)));
+        t.Liens.PropertyTaxes = float(d.PropertyTaxes) * t.Liens.PropertyTaxesSettlement;
+        t.Liens.WaterCharges = float(d.WaterCharges) * t.Liens.WaterChargesSettlement;
+        t.Liens.HPDCharges = float(d.HPDCharges) * t.Liens.HPDChargesSettlement;
+        t.Liens.ECBDOBViolations = float(d.ECBDOBViolations) * (1.0 + 0.0075 * float(d.DealTimeMonths)) * t.Liens.ECBDOBViolationsSettlement;
+        t.Liens.DOBCivilPenalties = float(d.DOBCivilPenalty) * t.Liens.DOBCivilPenaltiesSettlement;
+        t.Liens.PersonalJudgements = float(d.PersonalJudgements) * t.Liens.PersonalJudgementsSettlement;
+        t.Liens.HPDJudgements = float(d.HPDJudgements) * t.Liens.HPDJudgementsSettlement;
+        t.Liens.IRSNYSTaxLienSettlement = (function () {
+            return float(d.IRSNYSTaxLiens) < 12500 ? 1.0 : 0.0
+        })();
+        t.Liens.IRSNYSTaxLien = float(d.IRSNYSTaxLiens) * t.Liens.IRSNYSTaxLienSettlement;
+        t.Liens.RelocationLien = (function () {
+
+            function getTodayDate(){
+                return new Date(new Date().toJSON().slice(0,10));
+            }
+            if (!d.RelocationLienDate)
+                return 0.0;
+            else {
+                return float(d.RelocationLien) * (1.0 + (getTodayDate().getTime() + 180*24*60*60*1000 - new Date(d.RelocationLienDate).getTime()) * t.Liens.RelocationLienSettlement)
+            }
+        })();
+
+        t.Liens.MoneySpent = float(d.MoneySpent);
+        t.Liens.HOILien = (function () {
+            var c1 = d.SellerOccupied;
+            var c2 = d.NumOfTenants > 0;
+            var c3 = d.FHA;
+            var c4 = d.FannieMae;
+            var c5 = d.FreddieMac;
+            var c6 = d.HOI;
+
+            return (c1 | c2) & c3 & c4 & c5 & c6 ? float(d.HOI) * t.Liens.HOILienSettlement - 10000.00 : float(d.HOI) * t.Liens.HOILienSettlement;
+
+        })();
+        t.Liens.COSTermination = float(d.COSTermination);
+        t.Liens.Tenants = float(d.NumOfTenants) * 5000.00;
+        t.Liens.Agent = float(d.AgentCommission);
+        
     }
 
 }])
+
 angular.module("PortalApp")
     .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {
 

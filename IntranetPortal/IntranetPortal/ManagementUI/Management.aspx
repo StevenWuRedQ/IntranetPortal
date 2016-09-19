@@ -2,8 +2,6 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
     <style>
         .nofoucs:focus {
             border: none !important;
@@ -12,8 +10,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/bower_components/globalize/lib/globalize.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -1104,7 +1101,7 @@
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div id="barchart"></div>
+                                                    <canvas id="SS_Accepted_Chart" width="1200" height="300"></canvas>
                                                 </div>
 
 
@@ -1155,41 +1152,41 @@
                                     angular.module("PortalApp").controller('SSAcceptedTabCtrl', function ($scope) {
 
                                         $scope.dataSource = [{
-                                            day: "Jan",
-                                            oranges: 3
+                                            label: "Jan",
+                                            value: 3
                                         }, {
-                                            day: "Feb",
-                                            oranges: 2
+                                            label: "Feb",
+                                            value: 2
                                         }, {
-                                            day: "Mar",
-                                            oranges: 3
+                                            label: "Mar",
+                                            value: 3
                                         }, {
-                                            day: "Apr",
-                                            oranges: 4
+                                            label: "Apr",
+                                            value: 4
                                         }, {
-                                            day: "May",
-                                            oranges: 6
+                                            label: "May",
+                                            value: 6
                                         }, {
-                                            day: "Jun",
-                                            oranges: 11
+                                            label: "Jun",
+                                            value: 11
                                         }, {
-                                            day: "Jul",
-                                            oranges: 4
+                                            label: "Jul",
+                                            value: 4
                                         }, {
-                                            day: "Aug",
-                                            oranges: 6
+                                            label: "Aug",
+                                            value: 6
                                         }, {
-                                            day: "Sep",
-                                            oranges: 11
+                                            label: "Sep",
+                                            value: 11
                                         }, {
-                                            day: "Oct",
-                                            oranges: 4
+                                            label: "Oct",
+                                            value: 4
                                         }, {
-                                            day: "Nov",
-                                            oranges: 6
+                                            label: "Nov",
+                                            value: 6
                                         }, {
-                                            day: "Dec",
-                                            oranges: 11
+                                            label: "Dec",
+                                            value: 11
                                         }];
                                         $scope.TeamName = null;
                                         $scope.TeamName = null;
@@ -1237,6 +1234,13 @@
                                             });
                                             $("#barchart").dxChart({
                                                 dataSource: $scope.dataSource,
+                                                size: {
+                                                    height: 300,
+                                                },
+                                                barWidth: 0.5,
+                                                border: {
+                                                    width: 2
+                                                },
                                                 series: [{
                                                     argumentField: "day",
                                                     valueField: "oranges",

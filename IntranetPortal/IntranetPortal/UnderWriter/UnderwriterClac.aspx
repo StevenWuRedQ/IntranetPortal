@@ -76,14 +76,16 @@
         }
     </style>
     <div id="underwrite_clac" ng-controller="UnderwriterController">
-        <ui-view></ui-view>
+        <ui-view>
+            <ui-view></ui-view>
+        </ui-view>
         <nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container-fluid">
                 <ul class=" nav navbar-nav">
-                    <li ui-sref-active="active"><a ui-sref="datainput" >Data Input</a></li>
-                    <li ui-sref-active="active"><a ui-sref="flipsheets" >FlipSheets</a></li>
-                    <li ui-sref-active="active"><a ui-sref="rentalmodels" >Rental Model</a></li>
-                    <li ui-sref-active="active"><a ui-sref="tables">Tables</a></li>
+                    <li ui-sref-active="active"><a ui-sref="underwriter.datainput" >Data Input</a></li>
+                    <li ui-sref-active="active"><a ui-sref="underwriter.flipsheets" >FlipSheets</a></li>
+                    <li ui-sref-active="active"><a ui-sref="underwriter.rentalmodels" >Rental Model</a></li>
+                    <li ui-sref-active="active"><a ui-sref="underwriter.tables">Tables</a></li>
                 </ul>
                 <!-- /.navbar-collapse -->
             </div>

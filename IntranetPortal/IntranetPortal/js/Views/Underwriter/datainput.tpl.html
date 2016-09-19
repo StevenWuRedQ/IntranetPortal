@@ -1,5 +1,4 @@
-﻿
-<div class="container" style="width: 80%; margin-top: 20px">
+﻿<div class="container" style="width: 80%; margin-top: 20px">
     <div class="row">
         <div id="data_input_area" class="col-md-9 col-lg-9">
             <div class="row">
@@ -8,7 +7,10 @@
                     <div class="pt-panel">
                         <table>
                             <tr>
-                                <th class="td-label excel-default" colspan="2">Property Info</th>
+                                <th class="td-label excel-default">Property Info</th>
+                                <th class="td-value excel-default">
+                                    <span ng-bind='data.PropertyInfo'></span>
+                                </th>
                             </tr>
 
                             <tr>
@@ -20,7 +22,7 @@
 
                             <tr>
                                 <td class="td-value" colspan="2">
-                                    <input ngchange='update()' ng-model="data.PropertyAddress" />
+                                    <input ng-change='update()' ng-model="data.PropertyAddress" />
                                 </td>
                             </tr>
                             <tr>
@@ -28,51 +30,47 @@
                                     Tax Class:
                                 </td>
                                 <td class="td-value">
-                                    <input ngchange='update()' ng-model='data.TaxClass' />
+                                    <input ng-change='update()' ng-model='data.TaxClass' />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Building Dimension:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.BuildingDimension' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.BuildingDimension' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Lot Size:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.LotSize' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.LotSize' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Zoning:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.Zoning' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.Zoning' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Actual # of Units:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.ActualNumOfUnits' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.ActualNumOfUnits' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Property Tax (Year):
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.PropertyTaxYear' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.PropertyTaxYear' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Occupancy Status:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.OccupancyStatus' /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Seller Occupied:
-                                </td>
                                 <td class="td-value">
-                                    <select style="width: 100%" ng-model='data.SellerOccupied'>
+
+
+                                    <select style="width: 100%" ng-change='update()' ng-model='data.OccupancyStatus'>
                                         <option>Unkown</option>
                                         <option>Vacant</option>
                                         <option>Seller</option>
@@ -80,6 +78,14 @@
                                         <option>Tenant</option>
                                         <option>Multiple Tenants</option>
                                     </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Seller Occupied:
+                                </td>
+                                <td class="td-value">
+                                    <input ng-change="update()" ng-model='data.SellerOccupied' />
 
                                 </td>
                             </tr>
@@ -87,7 +93,7 @@
                                 <td class="td-label">
                                     # of Tenants:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.NumOfTenants' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.NumOfTenants' /></td>
                             </tr>
 
                         </table>
@@ -104,26 +110,26 @@
 
                                 </td>
                                 <td class="td-value">
-                                    <input ngchange='update()' ng-model='data.MoneySpent' />
+                                    <input ng-change='update()' ng-model='data.MoneySpent' />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     HOI:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.HOI' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.HOI' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     COS Termination:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.COSTermination' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.COSTermination' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Agent Commission:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.AgentCommission' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.AgentCommission' /></td>
                             </tr>
 
 
@@ -141,37 +147,37 @@
                                     Average Low Value:
 
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.AverageLowValue' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.AverageLowValue' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Renovated Value:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.RenovatedValue' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RenovatedValue' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Repair Bid:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.RepairBid' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RepairBid' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Deal Time (Months):
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.DealTimeMonths' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.DealTimeMonths' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Sales Commission:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.SalesCommission' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.SalesCommission' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Deal ROI (Cash):
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.DealROICash' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.DealROICash' /></td>
                             </tr>
 
 
@@ -189,37 +195,37 @@
                                     Deed Purchase:
 
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.DeedPurchase' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.DeedPurchase' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Currently Rented:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.CurrentlyRented' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.CurrentlyRented' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Repair Bid Total:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.RepairBidTotal' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RepairBidTotal' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     # of Units
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.NumOfUnits' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.NumOfUnits' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Market Rent Total:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.MarketRentTotal' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.MarketRentTotal' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Rental Time:
                                 </td>
-                                <td class="td-value"><input ngchange='update()' ng-model='data.RentalTime' /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RentalTime' /></td>
                             </tr>
 
                         </table>
@@ -242,7 +248,7 @@
                                             1st Mortgage:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.FirstMortgage' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.FirstMortgage' money-mask /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -250,20 +256,20 @@
 
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.SecondMortgage' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.SecondMortgage' money-mask /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             COS Recorded:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.COSRecorded' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.COSRecorded' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Deed Recorded:
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.DeedRecorded' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.DeedRecorded' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -289,7 +295,7 @@
                                         </td>
                                         <td class="td-value">
 
-                                            <input ngchange='update()' ng-model='data.FHA' />
+                                            <input ng-change='update()' ng-model='data.FHA' />
                                         </td>
                                     </tr>
                                     <tr>
@@ -297,28 +303,28 @@
                                             Fannie Mae:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.FannieMae' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.FannieMae' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Freddie Mac:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.FreddieMac' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.FreddieMac' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Servicer:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.Servicer' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.Servicer' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Foreclosure Index #:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.ForeclosureIndexNum' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.ForeclosureIndexNum' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -344,7 +350,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <input ngchange='update()' ng-model='data.ForeclosureNote' />
+                                            <input ng-change='update()' ng-model='data.ForeclosureNote' />
 
 
                                         </td>
@@ -354,35 +360,35 @@
                                             Auction Date:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.AuctionDate' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.AuctionDate' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Default Date:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.DefaultDate' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.DefaultDate' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Current Payoff:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.CurrentPayoff' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.CurrentPayoff' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Payoff Date:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.PayoffDate' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.PayoffDate' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Current SS Value:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.CurrentSSValue' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.CurrentSSValue' /></td>
                                     </tr>
 
                                 </table>
@@ -402,14 +408,14 @@
                                             Tax Lien Certificate:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.TaxLienCertificate' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.TaxLienCertificate' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Property Taxes:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.PropertyTaxes' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.PropertyTaxes' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -417,69 +423,69 @@
 
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.WaterCharges' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.WaterCharges' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             HPD Charges:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.HPDCharges' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.HPDCharges' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             ECB/DOB Violations:
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.ECBDOBViolations' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.ECBDOBViolations' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             DOB Civil Penalty
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.DOBCivilPenalty' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.DOBCivilPenalty' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Personal Judgements:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.PersonalJudgements' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.PersonalJudgements' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             HPD Judgements:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.HPDJudgements' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.HPDJudgements' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             IRS/NYS Tax Liens:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.IRSNYSTaxLiens' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.IRSNYSTaxLiens' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Vacate Order:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.VacateOrder' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.VacateOrder' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Relocation Lien:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.RelocationLien' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.RelocationLien' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Relocation Lien Date:
 
                                         </td>
-                                        <td class="td-value"><input ngchange='update()' ng-model='data.RelocationLienDate' /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.RelocationLienDate' /></td>
                                     </tr>
 
                                 </table>
