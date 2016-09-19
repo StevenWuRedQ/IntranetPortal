@@ -1162,6 +1162,16 @@ function GetPhoneNumber(span)
     return text.match(/\d+/g).join("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 }
 
+function GetUndoIndex(span)
+{
+    var undo_index = $(span).attr('data-undo-wrong');
+    if (!undo_index)
+    {
+        return -1;
+    }
+    return parseInt(undo_index);
+}
+
 function compareByActive(a, b) {
 
     var phoneLinkA = $(a).find(".PhoneLink:first");
@@ -1171,16 +1181,26 @@ function compareByActive(a, b) {
     var hcolor = hashStr(color);
     var hcolorB = hashStr(colorB);
 
-
+    // move wrong phone down by color
     var diff = hcolor - hcolorB;
 
     if (diff == 0) {
-        // do not move working phone and normal phone
-        var phoneLinkStrA = GetPhoneNumber(phoneLinkA);
-        var phoneLinkStrB = GetPhoneNumber(phoneLinkB);
-        var phoneAHash = hashStr(phoneLinkStrA);
-        var phoneBHash = hashStr(phoneLinkStrB);
-        diff = phoneAHash - phoneBHash;
+        // move undo wrong number under acitve number list 
+        var undo_indexA = GetUndoIndex(phoneLinkA);
+        var undo_indexB = GetUndoIndex(phoneLinkB);
+        diff = undo_indexA - undo_indexB;
+
+        if (diff == 0)
+        {
+            // do not move working phone and normal phone
+            var phoneLinkStrA = GetPhoneNumber(phoneLinkA);
+            var phoneLinkStrB = GetPhoneNumber(phoneLinkB);
+            var phoneAHash = hashStr(phoneLinkStrA);
+            var phoneBHash = hashStr(phoneLinkStrB);
+            diff = phoneAHash - phoneBHash;
+        }
+        
+       
     }
 
     return diff;
@@ -1238,6 +1258,7 @@ function compareByCallCount(a, b) {
     if (wrongPhone(b)) {
         CountB = -1;
     }
+
     diff = CountB - CountA;
     return diff;
 }
@@ -1253,15 +1274,56 @@ function sortPhoneFunc(compareFunc) {
             return compareFunc(a, b);
         });
 
-
         phones.each(function (ind) {
             var ptext = $(this).text();
             html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
         });
+       
         phones.parent().html('<div>' + html + '</div>');
+        var last_undo_wrong =  $("[data-undo-wrong='0']")
+            .closest(".color_gray:has(.color_gray)");
+        if (last_undo_wrong.length > 0 && !$(last_undo_wrong).prev().is("hr"))
+        {
+            $("<hr />").insertBefore(last_undo_wrong);
+        }
+        
+
     });
 }
 
+function reSortUndoWrongPhone(phones)
+{
+    var data_undo_wrong_attr = "data-undo-wrong";
+    var undoWrongs = $.grep(phones, function (n, i) {
+        return $(n).attr(data_undo_wrong_attr) != null;
+    }, true);
+
+    var phonesLeft = $.grep(phones, function (n) {
+        return undoWrongs.indexOf(n) < 0;
+    });
+    var phonesWrong = $.grep(phones, function (n) {
+        return undoWrongs.indexOf(n) < 0;
+    });
+
+    undoWrongs.sort(function (a, b) {
+        var undoWA = parseInt($(a).attr(data_undo_wrong_attr));
+        var undoWB = parseInt($(b).attr(data_undo_wrong_attr));
+        return undoWA - undoWB;
+    })
+
+}
+
+function buildPhonesHtml(phones)
+{
+    var html = "";
+
+    phones.each(function (ind) {
+        var ptext = $(this).text();
+        html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
+    });
+
+    return html;
+}
 function sortPhones() {
     sortPhoneFunc(compareByActive);
     //var colors = {}

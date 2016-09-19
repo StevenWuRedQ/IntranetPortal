@@ -29,13 +29,11 @@
         var temCommentSpan = $(temTelLink).parent().find(".phone_comment:first")
         if (temCommentSpan != null) {
             //$(".phone_comment").text("-" + comment); 
-            if (comment && comment.length > 30)
-            {
-                comment = comment.substring(0,30) + "..."
+            if (comment && comment.length > 30) {
+                comment = comment.substring(0, 30) + "..."
             }
             temCommentSpan.text("-" + comment);
-        } else
-        {
+        } else {
             console.error("Can not find temCommentSpan in onSavePhoneComment");
         }
         OnCallPhoneCallback("SaveComment|" + tmpPhoneNo + "|" + comment);
@@ -81,7 +79,7 @@
             if (e.item.index == 1) {
                 //telphoneLine.style.textDecoration = "line-through";
                 //telphoneLine.style.color = "red";
-
+                
                 OnCallPhoneCallback("BadPhone|" + tmpPhoneNo);
 
                 SetSameStyle("PhoneLink", "phone-wrong", tmpPhoneNo);
@@ -89,7 +87,8 @@
 
             if (e.item.index == 2) {
                 //telphoneLine.style.color = "green";
-                //telphoneLine.style.textDecoration = "none";                
+                //telphoneLine.style.textDecoration = "none";
+                IsUndoNotWorking(true, temTelLink);
                 OnCallPhoneCallback("RightPhone|" + tmpPhoneNo);
                 SetSameStyle("PhoneLink", "phone-working", tmpPhoneNo);
             }
@@ -97,6 +96,7 @@
             if (e.item.index == 3) {
                 //telphoneLine.style.color = "green";
                 //telphoneLine.style.textDecoration = "none";
+                IsUndoNotWorking(true, temTelLink);
                 OnCallPhoneCallback("UndoPhone|" + tmpPhoneNo);
                 SetSameStyle("PhoneLink", "", tmpPhoneNo);
             }
@@ -110,10 +110,29 @@
         e.item.SetChecked(false);
 
         if (sortPhones && e.item.index != 4 && e.item.index != 0) {
+            
             sortPhones();
         }
     }
+    function clearUndoCount(_tempTelLink)
+    {
+        $(_tempTelLink).removeAttr("data-undo-wrong");
+    }
+    function IsUndoNotWorking(isUndo, _temTelLink) {
+        var telDiv = $(_temTelLink).parent().first();
+        var telDivParent = $(telDiv).closest(".homeowner_info_label");
+        var isWrongPhone = $(_temTelLink).hasClass("phone-wrong");
+        if (isWrongPhone && isUndo) {
+            if (!telDivParent)
+            {
+                console.error("can not find root homeowner_info_label for check IsUndoNotWorking phone ");
+                return;
+            }
+            var undo_wrong_count = telDivParent.find("[data-undo-wrong]").length;
+            $(_temTelLink).attr("data-undo-wrong", undo_wrong_count);
+        }
 
+    }
     function SetSameStyle(className, style, value) {
         var list = document.getElementsByClassName(className)
         // alert('find class ' + className+ 'get item count '+list.length +' value'+value);
