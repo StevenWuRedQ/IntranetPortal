@@ -264,7 +264,7 @@
 
 
     <!--Best Phone info -->
-
+    
     <div>
         <div class="form_head homeowner_section_margin">
             <span runat="server" id="ulBestPhones">Best Phone Numbers &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color" style="cursor: pointer" onclick="<%= String.Format("AddBestPhoneNum('{0}','{1}','{2}', this)", BBLE, OwnerName, ulBestPhones.ClientID)%>"></i>
@@ -316,6 +316,7 @@
                             <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
+                                    
                                     <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
                                             <span class="phone-working-text">- Working phone</span>
