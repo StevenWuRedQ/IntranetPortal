@@ -80,10 +80,10 @@
         <nav class="navbar navbar-default navbar-fixed-bottom">
             <div class="container-fluid">
                 <ul class=" nav navbar-nav">
-                    <li ng-class="{ active: isActive('datainput')}"><a ui-sref="datainput" ui-sref-active="active">Data Input</a></li>
-                    <li ng-class="{ active: isActive('flipsheets')}"><a ui-sref="flipsheets" ui-sref-active="active">FlipSheets</a></li>
-                    <li ng-class="{ active: isActive('rentalmodels')}"><a ui-sref="rentalmodels" ui-sref-active="active">Rental Model</a></li>
-                    <li ng-class="{ active: isActive('tables')}"><a ui-sref="tables" ui-sref-active="active">Tables</a></li>
+                    <li ui-sref-active="active"><a ui-sref="datainput" >Data Input</a></li>
+                    <li ui-sref-active="active"><a ui-sref="flipsheets" >FlipSheets</a></li>
+                    <li ui-sref-active="active"><a ui-sref="rentalmodels" >Rental Model</a></li>
+                    <li ui-sref-active="active"><a ui-sref="tables">Tables</a></li>
                 </ul>
                 <!-- /.navbar-collapse -->
             </div>

@@ -44,14 +44,11 @@
                     .state(tables);
 
 });
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', 'ptUnderwriter', function ($scope, ptCom, $location, ptUnderwriter) {
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom',  'ptUnderwriter', function ($scope, ptCom,  ptUnderwriter) {
 
     $scope.data = {};
     $scope.uw = ptUnderwriter;
 
-    $scope.isActive = function (viewLocation) {
-        return viewLocation === $location.path();
-    };
 
     $scope.init = function (bble, isImport) {
         ptCom.startLoading()
@@ -78,6 +75,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         /** table **/
         t.TaxLienSettlement = 0.09 / 12;
         t.TaxLien = d.TaxLienCertificate * (1 + (t.TaxLienSettlement * d.DealTimeMonths));
+
     }
 
 }])

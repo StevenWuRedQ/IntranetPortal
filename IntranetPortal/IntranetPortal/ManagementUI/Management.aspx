@@ -556,7 +556,7 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <label for="selAgents" style="float: left">Select Agents:&nbsp;</label>
-                                                <select class="form-control" style="width: 200px; float: left; margin-left: 20px;" id="selAgents" name="selAgents">
+                                                <select class="form-control selAgents" style="width: 200px; float: left; margin-left: 20px;" id="SS_selAgents" name="selAgents">
                                                     <option>All Agents</option>
                                                     <option>Agents 1</option>
                                                 </select>
@@ -755,7 +755,7 @@
                                                                 }
                                                             },
                                                         }],
-                                                        title: "In Process Leads"                                                        
+                                                        title: "In Process Leads"
                                                     }
 
                                                     option.onDone = function (e) {
@@ -836,7 +836,7 @@
                                     <iframe src="/Map/ZipMap.aspx" style="width: 100%; height: 800px"></iframe>
                                 </div>--%>
                                 <div role="tabpanel" class="tab-pane" id="Team_Activity_Tab">
-                                   <div class="mag_tab_input_group">
+                                    <div class="mag_tab_input_group">
                                         <div class="row">
                                             <div id="dateRange2" class="containers" style="width: 100%;"></div>
                                         </div>
@@ -846,15 +846,15 @@
                                             <div id="leadsImportChart" class="containers" style="height: 440px; width: 100%;"></div>
                                         </div>
                                     </div>
-                                     <div id="divTeamLeadsPopup" style="width: 700px">
+                                    <div id="divTeamLeadsPopup" style="width: 700px">
                                         <div id="gridTeamLeads" style="height: 450px; max-width: 700px; width: 100%; margin: 0 auto;"></div>
                                     </div>
                                     <script type="text/javascript">
                                         var TeamActivityTab = {
                                             DateRange: function () { return $('#dateRange2').has("svg").length ? $('#dateRange2').dxRangeSelector('instance') : null },
-                                            ShowTab: function() {
+                                            ShowTab: function () {
                                                 var range = this.DateRange();
-                                                var selectedRange = range.getSelectedRange();                                               
+                                                var selectedRange = range.getSelectedRange();
                                                 this.UpdateChart(selectedRange.startValue, selectedRange.endValue);
                                             },
                                             InitalTab: function () {
@@ -878,7 +878,7 @@
                                                         minorTickInterval: "day",
                                                         majorTickInterval: 'week',
                                                         minRange: "day",
-                                                        showMinorTicks: false                                                        
+                                                        showMinorTicks: false
                                                     },
                                                     sliderMarker: {
                                                         format: "monthAndDay"
@@ -914,7 +914,7 @@
                                                         tab.UpdateTeamChart(clickedPoint.argument);
                                                     },
                                                 });
-                                                chart.endUpdate();                                                
+                                                chart.endUpdate();
                                             },
                                             UpdateTeamChart: function (teamName) {
                                                 var chart = this.BarChart();
@@ -922,7 +922,7 @@
                                                 chart.showLoadingIndicator();
                                                 chart.clearSelection();
                                                 var ds = new DevExpress.data.DataSource("/api/portalreport/" + teamName);
-                                                chart.beginUpdate();                                                
+                                                chart.beginUpdate();
                                                 chart.option({
                                                     dataSource: ds,
                                                     series: [
@@ -963,7 +963,7 @@
                                                         ],
                                                         argumentAxis: {
                                                             argumentType: 'string'
-                                                        },                                                     
+                                                        },
                                                         title: "Leads Import Amount of the Teams",
                                                         legend: {
                                                             verticalAlignment: "bottom",
@@ -971,12 +971,12 @@
                                                         },
                                                         loadingIndicator: {
                                                             show: true
-                                                        },                                                        
+                                                        },
                                                         onPointSelectionChanged: function (info) {
-                                                           
+
                                                         },
                                                         onLegendClick: function (info) {
-                                                           
+
                                                         }
                                                     });
                                                     return $("#leadsImportChart").dxChart("instance");
@@ -1000,7 +1000,7 @@
                                                 });
                                                 $("#divTeamLeadsPopup").dxPopup("instance").show();
 
-                                                var dsUrl = "/api/PortalReport/?teamName=" + teamName + "&startDate=" + Globalize.format(importDate, "yyyy-MM-dd");                                               
+                                                var dsUrl = "/api/PortalReport/?teamName=" + teamName + "&startDate=" + Globalize.format(importDate, "yyyy-MM-dd");
                                                 $("#gridTeamLeads").dxDataGrid({
                                                     dataSource: new DevExpress.data.DataSource(dsUrl),
                                                     showColumnLines: false,
@@ -1012,7 +1012,7 @@
                                                     },
                                                     "export": {
                                                         enabled: true,
-                                                        fileName: "leads"                                                        
+                                                        fileName: "leads"
                                                     }, groupPanel: {
                                                         visible: true
                                                     },
@@ -1051,88 +1051,259 @@
 
                                             }
                                         }
-
                                     </script>
 
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="SSAccepted_Tab">
-                                     <div class="mag_tab_input_group">
+                                <div role="tabpanel" class="tab-pane" id="SSAccepted_Tab" ng-controller="SSAcceptedTabCtrl">
+
+                                    <style>
+                                        .manageui-title {
+                                            font-size: 28px;
+                                            font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+                                            font-weight: 200;
+                                            fill: #232323;
+                                            cursor: default;
+                                        }
+
+                                        div .summary-box {
+                                            border-top: 2px solid #585858;
+                                            border-bottom: 2px solid #ddd;
+                                            border-left: 1px solid #ddd;
+                                            border-right: 1px solid #ddd;
+                                            border-radius: 2px;
+                                            height: 160px;
+                                            text-align: center;
+                                            margin: 10px;
+                                            box-shadow: 1px 1px 1px #888888;
+                                        }
+
+                                        .col-md-x20 {
+                                            width: 20%;
+                                            float: left;
+                                        }
+
+                                        .summary-detail {
+                                            padding-top: 5px;
+                                            font-size: 64px;
+                                            font-weight: bold;
+                                        }
+                                    </style>
+                                    <div class="mag_tab_input_group">
                                         <div class="row">
-                                            <div id="acceptedRange" class="containers" style="width: 100%;"></div>
+                                            <div class="col-md-3">
+                                                <label for="selAgents" style="float: left">Select Agents:&nbsp;</label>
+                                                <select class="form-control .selAgents" style="width: 200px; float: left; margin-left: 20px;" id="selAgents" name="selAgents">
+                                                    <option>All Agents</option>
+                                                    <option>Agents 1</option>
+                                                </select>
+                                            </div>
+                                            <div id="acceptedRange" class="col-md-9 containers"></div>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 10px">
                                         <div class="col-md-12">
-                                            
-                                        </div>
-                                        <div class="">
-                                            
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id="barchart"></div>
+                                                </div>
+
+
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+
+
+                                                        <span class="manageui-title">Shortsale Accepted</span>
+                                                        <div><span class="summary-detail">{{50}}</span></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Total Commission</span>
+                                                        <div><span class="summary-detail">$24.00</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Rank In Team</span>
+                                                        <div><span class="summary-detail">1</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Overall Rank</span>
+                                                        <div><span class="summary-detail">3</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Team Rank</span>
+                                                        <div><span class="summary-detail">2</span></div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+
                                         </div>
                                     </div>
-                                    <script>
-                                        var ssAcceptedTab = {
-                                            TeamName: null,
-                                            CurrentAgentName: null,
-                                            Visible: function () { return $("#SSAccepted_Tab").hasClass("active") ? true : false },
-                                            DateRange: function () {
-                                                return $('#acceptedRange').has("svg").length ? $('#acceptedRange').dxRangeSelector('instance') : null
-                                            },
-                                            InitalTab: function () {
-                                                var tab = this;
-                                                var dateNow = new Date();
-                                                var endDate = new Date();
-                                                endDate = endDate.setDate(dateNow.getDate() + 1);
-                                                var scaleStart = new Date();
-                                                scaleStart.setMonth(scaleStart.getMonth() - 6);
-                                                var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
-                                                $("#acceptedRange").dxRangeSelector({
-                                                    margin: {
-                                                        top: 5
-                                                    },
-                                                    size: {
-                                                        height: 120
-                                                    },
-                                                    scale: {
-                                                        startValue: scaleStart,
-                                                        endValue: endDate,
-                                                        minorTickInterval: "day",
-                                                        majorTickInterval: 'week',
-                                                        minRange: "day",
-                                                        showMinorTicks: false
-                                                    },
-                                                    sliderMarker: {
-                                                        format: "monthAndDay"
-                                                    },
-                                                    selectedRange: {
-                                                        startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
-                                                        endValue: endDate
-                                                    },
-                                                    onSelectedRangeChanged: function (e) {
-                                                        
+                                </div>
+                                <script>
+
+                                    angular.module("PortalApp").controller('SSAcceptedTabCtrl', function ($scope) {
+
+                                        $scope.dataSource = [{
+                                            day: "Jan",
+                                            oranges: 3
+                                        }, {
+                                            day: "Feb",
+                                            oranges: 2
+                                        }, {
+                                            day: "Mar",
+                                            oranges: 3
+                                        }, {
+                                            day: "Apr",
+                                            oranges: 4
+                                        }, {
+                                            day: "May",
+                                            oranges: 6
+                                        }, {
+                                            day: "Jun",
+                                            oranges: 11
+                                        }, {
+                                            day: "Jul",
+                                            oranges: 4
+                                        }, {
+                                            day: "Aug",
+                                            oranges: 6
+                                        }, {
+                                            day: "Sep",
+                                            oranges: 11
+                                        }, {
+                                            day: "Oct",
+                                            oranges: 4
+                                        }, {
+                                            day: "Nov",
+                                            oranges: 6
+                                        }, {
+                                            day: "Dec",
+                                            oranges: 11
+                                        }];
+                                        $scope.TeamName = null;
+                                        $scope.TeamName = null;
+                                        $scope.CurrentAgentName = null;
+                                        $scope.AgentSelect = $("#SS_selAgents");
+                                        $scope.Visible = function () { return $("#SSAccepted_Tab").hasClass("active") ? true : false };
+                                        $scope.DateRange = function () {
+                                            return $('#acceptedRange').has("svg").length ? $('#acceptedRange').dxRangeSelector('instance') : null
+                                        };
+                                        $scope.InitalTab = function () {
+                                            var tab = this;
+                                            var dateNow = new Date();
+                                            var endDate = new Date();
+                                            endDate = endDate.setDate(dateNow.getDate() + 1);
+                                            var scaleStart = new Date();
+                                            scaleStart.setMonth(scaleStart.getMonth() - 12);
+                                            var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                            $("#acceptedRange").dxRangeSelector({
+                                                margin: {
+                                                    top: 5
+                                                },
+                                                size: {
+                                                    height: 100
+                                                },
+                                                scale: {
+                                                    startValue: scaleStart,
+                                                    endValue: endDate,
+                                                    minorTickInterval: "day",
+                                                    majorTickInterval: 'week',
+                                                    minRange: "day",
+                                                    showMinorTicks: false,
+                                                    minorTick: { visible: false }
+                                                },
+                                                marker: { visible: false },
+                                                sliderMarker: {
+                                                    format: "monthAndDay"
+                                                },
+                                                selectedRange: {
+                                                    startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
+                                                    endValue: endDate
+                                                },
+                                                onSelectedRangeChanged: function (e) {
+
+                                                }
+                                            });
+                                            $("#barchart").dxChart({
+                                                dataSource: $scope.dataSource,
+                                                series: [{
+                                                    argumentField: "day",
+                                                    valueField: "oranges",
+                                                    name: "My oranges",
+                                                    type: "bar",
+                                                    color: '#ffaa66'
+                                                }, {
+                                                    argumentField: "day",
+                                                    valueField: "oranges",
+                                                    color: 'blue',
+                                                    name: 'myblue'
+                                                }]
+
+
+                                            });
+                                        };
+
+                                        $scope.ShowTab = function (name, noCheck) {
+                                            if ($scope.Visible() || noCheck) {
+                                                if ($scope.TeamName == name)
+                                                    return;
+                                                $scope.TeamName = name;
+                                                var range = $scope.DateRange();
+                                                var selectedRange = range.getSelectedRange();
+                                            }
+                                        };
+                                        $scope.InitAgentSelect = function () {
+                                            if ($scope.DisplayView != null) {
+
+                                                $scope.AgentSelect.html("");
+                                                $.each($scope.DisplayView.TeamUsers, function (key, value) {
+                                                    $scope.AgentSelect.append(
+                                                   $("<option></option>")
+                                                    .attr("value", value)
+                                                    .text(value));
+                                                });
+                                                $scope.AgentSelect.prepend("<option value='' selected='selected'>All</option>");
+
+                                                $scope.AgentSelect.change(function () {
+                                                    var agent = $scope.AgentSelect.val();
+                                                    if (agent != "") {
+                                                        tab.ShowAgentChart(agent);
+                                                    }
+                                                    else {
+                                                        tab.DisplayView = tab.DataView.Team;
+                                                        tab.LoadChart();
                                                     }
                                                 });
-                                            },
-                                            ShowTab: function (name, noCheck) {
-                                                if (this.Visible() || noCheck) {
-                                                    if (this.TeamName == name)
-                                                        return;
-
-                                                    this.TeamName = name;
-                                                    var range = this.DateRange();
-                                                    var selectedRange = range.getSelectedRange();                                                
-                                                }
                                             }
                                         }
-                                    </script>
-                                </div>
+
+                                    });
+
+
+                                    $(function () {
+                                        ssAcceptedTab = angular.element('#SSAccepted_Tab').scope();
+                                    })
+                                </script>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+
 
     <script type="text/javascript">
         function BindAgents() {
@@ -1559,18 +1730,19 @@
 
         var dropDownMenuData = <%= AllTameJson()%>
 
-           menuItemClicked = function (e) {
-               DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
-               //        $('#teams_link').html(e.itemData);
-               //officeDropDown.option("buttonText", e.itemData );
-               //loadCharts(e.itemData.replace("Office", '').trim());
-               agentActivityTab.ShowTab(e.itemData);
-               $.when(LoadTeamInfo(e.itemData)).done(function () {
-                   LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
-               });
-               if(TeamActivityTab.Visible())
-                TeamActivityTab.UpdateTeamChart(e.itemData);
-           };
+       function menuItemClicked(e) {
+           DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
+           //        $('#teams_link').html(e.itemData);
+           //officeDropDown.option("buttonText", e.itemData );
+           //loadCharts(e.itemData.replace("Office", '').trim());
+           agentActivityTab.ShowTab(e.itemData);
+           $.when(LoadTeamInfo(e.itemData)).done(function () {
+               LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
+           });
+           if (TeamActivityTab.Visible())
+               TeamActivityTab.UpdateTeamChart(e.itemData);
+       };
+
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
             onItemClick: menuItemClicked,
@@ -1598,6 +1770,7 @@
                     $('#mytab a[href="#SSAccepted_Tab"]').tab('show');
                     ssAcceptedTab.InitalTab();
                     ssAcceptedTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
+
                 }
             },
             <% If User.IsInRole("Admin") %>
@@ -1630,7 +1803,7 @@
 
         $(document).ready(function () {
             agentActivityTab.InitalTab();
-           
+
             if (dropDownMenuData && dropDownMenuData.length > 0)
                 ShowTeamData(dropDownMenuData[0]);
         });
