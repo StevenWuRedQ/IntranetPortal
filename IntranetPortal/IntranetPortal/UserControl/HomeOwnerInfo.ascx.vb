@@ -77,7 +77,10 @@ Public Class HomeOwnerInfo
                     IsEmptyReport = True
                     TLOLocateReport = New DataAPI.TLOLocateReportOutput
                 End If
-                BestNums = homeOwner.BestPhoneNo
+                If (homeOwner.BestPhoneNo IsNot Nothing) Then
+                    BestNums = homeOwner.BestPhoneNo.GroupBy(Function(x) x.Phone).Select(Function(x) x.First).ToList
+                End If
+
                 BestAddress = homeOwner.BestAddress
                 BestEmail = homeOwner.BestEmail
             End If

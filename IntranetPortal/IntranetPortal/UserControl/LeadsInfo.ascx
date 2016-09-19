@@ -79,7 +79,7 @@
             if (e.item.index == 1) {
                 //telphoneLine.style.textDecoration = "line-through";
                 //telphoneLine.style.color = "red";
-                
+
                 OnCallPhoneCallback("BadPhone|" + tmpPhoneNo);
 
                 SetSameStyle("PhoneLink", "phone-wrong", tmpPhoneNo);
@@ -110,12 +110,11 @@
         e.item.SetChecked(false);
 
         if (sortPhones && e.item.index != 4 && e.item.index != 0) {
-            
+
             sortPhones();
         }
     }
-    function clearUndoCount(_tempTelLink)
-    {
+    function clearUndoCount(_tempTelLink) {
         $(_tempTelLink).removeAttr("data-undo-wrong");
     }
     function IsUndoNotWorking(isUndo, _temTelLink) {
@@ -123,13 +122,29 @@
         var telDivParent = $(telDiv).closest(".homeowner_info_label");
         var isWrongPhone = $(_temTelLink).hasClass("phone-wrong");
         if (isWrongPhone && isUndo) {
-            if (!telDivParent)
-            {
+            if (!telDivParent) {
                 console.error("can not find root homeowner_info_label for check IsUndoNotWorking phone ");
                 return;
             }
-            var undo_wrong_count = telDivParent.find("[data-undo-wrong]").length;
-            $(_temTelLink).attr("data-undo-wrong", undo_wrong_count);
+            var undo_wrong_count = 0;
+            var wrong_phones = telDivParent.find("[data-undo-wrong]");
+            if (wrong_phones.length > 0) {
+                var max_wrong_count =
+               _.chain( $.makeArray(wrong_phones) )
+               .map(function (o) {
+                   return parseInt($(o).attr("data-undo-wrong"));
+               }).max();
+                undo_wrong_count = max_wrong_count || 0;
+            }
+
+
+            var _phoneLinks = $('.PhoneLink:contains("' + tmpPhoneNo + '")')
+            // var linkCount = _phoneLinks.length;
+            _phoneLinks.each(function (index, e) {
+                $(e).attr("data-undo-wrong", undo_wrong_count + index + 1);
+            })
+
+            // $(_temTelLink).attr("data-undo-wrong", undo_wrong_count);
         }
 
     }
