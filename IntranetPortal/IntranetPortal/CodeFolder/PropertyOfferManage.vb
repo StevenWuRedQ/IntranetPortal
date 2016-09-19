@@ -145,6 +145,25 @@ Public Class PropertyOfferManage
     End Function
 
     ''' <summary>
+    ''' Return accepted shortsale last two weeks
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function GetAllSSAcceptedOfferLastWeek() As PropertyOffer()
+        Dim dtStart = DateTime.Today.AddDays(-7)
+        Dim emps = New List(Of String)
+
+        For Each tm In Team.GetActiveTeams
+            emps.AddRange(tm.AllUsers)
+        Next
+
+        Dim data = PropertyOffer.GetSSAccepted(emps.ToArray, dtStart)
+        data.ForEach(Function(d)
+                         Return InitData(d, ManagerView.SSAccepted)
+                     End Function)
+        Return data
+    End Function
+
+    ''' <summary>
     ''' Return Complated property offers
     ''' </summary>
     ''' <param name="names"></param>
