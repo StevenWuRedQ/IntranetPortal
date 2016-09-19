@@ -13,7 +13,7 @@
             font-weight: 500;
             cursor: pointer;
         }
-
+        
         .myRow:hover {
             background-color: #efefef;
         }
