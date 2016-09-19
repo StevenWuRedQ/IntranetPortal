@@ -10,6 +10,8 @@ Partial Public Class PropertyOffer
     Public Property Team As String
     Public Property LeadsStatus As Integer?
     Public Property ShortSaleStatus As Integer?
+    Public Property AcceptedDate As DateTime?
+    Public Property AcceptedBy As String
 
     ''' <summary>
     ''' Return the PropertyOffer Array Owner Nmae
@@ -62,14 +64,18 @@ Partial Public Class PropertyOffer
     ''' </summary>
     ''' <param name="names"></param>
     ''' <returns></returns>
-    Public Shared Function GetSSAccepted(names As String()) As PropertyOffer()
+    Public Shared Function GetSSAccepted(names As String(), Optional startDate As DateTime? = Nothing, Optional endDate As DateTime? = Nothing) As PropertyOffer()
         Using ctx As New PortalEntities
             Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
                          Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5) On offer.BBLE Equals ld.BBLE
-                         Join ss In ctx.ShortSaleCases.Where(Function(s) s.Status > 0) On offer.BBLE Equals ss.BBLE
-                         Select offer
+                         Join ss In ctx.ShortSaleCases.Where(Function(s) s.Status > 0 AndAlso (startDate Is Nothing OrElse s.AcceptedDate > startDate)) On offer.BBLE Equals ss.BBLE
+                         Select offer, ss.AcceptedBy, ss.AcceptedDate
 
-            Return offers.ToArray
+            Return offers.AsEnumerable.Select(Function(f)
+                                                  f.offer.AcceptedDate = f.AcceptedDate
+                                                  f.offer.AcceptedBy = f.AcceptedBy
+                                                  Return f.offer
+                                              End Function).ToArray
         End Using
     End Function
 
