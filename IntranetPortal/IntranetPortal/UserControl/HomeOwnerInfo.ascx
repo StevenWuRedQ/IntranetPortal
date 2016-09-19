@@ -24,6 +24,62 @@
         cursor: pointer;
         color: green;
     }
+
+
+    /*.phone-text {
+        display: block;
+    }*/
+    .PhoneLink {
+        display: block;
+    }
+
+    .phone-last-called, .phone-call-count {
+        font-size: 14px;
+        color: #2e2f31;
+    }
+
+    a .phone-last-called:hover, a .phone-call-count:hover {
+        text-decoration: none !important;
+    }
+
+    .phone-wrong {
+        color: red;
+        text-decoration: line-through;
+    }
+
+    .phone-working {
+        color: green;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .phone-working-text {
+        display: none;
+    }
+
+    /*color use boot strap warning text color */
+    .phone_comment {
+        display: block;
+        color: #8a6d3b;
+    }
+
+    .phone_comment, .phone-working-text {
+        font-size: 14px;
+    }
+
+    .phone-working:hover .phone-working-text {
+        display: inline-block;
+    }
+
+    .phone-wrong:hover {
+        text-decoration: line-through;
+        color: red;
+    }
+
+    .phone-working:hover {
+        text-decoration: none;
+        color: green;
+    }
 </style>
 <script type="text/javascript">
     function ConfrimReport() {
@@ -42,7 +98,7 @@
 <% End If%>
 <div style='vertical-align: top; margin: 0; font-size: 18px; <%= if(IsNeedAddHomeOwner(),"visibility:hidden","") %>'>
     <div style="font-size: 30px; color: #2e2f31">
-        <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
+        <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}", "Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
         <% Dim needreport = IsEmptyReport AndAlso Not Utility.IsCompany(OwnerName)%>
         <% If needreport Then%>
         <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ConfrimReport()">&nbsp;</i>
@@ -208,10 +264,11 @@
 
 
     <!--Best Phone info -->
-
+    
     <div>
         <div class="form_head homeowner_section_margin">
             <span runat="server" id="ulBestPhones">Best Phone Numbers &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color" style="cursor: pointer" onclick="<%= String.Format("AddBestPhoneNum('{0}','{1}','{2}', this)", BBLE, OwnerName, ulBestPhones.ClientID)%>"></i>
+            &nbsp;<i class="fa fa-sort-amount-desc homeowner_plus_color" style="cursor: pointer" onclick="ASPxPopupSortPhoneClient.ShowAtElement(this)"></i>
         </div>
         <div>
             <div class="clearfix homeowner_info_label">
@@ -225,10 +282,21 @@
                             <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.Phone)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
-                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
-                                        <%=FormatPhoneNumber(phone.Phone)%>
-                                        <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span>
+                                    <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.Phone))%>" onclick='return OnTelphoneLinkClick(this, "<%= FormatPhoneNumber(phone.Phone)%>")'>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.Phone)%> <span class="phone-working-text">- Working phone</span>  </span>
+
                                     </a>
+                                    <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span>
+                                    <span class="phone-last-called"><%=GetAllLastCalled(phone.Phone)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.Phone) %>
+                                        <%If Not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>) 
+                                        <%End If %>
+
+                                    </span>
+
+
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     &nbsp;
@@ -248,13 +316,26 @@
                             <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
-                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                        <%=FormatPhoneNumber(phone.phoneField)%>
-                                        <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                    
+                                    <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
+                                            <span class="phone-working-text">- Working phone</span>
+
+                                        </span>
 
                                     </a>
+                                    <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                    <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.phoneField) %>
+                                        <%If Not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
+                                        <%End If %>
 
+                                    </span>
                                 </div>
+
+
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
                                 </div>
@@ -275,11 +356,22 @@
                             <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
-                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                        <%=FormatPhoneNumber(phone.phoneField)%>
-                                        <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                    <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
+                                        <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
+                                            <span class="phone-working-text">- Working phone</span>
 
+
+                                        </span>
                                     </a>
+                                    <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                    <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                    <span class="phone-call-count">
+                                        <%Dim count = GetCallCount(phone.phoneField) %>
+                                        <%If not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
+                                        <%End If %>
+                                    </span>
+
 
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
@@ -357,7 +449,7 @@
             <i class="fa fa-chain color_gray homeowner_info_icon"></i>
             <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
                 <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField%></span><br />
-                <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
+                <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField Is Nothing, " ", relative.dateOfBirthField.currentAgeField) %></span></span>
             </div>
         </div>
 
@@ -369,21 +461,36 @@
                         <% For Each phone In relative.phonesField%>
                         <% If phone.phoneField IsNot Nothing Then%>
                         <div class="color_gray clearfix">
-                            <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
-                            <div class="form_div_node homeowner_info_text ">
+                            <div class="color_gray clearfix">
+                                <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
+                                <div class="form_div_node homeowner_info_text ">
 
-                                <div class="color_blue">
-                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                        <%= FormatPhoneNumber(phone.phoneField) %>
-                                        <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
-                                    </a>
+                                    <div>
+                                        <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
+                                            <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
+                                                <span class="phone-working-text">- Working phone</span>
 
-                                </div>
-                                <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                    (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>)
+
+                                            </span>
+                                        </a>
+                                        <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                        <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                        <span class="phone-call-count">
+                                            <%Dim count = GetCallCount(phone.phoneField) %>
+                                            <%If not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
+                                        <%End If %>
+                                        </span>
+
+
+                                    </div>
+                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                        (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                         <% End If%>
                         <% Next%>
                         <% End If%>
@@ -409,7 +516,7 @@
             <div class="color_gray clearfix textMargin homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing," " & relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
+                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField %></span><br />
                     <br />
                     <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField Is Nothing, ";", relative.dateOfBirthField.currentAgeField)%></span></span>
                 </div>
@@ -425,21 +532,36 @@
                             <% For Each phone In relative.phonesField%>
                             <%If phone.phoneField IsNot Nothing Then%>
                             <div class="color_gray clearfix">
-                                <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
-                                <div class="form_div_node homeowner_info_text ">
+                                <div class="color_gray clearfix">
+                                    <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
+                                    <div class="form_div_node homeowner_info_text ">
 
-                                    <div class="color_blue">
-                                        <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                            <%= FormatPhoneNumber(phone.phoneField) %>
-                                            <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
-                                        </a>
+                                        <div>
+                                            <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
+                                                <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
+                                                    <span class="phone-working-text">- Working phone</span>
 
-                                    </div>
-                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                        (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+
+                                                </span>
+                                            </a>
+                                            <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                            <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                            <span class="phone-call-count">
+                                                <%Dim count = GetCallCount(phone.phoneField) %>
+                                                <%If not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
+                                        <%End If %>
+                                            </span>
+
+
+                                        </div>
+                                        <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                            (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                             <% End If%>
                             <% Next%>
                             <% End If%>
@@ -462,8 +584,8 @@
             <div class="color_gray clearfix textMargin homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
-                    <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
+                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField %></span><br />
+                    <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField Is Nothing, " ", relative.dateOfBirthField.currentAgeField) %></span></span>
                 </div>
             </div>
             <div class="homeowner_expanll_border" style="margin-left: 20px">
@@ -474,21 +596,35 @@
                             <% For Each phone In relative.phonesField%>
                             <% If phone.phoneField IsNot Nothing Then%>
                             <div class="color_gray clearfix">
-                                <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
-                                <div class="form_div_node homeowner_info_text ">
+                                <div class="color_gray clearfix">
+                                    <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
+                                    <div class="form_div_node homeowner_info_text ">
 
-                                    <div class="color_blue">
-                                        <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                            <%= FormatPhoneNumber(phone.phoneField) %>
-                                            <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
-                                        </a>
+                                        <div>
+                                            <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
+                                                <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
+                                                    <span class="phone-working-text">- Working phone</span>
 
-                                    </div>
-                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                        (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                                </span>
+                                            </a>
+                                            <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+                                            <span class="phone-last-called"><%=GetAllLastCalled(phone.phoneField)%></span>
+                                            <span class="phone-call-count">
+                                                <%Dim count = GetCallCount(phone.phoneField) %>
+                                                <%If not String.IsNullOrEmpty(count) Then %>
+                                            (<%=count%>)
+                                        <%End If %>
+                                            </span>
+
+
+                                        </div>
+                                        <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                            (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                             <% End If%>
                             <% Next%>
                             <% End If%>

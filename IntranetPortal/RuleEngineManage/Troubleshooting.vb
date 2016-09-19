@@ -1153,4 +1153,17 @@ Public Class Troubleshooting
         svc.ComplaintsUpdatedNotify(complaint)
     End Sub
 
+    Private Sub TestEntitiesBtn_Click(sender As Object, e As EventArgs) Handles TestEntitiesBtn.Click
+        Using ctx As New UnderwriterEntity
+            Dim form As New UnderwriterForm
+            form.CreateBy = "Zhang"
+            form.UpdateBy = "Zhang"
+            form.CreateDate = DateTime.Now
+            form.updateDate = DateTime.Now
+
+            ctx.forms.Add(form)
+            ctx.SaveChanges()
+
+        End Using
+    End Sub
 End Class

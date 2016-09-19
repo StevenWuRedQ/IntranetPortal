@@ -56,6 +56,20 @@ Partial Public Class Lead
         End Get
     End Property
 
+    ''' <summary>
+    ''' Get the SubStatus String
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property SubStatusStr As String
+        Get
+            If SubStatus.HasValue Then
+                Return CType(SubStatus, LeadSubStatus).ToString
+            End If
+
+            Return ""
+        End Get
+    End Property
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property LastOwnerUpdate As DateTime
         Get
@@ -237,20 +251,26 @@ Partial Public Class Lead
     ''' <param name="createUser"></param>
     ''' <param name="logCategory"></param>
     ''' <returns>Task Id</returns>
-    Public Shared Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String, logCategory As LeadsActivityLog.LogCategory) As UserTask
-        Dim scheduleDate = DateTime.Now
+    Public Shared Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String, logCategory As LeadsActivityLog.LogCategory, Optional dueDate As DateTime = Nothing) As UserTask
+        Dim scheduleDate As DateTime
+        If Not dueDate = Nothing Then
+            scheduleDate = dueDate
+        Else
+            scheduleDate = DateTime.Now
 
-        If taskPriority = "Normal" Then
-            scheduleDate = scheduleDate.AddDays(3)
+            If taskPriority = "Normal" Then
+                scheduleDate = scheduleDate.AddDays(3)
+            End If
+
+            If taskPriority = "Important" Then
+                scheduleDate = scheduleDate.AddDays(1)
+            End If
+
+            If taskPriority = "Urgent" Then
+                scheduleDate = scheduleDate.AddHours(2)
+            End If
         End If
 
-        If taskPriority = "Important" Then
-            scheduleDate = scheduleDate.AddDays(1)
-        End If
-
-        If taskPriority = "Urgent" Then
-            scheduleDate = scheduleDate.AddHours(2)
-        End If
 
         Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
                                      "<td>{0}</td></tr>" &
@@ -264,6 +284,103 @@ Partial Public Class Lead
         Return task
     End Function
 
+    '''' <summary>
+    '''' Return the given user's LoanMod leads which need followup on today
+    '''' </summary>
+    '''' <param name="userName">The given username</param>
+    '''' <returns></returns>
+    'Public Shared Function GetLoanModDueToday(userName As String) As List(Of Lead)
+    '    Dim lds = Lead.GetLoanModDue(userName, DateTime.Today)
+    '    Return lds
+    'End Function
+
+    ''' <summary>
+    ''' Return the given user's LoanMod leads which need followup on due date
+    ''' </summary>
+    ''' <param name="userName">The given username</param>
+    ''' <param name="dueDate">The given datetime</param>
+    ''' <returns></returns>
+    Public Shared Function GetLoanModDue(userName As String, Optional subStatus As LeadSubStatus = Nothing, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
+        Return GetLeadsDue(LeadStatus.LoanMod, userName, dueDate, subStatus)
+    End Function
+
+    ''' <summary>
+    ''' Return the given user's LoanMod leads which need followup on given date
+    ''' </summary>
+    ''' <param name="userName"></param>
+    ''' <param name="dueDate">The given datetime, default is today</param>
+    ''' <returns></returns>
+    Public Shared Function GetHotLeadsDue(userName As String, Optional dueDate As DateTime? = Nothing) As List(Of Lead)
+        Return GetLeadsDue(LeadStatus.Priority, userName, dueDate)
+    End Function
+
+    ''' <summary>
+    ''' Return the leads that need to follow up
+    ''' </summary>
+    ''' <param name="status">The leads statu</param>
+    ''' <param name="userName">The given user name</param>
+    ''' <param name="dueDate">The due date</param>
+    ''' <returns></returns>
+    Public Shared Function GetLeadsDue(status As LeadStatus, userName As String,
+                                       Optional dueDate As DateTime? = Nothing,
+                                       Optional subStatus As LeadSubStatus = Nothing) As List(Of Lead)
+        If dueDate Is Nothing Then
+            dueDate = Date.Today
+        End If
+
+        Dim lds = Lead.GetUserLeadsData(userName, status)
+
+        If subStatus IsNot Nothing Then
+            lds = lds.Where(Function(ld) ld.SubStatus = subStatus).ToList
+        End If
+
+        If leadsStatusDueDays.ContainsKey(New Tuple(Of LeadStatus, LeadSubStatus)(status, subStatus)) Then
+            Dim days = leadsStatusDueDays(New Tuple(Of LeadStatus, LeadSubStatus)(status, subStatus))
+            Return lds.Where(Function(ld) ld.IsDueOn(dueDate, days)).ToList
+        End If
+
+        Return lds
+    End Function
+
+    Private Shared dic As Dictionary(Of Tuple(Of LeadStatus, LeadSubStatus), Integer)
+    Private Shared ReadOnly Property leadsStatusDueDays As Dictionary(Of Tuple(Of LeadStatus, LeadSubStatus), Integer)
+        Get
+            If dic Is Nothing Then
+                dic = New Dictionary(Of Tuple(Of LeadStatus, LeadSubStatus), Integer)
+                dic.Add(New Tuple(Of LeadStatus, LeadSubStatus)(LeadStatus.LoanMod, Nothing), 30)
+                dic.Add(New Tuple(Of LeadStatus, LeadSubStatus)(LeadStatus.LoanMod, LeadSubStatus.LoanModCompleted), 60)
+                dic.Add(New Tuple(Of LeadStatus, LeadSubStatus)(LeadStatus.LoanMod, LeadSubStatus.LoanModInProcess), 30)
+                dic.Add(New Tuple(Of LeadStatus, LeadSubStatus)(LeadStatus.Priority, Nothing), 5)
+            End If
+
+            Return dic
+        End Get
+    End Property
+
+    Private Function IsDueOn(dueDate As DateTime, days As Integer) As Boolean
+        Dim ts = dueDate - LastOwnerUpdate
+
+        If ts.TotalDays > days Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    Public Shared Function GetUpcomingAppointmentsCount(name As String) As Integer
+        Dim Context As New Entities
+        'Bind Appointment
+        Dim leads = (From al In Context.Leads
+                     Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
+                     Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = name Or appoint.Manager = name) And appoint.ScheduleDate >= Today
+                     Select New With {
+                         .BBLE = al.BBLE,
+                         .LeadsName = al.LeadsName,
+                         .ScheduleDate = appoint.ScheduleDate
+                         }).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
+
+        Return leads.Count
+    End Function
 
     'Get user data by status
     Public Shared Function GetUserLeadsData(name As String, status As LeadStatus) As List(Of Lead)
@@ -420,7 +537,7 @@ Partial Public Class Lead
         Return listProp.Create()
     End Function
 
-    Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, Optional addCommend As String = Nothing) As Boolean
+    Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, Optional addCommend As String = Nothing, Optional subStatus As String = Nothing) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
             Dim addComStr = If(String.IsNullOrEmpty(addCommend), "", "<br/>" & " Comments: " & addCommend)
@@ -429,6 +546,10 @@ Partial Public Class Lead
                 lead.Status = status
                 If Not callbackDate = Nothing Then
                     lead.CallbackDate = callbackDate
+                End If
+
+                If Not String.IsNullOrEmpty(subStatus) Then
+                    lead.SubStatus = CInt(subStatus)
                 End If
 
                 Context.SaveChanges()
@@ -802,6 +923,26 @@ Partial Public Class Lead
         Return True
     End Function
 
+    Public Shared Sub UpdateLeadSubStatus(bble As String, newSubStatus As String)
+        If newSubStatus = "0" OrElse newSubStatus = "1" Then
+            Using Context As New Entities
+
+                Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
+                If lead IsNot Nothing Then
+                    lead.SubStatus = CInt(newSubStatus)
+                    Context.SaveChanges()
+
+
+                    Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
+                    Dim empName = HttpContext.Current.User.Identity.Name
+                    Dim comments = "Lead Status changed to LoanMod(" & lead.SubStatusStr.ToString & ") on " & Date.Now.ToString("MM/dd/yyyy")
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, LeadsActivityLog.EnumActionType.RefreshLeads)
+                End If
+            End Using
+        End If
+
+
+    End Sub
 
     Public Sub StartRecycleProcess()
         If Not InRecycle Then

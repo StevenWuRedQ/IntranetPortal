@@ -62,8 +62,27 @@ Public Class MySummary
                              New SummaryItemBase() With {.ControlFileName = "CalendarItem.ascx"}}
                     },
                     New SummaryControlSetting() With {
+                        .Name = "NewOffer",
+                        .ControlSettings = New List(Of SummaryItemBase) From {
+                             New SummaryItemBase() With {.ControlFileName = "NewOfferItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                                               {"mgrView", PropertyOfferManage.ManagerView.Completed}
+                                                                           }
+                                                        },
+                             New SummaryItemBase() With {.ControlFileName = "NewOfferItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                                               {"mgrView", PropertyOfferManage.ManagerView.InProcess}
+                                                                          }},
+                             New SummaryItemBase() With {.ControlFileName = "NewOfferItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                                               {"mgrView", PropertyOfferManage.ManagerView.SSAccepted}
+                                                                          }}
+                    }},
+                    New SummaryControlSetting() With {
                         .Name = "Title",
                         .ControlSettings = New List(Of SummaryItemBase) From {
+                            New SummaryItemBase() With {.ControlFileName = "FollowUpItem2.ascx"
+                                                      },
                              New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
                                                          .Parameters = New Dictionary(Of String, Object) From {
                                                             {"CategoryId", 1}
@@ -84,7 +103,7 @@ Public Class MySummary
                                                          .Parameters = New Dictionary(Of String, Object) From {
                                                             {"CategoryId", 5}
                                                          }}
-                                                         }
+                                                      }
                     }}
                 'New SummaryItemBase() With {.ControlFileName = "TitlesByCategoryItem.ascx",
                 '                                .Parameters = New Dictionary(Of String, Object) From {

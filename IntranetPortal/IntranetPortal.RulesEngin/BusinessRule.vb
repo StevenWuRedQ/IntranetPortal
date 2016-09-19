@@ -3,6 +3,9 @@ Imports MyIdealProp.Workflow.DBPersistence
 Imports System.Runtime.Serialization
 Imports System.Configuration
 
+''' <summary>
+''' The base rule definition
+''' </summary>
 <KnownType(GetType(LegalFollowUpRule))>
 <KnownType(GetType(LeadsAndTaskRule))>
 <KnownType(GetType(EmailSummaryRule))>
@@ -67,6 +70,10 @@ Public Class BaseRule
     End Enum
 End Class
 
+''' <summary>
+''' The leads and task related rule
+''' Notify user base on the active tasks and leads info
+''' </summary>
 Public Class LeadsAndTaskRule
     Inherits BaseRule
 
@@ -140,6 +147,11 @@ Public Class LeadsAndTaskRule
 
 End Class
 
+''' <summary>
+''' The user's daily summary email rule
+''' The summary email is send every morning include the
+''' follow ups, tasks and appointments
+''' </summary>
 Public Class EmailSummaryRule
     Inherits BaseRule
 
@@ -152,6 +164,7 @@ Public Class EmailSummaryRule
                 Try
                     If HasTask(emp) Then
                         client.SendTaskSummaryEmail(emp)
+                        Thread.Sleep(1000)
                     End If
 
                 Catch ex As Exception
@@ -177,8 +190,6 @@ Public Class EmailSummaryRule
             Return True
         End If
 
-
-
         Return False
     End Function
 End Class
@@ -197,6 +208,7 @@ Public Class AgentActivitySummaryRule
             For Each team In teams
                 Try
                     client.SendTeamActivityEmail(team.Name)
+                    Thread.Sleep(1000)
                 Catch ex As Exception
                     Log("AgentActivitySummaryRule Error. TeamName: " & team.Name, ex)
                 End Try
@@ -227,6 +239,10 @@ Public Class AgentActivitySummaryRule
     End Sub
 End Class
 
+''' <summary>
+''' Legal user activity report rule
+''' The report is send every night.
+''' </summary>
 Public Class LegalActivityReportRule
     Inherits BaseRule
 
@@ -261,6 +277,10 @@ Public Class ShortSaleActivityReportRule
     End Sub
 End Class
 
+''' <summary>
+''' The rule to prepare the leads data
+''' This rule is running every 5 mins
+''' </summary>
 Public Class LoopServiceRule
     Inherits BaseRule
 
@@ -469,6 +489,10 @@ InitialLine:
     'End Enum
 End Class
 
+''' <summary>
+''' The rule is running along with LeadsAndTaskRule to automatically 
+''' complete or expire the reminder and related task
+''' </summary>
 Public Class CompleteTaskRule
     Inherits BaseRule
 
@@ -517,6 +541,10 @@ Public Class CompleteTaskRule
             End If
 
             Dim ld = Lead.GetInstance(bble)
+            If ld Is Nothing Then
+                Return True
+            End If
+
             If Not tk.EmployeeName.ToLower.Contains(ld.EmployeeName.ToLower) Then
                 Return True
             End If
@@ -528,6 +556,9 @@ Public Class CompleteTaskRule
     End Function
 End Class
 
+''' <summary>
+''' The Rule to expired all the reminder rules
+''' </summary>
 Public Class ExpiredAllReminderRule
     Inherits BaseRule
 
@@ -594,6 +625,9 @@ Public Class CreateReminderBaseOnErrorProcess
 
 End Class
 
+''' <summary>
+''' The rule to recycle the leads
+''' </summary>
 Public Class RecycleProcessRule
     Inherits BaseRule
 
@@ -635,6 +669,10 @@ Public Class RefreshDataRule
 
 End Class
 
+''' <summary>
+''' The rule will prepare the leads data and assign to agents base on the configuration
+''' This rule will running every 5 mins
+''' </summary>
 Public Class PendingAssignRule
     Inherits BaseRule
 
@@ -678,6 +716,11 @@ Public Class PendingAssignRule
     End Sub
 End Class
 
+''' <summary>
+''' The rule to check properties' DOB complaints 
+''' The rule will run 4 times a day to monitor the DOB complaints
+''' Once the complaints was found, notify the property owner and related users
+''' </summary>
 Public Class DOBComplaintsCheckingRule
     Inherits BaseRule
 
@@ -719,7 +762,7 @@ Public Class DOBComplaintsCheckingRule
                         Dim mailData As New Dictionary(Of String, String)
                         mailData.Add("UserName", name)
                         client.SendEmailByTemplate(name, "ComplaintsRefreshed", mailData)
-
+                        Thread.Sleep(1000)
                     End Using
                 Catch ex As Exception
                     Log("Sending Notify Email " & name, ex)
@@ -758,11 +801,15 @@ Public Class ShortSaleFollowUpRule
                 Dim users = ShortSaleManage.GetShortSaleUsers
                 For Each ssUser In users
                     SendEmail(ssUser, PortalReport.CaseActivityData.ActivityType.ShortSale)
+
+                    Thread.Sleep(1000)
                 Next
 
                 users = TitleManage.TitleUsers
                 For Each tUsers In users
                     SendEmail(tUsers, PortalReport.CaseActivityData.ActivityType.Title)
+
+                    Thread.Sleep(1000)
                 Next
             Catch ex As Exception
                 Log("ShortSale user followup rule error", ex)

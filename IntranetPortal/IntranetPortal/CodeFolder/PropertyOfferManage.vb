@@ -4,11 +4,192 @@ Imports Newtonsoft.Json.Linq
 Imports Novacode
 Imports IntranetPortal.Data
 Imports iTextSharp.text.pdf
+Imports ClosedXML.Excel
 
 ''' <summary>
 ''' The action realted to PropertyOffer
 ''' </summary>
 Public Class PropertyOfferManage
+
+    ''' <summary>
+    ''' The office manager view enum
+    ''' </summary>
+    Public Class ManagerView
+        Inherits Status
+        ''' <summary>
+        ''' Represents the New Offer Completed status
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Property AllCompleted As New ManagerView With {
+        .Key = 0, .Name = "All"}
+        ''' <summary>
+        ''' Represents the New Offer Completed status
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Property Completed As New ManagerView With {
+        .Key = 1, .Name = "New Offer"}
+        ''' <summary>
+        ''' Represents the InProcess Status
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Property InProcess As New ManagerView With {
+        .Key = 2, .Name = "In Process"}
+        ''' <summary>
+        ''' Represents the ShortSale Accepted Status
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared Property SSAccepted As New ManagerView With {
+        .Key = 3, .Name = "SS Accepted"}
+
+        Public Shared Widening Operator CType(ByVal status As Integer) As ManagerView
+            Select Case status
+                Case 0
+                    Return AllCompleted
+                Case 1
+                    Return Completed
+                Case 2
+                    Return InProcess
+                Case 3
+                    Return SSAccepted
+            End Select
+
+            Return Nothing
+        End Operator
+
+        Public Shared Narrowing Operator CType(v As ManagerView) As Integer
+            Return v.Key
+        End Operator
+
+        Public Shared Operator =(ByVal v As ManagerView, ByVal i As Integer?) As Boolean
+            If Not i.HasValue Then
+                Return False
+            End If
+
+            Return v.Key = i
+        End Operator
+
+        Public Shared Operator <>(ByVal v As ManagerView, ByVal i As Integer?) As Boolean
+            If Not i.HasValue Then
+                Return True
+            End If
+
+            Return v.Key <> i
+        End Operator
+    End Class
+
+    ''' <summary>
+    ''' Return offer list that return manager
+    ''' </summary>
+    ''' <param name="name">The manager name</param>
+    ''' <param name="view">The view type</param>
+    ''' <returns></returns>
+    Public Shared Function GetOffersByManagerView(name As String, view As ManagerView, isSummary As Boolean) As PropertyOffer()
+        Dim emps = New List(Of String)
+        emps.Add(name)
+
+        If Roles.IsUserInRole(name, "Admin") OrElse Roles.IsUserInRole(name, "Office-Executive") Then
+            For Each tm In Team.GetActiveTeams
+                emps.AddRange(tm.AllUsers)
+            Next
+        Else
+            emps.AddRange(Team.GetTeamUsersByAssistant(name))
+        End If
+
+        Select Case view
+            Case ManagerView.AllCompleted
+                Dim offers = PropertyOffer.GetAllCompleted(emps.ToArray)
+                offers.ForEach(Function(o)
+                                   If o.ShortSaleStatus > 0 Then
+                                       Return InitData(o, ManagerView.SSAccepted)
+                                   End If
+
+                                   If o.LeadsStatus = 5 Then
+                                       Return InitData(o, ManagerView.InProcess)
+                                   End If
+
+                                   Return InitData(o, ManagerView.Completed)
+                               End Function)
+                Return offers
+            Case Else
+                Return OffersByManagerView(emps.ToArray, view, isSummary)
+        End Select
+
+        Return Nothing
+    End Function
+
+    ''' <summary>
+    ''' Return property offers by ManagerView
+    ''' </summary>
+    ''' <param name="emps">The Employee Names</param>
+    ''' <param name="view">The ManagerView</param>
+    ''' <param name="isSummary">The Summary Indicator</param>
+    ''' <returns></returns>
+    Public Shared Function OffersByManagerView(emps As String(), view As ManagerView, isSummary As Boolean) As PropertyOffer()
+        Dim offer() As PropertyOffer = {}
+        Select Case view
+            Case ManagerView.Completed
+                offer = PropertyOffer.GetCompleted(emps)
+            Case ManagerView.InProcess
+                offer = PropertyOffer.GetInProcess(emps.ToArray)
+            Case ManagerView.SSAccepted
+                offer = PropertyOffer.GetSSAccepted(emps.ToArray)
+        End Select
+
+        If Not isSummary Then
+            offer.ForEach(Function(d)
+                              Return InitData(d, view)
+                          End Function)
+        End If
+
+        Return offer
+    End Function
+
+    ''' <summary>
+    ''' Return Complated property offers
+    ''' </summary>
+    ''' <param name="names"></param>
+    ''' <returns></returns>
+    Public Shared Function CompletedPropertyOffers(names As String()) As PropertyOffer()
+        Dim offer = PropertyOffer.GetCompleted(names)
+
+        offer.ForEach(Function(d)
+                          Return InitData(d, ManagerView.Completed)
+                      End Function)
+        Return offer
+    End Function
+
+    ''' <summary>
+    ''' Return propertyoffers which is in process 
+    ''' but not accepted by shortsale
+    ''' </summary>
+    ''' <param name="names">The Owner Names</param>
+    ''' <returns></returns>
+    Public Shared Function InProcessOffers(names As String()) As PropertyOffer()
+        Dim offer = PropertyOffer.GetInProcess(names)
+        offer.ForEach(Function(d)
+                          Return InitData(d, ManagerView.InProcess)
+                      End Function)
+        Return offer
+    End Function
+
+    ''' <summary>
+    ''' Return completed property offers which were accepted by ShortSale
+    ''' </summary>
+    ''' <param name="names">The Owner Names</param>
+    ''' <returns></returns>
+    Public Shared Function SSAcceptedOffers(names As String()) As PropertyOffer()
+        Dim offer = PropertyOffer.GetSSAccepted(names)
+        offer.ForEach(Function(d)
+                          Return InitData(d, ManagerView.SSAccepted)
+                      End Function)
+        Return offer
+    End Function
+
+    Private Shared Function InitData(offer As PropertyOffer, view As ManagerView) As PropertyOffer
+        offer.OfferStage = view.ToString
+        offer.Team = Employee.GetEmpTeam(offer.Owner)
+        Return offer
+    End Function
 
     ''' <summary>
     ''' Check the pre conditions for new offer
@@ -178,6 +359,12 @@ Public Class DocumentGenerator
         Next
     End Sub
 
+    Public Sub GenerateExcel(wb As IXLWorksheet, config As GenerateFileConfig)
+        For Each ph In config.PlaceHolders
+            wb.Cell(ph.FieldName).Value = GetValue(ph)
+        Next
+    End Sub
+
     ''' <summary>
     ''' Generate word document by file config
     ''' </summary>
@@ -192,7 +379,6 @@ Public Class DocumentGenerator
             Catch ex As Exception
                 Console.Write(ex.Message)
             End Try
-
         Next
     End Sub
 
@@ -388,7 +574,7 @@ Public Class DocumentGenerator
         file.PlaceHolders = phs.ToList
 
         ' Add Seller
-        Dim sellerProps = {"Name", "SSN", "Address", "DOB", "Email", "Phone",
+        Dim sellerProps = {"Name", "SSN|SSN", "Address", "DOB", "Email", "Phone|Phone",
                            "Employed", "Bankaccount|YesNo", "TaxReturn|YesNo", "Bankruptcy|YesNo", "ActiveMilitar|YesNo"}
         For i = 0 To 3
             For Each item In sellerProps
@@ -530,6 +716,14 @@ Public Class DocumentGenerator
                             End If
 
                             Return field.ToString
+                        Case "SSN"
+                            Dim result = field.ToString
+                            If result.Length = 9 Then
+                                Return String.Format("{0}-{1}-{2}", result.Substring(0, 3), result.Substring(3, 2), result.Substring(5))
+                            End If
+
+                        Case "Phone"
+                            Return Utility.FormatPhone(field.ToString)
                     End Select
 
                     Return field.ToString

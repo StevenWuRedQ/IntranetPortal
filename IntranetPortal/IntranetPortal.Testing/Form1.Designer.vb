@@ -38,6 +38,8 @@ Partial Class Form1
         Me.txtReportToken = New System.Windows.Forms.TextBox()
         Me.ParseEamil = New System.Windows.Forms.Button()
         Me.ParseText = New System.Windows.Forms.TextBox()
+        Me.btnResendEmail = New System.Windows.Forms.Button()
+        Me.txtEmailId = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Button1
@@ -176,11 +178,29 @@ Partial Class Form1
         Me.ParseText.Size = New System.Drawing.Size(100, 20)
         Me.ParseText.TabIndex = 15
         '
+        'btnResendEmail
+        '
+        Me.btnResendEmail.Location = New System.Drawing.Point(475, 94)
+        Me.btnResendEmail.Name = "btnResendEmail"
+        Me.btnResendEmail.Size = New System.Drawing.Size(100, 23)
+        Me.btnResendEmail.TabIndex = 16
+        Me.btnResendEmail.Text = "Resend Email"
+        Me.btnResendEmail.UseVisualStyleBackColor = True
+        '
+        'txtEmailId
+        '
+        Me.txtEmailId.Location = New System.Drawing.Point(475, 68)
+        Me.txtEmailId.Name = "txtEmailId"
+        Me.txtEmailId.Size = New System.Drawing.Size(100, 20)
+        Me.txtEmailId.TabIndex = 17
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(695, 261)
+        Me.Controls.Add(Me.txtEmailId)
+        Me.Controls.Add(Me.btnResendEmail)
         Me.Controls.Add(Me.ParseText)
         Me.Controls.Add(Me.ParseEamil)
         Me.Controls.Add(Me.txtReportToken)
@@ -219,4 +239,6 @@ Partial Class Form1
     Friend WithEvents txtReportToken As System.Windows.Forms.TextBox
     Friend WithEvents ParseEamil As Button
     Friend WithEvents ParseText As TextBox
+    Friend WithEvents btnResendEmail As Button
+    Friend WithEvents txtEmailId As TextBox
 End Class

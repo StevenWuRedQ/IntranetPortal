@@ -27,6 +27,7 @@ Partial Public Class Lead
     Public Property Description As String
     Public Property MarkColor As Nullable(Of Integer)
     Public Property AppId As Nullable(Of Integer)
+    Public Property SubStatus As Nullable(Of Integer)
 
     Public Overridable Property LeadsInfo As LeadsInfo
     Public Overridable Property Employee As Employee

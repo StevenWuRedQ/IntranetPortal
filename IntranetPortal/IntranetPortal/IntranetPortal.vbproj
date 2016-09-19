@@ -259,41 +259,8 @@
     <Reference Include="JWT">
       <HintPath>..\packages\JWT.1.3.2\lib\3.5\JWT.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights.Log4NetAppender, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Log4NetAppender.2.1.0\lib\net45\Microsoft.ApplicationInsights.Log4NetAppender.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.EntityDataSource">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
@@ -634,8 +601,10 @@
     <Compile Include="CodeFolder\EmployeeItemComparer.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
+    <Compile Include="CodeFolder\ExcelBuilder.vb" />
     <Compile Include="CodeFolder\HomeOwner.vb" />
     <Compile Include="CodeFolder\ActivityManageBase.vb" />
+    <Compile Include="CodeFolder\HomeOwnerPhone.vb" />
     <Compile Include="CodeFolder\INavMenuAmount.vb" />
     <Compile Include="CodeFolder\Lead.vb" />
     <Compile Include="CodeFolder\LeadManage.vb" />
@@ -845,7 +814,9 @@
     <Compile Include="Controllers\TaxLiensODataController.vb" />
     <Compile Include="Controllers\TitleController.vb" />
     <Compile Include="Controllers\TwilioController.vb" />
+    <Compile Include="Controllers\UnderwriterController.vb" />
     <Compile Include="Controllers\UserInfoController.vb" />
+    <Compile Include="Controllers\WorkflowController.vb" />
     <Compile Include="Controllers\WorkingLogController.vb" />
     <Compile Include="DataAPITesting.aspx.designer.vb">
       <DependentUpon>DataAPITesting.aspx</DependentUpon>
@@ -966,8 +937,8 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Context.vb">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>PortalEntityModel.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Designer.vb">
@@ -1723,11 +1694,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="MyFollowup.aspx.designer.vb">
+      <DependentUpon>MyFollowup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyFollowup.aspx.vb">
+      <DependentUpon>MyFollowup.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="MyDefault.aspx.designer.vb">
       <DependentUpon>MyDefault.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyDefault.aspx.vb">
       <DependentUpon>MyDefault.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferAccepted.aspx.designer.vb">
+      <DependentUpon>NewOfferAccepted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferAccepted.aspx.vb">
+      <DependentUpon>NewOfferAccepted.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="NewOffer\NewOfferAssignCorp.ascx.designer.vb">
@@ -1737,11 +1722,25 @@
       <DependentUpon>NewOfferAssignCorp.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="NewOffer\NewOfferList.aspx.designer.vb">
+      <DependentUpon>NewOfferList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferList.aspx.vb">
+      <DependentUpon>NewOfferList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="NewOffer\NewOfferPreview.aspx.designer.vb">
       <DependentUpon>NewOfferPreview.aspx</DependentUpon>
     </Compile>
     <Compile Include="NewOffer\NewOfferPreview.aspx.vb">
       <DependentUpon>NewOfferPreview.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferTracking.aspx.designer.vb">
+      <DependentUpon>NewOfferTracking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewOffer\NewOfferTracking.aspx.vb">
+      <DependentUpon>NewOfferTracking.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.designer.vb">
@@ -2245,6 +2244,13 @@
       <DependentUpon>MyApp.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Task\MyTask2.aspx.designer.vb">
+      <DependentUpon>MyTask2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\MyTask2.aspx.vb">
+      <DependentUpon>MyTask2.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Task\MyTask.aspx.designer.vb">
       <DependentUpon>MyTask.aspx</DependentUpon>
     </Compile>
@@ -2391,6 +2397,20 @@
     <Compile Include="TitleUI\TitleTab.ascx.vb">
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UnderWriter\DocSearchList.aspx.designer.vb">
+      <DependentUpon>DocSearchList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\DocSearchList.aspx.vb">
+      <DependentUpon>DocSearchList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UnderWriter\UnderwriterClac.aspx.designer.vb">
+      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\UnderwriterClac.aspx.vb">
+      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
@@ -2579,6 +2599,20 @@
     </Compile>
     <Compile Include="UserControl\SummaryItem\TaskItem.ascx.vb">
       <DependentUpon>TaskItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\FollowUpItem2.ascx.designer.vb">
+      <DependentUpon>FollowUpItem2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\FollowUpItem2.ascx.vb">
+      <DependentUpon>FollowUpItem2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\NewOfferItem.ascx.designer.vb">
+      <DependentUpon>NewOfferItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\NewOfferItem.ascx.vb">
+      <DependentUpon>NewOfferItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx.designer.vb">
@@ -6833,7 +6867,6 @@
     <Content Include="EmailTemplate\TeamActivityReport.aspx" />
     <Content Include="EmailTemplate\Testing.ascx" />
     <Content Include="favicon.ico" />
-    <Content Include="Gruntfile.js" />
     <Content Include="gulpfile.js" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
@@ -6885,6 +6918,8 @@
     <Content Include="images\EmailAlertMsg.png" />
     <Content Include="images\Evication.jpg" />
     <Content Include="images\Evication.png" />
+    <Content Include="images\fa-circle-o.png" />
+    <Content Include="images\fa-money.png" />
     <Content Include="images\flag.png" />
     <Content Include="images\flag1.png" />
     <Content Include="images\goto.png" />
@@ -7133,30 +7168,68 @@
     <Content Include="img\TreeView\treeview-red-line.gif" />
     <Content Include="img\TreeView\treeview-red.gif" />
     <Content Include="js\app.js" />
-    <Content Include="js\build\controllers.js" />
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\common\portalRouteProvider.js" />
     <Content Include="js\common\PortalUIRouteProvider.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
+    <Content Include="js\controllers\es6\TestController.js" />
     <Content Include="js\controllers\LeadTaxSearchController.js" />
     <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\PreSignController.js" />
     <Content Include="js\controllers\ReportWizardController.js" />
-    <Content Include="js\controllers\RequireController.js" />
     <Content Include="js\controllers\ShortSaleController.js" />
     <Content Include="js\controllers\ShortSalePreSignController.js" />
     <Content Include="js\controllers\TitleController.js" />
+    <Content Include="js\controllers\UnderwriterController.js" />
     <Content Include="js\controllers\VendorController.js" />
+    <Content Include="js\directives\auditLogs.js" />
+    <Content Include="js\directives\bindId.js" />
+    <Content Include="js\directives\initGrid.js" />
+    <Content Include="js\directives\inputMask.js" />
+    <Content Include="js\directives\integerMask.js" />
+    <Content Include="js\directives\moneyMask.js" />
+    <Content Include="js\directives\numberMask.js" />
+    <Content Include="js\directives\percentMask.js" />
+    <Content Include="js\directives\preCondition.js" />
+    <Content Include="js\directives\ptAdd.js" />
+    <Content Include="js\directives\ptCollapse.js" />
+    <Content Include="js\directives\ptDel.js" />
+    <Content Include="js\directives\ptEditor.js" />
+    <Content Include="js\directives\ptFile.js" />
+    <Content Include="js\directives\ptFiles.js" />
+    <Content Include="js\directives\ptFinishedMark.js" />
+    <Content Include="js\directives\ptInitBind.js" />
+    <Content Include="js\directives\ptInitModel.js" />
+    <Content Include="js\directives\ptLink.js" />
+    <Content Include="js\directives\ptRadio.js" />
+    <Content Include="js\directives\radioInit.js" />
+    <Content Include="js\directives\ssDate.js" />
     <Content Include="js\e2etest\conf.js" />
     <Content Include="js\e2etest\ContructionController.js" />
     <Content Include="js\filters.js" />
+    <Content Include="js\filters\booleanToString.js" />
+    <Content Include="js\filters\ByContact.js" />
+    <Content Include="js\filters\unsafe.js" />
     <Content Include="js\models\AssignCorp.js" />
     <Content Include="js\models\AuditLog.js" />
     <Content Include="js\models\BusinessCheck.js" />
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
+    <Content Include="js\models\ptUnderwriter.js" />
+    <Content Include="js\services\ptCom.js" />
+    <Content Include="js\services\ptConstructionService.js" />
+    <Content Include="js\services\ptContactServices.js" />
+    <Content Include="js\services\ptEntityService.js" />
+    <Content Include="js\services\ptFileService.js" />
+    <Content Include="js\services\ptHomeBreakDownService.js" />
+    <Content Include="js\services\ptLeadsService.js" />
+    <Content Include="js\services\ptLegalService.js" />
+    <Content Include="js\services\ptPortalHttpInterceptor.js" />
+    <Content Include="js\services\ptShortsSaleService.js" />
+    <Content Include="js\services\ptTime.js" />
+    <Content Include="js\test\models\DivError.spec.js" />
     <Content Include="js\models\DocNewVersionConfig.js" />
     <Content Include="js\models\DocSearchEavesdropper.js" />
     <Content Include="js\models\DxGridModel.js" />
@@ -7189,6 +7262,7 @@
     <Content Include="js\test\ptFilesDirectiveSpec.js" />
     <Content Include="js\test\servicesSpec.js" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
+    <Content Include="js\Views\LeadDocSearch\NewDsSummary.js" />
     <Content Include="js\Views\LeadDocSearch\new_ds_summary.html" />
     <Content Include="js\Views\NewOffer\newoffer-assigncorp-tpl.bak.html" />
     <Content Include="js\Views\NewOffer\newoffer.tpl.html" />
@@ -7198,6 +7272,10 @@
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
+    <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
+    <Content Include="js\Views\Underwriter\tables.tpl.html" />
+    <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
+    <Content Include="js\Views\Underwriter\datainput.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
@@ -7261,10 +7339,14 @@
     <Content Include="Mobile\Construction\InitialForm.aspx" />
     <Content Include="Mobile\Construction\SpotCheck.aspx" />
     <Content Include="Mobile\default.aspx" />
+    <Content Include="MyFollowup.aspx" />
     <Content Include="MyDefault.aspx" />
+    <Content Include="NewOffer\NewOfferAccepted.aspx" />
     <Content Include="NewOffer\NewOfferAssignCorp.ascx" />
+    <Content Include="NewOffer\NewOfferList.aspx" />
     <Content Include="NewOffer\NewOfferPreview.aspx" />
     <Content Include="NewOffer\Templates\offer-business-form.html" />
+    <Content Include="NewOffer\NewOfferTracking.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />
@@ -7385,14 +7467,9 @@
     <Content Include="Publish\PublishProperty.ascx" />
     <Content Include="Publish\PublishPropertyPage.aspx" />
     <Content Include="CustomReport\ReportWizard.aspx" />
-    <Content Include="require.conf.js" />
-    <Content Include="Scripts\ai.0.22.9-build00167.js" />
-    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
-    <Content Include="Scripts\ContactJs.js" />
     <Content Include="js\directives.js" />
-    <Content Include="Scripts\filterLLC.js" />
     <Content Include="Content.Master" />
     <Content Include="css\Web.config" />
     <Content Include="pdfViewer\LICENSE" />
@@ -7736,23 +7813,28 @@
     <Content Include="bower_components\angular-route\package.json" />
     <Content Include="bower_components\angular-route\README.md" />
     <Content Include="App_Data\OfferDoc\ShortSalePackage.docx" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="App_Data\underwriter.xlsx" />
+    <Content Include="App_Data\docsearchmap.csv" />
+    <Content Include="App_Data\test.csv" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />
     <Content Include="ShortSale\ShortPreSignControl.ascx" />
     <Content Include="SQL\SearchReslut.sql" />
+    <Content Include="Task\MyTask2.aspx" />
     <Content Include="TempDataFile\reslut.docx" />
     <Content Include="TitleUI\TitleSummaryPage.aspx" />
     <Content Include="TitleUI\TitleSummaryView.ascx" />
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
+    <Content Include="UnderWriter\DocSearchList.aspx" />
+    <Content Include="UnderWriter\UnderwriterClac.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
+    <Content Include="UserControl\SummaryItem\FollowUpItem2.ascx" />
+    <Content Include="UserControl\SummaryItem\NewOfferItem.ascx" />
     <Content Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />
@@ -8020,8 +8102,6 @@
     <Content Include="bower_components\prototypejs\.bower.json" />
     <Content Include="bower_components\prototypejs\bower.json" />
     <Content Include="bower_components\prototypejs\LICENSE" />
-    <Content Include="Scripts\js\main.js" />
-    <Content Include="Scripts\js\right_pane.js" />
     <Content Include="Scripts\LeadsSubMenu.js" />
     <Content Include="Scripts\PortalMessager.js" />
     <Content Include="js\services.js" />
@@ -8256,7 +8336,6 @@
     <Content Include="Light.Master" />
     <Content Include="Main.Master" />
     <Content Include="Account\Web.config" />
-    <Content Include="Scripts\script.js" />
     <Content Include="ShowReport.aspx" />
     <Content Include="css\styles.css" />
     <None Include="My Project\Application.myapp">

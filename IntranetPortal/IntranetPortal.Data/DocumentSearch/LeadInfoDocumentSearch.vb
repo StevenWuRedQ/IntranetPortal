@@ -6,6 +6,15 @@ Public Class LeadInfoDocumentSearch
     Public Property IsSave As Boolean
     Public Property CaseName As String
 
+    ''' <summary>
+    ''' Notify roles when updating or completing
+    ''' </summary>
+    Public Shared ReadOnly NOTIFY_ROLE_WHEN_UPDATING As String = "DocSearch-Updating"
+    Public Shared ReadOnly NOTIFY_ROLE_WHEN_COMPLETING As String = "DocSearch-Completing"
+
+    Public Shared ReadOnly EMAIL_TEMPLATE_UPADATING As String = "DocSearchUpdating"
+    Public Shared ReadOnly EMAIL_TEMPLATE_COMPLETED As String = "DocSearchCompleted"
+
     Public Shared Function Exist(bble As String) As Boolean
         Using ctx As New PortalEntities
             Return ctx.LeadInfoDocumentSearches.Find(bble) IsNot Nothing
@@ -22,26 +31,34 @@ Public Class LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Dim result = From search In ctx.LeadInfoDocumentSearches
                          Join ld In ctx.ShortSaleLeadsInfoes On search.BBLE Equals ld.BBLE
-                         Select search, ld.PropertyAddress
-            'New With {
-            '   .BBLE = search.BBLE,
-            '   .CaseName = ld.PropertyAddress,
-            '   .ExpectedSigningDate = search.ExpectedSigningDate,
-            '   .CompletedBy = search.CompletedBy,
-            '   .CompletedOn = search.CompletedOn,
-            '   .CreateBy = search.CreateBy,
-            '   .CreateDate = search.CreateDate,
-            '   .LeadResearch = search.LeadResearch,
-            '   .Status = search.Status,
-            '   .UpdateBy = search.UpdateBy,
-            '   .UpdateDate = search.UpdateDate
-            '}
+                         Select New With {
+               .BBLE = search.BBLE,
+               .CaseName = ld.PropertyAddress,
+               .ExpectedSigningDate = search.ExpectedSigningDate,
+               .CompletedBy = search.CompletedBy,
+               .CompletedOn = search.CompletedOn,
+               .CreateBy = search.CreateBy,
+               .CreateDate = search.CreateDate,
+               .Status = search.Status,
+               .UpdateBy = search.UpdateBy,
+               .UpdateDate = search.UpdateDate
+            }
 
             'Return result.ToList
 
-            Return result.AsEnumerable().Select(Function(data)
-                                                    data.search.CaseName = data.PropertyAddress
-                                                    Return data.search
+            Return result.AsEnumerable().Select(Function(search)
+                                                    Return New LeadInfoDocumentSearch With {
+                                                                   .BBLE = search.BBLE,
+                                                                   .CaseName = search.CaseName,
+                                                                   .ExpectedSigningDate = search.ExpectedSigningDate,
+                                                                   .CompletedBy = search.CompletedBy,
+                                                                   .CompletedOn = search.CompletedOn,
+                                                                   .CreateBy = search.CreateBy,
+                                                                   .CreateDate = search.CreateDate,
+                                                                   .Status = search.Status,
+                                                                   .UpdateBy = search.UpdateBy,
+                                                                   .UpdateDate = search.UpdateDate
+                                                        }
                                                 End Function).ToList
         End Using
     End Function
@@ -72,6 +89,42 @@ Public Class LeadInfoDocumentSearch
     End Function
 
     ''' <summary>
+    ''' Updating doc search
+    ''' </summary>
+    Public Sub Update(updateBy As String)
+        If (String.IsNullOrEmpty(updateBy)) Then
+            Throw New Exception("Can not update file with nobody! ")
+        End If
+        UpdateDate = Date.Now
+        Me.UpdateBy = updateBy
+
+    End Sub
+
+
+    ''' <summary>
+    ''' Build email message
+    ''' </summary>
+    ''' <returns> 
+    ''' email data Dictionary of message to use it in Email service send email.
+    ''' </returns>
+    Public Function buildEmailMessge() As Dictionary(Of String, String)
+        If (ResutContent Is Nothing) Then
+            Throw New Exception("Can not build email message with out result content")
+        End If
+
+        If (String.IsNullOrEmpty(CreateBy)) Then
+            Throw New Exception("Can not build mail message when Create By is null")
+        End If
+
+        Dim mailData = New Dictionary(Of String, String)
+
+        'mailData.Add("UserName", CreateBy)
+        mailData.Add("ResutContent", ResutContent)
+
+        Return mailData
+    End Function
+
+    ''' <summary>
     ''' Submit new search
     ''' </summary>
     ''' <param name="submitBy"></param>
@@ -79,9 +132,26 @@ Public Class LeadInfoDocumentSearch
         Status = SearchStatus.NewSearch
         CreateDate = Date.Now
         CreateBy = submitBy
-        ' As deploy request 8/16/2016 
-        ' Version = 1
+        ' As deploy 8/18/2016 open new version switch
+        Version = 1
     End Sub
+
+    ''' <summary>
+    ''' Check if need notify user when need search
+    ''' 1. Before completed no need send notify
+    ''' 2. after completed when saving send notify to 
+    ''' user in rule
+    ''' <todo>
+    ''' this function should be private or p not for unit test 
+    ''' I doing it for public.
+    ''' </todo>
+    ''' </summary>
+    ''' <returns>
+    ''' ture if this case need to
+    ''' </returns>
+    Public Function isNeedNotifyWhenSaving() As Boolean
+        Return Status = SearchStatus.Completed
+    End Function
     Public Sub Save()
         Using ctx As New PortalEntities
             If ctx.LeadInfoDocumentSearches.Find(BBLE) IsNot Nothing Then
@@ -97,6 +167,11 @@ Public Class LeadInfoDocumentSearch
         NewSearch = 0
         Completed = 1
     End Enum
+
+    Public Shared Sub oldToNew()
+
+
+    End Sub
 End Class
 
 Public Class LeadInfoDocumentSearchCaseMetaData

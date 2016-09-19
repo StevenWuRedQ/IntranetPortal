@@ -27,8 +27,11 @@ Partial Public Class ShortSaleCase
         Get
             If _statuStr Is Nothing Then
                 Try
-                    Dim caseStatusE = CType(Status, CaseStatus)
-                    _statuStr = caseStatusE.ToString()
+                    If (Status IsNot Nothing) Then
+                        Dim caseStatusE = CType(Status, CaseStatus)
+                        _statuStr = caseStatusE.ToString()
+                    End If
+
                 Catch ex As Exception
 
                 End Try
@@ -883,7 +886,7 @@ Partial Public Class ShortSaleCase
                     _buyerEntity.BBLE = BBLE
                 End If
 
-                _buyerEntity.Save()
+                _buyerEntity.Save(userName)
             End If
 
         End Using
@@ -1019,9 +1022,38 @@ Partial Public Class ShortSaleCase
         End Using
     End Sub
 
+    ''' <summary>
+    ''' Delete ShortSaleCase with Mortgage data, property info and Owners
+    ''' </summary>
+    Public Sub Delete()
+        Using ctx As New PortalEntities
+
+            Dim mortgages = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = CaseId)
+            ctx.PropertyMortgages.RemoveRange(mortgages)
+
+            Dim propBaseInfo = ctx.PropertyBaseInfoes.Where(Function(pb) pb.BBLE = BBLE)
+            ctx.PropertyBaseInfoes.RemoveRange(propBaseInfo)
+
+            Dim owners = ctx.PropertyOwners.Where(Function(po) po.BBLE = BBLE)
+            ctx.PropertyOwners.RemoveRange(owners)
+
+            Dim buyer = ctx.ShortSaleBuyers.Find(BBLE)
+            ctx.ShortSaleBuyers.Remove(buyer)
+
+            ctx.Entry(Me).State = Entity.EntityState.Deleted
+            ctx.SaveChanges()
+
+        End Using
+    End Sub
 
     Public Shared Function DeleteCase(caseId As Integer) As Boolean
         Return True
+    End Function
+
+    Public Shared Function IsInProcess(bble As String) As Boolean
+        Using ctx As New PortalEntities
+            Return ctx.ShortSaleCases.Any(Function(ss) ss.BBLE = bble And ss.Status > 0)
+        End Using
     End Function
 
     Public Shared Function IsExist(bble As String) As Boolean

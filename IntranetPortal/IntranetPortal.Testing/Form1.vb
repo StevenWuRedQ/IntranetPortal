@@ -2,6 +2,7 @@
 Imports IntranetPortal
 Imports IntranetPortal.Data.DataAPI
 Imports IntranetPortal.RulesEngine
+Imports IntranetPortal.Core
 
 Public Class Form1
 
@@ -223,5 +224,11 @@ Public Class Form1
 
 
 
+    End Sub
+
+    Private Sub btnResendEmail_Click(sender As Object, e As EventArgs) Handles btnResendEmail.Click
+        Dim id = CInt(txtEmailId.Text)
+        Dim msg = EmailService.GetMailMessage(id)
+        EmailService.SendMail(msg.ToAddress, msg.CcAddress & ";chrisy@myidealprop.com", msg.Subject, msg.Body, Nothing)
     End Sub
 End Class

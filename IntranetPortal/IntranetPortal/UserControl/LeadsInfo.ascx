@@ -7,8 +7,9 @@
 <%@ Register Src="~/PopupControl/EditHomeOwner.ascx" TagPrefix="uc1" TagName="EditHomeOwner" %>
 <%@ Register Src="~/UserControl/TitleInLeadsControl.ascx" TagPrefix="uc1" TagName="TitleControl" %>
 <%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
-
+<script src="/Scripts/stevenjs.js"></script>
 <script type="text/javascript">
+    init_tooltip_and_scroll();
     // <![CDATA[
     function OnClick(s, e) {
         ASPxPopupMenuPhone.ShowAtElement(s.GetMainElement());
@@ -16,8 +17,8 @@
 
     var tmpPhoneNo = null;
     var temTelLink = null;
-    var temCommentSpan = null;
     var tmpEmail = null;
+    var temCommentSpan = null;
     var tempEmailLink = null;
     var tmpAddress = null;
     var currOwner = "";
@@ -25,11 +26,15 @@
 
     function onSavePhoneComment() {
         var comment = $("#phone_comment").val();
-        var temCommentSpan = $(temTelLink).children("span:first")
+        var temCommentSpan = $(temTelLink).parent().find(".phone_comment:first")
         if (temCommentSpan != null) {
             //$(".phone_comment").text("-" + comment); 
+            if (comment && comment.length > 30) {
+                comment = comment.substring(0, 30) + "..."
+            }
             temCommentSpan.text("-" + comment);
         } else {
+            console.error("Can not find temCommentSpan in onSavePhoneComment");
         }
         OnCallPhoneCallback("SaveComment|" + tmpPhoneNo + "|" + comment);
     }
@@ -48,11 +53,29 @@
         currOwner = ownerName;
         EmailPopupClient.ShowAtElement(emailink);
     }
+    function OnSortPhoneClick(s, e) {
+        if (sortPhoneFunc == undefined) {
+            console.error("sortPhoneFunc is null please check javascript import stevenjs");
+            return;
+        }
+        if (e.item.index == 0) {
 
+            sortPhoneFunc(compareLastCalledDate);
+
+        }
+
+        if (e.item.index == 1) {
+            sortPhoneFunc(compareByCallCount);
+        }
+    }
     function OnPhoneNumberClick(s, e) {
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
                 OnCallPhoneCallback("CallPhone|" + tmpPhoneNo);
+                OnCallPhone();
+                //if (sortPhones != undefined) {
+                //    sortPhones();
+                //}
             }
 
             if (e.item.index == 1) {
@@ -60,19 +83,22 @@
                 //telphoneLine.style.color = "red";
 
                 OnCallPhoneCallback("BadPhone|" + tmpPhoneNo);
-                SetSameStyle("PhoneLink", "color:red;text-decoration:line-through;", tmpPhoneNo);
+
+                SetSameStyle("PhoneLink", "phone-wrong", tmpPhoneNo);
             }
 
             if (e.item.index == 2) {
                 //telphoneLine.style.color = "green";
-                //telphoneLine.style.textDecoration = "none";                
+                //telphoneLine.style.textDecoration = "none";
+                IsUndoNotWorking(true, temTelLink);
                 OnCallPhoneCallback("RightPhone|" + tmpPhoneNo);
-                SetSameStyle("PhoneLink", "color:green;text-decoration:none;", tmpPhoneNo);
+                SetSameStyle("PhoneLink", "phone-working", tmpPhoneNo);
             }
 
             if (e.item.index == 3) {
                 //telphoneLine.style.color = "green";
                 //telphoneLine.style.textDecoration = "none";
+                IsUndoNotWorking(true, temTelLink);
                 OnCallPhoneCallback("UndoPhone|" + tmpPhoneNo);
                 SetSameStyle("PhoneLink", "", tmpPhoneNo);
             }
@@ -86,10 +112,44 @@
         e.item.SetChecked(false);
 
         if (sortPhones && e.item.index != 4 && e.item.index != 0) {
+
             sortPhones();
         }
     }
+    function clearUndoCount(_tempTelLink) {
+        $(_tempTelLink).removeAttr("data-undo-wrong");
+    }
+    function IsUndoNotWorking(isUndo, _temTelLink) {
+        var telDiv = $(_temTelLink).parent().first();
+        var telDivParent = $(telDiv).closest(".homeowner_info_label");
+        var isWrongPhone = $(_temTelLink).hasClass("phone-wrong");
+        if (isWrongPhone && isUndo) {
+            if (!telDivParent) {
+                console.error("can not find root homeowner_info_label for check IsUndoNotWorking phone ");
+                return;
+            }
+            var undo_wrong_count = 0;
+            var wrong_phones = telDivParent.find("[data-undo-wrong]");
+            if (wrong_phones.length > 0) {
+                var max_wrong_count =
+               _.chain( $.makeArray(wrong_phones) )
+               .map(function (o) {
+                   return parseInt($(o).attr("data-undo-wrong"));
+               }).max();
+                undo_wrong_count = max_wrong_count || 0;
+            }
 
+
+            var _phoneLinks = $('.PhoneLink:contains("' + tmpPhoneNo + '")')
+            // var linkCount = _phoneLinks.length;
+            _phoneLinks.each(function (index, e) {
+                $(e).attr("data-undo-wrong", undo_wrong_count + index + 1);
+            })
+
+            // $(_temTelLink).attr("data-undo-wrong", undo_wrong_count);
+        }
+
+    }
     function SetSameStyle(className, style, value) {
         var list = document.getElementsByClassName(className)
         // alert('find class ' + className+ 'get item count '+list.length +' value'+value);
@@ -98,7 +158,9 @@
 
             if (item.innerText.trim().indexOf(value) == 0) {
 
-                $(item).attr("style", style);
+                $(item).removeClass("phone-wrong");
+                $(item).removeClass("phone-working");
+                $(item).addClass(style);
             }
         }
     }
@@ -155,7 +217,7 @@
             return;
         else
             window.parent.agentTreeCallbackPanel.PerformCallback("");
-    } 
+    }
 
     function PrintLeadInfo() {
         if (leadsInfoBBLE != null) {
@@ -166,11 +228,10 @@
 
     function ReloadPage(bbleToLoad) {
         if (bbleToLoad == leadsInfoBBLE) {
-            if (typeof ContentCallbackPanel != undefined)
-            {
+            if (typeof ContentCallbackPanel != undefined) {
                 ContentCallbackPanel.PerformCallback(bbleToLoad);
             }
-            
+
             return true;
         }
 
@@ -213,22 +274,55 @@
         AspxPopupMenuAddress.ShowAtElement(s);
     }
 
+
+
+    function OnCallPhone() {
+        if (temTelLink) {
+            var parent = $(temTelLink).parent().parent();
+            var lastCallSpan = parent.find(".phone-last-called:first");
+            var callCountSpan = parent.find(".phone-call-count:first");
+            if (callCountSpan) {
+                var countText = callCountSpan.text().trim();
+                countText = countText.length > 0 ? countText : "(0)";
+                var countInt = countText.match(/\d+/);
+                if (countInt) {
+                    countInt = countInt || 0;
+                    var count = parseInt(countInt);
+                    count++;
+                    countText = countText.replace(countInt, count);
+                    callCountSpan.text(countText);
+                }
+
+
+            }
+
+            if (lastCallSpan) {
+                var d = new Date();
+                lastCallSpan.text(d.toLocaleDateString() + " " + d.getHours() + ':' + d.getSeconds())
+            }
+
+        } else {
+            console.error("temTelLink is null");
+        }
+    }
+
     function OnAddressPopupMenuClick(s, e) {
 
         if (tmpAddress != null) {
             if (e.item.index == 0) {
                 OnCallPhoneCallback("DoorKnock|" + tmpAddress);
+
                 SetLeadStatus(4);
             }
 
             if (e.item.index == 1) {
                 OnCallPhoneCallback("BadAddress|" + tmpAddress);
-                SetSameStyle("AddressLink", "color:red;text-decoration:line-through;", tmpAddress);
+                SetSameStyle("AddressLink", "phone-wrong", tmpAddress);
             }
 
             if (e.item.index == 2) {
                 OnCallPhoneCallback("RightAddress|" + tmpAddress);
-                SetSameStyle("AddressLink", "color:green;text-decoration:none;", tmpAddress);
+                SetSameStyle("AddressLink", "phone-working", tmpAddress);
             }
 
             if (e.item.index == 3) {
@@ -339,12 +433,17 @@
         if (sortPhones) {
             sortPhones();
         }
+
+        // reload callback on get lead status in propertyinfo
+        if (LoanModStatusCtrl) {
+            LoanModStatusCtrl.reload();
+        }
     }
 
     function reloadHomeBreakCtrl(bble) {
         var homeBreakDownCtrl = document.getElementById('homeBreakDownCtrl');
         // in hot leads, there is not homeBreakDownCtrl
-        if (homeBreakDownCtrl) {        
+        if (homeBreakDownCtrl) {
             var target = angular.element(homeBreakDownCtrl);
             var $injector = target.injector();
             $injector.invoke(function ($compile, ptCom, ptHomeBreakDownService) {
@@ -387,9 +486,22 @@
     }
     angular.module('PortalApp').controller('homeBreakDownCtrl', function () { })
 
+
+    // change leads status to additional folder
+    otherFolderPopupCtrl = {
+        show: function (elm) {
+            otherFolderPopup.ShowAtElement(elm);
+        },
+        onClick: function (s, e) {
+            //debugger;
+            var args = e.item.name.split('|');
+            // pass request fomat will be "x|{leadstatuscode}|{bble}"
+            SetLeadStatus("x" + "|" + e.item.name + "|" + leadsInfoBBLE);
+
+        }
+    }
 </script>
 
-<script src="/Scripts/stevenjs.js"></script>
 
 <style type="text/css">
     .UpdateInfoAlign {
@@ -421,7 +533,6 @@
                         <Paddings Padding="0px"></Paddings>
                     </Pane>
                 </Styles>
-
                 <Panes>
                     <dx:SplitterPane ShowCollapseBackwardButton="True" AutoHeight="true" Name="paneInfo">
                         <PaneStyle Paddings-Padding="0">
@@ -536,7 +647,20 @@
                                             <uc1:TitleControl runat="server" ID="TitleControl" />
                                         </div>
                                     </div>
+                                    <dx:ASPxPopupMenu ID="ASPxPopupSortPhone" runat="server" ClientInstanceName="ASPxPopupSortPhoneClient"
+                                        PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
+                                        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                        <ItemStyle Paddings-PaddingLeft="20px" />
+                                        <Items>
+                                            <dx:MenuItem Text="last called" Name="LastCalledDate">
+                                            </dx:MenuItem>
+                                            <dx:MenuItem Text="call count" Name="CallCount">
+                                            </dx:MenuItem>
 
+                                        </Items>
+                                        <ClientSideEvents ItemClick="OnSortPhoneClick" />
+                                    </dx:ASPxPopupMenu>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
                                         PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
                                         PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
@@ -616,7 +740,7 @@
                                                 <div class="tooltip-inner" style="background-color: #ff400d;">Show Property Info</div>
                                             </div>
                                             <% End If%>
-
+                                            <i class="fa fa-folder-open-o sale_head_button sale_head_button_left tooltip-examples" title="Add to folder" onclick="otherFolderPopupCtrl.show(this)" runat="server" id="otherFolderIcon"></i>
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                                             <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus('5|'+leadsInfoBBLE);"></i>
                                             <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
@@ -626,10 +750,9 @@
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                         </li>
                                     </ul>
-
                                 </div>
 
-                                <div class="clearfix">                                
+                                <div class="clearfix">
                                     <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
                                 </div>
                                 <dx:ASPxCallback ID="callPhoneCallback" runat="server" ClientInstanceName="callPhoneCallbackClient" OnCallback="callPhoneCallback_Callback">
@@ -651,6 +774,14 @@
                                         </dx:MenuItem>
                                     </Items>
                                     <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+                                </dx:ASPxPopupMenu>
+
+                                <dx:ASPxPopupMenu ID="OtherFolderPopup" runat="server" ClientInstanceName="otherFolderPopup"
+                                    AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                    <ItemStyle Paddings-PaddingLeft="20px" />
+                                    <Items></Items>
+                                    <ClientSideEvents ItemClick="otherFolderPopupCtrl.onClick" />
                                 </dx:ASPxPopupMenu>
 
                                 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
@@ -677,7 +808,7 @@
                                                         </dx:ASPxButton>
                                                         &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                                            <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
+                                                                <ClientSideEvents Click="function(){ASPxPopupSelectDateControl.Hide();}"></ClientSideEvents>
                                                             </dx:ASPxButton>
                                                     </td>
                                                 </tr>

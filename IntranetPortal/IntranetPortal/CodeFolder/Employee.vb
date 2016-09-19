@@ -172,7 +172,7 @@ Partial Public Class Employee
         If Roles.IsUserInRole(name, "Admin") Then
             Return True
         End If
-
+        ' Roles.GetUsersInRole("ShortSale-")
         Dim ld = Lead.GetInstance(bble)
         If ld Is Nothing Then
             Return False
@@ -468,7 +468,15 @@ Partial Public Class Employee
 
         Return users.Distinct.ToArray
     End Function
-
+    ''' <summary>
+    ''' get all user email split with ; in role 
+    ''' </summary>
+    ''' <param name="roleName">Role Name</param>
+    ''' <returns>user emails split with ; </returns>
+    Public Shared Function GetRoleUserEmails(roleName As String) As String
+        Dim users = GetRoleUsers(roleName)
+        Return GetEmpsEmails(users)
+    End Function
     ''' <summary>
     ''' Return list of user names that belong to given department
     ''' </summary>
@@ -822,6 +830,28 @@ Partial Public Class Employee
         Return Utility.IsTesting()
     End Function
 
+    Private Shared _empTeams As New Dictionary(Of String, String)
+    Private Shared lockObj As New Object
+    Public Shared Function GetEmpTeam(empName As String) As String
+        If Not _empTeams.ContainsKey(empName) Then
+            SyncLock lockObj
+                If _empTeams.ContainsKey(empName) Then
+                    Return _empTeams(empName)
+                End If
+
+                Dim team = GetEmpTeams(empName)
+                If team IsNot Nothing AndAlso team.Count > 0 Then
+                    _empTeams.Add(empName, team(0))
+                Else
+                    _empTeams.Add(empName, Nothing)
+                End If
+            End SyncLock
+
+        End If
+
+        Return _empTeams(empName)
+    End Function
+
     ''' <summary>
     ''' Get the list of team which the given employee belongs to
     ''' </summary>
@@ -841,6 +871,7 @@ Partial Public Class Employee
             Return Nothing
         End Using
     End Function
+
 
     ''' <summary>
     ''' Get Employee Data, used for JSON serialized

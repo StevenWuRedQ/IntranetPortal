@@ -12,13 +12,4 @@ Option Explicit On
 
 
 Partial Public Class Test
-    
-    '''<summary>
-    '''TitleDocTab control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TitleDocTab As Global.IntranetPortal.TitleDocTab
 End Class

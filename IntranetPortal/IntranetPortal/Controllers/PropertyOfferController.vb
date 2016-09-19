@@ -19,7 +19,6 @@ Namespace Controllers
         ''' <returns>The generated file link</returns>
         <Route("api/PropertyOffer/GeneratePackage/{bble}")>
         Public Function PostGeneratePackage(bble As String, <FromBody> data As JObject) As IHttpActionResult
-
             Try
                 Dim path = HttpContext.Current.Server.MapPath("~/App_Data/OfferDoc")
                 Dim destPath = HttpContext.Current.Server.MapPath("/TempDataFile/OfferDoc/")
@@ -28,7 +27,6 @@ Namespace Controllers
             Catch ex As Exception
                 Return BadRequest(ex.Message)
             End Try
-
         End Function
 
         ''' <summary>
@@ -37,16 +35,41 @@ Namespace Controllers
         ''' <returns>Property Offer list</returns>
         <Route("api/PropertyOffer/")>
         Public Function GetPropertyOffers() As IHttpActionResult
-
             Dim name = HttpContext.Current.User.Identity.Name
+            Dim mgrView = HttpContext.Current.Request.QueryString("mgrview")
+            Dim summary = HttpContext.Current.Request.QueryString("summary")
+            Dim isSummary = False
 
-            If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
-                name = "*"
+            If Boolean.TryParse(summary, isSummary) Then
+
             End If
 
-            Dim records = PropertyOffer.GetOffers(name)
-            Return Ok(records)
 
+            Dim result() As PropertyOffer = {}
+            If Not String.IsNullOrEmpty(mgrView) Then
+                Dim view As PropertyOfferManage.ManagerView = 0
+                If Integer.TryParse(mgrView, view) Then
+                    result = (PropertyOfferManage.GetOffersByManagerView(name, view, isSummary))
+                End If
+            Else
+                If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
+                    name = "*"
+                End If
+
+                result = PropertyOffer.GetOffers(name)
+            End If
+
+            If result.Count > 0 AndAlso Not String.IsNullOrEmpty(summary) Then
+                If isSummary Then
+                    Dim data = New With {
+                            .data = result.OrderByDescending(Function(d) d.UpdateDate).Take(10).ToArray,
+                            .count = result.Count
+                        }
+                    Return Ok(data)
+                End If
+            End If
+
+            Return Ok(result)
         End Function
 
         ''' <summary>

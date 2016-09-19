@@ -1,11 +1,22 @@
-﻿angular.module('PortalApp')
+﻿/**
+ * @author Steven Wu
+ * @date 9/15/2016
+ * @fix git committed bde6b6d
+ * add tax search js cotroller
+ * LeadTaxSearchController is doc search. 
+ * naming wrong becuase the name always change from spec guys.
+ */
+angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
         ptContactServices, ptCom, DocSearch, LeadsInfo
         , DocSearchEavesdropper, DivError
         ) {
         //New Model(this,arguments)
-        $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
+        $scope.ShowInfo = $('#ShowInfo').val();
+        $scope.ptContactServices = ptContactServices;
+
+
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
@@ -13,21 +24,6 @@
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
 
-        /////////////////////////////////////////////////////////////////////
-        // @date 8/11/2016
-        // for devextrem angular bugs have to init array frist
-        // fast prototype of grid bug on 8/11/2016 may spend two hours on it
-        //var INITS = {
-        //   OtherMortgage: [],
-        //   DeedRecorded: [],
-        //   COSRecorded: [],
-        //   OtherLiens: [],
-        //   TaxLienCertificate:[]
-        //};
-        //$scope.DocSearch.LeadResearch = {}
-        //angular.extend($scope.DocSearch.LeadResearch, INITS);
-        // ///////////////////////////////////////////////////////////////// 
-        // put here should not right for fast prototype ////////////////////
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -58,9 +54,8 @@
 
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
-       
-        $scope.multipleValidated = function (base, boolKey, arraykey)
-        {
+
+        $scope.multipleValidated = function (base, boolKey, arraykey) {
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
             /**
@@ -73,6 +68,7 @@
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
+            $scope.ShowInfo = $('#ShowInfo').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
                 return;
@@ -85,70 +81,40 @@
 
                 ////////// font end switch to new version //////////////
                 $scope.versionController.start2Eaves();
-                /////////////////// 8/12/2016 //////////////////////////
-
-                /////////////////////////////// saving and grid init bug for faster portotype ///////////////////
-                //
-                // use fast prototype it have same bug
-                // this is faster solution of grid init will remove to initGrid
-                // put here should not right that not right it should like this 
-                // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
-                // and put it to model inside;
-                // angular.extend($scope.DocSearch.LeadResearch, INITS);
-                //
-                /////////////////////////////// end saving and grid init bug for faster portotype ////////////////
-
-
             });
-            // ////remove all code to model version date is some time of June 2016 /////////////////////////////////////////////
-            //$scope.DocSearch;
-            // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-            // success(function (data, status, headers, config) {
-            //     $scope.DocSearch = data;
-            //     $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-            //         $scope.DocSearch.team = data;
 
-            //     });
-
-            //     $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-            //       success(function (data1, status, headers, config) {
-            //           $scope.LeadsInfo = data1;
-            //           $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
-            //           $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
-            //           $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
-            //           $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
-            //           $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
-            //           $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data1.C2ndMotgrAmt;
-            //           var ownerName = $scope.DocSearch.LeadResearch.ownerName;
-            //           if (ownerName) {
-            //               $http.post("/api/homeowner/ssn/" + leadsInfoBBLE, JSON.stringify(ownerName)).
-            //               success(function (ssn, status, headers, config) {
-            //                   $scope.DocSearch.LeadResearch.ownerSSN = ssn;
-            //               }).error(function () {
-
-            //               });
-            //           }
-
-
-            //       }).error(function (data, status, headers, config) {
-            //           alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-            //       });
-            // });
-            // ////////////////////////////////// remove all code to model version date is some time of June 2016 ////////////////////
         }
 
         $scope.init(leadsInfoBBLE)
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         * @fix
+         *  git commit f679a81 'finish the new doc search page'
+         *  add javascript version of validate in new version of doc search
+         *  it's not right to add the goal in git commit should create jira task.
+         */
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         *  
+         * @description
+         *  new version validate javascript version validate
+         * @returns {bool} true then pass validate
+         */
         $scope.newVersionValidate = function () {
-
+            /**
+             * change java script version validate 
+             * to oop model version validate
+             */
             if (!$scope.newVersion) {
                 return true;
             }
 
-            if (!$scope.DivError.passValidate())
-            {
-               
+            if (!$scope.DivError.passValidate()) {
+
                 return false;
             }
 
@@ -179,7 +145,17 @@
                 "has_Vacate_Order_Vacate_Order",
                 "has_ECB_Tickets_ECB_Tickets",
                 "has_ECB_on_Name_ECB_on_Name_other_known_address",
-                //under are one to multiple//
+
+                /**
+                 * @author Steven
+                 * @date   8/19/2016
+                 * 
+                 * @fix 
+                 * git commit bde6b6d tax search
+                 * add validated to new version doc search at least one item add 
+                 * when select yes control grid
+                 */
+                // under are one to multiple//
                 "Has_Other_Mortgage",
                 "Has_Other_Liens",
                 "Has_TaxLiensCertifcate",
@@ -207,7 +183,7 @@
 
                 for (var j = 0; j < checkedAttrs.length; j++) {
                     var f1 = checkedAttrs[j];
-                    if( ( fields[f1[0]] === true && !Array.isArray(fields[f1[1]]) ) || (fields[f1[0]] === true && fields[f1[1]].length === 0)){
+                    if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
                         errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
                     }
                 }
@@ -218,27 +194,18 @@
 
         }
 
-
-
-
         $scope.SearchComplete = function (isSave) {
 
-            if (!$scope.newVersionValidate())
-            {
+            if (!$scope.newVersionValidate()) {
                 var msg = $scope.DivError.getMessage();
 
                 AngularRoot.alert(msg[0]);
                 return;
             };
-            // $scope.DivError.getMessage();
-            // $scope.newVersionValidate();
 
-            //if (msg) {
-            //    AngularRoot.alert(msg);
-            //    return;
-            //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
@@ -246,7 +213,7 @@
                 });
             } else {
 
-                $scope.DocSearch.ResutContent = $("#searchReslut").html();
+                
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -254,41 +221,23 @@
                 });
             }
 
+            $scope.test = function () {
+                $scope.$digest();
+            }
 
-            //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
-            //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
-            //    if (typeof gridCase != 'undefined') {
-            //        if (!isSave) {
-            //            $scope.DocSearch.Status = 1;
-            //            gridCase.Refresh();
-            //        }
-            //    }
-            //}).error(function (data) {
-            //    alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //});
+        }
 
-            //Ajax anonymous function not work for angular scope need check about this.
-            //$.ajax({
-            //    type: "PUT",
-            //    url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
-            //    data: JSON.stringify(PostData),
-            //    dataType: 'json',
-            //    contentType: 'application/json',
-            //    success: function (data) {
+        $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
 
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
-            //        if (typeof gridCase != 'undefined') {
-            //            if (!isSave) {
-            //                $scope.DocSearch.Status = 1;
-            //                gridCase.Refresh();
-            //            }
+        for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
+            $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
+                if (nv) {
+                    var rest_exclusive_filed = _.without($scope.EXCLUSIVE_FIELD, this.exp);
+                    for (var j = 0; j < rest_exclusive_filed.length; j++) {
+                        if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
+                    }
+                }
 
-            //        }
-            //    },
-            //    error: function (data) {
-            //        alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //    }
-
-            //});
+            })
         }
     });

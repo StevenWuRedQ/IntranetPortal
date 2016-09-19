@@ -38,6 +38,7 @@
         this.super = $stateProvider;
         this.$get = angular.noop;
         this.ITEM_ID = ITEM_ID;
+
         // Again, if AngularJS had "provider helpers" we might be able to return `statesFor()` as the
         // portalUIRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
         // like:

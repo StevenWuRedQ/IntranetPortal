@@ -61,7 +61,12 @@ Public Class UserSummary
             gridTask.GroupBy(gridTask.Columns("ProcSchemeDisplayName"))
 
             gridPriority.DataBind()
-            
+
+            gridWarmer.DataBind()
+
+            gridLoanMod.DataBind()
+            CType(gridLoanMod.Columns("SubStatusStr"), GridViewDataColumn).GroupBy()
+
             gridCallback.DataBind()
             CType(gridCallback.Columns("CallbackDate"), GridViewDataColumn).GroupBy()
         End Using
@@ -102,6 +107,20 @@ Public Class UserSummary
             Dim Context As New Entities
             Dim callbackleads = Lead.GetUserLeadsData(Page.User.Identity.Name, LeadStatus.Callback) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
             gridCallback.DataSource = callbackleads
+        End If
+    End Sub
+
+    Protected Sub gridWarmer_DataBinding(sender As Object, e As EventArgs)
+        If gridWarmer.DataSource Is Nothing Then
+            Dim priorityData = Lead.GetUserLeadsData(Page.User.Identity.Name, LeadStatus.Warm)
+            gridWarmer.DataSource = priorityData
+        End If
+    End Sub
+
+    Protected Sub gridLoanMod_DataBinding(sender As Object, e As EventArgs)
+        If gridLoanMod.DataSource Is Nothing Then
+            Dim loanModleads = Lead.GetLoanModDue(Page.User.Identity.Name) ' , Nothing, New Date(2016, 12, 1)) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
+            gridLoanMod.DataSource = loanModleads
         End If
     End Sub
 
@@ -322,8 +341,5 @@ Public Class UserSummary
         e.Menu.Items.Clear()
     End Sub
 
-  
-    
- 
-    
+
 End Class

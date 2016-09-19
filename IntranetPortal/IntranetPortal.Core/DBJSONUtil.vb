@@ -1,21 +1,41 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
+Imports System.Web
+Imports Newtonsoft.Json.Linq
 
 Public Class DBJSONUtil
 
-    Private Shared ReadOnly ConStr As String = Configuration.ConfigurationManager.ConnectionStrings("CoreEntities").ConnectionString
 
-    Public Shared Function GetPrimayKey(tableName As String) As String()
+    Public Shared Function MapTo(ostr As String, mapPath As String) As String
+        Dim jobj = JObject.Parse(ostr)
 
-        Using ctx As New CoreEntities
-            Dim result = From p In ctx.GetPrimaryKeys("TitleCase")
-                         Select p.primary_keys
-            If result IsNot Nothing Then
-                Return result.ToArray
-            Else
-                Return {}
-            End If
+        Using sr = New StreamReader(mapPath)
+            Dim line As String
+            line = sr.ReadLine
+            While line IsNot Nothing
+                Dim token = line.Split(",")
+                If token.Count = 2 Then
+                    ReplaceField(jobj, token(0), token(1))
+                ElseIf token.Count = 3 Then
+                    Replace1AndUpdate2(jobj, token(0), token(1), token(2))
+                End If
+
+                line = sr.ReadLine
+            End While
         End Using
 
+        Return jobj.ToJsonString
     End Function
 
+    Public Shared Sub ReplaceField(jobj As JObject, fromField As String, toField As String)
+        jobj(toField) = jobj(fromField)
+        If Not fromField = toField Then
+            jobj.Remove(fromField)
+        End If
+    End Sub
+
+    Public Shared Sub Replace1AndUpdate2(jobj As JObject, fromFiled As String, toFiled As String, additional As String)
+        ReplaceField(jobj, fromFiled, toFiled)
+        jobj(additional) = "true"
+    End Sub
 End Class

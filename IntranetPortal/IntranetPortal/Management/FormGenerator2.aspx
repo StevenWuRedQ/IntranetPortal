@@ -75,7 +75,7 @@
                 data1 = [{
                     title: 'Giving POA',
                     items: [{ "label": "Name", "type": "input" },
-                            { "label": "Address", "type": "input" },
+                            { "label": "Address", "type": "ptRadio" },
                     ]
                 },
                 {
@@ -86,11 +86,11 @@
                     ]
                 },]
                 scope.process(data1);
-                fileElm.value = "";
-                //var fileElm = $('#uploadcsv')[0];
-                //var data = new FormData();
-                //data.append("file", fileElm.files[0]);
-                //$.ajax({
+                // fileElm.value = "";
+                // var fileElm = $('#uploadcsv')[0];
+                // var data = new FormData();
+                // data.append("file", fileElm.files[0]);
+                // $.ajax({
                 //    url: '/api/Management/ConvertCSV',
                 //    type: 'POST',
                 //    data: data,
@@ -105,7 +105,7 @@
                 //        fileElm.value = "";
                 //    }
 
-                //})
+                // })
             }
         }
         var portalApp = angular.module('PortalApp');
@@ -135,7 +135,7 @@
                 $scope.compilingItem = el;
                 var result = '';
                 if (el.type != 'textarea') {
-                    result += '<li class="ss_form_item ">';
+                    result += '<li class="ss_form_item">';
                     result += $interpolate($templateCache.get("label").trim())($scope);
                     var templeate = $templateCache.get($scope.compilingItem.type).trim();
                     result += $interpolate(templeate)($scope);
@@ -156,7 +156,6 @@
 
                 _.each($scope.FormItems, function (el) {
                     $scope.compilingFormTitle = el.title;
-
                     result += '<div class="ss_form"><h4 class="ss_form_title ">';
                     result += $scope.compilingFormTitle;
                     result += '</h4><div class="ss_border"><ul class="ss_form_box clearfix">';

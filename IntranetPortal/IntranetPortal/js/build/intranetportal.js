@@ -1,10 +1,8 @@
+var portalApp = angular.module('PortalApp',
+    ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
 
-function RequirePortalApp()
-{
-
-    var portalApp = angular.module('PortalApp', ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
-    angular.module('PortalApp').
-    controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
+angular.module('PortalApp')
+    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
         $rootScope.AlertModal = null;
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');
@@ -14,16 +12,14 @@ function RequirePortalApp()
             $rootScope.alertMessage = message ? message : '';
             $rootScope.AlertModal = $uibModal.open({
                 templateUrl: 'AlertModal',
-           
+
             });
         }
-    
-
         $rootScope.alertOK = function () {
             $rootScope.AlertModal.close();
         }
 
-        $rootScope.confirm = function (message,confrimFunc) {
+        $rootScope.confirm = function (message, confrimFunc) {
             $rootScope.confirmMessage = message ? message : '';
             $rootScope.ConfirmModal = $uibModal.open({
                 templateUrl: 'ConfirmModal'
@@ -31,17 +27,13 @@ function RequirePortalApp()
             $rootScope.ConfirmModal.confrimFunc = confrimFunc;
             return $rootScope.ConfirmModal.result;
         }
-
         $rootScope.confirmYes = function () {
             $rootScope.ConfirmModal.close(true);
-            if ($rootScope.ConfirmModal.confrimFunc)
-            {
+            if ($rootScope.ConfirmModal.confrimFunc) {
                 $rootScope.ConfirmModal.confrimFunc(true);
             }
-       
-        }
 
-   
+        }
         $rootScope.confirmNo = function () {
             $rootScope.ConfirmModal.close(false);
             if ($rootScope.ConfirmModal.confrimFunc) {
@@ -57,30 +49,27 @@ function RequirePortalApp()
             });
             $rootScope.promptModal.promptFunc = promptFunc;
         }
-
         $rootScope.promptYes = function () {
             $rootScope.promptModal.close($rootScope.promptModalTxt);
             if ($rootScope.promptModal.promptFunc) {
                 //UI Modal use async call send result so use jquery instand now 
                 $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
             }
-        
-        }
 
+        }
         $rootScope.promptNo = function () {
             $rootScope.promptModal.close(false);
             if ($rootScope.promptModal.promptFunc) {
                 $rootScope.promptModal.promptFunc(null)
             }
         }
+
         $rootScope.showLoading = function (divId) {
             $($rootScope.loadingCover).show();
         }
-
         $rootScope.hideLoading = function (divId) {
             $($rootScope.loadingCover).hide();
         }
-
         $rootScope.toggleLoading = function () {
             $rootScope.panelLoading = !$scope.panelLoading;
         }
@@ -93,45 +82,182 @@ function RequirePortalApp()
             });
         }
     }]);
-    
 
-    portalApp.config(function ($locationProvider) {
+/**
 
-        /* because need use anguler support url parameters $location.search();
-         * but it only work when open html 5 model 
-         * so need open html 5 model 
-         **/
+portalApp.config(function ($locationProvider) {
 
-        //$locationProvider.html5Mode({
-        //    enabled: true,
-        //    requireBase: false
-        //});
-    });
-    return portalApp;
-}
+    /* because need use anguler support url parameters $location.search();
+     * but it only work when open html 5 model 
+     * so need open html 5 model 
+
+
+//$locationProvider.html5Mode({
+//    enabled: true,
+//    requireBase: false
+//});
 
 function TestRequirePortalApp() {
     var portalApp = angular.module('PortalApp', []);
-    
     return portalApp;
 }
 
-/**
-  *this is model define has to be the last line
-  *like compile script will call when use require js solove the dependency 
-  Import xx  xx1
-  */
+
+*this is model define has to be the last line
+*like compile script will call when use require js solove the dependency 
+Import xx  xx1
+ 
 if (typeof requirejs === "function") {
     define(["jquery", "angular", "angular-resource", "angular-route", "angular-animate", "angular-sanitize"],
         function ($, angular, ngResource, ngRoute, ngAnimate, ngSanitize) {
-        //the jquery.alpha.js and jquery.beta.js plugins have been loaded.
-       
-        return RequirePortalApp();
-    });
+            //the jquery.alpha.js and jquery.beta.js plugins have been loaded.
+            return RequirePortalApp();
+        });
 } else {
     var portalApp = RequirePortalApp();
 }
+*/
+(function () {
+    /*define public shared var of class portalRouteProvider register var in the below*/
+    var ITEM_ID = 'itemId';
 
+    function portalRouteProvider($routeProvider) {
+
+        // This $get noop is because at the moment in AngularJS "providers" must provide something
+        // via a $get method.
+        // When AngularJS has "provider helpers" then this will go away!
+
+        /**/
+        this.$get = angular.noop;
+        this.ITEM_ID = ITEM_ID;
+        // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
+        // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
+        // like:
+        //
+        // ```
+        // myMod.config(function(portalRouteProvider) {
+        //   var routeProvider = portalRouteProvider.routesFor('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // but instead have something like:
+        //
+        //
+        // ```
+        // myMod.config(function(portalRouteProvider) {
+        //   var routeProvider = portalRouteProvider('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // In any case, the point is that this function is the key part of this "provider helper".
+        // We use it to create routes for CRUD operations.  We give it some basic information about
+        // the resource and the urls then it it returns our own special routeProvider.
+        this.routesFor = function (resourceName, urlPrefix, routePrefix) {
+            var baseUrl = resourceName.toLowerCase();
+
+            var baseRoute = '/' + resourceName.toLowerCase();
+            routePrefix = routePrefix || urlPrefix;
+
+            // Prepend the urlPrefix if available.
+            if (angular.isString(urlPrefix) && urlPrefix !== '') {
+                baseUrl = urlPrefix + '/' + baseUrl;
+            }
+
+            // Prepend the routePrefix if it was provided;
+            if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
+                baseRoute = '/' + routePrefix + baseRoute;
+            }
+
+            // Create the templateUrl for a route to our resource that does the specified operation.
+            var templateUrl = function (operation) {
+                return '/js/Views/' + resourceName.toLowerCase() + '/' + resourceName.toLowerCase() + '-' + operation.toLowerCase() + '.tpl.html';
+            };
+            // Create the controller name for a route to our resource that does the specified operation.
+            var controllerName = function (operation) {
+                return resourceName + operation + 'Ctrl';
+            };
+
+            // This is the object that our `routesFor()` function returns.  It decorates `$routeProvider`,
+            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
+            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
+            var routeBuilder = {
+                // Create a route that will handle showing a list of items
+                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
+                whenList: function (resolveFns) {
+                    routeBuilder.when(baseRoute, {
+                        templateUrl: templateUrl('List'),
+                        controller: controllerName('List'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Create a route that will handle creating a new item
+                whenNew: function (resolveFns) {
+                    routeBuilder.when(baseRoute + '/new', {
+                        templateUrl: templateUrl('Edit'),
+                        controller: controllerName('Edit'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Create a route that will handle editing an existing item
+                whenEdit: function (resolveFns) {
+                    routeBuilder.when(baseRoute + '/:' + ITEM_ID, {
+                        templateUrl: templateUrl('Edit'),
+                        controller: controllerName('Edit'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                whenOther: function (resolveFns, name, suffixUrl) {
+                    var _url = suffixUrl ? suffixUrl : '';
+                    routeBuilder.when(baseRoute +'/'+ name.toLowerCase() +'/'+ _url, {
+                        templateUrl: templateUrl(name),
+                        controller: controllerName(name),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Readonly views and controllers
+                whenView: function (resolveFns) {
+                    routeBuilder.when(baseRoute + '/view/:' + ITEM_ID, {
+                        templateUrl: templateUrl('View'),
+                        controller: controllerName('View'),
+                        resolve: resolveFns
+                    });
+                    return routeBuilder;
+                },
+                // Pass-through to `$routeProvider.when()`
+                when: function (path, route) {
+                    $routeProvider.when(path, route);
+                    return routeBuilder;
+                },
+                // Pass-through to `$routeProvider.otherwise()`
+                otherwise: function (params) {
+                    $routeProvider.otherwise(params);
+                    return routeBuilder;
+                },
+                // Access to the core $routeProvider.
+                $routeProvider: $routeProvider
+            };
+            return routeBuilder;
+        };
+    }
+    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
+    // we add our injection dependencies using the $inject form
+    portalRouteProvider.$inject = ['$routeProvider'];
+
+    /*define public shared var of class portalRouteProvider*/
+    portalRouteProvider.ITEM_ID = ITEM_ID;
+    // Create our provider - it would be nice to be able to do something like this instead:
+    //
+    // ```
+    // angular.module('services.portalRouteProvider', [])
+    //   .configHelper('portalRouteProvider', ['$routeProvider, portalRouteProvider]);
+    // ```
+    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
+    angular.module('PortalApp').provider('portalRoute', portalRouteProvider);
+})();
 /*
  * Portal UI Route will be the main router we use base on UI-router
  * The Portal Route will be Deprecated
@@ -172,6 +298,7 @@ if (typeof requirejs === "function") {
         this.super = $stateProvider;
         this.$get = angular.noop;
         this.ITEM_ID = ITEM_ID;
+
         // Again, if AngularJS had "provider helpers" we might be able to return `statesFor()` as the
         // portalUIRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
         // like:
@@ -352,147 +479,6 @@ if (typeof requirejs === "function") {
     // ```
     // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
     angular.module('PortalApp').provider('portalUIRoute', portalUIRouteProvider);
-})();
-(function () {
-    /*define public shared var of class portalRouteProvider register var in the below*/
-    var ITEM_ID = 'itemId';
-
-    function portalRouteProvider($routeProvider) {
-
-        // This $get noop is because at the moment in AngularJS "providers" must provide something
-        // via a $get method.
-        // When AngularJS has "provider helpers" then this will go away!
-
-        /**/
-        this.$get = angular.noop;
-        this.ITEM_ID = ITEM_ID;
-        // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
-        // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
-        // like:
-        //
-        // ```
-        // myMod.config(function(portalRouteProvider) {
-        //   var routeProvider = portalRouteProvider.routesFor('MyBook', '/myApp');
-        // });
-        // ```
-        //
-        // but instead have something like:
-        //
-        //
-        // ```
-        // myMod.config(function(portalRouteProvider) {
-        //   var routeProvider = portalRouteProvider('MyBook', '/myApp');
-        // });
-        // ```
-        //
-        // In any case, the point is that this function is the key part of this "provider helper".
-        // We use it to create routes for CRUD operations.  We give it some basic information about
-        // the resource and the urls then it it returns our own special routeProvider.
-        this.routesFor = function (resourceName, urlPrefix, routePrefix) {
-            var baseUrl = resourceName.toLowerCase();
-
-            var baseRoute = '/' + resourceName.toLowerCase();
-            routePrefix = routePrefix || urlPrefix;
-
-            // Prepend the urlPrefix if available.
-            if (angular.isString(urlPrefix) && urlPrefix !== '') {
-                baseUrl = urlPrefix + '/' + baseUrl;
-            }
-
-            // Prepend the routePrefix if it was provided;
-            if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
-                baseRoute = '/' + routePrefix + baseRoute;
-            }
-
-            // Create the templateUrl for a route to our resource that does the specified operation.
-            var templateUrl = function (operation) {
-                return '/js/Views/' + resourceName.toLowerCase() + '/' + resourceName.toLowerCase() + '-' + operation.toLowerCase() + '.tpl.html';
-            };
-            // Create the controller name for a route to our resource that does the specified operation.
-            var controllerName = function (operation) {
-                return resourceName + operation + 'Ctrl';
-            };
-
-            // This is the object that our `routesFor()` function returns.  It decorates `$routeProvider`,
-            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
-            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
-            var routeBuilder = {
-                // Create a route that will handle showing a list of items
-                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
-                whenList: function (resolveFns) {
-                    routeBuilder.when(baseRoute, {
-                        templateUrl: templateUrl('List'),
-                        controller: controllerName('List'),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                // Create a route that will handle creating a new item
-                whenNew: function (resolveFns) {
-                    routeBuilder.when(baseRoute + '/new', {
-                        templateUrl: templateUrl('Edit'),
-                        controller: controllerName('Edit'),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                // Create a route that will handle editing an existing item
-                whenEdit: function (resolveFns) {
-                    routeBuilder.when(baseRoute + '/:' + ITEM_ID, {
-                        templateUrl: templateUrl('Edit'),
-                        controller: controllerName('Edit'),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                whenOther: function (resolveFns, name, suffixUrl) {
-                    var _url = suffixUrl ? suffixUrl : '';
-                    routeBuilder.when(baseRoute +'/'+ name.toLowerCase() +'/'+ _url, {
-                        templateUrl: templateUrl(name),
-                        controller: controllerName(name),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                // Readonly views and controllers
-                whenView: function (resolveFns) {
-                    routeBuilder.when(baseRoute + '/view/:' + ITEM_ID, {
-                        templateUrl: templateUrl('View'),
-                        controller: controllerName('View'),
-                        resolve: resolveFns
-                    });
-                    return routeBuilder;
-                },
-                // Pass-through to `$routeProvider.when()`
-                when: function (path, route) {
-                    $routeProvider.when(path, route);
-                    return routeBuilder;
-                },
-                // Pass-through to `$routeProvider.otherwise()`
-                otherwise: function (params) {
-                    $routeProvider.otherwise(params);
-                    return routeBuilder;
-                },
-                // Access to the core $routeProvider.
-                $routeProvider: $routeProvider
-            };
-            return routeBuilder;
-        };
-    }
-    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
-    // we add our injection dependencies using the $inject form
-    portalRouteProvider.$inject = ['$routeProvider'];
-
-    /*define public shared var of class portalRouteProvider*/
-    portalRouteProvider.ITEM_ID = ITEM_ID;
-    // Create our provider - it would be nice to be able to do something like this instead:
-    //
-    // ```
-    // angular.module('services.portalRouteProvider', [])
-    //   .configHelper('portalRouteProvider', ['$routeProvider, portalRouteProvider]);
-    // ```
-    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
-    angular.module('PortalApp').provider('portalRoute', portalRouteProvider);
 })();
 /**
  * @return {[class]}                 AssignCorp class
@@ -708,59 +694,68 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
 
 angular.module('PortalApp')
     .factory('DivError', function () {
-    var _class = function (id) {
-        this.id = id;
-    }
-    /**
-     * @author Steven
-     * @date   8/16/2016
-     * @description
-     *  return all error messages under div
-     *  which need validate
-     */
-    _class.prototype.getMessage = function () {
-        var eMessages = [];
-        /*ignore every parent of has form-ignore */
-        $('#' + this.id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
-            eMessages.push($(this).attr('data-message'));
-        });
-        return eMessages;
-    }
+        var _class = function (id) {
+            this.id = id;
+        }
+        /**
+         * @author Steven
+         * @date   8/16/2016
+         * @description
+         *  return all error messages under div
+         *  which need validate
+         */
+        _class.prototype.getMessage = function () {
+            var eMessages = [];
+            /*ignore every parent of has form-ignore */
+            $('#' + this.id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
+                eMessages.push($(this).attr('data-message'));
+            });
+            return eMessages;
+        }
 
-    /**
-     * @returns {boolen} true if the div pass the validate 
-     */
-    _class.prototype.passValidate = function () {
-        return this.getMessage().length == 0;
-    }
-   /**
-     * @author steven
-     * @date   8/17/2016
-     * @description
-     *  check both have yes no bool type with date
-     * @bug
-     *  bugs over here boolVal can not check with null
-     *  @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
-     *  @solution
-     * 
-     * @return {boolen} true if it pass validate
-     */
-    _class.prototype.boolValidate = function(base,boolKey)
-    {
-        var boolVal = base[boolKey];
+        /**
+         * @returns {boolen} true if the div pass the validate 
+         */
+        _class.prototype.passValidate = function () {
+            return this.getMessage().length == 0;
+        }
 
-        return boolVal == null;
-    }
-    /**
-     * @author steven
-     * @date   8/17/2016
-     * @description
-     *  check both have yes no and have related array must have at lest one
-     *  row of date
-     * 
-     * @return {boolen} true if it pass validate
-     */
-    _class.prototype.multipleValidated = function (base, boolKey, arraykey) {
+        /**
+          * @author steven
+          * @date   8/17/2016
+          * @description
+          *  check both have yes no bool type with date
+          * @bug
+          *  bugs over here boolVal can not check with null
+          *  @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+          *  @solution
+          * 
+          * @return {boolen} true if it pass validate
+          */
+        _class.prototype.boolValidate = function (base, boolKey) {
+            if (!base)
+            {
+                return false;
+            }
+            var boolVal = base[boolKey];
+
+            return boolVal === undefined;
+        }
+
+        /**
+         * @author steven
+         * @date   8/17/2016
+         * @description
+         *  check both have yes no and have related array must have at lest one
+         *  row of date
+         * 
+         * @return {boolen} true if it pass validate
+         */
+        _class.prototype.multipleValidated = function (base, boolKey, arraykey) {
+            if (!base)
+            {
+                return false;
+            }
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
             /**
@@ -774,8 +769,8 @@ angular.module('PortalApp')
         }
 
 
-    return _class;
-});
+        return _class;
+    });
 angular.module('PortalApp')
     /**
      * @author steven
@@ -970,6 +965,43 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
 
     return dxGridModel;
 });
+/*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
+
+function dxModel() {
+
+
+}
+
+//function dxGridModel() {
+
+
+
+//}
+
+
+/**
+ * [dxGridColumnModel description]
+ * @param  {dxGridColumn Option} opt [dxGridColumn Option]
+ * @return {[dxGridColumnModel]}     [return model have dx Grid column with special handler]
+ */
+function dxGridColumnModel(opt) {
+
+    _.extend(this, opt);
+    if (this.dataType == 'date') {
+
+        this.customizeText = this.customizeTextDateFunc;
+    }
+
+}
+dxGridColumnModel.prototype.customizeTextDateFunc = function(e) {
+
+    var date = e.value
+    if (date) {
+        return PortalUtility.FormatISODate(new Date(date));
+    } 
+    return ''
+}
+
 //Leads/LeadsInfo
 angular.module('PortalApp').factory('HomeOwner', function (ptBaseResource) {
 
@@ -1215,6 +1247,266 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
 
     return propertyOffer;
 });
+angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
+    var BaseUri = '/api';
+
+    var PtBaseResource = function (apiName, key, paramDefaults, actions) {
+        var uri = BaseUri + '/' + apiName + '/:' + key;
+        var primaryKey = {};
+        primaryKey[key] = '@' + key;
+
+        /*default actions add put */
+        var _actions = {
+            'update': { method: 'PUT' }
+        };
+
+        angular.extend(primaryKey, paramDefaults)
+        angular.extend(_actions, actions);
+
+        var Resource = $resource(uri, primaryKey, _actions);
+
+        //static function
+        Resource.all = function () { }
+        Resource.CType = function (obj, Class) {
+
+            if (obj == null || obj == undefined) {
+                return null;
+            }
+
+            if (obj instanceof Class) {
+                return obj;
+            }
+            var _new = new Class();
+            angular.extend(_new, obj);
+            angular.extend(obj, _new);
+            return _new;
+        }
+
+        Resource.prototype.hasId = function () {
+            return this[key] != null && this[key] != 0;
+        }
+        /*********Use for Derived class implement validation interface *************/
+        /**************** string array to hold error messages **********************/
+        Resource.prototype.errorMsg = [];
+
+        Resource.prototype.clearErrorMsg = function () {
+            /* maybe cause memory leak if javascript garbage collection is not good */
+            this.errorMsg = []
+        }
+
+        Resource.prototype.getErrorMsg = function () {
+            return this.errorMsg;
+        }
+        Resource.prototype.getErrorMsgStr = function () {
+            return this.errorMsg.join('<br />');
+        }
+        Resource.prototype.hasErrorMsg = function () {
+
+            return this.errorMsg && this.errorMsg.length > 0;
+        }
+
+        Resource.prototype.pushErrorMsg = function (msg) {
+            if (!this.errorMsg) { this.errorMsg = [] };
+            this.errorMsg.push(msg);
+        }
+
+        /***************************************************************************/
+        /*base class instance function*/
+        Resource.prototype.$put = function () {
+
+        }
+
+        Resource.prototype.$cType = function (_this, Class) {
+            Resource.CType(this, Class);
+        }
+        return Resource;
+
+    }
+
+    return PtBaseResource;
+});
+
+/**
+ * @return {[class]}                 DocSearch class
+ */
+angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
+
+    /*api service funciton declear*/
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
+        {
+            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
+        });
+
+
+    docSearch.Status = {
+        New: 0,
+        Completed: 1
+    }
+    docSearch.prototype.initTeam = function () {
+        var self = this
+        $http.get('/Services/TeamService.svc/GetTeam?userName=' + this.CreateBy).success(function (data) {
+            self.team = data;
+        });
+    }
+    
+    docSearch.prototype.initLeadsResearch = function () {
+        var self = this;
+
+        var data1 = null;
+        if (self.LeadResearch == null) {
+            self.LeadResearch = new LeadResearch();
+            data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
+        } else {
+
+            var _LeadSearch = new LeadResearch();
+            angular.extend(_LeadSearch, self.LeadResearch);
+            self.LeadResearch = _LeadSearch;
+            /*always get refershed ssn*/
+            if (self.LeadResearch.ownerName) {
+
+                self.LeadResearch.getOwnerSSN(self.BBLE);
+            }
+            if(self.LeadResearch.initFromLeadsInfo)
+            {
+                data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
+            }
+        }
+       
+        return data1;
+    }
+
+
+    /**
+     * static function define use class object docSearch.static function;
+     */
+    /**
+     * instance function defanlt use prototype
+     * @return {[type]} [description]
+     */
+    docSearch.prototype.actionTest = function () {
+        this.$update()
+    }
+
+    /**
+     *If property has type use function get property
+     */
+    docSearch.prototype._leadResearch = function () {
+        if (this.LeadResearch && !(this instanceof LeadResearch)) {
+            angular.extend(this.LeadResearch, new LeadResearch())
+        }
+        return this.LeadResearch;
+    }
+
+    return docSearch;
+});
+
+
+
+angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
+
+    var leadResearch = function () {
+
+    }
+
+
+    leadResearch.prototype.getOwnerSSN = function (BBLE) {
+        var self = this;
+        $http.post("/api/homeowner/ssn/" + BBLE, JSON.stringify(self.ownerName)).
+            success(function (ssn, status, headers, config) {
+                self.ownerSSN = ssn;
+            });
+    }
+
+    leadResearch.prototype.initFromLeadsInfo = function(BBLE)
+    {
+        var self = this;
+        
+        // bug fix for mortgageAmount secondMortgageAmount not saving
+        // 8/26/2016
+        var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
+            self.ownerName = self.ownerName || data1.Owner;
+            self.waterCharges = self.waterCharges || data1.WaterAmt;
+            self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
+            self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
+            self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
+            self.getOwnerSSN(BBLE);
+        });
+        return data1;
+    }
+
+    return leadResearch;
+});
+angular.module('PortalApp').factory('ptUnderwriter', function ($http) {
+
+    var Model = function() {
+        this.PropertyAddress = undefined;
+        this.TaxClass = undefined;
+        this.BuildingDimension = undefined;
+        this.LotSize = undefined;
+        this.Zoning = undefined;
+        this.ActualNumOfUnits = undefined;
+        this.PropertyTaxYear = undefined;
+        this.OccupancyStatus = undefined;
+        this.SellerOccupied = undefined;
+        this.NumOfTenants = undefined;
+        this.MoneySpent = undefined;
+        this.HOI = undefined;
+        this.COSTermination = undefined;
+        this.AgentCommission = undefined;
+        this.AverageLowValue = undefined;
+        this.RenovatedValue = undefined;
+        this.RepairBid = undefined;
+        this.DealTimeMonths = undefined;
+        this.SalesCommission = undefined;
+        this.DealROICash = undefined;
+        this.DeedPurchase = undefined;
+        this.CurrentlyRented = undefined;
+        this.RepairBidTotal = undefined;
+        this.NumOfUnits = undefined;
+        this.MarketRentTotal = undefined;
+        this.RentalTime = undefined;
+        this.FirstMortgage = undefined;
+        this.SecondMortgage = undefined;
+        this.COSRecorded = undefined;
+        this.DeedRecorded = undefined;
+        this.OtherLiens = undefined;
+        this.FHA = undefined;
+        this.FannieMae = undefined;
+        this.FreddieMac = undefined;
+        this.Servicer = undefined;
+        this.ForeclosureIndexNum = undefined;
+        this.ForeclosureStatus = undefined;
+        this.ForeclosureNote = undefined;
+        this.AuctionDate = undefined;
+        this.DefaultDate = undefined;
+        this.CurrentPayoff = undefined;
+        this.PayoffDate = undefined;
+        this.CurrentSSValue = undefined;
+        this.TaxLienCertificate = undefined;
+        this.PropertyTaxes = undefined;
+        this.WaterCharges = undefined;
+        this.HPDCharges = undefined;
+        this.ECBDOBViolations = undefined;
+        this.DOBCivilPenalty = undefined;
+        this.PersonalJudgements = undefined;
+        this.HPDJudgements = undefined;
+        this.IRSNYSTaxLiens = undefined;
+        this.VacateOrder = undefined;
+        this.RelocationLien = undefined;
+        this.RelocationLienDate = undefined;
+
+    }
+
+    return {
+        createNew: function() {
+            return new Model();
+        }
+
+    }
+
+});
+
+
 
 /**
  * @return {[class]}                 QueryUrl class
@@ -1349,248 +1641,6 @@ angular.module('PortalApp').factory('WizardStep', function () {
 
     return _class;
 });
-/*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
-
-function dxModel() {
-
-
-}
-
-//function dxGridModel() {
-
-
-
-//}
-
-
-/**
- * [dxGridColumnModel description]
- * @param  {dxGridColumn Option} opt [dxGridColumn Option]
- * @return {[dxGridColumnModel]}     [return model have dx Grid column with special handler]
- */
-function dxGridColumnModel(opt) {
-
-    _.extend(this, opt);
-    if (this.dataType == 'date') {
-
-        this.customizeText = this.customizeTextDateFunc;
-    }
-
-}
-dxGridColumnModel.prototype.customizeTextDateFunc = function(e) {
-
-    var date = e.value
-    if (date) {
-        return PortalUtility.FormatISODate(new Date(date));
-    } 
-    return ''
-}
-
-angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
-    var BaseUri = '/api';
-
-    var PtBaseResource = function (apiName, key, paramDefaults, actions) {
-        var uri = BaseUri + '/' + apiName + '/:' + key;
-        var primaryKey = {};
-        /*default param */
-
-        primaryKey[key] = "@" + key;
-        /*default actions add put */
-        var _actions = { 'update': { method: 'PUT' } };
-
-        angular.extend(primaryKey, paramDefaults)
-        angular.extend(_actions, actions);
-        var Resource = $resource(uri, primaryKey, _actions);
-
-        //static function
-        Resource.all = function () {
-
-        }
-        Resource.CType = function (obj, Class) {
-
-            if (obj == null || obj == undefined) {
-                return null;
-            }
-
-            if (obj instanceof Class) {
-                return obj;
-            }
-            var _new = new Class();
-            angular.extend(_new, obj);
-            angular.extend(obj, _new);
-            return _new;
-        }
-        Resource.prototype.hasId = function()
-        {
-            return this[key] != null && this[key]!=0;
-        }
-        /*********Use for Derived class implement validation interface *************/
-        /**************** string array to hold error messages **********************/
-        Resource.prototype.errorMsg = [];
-        Resource.prototype.clearErrorMsg = function () {
-            /* maybe cause memory leak if javascript garbage collection is not good */
-            this.errorMsg = []
-        }
-        
-        Resource.prototype.getErrorMsg = function () {
-            return this.errorMsg;
-        }
-        Resource.prototype.getErrorMsgStr = function () {
-            return this.errorMsg.join('<br />');
-        }
-        Resource.prototype.hasErrorMsg = function () {
-
-            return this.errorMsg && this.errorMsg.length > 0;
-        }
-
-        Resource.prototype.pushErrorMsg = function (msg) {
-            if (!this.errorMsg) { this.errorMsg = [] };
-            this.errorMsg.push(msg);
-        }
-        /***************************************************************************/
-        /*base class instance function*/
-        Resource.prototype.$put = function () {
-
-        }
-
-        Resource.prototype.$cType = function (_this, Class) {
-            Resource.CType(this, Class);
-        }
-        return Resource;
-
-    }
-
-   
-
-    //leadResearch.prototype.func
-    //def function
-    //leadResearch.func
-    //constructor
-    return PtBaseResource;
-});
-
-/**
- * @return {[class]}                 DocSearch class
- */
-angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
-
-    /*api service funciton declear*/
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
-        {
-            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
-        });
-
-    //docSearch.properties = {
-    //    LeadResearch: "{LeadResearch}",
-    //    LeadResearchs: "[LeadResearch]"
-    //}
-
-    docSearch.Status = {
-        New: 0,
-        Completed: 1
-    }
-    docSearch.prototype.initTeam = function () {
-        var self = this
-        $http.get('/Services/TeamService.svc/GetTeam?userName=' + this.CreateBy).success(function (data) {
-            self.team = data;
-        });
-    }
-    
-    docSearch.prototype.initLeadsResearch = function () {
-        var self = this;
-        //var data1 = LeadsInfo.get({ BBLE: this.BBLE.trim() }, function () {
-        var data1 = null;
-        if (self.LeadResearch == null) {
-            self.LeadResearch = new LeadResearch();
-            data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
-        } else {
-
-            var _LeadSearch = new LeadResearch();
-            angular.extend(_LeadSearch, self.LeadResearch);
-            self.LeadResearch = _LeadSearch;
-            /*always get refershed ssn*/
-            if (self.LeadResearch.ownerName) {
-
-                self.LeadResearch.getOwnerSSN(self.BBLE);
-            }
-            if(self.LeadResearch.initFromLeadsInfo)
-            {
-                data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
-            }
-        }
-       
-        //self.LeadResearch = self.LeadResearch || new LeadResearch();
-
-        //});
-        return data1;
-    }
-
-
-    /**
-     * static function define use class object docSearch.static function;
-     */
-    /**
-     * instance function defanlt use prototype
-     * @return {[type]} [description]
-     */
-    docSearch.prototype.actionTest = function () {
-        this.$update()
-    }
-
-    /**
-     *If property has type use function get property
-     */
-    docSearch.prototype._leadResearch = function () {
-        if (this.LeadResearch && !(this instanceof LeadResearch)) {
-            angular.extend(this.LeadResearch, new LeadResearch())
-        }
-        return this.LeadResearch;
-    }
-
-    //def function
-    //leadResearch.func
-    //constructor
-    return docSearch;
-});
-
-
-
-angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
-
-    var leadResearch = function () {
-
-    }
-
-
-    leadResearch.prototype.getOwnerSSN = function (BBLE) {
-        var self = this;
-        $http.post("/api/homeowner/ssn/" + BBLE, JSON.stringify(self.ownerName)).
-            success(function (ssn, status, headers, config) {
-                self.ownerSSN = ssn;
-            });
-    }
-
-    leadResearch.prototype.initFromLeadsInfo = function(BBLE)
-    {
-        var self = this;
-        
-        var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
-            self.ownerName = data1.Owner;
-            self.waterCharges = data1.WaterAmt;
-            self.propertyTaxes = data1.TaxesAmt;
-            self.mortgageAmount = data1.C1stMotgrAmt;
-            self.secondMortgageAmount = data1.C2ndMotgrAmt;
-           
-            self.getOwnerSSN(BBLE);
-        });
-        return data1;
-    }
-    //leadResearch.prototype.func
-    //def function
-    //leadResearch.func
-    //constructor
-    return leadResearch;
-});
 angular.module("PortalApp")
 .directive('dsSummary', function () {
     return {
@@ -1598,19 +1648,36 @@ angular.module("PortalApp")
         scope: {
             summary:'='
         },
-        templateUrl:'/js/Views/LeadDocSearch/dsSummary.html'
+        templateUrl: '/js/Views/LeadDocSearch/dsSummary.html'
     };
 })
-angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($http, $rootScope) {
-    var that = this;
+angular.module("PortalApp")
+.directive('newDsSummary', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            summary: '=',
+            updateby: '=',
+            updateon: '=',
+            docsearch: '=',
+            leadsinfo: '=',
+            showinfo: '='
+        },
+        templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
+        link: function (scope)
+        {
 
-    this.DocGenerator = function (tplName, data, successFunc) {
-        $http.post("/Services/Documents.svc/DocGenrate", { "tplName": tplName, "data": JSON.stringify(data) }).success(function (data) {
-            successFunc(data);
-        }).error(function (data, status) {
-            alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
-        });
-    }; 
+        }
+    };
+})
+
+/**
+ * a utility library provide common function in angular
+ * 
+ **/
+
+angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
+    var that = this;
 
     this.arrayAdd = function (model, data) {
         if (model) {
@@ -1618,6 +1685,9 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
             model.push(data);
         }
     };
+
+
+    // delete a element from a array with promte
     this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
             if (confirm) {
@@ -1633,6 +1703,7 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         }
     };
 
+    // concat a validate address string by giving infomation
     this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
         var result = '';
         if (strNO) result += strNO + ' ';
@@ -1643,6 +1714,7 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         if (zip) result += zip;
         return result;
     };
+
     this.capitalizeFirstLetter = function (string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
@@ -1685,19 +1757,19 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         var divToPrint = document.getElementById(divID);
         var popupWin = window.open('', '_blank', 'width=300,height=300');
         popupWin.document.open();
-        popupWin.document.write('<html><head>'+
-        '<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" />'+
-        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />'+
-        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />'+
-        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />'+
-        '<link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />'+
-        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />'+
-        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />'+
-        '<link rel="stylesheet" href="/css/stevencss.css"type="text/css" />'+
+        popupWin.document.write('<html><head>' +
+        '<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" />' +
+        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />' +
+        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />' +
+        '<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />' +
+        '<link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />' +
+        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />' +
+        '<link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />' +
+        '<link rel="stylesheet" href="/css/stevencss.css"type="text/css" />' +
         '</head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
         popupWin.document.close();
     };
-    
+
     this.postRequest = function (url, data) {
         $.post(url, data, function (retData) {
             $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
@@ -1750,7 +1822,157 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
-}]).service('ptFileService', function () {
+}])
+angular.module("PortalApp").service('ptConstructionService', ['$http', function ($http) {
+    this.getConstructionCases = function (bble, callback) {
+        var url = "/api/ConstructionCases/" + bble;
+        $http.get(url)
+            .success(function (data) {
+                if (callback) callback(data);
+            }).error(function (data) {
+                console.log("Get Construction Data fails.");
+            });
+    };
+    this.saveConstructionCases = function (bble, data, callback) {
+        if (bble && data) {
+            bble = bble.trim();
+            var url = "/api/ConstructionCases/" + bble;
+            $http.put(url, data)
+                .success(function (res) {
+                    if (callback) callback(res);
+                }).error(function () {
+                    alert('Save CSCase fails.');
+                });
+        }
+    };
+    this.getDOBViolations = function (bble, callback) {
+        if (bble) {
+            var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble;
+            $http.get(url)
+            .success(function (res) {
+                if (callback) callback(null, res);
+            }).error(function () {
+                if (callback) callback("load dob violations fails");
+            });
+        } else {
+            if (callback) callback("bble is missing");
+        }
+    };
+    this.getECBViolations = function (bble, callback) {
+        if (bble) {
+            var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble;
+            $http.get(url)
+            .success(function (res) {
+                if (callback) callback(null, res);
+            }).error(function () {
+                if (callback) callback("load ecb violations fails");
+            });
+        }
+    };
+}
+])
+angular.module("PortalApp")
+    .service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
+
+    var allContact;
+    var allTeam;
+
+    (function () {
+        if (!allContact) {
+            $http.get('/Services/ContactService.svc/LoadContacts')
+           .success(function (data, status) {
+               allContact = data;
+           }).error(function (data, status) {
+               allContact = [];
+           });
+        }
+
+        if (!allTeam) {
+            $http.get('/Services/TeamService.svc/GetAllTeam')
+            .success(function (data, status) {
+                allTeam = data;
+            })
+            .error(function (data, status) {
+                allTeam = [];
+            });
+        }
+
+    }());
+
+    this.getAllContacts = function () {
+        if (allContact) return allContact;
+        return $http.get('/Services/ContactService.svc/LoadContacts')
+            .then(function (response) {
+                return limitToFilter(response.data, 10);
+            });
+    };
+
+    this.getContacts = function (args, /* optional */ groupId) {
+        groupId = groupId === undefined ? null : groupId;
+        return $http.get('/Services/ContactService.svc/GetContacts?args=' + args, { noIndicator:true})
+            .then(function (response) {
+                if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
+                return limitToFilter(response.data, 10);
+            });
+    };
+    this.getContactsByID = function (id) {
+        if (allContact) return allContact.filter(function (o) { return o.ContactId == key });
+        return $http.get('/Services/ContactService.svc/GetAllContacts?id=' + id)
+            .then(function (response) {
+                return limitToFilter(response.data, 10);
+            });
+    };
+    this.getContactsByGroup = function (groupId) {
+        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
+    };
+    
+    
+    this.getContact = function (id, name) {
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
+        return {};
+    };
+    this.getContactById = function (id) {
+        if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
+        return null;
+    };
+
+    this.getContactByName = function (name) {
+        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
+        return {};
+    };
+    
+    
+    this.getEntities = function (name, status) {
+        status = status === undefined ? 'Available' : status;
+        name = name ? '' : name;
+        return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
+            .then(function (res) {
+                return limitToFilter(res.data, 10);
+            });
+    };
+    
+    this.getTeamByName = function (teamName) {
+        if (allTeam) {
+            return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
+        }
+        return {};
+
+    };
+    }])
+angular.module("PortalApp")
+    .factory('ptEntityService', ['$http', function ($http) {
+    return {
+        getEntityByBBLE: function (bble, callback) {
+            var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
+            $http.get(url).then(function success(res) {
+                if (callback) callback(null, res.data);
+            }, function error(res) {
+                if (callback) callback("load fail", res.data);
+            });
+        }
+    };
+}]);
+angular.module("PortalApp").service('ptFileService', function () {
     
     this.isIE = function (fileName) {
         return fileName.indexOf(':\\') > -1;
@@ -1934,54 +2156,210 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         }
     };
 
-}).service('ptConstructionService', ['$http', function ($http) {
-    this.getConstructionCases = function (bble, callback) {
-        var url = "/api/ConstructionCases/" + bble;
-        $http.get(url)
-            .success(function (data) {
-                if (callback) callback(data);
-            }).error(function (data) {
-                console.log("Get Construction Data fails.");
-            });
-    };
-    this.saveConstructionCases = function (bble, data, callback) {
-        if (bble && data) {
-            bble = bble.trim();
-            var url = "/api/ConstructionCases/" + bble;
-            $http.put(url, data)
-                .success(function (res) {
-                    if (callback) callback(res);
+})
+angular.module("PortalApp")
+    .factory('ptHomeBreakDownService', ["$http", function ($http) {
+    return {
+        loadByBBLE: function (bble, callback) {
+            var url = '/ShortSale/ShortSaleServices.svc/LoadHomeBreakData?bble=' + bble;
+            $http.get(url)
+                .success(function (data) {
+                    callback(data);
                 }).error(function () {
-                    alert('Save CSCase fails.');
+                    console.log('load home breakdown fail. BBLE: ' + bble);
                 });
-        }
-    };
-    this.getDOBViolations = function (bble, callback) {
-        if (bble) {
-            var url = "/api/ConstructionCases/GetDOBViolations?bble=" + bble;
-            $http.get(url)
-            .success(function (res) {
-                if (callback) callback(null, res);
-            }).error(function () {
-                if (callback) callback("load dob violations fails");
-            });
-        } else {
-            if (callback) callback("bble is missing");
-        }
-    };
-    this.getECBViolations = function (bble, callback) {
-        if (bble) {
-            var url = "/api/ConstructionCases/GetECBViolations?bble=" + bble;
-            $http.get(url)
-            .success(function (res) {
-                if (callback) callback(null, res);
-            }).error(function () {
-                if (callback) callback("load ecb violations fails");
-            });
+        },
+        save: function (bble, data, callback) {
+            var url = '/ShortSale/ShortSaleServices.svc/SaveBreakData';
+            var postData = {
+                "bble": bble,
+                "jsonData": JSON.stringify(data)
+            };
+            $http.post(url, postData)
+                .success(function (res) {
+                    callback(res);
+                }).error(function () {
+                    console.log('save home breakdone fail. BBLE: ' + bble);
+                });
+
         }
     };
 }
-]).service("ptTime", [function () {
+    ])
+angular.module("PortalApp")
+    .service('ptLeadsService', ["$http", function ($http) {
+    this.getLeadsByBBLE = function (bble, callback) {
+        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
+        $http.get(leadsInfoUrl)
+        .success(function (data) {
+            callback(data);
+        }).error(function (data) {
+            console.log("Get Short sale Leads failed BBLE =" + bble + " error : " + JSON.stringify(data));
+        });
+    };
+}
+    ])
+angular.module("PortalApp")
+    .factory('ptLegalService', function () {
+    return {
+        load: function (bble, callback) {
+            var url = '/LegalUI/LegalUI.aspx/GetCaseData';
+            var d = { bble: bble };
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: JSON.stringify(d),
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (res) {
+                    callback(null, res);
+                },
+                error: function () {
+                    callback('load data fails');
+                }
+            });
+        },
+        savePreQuestions: function (bble, createBy, data, callback) {
+            var url = '/LegalUI/LegalServices.svc/StartNewLegalCase';
+            var d = {
+                bble: bble,
+                casedata: JSON.stringify({ PreQuestions: data }),
+                createBy: createBy,
+            };
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: JSON.stringify(d),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (res) {
+                    callback(null, res);
+                },
+                error: function () {
+                    callback('load data fails');
+                }
+            });
+        }
+    };
+    })
+angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$timeout', 'ptCom', function ($log, $q, $timeout, ptCom) {
+    $log.debug('$log is here to show you that this is a regular factory with injection');
+
+    var myInterceptor = {
+        delayHide: function () {
+            $timeout(ptCom.stopLoading, 300);
+        },
+        BuildAjaxErrorMessage: function (response) {
+            var message = "";
+            /*Only error handle*/
+            if (response.status > 300 || response.status < 200) {
+                var dataObj = JSON.parse(response.responseText);
+                if (dataObj) {
+                    var eMssage = dataObj.ExceptionMessage || dataObj.Message
+                    var messageObj = { Message: eMssage };
+                    message = myInterceptor.BuildErrorMessgeStr(messageObj);
+                } else {
+                    message = JSON.stringify(response)
+                }
+            }
+
+            return message;
+        },
+        BuildErrorMessgeStr: function (messageObj) {
+
+            return 'Error : ' + messageObj.Message || 'No Message' + '<br/> <small>(' + messageObj.urlName || 'No additional Info' + ')</small>';
+        }, ErrorUrl: function (url) {
+            return url.toString().replace(/\//g, ' ').replace('api', '');
+        },
+        BuildErrorMessage: function (data) {
+            var urlName;
+            if (data) {
+                if (data.data) {
+                    var messageObj = {
+                        Message: data.data.ExceptionMessage || data.data.Message,
+                        status: data.status,
+                        statusText: data.statusText,
+                        Url: data.config.url,
+                        Method: data.config.method,
+                    }
+                    console.log(data);
+                    urlName = messageObj.Url.toString().replace(/\//g, ' ').replace('api', '');
+
+                    return 'Error : ' + messageObj.Message + '<br/> <small>(' + urlName + ')</small>';
+
+                }
+            }
+            urlName = data.config.url.toString().replace(/\//g, ' ').replace('api', '');
+            return 'Get error !' + '<br/> <small>( Status: ' + data.status + ' ' + urlName + ' )</small>';
+        },
+        request: function (config) {
+            /*config some where do not need show indicator like typeahead and get contacts*/
+            if (!config.noIndicator) {
+                if (config.url.indexOf('template') < 0) {
+                    ptCom.startLoading();
+                }
+
+            }
+            myInterceptor.noError = config.options && config.options.noError;
+            return config;
+        },
+        responseError: function (rejection) {
+            myInterceptor.delayHide();
+            if (!myInterceptor.noError) {
+                ptCom.Alert(myInterceptor.BuildErrorMessage(rejection));
+            }
+            return $q.reject(rejection);
+        },
+
+        requestError: function (rejection) {
+            myInterceptor.delayHide();
+            myInterceptor.Alert(myInterceptor.BuildErrorMessage(rejection));
+            return $q.reject(rejection);
+        },
+
+        response: function (response) {
+            myInterceptor.delayHide();
+            return response;
+        },
+
+    };
+
+    return myInterceptor;
+}]);
+angular.module("PortalApp")
+    .service('ptShortsSaleService', ['$http', function ($http) {
+    this.getShortSaleCase = function (caseId, callback) {
+        var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
+        $http.get(url)
+            .success(function (data) {
+                callback(data);
+            })
+            .error(function (data) {
+                console.log("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
+            });
+    };
+    this.getShortSaleCaseByBBLE = function (bble, callback) {
+        var url = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + bble;
+        $http.get(url)
+            .success(function (data) {
+                callback(data);
+            }).error(function () {
+                console.log("Get Short Sale By BBLE fails.");
+            }
+        );
+
+    };
+    this.getBuyerTitle = function (bble, callback) {
+        var url = "/api/ShortSale/GetBuyerTitle?bble=";
+        $http.get(url + bble)
+        .then(function succ(res) {
+            if (callback) callback(null, res);
+        }, function error() {
+            if (callback) callback("Fail to get buyer title for bble: " + bble, null);
+        });
+    };
+    }])
+angular.module("PortalApp").service("ptTime", [function () {
     var that = this;
 
     this.isPassByDays = function (start, end, count) {
@@ -2046,216 +2424,17 @@ angular.module("PortalApp").service("ptCom", ["$http", "$rootScope", function ($
         else return false;
     }
 
-}]).service('ptContactServices', ['$http', 'limitToFilter', function ($http, limitToFilter) {
+    }])
+angular.module("PortalApp").filter('booleanToString', function () {
 
-    var allContact;
-    var allTeam;
+    return function (v) {
+        if (v == undefined) return "N/A"
+        else if (v) return "Yes"
+        else return "No"
+    }
+})
 
-    (function () {
-        if (!allContact) {
-            $http.get('/Services/ContactService.svc/LoadContacts')
-           .success(function (data, status) {
-               allContact = data;
-           }).error(function (data, status) {
-               allContact = [];
-           });
-        }
-
-        if (!allTeam) {
-            $http.get('/Services/TeamService.svc/GetAllTeam')
-            .success(function (data, status) {
-                allTeam = data;
-            })
-            .error(function (data, status) {
-                allTeam = [];
-            });
-        }
-
-    }());
-
-    this.getAllContacts = function () {
-        if (allContact) return allContact;
-        return $http.get('/Services/ContactService.svc/LoadContacts')
-            .then(function (response) {
-                return limitToFilter(response.data, 10);
-            });
-    };
-
-    this.getContacts = function (args, /* optional */ groupId) {
-        groupId = groupId === undefined ? null : groupId;
-        return $http.get('/Services/ContactService.svc/GetContacts?args=' + args, { noIndicator:true})
-            .then(function (response) {
-                if (groupId) return limitToFilter(response.data.filter(function (x) { return x.GroupId == groupId }), 10);
-                return limitToFilter(response.data, 10);
-            });
-    };
-    this.getContactsByID = function (id) {
-        if (allContact) return allContact.filter(function (o) { return o.ContactId == key });
-        return $http.get('/Services/ContactService.svc/GetAllContacts?id=' + id)
-            .then(function (response) {
-                return limitToFilter(response.data, 10);
-            });
-    };
-    this.getContactsByGroup = function (groupId) {
-        if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
-    };
-    
-    
-    this.getContact = function (id, name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
-        return {};
-    };
-    this.getContactById = function (id) {
-        if (allContact) return allContact.filter(function (o) { return o.ContactId == id; })[0];
-        return null;
-    };
-
-    this.getContactByName = function (name) {
-        if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
-        return {};
-    };
-    
-    
-    this.getEntities = function (name, status) {
-        status = status === undefined ? 'Available' : status;
-        name = name ? '' : name;
-        return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
-            .then(function (res) {
-                return limitToFilter(res.data, 10);
-            });
-    };
-    
-    this.getTeamByName = function (teamName) {
-        if (allTeam) {
-            return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
-        }
-        return {};
-
-    };
-}]).service('ptShortsSaleService', ['$http', function ($http) {
-    this.getShortSaleCase = function (caseId, callback) {
-        var url = "/ShortSale/ShortSaleServices.svc/GetCase?caseId=" + caseId;
-        $http.get(url)
-            .success(function (data) {
-                callback(data);
-            })
-            .error(function (data) {
-                console.log("Get Short sale failed CaseId= " + caseId + ", error : " + JSON.stringify(data));
-            });
-    };
-    this.getShortSaleCaseByBBLE = function (bble, callback) {
-        var url = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + bble;
-        $http.get(url)
-            .success(function (data) {
-                callback(data);
-            }).error(function () {
-                console.log("Get Short Sale By BBLE fails.");
-            }
-        );
-
-    };
-    this.getBuyerTitle = function (bble, callback) {
-        var url = "/api/ShortSale/GetBuyerTitle?bble=";
-        $http.get(url + bble)
-        .then(function succ(res) {
-            if (callback) callback(null, res);
-        }, function error() {
-            if (callback) callback("Fail to get buyer title for bble: " + bble, null);
-        });
-    };
-}]).service('ptLeadsService', ["$http", function ($http) {
-    this.getLeadsByBBLE = function (bble, callback) {
-        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + bble;
-        $http.get(leadsInfoUrl)
-        .success(function (data) {
-            callback(data);
-        }).error(function (data) {
-            console.log("Get Short sale Leads failed BBLE =" + bble + " error : " + JSON.stringify(data));
-        });
-    };
-}
-]).factory('ptHomeBreakDownService', ["$http", function ($http) {
-    return {
-        loadByBBLE: function (bble, callback) {
-            var url = '/ShortSale/ShortSaleServices.svc/LoadHomeBreakData?bble=' + bble;
-            $http.get(url)
-                .success(function (data) {
-                    callback(data);
-                }).error(function () {
-                    console.log('load home breakdown fail. BBLE: ' + bble);
-                });
-        },
-        save: function (bble, data, callback) {
-            var url = '/ShortSale/ShortSaleServices.svc/SaveBreakData';
-            var postData = {
-                "bble": bble,
-                "jsonData": JSON.stringify(data)
-            };
-            $http.post(url, postData)
-                .success(function (res) {
-                    callback(res);
-                }).error(function () {
-                    console.log('save home breakdone fail. BBLE: ' + bble);
-                });
-
-        }
-    };
-}
-]).factory('ptLegalService', function () {
-    return {
-        load: function (bble, callback) {
-            var url = '/LegalUI/LegalUI.aspx/GetCaseData';
-            var d = { bble: bble };
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: JSON.stringify(d),
-                dataType: 'json',
-                contentType: "application/json",
-                success: function (res) {
-                    callback(null, res);
-                },
-                error: function () {
-                    callback('load data fails');
-                }
-            });
-        },
-        savePreQuestions: function (bble, createBy, data, callback) {
-            var url = '/LegalUI/LegalServices.svc/StartNewLegalCase';
-            var d = {
-                bble: bble,
-                casedata: JSON.stringify({ PreQuestions: data }),
-                createBy: createBy,
-            };
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: JSON.stringify(d),
-                dataType: "json",
-                contentType: "application/json",
-                success: function (res) {
-                    callback(null, res);
-                },
-                error: function () {
-                    callback('load data fails');
-                }
-            });
-        }
-    };
-}).factory('ptEntityService', ['$http', function ($http) {
-    return {
-        getEntityByBBLE: function (bble, callback) {
-            var url = '/api/CorporationEntities/ByBBLE?BBLE=' + bble;
-            $http.get(url).then(function success(res) {
-                if (callback) callback(null, res.data);
-            }, function error(res) {
-                if (callback) callback("load fail", res.data);
-            });
-        }
-    };
-}]);
-angular.module("PortalApp")
-.filter("ByContact", function () {
+angular.module("PortalApp").filter("ByContact", function () {
     return function (movies, contact) {
         var items = {
 
@@ -2274,52 +2453,31 @@ angular.module("PortalApp")
         return items.out;
     };
 })
-.filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
-.filter('booleanToString', function () {
-
-    return function (v) {
-        if (v == undefined) return "N/A"
-        else if(v) return "Yes"
-        else return "No"
-    }
-})
-
 angular.module("PortalApp")
-    .directive('ssDate', function () {
+.filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }])
+angular.module("PortalApp")
+    .directive('auditLogs', ['AuditLog', function (AuditLog) {
         return {
-            restrict: 'A',
-            scope: true,
-            compile: function (tel, tAttrs) {
-                return {
-                    post: function (scope, el, attrs) {
-                        $(el).datepicker({
-                            forceParse: false,
-                        });
-                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
-                            var dateStr = newValue;
-                            if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-
-                                var dd = new Date(dateStr);
-                                dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
-                                $(el).datepicker('update', new Date(dd))
-                            }
-                        });
-                    }
-                }
-            }
-        };
-    })
-    .directive('inputMask', function () {
-        return {
-            restrict: 'A',
+            restrict: 'E',
+            templateUrl: '/js/Views/AuditLogs/AuditLogs.tpl.html',
+            scope: {
+                tableName: '@',
+                recordId: '=',
+            },
             link: function (scope, el, attrs) {
-                $(el).mask(attrs.inputMask);
-                $(el).on('change', function () {
-                    scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-                });
+                setTimeout(function () {
+                    AuditLog.load({ TableName: scope.tableName, RecordId: scope.recordId }, function (data) {
+                        var result = _.groupBy(data, function (item) {
+                            return item.EventDate;
+                        });
+                        scope.AuditLogs = result;
+                    })
+                }, 1000);               
             }
-        };
-    })
+        }
+    }])
+/* a directive to bind contact with it's contact it*/
+angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
             restrict: 'A',
@@ -2334,90 +2492,65 @@ angular.module("PortalApp")
 
         }
     }])
-    .directive('ptInitModel', function () {
+/**
+ * *********************************************************
+ * @author Steven
+ * @date 8/11/2016
+ * 
+ * sent time to write this initGrid to fix the save bug 
+ * and init data bug
+ *
+ * @returns directive init Grid
+ * 
+ * 
+ * @*********************************************************
+ * @author Steven
+ * @datetime 8/12/2016 2:54
+ * @bug
+ *  When switch to other cases the grid dataSource is empty
+ *  It can not add new rows
+ *  
+ * @fix Steven
+ * @end datetime 
+ * @*********************************************************
+ */
+angular.module("PortalApp")
+    .directive('initGrid', ['$parse', function ($parse) {
         return {
-            restrict: 'A',
-            require: '?ngModel',
-            priority: 99,
-            link: function (scope, el, attrs) {
-                scope.$watch(attrs.ptInitModel, function (newVal) {
-                    if (!scope.$eval(attrs.ngModel) && newVal) {
-                        if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
-                        scope.$eval(attrs.ngModel + "='" + newVal + "'");
-                    }
-                });
-            }
-        }
-    })
-    .directive('ptInitBind', function () { //one way bind of ptInitModel
-        return {
-            restrict: 'A',
-            require: '?ngBind',
-            link: function (scope, el, attrs) {
-                scope.$watch(attrs.ptInitBind, function (newVal) {
-                    if (!scope.$eval(attrs.ngBind) && newVal) {
-                        if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
-                        scope.$eval(attrs.ngBind + "='" + newVal + "'");
-                    }
-                });
-            }
-        }
-    })
-    .directive('radioInit', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-                scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?" + attrs.radioInit + ":" + attrs.ngModel);
-                scope.$watch(attrs.ngModel, function () {
-                    var bVal = scope.$eval(attrs.ngModel);
-                    bVal = bVal != null && (bVal == 'true' || bVal == true);
-                    scope.$eval(attrs.ngModel + "=" + bVal.toString());
-                });
-            }
-        }
-    })
-    .directive('moneyMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
+            link: function (scope, element, attrs, ngModelController) {
+                var gridOptions = null;
+                eval("gridOptions =" + attrs.dxDataGrid);
+                if (gridOptions) {
+                    var option = gridOptions.bindingOptions.dataSource;
+                    var array = scope.$eval(option);
 
-                scope.$watch(attrs.ngModel, function () {
-                    if ($(el).is(":focus")) return;
-                    $(el).formatCurrency();
-                });
-                $(el).on('blur', function () {
-                    $(this).formatCurrency();
-                });
-                $(el).on('focus', function () {
-                    $(this).toNumber()
-                });
+                    if (array == null || array == undefined)
+                        eval('scope.' + option + '=[];');
 
-            },
+                    scope.$watch(attrs.initGrid, function (newValue) {
+                        var array = scope.$eval(option);
+                        if (array == null || array == undefined)
+                            eval('scope.' + option + '=[];');
+                        // scope.$eval(option + '=[];');
+                    });
+                }
+            }
+        };
+    }]);
+/* a mask to automaticly convert number to money value*/
+angular.module("PortalApp")
+    .directive('inputMask', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                $(el).mask(attrs.inputMask);
+                $(el).on('change', function () {
+                    scope.$eval(attrs.ngModel + "='" + el.val() + "'");
+                });
+            }
         };
     })
-    .directive('numberMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-
-                scope.$watch(attrs.ngModel, function () {
-                    if ($(el).is(":focus")) return;
-                    $(el).formatCurrency({
-                        symbol: ""
-                    });
-                });
-                $(el).on('blur', function () {
-                    $(this).formatCurrency({
-                        symbol: ""
-                    });
-                });
-                $(el).on('focus', function () {
-                    $(this).toNumber()
-                });
-
-            },
-        };
-    })
+angular.module("PortalApp")
     .directive('integerMask', function () {
         return {
             restrict: 'A',
@@ -2443,6 +2576,51 @@ angular.module("PortalApp")
             },
         };
     })
+angular.module("PortalApp")
+    .directive('moneyMask', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+
+                scope.$watch(attrs.ngModel, function () {
+                    if ($(el).is(":focus")) return;
+                    $(el).formatCurrency();
+                });
+                $(el).on('blur', function () {
+                    $(this).formatCurrency();
+                });
+                $(el).on('focus', function () {
+                    $(this).toNumber()
+                });
+
+            },
+        };
+    })
+angular.module("PortalApp")
+    .directive('numberMask', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+
+                scope.$watch(attrs.ngModel, function () {
+                    if ($(el).is(":focus")) return;
+                    $(el).formatCurrency({
+                        symbol: ""
+                    });
+                });
+                $(el).on('blur', function () {
+                    $(this).formatCurrency({
+                        symbol: ""
+                    });
+                });
+                $(el).on('focus', function () {
+                    $(this).toNumber()
+                });
+
+            },
+        };
+    })
+angular.module("PortalApp")
     .directive('percentMask', function () {
         return {
             restrict: 'A',
@@ -2468,36 +2646,54 @@ angular.module("PortalApp")
             },
         };
     })
-    .directive('ptRadio', function () {
+    /**
+     * @author steven
+     * @date 8/11/2016
+     * @todo
+     *  the pre condition should will in the control which need
+     *  be controller and cleared by yes or no selected.
+     * 
+     * @param {'ngModel'} ) {
         return {
-            restrict: 'E',
-            template: '<input type="checkbox" id="{{name}}Y" ng-model="model" class="ss_form_input" ng-disabled="ngDisabled">' +
-                '<label for="{{name}}Y" class="input_with_check"><span class="box_text">{{trueValue}}&nbsp</span></label>' +
-                '<input type="checkbox" id="{{name}}N" ng-model="model" ng-true-value="false" ng-false-value="true" class="ss_form_input" ng-disabled="ngDisabled">' +
-                '<label for="{{name}}N" class="input_with_check"><span class="box_text">{{falseValue}}&nbsp</span></label>',
-            scope: {
-                model: '=',
-                name: '@',
-                defaultValue: '@',
-                trueValue: '@',
-                falseValue: '@',
-                ngDisabled: '='
-            },
-            link: function (scope, el, attrs) {
-                //scope.ngDisabled = attrs.ngDisabled;
-                // scope.disabled = attrs.disabled;
-                scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
-                scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
-                scope.defaultValue = scope.defaultValue === 'true' ? true : false;
-                if (typeof scope.model != 'undefined') {
-                    scope.model = scope.model == null ? scope.defaultValue : scope.model;
-
+            require
+     * @param {function (scope} link
+     * @param element
+     * @param attrs
+     * @param ngModelController) {
+                scope.$watch(attrs.preCondition
+     * @param function (newVal
+     * @param oldVal) {
+                    if (!newVal)
+                        eval('scope.' + attrs.ngModel + '=null');                  
                 }
+     * @param true);
 
             }
+        };
+    }
+     * @returns {type} 
+     */
+angular.module("PortalApp")
+    .directive('preCondition', function () {
+        return {
+            require: 'ngModel',           
+            link: function (scope, element, attrs, ngModelController) {
+                scope.$watch(attrs.preCondition, function (newVal, oldVal) {
+                    if (!newVal)
+                        eval('scope.' + attrs.ngModel + '=null');                  
+                }, true);
 
+            }
+        };
+    })
+angular.module("PortalApp")
+    .directive('ptAdd', function () {
+        return {
+            restrict: 'E',
+            template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
         }
     })
+angular.module("PortalApp")
     .directive('ptCollapse', function () {
         return {
             restrict: 'E',
@@ -2513,6 +2709,14 @@ angular.module("PortalApp")
 
         }
     })
+angular.module("PortalApp")
+    .directive('ptDel', function () {
+        return {
+            restrict: 'E',
+            template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
+        }
+    })
+angular.module("PortalApp")
     .directive('ptEditor', [function () {
         return {
 
@@ -2553,18 +2757,7 @@ angular.module("PortalApp")
             }
         };
     }])
-    .directive('ptAdd', function () {
-        return {
-            restrict: 'E',
-            template: '<i class="fa fa-plus-circle icon_btn text-primary tooltip-examples" title="Add"></i>',
-        }
-    })
-    .directive('ptDel', function () {
-        return {
-            restrict: 'E',
-            template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
-        }
-    })
+angular.module("PortalApp")
     .directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
         return {
             restrict: 'E',
@@ -2667,6 +2860,7 @@ angular.module("PortalApp")
             }
         }
     }])
+angular.module("PortalApp")
     .directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
         return {
             restrict: 'E',
@@ -2834,10 +3028,10 @@ angular.module("PortalApp")
                         scope.result.push(f);
                     }
 
-                    for (var i = 0; i < len; i++) {
+                    for (var j = 0; j < len; j++) {
                         var data = new FormData();
-                        data.append("file", scope.files[i]);
-                        var targetName = ptFileService.getFileName(scope.files[i].name);
+                        data.append("file", scope.files[j]);
+                        var targetName = ptFileService.getFileName(scope.files[j].name);
                         ptFileService.uploadFile(data, scope.fileBble, targetName, targetFolder, scope.uploadType, function callback(error, data, targetName) {
                             var targetElement;
                             if (error) {
@@ -2941,39 +3135,7 @@ angular.module("PortalApp")
         }
 
     }])
-    /**
-     * 
-     * @param {type} ptFileService) {
-        return {
-            restrict
-     * @param {type} scope
-     * @param {type} template
-     * @param {type} 20)}}</a>'
-     * @param {type} link
-     * @param {type} el
-     * @param {type} attrs) {
-                scope.onFilePreview = ptFileService.onFilePreview;
-                scope.trunc = ptFileService.trunc;
-            }
-
-        }
-    }]
-     * @returns {type} 
-     */
-    .directive('ptLink', ['ptFileService', function (ptFileService) {
-        return {
-            restrict: 'E',
-            scope: {
-                ptModel: '='
-            },
-            template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
-            link: function (scope, el, attrs) {
-                scope.onFilePreview = ptFileService.onFilePreview;
-                scope.trunc = ptFileService.trunc;
-            }
-
-        }
-    }])
+angular.module("PortalApp")
     .directive('ptFinishedMark', [function () {
         return {
             restrict: 'E',
@@ -2999,114 +3161,122 @@ angular.module("PortalApp")
                 }
             }
         }
-    }]).directive('auditLogs', ['AuditLog', function (AuditLog) {
+    }])
+angular.module("PortalApp")
+    .directive('ptInitBind', function () { //one way bind of ptInitModel
         return {
-            restrict: 'E',
-            templateUrl: '/js/Views/AuditLogs/AuditLogs.tpl.html',
-            scope: {
-                tableName: '@',
-                recordId: '=',
-            },
+            restrict: 'A',
+            require: '?ngBind',
             link: function (scope, el, attrs) {
-                setTimeout(function () {
-                    AuditLog.load({ TableName: scope.tableName, RecordId: scope.recordId }, function (data) {
-                        var result = _.groupBy(data, function (item) {
-                            return item.EventDate;
-                        });
-                        scope.AuditLogs = result;
-                    })
-                }, 1000);               
+                scope.$watch(attrs.ptInitBind, function (newVal) {
+                    if (!scope.$eval(attrs.ngBind) && newVal) {
+                        if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
+                        scope.$eval(attrs.ngBind + "='" + newVal + "'");
+                    }
+                });
             }
         }
-    }])
-    /**
-     * @author steven
-     * @date 8/11/2016
-     * @todo
-     *  the pre condition should will in the control which need
-     *  be controller and cleared by yes or no selected.
-     * 
-     * @param {'ngModel'} ) {
+    })
+angular.module("PortalApp")
+    .directive('ptInitModel', function () {
         return {
-            require
-     * @param {function (scope} link
-     * @param element
-     * @param attrs
-     * @param ngModelController) {
-                scope.$watch(attrs.preCondition
-     * @param function (newVal
-     * @param oldVal) {
-                    if (!newVal)
-                        eval('scope.' + attrs.ngModel + '=null');                  
+            restrict: 'A',
+            require: '?ngModel',
+            priority: 99,
+            link: function (scope, el, attrs) {
+                scope.$watch(attrs.ptInitModel, function (newVal) {
+                    if (!scope.$eval(attrs.ngModel) && newVal) {
+                        if (typeof newVal === 'string') newVal = newVal.replace(/'/g, "\\'");
+                        scope.$eval(attrs.ngModel + "='" + newVal + "'");
+                    }
+                });
+            }
+        }
+    })
+angular.module("PortalApp")
+    .directive('ptLink', ['ptFileService', function (ptFileService) {
+        return {
+            restrict: 'E',
+            scope: {
+                ptModel: '='
+            },
+            template: '<a ng-click="onFilePreview(ptModel.path)">{{trunc(ptModel.name,20)}}</a>',
+            link: function (scope, el, attrs) {
+                scope.onFilePreview = ptFileService.onFilePreview;
+                scope.trunc = ptFileService.trunc;
+            }
+
+        }
+    }])
+angular.module("PortalApp")
+    .directive('ptRadio', function () {
+        return {
+            restrict: 'E',
+            template: '<input type="checkbox" id="{{name}}Y" ng-model="model" class="ss_form_input" ng-disabled="ngDisabled">' +
+                '<label for="{{name}}Y" class="input_with_check"><span class="box_text">{{trueValue}}&nbsp</span></label>' +
+                '<input type="checkbox" id="{{name}}N" ng-model="model" ng-true-value="false" ng-false-value="true" class="ss_form_input" ng-disabled="ngDisabled">' +
+                '<label for="{{name}}N" class="input_with_check"><span class="box_text">{{falseValue}}&nbsp</span></label>',
+            scope: {
+                model: '=',
+                name: '@',
+                defaultValue: '@',
+                trueValue: '@',
+                falseValue: '@',
+                ngDisabled: '='
+            },
+            link: function (scope, el, attrs) {
+                //scope.ngDisabled = attrs.ngDisabled;
+                // scope.disabled = attrs.disabled;
+                scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
+                scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
+                scope.defaultValue = scope.defaultValue === 'true' ? true : false;
+                if (typeof scope.model != 'undefined') {
+                    scope.model = scope.model == null ? scope.defaultValue : scope.model;
+
                 }
-     * @param true);
 
             }
-        };
-    }
-     * @returns {type} 
-     */
-    .directive('preCondition', function () {
-        return {
-            require: 'ngModel',           
-            link: function (scope, element, attrs, ngModelController) {
-                scope.$watch(attrs.preCondition, function (newVal, oldVal) {
-                    if (!newVal)
-                        eval('scope.' + attrs.ngModel + '=null');                  
-                }, true);
 
+        }
+    })
+angular.module("PortalApp")
+    .directive('radioInit', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                scope.$eval(attrs.ngModel + "=" + attrs.ngModel + "==null?" + attrs.radioInit + ":" + attrs.ngModel);
+                scope.$watch(attrs.ngModel, function () {
+                    var bVal = scope.$eval(attrs.ngModel);
+                    bVal = bVal != null && (bVal == 'true' || bVal == true);
+                    scope.$eval(attrs.ngModel + "=" + bVal.toString());
+                });
+            }
+        }
+    })
+angular.module("PortalApp")
+    .directive('ssDate', function () {
+        return {
+            restrict: 'A',
+            scope: true,
+            compile: function (tel, tAttrs) {
+                return {
+                    post: function (scope, el, attrs) {
+                        $(el).datepicker({
+                            forceParse: false,
+                        });
+                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                            var dateStr = newValue;
+                            if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
+                                var dd = new Date(dateStr);
+                                dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
+                                $(el).datepicker('update', new Date(dd))
+                            }
+                        });
+                    }
+                }
             }
         };
     })
-
-    /**
-     * *********************************************************
-     * @author Steven
-     * @date 8/11/2016
-     * 
-     * sent time to write this initGrid to fix the save bug 
-     * and init data bug
-     *
-     * @returns directive init Grid
-     * 
-     * 
-     * @*********************************************************
-     * @author Steven
-     * @datetime 8/12/2016 2:54
-     * @bug
-     *  When switch to other cases the grid dataSource is empty
-     *  It can not add new rows
-     *  
-     * @fix Steven
-     * @end datetime 
-     * @*********************************************************
-     */
-    .directive('initGrid', ['$parse', function ($parse) {
-        return {
-            link: function (scope, element, attrs, ngModelController) {                
-                var gridOptions = null;               
-                eval("gridOptions =" + attrs.dxDataGrid);
-                if (gridOptions)
-                {
-                    var option = gridOptions.bindingOptions.dataSource;
-                    var array = scope.$eval(option);
-
-                    if (array == null || array == undefined)
-                        eval('scope.' + option + '=[];');
-                    
-                    scope.$watch(attrs.initGrid, function (newValue) {
-                        var array = scope.$eval(option);
-                        if (array == null || array == undefined)
-                            eval('scope.' + option + '=[];');
-                            // scope.$eval(option + '=[];');
-                    });
-                }
-            }
-        };
-    }]);
-
-
-
 angular.module("PortalApp")
 .controller('BuyerEntityCtrl', ['$scope', '$http', 'ptContactServices', 'CorpEntity', function ($scope, $http, ptContactServices, CorpEntity) {
     $scope.EmailTo = [];
@@ -3367,6 +3537,7 @@ angular.module("PortalApp")
 angular.module('PortalApp')
 .controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService', function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
+    //data structure defination
     var CSCaseModel = function () {
         this.CSCase = {
             InitialIntake: {},
@@ -3445,7 +3616,7 @@ angular.module('PortalApp')
                                     info: 'Electrical Sign Off Date'
                                 }];
 
-    // end scope variables defination
+
 
     $scope.arrayRemove = ptCom.arrayRemove;
     $scope.ptContactServices = ptContactServices;
@@ -3474,7 +3645,7 @@ angular.module('PortalApp')
         ptCom.startLoading();
         bble = bble.trim();
         $scope.reload();
-        var done1, done2, done3, done4;
+        var done1, done2, done3, done4; // status marker to indicate all async job finished
 
         ptConstructionService.getConstructionCases(bble, function (res) {
             ptCom.nullToUndefined(res);
@@ -3533,7 +3704,6 @@ angular.module('PortalApp')
                 ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
             });
     }
-    /* end status change function */
 
     $scope.saveCSCase = function () {
         var data = angular.toJson($scope.CSCase);
@@ -3813,8 +3983,11 @@ angular.module('PortalApp')
         , DocSearchEavesdropper, DivError
         ) {
         //New Model(this,arguments)
-        $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
+        $scope.ShowInfo = $('#ShowInfo').val();
+        $scope.ptContactServices = ptContactServices;
+
+
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
@@ -3822,21 +3995,6 @@ angular.module('PortalApp')
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
 
-        /////////////////////////////////////////////////////////////////////
-        // @date 8/11/2016
-        // for devextrem angular bugs have to init array frist
-        // fast prototype of grid bug on 8/11/2016 may spend two hours on it
-        //var INITS = {
-        //   OtherMortgage: [],
-        //   DeedRecorded: [],
-        //   COSRecorded: [],
-        //   OtherLiens: [],
-        //   TaxLienCertificate:[]
-        //};
-        //$scope.DocSearch.LeadResearch = {}
-        //angular.extend($scope.DocSearch.LeadResearch, INITS);
-        // ///////////////////////////////////////////////////////////////// 
-        // put here should not right for fast prototype ////////////////////
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -3867,9 +4025,8 @@ angular.module('PortalApp')
 
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
-       
-        $scope.multipleValidated = function (base, boolKey, arraykey)
-        {
+
+        $scope.multipleValidated = function (base, boolKey, arraykey) {
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
             /**
@@ -3882,6 +4039,7 @@ angular.module('PortalApp')
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
+            $scope.ShowInfo = $('#ShowInfo').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
                 return;
@@ -3894,70 +4052,40 @@ angular.module('PortalApp')
 
                 ////////// font end switch to new version //////////////
                 $scope.versionController.start2Eaves();
-                /////////////////// 8/12/2016 //////////////////////////
-
-                /////////////////////////////// saving and grid init bug for faster portotype ///////////////////
-                //
-                // use fast prototype it have same bug
-                // this is faster solution of grid init will remove to initGrid
-                // put here should not right that not right it should like this 
-                // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
-                // and put it to model inside;
-                // angular.extend($scope.DocSearch.LeadResearch, INITS);
-                //
-                /////////////////////////////// end saving and grid init bug for faster portotype ////////////////
-
-
             });
-            // ////remove all code to model version date is some time of June 2016 /////////////////////////////////////////////
-            //$scope.DocSearch;
-            // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-            // success(function (data, status, headers, config) {
-            //     $scope.DocSearch = data;
-            //     $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-            //         $scope.DocSearch.team = data;
 
-            //     });
-
-            //     $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-            //       success(function (data1, status, headers, config) {
-            //           $scope.LeadsInfo = data1;
-            //           $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
-            //           $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
-            //           $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
-            //           $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
-            //           $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
-            //           $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data1.C2ndMotgrAmt;
-            //           var ownerName = $scope.DocSearch.LeadResearch.ownerName;
-            //           if (ownerName) {
-            //               $http.post("/api/homeowner/ssn/" + leadsInfoBBLE, JSON.stringify(ownerName)).
-            //               success(function (ssn, status, headers, config) {
-            //                   $scope.DocSearch.LeadResearch.ownerSSN = ssn;
-            //               }).error(function () {
-
-            //               });
-            //           }
-
-
-            //       }).error(function (data, status, headers, config) {
-            //           alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-            //       });
-            // });
-            // ////////////////////////////////// remove all code to model version date is some time of June 2016 ////////////////////
         }
 
         $scope.init(leadsInfoBBLE)
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         * @fix
+         *  git commit f679a81 'finish the new doc search page'
+         *  add javascript version of validate in new version of doc search
+         *  it's not right to add the goal in git commit should create jira task.
+         */
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         *  
+         * @description
+         *  new version validate javascript version validate
+         * @returns {bool} true then pass validate
+         */
         $scope.newVersionValidate = function () {
-
+            /**
+             * change java script version validate 
+             * to oop model version validate
+             */
             if (!$scope.newVersion) {
                 return true;
             }
 
-            if (!$scope.DivError.passValidate())
-            {
-               
+            if (!$scope.DivError.passValidate()) {
+
                 return false;
             }
 
@@ -3988,7 +4116,17 @@ angular.module('PortalApp')
                 "has_Vacate_Order_Vacate_Order",
                 "has_ECB_Tickets_ECB_Tickets",
                 "has_ECB_on_Name_ECB_on_Name_other_known_address",
-                //under are one to multiple//
+
+                /**
+                 * @author Steven
+                 * @date   8/19/2016
+                 * 
+                 * @fix 
+                 * git commit bde6b6d tax search
+                 * add validated to new version doc search at least one item add 
+                 * when select yes control grid
+                 */
+                // under are one to multiple//
                 "Has_Other_Mortgage",
                 "Has_Other_Liens",
                 "Has_TaxLiensCertifcate",
@@ -4016,7 +4154,7 @@ angular.module('PortalApp')
 
                 for (var j = 0; j < checkedAttrs.length; j++) {
                     var f1 = checkedAttrs[j];
-                    if( ( fields[f1[0]] === true && !Array.isArray(fields[f1[1]]) ) || (fields[f1[0]] === true && fields[f1[1]].length === 0)){
+                    if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
                         errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
                     }
                 }
@@ -4027,27 +4165,18 @@ angular.module('PortalApp')
 
         }
 
-
-
-
         $scope.SearchComplete = function (isSave) {
 
-            if (!$scope.newVersionValidate())
-            {
+            if (!$scope.newVersionValidate()) {
                 var msg = $scope.DivError.getMessage();
 
                 AngularRoot.alert(msg[0]);
                 return;
             };
-            // $scope.DivError.getMessage();
-            // $scope.newVersionValidate();
 
-            //if (msg) {
-            //    AngularRoot.alert(msg);
-            //    return;
-            //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            $scope.DocSearch.ResutContent = $("#searchReslut").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
@@ -4055,7 +4184,7 @@ angular.module('PortalApp')
                 });
             } else {
 
-                $scope.DocSearch.ResutContent = $("#searchReslut").html();
+                
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -4063,47 +4192,29 @@ angular.module('PortalApp')
                 });
             }
 
+            $scope.test = function () {
+                $scope.$digest();
+            }
 
-            //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
-            //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
-            //    if (typeof gridCase != 'undefined') {
-            //        if (!isSave) {
-            //            $scope.DocSearch.Status = 1;
-            //            gridCase.Refresh();
-            //        }
-            //    }
-            //}).error(function (data) {
-            //    alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //});
+        }
 
-            //Ajax anonymous function not work for angular scope need check about this.
-            //$.ajax({
-            //    type: "PUT",
-            //    url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
-            //    data: JSON.stringify(PostData),
-            //    dataType: 'json',
-            //    contentType: 'application/json',
-            //    success: function (data) {
+        $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
 
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
-            //        if (typeof gridCase != 'undefined') {
-            //            if (!isSave) {
-            //                $scope.DocSearch.Status = 1;
-            //                gridCase.Refresh();
-            //            }
+        for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
+            $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
+                if (nv) {
+                    var rest_exclusive_filed = _.without($scope.EXCLUSIVE_FIELD, this.exp);
+                    for (var j = 0; j < rest_exclusive_filed.length; j++) {
+                        if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
+                    }
+                }
 
-            //        }
-            //    },
-            //    error: function (data) {
-            //        alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //    }
-
-            //});
+            })
         }
     });
 /* global LegalShowAll */
 /* global angular */
-angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime','$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
+angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime', '$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
 
     $scope.ptContactServices = ptContactServices;
     $scope.ptCom = ptCom;
@@ -4113,18 +4224,208 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
     $scope.isPassByMonths = ptTime.isPassByMonths;
     $scope.isPassOrEqualByMonths = ptTime.isPassOrEqualByMonths;
 
-    $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {}, PreQuestions: {} };
-    $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
-    $scope.LegalCase.SecondaryTypes = []
-    $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Miscellaneous", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title", ""];
+    $scope.LegalCase = {
+        PropertyInfo: {},
+        ForeclosureInfo: {
+            PlaintiffId: 638
+        },
+        SecondaryInfo: {
+            StatuteOfLimitations: [],
+        },
+        PreQuestions: {},
+        SecondaryTypes: []
+    };
     $scope.TestRepeatData = [];
+    $scope.History = [];
+    $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Miscellaneous", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title", ""];
     if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
         $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
     }
+
     $scope.filterSelected = true;
-    $scope.LegalCase.ForeclosureInfo.PlaintiffId = 638;
     $scope.PickedContactId = null;
-    $scope.History = [];
+
+    $scope.hSummery = [
+                {
+                    "Name": "CaseStauts",
+                    "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)",
+                    "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "EveryOneIn",
+                    "CallFunc": "LegalCase.ForeclosureInfo.WasEstateFormed != null",
+                    "Description": "There is an estate.",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "BankruptcyFiled",
+                    "CallFunc": "LegalCase.ForeclosureInfo.BankruptcyFiled == true",
+                    "Description": "Bankruptcy filed",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "Efile",
+                    "CallFunc": "LegalCase.ForeclosureInfo.Efile == true",
+                    "Description": "Has E-filed",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "EfileN",
+                    "CallFunc": "LegalCase.ForeclosureInfo.Efile == false",
+                    "Description": "No E-filed",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "ClientPersonallyServed",
+                    "CallFunc": "false",
+                    "Description": "Client personally is not served. ",
+                    "ArrayName": "AffidavitOfServices"
+                },
+                {
+                    "Name": "NailAndMail",
+                    "CallFunc": "true",
+                    "Description": "Nail and Mail.",
+                    "ArrayName": "AffidavitOfServices"
+                },
+                {
+                    "Name": "BorrowerLiveInAddrAtTimeServ",
+                    "CallFunc": "false",
+                    "Description": "Borrower didn\'t live in service Address at time of Serv.",
+                    "ArrayName": "AffidavitOfServices"
+                },
+                {
+                    "Name": "BorrowerEverLiveHere",
+                    "CallFunc": "false",
+                    "Description": "Borrower didn\'t ever live in service address.",
+                    "ArrayName": "AffidavitOfServices"
+                },
+                {
+                    "Name": "ServerInSererList",
+                    "CallFunc": "true",
+                    "Description": "process server is in server list.",
+                    "ArrayName": "AffidavitOfServices"
+                },
+                {
+                    "Name": "isServerHasNegativeInfo",
+                    "CallFunc": "true",
+                    "Description": "Web search provide any negative information on process server. ",
+                    "ArrayName": "AffidavitOfServices"
+                },
+                {
+                    "Name": "AffidavitServiceFiledIn20Day",
+                    "CallFunc": "false",
+                    "Description": "Affidavit of service wasn\'t file within 20 days of service.",
+                    "ArrayName": "AffidavitOfServices"
+                },
+                {
+                    "Name": "AnswerClientFiledBefore",
+                    "CallFunc": "LegalCase.ForeclosureInfo.AnswerClientFiledBefore == false",
+                    "Description": "Client hasn\'t ever filed an answer before.",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "NoteIsPossess",
+                    "CallFunc": "LegalCase.ForeclosureInfo.NoteIsPossess == false",
+                    "Description": "We Don't possess a copy of the note.",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "NoteEndoresed",
+                    "CallFunc": "LegalCase.ForeclosureInfo.NoteEndoresed == false",
+                    "Description": "Note wasn\'t endores.",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "NoteEndorserIsSignors",
+                    "CallFunc": "LegalCase.ForeclosureInfo.NoteEndorserIsSignors == true",
+                    "Description": "The endorser is in signors list.",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "HasDocDraftedByDOCXLLC",
+                    "CallFunc": "true",
+                    "Description": "There are documents drafted by DOCX LLC .",
+                    "ArrayName": "Assignments"
+                },
+                {
+                    "Name": "LisPendesRegDate",
+                    "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)",
+                    "Description": "Date of registration 5 days after Lis Pendens letter",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "AccelerationLetterMailedDate",
+                    "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )",
+                    "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "AccelerationLetterRegDate",
+                    "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )",
+                    "Description": "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "AffirmationFiledDate",
+                    "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)",
+                    "Description": "Affirmation filed after Judgement. ",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "AffirmationReviewerByCompany",
+                    "CallFunc": "LegalCase.ForeclosureInfo.AffirmationReviewerByCompany == false",
+                    "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "MortNoteAssInCert",
+                    "CallFunc": "LegalCase.ForeclosureInfo.MortNoteAssInCert == false",
+                    "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "MissInCert",
+                    "CallFunc": "checkMissInCertValue()",
+                    "Description": "Mortgage Note or Assignment are missing. ",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "CertificateReviewerByCompany",
+                    "CallFunc": "LegalCase.ForeclosureInfo.CertificateReviewerByCompany == false",
+                    "Description": "The certificate  reviewer wasn\'t employe by the servicing company. ",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "LegalCase.ItemsRedacted",
+                    "CallFunc": "LegalCase.ForeclosureInfo.ItemsRedacted == false",
+                    "Description": "Are items of personal information Redacted.",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "RJIDate",
+                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)",
+                    "Description": "RJI filed after 12 months of S&C.",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "ConferenceDate",
+                    "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)",
+                    "Description": "Conference date scheduled 60 days before RJI",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "OREFDate",
+                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)",
+                    "Description": "O/REF filed after 12 months after RJI.",
+                    "ArrayName": ""
+                },
+                {
+                    "Name": "JudgementDate",
+                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)",
+                    "Description": "Judgement submitted 12 months after O/REF. ",
+                    "ArrayName": ""
+                }];
 
     $scope.querySearch = function (query) {
         var createFilterFor = function (query) {
@@ -4292,15 +4593,13 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 var OldStatus = $(elem + ' option[value="' + old + '"]').html();
                 var NowStatus = $(elem + ' option[value="' + now + '"]').html();
 
-                if (!OldStatus)
-                {
+                if (!OldStatus) {
                     AddActivityLog(changeObject.msg.replace(" from", '') + ' to ' + NowStatus);
                 }
-                else
-                {
+                else {
                     AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus);
                 }
-                
+
                 $scope.LogChange[i].old = now;
             }
         }
@@ -4355,7 +4654,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
             }).error(function () {
                 alert("Fail to Short sale case  data : " + BBLE);
             });
-    
+
 
 
         $http.get(leadsInfoUrl)
@@ -4559,7 +4858,17 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 
         }
         ];
-        var tpl = Tpls.filter(function (o) { return o.tplName == tplName })[0]
+        $scope.DocGenerator2 = function (tplName, data, successFunc) {
+            $http.post("/Services/Documents.svc/DocGenrate", {
+                "tplName": tplName,
+                "data": JSON.stringify(data)
+            }).success(function (data) {
+                successFunc(data);
+            }).error(function (data, status) {
+                alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
+            });
+        };
+        var tpl = Tpls.filter(function (o) { return o.tplName == tplName })[0];
 
         if (tpl) {
             for (var v in tpl.data) {
@@ -4569,7 +4878,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                     return;
                 }
             }
-            ptCom.DocGenerator(tpl.tplName, tpl.data, function (url) {
+            $scope.DocGenerator2(tpl.tplName, tpl.data, function (url) {
                 //window.open(url,'blank');
                 STDownloadFile(url, tpl.tplName.replace("Template", ""));
             });
@@ -4585,187 +4894,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         var address = ['', '851 Grand Concourse Bronx, NY 10451', '360 Adams St. Brooklyn, NY 11201', '8811 Sutphin Boulevard, Jamaica, NY 11435'];
         return address[boro - 1];
     }
-    $scope.hSummery = [
-                    {
-                        "Name": "CaseStauts",
-                        "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)",
-                        "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "EveryOneIn",
-                        "CallFunc": "LegalCase.ForeclosureInfo.WasEstateFormed != null",
-                        "Description": "There is an estate.",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "BankruptcyFiled",
-                        "CallFunc": "LegalCase.ForeclosureInfo.BankruptcyFiled == true",
-                        "Description": "Bankruptcy filed",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "Efile",
-                        "CallFunc": "LegalCase.ForeclosureInfo.Efile == true",
-                        "Description": "Has E-filed",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "EfileN",
-                        "CallFunc": "LegalCase.ForeclosureInfo.Efile == false",
-                        "Description": "No E-filed",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "ClientPersonallyServed",
-                        "CallFunc": "false",
-                        "Description": "Client personally is not served. ",
-                        "ArrayName": "AffidavitOfServices"
-                    },
-                    {
-                        "Name": "NailAndMail",
-                        "CallFunc": "true",
-                        "Description": "Nail and Mail.",
-                        "ArrayName": "AffidavitOfServices"
-                    },
-                    {
-                        "Name": "BorrowerLiveInAddrAtTimeServ",
-                        "CallFunc": "false",
-                        "Description": "Borrower didn\'t live in service Address at time of Serv.",
-                        "ArrayName": "AffidavitOfServices"
-                    },
-                    {
-                        "Name": "BorrowerEverLiveHere",
-                        "CallFunc": "false",
-                        "Description": "Borrower didn\'t ever live in service address.",
-                        "ArrayName": "AffidavitOfServices"
-                    },
-                    {
-                        "Name": "ServerInSererList",
-                        "CallFunc": "true",
-                        "Description": "process server is in server list.",
-                        "ArrayName": "AffidavitOfServices"
-                    },
-                    {
-                        "Name": "isServerHasNegativeInfo",
-                        "CallFunc": "true",
-                        "Description": "Web search provide any negative information on process server. ",
-                        "ArrayName": "AffidavitOfServices"
-                    },
-                    {
-                        "Name": "AffidavitServiceFiledIn20Day",
-                        "CallFunc": "false",
-                        "Description": "Affidavit of service wasn\'t file within 20 days of service.",
-                        "ArrayName": "AffidavitOfServices"
-                    },
-                    {
-                        "Name": "AnswerClientFiledBefore",
-                        "CallFunc": "LegalCase.ForeclosureInfo.AnswerClientFiledBefore == false",
-                        "Description": "Client hasn\'t ever filed an answer before.",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "NoteIsPossess",
-                        "CallFunc": "LegalCase.ForeclosureInfo.NoteIsPossess == false",
-                        "Description": "We Don't possess a copy of the note.",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "NoteEndoresed",
-                        "CallFunc": "LegalCase.ForeclosureInfo.NoteEndoresed == false",
-                        "Description": "Note wasn\'t endores.",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "NoteEndorserIsSignors",
-                        "CallFunc": "LegalCase.ForeclosureInfo.NoteEndorserIsSignors == true",
-                        "Description": "The endorser is in signors list.",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "HasDocDraftedByDOCXLLC",
-                        "CallFunc": "true",
-                        "Description": "There are documents drafted by DOCX LLC .",
-                        "ArrayName": "Assignments"
-                    },
-                    {
-                        "Name": "LisPendesRegDate",
-                        "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)",
-                        "Description": "Date of registration 5 days after Lis Pendens letter",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "AccelerationLetterMailedDate",
-                        "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )",
-                        "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "AccelerationLetterRegDate",
-                        "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )",
-                        "Description": "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "AffirmationFiledDate",
-                        "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)",
-                        "Description": "Affirmation filed after Judgement. ",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "AffirmationReviewerByCompany",
-                        "CallFunc": "LegalCase.ForeclosureInfo.AffirmationReviewerByCompany == false",
-                        "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "MortNoteAssInCert",
-                        "CallFunc": "LegalCase.ForeclosureInfo.MortNoteAssInCert == false",
-                        "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "MissInCert",
-                        "CallFunc": "checkMissInCertValue()",
-                        "Description": "Mortgage Note or Assignment are missing. ",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "CertificateReviewerByCompany",
-                        "CallFunc": "LegalCase.ForeclosureInfo.CertificateReviewerByCompany == false",
-                        "Description": "The certificate  reviewer wasn\'t employe by the servicing company. ",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "LegalCase.ItemsRedacted",
-                        "CallFunc": "LegalCase.ForeclosureInfo.ItemsRedacted == false",
-                        "Description": "Are items of personal information Redacted.",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "RJIDate",
-                        "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)",
-                        "Description": "RJI filed after 12 months of S&C.",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "ConferenceDate",
-                        "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)",
-                        "Description": "Conference date scheduled 60 days before RJI",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "OREFDate",
-                        "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)",
-                        "Description": "O/REF filed after 12 months after RJI.",
-                        "ArrayName": ""
-                    },
-                    {
-                        "Name": "JudgementDate",
-                        "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)",
-                        "Description": "Judgement submitted 12 months after O/REF. ",
-                        "ArrayName": ""
-                    }];
+
     $scope.evalVisible = function (h) {
         var result = false;
         if (h.ArrayName) {
@@ -4779,6 +4908,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         }
         return result;
     };
+
     angular.forEach($scope.hSummery, function (el, idx) {
         $scope.$watch(function () { return $scope.evalVisible(el); }, function (newV) {
             el.visible = newV;
@@ -4878,7 +5008,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
             }
         };
     }
-    //-- end Steven code part--
 
     $scope.ShowAddPopUp = function (event) {
         $scope.addCommentTxt = "";
@@ -4928,78 +5057,78 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         if (logid) {
             var url = "/api/Legal/HistoryCaseData/" + logid;
             $http.get(url).success(function (data) {
-                    $scope.LegalCase = $.parseJSON(data);
-                    var BBLE = $scope.LegalCase.BBLE;
-                    if (BBLE) {
-                        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
-                        var shortsaleUrl = '/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE;
-                        var taxlienUrl = '/api/TaxLiens/' + BBLE;
-                        var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
+                $scope.LegalCase = $.parseJSON(data);
+                var BBLE = $scope.LegalCase.BBLE;
+                if (BBLE) {
+                    var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+                    var shortsaleUrl = '/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE;
+                    var taxlienUrl = '/api/TaxLiens/' + BBLE;
+                    var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
 
 
-                        $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
-                        $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
-                        $scope.LogChange = {
-                            'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC Status changed from ' },
-                            'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgae foreclosure Status changed from ' }
-                        }
-                        var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
-                        for (a in arrays) {
-                            var porp = arrays[a]
-                            var array = $scope.LegalCase.ForeclosureInfo[porp];
-                            if (!array || array.length === 0) {
-                                $scope.LegalCase.ForeclosureInfo[porp] = [];
-                                $scope.LegalCase.ForeclosureInfo[porp].push({});
-                            }
-                        }
-                        $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || []
-                        $scope.showSAndCFrom();
-
-                        $http.get(shortsaleUrl)
-                            .success(function (data) {
-                                $scope.ShortSaleCase = data;
-                            }).error(function () {
-                                alert("Fail to Short sale case  data : " + BBLE);
-                            });
-
-
-
-                        $http.get(leadsInfoUrl)
-                            .success(function (data) {
-                                $scope.LeadsInfo = data;
-                                $scope.LPShow = $scope.ModelArray('LeadsInfo.LisPens');
-                            }).error(function (data) {
-                                alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
-                            });
-
-                        $http.get(taxlienUrl)
-                            .success(function (data) {
-                                $scope.TaxLiens = data;
-                                $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
-                            }).error(function (data) {
-                                alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
-                            });
-
-                        $http.get(legalecoursUrl)
-                            .success(function (data) {
-                                $scope.LegalECourt = data;
-                            }).error(function () {
-                                $scope.LegalECourt = null;
-                            });
-
-                        LegalCaseBBLE = BBLE;
+                    $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
+                    $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
+                    $scope.LogChange = {
+                        'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC Status changed from ' },
+                        'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgae foreclosure Status changed from ' }
                     }
-                }).error(function () {
-                    alert("Fail to load data : ");
-                });
+                    var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
+                    for (a in arrays) {
+                        var porp = arrays[a]
+                        var array = $scope.LegalCase.ForeclosureInfo[porp];
+                        if (!array || array.length === 0) {
+                            $scope.LegalCase.ForeclosureInfo[porp] = [];
+                            $scope.LegalCase.ForeclosureInfo[porp].push({});
+                        }
+                    }
+                    $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || []
+                    $scope.showSAndCFrom();
 
-        }       
+                    $http.get(shortsaleUrl)
+                        .success(function (data) {
+                            $scope.ShortSaleCase = data;
+                        }).error(function () {
+                            alert("Fail to Short sale case  data : " + BBLE);
+                        });
+
+
+
+                    $http.get(leadsInfoUrl)
+                        .success(function (data) {
+                            $scope.LeadsInfo = data;
+                            $scope.LPShow = $scope.ModelArray('LeadsInfo.LisPens');
+                        }).error(function (data) {
+                            alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
+                        });
+
+                    $http.get(taxlienUrl)
+                        .success(function (data) {
+                            $scope.TaxLiens = data;
+                            $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
+                        }).error(function (data) {
+                            alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
+                        });
+
+                    $http.get(legalecoursUrl)
+                        .success(function (data) {
+                            $scope.LegalECourt = data;
+                        }).error(function () {
+                            $scope.LegalECourt = null;
+                        });
+
+                    LegalCaseBBLE = BBLE;
+                }
+            }).error(function () {
+                alert("Fail to load data : ");
+            });
+
+        }
 
 
     }
 
     $scope.openHistoryWindow = function (logid) {
-        $window.open('/LegalUI/Legalinfo.aspx?logid='+logid , '_blank', 'width=1024, height=768')
+        $window.open('/LegalUI/Legalinfo.aspx?logid=' + logid, '_blank', 'width=1024, height=768')
     }
 }]);
 var portalApp = angular.module('PortalApp');
@@ -6216,11 +6345,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
     }
 });
 /*************************end old style contoller**************************/
-var portalApp = angular.module('PortalApp');
-
-portalApp.controller('perAssignViewCtrl', function ($scope, PerSignItem, DxGridModel) {
-    $scope.PerSignItem = PerSignItem;
-})
 angular.module('PortalApp')
 .controller("ReportWizardCtrl", function ($scope, $http, $timeout, ptCom) {
     $scope.camel = _.camelCase;
@@ -6561,20 +6685,6 @@ angular.module('PortalApp')
         $scope.load({ReportId: PreLoadReportId,UseSql:true})
     }
 });
-
-if (typeof requirejs === "function")
-{
-    
-    define(['angular'], function (angular) {
-        function RequireController() {
-            alert("set up sucessfully !");
-        }
-
-        return RequireController
-    });
-}
-
-
 angular.module("PortalApp")
 .controller('ShortSaleCtrl', ['$scope', '$http', '$timeout', 'ptContactServices', 'ptCom', 
     function ($scope, $http, $timeout, ptContactServices, ptCom) {
@@ -7122,8 +7232,17 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             }
         }
     };
-
-    angular.extend($scope.SSpreSign,new PropertyOffer());
+    
+    angular.extend($scope.SSpreSign, new PropertyOffer());
+    /**
+     * @author Steven
+     * @date   8/19/2016
+     * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
+     * @description
+     *  fix the new offer can not save type
+     *  1.It maybe the bug of NG-resource or angular.extend
+     */
+    $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
     $scope.SSpreSign.assignCrop = new AssignCorp();
     //setTimeout(function () {
     //    $scope.SSpreSign.Type = 'Short Sale';
@@ -7173,6 +7292,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
 
     $scope.DeadType = {
+        ShortSale: false,
         Contract: true,
         Memo: false,
         Deed: false,
@@ -7595,6 +7715,15 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                     $scope.SSpreSign.BBLE = BBLE;
                 });
             }
+            /**
+             * @author Steven
+             * @date   8/19/2016
+             * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
+             * @description
+             *  fix the new offer can not save type
+             *  1.It maybe the bug of NG-resource or angular.extend
+             */
+            $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
         });
 
         
@@ -8182,6 +8311,73 @@ angular.module("PortalApp")
 
 
 }])
+angular.module("PortalApp").config(function ($stateProvider) {
+
+    var dataInput = {
+        name: 'datainput',
+        url: '/datainput',
+        templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
+    }
+    var flipsheets = {
+        name: 'flipsheets',
+        url: '/flipsheets',
+        templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
+    }
+    var rentalmodels = {
+        name: 'rentalmodels',
+        url: '/rentalmodels',
+        templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
+    }
+    var tables = {
+        name: 'tables',
+        url: '/tables',
+        templateUrl: '/js/Views/Underwriter/tables.tpl.html'
+    }
+    $stateProvider.state(dataInput);
+    $stateProvider.state(flipsheets);
+    $stateProvider.state(rentalmodels);
+    $stateProvider.state(tables);
+
+});
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', '$location', 'ptUnderwriter', 'DocSearch', 'LeadsInfo', function ($scope, ptCom, $location, ptUnderwriter, DocSearch, LeadsInfo) {
+
+    $scope.data = {};
+
+    $scope.isActive = function (viewLocation) {
+        return viewLocation === $location.path();
+    };
+
+    $scope.init = function (bble, isImport) {
+        ptCom.startLoading()
+        $scope.data = ptUnderwriter.createNew();
+        if (isImport) {
+            $scope.importData(bble);
+        } else {
+
+        }
+
+    }
+
+    $scope.importData = function (bble) {
+        $scope.leadsInfo = undefined;
+        $scope.docSearch = undefined;
+        $scope.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
+
+            $scope.docSearch.initLeadsResearch();
+            $scope.leadsInfo = $scope.LeadsInfo.get({ BBLE: bble.trim() }, function () {
+                debugger;
+            })
+
+        });
+
+    };
+
+
+    $scope.save = function () {
+
+
+    }
+}])
 angular.module("PortalApp")
     .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {
 
@@ -8231,7 +8427,6 @@ angular.module("PortalApp")
     $scope.initGroups();
     $scope.InitDataFunc = function (data) {
         var gropData = $scope.InitData(data.d);
-        //debugger;
         var allContacts = gropData;
         if (allContacts.length > 0) {
             $scope.currentContact = gropData[0];

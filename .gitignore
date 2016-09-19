@@ -215,3 +215,6 @@ IntranetPortal/IntranetPortal/TempDataFile/OfferDoc/
 /IntranetPortal/IntranetPortal/TempDataFile/AuctionFiles
 /IntranetPortal/IntranetPortal/TempDataFile/TitleDocs
 /IntranetPortal/IntranetPortal/TempDataFile/title_doc_package.zip
+
+# Visual Studio Code 
+.vscode

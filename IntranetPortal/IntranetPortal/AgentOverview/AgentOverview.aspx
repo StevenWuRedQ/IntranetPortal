@@ -282,7 +282,7 @@
                                 </div>
 
                             </div>
-                           
+
                             <%--menu list--%>
                             <div style="margin: 13px 30px 30px 30px">
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(0)">New Leads</div>
@@ -293,7 +293,7 @@
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(7)">Closed</div>
                             </div>
                             <% End if %>
-                            
+
                             <%-----end-----%>
                         </div>
                         <%----end bottom block--%>
@@ -957,7 +957,25 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
-    <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#right-pane-button").mouseenter(function () {
+                $("#right-pane-container").css("right", "0");
+            });
+
+            $('body').click(function (e) {
+                if (e.target.id == 'right-pane-container')
+                { return true; }
+                else
+                {
+                    $("#right-pane-container").css("right", "-290px");
+                }
+
+            });
+        })
+
+    </script>
 </asp:Content>
 
 

@@ -4,7 +4,7 @@ Imports Newtonsoft.Json.Linq
 Imports Newtonsoft.Json
 
 ''' <summary>
-''' To handle the short sale managment function
+''' To handle the short sale management function
 ''' </summary>
 Public Class ShortSaleManage
 
@@ -43,10 +43,29 @@ Public Class ShortSaleManage
         Return _viewable
     End Function
 
+    ''' <summary>
+    ''' Return if given property in the ShortSale
+    ''' </summary>
+    ''' <param name="bble">The Property BBLE</param>
+    ''' <returns></returns>
     Public Shared Function IsInShortSale(bble As String) As Boolean
         Return ShortSaleCase.IsExist(bble)
     End Function
 
+    ''' <summary>
+    ''' Return if the property is in the shortsale process
+    ''' </summary>
+    ''' <param name="bble">The given BBLE</param>
+    ''' <returns></returns>
+    Public Shared Function IsInProcess(bble As String) As Boolean
+        Return ShortSaleCase.IsInProcess(bble)
+    End Function
+
+    ''' <summary>
+    ''' Return if given case was changed
+    ''' </summary>
+    ''' <param name="changedCase">The Given ShortSale Case</param>
+    ''' <returns></returns>
     Public Shared Function IsOriginalCase(changedCase As ShortSaleCase) As Boolean
         Dim oCase = ShortSaleCase.GetCase(changedCase.CaseId)
 
@@ -57,6 +76,12 @@ Public Class ShortSaleManage
         Return True
     End Function
 
+    ''' <summary>
+    ''' Save ShortSale Case
+    ''' </summary>
+    ''' <param name="caseData">The Case Data, JSON format</param>
+    ''' <param name="saveBy">The User who save the data</param>
+    ''' <returns></returns>
     Public Shared Function SaveCase(caseData As String, saveBy As String) As ShortSaleCase
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(caseData)
 
@@ -159,6 +184,12 @@ Public Class ShortSaleManage
         End If
     End Sub
 
+    ''' <summary>
+    ''' Move Leads to ShortSale
+    ''' </summary>
+    ''' <param name="bble">The Property BBLE</param>
+    ''' <param name="createBy">The Create User</param>
+    ''' <param name="appid">The Application Id</param>
     Public Shared Sub MoveLeadsToShortSale(bble As String, createBy As String, appid As Integer)
         Dim li = LeadsInfo.GetInstance(bble)
 
@@ -182,6 +213,20 @@ Public Class ShortSaleManage
                 ssCase.Owner = GetIntaker()
                 ssCase = SetReferral(ssCase)
                 ssCase.CreateBy = createBy
+
+                ' init data from completed new offer data
+                Dim offer = PropertyOffer.GetOffer(bble)
+                If offer IsNot Nothing AndAlso offer.Status = PropertyOffer.OfferStatus.Completed Then
+                    Dim form = offer.LoadFormData()
+                    If form IsNot Nothing AndAlso Not String.IsNullOrEmpty(form.FormData) Then
+                        Try
+                            ssCase = InitFromNewOffer(ssCase, form.FormData)
+                        Catch ex As Exception
+                            Core.SystemLog.LogError("InitFromNewOffer", ex, Nothing, createBy, bble)
+                        End Try
+                    End If
+                End If
+
                 ssCase.Save(createBy)
 
                 If IsShortSaleManager(createBy) Then
@@ -192,12 +237,111 @@ Public Class ShortSaleManage
                     NewCaseProcess.ProcessStart(bble, bble, createBy, String.Format("{0} want to move this case to ShortSale. Please approval.", createBy))
                 End If
 
-                'NewCaseWithWF(bble, createBy)
+                ' NewCaseWithWF(bble, createBy)
             End If
         Else
             Throw New CallbackException("This address alread in system. please check.")
         End If
     End Sub
+
+    ''' <summary>
+    ''' Init ShortSaleData from new offer
+    ''' </summary>
+    ''' <param name="ssCase">The ShortSale Case</param>
+    ''' <param name="offerData">The New Offer Data in JSON format</param>
+    ''' <returns></returns>
+    Public Shared Function InitFromNewOffer(ssCase As ShortSaleCase, offerData As String) As ShortSaleCase
+        If String.IsNullOrEmpty(offerData) Then
+            Return ssCase
+        End If
+
+        Dim jsObj = JObject.Parse(offerData)
+
+        ' load owners
+        Dim jsOwners = jsObj.SelectToken("SsCase.PropertyInfo.Owners")
+        If jsOwners IsNot Nothing AndAlso jsOwners.Children.Count > 0 Then
+            Dim owners As New List(Of PropertyOwner)
+            For Each item In jsOwners.Children(Of JObject)
+                Try
+                    Dim jsonSettings As New JsonSerializerSettings With {
+                            .Error = Sub(obj, args)
+                                         Dim data = obj
+                                         args.ErrorContext.Handled = True
+                                     End Sub
+                        }
+                    Dim owner = JsonConvert.DeserializeObject(Of PropertyOwner)(item.ToString, jsonSettings)
+                    owner.BBLE = ssCase.BBLE
+                    owners.Add(owner)
+                Catch ex As Exception
+
+                End Try
+            Next
+            ssCase.PropertyInfo.Owners = owners.ToArray
+        End If
+
+        ' load mortgages
+        Dim jsMtgs = jsObj.SelectToken("SsCase.Mortgages")
+        If jsMtgs IsNot Nothing AndAlso jsMtgs.Children.Count > 0 Then
+            Dim mortgages As New List(Of PropertyMortgage)
+            For Each item In jsMtgs.Children(Of JObject)
+                Dim mort As New PropertyMortgage
+                mort.CaseId = ssCase.CaseId
+                mort.Lender = item.Value(Of String)("LenderName")
+                mort.LenderId = item.Value(Of Integer)("LenderId")
+                mort.Loan = item.Value(Of String)("Loan")
+
+                Dim loanAmount = 0
+                If Decimal.TryParse(item.Value(Of String)("LoanAmount"), loanAmount) Then
+                    mort.LoanAmount = loanAmount
+                End If
+
+                mortgages.Add(mort)
+            Next
+            ssCase.Mortgages = mortgages.ToArray
+        End If
+
+        ' load buyer
+        Dim jsBuyer = jsObj.SelectToken("DealSheet.ContractOrMemo.Buyer")
+        If jsBuyer IsNot Nothing AndAlso jsBuyer.Children.Count > 0 Then
+            Dim buyer = ssCase.BuyerEntity
+            With buyer
+                .Entity = jsBuyer.Value(Of String)("CorpName")
+                .EntityAddress = jsBuyer.Value(Of String)("Address")
+                .DateOpened = jsBuyer.Value(Of Date)("FillingDate")
+                .Office = jsBuyer.Value(Of String)("Patchen")
+                .TaxId = jsBuyer.Value(Of String)("EIN")
+            End With
+
+            Dim signerName = jsBuyer.Value(Of String)("Signer")
+            If Not String.IsNullOrEmpty(signerName) Then
+                Dim signer = PartyContact.GetContactByName(signerName)
+                If signer IsNot Nothing Then
+                    buyer.SignorId = signer.ContactId
+                    buyer.Signor = signer.Name
+                End If
+            End If
+
+            Dim jsAttorney = jsBuyer.Value(Of JObject)("buyerAttorneyObj")
+            If jsAttorney IsNot Nothing Then
+                ssCase.BuyerAttorney = jsAttorney.Value(Of Integer)("ContactId")
+                ssCase.BuyerAttorneyName = jsAttorney.Value(Of String)("Name")
+            End If
+        End If
+
+        Return ssCase
+    End Function
+
+    Private Function LoadJsonData(Of T)(jsonCase As JToken, jpath As String) As T
+        Try
+            Dim field = jsonCase.Value(Of T)(jpath)
+
+            Return field
+        Catch ex As Exception
+
+        End Try
+
+        Return Nothing
+    End Function
 
     Public Shared Function GetShortSaleUsers() As String()
         Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("ShortSale-"))
@@ -223,7 +367,7 @@ Public Class ShortSaleManage
             TitleManage.StartTitle(bble, ssCase.CaseName, userName, titleUser)
         Else
             Throw New Exception("Address can't found in ShortSale. BBLE: " & bble)
-        End If
+                End If
     End Sub
 
     Public Shared Sub NewCaseApproved(bble As String, approvedBy As String)
@@ -235,7 +379,8 @@ Public Class ShortSaleManage
         If processor IsNot Nothing Then
             ssCase.Processor = processor.ContactId
         End If
-
+        ssCase.AcceptedDate = DateTime.Now
+        ssCase.AcceptedBy = approvedBy
         ssCase.Save()
 
         If ssCase.CaseId > 0 Then
@@ -271,6 +416,8 @@ Public Class ShortSaleManage
         Catch ex As Exception
             Core.SystemLog.LogError("New SS Case email notification", ex, Nothing, HttpContext.Current.User.Identity.Name, bble)
         End Try
+
+        LeadsActivityLog.AddActivityLog(Now, "Leads was accepted by " & approvedBy, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString)
     End Sub
 
     Public Shared Function UpdateCaseStatus(caseId As Integer, status As ShortSale.CaseStatus, createBy As String, objData As String) As Boolean
@@ -334,7 +481,7 @@ Public Class ShortSaleManage
             ssCase.UpdateBy = updateBy
         End If
 
-        ssCase.Save()
+        ssCase.SaveEntity()
     End Sub
 
     Public Shared Sub UpdateReferral()
@@ -367,6 +514,7 @@ Public Class ShortSaleManage
             Dim referral = ShortSale.PartyContact.GetContactByName(ld.EmployeeName)
             If referral IsNot Nothing Then
                 ssCase.Referral = referral.ContactId
+                ssCase.ReferralUserName = referral.Name
             End If
         End If
 

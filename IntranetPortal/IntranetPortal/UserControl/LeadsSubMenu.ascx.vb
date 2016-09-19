@@ -8,6 +8,8 @@ Public Class LeadsSubMenu
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             MenuControl()
+
+
         End If
     End Sub
 
@@ -78,7 +80,13 @@ Public Class LeadsSubMenu
             If e.Parameter.Length > 0 Then
                 Dim AddComment = Nothing
                 If e.Parameter.Split("|").Count > 2 Then
-                    AddComment = e.Parameter.Split("|").ToList.Item(2)
+                    If e.Parameter.StartsWith("x") Then
+                        AddComment = e.Parameter.Split("|").ToList.Item(4)
+                    Else
+
+                        AddComment = e.Parameter.Split("|").ToList.Item(2)
+
+                    End If
                 End If
 
                 If e.Parameter.StartsWith("Tomorrow") Then
@@ -173,6 +181,24 @@ Public Class LeadsSubMenu
                         UpdateLeadStatus(bble, LeadStatus.Deleted, Nothing, AddComment)
                     End If
                 End If
+
+                ' format will be "x|21|bble" , x indicates this is a special request
+                If e.Parameter.StartsWith("x") Then
+                    If e.Parameter.Contains("|") Then
+                        Dim status = e.Parameter.Split("|")(2)
+                        Dim bble = e.Parameter.Split("|")(3)
+
+                        If (e.Parameter.StartsWith("x|LoanMod|20")) Then
+                            Dim substatus = e.Parameter.Split("|")(5)
+                            UpdateLeadStatus(bble, status, Nothing, AddComment, substatus)
+                        Else
+                            UpdateLeadStatus(bble, Status, Nothing, AddComment)
+                        End If
+
+
+                    End If
+                End If
+
             End If
 
         Catch ex As Exception
@@ -180,8 +206,14 @@ Public Class LeadsSubMenu
         End Try
     End Sub
 
-    Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, addCommend As String)
-        Lead.UpdateLeadStatus(bble, status, callbackDate, addCommend)
+    Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, addCommend As String, Optional subStatus As String = Nothing)
+        If Not String.IsNullOrEmpty(subStatus) Then
+            Lead.UpdateLeadStatus(bble, status, callbackDate, addCommend, subStatus)
+        Else
+            Lead.UpdateLeadStatus(bble, status, callbackDate, addCommend)
+        End If
+
+
     End Sub
 
     Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
@@ -195,6 +227,11 @@ Public Class LeadsSubMenu
         If (e.Parameter.StartsWith("Show")) Then
             Dim bble = e.Parameter.Split("|")(1)
             hfBBLE.Value = bble
+
+            Dim ld = Lead.GetInstance(bble)
+            If ld.Status = LeadStatus.LoanMod AndAlso ld.SubStatus = LeadSubStatus.LoanModInProcess Then
+                Throw New CallbackException("LoanMod In Progress leads can't move to DeadLeads folder.")
+            End If
 
             cbDeadReasons.DataSource = GetType(Lead.DeadReasonEnum).GetEnumValues().OfType(Of Lead.DeadReasonEnum).ToDictionary(
               Function(key)
@@ -289,7 +326,7 @@ Public Class LeadsSubMenu
             If Not String.IsNullOrEmpty(lbSelectionMode.Value) Then
                 If lbSelectionMode.SelectedValues.Contains("0") Then
                     'Add leads to short sale section
-                    If Not ShortSaleManage.IsInShortSale(hfInProcessBBLE.Value) Then
+                    If Not ShortSaleManage.IsInProcess(hfInProcessBBLE.Value) Then
                         ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name, Employee.CurrentAppId)
                     Else
 
@@ -297,7 +334,7 @@ Public Class LeadsSubMenu
                 End If
 
                 If lbSelectionMode.SelectedValues.Contains("1") Then
-                    If ShortSaleCase.GetCaseByBBLE(bble) Is Nothing Then
+                    If Not ShortSaleManage.IsInProcess(hfInProcessBBLE.Value) Then
                         ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name, Employee.CurrentAppId)
                     End If
 

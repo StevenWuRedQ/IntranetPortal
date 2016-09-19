@@ -342,7 +342,7 @@ Public Class ActivityLogs
                 UserMessage.AddNewMessage(userApoint.Agent, title, msg, userApoint.BBLE)
             End If
 
-            Lead.UpdateLeadStatus(userApoint.BBLE, LeadStatus.Priority, Nothing)
+            ' Lead.UpdateLeadStatus(userApoint.BBLE, LeadStatus.Priority, Nothing)
 
             BindData(hfBBLE.Value)
         End If
@@ -489,7 +489,9 @@ Public Class ActivityLogs
             employees = empsDropDownEdit.Text
         End If
 
-        Dim taskId = CreateTask(employees, cbTaskImportant.Text, cbTaskAction.Text, txtTaskDes.Text, hfBBLE.Value, Page.User.Identity.Name)
+        Dim dueDateStr = dueDate.Text
+
+        Dim taskId = CreateTask(employees, cbTaskImportant.Text, cbTaskAction.Text, txtTaskDes.Text, hfBBLE.Value, Page.User.Identity.Name, dueDateStr)
 
         Dim emps = employees.Split(";").Distinct.ToArray
         Dim upData = Employee.GetProfile(Page.User.Identity.Name)
@@ -504,7 +506,7 @@ Public Class ActivityLogs
             WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/LegalUI/LegalUI.aspx")
         ElseIf DisplayMode = ActivityLogMode.Construction Then
             WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/Construction/ConstructionUI.aspx")
-        ElseIf DisplayMode = ActivityLogMode.Title
+        ElseIf DisplayMode = ActivityLogMode.Title Then
             WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/BusinessForm/Default.aspx")
         End If
 
@@ -543,8 +545,16 @@ Public Class ActivityLogs
         WorkflowService.StartTaskProcess("ReminderProcess", taskName, taskId, bble, employees, taskPriority)
     End Sub
 
-    Private Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String) As Integer
-        Dim tk = Lead.CreateTask(employees, taskPriority, taskAction, taskDescription, bble, createUser, LogCategory)
+    Private Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String, Optional dueDateStr As String = "") As Integer
+
+        Dim tk As UserTask
+        If String.IsNullOrEmpty(dueDateStr) Then
+            tk = Lead.CreateTask(employees, taskPriority, taskAction, taskDescription, bble, createUser, LogCategory)
+        Else
+            Dim dueDate As DateTime = Convert.ToDateTime(dueDateStr)
+            tk = Lead.CreateTask(employees, taskPriority, taskAction, taskDescription, bble, createUser, LogCategory, dueDate)
+        End If
+
 
         If tk IsNot Nothing Then
             Return tk.TaskID

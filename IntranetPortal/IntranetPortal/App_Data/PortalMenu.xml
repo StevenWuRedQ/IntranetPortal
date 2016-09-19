@@ -57,6 +57,16 @@
           <![CDATA[<i class="glyphicon glyphicon-fire"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="AgentLoanModLeads" Text="LoanMod" NavigationUrl="/LeadAgent.aspx?c=other|20" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-money"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentWarmLeads" Text="Warm" NavigationUrl="/LeadAgent.aspx?c=other|21" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-circle-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="AgentFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Call Back" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
@@ -153,6 +163,16 @@
               <![CDATA[<i class="glyphicon glyphicon-fire"></i>]]>
             </FontClass>
           </PortalNavItem>
+          <PortalNavItem Name="AgentLoanModLeads" Text="LoanMod" NavigationUrl="/LeadAgent.aspx?c=other|20" ShowAmount="true">
+            <FontClass>
+              <![CDATA[<i class="fa fa-money"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+          <PortalNavItem Name="AgentWarmLeads" Text="Warm" NavigationUrl="/LeadAgent.aspx?c=other|21" ShowAmount="true">
+            <FontClass>
+              <![CDATA[<i class="fa fa-circle-o"></i>]]>
+            </FontClass>
+          </PortalNavItem>
           <PortalNavItem Name="AgentFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Call Back" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-rotate-right"></i>]]>
@@ -230,6 +250,16 @@
       <PortalNavItem Name="MgrHotLeads" Text="Hot Leads" NavigationUrl="/MgrViewLeads.aspx?c=Priority" ShowAmount="true">
         <FontClass>
           <![CDATA[ <i class="glyphicon glyphicon-fire"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="MgrLoanModLeads" Text="LoanMod" NavigationUrl="/MgrViewLeads.aspx?c=other|20" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-money"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="MgrWarmerLeads" Text="Warm" NavigationUrl="/MgrViewLeads.aspx?c=other|21" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-circle-o"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="MgrFollowUp" Text="Follow Up" NavigationUrl="/MgrViewLeads.aspx?c=Call Back" ShowAmount="true">
@@ -493,8 +523,10 @@
 
   </PortalNavItem>
 
-  <PortalNavItem Name="Eviction" Text="Eviction" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <!--Temporarily use Admin roles for Eviction-->
+  <!--<PortalNavItem Name="Eviction" Text="Eviction" NavigationUrl="#" ShowAmount="false" Expanded="false" visiable="false">
+    -->
+  <!--Temporarily use Admin roles for Eviction-->
+  <!--
     <UserRoles>Eviction-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="Eviction" Text="Eviction Leads" NavigationUrl="/ShortSale/ShortSale.aspx?isEviction=true" ShowAmount="true">
@@ -503,10 +535,26 @@
         </FontClass>
       </PortalNavItem>
     </Items>
+  </PortalNavItem>-->
+  <PortalNavItem Name="PreShortSale" Text="New Offer" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <!--Temporarily use Admin roles for Eviction-->    
+    <UserRoles>OfficeManager-*,OfficeExecutive</UserRoles>
+    <Items>
+      <PortalNavItem Name="PSS-Summary" Text="Summary" NavigationUrl="/mydefault.aspx?name=NewOffer" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="PSS-MyFiles" Text="My Files" NavigationUrl="/NewOffer/NewOfferList.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bullseye"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
   </PortalNavItem>
 
   <PortalNavItem Name="Title" Text="Title" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>Title-*,ShortSale-Manager</UserRoles>
+    <UserRoles>Title-*</UserRoles>
     <Applications>1</Applications>
     <Items>
       <PortalNavItem Name="Title-Summary" Text="Summary" NavigationUrl="/MyDefault.aspx?name=Title" ShowAmount="false">
@@ -520,36 +568,43 @@
         </FontClass>
       </PortalNavItem>-->
       <PortalNavItem Name="Title-MyCases" Text="My Cases" NavigationUrl="/TitleUI/TitleSummaryPage.aspx?c=-1" ShowAmount="true" AmountManageClass="TitleManage">
+        <UserRoles>Title-Manager,Title-User</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Title-Category-1" Text="Approved" NavigationUrl="/TitleUI/TitleSummaryPage.aspx?c=1&amp;name=Approved" ShowAmount="true" AmountManageClass="TitleManage">
+        <UserRoles>Title-Manager,Title-User</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Title-Category-2" Text="Pending Approval" NavigationUrl="/TitleUI/TitleSummaryPage.aspx?c=2&amp;name=Pending" ShowAmount="true" AmountManageClass="TitleManage">
+        <UserRoles>Title-Manager,Title-User</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Title-Category-3" Text="In Process" NavigationUrl="/TitleUI/TitleSummaryPage.aspx?c=3&amp;name=In Process" ShowAmount="true" AmountManageClass="TitleManage">
+        <UserRoles>Title-Manager,Title-User</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Title-Category-4" Text="Held" NavigationUrl="/TitleUI/TitleSummaryPage.aspx?c=4&amp;name=Held" ShowAmount="true" AmountManageClass="TitleManage">
+        <UserRoles>Title-Manager,Title-User</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Title-Category-5" Text="Closed" NavigationUrl="/TitleUI/TitleSummaryPage.aspx?c=5&amp;name=Closed" ShowAmount="true" AmountManageClass="TitleManage">
+        <UserRoles>Title-Manager,Title-User</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Title-Category-0" Text="External" NavigationUrl="/TitleUI/TitleSummaryPage.aspx?c=0" ShowAmount="true" AmountManageClass="TitleManage">
+        <UserRoles>Title-Manager,Title-User</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-wrench"></i>]]>
         </FontClass>
@@ -611,6 +666,17 @@
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-*,OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
     <Items>
+    </Items>
+  </PortalNavItem>
+  <PortalNavItem Name="Underwriter" Text="Underwriter" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <UserRoles>Underwriter</UserRoles>
+    <Items>
+      <PortalNavItem Name="UnderwriterSummary" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
+        <UserRoles>Underwriter</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pencil"></i>]]>
+        </FontClass>
+      </PortalNavItem>
     </Items>
   </PortalNavItem>
 

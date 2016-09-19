@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class ViewLeadsInfo
-
+    
     '''<summary>
     '''LeadsInfo control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class ViewLeadsInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LeadsInfo As Global.IntranetPortal.LeadsInfo1
-
+    
     '''<summary>
     '''LeadsSubMenu control.
     '''</summary>

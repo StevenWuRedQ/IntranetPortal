@@ -48,11 +48,11 @@ Public Class HomeOwnerInfo
         Dim ct = Contacts.Where(Function(c) c.Contact.Contains(contact)).FirstOrDefault
         If ct IsNot Nothing Then
             If ct.Status = OwnerContact.ContactStatus.Wrong Then
-                Return "style='color:red;text-decoration:line-through;'"
+                Return "phone-wrong"
             End If
 
             If ct.Status = OwnerContact.ContactStatus.Right Then
-                Return "style='color:green;text-decoration:none;'"
+                Return "phone-working"
             End If
         End If
         Return ""
@@ -77,7 +77,10 @@ Public Class HomeOwnerInfo
                     IsEmptyReport = True
                     TLOLocateReport = New DataAPI.TLOLocateReportOutput
                 End If
-                BestNums = homeOwner.BestPhoneNo
+                If (homeOwner.BestPhoneNo IsNot Nothing) Then
+                    BestNums = homeOwner.BestPhoneNo.GroupBy(Function(x) x.Phone).Select(Function(x) x.First).ToList
+                End If
+
                 BestAddress = homeOwner.BestAddress
                 BestEmail = homeOwner.BestEmail
             End If
@@ -92,6 +95,10 @@ Public Class HomeOwnerInfo
         Dim phoneStr = Regex.Replace(phone, "[^\d]+", "")
         Dim ownerPhone As HomeOwnerPhone = GetAllPhoneComments.FirstOrDefault(Function(p) p.Phone = phoneStr) 'ctx.HomeOwnerPhones.Where(Function(p) p.Phone = phoneStr And p.BBLE = BBLE And p.OwnerName = OwnerName).FirstOrDefault
         If (ownerPhone IsNot Nothing AndAlso ownerPhone.Comment IsNot Nothing) Then
+            Dim comment = ownerPhone.Comment
+            If comment.Length > 30 Then
+                comment = comment.Substring(0, 30) & " ..."
+            End If
             Return "-" + ownerPhone.Comment
         End If
         Return ""
@@ -156,6 +163,23 @@ Public Class HomeOwnerInfo
         End If
 
         Return String.Format("{0}/{1}/{2}", dt.monthField, dt.dayField, dt.yearField)
+    End Function
+    ''' <summary>
+    ''' get last call by date by phone number
+    ''' </summary>
+    ''' <param name="phoneNumber"></param>
+    ''' <returns>string of last called date</returns>
+    Public Function GetAllLastCalled(phoneNumber As String) As String
+        Return HomeOwnerPhone.GetAllPhoneLastCall(BBLE, phoneNumber)
+    End Function
+
+    ''' <summary>
+    ''' get call count by number
+    ''' </summary>
+    ''' <param name="phoneNumber"></param>
+    ''' <returns></returns>
+    Public Function GetCallCount(phoneNumber As String) As String
+        Return HomeOwnerPhone.GetAllPhoneCount(BBLE, phoneNumber)
     End Function
 
     Function BuilderRelativeName(relative As DataAPI.TLOPhoneBookEntry) As String

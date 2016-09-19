@@ -6,6 +6,12 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        If Not String.IsNullOrEmpty(Request.QueryString("f")) Then
+            Category = "Follow Up"
+
+            Return
+        End If
+
         If Not String.IsNullOrEmpty(Request.QueryString("c")) Then
             CategoryId = CInt(Request.QueryString("c"))
             Category = TitleManage.TitleCategories(CategoryId)

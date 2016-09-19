@@ -196,6 +196,7 @@
                             <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Team_Activity_Tab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Team Activity</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#SSAccepted_Tab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>SS Accepted</a></li>
                             <% If IntranetPortal.Employee.IsAdmin(Page.User.Identity.Name) Then%>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <%End If%>
@@ -754,8 +755,7 @@
                                                                 }
                                                             },
                                                         }],
-                                                        title: "In Process Leads",
-                                                        palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
+                                                        title: "In Process Leads"                                                        
                                                     }
 
                                                     option.onDone = function (e) {
@@ -778,14 +778,17 @@
                                                         $("#gridTitle").html(point.originalArgument);
                                                         //point.isVisible() ? point.hide() : point.show();
                                                     };
-                                                    $("#ProcessStatusChart").dxPieChart(option);
+                                                    option.series[0].type = 'bar';
+                                                    option.rotated = true;
+                                                    option.legend.visible = false;
+                                                    $("#ProcessStatusChart").dxChart(option);
                                                 }
                                                 else {
                                                     var chart = $("#InProcessLeadsChart").dxPieChart("instance");
                                                     chart.option("dataSource", tab.DisplayView.LeadsInProcessDataSource);
                                                     //chart.render({ force: true });
 
-                                                    chart = $("#ProcessStatusChart").dxPieChart("instance");
+                                                    chart = $("#ProcessStatusChart").dxChart("instance");
                                                     chart.option("dataSource", tab.DisplayView.LeadsDataSource);
                                                     //chart.render({ force: true });
                                                 }
@@ -1051,6 +1054,76 @@
 
                                     </script>
 
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="SSAccepted_Tab">
+                                     <div class="mag_tab_input_group">
+                                        <div class="row">
+                                            <div id="acceptedRange" class="containers" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px">
+                                        <div class="col-md-12">
+                                            
+                                        </div>
+                                        <div class="">
+                                            
+                                        </div>
+                                    </div>
+                                    <script>
+                                        var ssAcceptedTab = {
+                                            TeamName: null,
+                                            CurrentAgentName: null,
+                                            Visible: function () { return $("#SSAccepted_Tab").hasClass("active") ? true : false },
+                                            DateRange: function () {
+                                                return $('#acceptedRange').has("svg").length ? $('#acceptedRange').dxRangeSelector('instance') : null
+                                            },
+                                            InitalTab: function () {
+                                                var tab = this;
+                                                var dateNow = new Date();
+                                                var endDate = new Date();
+                                                endDate = endDate.setDate(dateNow.getDate() + 1);
+                                                var scaleStart = new Date();
+                                                scaleStart.setMonth(scaleStart.getMonth() - 6);
+                                                var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                                $("#acceptedRange").dxRangeSelector({
+                                                    margin: {
+                                                        top: 5
+                                                    },
+                                                    size: {
+                                                        height: 120
+                                                    },
+                                                    scale: {
+                                                        startValue: scaleStart,
+                                                        endValue: endDate,
+                                                        minorTickInterval: "day",
+                                                        majorTickInterval: 'week',
+                                                        minRange: "day",
+                                                        showMinorTicks: false
+                                                    },
+                                                    sliderMarker: {
+                                                        format: "monthAndDay"
+                                                    },
+                                                    selectedRange: {
+                                                        startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
+                                                        endValue: endDate
+                                                    },
+                                                    onSelectedRangeChanged: function (e) {
+                                                        
+                                                    }
+                                                });
+                                            },
+                                            ShowTab: function (name, noCheck) {
+                                                if (this.Visible() || noCheck) {
+                                                    if (this.TeamName == name)
+                                                        return;
+
+                                                    this.TeamName = name;
+                                                    var range = this.DateRange();
+                                                    var selectedRange = range.getSelectedRange();                                                
+                                                }
+                                            }
+                                        }
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -1517,6 +1590,14 @@
                 action: function () {
                     $('#mytab a[href="#Status_Of_Leads_Tab"]').tab('show');
                     LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
+                }
+            },
+            'SS Accepted': {
+                text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>SS Accepted",
+                action: function () {
+                    $('#mytab a[href="#SSAccepted_Tab"]').tab('show');
+                    ssAcceptedTab.InitalTab();
+                    ssAcceptedTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
                 }
             },
             <% If User.IsInRole("Admin") %>

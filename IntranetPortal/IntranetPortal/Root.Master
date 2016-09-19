@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/stevencss.css?v=17082016" />
+    <link rel="stylesheet" href="/css/stevencss.css?v=2016914" />
     <link rel="stylesheet" href="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -29,9 +29,8 @@
     <script src="/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script>
     <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
 
-    <script src="/Scripts/js/main.js"></script>
     <script src="/Scripts/PortalMessager.js"></script>
-    <script src="/Scripts/stevenjs.js?v=17082016"></script>
+    <script src="/Scripts/stevenjs.js?v=2016914"></script>
 
 
 
@@ -167,6 +166,8 @@
 <body onload="init();" id="testIDbody">
     <form id="form1" runat="server">
         <script type="text/javascript">
+            init_tooltip_and_scroll();
+            init_loading();
             $(function () {
                 setTimeout(
                     function () {
@@ -371,7 +372,7 @@
                                                         <i class="fa fa-wrench icon_btn color_black tooltip-examples" style="margin-left: 10px; color: black;" title="Support email: support@myidealprop.com"></i>
                                                     </a>--%>
                                                     <div class="dropdown" style="float: right">
-                                                        <i class="fa fa-user icon_btn color_black tooltip-examples dropdown-toggle" data-toggle="dropdown" style="margin-left: 10px; color: black;padding-top:0px" title="Settings"></i>
+                                                        <i class="fa fa-user icon_btn color_black tooltip-examples dropdown-toggle" data-toggle="dropdown" style="margin-left: 10px; color: black; padding-top: 0px" title="Settings"></i>
                                                         <ul class="dropdown-menu dropdown-menu-right">
                                                             <li><a href="/account/changepassword.aspx"><i class="fa fa-exchange"></i>&nbsp;&nbsp;Change Password</a></li>
                                                             <li>

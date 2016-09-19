@@ -1,19 +1,71 @@
 ﻿Imports System.Text
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports IntranetPortal.Core
+Imports Newtonsoft.Json.Linq
+Imports IntranetPortal.Data
 
 <TestClass()>
 Public Class DBUtilTest
 
-    <TestMethod()>
-    Public Sub TestGetPrimayKey()
-        Try
-            Dim result = DBJSONUtil.GetPrimayKey("TitleCase")
-            Assert.AreEqual(result(0), "BBLE")
-        Catch ex As Exception
-            Assert.IsFalse(True, ex.StackTrace.ToString)
-        End Try
+    Dim jstr As String
+    Dim jobj As JObject
 
+    <TestInitialize>
+    Public Sub beforeEach()
+        jstr = <![CDATA[
+            {
+
+            "A": "value1",
+            "B": "value2",
+
+            
+           }
+        ]]>.Value
+        jobj = JObject.Parse(jstr)
     End Sub
 
+
+
+    <TestMethod>
+    Public Sub testReplaceField()
+        DBJSONUtil.ReplaceField(jobj, "A", "C")
+        Assert.IsTrue(jobj("C").ToString = "value1")
+    End Sub
+
+
+    <TestMethod>
+    Public Sub testReplace1AndUpdate2()
+        DBJSONUtil.Replace1AndUpdate2(jobj, "A", "B", "C")
+        Assert.IsTrue(jobj("C").ToString = "true")
+        Assert.IsTrue(jobj("B").ToString = "value1")
+        Assert.IsTrue(jobj("A") Is Nothing)
+    End Sub
+
+    <TestMethod>
+    Public Sub testMapTo()
+        Dim ostr = DBJSONUtil.MapTo(jstr, "D:/TasksWebApplication/IntranetPortal/IntranetPortal/App_Data/test.csv")
+        Dim oobj = JObject.Parse(ostr)
+        Assert.IsTrue(oobj("D").ToString = "value1")
+        Assert.IsTrue(oobj("E").ToString = "true")
+        Assert.IsTrue(oobj("C").ToString = "value2")
+    End Sub
+
+    <TestMethod>
+    Public Sub ConvertDocSearchVersion()
+        Using ctx As New PortalEntities
+            Dim data = From l In ctx.LeadInfoDocumentSearches
+                       Where l.Version Is Nothing
+
+            For Each d In data
+
+                If Not String.IsNullOrEmpty(d.LeadResearch) Then
+                    d.LeadResearch = DBJSONUtil.MapTo(d.LeadResearch, "G:/Working Folder/WebApp/IntranetPortalGit/IntranetPortal/IntranetPortal/App_Data/docsearchmap.csv")
+                    d.Version = 1
+
+                End If
+            Next
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
 End Class

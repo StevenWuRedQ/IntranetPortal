@@ -45,11 +45,14 @@ Public Class NavMenu
         item.Items.Add(GetTeamAssignItem(teamId, teamName, "fa-check-square-o"))
         item.Items.Add(GetTeamNavItem("New Leads", teamId, "fa-star"))
         item.Items.Add(GetTeamNavItem("Hot Leads", teamId, "glyphicon glyphicon-fire"))
+        item.Items.Add(GetTeamNavItem("LoanMod", teamId, "fa-money"))
+        item.Items.Add(GetTeamNavItem("Warmer", teamId, "fa-circle-o"))
         item.Items.Add(GetTeamNavItem("Follow Up", teamId, "fa-rotate-right"))
         item.Items.Add(GetTeamNavItem("Door Knock", teamId, "fa-sign-in"))
         item.Items.Add(GetTeamNavItem("In Process", teamId, "fa-refresh"))
         item.Items.Add(GetTeamNavItem("Dead Lead", teamId, "fa-times-circle"))
         item.Items.Add(GetTeamNavItem("Closed", teamId, "fa-check-circle"))
+
     End Sub
 
     Shared Function GetTeamNavItem(type As String, teamId As Integer, fontClass As String)

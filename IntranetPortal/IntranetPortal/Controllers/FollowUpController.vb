@@ -3,9 +3,20 @@ Imports System.Web.Http
 Imports System.Web.Http.Description
 
 Namespace Controllers
+    ''' <summary>
+    ''' The Follow Up Controller
+    ''' </summary>
     Public Class FollowUpController
         Inherits ApiController
 
+        ''' <summary>
+        ''' Create the new follow up
+        ''' </summary>
+        ''' <param name="bble"></param>
+        ''' <param name="type"></param>
+        ''' <param name="category"></param>
+        ''' <param name="followUpdate"></param>
+        ''' <returns></returns>
         <ResponseType(GetType(Data.UserFollowUp))>
         <Route("api/Followup/")>
         Public Function PostFollowUp(bble As String, type As Integer, category As String, <FromBody> followUpdate As String) As IHttpActionResult
@@ -38,12 +49,45 @@ Namespace Controllers
             End Try
         End Function
 
+        ''' <summary>
+        ''' Clear follow up
+        ''' </summary>
+        ''' <param name="followUpId"></param>
+        ''' <returns></returns>
         <ResponseType(GetType(Data.UserFollowUp))>
         <Route("api/Followup/")>
-        Public Function DeleteFollowUp(followUpId As Integer) As IHttpActionResult
+        Public Function DeleteFollowUp(<FromBody> followUpId As Integer) As IHttpActionResult
             Try
                 Dim fp = UserFollowUpManage.ClearFollowUp(followUpId, HttpContext.Current.User.Identity.Name)
                 Return Ok(fp)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+        ''' <summary>
+        ''' Load follow up lists
+        ''' </summary>
+        ''' <returns></returns>
+        <Route("api/Followup/")>
+        Public Function GetFollowUp() As IHttpActionResult
+            Try
+                If String.IsNullOrEmpty(HttpContext.Current.Request.QueryString("filter")) Then
+                    Dim fps = Data.UserFollowUp.GetTodayFollowUps(HttpContext.Current.User.Identity.Name)
+                    Dim result = New With {
+                        .data = fps.Take(10).ToArray,
+                        .count = fps.Count
+                    }
+
+                    Return Ok(result)
+                Else
+                    If HttpContext.Current.Request.QueryString("filter") = "title" Then
+                        Dim fps = Data.UserFollowUp.GetMyTitleFollowUps(HttpContext.Current.User.Identity.Name)
+                        Return Ok(fps)
+                    End If
+                End If
+
+                Return Ok()
             Catch ex As Exception
                 Throw ex
             End Try

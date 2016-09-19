@@ -19,8 +19,20 @@ Namespace Controllers
         Private db As New PortalEntities
 
         ' GET: api/LeadInfoDocumentSearches
-        Function GetLeadInfoDocumentSearches() As List(Of LeadInfoDocumentSearch)
-            Return LeadInfoDocumentSearch.GetDocumentSearchs()
+        Function GetLeadInfoDocumentSearches() As IHttpActionResult
+            Dim status = HttpContext.Current.Request.QueryString("status")
+            If Not String.IsNullOrEmpty(status) Then
+                Dim view As LeadInfoDocumentSearch.SearchStatus
+                If Integer.TryParse(status, view) Then
+                    Dim result = LeadInfoDocumentSearch.GetDocumentSearchs
+                    Dim completedlist = result.Where(Function(ls) ls.Status = view).ToList
+                    Return Ok(completedlist)
+                End If
+
+                Return Ok()
+            End If
+
+            Return Ok(LeadInfoDocumentSearch.GetDocumentSearchs())
         End Function
 
         ' GET: api/LeadInfoDocumentSearches/5
@@ -46,8 +58,22 @@ Namespace Controllers
             End If
 
             db.Entry(leadInfoDocumentSearch).State = EntityState.Modified
-            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-            leadInfoDocumentSearch.UpdateDate = Date.Now
+
+            Dim docSearch = leadInfoDocumentSearch
+            docSearch.Update(HttpContext.Current.User.Identity.Name)
+
+            If (docSearch.isNeedNotifyWhenSaving()) Then
+                Dim mailData = docSearch.buildEmailMessge()
+                Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
+                mailData.Add("Address", l.PropertyAddress)
+                Dim users = Employee.GetRoleUsers(LeadInfoDocumentSearch.NOTIFY_ROLE_WHEN_UPDATING)
+
+                mailData.Add("UserName", String.Join(", ", users))
+                Core.EmailService.SendMail(
+                                           Employee.GetRoleUserEmails(LeadInfoDocumentSearch.NOTIFY_ROLE_WHEN_UPDATING),
+                                           Nothing, LeadInfoDocumentSearch.EMAIL_TEMPLATE_UPADATING,
+                                           mailData)
+            End If
 
             'leadInfoDocumentSearch.LeadResearch
             'If (leadInfoDocumentSearch.ResutContent IsNot Nothing) Then
@@ -87,7 +113,8 @@ Namespace Controllers
             leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStatus.Completed
             leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.CompletedOn = Date.Now
-
+            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
+            leadInfoDocumentSearch.UpdateDate = Date.Now
             Try
                 leadInfoDocumentSearch.Save()
             Catch ex As Exception

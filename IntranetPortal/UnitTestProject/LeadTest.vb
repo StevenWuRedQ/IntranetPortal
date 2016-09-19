@@ -4,6 +4,45 @@
 Public Class LeadTest
 
     <TestMethod()>
+    Public Sub SubStatus_Test()
+        Dim ld As New Lead
+        ld.SubStatus = CType(LeadSubStatus.LoanModCompleted, Integer)
+        ld.SubStatus = LeadSubStatus.LoanModCompleted
+        If ld.SubStatus = LeadSubStatus.LoanModCompleted Then
+            Assert.AreEqual(True, True)
+        End If
+        Assert.AreEqual(ld.SubStatusStr, "LoanMod Completed")
+    End Sub
+
+    <TestMethod()>
+    Public Sub GetCustomStatus_StatusArray()
+        Dim ls = Utility.GetLeadsCustomStatus()
+        Assert.IsTrue(ls.Count > 0)
+    End Sub
+
+    <TestMethod()>
+    Public Sub GetLeadsStatus_StatusArray()
+        Dim ls = Utility.GetLeadStatus("LoanMod")
+        Assert.AreEqual(Of LeadStatus)(ls, LeadStatus.LoanMod)
+
+        ls = Utility.GetLeadStatus("Warm")
+        Assert.AreEqual(Of LeadStatus)(ls, LeadStatus.Warm)
+    End Sub
+
+    <TestMethod()>
+    Public Sub GetLoanModLeads_leadsArray()
+        Dim lds = Lead.GetLoanModDue("Chris Yan", Nothing, New Date(2016, 12, 1))
+        Assert.IsTrue(lds.Count > 1)
+    End Sub
+
+    <TestMethod()>
+    Public Sub GetPriorityLeads_leadsArray()
+        Dim count = Lead.GetUserLeadsData("Chris Yan", LeadStatus.Priority).Count
+        Dim lds = Lead.GetHotLeadsDue("Chris Yan", New Date(2016, 12, 1))
+        Assert.AreEqual(lds.Count, count)
+    End Sub
+
+    <TestMethod()>
     Public Sub TestAddress2BBLE()
         Dim bble = IntranetPortal.Core.Utility.Address2BBLE("515 Wilson Ave, Brooklyn  NY 11221")
         Assert.AreEqual(bble, "3033980006")

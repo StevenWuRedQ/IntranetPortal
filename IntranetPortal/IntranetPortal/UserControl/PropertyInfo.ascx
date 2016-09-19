@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
+<%@ Implements Interface="System.Web.UI.ICallbackEventHandler" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/ShortSale/NGShortSaleInLeadsView.ascx" TagPrefix="uc1" TagName="NGShortSaleInLeadsView" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
@@ -9,6 +10,9 @@
 
 <script src="/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js"></script>
 <script type="text/javascript">
+    leadStatus = "";
+    leadSubstatus = "";
+
     function ShowAcrisMap(propBBLE, boro, block, lot) {
         OpenLeadsWindow('/PopupControl/PropertyMap.aspx?v=1&bble=' + leadsInfoBBLE, 'Acris');
         return;
@@ -95,18 +99,77 @@
         });
     }
 
-    $(document).ready(function () {
-        // Handler for .ready() called.
-        init_currency();
-    });
+
     function openZoningUrl(zoingcode) {
         window.open("http://www.nyc.gov/html/dcp/pdf/zone/zoning_handbook/" + zoingcode + ".pdf");
     }
-    //init_currency();
+
+    LoanModStatusCtrl = {
+        reload: function () {
+            CallServer('getLeadsStatus' + '|' + leadsInfoBBLE);
+        },
+        updatesSubStatus: function () {
+            $("#inprocessbtn").removeClass("btn-primary");
+            $("#completedbtn").removeClass("btn-primary");
+            if (leadSubstatus === "0") {
+                $("#inprocessbtn").addClass("btn-primary");
+            } else if (leadSubstatus === "1") {
+                $("#completedbtn").addClass("btn-primary");
+            }
+            if (gridLeads)
+                gridLeads.Refresh();
+            if (gridTrackingClient)
+                gridTrackingClient.Refresh();
+        },
+        changesSubStatus: function (substatusCode) {
+            if (substatusCode != undefined) {
+                var that = this;
+                this.substatusCode = substatusCode;
+                var substatusStr = substatusCode == 0 ? "In progress" : "Completed";
+                AngularRoot.confirm("Change the Loan Mod Status to " + substatusStr + "?", function (e) {
+                    if (e) {
+                        leadSubstatus = String(substatusCode);
+                        that.changesSubStatus_callback(that.substatusCode, that.updatesSubStatus)
+                    }
+                })
+
+            }
+        },
+        changesSubStatus_callback: function (substatusStr, callback) {
+            var url = "api/Leads/UpdateLeadsSubstatus/" + leadsInfoBBLE.trim() + "/" + substatusStr;
+            $.ajax(
+                {
+                    type: "POST",
+                    url: url,
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    success: callback
+                })
+        }
+    }
+
+    function ReceiveServerData(rValue) {
+        if (rValue.startsWith("getLeadsStatusResult")) {
+
+            var temp = rValue.split("|");
+            leadStatus = temp[1];
+            leadSubstatus = temp[2];
+            if (leadStatus && leadStatus === "20") {
+                $("#loanModStatusDiv").css("visibility", "visible");
+
+                LoanModStatusCtrl.updatesSubStatus();
+            }
+        }
+
+    }
+
+    $(document).ready(function () {
+        init_currency();
+    });
 </script>
 
 <input type="hidden" id="borugh_block_lot_data" value='(Borough: <%=  LeadsInfoData.BoroughName %> , Block:<%=LeadsInfoData.Block %> ,Lot:<%=LeadsInfoData.Lot %>)' />
 <input type="hidden" id="LinesDefendantAndIndex" value='<%= LinesDefendantAndIndex()%>' />
+
 <div class="tab-pane active" id="property_info" style="padding-top: 5px">
     <%--witch scroll bar--%>
     <%--/*display:none need delete when realse--%>
@@ -122,6 +185,7 @@
                 </dx:PanelContent>
             </PanelCollection>
         </dx:ASPxPanel>
+
         <%--time label--%>
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
@@ -157,7 +221,15 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-
+                        <%-- 
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                            <label class="btn btn-default">
+                                <input type="checkbox" name="123" style="display:inline;margin:5px">
+                                Mark as LoanMod   
+                            </label>                                                 
+                        </div>
+                        --%>
+                        <% i += 1%>
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
@@ -210,7 +282,6 @@
             <div class="note_item" style="background: white">
                 <%--<button class="btn" data-container="body" type="button" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">--%>
                 <i class="fa fa-plus-circle note_img tooltip-examples" title="Add Notes" style="color: #3993c1; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)"></i>
-
                 <%--</button>--%>
             </div>
         </div>
@@ -242,7 +313,15 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-        <%--------%>
+        <%-- loan mod label  --%>
+        <div id="loanModStatusDiv" class="pull-right" style="visibility: hidden; margin-right: 10px">
+            <h4 style="display: inline"><span class="label" style="background-color: #ff4000">Loan Mod: </span></h4>
+            <div class="btn-group">
+                <button id="inprocessbtn" type="button" class="btn btn-sm btn-default" onclick="LoanModStatusCtrl.changesSubStatus(0)">In Progress</button>
+                <button id="completedbtn" type="button" class="btn btn-sm btn-default" onclick="LoanModStatusCtrl.changesSubStatus(1)">Completed</button>
+            </div>
+        </div>
+
         <%--property form--%>
         <div style="margin: 20px" class="clearfix">
             <div class="form_head">General</div>
@@ -383,17 +462,17 @@
                             <%Else %>
                             <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
 
-                           
+
                             <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then %>
 
                             <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
-                            <span>search in processing </span>
+                            <span>search in process </span>
                             <% Else %>
-                               <i class="fa fa-search-plus color_blue_edit collapse_btn tooltip-examples" title="Request a search" id="btnRequest" onclick="RequestDocSearch()"></i>
+                            <i class="fa fa-search-plus color_blue_edit collapse_btn tooltip-examples" title="Request a search" id="btnRequest" onclick="RequestDocSearch()"></i>
                             <%End if %>
                             <span id="waitingSearch" style="display: none">
                                 <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
-                                <span>search in processing </span>
+                                <span>search in process </span>
                             </span>
                             <span style="display: none" id="docSearchLoading">
                                 <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
@@ -629,8 +708,3 @@
     </ContentCollection>
 </dx:ASPxPopupControl>
 
-<%--<script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>--%>
-
-<script type="text/javascript">
-    init_currency();
-</script>
