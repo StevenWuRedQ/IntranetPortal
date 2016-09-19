@@ -1280,12 +1280,13 @@ function sortPhoneFunc(compareFunc) {
         });
        
         phones.parent().html('<div>' + html + '</div>');
-        var last_undo_wrong =  $("[data-undo-wrong='0']")
-            .closest(".color_gray:has(.color_gray)");
-        if (last_undo_wrong.length > 0 && !$(last_undo_wrong).prev().is("hr"))
-        {
-            $("<hr />").insertBefore(last_undo_wrong);
-        }
+        // add split line the first undo phone added
+        //var last_undo_wrong =  $("[data-undo-wrong='0']")
+        //    .closest(".color_gray:has(.color_gray)");
+        //if (last_undo_wrong.length > 0 && !$(last_undo_wrong).prev().is("hr"))
+        //{
+        //    $("<hr />").insertBefore(last_undo_wrong);
+        //}
         
 
     });
