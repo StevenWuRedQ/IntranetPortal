@@ -59,6 +59,8 @@
 
     /*color use boot strap warning text color */
     .phone_comment {
+        /*change comment grap*/
+        line-height: 8px;
         display: block;
         color: #8a6d3b;
     }

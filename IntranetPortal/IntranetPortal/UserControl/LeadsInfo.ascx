@@ -144,7 +144,7 @@
             // var linkCount = _phoneLinks.length;
             _phoneLinks.each(function (index, e) {
                 $(e).attr("data-undo-wrong", undo_wrong_count + index + 1);
-            })
+            });
 
             // $(_temTelLink).attr("data-undo-wrong", undo_wrong_count);
         }
