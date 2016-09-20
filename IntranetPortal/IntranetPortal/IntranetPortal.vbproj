@@ -1139,6 +1139,13 @@
       <DependentUpon>DeadleadsReport.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\NewOfferNotification.ascx.designer.vb">
+      <DependentUpon>NewOfferNotification.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferNotification.ascx.vb">
+      <DependentUpon>NewOfferNotification.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\PreSignNotify.ascx.designer.vb">
       <DependentUpon>PreSignNotify.ascx</DependentUpon>
     </Compile>
@@ -1186,6 +1193,13 @@
     </Compile>
     <Compile Include="EmailTemplate\ShortSaleActivityReport.aspx.vb">
       <DependentUpon>ShortSaleActivityReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferNotification.aspx.designer.vb">
+      <DependentUpon>NewOfferNotification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferNotification.aspx.vb">
+      <DependentUpon>NewOfferNotification.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="EmailTemplate\TeamActivityReport.aspx.designer.vb">
@@ -6857,6 +6871,7 @@
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\AuctionDailyReport.ascx" />
     <Content Include="EmailTemplate\DeadleadsReport.ascx" />
+    <Content Include="EmailTemplate\NewOfferNotification.ascx" />
     <Content Include="EmailTemplate\PreSignNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />
@@ -6864,6 +6879,7 @@
     <Content Include="EmailTemplate\EmailSummary.aspx" />
     <Content Include="EmailTemplate\TaskSummary.ascx" />
     <Content Include="EmailTemplate\ShortSaleActivityReport.aspx" />
+    <Content Include="EmailTemplate\NewOfferNotification.aspx" />
     <Content Include="EmailTemplate\TeamActivityReport.aspx" />
     <Content Include="EmailTemplate\Testing.ascx" />
     <Content Include="favicon.ico" />
@@ -7210,6 +7226,7 @@
     <Content Include="js\filters.js" />
     <Content Include="js\filters\booleanToString.js" />
     <Content Include="js\filters\ByContact.js" />
+    <Content Include="js\filters\percentage.js" />
     <Content Include="js\filters\unsafe.js" />
     <Content Include="js\models\AssignCorp.js" />
     <Content Include="js\models\AuditLog.js" />

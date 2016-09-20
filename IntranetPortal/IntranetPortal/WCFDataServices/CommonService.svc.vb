@@ -403,20 +403,9 @@ Public Class CommonService
         Return sb.ToString
     End Function
 
+
+
     Public Sub SendEmailByControl(toAddresses As String, subject As String, controlName As String, params As Dictionary(Of String, String)) Implements ICommonService.SendEmailByControl
-        'Dim ts As EmailTemplateControl
-        'Using page As New Page
-        '    ts = CType(page.LoadControl("~/EmailTemplate/" & controlName & ".ascx"), EmailTemplateControl)
-        '    ts.BindData(params)
-
-        '    Dim body = RenderUserControl(ts)
-
-        '    Dim emailData As New Dictionary(Of String, String)
-        '    emailData.Add("Body", body)
-        '    emailData.Add("Subject", subject)
-
-        '    Core.EmailService.SendMail(toAddresses, Nothing, "EmailControlTemplate", emailData)
-        'End Using
         SendEmailByControlWithCC(toAddresses, Nothing, subject, controlName, params)
     End Sub
 

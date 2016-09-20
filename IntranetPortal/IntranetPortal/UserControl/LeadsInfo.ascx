@@ -59,9 +59,7 @@
             return;
         }
         if (e.item.index == 0) {
-
             sortPhoneFunc(compareLastCalledDate);
-
         }
 
         if (e.item.index == 1) {

@@ -46,7 +46,7 @@ Public Class NavMenu
         item.Items.Add(GetTeamNavItem("New Leads", teamId, "fa-star"))
         item.Items.Add(GetTeamNavItem("Hot Leads", teamId, "glyphicon glyphicon-fire"))
         item.Items.Add(GetTeamNavItem("LoanMod", teamId, "fa-money"))
-        item.Items.Add(GetTeamNavItem("Warmer", teamId, "fa-circle-o"))
+        item.Items.Add(GetTeamNavItem("Warm", teamId, "fa-circle-o"))
         item.Items.Add(GetTeamNavItem("Follow Up", teamId, "fa-rotate-right"))
         item.Items.Add(GetTeamNavItem("Door Knock", teamId, "fa-sign-in"))
         item.Items.Add(GetTeamNavItem("In Process", teamId, "fa-refresh"))

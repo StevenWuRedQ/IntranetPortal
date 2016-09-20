@@ -13,7 +13,7 @@
             font-weight: 500;
             cursor: pointer;
         }
-
+        
         .myRow:hover {
             background-color: #efefef;
         }
@@ -29,12 +29,12 @@
             font-weight: 600;
         }
 
-            .apply-filter-option > div:last-child {
-                display: inline-block;
-                vertical-align: top;
-                margin-left: 20px;
-                line-height: normal;
-            }
+        .apply-filter-option > div:last-child {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 20px;
+            line-height: normal;
+        }
     </style>
 
     <input type="text" style="display: none" />
