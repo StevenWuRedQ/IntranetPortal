@@ -54,7 +54,7 @@
                 if (config.url.indexOf('template') < 0) {
                     ptCom.startLoading();
                 }
-
+                // 
             }
             myInterceptor.noError = config.options && config.options.noError;
             return config;
@@ -62,14 +62,14 @@
         responseError: function (rejection) {
             myInterceptor.delayHide();
             if (!myInterceptor.noError) {
-                ptCom.Alert(myInterceptor.BuildErrorMessage(rejection));
+                ptCom.alert(myInterceptor.BuildErrorMessage(rejection));
             }
             return $q.reject(rejection);
         },
 
         requestError: function (rejection) {
             myInterceptor.delayHide();
-            myInterceptor.Alert(myInterceptor.BuildErrorMessage(rejection));
+            myInterceptor.alert(myInterceptor.BuildErrorMessage(rejection));
             return $q.reject(rejection);
         },
 

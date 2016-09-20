@@ -1154,16 +1154,11 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub TestEntitiesBtn_Click(sender As Object, e As EventArgs) Handles TestEntitiesBtn.Click
-        Using ctx As New UnderwriterEntity
-            Dim form As New UnderwriterForm
-            form.CreateBy = "Zhang"
-            form.UpdateBy = "Zhang"
-            form.CreateDate = DateTime.Now
-            form.updateDate = DateTime.Now
 
-            ctx.forms.Add(form)
-            ctx.SaveChanges()
+    End Sub
 
-        End Using
+    Private Sub btnNewOfferNotify_Click(sender As Object, e As EventArgs) Handles btnNewOfferNotify.Click
+        Dim rule As New NewOfferNotifyRule
+        rule.Execute()
     End Sub
 End Class
