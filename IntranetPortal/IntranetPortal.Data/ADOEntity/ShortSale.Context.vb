@@ -77,5 +77,6 @@ Partial Public Class PortalEntities
     Public Overridable Property AuditLogs() As DbSet(Of AuditLog)
     Public Overridable Property SSLeads() As DbSet(Of SSLead)
     Public Overridable Property SSLeadsStatusLogs() As DbSet(Of SSLeadsStatusLog)
+    Public Overridable Property UnderwritingRequests() As DbSet(Of UnderwritingRequest)
 
 End Class
