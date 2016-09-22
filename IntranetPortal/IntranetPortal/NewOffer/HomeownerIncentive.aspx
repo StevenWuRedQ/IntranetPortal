@@ -31,7 +31,7 @@
     <input type="hidden" id="BBLE" value='<%= Request.QueryString("BBLE")%>' />
     <input type="hidden" id="currentUser" value='<%=Page.User.Identity.Name %>' />
     <div ng-view class="container"></div>
-    <div ng-controller="preAssignCtrl" class="container">
+    <div ng-controller="preAssignCtrl" class="container" id="dataPanelDiv">
         <div class="row">
             <div class="col-md-12" ng-hide="!preSignList">
                 <div style="padding: 20px">

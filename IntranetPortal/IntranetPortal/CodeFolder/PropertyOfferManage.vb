@@ -148,13 +148,17 @@ Public Class PropertyOfferManage
     ''' Return accepted shortsale last two weeks
     ''' </summary>
     ''' <returns></returns>
-    Public Shared Function GetAllSSAcceptedOfferLastWeek() As PropertyOffer()
+    Public Shared Function GetSSAcceptedOfferLastWeek(userTeam As String) As PropertyOffer()
         Dim dtStart = DateTime.Today.AddDays(-7)
         Dim emps = New List(Of String)
 
-        For Each tm In Team.GetActiveTeams
-            emps.AddRange(tm.AllUsers)
-        Next
+        If userTeam = "*" Then
+            For Each tm In Team.GetActiveTeams
+                emps.AddRange(tm.AllUsers)
+            Next
+        Else
+            emps.AddRange(Team.GetTeam(userTeam).AllUsers)
+        End If
 
         Dim data = PropertyOffer.GetSSAccepted(emps.ToArray, dtStart)
         data.ForEach(Function(d)
@@ -431,6 +435,7 @@ Public Class DocumentGenerator
         'Memo
         Dim file = New GenerateFileConfig With {.FileName = "MemorandumOfContract.docx", .ConfigKey = "Memo"}
         Dim phs = {
+            New DocumentPlaceHolder("TODAY"),
             New DocumentPlaceHolder("DAY"),
             New DocumentPlaceHolder("MONTH"),
             New DocumentPlaceHolder("YEAR"),

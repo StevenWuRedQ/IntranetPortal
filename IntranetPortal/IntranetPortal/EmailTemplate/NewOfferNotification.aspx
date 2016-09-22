@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="NewOfferNotification.aspx.vb" Inherits="IntranetPortal.NewOfferNotification" %>
-
 <%@ Register Src="~/EmailTemplate/NewOfferNotification.ascx" TagPrefix="uc1" TagName="NewOfferNotification" %>
-
 
 <!DOCTYPE html>
 

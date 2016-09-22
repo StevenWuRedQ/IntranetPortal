@@ -13,6 +13,16 @@ Partial Public Class PropertyOffer
     Public Property AcceptedDate As DateTime?
     Public Property AcceptedBy As String
 
+    Public ReadOnly Property AcceptedDuration As TimeSpan?
+        Get
+            If AcceptedDate.HasValue AndAlso UpdateDate.HasValue Then
+                Return AcceptedDate - UpdateDate
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
     ''' <summary>
     ''' Return the PropertyOffer Array Owner Nmae
     ''' </summary>

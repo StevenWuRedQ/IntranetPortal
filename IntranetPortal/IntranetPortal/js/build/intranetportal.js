@@ -5500,7 +5500,7 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
  *
  **/
 
-portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location, $http) {
+portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpInterceptor, $http) {
 
     $scope.preAssign = PreSignItem;
     setTimeout(function () {
@@ -5707,7 +5707,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
             }
         });
 
-        var message = PortalHttp.BuildAjaxErrorMessage(response);
+        var message = PortalHttpInterceptor.BuildAjaxErrorMessage(response);
         if (message) {
             AngularRoot.alert(message);
             e.cancel = true;
@@ -5747,7 +5747,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                         $scope.deletedCheck = data;
                     }
                 });
-                var message = PortalHttp.BuildAjaxErrorMessage(response);
+                var message = PortalHttpInterceptor.BuildAjaxErrorMessage(response);
                 if (message) {
                     AngularRoot.alert(message);
 
@@ -5875,7 +5875,7 @@ portalApp.controller('preAssignListCtrl', function ($scope, PreSignList) {
 });
 
 /*************************old style contoller******************************/
-portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
+portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterceptor,$http) {
 
 
     $scope.preAssign = {
@@ -5926,7 +5926,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
             async: false
         });
 
-        var message = PortalHttp.BuildAjaxErrorMessage(preSignRespose);
+        var message = PortalHttpInterceptor.BuildAjaxErrorMessage(preSignRespose);
         if (message) {
             AngularRoot.alert(message)
         } else {
@@ -6019,7 +6019,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
             }
         });
 
-        var message = PortalHttp.BuildAjaxErrorMessage(response);
+        var message = PortalHttpInterceptor.BuildAjaxErrorMessage(response);
         if (message) {
             AngularRoot.alert(message);
             e.cancel = true;
@@ -6066,7 +6066,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, $http) {
                         $scope.deletedCheck = data;
                     }
                 });
-                var message = PortalHttp.BuildAjaxErrorMessage(response);
+                var message = PortalHttpInterceptor.BuildAjaxErrorMessage(response);
                 if (message) {
                     AngularRoot.alert(message);
 

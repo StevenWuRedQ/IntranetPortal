@@ -38,11 +38,13 @@
             <table style="margin-left: 15px; border: 1px solid black; border-collapse:collapse;border-spacing: 0px;" border="1" cellspacing="0">
                 <thead style="border: 1px solid black; font-weight:bold;background-color: #efefef;">
                     <tr>
-                        <td>Property Address</td>                        
+                        <td>Property Address</td>
+                        <td>Completed</td>
                         <td>Agent</td>
-                        <td>Team</td>
+                        <td>Team</td>                        
                         <td>Acceptance Date</td>
                         <td>Accepted By</td>
+                        <td>Duration</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,10 +52,12 @@
                     <tr>
                         <td>
                            <a href="http://portal.myidealprop.com/viewleadsinfo.aspx?id=<%= offer.BBLE %>"><%= offer.Title %></a> </td>
+                        <td><%= string.Format("{0:d}", offer.UpdateDate) %></td>
                         <td><%= offer.Owner %></td>
                         <td><%= offer.Team %></td>
                         <td><%= string.Format("{0:d}", offer.AcceptedDate) %></td>
                         <td><%= offer.AcceptedBy %></td>
+                        <td><%= HumanizeTimeSpan(offer.AcceptedDuration) %></td>
                     </tr>
                   <% Next %>
                 </tbody>
