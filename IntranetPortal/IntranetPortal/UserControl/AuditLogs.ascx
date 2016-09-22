@@ -33,8 +33,7 @@
             me.http.get('/api/auditlog/' + me.objectName + "/" + me.recordId).success(function (data) {
                 var result = _.groupBy(data, function (item) {
                     return item.EventDate;
-                });
-                console.log(result);
+                });               
                 me.scope.AuditLogs = result;
             });
         }
@@ -64,7 +63,7 @@
 
 <div ng-controller="AuditLogController" >
     <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block">
-        <h5 ng-class="{alert-success:$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </h5>        
+        <div ng-class="$index==0?'alert alert-success':''"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </div>
         <table class="" style="width: 100%; font-size:14px" ng-show="prop[0].EventType!=0">
              <tr>
                 <th style="width: 20%">Field</th>

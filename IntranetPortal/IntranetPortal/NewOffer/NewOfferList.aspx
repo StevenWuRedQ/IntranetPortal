@@ -13,7 +13,7 @@
             font-weight: 500;
             cursor: pointer;
         }
-
+        
         .myRow:hover {
             background-color: #efefef;
         }
@@ -49,7 +49,7 @@
             currentView = <%= Request.QueryString("view")%>;
             <% Else %>
             currentView = 0;
-            <% End if%>
+            <% End If%>
 
             function GoToCase(CaseId) {
                 var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
@@ -68,7 +68,7 @@
             function loadData(view){
                 var url = "/api/propertyoffer?mgrview=" + view;
                 $.getJSON(url).done(function (data) {
-                    var dataGrid = $("#gridContainer").dxDataGrid({
+                    var options = {
                         dataSource: data,
                         searchPanel: {
                             visible: true,
@@ -143,20 +143,53 @@
 
                                 return ""
                             }
-                            }, {
+                        }, {
                             caption: "Completed By",
                             dataField: "UpdateBy"
-                            }, {
+                        }, {
                             caption: "Lead Owner",
                             dataField: "Owner"
-                            }, {
-                                caption: "Team",
-                                dataField: "Team"
-                            }, {
+                        }, {
+                            caption: "Team",
+                            dataField: "Team"
+                        }, {
                             caption: "Status",
                             dataField: "OfferStage"
                         }]
-                    }).dxDataGrid('instance');});
+                    };
+
+                    if(view == 3){
+                        var duration = [{
+                            caption: "Accepted",
+                            dataField: "AcceptedDate",
+                            dataType: "date",
+                            customizeText: function (cellInfo) {                                
+                                if (!cellInfo.value)
+                                    return ""
+
+                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+                                if (dt)
+                                    return moment(dt).format('MM/DD/YYYY hh:mm a');
+
+                                return ""
+                            }
+                        }, {
+                            caption: "Accepted By",
+                            dataField: "AcceptedBy"
+                        }, {
+                            caption: "Duration",
+                            dataField: "AcceptedDuration",
+                            customizeText: function(cellInfo){
+                                if (!cellInfo.value)
+                                    return ""
+
+                                return moment.duration(cellInfo.value).humanize();
+                            }
+                        }];
+                        options.columns = options.columns.concat(duration);                        
+                    }
+
+                    var dataGrid = $("#gridContainer").dxDataGrid(options).dxDataGrid('instance');});
             }
 
             var applyFilterTypes = [

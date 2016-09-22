@@ -13,6 +13,16 @@ Partial Public Class PropertyOffer
     Public Property AcceptedDate As DateTime?
     Public Property AcceptedBy As String
 
+    Public ReadOnly Property AcceptedDuration As TimeSpan?
+        Get
+            If AcceptedDate.HasValue AndAlso UpdateDate.HasValue Then
+                Return AcceptedDate - UpdateDate
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
     ''' <summary>
     ''' Return the PropertyOffer Array Owner Nmae
     ''' </summary>
@@ -172,7 +182,11 @@ Partial Public Class PropertyOffer
 
         Dim updateBy = itemData.UpdateBy
         Using ctx As New PortalEntities
-            If ctx.PropertyOffers.Any(Function(t) t.FormItemId = itemData.DataId) Then
+            If itemData.FormName <> "PropertyOffer" Then
+                Return Nothing
+            End If
+
+            If ctx.PropertyOffers.Any(Function(t) t.FormItemId = itemData.DataId) OrElse ctx.PropertyOffers.Any(Function(t) t.BBLE = itemData.Tag) Then
                 If String.IsNullOrEmpty(BBLE) Then
                     Throw New Exception("can not find BBLE")
                 End If

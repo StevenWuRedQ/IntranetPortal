@@ -204,7 +204,7 @@
         <a ui-sref="newoffer.ssinfo">State 3</a>--%>
         <!-- We'll also add some navigation: -->
 
-        <div style="padding: 20px" ng-controller="shortSalePreSignCtrl">
+        <div style="padding: 20px" ng-controller="shortSalePreSignCtrl" id="dataPanelDiv">
             <div class="container" ng-hide="QueryUrl.model!='List' && QueryUrl.BBLE">
                 <div>
                     <h2>New Offer List</h2>

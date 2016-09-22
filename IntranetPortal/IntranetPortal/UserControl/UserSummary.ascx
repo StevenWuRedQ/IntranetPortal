@@ -5,7 +5,7 @@
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
 <link rel="stylesheet" href="/css/right-pane.css" />
-<script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
+<%--<script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>--%>
 <script>
     $(document).ready(function () {
 
@@ -819,13 +819,9 @@
                             function show_chart_modal() {
 
                                 $('#chart-modal').on('shown.bs.modal', function (event) {
-                                    agentSummaryReport.Render();
-                                    debugger;
+                                    agentSummaryReport.Render();                                    
                                 }).modal('show')
                             }
-
-
-
                         </script>
                     </div>
 
