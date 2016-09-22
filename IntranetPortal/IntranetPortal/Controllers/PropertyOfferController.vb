@@ -88,5 +88,21 @@ Namespace Controllers
         End Function
 
 
+        <HttpPost>
+        <Route("api/PropertyOffer/PostPerformance")>
+        Public Function PostPerformance(<FromBody> data As Object) As IHttpActionResult
+            Dim x = Request.Content
+            If data IsNot Nothing Then
+                Dim startDate = New DateTime().Parse(data("StartDate").ToString)
+                Dim endDate = New DateTime().Parse(data("EndDate").ToString)
+                Dim empName = data("EmpName").ToString
+                Dim teamName = data("TeamName").ToString
+
+                Dim result = PropertyOfferManage.getPerformance(startDate, endDate, empName, teamName)
+                Return Ok(result)
+            End If
+            Return Ok()
+        End Function
+
     End Class
 End Namespace
