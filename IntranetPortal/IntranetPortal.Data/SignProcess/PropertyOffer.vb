@@ -78,7 +78,7 @@ Partial Public Class PropertyOffer
         Using ctx As New PortalEntities
             Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
                          Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5) On offer.BBLE Equals ld.BBLE
-                         Join ss In ctx.ShortSaleCases.Where(Function(s) s.Status > 0 AndAlso (startDate Is Nothing OrElse s.AcceptedDate > startDate)) On offer.BBLE Equals ss.BBLE
+                         Join ss In ctx.ShortSaleCases.Where(Function(s) s.Status > 0 AndAlso (startDate Is Nothing OrElse s.AcceptedDate > startDate) AndAlso (endDate Is Nothing OrElse s.AcceptedDate < endDate)) On offer.BBLE Equals ss.BBLE
                          Select offer, ss.AcceptedBy, ss.AcceptedDate
 
             Return offers.AsEnumerable.Select(Function(f)

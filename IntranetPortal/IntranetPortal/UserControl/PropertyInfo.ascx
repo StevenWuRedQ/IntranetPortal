@@ -209,8 +209,8 @@
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
                 <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx#/preassign/new?BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
-                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/DocSearch/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>Underwriting</span>
                 <% End If %>
+                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("Underwriting Request" + leadsInfoBBLE, "/LeadDocSearch/UnderwritingRequest.aspx?BBLE=" + leadsInfoBBLE)'>Request Underwriting</span>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; <%= If( LeadsInfoData.CreateDate.HasValue,"visibility:visible","visibility:hidden")%>">Started on <%= LeadsInfoData.CreateDate.ToString%></span>
@@ -456,31 +456,33 @@
                         <div class="form_head" style="margin-top: 40px;">
                             MORTGAGE AND VIOLATIONS 
                             <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
-                            <%--<% Dim docSearch = IntranetPortal.Data.LeadInfoDocumentSearch.GetInstance(hfBBLE.Value)  %>
+
+
+                            <%--                            
+                                <% Dim docSearch = IntranetPortal.Data.LeadInfoDocumentSearch.GetInstance(hfBBLE.Value)  %>
 
                             <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.Completed Then %>
                             <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',667,900)"></i>
                             <%Else %>
-                            <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
+                                <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
+                                    <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then %>
 
+                                    <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
+                                    <span>search in process </span>
+                                    <% Else %>
+                                    <i class="fa fa-search-plus color_blue_edit collapse_btn tooltip-examples" title="Request a search" id="btnRequest" onclick="RequestDocSearch()"></i>
+                                    <%End if %>
+                               
+                                <span id="waitingSearch" style="display: none">
+                                    <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
+                                    <span>search in process </span>
+                                </span>
+                                <span style="display: none" id="docSearchLoading">
+                                    <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
+                                    <span>submitting </span>
+                                </span>
 
-                            <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then %>
-
-                            <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
-                            <span>search in process </span>
-                            <% Else %>
-                            <i class="fa fa-search-plus color_blue_edit collapse_btn tooltip-examples" title="Request a search" id="btnRequest" onclick="RequestDocSearch()"></i>
-                            <%End if %>--%>
-                            <%--<span id="waitingSearch" style="display: none">
-                                <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
-                                <span>search in process </span>
-                            </span>
-                            <span style="display: none" id="docSearchLoading">
-                                <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
-                                <span>submitting </span>
-                            </span>
-
-                            <% End If %>
+                                <% End If %>
                             <% End If %>--%>
                         </div>
 

@@ -117,6 +117,50 @@ Public Class PropertyOfferManage
         Return Nothing
     End Function
 
+    Friend Shared Function getPerformance(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+
+        If startDate = Nothing OrElse endDate = Nothing OrElse empName Is Nothing OrElse teamName Is Nothing Then
+            Throw New Exception("Parameters cannot be empty.")
+        End If
+
+
+        Dim count = getAcceptedCount(startDate, endDate, empName, teamName)
+        ' Dim rank = getrank(startDate, endDate, empName, teamName)
+        ' Dim commision = getCommision(startDate, endDate, empName, teamName)
+        ' Dim history = getHistory(startDate, endDate, empName, teamName)
+
+        Dim result = New With {
+            .totalaccepted = count
+        }
+        Return result
+    End Function
+
+    Private Shared Function getHistory(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+
+    End Function
+
+    Private Shared Function getCommision(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+
+    End Function
+
+    Private Shared Function getrank(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+
+    End Function
+
+    Private Shared Function getAcceptedCount(startDate As Date, endDate As Date, empName As String, teamName As String) As Integer
+        If String.IsNullOrEmpty(empName) Then
+            Return 0
+        ElseIf empName = "All" Then
+            Dim t = Team.GetTeam(teamName)
+            Dim users = t.ActiveUsers
+            Return PropertyOffer.GetSSAccepted(users, startDate, endDate).Count
+        Else
+            Return PropertyOffer.GetSSAccepted(New String() {empName}, startDate, endDate).Count
+        End If
+
+
+    End Function
+
     ''' <summary>
     ''' Return property offers by ManagerView
     ''' </summary>
@@ -387,6 +431,7 @@ Public Class DocumentGenerator
             wb.Cell(ph.FieldName).Value = GetValue(ph)
         Next
     End Sub
+
 
     ''' <summary>
     ''' Generate word document by file config

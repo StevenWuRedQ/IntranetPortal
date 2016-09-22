@@ -193,7 +193,7 @@
                             <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Team_Activity_Tab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Team Activity</a></li>
-                            <li role="presentation" class="mag_tabv"><a href="#SSAccepted_Tab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>SS Accepted</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#ssAcceptedTab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>SS Accepted</a></li>
                             <% If IntranetPortal.Employee.IsAdmin(Page.User.Identity.Name) Then%>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <%End If%>
@@ -360,7 +360,6 @@
                                                 if (this.Visible() || noCheck) {
                                                     if (this.TeamName == name)
                                                         return;
-
                                                     this.TeamName = name;
                                                     var range = this.DateRange();
                                                     var selectedRange = range.getSelectedRange();
@@ -669,7 +668,7 @@
                                                     caption: "Callback",
                                                     dataType: 'date',
                                                     visible: false
-                                                }, , {
+                                                }, {
                                                     dataField: "LastUpdate",
                                                     caption: "Last Update",
                                                     dataType: 'date',
@@ -1051,7 +1050,7 @@
                                     </script>
 
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="SSAccepted_Tab" ng-controller="SSAcceptedTabCtrl">
+                                <div role="tabpanel" class="tab-pane" id="ssAcceptedTab" ng-controller="SSAcceptedTabCtrl">
 
                                     <style>
                                         .manageui-title {
@@ -1089,9 +1088,9 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label for="selAgents" style="float: left">Select Agents:&nbsp;</label>
-                                                <select class="form-control .selAgents" style="width: 200px; float: left; margin-left: 20px;" id="selAgents" name="selAgents">
-                                                    <option>All Agents</option>
-                                                    <option>Agents 1</option>
+                                                <select id="ssAcceptedAgents" class="form-control .selAgents" ng-model="selectedEmp" ng-change="onAgentSelected()">
+                                                    <option>All</option>
+                                                    <option ng-repeat="o in teamMembers" ng-value="o">{{o}}</option>
                                                 </select>
                                             </div>
                                             <div id="acceptedRange" class="col-md-9 containers"></div>
@@ -1101,16 +1100,14 @@
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <canvas id="SS_Accepted_Chart" width="1200" height="300"></canvas>
+                                                    <div id="SS_Accepted_Chart"></div>
                                                 </div>
 
 
                                                 <div class="col-md-x20 ">
                                                     <div class="summary-box">
-
-
                                                         <span class="manageui-title">Shortsale Accepted</span>
-                                                        <div><span class="summary-detail">{{50}}</span></div>
+                                                        <div><span class="summary-detail">{{data.totalaccepted||0}}</span></div>
                                                     </div>
                                                 </div>
 
@@ -1149,7 +1146,7 @@
                                 </div>
                                 <script>
 
-                                    angular.module("PortalApp").controller('SSAcceptedTabCtrl', function ($scope) {
+                                    angular.module("PortalApp").controller('SSAcceptedTabCtrl', function ($scope, $http) {
 
                                         $scope.dataSource = [{
                                             label: "Jan",
@@ -1189,13 +1186,8 @@
                                             value: 11
                                         }];
                                         $scope.TeamName = null;
-                                        $scope.TeamName = null;
                                         $scope.CurrentAgentName = null;
-                                        $scope.AgentSelect = $("#SS_selAgents");
-                                        $scope.Visible = function () { return $("#SSAccepted_Tab").hasClass("active") ? true : false };
-                                        $scope.DateRange = function () {
-                                            return $('#acceptedRange').has("svg").length ? $('#acceptedRange').dxRangeSelector('instance') : null
-                                        };
+                                        $scope.Visible = function () { return $("#ssAcceptedTab").hasClass("active") ? true : false };
                                         $scope.InitalTab = function () {
                                             var tab = this;
                                             var dateNow = new Date();
@@ -1204,12 +1196,12 @@
                                             var scaleStart = new Date();
                                             scaleStart.setMonth(scaleStart.getMonth() - 12);
                                             var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
-                                            $("#acceptedRange").dxRangeSelector({
+                                            $scope.DateRange = $("#acceptedRange").dxRangeSelector({
                                                 margin: {
                                                     top: 5
                                                 },
                                                 size: {
-                                                    height: 100
+                                                    height: 120
                                                 },
                                                 scale: {
                                                     startValue: scaleStart,
@@ -1229,10 +1221,10 @@
                                                     endValue: endDate
                                                 },
                                                 onSelectedRangeChanged: function (e) {
-
+                                                    $scope.update($scope.TeamName, $scope.selectedEmp, $scope.DateRange.getSelectedRange())
                                                 }
-                                            });
-                                            $("#barchart").dxChart({
+                                            }).dxRangeSelector('instance');
+                                            $("#SS_Accepted_Chart").dxChart({
                                                 dataSource: $scope.dataSource,
                                                 size: {
                                                     height: 300,
@@ -1241,63 +1233,70 @@
                                                 border: {
                                                     width: 2
                                                 },
+                                                legend: {
+                                                    visible: false
+                                                },
                                                 series: [{
-                                                    argumentField: "day",
-                                                    valueField: "oranges",
-                                                    name: "My oranges",
+                                                    argumentField: "label",
+                                                    valueField: "value",
                                                     type: "bar",
                                                     color: '#ffaa66'
                                                 }, {
-                                                    argumentField: "day",
-                                                    valueField: "oranges",
-                                                    color: 'blue',
-                                                    name: 'myblue'
+                                                    argumentField: "label",
+                                                    valueField: "value",
+                                                    color: '#ff400d'
                                                 }]
 
 
                                             });
+                                            $scope.data = {};
                                         };
-
-                                        $scope.ShowTab = function (name, noCheck) {
+                                        $scope.ShowTab = function (name, users, noCheck) {
                                             if ($scope.Visible() || noCheck) {
                                                 if ($scope.TeamName == name)
                                                     return;
                                                 $scope.TeamName = name;
-                                                var range = $scope.DateRange();
-                                                var selectedRange = range.getSelectedRange();
+                                                $scope.teamMembers = users;
+                                                $scope.selectedEmp = 'All';
+                                                $scope.update($scope.TeamName, 'All', $scope.DateRange.getSelectedRange());
+                                                $scope.$apply();
                                             }
                                         };
-                                        $scope.InitAgentSelect = function () {
-                                            if ($scope.DisplayView != null) {
+                                        $scope.onAgentSelected = function () {
 
-                                                $scope.AgentSelect.html("");
-                                                $.each($scope.DisplayView.TeamUsers, function (key, value) {
-                                                    $scope.AgentSelect.append(
-                                                   $("<option></option>")
-                                                    .attr("value", value)
-                                                    .text(value));
-                                                });
-                                                $scope.AgentSelect.prepend("<option value='' selected='selected'>All</option>");
+                                            $scope.update($scope.TeamName, $scope.selectedEmp, $scope.DateRange.getSelectedRange())
 
-                                                $scope.AgentSelect.change(function () {
-                                                    var agent = $scope.AgentSelect.val();
-                                                    if (agent != "") {
-                                                        tab.ShowAgentChart(agent);
-                                                    }
-                                                    else {
-                                                        tab.DisplayView = tab.DataView.Team;
-                                                        tab.LoadChart();
-                                                    }
-                                                });
-                                            }
                                         }
+                                        $scope.update = function (team, name, range) {
+                                            $scope.data = {}
+                                            if (team == null)
+                                                return;
+                                            else {
+                                                $.ajax({
+                                                    method: 'POST',
+                                                    url: '/api/PropertyOffer/PostPerformance',
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    data: JSON.stringify({
+                                                        StartDate: range.startValue,
+                                                        EndDate: range.endValue,
+                                                        EmpName: name,
+                                                        TeamName: team
+                                                    })
 
+                                                }).then(function (d) {
+                                                    if (d.totalaccepted)
+                                                        $scope.data.totalaccepted = d.totalaccepted;
+                                                    $scope.$apply();
+                                                })
+
+                                            }
+
+                                        }
                                     });
-
-
                                     $(function () {
-                                        ssAcceptedTab = angular.element('#SSAccepted_Tab').scope();
+                                        ssAcceptedTab = angular.element('#ssAcceptedTab').scope();
                                     })
+
                                 </script>
                             </div>
                         </div>
@@ -1708,12 +1707,13 @@
             };
             var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
         }
-        //loadCharts("RonTeam");
+
     </script>
 
     <script type="text/javascript">
 
         var currentTeamInfo = null;
+        var dropDownMenuData = <%= AllTameJson()%>
 
         function ViewLeadsInfo(bble) {
             var url = '/ViewLeadsInfo.aspx?id=' + bble;
@@ -1732,20 +1732,22 @@
             });
         }
 
-        var dropDownMenuData = <%= AllTameJson()%>
+        function menuItemClicked(e) {
+            //debugger;
+            DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
+            agentActivityTab.ShowTab(e.itemData);
 
-       function menuItemClicked(e) {
-           DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
-           //        $('#teams_link').html(e.itemData);
-           //officeDropDown.option("buttonText", e.itemData );
-           //loadCharts(e.itemData.replace("Office", '').trim());
-           agentActivityTab.ShowTab(e.itemData);
-           $.when(LoadTeamInfo(e.itemData)).done(function () {
-               LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
-           });
-           if (TeamActivityTab.Visible())
-               TeamActivityTab.UpdateTeamChart(e.itemData);
-       };
+            $.when(LoadTeamInfo(e.itemData)).done(function () {
+                LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
+            });
+            $.when(LoadTeamInfo(e.itemData)).done(function () {
+                ssAcceptedTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
+            });
+
+            if (TeamActivityTab.Visible())
+                TeamActivityTab.UpdateTeamChart(e.itemData);
+
+        };
 
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
@@ -1771,7 +1773,7 @@
             'SS Accepted': {
                 text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>SS Accepted",
                 action: function () {
-                    $('#mytab a[href="#SSAccepted_Tab"]').tab('show');
+                    $('#mytab a[href="#ssAcceptedTab"]').tab('show');
                     ssAcceptedTab.InitalTab();
                     ssAcceptedTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
 

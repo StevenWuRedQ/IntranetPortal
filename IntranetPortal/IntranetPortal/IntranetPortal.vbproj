@@ -1252,6 +1252,13 @@
       <DependentUpon>LeadDocSearchList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="LeadDocSearch\UnderwritingRequest.aspx.designer.vb">
+      <DependentUpon>UnderwritingRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadDocSearch\UnderwritingRequest.aspx.vb">
+      <DependentUpon>UnderwritingRequest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="LeadsGenerator\LeadsGenerator.aspx.designer.vb">
       <DependentUpon>LeadsGenerator.aspx</DependentUpon>
     </Compile>
@@ -7203,6 +7210,7 @@
     <Content Include="js\controllers\ShortSalePreSignController.js" />
     <Content Include="js\controllers\TitleController.js" />
     <Content Include="js\controllers\UnderwriterController.js" />
+    <Content Include="js\controllers\UnderwritingRequestController.js" />
     <Content Include="js\controllers\VendorController.js" />
     <Content Include="js\directives\auditLogs.js" />
     <Content Include="js\directives\bindId.js" />
@@ -7303,6 +7311,7 @@
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
+    <Content Include="LeadDocSearch\UnderwritingRequest.aspx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
@@ -8419,6 +8428,7 @@
     <Folder Include="Content\layouts\Simple\" />
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
+    <Folder Include="Scripts\dx\" />
     <Folder Include="TempDataFile\AuctionFiles\" />
     <Folder Include="TempDataFile\OfferDoc\" />
     <Folder Include="TempDataFile\TitleDocs\" />
