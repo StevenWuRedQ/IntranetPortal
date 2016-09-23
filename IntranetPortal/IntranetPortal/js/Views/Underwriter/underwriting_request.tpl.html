@@ -1,0 +1,118 @@
+﻿
+<div id="" class="container" style="width: 80%;">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h3 style="text-align:center; margin-top: 10px">Underwriting Questionnaire</h3>
+            </div>
+
+            <hr />
+            <div class="form col-md-6" style="height:260px">
+                <h5>Brief Description</h5>
+                <textarea style="min-height: 150px; height: 85%" class="form-control" ng-model="data.BriefDescription"></textarea>
+            </div>
+            <div class="col-md-6" style="height:260px">
+                <div class="form">
+                    <h5>Occupancy</h5>
+                    <select class="form-control" ng-model="data.Occupancy">
+                        <option>Not Sure</option>
+                        <option>Vacant</option>
+                        <option>Tenants</option>
+                        <option>Seller</option>
+                        <option>Seller + Tenants</option>
+                        <option>Family Member(s)</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <h5>Occupancy Description </h5>
+                    <textarea style="min-height: 150px;" class="form-control" ng-model="data.OccupancyDescription"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12 clearfix">
+                <div class="row">
+                    <div class="form col-md-6">
+                        <h5>Already working on SS?</h5>
+                        <select class="form-control" ng-model="data.isWorkingOnSS">
+                            <option>Not Sure</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                    <div class="form col-md-6">
+                        <h5>If so, what is the name of the company they are working with?</h5>
+                        <input type="text" class="form-control" ng-model="data.WorkingCompany" />
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-12 clearfix">
+                <div class="row">
+
+
+                    <div class="form col-md-4">
+                        <h5>Was an HOI requested from the HO</h5>
+                        <select class="form-control" ng-model="data.wasHOIFromHO">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+
+                    <div ng-show="data.wasHOIFromHO" class="nga-default nga-fade">
+                        <div class="form col-md-4">
+                            <h5>If so, how much was requested? </h5>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" ng-model="data.TotalRequest" />
+                            </div>
+                        </div>
+                        <div class="form col-md-4">
+                            <h5>How much requested upfront?</h5>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" ng-model="data.UpfrontRequested" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 clearfix">
+                <div class="row">
+
+
+                    <div class="form col-md-4">
+                        <h5>Was an HOI offered</h5>
+                        <select class="form-control" ng-model="data.wasHOIOffered">
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                    <div ng-show="data.wasHOIOffered" class="nga-default nga-fade">
+                        <div class="form col-md-4">
+                            <h5>If so, how much was offered?  </h5>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" ng-model="data.TotalOffered" />
+                            </div>
+                        </div>
+                        <div class="form col-md-4">
+                            <h5>How much was offered upfront?</h5>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" ng-model="data.UpfrontOffered" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class='pull-right' style="margin: 20px">
+            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-warning">Request Underwriting</button>
+        </div>
+    </div>
+</div>
