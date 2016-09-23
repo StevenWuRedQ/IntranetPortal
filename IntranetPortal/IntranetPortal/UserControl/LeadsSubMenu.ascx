@@ -403,7 +403,7 @@
         <div style="height: 30px; vertical-align: central" id="divFoot">
             <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('Save');}else{ alert('please select reason.');}">Confirm</span>
-            <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>
+            <%--<span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>--%>
         </div>
     </FooterContentTemplate>
     <ClientSideEvents EndCallback="function(s,e){if($('#hdmark').length) $('#divFoot').show(); else {$('#divFoot').hide();}  if(popupShow) s.Show();  else{ s.Hide(); OnSetStatusComplete(s,e); } }" />
