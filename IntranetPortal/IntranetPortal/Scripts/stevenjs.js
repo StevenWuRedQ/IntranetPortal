@@ -1185,6 +1185,10 @@ function compareByActive(a, b) {
     var diff = hcolor - hcolorB;
 
     if (diff == 0) {
+       
+
+        /***********************************************
+        // disable sort phone function on release 9/23/2016 //
         // move undo wrong number under acitve number list 
         var undo_indexA = GetUndoIndex(phoneLinkA);
         var undo_indexB = GetUndoIndex(phoneLinkB);
@@ -1200,6 +1204,7 @@ function compareByActive(a, b) {
             diff = phoneAHash - phoneBHash;
         }
         
+        *****************************************************/
        
     }
 
