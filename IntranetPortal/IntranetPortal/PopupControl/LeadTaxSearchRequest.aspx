@@ -25,7 +25,7 @@
                 <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="None" PaneStyle-Paddings-Padding="0px" Name="dataPane">
                     <ContentCollection>
                         <dx:SplitterContentControl>
-                            <div>
+                            <div id="dataPanelDiv">
                                 <div style="align-content: center; height: 100%">
                                     <div class="legal-menu row " style="margin-left: 0px; margin-right: 0px">
                                         <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">

@@ -119,7 +119,7 @@ Public Class RulesService
         Rules.Add(New AutoAssignRule With {.ExecuteOn = TimeSpan.Parse(String.Format("16:00:00", days)), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auto Sign Leads", .ExecuteNow = False})
 
         'New Offer
-        Rules.Add(New NewOfferNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", days)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "New Offer Accepted Weekly Notify Rule", .ExecuteOnWeekend = True})
+        Rules.Add(New NewOfferNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", (days + 1) Mod 7)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "New Offer Accepted Weekly Notify Rule", .ExecuteOnWeekend = True})
     End Sub
 
     ''' <summary>

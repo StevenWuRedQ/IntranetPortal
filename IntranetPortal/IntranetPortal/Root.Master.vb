@@ -64,6 +64,16 @@ Public Class Root
             Return
         End If
 
+        ' remove the given teams search whole portal permission
+        Dim denyTeams = {"RonTeam", "GaliTeam", "AviTeam"}
+        Dim emp = Employee.GetInstance(Page.User.Identity.Name)
+
+        If denyTeams.Contains(emp.Department) Then
+            BindSearchGrid2(emp.Department, key, Employee.CurrentAppId)
+            Return
+        End If
+        ' end 
+
         If IsPhoneNo(key) Then
             Dim phoneNo = key.Replace("(", "").Replace(")", "").Replace("-", "")
 
@@ -147,4 +157,63 @@ Public Class Root
         'popupContentSearchPanel.Controls.Add(menu)
         BindSearchGrid(e.Parameter, Employee.CurrentAppId)
     End Sub
+
+
+    Sub BindSearchGrid2(teamName As String, key As String, appId As Integer)
+        key = txtSearchKey.Text
+        If String.IsNullOrEmpty(key) Then
+            Return
+        End If
+
+        Dim users = Employee.GetDeptUsers(teamName, False)
+        users = users.Concat(UserInTeam.GetTeamUsersArray(teamName, True)).Distinct.ToArray
+
+        If IsPhoneNo(key) Then
+            Dim phoneNo = key.Replace("(", "").Replace(")", "").Replace("-", "")
+
+            Using Context As New Entities
+                Dim results = (From lead In Context.Leads.Where(Function(ld) ld.AppId = appId And users.Contains(ld.EmployeeName))
+                               Join field In Context.HomeOwnerPhones On lead.BBLE Equals field.BBLE
+                               Where field.Phone = phoneNo Or lead.BBLE.StartsWith(phoneNo)
+                               Select lead).Union(Context.Leads.Where(Function(ld) ld.BBLE.StartsWith(phoneNo))).Distinct.ToList
+
+                gridSearch.DataSource = results
+                gridSearch.DataBind()
+            End Using
+        Else
+            If IsApartmentSearch(key) Then
+                Dim bble = key.Split("#")(0)
+                Dim unitNum = key.Split("#")(1)
+
+                Using ctx As New Entities
+                    gridSearch.DataSource = ctx.Leads.Where(Function(ld) ld.LeadsInfo.BuildingBBLE = bble And ld.LeadsInfo.UnitNum = unitNum And ld.AppId = appId And users.Contains(ld.EmployeeName)).ToList
+                    gridSearch.DataBind()
+                End Using
+            Else
+                Using Context As New Entities
+                    gridSearch.DataSource = Context.Leads.Where(Function(ld) (ld.LeadsName.Contains(key) Or ld.BBLE.StartsWith(key)) And ld.AppId = appId And users.Contains(ld.EmployeeName)).ToList
+                    gridSearch.DataBind()
+                End Using
+            End If
+        End If
+
+        'add Search by steven
+
+        If (gridSearch.DataSource Is Nothing Or gridSearch.GetRow(0) Is Nothing) Then
+            Try
+                Dim bble = Core.Utility.Address2BBLE(key)
+                If (Not String.IsNullOrEmpty(bble)) Then
+                    Using Context As New Entities
+                        gridSearch.DataSource = Context.Leads.Where(Function(ld) ld.BBLE = bble And ld.AppId = appId And users.Contains(ld.EmployeeName)).ToList
+                        gridSearch.DataBind()
+                    End Using
+                End If
+
+            Catch ex As Exception
+
+            End Try
+
+        End If
+    End Sub
+
 End Class

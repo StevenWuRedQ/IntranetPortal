@@ -45,7 +45,7 @@ Imports IntranetPortal.Data
     End Sub
 
     <TestMethod()> Public Sub NotifyTeamManager_sendEmail()
-        Dim rule As New RulesEngine.NewOfferNotifyRule
+        Dim rule As New IntranetPortal.RulesEngine.NewOfferNotifyRule
         rule.NotifyTeamManager()
     End Sub
 

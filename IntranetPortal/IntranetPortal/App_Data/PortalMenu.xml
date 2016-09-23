@@ -682,7 +682,7 @@
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="NewOffers" Text="New Offers" NavigationUrl="/NewOffer/ShortSaleNewOffer.aspx?model=List" ShowAmount="false">
+      <PortalNavItem Name="NewOffers" Text="New Offer List" NavigationUrl="/NewOffer/ShortSaleNewOffer.aspx?model=List" ShowAmount="false">
         <UserRoles>OfficeManager-*,NewOffer-Viewer</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-bullseye"></i>]]>

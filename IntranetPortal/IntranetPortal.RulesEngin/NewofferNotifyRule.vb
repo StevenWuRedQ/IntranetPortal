@@ -48,6 +48,7 @@ Public Class NewOfferNotifyRule
                 End If
 
                 client.SendEmailByControl(emails, subject, "NewOfferNotification", params)
+                Threading.Thread.Sleep(1000)
             Next
         End Using
     End Sub

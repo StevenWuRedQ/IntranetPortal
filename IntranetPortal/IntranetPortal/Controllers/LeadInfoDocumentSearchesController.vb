@@ -149,17 +149,17 @@ Namespace Controllers
                     Dim attachment As Mail.Attachment
                     Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
 
-                    Dim ccEmail = Employee.GetEmpsEmails(leadInfoDocumentSearch.CompletedBy, Employee.CEO.Name)
+                    Dim ccEmail = Employee.GetEmpsEmails(Employee.CEO.Name)
                     ccEmail = ccEmail & ";" & IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
 
                     If judgeDoc IsNot Nothing Then
                         attachment = New Mail.Attachment(New IO.MemoryStream(CType(judgeDoc.Data, Byte())), judgeDoc.Name.ToString)
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                                   ccEmail,
+                        Core.EmailService.SendMail(ccEmail,
+                                                    Nothing,
                                                    "DocSearchCompleted", maildata, {attachment})
                     Else
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                               ccEmail, "DocSearchCompleted", maildata)
+                        Core.EmailService.SendMail(ccEmail,
+                                               Nothing, "DocSearchCompleted", maildata)
                     End If
                 End If
             Catch ex As Exception
