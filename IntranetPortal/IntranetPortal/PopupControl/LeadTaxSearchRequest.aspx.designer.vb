@@ -48,4 +48,13 @@ Partial Public Class LeadTaxSearchRequest
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DocSearchNewVersion As Global.IntranetPortal.DocSearchNewVersion
+    
+    '''<summary>
+    '''AuditLogs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AuditLogs As Global.IntranetPortal.AuditLogs
 End Class

@@ -1829,6 +1829,29 @@ angular.module('PortalApp')
             })
             return promise;
         }
+
+        resource.createSearch = function (BBLE) {
+            debugger;
+            var promise = $http({
+                method: "POST",
+                url: '/api/LeadInfoDocumentSearches',
+                data: JSON.stringify({ "BBLE": BBLE }),
+                header: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return promise;
+        }
+
+        resource.getAdditionalInfo = function (BBLE) {
+            var promise = $http({
+                method: 'GET',
+                url: '/api/UnderwritingRequest/GetAdditionalInfo/' + BBLE,
+            });
+            return promise;
+        }
+
+
         return resource;
     }]);
 /**
@@ -8920,8 +8943,6 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
 
 angular.module("PortalApp")
 .controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom) {
-    $scope.location = $location;
-    $scope.state = $state;
     $scope.init = function () {
         $scope.data = {};
         $scope.BBLE = $location.search().BBLE || '';
@@ -8929,28 +8950,53 @@ angular.module("PortalApp")
             $scope.Review = $state.current.data.Review || '';
         }
         if ($scope.BBLE) {
-            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim(),  }, function () {
+            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim(), }, function () {
                 $scope.data.BBLE = $scope.BBLE;
+                UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(function success(res) {
+                    $scope.data.Address = res.data.Address;
+                    $scope.data.Status = res.data.Status || $scope.data.Status;
+
+                }, function error() {
+                    console.log('fail to fetch addiontal infomation.')
+                });
+
             }, function () {
                 $scope.data.BBLE = $scope.BBLE;
             })
         }
     }
-    $scope.save = function () {
+    $scope.save = function (isSlient) {
         UnderwritingRequest.saveByBBLE($scope.data).then(function () {
-            ptCom.alert('Save Successful!')
+            if (!isSlient) {
+                ptCom.alert('Save Successful!')
+            }
+
         }, function () {
-            ptCom.alert('Fail to Save!')
+            if (!isSlient) {
+                ptCom.alert('Fail to Save!')
+            }
         });
 
     }
 
+    $scope.requestDocSearch =function(){
+        debugger;
+        UnderwritingRequest.createSearch($scope.BBLE).then(function () {
+            ptCom.alert('Create Search Completed!');
+            $scope.data.Status = 1;
+            $scope.save(true);
+        }, function () {
+            ptCom.alert('Fail to create search')
+
+        })
+    }
+
     $scope.$watch(function () { return $location.search() }, function () {
         // debugger;
-        if($location.search().BBLE){
+        if ($location.search().BBLE) {
             $scope.init();
         }
-        
+
     }, true);
 
     if (!$state.current.data || !$state.current.data.Review) {

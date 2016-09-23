@@ -5,6 +5,7 @@
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
 <%@ Register Src="~/LeadDocSearch/DocSearchOldVersion.ascx" TagPrefix="uc1" TagName="DocSearchOldVersion" %>
 <%@ Register Src="~/LeadDocSearch/DocSearchNewVersion.ascx" TagPrefix="uc1" TagName="DocSearchNewVersion" %>
+<%@ Register Src="~/UserControl/AuditLogs.ascx" TagPrefix="uc1" TagName="AuditLogs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -76,7 +77,7 @@
                                                     // debugger;
                                                     if (location.hash == '#/agent_story') {
                                                         location.hash = '#/?BBLE=<%= Request.QueryString("BBLE")%>';
-                                                    }                                                      
+                                                    }
                                                 })
                                             }
                                     </script>
@@ -126,6 +127,25 @@
                                             });
                                         </script>
                                         <ui-view></ui-view>
+                                        <hr />
+                                        <div id='uwrhistory' class="container" style="max-width: 800px; margin-bottom: 40px">
+                                            <script type="text/javascript">
+                                                function getUWRID() {
+                                                    //debugger;
+                                                    var scope = angular.element('#uwrview').scope();
+                                                    return scope.data.Id;
+
+                                                }
+                                                function showHistory() {
+                                                    var id = getUWRID()
+                                                    if (id) {
+                                                        auditLog.toggle('UnderwritingRequest', id);
+                                                    }
+                                                }
+                                            </script>
+                                            <button type="button" class="btn btn-info" onclick="showHistory()">History</button>
+                                            <uc1:AuditLogs runat="server" ID="AuditLogs" />
+                                        </div>
                                     </div>
                                     <% End if %>
                                 </div>
