@@ -1,13 +1,12 @@
 ﻿<div id="uwrview" class="container" style="max-width: 800px;">
     <div class="row">
         <div class="col-md-12">
-            <div style="text-align:center; margin-top: 10px">
-                <h3>Underwriting Questionnaire</h3>
-                <h5 style="color: blue">{{data.Address}}</h5>
-                <h5 style="color: blue">Updated By: {{data.UpdateBy}}</h5>
-                <h5 style="color: blue">Last Updated Date: {{data.UpdateDate}}</h5>
+            <div style="text-align:center; margin-top: 10px">                
+                <h3 style="">{{data.Address}}</h3>
+                <h3 style="color: blue">Underwriting Questionnaire</h3>
+                <h5>Updated By: {{data.UpdateBy}}</h5>
+                <h5>Last Updated Date: {{data.UpdateDate}}</h5>
             </div>
-
             <hr />
             <div class="form col-md-6" style="height:260px">
                 <h5 style='font-weight:bold'>Brief Description</h5>
@@ -64,7 +63,7 @@
                             </div>
                         </div>
                         <div class="form col-md-4">
-                            <h5 style='font-weight:bold'>How much requested upfront?</h5>
+                            <h5 style='font-weight:bold'>How much was requested upfront?</h5>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
                                 <input type="text" class="form-control" ng-model="data.UpfrontRequested" />

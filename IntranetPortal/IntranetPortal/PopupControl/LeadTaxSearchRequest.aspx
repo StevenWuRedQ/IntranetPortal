@@ -84,7 +84,7 @@
                                     <li class="short_sale_head_tab activity_light_blue">
                                         <a role="tab" href="#agent_story" data-toggle="tab" class="tab_button_a" onclick="showUiView()">
                                             <i class="fa fa-book head_tab_icon_padding"></i>
-                                            <div class="font_size_bold">Property Story</div>
+                                            <div class="font_size_bold">Story</div>
                                         </a>
                                     </li>
 
