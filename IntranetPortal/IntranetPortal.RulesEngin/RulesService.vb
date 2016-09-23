@@ -118,16 +118,8 @@ Public Class RulesService
         ' Auto Assign
         Rules.Add(New AutoAssignRule With {.ExecuteOn = TimeSpan.Parse(String.Format("16:00:00", days)), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auto Sign Leads", .ExecuteNow = False})
 
-        'Construction
-        'Rules.Add(New ConstructionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("06:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Construction Notify Rule"})
-
-        'rules.Add(New ExpiredAllReminderRule With {.ExecuteOn = TimeSpan.Parse("18:31:00"), .Period = TimeSpan.Parse("10.0:0:0"), .RuleName = "Expired all reminder"})
-        'rules.Add(New CreateReminderBaseOnErrorProcess() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:20:00"), .RuleName = "CreateReminderBaseOnErrorProcess Rule", .ExecuteNow = True})
-
-        'rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "Leads and Task Rule"})
-        'rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:01"), .Period = TimeSpan.Parse("00:1:00"), .RuleName = "Data Loop Rule"})
-        'rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "User Task Summary Rule"})
-        'rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("02:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "Assign Leads Rule"})
+        'New Offer
+        Rules.Add(New NewOfferNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", days)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "New Offer Accepted Weekly Notify Rule", .ExecuteOnWeekend = True})
     End Sub
 
     ''' <summary>

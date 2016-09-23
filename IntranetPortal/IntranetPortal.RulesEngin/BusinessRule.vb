@@ -24,6 +24,7 @@ Imports System.Configuration
 <KnownType(GetType(NoticeECourtRule))>
 <KnownType(GetType(ShortSaleFollowUpRule))>
 <KnownType(GetType(AuctionNotifyRule))>
+<KnownType(GetType(NewOfferNotifyRule))>
 <DataContract>
 Public Class BaseRule
     <DataMember>

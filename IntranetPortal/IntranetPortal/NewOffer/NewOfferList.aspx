@@ -160,7 +160,7 @@
 
                     if(view == 3){
                         var duration = [{
-                            caption: "Accepted",
+                            caption: "Acceptance Date",
                             dataField: "AcceptedDate",
                             dataType: "date",
                             customizeText: function (cellInfo) {                                
@@ -179,6 +179,7 @@
                         }, {
                             caption: "Duration",
                             dataField: "AcceptedDuration",
+                            width: '80px',
                             customizeText: function(cellInfo){
                                 if (!cellInfo.value)
                                     return ""
