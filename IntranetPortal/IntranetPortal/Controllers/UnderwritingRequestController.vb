@@ -16,7 +16,7 @@ Namespace Controllers
         Public Function GetValue(ByVal id As String) As IHttpActionResult
             Dim ur = IntranetPortal.Data.UnderwritingRequest.GetInstance(id)
             If ur Is Nothing Then
-                Return NotFound()
+                Return StatusCode(HttpStatusCode.NoContent)
             End If
 
             Return Ok(ur)

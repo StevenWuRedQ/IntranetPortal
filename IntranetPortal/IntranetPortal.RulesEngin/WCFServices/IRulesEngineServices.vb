@@ -19,6 +19,7 @@ Imports System.Runtime.Serialization
 <ServiceKnownType(GetType(ScanECourtsRule))>
 <ServiceKnownType(GetType(ConstructionNotifyRule))>
 <ServiceKnownType(GetType(AutoAssignRule))>
+<ServiceKnownType(GetType(NewOfferNotifyRule))>
 Public Interface IRulesEngineServices
 
     <OperationContract()>

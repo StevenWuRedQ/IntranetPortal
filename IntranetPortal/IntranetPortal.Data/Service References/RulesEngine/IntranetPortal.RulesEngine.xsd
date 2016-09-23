@@ -168,6 +168,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="AuctionNotifyRule" nillable="true" type="tns:AuctionNotifyRule" />
+  <xs:complexType name="NewOfferNotifyRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NewOfferNotifyRule" nillable="true" type="tns:NewOfferNotifyRule" />
   <xs:complexType name="AutoAssignRule">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseRule">
