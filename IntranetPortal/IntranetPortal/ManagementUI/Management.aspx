@@ -193,8 +193,8 @@
                             <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Team_Activity_Tab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Team Activity</a></li>
-                            <li role="presentation" class="mag_tabv"><a href="#ssAcceptedTab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>SS Accepted</a></li>
                             <% If IntranetPortal.Employee.IsAdmin(Page.User.Identity.Name) Then%>
+                            <li role="presentation" class="mag_tabv"><a href="#ssAcceptedTab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>SS Accepted</a></li>                            
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <%End If%>
                             <%--  <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
@@ -1113,8 +1113,8 @@
 
                                                 <div class="col-md-x20 ">
                                                     <div class="summary-box">
-                                                        <span class="manageui-title">Total Commission</span>
-                                                        <div><span class="summary-detail">$24.00</span></div>
+                                                        <span class="manageui-title">Total Sales Commission</span>
+                                                        <div><span class="summary-detail">$2400.00</span></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-x20 ">
@@ -1770,16 +1770,15 @@
                     LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
                 }
             },
+            <% If User.IsInRole("Admin") %>
             'SS Accepted': {
                 text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>SS Accepted",
                 action: function () {
                     $('#mytab a[href="#ssAcceptedTab"]').tab('show');
                     ssAcceptedTab.InitalTab();
                     ssAcceptedTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
-
                 }
-            },
-            <% If User.IsInRole("Admin") %>
+            },        
             'Team Activity': {
                 text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>Team Activity",
                 action: function () {

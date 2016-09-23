@@ -523,19 +523,6 @@
 
   </PortalNavItem>
 
-  <!--<PortalNavItem Name="Eviction" Text="Eviction" NavigationUrl="#" ShowAmount="false" Expanded="false" visiable="false">
-    -->
-  <!--Temporarily use Admin roles for Eviction-->
-  <!--
-    <UserRoles>Eviction-Manager</UserRoles>
-    <Items>
-      <PortalNavItem Name="Eviction" Text="Eviction Leads" NavigationUrl="/ShortSale/ShortSale.aspx?isEviction=true" ShowAmount="true">
-        <FontClass>
-          <![CDATA[<i class="fa fa-sign-out"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-    </Items>
-  </PortalNavItem>-->
   <PortalNavItem Name="PreShortSale" Text="New Offer" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <!--Temporarily use Admin roles for Eviction-->    
     <UserRoles>OfficeManager-*,OfficeExecutive</UserRoles>
@@ -786,11 +773,11 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="QueryBuilder" Text="Query Builder" NavigationUrl="/Management/QueryBuilder.aspx" ShowAmount="false">
+      <!--<PortalNavItem Name="QueryBuilder" Text="Query Builder" NavigationUrl="/Management/QueryBuilder.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>
+      </PortalNavItem>-->
       <PortalNavItem Name="LeadsDataManagement" Text="Data Service" NavigationUrl="/Management/LeadsDataManage.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
