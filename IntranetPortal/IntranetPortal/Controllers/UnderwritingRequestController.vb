@@ -37,8 +37,23 @@ Namespace Controllers
         End Function
 
         ' PUT: api/UnderwritingRequest/5
-        Public Function PutValue(ByVal id As Integer, ByVal value As IntranetPortal.Data.UnderwritingRequest) As IHttpActionResult
-            Return Ok()
+        Public Function PutValue(ByVal id As Integer, ByVal record As IntranetPortal.Data.UnderwritingRequest) As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
+
+            If Not id = record.Id Then
+                Return BadRequest()
+            End If
+
+            Try
+                record.Save(HttpContext.Current.User.Identity.Name)
+
+            Catch ex As Exception
+                Throw ex
+            End Try
+
+            Return Ok(record)
         End Function
 
         ' DELETE: api/UnderwritingRequest/5
