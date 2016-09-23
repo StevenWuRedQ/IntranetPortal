@@ -580,6 +580,81 @@ angular.module('PortalApp').factory('AuditLog', function (ptBaseResource) {
     return auditLog;
 
 });
+angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
+    var BaseUri = '/api';
+
+    var PtBaseResource = function (apiName, key, paramDefaults, actions) {
+        var uri = BaseUri + '/' + apiName + '/:' + key;
+        var primaryKey = {};
+        primaryKey[key] = '@' + key;
+
+        /*default actions add put */
+        var _actions = {
+            'update': { method: 'PUT' }
+        };
+
+        angular.extend(primaryKey, paramDefaults)
+        angular.extend(_actions, actions);
+
+        var Resource = $resource(uri, primaryKey, _actions);
+
+        //static function
+        Resource.all = function () { }
+        Resource.CType = function (obj, Class) {
+
+            if (obj == null || obj == undefined) {
+                return null;
+            }
+
+            if (obj instanceof Class) {
+                return obj;
+            }
+            var _new = new Class();
+            angular.extend(_new, obj);
+            angular.extend(obj, _new);
+            return _new;
+        }
+
+        Resource.prototype.hasId = function () {
+            return this[key] != null && this[key] != 0;
+        }
+        /*********Use for Derived class implement validation interface *************/
+        /**************** string array to hold error messages **********************/
+        Resource.prototype.errorMsg = [];
+
+        Resource.prototype.clearErrorMsg = function () {
+            /* maybe cause memory leak if javascript garbage collection is not good */
+            this.errorMsg = []
+        }
+
+        Resource.prototype.getErrorMsg = function () {
+            return this.errorMsg;
+        }
+        Resource.prototype.getErrorMsgStr = function () {
+            return this.errorMsg.join('<br />');
+        }
+        Resource.prototype.hasErrorMsg = function () {
+            return this.errorMsg && this.errorMsg.length > 0;
+        }
+
+        Resource.prototype.pushErrorMsg = function (msg) {
+            if (!this.errorMsg) { this.errorMsg = [] };
+            this.errorMsg.push(msg);
+        }
+
+        /***************************************************************************/
+        /*base class instance function*/
+        Resource.prototype.$put = function () {}
+
+        Resource.prototype.$cType = function (_this, Class) {
+            Resource.CType(this, Class);
+        }
+        return Resource;
+
+    }
+
+    return PtBaseResource;
+});
 /**
  * @return {[class]}                 BusinessCheck class
  */
@@ -794,6 +869,81 @@ angular.module('PortalApp')
         
         return docNewVersionConfig;
     })
+
+/**
+ * @return {[class]}                 DocSearch class
+ */
+angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
+
+    /*api service funciton declear*/
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
+        {
+            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
+        });
+
+
+    docSearch.Status = {
+        New: 0,
+        Completed: 1
+    }
+
+    docSearch.prototype.initTeam = function () {
+        var self = this
+        $http.get('/Services/TeamService.svc/GetTeam?userName=' + this.CreateBy).success(function (data) {
+            self.team = data;
+        });
+    }
+
+    docSearch.prototype.initLeadsResearch = function () {
+        var self = this;
+
+        var data1 = null;
+        if (self.LeadResearch == null) {
+            self.LeadResearch = new LeadResearch();
+            data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
+        } else {
+
+            var _LeadSearch = new LeadResearch();
+            angular.extend(_LeadSearch, self.LeadResearch);
+            self.LeadResearch = _LeadSearch;
+            /*always get refershed ssn*/
+            if (self.LeadResearch.ownerName) {
+                self.LeadResearch.getOwnerSSN(self.BBLE);
+            }
+            if (self.LeadResearch.initFromLeadsInfo) {
+                data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
+            }
+        }
+
+        return data1;
+    }
+
+
+    /**
+     * static function define use class object docSearch.static function;
+     */
+    /**
+     * instance function defanlt use prototype
+     * @return {[type]} [description]
+     */
+    docSearch.prototype.actionTest = function () {
+        this.$update()
+    }
+
+    /**
+     *If property has type use function get property
+     */
+    docSearch.prototype._leadResearch = function () {
+        if (this.LeadResearch && !(this instanceof LeadResearch)) {
+            angular.extend(this.LeadResearch, new LeadResearch())
+        }
+        return this.LeadResearch;
+    }
+
+    return docSearch;
+});
+
+
 /**
     * @author steven
     * 
@@ -1014,6 +1164,41 @@ angular.module('PortalApp').factory('HomeOwner', function (ptBaseResource) {
     //leadResearch.func
     //constructor
     return homeOwner;
+});
+
+angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
+
+    var leadResearch = function () {
+
+    }
+
+
+    leadResearch.prototype.getOwnerSSN = function (BBLE) {
+        var self = this;
+        $http.post("/api/homeowner/ssn/" + BBLE, JSON.stringify(self.ownerName)).
+            success(function (ssn, status, headers, config) {
+                self.ownerSSN = ssn;
+            });
+    }
+
+    leadResearch.prototype.initFromLeadsInfo = function(BBLE)
+    {
+        var self = this;
+        
+        // bug fix for mortgageAmount secondMortgageAmount not saving
+        // 8/26/2016
+        var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
+            self.ownerName = self.ownerName || data1.Owner;
+            self.waterCharges = self.waterCharges || data1.WaterAmt;
+            self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
+            self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
+            self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
+            self.getOwnerSSN(BBLE);
+        });
+        return data1;
+    }
+
+    return leadResearch;
 });
 //Leads/LeadsInfo
 angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
@@ -1249,190 +1434,82 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
 
     return propertyOffer;
 });
-angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
-    var BaseUri = '/api';
 
-    var PtBaseResource = function (apiName, key, paramDefaults, actions) {
-        var uri = BaseUri + '/' + apiName + '/:' + key;
-        var primaryKey = {};
-        primaryKey[key] = '@' + key;
+/**
+ * @return {[class]}                 QueryUrl class
+ */
 
-        /*default actions add put */
-        var _actions = {
-            'update': { method: 'PUT' }
-        };
-
-        angular.extend(primaryKey, paramDefaults)
-        angular.extend(_actions, actions);
-
-        var Resource = $resource(uri, primaryKey, _actions);
-
-        //static function
-        Resource.all = function () { }
-        Resource.CType = function (obj, Class) {
-
-            if (obj == null || obj == undefined) {
-                return null;
+angular.module('PortalApp').factory('QueryUrl', function ($http) {
+    var _class = function () {
+        // This function is anonymous, is executed immediately and 
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
             }
-
-            if (obj instanceof Class) {
-                return obj;
-            }
-            var _new = new Class();
-            angular.extend(_new, obj);
-            angular.extend(obj, _new);
-            return _new;
         }
-
-        Resource.prototype.hasId = function () {
-            return this[key] != null && this[key] != 0;
-        }
-        /*********Use for Derived class implement validation interface *************/
-        /**************** string array to hold error messages **********************/
-        Resource.prototype.errorMsg = [];
-
-        Resource.prototype.clearErrorMsg = function () {
-            /* maybe cause memory leak if javascript garbage collection is not good */
-            this.errorMsg = []
-        }
-
-        Resource.prototype.getErrorMsg = function () {
-            return this.errorMsg;
-        }
-        Resource.prototype.getErrorMsgStr = function () {
-            return this.errorMsg.join('<br />');
-        }
-        Resource.prototype.hasErrorMsg = function () {
-            return this.errorMsg && this.errorMsg.length > 0;
-        }
-
-        Resource.prototype.pushErrorMsg = function (msg) {
-            if (!this.errorMsg) { this.errorMsg = [] };
-            this.errorMsg.push(msg);
-        }
-
-        /***************************************************************************/
-        /*base class instance function*/
-        Resource.prototype.$put = function () {}
-
-        Resource.prototype.$cType = function (_this, Class) {
-            Resource.CType(this, Class);
-        }
-        return Resource;
-
+        return query_string;
     }
+    
 
-    return PtBaseResource;
+    return _class;
 });
 
 /**
- * @return {[class]}                 DocSearch class
+ * @return {[class]}                 ScopeHelper class
  */
-angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
-
-    /*api service funciton declear*/
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
-        {
-            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
-        });
+angular.module('PortalApp').factory('ScopeHelper', function ($http) {
+    var _class = function () {
 
 
-    docSearch.Status = {
-        New: 0,
-        Completed: 1
     }
-
-    docSearch.prototype.initTeam = function () {
-        var self = this
-        $http.get('/Services/TeamService.svc/GetTeam?userName=' + this.CreateBy).success(function (data) {
-            self.team = data;
-        });
+    _class.getScope = function (id) {
+        return angular.element(document.getElementById(id)).scope();
     }
+    _class.getShortSaleScope = function () {
 
-    docSearch.prototype.initLeadsResearch = function () {
-        var self = this;
-
-        var data1 = null;
-        if (self.LeadResearch == null) {
-            self.LeadResearch = new LeadResearch();
-            data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
-        } else {
-
-            var _LeadSearch = new LeadResearch();
-            angular.extend(_LeadSearch, self.LeadResearch);
-            self.LeadResearch = _LeadSearch;
-            /*always get refershed ssn*/
-            if (self.LeadResearch.ownerName) {
-                self.LeadResearch.getOwnerSSN(self.BBLE);
-            }
-            if (self.LeadResearch.initFromLeadsInfo) {
-                data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
-            }
-        }
-
-        return data1;
+        
+        return _class.getScope('ShortSaleCtrl');
     }
-
-
-    /**
-     * static function define use class object docSearch.static function;
-     */
-    /**
-     * instance function defanlt use prototype
-     * @return {[type]} [description]
-     */
-    docSearch.prototype.actionTest = function () {
-        this.$update()
+    _class.getLeadsSearchScope = function()
+    {
+        return _class.getScope('LeadTaxSearchCtrl');
     }
-
-    /**
-     *If property has type use function get property
-     */
-    docSearch.prototype._leadResearch = function () {
-        if (this.LeadResearch && !(this instanceof LeadResearch)) {
-            angular.extend(this.LeadResearch, new LeadResearch())
-        }
-        return this.LeadResearch;
-    }
-
-    return docSearch;
+    return _class;
 });
 
 
+/**
+ * @return {[class]}                 Team class
+ */
+angular.module('PortalApp').factory('Team', function ($http) {
+    var _class = function () {
 
-angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
 
-    var leadResearch = function () {
+    }
+    _class.getTeams = function (successCall) {
+
+        $http.get('/api/CorporationEntities/Teams')
+            .success(successCall);
 
     }
 
-
-    leadResearch.prototype.getOwnerSSN = function (BBLE) {
-        var self = this;
-        $http.post("/api/homeowner/ssn/" + BBLE, JSON.stringify(self.ownerName)).
-            success(function (ssn, status, headers, config) {
-                self.ownerSSN = ssn;
-            });
+    _class.prototype.isAvailable = function () {
+        return this.Available == true;
     }
-
-    leadResearch.prototype.initFromLeadsInfo = function(BBLE)
-    {
-        var self = this;
-        
-        // bug fix for mortgageAmount secondMortgageAmount not saving
-        // 8/26/2016
-        var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
-            self.ownerName = self.ownerName || data1.Owner;
-            self.waterCharges = self.waterCharges || data1.WaterAmt;
-            self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
-            self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
-            self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
-            self.getOwnerSSN(BBLE);
-        });
-        return data1;
-    }
-
-    return leadResearch;
+    return _class;
 });
 angular.module('PortalApp')
     .factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
@@ -1739,83 +1816,44 @@ angular.module('PortalApp')
         return Underwriter;
 
     }]);
+angular.module('PortalApp')
+    .factory('UnderwritingRequest', ['$http', 'ptBaseResource', function ($http, ptBaseResource) {
 
-/**
- * @return {[class]}                 QueryUrl class
- */
-
-angular.module('PortalApp').factory('QueryUrl', function ($http) {
-    var _class = function () {
-        // This function is anonymous, is executed immediately and 
-        // the return value is assigned to QueryString!
-        var query_string = {};
-        var query = window.location.search.substring(1);
-        var vars = query.split("&");
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split("=");
-            // If first entry with this name
-            if (typeof query_string[pair[0]] === "undefined") {
-                query_string[pair[0]] = decodeURIComponent(pair[1]);
-                // If second entry with this name
-            } else if (typeof query_string[pair[0]] === "string") {
-                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
-                query_string[pair[0]] = arr;
-                // If third or later entry with this name
-            } else {
-                query_string[pair[0]].push(decodeURIComponent(pair[1]));
-            }
+        var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
+        resource.saveByBBLE = function (data) {
+            //debugger;
+            var promise = $http({
+                method: 'POST',
+                url: '/api/UnderwritingRequest',
+                data: data
+            })
+            return promise;
         }
-        return query_string;
-    }
-    
 
-    return _class;
-});
+        resource.createSearch = function (BBLE) {
+            debugger;
+            var promise = $http({
+                method: "POST",
+                url: '/api/LeadInfoDocumentSearches',
+                data: JSON.stringify({ "BBLE": BBLE }),
+                header: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return promise;
+        }
 
-/**
- * @return {[class]}                 ScopeHelper class
- */
-angular.module('PortalApp').factory('ScopeHelper', function ($http) {
-    var _class = function () {
-
-
-    }
-    _class.getScope = function (id) {
-        return angular.element(document.getElementById(id)).scope();
-    }
-    _class.getShortSaleScope = function () {
-
-        
-        return _class.getScope('ShortSaleCtrl');
-    }
-    _class.getLeadsSearchScope = function()
-    {
-        return _class.getScope('LeadTaxSearchCtrl');
-    }
-    return _class;
-});
+        resource.getAdditionalInfo = function (BBLE) {
+            var promise = $http({
+                method: 'GET',
+                url: '/api/UnderwritingRequest/GetAdditionalInfo/' + BBLE,
+            });
+            return promise;
+        }
 
 
-/**
- * @return {[class]}                 Team class
- */
-angular.module('PortalApp').factory('Team', function ($http) {
-    var _class = function () {
-
-
-    }
-    _class.getTeams = function (successCall) {
-
-        $http.get('/api/CorporationEntities/Teams')
-            .success(successCall);
-
-    }
-
-    _class.prototype.isAvailable = function () {
-        return this.Available == true;
-    }
-    return _class;
-});
+        return resource;
+    }]);
 /**
  * @return {[class]}                 Wizard class
  */
@@ -8904,8 +8942,66 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
 }]);
 
 angular.module("PortalApp")
-.controller('UnderwritingRequestController', ['$scope', '$http', 'ptContactServices', 'CorpEntity', function ($scope, $http, ptContactServices, CorpEntity) {
+.controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom) {
+    $scope.init = function () {
+        $scope.data = {};
+        $scope.BBLE = $location.search().BBLE || '';
+        if ($state.current.data) {
+            $scope.Review = $state.current.data.Review || '';
+        }
+        if ($scope.BBLE) {
+            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim(), }, function () {
+                $scope.data.BBLE = $scope.BBLE;
+                UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(function success(res) {
+                    $scope.data.Address = res.data.Address;
+                    $scope.data.Status = res.data.Status || $scope.data.Status;
 
+                }, function error() {
+                    console.log('fail to fetch addiontal infomation.')
+                });
+
+            }, function () {
+                $scope.data.BBLE = $scope.BBLE;
+            })
+        }
+    }
+    $scope.save = function (isSlient) {
+        UnderwritingRequest.saveByBBLE($scope.data).then(function () {
+            if (!isSlient) {
+                ptCom.alert('Save Successful!')
+            }
+
+        }, function () {
+            if (!isSlient) {
+                ptCom.alert('Fail to Save!')
+            }
+        });
+
+    }
+
+    $scope.requestDocSearch =function(){
+        debugger;
+        UnderwritingRequest.createSearch($scope.BBLE).then(function () {
+            ptCom.alert('Create Search Completed!');
+            $scope.data.Status = 1;
+            $scope.save(true);
+        }, function () {
+            ptCom.alert('Fail to create search')
+
+        })
+    }
+
+    $scope.$watch(function () { return $location.search() }, function () {
+        // debugger;
+        if ($location.search().BBLE) {
+            $scope.init();
+        }
+
+    }, true);
+
+    if (!$state.current.data || !$state.current.data.Review) {
+        $scope.init();
+    }
 
 
 }]);

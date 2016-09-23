@@ -7248,7 +7248,8 @@
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
-    <Content Include="js\models\ptUnderwriter.js" />
+    <Content Include="js\models\Underwriter.js" />
+    <Content Include="js\models\UnderwritingRequest.js" />
     <Content Include="js\services\ptCom.js" />
     <Content Include="js\services\ptConstructionService.js" />
     <Content Include="js\services\ptContactServices.js" />
@@ -7270,9 +7271,9 @@
     <Content Include="js\models\NewOfferListGrid.js" />
     <Content Include="js\models\PreSign.js" />
     <Content Include="js\models\PropertyOffer.js" />
-    <Content Include="js\models\ptBaseResource.js" />
-    <Content Include="js\models\ptDocSearch.js" />
-    <Content Include="js\models\ptLeadResearch.js" />
+    <Content Include="js\models\BaseResource.js" />
+    <Content Include="js\models\DocSearch.js" />
+    <Content Include="js\models\LeadResearch.js" />
     <Content Include="js\models\QueryUrl.js" />
     <Content Include="js\models\ScopeHelper.js" />
     <Content Include="js\models\Team.js" />
@@ -7307,6 +7308,7 @@
     <Content Include="js\Views\Underwriter\tables.tpl.html" />
     <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
     <Content Include="js\Views\Underwriter\datainput.tpl.html" />
+    <Content Include="js\Views\Underwriter\underwriting_request.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />

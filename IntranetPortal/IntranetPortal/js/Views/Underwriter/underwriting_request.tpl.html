@@ -1,0 +1,111 @@
+﻿<div id="uwrview" class="container" style="max-width: 800px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="text-align:center; margin-top: 10px">
+                <h3>Underwriting Questionnaire</h3>
+                <h5 style="color: blue">{{data.Address}}</h5>
+                <h5 style="color: blue">Updated By: {{data.UpdateBy}}</h5>
+                <h5 style="color: blue">Last Updated Date: {{data.UpdateDate}}</h5>
+            </div>
+
+            <hr />
+            <div class="form col-md-6" style="height:260px">
+                <h5 style='font-weight:bold'>Brief Description</h5>
+                <textarea style="min-height: 150px; height: 85%" class="form-control" ng-model="data.BriefDescription"></textarea>
+            </div>
+            <div class="col-md-6" style="height:260px">
+                <div class="form">
+                    <h5 style='font-weight:bold'>Occupancy</h5>
+                    <select class="form-control" ng-model="data.Occupancy">
+                        <option>Not Sure</option>
+                        <option>Vacant</option>
+                        <option>Tenants</option>
+                        <option>Seller</option>
+                        <option>Seller + Tenants</option>
+                        <option>Family Member(s)</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <h5 style='font-weight:bold'>Occupancy Description </h5>
+                    <textarea style="min-height: 150px;" class="form-control" ng-model="data.OccupancyDescription"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12 clearfix">
+                <div class="row">
+                    <div class="form col-md-6">
+                        <h5 style='font-weight:bold'>Already working on SS?</h5>
+                        <select class="form-control" ng-model='data.IsWorkingOnSS' ng-options="o.v as o.l for o in [{l:'Not Sure', v: 1}, { l: 'Yes', v: 2 }, { l: 'No', v: 3 }]"></select>
+                    </div>
+                    <div class="form col-md-6" ng-show="data.IsWorkingOnSS==2" class="nga-default nga-fade">
+                        <h5 style='font-weight:bold'>If so, what is the name of the company they are working with?</h5>
+                        <input type="text" class="form-control" ng-model="data.WorkingCompany" />
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-12 clearfix">
+                <div class="row">
+
+
+                    <div class="form col-md-4">
+                        <h5 style='font-weight:bold'>Was an HOI requested from the HO</h5>
+                        <select class="form-control" ng-model='data.WasHOIFromHO' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                    </div>
+
+                    <div ng-show="data.WasHOIFromHO" class="nga-default nga-fade">
+                        <div class="form col-md-4">
+                            <h5 style='font-weight:bold'>If so, how much was requested? </h5>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" ng-model="data.TotalRequest" />
+                            </div>
+                        </div>
+                        <div class="form col-md-4">
+                            <h5 style='font-weight:bold'>How much requested upfront?</h5>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" ng-model="data.UpfrontRequested" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 clearfix">
+                <div class="row">
+
+
+                    <div class="form col-md-4">
+                        <h5 style='font-weight:bold'>Was an HOI offered</h5>
+                        <select class="form-control" ng-model='data.WasHOIOffered' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+
+                    </div>
+                    <div ng-show="data.WasHOIOffered" class="nga-default nga-fade">
+                        <div class="form col-md-4">
+                            <h5 style='font-weight:bold'>If so, how much was offered?  </h5>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" ng-model="data.TotalOffered" />
+                            </div>
+                        </div>
+                        <div class="form col-md-4">
+                            <h5 style='font-weight:bold'>How much was offered upfront?</h5>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control" ng-model="data.UpfrontOffered" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class='pull-right' style="margin: 20px" ng-show="!Review">
+            <button type="button" class="btn btn-danger" ng-disabled="data.Status==1" ng-click="requestDocSearch()">Request Underwriting</button>
+            <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
+        </div>
+    </div>
+</div>

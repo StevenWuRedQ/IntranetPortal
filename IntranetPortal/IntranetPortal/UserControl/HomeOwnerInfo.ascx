@@ -270,7 +270,9 @@
     <div>
         <div class="form_head homeowner_section_margin">
             <span runat="server" id="ulBestPhones">Best Phone Numbers &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color" style="cursor: pointer" onclick="<%= String.Format("AddBestPhoneNum('{0}','{1}','{2}', this)", BBLE, OwnerName, ulBestPhones.ClientID)%>"></i>
-            &nbsp;<i class="fa fa-sort-amount-desc homeowner_plus_color" style="cursor: pointer" onclick="ASPxPopupSortPhoneClient.ShowAtElement(this)"></i>
+            &nbsp;
+            <%-- disable sort phone function on release 9/23/2016 --%>
+            <%--<i class="fa fa-sort-amount-desc homeowner_plus_color" style="cursor: pointer" onclick="ASPxPopupSortPhoneClient.ShowAtElement(this)"></i>--%>
         </div>
         <div>
             <div class="clearfix homeowner_info_label">

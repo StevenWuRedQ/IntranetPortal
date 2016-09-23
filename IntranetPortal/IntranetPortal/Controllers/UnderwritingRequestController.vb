@@ -60,5 +60,31 @@ Namespace Controllers
         Public Sub DeleteValue(ByVal id As Integer)
 
         End Sub
+
+        <HttpGet>
+        <Route("api/UnderwritingRequest/GetAdditionalInfo/{BBLE}")>
+        Public Function GetAdditionalInfo(BBLE As String) As IHttpActionResult
+            If Not String.IsNullOrEmpty(BBLE) Then
+                Dim l = Lead.GetInstance(BBLE)
+                Dim addr = l.LeadsInfo.PropertyAddress
+                Using ctx As New PortalEntities
+                    Dim r = From c In ctx.LeadInfoDocumentSearches
+                            Where c.BBLE = BBLE
+
+                    Dim status
+                    If r.Count > 0 Then
+                        status = 1
+                    Else
+                        status = 0
+                    End If
+
+                    Return Ok(New With {
+                                    .Status = status,
+                                    .Address = addr
+                    })
+                End Using
+            End If
+            Return BadRequest("BBLE cannot be empty")
+        End Function
     End Class
 End Namespace
