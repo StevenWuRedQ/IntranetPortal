@@ -14,7 +14,7 @@ Namespace Controllers
 
         ' GET: api/UnderwritingRequest/5
         Public Function GetValue(ByVal id As String) As IHttpActionResult
-            Dim ur = UnderwritingRequest.GetInstance(id)
+            Dim ur = IntranetPortal.Data.UnderwritingRequest.GetInstance(id)
             If ur Is Nothing Then
                 Return NotFound()
             End If
@@ -23,7 +23,7 @@ Namespace Controllers
         End Function
 
         ' POST: api/UnderwritingRequest
-        Public Function PostValue(ByVal value As UnderwritingRequest) As IHttpActionResult
+        Public Function PostValue(ByVal value As IntranetPortal.Data.UnderwritingRequest) As IHttpActionResult
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
@@ -37,7 +37,7 @@ Namespace Controllers
         End Function
 
         ' PUT: api/UnderwritingRequest/5
-        Public Function PutValue(ByVal id As Integer, ByVal value As UnderwritingRequest) As IHttpActionResult
+        Public Function PutValue(ByVal id As Integer, ByVal value As IntranetPortal.Data.UnderwritingRequest) As IHttpActionResult
             Return Ok()
         End Function
 
