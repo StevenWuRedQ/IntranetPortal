@@ -457,6 +457,7 @@
                         <div class="form_head" style="margin-top: 40px;">
                             MORTGAGE AND VIOLATIONS 
                             <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
+                            <%--
                             <% Dim docSearch = IntranetPortal.Data.LeadInfoDocumentSearch.GetInstance(hfBBLE.Value)  %>
 
                             <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.Completed Then %>
@@ -480,7 +481,8 @@
                             </span>
 
                             <% End If %>
-                            <% End If %>--%>
+                            <% End If %>
+                                --%>
                         </div>
 
                         <%--line 1--%>
