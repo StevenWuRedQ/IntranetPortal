@@ -36,7 +36,6 @@
             line-height: normal;
         }
     </style>
-
     <input type="text" style="display: none" />
     <div class="apply-filter-option">
         Files

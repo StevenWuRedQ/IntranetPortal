@@ -115,6 +115,7 @@ Namespace Controllers
             leadInfoDocumentSearch.CompletedOn = Date.Now
             leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.UpdateDate = Date.Now
+
             Try
                 leadInfoDocumentSearch.Save()
             Catch ex As Exception
@@ -207,8 +208,10 @@ Namespace Controllers
                     Dim empl = Employee.GetInstance(leadInfoDocumentSearch.CreateBy)
                     Dim mLead = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
                     Dim searchEmail = IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
+
+                    ' notify the doc search user
                     If (LeadInfoSearchUser IsNot Nothing AndAlso mLead IsNot Nothing) Then
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(LeadInfoSearchUser) & ";" & searchEmail, empl.Email,
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(LeadInfoSearchUser) & ";" & searchEmail, Nothing,
                                                "DocSearchNotify",
                                                 New Dictionary(Of String, String) From
                                                 {
@@ -217,6 +220,17 @@ Namespace Controllers
                                                     {"DocUser", LeadInfoSearchUser.Name},
                                                     {"BBLE", leadInfoDocumentSearch.BBLE},
                                                     {"ExpectedDate", IIf(leadInfoDocumentSearch.ExpectedSigningDate.HasValue, String.Format("{0:d}", leadInfoDocumentSearch.ExpectedSigningDate), "None")}
+                                                })
+                    End If
+
+                    ' notify the requestor
+                    If (LeadInfoSearchUser IsNot Nothing AndAlso mLead IsNot Nothing) Then
+                        Core.EmailService.SendMail(empl.Email, Nothing,
+                                               "DocSearchNotifyForAgent",
+                                                New Dictionary(Of String, String) From
+                                                {
+                                                    {"UserName", empl.Name},
+                                                    {"Address", mLead.PropertyAddress}
                                                 })
                     End If
                 End If
