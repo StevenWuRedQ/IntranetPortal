@@ -125,7 +125,7 @@
                                 .appendTo(container);
                         }
                     }, {
-                        caption: "Completion Date",
+                        caption: "Search Completed On",
                         dataField: "CompletedOn",
                         dataType: "date",
                         customizeText: function (cellInfo) {

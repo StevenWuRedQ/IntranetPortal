@@ -4474,7 +4474,7 @@ angular.module('PortalApp')
                 });
             } else {
 
-                
+
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -4500,6 +4500,23 @@ angular.module('PortalApp')
                 }
 
             })
+        }
+
+
+        $scope.markCompleted = function () {
+
+            $http({
+                method: 'GET',
+                url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
+            }).then(function succ(d) {
+                //debugger;
+                $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
+                $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+            }, function err() {
+
+            })
+
         }
     });
 /* global LegalShowAll */

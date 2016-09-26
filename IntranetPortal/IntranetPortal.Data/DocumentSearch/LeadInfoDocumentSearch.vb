@@ -172,6 +172,22 @@ Public Class LeadInfoDocumentSearch
 
 
     End Sub
+
+    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String) As LeadInfoDocumentSearch
+        Using ctx As New PortalEntities
+            Dim search = ctx.LeadInfoDocumentSearches.Find(BBLE)
+            If Nothing IsNot search Then
+                search.UnderwriteCompletedBy = User
+                search.UnderwriteCompletedOn = Date.Now
+                search.UnderwriteCompleted = True
+                ctx.SaveChanges()
+                Return search
+            Else
+                Return Nothing
+            End If
+        End Using
+    End Function
+
 End Class
 
 Public Class LeadInfoDocumentSearchCaseMetaData

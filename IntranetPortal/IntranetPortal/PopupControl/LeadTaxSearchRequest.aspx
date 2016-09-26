@@ -64,7 +64,7 @@
                                     <li class="short_sale_head_tab activity_light_blue">
                                         <a href="#searchReslut" role="tab" data-toggle="tab" class="tab_button_a">
                                             <i class="fa fa-history head_tab_icon_padding"></i>
-                                            <div class="font_size_bold">Search Summary</div>
+                                            <div class="font_size_bold" style="width: 100px">Summary</div>
                                         </a>
                                     </li>
 
@@ -81,17 +81,25 @@
                                                 })
                                             }
                                     </script>
-                                    <li class="short_sale_head_tab activity_light_blue">
-                                        <a role="tab" href="#agent_story" data-toggle="tab" class="tab_button_a" onclick="showUiView()">
+                                    <li class="short_sale_head_tab activity_light_blue" onclick="showUiView()">
+                                        <a role="tab" href="#agent_story" data-toggle="tab" class="tab_button_a">
                                             <i class="fa fa-book head_tab_icon_padding"></i>
-                                            <div class="font_size_bold">Story</div>
+                                            <div class="font_size_bold" style="width: 100px">
+                                                Story
+                                            </div>
                                         </a>
                                     </li>
 
                                     <li class="short_sale_head_tab activity_light_blue pull-right" onclick="exportsheet()">
                                         <a role="tab" class="tab_button_a">
                                             <i class="fa fa-file-excel-o head_tab_icon_padding" style="color: white !important"></i>
-                                            <div class="font_size_bold">Export</div>
+                                            <div class="font_size_bold" style="width: 100px">Export</div>
+                                        </a>
+                                    </li>
+                                    <li class="short_sale_head_tab activity_light_blue pull-right" ng-show="!DocSearch.UnderwriteCompleted" ng-click="markCompleted()">
+                                        <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Completed">
+                                            <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
+                                            <div class="font_size_bold" style="width: 100px">Completed</div>
                                         </a>
                                     </li>
                                     <% End If %>

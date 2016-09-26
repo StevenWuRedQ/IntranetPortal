@@ -263,5 +263,22 @@ Namespace Controllers
         Private Function LeadInfoDocumentSearchExists(ByVal id As String) As Boolean
             Return db.LeadInfoDocumentSearches.Count(Function(e) e.BBLE = id) > 0
         End Function
+        <HttpGet>
+        <Route("api/LeadInfoDocumentSearches/MarkCompleted/{bble}")>
+        Public Function MarkUnderWritingCompleted(BBLE As String) As IHttpActionResult
+            Dim USER = HttpContext.Current.User.Identity.Name
+            If Not String.IsNullOrEmpty(BBLE) OrElse String.IsNullOrEmpty(USER) Then
+                Dim search = LeadInfoDocumentSearch.MarkCompletedUnderwriting(BBLE, USER)
+                If Nothing IsNot search Then
+                    Return Ok(search)
+                Else
+                    Return BadRequest(String.Format("Doc Search With {0} Cannot Be Found!", BBLE))
+                End If
+
+            Else
+                Return BadRequest("BBLE Cannot Be empty.")
+            End If
+
+        End Function
     End Class
 End Namespace
