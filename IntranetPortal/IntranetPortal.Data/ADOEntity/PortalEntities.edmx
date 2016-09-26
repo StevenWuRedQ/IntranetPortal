@@ -356,6 +356,9 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UnderwriteCompleted" Type="bit" />
+          <Property Name="UnderwriteCompletedOn" Type="datetime" />
+          <Property Name="UnderwriteCompletedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Version" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -2117,6 +2120,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CompletedOn" Type="DateTime" Precision="3" />
           <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Version" Type="Int32" />
+          <Property Name="UnderwriteCompleted" Type="Boolean" />
+          <Property Name="UnderwriteCompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="UnderwriteCompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CheckingComplain">
           <Key>
@@ -3369,6 +3375,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="LeadInfoDocumentSearches">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadInfoDocumentSearch">
               <MappingFragment StoreEntitySet="LeadInfoDocumentSearch">
+                <ScalarProperty Name="UnderwriteCompletedBy" ColumnName="UnderwriteCompletedBy" />
+                <ScalarProperty Name="UnderwriteCompletedOn" ColumnName="UnderwriteCompletedOn" />
+                <ScalarProperty Name="UnderwriteCompleted" ColumnName="UnderwriteCompleted" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
                 <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
