@@ -12,7 +12,7 @@ Partial Public Class PropertyOffer
     Public Property ShortSaleStatus As Integer?
     Public Property AcceptedDate As DateTime?
     Public Property AcceptedBy As String
-
+    Public Property LeadsOwner As String
     Public ReadOnly Property AcceptedDuration As TimeSpan?
         Get
             If AcceptedDate.HasValue AndAlso UpdateDate.HasValue Then

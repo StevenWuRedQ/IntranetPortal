@@ -70,6 +70,12 @@ Partial Public Class Lead
         End Get
     End Property
 
+    Public Shared Function GetLeadsOwner(bble As String) As String
+        Using ctx As New Entities
+            Return ctx.Leads.Where(Function(l) l.BBLE = bble).Select(Function(a) a.EmployeeName).FirstOrDefault
+        End Using
+    End Function
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property LastOwnerUpdate As DateTime
         Get

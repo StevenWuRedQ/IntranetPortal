@@ -129,7 +129,7 @@
                                     .appendTo(container);
                             }
                         }, {
-                            caption: "Completed On",
+                            caption: "New Offer Completed On",
                             dataField: "UpdateDate",
                             dataType: "date",
                             customizeText: function (cellInfo) {
@@ -145,10 +145,10 @@
                             }
                         }, {
                             caption: "Completed By",
-                            dataField: "UpdateBy"
-                        }, {
-                            caption: "Lead Owner",
                             dataField: "Owner"
+                        }, {
+                            caption: "Agent",
+                            dataField: "LeadsOwner"
                         }, {
                             caption: "Team",
                             dataField: "Team"
