@@ -80,9 +80,6 @@
                                                     }
                                                 })
                                             }
-                                            function markCompleted() {
-
-                                            }
                                     </script>
                                     <li class="short_sale_head_tab activity_light_blue" onclick="showUiView()">
                                         <a role="tab" href="#agent_story" data-toggle="tab" class="tab_button_a">
@@ -99,7 +96,7 @@
                                             <div class="font_size_bold" style="width: 100px">Export</div>
                                         </a>
                                     </li>
-                                    <li class="short_sale_head_tab activity_light_blue pull-right" onclick="markCompleted()">
+                                    <li class="short_sale_head_tab activity_light_blue pull-right" ng-show="!DocSearch.UnderwriteCompleted" ng-click="markCompleted()">
                                         <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Completed">
                                             <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
                                             <div class="font_size_bold" style="width: 100px">Completed</div>
