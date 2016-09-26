@@ -55,14 +55,14 @@
                             <h5 style='font-weight:bold'>If so, how much was requested? </h5>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" ng-model="data.TotalRequest" />
+                                <input type="text" class="form-control" ng-model="data.TotalRequest" number-mask isvalidate/>
                             </div>
                         </div>
                         <div class="form col-md-4">
                             <h5 style='font-weight:bold'>How much was requested upfront?</h5>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" ng-model="data.UpfrontRequested" />
+                                <input type="text" class="form-control" ng-model="data.UpfrontRequested" number-mask isvalidate/>
                             </div>
                         </div>
                     </div>
@@ -82,14 +82,14 @@
                             <h5 style='font-weight:bold'>If so, how much was offered?  </h5>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" ng-model="data.TotalOffered" />
+                                <input type="text" class="form-control" ng-model="data.TotalOffered" number-mask isvalidate/>
                             </div>
                         </div>
                         <div class="form col-md-4">
                             <h5 style='font-weight:bold'>How much was offered upfront?</h5>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" ng-model="data.UpfrontOffered" />
+                                <input type="text" class="form-control" ng-model="data.UpfrontOffered" number-mask isvalidate />
                             </div>
                         </div>
                     </div>
