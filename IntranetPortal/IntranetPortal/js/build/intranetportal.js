@@ -8982,7 +8982,7 @@ angular.module("PortalApp")
     $scope.requestDocSearch =function(){
         debugger;
         UnderwritingRequest.createSearch($scope.BBLE).then(function () {
-            ptCom.alert('Create Search Completed!');
+            ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
             $scope.save(true);
         }, function () {
