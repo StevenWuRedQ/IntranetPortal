@@ -55,14 +55,14 @@
                             <h5 style='font-weight:bold'>If so, how much was requested? </h5>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" ng-model="data.TotalRequest" number-mask isvalidate/>
+                                <input type="text" class="form-control" ng-model="data.TotalRequest" number-mask isvalidate />
                             </div>
                         </div>
                         <div class="form col-md-4">
                             <h5 style='font-weight:bold'>How much was requested upfront?</h5>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" ng-model="data.UpfrontRequested" number-mask isvalidate/>
+                                <input type="text" class="form-control" ng-model="data.UpfrontRequested" number-mask isvalidate />
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                             <h5 style='font-weight:bold'>If so, how much was offered?  </h5>
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input type="text" class="form-control" ng-model="data.TotalOffered" number-mask isvalidate/>
+                                <input type="text" class="form-control" ng-model="data.TotalOffered" number-mask isvalidate />
                             </div>
                         </div>
                         <div class="form col-md-4">
@@ -106,9 +106,7 @@
                 <div class="clearfix"></div>
                 <div id="summited_info" style="text-align:center">
                     <div ng-show="data.Status==1" class="alert alert-warning" role="alert">
-                        <h5>Your Underwriting and Search Request was submitted.</h5>
-                    </div>
-                    <div class="alert alert-info" role="alert">
+                        <h5><b>Your Underwriting and Search Request was submitted.</b></h5>
                         <h5>You can still modify any information in the Underwriting Questionnaire.</h5>
                         <h5>Please press Save after adding or modifying any information. Thank you.</h5>
                     </div>
