@@ -122,6 +122,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
             d.MoneyFactor.CostOfMoney = 0.0;
             d.MoneyFactor.InterestOnMoney = 0.18;
             // Liens
+            d.Liens.LienPayoffsSettlement = 1.0
             d.Liens.TaxLienSettlement = 0.09 / 12;
             d.Liens.PropertyTaxesSettlement = 1.0;
             d.Liens.WaterChargesSettlement = 1.0;
@@ -150,7 +151,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
             //Rental Model
             d.RentalModel.CostOfMoneyRate = 0.16;
             d.RentalModel.MinROI = 0.18;
-            d.RentalModel.Insurance = 85;
+            d.RentalModel.Insurance = 85.0;
 
         }
     };
@@ -200,7 +201,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
             var c4 = !d.LienInfo.FannieMae;
             var c5 = !d.LienInfo.FreddieMac;
             var c6 = float(d.DealCosts.HOI) > 0.0;
-            debugger;
+            //debugger;
             return (c1 | c2) & c3 & c4 & c5 & c6 ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
 
         })();
@@ -267,7 +268,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.Liens.Sums = d.Liens.TaxLien + d.Liens.PropertyTaxes + d.Liens.WaterCharges + d.Liens.HPDCharges + d.Liens.ECBDOBViolations + d.Liens.DOBCivilPenalties + d.Liens.PersonalJudgements + d.Liens.HPDJudgements + d.Liens.IRSNYSTaxLien + d.Liens.RelocationLien;
         d.Liens.AdditonalCostsSums = d.Liens.WaterCharges + d.Liens.HPDCharges + d.Liens.ECBDOBViolations + d.Liens.DOBCivilPenalties + d.Liens.PersonalJudgements + d.Liens.HPDJudgements + d.Liens.IRSNYSTaxLien + d.Liens.RelocationLien;
         d.DealExpenses.Sums = d.DealExpenses.MoneySpent + d.DealExpenses.HOILien + d.DealExpenses.COSTermination + d.DealExpenses.Tenants + d.DealExpenses.Agent;
-        d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney
+        d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
         d.Construction.Sums = d.Construction.Construction + d.Construction.Architect;
         d.CarryingCosts.Sums = d.CarryingCosts.Insurance + d.CarryingCosts.RETaxs + d.CarryingCosts.Utilities;
         d.Resale.Sums = d.Resale.Commissions + d.Resale.TransferTax + d.Resale.Concession + d.Resale.Attorney + d.Resale.NDC;
@@ -297,7 +298,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
 
         // Best Case For HOI
         d.HOIBestCase.PurchasePriceAllIn = d.RehabInfo.AverageLowValue + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
-        d.HOIBestCase.TotalInvestment = d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
+        d.HOIBestCase.TotalInvestment = d.HOIBestCase.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
         d.HOIBestCase.CashRequirement = d.HOIBestCase.TotalInvestment - d.LoanTerms.LoanAmount;
         d.HOIBestCase.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOIBestCase.TotalInvestment;
         d.HOIBestCase.ROILoan = d.HOIBestCase.NetProfit / d.HOIBestCase.TotalInvestment;
@@ -309,14 +310,14 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.CashScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
         d.CashScenario.Purchase_Construction = d.Construction.Sums;
         d.CashScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
-        d.CashScenario.Purchase_TotalInvestment = d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums;
+        d.CashScenario.Purchase_TotalInvestment = d.CashScenario.Purchase_LienPayoffs + d.CashScenario.Purchase_OffHUDCosts + d.CashScenario.Purchase_DealCosts + d.CashScenario.Purchase_ClosingCost + d.CashScenario.Purchase_Construction + d.CashScenario.Purchase_CarryingCosts;
         d.CashScenario.Resale_SalePrice = d.Resale.ProbableResale;
         d.CashScenario.Resale_Concession = d.Resale.Concession;
         d.CashScenario.Resale_Commissions = d.Resale.Commissions;
         d.CashScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
         d.CashScenario.Resale_NetProfit = d.CashScenario.Resale_SalePrice - (d.CashScenario.Resale_Concession + d.CashScenario.Resale_Commissions + d.CashScenario.Resale_ClosingCost) - d.CashScenario.Purchase_TotalInvestment;
         d.CashScenario.Time = float(d.RehabInfo.DealTimeMonths);
-        d.CashScenario.AllCash = d.CashScenario.Purchase_TotalInvestment;
+        d.CashScenario.CashRequired = d.CashScenario.Purchase_TotalInvestment;
         d.CashScenario.ROI = d.CashScenario.Resale_NetProfit / d.CashScenario.Purchase_TotalInvestment;
         d.CashScenario.ROIAnnual = d.CashScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
         // Loan Scenario
@@ -336,15 +337,16 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.LoanScenario.Resale_NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - d.LoanScenario.Purchase_TotalInvestment;
         d.LoanScenario.Time = float(d.RehabInfo.DealTimeMonths);
         d.LoanScenario.LoanAmount = d.LoanTerms.LoanAmount;
-        d.LoanScenario.LTV = d.LoanScenario.Purchase_AdditonalCosts / d.LoanScenario.Resale_SalePrice;
-        d.LoanScenario.CashRequirement = d.LoanScenario.Resale_SalePrice - d.LoanScenario.LoanAmount;
+        d.LoanScenario.LTV = d.LoanScenario.LoanAmount / d.LoanScenario.Resale_SalePrice;
+        d.LoanScenario.CashRequirement = d.LoanScenario.Purchase_TotalInvestment - d.LoanScenario.LoanAmount;
         d.LoanScenario.ROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.Purchase_TotalInvestment;
         d.LoanScenario.ROIAnnual = d.LoanScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
-        d.LoanScenario.CashROI = d.LoanScenario.NetProfit / d.LoanScenario.CashRequirement;
+        d.LoanScenario.CashROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.CashRequirement;
         d.LoanScenario.CashROIAnnual = d.LoanScenario.CashROI / d.RehabInfo.DealTimeMonths * 12;
         // FlipScenario
+        d.FlipScenario.Purchase_TotalCost = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
         d.FlipScenario.FlipPrice_SalePrice = d.FlipCalculation.FlipPrice;
-        d.FlipScenario.Purchase_TotalCost = d.Liens.ProbableResale + d.Liens.Sums + d.DealExpenses.Sums;
+
         d.FlipScenario.Purchase_PurchasePrice = d.FlipScenario.FlipPrice_SalePrice;
         d.FlipScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
         d.FlipScenario.Purchase_Construction = d.Construction.Sums;
@@ -354,7 +356,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.FlipScenario.Resale_Concession = d.Resale.Concession;
         d.FlipScenario.Resale_Commissions = d.Resale.Commissions;
         d.FlipScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-        d.FlipScenario.Resale_NetProfit = d.FlipScenario.Resale_SalePrice - (d.FlipScenario.Purchase_Construction + d.FlipScenario.Purchase_CarryingCosts) - d.FlipScenario.Purchase_TotalInvestment;
+        d.FlipScenario.Resale_NetProfit = d.FlipScenario.Resale_SalePrice - (d.FlipScenario.Resale_Commissions + d.FlipScenario.Resale_ClosingCost) - d.FlipScenario.Purchase_TotalInvestment;
         d.FlipScenario.FlipProfit = d.FlipScenario.FlipPrice_SalePrice - d.FlipScenario.Purchase_TotalCost;
         d.FlipScenario.CashRequirement = d.FlipScenario.Purchase_TotalInvestment
         d.FlipScenario.ROI = d.FlipScenario.Resale_NetProfit / d.FlipScenario.Purchase_TotalInvestment;
@@ -372,20 +374,21 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.BestCaseScenario.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums;
         d.BestCaseScenario.TotalInvestment = d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
         d.BestCaseScenario.CashRequirement = d.BestCaseScenario.TotalInvestment - d.LoanTerms.LoanAmount;
-        d.BestCaseScenario.NetProfit = d.FlipScenario.Purchase_Purchase - (d.Liens.AdditonalCostsSums + d.DealExpenses.Sums + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums) - (d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums);
+        d.BestCaseScenario.NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - (d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums);
         d.BestCaseScenario.ROI = d.BestCaseScenario.NetProfit / d.BestCaseScenario.TotalInvestment
         // Rental Model
+        d.RentalModel.NumOfUnits = int(d.RentalInfo.NumOfUnits);
         d.RentalModel.DeedPurchase = float(d.RentalInfo.DeedPurchase);
         d.RentalModel.TotalRepairs = float(d.RentalInfo.RepairBidTotal);
         d.RentalModel.AgentCommission = float(d.DealCosts.AgentCommission);
         d.RentalModel.TotalUpfront = d.RentalModel.DeedPurchase + d.RentalModel.TotalRepairs + d.RentalModel.AgentCommission;
         d.RentalModel.Rent = float(d.RentalInfo.MarketRentTotal);
         d.RentalModel.ManagementFee = d.RentalModel.Rent * 0.1;
-        d.RentalModel.Maintenance = 50 + (int(d.RentalInfo.NumOfUnits) - 1) * 25;
-        d.RentalModel.MiscRepairs = 75 * int(d.RentalInfo.NumOfUnits);
+        d.RentalModel.Maintenance = 50 + (d.RentalModel.NumOfUnits - 1) * 25;
+        d.RentalModel.MiscRepairs = 75 * d.RentalModel.NumOfUnits;
         d.RentalModel.NetMontlyRent = d.RentalModel.Rent - d.RentalModel.ManagementFee - d.RentalModel.Maintenance - d.RentalModel.Insurance - d.RentalModel.MiscRepairs;
         $scope.RentalHelper = new ptUnderwriter.RentalHelper(d.RentalInfo.CurrentlyRented, d.RentalInfo.RentalTime, d.RentalModel);
-        d.RentalModel.TotalMonth = $scope.RentalHelper.totalMonth;
+        d.RentalModel.TotalMonth = $scope.RentalHelper.totalMonths;
         d.RentalModel.CostOfMoney = $scope.RentalHelper.costOfMoney;
         d.RentalModel.TotalCost = $scope.RentalHelper.totalCost;
         d.RentalModel.Breakeven = $scope.RentalHelper.breakeven;

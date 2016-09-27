@@ -9,7 +9,7 @@
                             <tr>
                                 <th class="td-label excel-default">Property Info</th>
                                 <th class="td-value excel-default">
-                                    <span ng-bind='data.PropertyInfo.Info'></span>
+                                    <span ng-bind='data.PropertyInfo.PropertyType'></span>
                                 </th>
                             </tr>
 
@@ -536,7 +536,7 @@
                             Maximum Lien Payoff
                         </td>
                         <td class="td-value">
-                            {{data.Others.MaximumLienPayoff}}
+                            {{data.Others.MaximumLienPayoff | currency}}
                         </td>
                     </tr>
                     <tr>
@@ -544,7 +544,7 @@
                             Maximum SS Price
                         </td>
                         <td class="td-value">
-                            {{data.Others.MaximumSSPrice}}
+                            {{data.Others.MaximumSSPrice |currency}}
                         </td>
                     </tr>
                 </table>
@@ -559,31 +559,31 @@
                     <tr>
                         <td class="td-label">Purchase Price (All In)</td>
                         <td class="td-value">
-                            {{data.MinimumBaselineScenario.PurchasePriceAllIn}}
+                            {{data.MinimumBaselineScenario.PurchasePriceAllIn | currency}}
                         </td>
                     </tr>
                     <tr>
                         <td class="td-label">Total Investment</td>
                         <td class="td-value">
-                            {{data.MinimumBaselineScenario.TotalInvestment}}
+                            {{data.MinimumBaselineScenario.TotalInvestment | currency}}
                         </td>
                     </tr>
                     <tr>
                         <td class="td-label">Cash Requirement</td>
                         <td class="td-value">
-                            {{data.MinimumBaselineScenario.CashRequirement }}
+                            {{data.MinimumBaselineScenario.CashRequirement |currency}}
                         </td>
                     </tr>
                     <tr>
                         <td class="td-label">Net Profit</td>
                         <td class="td-value">
-                            {{data.MinimumBaselineScenario.NetProfit}}
+                            {{data.MinimumBaselineScenario.NetProfit| currency}}
                         </td>
                     </tr>
                     <tr>
                         <td class="td-label">ROI (Loan)</td>
                         <td class="td-value">
-                            {{data.MinimumBaselineScenario.ROI}}
+                            {{data.MinimumBaselineScenario.ROI |percentage}}
                         </td>
                     </tr>
                 </table>
@@ -598,31 +598,31 @@
                     <tr class="success">
                         <td class="td-label">Purchase Price (All In)</td>
                         <td class="td-value">
-                            {{data.BestCaseScenario.PurchasePriceAllIn}}
+                            {{data.BestCaseScenario.PurchasePriceAllIn |currency}}
                         </td>
                     </tr>
                     <tr class="success">
                         <td class="td-label">Total Investment</td>
                         <td class="td-value">
-                            {{data.BestCaseScenario.TotalInvestment}}
+                            {{data.BestCaseScenario.TotalInvestment | currency}}
                         </td>
                     </tr>
                     <tr class="success">
                         <td class="td-label">Cash Requirement</td>
                         <td class="td-value">
-                            {{data.BestCaseScenario.CashRequirement}}
+                            {{data.BestCaseScenario.CashRequirement | currency}}
                         </td>
                     </tr>
                     <tr class="success">
                         <td class="td-label">Net Profit</td>
                         <td class="td-value">
-                            {{data.BestCaseScenario.NetProfit}}
+                            {{data.BestCaseScenario.NetProfit | currency}}
                         </td>
                     </tr>
                     <tr class="success">
                         <td class="td-label">ROI (Loan)</td>
                         <td class="td-value">
-                            {{data.BestCaseScenario.ROI}}
+                            {{data.BestCaseScenario.ROI | percentage}}
                         </td>
                     </tr>
                 </table>
@@ -637,13 +637,13 @@
                     <tr>
                         <td class="td-label">Upfront Cost</td>
                         <td class="td-value">
-                            {{data.RentalModel.TotalUpfront}}
+                            {{data.RentalModel.TotalUpfront | currency}}
                         </td>
                     </tr>
                     <tr>
                         <td class="td-label">Net Rent</td>
                         <td class="td-value">
-                            {{data.RentalModel.NetMontlyRent}}
+                            {{data.RentalModel.NetMontlyRent | currency}}
                         </td>
                     </tr>
                     <tr>
@@ -661,7 +661,7 @@
                     <tr>
                         <td class="td-label">Target Profit</td>
                         <td class="td-value">
-                            {{data.RentalModel.TargetProfit}}
+                            {{data.RentalModel.TargetProfit | currency}}
                         </td>
                     </tr>
                 </table>
@@ -673,7 +673,7 @@
                     <tr>
                         <td class="td-label">MAX HOI</td>
                         <td class="td-value">
-                            {{data.Others.MaxHOI}}
+                            {{data.Others.MaxHOI | currency}}
                         </td>
                     </tr>
                 </table>
