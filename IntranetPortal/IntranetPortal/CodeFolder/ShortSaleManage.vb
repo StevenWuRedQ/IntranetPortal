@@ -367,7 +367,7 @@ Public Class ShortSaleManage
             TitleManage.StartTitle(bble, ssCase.CaseName, userName, titleUser)
         Else
             Throw New Exception("Address can't found in ShortSale. BBLE: " & bble)
-                End If
+        End If
     End Sub
 
     Public Shared Sub NewCaseApproved(bble As String, approvedBy As String)

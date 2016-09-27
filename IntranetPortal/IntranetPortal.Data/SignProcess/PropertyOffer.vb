@@ -13,6 +13,8 @@ Partial Public Class PropertyOffer
     Public Property AcceptedDate As DateTime?
     Public Property AcceptedBy As String
     Public Property LeadsOwner As String
+    Public Property InProcessDate As DateTime
+    Public Property InProcessBy As String
     Public ReadOnly Property AcceptedDuration As TimeSpan?
         Get
             If AcceptedDate.HasValue AndAlso UpdateDate.HasValue Then
@@ -44,11 +46,14 @@ Partial Public Class PropertyOffer
     ''' <returns></returns>
     Public Shared Function GetCompleted(names As String()) As PropertyOffer()
         Using ctx As New PortalEntities
-            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
-                         Join ld In ctx.SSLeads.Where(Function(p) Not ({5, 7}).Contains(p.Status)) On offer.BBLE Equals ld.BBLE
-                         Select offer
+            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2)
+                         Join ld In ctx.SSLeads.Where(Function(p) Not ({5, 7}).Contains(p.Status) AndAlso names.Contains(p.EmployeeName)) On offer.BBLE Equals ld.BBLE
+                         Select offer, ld.EmployeeName
 
-            Return offers.ToArray
+            Return offers.AsEnumerable.Select(Function(a)
+                                                  a.offer.LeadsOwner = a.EmployeeName
+                                                  Return a.offer
+                                              End Function).ToArray
         End Using
     End Function
 
@@ -59,13 +64,19 @@ Partial Public Class PropertyOffer
     ''' <returns></returns>
     Public Shared Function GetInProcess(names As String()) As PropertyOffer()
         Using ctx As New PortalEntities
-            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
-                         Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5) On offer.BBLE Equals ld.BBLE
+            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2)
+                         Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5 AndAlso names.Contains(p.EmployeeName)) On offer.BBLE Equals ld.BBLE
                          From ss In ctx.ShortSaleCases.Where(Function(s) s.BBLE = offer.BBLE).DefaultIfEmpty()
+                         Let ipLog = ctx.SSLeadsStatusLogs.Where(Function(s) s.BBLE = offer.BBLE AndAlso s.Type = 1).OrderByDescending(Function(a) a.CreateDate).FirstOrDefault
                          Where ss.Status Is Nothing OrElse ss.Status = 0
-                         Select offer
+                         Select offer, ld.EmployeeName, ipLog.CreateDate, ipLog.CreateBy
 
-            Return offers.ToArray
+            Return offers.AsEnumerable.Select(Function(a)
+                                                  a.offer.LeadsOwner = a.EmployeeName
+                                                  a.offer.InProcessBy = a.CreateBy
+                                                  a.offer.InProcessDate = a.CreateDate
+                                                  Return a.offer
+                                              End Function).ToArray
         End Using
     End Function
 
@@ -76,14 +87,15 @@ Partial Public Class PropertyOffer
     ''' <returns></returns>
     Public Shared Function GetSSAccepted(names As String(), Optional startDate As DateTime? = Nothing, Optional endDate As DateTime? = Nothing) As PropertyOffer()
         Using ctx As New PortalEntities
-            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
-                         Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5) On offer.BBLE Equals ld.BBLE
+            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2)
+                         Join ld In ctx.SSLeads.Where(Function(p) p.Status = 5 AndAlso names.Contains(p.EmployeeName)) On offer.BBLE Equals ld.BBLE
                          Join ss In ctx.ShortSaleCases.Where(Function(s) s.Status > 0 AndAlso (startDate Is Nothing OrElse s.AcceptedDate > startDate) AndAlso (endDate Is Nothing OrElse s.AcceptedDate < endDate)) On offer.BBLE Equals ss.BBLE
-                         Select offer, ss.AcceptedBy, ss.AcceptedDate
+                         Select offer, ss.AcceptedBy, ss.AcceptedDate, ld.EmployeeName
 
             Return offers.AsEnumerable.Select(Function(f)
                                                   f.offer.AcceptedDate = f.AcceptedDate
                                                   f.offer.AcceptedBy = f.AcceptedBy
+                                                  f.offer.LeadsOwner = f.EmployeeName
                                                   Return f.offer
                                               End Function).ToArray
         End Using
@@ -96,14 +108,15 @@ Partial Public Class PropertyOffer
     ''' <returns></returns>
     Public Shared Function GetAllCompleted(names As String()) As PropertyOffer()
         Using ctx As New PortalEntities
-            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2 And names.Contains(p.Owner))
-                         From ld In ctx.SSLeads.Where(Function(p) p.Status = 5 AndAlso p.BBLE = offer.BBLE).DefaultIfEmpty
+            Dim offers = From offer In ctx.PropertyOffers.Where(Function(p) p.Status = 2)
+                         Join ld In ctx.SSLeads.Where(Function(p) names.Contains(p.EmployeeName)) On ld.BBLE Equals offer.BBLE
                          From ss In ctx.ShortSaleCases.Where(Function(s) s.BBLE = offer.BBLE).DefaultIfEmpty()
-                         Select New With {offer, ld.Status, .ssStatue = ss.Status}
+                         Select New With {offer, ld.Status, ld.EmployeeName, .ssStatue = ss.Status}
 
             Return offers.AsEnumerable.Select(Function(f)
                                                   f.offer.LeadsStatus = f.Status
                                                   f.offer.ShortSaleStatus = f.ssStatue
+                                                  f.offer.LeadsOwner = f.EmployeeName
                                                   Return f.offer
                                               End Function).ToArray
         End Using
@@ -128,8 +141,14 @@ Partial Public Class PropertyOffer
     ''' <returns>The Property Offer</returns>
     Public Shared Function GetOffer(bble As String) As PropertyOffer
         Using ctx As New PortalEntities
-            Dim offer = ctx.PropertyOffers.Where(Function(p) p.BBLE = bble).FirstOrDefault
-            Return offer
+            Dim result = From offer In ctx.PropertyOffers.Where(Function(p) p.BBLE = bble)
+                         Join ld In ctx.SSLeads On offer.BBLE Equals ld.BBLE
+                         Select offer, ld.EmployeeName
+
+            Return result.AsEnumerable.Select(Function(a)
+                                                  a.offer.LeadsOwner = a.EmployeeName
+                                                  Return a.offer
+                                              End Function).FirstOrDefault
         End Using
     End Function
 
