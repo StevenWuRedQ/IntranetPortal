@@ -90,18 +90,7 @@
                             rowInfo.rowElement.addClass('myRow');
                         },
                         onContentReady: function (e) {
-                            //var spanTotal = e.element.find('.spanTotal')[0];
-                            //if (spanTotal) {
-                            //    $(spanTotal).html("Total Count: " + e.component.totalCount());
-                            //} else {
-                            //    var panel = e.element.find('.dx-datagrid-pager');
-
-                            //    if (!panel.find(".dx-pages").length) {
-                            //        $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()).appendTo(e.element);
-                            //    } else {
-                            //        panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
-                            //    }
-                            //}
+                            
                         },
                         summary: {
                             groupItems: [{
@@ -185,6 +174,28 @@
 
                                 return moment.duration(cellInfo.value).humanize();
                             }
+                        }];
+                        options.columns = options.columns.concat(duration);                        
+                    }
+
+                    if(view == 2){
+                        var duration = [{
+                            caption: "In Process Date",
+                            dataField: "InProcessDate",
+                            dataType: "date",
+                            customizeText: function (cellInfo) {                                
+                                if (!cellInfo.value)
+                                    return ""
+
+                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+                                if (dt)
+                                    return moment(dt).format('MM/DD/YYYY hh:mm a');
+
+                                return ""
+                            }
+                        }, {
+                            caption: "In Process By",
+                            dataField: "InProcessBy"
                         }];
                         options.columns = options.columns.concat(duration);                        
                     }

@@ -4485,14 +4485,18 @@ angular.module('PortalApp')
         }
 
         $scope.SearchComplete = function (isSave) {
+            // only completed need check validate
+            // when saving don't need validate input.
+            if (!isSave)
+            {
+                if (!$scope.newVersionValidate()) {
+                    var msg = $scope.DivError.getMessage();
 
-            if (!$scope.newVersionValidate()) {
-                var msg = $scope.DivError.getMessage();
-
-                AngularRoot.alert(msg[0]);
-                return;
-            };
-
+                    AngularRoot.alert(msg[0]);
+                    return;
+                };
+            }
+            
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
@@ -4502,7 +4506,6 @@ angular.module('PortalApp')
                     AngularRoot.alert("Save successfully!");
                 });
             } else {
-
 
                 $scope.DocSearch.$completed(null, function () {
 

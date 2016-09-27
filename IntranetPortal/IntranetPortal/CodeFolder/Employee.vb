@@ -270,6 +270,10 @@ Partial Public Class Employee
         Dim emps As New List(Of String)
         For Each rl In Roles.GetRolesForUser(userName)
             If rl.StartsWith("OfficeManager") Then
+                If rl.Contains("*") Then
+                    Continue For
+                End If
+
                 Dim dept = rl.Split("-")(1)
                 emps.AddRange(GetDeptUsers(dept).ToList)
                 emps.AddRange(UserInTeam.GetTeamUsersArray(dept))
@@ -618,6 +622,10 @@ Partial Public Class Employee
         End If
 
         If rs.Any(Function(r) r.Contains("Manager")) Then
+            Return True
+        End If
+
+        If rs.Any(Function(r) r.Contains("OfficeExecutive")) Then
             Return True
         End If
 

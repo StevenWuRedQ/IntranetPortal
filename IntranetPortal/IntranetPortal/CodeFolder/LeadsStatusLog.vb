@@ -54,7 +54,6 @@
             ctx.SaveChanges()
 
         End Using
-
     End Sub
 
     Public Enum LogType
