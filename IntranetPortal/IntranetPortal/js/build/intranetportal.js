@@ -1816,6 +1816,7 @@ angular.module('PortalApp')
 
         return Underwriter;
 
+   
     }]);
 angular.module('PortalApp')
     .factory('UnderwritingRequest', ['$http', 'ptBaseResource', function ($http, ptBaseResource) {
@@ -2049,8 +2050,8 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
-    this.confirm = function (message) {
-        return $rootScope.confirm(message);
+    this.confirm = function (message, callback) {
+        return $rootScope.confirm(message, callback);
     };
     this.addOverlay = function () {
         $rootScope.addOverlay();
@@ -4487,8 +4488,7 @@ angular.module('PortalApp')
         $scope.SearchComplete = function (isSave) {
             // only completed need check validate
             // when saving don't need validate input.
-            if (!isSave)
-            {
+            if (!isSave) {
                 if (!$scope.newVersionValidate()) {
                     var msg = $scope.DivError.getMessage();
 
@@ -4496,7 +4496,7 @@ angular.module('PortalApp')
                     return;
                 };
             }
-            
+
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
@@ -4536,18 +4536,30 @@ angular.module('PortalApp')
 
 
         $scope.markCompleted = function () {
+            var xhrfunc = function () {
+                debugger;
+                $http({
+                    method: 'GET',
+                    url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
+                }).then(function succ(d) {
+                    //debugger;
+                    $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
+                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                    $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                }, function err() {
 
-            $http({
-                method: 'GET',
-                url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
-            }).then(function succ(d) {
-                //debugger;
-                $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
-                $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-            }, function err() {
+                })
+            };
+            
+            // because the underwriting completion is not reversible, comfirm it before save to db.
+            ptCom.confirm('Are you sure to complete this underwriting?', function (result) {
+                debugger;
+                if (result) {
+                    xhrfunc();
+                }
 
-            })
+            });
+
 
         }
     });
@@ -8748,7 +8760,6 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
 
         }
     };
-
     $scope.applyRule = function () {
         //debugger;
         var d = $scope.data;
