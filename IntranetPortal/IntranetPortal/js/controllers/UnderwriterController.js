@@ -155,7 +155,6 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
 
         }
     };
-
     $scope.applyRule = function () {
         //debugger;
         var d = $scope.data;
