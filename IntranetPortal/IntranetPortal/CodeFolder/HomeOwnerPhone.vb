@@ -70,6 +70,16 @@
         Return Regex.Replace(phoneNumber, "[^\d]+", "")
     End Function
     ''' <summary>
+    ''' Get owner phone list by bble
+    ''' </summary>
+    ''' <param name="BBLE">BBLE</param>
+    ''' <returns>list of owner phones</returns>
+    Public Shared Function GetPhonesByBBLE(BBLE As String) As List(Of HomeOwnerPhone)
+        Using ctx As New Entities
+            Return ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE).ToList()
+        End Using
+    End Function
+    ''' <summary>
     ''' After Call all phone by BBLE and phone number mark all phone number LastCalledDate 
     ''' </summary>
     ''' todo

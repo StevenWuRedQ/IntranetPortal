@@ -9,7 +9,8 @@ Namespace Migrations
         Inherits DbMigrationsConfiguration(Of UnderwriterEntity)
 
         Public Sub New()
-            AutomaticMigrationsEnabled = False
+            AutomaticMigrationsEnabled = True
+            ContextKey = "IntranetPortal.Data.UnderwriterEntity"
         End Sub
 
         Protected Overrides Sub Seed(context As UnderwriterEntity)

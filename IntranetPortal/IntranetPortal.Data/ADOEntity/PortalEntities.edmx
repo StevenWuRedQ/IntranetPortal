@@ -356,6 +356,9 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UnderwriteCompleted" Type="bit" />
+          <Property Name="UnderwriteCompletedOn" Type="datetime" />
+          <Property Name="UnderwriteCompletedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Version" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
@@ -1053,6 +1056,29 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="UnderwritingRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nvarchar" MaxLength="11" />
+          <Property Name="BriefDescription" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Occupancy" Type="nvarchar" MaxLength="50" />
+          <Property Name="OccupancyDescription" Type="nvarchar" MaxLength="512" />
+          <Property Name="IsWorkingOnSS" Type="int" />
+          <Property Name="WorkingCompany" Type="nvarchar" MaxLength="50" />
+          <Property Name="WasHOIFromHO" Type="bit" />
+          <Property Name="TotalRequest" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UpfrontRequested" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="WasHOIOffered" Type="bit" />
+          <Property Name="TotalOffered" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UpfrontOffered" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="UserFollowUps">
           <Key>
             <PropertyRef Name="FollowUpId" />
@@ -1273,6 +1299,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="TitleCase" EntityType="Self.TitleCase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleClearences" EntityType="Self.TitleClearences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleJudgementSearch" EntityType="Self.TitleJudgementSearch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnderwritingRequests" EntityType="Self.UnderwritingRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFollowUps" EntityType="Self.UserFollowUps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuctionPropertyView" EntityType="Self.AuctionPropertyView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1472,6 +1499,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="AuditLogs" EntityType="IntranetPortalModel.AuditLog" />
           <EntitySet Name="SSLeads" EntityType="IntranetPortalModel.SSLead" />
           <EntitySet Name="SSLeadsStatusLogs" EntityType="IntranetPortalModel.SSLeadsStatusLog" />
+          <EntitySet Name="UnderwritingRequests" EntityType="IntranetPortalModel.UnderwritingRequest" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2092,6 +2120,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CompletedOn" Type="DateTime" Precision="3" />
           <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Version" Type="Int32" />
+          <Property Name="UnderwriteCompleted" Type="Boolean" />
+          <Property Name="UnderwriteCompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="UnderwriteCompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CheckingComplain">
           <Key>
@@ -2680,6 +2711,29 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UnderwritingRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BriefDescription" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Occupancy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OccupancyDescription" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="IsWorkingOnSS" Type="Int32" />
+          <Property Name="WorkingCompany" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WasHOIFromHO" Type="Boolean" />
+          <Property Name="TotalRequest" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UpfrontRequested" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WasHOIOffered" Type="Boolean" />
+          <Property Name="TotalOffered" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UpfrontOffered" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3321,6 +3375,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="LeadInfoDocumentSearches">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadInfoDocumentSearch">
               <MappingFragment StoreEntitySet="LeadInfoDocumentSearch">
+                <ScalarProperty Name="UnderwriteCompletedBy" ColumnName="UnderwriteCompletedBy" />
+                <ScalarProperty Name="UnderwriteCompletedOn" ColumnName="UnderwriteCompletedOn" />
+                <ScalarProperty Name="UnderwriteCompleted" ColumnName="UnderwriteCompleted" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
                 <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
@@ -3944,6 +4001,30 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="LogId" ColumnName="LogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnderwritingRequests">
+            <EntityTypeMapping TypeName="IntranetPortalModel.UnderwritingRequest">
+              <MappingFragment StoreEntitySet="UnderwritingRequests">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UpfrontOffered" ColumnName="UpfrontOffered" />
+                <ScalarProperty Name="TotalOffered" ColumnName="TotalOffered" />
+                <ScalarProperty Name="WasHOIOffered" ColumnName="WasHOIOffered" />
+                <ScalarProperty Name="UpfrontRequested" ColumnName="UpfrontRequested" />
+                <ScalarProperty Name="TotalRequest" ColumnName="TotalRequest" />
+                <ScalarProperty Name="WasHOIFromHO" ColumnName="WasHOIFromHO" />
+                <ScalarProperty Name="WorkingCompany" ColumnName="WorkingCompany" />
+                <ScalarProperty Name="IsWorkingOnSS" ColumnName="IsWorkingOnSS" />
+                <ScalarProperty Name="OccupancyDescription" ColumnName="OccupancyDescription" />
+                <ScalarProperty Name="Occupancy" ColumnName="Occupancy" />
+                <ScalarProperty Name="BriefDescription" ColumnName="BriefDescription" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

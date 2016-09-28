@@ -84,6 +84,12 @@ Public Class HomeOwnerInfo
                 BestAddress = homeOwner.BestAddress
                 BestEmail = homeOwner.BestEmail
             End If
+
+            If ownerPhones Is Nothing AndAlso Not String.IsNullOrEmpty(bble) Then
+
+                ownerPhones = HomeOwnerPhone.GetPhonesByBBLE(bble) ' ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = OwnerName And Not String.IsNullOrEmpty(p.Comment)).ToList
+
+            End If
         End Using
     End Sub
 
@@ -93,7 +99,7 @@ Public Class HomeOwnerInfo
 
     Public Function GetPhoneComment(phone As String) As String
         Dim phoneStr = Regex.Replace(phone, "[^\d]+", "")
-        Dim ownerPhone As HomeOwnerPhone = GetAllPhoneComments.FirstOrDefault(Function(p) p.Phone = phoneStr) 'ctx.HomeOwnerPhones.Where(Function(p) p.Phone = phoneStr And p.BBLE = BBLE And p.OwnerName = OwnerName).FirstOrDefault
+        Dim ownerPhone As HomeOwnerPhone = GetAllPhoneComments.FirstOrDefault(Function(p) p.Phone = phoneStr AndAlso p.Comment IsNot Nothing) 'ctx.HomeOwnerPhones.Where(Function(p) p.Phone = phoneStr And p.BBLE = BBLE And p.OwnerName = OwnerName).FirstOrDefault
         If (ownerPhone IsNot Nothing AndAlso ownerPhone.Comment IsNot Nothing) Then
             Dim comment = ownerPhone.Comment
             If comment.Length > 30 Then
@@ -106,10 +112,9 @@ Public Class HomeOwnerInfo
 
     Private ownerPhones As List(Of HomeOwnerPhone)
     Private Function GetAllPhoneComments() As List(Of HomeOwnerPhone)
-        If ownerPhones Is Nothing Then
-            Using ctx As New Entities
-                ownerPhones = ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = OwnerName And Not String.IsNullOrEmpty(p.Comment)).ToList
-            End Using
+
+        If (Utility.IsAny(ownerPhones)) Then
+            Return ownerPhones.Where(Function(p) p.OwnerName = OwnerName AndAlso p.Comment IsNot Nothing).ToList()
         End If
 
         Return ownerPhones
@@ -164,13 +169,24 @@ Public Class HomeOwnerInfo
 
         Return String.Format("{0}/{1}/{2}", dt.monthField, dt.dayField, dt.yearField)
     End Function
+
     ''' <summary>
     ''' get last call by date by phone number
     ''' </summary>
     ''' <param name="phoneNumber"></param>
     ''' <returns>string of last called date</returns>
     Public Function GetAllLastCalled(phoneNumber As String) As String
-        Return HomeOwnerPhone.GetAllPhoneLastCall(BBLE, phoneNumber)
+        If (Utility.IsAny(ownerPhones)) Then
+            Dim ph = ownerPhones.Where(Function(p) p.Phone = phoneNumber AndAlso p.HasLastCalled()).FirstOrDefault()
+
+            If (ph IsNot Nothing) Then
+                Dim ccDate = CDate(ph.LastCalledDate)
+                Return ccDate.ToString("MM/dd/yyyy HH:mm")
+            End If
+        End If
+
+        Return Nothing
+        'Return HomeOwnerPhone.GetAllPhoneLastCall(BBLE, phoneNumber)
     End Function
 
     ''' <summary>
@@ -179,7 +195,16 @@ Public Class HomeOwnerInfo
     ''' <param name="phoneNumber"></param>
     ''' <returns></returns>
     Public Function GetCallCount(phoneNumber As String) As String
-        Return HomeOwnerPhone.GetAllPhoneCount(BBLE, phoneNumber)
+        If (Utility.IsAny(ownerPhones)) Then
+            Dim ph = ownerPhones.Where(Function(p) p.Phone = phoneNumber AndAlso p.HasCallCount()).FirstOrDefault()
+            If ph IsNot Nothing Then
+                Return ph.CallCount.ToString()
+            End If
+            'Return
+        End If
+
+        Return Nothing
+        ' Return HomeOwnerPhone.GetAllPhoneCount(BBLE, phoneNumber)
     End Function
 
     Function BuilderRelativeName(relative As DataAPI.TLOPhoneBookEntry) As String

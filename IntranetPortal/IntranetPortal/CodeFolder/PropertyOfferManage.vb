@@ -87,11 +87,10 @@ Public Class PropertyOfferManage
         Dim emps = New List(Of String)
         emps.Add(name)
 
-        If Roles.IsUserInRole(name, "Admin") OrElse Roles.IsUserInRole(name, "Office-Executive") Then
-            For Each tm In Team.GetActiveTeams
-                emps.AddRange(tm.AllUsers)
-            Next
+        If IsManager(name) Then
+            emps.AddRange(Employee.GetAllEmps)
         Else
+            emps.AddRange(Employee.GetControledDeptEmployees(name))
             emps.AddRange(Team.GetTeamUsersByAssistant(name))
         End If
 
@@ -115,6 +114,50 @@ Public Class PropertyOfferManage
         End Select
 
         Return Nothing
+    End Function
+
+    Friend Shared Function getPerformance(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+
+        If startDate = Nothing OrElse endDate = Nothing OrElse empName Is Nothing OrElse teamName Is Nothing Then
+            Throw New Exception("Parameters cannot be empty.")
+        End If
+
+
+        Dim count = getAcceptedCount(startDate, endDate, empName, teamName)
+        ' Dim rank = getrank(startDate, endDate, empName, teamName)
+        ' Dim commision = getCommision(startDate, endDate, empName, teamName)
+        ' Dim history = getHistory(startDate, endDate, empName, teamName)
+
+        Dim result = New With {
+            .totalaccepted = count
+        }
+        Return result
+    End Function
+
+    Private Shared Function getHistory(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+
+    End Function
+
+    Private Shared Function getCommision(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+
+    End Function
+
+    Private Shared Function getrank(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+
+    End Function
+
+    Private Shared Function getAcceptedCount(startDate As Date, endDate As Date, empName As String, teamName As String) As Integer
+        If String.IsNullOrEmpty(empName) Then
+            Return 0
+        ElseIf empName = "All" Then
+            Dim t = Team.GetTeam(teamName)
+            Dim users = t.ActiveUsers
+            Return PropertyOffer.GetSSAccepted(users, startDate, endDate).Count
+        Else
+            Return PropertyOffer.GetSSAccepted(New String() {empName}, startDate, endDate).Count
+        End If
+
+
     End Function
 
     ''' <summary>
@@ -142,6 +185,29 @@ Public Class PropertyOfferManage
         End If
 
         Return offer
+    End Function
+
+    ''' <summary>
+    ''' Return accepted shortsale last two weeks
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function GetSSAcceptedOfferLastWeek(userTeam As String) As PropertyOffer()
+        Dim dtStart = DateTime.Today.AddDays(-7)
+        Dim emps = New List(Of String)
+
+        If userTeam = "*" Then
+            For Each tm In Team.GetActiveTeams
+                emps.AddRange(tm.AllUsers)
+            Next
+        Else
+            emps.AddRange(Team.GetTeam(userTeam).AllUsers)
+        End If
+
+        Dim data = PropertyOffer.GetSSAccepted(emps.ToArray, dtStart)
+        data.ForEach(Function(d)
+                         Return InitData(d, ManagerView.SSAccepted)
+                     End Function)
+        Return data
     End Function
 
     ''' <summary>
@@ -187,8 +253,13 @@ Public Class PropertyOfferManage
 
     Private Shared Function InitData(offer As PropertyOffer, view As ManagerView) As PropertyOffer
         offer.OfferStage = view.ToString
-        offer.Team = Employee.GetEmpTeam(offer.Owner)
+        ' offer.LeadsOwner = Lead.GetLeadsOwner(offer.BBLE)
+        offer.Team = Employee.GetEmpTeam(offer.LeadsOwner)
         Return offer
+    End Function
+
+    Public Shared Function IsManager(name As String) As Boolean
+        Return Roles.IsUserInRole(name, "Admin") OrElse Roles.IsUserInRole(name, "OfficeExecutive")
     End Function
 
     ''' <summary>
@@ -365,6 +436,7 @@ Public Class DocumentGenerator
         Next
     End Sub
 
+
     ''' <summary>
     ''' Generate word document by file config
     ''' </summary>
@@ -412,6 +484,7 @@ Public Class DocumentGenerator
         'Memo
         Dim file = New GenerateFileConfig With {.FileName = "MemorandumOfContract.docx", .ConfigKey = "Memo"}
         Dim phs = {
+            New DocumentPlaceHolder("TODAY"),
             New DocumentPlaceHolder("DAY"),
             New DocumentPlaceHolder("MONTH"),
             New DocumentPlaceHolder("YEAR"),

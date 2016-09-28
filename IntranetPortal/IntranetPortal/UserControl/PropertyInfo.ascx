@@ -208,7 +208,8 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
                 <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx#/preassign/new?BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
-                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
+                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>                
+                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("Underwriting Request" + leadsInfoBBLE, "/LeadDocSearch/UnderwritingRequest.aspx" + "#/?BBLE=" + leadsInfoBBLE)'>Request Underwriting</span>
                 <% End If %>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
@@ -455,14 +456,13 @@
                         <div class="form_head" style="margin-top: 40px;">
                             MORTGAGE AND VIOLATIONS 
                             <i class="fa fa-save  color_blue_edit collapse_btn tooltip-examples" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i>
+                            <%--
                             <% Dim docSearch = IntranetPortal.Data.LeadInfoDocumentSearch.GetInstance(hfBBLE.Value)  %>
 
                             <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.Completed Then %>
                             <i class="fa fa-eye  color_blue_edit collapse_btn tooltip-examples" title="View search result" onclick="OpenLeadsWindow('/PopupControl/LeadTaxSearchRequest.aspx?BBLE=<%=hfBBLE.Value%>','Entities',667,900)"></i>
                             <%Else %>
                             <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
-
-
                             <% If docSearch IsNot Nothing AndAlso docSearch.Status = IntranetPortal.Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then %>
 
                             <i class="fa fa-refresh fa-spin fa-fw color_blue_edit  tooltip-examples"></i>
@@ -481,6 +481,7 @@
 
                             <% End If %>
                             <% End If %>
+                            --%>
                         </div>
 
                         <%--line 1--%>

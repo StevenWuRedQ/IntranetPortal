@@ -143,11 +143,12 @@ Partial Class Troubleshooting
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
         Me.TitleTab = New System.Windows.Forms.TabPage()
+        Me.TestEntitiesBtn = New System.Windows.Forms.Button()
         Me.TitleButton1 = New System.Windows.Forms.Button()
         Me.tpAuction = New System.Windows.Forms.TabPage()
         Me.txtFiles = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.TestEntitiesBtn = New System.Windows.Forms.Button()
+        Me.btnNewOfferNotify = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -476,6 +477,7 @@ Partial Class Troubleshooting
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.btnNewOfferNotify)
         Me.TabPage2.Controls.Add(Me.AutoAssignRules)
         Me.TabPage2.Controls.Add(Me.Button11)
         Me.TabPage2.Controls.Add(Me.TextBox1)
@@ -1357,6 +1359,15 @@ Partial Class Troubleshooting
         Me.TitleTab.Text = "TitleTab"
         Me.TitleTab.UseVisualStyleBackColor = True
         '
+        'TestEntitiesBtn
+        '
+        Me.TestEntitiesBtn.Location = New System.Drawing.Point(132, 22)
+        Me.TestEntitiesBtn.Name = "TestEntitiesBtn"
+        Me.TestEntitiesBtn.Size = New System.Drawing.Size(75, 23)
+        Me.TestEntitiesBtn.TabIndex = 1
+        Me.TestEntitiesBtn.Text = "TestEntities"
+        Me.TestEntitiesBtn.UseVisualStyleBackColor = True
+        '
         'TitleButton1
         '
         Me.TitleButton1.Location = New System.Drawing.Point(38, 23)
@@ -1393,14 +1404,14 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'TestEntitiesBtn
+        'btnNewOfferNotify
         '
-        Me.TestEntitiesBtn.Location = New System.Drawing.Point(132, 22)
-        Me.TestEntitiesBtn.Name = "TestEntitiesBtn"
-        Me.TestEntitiesBtn.Size = New System.Drawing.Size(75, 23)
-        Me.TestEntitiesBtn.TabIndex = 1
-        Me.TestEntitiesBtn.Text = "TestEntities"
-        Me.TestEntitiesBtn.UseVisualStyleBackColor = True
+        Me.btnNewOfferNotify.Location = New System.Drawing.Point(222, 163)
+        Me.btnNewOfferNotify.Name = "btnNewOfferNotify"
+        Me.btnNewOfferNotify.Size = New System.Drawing.Size(153, 23)
+        Me.btnNewOfferNotify.TabIndex = 11
+        Me.btnNewOfferNotify.Text = "New Offer Notify Rule"
+        Me.btnNewOfferNotify.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1579,4 +1590,5 @@ Partial Class Troubleshooting
     Friend WithEvents AutoAssignRules As Button
     Friend WithEvents btnComplaintEmail As Button
     Friend WithEvents TestEntitiesBtn As Button
+    Friend WithEvents btnNewOfferNotify As Button
 End Class

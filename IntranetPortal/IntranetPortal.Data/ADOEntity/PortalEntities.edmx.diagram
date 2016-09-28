@@ -49,6 +49,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.AuctionPropertyView" Width="2" PointX="5.125" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.DeedCorp" Width="1.5" PointX="9.5" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.DeedCorpProperty" Width="1.75" PointX="7.5" PointY="0.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UnderwritingRequest" Width="1.875" PointX="0.5" PointY="5.125" />
       </Diagram>
       <Diagram DiagramId="4f83f20108054e3eb3754950694b164a" Name="Construction" >
         <EntityTypeShape EntityType="IntranetPortalModel.CheckingComplain" Width="1.5" PointX="0.5" PointY="0.75" />

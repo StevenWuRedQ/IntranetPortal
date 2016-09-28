@@ -115,6 +115,7 @@ Namespace Controllers
             leadInfoDocumentSearch.CompletedOn = Date.Now
             leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
             leadInfoDocumentSearch.UpdateDate = Date.Now
+
             Try
                 leadInfoDocumentSearch.Save()
             Catch ex As Exception
@@ -149,17 +150,17 @@ Namespace Controllers
                     Dim attachment As Mail.Attachment
                     Dim judgeDoc = leadInfoDocumentSearch.LoadJudgesearchDoc
 
-                    Dim ccEmail = Employee.GetEmpsEmails(leadInfoDocumentSearch.CompletedBy, Employee.CEO.Name)
+                    Dim ccEmail = Employee.GetEmpsEmails(Employee.CEO.Name)
                     ccEmail = ccEmail & ";" & IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
 
                     If judgeDoc IsNot Nothing Then
                         attachment = New Mail.Attachment(New IO.MemoryStream(CType(judgeDoc.Data, Byte())), judgeDoc.Name.ToString)
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                                   ccEmail,
+                        Core.EmailService.SendMail(ccEmail,
+                                                    Nothing,
                                                    "DocSearchCompleted", maildata, {attachment})
                     Else
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-                                               ccEmail, "DocSearchCompleted", maildata)
+                        Core.EmailService.SendMail(ccEmail,
+                                               Nothing, "DocSearchCompleted", maildata)
                     End If
                 End If
             Catch ex As Exception
@@ -207,8 +208,10 @@ Namespace Controllers
                     Dim empl = Employee.GetInstance(leadInfoDocumentSearch.CreateBy)
                     Dim mLead = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
                     Dim searchEmail = IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
+
+                    ' notify the doc search user
                     If (LeadInfoSearchUser IsNot Nothing AndAlso mLead IsNot Nothing) Then
-                        Core.EmailService.SendMail(Employee.GetEmpsEmails(LeadInfoSearchUser) & ";" & searchEmail, empl.Email,
+                        Core.EmailService.SendMail(Employee.GetEmpsEmails(LeadInfoSearchUser) & ";" & searchEmail, Nothing,
                                                "DocSearchNotify",
                                                 New Dictionary(Of String, String) From
                                                 {
@@ -217,6 +220,17 @@ Namespace Controllers
                                                     {"DocUser", LeadInfoSearchUser.Name},
                                                     {"BBLE", leadInfoDocumentSearch.BBLE},
                                                     {"ExpectedDate", IIf(leadInfoDocumentSearch.ExpectedSigningDate.HasValue, String.Format("{0:d}", leadInfoDocumentSearch.ExpectedSigningDate), "None")}
+                                                })
+                    End If
+
+                    ' notify the requestor
+                    If (LeadInfoSearchUser IsNot Nothing AndAlso mLead IsNot Nothing) Then
+                        Core.EmailService.SendMail(empl.Email, Nothing,
+                                               "DocSearchNotifyForAgent",
+                                                New Dictionary(Of String, String) From
+                                                {
+                                                    {"UserName", empl.Name},
+                                                    {"Address", mLead.PropertyAddress}
                                                 })
                     End If
                 End If
@@ -248,6 +262,23 @@ Namespace Controllers
 
         Private Function LeadInfoDocumentSearchExists(ByVal id As String) As Boolean
             Return db.LeadInfoDocumentSearches.Count(Function(e) e.BBLE = id) > 0
+        End Function
+        <HttpGet>
+        <Route("api/LeadInfoDocumentSearches/MarkCompleted/{bble}")>
+        Public Function MarkUnderWritingCompleted(BBLE As String) As IHttpActionResult
+            Dim USER = HttpContext.Current.User.Identity.Name
+            If Not String.IsNullOrEmpty(BBLE) OrElse String.IsNullOrEmpty(USER) Then
+                Dim search = LeadInfoDocumentSearch.MarkCompletedUnderwriting(BBLE, USER)
+                If Nothing IsNot search Then
+                    Return Ok(search)
+                Else
+                    Return BadRequest(String.Format("Doc Search With {0} Cannot Be Found!", BBLE))
+                End If
+
+            Else
+                Return BadRequest("BBLE Cannot Be empty.")
+            End If
+
         End Function
     End Class
 End Namespace

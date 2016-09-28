@@ -54,6 +54,4 @@ Namespace Controllers
         End Function
 
     End Class
-
-
 End Namespace

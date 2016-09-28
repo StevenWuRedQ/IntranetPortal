@@ -44,6 +44,11 @@ Imports IntranetPortal.Data
         Assert.IsNotNull(offer.Status)
     End Sub
 
+    <TestMethod()> Public Sub NotifyTeamManager_sendEmail()
+        Dim rule As New IntranetPortal.RulesEngine.NewOfferNotifyRule
+        rule.NotifyTeamManager()
+    End Sub
+
     <TestMethod()> Public Sub UpdateAudit_ReturnData()
         Dim prop = PropertyOffer.GetOffer("4070570032")
         Dim seller1 = prop.ContractSeller1

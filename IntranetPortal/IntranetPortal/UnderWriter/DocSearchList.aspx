@@ -61,7 +61,7 @@
                 $("#preview").css("visibility", "visible");
                 $("#preview").css("width", "50%");
 
-                var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + CaseId;
+                var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + CaseId + '#/';
                 $("#previewWindow").attr("src", url)
             }
 
@@ -125,7 +125,7 @@
                                 .appendTo(container);
                         }
                     }, {
-                        caption: "Completion Date",
+                        caption: "Search Completed On",
                         dataField: "CompletedOn",
                         dataType: "date",
                         customizeText: function (cellInfo) {

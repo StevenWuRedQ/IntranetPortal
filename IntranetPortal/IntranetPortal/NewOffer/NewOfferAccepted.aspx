@@ -8,7 +8,7 @@
         <% If String.IsNullOrEmpty(Address) Then %>
         The property is not found in shortsale.
         <% else %>
-        The offer (<%= Address %>) was accepted by <% If Not String.IsNullOrEmpty(AcceptedBy) Then %> <%= AcceptedBy %> from ShortSale Departent on <%= string.Format("{0:d}", AcceptedDate) %><% else %> ShortSale<% End if %>.
+        The offer (<%= Address %>) was accepted by <% If Not String.IsNullOrEmpty(AcceptedBy) Then %> <%= AcceptedBy %> from ShortSale Department on <%= string.Format("{0:d}", AcceptedDate) %><% else %> ShortSale<% End if %>.
         <% End If %>
         <br /><br />
         <a href="/viewleadsinfo.aspx?id=<%= BBLE %>">View Lead</a>

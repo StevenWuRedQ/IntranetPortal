@@ -218,3 +218,4 @@ IntranetPortal/IntranetPortal/TempDataFile/OfferDoc/
 
 # Visual Studio Code 
 .vscode
+/IntranetPortal/InterPortalSQL

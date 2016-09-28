@@ -252,6 +252,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Humanizer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Humanizer.Core.2.1.0\lib\netstandard1.0\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
@@ -815,6 +819,7 @@
     <Compile Include="Controllers\TitleController.vb" />
     <Compile Include="Controllers\TwilioController.vb" />
     <Compile Include="Controllers\UnderwriterController.vb" />
+    <Compile Include="Controllers\UnderwritingRequestController.vb" />
     <Compile Include="Controllers\UserInfoController.vb" />
     <Compile Include="Controllers\WorkflowController.vb" />
     <Compile Include="Controllers\WorkingLogController.vb" />
@@ -1139,6 +1144,13 @@
       <DependentUpon>DeadleadsReport.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\NewOfferNotification.ascx.designer.vb">
+      <DependentUpon>NewOfferNotification.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferNotification.ascx.vb">
+      <DependentUpon>NewOfferNotification.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\PreSignNotify.ascx.designer.vb">
       <DependentUpon>PreSignNotify.ascx</DependentUpon>
     </Compile>
@@ -1188,6 +1200,13 @@
       <DependentUpon>ShortSaleActivityReport.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\NewOfferNotification.aspx.designer.vb">
+      <DependentUpon>NewOfferNotification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferNotification.aspx.vb">
+      <DependentUpon>NewOfferNotification.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\TeamActivityReport.aspx.designer.vb">
       <DependentUpon>TeamActivityReport.aspx</DependentUpon>
     </Compile>
@@ -1232,6 +1251,13 @@
     <Compile Include="LeadDocSearch\LeadDocSearchList.ascx.vb">
       <DependentUpon>LeadDocSearchList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LeadDocSearch\UnderwritingRequest.aspx.designer.vb">
+      <DependentUpon>UnderwritingRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadDocSearch\UnderwritingRequest.aspx.vb">
+      <DependentUpon>UnderwritingRequest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="LeadsGenerator\LeadsGenerator.aspx.designer.vb">
       <DependentUpon>LeadsGenerator.aspx</DependentUpon>
@@ -6857,6 +6883,7 @@
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\AuctionDailyReport.ascx" />
     <Content Include="EmailTemplate\DeadleadsReport.ascx" />
+    <Content Include="EmailTemplate\NewOfferNotification.ascx" />
     <Content Include="EmailTemplate\PreSignNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserReport.ascx" />
@@ -6864,6 +6891,7 @@
     <Content Include="EmailTemplate\EmailSummary.aspx" />
     <Content Include="EmailTemplate\TaskSummary.ascx" />
     <Content Include="EmailTemplate\ShortSaleActivityReport.aspx" />
+    <Content Include="EmailTemplate\NewOfferNotification.aspx" />
     <Content Include="EmailTemplate\TeamActivityReport.aspx" />
     <Content Include="EmailTemplate\Testing.ascx" />
     <Content Include="favicon.ico" />
@@ -7182,6 +7210,7 @@
     <Content Include="js\controllers\ShortSalePreSignController.js" />
     <Content Include="js\controllers\TitleController.js" />
     <Content Include="js\controllers\UnderwriterController.js" />
+    <Content Include="js\controllers\UnderwritingRequestController.js" />
     <Content Include="js\controllers\VendorController.js" />
     <Content Include="js\directives\auditLogs.js" />
     <Content Include="js\directives\bindId.js" />
@@ -7210,14 +7239,17 @@
     <Content Include="js\filters.js" />
     <Content Include="js\filters\booleanToString.js" />
     <Content Include="js\filters\ByContact.js" />
+    <Content Include="js\filters\percentage.js" />
     <Content Include="js\filters\unsafe.js" />
+    <Content Include="js\libs\dx.all.js" />
     <Content Include="js\models\AssignCorp.js" />
     <Content Include="js\models\AuditLog.js" />
     <Content Include="js\models\BusinessCheck.js" />
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
-    <Content Include="js\models\ptUnderwriter.js" />
+    <Content Include="js\models\Underwriter.js" />
+    <Content Include="js\models\UnderwritingRequest.js" />
     <Content Include="js\services\ptCom.js" />
     <Content Include="js\services\ptConstructionService.js" />
     <Content Include="js\services\ptContactServices.js" />
@@ -7239,9 +7271,9 @@
     <Content Include="js\models\NewOfferListGrid.js" />
     <Content Include="js\models\PreSign.js" />
     <Content Include="js\models\PropertyOffer.js" />
-    <Content Include="js\models\ptBaseResource.js" />
-    <Content Include="js\models\ptDocSearch.js" />
-    <Content Include="js\models\ptLeadResearch.js" />
+    <Content Include="js\models\BaseResource.js" />
+    <Content Include="js\models\DocSearch.js" />
+    <Content Include="js\models\LeadResearch.js" />
     <Content Include="js\models\QueryUrl.js" />
     <Content Include="js\models\ScopeHelper.js" />
     <Content Include="js\models\Team.js" />
@@ -7276,10 +7308,12 @@
     <Content Include="js\Views\Underwriter\tables.tpl.html" />
     <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
     <Content Include="js\Views\Underwriter\datainput.tpl.html" />
+    <Content Include="js\Views\Underwriter\underwriting_request.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
+    <Content Include="LeadDocSearch\UnderwritingRequest.aspx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
@@ -8396,6 +8430,7 @@
     <Folder Include="Content\layouts\Simple\" />
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
+    <Folder Include="Scripts\dx\" />
     <Folder Include="TempDataFile\AuctionFiles\" />
     <Folder Include="TempDataFile\OfferDoc\" />
     <Folder Include="TempDataFile\TitleDocs\" />

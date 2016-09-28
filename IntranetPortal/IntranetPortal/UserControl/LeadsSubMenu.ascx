@@ -319,9 +319,9 @@
         <dx:PopupControlContentControl runat="server" ClientInstanceName="ConfirmMessagerContent">
             <div>
                 <div>
-                    <h5><b>New offer</b> is not done on this lead!</h5>
+                    <h5><b>New offer</b> is not completed on this lead!</h5>
                 </div>
-                <h5>Please finish <b>new offer</b> before move it to short sale process.</h5>
+                <h5>Please complete <b>new offer</b> before moving to the short sale process.</h5>
             </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
@@ -403,7 +403,7 @@
         <div style="height: 30px; vertical-align: central" id="divFoot">
             <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('Save');}else{ alert('please select reason.');}">Confirm</span>
-            <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>
+            <%--<span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>--%>
         </div>
     </FooterContentTemplate>
     <ClientSideEvents EndCallback="function(s,e){if($('#hdmark').length) $('#divFoot').show(); else {$('#divFoot').hide();}  if(popupShow) s.Show();  else{ s.Hide(); OnSetStatusComplete(s,e); } }" />

@@ -195,14 +195,18 @@ angular.module('PortalApp')
         }
 
         $scope.SearchComplete = function (isSave) {
+            // only completed need check validate
+            // when saving don't need validate input.
+            if (!isSave)
+            {
+                if (!$scope.newVersionValidate()) {
+                    var msg = $scope.DivError.getMessage();
 
-            if (!$scope.newVersionValidate()) {
-                var msg = $scope.DivError.getMessage();
-
-                AngularRoot.alert(msg[0]);
-                return;
-            };
-
+                    AngularRoot.alert(msg[0]);
+                    return;
+                };
+            }
+            
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
@@ -213,7 +217,6 @@ angular.module('PortalApp')
                 });
             } else {
 
-                
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -239,5 +242,22 @@ angular.module('PortalApp')
                 }
 
             })
+        }
+
+
+        $scope.markCompleted = function () {
+
+            $http({
+                method: 'GET',
+                url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
+            }).then(function succ(d) {
+                //debugger;
+                $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
+                $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+            }, function err() {
+
+            })
+
         }
     });

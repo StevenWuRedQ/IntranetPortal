@@ -154,6 +154,9 @@
     <Compile Include="ADOEntity\SSLeadsStatusLog.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\UnderwritingRequest.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="Auction\AuctionProperty.vb" />
     <Compile Include="Audit\AuditLog.vb" />
     <Compile Include="BusinessForm\BusinessDataBase.vb" />
@@ -166,6 +169,7 @@
     <Compile Include="Construction\ConstructionSpotCheck.vb" />
     <Compile Include="Construction\ConstructionViolations.vb" />
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
+    <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
     <Compile Include="Exception\DataException.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />
@@ -362,8 +366,9 @@
     <Compile Include="SignProcess\PropertyOffer.vb" />
     <Compile Include="Title\TitleCase.vb" />
     <Compile Include="Twilio\TwilioClient.vb" />
-    <Compile Include="Underwriter\NewTest.vb" />
-    <Compile Include="Underwriter\UnderwriterForm.vb" />
+    <Compile Include="Underwriter\NewTable.vb" />
+    <Compile Include="Underwriter\Underwriter.vb" />
+    <Compile Include="Underwriter\UnderwriterEntity.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
