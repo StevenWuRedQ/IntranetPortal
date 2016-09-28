@@ -2,6 +2,7 @@
 Imports System.Web.Security
 Imports IntranetPortal.Data
 
+
 ''' <summary>
 ''' The Rule to notify the New Offer Acceptance report last week.
 ''' The notification will send out at every Monday morning and includes
