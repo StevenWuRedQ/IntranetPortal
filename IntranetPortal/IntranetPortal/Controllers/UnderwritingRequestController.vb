@@ -66,23 +66,27 @@ Namespace Controllers
         Public Function GetAdditionalInfo(BBLE As String) As IHttpActionResult
             If Not String.IsNullOrEmpty(BBLE) Then
                 Dim l = Lead.GetInstance(BBLE)
-                Dim addr = l.LeadsInfo.PropertyAddress
-                Using ctx As New PortalEntities
-                    Dim r = From c In ctx.LeadInfoDocumentSearches
-                            Where c.BBLE = BBLE
+                If Nothing Is l Then
+                    Return BadRequest(String.Format("Property With {0} Cannot Be Found.", BBLE))
+                Else
+                    Dim addr = l.LeadsInfo.PropertyAddress
+                    Using ctx As New PortalEntities
+                        Dim r = From c In ctx.LeadInfoDocumentSearches
+                                Where c.BBLE = BBLE
 
-                    Dim status
-                    If r.Count > 0 Then
-                        status = 1
-                    Else
-                        status = 0
-                    End If
+                        Dim status
+                        If r.Count > 0 Then
+                            status = 1
+                        Else
+                            status = 0
+                        End If
 
-                    Return Ok(New With {
-                                    .Status = status,
-                                    .Address = addr
-                    })
-                End Using
+                        Return Ok(New With {
+                                        .Status = status,
+                                        .Address = addr
+                        })
+                    End Using
+                End If
             End If
             Return BadRequest("BBLE cannot be empty")
         End Function
