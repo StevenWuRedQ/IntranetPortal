@@ -65,13 +65,13 @@ Public Class Root
         End If
 
         ' remove the given teams search whole portal permission
-        Dim denyTeams = {"RonTeam", "GaliTeam", "AviTeam"}
-        Dim emp = Employee.GetInstance(Page.User.Identity.Name)
+        'Dim denyTeams = {"RonTeam", "GaliTeam", "AviTeam"}
+        'Dim emp = Employee.GetInstance(Page.User.Identity.Name)
 
-        If denyTeams.Contains(emp.Department) Then
-            BindSearchGrid2(emp.Department, key, Employee.CurrentAppId)
-            Return
-        End If
+        'If denyTeams.Contains(emp.Department) Then
+        '    BindSearchGrid2(emp.Department, key, Employee.CurrentAppId)
+        '    Return
+        'End If
         ' end 
 
         If IsPhoneNo(key) Then
