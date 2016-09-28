@@ -272,7 +272,6 @@ Public Class RulesService
         Next
         Log("Task Rules Finished.")
 
-
         Dim lds = Lead.GetAllActiveLeads()
         Log("Total Active Leads: " & lds.Count)
 

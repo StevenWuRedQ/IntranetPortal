@@ -25,13 +25,14 @@ Namespace Controllers
                 Dim view As LeadInfoDocumentSearch.SearchStatus
                 If Integer.TryParse(status, view) Then
                     Dim result = LeadInfoDocumentSearch.GetDocumentSearchs
-                    Dim completedlist = result.Where(Function(ls) ls.Status = view).ToList
+                    Dim completedlist = result.Where(Function(ls) ls.Status = view) _
+                                              .OrderByDescending(Function(a) a.CompletedOn) _
+                                              .ThenBy(Function(a) a.CreateDate).ToList
                     Return Ok(completedlist)
                 End If
 
                 Return Ok()
             End If
-
             Return Ok(LeadInfoDocumentSearch.GetDocumentSearchs())
         End Function
 

@@ -139,6 +139,4 @@ Public Class LeadTest
         Assert.IsFalse(LeadManage.OverUserCreateLimit(name))
 
     End Sub
-
-
 End Class
