@@ -234,9 +234,9 @@
             this._model[k] = {
                 Month: k + 1,
                 Rent: 0,
-                Interest: model.TotalUpfront * model.CostOfMoneyRate / 12.0
+                Interest: -(model.TotalUpfront * model.CostOfMoneyRate / 12.0)
             };
-            this._model[k].Total = model.TotalUpfront - this._model[k].Interest;
+            this._model[k].Total = -(model.TotalUpfront - this._model[k].Interest);
             k++;
 
             for (; k < 3; k++) {
@@ -259,7 +259,7 @@
                     } else {
                         this._model[k].Interest = this._model[k - 1].Total < 0 ? this._model[k - 1].Total * 0.18 / 12 : 0.0;
                     }
-                    this._model[k].Total = this._model[k - 1].Total < 0 ? this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent : this._model[k - 1].Total + this._model[k].Interest;
+                    this._model[k].Total = this._model[k - 1].Total < 0 ? this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent : this._model[k - 1].Total + this._model[k].Rent;
                 }
 
             }
@@ -269,6 +269,7 @@
             for (i = 0; i < 60; i++) {
                 this.costOfMoney += this._model[i].Interest;
             }
+            this.costOfMoney = -this.costOfMoney;
 
             this.totalCost = model.TotalUpfront + this.costOfMoney;
             for (var m = 1 ; m < this._model.length; m++) {
@@ -277,10 +278,10 @@
 
             this.totalMonths = 0;
             this.targetProfit = 0.0;
-            for (m = 0; m < this._model.length; m++) {
-                if (this._model[m].ROI > model.CostOfMoneyRate) {
+            for (m = 1; m < this._model.length; m++) {
+                if (this._model[m].ROI > model.MinROI) {
                     this.totalMonths = this._model[m].Month;
-                    this.targetProfit = this.Total;
+                    this.targetProfit = this._model[m].Total;
                     break;
                 }
             }
@@ -302,4 +303,5 @@
 
         return Underwriter;
 
+   
     }]);

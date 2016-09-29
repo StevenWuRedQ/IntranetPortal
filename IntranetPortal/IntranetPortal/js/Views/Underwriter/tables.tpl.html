@@ -1,4 +1,4 @@
-﻿<div class="container" style="width: 90%; margin-top: 20px">
+﻿<div>
     <div class="row">
 
         <div class="col-md-5 col-lg-5">
@@ -21,13 +21,13 @@
 
                                 <tr>
                                     <td colspan="2">
-                                        <input />
+                                        {{data.InsurancePremium.PurchasePrice | currency}}
                                     </td>
                                     <td colspan="2">
-                                        <input />
+                                        {{data.InsurancePremium.LoanAmountDiscounted | currency}}
                                     </td>
                                     <td colspan="2">
-                                        <input />
+                                        {{data.InsurancePremium.LoanAmountFullPremium | currency}}
                                     </td>
                                 </tr>
 
@@ -46,95 +46,40 @@
                                     <td class="td-label">Owner's Policy Cost</td>
                                     <td class="td-label">Loan Policy Cost</td>
                                 </tr>
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
+                                <tr ng-repeat="n in [0,1,2,3,4,5,6] track by $index">
+                                    <td>{{data.InsurancePremium.From[$index] | currency}}</td>
+                                    <td>{{data.InsurancePremium.To[$index] | currency}}</td>
+                                    <td>{{data.InsurancePremium.OwnersPolicyRate[$index] | percentage}}</td>
+                                    <td>{{data.InsurancePremium.LoanPolicyRate[$index] | percentage}}</td>
+                                    <td>{{data.InsurancePremium.CostOwnersPolicy[$index] | currency}}</td>
+                                    <td>{{data.InsurancePremium.CostLoanPolicy[$index] | currency}}</td>
                                 </tr>
 
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                </tr>
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                </tr>
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                </tr>
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                </tr>
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                </tr>
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                </tr>
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                </tr>
-                                <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                </tr>
 
                                 <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
+                                    <td>{{data.InsurancePremium.From[7] | currency}}</td>
+                                    <td></td>
+                                    <td>{{data.InsurancePremium.OwnersPolicyRate[7] | percentage}}</td>
+                                    <td>{{data.InsurancePremium.LoanPolicyRate[7] | percentage}}</td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
 
                                 <tr>
                                     <td colspan="6">&nbsp;</td>
                                 </tr>
 
                                 <tr>
-                                    <td class="td-label">Owner' Policy</td>
+                                    <td class="td-label">Owner's Policy</td>
                                     <td class="td-label">Owner&Loan Policy &lt;= Purchase </td>
                                     <td class="td-label"></td>
                                     <td class="td-label"></td>
@@ -143,12 +88,21 @@
                                 </tr>
 
                                 <tr>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
-                                    <td><input /></td>
+                                    <td>
+                                        {{data.InsurancePremium.OwnersPolicy | currency}}
+                                    </td>
+                                    <td>
+                                        {{data.InsurancePremium.OwnersLoanPolicyDiscounted | currency}}
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        {{data.InsurancePremium.OwnersLoanPolicyFullPremium | currency}}
+                                    </td>
+                                    <td>
+                                        {{data.InsurancePremium.TitleInsurance | currency}}
+                                    </td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -165,10 +119,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <select style="width: 100%">
-                                            <option>Residential</option>
-                                            <option>Not Residential</option>
-                                        </select>
+                                        {{data.PropertyInfo.PropertyType}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -186,6 +137,7 @@
                                         Filp ROI
                                     </td>
                                     <td>
+                                        {{data.FlipCalculation.FlipROI | percentage}}
                                         <input />
                                     </td>
                                 </tr>
@@ -195,7 +147,7 @@
                                         Filp Price
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.FlipCalculation.FlipPrice | currency}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -205,7 +157,7 @@
                     <div class="pt-panel">
                         <table>
                             <tr>
-                                <th class="td-label excel-default" colspan="2">Money Folder</th>
+                                <th class="td-label excel-default" colspan="2">Money Factor</th>
                             </tr>
                             <tbody>
                                 <tr>
@@ -215,7 +167,7 @@
                                         Cost Of Money
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.MoneyFactor.CostOfMoney | percentage}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -223,6 +175,7 @@
                                         Interest On Money
                                     </td>
                                     <td>
+                                        {{data.MoneyFactor.InterestOnMoney | percentage}}
                                         <input />
                                     </td>
                                 </tr>
@@ -237,15 +190,17 @@
                         <table>
                             <tr>
                                 <th class="td-label excel-green">HOI</th>
-                                <th class="td-label excel-green"><input /></th>
+                                <th class="td-label excel-green">
+                                    {{data.HOI.Value | percentage}}
+                                </th>
                             </tr>
                             <tbody>
                                 <tr>
                                     <td class="td-label">
                                         Purchase Price(All in)
                                     </td>
-                                    <td>
-                                        <input />
+                                    <td class="td-value">
+                                        {{data.HOI.PurchasePriceAllIn | currency}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -254,7 +209,7 @@
                                         Total Investment
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.HOI.TotalInvestment | currency}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -263,7 +218,7 @@
                                         Cash Requirement
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.HOI.CashRequirement | currency}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -272,7 +227,7 @@
                                         Net Profit
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.HOI.NetProfit | currency}}
                                     </td>
                                 </tr>
 
@@ -282,7 +237,7 @@
                                         ROI (Loan)
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.HOI.ROILoan | percentage}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -292,16 +247,15 @@
                     <div class="pt-panel">
                         <table>
                             <tr>
-                                <th class="td-label excel-green">Best Case For HOI</th>
-                                <th class="td-label excel-green"><input /></th>
+                                <th class="td-label excel-green" colspan="2">Best Case For HOI</th>
                             </tr>
                             <tbody>
                                 <tr>
                                     <td class="td-label">
                                         Purchase Price(All in)
                                     </td>
-                                    <td>
-                                        <input />
+                                    <td class="td-value">
+                                        {{data.HOIBestCase.PurchasePriceAllIn | currency}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -310,7 +264,7 @@
                                         Total Investment
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.HOIBestCase.TotalInvestment | currency}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -319,7 +273,7 @@
                                         Cash Requirement
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.HOIBestCase.CashRequirement | currency}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -328,7 +282,7 @@
                                         Net Profit
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.HOIBestCase.NetProfit | currency}}
                                     </td>
                                 </tr>
 
@@ -338,7 +292,7 @@
                                         ROI (Loan)
                                     </td>
                                     <td>
-                                        <input />
+                                        {{data.HOIBestCase.ROILoan | percentage}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -361,41 +315,33 @@
                                         Property Address
                                     </td>
                                     <td colspan="3">
-                                        {{data.PropertyAddress}}
+                                        {{data.PropertyInfo.PropertyAddress}}
                                     </td>
-
                                     <td class="td-label">
                                         Deal Length
                                     </td>
-
                                     <td>
-                                        <input ng-model="data.Tables.Liens.DealLength" />
+                                        {{data.RehabInfo.DealTimeMonths}}
                                     </td>
-
-
                                 </tr>
                                 <tr>
 
                                     <td class="td-label">
                                         Tax Class:
-
                                     </td>
                                     <td>
-                                        {{data.TaxClass}}
+                                        {{data.PropertyInfo.TaxClass}}
                                     </td>
 
                                     <td colspan="2">
-                                        <select style="width:100%" ng-model="data.PropertyInfo">
-                                            <option>Residential</option>
-                                            <option>Not Residential</option>
-                                        </select>
+                                        {{data.PropertyInfo.PropertyType}}
                                     </td>
 
                                     <td class="td-label">
                                         Deal ROI:
                                     </td>
                                     <td>
-                                        {{data.DealROICash}}
+                                        {{data.RehabInfo.DealROICash | percentage}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -404,20 +350,20 @@
                                     </td>
 
                                     <td>
-                                        {{data.OccupancyStatus}}
+                                        {{data.PropertyInfo.OccupancyStatus}}
                                     </td>
 
                                     <td class="td-label">
                                         # of Tenants:
                                     </td>
-                                    <td>{{data.NumOfTenants}}</td>
+                                    <td>{{data.PropertyInfo.NumOfTenants}}</td>
 
                                     <td class="td-label">
                                         Cost of Money:
                                     </td>
 
                                     <td>
-                                        <input ng-model="data.Tables.Liens.CostOfMoney" />
+                                        {{data.MoneyFactor.CostOfMoney | percentage}}
                                     </td>
 
                                 </tr>
@@ -443,62 +389,62 @@
                                         </tr>
                                         <tr>
                                             <td class="td-label">Lien Payoff(s)</td>
-                                            <td class="td-value"></td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.Liens.LienPayoffs | currency}}</td>
+                                            <td class="td-value">{{data.Liens.LienPayoffsSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Tax Lien
                                             </td>
-                                            <td class="td-value">{{data.Tables.Liens.TaxLien | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.TaxLienSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.TaxLien | currency}}</td>
+                                            <td class="td-value">{{data.Liens.TaxLienSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Property Taxes</td>
 
-                                            <td class="td-value">{{data.Tables.Liens.PropertyTaxes | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.PropertyTaxesSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.PropertyTaxes | currency}}</td>
+                                            <td class="td-value">{{data.Liens.PropertyTaxesSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Water Charges</td>
-                                            <td class="td-value">{{data.Tables.Liens.WaterCharges | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.WaterChargesSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.WaterCharges | currency}}</td>
+                                            <td class="td-value">{{data.Liens.WaterChargesSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">HPD Charges</td>
-                                            <td class="td-value">{{data.Tables.Liens.HPDCharges | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.HPDChargesSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.HPDCharges | currency}}</td>
+                                            <td class="td-value">{{data.Liens.HPDChargesSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">ECB/DOB Violations</td>
-                                            <td class="td-value">{{data.Tables.Liens.ECBDOBViolations | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.ECBDOBViolationsSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.ECBDOBViolations | currency}}</td>
+                                            <td class="td-value">{{data.Liens.ECBDOBViolationsSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">DOB Civil Penalties</td>
-                                            <td class="td-value">{{data.Tables.Liens.DOBCivilPenalties | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.DOBCivilPenaltiesSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.DOBCivilPenalties | currency}}</td>
+                                            <td class="td-value">{{data.Liens.DOBCivilPenaltiesSettlement | percentage}}</td>
                                         </tr>
 
                                         <tr>
                                             <td class="td-label">Personal Judgements</td>
-                                            <td class="td-value">{{data.Tables.Liens.PersonalJudgements | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.PersonalJudgementsSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.PersonalJudgements | currency}}</td>
+                                            <td class="td-value">{{data.Liens.PersonalJudgementsSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">HPD Judgements</td>
-                                            <td class="td-value">{{data.Tables.Liens.HPDJudgements | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.HPDJudgementsSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.HPDJudgements | currency}}</td>
+                                            <td class="td-value">{{data.Liens.HPDJudgementsSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">IRS/NYS Tax Lien</td>
-                                            <td class="td-value">{{data.Tables.Liens.IRSNYSTaxLien | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.IRSNYSTaxLienSettlement| percentage}}</td>
+                                            <td class="td-value">{{data.Liens.IRSNYSTaxLien | currency}}</td>
+                                            <td class="td-value">{{data.Liens.IRSNYSTaxLienSettlement| percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Relocation Lien</td>
-                                            <td class="td-value">{{data.Tables.Liens.RelocationLien | currency}}</td>
-                                            <td class="td-value">{{data.Tables.Liens.RelocationLienSettlement| percentage}}</td>
+                                            <td class="td-value">{{data.Liens.RelocationLien | currency}}</td>
+                                            <td class="td-value">{{data.Liens.RelocationLienSettlement| percentage}}</td>
                                         </tr>
                                         <tr>
                                             <th class="td-label excel-default" colspan="3">Deal Expenses</th>
@@ -506,27 +452,27 @@
 
                                         <tr>
                                             <td class="td-label">Money Spent</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.DealExpenses.MoneySpent | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">HOI Lien</td>
-                                            <td class="td-value"></td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.DealExpenses.HOILien | currency}}</td>
+                                            <td class="td-value">{{data.DealExpenses.HOILienSettlement| percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">COS Termination</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.DealExpenses.COSTermination | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Tenants</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.DealExpenses.Tenants | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Agent</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.DealExpenses.Agent | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
@@ -536,17 +482,17 @@
                                         </tr>
                                         <tr>
                                             <td class="td-label">Owners Policy</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.ClosingCost.OwnersPolicy | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Title Bill</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.ClosingCost.TitleBill | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Buyers Attorney</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.ClosingCost.BuyerAttorney | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
@@ -556,12 +502,12 @@
                                         </tr>
                                         <tr>
                                             <td class="td-label">Construction</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.Construction.Construction | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Architect</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.Construction.Architect | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
@@ -571,17 +517,17 @@
                                         </tr>
                                         <tr>
                                             <td class="td-label">Insurance</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.CarryingCosts.Insurance | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">RE Taxes</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.CarryingCosts.RETaxs | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Utilities</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.CarryingCosts.Utilities | currency}}</td>
                                             <td class="td-value"></td>
                                         </tr>
 
@@ -601,35 +547,33 @@
                                         </tr>
                                         <tr>
                                             <td class="td-label">Probable Resale</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.Resale.ProbableResale | currency}}</td>
 
                                         </tr>
                                         <tr>
                                             <td class="td-label">Concession</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.Resale.Concession | currency}}</td>
 
                                         </tr>
                                         <tr>
                                             <td class="td-label">Commissions</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.Resale.Commissions | currency}}</td>
 
                                         </tr>
                                         <tr>
                                             <td class="td-label">Transfer Tax</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.Resale.TransferTax | currency}}</td>
 
                                         </tr>
                                         <tr>
                                             <td class="td-label">Attorney</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.Resale.Attorney | currency}}</td>
 
                                         </tr>
 
                                         <tr>
-                                            <td class="td-label">
-                                                NDC
-                                            </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-label">NDC</td>
+                                            <td class="td-value">{{data.Resale.NDC | currency}}</td>
 
                                         </tr>
                                         <tr>
@@ -641,7 +585,9 @@
                                             <td class="td-label">
                                                 Loan Amount
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">
+                                                {{data.LoanTerms.LoanAmount | currency}}
+                                            </td>
 
                                         </tr>
 
@@ -650,7 +596,9 @@
                                             <td class="td-label">
                                                 Loan Rate
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">
+                                                {{data.LoanTerms.LoanRate | percentage}}
+                                            </td>
 
                                         </tr>
 
@@ -658,7 +606,9 @@
                                             <td class="td-label">
                                                 Loan Points
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">
+                                                {{data.LoanTerms.LoanPoints}}
+                                            </td>
 
                                         </tr>
 
@@ -666,17 +616,20 @@
                                             <td class="td-label">
                                                 Loan Term (Months)
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">
+                                                {{data.LoanTerms.LoanTermMonths}}
+                                            </td>
 
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 LTV
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">
+                                                {{data.LoanTerms.LTV | percentage}}
+                                            </td>
 
                                         </tr>
-
                                         <tr>
                                             <th class="td-label excel-default" colspan="2">Loan Costs</th>
 
@@ -685,34 +638,37 @@
                                             <td class="td-label">
                                                 Loan Policy
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">
+                                                {{data.LoanCosts.LoanPolicy | currency}}
+                                            </td>
 
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Loan Closing Cost
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">
+                                                {{data.LoanCosts.LoanClosingCost | currency}}
+                                            </td>
 
                                         </tr>
                                         <tr>
                                             <td class="td-label">
                                                 Points
                                             </td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">
+                                                {{data.LoanCosts.Points | currency}}
+                                            </td>
 
                                         </tr>
-
-
                                         <tr>
                                             <td class="td-label">
                                                 Loan Interest
                                             </td>
-                                            <td class="td-value"></td>
-
+                                            <td class="td-value">
+                                                {{data.LoanCosts.LoanInterest | currency}}
+                                            </td>
                                         </tr>
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -733,19 +689,19 @@
                                     <tbody>
                                         <tr>
                                             <td class="td-label">Total Investment</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.CashScenario.Purchase_TotalInvestment | currency}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Net Profit (Cash)</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.CashScenario.Resale_NetProfit | currency}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">ROI (All Cash)</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.CashScenario.ROI | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">ROI (Annual)</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.CashScenario.ROIAnnual | percentage}}</td>
                                         </tr>
 
 
@@ -762,29 +718,33 @@
                                     </tr>
                                     <tbody>
                                         <tr>
+                                            <td class="td-label">Total Investment</td>
+                                            <td class="td-value">{{data.LoanScenario.Purchase_TotalInvestment | currency}}</td>
+                                        </tr>
+                                        <tr>
                                             <td class="td-label">Net Profit (Loan)</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.LoanScenario.Resale_NetProfit | currency}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">ROI (w/ Loan)</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.LoanScenario.ROI | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">ROI (Annual)</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.LoanScenario.ROIAnnual | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Cash Requirement</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.LoanScenario.CashRequirement | currency}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">ROI (On Cash)</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.LoanScenario.CashROI | percentage}}</td>
                                         </tr>
 
                                         <tr>
                                             <td class="td-label">ROI (On Cash Annual)</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.LoanScenario.CashROIAnnual | percentage}}</td>
                                         </tr>
 
                                     </tbody>
@@ -801,15 +761,15 @@
                                     <tbody>
                                         <tr>
                                             <td class="td-label">Flip Price</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.FlipScenario.FlipPrice_SalePrice | currency}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Total Cost</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.FlipScenario.Purchase_TotalCost | currency}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Flip Profit</td>
-                                            <td class="td-value"></td>
+                                            <td class="td-value">{{data.FlipScenario.FlipProfit | currency}}</td>
                                         </tr>
 
 

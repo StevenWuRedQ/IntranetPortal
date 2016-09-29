@@ -1,5 +1,5 @@
 ﻿
-<div class="container" style="width: 90%; margin-top: 20px">
+<div>
     <div class="row">
         <div id="data_input_area1" class="col-md-12 col-lg-12">
             <div class="row">
@@ -12,32 +12,37 @@
                                     <td class="td-label">
                                         Property Address:
                                     </td>
-                                    <td class="td-value" colspan="3"><input /></td>
-
+                                    <td class="td-value" colspan="3">
+                                        {{data.PropertyInfo.PropertyAddress}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         # of Units:
                                     </td>
                                     <td class="td-value">
-                                        <input />
+                                        {{data.RentalModel.NumOfUnits}}
                                     </td>
                                     <td class="td-label">
                                         Cost of Money :
                                     </td>
-                                    <td class="td-value"> <input /></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.CostOfMoneyRate | percentage}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Total Months:
                                     </td>
                                     <td class="td-value">
-                                        <input />
+                                        {{data.RentalModel.TotalMonth}}
                                     </td>
                                     <td class="td-label">
                                         Min ROI:
                                     </td>
-                                    <td class="td-value"> <input /></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.MinROI | percentage}}
+                                    </td>
                                 </tr>
 
                                 <tr>
@@ -50,64 +55,88 @@
                                 </tr>
                                 <tr>
                                     <td class="td-label">
-                                        Deed Purcahse
+                                        Deed Purchase
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.DeedPurchase | currency}}
+                                    </td>
                                     <td class="td-label">
                                         Rent
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.Rent | currency}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Total Repairs
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.TotalRepairs | currency}}
+                                    </td>
                                     <td class="td-label">
                                         Mgt Fee (10%)
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.ManagementFee | currency}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Agent Commission
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.AgentCommission | currency}}
+                                    </td>
                                     <td class="td-label">
                                         Insurance
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.Insurance | currency}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Total Upfront
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.TotalUpfront | currency}}
+                                    </td>
                                     <td class="td-label">
                                         Maintenance
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.Maintenance | currency}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-label">
                                         Cost of Money
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.CostOfMoney | currency}}
+                                    </td>
                                     <td class="td-label">
                                         Misc Repairs
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.MiscRepairs | currency}}
+                                    </td>
                                 </tr>
 
                                 <tr>
                                     <td class="td-label">
-                                        Total Investment
+                                        Total Cost
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.TotalCost | currency}}
+                                    </td>
                                     <td class="td-label">
                                         Net Montly Rent
                                     </td>
-                                    <td class="td-value"></td>
+                                    <td class="td-value">
+                                        {{data.RentalModel.NetMontlyRent | currency}}
+                                    </td>
                                 </tr>
                             </table>
 
@@ -127,7 +156,7 @@
                                 </tr>
                                 <tr>
                                     <td class="td-value">
-                                        <input />
+                                        {{data.RentalModel.Breakeven}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -137,7 +166,7 @@
                                 </tr>
                                 <tr>
                                     <td class="td-value">
-                                        <input />
+                                        {{data.RentalModel.TargetTime}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -147,7 +176,7 @@
                                 </tr>
                                 <tr>
                                     <td class="td-value">
-                                        <input />
+                                        {{data.RentalModel.TargetProfit| currency}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -157,7 +186,7 @@
                                 </tr>
                                 <tr>
                                     <td class="td-value">
-                                        <input />
+                                        {{data.RentalModel.ROIYear | percentage}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -167,7 +196,7 @@
                                 </tr>
                                 <tr>
                                     <td class="td-value">
-                                        <input />
+                                        {{data.RentalModel.ROITotal | percentage}}
                                     </td>
                                 </tr>
 

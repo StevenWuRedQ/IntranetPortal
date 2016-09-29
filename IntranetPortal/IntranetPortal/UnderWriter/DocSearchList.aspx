@@ -128,6 +128,7 @@
                         caption: "Search Completed On",
                         dataField: "CompletedOn",
                         dataType: "date",
+                        sortOrder: 'desc',
                         customizeText: function (cellInfo) {
                             //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
                             if (!cellInfo.value)

@@ -87,9 +87,10 @@ Public Class PropertyOfferManage
         Dim emps = New List(Of String)
         emps.Add(name)
 
-        If Roles.IsUserInRole(name, "Admin") OrElse Roles.IsUserInRole(name, "OfficeExecutive") Then
+        If IsManager(name) Then
             emps.AddRange(Employee.GetAllEmps)
         Else
+            emps.AddRange(Employee.GetControledDeptEmployees(name))
             emps.AddRange(Team.GetTeamUsersByAssistant(name))
         End If
 
@@ -252,9 +253,13 @@ Public Class PropertyOfferManage
 
     Private Shared Function InitData(offer As PropertyOffer, view As ManagerView) As PropertyOffer
         offer.OfferStage = view.ToString
-        offer.LeadsOwner = Lead.GetLeadsOwner(offer.BBLE)
+        ' offer.LeadsOwner = Lead.GetLeadsOwner(offer.BBLE)
         offer.Team = Employee.GetEmpTeam(offer.LeadsOwner)
         Return offer
+    End Function
+
+    Public Shared Function IsManager(name As String) As Boolean
+        Return Roles.IsUserInRole(name, "Admin") OrElse Roles.IsUserInRole(name, "OfficeExecutive")
     End Function
 
     ''' <summary>

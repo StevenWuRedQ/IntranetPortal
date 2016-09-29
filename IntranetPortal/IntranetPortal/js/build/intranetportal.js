@@ -1747,9 +1747,9 @@ angular.module('PortalApp')
             this._model[k] = {
                 Month: k + 1,
                 Rent: 0,
-                Interest: model.TotalUpfront * model.CostOfMoneyRate / 12.0
+                Interest: -(model.TotalUpfront * model.CostOfMoneyRate / 12.0)
             };
-            this._model[k].Total = model.TotalUpfront - this._model[k].Interest;
+            this._model[k].Total = -(model.TotalUpfront - this._model[k].Interest);
             k++;
 
             for (; k < 3; k++) {
@@ -1772,7 +1772,7 @@ angular.module('PortalApp')
                     } else {
                         this._model[k].Interest = this._model[k - 1].Total < 0 ? this._model[k - 1].Total * 0.18 / 12 : 0.0;
                     }
-                    this._model[k].Total = this._model[k - 1].Total < 0 ? this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent : this._model[k - 1].Total + this._model[k].Interest;
+                    this._model[k].Total = this._model[k - 1].Total < 0 ? this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent : this._model[k - 1].Total + this._model[k].Rent;
                 }
 
             }
@@ -1782,6 +1782,7 @@ angular.module('PortalApp')
             for (i = 0; i < 60; i++) {
                 this.costOfMoney += this._model[i].Interest;
             }
+            this.costOfMoney = -this.costOfMoney;
 
             this.totalCost = model.TotalUpfront + this.costOfMoney;
             for (var m = 1 ; m < this._model.length; m++) {
@@ -1790,10 +1791,10 @@ angular.module('PortalApp')
 
             this.totalMonths = 0;
             this.targetProfit = 0.0;
-            for (m = 0; m < this._model.length; m++) {
-                if (this._model[m].ROI > model.CostOfMoneyRate) {
+            for (m = 1; m < this._model.length; m++) {
+                if (this._model[m].ROI > model.MinROI) {
                     this.totalMonths = this._model[m].Month;
-                    this.targetProfit = this.Total;
+                    this.targetProfit = this._model[m].Total;
                     break;
                 }
             }
@@ -1815,6 +1816,7 @@ angular.module('PortalApp')
 
         return Underwriter;
 
+   
     }]);
 angular.module('PortalApp')
     .factory('UnderwritingRequest', ['$http', 'ptBaseResource', function ($http, ptBaseResource) {
@@ -2048,8 +2050,8 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
-    this.confirm = function (message) {
-        return $rootScope.confirm(message);
+    this.confirm = function (message, callback) {
+        return $rootScope.confirm(message, callback);
     };
     this.addOverlay = function () {
         $rootScope.addOverlay();
@@ -2883,7 +2885,6 @@ angular.module("PortalApp")
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {
-
                 var isValidate = attrs.hasOwnProperty('isvalidate');
                 //debugger;
                 var rule = /^(\d+|\d*\.\d+)$/;
@@ -4487,8 +4488,7 @@ angular.module('PortalApp')
         $scope.SearchComplete = function (isSave) {
             // only completed need check validate
             // when saving don't need validate input.
-            if (!isSave)
-            {
+            if (!isSave) {
                 if (!$scope.newVersionValidate()) {
                     var msg = $scope.DivError.getMessage();
 
@@ -4496,7 +4496,7 @@ angular.module('PortalApp')
                     return;
                 };
             }
-            
+
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
             $scope.DocSearch.ResutContent = $("#searchReslut").html();
@@ -4536,18 +4536,30 @@ angular.module('PortalApp')
 
 
         $scope.markCompleted = function () {
+            var xhrfunc = function () {
+                debugger;
+                $http({
+                    method: 'GET',
+                    url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
+                }).then(function succ(d) {
+                    //debugger;
+                    $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
+                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                    $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                }, function err() {
 
-            $http({
-                method: 'GET',
-                url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
-            }).then(function succ(d) {
-                //debugger;
-                $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
-                $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-            }, function err() {
+                })
+            };
+            
+            // because the underwriting completion is not reversible, comfirm it before save to db.
+            ptCom.confirm('Are you sure to complete this underwriting?', function (result) {
+                debugger;
+                if (result) {
+                    xhrfunc();
+                }
 
-            })
+            });
+
 
         }
     });
@@ -8715,6 +8727,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
             d.MoneyFactor.CostOfMoney = 0.0;
             d.MoneyFactor.InterestOnMoney = 0.18;
             // Liens
+            d.Liens.LienPayoffsSettlement = 1.0
             d.Liens.TaxLienSettlement = 0.09 / 12;
             d.Liens.PropertyTaxesSettlement = 1.0;
             d.Liens.WaterChargesSettlement = 1.0;
@@ -8743,11 +8756,10 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
             //Rental Model
             d.RentalModel.CostOfMoneyRate = 0.16;
             d.RentalModel.MinROI = 0.18;
-            d.RentalModel.Insurance = 85;
+            d.RentalModel.Insurance = 85.0;
 
         }
     };
-
     $scope.applyRule = function () {
         //debugger;
         var d = $scope.data;
@@ -8793,7 +8805,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
             var c4 = !d.LienInfo.FannieMae;
             var c5 = !d.LienInfo.FreddieMac;
             var c6 = float(d.DealCosts.HOI) > 0.0;
-            debugger;
+            //debugger;
             return (c1 | c2) & c3 & c4 & c5 & c6 ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
 
         })();
@@ -8860,7 +8872,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.Liens.Sums = d.Liens.TaxLien + d.Liens.PropertyTaxes + d.Liens.WaterCharges + d.Liens.HPDCharges + d.Liens.ECBDOBViolations + d.Liens.DOBCivilPenalties + d.Liens.PersonalJudgements + d.Liens.HPDJudgements + d.Liens.IRSNYSTaxLien + d.Liens.RelocationLien;
         d.Liens.AdditonalCostsSums = d.Liens.WaterCharges + d.Liens.HPDCharges + d.Liens.ECBDOBViolations + d.Liens.DOBCivilPenalties + d.Liens.PersonalJudgements + d.Liens.HPDJudgements + d.Liens.IRSNYSTaxLien + d.Liens.RelocationLien;
         d.DealExpenses.Sums = d.DealExpenses.MoneySpent + d.DealExpenses.HOILien + d.DealExpenses.COSTermination + d.DealExpenses.Tenants + d.DealExpenses.Agent;
-        d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney
+        d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
         d.Construction.Sums = d.Construction.Construction + d.Construction.Architect;
         d.CarryingCosts.Sums = d.CarryingCosts.Insurance + d.CarryingCosts.RETaxs + d.CarryingCosts.Utilities;
         d.Resale.Sums = d.Resale.Commissions + d.Resale.TransferTax + d.Resale.Concession + d.Resale.Attorney + d.Resale.NDC;
@@ -8890,7 +8902,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
 
         // Best Case For HOI
         d.HOIBestCase.PurchasePriceAllIn = d.RehabInfo.AverageLowValue + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
-        d.HOIBestCase.TotalInvestment = d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
+        d.HOIBestCase.TotalInvestment = d.HOIBestCase.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
         d.HOIBestCase.CashRequirement = d.HOIBestCase.TotalInvestment - d.LoanTerms.LoanAmount;
         d.HOIBestCase.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOIBestCase.TotalInvestment;
         d.HOIBestCase.ROILoan = d.HOIBestCase.NetProfit / d.HOIBestCase.TotalInvestment;
@@ -8902,14 +8914,14 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.CashScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
         d.CashScenario.Purchase_Construction = d.Construction.Sums;
         d.CashScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
-        d.CashScenario.Purchase_TotalInvestment = d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums;
+        d.CashScenario.Purchase_TotalInvestment = d.CashScenario.Purchase_LienPayoffs + d.CashScenario.Purchase_OffHUDCosts + d.CashScenario.Purchase_DealCosts + d.CashScenario.Purchase_ClosingCost + d.CashScenario.Purchase_Construction + d.CashScenario.Purchase_CarryingCosts;
         d.CashScenario.Resale_SalePrice = d.Resale.ProbableResale;
         d.CashScenario.Resale_Concession = d.Resale.Concession;
         d.CashScenario.Resale_Commissions = d.Resale.Commissions;
         d.CashScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
         d.CashScenario.Resale_NetProfit = d.CashScenario.Resale_SalePrice - (d.CashScenario.Resale_Concession + d.CashScenario.Resale_Commissions + d.CashScenario.Resale_ClosingCost) - d.CashScenario.Purchase_TotalInvestment;
         d.CashScenario.Time = float(d.RehabInfo.DealTimeMonths);
-        d.CashScenario.AllCash = d.CashScenario.Purchase_TotalInvestment;
+        d.CashScenario.CashRequired = d.CashScenario.Purchase_TotalInvestment;
         d.CashScenario.ROI = d.CashScenario.Resale_NetProfit / d.CashScenario.Purchase_TotalInvestment;
         d.CashScenario.ROIAnnual = d.CashScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
         // Loan Scenario
@@ -8929,15 +8941,16 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.LoanScenario.Resale_NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - d.LoanScenario.Purchase_TotalInvestment;
         d.LoanScenario.Time = float(d.RehabInfo.DealTimeMonths);
         d.LoanScenario.LoanAmount = d.LoanTerms.LoanAmount;
-        d.LoanScenario.LTV = d.LoanScenario.Purchase_AdditonalCosts / d.LoanScenario.Resale_SalePrice;
-        d.LoanScenario.CashRequirement = d.LoanScenario.Resale_SalePrice - d.LoanScenario.LoanAmount;
+        d.LoanScenario.LTV = d.LoanScenario.LoanAmount / d.LoanScenario.Resale_SalePrice;
+        d.LoanScenario.CashRequirement = d.LoanScenario.Purchase_TotalInvestment - d.LoanScenario.LoanAmount;
         d.LoanScenario.ROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.Purchase_TotalInvestment;
         d.LoanScenario.ROIAnnual = d.LoanScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
-        d.LoanScenario.CashROI = d.LoanScenario.NetProfit / d.LoanScenario.CashRequirement;
+        d.LoanScenario.CashROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.CashRequirement;
         d.LoanScenario.CashROIAnnual = d.LoanScenario.CashROI / d.RehabInfo.DealTimeMonths * 12;
         // FlipScenario
+        d.FlipScenario.Purchase_TotalCost = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
         d.FlipScenario.FlipPrice_SalePrice = d.FlipCalculation.FlipPrice;
-        d.FlipScenario.Purchase_TotalCost = d.Liens.ProbableResale + d.Liens.Sums + d.DealExpenses.Sums;
+
         d.FlipScenario.Purchase_PurchasePrice = d.FlipScenario.FlipPrice_SalePrice;
         d.FlipScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
         d.FlipScenario.Purchase_Construction = d.Construction.Sums;
@@ -8947,7 +8960,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.FlipScenario.Resale_Concession = d.Resale.Concession;
         d.FlipScenario.Resale_Commissions = d.Resale.Commissions;
         d.FlipScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-        d.FlipScenario.Resale_NetProfit = d.FlipScenario.Resale_SalePrice - (d.FlipScenario.Purchase_Construction + d.FlipScenario.Purchase_CarryingCosts) - d.FlipScenario.Purchase_TotalInvestment;
+        d.FlipScenario.Resale_NetProfit = d.FlipScenario.Resale_SalePrice - (d.FlipScenario.Resale_Commissions + d.FlipScenario.Resale_ClosingCost) - d.FlipScenario.Purchase_TotalInvestment;
         d.FlipScenario.FlipProfit = d.FlipScenario.FlipPrice_SalePrice - d.FlipScenario.Purchase_TotalCost;
         d.FlipScenario.CashRequirement = d.FlipScenario.Purchase_TotalInvestment
         d.FlipScenario.ROI = d.FlipScenario.Resale_NetProfit / d.FlipScenario.Purchase_TotalInvestment;
@@ -8965,20 +8978,21 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
         d.BestCaseScenario.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums;
         d.BestCaseScenario.TotalInvestment = d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
         d.BestCaseScenario.CashRequirement = d.BestCaseScenario.TotalInvestment - d.LoanTerms.LoanAmount;
-        d.BestCaseScenario.NetProfit = d.FlipScenario.Purchase_Purchase - (d.Liens.AdditonalCostsSums + d.DealExpenses.Sums + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums) - (d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums);
+        d.BestCaseScenario.NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - (d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums);
         d.BestCaseScenario.ROI = d.BestCaseScenario.NetProfit / d.BestCaseScenario.TotalInvestment
         // Rental Model
+        d.RentalModel.NumOfUnits = int(d.RentalInfo.NumOfUnits);
         d.RentalModel.DeedPurchase = float(d.RentalInfo.DeedPurchase);
         d.RentalModel.TotalRepairs = float(d.RentalInfo.RepairBidTotal);
         d.RentalModel.AgentCommission = float(d.DealCosts.AgentCommission);
         d.RentalModel.TotalUpfront = d.RentalModel.DeedPurchase + d.RentalModel.TotalRepairs + d.RentalModel.AgentCommission;
         d.RentalModel.Rent = float(d.RentalInfo.MarketRentTotal);
         d.RentalModel.ManagementFee = d.RentalModel.Rent * 0.1;
-        d.RentalModel.Maintenance = 50 + (int(d.RentalInfo.NumOfUnits) - 1) * 25;
-        d.RentalModel.MiscRepairs = 75 * int(d.RentalInfo.NumOfUnits);
+        d.RentalModel.Maintenance = 50 + (d.RentalModel.NumOfUnits - 1) * 25;
+        d.RentalModel.MiscRepairs = 75 * d.RentalModel.NumOfUnits;
         d.RentalModel.NetMontlyRent = d.RentalModel.Rent - d.RentalModel.ManagementFee - d.RentalModel.Maintenance - d.RentalModel.Insurance - d.RentalModel.MiscRepairs;
         $scope.RentalHelper = new ptUnderwriter.RentalHelper(d.RentalInfo.CurrentlyRented, d.RentalInfo.RentalTime, d.RentalModel);
-        d.RentalModel.TotalMonth = $scope.RentalHelper.totalMonth;
+        d.RentalModel.TotalMonth = $scope.RentalHelper.totalMonths;
         d.RentalModel.CostOfMoney = $scope.RentalHelper.costOfMoney;
         d.RentalModel.TotalCost = $scope.RentalHelper.totalCost;
         d.RentalModel.Breakeven = $scope.RentalHelper.breakeven;

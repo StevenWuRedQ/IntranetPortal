@@ -3,7 +3,6 @@
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {
-
                 var isValidate = attrs.hasOwnProperty('isvalidate');
                 //debugger;
                 var rule = /^(\d+|\d*\.\d+)$/;
