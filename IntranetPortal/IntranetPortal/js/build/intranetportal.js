@@ -9017,7 +9017,7 @@ angular.module("PortalApp")
 
     $scope.checkValidate = function () {
         return _.some($('input'), function (v) {
-            return $(v).attr('error') == 'true'
+            return $(v).attr('error') == 'true';
         })
     }
 
