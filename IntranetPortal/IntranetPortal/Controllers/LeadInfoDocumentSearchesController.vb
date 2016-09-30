@@ -203,12 +203,12 @@ Namespace Controllers
         Private Sub SendNewSearchNotify(leadInfoDocumentSearch As LeadInfoDocumentSearch)
             Try
                 Dim EntityMananger = Roles.GetUsersInRole("Entity-Manager")(0)
+                Dim searchEmail = IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
 
                 If (Not String.IsNullOrEmpty(EntityMananger)) Then
                     Dim LeadInfoSearchUser = Employee.GetInstance(EntityMananger)
                     Dim empl = Employee.GetInstance(leadInfoDocumentSearch.CreateBy)
                     Dim mLead = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
-                    Dim searchEmail = IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
 
                     ' notify the doc search user
                     If (LeadInfoSearchUser IsNot Nothing AndAlso mLead IsNot Nothing) Then

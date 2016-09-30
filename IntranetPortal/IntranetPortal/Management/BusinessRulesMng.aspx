@@ -168,6 +168,9 @@
                         showRowLines: true,
                         rowAlternationEnabled: true,
                         wordWrapEnabled: true,
+                        pageing: {
+                            enabled: false
+                        },
                         columns: [{
                             dataField: "RuleName",
                             caption: "Name",
