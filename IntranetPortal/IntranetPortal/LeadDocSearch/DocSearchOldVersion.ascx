@@ -51,10 +51,10 @@
                 <div class="ss_border" collapse="CollapseECBDOB">
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item ">
-                            <label class="ss_form_input_title">Property Taxes</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.propertyTaxes" money-mask /></li>
+                            <label class="ss_form_input_title">Property Taxes</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.propertyTaxes" number-mask maskformat='money' /></li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Water Charges</label>
-                            <input class="ss_form_input" ng-model="DocSearch.LeadResearch.waterCharges" money-mask />
+                            <input class="ss_form_input" ng-model="DocSearch.LeadResearch.waterCharges" number-mask maskformat='money' />
                         </li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">C/O</label>
@@ -77,17 +77,17 @@
 
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">ECB Violation</label>
-                                <input class="ss_form_input" ng-model="DocSearch.LeadResearch.ecbViolation" money-mask />
+                                <input class="ss_form_input" ng-model="DocSearch.LeadResearch.ecbViolation" number-mask maskformat='money' />
 
                             </li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">Dob Violation</label>
-                                <input class="ss_form_input" ng-model="DocSearch.LeadResearch.dobWebsites" money-mask />
+                                <input class="ss_form_input" ng-model="DocSearch.LeadResearch.dobWebsites" number-mask maskformat='money' />
 
                             </li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">ECB On JdmtSearch</label>
-                                <input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgementSearch" money-mask />
+                                <input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgementSearch" number-mask maskformat='money' />
                             </li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">Judgement Doc</label>
@@ -103,10 +103,10 @@
                     <div class="ss_border">
                         <ul class="ss_form_box clearfix" collapse="LiensInfoCollapse">
                             <li class="ss_form_item ">
-                                <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" money-mask /></li>
+                                <label class="ss_form_input_title">Judgments</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.judgments" number-mask maskformat='money' /></li>
 
                             <li class="ss_form_item ">
-                                <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" money-mask /></li>
+                                <label class="ss_form_input_title">Irs Tax Lien</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.irsTaxLien" number-mask maskformat='money' /></li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">NYS Tax Lien</label>
                                 <pt-radio name="has_NysTaxLien" model="DocSearch.LeadResearch.hasNysTaxLien"></pt-radio>
@@ -120,9 +120,9 @@
                                 <pt-radio name="liens_info_fha" model="DocSearch.LeadResearch.fha"></pt-radio>
                             </li>
                             <li class="ss_form_item ">
-                                <label class="ss_form_input_title">Mortgage Amount</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.mortgageAmount" money-mask /></li>
+                                <label class="ss_form_input_title">Mortgage Amount</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.mortgageAmount" number-mask maskformat='money' /></li>
                             <li class="ss_form_item ">
-                                <label class="ss_form_input_title">2nd Mortgage Amount</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.secondMortgageAmount" money-mask /></li>
+                                <label class="ss_form_input_title">2nd Mortgage Amount</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.secondMortgageAmount" number-mask maskformat='money' /></li>
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">Servicer</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.servicer" /></li>
                             <li class="ss_form_item ">
@@ -164,9 +164,9 @@
                             <li class="ss_form_item ">
                                 <label class="ss_form_input_title">Signor Social Security</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.signorSocialSecurity" /></li>
                             <li class="ss_form_item ">
-                                <label class="ss_form_input_title">Contract Price</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.contractPrice" money-mask /></li>
+                                <label class="ss_form_input_title">Contract Price</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.contractPrice" number-mask maskformat='money' /></li>
                             <li class="ss_form_item ">
-                                <label class="ss_form_input_title">Listing Price</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.listingPrice" money-mask /></li>
+                                <label class="ss_form_input_title">Listing Price</label><input class="ss_form_input" ng-model="DocSearch.LeadResearch.listingPrice" number-mask maskformat='money' /></li>
                         </ul>
                     </div>
                 </div>

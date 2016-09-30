@@ -98,23 +98,23 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Bedroom</label>
-                                    <input class="form-control" ng-model="floor.Bedroom" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Bedroom" number-mask maskformat='integer'/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Bathroom</label>
-                                    <input class="form-control" ng-model="floor.Bathroom" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Bathroom" number-mask maskformat='integer'/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Livingroom</label>
-                                    <input class="form-control" ng-model="floor.Livingroom" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Livingroom" number-mask maskformat='integer'/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Kitchen</label>
-                                    <input class="form-control" ng-model="floor.Kitchen" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Kitchen" number-mask maskformat='integer'/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Diningroom</label>
-                                    <input class="form-control" ng-model="floor.Diningroom" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Diningroom" number-mask maskformat='integer'/>
                                 </div>
                             </div>
                             <hr />

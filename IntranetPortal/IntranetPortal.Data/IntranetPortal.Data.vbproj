@@ -171,6 +171,10 @@
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
     <Compile Include="Exception\DataException.vb" />
+    <Compile Include="Migrations\201609291834424_Initial.Designer.vb">
+      <DependentUpon>201609291834424_Initial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609291834424_Initial.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
@@ -366,11 +370,13 @@
     <Compile Include="SignProcess\PropertyOffer.vb" />
     <Compile Include="Title\TitleCase.vb" />
     <Compile Include="Twilio\TwilioClient.vb" />
-    <Compile Include="Underwriter\NewTable.vb" />
-    <Compile Include="Underwriter\Underwriter.vb" />
-    <Compile Include="Underwriter\UnderwriterEntity.vb" />
+    <Compile Include="CodeFirstEntity\Underwriting.vb" />
+    <Compile Include="CodeFirstEntity\CodeFirstEntity.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609291834424_Initial.resx">
+      <DependentUpon>201609291834424_Initial.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -395,7 +401,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PortalEntities.Designer.vb</LastGenOutput>
     </EntityDeploy>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\DataAPI\IntranetPortal.Data.DataAPI.AB_Report_Out.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -50,7 +50,7 @@
                     <td class="col-sm-1">{{d.name}}
                     </td>
                     <td class="col-sm-1">
-                        <input type="text" ng-model="d.cost" ng-change="updateTotal(d)" money-mask/>
+                        <input type="text" ng-model="d.cost" ng-change="updateTotal(d)" number-mask maskformat='money'/>
                     </td>
                     <td class="col-sm-2">
                         <input type="text" ng-model="d.note" placeholder="add notes"/>
@@ -62,7 +62,7 @@
                     <td></td>
                     <td>Total</td>
                     <td>
-                        <input style="background-color: yellow; font-weight: bolder" type="text" ng-model="FormData.FeeClearance.total" money-mask disabled />
+                        <input style="background-color: yellow; font-weight: bolder" type="text" ng-model="FormData.FeeClearance.total" number-mask maskformat='money' disabled />
                     </td>
                     <td></td>
                     <td></td>

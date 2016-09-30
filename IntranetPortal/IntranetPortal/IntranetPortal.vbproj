@@ -7201,7 +7201,6 @@
     <Content Include="js\common\PortalUIRouteProvider.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
-    <Content Include="js\controllers\es6\TestController.js" />
     <Content Include="js\controllers\LeadTaxSearchController.js" />
     <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\PreSignController.js" />
@@ -7216,10 +7215,7 @@
     <Content Include="js\directives\bindId.js" />
     <Content Include="js\directives\initGrid.js" />
     <Content Include="js\directives\inputMask.js" />
-    <Content Include="js\directives\integerMask.js" />
-    <Content Include="js\directives\moneyMask.js" />
     <Content Include="js\directives\numberMask.js" />
-    <Content Include="js\directives\percentMask.js" />
     <Content Include="js\directives\preCondition.js" />
     <Content Include="js\directives\ptAdd.js" />
     <Content Include="js\directives\ptCollapse.js" />
@@ -8430,6 +8426,7 @@
     <Folder Include="Content\layouts\Simple\" />
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
+    <Folder Include="js\controllers\es6\" />
     <Folder Include="Scripts\dx\" />
     <Folder Include="TempDataFile\AuctionFiles\" />
     <Folder Include="TempDataFile\OfferDoc\" />

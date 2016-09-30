@@ -201,7 +201,7 @@
                                         <h5>Contract Price</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.ContractPrice" money-mask />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.ContractPrice" number-mask maskformat='money' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -220,7 +220,7 @@
                                         <h5>Approved Net - 1st Lien</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.FirstLien" money-mask />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.FirstLien" number-mask maskformat='money' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -239,7 +239,7 @@
                                         <h5>2nd Mortgage</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondMortgage" money-mask />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondMortgage" number-mask maskformat='money' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -247,7 +247,7 @@
                                         <h5>Approved Net - 2nd Lien</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondLien" money-mask />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondLien" number-mask maskformat='money' />
                                     </div>
                                 </div>
 
@@ -256,7 +256,7 @@
                                         <h5>Commission %</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionPercentage" percent-mask />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionPercentage" number-mask maskformat='percentage' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -264,7 +264,7 @@
                                         <h5>Commission Amount</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionAmount" money-mask />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionAmount" number-mask maskformat='money' />
                                     </div>
                                 </div>
                                 <div class="row">

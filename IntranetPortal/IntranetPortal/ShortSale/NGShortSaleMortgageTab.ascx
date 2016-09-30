@@ -31,7 +31,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Amount</label>
-                    <input class="ss_form_input" ng-model="mortgage.PayoffAmount" money-mask>
+                    <input class="ss_form_input" ng-model="mortgage.PayoffAmount" number-mask maskformat='money'>
                 </li>
             </ul>
         </div>
@@ -90,7 +90,7 @@
                 <div uib-collapse="mortgageCompanyCollapse">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Loan Amount</label>
-                    <input class="ss_form_input" ng-model="mortgage.LoanAmount" money-mask>
+                    <input class="ss_form_input" ng-model="mortgage.LoanAmount" number-mask maskformat='money'>
 
                 </li>
                 <li class="ss_form_item">

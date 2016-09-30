@@ -61,7 +61,7 @@
                                 <td class="td-label">
                                     Property Tax (Year):
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.PropertyInfo.PropertyTaxYear' money-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.PropertyInfo.PropertyTaxYear' number-mask maskformat="percentage" isvalidate /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
@@ -109,26 +109,26 @@
 
                                 </td>
                                 <td class="td-value">
-                                    <input ng-change='update()' ng-model='data.DealCosts.MoneySpent' money-mask />
+                                    <input ng-change='update()' ng-model='data.DealCosts.MoneySpent' number-mask maskformat='money' />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     HOI:
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.DealCosts.HOI' money-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.DealCosts.HOI' number-mask maskformat='money' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     COS Termination:
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.DealCosts.COSTermination' money-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.DealCosts.COSTermination' number-mask maskformat='money' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Agent Commission:
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.DealCosts.AgentCommission' money-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.DealCosts.AgentCommission' number-mask maskformat='money' /></td>
                             </tr>
 
 
@@ -146,19 +146,19 @@
                                     Average Low Value:
 
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.AverageLowValue' money-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.AverageLowValue' number-mask maskformat='money' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Renovated Value:
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.RenovatedValue' money-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.RenovatedValue' number-mask maskformat='money' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Repair Bid:
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.RepairBid' money-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.RepairBid' number-mask maskformat='money' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
@@ -170,13 +170,13 @@
                                 <td class="td-label">
                                     Sales Commission:
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.SalesCommission' percent-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.SalesCommission' number-mask maskformat='percentage' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
                                     Deal ROI (Cash):
                                 </td>
-                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.DealROICash' percent-mask /></td>
+                                <td class="td-value"><input ng-change='update()' ng-model='data.RehabInfo.DealROICash' number-mask maskformat='percentage' /></td>
                             </tr>
 
 
@@ -250,7 +250,7 @@
                                             1st Mortgage:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienInfo.FirstMortgage' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienInfo.FirstMortgage' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -258,7 +258,7 @@
 
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienInfo.SecondMortgage' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienInfo.SecondMortgage' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -417,14 +417,14 @@
                                             Tax Lien Certificate:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.TaxLienCertificate' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.TaxLienCertificate' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Property Taxes:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.PropertyTaxes' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.PropertyTaxes' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -432,62 +432,64 @@
 
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.WaterCharges' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.WaterCharges' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             HPD Charges:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.HPDCharges' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.HPDCharges' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             ECB/DOB Violations:
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.ECBDOBViolations' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.ECBDOBViolations' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             DOB Civil Penalty
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.DOBCivilPenalty' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.DOBCivilPenalty' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Personal Judgements:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.PersonalJudgements' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.PersonalJudgements' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             HPD Judgements:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.HPDJudgements' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.HPDJudgements' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             IRS/NYS Tax Liens:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.IRSNYSTaxLiens' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.IRSNYSTaxLiens' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Vacate Order:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.VacateOrder' money-mask /></td>
+                                        <td class="td-value">
+                                            <select ng-change='update()' style="width: 100%" ng-model='data.LienCosts.VacateOrder' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
                                             Relocation Lien:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.RelocationLien' money-mask /></td>
+                                        <td class="td-value"><input ng-change='update()' ng-model='data.LienCosts.RelocationLien' number-mask maskformat='money' /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -681,7 +683,7 @@
             </div>
             <hr />
             <div class="clearfix">
-                <span class="btn btn-primary">calculate</span>
+                <span class="btn btn-primary">SnapShot</span>
             </div>
 
 

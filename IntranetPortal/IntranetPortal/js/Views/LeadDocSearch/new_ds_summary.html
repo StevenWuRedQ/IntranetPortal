@@ -288,7 +288,7 @@ a template to display new doc search.
             </td>
             <td ng-show="summary.Has_Open_ECB_Violoations">
                 <label>ECB Violations Due Amount: </label>
-                <span money-mask ng-bind="summary.ecbViolation| currency"></span>
+                <span number-mask maskformat='money' ng-bind="summary.ecbViolation| currency"></span>
             </td>
         </tr>
         <tr>
@@ -302,7 +302,7 @@ a template to display new doc search.
             </td>
             <td ng-show="summary.Has_Open_DOB_Violoations">
                 <label>DOB Violations Amount: </label>
-                <span money-mask ng-bind="summary.dobWebsites| currency"></span>
+                <span number-mask maskformat='money' ng-bind="summary.dobWebsites| currency"></span>
             </td>
         </tr>
         <tr>

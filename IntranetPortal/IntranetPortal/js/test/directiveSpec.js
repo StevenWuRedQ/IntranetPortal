@@ -58,7 +58,7 @@
         beforeEach(function() {
             module("PortalApp");
             inject(function(_$compile_, _$rootScope_) {
-                var html = "<input ng-model='xdata' money-mask></input>";
+                var html = "<input ng-model='xdata' number-mask maskformat='money'></input>";
                 scope = _$rootScope_.$new();
                 celem = _$compile_(html)(scope);
                 scope.$digest();

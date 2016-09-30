@@ -4,16 +4,15 @@ Imports System.ComponentModel.DataAnnotations.Schema
 Imports System.Linq
 Imports System.ComponentModel.DataAnnotations
 
-Partial Public Class UnderwriterEntity
+Partial Public Class CodeFirstEntity
     Inherits DbContext
 
-    Public Overridable Property underwriters As DbSet(Of Underwriter)
-
-
+    Public Property Underwritings As DbSet(Of Underwriting)
+    Public Property UnderwritingPropertyInfos As DbSet(Of UnderwritingPropertyInfo)
 
 
     Public Sub New()
-        MyBase.New("name=UnderwriterEntity")
+        MyBase.New("name=CodeFirstEntity")
     End Sub
 
 

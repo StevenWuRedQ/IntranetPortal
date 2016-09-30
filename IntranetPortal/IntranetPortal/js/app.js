@@ -12,7 +12,6 @@ angular.module('PortalApp')
             $rootScope.alertMessage = message ? message : '';
             $rootScope.AlertModal = $uibModal.open({
                 templateUrl: 'AlertModal',
-
             });
         }
         $rootScope.alertOK = function () {
@@ -40,7 +39,6 @@ angular.module('PortalApp')
                 $rootScope.ConfirmModal.confrimFunc(false);
             }
         }
-
         $rootScope.prompt = function (message, promptFunc) {
             $rootScope.promptMessage = message ? message : '';
             $rootScope.promptModalTxt = '';
@@ -63,7 +61,6 @@ angular.module('PortalApp')
                 $rootScope.promptModal.promptFunc(null)
             }
         }
-
         $rootScope.showLoading = function (divId) {
             $($rootScope.loadingCover).show();
         }
@@ -84,7 +81,6 @@ angular.module('PortalApp')
     }]);
 
 /**
-
 portalApp.config(function ($locationProvider) {
 
     /* because need use anguler support url parameters $location.search();

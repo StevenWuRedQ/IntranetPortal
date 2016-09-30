@@ -13,7 +13,8 @@ var angularPath = ['js/app.js',
                 'js/services/*.js',
                 'js/filters/*.js',
                 'js/directives/*.js',
-                'js/controllers/*.js'];
+                'js/controllers/*.js',
+                'js/build/' + p.name + '.es6.js'];
 
 
 var getTimeString = function () {
@@ -30,6 +31,9 @@ gulp.task('clean', function () {
 gulp.task('concat', function () {
 
     gulp.src(angularPath)
+        .pipe(babel({
+            presets: ['es2015-without-strict']
+        }))
         .pipe(concat(p.name + '.js'))
         .pipe(gulp.dest('js/build/'))
 })

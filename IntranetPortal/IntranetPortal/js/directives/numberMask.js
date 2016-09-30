@@ -1,9 +1,41 @@
-﻿angular.module("PortalApp")
+﻿/**
+ * a input attribute directive to automatic convert input to certain data format
+ * example <input number-mask maskformat='money' isvalidate/>
+ * (optional) maskerformat: control how data will present.
+ * (optional) isvalidate: if the attribute present, will validate if the user input is correct
+ */
+angular.module("PortalApp")
     .directive('numberMask', function () {
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {
                 var isValidate = attrs.hasOwnProperty('isvalidate');
+                var format = attrs['maskformat'] || '';
+                var formatConfig;
+                switch (format) {
+                    case 'integer':
+                        formatConfig = {
+                            symbol: "",
+                            roundToDecimalPlace: 0
+                        }
+                        break;
+                    case 'money':
+                        formatConfig = {
+
+                        }
+                        break;
+                    case 'percentage':
+                        formatConfig = {
+                            symbol: "%",
+                            positiveFormat: '%n%s'
+                        }
+                        break;
+                    default:
+                        formatConfig = {
+                            symbol: ""
+                        }
+
+                }
                 //debugger;
                 var rule = /^(\d+|\d*\.\d+)$/;
                 var validate = function (val) {
@@ -16,11 +48,10 @@
                     }
 
                 }
+
                 scope.$watch(attrs.ngModel, function () {
                     if ($(el).is(":focus")) return;
-                    $(el).formatCurrency({
-                        symbol: ""
-                    });
+                    $(el).formatCurrency(formatConfig);
                 });
                 $(el).on('blur', function () {
                     if (isValidate) {
@@ -32,14 +63,10 @@
                         } else {
                             $(this).css("background-color", "");
                             $(this).attr('error', '');
-                            $(this).formatCurrency({
-                                symbol: ""
-                            });
+                            $(this).formatCurrency(formatConfig);
                         }
                     } else {
-                        $(this).formatCurrency({
-                            symbol: ""
-                        });
+                        $(this).formatCurrency(formatConfig);
                     }
 
 

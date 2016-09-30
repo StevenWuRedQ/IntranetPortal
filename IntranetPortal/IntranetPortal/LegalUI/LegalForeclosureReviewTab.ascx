@@ -52,7 +52,7 @@
 				<label class="ss_form_input_title">
 					Tax Lien Amount
 				</label>
-				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.taxLienAmt" money-mask />
+				<input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.taxLienAmt" number-mask maskformat='money' />
 			</li>
 			<li class="ss_form_item " style="width: 30%">
 				<div>

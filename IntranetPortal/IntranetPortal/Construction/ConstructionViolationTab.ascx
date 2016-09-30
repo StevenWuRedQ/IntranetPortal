@@ -203,11 +203,11 @@
                         <td>
                             <input class="ss_form_input" ng-model="penalty.DueDate" ss-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountOwed" money-mask></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountOwed" number-mask maskformat='money'></td>
                         <td>
                             <input class="ss_form_input" type="text" ng-model="penalty.PaidDate" ss-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountPaid" money-mask></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountPaid" number-mask maskformat='money'></td>
                         <td>
                             <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.DOB_Penalty, $index, true)"></pt-del>
                         </td>
@@ -357,11 +357,11 @@
                         <td>
                             <input class="ss_form_input" ng-model="penalty.DueDate" ss-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountOwed" money-mask></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountOwed" number-mask maskformat='money'></td>
                         <td>
                             <input class="ss_form_input" type="text" ng-model="penalty.PaidDate" ss-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountPaid" money-mask></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountPaid" number-mask maskformat='money'></td>
                         <td>
                             <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.ECB_Penalty, $index, true)"></pt-del>
                         </td>
@@ -505,7 +505,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount Owed</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed" money-mask>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed" number-mask maskformat='money'>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Dwelling Classification Fee</label>

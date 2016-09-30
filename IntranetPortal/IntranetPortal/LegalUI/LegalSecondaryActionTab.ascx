@@ -174,7 +174,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Mortgage Amount <span class="mandatory_star">*</span></label>
-                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsMortgageAmount" money-mask>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsMortgageAmount" number-mask maskformat='money'>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date of recording  <span class="mandatory_star">*</span></label>
