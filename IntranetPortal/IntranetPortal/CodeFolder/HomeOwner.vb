@@ -351,7 +351,7 @@ Partial Public Class HomeOwner
     Function GetOwnerPhone(bble As String, ownerName As String, item As DataAPI.BasicPhoneListing) As HomeOwnerPhone
         Dim phone = New HomeOwnerPhone
         phone.BBLE = bble
-        phone.OwnerName = Name
+        phone.OwnerName = ownerName
         phone.Phone = item.phoneField
         phone.Type = item.phoneTypeField.ToString
         phone.Source = PhoneSource.TLOLocateReport

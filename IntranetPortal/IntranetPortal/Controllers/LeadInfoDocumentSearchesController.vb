@@ -25,13 +25,14 @@ Namespace Controllers
                 Dim view As LeadInfoDocumentSearch.SearchStatus
                 If Integer.TryParse(status, view) Then
                     Dim result = LeadInfoDocumentSearch.GetDocumentSearchs
-                    Dim completedlist = result.Where(Function(ls) ls.Status = view).ToList
+                    Dim completedlist = result.Where(Function(ls) ls.Status = view) _
+                                              .OrderByDescending(Function(a) a.CompletedOn) _
+                                              .ThenBy(Function(a) a.CreateDate).ToList
                     Return Ok(completedlist)
                 End If
 
                 Return Ok()
             End If
-
             Return Ok(LeadInfoDocumentSearch.GetDocumentSearchs())
         End Function
 
@@ -202,12 +203,12 @@ Namespace Controllers
         Private Sub SendNewSearchNotify(leadInfoDocumentSearch As LeadInfoDocumentSearch)
             Try
                 Dim EntityMananger = Roles.GetUsersInRole("Entity-Manager")(0)
+                Dim searchEmail = IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
 
                 If (Not String.IsNullOrEmpty(EntityMananger)) Then
                     Dim LeadInfoSearchUser = Employee.GetInstance(EntityMananger)
                     Dim empl = Employee.GetInstance(leadInfoDocumentSearch.CreateBy)
                     Dim mLead = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
-                    Dim searchEmail = IntranetPortal.Core.PortalSettings.GetValue("DocSearchEmail")
 
                     ' notify the doc search user
                     If (LeadInfoSearchUser IsNot Nothing AndAlso mLead IsNot Nothing) Then

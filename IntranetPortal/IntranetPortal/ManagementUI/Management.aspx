@@ -552,7 +552,7 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <label for="selAgents" style="float: left">Select Agents:&nbsp;</label>
-                                                <select class="form-control selAgents" style="width: 200px; float: left; margin-left: 20px;" id="SS_selAgents" name="selAgents">
+                                                <select class="form-control selAgents" style="width: 200px; float: left; margin-left: 20px;" id="selAgents" name="selAgents">
                                                     <option>All Agents</option>
                                                     <option>Agents 1</option>
                                                 </select>
@@ -1050,6 +1050,7 @@
                                     </script>
 
                                 </div>
+
                                 <div role="tabpanel" class="tab-pane" id="ssAcceptedTab" ng-controller="SSAcceptedTabCtrl">
 
                                     <style>

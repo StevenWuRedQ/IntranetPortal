@@ -2,6 +2,13 @@
 Imports System.Web.Security
 Imports IntranetPortal.Data
 
+
+''' <summary>
+''' The Rule to notify the New Offer Acceptance report last week.
+''' The notification will send out at every Monday morning and includes
+''' 1. send report to watch users that all teams' files accepted by ShortSale
+''' 2. send report to team managers that their files were accepted by ShortSale
+''' </summary>
 <DataContract>
 Public Class NewOfferNotifyRule
     Inherits BaseRule
@@ -37,7 +44,7 @@ Public Class NewOfferNotifyRule
                 Dim users = Roles.GetUsersInRole("OfficeManager-" & tm)
                 Dim emails As String = Employee.GetEmpsEmails(users)
 
-                Dim subject = String.Format("ShortSale Acceptance Report for {0} - {1}", tm, DateTime.Today.ToShortDateString)
+                Dim subject = String.Format("ShortSale Acceptance Report for {0} Last Week", tm)
                 Dim params As New Dictionary(Of String, String) From {
                         {"team", tm}
                     }

@@ -33,6 +33,8 @@ Partial Class FrmHomeowner
         Me.txtBBLEs = New System.Windows.Forms.TextBox()
         Me.chkBBLes = New System.Windows.Forms.CheckBox()
         Me.chkUseThreads = New System.Windows.Forms.CheckBox()
+        Me.chkSSN = New System.Windows.Forms.CheckBox()
+        Me.chkPhone = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'btnLoadOwner
@@ -92,7 +94,7 @@ Partial Class FrmHomeowner
         Me.btnSavePhone.Name = "btnSavePhone"
         Me.btnSavePhone.Size = New System.Drawing.Size(82, 23)
         Me.btnSavePhone.TabIndex = 6
-        Me.btnSavePhone.Text = "Save Phones"
+        Me.btnSavePhone.Text = "Save Data"
         Me.btnSavePhone.UseVisualStyleBackColor = True
         '
         'txtBBLEs
@@ -102,7 +104,7 @@ Partial Class FrmHomeowner
         Me.txtBBLEs.Name = "txtBBLEs"
         Me.txtBBLEs.Size = New System.Drawing.Size(257, 72)
         Me.txtBBLEs.TabIndex = 7
-        Me.txtBBLEs.Text = "3041500060 "
+        Me.txtBBLEs.Text = "BBLE/Owner Id"
         Me.txtBBLEs.Visible = False
         '
         'chkBBLes
@@ -110,9 +112,9 @@ Partial Class FrmHomeowner
         Me.chkBBLes.AutoSize = True
         Me.chkBBLes.Location = New System.Drawing.Point(13, 70)
         Me.chkBBLes.Name = "chkBBLes"
-        Me.chkBBLes.Size = New System.Drawing.Size(58, 17)
+        Me.chkBBLes.Size = New System.Drawing.Size(55, 17)
         Me.chkBBLes.TabIndex = 8
-        Me.chkBBLes.Text = "BBLEs"
+        Me.chkBBLes.Text = "Inputs"
         Me.chkBBLes.UseVisualStyleBackColor = True
         '
         'chkUseThreads
@@ -125,11 +127,33 @@ Partial Class FrmHomeowner
         Me.chkUseThreads.Text = "Use Threads"
         Me.chkUseThreads.UseVisualStyleBackColor = True
         '
+        'chkSSN
+        '
+        Me.chkSSN.AutoSize = True
+        Me.chkSSN.Location = New System.Drawing.Point(269, 14)
+        Me.chkSSN.Name = "chkSSN"
+        Me.chkSSN.Size = New System.Drawing.Size(48, 17)
+        Me.chkSSN.TabIndex = 10
+        Me.chkSSN.Text = "SSN"
+        Me.chkSSN.UseVisualStyleBackColor = True
+        '
+        'chkPhone
+        '
+        Me.chkPhone.AutoSize = True
+        Me.chkPhone.Location = New System.Drawing.Point(324, 14)
+        Me.chkPhone.Name = "chkPhone"
+        Me.chkPhone.Size = New System.Drawing.Size(57, 17)
+        Me.chkPhone.TabIndex = 11
+        Me.chkPhone.Text = "Phone"
+        Me.chkPhone.UseVisualStyleBackColor = True
+        '
         'FrmHomeowner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(398, 155)
+        Me.Controls.Add(Me.chkPhone)
+        Me.Controls.Add(Me.chkSSN)
         Me.Controls.Add(Me.chkUseThreads)
         Me.Controls.Add(Me.chkBBLes)
         Me.Controls.Add(Me.txtBBLEs)
@@ -158,4 +182,6 @@ Partial Class FrmHomeowner
     Friend WithEvents txtBBLEs As TextBox
     Friend WithEvents chkBBLes As CheckBox
     Friend WithEvents chkUseThreads As CheckBox
+    Friend WithEvents chkSSN As CheckBox
+    Friend WithEvents chkPhone As CheckBox
 End Class
