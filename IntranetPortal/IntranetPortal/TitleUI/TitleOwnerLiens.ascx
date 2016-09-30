@@ -267,7 +267,7 @@
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " money-mask ng-model="mortgage.Amount">
+                                    <input class="ss_form_input " number-mask maskformat='money' ng-model="mortgage.Amount">
                                 </li>
                             </ul>
                         </div>
@@ -499,7 +499,7 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " money-mask ng-model="federalTaxLien.Federal_Tax_Liens_Amount">
+                                    <input class="ss_form_input " number-mask maskformat='money' ng-model="federalTaxLien.Federal_Tax_Liens_Amount">
                                 </li>
                             </ul>
                         </div>
@@ -532,7 +532,7 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " money-mask ng-model="mechanicsLien.Mechanics_Lien_Amount">
+                                    <input class="ss_form_input " number-mask maskformat='money' ng-model="mechanicsLien.Mechanics_Lien_Amount">
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Attorney</label>
@@ -601,7 +601,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="vacateRelocationLien.Relocation_Lien">
                                     <label class="ss_form_input_title ">Relocation payoff</label>
-                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Relocation_Payoff" money-mask>
+                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Relocation_Payoff" number-mask maskformat='money'>
                                 </li>
                             </ul>
                         </div>

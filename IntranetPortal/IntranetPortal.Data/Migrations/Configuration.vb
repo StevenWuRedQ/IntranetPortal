@@ -6,14 +6,13 @@ Imports System.Linq
 Namespace Migrations
 
     Friend NotInheritable Class Configuration 
-        Inherits DbMigrationsConfiguration(Of UnderwriterEntity)
+        Inherits DbMigrationsConfiguration(Of CodeFirstEntity)
 
         Public Sub New()
             AutomaticMigrationsEnabled = True
-            ContextKey = "IntranetPortal.Data.UnderwriterEntity"
         End Sub
 
-        Protected Overrides Sub Seed(context As UnderwriterEntity)
+        Protected Overrides Sub Seed(context As CodeFirstEntity)
             '  This method will be called after migrating to the latest version.
 
             '  You can use the DbSet(Of T).AddOrUpdate() helper extension method 

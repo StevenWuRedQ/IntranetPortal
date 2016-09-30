@@ -97,7 +97,7 @@
                             </li>--%>
                                     <%--<li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Total Check Amount</label>
-                                <input class="ss_form_input " money-mask ng-model="preAssignCtrl.Total_Check_Amount">
+                                <input class="ss_form_input " number-mask maskformat='money' ng-model="preAssignCtrl.Total_Check_Amount">
                             </li>--%>
 
                                     <%--<li class="ss_form_item ">
@@ -107,7 +107,7 @@
                             </li>--%>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
-                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
+                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" number-mask maskformat='money' />
                                     </li>
                                     <div ng-show="preAssign.NeedCheck">
                                         <li class="ss_form_item">

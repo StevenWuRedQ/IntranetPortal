@@ -411,11 +411,11 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Resale Range Min</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.CompsMin" money-mask>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.CompsMin" number-mask maskformat='money'>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Resale Range Max</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.Comps" money-mask>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.Comps" number-mask maskformat='money'>
             </li>
         </ul>
         <ul class="ss_form_box clearfix" uib-collapse="!ReloadedData.CompsCollapse">
@@ -447,11 +447,11 @@
         <div class="row">
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Resale Range Min</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.CompsMin" money-mask>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.CompsMin" number-mask maskformat='money'>
             </div>
             <div class="col-sm-4">
                 <label class="ss_form_input_title">Resale Range Max</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.Comps" money-mask>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.InitialIntake.Comps" number-mask maskformat='money'>
             </div>
             <div class="clearfix"></div>
             <div class="col-sm-4">

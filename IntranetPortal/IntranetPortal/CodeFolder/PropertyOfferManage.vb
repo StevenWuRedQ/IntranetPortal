@@ -135,15 +135,16 @@ Public Class PropertyOfferManage
     End Function
 
     Private Shared Function getHistory(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+        Return Nothing
 
     End Function
 
     Private Shared Function getCommision(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
-
+        Return Nothing
     End Function
 
     Private Shared Function getrank(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
-
+        Return Nothing
     End Function
 
     Private Shared Function getAcceptedCount(startDate As Date, endDate As Date, empName As String, teamName As String) As Integer

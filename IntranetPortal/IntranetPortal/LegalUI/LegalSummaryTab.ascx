@@ -67,7 +67,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Original Loan Amt</label>
-                <input class="ss_form_input" money-mask ng-model="LegalCase.MortgageOriginalLoanAmt">
+                <input class="ss_form_input" number-mask maskformat='money' ng-model="LegalCase.MortgageOriginalLoanAmt">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Executed Date</label>

@@ -19,17 +19,14 @@ Namespace Controllers
 
         <Route("api/underwriter/{BBLE}")>
         Public Function getUnderwriter(BBLE As String) As IHttpActionResult
-            Using ctx As New UnderwriterEntity
-                Dim result = From uw In ctx.underwriters
-                             Where uw.BBLE = BBLE
+            Return Ok()
 
-                Return Ok(result.FirstOrDefault)
-            End Using
         End Function
 
         <Route("api/underwriter/{BBLE}")>
         <HttpPost>
-        Public Function postUnderwriter(<FromBody> underwrite As Underwriter) As IHttpActionResult
+        Public Function postUnderwriter(<FromBody> underwrite As Underwriting) As IHttpActionResult
+            Return Ok()
 
         End Function
 

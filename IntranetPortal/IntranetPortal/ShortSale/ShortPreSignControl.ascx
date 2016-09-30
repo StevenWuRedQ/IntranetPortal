@@ -331,7 +331,7 @@
 
                                 <li class="ss_form_item"  ng-show="mortgage.LenderName!='N/A'">
                                     <label class="ss_form_input_title" ng-class="{ss_warning:mortgage.LenderName!='N/A'&& !mortgage.LoanAmount }" data-message="Please fill {{$index+1|ordered}} Mortgage Loan Amount"> Loan Amount</label>
-                                    <input class="ss_form_input" ng-model="mortgage.LoanAmount" money-mask>
+                                    <input class="ss_form_input" ng-model="mortgage.LoanAmount" number-mask maskformat='money'>
                                 </li>
                                 
                             </ul>

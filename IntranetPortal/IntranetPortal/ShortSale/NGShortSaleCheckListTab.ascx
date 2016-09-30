@@ -27,7 +27,7 @@
                 <label class="ss_form_input_title">Contract Price</label>
 
 
-                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.ContractPrice" money-mask />
+                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.ContractPrice" number-mask maskformat='money' />
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -46,7 +46,7 @@
                 <label class="ss_form_input_title">Approved Net - 1st Lien</label>
 
 
-                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.FirstLien" money-mask />
+                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.FirstLien" number-mask maskformat='money' />
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -65,7 +65,7 @@
                 <label class="ss_form_input_title">2nd Mortgage</label>
 
 
-                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.SecondMortgage" money-mask />
+                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.SecondMortgage" number-mask maskformat='money' />
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -73,15 +73,13 @@
                 <label class="ss_form_input_title">Approved Net - 2nd Lien</label>
 
 
-                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.SecondLien" money-mask />
+                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.SecondLien" number-mask maskformat='money' />
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Commission %</label>
-
-
-                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.CommissionPercentage" percent-mask />
+                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.CommissionPercentage" number-mask maskformat='percentage' />
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -89,7 +87,7 @@
                 <label class="ss_form_input_title">Commission Amount</label>
 
 
-                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.CommissionAmount" money-mask />
+                <input class="ss_form_input" type="text" ng-model="SsCase.ApprovalChecklist.CommissionAmount" number-mask maskformat='money' />
             </li>
         </ul>
         <ul class="ss_form_box clearfix">

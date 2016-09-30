@@ -13,4 +13,18 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
         Assert.IsTrue(Not IntranetPortal.Utility.IsCompany("OLR MM HOUSING DEVELOPMENT FUND COMPANY, INC."))
     End Sub
 
+
+    <TestMethod()> Public Sub TestTest()
+        Using ctx As New IntranetPortal.Data.CodeFirstEntity
+
+            Dim d = New IntranetPortal.Data.Underwriting
+            d.PropertyInfo = New IntranetPortal.Data.UnderwritingPropertyInfo
+            d.PropertyInfo.OccupancyStatus = IntranetPortal.Data.UnderwritingPropertyInfo.OccupancyStatusEnum.Seller
+
+            ctx.Underwritings.Add(d)
+            ctx.SaveChanges()
+
+        End Using
+
+    End Sub
 End Class

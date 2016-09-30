@@ -65,7 +65,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">List Price</label>
-                <input class="ss_form_input currency_input" ng-model="SsCase.ListPrice" money-mask>
+                <input class="ss_form_input currency_input" ng-model="SsCase.ListPrice" number-mask maskformat='money'>
             </li>
 
             <li class="ss_form_item">
@@ -154,7 +154,7 @@
                             </div>
                             <div>
                                 <label>Value</label>
-                                <input class="form-control" ng-model="value.BankValue" money-mask />
+                                <input class="form-control" ng-model="value.BankValue" number-mask maskformat='money' />
                             </div>
                             <div>
                                 <label>Date Expires</label>
@@ -260,7 +260,7 @@
                             </div>
                             <div>
                                 <label>Offer Amount</label>
-                                <input class="form-control" ng-model="offer.OfferAmount" money-mask />
+                                <input class="form-control" ng-model="offer.OfferAmount" number-mask maskformat='money' />
                             </div>
                             <div>
                                 <label>Date Submited</label>
