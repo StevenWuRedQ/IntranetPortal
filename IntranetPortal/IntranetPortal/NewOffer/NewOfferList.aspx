@@ -39,7 +39,7 @@
     <input type="text" style="display: none" />
     <div class="apply-filter-option">
         Files
-    <div id="useFilterApplyButton"></div>
+        <div id="useFilterApplyButton"></div>
     </div>
     <div id="gridContainer" style="margin: 10px"></div>
     <script>

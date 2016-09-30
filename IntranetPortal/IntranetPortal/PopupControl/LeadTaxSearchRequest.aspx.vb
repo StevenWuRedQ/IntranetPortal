@@ -1,4 +1,6 @@
 ﻿Imports IntranetPortal.Data
+
+
 Public Class LeadTaxSearchRequest
     Inherits LeadsBasePage
 
