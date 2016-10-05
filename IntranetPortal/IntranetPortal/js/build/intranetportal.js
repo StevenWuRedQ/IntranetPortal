@@ -1644,14 +1644,14 @@ angular.module('PortalApp').factory('ptUnderwriter', ['$http', 'ptBaseResource',
 
             var r = d.docSearch.LeadResearch;
 
-            d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due;
-            d.LienInfo.FirstMortgage = r.mortgageAmount;
-            d.LienInfo.SecondMortgage = r.secondMortgageAmount;
-            d.LienInfo.COSRecorded = r.Has_COS_Recorded;
-            d.LienInfo.DeedRecorded = r.Has_Deed_Recorded;
-            d.LienInfo.FHA = r.fha;
-            d.LienInfo.FannieMae = r.fannie;
-            d.LienInfo.FreddieMac = r.Freddie_Mac_;
+            d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
+            d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
+            d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
+            d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
+            d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
+            d.LienInfo.FHA = r.fha || false;
+            d.LienInfo.FannieMae = r.fannie || false;
+            d.LienInfo.FreddieMac = r.Freddie_Mac_ || false;
             d.LienInfo.Servicer = r.servicer;
             d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
             d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
@@ -1659,29 +1659,29 @@ angular.module('PortalApp').factory('ptUnderwriter', ['$http', 'ptBaseResource',
                 var total = 0.0;
                 if (r.TaxLienCertificate) {
                     for (var i = 0; i < r.TaxLienCertificate.length; i++) {
-                        total += Number.parseFloat(r.TaxLienCertificate[i].Amount);
+                        total += parseFloat(r.TaxLienCertificate[i].Amount);
                     }
                 }
                 return total;
             }();
-            d.LienCosts.PropertyTaxes = r.propertyTaxes;
-            d.LienCosts.WaterCharges = r.waterCharges;
-            d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred;
-            d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets;
-            d.LienCosts.DOBCivilPenalty = r.dobWebsites;
-            d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments;
-            d.LienCosts.HPDJudgements = r.HPDjudgementAmount;
+            d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
+            d.LienCosts.WaterCharges = r.waterCharges || 0.0;
+            d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
+            d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets || 0.0;
+            d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
+            d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
+            d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
             d.LienCosts.IRSNYSTaxLiens = function () {
                 var total = 0.0;
 
-                if (r.irsTaxLien) total += Number.parseFloat(r.irsTaxLien);
-                if (r.Amount_NYS_Tax_Lien) total += Number.parseFloat(r.Amount_NYS_Tax_Lien);
+                if (r.irsTaxLien) total += parseFloat(r.irsTaxLien);
+                if (r.Amount_NYS_Tax_Lien) total += parseFloat(r.Amount_NYS_Tax_Lien);
 
                 return total;
             }();
-            d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order;
+            d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
             d.LienCosts.RelocationLien = function () {
-                if (r.has_Vacate_Order_Vacate_Order) return r.Amount_Vacate_Order;
+                if (r.has_Vacate_Order_Vacate_Order) return r.Amount_Vacate_Order || 0.0;
             }();
         }
         // map to Leads Info if we have data
@@ -1765,8 +1765,9 @@ angular.module('PortalApp').factory('ptUnderwriter', ['$http', 'ptBaseResource',
     underwriter.load = function ( /* optional */bble, /* optional */isImport) {
         var data = underwritingFactory.build();
         if (bble) {
-            var _data = Underwriter.get({ BBLE: bble.trim() }, function () {
-                _.default(_data, data);
+            var _data = underwriter.get({ BBLE: bble.trim() }, function () {
+                _.defaults(_data, data);
+                //debugger;
                 if (isImport) {
                     data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
                         data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {
@@ -2057,54 +2058,94 @@ angular.module('PortalApp').factory('UnderwritingRequest', ['$http', 'ptBaseReso
 
     return resource;
 }]);
+/// <reference path="DocSearch.js" />
 /**
+ * Wizard control to support comstom display and show current step
  * @return {[class]}                 Wizard class
  */
 angular.module('PortalApp').factory('Wizard', function (WizardStep) {
+  /**
+   * Wizard class constructor
+   */
+  var _class = function _class() {};
+  /**
+   * valule of steped filted by conditions 
+   */
+  _class.prototype.filteredSteps = [];
+  /**
+   * `public set filtered steps
+   * @param {array of WizardStep object} filteredSteps
+   */
+  _class.prototype.setFilteredSteps = function (filteredSteps) {
+    this.filteredSteps = filteredSteps;
+  };
+  /**
+   * contorller scope 
+   * similar to other MVC framework context
+   */
+  _class.prototype.scope = { step: 1 };
+  /**
+   * get current max step of current steps
+   * @returns {int} 
+   */
+  _class.prototype.MaxStep = function () {
+    return this.filteredSteps.length;
+  };
+  /**
+   * get class scope, other MVC framework UI context 
+   * 
+   * @param {angular scope} scope
+   */
+  _class.prototype.setScope = function (scope) {
+    this.scope = scope;
+  };
+  /**
+   * get current step
+   * @returns {WizardStep object} current step object
+   */
+  _class.prototype.currentStep = function () {
+    return this.filteredSteps[this.scope.step - 1];
+  };
 
-    var _class = function _class() {};
-
-    _class.prototype.filteredSteps = [];
-
-    _class.prototype.setFilteredSteps = function (filteredSteps) {
-        this.filteredSteps = filteredSteps;
-    };
-    _class.prototype.scope = { step: 1 };
-
-    _class.prototype.MaxStep = function () {
-        return this.filteredSteps.length;
-    };
-    _class.prototype.setScope = function (scope) {
-        this.scope = scope;
-    };
-    _class.prototype.currentStep = function () {
-        return this.filteredSteps[this.scope.step - 1];
-    };
-
-    //return $scope.filteredSteps.length;
-    return _class;
+  return _class;
 });
 /**
- * @return {[class]}                 WizardStep class
+ * Wizard step item  class
+ * @return {[WizardStep]}                 WizardStep class
  */
 angular.module('PortalApp').factory('WizardStep', function () {
-    var _class = function _class(step) {
+  /**
+   * WizardStep constructor
+   * @param {object} step
+   */
+  var _class = function _class(step) {
 
-        this.title = step.title;
-        this.next = step.next;
-        this.init = step.init;
-        angular.extend(this, step);
-    };
-    _class.prototype.title = "";
+    this.title = step.title;
+    this.next = step.next;
+    this.init = step.init;
+    angular.extend(this, step);
+  };
+  /**
+   * wizard title
+   */
+  _class.prototype.title = "";
+  /**
+   * interface of wizard can move to next or not default is true
+   * @returns {boolean} wizard can move to next or not
+   */
+  _class.prototype.next = function () {
+    return true;
+  };
+  /**
+   * interface of wizard preload function it will call
+   * before wizard contet showup.
+   * @returns {boolean} wizard preload function
+   */
+  _class.prototype.init = function () {
+    return true;
+  };
 
-    _class.prototype.next = function () {
-        return true;
-    };
-    _class.prototype.init = function () {
-        return true;
-    };
-
-    return _class;
+  return _class;
 });
 angular.module("PortalApp").directive('dsSummary', function () {
     return {
@@ -8406,7 +8447,7 @@ angular.module("PortalApp").config(function ($stateProvider) {
     $stateProvider.state(underwriter).state(dataInput).state(flipsheets).state(rentalmodels).state(tables);
 });
 
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', 'ptUnderwriter', function ($scope, ptCom, ptUnderwriter) {
+angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', 'ptUnderwriter', '$location', function ($scope, ptCom, ptUnderwriter, $location) {
 
     $scope.data = {};
 
@@ -8421,7 +8462,7 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
 
             });
         }
-        $scope.feedData();
+        //$scope.feedData();
     };
 
     // a predefined model to validate with excel data
@@ -8450,6 +8491,13 @@ angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCo
             ptUnderwriter.applyRule($scope.data);
         });
     };
+
+    var search = $location.search();
+    if (search && search.bble) {
+        $scope.init(search.bble, true);
+    } else {
+        $scope.init();
+    }
 }]);
 angular.module("PortalApp").controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom) {
     $scope.init = function () {
