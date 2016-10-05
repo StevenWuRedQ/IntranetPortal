@@ -1,0 +1,96 @@
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UnderWriterItem.ascx.vb" Inherits="IntranetPortal.UnderWriterItem" %>
+
+<style type="text/css">
+    a.dx-link-MyIdealProp:hover {
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .myRow:hover {
+        background-color: #efefef;
+    }
+
+    label.xlink {
+        color: black;
+    }
+
+    label.xlink:hover {
+        color: blue;
+    }
+</style>
+<h4 id="NewOffer_<%= ClientID %>" style="padding-top: 5px">
+    <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
+    <% If CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingSearch %>
+     <label class='grid-title-icon'>PS</label>
+    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedSearch %>
+     <label class='grid-title-icon'>CS</label>
+    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingUnderwirter %>
+     <label class='grid-title-icon'>PU</label>
+    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedUnderwirter %>
+     <label class='grid-title-icon'>CU</label>
+    <% End if %>
+   
+
+    <a href="/NewOffer/NewOfferList.aspx?view=<%=CInt(CaseStatus)%>">
+        <label class="xlink">&nbsp;<%= CaseStatus.ToString %></label>
+        <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label>
+    </a>
+</h4>
+<div id="gridContainer" runat="server" style="margin: 3px; height: 330px"></div>
+<script>
+    var CategoryItem_<%= Me.ClientID%> = {
+        url: "/api/LeadInfoDocumentSearches/UnderWritingStatus/<%=CInt(CaseStatus)%>",
+        dxGridName: "#<%= gridContainer.ClientID%>",
+        headName: "NewOffer_<%= ClientID%>",
+        loadData: function () {
+            var tab = this;
+            $.getJSON(tab.url).done(function (data) {                
+                var dataGrid = $(tab.dxGridName).dxDataGrid({
+                    dataSource: data.data,
+                    rowAlternationEnabled: true,
+                    pager: {
+                        showInfo: true
+                    },
+                    paging: {
+                        enabled: true,
+                    },
+                    onRowPrepared: function (rowInfo) {
+                        if (rowInfo.rowType != 'data')
+                            return;
+                        rowInfo.rowElement
+                        .addClass('myRow');
+                    },
+                    onContentReady: function (e) {
+                        var spanTotal = $('#' + tab.headName).find('.employee_lest_head_number_label')[0];
+                        if (spanTotal) {
+                            $(spanTotal).html(data.count);
+                        }
+                    },
+                    showColumnHeaders:false,
+                    columns: [{
+                        dataField: "CaseName",
+                        caption: "Name",
+                        cellTemplate: function (container, options) {
+                            $('<a/>').addClass('dx-link-MyIdealProp')
+                                .text(options.value)
+                                .on('dxclick', function(){
+                                    //Do something with options.data;
+                                    var url = '/ViewLeadsInfo.aspx?id=' + options.data.BBLE;
+                                     <% If CaseStatus = 4 %>
+                                     url = '/NewOffer/NewOfferAccepted.aspx?bble=' + options.data.BBLE;
+                                     <% End if %>
+                                    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);                                                                       
+                                })
+                                .appendTo(container);
+                        },
+                    }],
+                }).dxDataGrid('instance');              
+            });
+        }
+    }
+    
+    $(function(){
+        CategoryItem_<%= Me.ClientID%>.loadData();    
+    });    
+
+</script>

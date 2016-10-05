@@ -2651,6 +2651,13 @@
       <DependentUpon>TitlesByCategoryItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\SummaryItem\UnderWriterItem.ascx.designer.vb">
+      <DependentUpon>UnderWriterItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\UnderWriterItem.ascx.vb">
+      <DependentUpon>UnderWriterItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\TitleInLeadsControl.ascx.designer.vb">
       <DependentUpon>TitleInLeadsControl.ascx</DependentUpon>
     </Compile>
@@ -7861,6 +7868,7 @@
     <Content Include="UserControl\SummaryItem\FollowUpItem2.ascx" />
     <Content Include="UserControl\SummaryItem\NewOfferItem.ascx" />
     <Content Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx" />
+    <Content Include="UserControl\SummaryItem\UnderWriterItem.ascx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />
     <Content Include="App_Data\QuietTitleComplantTemplate.docx" />

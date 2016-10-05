@@ -281,5 +281,28 @@ Namespace Controllers
             End If
 
         End Function
+        <HttpGet>
+        <Route("api/LeadInfoDocumentSearches/UnderWritingStatus/{status}")>
+        Public Function GetSearchByUnderWritingStatus(status As Integer) As IHttpActionResult
+
+            Try
+                Dim underWritingStatus = CType(status, LeadInfoDocumentSearch.UnderWriterStatus)
+                Dim searches = LeadInfoDocumentSearch.GetByUnerWritingStatus(underWritingStatus)
+                If (searches Is Nothing) Then
+                    Throw New Exception("Empty request by searches" & status)
+                End If
+
+                Dim data = New With {
+                    .data = searches.Take(10),
+                    .count = searches.Count()
+                }
+                Return Ok(data)
+            Catch ex As Exception
+                Return BadRequest(ex.Message)
+            End Try
+
+
+        End Function
+
     End Class
 End Namespace
