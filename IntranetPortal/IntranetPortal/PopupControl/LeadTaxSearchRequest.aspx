@@ -96,11 +96,29 @@
                                             <div class="font_size_bold" style="width: 100px">Export</div>
                                         </a>
                                     </li>
-                                    <li class="short_sale_head_tab activity_light_blue pull-right" ng-show="!DocSearch.UnderwriteCompleted" ng-click="markCompleted()">
-                                        <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Completed">
-                                            <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
-                                            <div class="font_size_bold" style="width: 100px">Completed</div>
+
+                                    <li class="short_sale_head_tab activity_light_blue pull-right" ng-show="!DocSearch.UnderwriteStatus">
+                                        <a class="tab_button_a">
+                                            <i class="fa fa-list-ul head_tab_icon_padding"></i>
+                                            <div class="font_size_bold" style="width: 100px">Mark</div>
                                         </a>
+                                        <div class="shot_sale_sub">
+                                            <ul class="nav  clearfix" role="tablist">
+
+                                                <li class="short_sale_head_tab " ng-click="markCompleted(1)">
+                                                    <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Completed">
+                                                        <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
+                                                        <div class="font_size_bold" style="width: 100px">Completed</div>
+                                                    </a>
+                                                </li>
+                                                <li class="short_sale_head_tab" ng-click="markCompleted(2)">
+                                                    <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Rejected">
+                                                        <i class="fa fa-times head_tab_icon_padding" style="color: white !important"></i>
+                                                        <div class="font_size_bold" style="width: 100px">Reject</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
                                     <% End If %>
                                 </ul>

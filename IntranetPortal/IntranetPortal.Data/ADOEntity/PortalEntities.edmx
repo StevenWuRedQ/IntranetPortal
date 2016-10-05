@@ -361,6 +361,7 @@
           <Property Name="UnderwriteCompletedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Version" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="UnderwriteStatus" Type="tinyint" />
         </EntityType>
         <EntityType Name="Leads">
           <Key>
@@ -2123,6 +2124,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="UnderwriteCompleted" Type="Boolean" />
           <Property Name="UnderwriteCompletedOn" Type="DateTime" Precision="3" />
           <Property Name="UnderwriteCompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnderwriteStatus" Type="Byte" />
         </EntityType>
         <EntityType Name="CheckingComplain">
           <Key>
@@ -3375,6 +3377,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySetMapping Name="LeadInfoDocumentSearches">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadInfoDocumentSearch">
               <MappingFragment StoreEntitySet="LeadInfoDocumentSearch">
+                <ScalarProperty Name="UnderwriteStatus" ColumnName="UnderwriteStatus" />
                 <ScalarProperty Name="UnderwriteCompletedBy" ColumnName="UnderwriteCompletedBy" />
                 <ScalarProperty Name="UnderwriteCompletedOn" ColumnName="UnderwriteCompletedOn" />
                 <ScalarProperty Name="UnderwriteCompleted" ColumnName="UnderwriteCompleted" />

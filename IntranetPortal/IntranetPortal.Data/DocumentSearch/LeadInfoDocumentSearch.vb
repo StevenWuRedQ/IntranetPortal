@@ -42,7 +42,8 @@ Public Class LeadInfoDocumentSearch
                .CreateDate = search.CreateDate,
                .Status = search.Status,
                .UpdateBy = search.UpdateBy,
-               .UpdateDate = search.UpdateDate
+               .UpdateDate = search.UpdateDate,
+               .UnderwriteStatus = search.UnderwriteStatus
             }
 
             'Return result.ToList
@@ -58,7 +59,8 @@ Public Class LeadInfoDocumentSearch
                                                                    .CreateDate = search.CreateDate,
                                                                    .Status = search.Status,
                                                                    .UpdateBy = search.UpdateBy,
-                                                                   .UpdateDate = search.UpdateDate
+                                                                   .UpdateDate = search.UpdateDate,
+                                                                   .UnderwriteStatus = search.UnderwriteStatus
                                                         }
                                                 End Function).ToList
         End Using
@@ -228,7 +230,7 @@ Public Class LeadInfoDocumentSearch
             If Nothing IsNot search Then
                 search.UnderwriteCompletedBy = User
                 search.UnderwriteCompletedOn = Date.Now
-                search.UnderwriteCompleted = True
+                search.UnderwriteStatus = CInt(Status)
                 ctx.SaveChanges()
                 Return search
             Else

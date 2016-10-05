@@ -25,5 +25,6 @@ Partial Public Class LeadInfoDocumentSearch
     Public Property UnderwriteCompleted As Nullable(Of Boolean)
     Public Property UnderwriteCompletedOn As Nullable(Of Date)
     Public Property UnderwriteCompletedBy As String
+    Public Property UnderwriteStatus As Nullable(Of Byte)
 
 End Class

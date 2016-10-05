@@ -244,24 +244,26 @@ angular.module('PortalApp')
         }
 
 
-        $scope.markCompleted = function () {
+        $scope.markCompleted = function (status) {
             var xhrfunc = function () {
                 debugger;
                 $http({
                     method: 'GET',
-                    url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
+                    url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE + '|' + status
                 }).then(function succ(d) {
                     //debugger;
-                    $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
-                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                    $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy; 
                     $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
                 }, function err() {
 
                 })
             };
-            
+
             // because the underwriting completion is not reversible, comfirm it before save to db.
-            ptCom.confirm('Are you sure to complete this underwriting?', function (result) {
+
+            var msg = status == 1?'Are you sure to complete this underwriting?':'Are you sure to reject this underwriting?';
+            ptCom.confirm(msg, function (result) {
                 debugger;
                 if (result) {
                     xhrfunc();

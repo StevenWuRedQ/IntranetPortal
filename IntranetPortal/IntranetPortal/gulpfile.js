@@ -31,9 +31,7 @@ gulp.task('clean', function () {
 gulp.task('concat', function () {
 
     gulp.src(angularPath)
-        .pipe(babel({
-            presets: ['es2015-without-strict']
-        }))
+        //.pipe(babel({            presets: ['es2015-without-strict']        }))
         .pipe(concat(p.name + '.js'))
         .pipe(gulp.dest('js/build/'))
 })

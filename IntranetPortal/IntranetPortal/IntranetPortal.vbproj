@@ -7282,6 +7282,7 @@
     <Content Include="js\models\Wizard.js" />
     <Content Include="js\models\WizardStep.js" />
     <Content Include="js\test\model.PreSign.spec.js" />
+    <Content Include="js\test\model.underwriting.spec.js" />
     <Content Include="js\test\service.ptDocSearch.spec.js" />
     <Content Include="js\Views\AuditLogs\AuditLogs.tpl.html" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.html" />
