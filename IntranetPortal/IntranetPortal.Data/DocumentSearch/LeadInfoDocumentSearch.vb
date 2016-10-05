@@ -198,12 +198,13 @@ Public Class LeadInfoDocumentSearch
                                               End If
 
                                               If (x.Status = SearchStatus.Completed) Then
-                                                  Return UnderWriterStatus.PendingUnderwirter
+                                                  Return UnderWriterStatus.CompletedSearch
                                               End If
 
-                                              ' If (x.UnderwriteStatus = 2) Then
-                                              ' return UnderWriterStatus.CompletedUnderwirter
-                                              ' end if
+                                              If (x.UnderwriteStatus = 2) Then
+                                                  Return UnderWriterStatus.CompletedUnderwirter
+                                              End If
+
                                               Return UnderWriterStatus.PendingSearch
 
                                           End Function)
@@ -224,7 +225,7 @@ Public Class LeadInfoDocumentSearch
         End If
         Return Nothing
     End Function
-    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String) As LeadInfoDocumentSearch
+    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String, Status As Integer) As LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Dim search = ctx.LeadInfoDocumentSearches.Find(BBLE)
             If Nothing IsNot search Then
