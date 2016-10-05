@@ -265,17 +265,21 @@ Namespace Controllers
             Return db.LeadInfoDocumentSearches.Count(Function(e) e.BBLE = id) > 0
         End Function
         <HttpGet>
-        <Route("api/LeadInfoDocumentSearches/MarkCompleted/{bble}")>
-        Public Function MarkUnderWritingCompleted(BBLE As String) As IHttpActionResult
+        <Route("api/LeadInfoDocumentSearches/MarkCompleted/{BBLEANDStatus}")>
+        Public Function MarkUnderWritingCompleted(BBLEANDStatus As String) As IHttpActionResult
             Dim USER = HttpContext.Current.User.Identity.Name
-            If Not String.IsNullOrEmpty(BBLE) OrElse String.IsNullOrEmpty(USER) Then
-                Dim search = LeadInfoDocumentSearch.MarkCompletedUnderwriting(BBLE, USER)
-                If Nothing IsNot search Then
-                    Return Ok(search)
-                Else
-                    Return BadRequest(String.Format("Doc Search With {0} Cannot Be Found!", BBLE))
+            If Not String.IsNullOrEmpty(BBLEANDStatus) OrElse String.IsNullOrEmpty(USER) Then
+                Dim tokens = BBLEANDStatus.Split("|")
+                Dim BBLE = tokens(0)
+                Dim Status = tokens(1)
+                If Not String.IsNullOrEmpty(BBLE) AndAlso Not String.IsNullOrEmpty(Status) Then
+                    Dim search = LeadInfoDocumentSearch.MarkCompletedUnderwriting(BBLE, USER, Status)
+                    If Nothing IsNot search Then
+                        Return Ok(search)
+                    Else
+                        Return BadRequest(String.Format("Doc Search With {0} Cannot Be Found!", BBLE))
+                    End If
                 End If
-
             Else
                 Return BadRequest("BBLE Cannot Be empty.")
             End If

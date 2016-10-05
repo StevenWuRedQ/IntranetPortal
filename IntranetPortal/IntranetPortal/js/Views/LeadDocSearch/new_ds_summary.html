@@ -30,8 +30,8 @@ a template to display new doc search.
     }
 </style>
 <div>
-    <div class="alert alert-info" ng-show="docsearch.UnderwriteCompleted">
-        The Underwriting Completed by {{docsearch.UnderwriteCompletedBy}} on {{docsearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!
+    <div class="alert alert-info" ng-show="docsearch.UnderwriteStatus > 0">
+        The Underwriting {{UnderwriteStatus == 1? 'Completed':'Rejected'}} by {{docsearch.UnderwriteCompletedBy}} on {{docsearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!
     </div>
     <div class="alert alert-warning" ng-show="updateon">The last search updated on {{updateon | date:'MM/dd/yyyy'}} by {{updateby}}</div>
     <table class="table summary" ng-show="showinfo">

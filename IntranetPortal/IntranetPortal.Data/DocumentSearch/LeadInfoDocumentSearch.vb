@@ -41,7 +41,8 @@ Public Class LeadInfoDocumentSearch
                .CreateDate = search.CreateDate,
                .Status = search.Status,
                .UpdateBy = search.UpdateBy,
-               .UpdateDate = search.UpdateDate
+               .UpdateDate = search.UpdateDate,
+               .UnderwriteStatus = search.UnderwriteStatus
             }
 
             'Return result.ToList
@@ -57,7 +58,8 @@ Public Class LeadInfoDocumentSearch
                                                                    .CreateDate = search.CreateDate,
                                                                    .Status = search.Status,
                                                                    .UpdateBy = search.UpdateBy,
-                                                                   .UpdateDate = search.UpdateDate
+                                                                   .UpdateDate = search.UpdateDate,
+                                                                   .UnderwriteStatus = search.UnderwriteStatus
                                                         }
                                                 End Function).ToList
         End Using
@@ -173,13 +175,13 @@ Public Class LeadInfoDocumentSearch
 
     End Sub
 
-    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String) As LeadInfoDocumentSearch
+    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String, Status As String) As LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Dim search = ctx.LeadInfoDocumentSearches.Find(BBLE)
             If Nothing IsNot search Then
                 search.UnderwriteCompletedBy = User
                 search.UnderwriteCompletedOn = Date.Now
-                search.UnderwriteCompleted = True
+                search.UnderwriteStatus = CInt(Status)
                 ctx.SaveChanges()
                 Return search
             Else
