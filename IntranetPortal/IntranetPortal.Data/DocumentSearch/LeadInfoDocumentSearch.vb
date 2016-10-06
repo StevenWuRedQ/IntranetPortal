@@ -202,7 +202,7 @@ Public Class LeadInfoDocumentSearch
 
     ' should move this to UnderWriter class
     Public Enum UnderWriterStatus
-        <Description("Pending Search")>
+        <Description("New Search")>
         PendingSearch = 0
         <Description("Completed Search")>
         CompletedSearch = 1
