@@ -1,7 +1,8 @@
 ﻿Imports System.ComponentModel
-Imports System.ComponentModel.DataAnnotations
+Imports Humanizer
 
-<MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
+' <MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
+
 Public Class LeadInfoDocumentSearch
     Public Property ResutContent As String
     Public Property IsSave As Boolean
@@ -126,6 +127,33 @@ Public Class LeadInfoDocumentSearch
 
         Return mailData
     End Function
+    ''' <summary>
+    ''' combine status and under write status to one filed
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function GetUnderWritingStatus() As Integer
+        Dim reslut = 0
+        ' last 8 bit is search status
+        ' last 9-16 bit is under writing status
+        reslut = Status << 8 Or UnderwriteStatus
+
+        Return Status
+    End Function
+
+    ''' <summary>
+    ''' check combined under writing status
+    ''' </summary>
+    ''' <param name="m_status">under write status</param>
+    ''' <returns></returns>
+    Public Function isUnderWritingStatus(m_status As UnderWriterStatus) As Boolean
+        Dim s = CType(m_status, Integer)
+
+        If (s >= 2) Then
+            Return UnderwriteStatus = s - 2
+        End If
+
+        Return s = Me.Status
+    End Function
 
     ''' <summary>
     ''' Submit new search
@@ -174,11 +202,16 @@ Public Class LeadInfoDocumentSearch
 
     ' should move this to UnderWriter class
     Public Enum UnderWriterStatus
+        <Description("Pending Search")>
         PendingSearch = 0
+        <Description("Completed Search")>
         CompletedSearch = 1
-        PendingUnderwirter = 2
-        <Description("Not Completed")>
-        CompletedUnderwirter = 3
+        <Description("Pending Underwriting")>
+        PendingUnderwriting = 2
+        <Description("Completed Underwriting")>
+        CompletedUnderwriting = 3
+        <Description("RejectUnder Underwriting")>
+        RejectUnderwriting = 4
     End Enum
 
     ' duck type type converting to underwriter type
@@ -193,6 +226,16 @@ Public Class LeadInfoDocumentSearch
         Get
             Return CUnderWriterStatus(Me, Function(x)
 
+                                              If (x.UnderwriteStatus = 0) Then
+                                                  Return UnderWriterStatus.PendingUnderwriting
+                                              End If
+                                              If (x.UnderwriteStatus = 1) Then
+                                                  Return UnderWriterStatus.CompletedUnderwriting
+                                              End If
+                                              If (x.UnderwriteStatus = 2) Then
+                                                  Return UnderWriterStatus.RejectUnderwriting
+                                              End If
+
                                               If x.Status = SearchStatus.NewSearch Then
                                                   Return UnderWriterStatus.PendingSearch
                                               End If
@@ -201,9 +244,6 @@ Public Class LeadInfoDocumentSearch
                                                   Return UnderWriterStatus.CompletedSearch
                                               End If
 
-                                              If (x.UnderwriteStatus = 2) Then
-                                                  Return UnderWriterStatus.CompletedUnderwirter
-                                              End If
 
                                               Return UnderWriterStatus.PendingSearch
 
@@ -219,9 +259,10 @@ Public Class LeadInfoDocumentSearch
     ''' <returns> list of doc search</returns>
     Public Shared Function GetByUnerWritingStatus(status As UnderWriterStatus) As List(Of LeadInfoDocumentSearch)
         ' Query need  optimization if search is big table
+
         Dim searches = GetDocumentSearchs()
         If (searches IsNot Nothing) Then
-            Return searches.ToList().Where(Function(s) s.MUnderWritingStatus = status).ToList
+            Return searches.ToList().Where(Function(s) s.isUnderWritingStatus(status)).ToList
         End If
         Return Nothing
     End Function
