@@ -1,4 +1,9 @@
-﻿Imports IntranetPortal.Data
+﻿Imports System.ComponentModel
+Imports System.Reflection
+Imports System.Runtime.CompilerServices
+Imports IntranetPortal.Data
+Imports Humanizer
+
 Public Class UnderWriterItem
     Inherits SummaryItemBase
     ' this should be underwriter status
@@ -10,13 +15,16 @@ Public Class UnderWriterItem
     End Sub
 
     Public Overrides Sub BindData()
+        LeadInfoDocumentSearch.UnderWriterStatus.PendingUnderwriting.Humanize()
         If Parameters IsNot Nothing Then
             CaseStatus = CType(Parameters("caseStatus"), LeadInfoDocumentSearch.UnderWriterStatus)
         End If
 
     End Sub
 
-
+    Public Function HumanizeEnum(e As LeadInfoDocumentSearch.UnderWriterStatus) As String
+        Return e.Humanize()
+    End Function
 
 
 

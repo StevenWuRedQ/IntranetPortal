@@ -20,19 +20,20 @@
 </style>
 <h4 id="NewOffer_<%= ClientID %>" style="padding-top: 5px">
     <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
-    <% If CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingSearch %>
+    <% If CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingSearch Then %>
      <label class='grid-title-icon'>PS</label>
     <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedSearch %>
      <label class='grid-title-icon'>CS</label>
-    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingUnderwirter %>
+    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingUnderwriting %>
      <label class='grid-title-icon'>PU</label>
-    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedUnderwirter %>
+    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedUnderwriting %>
      <label class='grid-title-icon'>CU</label>
     <% End if %>
    
-
-    <a href="/NewOffer/NewOfferList.aspx?view=<%=CInt(CaseStatus)%>">
-        <label class="xlink">&nbsp;<%= CaseStatus.ToString %></label>
+    <%-- do not use link to jump now --%>
+    <%--href="/NewOffer/NewOfferList.aspx?view=<%=CInt(CaseStatus)%>"--%>
+    <a href="/UnderWriter/DocSearchList.aspx#/<%=CInt(CaseStatus) + 1 %>">
+        <label class="xlink">&nbsp;<%= HumanizeEnum(CaseStatus)  %></label>
         <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label>
     </a>
 </h4>
