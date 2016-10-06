@@ -84,7 +84,7 @@
         }
 
         $(document).ready(function () {
-            var url = "/api/LeadInfoDocumentSearches?status=1";
+            var url = "/api/LeadInfoDocumentSearches";
             $.getJSON(url).done(function (data) {
                 var dataGrid = $("#gridContainer").dxDataGrid({
                     dataSource: data,
@@ -116,7 +116,6 @@
                             $(spanTotal).html("Total Count: " + e.component.totalCount());
                         } else {
                             var panel = e.element.find('.dx-datagrid-pager');
-
                             if (!panel.find(".dx-pages").length) {
                                 $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()).appendTo(e.element);
                             } else {
@@ -145,10 +144,11 @@
                         }
                     }, {
                         caption: "Requested By",
-                        dataField: "CreateBy"
+                        dataField: "CreateBy",
                     }, {
                         caption: "Search Status",
                         dataField: "Status",
+                        alignment: "left",
                         customizeText: function (cell) {
                             switch (cell.value) {
                                 case 1:
@@ -177,6 +177,7 @@
                     }, {
                         caption: 'Underwriting Status',
                         dataField: 'UnderwriteStatus',
+                        alignment: "left",
                         customizeText: function (cell) {
                             switch (cell.value) {
                                 case 1:
@@ -191,8 +192,72 @@
                     }]
                 }).dxDataGrid('instance');
                 $(".dx-datagrid-header-panel").prepend($("<label class='grid-title-icon' style='display: inline-block'>UW</label>"))
-                $(".dx-datagrid-header-panel").prepend($("<span id='hideicon' data-toggle='tooltip' data-placement='right' title='hide right panel' onclick='previewControl.undo()'><img class='pull-right' src='/images/hide.png' height='40' width='40' /></span>"))
+
+                $(".dx-datagrid-header-panel").prepend($("<span id='hideicon' class='btn btn-blue pull-right' data-toggle='tooltip' data-placement='right' title='hide right panel' onclick='previewControl.undo()'><i class='fa fa-angle-double-right fa-lg'></i></span>"))
+
+                $(".dx-toolbar-items-container").prepend($("<span id='useFilterApplyButton'></div>"))
+                var filterDataDelegate = function (data) {
+                    filterData(data.value);
+                }
+
+                var filterData = function (data) {
+
+                    dataGrid.clearFilter();
+                    switch (data) {
+                        case 1:
+                            dataGrid.filter(['Status', '=', '0']);
+                            break;
+                        case 2:
+                            dataGrid.filter(['Status', '=', '1']);
+                            break;
+                        case 3:
+                            dataGrid.filter(['UnderwriteStatus', '=', '0']);
+                            break;
+                        case 4:
+                            dataGrid.filter(['UnderwriteStatus', '=', '1']);
+                            break;
+                        case 5:
+                            dataGrid.filter(['UnderwriteStatus', '=', '2']);
+                    }
+                }
+
+                var filterBox = $("#useFilterApplyButton").dxSelectBox({
+                    items: [{
+                        key: 0,
+                        name: "All"
+                    }, {
+                        key: 1,
+                        name: "Pending Search"
+                    }, {
+                        key: 2,
+                        name: "Completed Search"
+                    }, {
+                        key: 3,
+                        name: "Pending Underwriting"
+                    }, {
+                        key: 4,
+                        name: "Completed Underwriting"
+                    }, {
+                        key: 5,
+                        name: "Rejected Underwriting"
+                    }],
+                    valueExpr: "key",
+                    displayExpr: "name",
+                    width: '250',
+                    onValueChanged: filterDataDelegate
+                }).dxSelectBox('instance');
+
+                var hashnum = parseInt(location.hash.slice(2));
+                if (hashnum) {
+                    filterBox.option('value', hashnum)
+                } else {
+                    filterBox.option('value', 0);
+                }
+
+                
             });
+
+
         })
 
     </script>

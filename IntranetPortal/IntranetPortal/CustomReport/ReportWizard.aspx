@@ -70,7 +70,7 @@
                                                     <option value="2">is after</option>
                                                     <option value="3">equals</option>
                                                 </select>
-                                                <input type="text" ng-model="x.input1" ng-change="updateDateFilter(x)" type="text" ss-date />
+                                                <input type="text" ng-model="x.input1" ng-change="updateDateFilter(x)" type="text" pt-date />
                                             </span>
                                             <span ng-if="f.type=='number'">
                                                 <select ng-model="x.criteria" ng-change="updateNumberFilter(x)">

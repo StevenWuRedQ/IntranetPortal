@@ -1,11 +1,11 @@
 ﻿/**
  * a input attribute directive to automatic convert input to certain data format
- * example <input number-mask maskformat='money' isvalidate/>
+ * example <input pt-number-mask maskformat='money' isvalidate/>
  * (optional) maskerformat: control how data will present.
  * (optional) isvalidate: if the attribute present, will validate if the user input is correct
  */
 angular.module("PortalApp")
-    .directive('numberMask', function () {
+    .directive('ptNumberMask', function () {
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {

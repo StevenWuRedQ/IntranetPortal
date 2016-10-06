@@ -35,19 +35,19 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Order Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Order_Date" pt-init-model="BuyerTitle.ReportOrderDate">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.info.Order_Date" pt-init-model="BuyerTitle.ReportOrderDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Confirmation Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Confirmation_Date" pt-init-model="BuyerTitle.ConfirmationDate">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.info.Confirmation_Date" pt-init-model="BuyerTitle.ConfirmationDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Received Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Received_Date" pt-init-model="BuyerTitle.ReceivedDate">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.info.Received_Date" pt-init-model="BuyerTitle.ReceivedDate">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Initial Reivew Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.info.Initial_Reivew_Date" pt-init-model="BuyerTitle.ReviewedDate">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.info.Initial_Reivew_Date" pt-init-model="BuyerTitle.ReviewedDate">
             </li>
         </ul>
     </div>
@@ -141,7 +141,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.info.fillable_date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.info.fillable_date" pt-date></input>
             </li>
         </ul>
     </div>

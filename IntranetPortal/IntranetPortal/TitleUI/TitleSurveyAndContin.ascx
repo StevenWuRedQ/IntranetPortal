@@ -8,33 +8,33 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.Title_Date_Requested">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.surveyAndContin.Title_Date_Requested">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Received</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.Title_Date_Received">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.surveyAndContin.Title_Date_Received">
             </li>
             <li class="ss_form_item ">
                 <span class="label label-primary">Tax and Water Contin</span>
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.Tax_and_Water_Date_Requested">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.surveyAndContin.Tax_and_Water_Date_Requested">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Received</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.Tax_and_Water_Date_Received">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.surveyAndContin.Tax_and_Water_Date_Received">
             </li>
             <li class="ss_form_item ">
                 <span class="label label-primary">ER Contin</span>
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Requested</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.ER_Date_Requested">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.surveyAndContin.ER_Date_Requested">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Date Received</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.ER_Date_Received">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.surveyAndContin.ER_Date_Received">
             </li>
         </ul>
     </div>
@@ -53,7 +53,7 @@
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Order Date</label>
-                <input class="ss_form_input " ss-date ng-model="Form.FormData.surveyAndContin.Survey_Order_Date">
+                <input class="ss_form_input " pt-date ng-model="Form.FormData.surveyAndContin.Survey_Order_Date">
             </li>
             <li class="ss_form_item ">
                 <label class="ss_form_input_title ">Received Date</label>

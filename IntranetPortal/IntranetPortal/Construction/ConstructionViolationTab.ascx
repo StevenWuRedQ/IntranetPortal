@@ -144,7 +144,7 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Project Assigned Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Violations.Expeditor_AssignedDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Violations.Expeditor_AssignedDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Vendor Company</label>
@@ -201,13 +201,13 @@
                     <tr ng-repeat="penalty in CSCase.CSCase.Violations.DOB_Penalty">
                         <td>{{$index+1}}</td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.DueDate" ss-date></td>
+                            <input class="ss_form_input" ng-model="penalty.DueDate" pt-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountOwed" number-mask maskformat='money'></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountOwed" pt-number-mask maskformat='money'></td>
                         <td>
-                            <input class="ss_form_input" type="text" ng-model="penalty.PaidDate" ss-date></td>
+                            <input class="ss_form_input" type="text" ng-model="penalty.PaidDate" pt-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountPaid" number-mask maskformat='money'></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountPaid" pt-number-mask maskformat='money'></td>
                         <td>
                             <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.DOB_Penalty, $index, true)"></pt-del>
                         </td>
@@ -280,7 +280,7 @@
 
                                     <div class="col-sm-6">
                                         <label>Filed Date</label>
-                                        <input class="form-control" ng-model="violation.FiledDate" ss-date />
+                                        <input class="form-control" ng-model="violation.FiledDate" pt-date />
                                     </div>
 
                                     <div class="col-sm-6">
@@ -355,13 +355,13 @@
                     <tr ng-repeat="penalty in CSCase.CSCase.Violations.ECB_Penalty">
                         <td>{{$index+1}}</td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.DueDate" ss-date></td>
+                            <input class="ss_form_input" ng-model="penalty.DueDate" pt-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountOwed" number-mask maskformat='money'></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountOwed" pt-number-mask maskformat='money'></td>
                         <td>
-                            <input class="ss_form_input" type="text" ng-model="penalty.PaidDate" ss-date></td>
+                            <input class="ss_form_input" type="text" ng-model="penalty.PaidDate" pt-date></td>
                         <td>
-                            <input class="ss_form_input" ng-model="penalty.AmountPaid" number-mask maskformat='money'></td>
+                            <input class="ss_form_input" ng-model="penalty.AmountPaid" pt-number-mask maskformat='money'></td>
                         <td>
                             <pt-del ng-click="arrayRemove(CSCase.CSCase.Violations.ECB_Penalty, $index, true)"></pt-del>
                         </td>
@@ -445,7 +445,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Filed Date</label>
-                                            <input class="form-control" ng-model="violation.FiledDate" ss-date />
+                                            <input class="form-control" ng-model="violation.FiledDate" pt-date />
                                         </div>
 
                                         <div class="col-sm-6">
@@ -497,15 +497,15 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Registration Expiration Date</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_RegExpireDate" ss-date>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_RegExpireDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Dismissal Request</label>
-                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_DismissalRequest" ss-date>
+                <input class="ss_form_input" ng-model="CSCase.CSCase.Violations.HPD_DismissalRequest" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Amount Owed</label>
-                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed" number-mask maskformat='money'>
+                <input class="ss_form_input intakeCheck" ng-model="CSCase.CSCase.Violations.HPD_AmountOwed" pt-number-mask maskformat='money'>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Dwelling Classification Fee</label>

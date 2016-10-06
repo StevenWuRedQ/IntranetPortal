@@ -1,5 +1,7 @@
-﻿angular.module("PortalApp")
-    .directive('radioInit', function () {
+﻿// the original attribute apply to regular <input type=radio>
+// @deprecated, use <pt-radio> instead!
+angular.module("PortalApp")
+    .directive('ptRadioInit', function () {
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {

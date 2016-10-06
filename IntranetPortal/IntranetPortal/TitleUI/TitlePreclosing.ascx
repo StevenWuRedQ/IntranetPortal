@@ -9,7 +9,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.POA_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.POA_Date" pt-date></input>
             </li>
         </ul>
         <div class="ss_form_item_line">
@@ -28,7 +28,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Last Modified</label>
-                <input type="text" class="ss_form_input" ng-model="Form.FormData.preclosing.WILLS_Date" ss-date></input>
+                <input type="text" class="ss_form_input" ng-model="Form.FormData.preclosing.WILLS_Date" pt-date></input>
             </li>
         </ul>
 
@@ -64,7 +64,7 @@
             <li class="clearfix"></li>
             <li class="ss_form_item" ng-repeat-start="d in Form.FormData.preclosing.ApprovalData">
                 <label class="ss_form_input_title ">Approval {{$index + 1}} Expired</label>
-                <input type="text" class="ss_form_input" ng-model="d.Expired_Date" ss-date></input>
+                <input type="text" class="ss_form_input" ng-model="d.Expired_Date" pt-date></input>
             </li>            
             <li class="ss_form_item2" ng-repeat-end>
                 <label class="ss_form_input_title ">Approval {{$index + 1}} Notes</label>
@@ -114,7 +114,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.Filing_Receipts_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.Filing_Receipts_Date" pt-date></input>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -128,7 +128,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.Proof_of_Publication_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.Proof_of_Publication_Date" pt-date></input>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -142,7 +142,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.Operating_Agreeements_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.Operating_Agreeements_Date" pt-date></input>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -156,7 +156,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.By_Laws_of_Corp_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.By_Laws_of_Corp_Date" pt-date></input>
             </li>
         </ul>
         <ul class="ss_form_box clearfix">
@@ -170,7 +170,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.Certificate_of_Good_Standing_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.preclosing.Certificate_of_Good_Standing_Date" pt-date></input>
             </li>
         </ul>
     </div>

@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="ShortSaleNewOffer.aspx.vb" Inherits="IntranetPortal.ShortSaleNewOfferPage" %>
-
 <%@ Register Src="~/ShortSale/NGShortSaleHomewonerTab.ascx" TagPrefix="uc1" TagName="NGShortSaleHomewonerTab" %>
 <%@ Register Src="~/ShortSale/NGShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="NGShortSaleMortgageTab" %>
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
@@ -407,11 +406,11 @@
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.contractPrice}" data-message="Please fill Contract Price">Contract Price</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.contractPrice" number-mask maskformat='money' />
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.contractPrice" pt-number-mask maskformat='money' />
                                             </li>
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.downPayment}" data-message="Please fill Down Payment">Down Payment</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment" number-mask maskformat='money' />
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment" pt-number-mask maskformat='money' />
                                             </li>
                                         </ul>
                                     </div>

@@ -192,7 +192,7 @@
                     <div class="clear-fix"></div>
                     <div class="col-md-6">
                         <h4 class="ss_form_input_title" ng-class="PreQuestions.DeedReversionReview.DeedHolderPay?'':'ss_warning'">How much did the current deed holder pay for the deed?</h4>
-                        <input class="ss_form_input" ng-model="PreQuestions.DeedReversionReview.DeedHolderPay" number-mask maskformat='money' />
+                        <input class="ss_form_input" ng-model="PreQuestions.DeedReversionReview.DeedHolderPay" pt-number-mask maskformat='money' />
                     </div>
                     <div class="clearfix"></div>
                     <div class="col-md-6">
@@ -223,7 +223,7 @@
                 <div class="ss_border">
                     <div class="col-md-6">
                         <h4 class="ss_form_input_title" ng-class="PreQuestions.QuietTitleReview.LastPaymentMade?'':'ss_warning'">When was the last payment made</h4>
-                        <input class="ss_form_input" ng-model="PreQuestions.QuietTitleReview.LastPaymentMade" ss-date />
+                        <input class="ss_form_input" ng-model="PreQuestions.QuietTitleReview.LastPaymentMade" pt-date />
                     </div>
                     <div class="col-md-6">
                         <h4 class="ss_form_input_title" ng-class="PreQuestions.QuietTitleReview.AnotherMortgage?'':'ss_warning'">If there is another mortgage that is delinquent or being paid? (specify)</h4>
@@ -300,7 +300,7 @@
                     <div class="clearfix"></div>
                     <div class="col-md-6">
                         <h4 class="ss_form_input_title" ng-class="PreQuestions.SpecificReview.PayInAdvance?'':'ss_warning'">How much money did we pay in advance?</h4>
-                        <input class="ss_form_input" ng-model="PreQuestions.SpecificReview.PayInAdvance" number-mask maskformat='money' />
+                        <input class="ss_form_input" ng-model="PreQuestions.SpecificReview.PayInAdvance" pt-number-mask maskformat='money' />
                     </div>
                     <div class="col-md-6">
                         <h4 class="ss_form_input_title">Do we have a copy of said check?</h4>
