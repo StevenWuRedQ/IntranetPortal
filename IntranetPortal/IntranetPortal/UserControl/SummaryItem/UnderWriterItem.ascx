@@ -28,6 +28,8 @@
      <label class='grid-title-icon'>PU</label>
     <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedUnderwriting %>
      <label class='grid-title-icon'>CU</label>
+     <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.RejectUnderwriting %>
+     <label class='grid-title-icon'>RU</label>
     <% End if %>
    
     <%-- do not use link to jump now --%>
@@ -76,10 +78,8 @@
                                 .text(options.value)
                                 .on('dxclick', function(){
                                     //Do something with options.data;
-                                    var url = '/ViewLeadsInfo.aspx?id=' + options.data.BBLE;
-                                     <% If CaseStatus = 4 %>
-                                     url = '/NewOffer/NewOfferAccepted.aspx?bble=' + options.data.BBLE;
-                                     <% End if %>
+                                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + options.data.BBLE;
+                                    
                                     PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);                                                                       
                                 })
                                 .appendTo(container);
