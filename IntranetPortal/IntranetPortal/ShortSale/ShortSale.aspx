@@ -177,7 +177,7 @@
                                         <h5>Date Approval Issued</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.DateIssued" ss-date />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.DateIssued" pt-date />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -185,7 +185,7 @@
                                         <h5>Date Approval Expires</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.DateExpired" ss-date />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.DateExpired" pt-date />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -201,7 +201,7 @@
                                         <h5>Contract Price</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.ContractPrice" number-mask maskformat='money' />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.ContractPrice" pt-number-mask maskformat='money' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -220,7 +220,7 @@
                                         <h5>Approved Net - 1st Lien</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.FirstLien" number-mask maskformat='money' />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.FirstLien" pt-number-mask maskformat='money' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -239,7 +239,7 @@
                                         <h5>2nd Mortgage</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondMortgage" number-mask maskformat='money' />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondMortgage" pt-number-mask maskformat='money' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -247,7 +247,7 @@
                                         <h5>Approved Net - 2nd Lien</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondLien" number-mask maskformat='money' />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.SecondLien" pt-number-mask maskformat='money' />
                                     </div>
                                 </div>
 
@@ -256,7 +256,7 @@
                                         <h5>Commission %</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionPercentage" number-mask maskformat='percentage' />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionPercentage" pt-number-mask maskformat='percentage' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -264,7 +264,7 @@
                                         <h5>Commission Amount</h5>
                                     </div>
                                     <div class="col-sm-5">
-                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionAmount" number-mask maskformat='money' />
+                                        <input class="form-control" type="text" ng-model="SsCase.ApprovalChecklist.CommissionAmount" pt-number-mask maskformat='money' />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -349,7 +349,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">Date of Call</div>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" ng-model="valuation.DateOfCall" ss-date />
+                                        <input type="text" class="form-control" ng-model="valuation.DateOfCall" pt-date />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -370,7 +370,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">Date of Valuation</div>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" ng-model="valuation.DateOfValue" ss-date />
+                                        <input type="text" class="form-control" ng-model="valuation.DateOfValue" pt-date />
 
                                     </div>
                                 </div>

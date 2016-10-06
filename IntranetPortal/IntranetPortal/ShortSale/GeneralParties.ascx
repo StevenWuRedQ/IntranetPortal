@@ -220,7 +220,7 @@
         <ul class="ss_form_box clearfix" uib-collapse="!buyerCollapse">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Opened</label>
-                <input class="ss_form_input" ss-date ng-model="SsCase.BuyerEntity.DateOpened" readonly="readonly">
+                <input class="ss_form_input" pt-date ng-model="SsCase.BuyerEntity.DateOpened" readonly="readonly">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Office</label>

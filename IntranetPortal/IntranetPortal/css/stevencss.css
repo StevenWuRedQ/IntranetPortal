@@ -2455,3 +2455,12 @@ a.shot_sale_tab_a {
     padding: 10px 15px;
 }
 
+.btn-blue {
+    color: #fff;
+    background-color: #1e4154;
+}
+
+    .btn-blue:hover {
+        color: #fff;
+        background-color: #295268;
+    }

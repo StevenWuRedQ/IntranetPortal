@@ -40,7 +40,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">DATE</label>
-            <input class="ss_form_input intakeCheck" type="text" ng-model="floor.ConED.Date" ss-date />
+            <input class="ss_form_input intakeCheck" type="text" ng-model="floor.ConED.Date" pt-date />
         </li>
     </ul>
     <ul class="ss_form_box clearfix" uib-collapse="ReloadedData.ConED_Collapsed">
@@ -95,7 +95,7 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Appointments</label>
-            <input class="ss_form_input" type="text" ng-model="floor.ConED.Appointments" ss-date>
+            <input class="ss_form_input" type="text" ng-model="floor.ConED.Appointments" pt-date>
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Appointments Time</label>
@@ -139,7 +139,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date</label>
-                <input class="ss_form_input" type="text" ng-model="floor.EnergyService.Date" ss-date>
+                <input class="ss_form_input" type="text" ng-model="floor.EnergyService.Date" pt-date>
             </li>
         </ul>
         <ul class="ss_form_box clearfix" uib-collapse="ReloadedData.EnergyService_Collapsed">
@@ -153,15 +153,15 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Electric permit pulled Date</label>
-                <input class="ss_form_input" type="text" ng-model="floor.EnergyService.ElecPermPulledDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="floor.EnergyService.ElecPermPulledDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">City permit pulled date</label>
-                <input class="ss_form_input" ng-model="floor.EnergyService.CityPermitPulledDate" ss-date>
+                <input class="ss_form_input" ng-model="floor.EnergyService.CityPermitPulledDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Check List Submitted Date</label>
-                <input class="ss_form_input" ng-model="floor.EnergyService.DateCheckListSubmitted" ss-date>
+                <input class="ss_form_input" ng-model="floor.EnergyService.DateCheckListSubmitted" pt-date>
             </li>
 
             <li class="clearfix" style="list-style: none"></li>
@@ -188,7 +188,7 @@
             <li class="clearfix" style="list-style: none"></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Appointments</label>
-                <input class="ss_form_input" type="text" ng-model="floor.EnergyService.Appointments" ss-date>
+                <input class="ss_form_input" type="text" ng-model="floor.EnergyService.Appointments" pt-date>
             </li>
 
             <li class="ss_form_item">
@@ -234,7 +234,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date</label>
-                <input class="ss_form_input intakeCheck" type="text" ng-model="floor.NationalGrid.Date" ss-date>
+                <input class="ss_form_input intakeCheck" type="text" ng-model="floor.NationalGrid.Date" pt-date>
             </li>
         </ul>
         <ul class="ss_form_box clearfix" uib-collapse="ReloadedData.NationalGrid_Collapsed">
@@ -275,7 +275,7 @@
             <li class="clearfix" style="list-style: none"></li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Appointments</label>
-                <input class="ss_form_input" type="text" ng-model="floor.NationalGrid.Appointments" ss-date>
+                <input class="ss_form_input" type="text" ng-model="floor.NationalGrid.Appointments" pt-date>
             </li>
 
             <li class="ss_form_item">
@@ -313,7 +313,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP_Date" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP_Date" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Account Name</label>
@@ -325,7 +325,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cancellation Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP_CancellationDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP_CancellationDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Service</label>
@@ -351,7 +351,7 @@
         </ul>
         <div class="ss_form_item">
             <label class="ss_form_input_title">Appointments</label>
-            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP_Appointments" ss-date>
+            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.DEP_Appointments" pt-date>
         </div>
         <div>
             <label class="ss_form_input_title">Notes</label>
@@ -375,11 +375,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Permit pulled date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.MissingMeter_PermitPulledDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.MissingMeter_PermitPulledDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Meter Registered Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.MissingMeter_MeterRegisteredDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.MissingMeter_MeterRegisteredDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Meter Size</label>
@@ -473,15 +473,15 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date Requested</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ADT_DateRequest" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ADT_DateRequest" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Installation Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ADT_InstallationDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ADT_InstallationDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cancellation Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ADT_CancellatonDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.ADT_CancellatonDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Access Code</label>
@@ -512,12 +512,12 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Expiration Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance_ExpirationDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance_ExpirationDate" pt-date>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Cancellation Date</label>
-                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance_CancellationDate" ss-date>
+                <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance_CancellationDate" pt-date>
             </li>
         </ul>
         <div>
@@ -526,7 +526,7 @@
         </div>
         <div class="ss_form_item">
             <label class="ss_form_input_title">Renewal Remind</label>
-            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance_CalenderOption" ss-date>
+            <input class="ss_form_input" type="text" ng-model="CSCase.CSCase.Utilities.Insurance_CalenderOption" pt-date>
         </div>
     </div>
 

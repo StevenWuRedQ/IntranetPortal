@@ -20,19 +20,22 @@
 </style>
 <h4 id="NewOffer_<%= ClientID %>" style="padding-top: 5px">
     <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
-    <% If CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingSearch %>
-     <label class='grid-title-icon'>PS</label>
+    <% If CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingSearch Then %>
+     <label class='grid-title-icon'>NS</label>
     <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedSearch %>
      <label class='grid-title-icon'>CS</label>
-    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingUnderwirter %>
+    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingUnderwriting %>
      <label class='grid-title-icon'>PU</label>
-    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedUnderwirter %>
+    <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedUnderwriting %>
      <label class='grid-title-icon'>CU</label>
+     <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.RejectUnderwriting %>
+     <label class='grid-title-icon'>RU</label>
     <% End if %>
    
-
-    <a href="/NewOffer/NewOfferList.aspx?view=<%=CInt(CaseStatus)%>">
-        <label class="xlink">&nbsp;<%= CaseStatus.ToString %></label>
+    <%-- do not use link to jump now --%>
+    <%--href="/NewOffer/NewOfferList.aspx?view=<%=CInt(CaseStatus)%>"--%>
+    <a href="/UnderWriter/DocSearchList.aspx#/<%=CInt(CaseStatus) + 1 %>">
+        <label class="xlink">&nbsp;<%= HumanizeEnum(CaseStatus)  %></label>
         <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label>
     </a>
 </h4>
@@ -73,14 +76,13 @@
                         cellTemplate: function (container, options) {
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
-                                .on('dxclick', function(){
-                                    //Do something with options.data;
-                                    var url = '/ViewLeadsInfo.aspx?id=' + options.data.BBLE;
-                                     <% If CaseStatus = 4 %>
-                                     url = '/NewOffer/NewOfferAccepted.aspx?bble=' + options.data.BBLE;
-                                     <% End if %>
-                                    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);                                                                       
-                                })
+                                .attr("href", "/UnderWriter/DocSearchList.aspx#/<%=CInt(CaseStatus) + 1 %>/" + options.data.BBLE)
+                                //.on('dxclick', function(){
+                                //    //Do something with options.data;
+                                //    var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + options.data.BBLE;
+                                    
+                                //    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);                                                                       
+                                //})
                                 .appendTo(container);
                         },
                     }],

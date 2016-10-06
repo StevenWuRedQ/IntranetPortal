@@ -26,7 +26,7 @@
                             <h5 class="ss_form_title">Date</h5>
                         </td>
                         <td>
-                            <input class="ss_form_input" ng-model="data.Form.date" ss-date />
+                            <input class="ss_form_input" ng-model="data.Form.date" pt-date />
                         </td>
                         <td>
                             <h5 class="ss_form_title">Clean Up</h5>

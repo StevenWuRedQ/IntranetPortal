@@ -3116,7 +3116,7 @@ angular.module("PortalApp")
             }
         }
     }])
-/* a directive to bind contact with it's contact it*/
+// a directive to bind contact with it's contact it
 angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
@@ -3177,98 +3177,6 @@ angular.module("PortalApp")
             }
         };
     }]);
-/* a mask to automaticly convert number to money value*/
-angular.module("PortalApp")
-    .directive('inputMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-                $(el).mask(attrs.inputMask);
-                $(el).on('change', function () {
-                    scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-                });
-            }
-        };
-    })
-/**
- * a input attribute directive to automatic convert input to certain data format
- * example <input number-mask maskformat='money' isvalidate/>
- * (optional) maskerformat: control how data will present.
- * (optional) isvalidate: if the attribute present, will validate if the user input is correct
- */
-angular.module("PortalApp")
-    .directive('numberMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-                var isValidate = attrs.hasOwnProperty('isvalidate');
-                var format = attrs['maskformat'] || '';
-                var formatConfig;
-                switch (format) {
-                    case 'integer':
-                        formatConfig = {
-                            symbol: "",
-                            roundToDecimalPlace: 0
-                        }
-                        break;
-                    case 'money':
-                        formatConfig = {
-
-                        }
-                        break;
-                    case 'percentage':
-                        formatConfig = {
-                            symbol: "%",
-                            positiveFormat: '%n%s'
-                        }
-                        break;
-                    default:
-                        formatConfig = {
-                            symbol: ""
-                        }
-
-                }
-                //debugger;
-                var rule = /^(\d+|\d*\.\d+)$/;
-                var validate = function (val) {
-                    if (typeof (val) == 'number') {
-                        return true;
-                    } else if (typeof (val) == 'string') {
-                        return !!rule.exec(val);
-                    } else {
-                        return false;
-                    }
-
-                }
-
-                scope.$watch(attrs.ngModel, function () {
-                    if ($(el).is(":focus")) return;
-                    $(el).formatCurrency(formatConfig);
-                });
-                $(el).on('blur', function () {
-                    if (isValidate) {
-                        var res = validate(this.value);
-                        if (!res) {
-                            $(this).css("background-color", "yellow");
-                            $(this).attr('error', 'true');
-
-                        } else {
-                            $(this).css("background-color", "");
-                            $(this).attr('error', '');
-                            $(this).formatCurrency(formatConfig);
-                        }
-                    } else {
-                        $(this).formatCurrency(formatConfig);
-                    }
-
-
-                });
-                $(el).on('focus', function () {
-                    $(this).toNumber()
-                });
-            },
-        };
-    })
     /**
      * @author steven
      * @date 8/11/2016
@@ -3331,6 +3239,30 @@ angular.module("PortalApp")
             }
 
         }
+    })
+angular.module("PortalApp")
+    .directive('ptDate', function () {
+        return {
+            restrict: 'A',
+            scope: true,
+            compile: function (tel, tAttrs) {
+                return {
+                    post: function (scope, el, attrs) {
+                        $(el).datepicker({
+                            forceParse: false,
+                        });
+                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                            var dateStr = newValue;
+                            if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
+                                var dd = new Date(dateStr);
+                                dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
+                                $(el).datepicker('update', new Date(dd))
+                            }
+                        });
+                    }
+                }
+            }
+        };
     })
 angular.module("PortalApp")
     .directive('ptDel', function () {
@@ -3816,6 +3748,19 @@ angular.module("PortalApp")
             }
         }
     })
+/* a mask to automaticly convert number to money value*/
+angular.module("PortalApp")
+    .directive('ptInputMask', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                $(el).mask(attrs.inputMask);
+                $(el).on('change', function () {
+                    scope.$eval(attrs.ngModel + "='" + el.val() + "'");
+                });
+            }
+        };
+    })
 angular.module("PortalApp")
     .directive('ptLink', ['ptFileService', function (ptFileService) {
         return {
@@ -3831,6 +3776,85 @@ angular.module("PortalApp")
 
         }
     }])
+/**
+ * a input attribute directive to automatic convert input to certain data format
+ * example <input pt-number-mask maskformat='money' isvalidate/>
+ * (optional) maskerformat: control how data will present.
+ * (optional) isvalidate: if the attribute present, will validate if the user input is correct
+ */
+angular.module("PortalApp")
+    .directive('ptNumberMask', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                var isValidate = attrs.hasOwnProperty('isvalidate');
+                var format = attrs['maskformat'] || '';
+                var formatConfig;
+                switch (format) {
+                    case 'integer':
+                        formatConfig = {
+                            symbol: "",
+                            roundToDecimalPlace: 0
+                        }
+                        break;
+                    case 'money':
+                        formatConfig = {
+
+                        }
+                        break;
+                    case 'percentage':
+                        formatConfig = {
+                            symbol: "%",
+                            positiveFormat: '%n%s'
+                        }
+                        break;
+                    default:
+                        formatConfig = {
+                            symbol: ""
+                        }
+
+                }
+                //debugger;
+                var rule = /^(\d+|\d*\.\d+)$/;
+                var validate = function (val) {
+                    if (typeof (val) == 'number') {
+                        return true;
+                    } else if (typeof (val) == 'string') {
+                        return !!rule.exec(val);
+                    } else {
+                        return false;
+                    }
+
+                }
+
+                scope.$watch(attrs.ngModel, function () {
+                    if ($(el).is(":focus")) return;
+                    $(el).formatCurrency(formatConfig);
+                });
+                $(el).on('blur', function () {
+                    if (isValidate) {
+                        var res = validate(this.value);
+                        if (!res) {
+                            $(this).css("background-color", "yellow");
+                            $(this).attr('error', 'true');
+
+                        } else {
+                            $(this).css("background-color", "");
+                            $(this).attr('error', '');
+                            $(this).formatCurrency(formatConfig);
+                        }
+                    } else {
+                        $(this).formatCurrency(formatConfig);
+                    }
+
+
+                });
+                $(el).on('focus', function () {
+                    $(this).toNumber()
+                });
+            },
+        };
+    })
 angular.module("PortalApp")
     .directive('ptRadio', function () {
         return {
@@ -3862,8 +3886,10 @@ angular.module("PortalApp")
 
         }
     })
+// the original attribute apply to regular <input type=radio>
+// @deprecated, use <pt-radio> instead!
 angular.module("PortalApp")
-    .directive('radioInit', function () {
+    .directive('ptRadioInit', function () {
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {
@@ -3877,27 +3903,55 @@ angular.module("PortalApp")
         }
     })
 angular.module("PortalApp")
-    .directive('ssDate', function () {
+    .directive('ptRequired', function () {
         return {
             restrict: 'A',
-            scope: true,
-            compile: function (tel, tAttrs) {
-                return {
-                    post: function (scope, el, attrs) {
-                        $(el).datepicker({
-                            forceParse: false,
-                        });
-                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
-                            var dateStr = newValue;
-                            if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-                                var dd = new Date(dateStr);
-                                dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
-                                $(el).datepicker('update', new Date(dd))
-                            }
-                        });
+            link: function (scope, el, attrs) {
+                // debugger;
+                var eltype = $(el)[0].type;
+
+                if (eltype != 'text' && eltype != 'textarea' && eltype != 'select-one') {
+                    return;
+                }
+
+
+                var validate = function (v) {
+                    if (eltype == 'text' || eltype == 'textarea') {
+                        if (v && typeof v == 'string' && v.trim().length > 0) {
+                            return true;
+                        } else {
+                            return false
+                        }
+                    } else if (eltype == 'select-one') {
+                        return v == undefined || (typeof v == 'string' && (v.trim().length == 0 || v.indexOf('?') == 0)) ? false : true;
+                    } else {
+                        return false;
                     }
                 }
-            }
+
+                var callback = function () {
+                    debugger
+                    var res = validate($(el)[0].value);
+                    if (!res) {
+                        $(el).css("background-color", "yellow");
+                        $(el).attr('error', 'true');
+                        if ($(el)[0].type == 'text' || $(el)[0].type == 'textarea') {
+                            $(el)[0].placeholder = 'content is required.'
+                        }
+
+                    } else {
+                        $(el).css("background-color", "");
+                        $(el).attr('error', '');
+                        if ($(el)[0].type == 'text' || $(el)[0].type == 'textarea') {
+                            $(el)[0].placeholder = ''
+                        }
+                    }
+                }
+
+                $(el).on('blur', callback);
+                scope.$on('ptSelfCheck', callback);
+
+            },
         };
     })
 angular.module("PortalApp")
@@ -9041,15 +9095,16 @@ angular.module("PortalApp")
     }
 
     $scope.checkValidate = function () {
-        return _.some($('input'), function (v) {
+        return _.some($('input, textarea, select'), function (v) {
             return $(v).attr('error') == 'true';
         })
     }
 
     $scope.save = function (isSlient) {
+        $scope.$broadcast('ptSelfCheck')
 
         if ($scope.checkValidate()) {
-            ptCom.alert('Please correct Highlight Field before Save.');
+            ptCom.alert('Please correct Highlight Field first.');
             return;
         }
 
@@ -9067,7 +9122,11 @@ angular.module("PortalApp")
     }
 
     $scope.requestDocSearch = function () {
-        debugger;
+        // debugger;
+        if ($scope.checkValidate()) {
+            ptCom.alert('Please correct Highlight Field first.');
+            return;
+        }
         UnderwritingRequest.createSearch($scope.BBLE).then(function () {
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;

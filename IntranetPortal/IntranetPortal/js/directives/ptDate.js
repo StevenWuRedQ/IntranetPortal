@@ -1,5 +1,5 @@
 ﻿angular.module("PortalApp")
-    .directive('ssDate', function () {
+    .directive('ptDate', function () {
         return {
             restrict: 'A',
             scope: true,

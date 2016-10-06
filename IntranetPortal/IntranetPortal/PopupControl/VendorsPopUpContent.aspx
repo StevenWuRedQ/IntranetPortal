@@ -132,7 +132,7 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">office #</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.OfficeNO" />
+                                                                <input class="ss_form_input ss_phone" pt-input-mask="(000) 000-0000" ng-model="addContact.OfficeNO" />
 
                                                                 <%--  <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
@@ -141,7 +141,7 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Customer Service</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.CustomerService" />
+                                                                <input class="ss_form_input ss_phone" pt-input-mask="(000) 000-0000" ng-model="addContact.CustomerService" />
 
                                                             </li>
                                                             <li class="ss_form_item">
@@ -152,12 +152,12 @@
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Fax </label>
                                                                 <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
-                                                                <input class="ss_form_input" input-mask="(000) 000-0000" ng-model="addContact.Fax" />
+                                                                <input class="ss_form_input" pt-input-mask="(000) 000-0000" ng-model="addContact.Fax" />
                                                             </li>
 
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Cell #</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.Cell" />
+                                                                <input class="ss_form_input ss_phone" pt-input-mask="(000) 000-0000" ng-model="addContact.Cell" />
                                                                 <%--<dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
@@ -304,7 +304,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.OfficeNO" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" pt-input-mask="(000) 000-0000" ng-model="currentContact.OfficeNO" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -313,7 +313,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.CustomerService" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" pt-input-mask="(000) 000-0000" ng-model="currentContact.CustomerService" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -332,7 +332,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.Fax" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" pt-input-mask="(000) 000-0000" ng-model="currentContact.Fax" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -348,7 +348,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.Cell" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" pt-input-mask="(000) 000-0000" ng-model="currentContact.Cell" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
