@@ -21,7 +21,7 @@
 <h4 id="NewOffer_<%= ClientID %>" style="padding-top: 5px">
     <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
     <% If CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingSearch Then %>
-     <label class='grid-title-icon'>PS</label>
+     <label class='grid-title-icon'>NS</label>
     <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.CompletedSearch %>
      <label class='grid-title-icon'>CS</label>
     <% ElseIf CaseStatus = IntranetPortal.Data.LeadInfoDocumentSearch.UnderWriterStatus.PendingUnderwriting %>
@@ -76,12 +76,13 @@
                         cellTemplate: function (container, options) {
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
-                                .on('dxclick', function(){
-                                    //Do something with options.data;
-                                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + options.data.BBLE;
+                                .attr("href", "/UnderWriter/DocSearchList.aspx#/<%=CInt(CaseStatus) + 1 %>/" + options.data.BBLE)
+                                //.on('dxclick', function(){
+                                //    //Do something with options.data;
+                                //    var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + options.data.BBLE;
                                     
-                                    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);                                                                       
-                                })
+                                //    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);                                                                       
+                                //})
                                 .appendTo(container);
                         },
                     }],

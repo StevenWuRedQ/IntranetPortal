@@ -297,7 +297,7 @@ Namespace Controllers
                 End If
 
                 Dim data = New With {
-                    .data = searches.Take(10),
+                    .data = searches.OrderByDescending(Function(s) s.UpdateDate).Take(10),
                     .count = searches.Count()
                 }
                 Return Ok(data)
