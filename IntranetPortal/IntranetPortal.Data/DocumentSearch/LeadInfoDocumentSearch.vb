@@ -210,7 +210,7 @@ Public Class LeadInfoDocumentSearch
         PendingUnderwriting = 2
         <Description("Completed Underwriting")>
         CompletedUnderwriting = 3
-        <Description("RejectUnder Underwriting")>
+        <Description("Rejected Underwriting")>
         RejectUnderwriting = 4
     End Enum
 
