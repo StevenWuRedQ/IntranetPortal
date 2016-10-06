@@ -3,9 +3,7 @@
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
-
 <link rel="stylesheet" href="/css/right-pane.css" />
-<%--<script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>--%>
 <script>
     $(document).ready(function () {
 
