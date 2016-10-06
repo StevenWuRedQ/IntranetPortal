@@ -64,13 +64,20 @@
         }
 
         previewControl = {
-            showCaseInfo: function (CaseId) {
-                $("#xwrapper").css("width", "50%");
-                $("#preview").css("visibility", "visible");
-                $("#preview").css("width", "50%");
-                var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + CaseId + '#/';
-                $("#previewWindow").attr("src", url);
-                $("#hideicon").css("visibility", "visible");
+            showCaseInfo: function (CaseId, status) {
+
+                if (status == 0) {
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId
+                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url); 
+                } else {
+                    $("#xwrapper").css("width", "50%");
+                    $("#preview").css("visibility", "visible");
+                    $("#preview").css("width", "50%");
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + CaseId + '#/';
+                    $("#previewWindow").attr("src", url);
+                    $("#hideicon").css("visibility", "visible");
+                }
+
             },
 
             undo: function () {
@@ -138,7 +145,7 @@
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
                                 .on('dxclick', function () {
-                                    previewControl.showCaseInfo(options.data.BBLE);
+                                    previewControl.showCaseInfo(options.data.BBLE, options.data.Status);
                                 })
                                 .appendTo(container);
                         }
@@ -197,6 +204,7 @@
 
                 $(".dx-toolbar-items-container").prepend($("<span id='useFilterApplyButton'></div>"))
                 var filterDataDelegate = function (data) {
+                    previewControl.undo();
                     filterData(data.value);
                 }
 
@@ -254,7 +262,7 @@
                     filterBox.option('value', 0);
                 }
 
-                
+
             });
 
 
