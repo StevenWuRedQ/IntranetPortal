@@ -63,12 +63,28 @@
             window.location.href = url;
         }
 
+        var highlighter = (function () {
+            var highlightedElement;
+
+            return {
+                setHighlight: function (el) {
+                    this.clearHighlight();
+                    highlightedElement = el;
+                    $(el).css('background-color', '#c0c0c0');
+                },
+                clearHighlight: function () {
+                    $(highlightedElement).css('background-color', '');
+                    highlightedElement = undefined;
+                }
+            }
+        })();
+
         previewControl = {
             showCaseInfo: function (CaseId, status) {
 
                 if (status == 0) {
                     var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId
-                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url); 
+                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
                 } else {
                     $("#xwrapper").css("width", "50%");
                     $("#preview").css("visibility", "visible");
@@ -92,6 +108,7 @@
 
         $(document).ready(function () {
             var url = "/api/LeadInfoDocumentSearches";
+            var that = this;
             $.getJSON(url).done(function (data) {
                 var dataGrid = $("#gridContainer").dxDataGrid({
                     dataSource: data,
@@ -129,6 +146,7 @@
                                 panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
                             }
                         }
+                        highlightcallback();
                     },
                     summary: {
                         groupItems: [{
@@ -145,6 +163,7 @@
                             $('<a/>').addClass('dx-link-MyIdealProp')
                                 .text(options.value)
                                 .on('dxclick', function () {
+                                    highlighter.setHighlight(this.parentNode);
                                     previewControl.showCaseInfo(options.data.BBLE, options.data.Status);
                                 })
                                 .appendTo(container);
@@ -209,7 +228,6 @@
                 }
 
                 var filterData = function (data) {
-
                     dataGrid.clearFilter();
                     switch (data) {
                         case 1:
@@ -228,7 +246,6 @@
                             dataGrid.filter(['UnderwriteStatus', '=', '2']);
                     }
                 }
-
                 var filterBox = $("#useFilterApplyButton").dxSelectBox({
                     items: [{
                         key: 0,
@@ -254,12 +271,28 @@
                     width: '250',
                     onValueChanged: filterDataDelegate
                 }).dxSelectBox('instance');
-
-                var hashnum = parseInt(location.hash.slice(2));
+                var hashnum = parseInt(location.hash.split('/')[1]);
+                var bble = location.hash.split('/')[2];
                 if (hashnum) {
-                    filterBox.option('value', hashnum)
+                    filterBox.option('value', hashnum);
                 } else {
                     filterBox.option('value', 0);
+                }
+                //debugger;
+                if (bble) {
+                    previewControl.showCaseInfo(bble);
+                }
+                var highlightcallback = function () {
+                    debugger;
+                    if (bble) {
+                        var datarow = _.filter(dataGrid.option('dataSource'), function (d) { return d.BBLE.trim() == bble.trim() });
+                        var address = datarow && datarow[0] ? datarow[0].CaseName : '';
+                        if (address) {
+                            var el = $('td:contains("' + address.trim() + '")')[0];
+                            highlighter.setHighlight(el);
+                        }
+                    }
+
                 }
 
 
