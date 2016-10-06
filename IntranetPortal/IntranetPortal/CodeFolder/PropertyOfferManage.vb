@@ -192,8 +192,10 @@ Public Class PropertyOfferManage
     ''' Return accepted shortsale last two weeks
     ''' </summary>
     ''' <returns></returns>
-    Public Shared Function GetSSAcceptedOfferLastWeek(userTeam As String) As PropertyOffer()
-        Dim dtStart = DateTime.Today.AddDays(-7)
+    Public Shared Function GetSSAcceptedOfferLastWeek(userTeam As String, ByRef dtStart As DateTime, ByRef dtEnd As DateTime) As PropertyOffer()
+        Dim dayofWeek = DateTime.Today.DayOfWeek - 1
+        dtStart = DateTime.Today.AddDays(-7 - dayofWeek)
+        dtEnd = DateTime.Today.AddDays(-dayofWeek)
         Dim emps = New List(Of String)
 
         If userTeam = "*" Then
@@ -204,7 +206,7 @@ Public Class PropertyOfferManage
             emps.AddRange(Team.GetTeam(userTeam).AllUsers)
         End If
 
-        Dim data = PropertyOffer.GetSSAccepted(emps.ToArray, dtStart)
+        Dim data = PropertyOffer.GetSSAccepted(emps.ToArray, dtStart, dtEnd)
         data.ForEach(Function(d)
                          Return InitData(d, ManagerView.SSAccepted)
                      End Function)
