@@ -231,14 +231,14 @@
 
                 var r = d.docSearch.LeadResearch;
 
-                d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due;
-                d.LienInfo.FirstMortgage = r.mortgageAmount;
-                d.LienInfo.SecondMortgage = r.secondMortgageAmount;
-                d.LienInfo.COSRecorded = r.Has_COS_Recorded;
-                d.LienInfo.DeedRecorded = r.Has_Deed_Recorded;
-                d.LienInfo.FHA = r.fha;
-                d.LienInfo.FannieMae = r.fannie;
-                d.LienInfo.FreddieMac = r.Freddie_Mac_;
+                d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
+                d.LienInfo.FirstMortgage = r.mortgageAmount ||0.0 ;
+                d.LienInfo.SecondMortgage = r.secondMortgageAmount ||0.0;
+                d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
+                d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
+                d.LienInfo.FHA = r.fha || false;
+                d.LienInfo.FannieMae = r.fannie || false;
+                d.LienInfo.FreddieMac = r.Freddie_Mac_ || false;
                 d.LienInfo.Servicer = r.servicer;
                 d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
                 d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
@@ -246,33 +246,33 @@
                     var total = 0.0;
                     if (r.TaxLienCertificate) {
                         for (var i = 0; i < r.TaxLienCertificate.length; i++) {
-                            total += Number.parseFloat(r.TaxLienCertificate[i].Amount);
+                            total += parseFloat(r.TaxLienCertificate[i].Amount);
                         }
                     }
                     return total;
                 })();
-                d.LienCosts.PropertyTaxes = r.propertyTaxes;
-                d.LienCosts.WaterCharges = r.waterCharges;
-                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred;
-                d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets;
-                d.LienCosts.DOBCivilPenalty = r.dobWebsites;
-                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments;
-                d.LienCosts.HPDJudgements = r.HPDjudgementAmount;
+                d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
+                d.LienCosts.WaterCharges = r.waterCharges ||0.0;
+                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred|| 0.0;
+                d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets|| 0.0;
+                d.LienCosts.DOBCivilPenalty = r.dobWebsites|| 0.0;
+                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments|| 0.0;
+                d.LienCosts.HPDJudgements = r.HPDjudgementAmount|| 0.0;
                 d.LienCosts.IRSNYSTaxLiens = (function () {
                     var total = 0.0;
 
                     if (r.irsTaxLien)
-                        total += Number.parseFloat(r.irsTaxLien);
+                        total += parseFloat(r.irsTaxLien);
                     if (r.Amount_NYS_Tax_Lien)
-                        total += Number.parseFloat(r.Amount_NYS_Tax_Lien);
+                        total += parseFloat(r.Amount_NYS_Tax_Lien);
 
                     return total;
 
                 })();
-                d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order;
+                d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
                 d.LienCosts.RelocationLien = (function () {
                     if (r.has_Vacate_Order_Vacate_Order)
-                        return r.Amount_Vacate_Order;
+                        return r.Amount_Vacate_Order || 0.0;
                 })()
 
             }
@@ -361,8 +361,9 @@
         underwriter.load = function (/* optional */ bble, /* optional */ isImport) {
             var data = underwritingFactory.build();
             if (bble) {
-                var _data = Underwriter.get({ BBLE: bble.trim() }, function () {
-                    _.default(_data, data);
+                var _data = underwriter.get({ BBLE: bble.trim() }, function () {
+                    _.defaults(_data, data);
+                    //debugger;
                     if (isImport) {
                         data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
                             data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {

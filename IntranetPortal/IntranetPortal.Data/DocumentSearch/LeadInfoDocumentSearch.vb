@@ -1,4 +1,5 @@
-﻿Imports System.ComponentModel.DataAnnotations
+﻿Imports System.ComponentModel
+Imports System.ComponentModel.DataAnnotations
 
 <MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
 Public Class LeadInfoDocumentSearch
@@ -41,7 +42,8 @@ Public Class LeadInfoDocumentSearch
                .CreateDate = search.CreateDate,
                .Status = search.Status,
                .UpdateBy = search.UpdateBy,
-               .UpdateDate = search.UpdateDate
+               .UpdateDate = search.UpdateDate,
+               .UnderwriteStatus = search.UnderwriteStatus
             }
 
             'Return result.ToList
@@ -57,7 +59,8 @@ Public Class LeadInfoDocumentSearch
                                                                    .CreateDate = search.CreateDate,
                                                                    .Status = search.Status,
                                                                    .UpdateBy = search.UpdateBy,
-                                                                   .UpdateDate = search.UpdateDate
+                                                                   .UpdateDate = search.UpdateDate,
+                                                                   .UnderwriteStatus = search.UnderwriteStatus
                                                         }
                                                 End Function).ToList
         End Using
@@ -168,18 +171,67 @@ Public Class LeadInfoDocumentSearch
         Completed = 1
     End Enum
 
-    Public Shared Sub oldToNew()
+
+    ' should move this to UnderWriter class
+    Public Enum UnderWriterStatus
+        PendingSearch = 0
+        CompletedSearch = 1
+        PendingUnderwirter = 2
+        <Description("Not Completed")>
+        CompletedUnderwirter = 3
+    End Enum
+
+    ' duck type type converting to underwriter type
+    Public Shared Function CUnderWriterStatus(Of InputT)(obj As InputT, lambda As Func(Of InputT, UnderWriterStatus)) As UnderWriterStatus
+        If obj Is Nothing Then
+            Throw New Exception("can not covert to underwriter status with empty object")
+        End If
+        Return lambda(obj)
+    End Function
+
+    Public ReadOnly Property MUnderWritingStatus() As UnderWriterStatus
+        Get
+            Return CUnderWriterStatus(Me, Function(x)
+
+                                              If x.Status = SearchStatus.NewSearch Then
+                                                  Return UnderWriterStatus.PendingSearch
+                                              End If
+
+                                              If (x.Status = SearchStatus.Completed) Then
+                                                  Return UnderWriterStatus.CompletedSearch
+                                              End If
+
+                                              If (x.UnderwriteStatus = 2) Then
+                                                  Return UnderWriterStatus.CompletedUnderwirter
+                                              End If
+
+                                              Return UnderWriterStatus.PendingSearch
+
+                                          End Function)
+        End Get
+    End Property
 
 
-    End Sub
-
-    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String) As LeadInfoDocumentSearch
+    ''' <summary>
+    ''' get under writing status
+    ''' </summary>
+    ''' <param name="status">under writing status</param>
+    ''' <returns> list of doc search</returns>
+    Public Shared Function GetByUnerWritingStatus(status As UnderWriterStatus) As List(Of LeadInfoDocumentSearch)
+        ' Query need  optimization if search is big table
+        Dim searches = GetDocumentSearchs()
+        If (searches IsNot Nothing) Then
+            Return searches.ToList().Where(Function(s) s.MUnderWritingStatus = status).ToList
+        End If
+        Return Nothing
+    End Function
+    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String, Status As Integer) As LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Dim search = ctx.LeadInfoDocumentSearches.Find(BBLE)
             If Nothing IsNot search Then
                 search.UnderwriteCompletedBy = User
                 search.UnderwriteCompletedOn = Date.Now
-                search.UnderwriteCompleted = True
+                search.UnderwriteStatus = CInt(Status)
                 ctx.SaveChanges()
                 Return search
             Else

@@ -118,6 +118,7 @@
         it('should only checked frist input when radio value is true and only checked second input when radio is false', function() {
             scope.radio = true;
             scope.$digest();
+            
             var elemContents = celem.contents();
             expect(elemContents[0].checked).toBe(true);
             expect(elemContents[2].checked).toBe(false);

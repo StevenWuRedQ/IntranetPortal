@@ -51,6 +51,7 @@ Public Class UnderwritingCashScenario
     Public Property Resale_NetProfit As Decimal
     Public Property Resale_SalePrice As Decimal
     Public Property Time As Integer
+
 End Class
 
 Public Class UnderwritingClosingCost
