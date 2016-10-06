@@ -77,7 +77,8 @@
         </tbody>
     </table>
     <% else %>
-    No property was accepted by ShortSale last week. Thank you.
+    <br />
+    No property was accepted by ShortSale for the week (<%= String.Format("{0:d} - {1:d}", StartDate, EndDate.AddDays(-1)) %>). Thank you.
     <% End If %>
     <br />
     For more infomation, please <a href="http://portal.myidealprop.com/newoffer/newofferlist.aspx">click here</a>.
