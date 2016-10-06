@@ -52,7 +52,7 @@ Imports IntranetPortal.Data
 
     <TestMethod()> Public Sub NotifyTeamManager_sendEmail()
         Dim rule As New IntranetPortal.RulesEngine.NewOfferNotifyRule
-        rule.NotifyTeamManager()
+        rule.Execute()
     End Sub
 
     <TestMethod()> Public Sub UpdateAudit_ReturnData()
