@@ -1,6 +1,6 @@
 ﻿/* a mask to automaticly convert number to money value*/
 angular.module("PortalApp")
-    .directive('inputMask', function () {
+    .directive('ptInputMask', function () {
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {

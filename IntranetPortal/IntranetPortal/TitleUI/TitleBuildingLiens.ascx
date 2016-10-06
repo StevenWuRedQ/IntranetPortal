@@ -13,7 +13,7 @@
             </li>
             <li class="ss_form_item nga-fast nga-fade" ng-show="Form.FormData.buildingLiens.Housing_and_Building_Search">
                 <label class="ss_form_input_title">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Housing_and_Building_Search_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Housing_and_Building_Search_Date" pt-date></input>
             </li>
 
             <li class="clearfix"></li>
@@ -36,7 +36,7 @@
 
             <li class="ss_form_item nga-fast nga-fade" ng-show="Form.FormData.buildingLiens.Emergency_Repairs_search">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Emergency_Repairs_search_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Emergency_Repairs_search_Date" pt-date></input>
             </li>
 
             <li class="clearfix"></li>
@@ -59,7 +59,7 @@
 
             <li class="ss_form_item nga-fast nga-fade" ng-show="Form.FormData.buildingLiens.Fire_Search">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Fire_Search_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Fire_Search_Date" pt-date></input>
             </li>
 
             <li class="clearfix"></li>
@@ -82,7 +82,7 @@
 
             <li class="ss_form_item nga-fast nga-fade" ng-show="Form.FormData.buildingLiens.Street_Report">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Street_Report_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Street_Report_Date" pt-date></input>
             </li>
 
             <li class="clearfix"></li>
@@ -105,7 +105,7 @@
 
             <li class="ss_form_item nga-fast nga-fade" ng-show="Form.FormData.buildingLiens.Taxes_and_Water">
                 <label class="ss_form_input_title ">Date Last Modified</label>
-                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Taxes_and_Water_Date" ss-date></input>
+                <input class="ss_form_input" type="text" ng-model="Form.FormData.buildingLiens.Taxes_and_Water_Date" pt-date></input>
             </li>
             <li class="clearfix"></li>
             <li class="ss_form_item_line nga-fast nga-fade" ng-show="Form.FormData.buildingLiens.Taxes_and_Water">

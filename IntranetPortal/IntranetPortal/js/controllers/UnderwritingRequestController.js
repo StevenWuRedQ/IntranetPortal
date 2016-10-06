@@ -24,15 +24,16 @@
     }
 
     $scope.checkValidate = function () {
-        return _.some($('input'), function (v) {
+        return _.some($('input, textarea, select'), function (v) {
             return $(v).attr('error') == 'true';
         })
     }
 
     $scope.save = function (isSlient) {
+        $scope.$broadcast('ptSelfCheck')
 
         if ($scope.checkValidate()) {
-            ptCom.alert('Please correct Highlight Field before Save.');
+            ptCom.alert('Please correct Highlight Field first.');
             return;
         }
 
@@ -50,7 +51,11 @@
     }
 
     $scope.requestDocSearch = function () {
-        debugger;
+        // debugger;
+        if ($scope.checkValidate()) {
+            ptCom.alert('Please correct Highlight Field first.');
+            return;
+        }
         UnderwritingRequest.createSearch($scope.BBLE).then(function () {
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;

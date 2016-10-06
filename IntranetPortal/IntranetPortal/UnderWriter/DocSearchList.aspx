@@ -145,10 +145,11 @@
                         }
                     }, {
                         caption: "Requested By",
-                        dataField: "CreateBy"
+                        dataField: "CreateBy",
                     }, {
                         caption: "Search Status",
                         dataField: "Status",
+                        alignment: "left",
                         customizeText: function (cell) {
                             switch (cell.value) {
                                 case 1:
@@ -177,6 +178,7 @@
                     }, {
                         caption: 'Underwriting Status',
                         dataField: 'UnderwriteStatus',
+                        alignment: "left",
                         customizeText: function (cell) {
                             switch (cell.value) {
                                 case 1:
@@ -191,7 +193,7 @@
                     }]
                 }).dxDataGrid('instance');
                 $(".dx-datagrid-header-panel").prepend($("<label class='grid-title-icon' style='display: inline-block'>UW</label>"))
-                $(".dx-datagrid-header-panel").prepend($("<span id='hideicon' data-toggle='tooltip' data-placement='right' title='hide right panel' onclick='previewControl.undo()'><img class='pull-right' src='/images/hide.png' height='40' width='40' /></span>"))
+                $(".dx-datagrid-header-panel").prepend($("<span id='hideicon' class='btn btn-blue pull-right' data-toggle='tooltip' data-placement='right' title='hide right panel' onclick='previewControl.undo()'><i class='fa fa-angle-double-right fa-lg'></i></span>"))
             });
         })
 

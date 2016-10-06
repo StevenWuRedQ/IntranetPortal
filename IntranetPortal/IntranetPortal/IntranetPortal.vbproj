@@ -7224,8 +7224,8 @@
     <Content Include="js\directives\auditLogs.js" />
     <Content Include="js\directives\bindId.js" />
     <Content Include="js\directives\initGrid.js" />
-    <Content Include="js\directives\inputMask.js" />
-    <Content Include="js\directives\numberMask.js" />
+    <Content Include="js\directives\ptInputMask.js" />
+    <Content Include="js\directives\ptNumberMask.js" />
     <Content Include="js\directives\preCondition.js" />
     <Content Include="js\directives\ptAdd.js" />
     <Content Include="js\directives\ptCollapse.js" />
@@ -7238,8 +7238,9 @@
     <Content Include="js\directives\ptInitModel.js" />
     <Content Include="js\directives\ptLink.js" />
     <Content Include="js\directives\ptRadio.js" />
-    <Content Include="js\directives\radioInit.js" />
-    <Content Include="js\directives\ssDate.js" />
+    <Content Include="js\directives\ptRadioInit.js" />
+    <Content Include="js\directives\ptDate.js" />
+    <Content Include="js\directives\ptRequired.js" />
     <Content Include="js\filters\booleanToString.js" />
     <Content Include="js\filters\ByContact.js" />
     <Content Include="js\filters\percentage.js" />
