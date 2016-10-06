@@ -33,6 +33,12 @@ Imports IntranetPortal.Data
         Assert.IsTrue(File.Exists(destPath & link))
     End Sub
 
+    <TestMethod()>
+    Public Sub SSAcceptedLastWeek_returnListOfOffer()
+        Dim offer = PropertyOfferManage.GetSSAcceptedOfferLastWeek("*", Nothing, Nothing)
+        Assert.IsTrue(offer.Count > 0)
+    End Sub
+
     <TestMethod()> Public Sub UpdateFields_ReturnUpdatedData()
         Dim formId = 191
         Dim item = FormDataItem.Instance(formId)
@@ -46,7 +52,7 @@ Imports IntranetPortal.Data
 
     <TestMethod()> Public Sub NotifyTeamManager_sendEmail()
         Dim rule As New IntranetPortal.RulesEngine.NewOfferNotifyRule
-        rule.NotifyTeamManager()
+        rule.Execute()
     End Sub
 
     <TestMethod()> Public Sub UpdateAudit_ReturnData()

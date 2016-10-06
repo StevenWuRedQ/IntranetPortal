@@ -9,8 +9,7 @@
     </style>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    <script src="/bower_components/globalize/lib/globalize.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+<%--    <script src="/bower_components/globalize/lib/globalize.js"></script>--%>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -70,121 +69,7 @@
             </div>
         </div>
         <div style="margin-top: 40px;">
-            <%--body Left--%>
-            <%--<div class="row" style="display:none">
-                <div class="col-md-7">
-                    <div role="tabpanel" class="mag_tab_panel">
-
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active mag_tab"><a class="mag_tab_text" href="#phone_callsTab" aria-controls="phone_callsTab" role="tab" data-toggle="tab"><i class="fa fa-phone"></i>
-                                <br />
-                                Phone Calls</a></li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#geomap" aria-controls="profile" role="tab" data-toggle="tab">
-                                <i class="fa fa-map-marker"></i>
-                                <br />
-                                Geo map</a>
-
-                            </li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-                                <i class="fa fa-sign-in"></i>
-                                <br />
-                                Door Knocks</a>
-
-                            </li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#deals_tab" aria-controls="deals_tab" role="tab" data-toggle="tab"><i class="fa fa-check-circle"></i>
-                                <br />
-                                Deals</a></li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><i class="fa fa-crosshairs"></i>
-                                <br />
-                                HR Analytics</a></li>
-
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content" style="padding: 30px;">
-                            <div role="tabpanel" class="tab-pane active" id="phone_callsTab">
-                                <div class="mag_tab_input_group">
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <select class="form-control">
-                                                <option>Last Month</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select class="form-control" id="selAgents">
-                                                <option>All Agents</option>
-                                                <option>Agents 1</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="button" value="Display" class="rand-button bg_color_blue rand-button-padding" onclick="LoadGrid()" />
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="button" value="Chart" class="rand-button bg_color_blue rand-button-padding" onclick="LoadPhoneBarChart()" />
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="margin: 30px 0; font-size: 24px; color: #234b60; display: none" id="divPhoneSummary">
-                                    <span style="font-weight: 900" id="CallTotalCount">52,013 </span>Phone Calls<br />
-                                    <span style="font-size: 14px; color: #77787b">January 1, 2015 - January 31, 2015</span>
-                                </div>
-                                <div style="font-size: 14px;">
-                                    <div id="chartContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto; display: none"></div>
-                                    <div id="gridContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto; display: none"></div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="profile">...</div>
-                            <div role="tabpanel" class="tab-pane" id="geomap">
-                                <iframe src="/Map/ZipMap.aspx" style="width: 100%; min-height: 600px"></iframe>
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane" id="deals_tab">deals_tab</div>
-                            <div role="tabpanel" class="tab-pane" id="messages">...</div>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div style="padding-left: 10px">
-                        <div>
-                            <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Status Of Leads</span>
-                        </div>
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div id="container" class="containers" style="height: 250px; width: 100%;"></div>
-                                    <div class="chart_text">
-                                        In Process Leads: <span id="InProcessCount" class="font_black">0</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div id="current_leads" class="containers" style="height: 250px; width: 100%;"></div>
-                                    <div class="chart_text">
-                                        Current Leads: <span id="spanTotalLeads" class="font_black">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="margin: 30px 0;">
-                            <i class="fa fa-bar-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Monthly Leads Process</span>
-                        </div>
-                        <div>
-                            <div id="leads_process_chart" class="containers" style="height: 250px; width: 100%;"></div>
-                        </div>
-                        <div style="margin: 30px 0;">
-                            <i class="fa fa-line-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Compare Offices</span>
-                        </div>
-                        <div>
-                            <div id="compare_offices_chart" class="containers" style="height: 200px; width: 100%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
+           
             <%-- New layout --%>
             <div class="container-fluid">
                 <div class="row">
@@ -242,8 +127,10 @@
                                                             selectionMode: "allArgumentPoints",
                                                             label: {
                                                                 visible: true,
-                                                                format: "fixedPoint",
-                                                                precision: 0
+                                                                format: {
+                                                                    type: "fixedPoint",
+                                                                    precision: 0
+                                                                }
                                                             }
                                                         },
                                                         argumentAxis: {
@@ -340,9 +227,11 @@
                                                         startValue: scaleStart,
                                                         endValue: endDate,
                                                         minorTickInterval: "day",
-                                                        majorTickInterval: 'week',
+                                                        tickInterval: 'week',
                                                         minRange: "day",
-                                                        showMinorTicks: false
+                                                        minorTick: {
+                                                            visible: false,
+                                                        }
                                                     },
                                                     sliderMarker: {
                                                         format: "monthAndDay"
@@ -547,6 +436,7 @@
 
                                     </script>
                                 </div>
+
                                 <div role="tabpanel" class="tab-pane " id="Status_Of_Leads_Tab">
                                     <div class="mag_tab_input_group">
                                         <div class="row">
@@ -828,9 +718,7 @@
                                         };
                                     </script>
                                 </div>
-                                <%--<div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
-                                    <iframe src="/Map/ZipMap.aspx" style="width: 100%; height: 800px"></iframe>
-                                </div>--%>
+                      
                                 <div role="tabpanel" class="tab-pane" id="Team_Activity_Tab">
                                     <div class="mag_tab_input_group">
                                         <div class="row">
@@ -872,9 +760,11 @@
                                                         startValue: scaleStart,
                                                         endValue: endDate,
                                                         minorTickInterval: "day",
-                                                        majorTickInterval: 'week',
+                                                        tickInterval: 'week',
                                                         minRange: "day",
-                                                        showMinorTicks: false
+                                                        minorTick: {
+                                                            visible: false,
+                                                        }
                                                     },
                                                     sliderMarker: {
                                                         format: "monthAndDay"
@@ -949,8 +839,10 @@
                                                             selectionMode: "allArgumentPoints",
                                                             label: {
                                                                 visible: true,
-                                                                format: "fixedPoint",
-                                                                precision: 0
+                                                                format: {
+                                                                    type:"fixedPoint",
+                                                                    precision: 0
+                                                                }
                                                             }
                                                         },
                                                         series: [
@@ -1145,8 +1037,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <script>
-
                                     angular.module("PortalApp").controller('SSAcceptedTabCtrl', function ($scope, $http) {
 
                                         $scope.dataSource = [{
@@ -1208,10 +1100,11 @@
                                                     startValue: scaleStart,
                                                     endValue: endDate,
                                                     minorTickInterval: "day",
-                                                    majorTickInterval: 'week',
+                                                    tickInterval: 'week',
                                                     minRange: "day",
-                                                    showMinorTicks: false,
-                                                    minorTick: { visible: false }
+                                                    minorTick: {
+                                                        visible: false,
+                                                    }
                                                 },
                                                 marker: { visible: false },
                                                 sliderMarker: {
@@ -1307,409 +1200,6 @@
             </div>
         </div>
     </div>
-
-
-    <script type="text/javascript">
-        function BindAgents() {
-            if (currentTeamInfo != null) {
-                $("#selAgents").html("");
-                $.each(currentTeamInfo.Users, function (key, value) {
-                    $('#selAgents')
-                    .append($("<option></option>")
-                    .attr("value", value)
-                    .text(value));
-                });
-
-                $("#selAgents").prepend("<option value='' selected='selected'>All</option>");
-            }
-        }
-
-        function LoadPhoneBarChart() {
-            $("#chartContainer").show();
-            var localCallLogs = null;
-            var customStore = new DevExpress.data.CustomStore({
-                load: function (loadOptions) {
-                    var d = $.Deferred();
-                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
-                        d.resolve(data, { totalCount: data.length });
-                    });
-                    return d.promise();
-                }
-            });
-
-            var gridDataSourceConfiguration = { store: customStore };
-
-            var logDataSource = new DevExpress.data.DataSource({
-                store: customStore,
-                paginate: false
-            });
-
-            $("#chartContainer").dxChart({
-                dataSource: customStore,
-                commonSeriesSettings: {
-                    argumentField: "EmployeeName",
-                    type: "stackedbar"
-                },
-                series: [
-                     { valueField: "Inbound", name: "Inbound" },
-                     { valueField: "Outbound", name: "Outbound" },
-                     { valueField: "Internal", name: "Internal" },
-                     { valueField: "Count", name: "Total", type: 'spline', color: 'blue' }
-                ],
-                argumentAxis: {
-                    argumentType: 'string'
-                },
-                tooltip: {
-                    enabled: true
-                },
-                legend: {
-                    verticalAlignment: 'bottom',
-                    horizontalAlignment: 'center'
-                },
-                onPointClick: function (info) {
-                    var clickedPoint = info.target;
-                    clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
-                },
-                onPointSelectionChanged: function (info) {
-                    var selectedPoint = info.target;
-                    ShowEmployeeReport(selectedPoint.originalArgument);
-                }
-            });
-        }
-
-        function LoadGrid() {
-            $("#gridContainer").show();
-            var agent = $("#selAgents").val();
-            if (agent != "") {
-                ShowEmployeeReport(agent);
-                return;
-            }
-
-            var localCallLogs = null;
-            var customStore = new DevExpress.data.CustomStore({
-                load: function (loadOptions) {
-                    var d = $.Deferred();
-                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
-                        DevExpress.data.query(data).sum("Count").done(function (result) {
-                            $("#divPhoneSummary").show();
-                            $("#CallTotalCount").html(result);
-                        });
-                        d.resolve(data, { totalCount: data.length });
-                    });
-                    return d.promise();
-                }
-            });
-
-            var gridDataSourceConfiguration = { store: customStore };
-
-            var logDataSource = new DevExpress.data.DataSource({
-                store: customStore,
-                paginate: false
-            });
-
-            $(function () {
-                var datagrid = $("#gridContainer").dxDataGrid({
-                    dataSource: logDataSource,
-                    showColumnLines: false,
-                    showRowLines: true,
-                    rowAlternationEnabled: true,
-                    paging: { enabled: false },
-                    columns: [{
-                        dataField: "EmployeeName",
-                        caption: "Name",
-                        cellTemplate: function (container, options) {
-                            if (options.value != null) {
-                                var fieldHTML = '<a href="javascript:ShowEmployeeReport(\'' + options.value + '\')">' + options.value + "</a>"
-                                container.html(fieldHTML);
-                            }
-                        }
-                    }, "Inbound", {
-                        dataField: "Outbound",
-                        caption: "Outbound"
-                    }, {
-                        dataField: "Count",
-                        caption: "Phone Calls"
-                    }, {
-                        dataField: "Duration",
-                        caption: "Total Time"
-                    }],
-                    summary: {
-                        totalItems: [{
-                            column: 'Count',
-                            summaryType: 'sum'
-                        }]
-                    }
-                });
-            });
-        }
-
-        function ShowEmployeeReport(empName) {
-            $("#gridContainer").show();
-            var empCallLogs = null;
-            var empCallLogsDs = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/CallLog/" + empName);
-            empCallLogsDs.load().done(function (result) {
-                empCallLogs = result;
-
-                $("#gridContainer").dxDataGrid({
-                    dataSource: empCallLogs,
-                    showColumnLines: false,
-                    showRowLines: true,
-                    rowAlternationEnabled: true,
-                    paging: { enabled: false },
-                    columns: [{
-                        dataField: "DateTime",
-                        caption: "Date",
-                        dataType: "date",
-                        format: "shortDate",
-                        calculateGroupValue: function (rowData) {
-                            var callDate = new Date(rowData.DateTime);
-                            return callDate.toLocaleDateString();
-                        }
-                    }, {
-                        dataField: "DateTime",
-                        caption: "Time",
-                        dataType: "date",
-                        format: "shortTime",
-                    },
-                    "CallingNumber", "TimeZone", "Direction", "Duration", "DialedNumber", "Talk", "Answer"
-                    ],
-                    groupPanel: {
-                        visible: true
-                    },
-                    allowColumnReordering: true,
-                    grouping: {
-                        autoExpandAll: true,
-                    },
-                    searchPanel: {
-                        visible: true
-                    },
-                    summary: {
-                        totalItems: [{
-                            column: 'CallingNumber',
-                            summaryType: 'count'
-                        }, {
-                            column: 'Duration',
-                            summaryType: 'sum'
-                        }]
-                    }
-                });
-            });
-        }
-
-        var palette_color = ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7'];
-        function loadCharts(office) {
-
-            $("#monthly_intake").dxChart({
-                legend: { visible: false },
-                rotated: true,
-                dataSource: [
-                    { day: "Monday", oranges: 3 },
-                    { day: "Tuesday", oranges: 2 },
-                    { day: "Wednesday", oranges: 3 },
-                    { day: "Thursday", oranges: 4 },
-                    { day: "Friday", oranges: 6 },
-                    { day: "Saturday", oranges: 11 },
-                    { day: "Sunday", oranges: 4 }],
-
-                series: {
-                    argumentField: "day",
-                    valueField: "oranges",
-
-                    type: "bar",
-
-                },
-                palette: palette_color,
-            });
-            var dataSource = [
-                  { language: "English", percent: 55.5 },
-                  { language: "Chinese", percent: 4.0 },
-                  { language: "Spanish", percent: 4.3 },
-                  { language: "Japanese", percent: 4.9 },
-                  { language: "Portuguese", percent: 2.3 },
-                  { language: "German", percent: 5.6 },
-                  { language: "French", percent: 3.8 },
-                  { language: "Russian", percent: 6.3 },
-                  { language: "Italian", percent: 1.6 },
-                  { language: "Polish", percent: 1.8 }
-            ];
-
-            $("#team_hours_chart").dxPieChart({
-
-                dataSource: dataSource,
-                legend: {
-                    horizontalAlignment: "center",
-                    verticalAlignment: "bottom",
-
-                    visible: false
-                },
-
-                series: [{
-                    smallValuesGrouping: {
-                        mode: "topN",
-                        topCount: 3
-                    },
-                    type: "doughnut",
-                    argumentField: "language",
-                    valueField: "percent",
-                    label: {
-                        visible: true,
-                        format: "fixedPoint",
-
-                        connector: {
-                            visible: true,
-                            width: 1
-                        }
-                    }
-                }]
-            });
-
-
-            var dataSource = new DevExpress.data.DataSource({
-                load: function (loadOptions) {
-                    var d = $.Deferred();
-                    $.getJSON('/WCFDataServices/PortalReportService.svc/LeadsInProcessReport/' + office).done(function (data) {
-                        d.resolve(data);
-                        var inporcessCount = data.reduce(function (a, b) {
-                            return { Count: a.Count + b.Count };
-                        });
-                        $("#InProcessCount").html(inporcessCount.Count)
-                    });
-                    return d.promise();
-                }
-            });
-            var leadstatusData = null;
-            var dataSource2 = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LeadsStatusReport/" + office);
-
-
-            dataSource2.load().done(function (result) {
-                leadstatusData = result;
-                DevExpress.data.query(leadstatusData).sum("Count").done(function (result) {
-                    $("#spanTotalLeads").html(result);
-                });
-            });
-
-            var option =
-                {
-                    dataSource: dataSource,
-                    tooltip: {
-                        enabled: true,
-
-                        percentPrecision: 2,
-                        customizeText: function () {
-
-                            return this.argumentText + " - " + this.percentText;
-                        }
-                    },
-                    legend: { visible: false },
-                    series: [{
-                        type: "doughnut",
-                        argumentField: "Status",
-                        valueField: "Count",
-                        label: {
-                            visible: true,
-
-                            connector: {
-                                visible: true
-                            }
-                        },
-
-                    }],
-                    palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
-
-                }
-            $("#LeadsStatusChart").dxPieChart(option);
-            option.dataSource = dataSource2;
-            $("#current_leads").dxPieChart(option);
-
-
-
-            var leadsProcess = [
-                { state: "May", young: 6.7, middle: 28.6, older: 5.1 },
-                { state: "Jun", young: 9.6, middle: 43.4, older: 9 },
-                { state: "Jul", young: 13.5, middle: 49, older: 5.8 },
-                { state: "Aug", young: 30, middle: 90.3, older: 14.5 }
-            ];
-
-            $("#leads_process_chart").dxChart({
-                dataSource: leadsProcess,
-                commonSeriesSettings: {
-                    argumentField: "state",
-                    type: "stackedBar"
-                },
-                series: [
-                    { valueField: "young", name: "Closed" },
-                    { valueField: "middle", name: "In Process" },
-                    { valueField: "older", name: "Appointments" }
-                ],
-                legend: {
-                    verticalAlignment: "bottom",
-                    horizontalAlignment: "center",
-                    itemTextPosition: 'top'
-                },
-                valueAxis: {
-                    title: {
-                        text: "millions"
-                    },
-                    position: "right"
-                },
-
-                tooltip: {
-                    enabled: true,
-                    location: "edge",
-                    customizeText: function () {
-                        return this.seriesName + " years: " + this.valueText;
-                    }
-                },
-                palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
-            });
-            var compateOfficeData = [
-                { year: "November,2014", Queens: 190, Brooklyn: 180, Bronx: 100, Manhattan: 150 },
-                { year: "December,2014", Queens: 263, Brooklyn: 280, Bronx: 230, Manhattan: 150 },
-                { year: "January", Queens: 220, Brooklyn: 380, Bronx: 190, Manhattan: 150 },
-
-            ];
-
-
-
-            var chartOptions = {
-                dataSource: compateOfficeData,
-                commonSeriesSettings: {
-                    type: "spline",
-                    argumentField: "year"
-                },
-                commonAxisSettings: {
-                    grid: {
-                        visible: true
-                    }
-                },
-                margin: {
-                    bottom: 20
-                },
-                series: [
-                    { valueField: "Queens", name: "Queens Office" },
-                    { valueField: "Brooklyn", name: "Queens Office" },
-                    { valueField: "Bronx", name: "Bronx Office" },
-                    { valueField: "Manhattan", name: "Manhattan Office" }
-                ],
-                tooltip: {
-                    enabled: true
-                },
-                legend: {
-                    verticalAlignment: "bottom",
-                    horizontalAlignment: "center",
-                    itemTextPosition: 'top'
-                },
-                //title: "Architecture Share Over Time (Count)",
-                commonPaneSettings: {
-                    border: {
-                        visible: true
-                    }
-                }
-            };
-            var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
-        }
-
-    </script>
 
     <script type="text/javascript">
 
