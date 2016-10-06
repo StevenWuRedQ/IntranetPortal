@@ -331,7 +331,7 @@
 </div>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
-    <div style="margin: 30px 10px 10px 10px; text-align: left;" class="clearfix">
+    <div style="margin: 10px 10px 10px 10px; text-align: left;" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
             <div class="clearfix">
                 <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
@@ -346,7 +346,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 768px; padding: 0px 0px;" id="leads_list_left">
+    <div style="height: 798px; padding: 0px 0px;" id="leads_list_left">
         <dx:ASPxGridView EnableViewState="false" runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText"
             OnSummaryDisplayText="gridLeads_SummaryDisplayText"
             OnCustomDataCallback="gridLeads_CustomDataCallback"
@@ -694,8 +694,8 @@
             </Templates>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" />
-            <SettingsPager Mode="EndlessPaging" PageSize="16"></SettingsPager>
-            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
+            <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
+            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="820"></Settings>
             <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
             <SettingsCommandButton CancelButton-ButtonType="Button" UpdateButton-ButtonType="Button">
                 <UpdateButton ButtonType="Button" Text="OK"></UpdateButton>
