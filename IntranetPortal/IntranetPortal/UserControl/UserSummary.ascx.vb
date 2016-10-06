@@ -56,7 +56,6 @@ Public Class UserSummary
         gridAppointment.DataBind()
         gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
 
-
         gridTask.DataBind()
         gridTask.GroupBy(gridTask.Columns("ProcSchemeDisplayName"))
 
