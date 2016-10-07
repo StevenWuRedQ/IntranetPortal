@@ -78,10 +78,14 @@
                 }
             }
         })();
-
+        var onSelectionChangedCallback = function (e) {
+            debugger;
+            var bble = e.selectedRowKeys[0].BBLE || '';
+            var status = e.selectedRowKeys[0].Status || 0;
+            previewControl.showCaseInfo(bble, status)
+        }
         previewControl = {
             showCaseInfo: function (CaseId, status) {
-
                 if (status == 0) {
                     var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId
                     PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
@@ -146,7 +150,11 @@
                                 panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
                             }
                         }
-                        highlightcallback();
+                        highlightcallback(e);
+                    },
+                    onSelectionChanged: onSelectionChangedCallback,
+                    selection: {
+                        mode: 'single'
                     },
                     summary: {
                         groupItems: [{
@@ -155,40 +163,44 @@
                             displayFormat: "{0}",
                         }]
                     },
-                    columns: [{
-                        dataField: "CaseName",
-                        width: 450,
-                        caption: "Property Address",
-                        cellTemplate: function (container, options) {
-                            $('<a/>').addClass('dx-link-MyIdealProp')
-                                .text(options.value)
-                                .on('dxclick', function () {
-                                    highlighter.setHighlight(this.parentNode);
-                                    previewControl.showCaseInfo(options.data.BBLE, options.data.Status);
-                                })
-                                .appendTo(container);
-                        }
-                    }, {
-                        caption: "Requested By",
-                        dataField: "CreateBy",
-                    }, {
-                        caption: "Search Status",
-                        dataField: "Status",
-                        alignment: "left",
-                        customizeText: function (cell) {
-                            switch (cell.value) {
-                                case 1:
-                                    return 'Completed';
-                                default:
-                                    return 'New';
+                    columns: [
+                        {
+                            dataField: 'BBLE',
+                            visible: false
+                        },
+                        {
+                            dataField: 'UpdateDate',
+                            caption: 'UpdateDate',
+                            sortIndex: 1,
+                            sortOrder: 'desc',
+                            visible: false
+                        },
+                        {
+                            dataField: "CaseName",
+                            width: 450,
+                            caption: "Property Address",
+                        }, {
+                            caption: "Requested By",
+                            dataField: "CreateBy",
+                        }, {
+                            caption: "Search Status",
+                            dataField: "Status",
+                            alignment: "left",
+                            customizeText: function (cell) {
+                                switch (cell.value) {
+                                    case 1:
+                                        return 'Completed';
+                                    default:
+                                        return 'New';
 
+                                }
                             }
-                        }
-                    },
+                        },
                     {
                         caption: "Search Completion",
                         dataField: "CompletedOn",
                         dataType: "date",
+                        sortIndex: 0,
                         sortOrder: 'desc',
                         customizeText: function (cellInfo) {
                             //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
@@ -252,7 +264,7 @@
                         name: "All"
                     }, {
                         key: 1,
-                        name: "Pending Search"
+                        name: "New Search"
                     }, {
                         key: 2,
                         name: "Completed Search"
@@ -282,17 +294,23 @@
                 if (bble) {
                     previewControl.showCaseInfo(bble);
                 }
-                var highlightcallback = function () {
+
+                //high light column by refresh
+                var highlightcallback = function (e) {
                     debugger;
                     if (bble) {
-                        var datarow = _.filter(dataGrid.option('dataSource'), function (d) { return d.BBLE.trim() == bble.trim() });
-                        var address = datarow && datarow[0] ? datarow[0].CaseName : '';
-                        if (address) {
-                            var el = $('td:contains("' + address.trim() + '")')[0];
-                            highlighter.setHighlight(el);
+                        var grid = e.element.dxDataGrid('instance');
+                        var data = grid.option('dataSource');
+                        var items = []
+                        _.forEach(data, function (v, i) {
+                            if (v.BBLE.trim() == bble.trim())
+                                items.push(v)
+                        });
+                        if (items.length > 0) {
+                            grid.selectRows(items, true);
                         }
+                        bble = undefined;
                     }
-
                 }
 
 
