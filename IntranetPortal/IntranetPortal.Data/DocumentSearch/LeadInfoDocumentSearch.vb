@@ -149,9 +149,12 @@ Public Class LeadInfoDocumentSearch
         Dim s = CType(m_status, Integer)
 
         If (s >= 2) Then
-            Return UnderwriteStatus = s - 2
+            If (UnderwriteStatus IsNot Nothing) Then
+                Return UnderwriteStatus = s - 2
+            Else
+                Return False
+            End If
         End If
-
         Return s = Me.Status
     End Function
 
