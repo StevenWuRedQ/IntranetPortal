@@ -150,11 +150,12 @@ Public Class LeadInfoDocumentSearch
 
         If (s >= 2) Then
             If (UnderwriteStatus IsNot Nothing) Then
-                Return UnderwriteStatus = s - 2
+                Return UnderwriteStatus = s - 2 And Status = SearchStatus.Completed
             Else
                 Return False
             End If
         End If
+
         Return s = Me.Status
     End Function
 
