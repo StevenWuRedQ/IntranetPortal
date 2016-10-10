@@ -183,8 +183,6 @@
         </dx:ASPxSplitter>
     </div>
     <script>
-        //java script code for outer call
-
 
         function LoadSearch(bble) {
             angular.element(document.getElementById('LeadTaxSearchCtrl')).scope().init(bble);

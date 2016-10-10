@@ -105,9 +105,16 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
+
+
     this.confirm = function (message, callback) {
         return $rootScope.confirm(message, callback);
     };
+
+    this.prompt = function (message, callback) {
+        return $rootScope.prompt(message, callback);
+    }
+
     this.addOverlay = function () {
         $rootScope.addOverlay();
     };

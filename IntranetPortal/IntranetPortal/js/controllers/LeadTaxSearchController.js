@@ -245,8 +245,8 @@ angular.module('PortalApp')
 
 
         $scope.markCompleted = function (status) {
-            var xhrfunc = function () {
-                debugger;
+            var xhrfunc = function (notes) {
+                //debugger;
                 $http({
                     method: 'GET',
                     url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE + '|' + status
@@ -262,11 +262,11 @@ angular.module('PortalApp')
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
 
-            var msg = status == 1?'Are you sure to complete this underwriting?':'Are you sure to reject this underwriting?';
-            ptCom.confirm(msg, function (result) {
-                debugger;
-                if (result) {
-                    xhrfunc();
+            var msg = 'Please provide Note or press no to cancle';
+            ptCom.prompt(msg, function (result) {
+                //debugger;
+                if (result != null) {
+                    xhrfunc(result);
                 }
 
             });

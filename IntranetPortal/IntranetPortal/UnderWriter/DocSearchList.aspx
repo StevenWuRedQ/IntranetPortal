@@ -249,13 +249,15 @@
                             dataGrid.filter(['Status', '=', '1']);
                             break;
                         case 3:
-                            dataGrid.filter(['UnderwriteStatus', '=', '0']);
+                            dataGrid.filter([['UnderwriteStatus', '=', '0'],['Status', '=', '1']]);
                             break;
                         case 4:
                             dataGrid.filter(['UnderwriteStatus', '=', '1']);
+                            dataGrid.filter([['Status', '=', '1'],['Status', '=', '1']]);
                             break;
                         case 5:
                             dataGrid.filter(['UnderwriteStatus', '=', '2']);
+                            dataGrid.filter([['Status', '=', '1'],['Status', '=', '1']]);
                     }
                 }
                 var filterBox = $("#useFilterApplyButton").dxSelectBox({

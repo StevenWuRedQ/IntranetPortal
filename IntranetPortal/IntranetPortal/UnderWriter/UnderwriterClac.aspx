@@ -4,6 +4,29 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <style>
+        div.flexbox {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+
+        div.items-list {
+            flex: 0 0 300px;
+            border-right: 2px double #ccc;
+        }
+
+        div.item-detail {
+            flex: auto;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
         body {
             font-size: 14px !important;
         }
@@ -75,25 +98,29 @@
             color: white;
         }
     </style>
-    <div id="underwrite_clac" ng-controller="UnderwriterController">
-
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <ul class=" nav navbar-nav">
-                    <li ui-sref-active="active"><a ui-sref="underwriter.datainput">Data Input</a></li>
-                    <li ui-sref-active="active"><a ui-sref="underwriter.flipsheets">FlipSheets</a></li>
-                    <li ui-sref-active="active"><a ui-sref="underwriter.rentalmodels">Rental Model</a></li>
-                    <li ui-sref-active="active"><a ui-sref="underwriter.tables">Tables</a></li>
-                </ul>
-                <!-- /.navbar-collapse -->
+    <div id="underwrite_clac" class="flexbox" ng-controller="UnderwriterController">
+        <%--    <pt-item-list item-name="Underwriting" item-url="/api/LeadInfoDocumentSearches" item-field="CaseName" on-selection-change="onSelectionChange()"></pt-item-list>--%>
+        <div class="item-detail">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <ul class=" nav navbar-nav">
+                        <li ui-sref-active="active"><a ui-sref="underwriter.datainput">Data Input</a></li>
+                        <li ui-sref-active="active"><a ui-sref="underwriter.flipsheets">FlipSheets</a></li>
+                        <li ui-sref-active="active"><a ui-sref="underwriter.rentalmodels">Rental Model</a></li>
+                        <!-- <li ui-sref-active="active"><a ui-sref="underwriter.tables">Tables</a></li>-->
+                    </ul>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div class="container" style="min-width: 800px; width: 95%">
+                <ui-view>
+                    <ui-view></ui-view>
+                </ui-view>
             </div>
-            <!-- /.container-fluid -->
-        </nav>
-        <div class="container" style="min-width: 800px; width: 80%">
-            <ui-view>
-            <ui-view></ui-view>
-        </ui-view>
+
         </div>
+
     </div>
 
 </asp:Content>

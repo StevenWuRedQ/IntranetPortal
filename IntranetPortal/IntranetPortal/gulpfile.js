@@ -14,6 +14,7 @@ var angularPath = ['js/app.js',
                 'js/filters/*.js',
                 'js/directives/*.js',
                 'js/controllers/*.js',
+                'js/components/*.js',
                 'js/build/' + p.name + '.es6.js'];
 
 
