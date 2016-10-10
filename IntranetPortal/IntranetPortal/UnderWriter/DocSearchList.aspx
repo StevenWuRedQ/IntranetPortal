@@ -177,14 +177,19 @@
                         },
                         {
                             dataField: "CaseName",
-                            width: 450,
+                            width: 400,
                             caption: "Property Address",
                         }, {
-                            caption: "Requested By",
                             dataField: "CreateBy",
+                            caption: "Search Request By"
                         }, {
-                            caption: "Search Status",
+                            dataField: "CreateDate",
+                            caption: "Search Request Date",
+                            dataType: "date",
+                        }, {
                             dataField: "Status",
+                            caption: "Search Status",
+
                             alignment: "left",
                             customizeText: function (cell) {
                                 switch (cell.value) {
@@ -195,39 +200,65 @@
 
                                 }
                             }
-                        },
-                    {
-                        caption: "Search Completion",
-                        dataField: "CompletedOn",
-                        dataType: "date",
-                        sortIndex: 0,
-                        sortOrder: 'desc',
-                        customizeText: function (cellInfo) {
-                            //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
-                            if (!cellInfo.value)
+                        }, {
+                            dataField: "CompletedBy",
+                            caption: "Search Completed By"
+                        }, {
+                            dataField: "CompletedOn",
+                            caption: "Search Completion Date",
+                            dataType: "date",
+                            sortIndex: 0,
+                            sortOrder: 'desc',
+                            customizeText: function (cellInfo) {
+                                //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
+                                if (!cellInfo.value)
+                                    return ""
+                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+                                if (dt)
+                                    return moment(dt).format('MM/DD/YYYY hh:mm a');
+
                                 return ""
-                            var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                            if (dt)
-                                return moment(dt).format('MM/DD/YYYY hh:mm a');
-
-                            return ""
-                        }
-                    }, {
-                        caption: 'Underwriting Status',
-                        dataField: 'UnderwriteStatus',
-                        alignment: "left",
-                        customizeText: function (cell) {
-                            switch (cell.value) {
-                                case 1:
-                                    return 'Completed';
-                                case 2:
-                                    return 'Rejected';
-                                default:
-                                    return 'Pending';
-
                             }
-                        }
-                    }]
+                        }, {
+                            dataField: 'UnderwriteStatus',
+                            caption: 'Underwriting Decision',
+                            alignment: "left",
+                            customizeText: function (cell) {
+                                switch (cell.value) {
+                                    case 1:
+                                        return 'Accepted';
+                                    case 2:
+                                        return 'Rejected';
+                                    default:
+                                        return 'Pending';
+
+                                }
+                            }
+                        }, {
+                            dataField: 'UnderwriteStatus',
+                            caption: 'Underwriting Decision',
+                            dataType: "date",
+                        }, {
+                            dataField: 'UnderwriteCompletedOn',
+                            caption: 'Underwriting Completion Date',
+                            dataType: "date",
+                        
+                        }, {
+                            caption: "Duration",
+                            width: '80px',
+                            allowSorting: true,
+                            calculateCellValue: function (data) {
+                                //debugger;
+                                if (!data.UnderwriteCompletedOn || !data.CreateDate) {
+                                    return Infinity;
+                                }
+                                return new Date(data.UnderwriteCompletedOn) - new Date(data.CreateDate);
+                            },
+                            customizeText: function (cellInfo) {
+                                if (cellInfo.value == Infinity) return "";
+                                return moment.duration(cellInfo.value).humanize()
+                            }
+                        }]
                 }).dxDataGrid('instance');
                 $(".dx-datagrid-header-panel").prepend($("<label class='grid-title-icon' style='display: inline-block'>UW</label>"))
 
@@ -249,13 +280,15 @@
                             dataGrid.filter(['Status', '=', '1']);
                             break;
                         case 3:
-                            dataGrid.filter(['UnderwriteStatus', '=', '0']);
+                            dataGrid.filter([['UnderwriteStatus', '=', '0'], ['Status', '=', '1']]);
                             break;
                         case 4:
                             dataGrid.filter(['UnderwriteStatus', '=', '1']);
+                            dataGrid.filter([['Status', '=', '1'], ['Status', '=', '1']]);
                             break;
                         case 5:
                             dataGrid.filter(['UnderwriteStatus', '=', '2']);
+                            dataGrid.filter([['Status', '=', '1'], ['Status', '=', '1']]);
                     }
                 }
                 var filterBox = $("#useFilterApplyButton").dxSelectBox({
@@ -297,7 +330,7 @@
 
                 //high light column by refresh
                 var highlightcallback = function (e) {
-                    debugger;
+                    // debugger;
                     if (bble) {
                         var grid = e.element.dxDataGrid('instance');
                         var data = grid.option('dataSource');

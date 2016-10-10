@@ -2406,9 +2406,16 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
+
+
     this.confirm = function (message, callback) {
         return $rootScope.confirm(message, callback);
     };
+
+    this.prompt = function (message, callback) {
+        return $rootScope.prompt(message, callback);
+    }
+
     this.addOverlay = function () {
         $rootScope.addOverlay();
     };
@@ -3930,7 +3937,7 @@ angular.module("PortalApp")
                 }
 
                 var callback = function () {
-                    debugger
+                    //debugger
                     var res = validate($(el)[0].value);
                     if (!res) {
                         $(el).css("background-color", "yellow");
@@ -4901,8 +4908,8 @@ angular.module('PortalApp')
 
 
         $scope.markCompleted = function (status) {
-            var xhrfunc = function () {
-                debugger;
+            var xhrfunc = function (notes) {
+                //debugger;
                 $http({
                     method: 'GET',
                     url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE + '|' + status
@@ -4918,11 +4925,11 @@ angular.module('PortalApp')
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
 
-            var msg = status == 1?'Are you sure to complete this underwriting?':'Are you sure to reject this underwriting?';
-            ptCom.confirm(msg, function (result) {
-                debugger;
-                if (result) {
-                    xhrfunc();
+            var msg = 'Please provide Note or press no to cancle';
+            ptCom.prompt(msg, function (result) {
+                //debugger;
+                if (result != null) {
+                    xhrfunc(result);
                 }
 
             });
@@ -8982,7 +8989,7 @@ angular.module("PortalApp").config(function ($stateProvider) {
         name: 'underwriter.datainput',
         url: '/datainput',
         //controller: 'UnderwriterController',
-        templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
+        templateUrl: '/js/Views/Underwriter/datainput.tpl.html',
     }
     var flipsheets = {
         name: 'underwriter.flipsheets',
@@ -9012,20 +9019,17 @@ angular.module("PortalApp").config(function ($stateProvider) {
 });
 
 angular.module("PortalApp").controller("UnderwriterController",
-                ['$scope', 'ptCom', 'ptUnderwriter', '$location',
-        function ($scope, ptCom, ptUnderwriter, $location) {
+                ['$scope', 'ptCom', 'ptUnderwriter', '$location', '$http',
+        function ($scope, ptCom, ptUnderwriter, $location, $http) {
 
             $scope.data = {};
-
+            $scope.list = {/*dataSource*/ };
             $scope.init = function (bble, isImport) {
                 //ptCom.startLoading()
                 $scope.data = ptUnderwriter.load(bble, isImport);
                 if ($scope.data.$promise) {
                     $scope.data.$promise.then(function () {
-                        $scope.update();
-                    }).finally(function () {
-                        //ptCom.stopLoading()
-
+                        $scope.calculate();
                     })
                 }
                 //$scope.feedData();
@@ -9051,17 +9055,21 @@ angular.module("PortalApp").controller("UnderwriterController",
                 $scope.data.LienCosts.PersonalJudgements = 14892.09;
                 $scope.update();
             }
-            $scope.save = function () {
-
-            }
-
-            $scope.update = function () {
+            $scope.calculate = function () {
                 $scope.$applyAsync(function () {
                     ptUnderwriter.applyRule($scope.data);
                 });
             }
 
-            
+            $scope.save = function () {
+
+            }
+
+            $scope.onSelectionChange = function () {
+
+            }
+
+            // init controller;
             var search = $location.search();
             if (search && search.bble) {
                 $scope.init(search.bble, true)
@@ -9094,14 +9102,43 @@ angular.module("PortalApp")
         }
     }
 
-    $scope.checkValidate = function () {
-        return _.some($('input, textarea, select'), function (v) {
-            return $(v).attr('error') == 'true';
-        })
+    $scope.checkValidate = function (async) {
+        if (!async) {
+            return _.some($('input, textarea, select'), function (v) {
+                return $(v).attr('error') == 'true';
+            })
+        } else {
+            var dfd = $.Deferred();
+
+            var err = _.some($('input, textarea, select'), function (v) {
+                return $(v).attr('error') == 'true';
+            });
+
+            if (err) {
+                dfd.resolve();
+            } else {
+                dfd.reject();
+            }
+
+            return dfd;
+        }
+
+    }
+
+    $scope.selfCheck = function () {
+        $scope.$broadcast('ptSelfCheck');
+
+        var startFlag = false
+        var checkingcounter = 0;
+        $scope.$on('ptSelfCheckStart', function () {
+            startFlag = true;
+            checkingcounter++;
+        });
+
     }
 
     $scope.save = function (isSlient) {
-        $scope.$broadcast('ptSelfCheck')
+        $scope.$broadcast('ptSelfCheck');
 
         if ($scope.checkValidate()) {
             ptCom.alert('Please correct Highlight Field first.');
@@ -9121,12 +9158,15 @@ angular.module("PortalApp")
 
     }
 
+
     $scope.requestDocSearch = function () {
+        $scope.$broadcast('ptSelfCheck');
         // debugger;
         if ($scope.checkValidate()) {
             ptCom.alert('Please correct Highlight Field first.');
             return;
         }
+
         UnderwritingRequest.createSearch($scope.BBLE).then(function () {
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
@@ -9335,3 +9375,64 @@ angular.module("PortalApp")
     }
 
 }]);
+angular.module('PortalApp').component('ptItemList', {
+
+    templateUrl: '/js/templates/ptItemList.html',
+    bindings: {
+        itemName: '@',
+        itemUrl: '@',
+        itemField: '@',
+        onSelectionChanged: '&'
+    },
+    controller: function ($scope, $element, $attrs, $http) {
+        $scope.list = {}
+        $scope.searchOptions = {
+            valueChangeEvent: "keyup",
+            placeholder: "Search",
+            mode: "search",
+            onValueChanged: function (args) {
+                $scope.list.searchValue(args.value);
+                $scope.list.load();
+            }
+        };
+        $scope.listOptions = {
+            selectionMode: "single",
+            onSelectionChanged: function (data) {
+                $scope.$ctrl.onSelectionChanged(data);
+            },
+            columns: [
+                {
+                    dataField: $scope.$ctrl.itemField,
+                    itemTemplate: function (data, index) {
+                        var result = $("<div>").addClass("list-item");
+                        $("<div>").text(data[$scope.$ctrl.itemField]).css("padding-left", "10px").appendTo(result);
+                        return result;
+                    }
+                }
+            ],
+
+            bindingOptions: {
+                dataSource: 'list',
+            },
+
+        }
+        $scope.bindList = function () {
+            debugger;
+            $http({
+                method: 'GET',
+                url: $scope.$ctrl.itemUrl
+            }).then(function (d) {
+                $scope.list = new DevExpress.data.DataSource({
+                    searchOperation: "contains",
+                    searchExpr: $scope.$ctrl.itemField,
+                    store: d.data
+                });
+            })
+        }
+
+        $scope.bindList();
+
+
+    }
+
+})

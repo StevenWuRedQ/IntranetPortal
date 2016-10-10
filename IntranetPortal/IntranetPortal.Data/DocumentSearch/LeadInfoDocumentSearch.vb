@@ -44,7 +44,8 @@ Public Class LeadInfoDocumentSearch
                .Status = search.Status,
                .UpdateBy = search.UpdateBy,
                .UpdateDate = search.UpdateDate,
-               .UnderwriteStatus = search.UnderwriteStatus
+               .UnderwriteStatus = search.UnderwriteStatus,
+                     .UnderwriteCompletedOn = search.UnderwriteCompletedOn
             }
 
             'Return result.ToList
@@ -61,7 +62,8 @@ Public Class LeadInfoDocumentSearch
                                                                    .Status = search.Status,
                                                                    .UpdateBy = search.UpdateBy,
                                                                    .UpdateDate = search.UpdateDate,
-                                                                   .UnderwriteStatus = search.UnderwriteStatus
+                                                                   .UnderwriteStatus = search.UnderwriteStatus,
+                                                                   .UnderwriteCompletedOn = search.UnderwriteCompletedOn
                                                         }
                                                 End Function).ToList
         End Using

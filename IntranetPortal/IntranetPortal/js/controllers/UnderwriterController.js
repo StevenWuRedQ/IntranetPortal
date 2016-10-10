@@ -10,7 +10,7 @@
         name: 'underwriter.datainput',
         url: '/datainput',
         //controller: 'UnderwriterController',
-        templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
+        templateUrl: '/js/Views/Underwriter/datainput.tpl.html',
     }
     var flipsheets = {
         name: 'underwriter.flipsheets',
@@ -40,20 +40,17 @@
 });
 
 angular.module("PortalApp").controller("UnderwriterController",
-                ['$scope', 'ptCom', 'ptUnderwriter', '$location',
-        function ($scope, ptCom, ptUnderwriter, $location) {
+                ['$scope', 'ptCom', 'ptUnderwriter', '$location', '$http',
+        function ($scope, ptCom, ptUnderwriter, $location, $http) {
 
             $scope.data = {};
-
+            $scope.list = {/*dataSource*/ };
             $scope.init = function (bble, isImport) {
                 //ptCom.startLoading()
                 $scope.data = ptUnderwriter.load(bble, isImport);
                 if ($scope.data.$promise) {
                     $scope.data.$promise.then(function () {
-                        $scope.update();
-                    }).finally(function () {
-                        //ptCom.stopLoading()
-
+                        $scope.calculate();
                     })
                 }
                 //$scope.feedData();
@@ -79,17 +76,21 @@ angular.module("PortalApp").controller("UnderwriterController",
                 $scope.data.LienCosts.PersonalJudgements = 14892.09;
                 $scope.update();
             }
-            $scope.save = function () {
-
-            }
-
-            $scope.update = function () {
+            $scope.calculate = function () {
                 $scope.$applyAsync(function () {
                     ptUnderwriter.applyRule($scope.data);
                 });
             }
 
-            
+            $scope.save = function () {
+
+            }
+
+            $scope.onSelectionChange = function () {
+
+            }
+
+            // init controller;
             var search = $location.search();
             if (search && search.bble) {
                 $scope.init(search.bble, true)

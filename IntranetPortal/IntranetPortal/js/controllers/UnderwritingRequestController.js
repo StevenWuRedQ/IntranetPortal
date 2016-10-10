@@ -23,14 +23,43 @@
         }
     }
 
-    $scope.checkValidate = function () {
-        return _.some($('input, textarea, select'), function (v) {
-            return $(v).attr('error') == 'true';
-        })
+    $scope.checkValidate = function (async) {
+        if (!async) {
+            return _.some($('input, textarea, select'), function (v) {
+                return $(v).attr('error') == 'true';
+            })
+        } else {
+            var dfd = $.Deferred();
+
+            var err = _.some($('input, textarea, select'), function (v) {
+                return $(v).attr('error') == 'true';
+            });
+
+            if (err) {
+                dfd.resolve();
+            } else {
+                dfd.reject();
+            }
+
+            return dfd;
+        }
+
+    }
+
+    $scope.selfCheck = function () {
+        $scope.$broadcast('ptSelfCheck');
+
+        var startFlag = false
+        var checkingcounter = 0;
+        $scope.$on('ptSelfCheckStart', function () {
+            startFlag = true;
+            checkingcounter++;
+        });
+
     }
 
     $scope.save = function (isSlient) {
-        $scope.$broadcast('ptSelfCheck')
+        $scope.$broadcast('ptSelfCheck');
 
         if ($scope.checkValidate()) {
             ptCom.alert('Please correct Highlight Field first.');
@@ -50,12 +79,15 @@
 
     }
 
+
     $scope.requestDocSearch = function () {
+        $scope.$broadcast('ptSelfCheck');
         // debugger;
         if ($scope.checkValidate()) {
             ptCom.alert('Please correct Highlight Field first.');
             return;
         }
+
         UnderwritingRequest.createSearch($scope.BBLE).then(function () {
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;

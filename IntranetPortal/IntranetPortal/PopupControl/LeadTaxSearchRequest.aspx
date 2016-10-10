@@ -182,10 +182,12 @@
             </Panes>
         </dx:ASPxSplitter>
     </div>
+    <% If Request.QueryString("si") = 1 Then %>
     <script>
-        //java script code for outer call
-
-
+        angular.element("#LeadTaxSearchCtrl").scope().underwritemode = true;
+    </script>
+    <% end if %>
+    <script>
         function LoadSearch(bble) {
             angular.element(document.getElementById('LeadTaxSearchCtrl')).scope().init(bble);
         }

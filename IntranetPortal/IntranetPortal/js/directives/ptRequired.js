@@ -26,7 +26,7 @@
                 }
 
                 var callback = function () {
-                    debugger
+                    //debugger
                     var res = validate($(el)[0].value);
                     if (!res) {
                         $(el).css("background-color", "yellow");
