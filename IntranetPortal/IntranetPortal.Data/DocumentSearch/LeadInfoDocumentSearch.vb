@@ -213,7 +213,7 @@ Public Class LeadInfoDocumentSearch
         CompletedSearch = 1
         <Description("Pending Underwriting")>
         PendingUnderwriting = 2
-        <Description("Completed Underwriting")>
+        <Description("Accepted Underwriting")>
         CompletedUnderwriting = 3
         <Description("Rejected Underwriting")>
         RejectUnderwriting = 4
