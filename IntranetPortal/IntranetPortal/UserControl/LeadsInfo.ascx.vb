@@ -27,7 +27,6 @@ Public Class LeadsInfo1
                     otherFolderIcon.Visible = False
                 End If
 
-
                 If CategoryName = "Door Knock" Then
                     doorKnockMapPanel.Visible = True
                     ClientVisible = False
