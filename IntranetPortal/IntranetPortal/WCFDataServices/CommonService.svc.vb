@@ -34,7 +34,6 @@ Public Class CommonService
                 toAdds.Add(tmpEmp.Email)
             End If
         Next
-        ' Dim emp = Employee.GetInstance(userName)
 
         If toAdds IsNot Nothing AndAlso toAdds.Count > 0 Then
             Dim taskId = 0
@@ -86,6 +85,11 @@ Public Class CommonService
         Dim ccEmail = ""
         If Employee.CEO IsNot Nothing Then
             ccEmail = Employee.CEO.Email
+        End If
+
+        Dim mgrUses = Roles.GetUsersInRole("Management-Users")
+        If mgrUses IsNot Nothing AndAlso mgrUses.Count > 0 Then
+            ccEmail = ccEmail & ";" & Employee.GetEmpsEmails(mgrUses)
         End If
 
         Dim emailData As New Dictionary(Of String, String)
@@ -170,7 +174,6 @@ Public Class CommonService
         If toAdds.Count > 0 Then
             IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), String.Join(";", ccAdds.ToArray), "TeamActivitySummary", emailData, {attachment})
         End If
-
     End Sub
 
     ''' <summary>
@@ -221,9 +224,6 @@ Public Class CommonService
                 toAdds.Add(emp.Email)
             End If
         Next
-
-        'toAdds.Add("ron@myidealprop.com")
-        'toAdds.Add("chris@gvs4u.com")
 
         Dim emailData As New Dictionary(Of String, String)
         'emailData.Add("Body", LoadTeamActivityEmail(objTeam))

@@ -1029,7 +1029,6 @@ Public Class Troubleshooting
             line = fs.ReadLine
         End While
         fs.Close()
-
     End Sub
 
     Private Sub TestRegExp_Click(sender As Object, e As EventArgs) Handles TestRegExp.Click

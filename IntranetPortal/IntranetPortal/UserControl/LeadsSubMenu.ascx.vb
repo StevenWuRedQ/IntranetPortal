@@ -16,6 +16,7 @@ Public Class LeadsSubMenu
     Sub MenuControl()
         If Employee.IsManager(Page.User.Identity.Name) Then
             popupMenuLeads.Items.FindByName("Reassign").Visible = True
+            popupMenuLeads.Items.FindByName("InProcess").Visible = True
         End If
     End Sub
 

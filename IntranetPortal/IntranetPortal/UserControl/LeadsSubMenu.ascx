@@ -31,7 +31,6 @@
                 </div>
             </Template>
         </dx:MenuItem>
-
         <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drap_doorknock_icons.png"></Image>
         </dx:MenuItem>
@@ -41,7 +40,7 @@
         <dx:MenuItem GroupName="Sort" Text="Dead Lead" Name="DeadLead" Image-Url="/images/drap_deadlead_icons.png">
             <Image Url="/images/drap_deadlead_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" Image-Url="/images/drap_inprocess_icons.png">
+        <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" Image-Url="/images/drap_inprocess_icons.png" Visible="false">
             <Image Url="/images/drap_inprocess_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="View Lead" Name="ViewLead" Visible="false">
