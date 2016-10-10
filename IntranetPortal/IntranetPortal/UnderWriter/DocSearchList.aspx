@@ -264,7 +264,7 @@
                     })
 
                 }
-
+                // use to hide some columns that not needed.
                 var hidesome = function (arraylike) {
                     _.forEach(arraylike, function (v, i) {
                         dataGrid.columnOption(v, 'visible', false)
