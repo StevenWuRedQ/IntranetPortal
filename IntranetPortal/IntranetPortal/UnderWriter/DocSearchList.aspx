@@ -209,16 +209,6 @@
                             dataType: "date",
                             sortIndex: 0,
                             sortOrder: 'desc',
-                            customizeText: function (cellInfo) {
-                                //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
-                                if (!cellInfo.value)
-                                    return ""
-                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                                if (dt)
-                                    return moment(dt).format('MM/DD/YYYY hh:mm a');
-
-                                return ""
-                            }
                         }, {
                             dataField: 'UnderwriteStatus',
                             caption: 'UW Decision',
@@ -266,17 +256,35 @@
                     filterData(data.value);
                 }
 
+                var columns = ['CaseName', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'Duration'];
+
+                var displayall = function () {
+                    _.forEach(columns, function (v, i) {
+                        dataGrid.columnOption(v, 'visible', true)
+                    })
+
+                }
+
+                var hidesome = function (arraylike) {
+                    _.forEach(arraylike, function (v, i) {
+                        dataGrid.columnOption(v, 'visible', false)
+                    })
+                }
+
                 var filterData = function (data) {
                     dataGrid.clearFilter();
+                    displayall();
                     switch (data) {
                         case 1:
                             dataGrid.filter(['Status', '=', '0']);
+                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration'])
                             break;
                         case 2:
                             dataGrid.filter(['Status', '=', '1']);
                             break;
                         case 3:
                             dataGrid.filter([['UnderwriteStatus', '=', '0'], ['Status', '=', '1']]);
+                            hidesome(['UnderwriteCompletedOn', 'Duration'])
                             break;
                         case 4:
                             dataGrid.filter([['UnderwriteStatus', '=', '1'], ['Status', '=', '1']]);

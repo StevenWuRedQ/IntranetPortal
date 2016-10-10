@@ -270,7 +270,7 @@ angular.module('PortalApp')
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
 
-            var msg = 'Please provide Note or press no to cancle';
+            var msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
