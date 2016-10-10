@@ -42,18 +42,18 @@ Public Class NewOfferNotifyRule
         Dim teams = Core.PortalSettings.GetValue("ActiveTeams")
         Using client As New PortalService.CommonServiceClient
             For Each tm In teams.Split(";")
-                Dim users = Roles.GetUsersInRole("OfficeManager-" & tm)
+                Dim users = Team.GetTeam(tm).Manager
                 Dim emails As String = Employee.GetEmpsEmails(users)
-
-                Dim subject = String.Format("ShortSale Acceptance Report for {0} Last Week", tm)
-                Dim params As New Dictionary(Of String, String) From {
-                        {"team", tm}
-                    }
 
                 If String.IsNullOrEmpty(emails) Then
                     Log("Can't load team manager emails - Team: " & tm)
                     Continue For
                 End If
+
+                Dim subject = String.Format("ShortSale Acceptance Report for {0} Last Week", tm)
+                Dim params As New Dictionary(Of String, String) From {
+                        {"team", tm}
+                    }
 
                 client.SendEmailByControl(emails, subject, "NewOfferNotification", params)
                 Threading.Thread.Sleep(3000)

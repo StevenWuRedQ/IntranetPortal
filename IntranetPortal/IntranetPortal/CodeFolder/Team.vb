@@ -182,6 +182,23 @@ Partial Public Class Team
         End Get
     End Property
 
+    Private _reporters As String()
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property TeamReporters As String()
+        Get
+            If _reporters Is Nothing Then
+                Dim roleName = String.Format("TeamReporter-{0}", Name)
+                _reporters = Roles.GetUsersInRole(roleName)
+
+                If _reporters Is Nothing OrElse _reporters.Count = 0 Then
+                    _reporters = TeamManagers
+                End If
+            End If
+
+            Return _reporters
+        End Get
+    End Property
+
     Public ReadOnly Property ManagerData As Employee
         Get
             Return Employee.GetInstance(Manager)
