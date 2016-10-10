@@ -88,10 +88,6 @@ Public Class MySummary
                                                         },
                              New SummaryItemBase() With {.ControlFileName = "UnderWriterItem.ascx",
                                                          .Parameters = New Dictionary(Of String, Object) From {
-                                                                               {"caseStatus", 1}
-                                                                          }},
-                             New SummaryItemBase() With {.ControlFileName = "UnderWriterItem.ascx",
-                                                         .Parameters = New Dictionary(Of String, Object) From {
                                                                                {"caseStatus", 2}
                                                                           }},
                             New SummaryItemBase() With {.ControlFileName = "UnderWriterItem.ascx",
