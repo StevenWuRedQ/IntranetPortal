@@ -79,7 +79,7 @@
             }
         })();
         var onSelectionChangedCallback = function (e) {
-            debugger;
+            //debugger;
             var bble = e.selectedRowKeys[0].BBLE || '';
             var status = e.selectedRowKeys[0].Status || 0;
             previewControl.showCaseInfo(bble, status)
@@ -181,10 +181,10 @@
                             caption: "Property Address",
                         }, {
                             dataField: "CreateBy",
-                            caption: "Search Request By"
+                            caption: "UW Requested By"
                         }, {
                             dataField: "CreateDate",
-                            caption: "Search Request Date",
+                            caption: "UW Requested Date",
                             dataType: "date",
                         }, {
                             dataField: "Status",
@@ -221,7 +221,7 @@
                             }
                         }, {
                             dataField: 'UnderwriteStatus',
-                            caption: 'Underwriting Decision',
+                            caption: 'UW Decision',
                             alignment: "left",
                             customizeText: function (cell) {
                                 switch (cell.value) {
@@ -235,14 +235,10 @@
                                 }
                             }
                         }, {
-                            dataField: 'UnderwriteStatus',
-                            caption: 'Underwriting Decision',
-                            dataType: "date",
-                        }, {
                             dataField: 'UnderwriteCompletedOn',
-                            caption: 'Underwriting Completion Date',
+                            caption: 'UW Completion Date',
                             dataType: "date",
-                        
+
                         }, {
                             caption: "Duration",
                             width: '80px',
@@ -256,7 +252,7 @@
                             },
                             customizeText: function (cellInfo) {
                                 if (cellInfo.value == Infinity) return "";
-                                return moment.duration(cellInfo.value).humanize()
+                                return moment.duration(cellInfo.value).humanize();
                             }
                         }]
                 }).dxDataGrid('instance');
@@ -283,12 +279,10 @@
                             dataGrid.filter([['UnderwriteStatus', '=', '0'], ['Status', '=', '1']]);
                             break;
                         case 4:
-                            dataGrid.filter(['UnderwriteStatus', '=', '1']);
-                            dataGrid.filter([['Status', '=', '1'], ['Status', '=', '1']]);
+                            dataGrid.filter([['UnderwriteStatus', '=', '1'], ['Status', '=', '1']]);
                             break;
                         case 5:
-                            dataGrid.filter(['UnderwriteStatus', '=', '2']);
-                            dataGrid.filter([['Status', '=', '1'], ['Status', '=', '1']]);
+                            dataGrid.filter([['UnderwriteStatus', '=', '2'], ['Status', '=', '1']]);
                     }
                 }
                 var filterBox = $("#useFilterApplyButton").dxSelectBox({
@@ -299,14 +293,14 @@
                         key: 1,
                         name: "New Search"
                     }, {
-                        key: 2,
-                        name: "Completed Search"
-                    }, {
                         key: 3,
                         name: "Pending Underwriting"
                     }, {
+                        key: 2,
+                        name: "Completed Search"
+                    }, {
                         key: 4,
-                        name: "Completed Underwriting"
+                        name: "Accepted Underwriting"
                     }, {
                         key: 5,
                         name: "Rejected Underwriting"

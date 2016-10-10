@@ -244,17 +244,25 @@ angular.module('PortalApp')
         }
 
 
-        $scope.markCompleted = function (status) {
-            var xhrfunc = function (notes) {
+        $scope.markCompleted = function (status,msg) {
+            var xhrfunc = function (note) {
                 //debugger;
+
+                payload = {
+                    bble: $scope.DocSearch.BBLE,
+                    status: status,
+                    note: note
+                }
                 $http({
-                    method: 'GET',
-                    url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE + '|' + status
+                    method: 'POST',
+                    url: '/api/LeadInfoDocumentSearches/MarkCompleted',
+                    data: payload                    
                 }).then(function succ(d) {
                     //debugger;
                     $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
                     $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy; 
                     $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                    $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
                 }, function err() {
 
                 })
@@ -271,6 +279,9 @@ angular.module('PortalApp')
 
             });
 
-
+        }
+        //debugger;
+        if(location.search.indexOf('si=1')>=0){
+            $scope.underwritemode = true;
         }
     });

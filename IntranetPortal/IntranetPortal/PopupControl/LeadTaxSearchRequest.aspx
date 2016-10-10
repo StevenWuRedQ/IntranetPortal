@@ -106,15 +106,15 @@
                                             <ul class="nav  clearfix" role="tablist">
 
                                                 <li class="short_sale_head_tab " ng-click="markCompleted(1)">
-                                                    <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Completed">
+                                                    <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Accept">
                                                         <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
-                                                        <div class="font_size_bold" style="width: 100px">Completed</div>
+                                                        <div class="font_size_bold" style="width: 100px">Accpet</div>
                                                     </a>
                                                 </li>
                                                 <li class="short_sale_head_tab" ng-click="markCompleted(2)">
-                                                    <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Rejected">
+                                                    <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Reject">
                                                         <i class="fa fa-times head_tab_icon_padding" style="color: white !important"></i>
-                                                        <div class="font_size_bold" style="width: 100px">Rejected</div>
+                                                        <div class="font_size_bold" style="width: 100px">Reject</div>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -134,7 +134,7 @@
 
                                      <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />
                                         --%>
-                                        <new-ds-summary docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" showinfo="ShowInfo"></new-ds-summary>
+                                        <new-ds-summary docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" showinfo="ShowInfo" underwritemode="underwritemode"></new-ds-summary>
                                     </div>
                                     <% If Request.QueryString("si") = 1 Then %>
                                     <div id="agent_story" class="tab-pane fade" style="padding: 20px; max-height: 850px; overflow-y: scroll">
@@ -173,7 +173,7 @@
                                             <uc1:AuditLogs runat="server" ID="AuditLogs" />
                                         </div>
                                     </div>
-                                    <% End if %>
+                                    <% End If %>
                                 </div>
                             </div>
                         </dx:SplitterContentControl>
@@ -182,11 +182,7 @@
             </Panes>
         </dx:ASPxSplitter>
     </div>
-    <% If Request.QueryString("si") = 1 Then %>
-    <script>
-        angular.element("#LeadTaxSearchCtrl").scope().underwritemode = true;
-    </script>
-    <% end if %>
+
     <script>
         function LoadSearch(bble) {
             angular.element(document.getElementById('LeadTaxSearchCtrl')).scope().init(bble);
@@ -214,5 +210,4 @@
 
 
     </script>
-
 </asp:Content>

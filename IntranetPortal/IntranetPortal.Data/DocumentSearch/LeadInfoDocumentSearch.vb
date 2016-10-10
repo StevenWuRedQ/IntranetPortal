@@ -272,13 +272,14 @@ Public Class LeadInfoDocumentSearch
         End If
         Return Nothing
     End Function
-    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String, Status As Integer) As LeadInfoDocumentSearch
+    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String, Status As Integer, Note As String) As LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Dim search = ctx.LeadInfoDocumentSearches.Find(BBLE)
             If Nothing IsNot search Then
                 search.UnderwriteCompletedBy = User
                 search.UnderwriteCompletedOn = Date.Now
-                search.UnderwriteStatus = CInt(Status)
+                search.UnderwriteStatus = Status
+                search.UnderwriteCompletedNotes = Note
                 ctx.SaveChanges()
                 Return search
             Else

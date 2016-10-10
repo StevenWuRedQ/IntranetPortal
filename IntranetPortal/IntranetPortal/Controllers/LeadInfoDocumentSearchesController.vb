@@ -264,25 +264,34 @@ Namespace Controllers
         Private Function LeadInfoDocumentSearchExists(ByVal id As String) As Boolean
             Return db.LeadInfoDocumentSearches.Count(Function(e) e.BBLE = id) > 0
         End Function
-        <HttpGet>
-        <Route("api/LeadInfoDocumentSearches/MarkCompleted/{BBLEANDStatus}")>
-        Public Function MarkUnderWritingCompleted(BBLEANDStatus As String) As IHttpActionResult
+        <HttpPost>
+        <Route("api/LeadInfoDocumentSearches/MarkCompleted")>
+        Public Function MarkUnderWritingCompleted(<FromBody> data As Object) As IHttpActionResult
             Dim USER = HttpContext.Current.User.Identity.Name
-            If Not String.IsNullOrEmpty(BBLEANDStatus) OrElse String.IsNullOrEmpty(USER) Then
-                Dim tokens = BBLEANDStatus.Split("|")
-                Dim BBLE = tokens(0)
-                Dim Status = tokens(1)
-                If Not String.IsNullOrEmpty(BBLE) AndAlso Not String.IsNullOrEmpty(Status) Then
-                    Dim search = LeadInfoDocumentSearch.MarkCompletedUnderwriting(BBLE, USER, Status)
-                    If Nothing IsNot search Then
-                        Return Ok(search)
-                    Else
-                        Return BadRequest(String.Format("Doc Search With {0} Cannot Be Found!", BBLE))
+            Dim BBLE As String
+            Dim Status As Integer
+            Dim Note As String
+            Try
+                If Not data Is Nothing Then
+                    BBLE = data("bble").ToString
+                    Status = CInt(data("status").ToString)
+                    Note = data("note").ToString
+
+                    If Not String.IsNullOrEmpty(BBLE) Then
+                        Dim search = LeadInfoDocumentSearch.MarkCompletedUnderwriting(BBLE, USER, Status, Note)
+                        If Nothing IsNot search Then
+                            Return Ok(search)
+                        Else
+                            Return BadRequest(String.Format("Doc Search With {0} Cannot Be Found!", BBLE))
+                        End If
                     End If
+                Else
+                    Return BadRequest()
                 End If
-            Else
-                Return BadRequest("BBLE Cannot Be empty.")
-            End If
+            Catch ex As Exception
+                Return BadRequest()
+            End Try
+
 
         End Function
         <HttpGet>
