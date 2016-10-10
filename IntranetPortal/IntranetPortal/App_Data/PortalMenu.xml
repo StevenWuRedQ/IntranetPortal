@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ArrayOfPortalNavItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  
   <PortalNavItem Name="MyTaskMain" Text="Tasks &lt;span class='notification' style='display:none' id='SpanAmount_TotalTask'&gt;&lt;/span&gt;" NavigationUrl="/Task/MyTask.aspx" ShowAmount="false" ItemType="" Expanded="false">
     <level>1</level>
     <Applications>1,2</Applications>
@@ -319,7 +320,6 @@
           <![CDATA[<i class="fa fa-group"></i>]]>
         </FontClass>
       </PortalNavItem>
-
       <PortalNavItem Name="Calendar" Text="Calendar" NavigationUrl="/Calendar.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
@@ -334,7 +334,7 @@
   </PortalNavItem>
 
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
-    <UserRoles>OfficeManager-*,OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
+    <UserRoles>OfficeManager-*</UserRoles>
     <Items>
     </Items>
   </PortalNavItem>
