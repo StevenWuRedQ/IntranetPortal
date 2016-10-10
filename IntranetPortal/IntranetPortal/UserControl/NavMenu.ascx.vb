@@ -21,7 +21,7 @@ Public Class NavMenu
     Shared Sub AddTeamsMenu(menus As List(Of PortalNavItem))
         Dim teamList As New List(Of PortalNavItem)
 
-        For Each t In Team.GetAllTeams()
+        For Each t In Team.GetActiveTeams()
             Dim item As New PortalNavItem
             item.Name = String.Format("Team-{0}-Management", t.TeamId)
             item.Text = t.Name
