@@ -151,7 +151,7 @@ Public Class RulesService
 
         Dim dueTime = DateTime.Today.Add(rule.ExecuteOn) - DateTime.Now
         If dueTime.TotalSeconds < 0 Then
-            dueTime = DateTime.Today.AddDays(1).Add(rule.ExecuteOn) - DateTime.Now
+            dueTime = DateTime.Today.AddDays(rule.Period.TotalDays).Add(rule.ExecuteOn) - DateTime.Now
         End If
 
         If rule.ExecuteNow Then

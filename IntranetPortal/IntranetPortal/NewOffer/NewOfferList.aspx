@@ -63,7 +63,7 @@
                 }
                 PortalUtility.ShowPopWindow("View Case - " + CaseId, url);                
             }
-            
+                        
             function loadData(view){
                 var url = "/api/propertyoffer?mgrview=" + view;
                 $.getJSON(url).done(function (data) {
@@ -120,17 +120,7 @@
                             caption: "New Offer Completed On",
                             dataField: "UpdateDate",
                             dataType: "date",
-                            customizeText: function (cellInfo) {
-                                //return moment(cellInfo.value).tz('America/New_York').format('MM/dd/yyyy hh:mm tt')
-                                if (!cellInfo.value)
-                                    return ""
-
-                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                                if (dt)
-                                    return moment(dt).format('MM/DD/YYYY hh:mm a');
-
-                                return ""
-                            }
+                            customizeText: PortalUtility.customizeDateText
                         }, {
                             caption: "Completed By",
                             dataField: "Owner"
@@ -151,16 +141,7 @@
                             caption: "Acceptance Date",
                             dataField: "AcceptedDate",
                             dataType: "date",
-                            customizeText: function (cellInfo) {                                
-                                if (!cellInfo.value)
-                                    return ""
-
-                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                                if (dt)
-                                    return moment(dt).format('MM/DD/YYYY hh:mm a');
-
-                                return ""
-                            }
+                            customizeText: PortalUtility.customizeDateText
                         }, {
                             caption: "Accepted By",
                             dataField: "AcceptedBy"
@@ -183,16 +164,7 @@
                             caption: "In Process Date",
                             dataField: "InProcessDate",
                             dataType: "date",
-                            customizeText: function (cellInfo) {                                
-                                if (!cellInfo.value)
-                                    return ""
-
-                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                                if (dt)
-                                    return moment(dt).format('MM/DD/YYYY hh:mm a');
-
-                                return ""
-                            }
+                            customizeText: PortalUtility.customizeDateText
                         }, {
                             caption: "In Process By",
                             dataField: "InProcessBy"
