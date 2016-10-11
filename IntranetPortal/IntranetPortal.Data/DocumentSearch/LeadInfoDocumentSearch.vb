@@ -1,8 +1,8 @@
 ﻿Imports System.ComponentModel
+Imports System.ComponentModel.DataAnnotations
 Imports Humanizer
 
-' <MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
-
+<MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
 Public Class LeadInfoDocumentSearch
     Public Property ResutContent As String
     Public Property IsSave As Boolean
@@ -33,6 +33,7 @@ Public Class LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Dim result = From search In ctx.LeadInfoDocumentSearches
                          Join ld In ctx.ShortSaleLeadsInfoes On search.BBLE Equals ld.BBLE
+                         Join lead In ctx.SSLeads On ld.BBLE Equals lead.BBLE
                          Select New With {
                .BBLE = search.BBLE,
                .CaseName = ld.PropertyAddress,
