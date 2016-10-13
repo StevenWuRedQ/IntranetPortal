@@ -6,13 +6,18 @@ Imports IntranetPortal.Data
 
     <TestMethod()> Public Sub Archive_returnDoc()
         Dim bble = "3003820020"
+        Dim username = "Test"
         Dim search = LeadInfoDocumentSearch.GetInstance(bble)
-        search.Save()
-        search.Archive("Test")
+        search.Save(username)
+        Assert.IsFalse(search.Expired)
+        search.Status = LeadInfoDocumentSearch.SearchStatus.Completed
+        search.CompletedOn = New DateTime(2016, 1, 1)
+        Assert.IsTrue(search.Expired)
+        search.Archive(username)
         Dim search2 = LeadInfoDocumentSearch.GetInstance(bble)
         Assert.IsNull(search2)
 
-        search.Save()
+        search.Save(username)
     End Sub
 
     <TestMethod()> Public Sub LoadJudgementSearch_returnDoc()

@@ -109,22 +109,23 @@ Namespace Controllers
 
         <Route("api/LeadInfoDocumentSearches/{bble}/Completed")>
         <ResponseType(GetType(LeadInfoDocumentSearch))>
-        Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
+        Function PostCompleted(ByVal bble As String, ByVal search As LeadInfoDocumentSearch) As IHttpActionResult
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
 
-            If Not bble.Trim = leadInfoDocumentSearch.BBLE.Trim Then
+            If Not bble.Trim = search.BBLE.Trim Then
                 Return BadRequest()
             End If
             Dim userName = HttpContext.Current.User.Identity.Name
 
-            leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStatus.Completed
-            leadInfoDocumentSearch.CompletedBy = userName
-            leadInfoDocumentSearch.CompletedOn = DateTime.Now
+            search.Status = LeadInfoDocumentSearch.SearchStatus.Completed
+            search.CompletedBy = userName
+            search.CompletedOn = DateTime.Now
+            search.UnderwriteStatus = 0
 
             Try
-                leadInfoDocumentSearch.Save(userName)
+                search.Save(userName)
             Catch ex As Exception
                 Throw ex
             End Try
@@ -195,7 +196,7 @@ Namespace Controllers
             If (findSearch Is Nothing) OrElse archived Then
                 ' db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
                 leadInfoDocumentSearch.SubmitSearch(user)
-                leadInfoDocumentSearch.Save()
+                leadInfoDocumentSearch.Save(user)
 
                 LeadsActivityLog.AddActivityLog(DateTime.Now(), "Create a search request to doc Search Agent ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
 
