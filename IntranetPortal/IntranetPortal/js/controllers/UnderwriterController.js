@@ -3,31 +3,28 @@
     var underwriter = {
         name: 'underwriter',
         url: '/underwriter',
+        template: '<ui-view></ui-view>',
         controller: 'UnderwriterController'
     }
 
     var dataInput = {
         name: 'underwriter.datainput',
         url: '/datainput',
-        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/datainput.tpl.html',
     }
     var flipsheets = {
         name: 'underwriter.flipsheets',
         url: '/flipsheets',
-        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
     }
     var rentalmodels = {
         name: 'underwriter.rentalmodels',
         url: '/rentalmodels',
-        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
     }
     var tables = {
         name: 'underwriter.tables',
         url: '/tables',
-        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/tables.tpl.html'
     }
 
@@ -76,6 +73,7 @@ angular.module("PortalApp").controller("UnderwriterController",
                 $scope.data.LienCosts.PersonalJudgements = 14892.09;
                 $scope.update();
             }
+
             $scope.calculate = function () {
                 $scope.$applyAsync(function () {
                     ptUnderwriter.applyRule($scope.data);
@@ -83,7 +81,7 @@ angular.module("PortalApp").controller("UnderwriterController",
             }
 
             $scope.save = function () {
-
+                ptUnderwriter.save($scope.data);
             }
 
             $scope.onSelectionChange = function () {

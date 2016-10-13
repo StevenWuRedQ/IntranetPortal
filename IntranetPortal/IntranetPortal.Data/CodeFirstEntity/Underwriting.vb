@@ -5,6 +5,7 @@ Public Class Underwriting
     <Key>
     Public Property Id As Integer
     Public Property BBLE As String
+    Public Property Actived As Boolean
     Public Property CreateBy As String
     Public Property UpdateBy As String
     Public Property CreateDate As DateTime?
@@ -16,10 +17,17 @@ Public Class Underwriting
     Public Overridable Property RentalInfo As UnderwritingRentalInfo
     Public Overridable Property LienInfo As UnderwritingLienInfo
     Public Overridable Property LienCosts As UnderwritingLienCosts
-
+    Public Overridable Property MinimumBaselineScenario As UnderwritingMinimumBaselineScenario
+    Public Overridable Property BestCaseScenario As UnderwritingBestCaseScenario
+    Public Overridable Property CashScenario As UnderwritingCashScenario
+    Public Overridable Property LoanScenario As UnderwritingLoanScenario
+    Public Overridable Property RentalModel As UnderwritingRentalModel
+    Public Overridable Property Others As UnderwritingOthers
 End Class
 
 Public Class UnderwritingBestCaseScenario
+    <Key>
+    Public Property Id As Integer
     Public Property CashRequirement As Decimal
     Public Property NetProfit As Decimal
     Public Property PurchasePriceAllIn As Decimal
@@ -28,6 +36,8 @@ Public Class UnderwritingBestCaseScenario
 End Class
 
 Public Class UnderwritingCarryingCost
+    <Key>
+    Public Property Id As Integer
     Public Property RETaxs As Decimal
     Public Property Utilities As Decimal
     Public Property Insurance As Decimal
@@ -35,6 +45,8 @@ Public Class UnderwritingCarryingCost
 End Class
 
 Public Class UnderwritingCashScenario
+    <Key>
+    Public Property Id As Integer
     Public Property CashRequired As Decimal
     Public Property Purchase_CarryingCosts As Decimal
     Public Property Purchase_ClosingCost As Decimal
@@ -55,6 +67,8 @@ Public Class UnderwritingCashScenario
 End Class
 
 Public Class UnderwritingClosingCost
+    <Key>
+    Public Property Id As Integer
     Public Property TitleBill As Decimal
     Public Property BuyerAttorney As Decimal
     Public Property PartialSums As Decimal
@@ -63,12 +77,16 @@ Public Class UnderwritingClosingCost
 End Class
 
 Public Class UnderwritingConstruction
+    <Key>
+    Public Property Id As Integer
     Public Property Construction As Decimal
     Public Property Architect As Decimal
     Public Property Sums As Decimal
 End Class
 
 Public Class UnderwritingDealCosts
+    <Key>
+    Public Property Id As Integer
     Public Property MoneySpent As Decimal
     Public Property HOI As Decimal
     Public Property COSTermination As Decimal
@@ -76,6 +94,8 @@ Public Class UnderwritingDealCosts
 End Class
 
 Public Class UnderwritingDealExpenses
+    <Key>
+    Public Property Id As Integer
     Public Property Agent As Decimal
     Public Property COSTermination As Decimal
     Public Property HOILien As Decimal
@@ -86,11 +106,15 @@ Public Class UnderwritingDealExpenses
 End Class
 
 Public Class UnderwritingFlipCalculation
+    <Key>
+    Public Property Id As Integer
     Public Property FlipROI As Decimal
     Public Property FlipPrice As Decimal
 End Class
 
 Public Class UnderwritingFlipScenario
+    <Key>
+    Public Property Id As Integer
     Public Property CashRequirement As Decimal
     Public Property FlipPrice_SalePrice As Decimal
     Public Property FlipProfit As Decimal
@@ -109,6 +133,8 @@ Public Class UnderwritingFlipScenario
 End Class
 
 Public Class UnderwritingHOI
+    <Key>
+    Public Property Id As Integer
     Public Property Value As Decimal
     Public Property PurchasePriceAllIn As Decimal
     Public Property TotalInvestment As Decimal
@@ -118,6 +144,8 @@ Public Class UnderwritingHOI
 End Class
 
 Public Class UnderwritingHOIBestCase
+    <Key>
+    Public Property Id As Integer
     Public Property PurchasePriceAllIn As Decimal
     Public Property TotalInvestment As Decimal
     Public Property CashRequirement As Decimal
@@ -126,6 +154,8 @@ Public Class UnderwritingHOIBestCase
 End Class
 
 Public Class UnderwritingInsurancePremium
+    <Key>
+    Public Property Id As Integer
     Public Property From() As Decimal
     Public Property _To() As Decimal
     Public Property OwnersPolicyRate() As Decimal
@@ -142,6 +172,8 @@ Public Class UnderwritingInsurancePremium
 End Class
 
 Public Class UnderwritingLiens
+    <Key>
+    Public Property Id As Integer
     Public Property LienPayoffsSettlement As Decimal
     Public Property TaxLienSettlement As Decimal
     Public Property PropertyTaxesSettlement As Decimal
@@ -170,6 +202,8 @@ End Class
 
 
 Public Class UnderwritingLienCosts
+    <Key>
+    Public Property Id As Integer
     Public Property TaxLienCertificate As Decimal
     Public Property PropertyTaxes As Decimal
     Public Property WaterCharges As Decimal
@@ -185,6 +219,8 @@ Public Class UnderwritingLienCosts
 End Class
 
 Public Class UnderwritingLienInfo
+    <Key>
+    Public Property Id As Integer
     Public Property AuctionDate As DateTime?
     Public Property COSRecorded As Boolean
     Public Property CurrentPayoff As Decimal
@@ -229,6 +265,8 @@ End Class
 
 
 Public Class UnderwritingLoanCosts
+    <Key>
+    Public Property Id As Integer
     Public Property LoanClosingCost As Decimal
     Public Property Points As Decimal
     Public Property LoanInterest As Decimal
@@ -238,6 +276,8 @@ End Class
 
 
 Public Class UnderwritingLoanScenario
+    <Key>
+    Public Property Id As Integer
     Public Property Purchase_PurchasePrice As Decimal
     Public Property Purchase_AdditonalCosts As Decimal
     Public Property Purchase_DealCosts As Decimal
@@ -264,6 +304,8 @@ End Class
 
 
 Public Class UnderwritingLoanTerms
+    <Key>
+    Public Property Id As Integer
     Public Property LoanRate As Decimal
     Public Property LoanPoints As Decimal
     Public Property LoanTermMonths As Integer
@@ -273,6 +315,8 @@ End Class
 
 
 Public Class UnderwritingMinimumBaselineScenario
+    <Key>
+    Public Property Id As Integer
     Public Property PurchasePriceAllIn As Decimal
     Public Property TotalInvestment As Decimal
     Public Property CashRequirement As Decimal
@@ -282,12 +326,16 @@ End Class
 
 
 Public Class UnderwritingMoneyFactor
+    <Key>
+    Public Property Id As Integer
     Public Property CostOfMoney As Decimal
     Public Property InterestOnMoney As Decimal
 End Class
 
 
 Public Class UnderwritingOthers
+    <Key>
+    Public Property Id As Integer
     Public Property MaximumLienPayoff As Decimal
     Public Property MaximumSSPrice As Decimal
     Public Property MaxHOI As Decimal
@@ -334,6 +382,8 @@ Public Class UnderwritingPropertyInfo
 End Class
 
 Public Class UnderwritingRehabInfo
+    <Key>
+    Public Property Id As Integer
     Public Property AverageLowValue As Decimal
     Public Property DealROICash As Decimal
     Public Property DealTimeMonths As Integer
@@ -343,6 +393,8 @@ Public Class UnderwritingRehabInfo
 End Class
 
 Public Class UnderwritingRentalInfo
+    <Key>
+    Public Property Id As Integer
     Public Property DeedPurchase As Decimal
     Public Property CurrentlyRented As Boolean
     Public Property RepairBidTotal As Decimal
@@ -352,6 +404,8 @@ Public Class UnderwritingRentalInfo
 End Class
 
 Public Class UnderwritingRentalModel
+    <Key>
+    Public Property Id As Integer
     Public Property CostOfMoneyRate As Decimal
     Public Property MinROI As Decimal
     Public Property Insurance As Decimal
@@ -377,6 +431,8 @@ Public Class UnderwritingRentalModel
 End Class
 
 Public Class UnderwritingResale
+    <Key>
+    Public Property Id As Integer
     Public Property Concession As Decimal
     Public Property Attorney As Decimal
     Public Property NDC As Decimal

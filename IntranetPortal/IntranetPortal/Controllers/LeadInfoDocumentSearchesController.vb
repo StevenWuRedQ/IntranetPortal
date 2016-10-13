@@ -109,27 +109,28 @@ Namespace Controllers
 
         <Route("api/LeadInfoDocumentSearches/{bble}/Completed")>
         <ResponseType(GetType(LeadInfoDocumentSearch))>
-        Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
+        Function PostCompleted(ByVal bble As String, ByVal search As LeadInfoDocumentSearch) As IHttpActionResult
 
-            leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStatus.Completed
-            leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
-            leadInfoDocumentSearch.CompletedOn = Date.Now
-            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-            leadInfoDocumentSearch.UpdateDate = Date.Now
+            search.Status = LeadInfoDocumentSearch.SearchStatus.Completed
+            search.CompletedBy = HttpContext.Current.User.Identity.Name
+            search.CompletedOn = Date.Now
+            search.UpdateBy = HttpContext.Current.User.Identity.Name
+            search.UpdateDate = Date.Now
+            search.UnderwriteStatus = 0
 
             Try
-                leadInfoDocumentSearch.Save()
+                search.Save()
             Catch ex As Exception
                 Throw ex
             End Try
 
-            If (Not String.IsNullOrEmpty(leadInfoDocumentSearch.ResutContent)) Then
-                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, leadInfoDocumentSearch)
+            If (Not String.IsNullOrEmpty(search.ResutContent)) Then
+                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, search)
             Else
-                IntranetPortal.Core.SystemLog.LogError("LeadsDocumentSearchContentError", New Exception("The content is null"), leadInfoDocumentSearch.ToJsonString, leadInfoDocumentSearch.CompletedBy, leadInfoDocumentSearch.BBLE)
+                IntranetPortal.Core.SystemLog.LogError("LeadsDocumentSearchContentError", New Exception("The content is null"), search.ToJsonString, search.CompletedBy, search.BBLE)
             End If
 
-            Return Ok(leadInfoDocumentSearch)
+            Return Ok(search)
             'PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
         End Function
 

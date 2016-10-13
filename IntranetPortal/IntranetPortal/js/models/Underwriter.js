@@ -232,8 +232,8 @@
                 var r = d.docSearch.LeadResearch;
 
                 d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
-                d.LienInfo.FirstMortgage = r.mortgageAmount ||0.0 ;
-                d.LienInfo.SecondMortgage = r.secondMortgageAmount ||0.0;
+                d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
+                d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
                 d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
                 d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
                 d.LienInfo.FHA = r.fha || false;
@@ -252,12 +252,12 @@
                     return total;
                 })();
                 d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
-                d.LienCosts.WaterCharges = r.waterCharges ||0.0;
-                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred|| 0.0;
-                d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets|| 0.0;
-                d.LienCosts.DOBCivilPenalty = r.dobWebsites|| 0.0;
-                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments|| 0.0;
-                d.LienCosts.HPDJudgements = r.HPDjudgementAmount|| 0.0;
+                d.LienCosts.WaterCharges = r.waterCharges || 0.0;
+                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
+                d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets || 0.0;
+                d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
+                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
+                d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
                 d.LienCosts.IRSNYSTaxLiens = (function () {
                     var total = 0.0;
 
@@ -361,7 +361,7 @@
         underwriter.load = function (/* optional */ bble, /* optional */ isImport) {
             var data = underwritingFactory.build();
             if (bble) {
-                var _data = underwriter.get({ BBLE: bble.trim() }, function () {
+                var _data = underwriter.get({ BBLE: bble.trim }, function () {
                     _.defaults(_data, data);
                     //debugger;
                     if (isImport) {
@@ -621,6 +621,19 @@
             d.RentalModel.ROITotal = helper.ROITotal;
         }
 
+        underwriter.save = function (d) {
+
+            $http({
+                method: 'POST',
+                url: '/api/underwriter',
+                data: d,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            })
+
+        }
         return underwriter;
-       
+
     }]);
