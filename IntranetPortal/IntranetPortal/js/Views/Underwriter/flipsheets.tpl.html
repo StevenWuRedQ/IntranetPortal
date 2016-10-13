@@ -3,177 +3,173 @@
         <div id="data_input_area" class="col-md-12 col-lg-12">
             <div class="row">
                 <div class="col-md-4 col-lg-4">
-                    <div class="panel panel-default" style="margin-top: 10px">
-                        <div class="panel-body">
-                            <table>
-                                <tr>
-                                    <td class="td-label">
-                                        Property Address:
-                                    </td>
-                                    <td class="td-value" colspan="3">
-                                        {{data.PropertyInfo.PropertyAddress}}
-                                    </td>
+                    <div class="pt-panel">
+                        <table>
+                            <tr>
+                                <td class="td-label">
+                                    Property Address:
+                                </td>
+                                <td class="td-value" colspan="3">
+                                    {{data.PropertyInfo.PropertyAddress}}
+                                </td>
 
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Tax Class:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.PropertyInfo.TaxClass}}
-                                    </td>
-                                    <td class="td-label">
-                                        Property Taxes:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.PropertyInfo.PropertyTaxYear | currency}}
-                                    </td>
-                                </tr>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Tax Class:
+                                </td>
+                                <td class="td-value">
+                                    {{data.PropertyInfo.TaxClass}}
+                                </td>
+                                <td class="td-label">
+                                    Property Taxes:
+                                </td>
+                                <td class="td-value">
+                                    {{data.PropertyInfo.PropertyTaxYear | currency}}
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <td colspan="2" align="center" class="td-label excel-green">
-                                        Purchase
-                                    </td>
-                                    <td colspan="2" align="center" class="td-label excel-green">
-                                        Resale
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Lien Payoff(s)
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Purchase_LienPayoffs| currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Sale Price(s)
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Resale_SalePrice| currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Off HUD Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Purchase_OffHUDCosts| currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Concession
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Resale_Concession| currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Deal Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Purchase_DealCosts| currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Commissions
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Resale_Commissions| currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Closing Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Purchase_ClosingCost| currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Closing Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Resale_ClosingCost| currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Constrution
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Purchase_Construction| currency}}
-                                    </td>
+                            <tr>
+                                <td colspan="2" align="center" class="td-label excel-green">
+                                    Purchase
+                                </td>
+                                <td colspan="2" align="center" class="td-label excel-green">
+                                    Resale
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Lien Payoff(s)
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Purchase_LienPayoffs| currency}}
+                                </td>
+                                <td class="td-label">
+                                    Sale Price(s)
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Resale_SalePrice| currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Off HUD Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Purchase_OffHUDCosts| currency}}
+                                </td>
+                                <td class="td-label">
+                                    Concession
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Resale_Concession| currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Deal Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Purchase_DealCosts| currency}}
+                                </td>
+                                <td class="td-label">
+                                    Commissions
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Resale_Commissions| currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Closing Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Purchase_ClosingCost| currency}}
+                                </td>
+                                <td class="td-label">
+                                    Closing Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Resale_ClosingCost| currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Constrution
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Purchase_Construction| currency}}
+                                </td>
 
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Carrying Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Purchase_CarryingCosts| currency}}
-                                    </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Carrying Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Purchase_CarryingCosts| currency}}
+                                </td>
 
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Total Investment:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Purchase_TotalInvestment| currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Net Profit:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Resale_NetProfit| currency}}
-                                    </td>
-                                </tr>
-                            </table>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Total Investment:
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Purchase_TotalInvestment| currency}}
+                                </td>
+                                <td class="td-label">
+                                    Net Profit:
+                                </td>
+                                <td class="td-value">
+                                    {{data.CashScenario.Resale_NetProfit| currency}}
+                                </td>
+                            </tr>
+                        </table>
 
-                        </div>
                     </div>
 
                 </div>
                 <div class="col-md-2 col-lg-2">
-                    <div class="panel panel-default" style="margin-top: 10px">
-                        <div class="panel-body">
-                            <table>
-                                <tr>
-                                    <td class="td-label">
-                                        Time (Months)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-value">
-                                        {{data.CashScenario.Time}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label excel-green">
-                                        All Cash
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Cash Required
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-value">
-                                        {{data.CashScenario.CashRequired| currency}} <input />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        ROI
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-value">
-                                        {{data.CashScenario.ROI| percentage}} <input />
-                                    </td>
-                                </tr>
+                    <div class="pt-panel">
+                        <table>
+                            <tr>
+                                <td class="td-label">
+                                    Time (Months)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.CashScenario.Time}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label excel-green">
+                                    All Cash
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Cash Required
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.CashScenario.CashRequired| currency}} <input />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    ROI
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.CashScenario.ROI| percentage}} <input />
+                                </td>
+                            </tr>
 
-                            </table>
-                        </div>
+                        </table>
                     </div>
 
 
@@ -181,394 +177,389 @@
 
 
             </div>
-
+            <br />
             <div class="row">
                 <div class="col-md-4 col-lg-4">
-                    <div class="panel panel-default" style="margin-top: 10px">
 
-                        <div class="panel-body">
-                            <table>
-                                <tr>
-                                    <td class="td-label">
-                                        Property Address:
-                                    </td>
-                                    <td class="td-value" colspan="3">
-                                        {{data.PropertyInfo.PropertyAddress}}
-                                    </td>
+                    <div class="pt-penel">
+                        <table>
+                            <tr>
+                                <th class="td-label">
+                                    Property Address:
+                                </th>
+                                <th class="td-value" colspan="3">
+                                    {{data.PropertyInfo.PropertyAddress}}
+                                </th>
 
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Tax Class:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.PropertyInfo.TaxClass}}
-                                    </td>
-                                    <td class="td-label">
-                                        Property Taxes:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.PropertyInfo.PropertyTaxYear | currency}}
-                                    </td>
-                                </tr>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Tax Class:
+                                </td>
+                                <td class="td-value">
+                                    {{data.PropertyInfo.TaxClass}}
+                                </td>
+                                <td class="td-label">
+                                    Property Taxes:
+                                </td>
+                                <td class="td-value">
+                                    {{data.PropertyInfo.PropertyTaxYear | currency}}
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <td colspan="2" align="center" class="td-label excel-blue">
-                                        Purchase
-                                    </td>
-                                    <td colspan="2" align="center" class="td-label excel-blue">
-                                        Resale
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Purchase Price
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_PurchasePrice | currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Sale Price(s)
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Resale_SalePrice | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Additonal Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_AdditonalCosts | currency}}
-
-
-                                    </td>
-                                    <td class="td-label">
-                                        Concession
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Resale_Concession | currency}}
+                            <tr>
+                                <td colspan="2" align="center" class="td-label excel-blue">
+                                    Purchase
+                                </td>
+                                <td colspan="2" align="center" class="td-label excel-blue">
+                                    Resale
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Purchase Price
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_PurchasePrice | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Sale Price(s)
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Resale_SalePrice | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Additonal Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_AdditonalCosts | currency}}
 
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Deal Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_DealCosts | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Concession
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Resale_Concession | currency}}
 
 
-                                    </td>
-                                    <td class="td-label">
-                                        Commissions
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Resale_Commissions | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Deal Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_DealCosts | currency}}
 
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Closing Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_ClosingCost | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Commissions
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Resale_Commissions | currency}}
 
 
-                                    </td>
-                                    <td class="td-label">
-                                        Closing Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Resale_ClosingCost | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Closing Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_ClosingCost | currency}}
 
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Constrution
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_Construction | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Closing Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Resale_ClosingCost | currency}}
 
 
-                                    </td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Constrution
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_Construction | currency}}
 
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Carrying Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_CarryingCosts | currency}}
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Carrying Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_CarryingCosts | currency}}
 
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Loan Closing Costs
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Loan Closing Costs
 
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_LoanClosingCost | currency}}
-
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_LoanClosingCost | currency}}
 
 
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Loan Interest
 
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_LoanInterest | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Loan Interest
 
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Total Investment:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Purchase_TotalInvestment | currency}}
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_LoanInterest | currency}}
 
 
-                                    </td>
-                                    <td class="td-label">
-                                        Net Profit:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Resale_NetProfit | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Total Investment:
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Purchase_TotalInvestment | currency}}
 
 
-                                    </td>
-                                </tr>
-                            </table>
+                                </td>
+                                <td class="td-label">
+                                    Net Profit:
+                                </td>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Resale_NetProfit | currency}}
 
-                        </div>
+
+                                </td>
+                            </tr>
+                        </table>
+
                     </div>
                 </div>
 
                 <div class="col-md-2 col-lg-2">
-                    <div class="panel panel-default" style="margin-top: 10px">
 
-                        <div class="panel-body">
-                            <table>
-                                <tr>
-                                    <td class="td-label">
-                                        Time (Months)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.Time}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label excel-blue">
-                                        LOAN
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Loan Amount
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.LoanAmount | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        LTV
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.LTV | percentage}}
-                                    </td>
-                                </tr>
-
-
-                                <tr>
-                                    <td class="td-label">Cash Required</td>
-                                </tr>
-                                <tr>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.CashRequirement | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        ROI
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-value">
-                                        {{data.LoanScenario.ROI | percentage}}
-                                    </td>
-                                </tr>
+                    <div class="pt-panel">
+                        <table>
+                            <tr>
+                                <td class="td-label">
+                                    Time (Months)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.LoanScenario.Time}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label excel-blue">
+                                    LOAN
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Loan Amount
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.LoanScenario.LoanAmount | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    LTV
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.LoanScenario.LTV | percentage}}
+                                </td>
+                            </tr>
 
 
-                            </table>
-                        </div>
+                            <tr>
+                                <td class="td-label">Cash Required</td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.LoanScenario.CashRequirement | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    ROI
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.LoanScenario.ROI | percentage}}
+                                </td>
+                            </tr>
+
+
+                        </table>
                     </div>
                 </div>
             </div>
+            <br />
             <div class="row">
                 <div class="col-md-4 col-lg-4">
-                    <div class="panel panel-default" style="margin-top: 10px">
 
-                        <div class="panel-body">
-                            <table>
-                                <tr>
-                                    <td class="td-label">
-                                        Property Address:
-                                    </td>
-                                    <td class="td-value" colspan="3">
-                                        {{data.PropertyInfo.PropertyAddress}}
-                                    </td>
+                    <div class="pt-penel">
+                        <table>
+                            <tr>
+                                <td class="td-label">
+                                    Property Address:
+                                </td>
+                                <td class="td-value" colspan="3">
+                                    {{data.PropertyInfo.PropertyAddress}}
+                                </td>
 
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Tax Class:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.PropertyInfo.TaxClass}}
-                                    </td>
-                                    <td class="td-label">
-                                        Property Taxes:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.PropertyInfo.PropertyTaxYear | currency}}
-                                    </td>
-                                </tr>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Tax Class:
+                                </td>
+                                <td class="td-value">
+                                    {{data.PropertyInfo.TaxClass}}
+                                </td>
+                                <td class="td-label">
+                                    Property Taxes:
+                                </td>
+                                <td class="td-value">
+                                    {{data.PropertyInfo.PropertyTaxYear | currency}}
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <td colspan="2" align="center" class="td-label excel-yellow">
-                                        Purchase
-                                    </td>
-                                    <td colspan="2" align="center" class="td-label excel-yellow">
-                                        Flip Price
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Total Cost
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Purchase_TotalCost | currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Sale Price
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.FlipPrice_SalePrice | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4">
-                                        &nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" align="center" class="td-label excel-yellow">
-                                        Purchase
-                                    </td>
-                                    <td colspan="2" align="center" class="td-label excel-yellow">
-                                        Resale
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td colspan="2" align="center" class="td-label excel-yellow">
+                                    Purchase
+                                </td>
+                                <td colspan="2" align="center" class="td-label excel-yellow">
+                                    Flip Price
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Total Cost
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Purchase_TotalCost | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Sale Price
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.FlipPrice_SalePrice | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center" class="td-label excel-yellow">
+                                    Purchase
+                                </td>
+                                <td colspan="2" align="center" class="td-label excel-yellow">
+                                    Resale
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <td class="td-label">
-                                        Purchase Price
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Purchase_PurchasePrice | currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Sale Price
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Resale_SalePrice | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Closing Costs
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Purchase_ClosingCost | currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Concession
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Resale_Concession | currency}}
-                                    </td>
+                            <tr>
+                                <td class="td-label">
+                                    Purchase Price
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Purchase_PurchasePrice | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Sale Price
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Resale_SalePrice | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Closing Costs
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Purchase_ClosingCost | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Concession
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Resale_Concession | currency}}
+                                </td>
 
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Constrution
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Purchase_Construction | currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Commissions
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Resale_Commissions | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Carrying Costs
-                                    </td>
-                                    <td class="td-value">
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Constrution
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Purchase_Construction | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Commissions
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Resale_Commissions | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Carrying Costs
+                                </td>
+                                <td class="td-value">
 
-                                        {{data.FlipScenario.Purchase_CarryingCosts | currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Closing Costs
+                                    {{data.FlipScenario.Purchase_CarryingCosts | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Closing Costs
 
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Resale_ClosingCost | currency}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-label">
-                                        Total Investment:
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Resale_ClosingCost | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Total Investment:
 
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Purchase_TotalInvestment | currency}}
-                                    </td>
-                                    <td class="td-label">
-                                        Net Profit:
-                                    </td>
-                                    <td class="td-value">
-                                        {{data.FlipScenario.Resale_NetProfit | currency}}
-                                    </td>
-                                </tr>
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Purchase_TotalInvestment | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Net Profit:
+                                </td>
+                                <td class="td-value">
+                                    {{data.FlipScenario.Resale_NetProfit | currency}}
+                                </td>
+                            </tr>
 
-                            </table>
+                        </table>
 
-                        </div>
                     </div>
                 </div>
 

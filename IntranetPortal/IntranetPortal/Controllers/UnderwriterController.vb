@@ -11,23 +11,27 @@ Namespace Controllers
     Public Class UnderwriterController
         Inherits ApiController
 
-        ' GET: api/Underwriter
-        Public Function GetValues() As IEnumerable(Of String)
-            Return New String() {""}
-        End Function
-
-
-        <Route("api/underwriter/{BBLE}")>
-        Public Function getUnderwriter(BBLE As String) As IHttpActionResult
+        <Route("api/underwriter/{id}")>
+        Public Function getUnderwriter(id As String) As IHttpActionResult
             Return Ok()
-
+            Dim uw = UnderWritingManager.getInstance(CInt(id))
+            Return Ok(uw)
         End Function
 
-        <Route("api/underwriter/{BBLE}")>
+        <Route("api/underwriter")>
         <HttpPost>
-        Public Function postUnderwriter(<FromBody> underwrite As Underwriting) As IHttpActionResult
-            Return Ok()
+        Public Function postUnderwriter(<FromBody> uw As Underwriting) As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
 
+            Try
+                UnderWritingManager.save(uw, HttpContext.Current.User.Identity.Name)
+            Catch ex As Exception
+
+            End Try
+
+            Return Ok(uw)
         End Function
 
 
@@ -38,9 +42,7 @@ Namespace Controllers
 
 
             If Not String.IsNullOrEmpty(bble) Then
-
                 Dim ms As New MemoryStream
-
                 Using fs = File.Open(HttpContext.Current.Server.MapPath("~/App_Data/underwriter.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                     fs.CopyTo(ms)
                 End Using

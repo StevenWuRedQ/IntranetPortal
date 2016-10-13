@@ -1741,8 +1741,8 @@ angular.module('PortalApp')
                 var r = d.docSearch.LeadResearch;
 
                 d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
-                d.LienInfo.FirstMortgage = r.mortgageAmount ||0.0 ;
-                d.LienInfo.SecondMortgage = r.secondMortgageAmount ||0.0;
+                d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
+                d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
                 d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
                 d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
                 d.LienInfo.FHA = r.fha || false;
@@ -1761,12 +1761,12 @@ angular.module('PortalApp')
                     return total;
                 })();
                 d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
-                d.LienCosts.WaterCharges = r.waterCharges ||0.0;
-                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred|| 0.0;
-                d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets|| 0.0;
-                d.LienCosts.DOBCivilPenalty = r.dobWebsites|| 0.0;
-                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments|| 0.0;
-                d.LienCosts.HPDJudgements = r.HPDjudgementAmount|| 0.0;
+                d.LienCosts.WaterCharges = r.waterCharges || 0.0;
+                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
+                d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets || 0.0;
+                d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
+                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
+                d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
                 d.LienCosts.IRSNYSTaxLiens = (function () {
                     var total = 0.0;
 
@@ -1870,7 +1870,7 @@ angular.module('PortalApp')
         underwriter.load = function (/* optional */ bble, /* optional */ isImport) {
             var data = underwritingFactory.build();
             if (bble) {
-                var _data = underwriter.get({ BBLE: bble.trim() }, function () {
+                var _data = underwriter.get({ BBLE: bble.trim }, function () {
                     _.defaults(_data, data);
                     //debugger;
                     if (isImport) {
@@ -2130,8 +2130,21 @@ angular.module('PortalApp')
             d.RentalModel.ROITotal = helper.ROITotal;
         }
 
+        underwriter.save = function (d) {
+
+            $http({
+                method: 'POST',
+                url: '/api/underwriter',
+                data: d,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            })
+
+        }
         return underwriter;
-       
+
     }]);
 angular.module('PortalApp')
     .factory('UnderwritingRequest', ['$http', 'ptBaseResource', function ($http, ptBaseResource) {
@@ -4934,7 +4947,7 @@ angular.module('PortalApp')
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
 
-            var msg = 'Please provide Note or press no to cancle';
+            var msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
@@ -8994,31 +9007,28 @@ angular.module("PortalApp").config(function ($stateProvider) {
     var underwriter = {
         name: 'underwriter',
         url: '/underwriter',
+        template: '<ui-view></ui-view>',
         controller: 'UnderwriterController'
     }
 
     var dataInput = {
         name: 'underwriter.datainput',
         url: '/datainput',
-        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/datainput.tpl.html',
     }
     var flipsheets = {
         name: 'underwriter.flipsheets',
         url: '/flipsheets',
-        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
     }
     var rentalmodels = {
         name: 'underwriter.rentalmodels',
         url: '/rentalmodels',
-        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
     }
     var tables = {
         name: 'underwriter.tables',
         url: '/tables',
-        //controller: 'UnderwriterController',
         templateUrl: '/js/Views/Underwriter/tables.tpl.html'
     }
 
@@ -9067,6 +9077,7 @@ angular.module("PortalApp").controller("UnderwriterController",
                 $scope.data.LienCosts.PersonalJudgements = 14892.09;
                 $scope.update();
             }
+
             $scope.calculate = function () {
                 $scope.$applyAsync(function () {
                     ptUnderwriter.applyRule($scope.data);
@@ -9074,7 +9085,7 @@ angular.module("PortalApp").controller("UnderwriterController",
             }
 
             $scope.save = function () {
-
+                ptUnderwriter.save($scope.data);
             }
 
             $scope.onSelectionChange = function () {
