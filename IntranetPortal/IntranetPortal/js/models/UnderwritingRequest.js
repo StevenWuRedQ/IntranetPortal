@@ -3,7 +3,7 @@
 
         var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
         resource.saveByBBLE = function (data) {
-            //debugger;
+            // debugger;
             var promise = $http({
                 method: 'POST',
                 url: '/api/UnderwritingRequest',
@@ -13,7 +13,7 @@
         }
 
         resource.createSearch = function (BBLE) {
-            debugger;
+            // debugger;
             var promise = $http({
                 method: "POST",
                 url: '/api/LeadInfoDocumentSearches',

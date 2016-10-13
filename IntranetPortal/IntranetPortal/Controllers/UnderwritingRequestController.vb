@@ -75,15 +75,18 @@ Namespace Controllers
                                 Where c.BBLE = BBLE
 
                         Dim status
+                        Dim completedDate = Nothing
                         If r.Count > 0 Then
                             status = 1
+                            completedDate = r.FirstOrDefault.CompletedOn
                         Else
                             status = 0
                         End If
 
                         Return Ok(New With {
                                         .Status = status,
-                                        .Address = addr
+                                        .Address = addr,
+                                        .CompletedDate = completedDate
                         })
                     End Using
                 End If

@@ -12,6 +12,7 @@
                 UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(function success(res) {
                     $scope.data.Address = res.data.Address;
                     $scope.data.Status = res.data.Status || $scope.data.Status;
+                    $scope.data.CompletedDate = res.data.CompletedDate || undefined;
 
                 }, function error() {
                     console.log('fail to fetch addiontal infomation.')
@@ -23,6 +24,7 @@
         }
     }
 
+    //check input and textarea to see if there is a error attribute
     $scope.checkValidate = function (async) {
         if (!async) {
             return _.some($('input, textarea, select'), function (v) {
@@ -46,6 +48,7 @@
 
     }
 
+    //broadcast ptSelfCheck event make ptRequried directive check it self
     $scope.selfCheck = function () {
         $scope.$broadcast('ptSelfCheck');
 
@@ -57,6 +60,7 @@
         });
 
     }
+
 
     $scope.save = function (isSlient) {
         $scope.$broadcast('ptSelfCheck');
@@ -96,6 +100,20 @@
             ptCom.alert('Fail to create search')
 
         })
+    }
+
+    $scope.completedOver60days = function () {
+        if ($scope.data.CompletedDate == undefined){
+            return false;
+        }
+        else {
+            timenow = new Date().getTime();
+            timeCompleted = new Date($scope.data.CompletedDate);
+            _60days = 1000 * 60 * 60 * 24 * 60;
+            return timenow - timeCompleted > _60days ? true : false;
+
+        }
+        
     }
 
     $scope.$watch(function () { return $location.search() }, function () {

@@ -2151,7 +2151,7 @@ angular.module('PortalApp')
 
         var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
         resource.saveByBBLE = function (data) {
-            //debugger;
+            // debugger;
             var promise = $http({
                 method: 'POST',
                 url: '/api/UnderwritingRequest',
@@ -2161,7 +2161,7 @@ angular.module('PortalApp')
         }
 
         resource.createSearch = function (BBLE) {
-            debugger;
+            // debugger;
             var promise = $http({
                 method: "POST",
                 url: '/api/LeadInfoDocumentSearches',
@@ -4791,14 +4791,12 @@ angular.module('PortalApp')
             }
 
             if (!$scope.DivError.passValidate()) {
-
                 return false;
             }
 
             return true;
             ////////////under are old validate///////////////////
             var errormsg = '';
-
             var validateFields = [
                 "Has_Deed_Purchase_Deed",
                 "Has_c_1st_Mortgage_c_1st_Mortgage",
@@ -4853,7 +4851,6 @@ angular.module('PortalApp')
                     var f = validateFields[i];
                     if (fields[f] === undefined) {
                         errormsg += "The fields marked * must been filled please check them before submit!<br>";
-
                         break;
                     }
                 }
@@ -4865,7 +4862,6 @@ angular.module('PortalApp')
                     }
                 }
             }
-
 
             return errormsg;
 
@@ -4906,20 +4902,26 @@ angular.module('PortalApp')
 
         }
 
-        $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
 
-        for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
-            $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
-                if (nv) {
-                    var rest_exclusive_filed = _.without($scope.EXCLUSIVE_FIELD, this.exp);
-                    for (var j = 0; j < rest_exclusive_filed.length; j++) {
-                        if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
+        // only one of fha, fannie, freddie_mac can be yes at the same time
+        function fha_fannie_freddie(){
+            var EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
+            for (var i = 0; i < EXCLUSIVE_FIELD.length; i++) {
+                var field = EXCLUSIVE_FIELD[i];
+                $scope.$watch(field, function (nv, ov) {
+                    if (nv == true) {
+                        debugger;
+                        var rest_exclusive_filed = _.without(EXCLUSIVE_FIELD, field);
+                        for (var j = 0; j < rest_exclusive_filed.length; j++) {
+                            if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
+                        }
                     }
-                }
 
-            })
-        }
+                })
+            }
+        };
 
+        fha_fannie_freddie();
 
         $scope.markCompleted = function (status,msg) {
             var xhrfunc = function (note) {
@@ -4947,7 +4949,7 @@ angular.module('PortalApp')
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
 
-            var msg = 'Please provide Note or press no to cancel';
+            msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
@@ -9114,6 +9116,7 @@ angular.module("PortalApp")
                 UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(function success(res) {
                     $scope.data.Address = res.data.Address;
                     $scope.data.Status = res.data.Status || $scope.data.Status;
+                    $scope.data.CompletedDate = res.data.CompletedDate || undefined;
 
                 }, function error() {
                     console.log('fail to fetch addiontal infomation.')
@@ -9125,6 +9128,7 @@ angular.module("PortalApp")
         }
     }
 
+    //check input and textarea to see if there is a error attribute
     $scope.checkValidate = function (async) {
         if (!async) {
             return _.some($('input, textarea, select'), function (v) {
@@ -9148,6 +9152,7 @@ angular.module("PortalApp")
 
     }
 
+    //broadcast ptSelfCheck event make ptRequried directive check it self
     $scope.selfCheck = function () {
         $scope.$broadcast('ptSelfCheck');
 
@@ -9159,6 +9164,7 @@ angular.module("PortalApp")
         });
 
     }
+
 
     $scope.save = function (isSlient) {
         $scope.$broadcast('ptSelfCheck');
@@ -9198,6 +9204,20 @@ angular.module("PortalApp")
             ptCom.alert('Fail to create search')
 
         })
+    }
+
+    $scope.completedOver60days = function () {
+        if ($scope.data.CompletedDate == undefined){
+            return false;
+        }
+        else {
+            timenow = new Date().getTime();
+            timeCompleted = new Date($scope.data.CompletedDate);
+            _60days = 1000 * 60 * 60 * 24 * 60;
+            return timenow - timeCompleted > _60days ? true : false;
+
+        }
+        
     }
 
     $scope.$watch(function () { return $location.search() }, function () {

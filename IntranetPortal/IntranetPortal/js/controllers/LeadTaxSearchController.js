@@ -114,14 +114,12 @@ angular.module('PortalApp')
             }
 
             if (!$scope.DivError.passValidate()) {
-
                 return false;
             }
 
             return true;
             ////////////under are old validate///////////////////
             var errormsg = '';
-
             var validateFields = [
                 "Has_Deed_Purchase_Deed",
                 "Has_c_1st_Mortgage_c_1st_Mortgage",
@@ -176,7 +174,6 @@ angular.module('PortalApp')
                     var f = validateFields[i];
                     if (fields[f] === undefined) {
                         errormsg += "The fields marked * must been filled please check them before submit!<br>";
-
                         break;
                     }
                 }
@@ -188,7 +185,6 @@ angular.module('PortalApp')
                     }
                 }
             }
-
 
             return errormsg;
 
@@ -229,20 +225,26 @@ angular.module('PortalApp')
 
         }
 
-        $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
 
-        for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
-            $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
-                if (nv) {
-                    var rest_exclusive_filed = _.without($scope.EXCLUSIVE_FIELD, this.exp);
-                    for (var j = 0; j < rest_exclusive_filed.length; j++) {
-                        if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
+        // only one of fha, fannie, freddie_mac can be yes at the same time
+        function fha_fannie_freddie(){
+            var EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
+            for (var i = 0; i < EXCLUSIVE_FIELD.length; i++) {
+                var field = EXCLUSIVE_FIELD[i];
+                $scope.$watch(field, function (nv, ov) {
+                    if (nv == true) {
+                        debugger;
+                        var rest_exclusive_filed = _.without(EXCLUSIVE_FIELD, field);
+                        for (var j = 0; j < rest_exclusive_filed.length; j++) {
+                            if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
+                        }
                     }
-                }
 
-            })
-        }
+                })
+            }
+        };
 
+        fha_fannie_freddie();
 
         $scope.markCompleted = function (status,msg) {
             var xhrfunc = function (note) {
@@ -270,7 +272,7 @@ angular.module('PortalApp')
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
 
-            var msg = 'Please provide Note or press no to cancel';
+            msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
