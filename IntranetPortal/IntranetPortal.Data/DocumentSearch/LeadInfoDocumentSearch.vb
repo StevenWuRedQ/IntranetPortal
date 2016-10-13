@@ -9,6 +9,21 @@ Public Class LeadInfoDocumentSearch
     Public Property CaseName As String
 
     ''' <summary>
+    ''' The property to indicate if the search is expired
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property Expired As Boolean
+        Get
+            If Status = SearchStatus.Completed AndAlso CompletedOn.HasValue Then
+                Dim ts = DateTime.Now - CompletedOn.Value
+                Return ts.TotalDays > 60
+            End If
+
+            Return False
+        End Get
+    End Property
+
+    ''' <summary>
     ''' Notify roles when updating or completing
     ''' </summary>
     Public Shared ReadOnly NOTIFY_ROLE_WHEN_UPDATING As String = "DocSearch-Updating"
@@ -106,7 +121,7 @@ Public Class LeadInfoDocumentSearch
         If (String.IsNullOrEmpty(updateBy)) Then
             Throw New Exception("Can not update file with nobody! ")
         End If
-        UpdateDate = Date.Now
+        UpdateDate = DateTime.Now
         Me.UpdateBy = updateBy
 
     End Sub
@@ -178,6 +193,14 @@ Public Class LeadInfoDocumentSearch
         Version = 1
     End Sub
 
+    Public Sub Archive(username As String)
+        If Expired Then
+            Using ctx As New PortalEntities
+                ctx.ArchiveDocumentSearch(BBLE, username)
+            End Using
+        End If
+    End Sub
+
     ''' <summary>
     ''' Check if need notify user when need search
     ''' 1. Before completed no need send notify
@@ -194,11 +217,16 @@ Public Class LeadInfoDocumentSearch
     Public Function isNeedNotifyWhenSaving() As Boolean
         Return Status = SearchStatus.Completed
     End Function
-    Public Sub Save()
+
+    Public Sub Save(saveby As String)
         Using ctx As New PortalEntities
-            If ctx.LeadInfoDocumentSearches.Find(BBLE) IsNot Nothing Then
+            If ctx.LeadInfoDocumentSearches.Any(Function(l) l.BBLE = BBLE) Then
+                Me.UpdateDate = DateTime.Now
+                Me.UpdateBy = saveby
                 ctx.Entry(Me).State = Entity.EntityState.Modified
             Else
+                Me.CreateBy = saveby
+                Me.CreateDate = DateTime.Now
                 ctx.LeadInfoDocumentSearches.Add(Me)
             End If
             ctx.SaveChanges()

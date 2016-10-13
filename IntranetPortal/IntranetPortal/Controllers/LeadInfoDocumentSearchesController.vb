@@ -117,15 +117,14 @@ Namespace Controllers
             If Not bble.Trim = leadInfoDocumentSearch.BBLE.Trim Then
                 Return BadRequest()
             End If
+            Dim userName = HttpContext.Current.User.Identity.Name
 
             leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStatus.Completed
-            leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
-            leadInfoDocumentSearch.CompletedOn = Date.Now
-            leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-            leadInfoDocumentSearch.UpdateDate = Date.Now
+            leadInfoDocumentSearch.CompletedBy = userName
+            leadInfoDocumentSearch.CompletedOn = DateTime.Now
 
             Try
-                leadInfoDocumentSearch.Save()
+                leadInfoDocumentSearch.Save(userName)
             Catch ex As Exception
                 Throw ex
             End Try
@@ -182,27 +181,26 @@ Namespace Controllers
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
+
+            Dim user = HttpContext.Current.User.Identity.Name
+            Dim archived = False
+
             Dim findSearch = db.LeadInfoDocumentSearches.Find(leadInfoDocumentSearch.BBLE)
 
-            If (findSearch Is Nothing) Then
-                db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
-                leadInfoDocumentSearch.SubmitSearch(HttpContext.Current.User.Identity.Name)
-                'leadInfoDocumentSearch.CreateDate = Date.Now
-
-                Try
-                    db.SaveChanges()
-                Catch ex As DbUpdateException
-                    Throw
-                End Try
-
-                LeadsActivityLog.AddActivityLog(Date.Now(), "Create a search request to doc Search Agent ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
-
-                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendNewSearchNotify, leadInfoDocumentSearch)
-                'SendNewSearchNotify(leadInfoDocumentSearch)
+            If findSearch IsNot Nothing AndAlso findSearch.Expired Then
+                findSearch.Archive(user)
+                archived = True
             End If
 
-            'leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-            'leadInfoDocumentSearch.UpdateDate = Date.Now
+            If (findSearch Is Nothing) OrElse archived Then
+                ' db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
+                leadInfoDocumentSearch.SubmitSearch(user)
+                leadInfoDocumentSearch.Save()
+
+                LeadsActivityLog.AddActivityLog(DateTime.Now(), "Create a search request to doc Search Agent ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
+
+                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendNewSearchNotify, leadInfoDocumentSearch)
+            End If
 
             Return CreatedAtRoute("DefaultApi", New With {.id = leadInfoDocumentSearch.BBLE}, leadInfoDocumentSearch)
         End Function
@@ -298,9 +296,8 @@ Namespace Controllers
             Catch ex As Exception
                 Return BadRequest()
             End Try
-
-
         End Function
+
         <HttpGet>
         <Route("api/LeadInfoDocumentSearches/UnderWritingStatus/{status}")>
         Public Function GetSearchByUnderWritingStatus(status As Integer) As IHttpActionResult

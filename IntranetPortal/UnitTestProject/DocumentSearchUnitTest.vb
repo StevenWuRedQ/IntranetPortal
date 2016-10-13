@@ -4,6 +4,17 @@ Imports IntranetPortal.Data
 
 <TestClass()> Public Class DocumentSearchUnitTest
 
+    <TestMethod()> Public Sub Archive_returnDoc()
+        Dim bble = "3003820020"
+        Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+        search.Save()
+        search.Archive("Test")
+        Dim search2 = LeadInfoDocumentSearch.GetInstance(bble)
+        Assert.IsNull(search2)
+
+        search.Save()
+    End Sub
+
     <TestMethod()> Public Sub LoadJudgementSearch_returnDoc()
         Dim bble = "3003820020 "
         Dim search = LeadInfoDocumentSearch.GetInstance(bble)
@@ -13,6 +24,16 @@ Imports IntranetPortal.Data
         Assert.IsNotNull(judgementDoc)
         Assert.IsNotNull(judgementDoc.Data)
         Assert.IsNotNull(judgementDoc.Name)
+    End Sub
+
+    <TestMethod()> Public Sub CompleteController_Savedata()
+        Dim bble = "3003820020"
+        Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+        search.ResutContent = Nothing
+
+        Dim controller As New IntranetPortal.Controllers.LeadInfoDocumentSearchesController
+        Dim result = controller.PostCompleted(bble, search)
+        Assert.IsTrue(True)
     End Sub
 
     <TestMethod()> Public Sub CompleteController_SendEmail()
