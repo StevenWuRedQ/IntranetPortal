@@ -110,16 +110,22 @@ Namespace Controllers
         <Route("api/LeadInfoDocumentSearches/{bble}/Completed")>
         <ResponseType(GetType(LeadInfoDocumentSearch))>
         Function PostCompleted(ByVal bble As String, ByVal search As LeadInfoDocumentSearch) As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
+
+            If Not bble.Trim = search.BBLE.Trim Then
+                Return BadRequest()
+            End If
+            Dim userName = HttpContext.Current.User.Identity.Name
 
             search.Status = LeadInfoDocumentSearch.SearchStatus.Completed
-            search.CompletedBy = HttpContext.Current.User.Identity.Name
-            search.CompletedOn = Date.Now
-            search.UpdateBy = HttpContext.Current.User.Identity.Name
-            search.UpdateDate = Date.Now
+            search.CompletedBy = userName
+            search.CompletedOn = DateTime.Now
             search.UnderwriteStatus = 0
 
             Try
-                search.Save()
+                search.Save(userName)
             Catch ex As Exception
                 Throw ex
             End Try
@@ -176,27 +182,26 @@ Namespace Controllers
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
+
+            Dim user = HttpContext.Current.User.Identity.Name
+            Dim archived = False
+
             Dim findSearch = db.LeadInfoDocumentSearches.Find(leadInfoDocumentSearch.BBLE)
 
-            If (findSearch Is Nothing) Then
-                db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
-                leadInfoDocumentSearch.SubmitSearch(HttpContext.Current.User.Identity.Name)
-                'leadInfoDocumentSearch.CreateDate = Date.Now
-
-                Try
-                    db.SaveChanges()
-                Catch ex As DbUpdateException
-                    Throw
-                End Try
-
-                LeadsActivityLog.AddActivityLog(Date.Now(), "Create a search request to doc Search Agent ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
-
-                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendNewSearchNotify, leadInfoDocumentSearch)
-                'SendNewSearchNotify(leadInfoDocumentSearch)
+            If findSearch IsNot Nothing AndAlso findSearch.Expired Then
+                findSearch.Archive(user)
+                archived = True
             End If
 
-            'leadInfoDocumentSearch.UpdateBy = HttpContext.Current.User.Identity.Name
-            'leadInfoDocumentSearch.UpdateDate = Date.Now
+            If (findSearch Is Nothing) OrElse archived Then
+                ' db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
+                leadInfoDocumentSearch.SubmitSearch(user)
+                leadInfoDocumentSearch.Save(user)
+
+                LeadsActivityLog.AddActivityLog(DateTime.Now(), "Create a search request to doc Search Agent ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
+
+                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendNewSearchNotify, leadInfoDocumentSearch)
+            End If
 
             Return CreatedAtRoute("DefaultApi", New With {.id = leadInfoDocumentSearch.BBLE}, leadInfoDocumentSearch)
         End Function
@@ -292,9 +297,8 @@ Namespace Controllers
             Catch ex As Exception
                 Return BadRequest()
             End Try
-
-
         End Function
+
         <HttpGet>
         <Route("api/LeadInfoDocumentSearches/UnderWritingStatus/{status}")>
         Public Function GetSearchByUnderWritingStatus(status As Integer) As IHttpActionResult

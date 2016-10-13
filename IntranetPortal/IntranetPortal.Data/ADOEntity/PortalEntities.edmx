@@ -1251,6 +1251,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" />
         </EntityType>
+        <Function Name="ArchiveDocumentSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="bble" Type="nchar" Mode="In" />
+          <Parameter Name="archiveBy" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="AuctionProperties" EntityType="Self.AuctionProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLogs" Schema="dbo" store:Type="Tables" />
@@ -1503,6 +1507,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="SSLeads" EntityType="IntranetPortalModel.SSLead" />
           <EntitySet Name="SSLeadsStatusLogs" EntityType="IntranetPortalModel.SSLeadsStatusLog" />
           <EntitySet Name="UnderwritingRequests" EntityType="IntranetPortalModel.UnderwritingRequest" />
+          <FunctionImport Name="ArchiveDocumentSearch">
+            <Parameter Name="bble" Mode="In" Type="String" />
+            <Parameter Name="archiveBy" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -4037,6 +4045,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ArchiveDocumentSearch" FunctionName="IntranetPortalModel.Store.ArchiveDocumentSearch" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

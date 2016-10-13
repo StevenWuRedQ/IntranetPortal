@@ -10,6 +10,8 @@
 Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
+Imports System.Data.Entity.Core.Objects
+Imports System.Linq
 
 Partial Public Class PortalEntities
     Inherits DbContext
@@ -78,5 +80,13 @@ Partial Public Class PortalEntities
     Public Overridable Property SSLeads() As DbSet(Of SSLead)
     Public Overridable Property SSLeadsStatusLogs() As DbSet(Of SSLeadsStatusLog)
     Public Overridable Property UnderwritingRequests() As DbSet(Of UnderwritingRequest)
+
+    Public Overridable Function ArchiveDocumentSearch(bble As String, archiveBy As String) As Integer
+        Dim bbleParameter As ObjectParameter = If(bble IsNot Nothing, New ObjectParameter("bble", bble), New ObjectParameter("bble", GetType(String)))
+
+        Dim archiveByParameter As ObjectParameter = If(archiveBy IsNot Nothing, New ObjectParameter("archiveBy", archiveBy), New ObjectParameter("archiveBy", GetType(String)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("ArchiveDocumentSearch", bbleParameter, archiveByParameter)
+    End Function
 
 End Class

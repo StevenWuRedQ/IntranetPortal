@@ -1,4 +1,9 @@
-﻿Public Class PortalPage
+﻿
+''' <summary>
+''' The base page class for Portal,
+''' provide the Username, Employee object
+''' </summary>
+Public Class PortalPage
     Inherits Page
 
     Private _userName As String

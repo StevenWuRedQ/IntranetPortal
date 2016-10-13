@@ -1,6 +1,18 @@
 ﻿wx_deubg = true;
 wx_show_bug = false;
 PortalUtility = {
+    customizeDateText: function (cellInfo) {
+        if(cellInfo.target == "headerFilter")
+            return cellInfo.valueText;
+
+        if (!cellInfo.value)
+            return ""                                
+        var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+        if (dt)
+            return moment(dt).format('MM/DD/YYYY hh:mm a');
+
+        return ""
+    },
     FormatLocalDateTime: function (utcDate) {
         if (!utcDate)
             return

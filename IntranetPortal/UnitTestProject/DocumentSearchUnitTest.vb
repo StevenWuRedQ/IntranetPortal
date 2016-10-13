@@ -4,6 +4,22 @@ Imports IntranetPortal.Data
 
 <TestClass()> Public Class DocumentSearchUnitTest
 
+    <TestMethod()> Public Sub Archive_returnDoc()
+        Dim bble = "3003820020"
+        Dim username = "Test"
+        Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+        search.Save(username)
+        Assert.IsFalse(search.Expired)
+        search.Status = LeadInfoDocumentSearch.SearchStatus.Completed
+        search.CompletedOn = New DateTime(2016, 1, 1)
+        Assert.IsTrue(search.Expired)
+        search.Archive(username)
+        Dim search2 = LeadInfoDocumentSearch.GetInstance(bble)
+        Assert.IsNull(search2)
+
+        search.Save(username)
+    End Sub
+
     <TestMethod()> Public Sub LoadJudgementSearch_returnDoc()
         Dim bble = "3003820020 "
         Dim search = LeadInfoDocumentSearch.GetInstance(bble)
@@ -13,6 +29,16 @@ Imports IntranetPortal.Data
         Assert.IsNotNull(judgementDoc)
         Assert.IsNotNull(judgementDoc.Data)
         Assert.IsNotNull(judgementDoc.Name)
+    End Sub
+
+    <TestMethod()> Public Sub CompleteController_Savedata()
+        Dim bble = "3003820020"
+        Dim search = LeadInfoDocumentSearch.GetInstance(bble)
+        search.ResutContent = Nothing
+
+        Dim controller As New IntranetPortal.Controllers.LeadInfoDocumentSearchesController
+        Dim result = controller.PostCompleted(bble, search)
+        Assert.IsTrue(True)
     End Sub
 
     <TestMethod()> Public Sub CompleteController_SendEmail()
@@ -36,6 +62,14 @@ Imports IntranetPortal.Data
 
         objController.Invoke("SendNewSearchNotify", search)
         Assert.IsTrue(True)
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestSubmitSearch_CreateDate()
+        Dim search = New LeadInfoDocumentSearch
+        search.SubmitSearch("Test")
+        Assert.AreEqual(search.CreateBy, "Test")
+        ' Assert.IsTrue(search.CreateDate > Date.Now)
     End Sub
 
     <TestMethod()> Public Sub TestNeedNotifyWhenSaving()
