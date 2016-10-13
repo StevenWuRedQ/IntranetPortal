@@ -38,6 +38,14 @@ Imports IntranetPortal.Data
         Assert.IsTrue(True)
     End Sub
 
+    <TestMethod()>
+    Public Sub TestSubmitSearch_CreateDate()
+        Dim search = New LeadInfoDocumentSearch
+        search.SubmitSearch("Test")
+        Assert.AreEqual(search.CreateBy, "Test")
+        ' Assert.IsTrue(search.CreateDate > Date.Now)
+    End Sub
+
     <TestMethod()> Public Sub TestNeedNotifyWhenSaving()
         Dim search = New LeadInfoDocumentSearch()
         search.Status = LeadInfoDocumentSearch.SearchStatus.NewSearch

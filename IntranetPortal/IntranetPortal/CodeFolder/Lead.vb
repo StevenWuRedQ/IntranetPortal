@@ -77,6 +77,21 @@ Partial Public Class Lead
     End Function
 
     <JsonIgnoreAttribute>
+    Public ReadOnly Property LastOwnerUpdate2 As DateTime
+        Get
+            Using ctx As New Entities
+                Dim dt = ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = BBLE AndAlso l.EmployeeName = EmployeeName) _
+                              .Select(Function(l) l.ActivityDate).Max
+                If dt.HasValue Then
+                    Return dt
+                End If
+
+                Return AssignDate
+            End Using
+        End Get
+    End Property
+
+    <JsonIgnoreAttribute>
     Public ReadOnly Property LastOwnerUpdate As DateTime
         Get
             Dim log = LeadsActivityLogs.Where(Function(l) l.EmployeeName.ToLower = EmployeeName.ToLower).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
@@ -364,7 +379,12 @@ Partial Public Class Lead
     End Property
 
     Private Function IsDueOn(dueDate As DateTime, days As Integer) As Boolean
-        Dim ts = dueDate - LastOwnerUpdate
+        Dim dt = AssignDate.Value
+        If LastUpdate.HasValue Then
+            dt = LastUpdate.Value
+        End If
+
+        Dim ts = dueDate - dt
 
         If ts.TotalDays > days Then
             Return True

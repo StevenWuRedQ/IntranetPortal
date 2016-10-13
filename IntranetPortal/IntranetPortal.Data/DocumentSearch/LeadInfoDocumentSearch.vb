@@ -77,6 +77,10 @@ Public Class LeadInfoDocumentSearch
     End Function
 
     Public Function LoadJudgesearchDoc() As Object
+        If LeadResearch Is Nothing Then
+            Return Nothing
+        End If
+
         Dim json = Newtonsoft.Json.Linq.JObject.Parse(LeadResearch)
         Dim judgementDoc = json("judgementSearchDoc")
 
@@ -168,7 +172,7 @@ Public Class LeadInfoDocumentSearch
     ''' <param name="submitBy"></param>
     Public Sub SubmitSearch(submitBy As String)
         Status = SearchStatus.NewSearch
-        CreateDate = Date.Now
+        CreateDate = DateTime.Now
         CreateBy = submitBy
         ' As deploy 8/18/2016 open new version switch
         Version = 1

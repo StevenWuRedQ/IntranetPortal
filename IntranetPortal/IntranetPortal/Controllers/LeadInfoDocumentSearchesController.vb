@@ -110,6 +110,13 @@ Namespace Controllers
         <Route("api/LeadInfoDocumentSearches/{bble}/Completed")>
         <ResponseType(GetType(LeadInfoDocumentSearch))>
         Function PostCompleted(ByVal bble As String, ByVal leadInfoDocumentSearch As LeadInfoDocumentSearch) As IHttpActionResult
+            If Not ModelState.IsValid Then
+                Return BadRequest(ModelState)
+            End If
+
+            If Not bble.Trim = leadInfoDocumentSearch.BBLE.Trim Then
+                Return BadRequest()
+            End If
 
             leadInfoDocumentSearch.Status = LeadInfoDocumentSearch.SearchStatus.Completed
             leadInfoDocumentSearch.CompletedBy = HttpContext.Current.User.Identity.Name
