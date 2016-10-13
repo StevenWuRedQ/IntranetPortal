@@ -129,13 +129,13 @@ Namespace Controllers
                 Throw ex
             End Try
 
-            If (Not String.IsNullOrEmpty(leadInfoDocumentSearch.ResutContent)) Then
-                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, leadInfoDocumentSearch)
+            If (Not String.IsNullOrEmpty(search.ResutContent)) Then
+                Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, search)
             Else
-                IntranetPortal.Core.SystemLog.LogError("LeadsDocumentSearchContentError", New Exception("The content is null"), leadInfoDocumentSearch.ToJsonString, leadInfoDocumentSearch.CompletedBy, leadInfoDocumentSearch.BBLE)
+                IntranetPortal.Core.SystemLog.LogError("LeadsDocumentSearchContentError", New Exception("The content is null"), search.ToJsonString, search.CompletedBy, search.BBLE)
             End If
 
-            Return Ok(leadInfoDocumentSearch)
+            Return Ok(search)
             'PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
         End Function
 

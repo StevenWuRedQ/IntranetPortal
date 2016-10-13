@@ -98,8 +98,7 @@
             color: white;
         }
     </style>
-    <div id="underwrite_clac" class="flexbox" ng-controller="UnderwriterController">
-        <%--    <pt-item-list item-name="Underwriting" item-url="/api/LeadInfoDocumentSearches" item-field="CaseName" on-selection-change="onSelectionChange()"></pt-item-list>--%>
+    <div id="underwrite_clac" class="flexbox" ng-controller="UnderwriterController as uw">
         <div class="item-detail">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -114,9 +113,7 @@
                 <!-- /.container-fluid -->
             </nav>
             <div class="container" style="min-width: 800px; width: 95%">
-                <ui-view>
-                    <ui-view></ui-view>
-                </ui-view>
+                <ui-view></ui-view>
             </div>
 
         </div>
