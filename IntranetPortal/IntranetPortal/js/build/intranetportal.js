@@ -1185,11 +1185,18 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
         // 8/26/2016
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
             self.ownerName = self.ownerName || data1.Owner;
-            self.waterCharges = self.waterCharges || data1.WaterAmt;
-            self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
-            self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
-            self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
             self.getOwnerSSN(BBLE);
+
+            // disable the water tax from leads 
+            // @see jira link
+            // https://myidealprop.atlassian.net/browse/PORTAL-484
+
+            //self.waterCharges = self.waterCharges || data1.WaterAmt;
+            //self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
+            //self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
+            //self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
+
+            
         });
         return data1;
     }
@@ -4934,7 +4941,7 @@ angular.module('PortalApp')
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
 
-            var msg = 'Please provide Note or press no to cancle';
+            var msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
