@@ -84,7 +84,7 @@
     }
 
 
-    $scope.requestDocSearch = function () {
+    $scope.requestDocSearch = function (isResubmit) {
         $scope.$broadcast('ptSelfCheck');
         // debugger;
         if ($scope.checkValidate()) {
@@ -95,7 +95,13 @@
         UnderwritingRequest.createSearch($scope.BBLE).then(function () {
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
+            debugger;
+            if(isResubmit) {
+                $scope.data.CompletedDate = undefined;
+            }
+            debugger;
             $scope.save(true);
+
         }, function () {
             ptCom.alert('Fail to create search')
 
