@@ -111,7 +111,13 @@
 
     $scope.remainDays = function () {
         if ($scope.data.CompletedDate == undefined) {
-            return false;
+            return -1;
+        } else {
+            var timenow = new Date().getTime();
+            var timeCompleted = new Date($scope.data.CompletedDate);
+            var diff = timenow - timeCompleted;
+            var dayinmsec = 1000* 60 * 60 * 24
+            return diff / dayinmsec;
         }
 
     }
@@ -121,8 +127,7 @@
             return false;
         }
         else {
-            timenow = new Date().getTime();
-            timeCompleted = new Date($scope.data.CompletedDate);
+
             _60days = 1000 * 60 * 60 * 24 * 60;
             return timenow - timeCompleted > _60days ? true : false;
 

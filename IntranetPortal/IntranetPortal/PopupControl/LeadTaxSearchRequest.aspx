@@ -139,7 +139,7 @@
                                             <h5>The Underwriting {{DocSearch.UnderwriteStatus==1?'Completed':'Rejected'}} by {{DocSearch.UnderwriteCompletedBy}} on {{DocSearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!</h5>
                                             <h5>
                                                 <b>Comments:</b>
-                                                {{docsearch.UnderwriteCompletedNotes || "None"}}
+                                                {{DocSearch.UnderwriteCompletedNotes || "None"}}
 
                                             </h5>
                                         </div>
