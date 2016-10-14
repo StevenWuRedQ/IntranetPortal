@@ -1076,7 +1076,6 @@
           <Property Name="WasHOIOffered" Type="bit" />
           <Property Name="TotalOffered" Type="decimal" Precision="18" Scale="2" />
           <Property Name="UpfrontOffered" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Status" Type="int" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
@@ -1506,11 +1505,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <EntitySet Name="AuditLogs" EntityType="IntranetPortalModel.AuditLog" />
           <EntitySet Name="SSLeads" EntityType="IntranetPortalModel.SSLead" />
           <EntitySet Name="SSLeadsStatusLogs" EntityType="IntranetPortalModel.SSLeadsStatusLog" />
-          <EntitySet Name="UnderwritingRequests" EntityType="IntranetPortalModel.UnderwritingRequest" />
           <FunctionImport Name="ArchiveDocumentSearch">
             <Parameter Name="bble" Mode="In" Type="String" />
             <Parameter Name="archiveBy" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="UnderwritingRequests" EntityType="IntranetPortalModel.UnderwritingRequest" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2731,6 +2730,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="BriefDescription" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="Occupancy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OccupancyDescription" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -2746,8 +2746,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4021,11 +4019,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ArchiveDocumentSearch" FunctionName="IntranetPortalModel.Store.ArchiveDocumentSearch" />
           <EntitySetMapping Name="UnderwritingRequests">
             <EntityTypeMapping TypeName="IntranetPortalModel.UnderwritingRequest">
               <MappingFragment StoreEntitySet="UnderwritingRequests">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -4041,11 +4038,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
                 <ScalarProperty Name="OccupancyDescription" ColumnName="OccupancyDescription" />
                 <ScalarProperty Name="Occupancy" ColumnName="Occupancy" />
                 <ScalarProperty Name="BriefDescription" ColumnName="BriefDescription" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="ArchiveDocumentSearch" FunctionName="IntranetPortalModel.Store.ArchiveDocumentSearch" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
