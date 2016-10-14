@@ -198,7 +198,7 @@ angular.module('PortalApp')
 
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            $scope.DocSearch.ResutContent = $("#new-ds-summary").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {

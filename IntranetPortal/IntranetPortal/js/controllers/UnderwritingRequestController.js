@@ -108,6 +108,14 @@
         })
     }
 
+
+    $scope.remainDays = function () {
+        if ($scope.data.CompletedDate == undefined) {
+            return false;
+        }
+
+    }
+
     $scope.completedOver60days = function () {
         if ($scope.data.CompletedDate == undefined){
             return false;
@@ -121,6 +129,7 @@
         }
         
     }
+
 
     $scope.$watch(function () { return $location.search() }, function () {
         // debugger;

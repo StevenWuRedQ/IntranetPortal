@@ -4882,7 +4882,7 @@ angular.module('PortalApp')
 
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            $scope.DocSearch.ResutContent = $("#new-ds-summary").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
@@ -9215,6 +9215,14 @@ angular.module("PortalApp")
         })
     }
 
+
+    $scope.remainDays = function () {
+        if ($scope.data.CompletedDate == undefined) {
+            return false;
+        }
+
+    }
+
     $scope.completedOver60days = function () {
         if ($scope.data.CompletedDate == undefined){
             return false;
@@ -9228,6 +9236,7 @@ angular.module("PortalApp")
         }
         
     }
+
 
     $scope.$watch(function () { return $location.search() }, function () {
         // debugger;

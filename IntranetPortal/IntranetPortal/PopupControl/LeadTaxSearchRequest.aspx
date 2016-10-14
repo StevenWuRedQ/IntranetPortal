@@ -143,7 +143,7 @@
 
                                             </h5>
                                         </div>
-                                        <new-ds-summary docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" showinfo="ShowInfo" underwritemode="underwritemode"></new-ds-summary>
+                                        <new-ds-summary id="new-ds-summary" docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" showinfo="ShowInfo" underwritemode="underwritemode"></new-ds-summary>
                                     </div>
                                     <% If Request.QueryString("si") = 1 Then %>
                                     <div id="agent_story" class="tab-pane fade" style="padding: 20px; max-height: 850px; overflow-y: scroll">
