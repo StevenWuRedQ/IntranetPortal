@@ -134,6 +134,15 @@
 
                                      <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />
                                         --%>
+
+                                        <div class="alert alert-info" ng-show="underwritemode && DocSearch.UnderwriteStatus > 0">
+                                            <h5>The Underwriting {{DocSearch.UnderwriteStatus==1?'Completed':'Rejected'}} by {{DocSearch.UnderwriteCompletedBy}} on {{DocSearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!</h5>
+                                            <h5>
+                                                <b>Comments:</b>
+                                                {{docsearch.UnderwriteCompletedNotes || "None"}}
+
+                                            </h5>
+                                        </div>
                                         <new-ds-summary docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" showinfo="ShowInfo" underwritemode="underwritemode"></new-ds-summary>
                                     </div>
                                     <% If Request.QueryString("si") = 1 Then %>
