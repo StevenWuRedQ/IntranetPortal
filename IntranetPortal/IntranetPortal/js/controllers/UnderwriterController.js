@@ -3,7 +3,9 @@
     var underwriter = {
         name: 'underwriter',
         url: '/underwriter',
-        template: '<ui-view></ui-view>',
+        template:
+
+            '<ui-view></ui-view>',
         controller: 'UnderwriterController'
     }
 

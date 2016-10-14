@@ -127,7 +127,7 @@
 
 
     $scope.remainDays = function () {
-        if ($scope.data.CompletedDate == undefined) {
+        if (!$scope.data || !$scope.data.CompletedDate) {
             return "more than 60";
         } else {
             var timenow = new Date().getTime();
@@ -140,7 +140,7 @@
     }
 
     $scope.completedOver60days = function () {
-        if ($scope.data.CompletedDate == undefined) {
+        if (!$scope.data || $scope.data.CompletedDate == undefined) {
             return false;
         }
         else {

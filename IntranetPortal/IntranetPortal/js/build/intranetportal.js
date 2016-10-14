@@ -9012,7 +9012,9 @@ angular.module("PortalApp").config(function ($stateProvider) {
     var underwriter = {
         name: 'underwriter',
         url: '/underwriter',
-        template: '<ui-view></ui-view>',
+        template:
+
+            '<ui-view></ui-view>',
         controller: 'UnderwriterController'
     }
 
@@ -9234,7 +9236,7 @@ angular.module("PortalApp")
 
 
     $scope.remainDays = function () {
-        if ($scope.data.CompletedDate == undefined) {
+        if (!$scope.data || !$scope.data.CompletedDate) {
             return "more than 60";
         } else {
             var timenow = new Date().getTime();
@@ -9247,7 +9249,7 @@ angular.module("PortalApp")
     }
 
     $scope.completedOver60days = function () {
-        if ($scope.data.CompletedDate == undefined) {
+        if (!$scope.data || $scope.data.CompletedDate == undefined) {
             return false;
         }
         else {

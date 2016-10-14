@@ -1,0 +1,12 @@
+﻿<div id="search_result" class="tab-pane fade in active" style="padding: 20px; max-height: 850px; overflow-y: scroll">
+    <div class="alert alert-info" ng-show="underwritemode && DocSearch.UnderwriteStatus > 0">
+        <h5>The Underwriting {{DocSearch.UnderwriteStatus==1?'Completed':'Rejected'}} by {{DocSearch.UnderwriteCompletedBy}} on {{DocSearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!</h5>
+        <h5>
+            <b>Comments:</b>
+            {{DocSearch.UnderwriteCompletedNotes || "None"}}
+
+        </h5>
+    </div>
+
+    <new-ds-summary id="new-ds-summary" docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" showinfo="ShowInfo" underwritemode="underwritemode"></new-ds-summary>
+</div>

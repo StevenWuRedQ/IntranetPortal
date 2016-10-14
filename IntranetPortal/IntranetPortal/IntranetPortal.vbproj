@@ -1913,6 +1913,13 @@
       <DependentUpon>testPopup.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\UnderwritingSummary.aspx.designer.vb">
+      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\UnderwritingSummary.aspx.vb">
+      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\VendorsPopup.ascx.designer.vb">
       <DependentUpon>VendorsPopup.ascx</DependentUpon>
     </Compile>
@@ -2428,18 +2435,18 @@
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UnderWriter\DocSearchListNew.aspx.designer.vb">
+      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\DocSearchListNew.aspx.vb">
+      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UnderWriter\DocSearchList.aspx.designer.vb">
       <DependentUpon>DocSearchList.aspx</DependentUpon>
     </Compile>
     <Compile Include="UnderWriter\DocSearchList.aspx.vb">
       <DependentUpon>DocSearchList.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwriterClac.aspx.designer.vb">
-      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwriterClac.aspx.vb">
-      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
@@ -7309,9 +7316,11 @@
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
     <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
+    <Content Include="js\Views\Underwriter\searchsummary.tpl.html" />
     <Content Include="js\Views\Underwriter\tables.tpl.html" />
     <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
     <Content Include="js\Views\Underwriter\datainput.tpl.html" />
+    <Content Include="js\Views\Underwriter\underwriting.tpl.html" />
     <Content Include="js\Views\Underwriter\underwriting_request.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
@@ -7492,6 +7501,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="NewOffer\ShortSaleNewOffer.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
+    <Content Include="PopupControl\UnderwritingSummary.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
@@ -7865,8 +7875,8 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
+    <Content Include="UnderWriter\DocSearchListNew.aspx" />
     <Content Include="UnderWriter\DocSearchList.aspx" />
-    <Content Include="UnderWriter\UnderwriterClac.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
