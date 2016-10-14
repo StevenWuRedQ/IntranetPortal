@@ -76,24 +76,6 @@ Namespace Controllers
                                            mailData)
             End If
 
-            'leadInfoDocumentSearch.LeadResearch
-            'If (leadInfoDocumentSearch.ResutContent IsNot Nothing) Then
-            '    If Not leadInfoDocumentSearch.IsSave Then
-            '        Dim l = LeadsInfo.GetInstance(leadInfoDocumentSearch.BBLE)
-            '        Dim maildata As New Dictionary(Of String, String)
-            '        maildata.Add("Address", l.PropertyAddress)
-            '        maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
-            '        maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
-
-            '        If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
-
-            '            Core.EmailService.SendMail(Employee.GetEmpsEmails(leadInfoDocumentSearch.CreateBy),
-            '                                       Employee.GetEmpsEmails(leadInfoDocumentSearch.UpdateBy, Employee.CEO.Name),
-            '                                       "DocSearchCompleted", maildata)
-            '        End If
-            '    End If
-            'End If
-
             Try
                 db.SaveChanges()
             Catch ex As DbUpdateConcurrencyException
@@ -117,18 +99,9 @@ Namespace Controllers
             If Not bble.Trim = search.BBLE.Trim Then
                 Return BadRequest()
             End If
+
             Dim userName = HttpContext.Current.User.Identity.Name
-
-            search.Status = LeadInfoDocumentSearch.SearchStatus.Completed
-            search.CompletedBy = userName
-            search.CompletedOn = DateTime.Now
-            search.UnderwriteStatus = 0
-
-            Try
-                search.Save(userName)
-            Catch ex As Exception
-                Throw ex
-            End Try
+            search.Complete(userName)
 
             If (Not String.IsNullOrEmpty(search.ResutContent)) Then
                 Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, search)
@@ -137,7 +110,6 @@ Namespace Controllers
             End If
 
             Return Ok(search)
-            'PostLeadInfoDocumentSearch(leadInfoDocumentSearch)
         End Function
 
         Private Sub SendCompleteNotify(leadInfoDocumentSearch As LeadInfoDocumentSearch)
@@ -183,23 +155,14 @@ Namespace Controllers
                 Return BadRequest(ModelState)
             End If
 
-            Dim user = HttpContext.Current.User.Identity.Name
-            Dim archived = False
-
-            Dim findSearch = db.LeadInfoDocumentSearches.Find(leadInfoDocumentSearch.BBLE)
-
-            If findSearch IsNot Nothing AndAlso findSearch.Expired Then
-                findSearch.Archive(user)
-                archived = True
+            If String.IsNullOrEmpty(leadInfoDocumentSearch.BBLE) Then
+                Return BadRequest("can't find bble")
             End If
 
-            If (findSearch Is Nothing) OrElse archived Then
-                ' db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
-                leadInfoDocumentSearch.SubmitSearch(user)
-                leadInfoDocumentSearch.Save(user)
+            Dim user = HttpContext.Current.User.Identity.Name
 
+            If leadInfoDocumentSearch.Create(user) Then
                 LeadsActivityLog.AddActivityLog(DateTime.Now(), "Create a search request to doc Search Agent ", leadInfoDocumentSearch.BBLE, LogCategory.SalesAgent.ToString)
-
                 Threading.ThreadPool.QueueUserWorkItem(AddressOf SendNewSearchNotify, leadInfoDocumentSearch)
             End If
 

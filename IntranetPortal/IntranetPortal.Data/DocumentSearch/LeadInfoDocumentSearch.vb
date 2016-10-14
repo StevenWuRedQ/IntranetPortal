@@ -34,7 +34,7 @@ Public Class LeadInfoDocumentSearch
 
     Public Shared Function Exist(bble As String) As Boolean
         Using ctx As New PortalEntities
-            Return ctx.LeadInfoDocumentSearches.Find(bble) IsNot Nothing
+            Return ctx.LeadInfoDocumentSearches.Any(Function(l) l.BBLE = bble)
         End Using
     End Function
 
@@ -123,9 +123,48 @@ Public Class LeadInfoDocumentSearch
         End If
         UpdateDate = DateTime.Now
         Me.UpdateBy = updateBy
-
     End Sub
 
+    ''' <summary>
+    ''' Complete the leads search
+    ''' </summary>
+    ''' <param name="completeBy"></param>
+    Public Sub Complete(completeBy As String)
+        Me.Status = SearchStatus.Completed
+        Me.CompletedBy = completeBy
+        CompletedOn = DateTime.Now
+        UnderwriteStatus = 0
+
+        Try
+            Save(completeBy)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Create the new document search
+    ''' </summary>
+    ''' <param name="createBy"></param>
+    ''' <returns></returns>
+    Public Function Create(createBy As String) As Boolean
+        Dim archived = False
+        Dim search = GetInstance(BBLE)
+
+        If search IsNot Nothing AndAlso search.Expired Then
+            search.Archive(createBy)
+            archived = True
+        End If
+
+        If (search Is Nothing) OrElse archived Then
+            ' db.LeadInfoDocumentSearches.Add(leadInfoDocumentSearch)
+            SubmitSearch(createBy)
+            Save(createBy)
+            Return True
+        End If
+
+        Return False
+    End Function
 
     ''' <summary>
     ''' Build email message
@@ -186,6 +225,8 @@ Public Class LeadInfoDocumentSearch
     ''' </summary>
     ''' <param name="submitBy"></param>
     Public Sub SubmitSearch(submitBy As String)
+        CompletedBy = Nothing
+        CompletedOn = Nothing
         Status = SearchStatus.NewSearch
         CreateDate = DateTime.Now
         CreateBy = submitBy

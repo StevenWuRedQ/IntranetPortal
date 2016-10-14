@@ -9,6 +9,7 @@ Imports IntranetPortal.Data
         Dim username = "Test"
         Dim search = LeadInfoDocumentSearch.GetInstance(bble)
         search.Save(username)
+        search.Status = LeadInfoDocumentSearch.SearchStatus.NewSearch
         Assert.IsFalse(search.Expired)
         search.Status = LeadInfoDocumentSearch.SearchStatus.Completed
         search.CompletedOn = New DateTime(2016, 1, 1)
@@ -17,7 +18,11 @@ Imports IntranetPortal.Data
         Dim search2 = LeadInfoDocumentSearch.GetInstance(bble)
         Assert.IsNull(search2)
 
-        search.Save(username)
+        Dim result = search.Create(username)
+        Assert.IsTrue(result)
+
+        result = search.Create(username)
+        Assert.IsFalse(result)
     End Sub
 
     <TestMethod()> Public Sub LoadJudgementSearch_returnDoc()
@@ -39,6 +44,12 @@ Imports IntranetPortal.Data
         Dim controller As New IntranetPortal.Controllers.LeadInfoDocumentSearchesController
         Dim result = controller.PostCompleted(bble, search)
         Assert.IsTrue(True)
+    End Sub
+
+    <TestMethod()> Public Sub CreateSearch_returnTrue()
+        Dim bble = "3003820020"
+
+
     End Sub
 
     <TestMethod()> Public Sub CompleteController_SendEmail()
