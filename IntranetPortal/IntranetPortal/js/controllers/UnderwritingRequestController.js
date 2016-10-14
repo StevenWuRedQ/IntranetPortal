@@ -7,21 +7,37 @@
             $scope.Review = $state.current.data.Review || '';
         }
         if ($scope.BBLE) {
-            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim(), }, function () {
-                $scope.data.BBLE = $scope.BBLE;
-                UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(function success(res) {
-                    $scope.data.Address = res.data.Address;
-                    $scope.data.Status = res.data.Status || $scope.data.Status;
-                    $scope.data.CompletedDate = res.data.CompletedDate || undefined;
+            $scope.data = UnderwritingRequest.get(
+                { BBLE: $scope.BBLE.trim() },
+                function () {
+                    $scope.data.BBLE = $scope.BBLE;
+                    UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(
+                        function success(res) {
+                            $scope.data.Address = res.data.Address;
+                            $scope.data.Status = res.data.Status || $scope.data.Status;
+                            $scope.data.CompletedDate = res.data.CompletedDate || undefined;
 
-                }, function error() {
-                    console.log('fail to fetch addiontal infomation.')
-                });
+                        }, function error() {
+                            console.log('fail to fetch addiontal infomation.')
+                        }
+                    );
 
-            }, function () {
-                $scope.data.BBLE = $scope.BBLE;
-            })
+                },
+                function () {
+                    $scope.data.BBLE = $scope.BBLE;
+                }
+            )
         }
+    }
+
+
+    $scope.cleanForm = function () {
+        var oldId = $scope.data.Id;
+        $scope.data = {};
+        $scope.data.Id = oldId;
+        if ($scope.BBLE) $scope.data.BBLE = $scope.BBLE;
+        $scope.formCleaned = true;
+    
     }
 
     //check input and textarea to see if there is a error attribute
@@ -96,8 +112,9 @@
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
             debugger;
-            if(isResubmit) {
+            if (isResubmit) {
                 $scope.data.CompletedDate = undefined;
+                $scope.formCleaned = false;
             }
             debugger;
             $scope.save(true);
@@ -111,28 +128,25 @@
 
     $scope.remainDays = function () {
         if ($scope.data.CompletedDate == undefined) {
-            return -1;
+            return "more than 60";
         } else {
             var timenow = new Date().getTime();
             var timeCompleted = new Date($scope.data.CompletedDate);
             var diff = timenow - timeCompleted;
-            var dayinmsec = 1000* 60 * 60 * 24
-            return diff / dayinmsec;
+            var dayinmsec = 1000 * 60 * 60 * 24
+            return 60 - Math.ceil(diff / dayinmsec);
         }
 
     }
 
     $scope.completedOver60days = function () {
-        if ($scope.data.CompletedDate == undefined){
+        if ($scope.data.CompletedDate == undefined) {
             return false;
         }
         else {
+            return $scope.remainDays() < 0 ? true : false;
+        } 
 
-            _60days = 1000 * 60 * 60 * 24 * 60;
-            return timenow - timeCompleted > _60days ? true : false;
-
-        }
-        
     }
 
 

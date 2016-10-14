@@ -1,5 +1,6 @@
 ﻿<div id="uwrview" class="container" style="max-width: 800px;">
     <div class="row">
+        <div ng-show="completedOver60days()" style="background-color: yellow; width: 100%; text-align:center; color: red">The Search is out of date.</div>
         <div class="col-md-12">
             <div style="text-align:center; margin-top: 10px">
                 <h3 style="">{{data.Address}}</h3>
@@ -100,20 +101,17 @@
         <div ng-show="!Review" class="col-md-12">
             <div class="row">
                 <div class='pull-right clearfix' style="margin: 20px">
-                    <button type="button" class="btn btn-danger" ng-show="!completedOver60days()" ng-disabled="data.Status==1" ng-click="requestDocSearch()">Request Underwriting</button>
-                    <button type="button" class="btn btn-info" ng-show="completedOver60days()" ng-click="requestDocSearch(true)">Resubmit Request</button>
+                    <button type="button" class="btn btn-danger" ng-show="!formCleaned && !completedOver60days()" ng-disabled="data.Status==1" ng-click="requestDocSearch()">Request Underwriting</button>
+                    <button type="button" class="btn btn-danger" ng-show="!formCleaned && completedOver60days()" ng-click="cleanForm()"><i class="fa fa-question-circle" aria-hidden="true" tooltip="Exsiting questionnaire will be cleaned."></i>&nbsp;Request an updated search</button>
+                    <button type="button" class="btn btn-info" ng-show="formCleaned" ng-click="requestDocSearch(true)">Submit new request</button>
                     <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
                 </div>
                 <div class="clearfix"></div>
                 <div id="summited_info" style="text-align:center">
                     <div ng-show="data.Status==1&&!completedOver60days()" class="alert alert-warning" role="alert">
-                        <h5><b>Your Underwriting and Search Request was submitted. It will expire in {{}} days</b></h5>
+                        <h5><b>Your Underwriting and Search Request was submitted. It will expire in {{remainDays()}} days</b></h5>
                         <h5>You can still modify any information in the Underwriting Questionnaire.</h5>
                         <h5>Please press Save after adding or modifying any information. Thank you.</h5>
-                    </div>
-                    <div ng-show="completedOver60days()" class="alert alert-warning" role="alert">
-                        <h5><b>Your Underwriting and Search Request have been completed more than 60 days.</b></h5>
-                        <h5>To request search update, please create a new request by click <b>Resubmit Request</b> Button.</h5>
                     </div>
                 </div>
             </div>
