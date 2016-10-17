@@ -64,6 +64,10 @@ Partial Class AuditLog
     End Function
 
     Private Function FormatSimpleTypeValue(prop As PropertyInfo, value As String) As String
+        If prop Is Nothing Then
+            Return value
+        End If
+
         Dim data = CTypeDynamic(value, prop.PropertyType)
         Select Case prop.PropertyType
             Case GetType(System.Decimal), GetType(System.Decimal?)
@@ -111,17 +115,22 @@ Partial Class AuditLog
         If Not _objectProperties.ContainsKey(key) Then
 
             Dim tp = Type.GetType("IntranetPortal.Data." & objName)
-            Dim prop As PropertyInfo = tp.GetProperty(propName)
 
-            Dim tpAttrs = tp.GetCustomAttribute(GetType(MetadataTypeAttribute), True)
-            If tpAttrs IsNot Nothing Then
-                Dim metaType = CType(tpAttrs, MetadataTypeAttribute).MetadataClassType
-                If metaType.GetProperty(propName) IsNot Nothing Then
-                    prop = metaType.GetProperty(propName)
+            If tp Is Nothing Then
+                _objectProperties.Add(key, Nothing)
+            Else
+                Dim prop As PropertyInfo = tp.GetProperty(propName)
+
+                Dim tpAttrs = tp.GetCustomAttribute(GetType(MetadataTypeAttribute), True)
+                If tpAttrs IsNot Nothing Then
+                    Dim metaType = CType(tpAttrs, MetadataTypeAttribute).MetadataClassType
+                    If metaType.GetProperty(propName) IsNot Nothing Then
+                        prop = metaType.GetProperty(propName)
+                    End If
                 End If
-            End If
 
-            _objectProperties.Add(key, prop)
+                _objectProperties.Add(key, prop)
+            End If
         End If
 
         Return _objectProperties(key)
