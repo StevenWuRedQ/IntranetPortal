@@ -1148,6 +1148,20 @@
       <DependentUpon>DeadleadsReport.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\NewOfferInProcessDue.ascx.designer.vb">
+      <DependentUpon>NewOfferInProcessDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferInProcessDue.ascx.vb">
+      <DependentUpon>NewOfferInProcessDue.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferCompletedDue.ascx.designer.vb">
+      <DependentUpon>NewOfferCompletedDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferCompletedDue.ascx.vb">
+      <DependentUpon>NewOfferCompletedDue.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\NewOfferNotification.ascx.designer.vb">
       <DependentUpon>NewOfferNotification.ascx</DependentUpon>
     </Compile>
@@ -6901,6 +6915,8 @@
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\AuctionDailyReport.ascx" />
     <Content Include="EmailTemplate\DeadleadsReport.ascx" />
+    <Content Include="EmailTemplate\NewOfferInProcessDue.ascx" />
+    <Content Include="EmailTemplate\NewOfferCompletedDue.ascx" />
     <Content Include="EmailTemplate\NewOfferNotification.ascx" />
     <Content Include="EmailTemplate\PreSignNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
