@@ -358,13 +358,15 @@
          * if isImport present also load data from Doc Search and Leads Info
          * 
          **/
-        underwriter.load = function (/* optional */ bble, /* optional */ isImport) {
+        underwriter.load = function (/* optional */ bble) {
+            //debugger;
             var data = underwritingFactory.build();
             if (bble) {
-                var _data = underwriter.get({ BBLE: bble.trim }, function () {
+                var _data = underwriter.get({ BBLE: bble.trim() }, function (d) {
+                    _data.BBLE = bble;
                     _.defaults(_data, data);
                     //debugger;
-                    if (isImport) {
+                    if (!_data.Id) {
                         data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
                             data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {
                                 mapData(data);
@@ -387,8 +389,8 @@
             //debugger;
             var float = parseFloat;
             var int = parseInt;
-            // PropertyInfo
-            d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? "Residential" : "Not Residential" })();
+            // PropertyInfo 1:residential 2: nonresidential
+            d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? 1 : 2})();
 
             // Liens
             d.Liens.TaxLien = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienSettlement * float(d.RehabInfo.DealTimeMonths));
@@ -444,7 +446,7 @@
             d.Resale.TransferTax = (function () {
                 var pr = parseFloat(d.Resale.ProbableResale);
                 var rate;
-                if (d.PropertyInfo.PropertyType == 'Residential') {
+                if (d.PropertyInfo.PropertyType == 1) {
                     if (pr <= 500000) {
                         rate = 0.01;
                     } else if (pr > 500000) {
@@ -467,7 +469,7 @@
             d.LoanCosts.LoanClosingCost = (function () {
                 var la = d.LoanTerms.LoanAmount;
                 var rate;
-                if (d.PropertyInfo.PropertyType == 'Residential') {
+                if (d.PropertyInfo.PropertyType == 1) {
                     if (la <= 500000) {
                         rate = 0.02;
 
@@ -621,12 +623,11 @@
             d.RentalModel.ROITotal = helper.ROITotal;
         }
 
-        underwriter.save = function (d) {
-
-            $http({
+        underwriter.save = function (data) {
+            return $http({
                 method: 'POST',
                 url: '/api/underwriter',
-                data: d,
+                data: data,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -634,6 +635,8 @@
             })
 
         }
+
+
         return underwriter;
 
     }]);

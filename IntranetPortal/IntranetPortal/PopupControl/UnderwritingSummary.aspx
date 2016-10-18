@@ -4,63 +4,38 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        div.flexbox {
-            display: flex;
-            flex-direction: row;
-            align-items: stretch;
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            height: 100%;
-            width: 100%;
-        }
-
-
-        div.items-list {
-            flex: 0 0 300px;
-            border-right: 2px double #ccc;
-        }
-
-        div.item-detail {
-            flex: auto;
-            height: 100%;
-            overflow-y: scroll;
-        }
-
-        body {
-            font-size: 14px !important;
-        }
-
-        div table {
+        div#underwriting-summary table {
             width: 98%;
             table-layout: fixed;
         }
 
-        th {
-            border: 1px solid #ddd;
-            padding-left: 2px;
-        }
-
-        td {
-            border: 1px solid #ddd;
-            padding-left: 2px;
-        }
-
-            td.td-label {
-                padding-right: 10px;
-                width: 160px;
-                height: 100%;
-                font-weight: bold;
+            div#underwriting-summary table th {
+                font-size: 12px;
+                border: 1px solid #ddd;
+                padding-left: 2px;
             }
 
-            td input {
-                border: none;
-                padding: 0;
-                text-align: right;
-                width: 100%;
+            div#underwriting-summary table td {
+                font-size: 12px;
+                border: 1px solid #ddd;
+                padding-left: 2px;
             }
 
-        th input {
+        div#underwriting-summary td.td-label {
+            padding-right: 10px;
+            width: 160px;
+            height: 100%;
+            font-weight: bold;
+        }
+
+        div#underwriting-summary td input {
+            border: none;
+            padding: 0;
+            text-align: right;
+            width: 100%;
+        }
+
+        div#underwriting-summary th input {
             border: 1px solid #ddd;
             padding: 0;
             text-align: right;
@@ -99,39 +74,100 @@
         }
     </style>
     <script>
-        function showUiView() {
-            $('a[data-toggle="tab"]').on('shown.bs.tab',
-                function (e) {
-                    // debugger;
-                    if (location.hash == '#/agent_story') {
-                        location.hash = '#/?BBLE=<%= Request.QueryString("BBLE")%>';
-                    }
-                })
+        function getUWRID() {
+            //debugger;
+            var scope = angular.element('#uwrview').scope();
+            return scope.data.Id;
+
+        }
+        function showHistory() {
+            var id = getUWRID()
+            if (id) {
+                auditLog.toggle('UnderwritingRequest', id);
             }
+        }
+    </script>
+    <script>
+        angular.module("PortalApp").config(function ($stateProvider) {
+            var searchSummary = {
+                name: 'searchSummary',
+                url: '/searchSummary',
+                controller: 'LeadTaxSearchCtrl',
+                templateUrl: '/js/Views/Underwriter/searchsummary.tpl.html',
+            }
+
+            var underwriterRequest = {
+                name: 'underwritingRequest',
+                url: '/underwritingRequest',
+                controller: 'UnderwritingRequestController',
+                templateUrl: '/js/Views/Underwriter/underwriting_request.tpl.html',
+                data: {
+                    Review: true
+                }
+            }
+
+            var underwriter = {
+                name: 'underwriter',
+                url: '/underwriter',
+                templateUrl: '/js/Views/Underwriter/underwriting.tpl.html',
+                controller: 'UnderwriterController'
+            }
+
+            var dataInput = {
+                name: 'underwriter.datainput',
+                url: '/datainput',
+                templateUrl: '/js/Views/Underwriter/datainput.tpl.html',
+            }
+            var flipsheets = {
+                name: 'underwriter.flipsheets',
+                url: '/flipsheets',
+                templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
+            }
+            var rentalmodels = {
+                name: 'underwriter.rentalmodels',
+                url: '/rentalmodels',
+                templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
+            }
+            var tables = {
+                name: 'underwriter.tables',
+                url: '/tables',
+                templateUrl: '/js/Views/Underwriter/tables.tpl.html'
+            }
+
+            $stateProvider
+                .state(searchSummary)
+                .state(underwriter)
+                .state(dataInput)
+                .state(flipsheets)
+                .state(rentalmodels)
+                .state(tables)
+                .state(underwriterRequest);
+        })
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
-    <div id="dataPanelDiv" style="font-size: 12px; color: #9fa1a8;" ng-controller="">
+    <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
+    <div id="dataPanelDiv" style="font-size: 12px; color: #9fa1a8;">
         <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
-            <li class="short_sale_head_tab activity_light_blue">
-                <a href="#searchReslut" role="tab" data-toggle="tab" class="tab_button_a">
+            <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
+                <a role="tab" href="#searchSummary?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
                     <i class="fa fa-history head_tab_icon_padding"></i>
                     <div class="font_size_bold" style="width: 100px">Summary</div>
                 </a>
             </li>
-            <li class="short_sale_head_tab activity_light_blue">
-                <a role="tab" href="#agent_story" data-toggle="tab" class="tab_button_a">
+            <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
+                <a role="tab" href="#underwritingRequest?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
                     <i class="fa fa-book head_tab_icon_padding"></i>
                     <div class="font_size_bold" style="width: 100px">
                         Story
                     </div>
                 </a>
             </li>
-            <li class="short_sale_head_tab activity_light_blue">
-                <a role="tab" href="#agent_story" data-toggle="tab" class="tab_button_a">
-                    <i class="fa fa-book head_tab_icon_padding"></i>
+            <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
+                <a role="tab" href="#underwriter/datainput?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
+                    <i class="fa fa-calculator head_tab_icon_padding"></i>
                     <div class="font_size_bold" style="width: 100px">
-                        Story
+                        Calculate
                     </div>
                 </a>
             </li>
@@ -160,49 +196,16 @@
                 </div>
             </li>
         </ul>
-        <div >
-
-            <ui-view></ui-view>
-
-
-            <div id="agent_story" class="tab-pane fade" style="padding: 20px; max-height: 850px; overflow-y: scroll">
-                <script>
-                    angular.module("PortalApp").config(function ($stateProvider) {
-                        var underwriterRequest = {
-                            name: 'underwritingRequest',
-                            url: '/agent_story',
-                            controller: 'UnderwritingRequestController',
-                            templateUrl: '/js/Views/Underwriter/underwriting_request.tpl.html',
-                            data: {
-                                Review: true
-                            }
-                        }
-                        $stateProvider.state(underwriterRequest);
-                    });
-                </script>
-                <ui-view></ui-view>
-                <hr />
-                <div id='uwrhistory' class="container" style="max-width: 800px; margin-bottom: 40px">
-                    <script type="text/javascript">
-                        function getUWRID() {
-                            //debugger;
-                            var scope = angular.element('#uwrview').scope();
-                            return scope.data.Id;
-
-                        }
-                        function showHistory() {
-                            var id = getUWRID()
-                            if (id) {
-                                auditLog.toggle('UnderwritingRequest', id);
-                            }
-                        }
-                    </script>
-                    <button type="button" class="btn btn-info" onclick="showHistory()">History</button>
-                    <uc1:AuditLogs runat="server" ID="AuditLogs" />
-                </div>
-            </div>
-
-
-        </div>
     </div>
+    <div id="underwriting-summary">
+
+
+        <ui-view></ui-view>
+
+
+        <div id='uwrhistory' class="container" style="max-width: 800px; margin-bottom: 40px" ng-show="$state.current.name=='underwritingRequest'">
+            <button type="button" class="btn btn-info" onclick="showHistory()">History</button>
+            <uc1:AuditLogs runat="server" ID="AuditLogs" />
+        </div>
+    </di>
 </asp:Content>

@@ -18,29 +18,12 @@
             background-color: #efefef;
         }
 
-        iframe {
-            border: none;
-            width: 100%;
-            height: 100%;
-        }
 
         #xwrapper {
             float: left;
             height: 875px;
         }
 
-        #preview {
-            float: left;
-            height: 875px;
-        }
-
-        #hideicon {
-            visibility: hidden;
-        }
-
-            #hideicon:hover {
-                cursor: pointer;
-            }
     </style>
 
     <input type="text" style="display: none" />
@@ -48,21 +31,8 @@
         <div id="xwrapper">
             <div id="gridContainer" style="margin: 10px"></div>
         </div>
-
-        <div id="preview" style="visibility: hidden">
-            <iframe id="previewWindow"></iframe>
-        </div>
     </div>
     <script>
-        function resizeIframe(obj) {
-            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-        }
-
-        function GoToCase(CaseId) {
-            var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
-            window.location.href = url;
-        }
-
         var highlighter = (function () {
             var highlightedElement;
 
@@ -84,31 +54,7 @@
             var status = e.selectedRowKeys[0].Status || 0;
             previewControl.showCaseInfo(bble, status)
         }
-        previewControl = {
-            showCaseInfo: function (CaseId, status) {
-                if (status == 0) {
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId
-                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
-                } else {
-                    $("#xwrapper").css("width", "50%");
-                    $("#preview").css("visibility", "visible");
-                    $("#preview").css("width", "50%");
-                    var url = '/PopupControl/UnderwritingSummary.aspx?BBLE=' + CaseId + '#searchSummary';
-                    $("#previewWindow").attr("src", url);
-                    $("#hideicon").css("visibility", "visible");
-                }
 
-            },
-
-            undo: function () {
-                $("#preview").css("width", "0%");
-                $("#preview").css("visibility", "hidden");
-                $("#hideicon").css("visibility", "hidden");
-                $("#xwrapper").css("width", "100%");
-                $("#previewWindow").attr("src", "");
-            }
-
-        }
 
         $(document).ready(function () {
             var url = "/api/LeadInfoDocumentSearches";
@@ -345,6 +291,7 @@
                     width: '250',
                     onValueChanged: filterDataDelegate
                 }).dxSelectBox('instance');
+
                 var hashnum = parseInt(location.hash.split('/')[1]);
                 var bble = location.hash.split('/')[2];
                 if (hashnum) {
@@ -352,28 +299,7 @@
                 } else {
                     filterBox.option('value', 0);
                 }
-                //debugger;
-                if (bble) {
-                    previewControl.showCaseInfo(bble);
-                }
 
-                //high light column by refresh
-                var highlightcallback = function (e) {
-                    // debugger;
-                    if (bble) {
-                        var grid = e.element.dxDataGrid('instance');
-                        var data = grid.option('dataSource');
-                        var items = []
-                        _.forEach(data, function (v, i) {
-                            if (v.BBLE.trim() == bble.trim())
-                                items.push(v)
-                        });
-                        if (items.length > 0) {
-                            grid.selectRows(items, true);
-                        }
-                        bble = undefined;
-                    }
-                }
 
 
             });

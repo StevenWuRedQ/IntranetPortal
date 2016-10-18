@@ -2,12 +2,12 @@ var portalApp = angular.module('PortalApp',
     ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
 
 angular.module('PortalApp')
-    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
+    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state', function ($rootScope, $uibModal, $timeout, $state) {
         $rootScope.AlertModal = null;
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');
         $rootScope.panelLoading = false;
-
+        $rootScope.$state = $state;
         $rootScope.alert = function (message) {
             $rootScope.alertMessage = message ? message : '';
             $rootScope.AlertModal = $uibModal.open({
@@ -1874,13 +1874,15 @@ angular.module('PortalApp')
          * if isImport present also load data from Doc Search and Leads Info
          * 
          **/
-        underwriter.load = function (/* optional */ bble, /* optional */ isImport) {
+        underwriter.load = function (/* optional */ bble) {
+            //debugger;
             var data = underwritingFactory.build();
             if (bble) {
-                var _data = underwriter.get({ BBLE: bble.trim }, function () {
+                var _data = underwriter.get({ BBLE: bble.trim() }, function (d) {
+                    _data.BBLE = bble;
                     _.defaults(_data, data);
                     //debugger;
-                    if (isImport) {
+                    if (!_data.Id) {
                         data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
                             data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {
                                 mapData(data);
@@ -1903,8 +1905,8 @@ angular.module('PortalApp')
             //debugger;
             var float = parseFloat;
             var int = parseInt;
-            // PropertyInfo
-            d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? "Residential" : "Not Residential" })();
+            // PropertyInfo 1:residential 2: nonresidential
+            d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? 1 : 2})();
 
             // Liens
             d.Liens.TaxLien = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienSettlement * float(d.RehabInfo.DealTimeMonths));
@@ -1960,7 +1962,7 @@ angular.module('PortalApp')
             d.Resale.TransferTax = (function () {
                 var pr = parseFloat(d.Resale.ProbableResale);
                 var rate;
-                if (d.PropertyInfo.PropertyType == 'Residential') {
+                if (d.PropertyInfo.PropertyType == 1) {
                     if (pr <= 500000) {
                         rate = 0.01;
                     } else if (pr > 500000) {
@@ -1983,7 +1985,7 @@ angular.module('PortalApp')
             d.LoanCosts.LoanClosingCost = (function () {
                 var la = d.LoanTerms.LoanAmount;
                 var rate;
-                if (d.PropertyInfo.PropertyType == 'Residential') {
+                if (d.PropertyInfo.PropertyType == 1) {
                     if (la <= 500000) {
                         rate = 0.02;
 
@@ -2137,12 +2139,11 @@ angular.module('PortalApp')
             d.RentalModel.ROITotal = helper.ROITotal;
         }
 
-        underwriter.save = function (d) {
-
-            $http({
+        underwriter.save = function (data) {
+            return $http({
                 method: 'POST',
                 url: '/api/underwriter',
-                data: d,
+                data: data,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -2150,6 +2151,8 @@ angular.module('PortalApp')
             })
 
         }
+
+
         return underwriter;
 
     }]);
@@ -3855,7 +3858,7 @@ angular.module("PortalApp")
 
                 }
 
-                scope.$watch(attrs.ngModel, function () {
+                scope.$watch(attrs.ngModel, function (newvalue) {
                     if ($(el).is(":focus")) return;
                     $(el).formatCurrency(formatConfig);
                 });
@@ -3874,8 +3877,6 @@ angular.module("PortalApp")
                     } else {
                         $(this).formatCurrency(formatConfig);
                     }
-
-
                 });
                 $(el).on('focus', function () {
                     $(this).toNumber()
@@ -3883,6 +3884,38 @@ angular.module("PortalApp")
             },
         };
     })
+angular.module("PortalApp")
+    .directive('ptNumberMaskPatch', function () {
+        return {
+            priority: 1,
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                var format = attrs['maskformat'] || '';
+                scope.$watch(attrs.ngModel, function (newvalue) {
+                    if ($(el).is(":focus")) return;
+                    if (format == 'money') {
+                        if (typeof newvalue == 'string') {
+                            var cleanedvalue = newvalue.replace("$", "").replace(",", "")
+                            angular.element(el).scope().$eval(attrs.ngModel + "='" + cleanedvalue + "'")
+                        }
+                    }
+                });
+                $(el).on('blur', function () {
+                    if (format == 'money') {
+                        if (typeof this.value == 'string') {
+                            var cleanedvalue = this.value.replace("$", "").replace(",", "");
+                            if (cleanedvalue.length != this.value.length) {
+                                var targetScope = angular.element(el).scope();
+                                targetScope.$eval(attrs.ngModel + "='" + cleanedvalue + "'");
+                                targetScope.$apply();
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    })
+
 angular.module("PortalApp")
     .directive('ptRadio', function () {
         return {
@@ -4691,7 +4724,7 @@ angular.module('PortalApp')
  * naming wrong becuase the name always change from spec guys.
  */
 angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
         //New Model(this,arguments)
         leadsInfoBBLE = $('#BBLE').val();
         $scope.ShowInfo = $('#ShowInfo').val();
@@ -9007,55 +9040,15 @@ angular.module("PortalApp")
 
 
 }])
-angular.module("PortalApp").config(function ($stateProvider) {
-
-    var underwriter = {
-        name: 'underwriter',
-        url: '/underwriter',
-        template:
-
-            '<ui-view></ui-view>',
-        controller: 'UnderwriterController'
-    }
-
-    var dataInput = {
-        name: 'underwriter.datainput',
-        url: '/datainput',
-        templateUrl: '/js/Views/Underwriter/datainput.tpl.html',
-    }
-    var flipsheets = {
-        name: 'underwriter.flipsheets',
-        url: '/flipsheets',
-        templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
-    }
-    var rentalmodels = {
-        name: 'underwriter.rentalmodels',
-        url: '/rentalmodels',
-        templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
-    }
-    var tables = {
-        name: 'underwriter.tables',
-        url: '/tables',
-        templateUrl: '/js/Views/Underwriter/tables.tpl.html'
-    }
-
-    $stateProvider.state(underwriter)
-                    .state(dataInput)
-                    .state(flipsheets)
-                    .state(rentalmodels)
-                    .state(tables);
-
-});
-
 angular.module("PortalApp").controller("UnderwriterController",
                 ['$scope', 'ptCom', 'ptUnderwriter', '$location', '$http',
         function ($scope, ptCom, ptUnderwriter, $location, $http) {
 
             $scope.data = {};
             $scope.list = {/*dataSource*/ };
-            $scope.init = function (bble, isImport) {
+            $scope.init = function (bble) {
                 //ptCom.startLoading()
-                $scope.data = ptUnderwriter.load(bble, isImport);
+                $scope.data = ptUnderwriter.load(bble);
                 if ($scope.data.$promise) {
                     $scope.data.$promise.then(function () {
                         $scope.calculate();
@@ -9092,7 +9085,16 @@ angular.module("PortalApp").controller("UnderwriterController",
             }
 
             $scope.save = function () {
-                ptUnderwriter.save($scope.data);
+                ptUnderwriter.save($scope.data).then(function (d) {
+                    //debugger;
+                    if (d.data) {
+                        $scope.data = d.data;
+                    }
+                    alert("Save Successful");
+                }, function () {
+                    alert("fail to save");
+                })
+
             }
 
             $scope.onSelectionChange = function () {
@@ -9101,8 +9103,8 @@ angular.module("PortalApp").controller("UnderwriterController",
 
             // init controller;
             var search = $location.search();
-            if (search && search.bble) {
-                $scope.init(search.bble, true)
+            if (search && search.BBLE) {
+                $scope.init(search.BBLE)
             } else {
                 $scope.init();
             }
@@ -9242,7 +9244,7 @@ angular.module("PortalApp")
             var timenow = new Date().getTime();
             var timeCompleted = new Date($scope.data.CompletedDate);
             var diff = timenow - timeCompleted;
-            var dayinmsec = 1000 * 60 * 60 * 24
+            var dayinmsec = 1000 * 60 * 60 * 24;
             return 60 - Math.ceil(diff / dayinmsec);
         }
 

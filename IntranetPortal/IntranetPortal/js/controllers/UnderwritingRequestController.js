@@ -133,7 +133,7 @@
             var timenow = new Date().getTime();
             var timeCompleted = new Date($scope.data.CompletedDate);
             var diff = timenow - timeCompleted;
-            var dayinmsec = 1000 * 60 * 60 * 24
+            var dayinmsec = 1000 * 60 * 60 * 24;
             return 60 - Math.ceil(diff / dayinmsec);
         }
 

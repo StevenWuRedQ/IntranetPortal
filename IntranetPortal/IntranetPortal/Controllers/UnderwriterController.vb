@@ -11,10 +11,10 @@ Namespace Controllers
     Public Class UnderwriterController
         Inherits ApiController
 
-        <Route("api/underwriter/{id}")>
-        Public Function getUnderwriter(id As String) As IHttpActionResult
-            Return Ok()
-            Dim uw = UnderWritingManager.getInstance(CInt(id))
+        <Route("api/underwriter/{bble}")>
+        Public Function getUnderwriter(bble As String) As IHttpActionResult
+            'Return Ok()
+            Dim uw = UnderwritingManager.getInstance(bble)
             Return Ok(uw)
         End Function
 
@@ -26,12 +26,13 @@ Namespace Controllers
             End If
 
             Try
-                UnderWritingManager.save(uw, HttpContext.Current.User.Identity.Name)
+                Dim u = UnderwritingManager.save(uw, HttpContext.Current.User.Identity.Name)
+                Return Ok(u)
             Catch ex As Exception
 
             End Try
 
-            Return Ok(uw)
+            Return Ok()
         End Function
 
 
