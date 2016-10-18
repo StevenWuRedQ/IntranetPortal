@@ -32,6 +32,8 @@ Partial Public Class CodeFirstEntity
 
     Public Sub New()
         MyBase.New("name=CodeFirstEntity")
+        Me.Configuration.LazyLoadingEnabled = False
+        Me.Configuration.ProxyCreationEnabled = False
     End Sub
 
 

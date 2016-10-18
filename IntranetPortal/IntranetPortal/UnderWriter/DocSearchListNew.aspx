@@ -93,7 +93,7 @@
                     $("#xwrapper").css("width", "50%");
                     $("#preview").css("visibility", "visible");
                     $("#preview").css("width", "50%");
-                    var url = '/PopupControl/UnderwritingSummary.aspx?&BBLE=' + CaseId + '#/';
+                    var url = '/PopupControl/UnderwritingSummary.aspx?BBLE=' + CaseId + '#searchSummary';
                     $("#previewWindow").attr("src", url);
                     $("#hideicon").css("visibility", "visible");
                 }

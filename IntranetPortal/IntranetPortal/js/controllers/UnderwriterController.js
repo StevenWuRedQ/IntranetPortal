@@ -1,52 +1,12 @@
-﻿angular.module("PortalApp").config(function ($stateProvider) {
-
-    var underwriter = {
-        name: 'underwriter',
-        url: '/underwriter',
-        template:
-
-            '<ui-view></ui-view>',
-        controller: 'UnderwriterController'
-    }
-
-    var dataInput = {
-        name: 'underwriter.datainput',
-        url: '/datainput',
-        templateUrl: '/js/Views/Underwriter/datainput.tpl.html',
-    }
-    var flipsheets = {
-        name: 'underwriter.flipsheets',
-        url: '/flipsheets',
-        templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
-    }
-    var rentalmodels = {
-        name: 'underwriter.rentalmodels',
-        url: '/rentalmodels',
-        templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
-    }
-    var tables = {
-        name: 'underwriter.tables',
-        url: '/tables',
-        templateUrl: '/js/Views/Underwriter/tables.tpl.html'
-    }
-
-    $stateProvider.state(underwriter)
-                    .state(dataInput)
-                    .state(flipsheets)
-                    .state(rentalmodels)
-                    .state(tables);
-
-});
-
-angular.module("PortalApp").controller("UnderwriterController",
+﻿angular.module("PortalApp").controller("UnderwriterController",
                 ['$scope', 'ptCom', 'ptUnderwriter', '$location', '$http',
         function ($scope, ptCom, ptUnderwriter, $location, $http) {
 
             $scope.data = {};
             $scope.list = {/*dataSource*/ };
-            $scope.init = function (bble, isImport) {
+            $scope.init = function (bble) {
                 //ptCom.startLoading()
-                $scope.data = ptUnderwriter.load(bble, isImport);
+                $scope.data = ptUnderwriter.load(bble);
                 if ($scope.data.$promise) {
                     $scope.data.$promise.then(function () {
                         $scope.calculate();
@@ -83,7 +43,16 @@ angular.module("PortalApp").controller("UnderwriterController",
             }
 
             $scope.save = function () {
-                ptUnderwriter.save($scope.data);
+                ptUnderwriter.save($scope.data).then(function (d) {
+                    //debugger;
+                    if (d.data) {
+                        $scope.data = d.data;
+                    }
+                    alert("Save Successful");
+                }, function () {
+                    alert("fail to save");
+                })
+
             }
 
             $scope.onSelectionChange = function () {
@@ -92,8 +61,8 @@ angular.module("PortalApp").controller("UnderwriterController",
 
             // init controller;
             var search = $location.search();
-            if (search && search.bble) {
-                $scope.init(search.bble, true)
+            if (search && search.BBLE) {
+                $scope.init(search.BBLE)
             } else {
                 $scope.init();
             }
