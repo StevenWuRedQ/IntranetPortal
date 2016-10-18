@@ -2449,6 +2449,13 @@
       <DependentUpon>DocSearchList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="UnderWriter\UnderwritingNewofferList.aspx.designer.vb">
+      <DependentUpon>UnderwritingNewofferList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\UnderwritingNewofferList.aspx.vb">
+      <DependentUpon>UnderwritingNewofferList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
     </Compile>
@@ -7246,6 +7253,7 @@
     <Content Include="js\directives\ptInitBind.js" />
     <Content Include="js\directives\ptInitModel.js" />
     <Content Include="js\directives\ptLink.js" />
+    <Content Include="js\directives\ptNumberMaskPatch.js" />
     <Content Include="js\directives\ptRadio.js" />
     <Content Include="js\directives\ptRadioInit.js" />
     <Content Include="js\directives\ptDate.js" />
@@ -7877,6 +7885,7 @@
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
     <Content Include="UnderWriter\DocSearchListNew.aspx" />
     <Content Include="UnderWriter\DocSearchList.aspx" />
+    <Content Include="UnderWriter\UnderwritingNewofferList.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />

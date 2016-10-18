@@ -367,7 +367,7 @@
                                 </li>
                                 <li class="ss_form_item" ng-show="DocSearch.LeadResearch.Has_c_1st_Mortgage_c_1st_Mortgage">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.mortgageAmount" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.mortgageAmount" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title "
@@ -395,7 +395,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_c_2nd_Mortgage_c_2nd_Mortgage">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.secondMortgageAmount" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.secondMortgageAmount" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
 
                             </ul>
@@ -766,7 +766,7 @@
 
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="DocSearch.LeadResearch.propertyTaxes">
+                                    <input class="ss_form_input " pt-number-mask maskformat='money' pt-number-mask-patch ng-model="DocSearch.LeadResearch.propertyTaxes">
                                 </li>
                             </ul>
                         </div>
@@ -786,7 +786,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Water_Charges_Due">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="DocSearch.LeadResearch.waterCharges">
+                                    <input class="ss_form_input " pt-number-mask maskformat='money' pt-number-mask-patch ng-model="DocSearch.LeadResearch.waterCharges">
                                 </li>
                             </ul>
                         </div>
@@ -810,7 +810,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Open_ECB_Violoations">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="DocSearch.LeadResearch.ecbViolation">
+                                    <input class="ss_form_input " pt-number-mask maskformat='money' pt-number-mask-patch ng-model="DocSearch.LeadResearch.ecbViolation">
                                 </li>
                             </ul>
                         </div>
@@ -834,7 +834,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Open_DOB_Violoations">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="DocSearch.LeadResearch.dobWebsites">
+                                    <input class="ss_form_input " pt-number-mask maskformat='money' pt-number-mask-patch ng-model="DocSearch.LeadResearch.dobWebsites">
                                 </li>
                             </ul>
                         </div>
@@ -906,7 +906,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Is_Open_HPD_Charges_Not_Paid_Transferred">
                                     <label class="ss_form_input_title ">Open Amount</label>
-                                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="DocSearch.LeadResearch.Open_Amount_HPD_Charges_Not_Paid_Transferred">
+                                    <input class="ss_form_input " pt-number-mask maskformat='money' pt-number-mask-patch ng-model="DocSearch.LeadResearch.Open_Amount_HPD_Charges_Not_Paid_Transferred">
                                 </li>
                             </ul>
                         </div>
@@ -963,7 +963,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Judgments_Personal_Judgments">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Personal_Judgments" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Personal_Judgments" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                             </ul>
                         </div>
@@ -987,7 +987,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Judgments_HPD_Judgments">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.HPDjudgementAmount" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.HPDjudgementAmount" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                             </ul>
                         </div>
@@ -1011,7 +1011,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_IRS_Tax_Lien_IRS_Tax_Lien">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.irsTaxLien" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.irsTaxLien" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                             </ul>
                         </div>
@@ -1035,7 +1035,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.hasNysTaxLien">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_NYS_Tax_Lien" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_NYS_Tax_Lien" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                             </ul>
                         </div>
@@ -1059,7 +1059,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Sidewalk_Liens_Sidewalk_Liens">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Sidewalk_Liens" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Sidewalk_Liens" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                             </ul>
                         </div>
@@ -1083,7 +1083,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_Vacate_Order_Vacate_Order">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Vacate_Order" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_Vacate_Order" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                             </ul>
                         </div>
@@ -1107,7 +1107,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_ECB_Tickets_ECB_Tickets">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_ECB_Tickets" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_ECB_Tickets" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                             </ul>
                         </div>
@@ -1131,7 +1131,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.has_ECB_on_Name_ECB_on_Name_other_known_address">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_ECB_on_Name_other_known_address" pt-number-mask maskformat='money'>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Amount_ECB_on_Name_other_known_address" pt-number-mask maskformat='money' pt-number-mask-patch>
                                 </li>
                             </ul>
                         </div>

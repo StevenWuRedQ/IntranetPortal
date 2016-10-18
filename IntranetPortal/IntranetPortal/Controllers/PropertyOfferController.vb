@@ -104,5 +104,20 @@ Namespace Controllers
             Return Ok()
         End Function
 
+        <HttpGet>
+        <Route("api/PropertyOffer/UnderwritingNewoffer")>
+        Public Function getUnderwritingNewoffer() As IHttpActionResult
+
+            Using ctx As New PortalEntities
+                Dim query = From search In ctx.LeadInfoDocumentSearches
+                            Join offer In ctx.PropertyOffers On search.BBLE Equals offer.BBLE
+                            Join ss In ctx.ShortSaleCases On search.BBLE Equals ss.BBLE
+
+
+            End Using
+
+        End Function
+
+
     End Class
 End Namespace
