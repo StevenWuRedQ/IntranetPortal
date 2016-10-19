@@ -123,6 +123,18 @@ Partial Public Class PropertyOffer
     End Function
 
     ''' <summary>
+    ''' Return the properties that underwriting is completed and new offer is not created
+    ''' </summary>
+    ''' <param name="names"></param>
+    ''' <returns></returns>
+    Public Shared Function PendingForNewOffer(names As String()) As UnderwritingTrackingView()
+        Using ctx As New PortalEntities
+            Dim uws = ctx.UnderwritingTrackingViews.Where(Function(a) a.UnderwriteStatus = 1 AndAlso a.OfferStatus Is Nothing)
+            Return uws.ToArray
+        End Using
+    End Function
+
+    ''' <summary>
     ''' Return the form data item
     ''' </summary>
     ''' <returns></returns>

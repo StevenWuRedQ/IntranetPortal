@@ -33,47 +33,60 @@ Public Class NewOfferNotifyRule
         Using client As New PortalService.CommonServiceClient
             For Each tm In teams.Split(";")
                 If PropertyOfferManage.HasCompletedNewOfferDue(tm) Then
-                    Dim mgr = Team.GetTeam(tm).Manager
-                    Dim users = Roles.GetUsersInRole("NewOffer-Notify2")
-                    users = users.Concat({mgr}).ToArray
-                    Dim emails As String = Employee.GetEmpsEmails(users)
+                    Dim emails = LoadEmails(tm, "NewOffer-Notify2")
+                    If Not String.IsNullOrEmpty(emails) Then
+                        Dim subject = String.Format("Past Due of Completed NewOffer for {0}", tm)
+                        Dim params As New Dictionary(Of String, String) From {
+                                {"team", tm}
+                            }
 
-                    If String.IsNullOrEmpty(emails) Then
-                        Log("Can't load team manager emails - Team: " & tm)
-                        Continue For
+                        client.SendEmailByControl(emails, subject, "NewOfferCompletedDue", params)
+                        Threading.Thread.Sleep(1000)
                     End If
-
-                    Dim subject = String.Format("Past Due of Completed NewOffer for {0}", tm)
-                    Dim params As New Dictionary(Of String, String) From {
-                            {"team", tm}
-                        }
-
-                    client.SendEmailByControl(emails, subject, "NewOfferCompletedDue", params)
-                    Threading.Thread.Sleep(1000)
                 End If
 
                 If PropertyOfferManage.HasInProcessNewOfferDue(tm) Then
-                    Dim mgr = Team.GetTeam(tm).Manager
-                    Dim users = Roles.GetUsersInRole("NewOffer-Notify3")
-                    users = users.Concat({mgr}).ToArray
-                    Dim emails As String = Employee.GetEmpsEmails(users)
+                    Dim emails = LoadEmails(tm, "NewOffer-Notify3")
+                    If Not String.IsNullOrEmpty(emails) Then
+                        Dim subject = String.Format("Past Due of InProcess NewOffer for {0}", tm)
+                        Dim params As New Dictionary(Of String, String) From {
+                                {"team", tm}
+                            }
 
-                    If String.IsNullOrEmpty(emails) Then
-                        Log("Can't load team manager emails - Team: " & tm)
-                        Continue For
+                        client.SendEmailByControl(emails, subject, "NewOfferInProcessDue", params)
+                        Threading.Thread.Sleep(1000)
                     End If
+                End If
 
-                    Dim subject = String.Format("Past Due of InProcess NewOffer for {0}", tm)
-                    Dim params As New Dictionary(Of String, String) From {
+                If PropertyOfferManage.HasPendingNewOfferDue(tm) Then
+                    Dim emails = LoadEmails(tm, "NewOffer-Notify4")
+                    If Not String.IsNullOrEmpty(emails) Then
+                        Dim subject = String.Format("Past Due of Pending NewOffer for {0}", tm)
+                        Dim params As New Dictionary(Of String, String) From {
                             {"team", tm}
                         }
 
-                    client.SendEmailByControl(emails, subject, "NewOfferInProcessDue", params)
-                    Threading.Thread.Sleep(1000)
+                        client.SendEmailByControl(emails, subject, "PendingNewOffer", params)
+                        Threading.Thread.Sleep(1000)
+                    End If
                 End If
             Next
         End Using
     End Sub
+
+    Private Function LoadEmails(tm As String, roleName As String) As String
+        Dim mgr = Team.GetTeam(tm).Manager
+        Dim users = Roles.GetUsersInRole(roleName)
+        users = users.Concat({mgr}).ToArray
+        Dim emails As String = Employee.GetEmpsEmails(users)
+
+        If String.IsNullOrEmpty(emails) Then
+            Log("Can't load team manager emails - Team: " & tm)
+            Return Nothing
+        End If
+
+        Return emails
+    End Function
 
     Private Sub NotifyShortSale()
         Dim users = Roles.GetUsersInRole("NewOffer-Notify")

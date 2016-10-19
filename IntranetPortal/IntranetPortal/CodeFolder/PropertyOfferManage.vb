@@ -193,10 +193,28 @@ Public Class PropertyOfferManage
     ''' <summary>
     ''' Return if the given team has InProcess new offer due today
     ''' </summary>
-    ''' <param name="teamName"></param>
+    ''' <param name="teamName">Team Name</param>
     ''' <returns></returns>
     Public Shared Function HasInProcessNewOfferDue(teamName As String) As Boolean
         Return InProcessNewOfferDue(teamName).Count > 0
+    End Function
+
+    ''' <summary>
+    ''' Return the properties that underwriting was accepted but new offer was not created for over 2 ydays
+    ''' </summary>
+    ''' <param name="teamName">Team name</param>
+    ''' <returns></returns>
+    Public Shared Function PendingNewOfferDue(teamName As String) As UnderwritingTrackingView()
+        Return PropertyOffer.PendingForNewOffer(Team.GetTeamUsers(teamName))
+    End Function
+
+    ''' <summary>
+    ''' Return if the given team has due on new offer creating
+    ''' </summary>
+    ''' <param name="teamName"></param>
+    ''' <returns></returns>
+    Public Shared Function HasPendingNewOfferDue(teamName As String) As Boolean
+        Return PendingNewOfferDue(teamName).Count > 0
     End Function
 
     ''' <summary>
