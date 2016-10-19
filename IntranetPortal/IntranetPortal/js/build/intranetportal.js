@@ -2312,8 +2312,7 @@ angular.module("PortalApp")
             updateon: '=',
             docsearch: '=',
             leadsinfo: '=',
-            showinfo: '=',
-            underwritemode: '='
+            viewmode: '='
         },
         templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
         link: function (scope)
@@ -4995,9 +4994,18 @@ angular.module('PortalApp')
             });
 
         }
-        //debugger;
-        if (location.search.indexOf('si=1') >= 0) {
-            $scope.underwritemode = true;
+
+        try {
+            var modePatten = /mode=\d/;
+            var matches = modePatten.exec(location.search);
+            //debugger;
+            if (matches && matches[0]) {
+                $scope.viewmode = parseInt(matches[0].split('=')[1]);
+            } else {
+                $scope.viewmode = 0;
+            }
+        } catch (ex) {
+            $scope.viewmode = 0;
         }
     });
 /* global LegalShowAll */

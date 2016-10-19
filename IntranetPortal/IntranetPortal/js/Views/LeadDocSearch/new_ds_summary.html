@@ -32,7 +32,7 @@ a template to display new doc search.
 <div>
 
     <div class="alert alert-warning" ng-show="updateon">The last search updated on {{updateon | date:'MM/dd/yyyy'}} by {{updateby}}</div>
-    <table class="table summary" ng-show="showinfo">
+    <table class="table summary" ng-show="viewmode>0">
         <tr class="newsec">
             <td colspan="3"><b>Request Info</b></td>
         </tr>

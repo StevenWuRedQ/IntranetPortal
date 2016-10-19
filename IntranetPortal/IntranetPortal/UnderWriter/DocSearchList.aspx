@@ -87,13 +87,21 @@
         previewControl = {
             showCaseInfo: function (CaseId, status) {
                 if (status == 0) {
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId
+                    <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId
+                    <% ELSE%>
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId
+                    <% End IF%>
                     PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
                 } else {
                     $("#xwrapper").css("width", "50%");
                     $("#preview").css("visibility", "visible");
                     $("#preview").css("width", "50%");
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + CaseId + '#/';
+                    <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=3&BBLE=' + CaseId + '#/';
+                    <% ELSE%>
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId + '#/';
+                    <% End IF%>
                     $("#previewWindow").attr("src", url);
                     $("#hideicon").css("visibility", "visible");
                 }

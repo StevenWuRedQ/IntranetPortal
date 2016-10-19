@@ -11,7 +11,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
-    <input type="hidden" id="ShowInfo" value="<%= Request.QueryString("si")%>" />
+    <input type="hidden" id="mode" value="<%= Request.QueryString("mode")%>" />
     <div id="LeadTaxSearchCtrl" ng-controller="LeadTaxSearchCtrl">
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
@@ -68,10 +68,9 @@
                                         </a>
                                     </li>
 
-                                    <% If Request.QueryString("si") = 1 %>
+                                    <% If CInt(Request.QueryString("mode")) >= 1 %>
                                     <script>
                                         function showUiView() {
-                                            //$('#agent_story').tab('show');
                                             $('a[data-toggle="tab"]').on('shown.bs.tab',
                                                 function (e) {
                                                     // debugger;
@@ -89,7 +88,8 @@
                                             </div>
                                         </a>
                                     </li>
-
+                                    <% End if %>
+                                    <% If CInt(Request.QueryString("mode")) >= 3 %>
                                     <li class="short_sale_head_tab activity_light_blue pull-right" onclick="exportsheet()">
                                         <a role="tab" class="tab_button_a">
                                             <i class="fa fa-file-excel-o head_tab_icon_padding" style="color: white !important"></i>
@@ -108,7 +108,7 @@
                                                 <li class="short_sale_head_tab " ng-click="markCompleted(1)">
                                                     <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Accept">
                                                         <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
-                                                        <div class="font_size_bold" style="width: 100px">Accpet</div>
+                                                        <div class="font_size_bold" style="width: 100px">Accept</div>
                                                     </a>
                                                 </li>
                                                 <li class="short_sale_head_tab" ng-click="markCompleted(2)">
@@ -124,16 +124,6 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div id="searchReslut" class="tab-pane fade in active" style="padding: 20px; max-height: 850px; overflow-y: scroll">
-                                        <%--
-                                    <div ng-if="newVersion">
-
-                                    </div>
-                                    <div ng-if="!newVersion">
-                                        <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
-                                    </div>
-
-                                     <uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />
-                                        --%>
 
                                         <div class="alert alert-info" ng-show="underwritemode && DocSearch.UnderwriteStatus > 0">
                                             <h5>The Underwriting {{DocSearch.UnderwriteStatus==1?'Completed':'Rejected'}} by {{DocSearch.UnderwriteCompletedBy}} on {{DocSearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!</h5>
@@ -143,9 +133,9 @@
 
                                             </h5>
                                         </div>
-                                        <new-ds-summary id="new-ds-summary" docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" showinfo="ShowInfo" underwritemode="underwritemode"></new-ds-summary>
+                                        <new-ds-summary id="new-ds-summary" docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" viewmode="viewmode"></new-ds-summary>
                                     </div>
-                                    <% If Request.QueryString("si") = 1 Then %>
+                                    <% If CInt(Request.QueryString("mode")) >= 1 Then %>
                                     <div id="agent_story" class="tab-pane fade" style="padding: 20px; max-height: 850px; overflow-y: scroll">
                                         <script>
                                             angular.module("PortalApp").config(function ($stateProvider) {
@@ -162,7 +152,10 @@
                                             });
                                         </script>
                                         <ui-view></ui-view>
+                                        <% End If %>
+                                        <% If CInt(Request.QueryString("mode")) >= 2 Then %>
                                         <hr />
+
                                         <div id='uwrhistory' class="container" style="max-width: 800px; margin-bottom: 40px">
                                             <script type="text/javascript">
                                                 function getUWRID() {
