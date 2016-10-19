@@ -23,7 +23,6 @@
             float: left;
             height: 875px;
         }
-
     </style>
 
     <input type="text" style="display: none" />
@@ -33,27 +32,27 @@
         </div>
     </div>
     <script>
-        var highlighter = (function () {
-            var highlightedElement;
+        //var highlighter = (function () {
+        //    var highlightedElement;
 
-            return {
-                setHighlight: function (el) {
-                    this.clearHighlight();
-                    highlightedElement = el;
-                    $(el).css('background-color', '#c0c0c0');
-                },
-                clearHighlight: function () {
-                    $(highlightedElement).css('background-color', '');
-                    highlightedElement = undefined;
-                }
-            }
-        })();
-        var onSelectionChangedCallback = function (e) {
-            //debugger;
-            var bble = e.selectedRowKeys[0].BBLE || '';
-            var status = e.selectedRowKeys[0].Status || 0;
-            previewControl.showCaseInfo(bble, status)
-        }
+        //    return {
+        //        setHighlight: function (el) {
+        //            this.clearHighlight();
+        //            highlightedElement = el;
+        //            $(el).css('background-color', '#c0c0c0');
+        //        },
+        //        clearHighlight: function () {
+        //            $(highlightedElement).css('background-color', '');
+        //            highlightedElement = undefined;
+        //        }
+        //    }
+        //})();
+        //var onSelectionChangedCallback = function (e) {
+        //    //debugger;
+        //    var bble = e.selectedRowKeys[0].BBLE || '';
+        //    var status = e.selectedRowKeys[0].Status || 0;
+        //    //previewControl.showCaseInfo(bble, status)
+        //}
 
 
         $(document).ready(function () {
@@ -96,10 +95,10 @@
                             }
                         }
                     },
-                    onSelectionChanged: onSelectionChangedCallback,
-                    selection: {
-                        mode: 'single'
-                    },
+                    //onSelectionChanged: onSelectionChangedCallback,
+                    //selection: {
+                    //    mode: 'single'
+                    //},
                     summary: {
                         groupItems: [{
                             column: "BBLE",
@@ -110,48 +109,34 @@
                     columns: [
                         {
                             dataField: 'BBLE',
+                            visible: false
                         },
                         {
                             dataField: "PropertyAddress",
                             width: 400,
                             caption: "Property Address",
-                        }, {
-                            dataField: "CreateBy",
-                            caption: "UW Requested By"
-                        }, {
-                            dataField: "CreateDate",
-                            caption: "UW Requested Date",
-                            dataType: "date",
-                            customizeText: function (cellInfo) {
-                                if (!cellInfo.value)
-                                    return ""
-
-                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                                if (dt)
-                                    return moment(dt).format('MM/DD/YYYY');
-
-                                return ""
-                            }
-                        }, {
-                            dataField: "Status",
-                            caption: "Search Status",
-
+                        },
+                        {
+                            dataField: "UnderwriteStatus",
+                            caption: "UW. Status",
                             alignment: "left",
                             customizeText: function (cell) {
                                 switch (cell.value) {
+                                    case 0:
+                                        return 'Pending'
                                     case 1:
-                                        return 'Completed';
+                                        return 'Accepted';
+                                    case 2:
+                                        return 'Reject';
                                     default:
-                                        return 'New';
+                                        return '';
 
                                 }
-                            }
+                            },
+                            sortOrder: 'desc'
                         }, {
-                            dataField: "CompletedBy",
-                            caption: "Search Completed By"
-                        }, {
-                            dataField: "CompletedOn",
-                            caption: "Search Completion Date",
+                            dataField: "UnderwriteCompletedOn",
+                            caption: "UW. Completed Date",
                             dataType: "date",
                             customizeText: function (cellInfo) {
                                 if (!cellInfo.value)
@@ -162,27 +147,61 @@
                                     return moment(dt).format('MM/DD/YYYY');
 
                                 return ""
-                            },
-                            sortIndex: 0,
-                            sortOrder: 'desc',
+                            }
                         }, {
-                            dataField: 'UnderwriteStatus',
-                            caption: 'UW Decision',
+                            dataField: "UnderwriteCompletedBy",
+                            caption: "UW. Completed By",
+                        },
+                        {
+                            dataField: "NewOfferStatus",
+                            caption: "NO. Status",
+                            alignment: "left",
+                            customizeText: function (cell) {
+                                switch (cell.value) {
+                                    case 2:
+                                        return 'Completed';
+                                    default:
+                                        return 'Not Completed';
+
+                                }
+                            }
+                        },
+                        {
+                            dataField: "NewOfferDate",
+                            caption: "NO. Updated Date",
+                            dataType: "date",
+                            customizeText: function (cellInfo) {
+                                if (!cellInfo.value)
+                                    return ""
+
+                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+                                if (dt)
+                                    return moment(dt).format('MM/DD/YYYY');
+
+                                return ""
+                            }
+                        }, {
+                            dataField: "NewOfferBy",
+                            caption: "NO. Updated By",
+                        }, {
+                            dataField: "IsShortSaleAccpeted",
+                            caption: "SS. Accepted Status",
                             alignment: "left",
                             customizeText: function (cell) {
                                 switch (cell.value) {
                                     case 1:
                                         return 'Accepted';
-                                    case 2:
-                                        return 'Rejected';
                                     default:
-                                        return 'Pending';
+                                        return 'Not Accepted';
 
                                 }
                             }
-                        }, {
-                            dataField: 'UnderwriteCompletedOn',
-                            caption: 'UW Completion Date',
+
+                        },
+
+                        {
+                            dataField: "AcceptedDate",
+                            caption: "SS. Accepted Date",
                             dataType: "date",
                             customizeText: function (cellInfo) {
                                 if (!cellInfo.value)
@@ -194,32 +213,51 @@
 
                                 return ""
                             }
+                        }, {
+                            dataField: "AcceptedBy",
+                            caption: "SS. Accepted By",
+                        },
+                        {
+                            dataField: "IsInProcess",
+                            caption: "In Process Status",
+                            alignment: "left",
+                            customizeText: function (cell) {
+                                switch (cell.value) {
+                                    case 1:
+                                        return 'In Process';
+                                    default:
+                                        return 'Not In Process';
+
+                                }
+                            }
 
                         }, {
-                            caption: "Duration",
-                            width: '80px',
-                            allowSorting: true,
-                            calculateCellValue: function (data) {
-                                //debugger;
-                                if (!data.UnderwriteCompletedOn || !data.CreateDate) {
-                                    return Infinity;
-                                }
-                                return new Date(data.UnderwriteCompletedOn) - new Date(data.CreateDate);
-                            },
+                            dataField: "InProcessDate",
+                            caption: "In Process Date",
+                            dataType: "date",
                             customizeText: function (cellInfo) {
-                                if (cellInfo.value == Infinity) return "";
-                                return moment.duration(cellInfo.value).humanize();
+                                if (!cellInfo.value)
+                                    return ""
+
+                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+                                if (dt)
+                                    return moment(dt).format('MM/DD/YYYY');
+
+                                return ""
                             }
+                        }, {
+                            dataField: "InProcessBy",
+                            caption: "In Process By",
                         }]
                 }).dxDataGrid('instance');
-                $(".dx-datagrid-header-panel").prepend($("<div id='uw-properties-title' style='margin-bottom: -35px'><label class='grid-title-icon' style='display: inline-block'>UW</label><span id='useFilterApplyButton' style='z-index: 999'></span></div>"))
+                $(".dx-datagrid-header-panel").prepend($("<div id='uw-properties-title' style='margin-bottom: -35px'><label class='grid-title-icon' style='display: inline-block'>???</label><span id='useFilterApplyButton' style='z-index: 999'></span></div>"))
                 $(".dx-datagrid-header-panel").prepend($("<span id='hideicon' class='btn btn-blue pull-right' data-toggle='tooltip' data-placement='right' title='hide right panel' onclick='previewControl.undo()'><i class='fa fa-angle-double-right fa-lg'></i></span>"))
                 var filterDataDelegate = function (data) {
-                    previewControl.undo();
+                    //previewControl.undo();
                     filterData(data.value);
                 }
 
-                var columns = ['CaseName', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'Duration'];
+                var columns = ["BBLE", "PropertyAddress", "UnderwriteStatus", "UnderwriteCompletedOn", "UnderwriteCompletedBy", "NewOfferStatus", "NewOfferDate", "NewOfferBy", "IsShortSaleAccpeted", "AcceptedBy", "AcceptedDate", "IsInProcess", "InProcessDate", "InProcessBy"];
 
                 var displayall = function () {
                     _.forEach(columns, function (v, i) {
@@ -239,21 +277,9 @@
                     displayall();
                     switch (data) {
                         case 1:
-                            dataGrid.filter(['Status', '=', '0']);
-                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration'])
+                            dataGrid.filter(['UnderwriteStatus', '=', '1'], 'and', ['NewOfferStatus', '<>', '2']);
+                            //hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration'])
                             break;
-                        case 2:
-                            dataGrid.filter(['Status', '=', '1']);
-                            break;
-                        case 3:
-                            dataGrid.filter([['UnderwriteStatus', '=', '0'], ['Status', '=', '1']]);
-                            hidesome(['UnderwriteCompletedOn', 'Duration'])
-                            break;
-                        case 4:
-                            dataGrid.filter([['UnderwriteStatus', '=', '1'], ['Status', '=', '1']]);
-                            break;
-                        case 5:
-                            dataGrid.filter([['UnderwriteStatus', '=', '2'], ['Status', '=', '1']]);
                     }
                 }
                 var filterBox = $("#useFilterApplyButton").dxSelectBox({
@@ -262,34 +288,13 @@
                         name: "All"
                     }, {
                         key: 1,
-                        name: "New Search"
-                    }, {
-                        key: 3,
-                        name: "Pending Underwriting"
-                    }, {
-                        key: 2,
-                        name: "Completed Search"
-                    }, {
-                        key: 4,
-                        name: "Accepted Underwriting"
-                    }, {
-                        key: 5,
-                        name: "Rejected Underwriting"
+                        name: "Underwriting Completed But Not New Offer"
                     }],
                     valueExpr: "key",
                     displayExpr: "name",
-                    width: '250',
+                    width: '350',
                     onValueChanged: filterDataDelegate
                 }).dxSelectBox('instance');
-
-                var hashnum = parseInt(location.hash.split('/')[1]);
-                var bble = location.hash.split('/')[2];
-                if (hashnum) {
-                    filterBox.option('value', hashnum);
-                } else {
-                    filterBox.option('value', 0);
-                }
-
 
 
             });
