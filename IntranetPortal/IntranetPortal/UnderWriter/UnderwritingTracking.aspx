@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="DocSearchListNew.aspx.vb" Inherits="IntranetPortal.DocSearchList" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="UnderwritingTracking.aspx.vb" Inherits="IntranetPortal.DocSearchList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -57,7 +57,7 @@
 
 
         $(document).ready(function () {
-            var url = "/api/LeadInfoDocumentSearches";
+            var url = "/api/PropertyOffer/UnderwritingNewoffer";
             var that = this;
             $.getJSON(url).done(function (data) {
                 var dataGrid = $("#gridContainer").dxDataGrid({
@@ -81,8 +81,7 @@
                     onRowPrepared: function (rowInfo) {
                         if (rowInfo.rowType != 'data')
                             return;
-                        rowInfo.rowElement
-                        .addClass('myRow');
+                        rowInfo.rowElement.addClass('myRow');
                     },
                     onContentReady: function (e) {
                         var spanTotal = e.element.find('.spanTotal')[0];
@@ -96,7 +95,6 @@
                                 panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
                             }
                         }
-                        highlightcallback(e);
                     },
                     onSelectionChanged: onSelectionChangedCallback,
                     selection: {
@@ -112,17 +110,9 @@
                     columns: [
                         {
                             dataField: 'BBLE',
-                            visible: false
                         },
                         {
-                            dataField: 'UpdateDate',
-                            caption: 'UpdateDate',
-                            sortIndex: 1,
-                            sortOrder: 'desc',
-                            visible: false
-                        },
-                        {
-                            dataField: "CaseName",
+                            dataField: "PropertyAddress",
                             width: 400,
                             caption: "Property Address",
                         }, {

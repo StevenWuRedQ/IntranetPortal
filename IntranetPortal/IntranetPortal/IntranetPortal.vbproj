@@ -2463,11 +2463,11 @@
       <DependentUpon>DocSearchList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="UnderWriter\UnderwritingNewofferList.aspx.designer.vb">
-      <DependentUpon>UnderwritingNewofferList.aspx</DependentUpon>
+    <Compile Include="UnderWriter\UnderwritingTracking.aspx.designer.vb">
+      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UnderWriter\UnderwritingNewofferList.aspx.vb">
-      <DependentUpon>UnderwritingNewofferList.aspx</DependentUpon>
+    <Compile Include="UnderWriter\UnderwritingTracking.aspx.vb">
+      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
@@ -7901,7 +7901,7 @@
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
     <Content Include="UnderWriter\DocSearchListNew.aspx" />
     <Content Include="UnderWriter\DocSearchList.aspx" />
-    <Content Include="UnderWriter\UnderwritingNewofferList.aspx" />
+    <Content Include="UnderWriter\UnderwritingTracking.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
