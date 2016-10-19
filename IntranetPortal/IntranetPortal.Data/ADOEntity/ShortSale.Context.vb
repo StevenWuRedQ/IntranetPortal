@@ -80,6 +80,7 @@ Partial Public Class PortalEntities
     Public Overridable Property SSLeads() As DbSet(Of SSLead)
     Public Overridable Property SSLeadsStatusLogs() As DbSet(Of SSLeadsStatusLog)
     Public Overridable Property UnderwritingRequests() As DbSet(Of UnderwritingRequest)
+    Public Overridable Property UnderwritingTrackingViews() As DbSet(Of UnderwritingTrackingView)
 
     Public Overridable Function ArchiveDocumentSearch(bble As String, archiveBy As String) As Integer
         Dim bbleParameter As ObjectParameter = If(bble IsNot Nothing, New ObjectParameter("bble", bble), New ObjectParameter("bble", GetType(String)))

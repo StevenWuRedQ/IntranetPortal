@@ -1250,6 +1250,24 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UnderwritingTrackingView">
+          <Key>
+            <PropertyRef Name="IsShortSaleAccpeted" />
+            <PropertyRef Name="IsInProcess" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="UnderwriteStatus" Type="tinyint" />
+          <Property Name="OfferStatus" Type="int" />
+          <Property Name="IsShortSaleAccpeted" Type="int" Nullable="false" />
+          <Property Name="AcceptedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="AcceptedDate" Type="datetime" />
+          <Property Name="IsInProcess" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Function Name="ArchiveDocumentSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="bble" Type="nchar" Mode="In" />
           <Parameter Name="archiveBy" Type="nvarchar" Mode="In" />
@@ -1444,6 +1462,20 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
     [SSFirstMortgage].[BBLE] AS [BBLE]
     FROM [dbo].[SSFirstMortgage] AS [SSFirstMortgage]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="UnderwritingTrackingView" EntityType="Self.UnderwritingTrackingView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UnderwritingTrackingView].[BBLE] AS [BBLE], 
+    [UnderwritingTrackingView].[PropertyAddress] AS [PropertyAddress], 
+    [UnderwritingTrackingView].[UnderwriteStatus] AS [UnderwriteStatus], 
+    [UnderwritingTrackingView].[OfferStatus] AS [OfferStatus], 
+    [UnderwritingTrackingView].[IsShortSaleAccpeted] AS [IsShortSaleAccpeted], 
+    [UnderwritingTrackingView].[AcceptedBy] AS [AcceptedBy], 
+    [UnderwritingTrackingView].[AcceptedDate] AS [AcceptedDate], 
+    [UnderwritingTrackingView].[IsInProcess] AS [IsInProcess], 
+    [UnderwritingTrackingView].[CreateDate] AS [CreateDate], 
+    [UnderwritingTrackingView].[CreateBy] AS [CreateBy]
+    FROM [dbo].[UnderwritingTrackingView] AS [UnderwritingTrackingView]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1510,6 +1542,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
             <Parameter Name="archiveBy" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="UnderwritingRequests" EntityType="IntranetPortalModel.UnderwritingRequest" />
+          <EntitySet Name="UnderwritingTrackingViews" EntityType="IntranetPortalModel.UnderwritingTrackingView" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2746,6 +2779,22 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UnderwritingTrackingView">
+          <Key>
+            <PropertyRef Name="IsShortSaleAccpeted" />
+            <PropertyRef Name="IsInProcess" />
+          </Key>
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UnderwriteStatus" Type="Byte" />
+          <Property Name="OfferStatus" Type="Int32" />
+          <Property Name="IsShortSaleAccpeted" Type="Int32" Nullable="false" />
+          <Property Name="AcceptedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AcceptedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsInProcess" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4040,6 +4089,22 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
                 <ScalarProperty Name="BriefDescription" ColumnName="BriefDescription" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnderwritingTrackingViews">
+            <EntityTypeMapping TypeName="IntranetPortalModel.UnderwritingTrackingView">
+              <MappingFragment StoreEntitySet="UnderwritingTrackingView">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsInProcess" ColumnName="IsInProcess" />
+                <ScalarProperty Name="AcceptedDate" ColumnName="AcceptedDate" />
+                <ScalarProperty Name="AcceptedBy" ColumnName="AcceptedBy" />
+                <ScalarProperty Name="IsShortSaleAccpeted" ColumnName="IsShortSaleAccpeted" />
+                <ScalarProperty Name="OfferStatus" ColumnName="OfferStatus" />
+                <ScalarProperty Name="UnderwriteStatus" ColumnName="UnderwriteStatus" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
