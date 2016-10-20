@@ -10,6 +10,8 @@ Public Class PortalPage
             If Not PortalNavManage.IsViewable(HttpContext.Current) Then
                 PageAuthorization = False
                 NotAllowdAccess()
+            Else
+                PageAuthorization = True
             End If
         End If
     End Sub
