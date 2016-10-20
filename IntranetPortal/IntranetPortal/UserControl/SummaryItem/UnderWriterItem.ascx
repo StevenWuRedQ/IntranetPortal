@@ -85,10 +85,13 @@
                                 // completed search or under writing should go to under writing list page
                                 elem
                                 .on('dxclick', function () {
-                                    //Do something with options.data;
-                                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?si=1&BBLE=' + options.data.BBLE;
-
+                                    <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&&BBLE=' + options.data.BBLE;
                                     PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);
+                                    <% ELSE%>
+                                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&&BBLE=' + options.data.BBLE;
+                                    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);
+                                    <% End IF%>
                                 })
                             }
 

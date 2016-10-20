@@ -8,8 +8,7 @@
             updateon: '=',
             docsearch: '=',
             leadsinfo: '=',
-            showinfo: '=',
-            underwritemode: '='
+            viewmode: '='
         },
         templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
         link: function (scope)
