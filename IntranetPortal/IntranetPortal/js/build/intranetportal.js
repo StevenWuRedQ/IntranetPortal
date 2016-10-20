@@ -8,7 +8,7 @@ angular.module('PortalApp')
         $rootScope.loadingCover = document.getElementById('LodingCover');
         $rootScope.panelLoading = false;
         $rootScope.loadPanelPosition = (function () {
-            var dataPanelDiv = document.getElementById('#dataPanelDiv');
+            var dataPanelDiv = document.getElementById('dataPanelDiv');
             if (dataPanelDiv != null) {
                 return { of: '#dataPanelDiv' }
             } else {
