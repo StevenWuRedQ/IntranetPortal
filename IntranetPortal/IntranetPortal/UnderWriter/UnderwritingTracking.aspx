@@ -32,28 +32,6 @@
         </div>
     </div>
     <script>
-        //var highlighter = (function () {
-        //    var highlightedElement;
-
-        //    return {
-        //        setHighlight: function (el) {
-        //            this.clearHighlight();
-        //            highlightedElement = el;
-        //            $(el).css('background-color', '#c0c0c0');
-        //        },
-        //        clearHighlight: function () {
-        //            $(highlightedElement).css('background-color', '');
-        //            highlightedElement = undefined;
-        //        }
-        //    }
-        //})();
-        //var onSelectionChangedCallback = function (e) {
-        //    //debugger;
-        //    var bble = e.selectedRowKeys[0].BBLE || '';
-        //    var status = e.selectedRowKeys[0].Status || 0;
-        //    //previewControl.showCaseInfo(bble, status)
-        //}
-
 
         $(document).ready(function () {
             var url = "/api/PropertyOffer/UnderwritingNewoffer";
