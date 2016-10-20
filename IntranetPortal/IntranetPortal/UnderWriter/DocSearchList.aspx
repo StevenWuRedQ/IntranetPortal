@@ -92,7 +92,7 @@
                     <% ELSE%>
                     var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId
                     <% End IF%>
-                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
+                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url, 1700);
                 } else {
                     $("#xwrapper").css("width", "50%");
                     $("#preview").css("visibility", "visible");

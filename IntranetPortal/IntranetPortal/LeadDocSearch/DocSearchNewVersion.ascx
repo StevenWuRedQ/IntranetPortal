@@ -1143,7 +1143,7 @@
             </div>
 
             <hr />
-            <div class="ss_form" ng-show="DocSearch.Status!=1">
+            <div class="ss_form" ng-show="DocSearch.Status!=1 && viewmode == 0">
 
                 <div>
                     <ul class="ss_form_box clearfix">

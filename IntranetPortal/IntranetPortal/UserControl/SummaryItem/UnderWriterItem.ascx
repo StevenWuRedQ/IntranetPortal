@@ -87,10 +87,10 @@
                                 .on('dxclick', function () {
                                     <% If HttpContext.Current.User.IsInRole("Underwriter") %>
                                     var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&&BBLE=' + options.data.BBLE;
-                                    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);
+                                    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url,1700);
                                     <% ELSE%>
                                     var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&&BBLE=' + options.data.BBLE;
-                                    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);
+                                    PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url,1700);
                                     <% End IF%>
                                 })
                             }

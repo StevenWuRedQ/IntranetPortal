@@ -7,6 +7,14 @@ angular.module('PortalApp')
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');
         $rootScope.panelLoading = false;
+        $rootScope.loadPanelPosition = (function () {
+            var dataPanelDiv = document.getElementById('#dataPanelDiv');
+            if (dataPanelDiv != null) {
+                return { of: '#dataPanelDiv' }
+            } else {
+                return { of: 'body' }
+            }
+        })();
         $rootScope.$state = $state;
         $rootScope.alert = function (message) {
             $rootScope.alertMessage = message ? message : '';
@@ -68,10 +76,14 @@ angular.module('PortalApp')
             $($rootScope.loadingCover).hide();
         }
         $rootScope.toggleLoading = function () {
-            $rootScope.panelLoading = !$scope.panelLoading;
+            $timeout(function () {
+                $rootScope.panelLoading = !$scope.panelLoading;
+            })
         }
         $rootScope.startLoading = function () {
-            $rootScope.panelLoading = true;
+            $timeout(function () {
+                $rootScope.panelLoading = true;
+            })
         }
         $rootScope.stopLoading = function () {
             $timeout(function () {
