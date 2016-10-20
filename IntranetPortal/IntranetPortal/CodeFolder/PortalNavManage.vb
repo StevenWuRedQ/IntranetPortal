@@ -43,7 +43,7 @@ Public Class PortalNavManage
     Public Shared Function LoadMenuItem(context As HttpContext) As PortalNavItem
         Dim page = context.Request.Url.AbsolutePath
         Dim item = GetAllMenuItems(LoadMenuFromXml(context)) _
-                                  .Where(Function(a) a.NavigationUrl.ToLower.StartsWith(page.ToLower)).SingleOrDefault
+                                  .Where(Function(a) a.NavigationUrl IsNot Nothing AndAlso a.NavigationUrl.ToLower.StartsWith(page.ToLower)).FirstOrDefault
 
         Return item
     End Function

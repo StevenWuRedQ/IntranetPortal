@@ -2,7 +2,7 @@
 Imports IntranetPortal.Data
 
 Public Class NewOfferAccepted
-    Inherits System.Web.UI.Page
+    Inherits PortalPage
 
     Public Property Address As String
     Public Property AcceptedDate As DateTime?
