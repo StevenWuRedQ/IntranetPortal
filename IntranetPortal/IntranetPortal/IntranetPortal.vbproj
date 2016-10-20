@@ -1799,13 +1799,6 @@
       <DependentUpon>NewOfferPreview.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="NewOffer\NewOfferTracking.aspx.designer.vb">
-      <DependentUpon>NewOfferTracking.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="NewOffer\NewOfferTracking.aspx.vb">
-      <DependentUpon>NewOfferTracking.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.designer.vb">
       <DependentUpon>LoadFileFromSharepoint.aspx</DependentUpon>
     </Compile>
@@ -7438,7 +7431,6 @@
     <Content Include="NewOffer\NewOfferList.aspx" />
     <Content Include="NewOffer\NewOfferPreview.aspx" />
     <Content Include="NewOffer\Templates\offer-business-form.html" />
-    <Content Include="NewOffer\NewOfferTracking.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />

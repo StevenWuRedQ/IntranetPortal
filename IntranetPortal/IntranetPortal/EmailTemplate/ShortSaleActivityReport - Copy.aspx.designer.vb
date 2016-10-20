@@ -11,32 +11,23 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class NewOfferTracking
-    
+Partial Public Class ShortSaleActivityReport
+
     '''<summary>
-    '''PropertyInfo control.
+    '''form1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PropertyInfo As Global.IntranetPortal.PropertyInfo
-    
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
     '''<summary>
-    '''cbpLogs control.
+    '''chartActivity control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbpLogs As Global.DevExpress.Web.ASPxCallbackPanel
-    
-    '''<summary>
-    '''ActivityLogs control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
+    Protected WithEvents chartActivity As Global.DevExpress.XtraCharts.Web.WebChartControl
 End Class
