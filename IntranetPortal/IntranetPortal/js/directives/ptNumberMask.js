@@ -49,7 +49,7 @@ angular.module("PortalApp")
 
                 }
 
-                scope.$watch(attrs.ngModel, function () {
+                scope.$watch(attrs.ngModel, function (newvalue) {
                     if ($(el).is(":focus")) return;
                     $(el).formatCurrency(formatConfig);
                 });
@@ -68,8 +68,6 @@ angular.module("PortalApp")
                     } else {
                         $(this).formatCurrency(formatConfig);
                     }
-
-
                 });
                 $(el).on('focus', function () {
                     $(this).toNumber()

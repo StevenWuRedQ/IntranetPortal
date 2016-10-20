@@ -357,16 +357,16 @@
   </PortalNavItem>
 
   <PortalNavItem Name="Underwriter" Text="Underwriter" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>Underwriter</UserRoles>
+    <UserRoles>Underwriter,Sales-Executive</UserRoles>
     <Items>
       <PortalNavItem Name="UnderwriterSummary2" Text="Summary" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
-        <UserRoles>Underwriter</UserRoles>
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="UnderwriterSummary" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
-        <UserRoles>Underwriter</UserRoles>
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
@@ -675,7 +675,7 @@
   </PortalNavItem>
 
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager</UserRoles>
+    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager,DocSearch-Outside</UserRoles>
     <Items>
       <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
@@ -720,12 +720,13 @@
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="DocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
-        <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
+        <UserRoles>Entity-Manager,Relation-Manager,DocSearch-Outside</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
         </FontClass>
         <Items>
           <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+            <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
             <FontClass>
               <![CDATA[<i class="fa fa-star"></i>]]>
             </FontClass>
@@ -734,6 +735,7 @@
             </FrontButton>
           </PortalNavItem>
           <PortalNavItem Name="AgentNewLeads" Text="Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=leadsDocSearch" ShowAmount="false">
+            <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
             <FontClass>
               <![CDATA[<i class="fa fa-line-chart"></i>]]>
             </FontClass>
@@ -741,6 +743,7 @@
         </Items>
       </PortalNavItem>
       <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
+        <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>

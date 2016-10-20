@@ -13,10 +13,80 @@ Imports IntranetPortal.Data
 Public Class NewOfferNotifyRule
     Inherits BaseRule
 
+    Public Property IsWeekly As Boolean = True
+
     Public Overrides Sub Execute()
-        NotifyShortSale()
-        NotifyTeamManager()
+        If IsWeekly Then
+            NotifyShortSale()
+            NotifyTeamManager()
+        Else
+            NotifyNewOfferDue()
+        End If
     End Sub
+
+    ''' <summary>
+    ''' Notify if any new offer is due
+    ''' include completed and InProcess new offer
+    ''' </summary>
+    Public Sub NotifyNewOfferDue()
+        Dim teams = Core.PortalSettings.GetValue("ActiveTeams")
+        Using client As New PortalService.CommonServiceClient
+            For Each tm In teams.Split(";")
+                If PropertyOfferManage.HasCompletedNewOfferDue(tm) Then
+                    Dim emails = LoadEmails(tm, "NewOffer-Notify2")
+                    If Not String.IsNullOrEmpty(emails) Then
+                        Dim subject = String.Format("Past Due of Completed NewOffer for {0}", tm)
+                        Dim params As New Dictionary(Of String, String) From {
+                                {"team", tm}
+                            }
+
+                        client.SendEmailByControl(emails, subject, "NewOfferCompletedDue", params)
+                        Threading.Thread.Sleep(1000)
+                    End If
+                End If
+
+                If PropertyOfferManage.HasInProcessNewOfferDue(tm) Then
+                    Dim emails = LoadEmails(tm, "NewOffer-Notify3")
+                    If Not String.IsNullOrEmpty(emails) Then
+                        Dim subject = String.Format("Past Due of InProcess NewOffer for {0}", tm)
+                        Dim params As New Dictionary(Of String, String) From {
+                                {"team", tm}
+                            }
+
+                        client.SendEmailByControl(emails, subject, "NewOfferInProcessDue", params)
+                        Threading.Thread.Sleep(1000)
+                    End If
+                End If
+
+                If PropertyOfferManage.HasPendingNewOfferDue(tm) Then
+                    Dim emails = LoadEmails(tm, "NewOffer-Notify4")
+                    If Not String.IsNullOrEmpty(emails) Then
+                        Dim subject = String.Format("Past Due of Pending NewOffer for {0}", tm)
+                        Dim params As New Dictionary(Of String, String) From {
+                            {"team", tm}
+                        }
+
+                        client.SendEmailByControl(emails, subject, "NewOfferPendingDue", params)
+                        Threading.Thread.Sleep(1000)
+                    End If
+                End If
+            Next
+        End Using
+    End Sub
+
+    Private Function LoadEmails(tm As String, roleName As String) As String
+        Dim mgr = Team.GetTeam(tm).Manager
+        Dim users = Roles.GetUsersInRole(roleName)
+        users = users.Concat({mgr}).ToArray
+        Dim emails As String = Employee.GetEmpsEmails(users)
+
+        If String.IsNullOrEmpty(emails) Then
+            Log("Can't load team manager emails - Team: " & tm)
+            Return Nothing
+        End If
+
+        Return emails
+    End Function
 
     Private Sub NotifyShortSale()
         Dim users = Roles.GetUsersInRole("NewOffer-Notify")

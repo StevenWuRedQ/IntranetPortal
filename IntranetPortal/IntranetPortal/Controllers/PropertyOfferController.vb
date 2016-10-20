@@ -104,5 +104,19 @@ Namespace Controllers
             Return Ok()
         End Function
 
+        <HttpGet>
+        <Route("api/PropertyOffer/UnderwritingNewoffer")>
+        Public Function getUnderwritingNewoffer() As IHttpActionResult
+
+            Using ctx As New PortalEntities
+                Dim result = ctx.UnderwritingTrackingViews.OrderBy(Function(a) a.BBLE)
+
+
+                Return Ok(result.ToArray)
+            End Using
+
+        End Function
+
+
     End Class
 End Namespace

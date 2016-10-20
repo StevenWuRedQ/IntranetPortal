@@ -13,7 +13,7 @@ Public Class LeadTaxSearchRequest
 
         Dim ld = Data.LeadInfoDocumentSearch.GetInstance(bble)
         If ld.Status = Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then
-            If Not Authenticate(UserName) Then
+            If Not PageAuthorization Then
                 Server.Transfer("/PortalError.aspx?code=1001")
             End If
         Else
@@ -26,7 +26,7 @@ Public Class LeadTaxSearchRequest
     End Sub
 
     Protected Overrides Sub LoadWithoutLeadsData()
-        If Not Authenticate(UserName) Then
+        If Not PageAuthorization Then
             Server.Transfer("/PortalError.aspx?code=1001")
         End If
     End Sub
@@ -36,5 +36,5 @@ Public Class LeadTaxSearchRequest
         Return ur.Any(Function(r) UserRoles.Contains(r))
     End Function
 
-    Private UserRoles() As String = {"Entity-Manager", "Relation-Manager", "Admin"}
+    Private UserRoles() As String = {"Entity-Manager", "Relation-Manager", "Admin", "DocSearch-Outside", "Sales-Executive"}
 End Class

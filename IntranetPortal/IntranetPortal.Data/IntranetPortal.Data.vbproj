@@ -161,6 +161,9 @@
     <Compile Include="ADOEntity\UnderwritingRequest.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\UnderwritingTrackingView.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="Auction\AuctionProperty.vb" />
     <Compile Include="Audit\AuditLog.vb" />
     <Compile Include="BusinessForm\BusinessDataBase.vb" />

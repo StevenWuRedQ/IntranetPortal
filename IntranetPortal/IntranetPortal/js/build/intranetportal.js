@@ -2,12 +2,12 @@ var portalApp = angular.module('PortalApp',
     ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
 
 angular.module('PortalApp')
-    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
+    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state', function ($rootScope, $uibModal, $timeout, $state) {
         $rootScope.AlertModal = null;
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');
         $rootScope.panelLoading = false;
-
+        $rootScope.$state = $state;
         $rootScope.alert = function (message) {
             $rootScope.alertMessage = message ? message : '';
             $rootScope.AlertModal = $uibModal.open({
@@ -1874,13 +1874,15 @@ angular.module('PortalApp')
          * if isImport present also load data from Doc Search and Leads Info
          * 
          **/
-        underwriter.load = function (/* optional */ bble, /* optional */ isImport) {
+        underwriter.load = function (/* optional */ bble) {
+            //debugger;
             var data = underwritingFactory.build();
             if (bble) {
-                var _data = underwriter.get({ BBLE: bble.trim }, function () {
+                var _data = underwriter.get({ BBLE: bble.trim() }, function (d) {
+                    _data.BBLE = bble;
                     _.defaults(_data, data);
                     //debugger;
-                    if (isImport) {
+                    if (!_data.Id) {
                         data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
                             data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {
                                 mapData(data);
@@ -1903,8 +1905,8 @@ angular.module('PortalApp')
             //debugger;
             var float = parseFloat;
             var int = parseInt;
-            // PropertyInfo
-            d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? "Residential" : "Not Residential" })();
+            // PropertyInfo 1:residential 2: nonresidential
+            d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? 1 : 2})();
 
             // Liens
             d.Liens.TaxLien = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienSettlement * float(d.RehabInfo.DealTimeMonths));
@@ -1960,7 +1962,7 @@ angular.module('PortalApp')
             d.Resale.TransferTax = (function () {
                 var pr = parseFloat(d.Resale.ProbableResale);
                 var rate;
-                if (d.PropertyInfo.PropertyType == 'Residential') {
+                if (d.PropertyInfo.PropertyType == 1) {
                     if (pr <= 500000) {
                         rate = 0.01;
                     } else if (pr > 500000) {
@@ -1983,7 +1985,7 @@ angular.module('PortalApp')
             d.LoanCosts.LoanClosingCost = (function () {
                 var la = d.LoanTerms.LoanAmount;
                 var rate;
-                if (d.PropertyInfo.PropertyType == 'Residential') {
+                if (d.PropertyInfo.PropertyType == 1) {
                     if (la <= 500000) {
                         rate = 0.02;
 
@@ -2137,12 +2139,11 @@ angular.module('PortalApp')
             d.RentalModel.ROITotal = helper.ROITotal;
         }
 
-        underwriter.save = function (d) {
-
-            $http({
+        underwriter.save = function (data) {
+            return $http({
                 method: 'POST',
                 url: '/api/underwriter',
-                data: d,
+                data: data,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -2150,6 +2151,8 @@ angular.module('PortalApp')
             })
 
         }
+
+
         return underwriter;
 
     }]);
@@ -2309,8 +2312,7 @@ angular.module("PortalApp")
             updateon: '=',
             docsearch: '=',
             leadsinfo: '=',
-            showinfo: '=',
-            underwritemode: '='
+            viewmode: '='
         },
         templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
         link: function (scope)
@@ -3855,7 +3857,7 @@ angular.module("PortalApp")
 
                 }
 
-                scope.$watch(attrs.ngModel, function () {
+                scope.$watch(attrs.ngModel, function (newvalue) {
                     if ($(el).is(":focus")) return;
                     $(el).formatCurrency(formatConfig);
                 });
@@ -3874,8 +3876,6 @@ angular.module("PortalApp")
                     } else {
                         $(this).formatCurrency(formatConfig);
                     }
-
-
                 });
                 $(el).on('focus', function () {
                     $(this).toNumber()
@@ -3883,6 +3883,38 @@ angular.module("PortalApp")
             },
         };
     })
+angular.module("PortalApp")
+    .directive('ptNumberMaskPatch', function () {
+        return {
+            priority: 1,
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                var format = attrs['maskformat'] || '';
+                scope.$watch(attrs.ngModel, function (newvalue) {
+                    if ($(el).is(":focus")) return;
+                    if (format == 'money') {
+                        if (typeof newvalue == 'string') {
+                            var cleanedvalue = newvalue.replace("$", "").replace(",", "")
+                            angular.element(el).scope().$eval(attrs.ngModel + "='" + cleanedvalue + "'")
+                        }
+                    }
+                });
+                $(el).on('blur', function () {
+                    if (format == 'money') {
+                        if (typeof this.value == 'string') {
+                            var cleanedvalue = this.value.replace("$", "").replace(",", "");
+                            if (cleanedvalue.length != this.value.length) {
+                                var targetScope = angular.element(el).scope();
+                                targetScope.$eval(attrs.ngModel + "='" + cleanedvalue + "'");
+                                targetScope.$apply();
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    })
+
 angular.module("PortalApp")
     .directive('ptRadio', function () {
         return {
@@ -4691,23 +4723,17 @@ angular.module('PortalApp')
  * naming wrong becuase the name always change from spec guys.
  */
 angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
-        ptContactServices, ptCom, DocSearch, LeadsInfo
-        , DocSearchEavesdropper, DivError
-        ) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
         //New Model(this,arguments)
         leadsInfoBBLE = $('#BBLE').val();
         $scope.ShowInfo = $('#ShowInfo').val();
         $scope.ptContactServices = ptContactServices;
-
-
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
         //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
-
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -4803,74 +4829,74 @@ angular.module('PortalApp')
 
             return true;
             ////////////under are old validate///////////////////
-            var errormsg = '';
-            var validateFields = [
-                "Has_Deed_Purchase_Deed",
-                "Has_c_1st_Mortgage_c_1st_Mortgage",
-                "fha",
-                "Has_c_2nd_Mortgage_c_2nd_Mortgage",
-                "has_Last_Assignment_Last_Assignment",
-                "fannie",
-                "Freddie_Mac_",
-                "Has_Due_Property_Taxes_Due",
-                "Has_Due_Water_Charges_Due",
-                "Has_Open_ECB_Violoations",
-                "Has_Open_DOB_Violoations",
-                "hasCO",
-                "Has_Violations_HPD_Violations",
-                "Is_Open_HPD_Charges_Not_Paid_Transferred",
-                "has_Judgments_Personal_Judgments",
-                "has_Judgments_HPD_Judgments",
-                "has_IRS_Tax_Lien_IRS_Tax_Lien",
-                "hasNysTaxLien",
-                "has_Sidewalk_Liens_Sidewalk_Liens",
-                "has_Vacate_Order_Vacate_Order",
-                "has_ECB_Tickets_ECB_Tickets",
-                "has_ECB_on_Name_ECB_on_Name_other_known_address",
+            //var errormsg = '';
+            //var validateFields = [
+            //    "Has_Deed_Purchase_Deed",
+            //    "Has_c_1st_Mortgage_c_1st_Mortgage",
+            //    "fha",
+            //    "Has_c_2nd_Mortgage_c_2nd_Mortgage",
+            //    "has_Last_Assignment_Last_Assignment",
+            //    "fannie",
+            //    "Freddie_Mac_",
+            //    "Has_Due_Property_Taxes_Due",
+            //    "Has_Due_Water_Charges_Due",
+            //    "Has_Open_ECB_Violoations",
+            //    "Has_Open_DOB_Violoations",
+            //    "hasCO",
+            //    "Has_Violations_HPD_Violations",
+            //    "Is_Open_HPD_Charges_Not_Paid_Transferred",
+            //    "has_Judgments_Personal_Judgments",
+            //    "has_Judgments_HPD_Judgments",
+            //    "has_IRS_Tax_Lien_IRS_Tax_Lien",
+            //    "hasNysTaxLien",
+            //    "has_Sidewalk_Liens_Sidewalk_Liens",
+            //    "has_Vacate_Order_Vacate_Order",
+            //    "has_ECB_Tickets_ECB_Tickets",
+            //    "has_ECB_on_Name_ECB_on_Name_other_known_address",
 
-                /**
-                 * @author Steven
-                 * @date   8/19/2016
-                 * 
-                 * @fix 
-                 * git commit bde6b6d tax search
-                 * add validated to new version doc search at least one item add 
-                 * when select yes control grid
-                 */
-                // under are one to multiple//
-                "Has_Other_Mortgage",
-                "Has_Other_Liens",
-                "Has_TaxLiensCertifcate",
-                "Has_COS_Recorded",
-                "Has_Deed_Recorded",
-                ///////////////////////////
+            //    /**
+            //     * @author Steven
+            //     * @date   8/19/2016
+            //     * 
+            //     * @fix 
+            //     * git commit bde6b6d tax search
+            //     * add validated to new version doc search at least one item add 
+            //     * when select yes control grid
+            //     */
+            //    // under are one to multiple//
+            //    "Has_Other_Mortgage",
+            //    "Has_Other_Liens",
+            //    "Has_TaxLiensCertifcate",
+            //    "Has_COS_Recorded",
+            //    "Has_Deed_Recorded",
+            //    ///////////////////////////
 
-            ];
-            var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
-                                ["Has_Other_Liens", "OtherLiens"],
-                                ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
-                                ["Has_COS_Recorded", "COSRecorded"],
-                                ["Has_Deed_Recorded", "DeedRecorded"]];
+            //];
+            //var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
+            //                    ["Has_Other_Liens", "OtherLiens"],
+            //                    ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
+            //                    ["Has_COS_Recorded", "COSRecorded"],
+            //                    ["Has_Deed_Recorded", "DeedRecorded"]];
 
-            var fields = $scope.DocSearch.LeadResearch;
-            if (fields) {
-                for (var i = 0; i < validateFields.length; i++) {
-                    var f = validateFields[i];
-                    if (fields[f] === undefined) {
-                        errormsg += "The fields marked * must been filled please check them before submit!<br>";
-                        break;
-                    }
-                }
+            //var fields = $scope.DocSearch.LeadResearch;
+            //if (fields) {
+            //    for (var i = 0; i < validateFields.length; i++) {
+            //        var f = validateFields[i];
+            //        if (fields[f] === undefined) {
+            //            errormsg += "The fields marked * must been filled please check them before submit!<br>";
+            //            break;
+            //        }
+            //    }
 
-                for (var j = 0; j < checkedAttrs.length; j++) {
-                    var f1 = checkedAttrs[j];
-                    if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
-                        errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
-                    }
-                }
-            }
+            //    for (var j = 0; j < checkedAttrs.length; j++) {
+            //        var f1 = checkedAttrs[j];
+            //        if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
+            //            errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
+            //        }
+            //    }
+            //}
 
-            return errormsg;
+            //return errormsg;
 
         }
 
@@ -4888,7 +4914,7 @@ angular.module('PortalApp')
 
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            $scope.DocSearch.ResutContent = $("#new-ds-summary").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
@@ -4911,26 +4937,28 @@ angular.module('PortalApp')
 
 
         // only one of fha, fannie, freddie_mac can be yes at the same time
-        function fha_fannie_freddie(){
-            var EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
-            for (var i = 0; i < EXCLUSIVE_FIELD.length; i++) {
-                var field = EXCLUSIVE_FIELD[i];
-                $scope.$watch(field, function (nv, ov) {
-                    if (nv == true) {
-                        debugger;
-                        var rest_exclusive_filed = _.without(EXCLUSIVE_FIELD, field);
-                        for (var j = 0; j < rest_exclusive_filed.length; j++) {
-                            if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
-                        }
-                    }
 
-                })
+        $scope.$watch('DocSearch.LeadResearch.fha', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                if ($scope.DocSearch.LeadResearch.Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
             }
-        };
+        })
+        $scope.$watch('DocSearch.LeadResearch.fannie', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+                if ($scope.DocSearch.LeadResearch.Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+            }
+        })
 
-        fha_fannie_freddie();
+        $scope.$watch('DocSearch.LeadResearch.Freddie_Mac_', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+            }
+        })
 
-        $scope.markCompleted = function (status,msg) {
+        $scope.markCompleted = function (status, msg) {
             var xhrfunc = function (note) {
                 //debugger;
 
@@ -4942,11 +4970,11 @@ angular.module('PortalApp')
                 $http({
                     method: 'POST',
                     url: '/api/LeadInfoDocumentSearches/MarkCompleted',
-                    data: payload                    
+                    data: payload
                 }).then(function succ(d) {
                     //debugger;
                     $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
-                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy; 
+                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
                     $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
                     $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
                 }, function err() {
@@ -4966,9 +4994,18 @@ angular.module('PortalApp')
             });
 
         }
-        //debugger;
-        if(location.search.indexOf('si=1')>=0){
-            $scope.underwritemode = true;
+
+        try {
+            var modePatten = /mode=\d/;
+            var matches = modePatten.exec(location.search);
+            //debugger;
+            if (matches && matches[0]) {
+                $scope.viewmode = parseInt(matches[0].split('=')[1]);
+            } else {
+                $scope.viewmode = 0;
+            }
+        } catch (ex) {
+            $scope.viewmode = 0;
         }
     });
 /* global LegalShowAll */
@@ -9011,53 +9048,15 @@ angular.module("PortalApp")
 
 
 }])
-angular.module("PortalApp").config(function ($stateProvider) {
-
-    var underwriter = {
-        name: 'underwriter',
-        url: '/underwriter',
-        template: '<ui-view></ui-view>',
-        controller: 'UnderwriterController'
-    }
-
-    var dataInput = {
-        name: 'underwriter.datainput',
-        url: '/datainput',
-        templateUrl: '/js/Views/Underwriter/datainput.tpl.html',
-    }
-    var flipsheets = {
-        name: 'underwriter.flipsheets',
-        url: '/flipsheets',
-        templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
-    }
-    var rentalmodels = {
-        name: 'underwriter.rentalmodels',
-        url: '/rentalmodels',
-        templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
-    }
-    var tables = {
-        name: 'underwriter.tables',
-        url: '/tables',
-        templateUrl: '/js/Views/Underwriter/tables.tpl.html'
-    }
-
-    $stateProvider.state(underwriter)
-                    .state(dataInput)
-                    .state(flipsheets)
-                    .state(rentalmodels)
-                    .state(tables);
-
-});
-
 angular.module("PortalApp").controller("UnderwriterController",
                 ['$scope', 'ptCom', 'ptUnderwriter', '$location', '$http',
         function ($scope, ptCom, ptUnderwriter, $location, $http) {
 
             $scope.data = {};
             $scope.list = {/*dataSource*/ };
-            $scope.init = function (bble, isImport) {
+            $scope.init = function (bble) {
                 //ptCom.startLoading()
-                $scope.data = ptUnderwriter.load(bble, isImport);
+                $scope.data = ptUnderwriter.load(bble);
                 if ($scope.data.$promise) {
                     $scope.data.$promise.then(function () {
                         $scope.calculate();
@@ -9094,7 +9093,16 @@ angular.module("PortalApp").controller("UnderwriterController",
             }
 
             $scope.save = function () {
-                ptUnderwriter.save($scope.data);
+                ptUnderwriter.save($scope.data).then(function (d) {
+                    //debugger;
+                    if (d.data) {
+                        $scope.data = d.data;
+                    }
+                    alert("Save Successful");
+                }, function () {
+                    alert("fail to save");
+                })
+
             }
 
             $scope.onSelectionChange = function () {
@@ -9103,8 +9111,8 @@ angular.module("PortalApp").controller("UnderwriterController",
 
             // init controller;
             var search = $location.search();
-            if (search && search.bble) {
-                $scope.init(search.bble, true)
+            if (search && search.BBLE) {
+                $scope.init(search.BBLE)
             } else {
                 $scope.init();
             }
@@ -9118,21 +9126,37 @@ angular.module("PortalApp")
             $scope.Review = $state.current.data.Review || '';
         }
         if ($scope.BBLE) {
-            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim(), }, function () {
-                $scope.data.BBLE = $scope.BBLE;
-                UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(function success(res) {
-                    $scope.data.Address = res.data.Address;
-                    $scope.data.Status = res.data.Status || $scope.data.Status;
-                    $scope.data.CompletedDate = res.data.CompletedDate || undefined;
+            $scope.data = UnderwritingRequest.get(
+                { BBLE: $scope.BBLE.trim() },
+                function () {
+                    $scope.data.BBLE = $scope.BBLE;
+                    UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(
+                        function success(res) {
+                            $scope.data.Address = res.data.Address;
+                            $scope.data.Status = res.data.Status || $scope.data.Status;
+                            $scope.data.CompletedDate = res.data.CompletedDate || undefined;
 
-                }, function error() {
-                    console.log('fail to fetch addiontal infomation.')
-                });
+                        }, function error() {
+                            console.log('fail to fetch addiontal infomation.')
+                        }
+                    );
 
-            }, function () {
-                $scope.data.BBLE = $scope.BBLE;
-            })
+                },
+                function () {
+                    $scope.data.BBLE = $scope.BBLE;
+                }
+            )
         }
+    }
+
+
+    $scope.cleanForm = function () {
+        var oldId = $scope.data.Id;
+        $scope.data = {};
+        $scope.data.Id = oldId;
+        if ($scope.BBLE) $scope.data.BBLE = $scope.BBLE;
+        $scope.formCleaned = true;
+    
     }
 
     //check input and textarea to see if there is a error attribute
@@ -9195,7 +9219,7 @@ angular.module("PortalApp")
     }
 
 
-    $scope.requestDocSearch = function () {
+    $scope.requestDocSearch = function (isResubmit) {
         $scope.$broadcast('ptSelfCheck');
         // debugger;
         if ($scope.checkValidate()) {
@@ -9206,26 +9230,44 @@ angular.module("PortalApp")
         UnderwritingRequest.createSearch($scope.BBLE).then(function () {
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
+            debugger;
+            if (isResubmit) {
+                $scope.data.CompletedDate = undefined;
+                $scope.formCleaned = false;
+            }
+            debugger;
             $scope.save(true);
+
         }, function () {
             ptCom.alert('Fail to create search')
 
         })
     }
 
+
+    $scope.remainDays = function () {
+        if (!$scope.data || !$scope.data.CompletedDate) {
+            return "more than 60";
+        } else {
+            var timenow = new Date().getTime();
+            var timeCompleted = new Date($scope.data.CompletedDate);
+            var diff = timenow - timeCompleted;
+            var dayinmsec = 1000 * 60 * 60 * 24;
+            return 60 - Math.ceil(diff / dayinmsec);
+        }
+
+    }
+
     $scope.completedOver60days = function () {
-        if ($scope.data.CompletedDate == undefined){
+        if (!$scope.data || $scope.data.CompletedDate == undefined) {
             return false;
         }
         else {
-            timenow = new Date().getTime();
-            timeCompleted = new Date($scope.data.CompletedDate);
-            _60days = 1000 * 60 * 60 * 24 * 60;
-            return timenow - timeCompleted > _60days ? true : false;
+            return $scope.remainDays() < 0 ? true : false;
+        } 
 
-        }
-        
     }
+
 
     $scope.$watch(function () { return $location.search() }, function () {
         // debugger;

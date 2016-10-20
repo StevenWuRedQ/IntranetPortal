@@ -20,6 +20,10 @@ Partial Public Class Team
         End Using
     End Function
 
+    Public Shared Function GetTeamUsers(teamname As String) As String()
+        Return UserInTeam.GetTeamUsers(teamname, True).Select(Function(t) t.EmployeeName).ToArray
+    End Function
+
     Public Shared Function GetAllTeams() As List(Of Team)
         Using ctx As New Entities
             Return ctx.Teams.ToList

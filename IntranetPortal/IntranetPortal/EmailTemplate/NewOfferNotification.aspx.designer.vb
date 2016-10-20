@@ -23,11 +23,11 @@ Partial Public Class NewOfferNotification
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
-    '''NewOfferNotification control.
+    '''NewOfferInProcessDue control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NewOfferNotification As Global.IntranetPortal.NewOfferNotification1
+    Protected WithEvents NewOfferInProcessDue As Global.IntranetPortal.NewOfferPassDueControl
 End Class

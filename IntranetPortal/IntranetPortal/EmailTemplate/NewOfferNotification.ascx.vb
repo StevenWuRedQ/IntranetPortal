@@ -5,7 +5,6 @@ Imports IntranetPortal.Data
 Public Class NewOfferNotification1
     Inherits EmailTemplateControl
 
-
     Public Property TeamView As Boolean = False
     Public Property StartDate As DateTime
     Public Property EndDate As DateTime

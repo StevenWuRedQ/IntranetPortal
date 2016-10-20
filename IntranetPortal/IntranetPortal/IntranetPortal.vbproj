@@ -635,6 +635,7 @@
     <Compile Include="CodeFolder\PortalLisPen.vb" />
     <Compile Include="CodeFolder\PortalMembership.vb" />
     <Compile Include="CodeFolder\PortalNavItem.vb" />
+    <Compile Include="CodeFolder\PortalNavManage.vb" />
     <Compile Include="CodeFolder\PortalPage.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -643,6 +644,9 @@
     <Compile Include="CodeFolder\PropertyOfferManage.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
+    <Compile Include="CodeFolder\RoleBasePage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
     <Compile Include="CodeFolder\SummaryItemBase.vb">
@@ -1154,6 +1158,27 @@
     </Compile>
     <Compile Include="EmailTemplate\DeadleadsReport.ascx.vb">
       <DependentUpon>DeadleadsReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferPendingDue.ascx.designer.vb">
+      <DependentUpon>NewOfferPendingDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferPendingDue.ascx.vb">
+      <DependentUpon>NewOfferPendingDue.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferInProcessDue.ascx.designer.vb">
+      <DependentUpon>NewOfferInProcessDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferInProcessDue.ascx.vb">
+      <DependentUpon>NewOfferInProcessDue.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferCompletedDue.ascx.designer.vb">
+      <DependentUpon>NewOfferCompletedDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferCompletedDue.ascx.vb">
+      <DependentUpon>NewOfferCompletedDue.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EmailTemplate\NewOfferNotification.ascx.designer.vb">
@@ -1921,6 +1946,13 @@
       <DependentUpon>testPopup.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\UnderwritingSummary.aspx.designer.vb">
+      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\UnderwritingSummary.aspx.vb">
+      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\VendorsPopup.ascx.designer.vb">
       <DependentUpon>VendorsPopup.ascx</DependentUpon>
     </Compile>
@@ -2436,6 +2468,13 @@
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UnderWriter\DocSearchListNew.aspx.designer.vb">
+      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\DocSearchListNew.aspx.vb">
+      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UnderWriter\DocSearchList.aspx.designer.vb">
       <DependentUpon>DocSearchList.aspx</DependentUpon>
     </Compile>
@@ -2443,11 +2482,11 @@
       <DependentUpon>DocSearchList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="UnderWriter\UnderwriterClac.aspx.designer.vb">
-      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+    <Compile Include="UnderWriter\UnderwritingTracking.aspx.designer.vb">
+      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UnderWriter\UnderwriterClac.aspx.vb">
-      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+    <Compile Include="UnderWriter\UnderwritingTracking.aspx.vb">
+      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
@@ -6903,6 +6942,9 @@
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\AuctionDailyReport.ascx" />
     <Content Include="EmailTemplate\DeadleadsReport.ascx" />
+    <Content Include="EmailTemplate\NewOfferPendingDue.ascx" />
+    <Content Include="EmailTemplate\NewOfferInProcessDue.ascx" />
+    <Content Include="EmailTemplate\NewOfferCompletedDue.ascx" />
     <Content Include="EmailTemplate\NewOfferNotification.ascx" />
     <Content Include="EmailTemplate\PreSignNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
@@ -7248,6 +7290,7 @@
     <Content Include="js\directives\ptInitBind.js" />
     <Content Include="js\directives\ptInitModel.js" />
     <Content Include="js\directives\ptLink.js" />
+    <Content Include="js\directives\ptNumberMaskPatch.js" />
     <Content Include="js\directives\ptRadio.js" />
     <Content Include="js\directives\ptRadioInit.js" />
     <Content Include="js\directives\ptDate.js" />
@@ -7318,9 +7361,11 @@
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
     <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
+    <Content Include="js\Views\Underwriter\searchsummary.tpl.html" />
     <Content Include="js\Views\Underwriter\tables.tpl.html" />
     <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
     <Content Include="js\Views\Underwriter\datainput.tpl.html" />
+    <Content Include="js\Views\Underwriter\underwriting.tpl.html" />
     <Content Include="js\Views\Underwriter\underwriting_request.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
@@ -7501,6 +7546,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="NewOffer\ShortSaleNewOffer.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
+    <Content Include="PopupControl\UnderwritingSummary.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
@@ -7874,8 +7920,9 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
+    <Content Include="UnderWriter\DocSearchListNew.aspx" />
     <Content Include="UnderWriter\DocSearchList.aspx" />
-    <Content Include="UnderWriter\UnderwriterClac.aspx" />
+    <Content Include="UnderWriter\UnderwritingTracking.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
