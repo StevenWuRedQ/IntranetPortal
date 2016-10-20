@@ -357,16 +357,16 @@
   </PortalNavItem>
 
   <PortalNavItem Name="Underwriter" Text="Underwriter" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>Underwriter</UserRoles>
+    <UserRoles>Underwriter,Sales-Executive</UserRoles>
     <Items>
       <PortalNavItem Name="UnderwriterSummary2" Text="Summary" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
-        <UserRoles>Underwriter</UserRoles>
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="UnderwriterSummary" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
-        <UserRoles>Underwriter</UserRoles>
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>

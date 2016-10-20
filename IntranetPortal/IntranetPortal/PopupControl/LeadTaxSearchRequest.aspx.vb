@@ -36,5 +36,5 @@ Public Class LeadTaxSearchRequest
         Return ur.Any(Function(r) UserRoles.Contains(r))
     End Function
 
-    Private UserRoles() As String = {"Entity-Manager", "Relation-Manager", "Admin", "DocSearch-Outside"}
+    Private UserRoles() As String = {"Entity-Manager", "Relation-Manager", "Admin", "DocSearch-Outside", "Sales-Executive"}
 End Class
