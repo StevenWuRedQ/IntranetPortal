@@ -1,6 +1,6 @@
 ﻿
 Public Class ComplainsMng
-    Inherits System.Web.UI.Page
+    Inherits PortalPage
 
     Public Property ComplaintsAmount As Integer
     Public Property DetailView As Boolean
