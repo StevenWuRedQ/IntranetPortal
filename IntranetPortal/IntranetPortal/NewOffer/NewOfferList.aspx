@@ -25,8 +25,8 @@
             z-index: 1;
             top: 0;
             line-height: 38px;
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 24px;
+            font-weight: 600;             
         }
 
         .apply-filter-option > div:last-child {
@@ -38,7 +38,7 @@
     </style>
     <input type="text" style="display: none" />
     <div class="apply-filter-option">
-        Files
+        New Offer Files
         <div id="useFilterApplyButton"></div>
     </div>
     <div id="gridContainer" style="margin: 10px"></div>

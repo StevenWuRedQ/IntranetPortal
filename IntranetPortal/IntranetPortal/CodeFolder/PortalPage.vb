@@ -1,10 +1,24 @@
-﻿
-''' <summary>
+﻿''' <summary>
 ''' The base page class for Portal,
 ''' provide the Username, Employee object
 ''' </summary>
 Public Class PortalPage
     Inherits Page
+
+    Protected Sub Base_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not Page.IsPostBack Then
+            If Not PortalNavManage.IsViewable(HttpContext.Current) Then
+                PageAuthorization = False
+                NotAllowdAccess()
+            End If
+        End If
+    End Sub
+
+    Protected Property PageAuthorization As Boolean
+
+    Protected Overridable Sub NotAllowdAccess()
+        Server.Transfer("/PortalError.aspx?code=1001")
+    End Sub
 
     Private _userName As String
     Public ReadOnly Property UserName As String

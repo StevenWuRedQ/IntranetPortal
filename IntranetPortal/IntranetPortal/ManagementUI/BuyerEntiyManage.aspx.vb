@@ -1,7 +1,8 @@
 ﻿Imports IntranetPortal.Data
 
 Public Class BuyerEntiyManage
-    Inherits System.Web.UI.Page
+    Inherits PortalPage
+
     Public Filters As List(Of Object)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         BindEntity()

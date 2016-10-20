@@ -115,4 +115,5 @@
             Return context.Roles.Where(Function(r) r.ApplicationName = ApplicationName And r.Rolename = roleName).Count > 0
         End Using
     End Function
+
 End Class

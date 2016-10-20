@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NewOfferInProcessDue.ascx.vb" Inherits="IntranetPortal.NewOfferPassDueControl" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NewOfferPendingDue.ascx.vb" Inherits="IntranetPortal.NewOfferPendingDue" %>
 
 <style type="text/css">
     table {
@@ -40,19 +40,16 @@
 <div style="width: 900px">
     <% If OfferData IsNot Nothing AndAlso OfferData.Count > 0 %>
     <div class="topbar">
-        InProcess New Offers Past Due
-    </div>
-    <span class="text">The New Offers below were In Process for over one week but were not accepted by ShortSale.</span>
+        Pending for New Offer Due
+    </div>    
+    <span class="text">The Underwriting of leads below were accepted over two days but new offeres are not created.</span>
     <br />
     <br />
     <table style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px;" border="1" cellspacing="0">
         <thead style="border: 1px solid black; font-weight: bold; background-color: #efefef;">
             <tr>
                 <td>Property Address</td>
-                <td>Completed</td>
-                <td>Agent</td>
-                <td>Team</td>               
-                <td>InProcess</td>               
+                <td>UW Completed On</td>                   
                 <td>Duration</td>
             </tr>
         </thead>
@@ -60,12 +57,9 @@
             <% For Each offer In OfferData %>
             <tr>
                 <td>
-                    <a href="http://portal.myidealprop.com/viewleadsinfo.aspx?id=<%= offer.BBLE %>"><%= offer.Title %></a></td>
-                <td><%= string.Format("{0:d}", offer.UpdateDate) %></td>
-                <td><%= offer.LeadsOwner %></td>
-                <td><%= offer.Team %></td>
-                <td><%= offer.InProcessDate %></td>
-                <td><%= HumanizeTimeSpan(DateTime.Now - offer.InProcessDate) %></td>
+                    <a href="http://portal.myidealprop.com/viewleadsinfo.aspx?id=<%= offer.BBLE %>"><%= offer.PropertyAddress %></a></td>             
+                <td><%= offer.UnderwriteCompletedOn %></td>                     
+                <td><%= HumanizeTimeSpan(DateTime.Now - offer.UnderwriteCompletedOn) %></td>
             </tr>
             <% Next %>
         </tbody>
@@ -73,7 +67,7 @@
     <% End If %>
     <br />
     For more infomation, please <a href="http://portal.myidealprop.com/newoffer/newofferlist.aspx">click here</a>.
-    <br />
+            <br />
     <br />
     <br />
     Regards,<br />

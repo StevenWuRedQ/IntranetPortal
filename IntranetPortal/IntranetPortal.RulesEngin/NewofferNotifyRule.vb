@@ -66,7 +66,7 @@ Public Class NewOfferNotifyRule
                             {"team", tm}
                         }
 
-                        client.SendEmailByControl(emails, subject, "PendingNewOffer", params)
+                        client.SendEmailByControl(emails, subject, "NewOfferPendingDue", params)
                         Threading.Thread.Sleep(1000)
                     End If
                 End If

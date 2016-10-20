@@ -27,10 +27,14 @@ Public Class LeadsBasePage
         End If
     End Sub
 
+    Protected Overrides Sub NotAllowdAccess()
+
+    End Sub
+
     ''' <summary>
     ''' Base method to Load Leads related data
     ''' </summary>
-    ''' <param name="bble">The problem </param>
+    ''' <param name="bble">The property bble </param>
     Protected Overridable Sub LoadLeadsData(bble As String)
 
     End Sub
@@ -39,6 +43,10 @@ Public Class LeadsBasePage
     ''' Base method that call when property address is not specified
     ''' </summary>
     Protected Overridable Sub LoadWithoutLeadsData()
+        If Not PageAuthorization Then
+            Server.Transfer("/PortalError.aspx?code=1001")
+        End If
+
         Response.Write("No property data is provided. Please check.")
         Response.End()
     End Sub

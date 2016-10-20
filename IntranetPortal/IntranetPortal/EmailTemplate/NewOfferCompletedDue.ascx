@@ -40,9 +40,9 @@
 <div style="width: 900px">
     <% If OfferData IsNot Nothing AndAlso OfferData.Count > 0 %>
     <div class="topbar">
-        Completed New Offers Pass Due
+        Completed New Offers Past Due
     </div>    
-    <span class="text">Please check below NewOffers, which were completed for over one week but not move to In Process.</span>    
+    <span class="text"> The New Offers below were Completed over one week but were not moved to In Process. </span>    
     <br />
     <br />
     <table style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px;" border="1" cellspacing="0">

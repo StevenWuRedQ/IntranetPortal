@@ -52,7 +52,9 @@ Public Class ShortSaleNewOfferPage
     Protected Overrides Sub LoadWithoutLeadsData()
         If Request.QueryString("model") IsNot Nothing Then
             If Request.QueryString("model") = "List" Then
-
+                If Not PageAuthorization Then
+                    Server.Transfer("/PortalError.aspx?code=1001")
+                End If
             End If
         Else
             Server.Transfer("/PortalError.aspx?code=1001")

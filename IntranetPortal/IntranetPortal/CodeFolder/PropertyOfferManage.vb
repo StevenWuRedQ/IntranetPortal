@@ -205,7 +205,9 @@ Public Class PropertyOfferManage
     ''' <param name="teamName">Team name</param>
     ''' <returns></returns>
     Public Shared Function PendingNewOfferDue(teamName As String) As UnderwritingTrackingView()
-        Return PropertyOffer.PendingForNewOffer(Team.GetTeamUsers(teamName))
+        Return PropertyOffer.PendingForNewOffer(Team.GetTeamUsers(teamName)) _
+                            .Where(Function(a) a.UnderwriteCompletedOn < DateTime.Now.AddDays(-1)) _
+                            .ToArray
     End Function
 
     ''' <summary>

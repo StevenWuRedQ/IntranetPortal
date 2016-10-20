@@ -129,7 +129,7 @@ Partial Public Class PropertyOffer
     ''' <returns></returns>
     Public Shared Function PendingForNewOffer(names As String()) As UnderwritingTrackingView()
         Using ctx As New PortalEntities
-            Dim uws = ctx.UnderwritingTrackingViews.Where(Function(a) a.UnderwriteStatus = 1 AndAlso a.OfferStatus Is Nothing)
+            Dim uws = ctx.UnderwritingTrackingViews.Where(Function(a) a.UnderwriteStatus = 1 AndAlso a.NewOfferStatus Is Nothing)
             Return uws.ToArray
         End Using
     End Function
