@@ -675,7 +675,7 @@
   </PortalNavItem>
 
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager,DocSearch-Outside</UserRoles>
+    <UserRoles>OfficeManager-*,Entity-Manager,ShortSale-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager,DocSearch-Outside</UserRoles>
     <Items>
       <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
@@ -743,7 +743,7 @@
         </Items>
       </PortalNavItem>
       <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
-        <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager</UserRoles>
+        <UserRoles>OfficeManager-*,Complaints-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>

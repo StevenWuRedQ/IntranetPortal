@@ -21,29 +21,35 @@ Public Class PortalNavManage
     End Function
 
     Public Shared Function IsViewable(context As HttpContext) As Boolean
-        Dim item = LoadMenuItem(context)
+        Dim items = LoadMenuItem(context)
 
-        If item Is Nothing Then
+        If items Is Nothing AndAlso items.Count = 0 Then
             Return True
         End If
 
         Dim result = False
-        Do While item.Name <> "Root"
-            If String.IsNullOrEmpty(item.UserRoles) Then
-                item = item.Parent
-                Continue Do
-            End If
+        For Each item In items
+            Do While item.Name <> "Root"
+                If String.IsNullOrEmpty(item.UserRoles) Then
+                    item = item.Parent
+                    Continue Do
+                End If
 
-            Return item.IsUserRoles(context.User.Identity.Name)
-        Loop
+                If item.IsUserRoles(context.User.Identity.Name) Then
+                    Return True
+                End If
 
-        Return True
+                Continue For
+            Loop
+        Next
+
+        Return False
     End Function
 
-    Public Shared Function LoadMenuItem(context As HttpContext) As PortalNavItem
+    Public Shared Function LoadMenuItem(context As HttpContext) As PortalNavItem()
         Dim page = context.Request.Url.AbsolutePath
         Dim item = GetAllMenuItems(LoadMenuFromXml(context)) _
-                                  .Where(Function(a) a.NavigationUrl IsNot Nothing AndAlso a.NavigationUrl.ToLower.StartsWith(page.ToLower)).FirstOrDefault
+                                  .Where(Function(a) a.NavigationUrl IsNot Nothing AndAlso a.NavigationUrl.ToLower.StartsWith(page.ToLower)).ToArray
 
         Return item
     End Function
