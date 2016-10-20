@@ -2,21 +2,18 @@
 Imports Humanizer.Localisation
 Imports IntranetPortal.Data
 
-Public Class NewOfferNotification1
+Public Class NewOfferPendingDue
     Inherits EmailTemplateControl
 
-    Public Property TeamView As Boolean = False
-    Public Property StartDate As DateTime
-    Public Property EndDate As DateTime
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            OfferData = PropertyOfferManage.GetSSAcceptedOfferLastWeek("*", StartDate, EndDate)
+            OfferData = PropertyOfferManage.PendingNewOfferDue("*")
         End If
     End Sub
 
     Public Function HumanizeTimeSpan(ts As TimeSpan?) As String
         If ts.HasValue Then
-            Return ts.Value.Humanize(maxUnit:=TimeUnit.Day)
+            Return ts.Value.Humanize()
         End If
 
         Return Nothing
@@ -26,11 +23,9 @@ Public Class NewOfferNotification1
         MyBase.BindData(params)
         If params.ContainsKey("team") Then
             Dim tm = params("team")
-            OfferData = PropertyOfferManage.GetSSAcceptedOfferLastWeek(tm, StartDate, EndDate)
-            TeamView = True
+            OfferData = PropertyOfferManage.PendingNewOfferDue(tm)
         End If
     End Sub
 
-    Public Property Manager As String = "Manager"
-    Public Property OfferData As PropertyOffer()
+    Public Property OfferData As UnderwritingTrackingView()
 End Class

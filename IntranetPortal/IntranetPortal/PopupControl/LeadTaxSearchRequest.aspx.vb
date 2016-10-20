@@ -13,7 +13,7 @@ Public Class LeadTaxSearchRequest
 
         Dim ld = Data.LeadInfoDocumentSearch.GetInstance(bble)
         If ld.Status = Data.LeadInfoDocumentSearch.SearchStatus.NewSearch Then
-            If Not Authenticate(UserName) Then
+            If Not PageAuthorization Then
                 Server.Transfer("/PortalError.aspx?code=1001")
             End If
         Else
@@ -26,7 +26,7 @@ Public Class LeadTaxSearchRequest
     End Sub
 
     Protected Overrides Sub LoadWithoutLeadsData()
-        If Not Authenticate(UserName) Then
+        If Not PageAuthorization Then
             Server.Transfer("/PortalError.aspx?code=1001")
         End If
     End Sub

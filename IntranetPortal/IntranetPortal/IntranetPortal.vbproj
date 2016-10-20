@@ -628,6 +628,7 @@
     <Compile Include="CodeFolder\PortalLisPen.vb" />
     <Compile Include="CodeFolder\PortalMembership.vb" />
     <Compile Include="CodeFolder\PortalNavItem.vb" />
+    <Compile Include="CodeFolder\PortalNavManage.vb" />
     <Compile Include="CodeFolder\PortalPage.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -636,6 +637,9 @@
     <Compile Include="CodeFolder\PropertyOfferManage.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
+    <Compile Include="CodeFolder\RoleBasePage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
     <Compile Include="CodeFolder\SummaryItemBase.vb">
@@ -1146,6 +1150,27 @@
     </Compile>
     <Compile Include="EmailTemplate\DeadleadsReport.ascx.vb">
       <DependentUpon>DeadleadsReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferPendingDue.ascx.designer.vb">
+      <DependentUpon>NewOfferPendingDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferPendingDue.ascx.vb">
+      <DependentUpon>NewOfferPendingDue.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferInProcessDue.ascx.designer.vb">
+      <DependentUpon>NewOfferInProcessDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferInProcessDue.ascx.vb">
+      <DependentUpon>NewOfferInProcessDue.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferCompletedDue.ascx.designer.vb">
+      <DependentUpon>NewOfferCompletedDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferCompletedDue.ascx.vb">
+      <DependentUpon>NewOfferCompletedDue.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EmailTemplate\NewOfferNotification.ascx.designer.vb">
@@ -6908,6 +6933,9 @@
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\AuctionDailyReport.ascx" />
     <Content Include="EmailTemplate\DeadleadsReport.ascx" />
+    <Content Include="EmailTemplate\NewOfferPendingDue.ascx" />
+    <Content Include="EmailTemplate\NewOfferInProcessDue.ascx" />
+    <Content Include="EmailTemplate\NewOfferCompletedDue.ascx" />
     <Content Include="EmailTemplate\NewOfferNotification.ascx" />
     <Content Include="EmailTemplate\PreSignNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
