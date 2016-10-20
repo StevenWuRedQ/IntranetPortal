@@ -546,6 +546,13 @@
     <Compile Include="AutoDialer\DialerAjaxService.svc.vb">
       <DependentUpon>DialerAjaxService.svc</DependentUpon>
     </Compile>
+    <Compile Include="AutoDialer\DialPhoneList.aspx.designer.vb">
+      <DependentUpon>DialPhoneList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AutoDialer\DialPhoneList.aspx.vb">
+      <DependentUpon>DialPhoneList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="AutoDialer\Twiml.aspx.designer.vb">
       <DependentUpon>Twiml.aspx</DependentUpon>
     </Compile>
@@ -788,6 +795,7 @@
     </Compile>
     <Compile Include="Controllers\AuctionController.vb" />
     <Compile Include="Controllers\AuditLogController.vb" />
+    <Compile Include="Controllers\AutoDialerController.vb" />
     <Compile Include="Controllers\BuildingCodes1Controller.vb" />
     <Compile Include="Controllers\BusinessCheckController.vb" />
     <Compile Include="Controllers\BusinessFormController.vb" />
@@ -2770,6 +2778,7 @@
     <Content Include="AutoDialer\CallManagement.aspx" />
     <Content Include="AutoDialer\Dialer.aspx" />
     <Content Include="AutoDialer\DialerAjaxService.svc" />
+    <Content Include="AutoDialer\DialPhoneList.aspx" />
     <Content Include="AutoDialer\Twiml.aspx" />
     <Content Include="BingViewMap.aspx" />
     <Content Include="bower_components\angular-animate-css\build\nga.all.css" />
