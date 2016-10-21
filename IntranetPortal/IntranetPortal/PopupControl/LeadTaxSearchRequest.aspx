@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="LeadTaxSearchRequest.aspx.vb" Inherits="IntranetPortal.LeadTaxSearchRequest" %>
-
+<%-- 
+According To different mode in url, Page will show in different behavier
+mode 0(or no mode): DocSearch Mode, user can modify search, user cannot view story, user cannot view underwriting status, user cannot export
+mode 1: Sales Executive mode, user can view but not modified search, user can view story but not story history, user cannot view underwriting status, cuser cannot view export
+mode 2: underwriter mode,  user can view but not modified search, user can view story and story history, user can change underwriting status, cuser can export excel
+--%>
 
 <%@ Register Src="~/LeadDocSearch/LeadDocSearchList.ascx" TagPrefix="uc1" TagName="LeadDocSearchList" %>
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
@@ -118,8 +123,7 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div id="searchReslut" class="tab-pane fade in active" style="padding: 20px; max-height: 850px; overflow-y: scroll">
-
-                                        <div class="alert alert-info" ng-show="underwritemode && DocSearch.UnderwriteStatus > 0">
+                                        <div class="alert alert-info" ng-show="DocSearch.UnderwriteStatus > 0 && viewmode>2">
                                             <h5>The Underwriting {{DocSearch.UnderwriteStatus==1?'Completed':'Rejected'}} by {{DocSearch.UnderwriteCompletedBy}} on {{DocSearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!</h5>
                                             <h5>
                                                 <b>Comments:</b>

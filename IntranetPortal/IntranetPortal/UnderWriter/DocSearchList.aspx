@@ -89,7 +89,7 @@
                 if (status == 0) {
                     <% If HttpContext.Current.User.IsInRole("Underwriter") %>
                     var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId
-                    <% ELSE%>
+                    <% ELSE %>
                     var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId
                     <% End IF%>
                     PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url, 1700);
