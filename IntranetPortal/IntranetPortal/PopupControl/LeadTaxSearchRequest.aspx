@@ -119,7 +119,7 @@
                                 <div class="tab-content">
                                     <div id="searchReslut" class="tab-pane fade in active" style="padding: 20px; max-height: 850px; overflow-y: scroll">
 
-                                        <div class="alert alert-info" ng-show="underwritemode && DocSearch.UnderwriteStatus > 0">
+                                        <div class="alert alert-info" ng-show="DocSearch.UnderwriteStatus > 0 && viewmode>1">
                                             <h5>The Underwriting {{DocSearch.UnderwriteStatus==1?'Completed':'Rejected'}} by {{DocSearch.UnderwriteCompletedBy}} on {{DocSearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!</h5>
                                             <h5>
                                                 <b>Comments:</b>
