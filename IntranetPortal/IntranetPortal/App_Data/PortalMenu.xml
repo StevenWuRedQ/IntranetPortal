@@ -726,7 +726,7 @@
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="DocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
-        <UserRoles>Entity-Manager,Relation-Manager,DocSearch-Outside</UserRoles>
+        <UserRoles>Entity-Manager,Relation-Manager,Sales-Executive,DocSearch-Outside,Underwriter</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
         </FontClass>

@@ -35,8 +35,8 @@ PortalUtility = {
         window.location.href = url;
     },
     fileWindows: {},
-    ShowPopWindow: function (windowId, url) {
-        this.OpenWindow(url, windowId);
+    ShowPopWindow: function (windowId, url, width, height) {
+        this.OpenWindow(url, windowId, width, height);
     },
     OpenWindow: function (url, title, width, height) {
         for (var win in this.fileWindows) {

@@ -36,20 +36,14 @@
                                                     <div class="font_size_bold" id="LegalTabHead">Searches</div>
                                                 </a>
                                             </li>
+                                            <% If Nothing Is Request.QueryString("mode") OrElse CInt(Request.QueryString("mode")) < 1 %>
                                             <li style="margin-right: 30px; color: #ffa484; float: right">
                                                 <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="Save" ng-click="SearchComplete(true)"></i>
                                             </li>
+                                            <% End if %>
                                         </ul>
                                     </div>
                                 </div>
-                                <%-- 
-                                <div ng-if="newVersion">
-                                    <uc1:DocSearchNewVersion runat="server" ID="DocSearchNewVersion" />
-                                </div>
-                                <div ng-show="!newVersion">
-                                    <uc1:DocSearchOldVersion runat="server" ID="DocSearchOldVersion" />
-                                </div>
-                                --%>
                                 <uc1:DocSearchNewVersion runat="server" ID="DocSearchNewVersion" />
                             </div>
                         </dx:SplitterContentControl>
