@@ -1,5 +1,5 @@
 ﻿Public Class ReportWizard
-    Inherits System.Web.UI.Page
+    Inherits PortalPage
 
     Public Template = "shortsale"
     Public ReportId = 0
