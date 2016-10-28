@@ -120,6 +120,9 @@ Public Class RulesService
         'New Offer
         Rules.Add(New NewOfferNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", (days + 1) Mod 7)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "New Offer Accepted Weekly Notify Rule", .ExecuteOnWeekend = True})
         Rules.Add(New NewOfferNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:10:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "New Offer Accepted Weekly Notify Rule", .ExecuteOnWeekend = False, .IsWeekly = False})
+
+        'Ecourt data update
+        Rules.Add(New EcourtCasesUpdateRule With {.ExecuteOn = TimeSpan.Parse("21:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Ecourt Data Syncing Rule", .ExecuteNow = False, .ExecuteOnWeekend = True})
     End Sub
 
     ''' <summary>

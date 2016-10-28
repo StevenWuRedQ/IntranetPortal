@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssignLeadsRule.vb" />
+    <Compile Include="EcourCasesUpdateRule.vb" />
     <Compile Include="NewofferNotifyRule.vb" />
     <Compile Include="AuctionNotifyRule.vb" />
     <Compile Include="AutoAssignRule.vb" />

@@ -25,6 +25,7 @@ Imports System.Configuration
 <KnownType(GetType(ShortSaleFollowUpRule))>
 <KnownType(GetType(AuctionNotifyRule))>
 <KnownType(GetType(NewOfferNotifyRule))>
+<KnownType(GetType(EcourtCasesUpdateRule))>
 <DataContract>
 Public Class BaseRule
     <DataMember>
@@ -69,6 +70,39 @@ Public Class BaseRule
         InProcess
         Stoped
     End Enum
+
+    Public ReadOnly Property RuleData As Rule
+        Get
+            Return New Rule With {
+                .RuleId = RuleId,
+                .RuleName = RuleName,
+                .ExecuteNow = ExecuteNow,
+                .ExecuteOn = ExecuteOn,
+                .ExecuteOnWeekend = ExecuteOnWeekend,
+                .Period = Period,
+                .Status = Status
+                }
+        End Get
+    End Property
+End Class
+
+<DataContract>
+Public Class Rule
+    <DataMember>
+    Public Property RuleId As Guid
+    <DataMember>
+    Public Property RuleName As String
+    <DataMember>
+    Public Property ExecuteOn As TimeSpan
+    <DataMember>
+    Public Property Period As TimeSpan
+    <DataMember>
+    Public Property ExecuteNow As Boolean
+    <DataMember>
+    Public Property Status As BaseRule.RuleStatus = BaseRule.RuleStatus.Stoped
+    <DataMember>
+    Public Property ExecuteOnWeekend As Boolean
+
 End Class
 
 ''' <summary>
