@@ -188,6 +188,8 @@
                             width: 400,
                             caption: "Property Address",
                         }, {
+                            dataField: "Team"
+                        }, {
                             dataField: "CreateBy",
                             caption: "UW Requested By"
                         }, {
@@ -207,7 +209,6 @@
                         }, {
                             dataField: "Status",
                             caption: "Search Status",
-
                             alignment: "left",
                             customizeText: function (cell) {
                                 switch (cell.value) {
@@ -268,6 +269,18 @@
                             }
 
                         }, {
+                            dataField: 'IsInProcess',
+                            caption: 'In Process',
+                            alignment: "left",
+                            customizeText: function (cellInfo) {
+                                if (cellInfo.value == 1) {
+                                    return "In Process";
+                                } else {
+                                    return "";
+                                }
+
+                            }
+                        }, {
                             caption: "Duration",
                             width: '80px',
                             allowSorting: true,
@@ -312,7 +325,7 @@
                     switch (data) {
                         case 1:
                             dataGrid.filter(['Status', '=', '0']);
-                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration'])
+                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration', 'IsInProcess'])
                             break;
                         case 2:
                             dataGrid.filter(['Status', '=', '1']);
@@ -323,9 +336,11 @@
                             break;
                         case 4:
                             dataGrid.filter([['UnderwriteStatus', '=', '1'], ['Status', '=', '1']]);
+                            hidesome(['Team'])
                             break;
                         case 5:
                             dataGrid.filter([['UnderwriteStatus', '=', '2'], ['Status', '=', '1']]);
+                            hidesome(['Team'])
                     }
                 }
                 var filterBox = $("#useFilterApplyButton").dxSelectBox({

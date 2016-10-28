@@ -7,6 +7,7 @@ angular.module('PortalApp')
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');
         $rootScope.panelLoading = false;
+        $rootScope.isPromptModalArea = false;
         $rootScope.loadPanelPosition = (function () {
             var dataPanelDiv = document.getElementById('dataPanelDiv');
             if (dataPanelDiv != null) {
@@ -47,13 +48,15 @@ angular.module('PortalApp')
                 $rootScope.ConfirmModal.confrimFunc(false);
             }
         }
-        $rootScope.prompt = function (message, promptFunc) {
+        $rootScope.prompt = function (message, callback, /*optional*/ showArea){
             $rootScope.promptMessage = message ? message : '';
             $rootScope.promptModalTxt = '';
+            $rootScope.isPromptModalArea = showArea || false;
             $rootScope.promptModal = $uibModal.open({
                 templateUrl: 'PromptModal'
             });
-            $rootScope.promptModal.promptFunc = promptFunc;
+            $rootScope.promptModal.promptFunc = callback;
+
         }
         $rootScope.promptYes = function () {
             $rootScope.promptModal.close($rootScope.promptModalTxt);

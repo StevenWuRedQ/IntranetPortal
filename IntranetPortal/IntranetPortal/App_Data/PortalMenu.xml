@@ -369,6 +369,11 @@
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="UnderwriterSummary" Text="New Properties" NavigationUrl="/UnderWriter/DocSearchListNew.aspx" ShowAmount="false" visible="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-pencil"></i>]]>
+        </FontClass>
+      </PortalNavItem>
     </Items>
   </PortalNavItem>
   

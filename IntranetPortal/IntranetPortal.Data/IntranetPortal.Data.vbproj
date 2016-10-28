@@ -182,6 +182,14 @@
       <DependentUpon>201609291834424_Initial.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201609291834424_Initial.vb" />
+    <Compile Include="Migrations\201610241901293_Initial1.Designer.vb">
+      <DependentUpon>201610241901293_Initial1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610241901293_Initial1.vb" />
+    <Compile Include="Migrations\201610251324198_Initial2.Designer.vb">
+      <DependentUpon>201610251324198_Initial2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610251324198_Initial2.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
@@ -383,6 +391,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609291834424_Initial.resx">
       <DependentUpon>201609291834424_Initial.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610241901293_Initial1.resx">
+      <DependentUpon>201610241901293_Initial1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610251324198_Initial2.resx">
+      <DependentUpon>201610251324198_Initial2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

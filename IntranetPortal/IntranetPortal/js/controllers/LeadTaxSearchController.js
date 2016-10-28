@@ -198,14 +198,13 @@ angular.module('PortalApp')
 
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            $scope.DocSearch.ResutContent = $("#new-ds-summary").html();
+            $scope.DocSearch.ResutContent = $("#search_summary_div").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
                     AngularRoot.alert("Save successfully!");
                 });
             } else {
-
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -275,7 +274,7 @@ angular.module('PortalApp')
                     xhrfunc(result);
                 }
 
-            });
+            }, true);
 
         }
 

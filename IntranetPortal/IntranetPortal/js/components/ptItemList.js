@@ -40,7 +40,7 @@
 
         }
         $scope.bindList = function () {
-            debugger;
+            //debugger;
             $http({
                 method: 'GET',
                 url: $scope.$ctrl.itemUrl

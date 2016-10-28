@@ -123,15 +123,7 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                                 </ul>
                                 <div class="tab-content">
                                     <div id="searchReslut" class="tab-pane fade in active" style="padding: 20px; max-height: 850px; overflow-y: scroll">
-                                        <div class="alert alert-info" ng-show="DocSearch.UnderwriteStatus > 0 && viewmode>2">
-                                            <h5>The Underwriting {{DocSearch.UnderwriteStatus==1?'Completed':'Rejected'}} by {{DocSearch.UnderwriteCompletedBy}} on {{DocSearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!</h5>
-                                            <h5>
-                                                <b>Comments:</b>
-                                                {{DocSearch.UnderwriteCompletedNotes || "None"}}
-
-                                            </h5>
-                                        </div>
-                                        <new-ds-summary id="new-ds-summary" docsearch="DocSearch" leadsinfo="LeadsInfo" summary="DocSearch.LeadResearch" updateby="DocSearch.UpdateBy" updateon="DocSearch.UpdateDate" viewmode="viewmode"></new-ds-summary>
+                                        <new-ds-summary id="new-ds-summary"></new-ds-summary>
                                     </div>
                                     <% If CInt(Request.QueryString("mode")) >= 1 Then %>
                                     <div id="agent_story" class="tab-pane fade" style="padding: 20px; max-height: 850px; overflow-y: scroll">

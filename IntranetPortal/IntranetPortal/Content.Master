@@ -152,7 +152,8 @@
     <script type="text/ng-template" id="PromptModal">
         <div class="modal-body">
             <div ng-bind-html="promptMessage| unsafe"></div>
-            <div  style="margin-top:20px"> 
+            <input class="form-control" ng-model="promptModalTxt" ng-show="!isPromptModalArea" >
+            <div style="margin-top:20px" ng-show="isPromptModalArea"> 
                 <textarea id="promptModalTxt" class="form-control" ng-model="promptModalTxt" /> 
             </div>
         </div>

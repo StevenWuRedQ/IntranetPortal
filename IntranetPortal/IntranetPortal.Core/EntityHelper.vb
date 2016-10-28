@@ -3,6 +3,7 @@ Imports System.Data.Entity.Infrastructure
 
 Public Class EntityHelper(Of T As Class)
 
+    'Get navigationproperties Of Type T
     Public Shared Function GetNavigationProperties(ctx As IObjectContextAdapter) As List(Of Entity.Core.Metadata.Edm.NavigationProperty)
         Dim properties As List(Of Entity.Core.Metadata.Edm.NavigationProperty)
         Dim entityType = GetType(T)
@@ -11,6 +12,7 @@ Public Class EntityHelper(Of T As Class)
         Return properties
     End Function
 
+    ' Update Reference Type in DBEntry Recursively
     Public Shared Sub ReferenceUpdate(ctx As DbContext, oldv As T, newv As T)
 
         For Each np In GetNavigationProperties(ctx)
@@ -26,4 +28,12 @@ Public Class EntityHelper(Of T As Class)
             Next
         Next
     End Sub
+
+    'Public Shared Function clone(original As T) As T
+    '    Dim x = GetType(T).GetConstructors()
+    '    Dim newObj = GetType(T).GetConstructor(New Type() {GetType(T)}).Invoke(New Object() {original})
+    '    newObj("id") = Nothing
+    '    Return newObj
+
+    'End Function
 End Class
