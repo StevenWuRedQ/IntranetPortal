@@ -23,7 +23,7 @@ Public Class PortalNavManage
     Public Shared Function IsViewable(context As HttpContext) As Boolean
         Dim items = LoadMenuItem(context)
 
-        If items Is Nothing AndAlso items.Count = 0 Then
+        If items Is Nothing OrElse items.Length = 0 Then
             Return True
         End If
 

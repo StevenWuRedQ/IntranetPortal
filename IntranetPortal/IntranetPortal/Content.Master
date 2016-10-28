@@ -1,7 +1,6 @@
 <%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Content.master.vb" Inherits="IntranetPortal.Content" %>
 
 <!DOCTYPE html>
-
 <html id="rootMaster" xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" ng-app="PortalApp">
 <head runat="server">
     <title></title>

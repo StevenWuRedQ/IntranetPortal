@@ -14,6 +14,11 @@ Namespace Controllers
 
         ' GET: api/UnderwritingRequest/5
         Public Function GetValue(ByVal id As String) As IHttpActionResult
+
+            If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, id) Then
+                Return Unauthorized()
+            End If
+
             Dim ur = IntranetPortal.Data.UnderwritingRequest.GetInstance(id)
             If ur Is Nothing Then
                 Return StatusCode(HttpStatusCode.NoContent)

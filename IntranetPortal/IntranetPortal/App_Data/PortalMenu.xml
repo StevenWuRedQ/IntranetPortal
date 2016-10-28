@@ -716,10 +716,16 @@
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ReportCalendar" Text="Entity Manage" NavigationUrl="/ManagementUI/BuyerEntiyManage.aspx" ShowAmount="false">
+      <PortalNavItem Name="EntityManage" Text="Entity Manage" NavigationUrl="/ManagementUI/BuyerEntiyManage.aspx" ShowAmount="false">
         <UserRoles>Entity-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-building"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="CorpList" Text="Entity List" NavigationUrl="/popupControl/buyerentitypopupcontent.aspx" ShowAmount="false" visible="false">
+        <UserRoles>Entity-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="DocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
@@ -775,6 +781,7 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+
     </Items>
   </PortalNavItem>
 
