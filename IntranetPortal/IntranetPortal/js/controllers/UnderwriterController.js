@@ -69,11 +69,11 @@
              * @param: archive
              */
             $scope.loadArchived = function (archive) {
-                debugger;
+                //debugger;
                 if (archive.Id) {
                     ptUnderwriter.loadArchived(archive.Id).then(function (d) {
                         if (d.data) {
-                            debugger;
+                            //debugger;
                             angular.copy($scope.data, $scope.currentDataCopy);
                             ptCom.assignReference($scope.data, d.data, [], ['Id']);
                             $scope.archive = archive;

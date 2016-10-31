@@ -7331,6 +7331,7 @@
     <Content Include="js\models\Team.js" />
     <Content Include="js\models\Wizard.js" />
     <Content Include="js\models\WizardStep.js" />
+    <Content Include="js\services\ptUnderwritingCaculator.js" />
     <Content Include="js\templates\ptAudit.html" />
     <Content Include="js\templates\ptItemList.html" />
     <Content Include="js\test\model.PreSign.spec.js" />
@@ -8506,6 +8507,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="js\components\Test.ts" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

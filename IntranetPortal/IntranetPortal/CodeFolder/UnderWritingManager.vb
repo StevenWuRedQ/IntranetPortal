@@ -57,15 +57,18 @@ Public Class UnderwritingManager
 
     End Function
 
-    Public Shared Function archive(bble As String, saveBy As String) As Underwriting
+    Public Shared Function archive(bble As String, saveBy As String, note As String) As Underwriting
         Using ctx As New CodeFirstEntity
 
             Dim uw = getInstance(bble)
             If uw IsNot Nothing Then
                 Dim uwa = New UnderwritingArchived
+
                 uwa.BBLE = uw.BBLE
                 uwa.ArchivedBy = saveBy
                 uwa.ArchivedDate = DateTime.Now
+                uwa.ArchivedNote = note
+
                 uwa.PropertyInfo = uw.PropertyInfo
                 uwa.PropertyInfo.Id = Nothing
                 uwa.DealCosts = uw.DealCosts
@@ -79,22 +82,6 @@ Public Class UnderwritingManager
                 uwa.LienCosts = uw.LienCosts
                 uwa.LienCosts.Id = Nothing
 
-                uwa.MinimumBaselineScenario = uw.MinimumBaselineScenario
-                uwa.MinimumBaselineScenario.Id = Nothing
-                uwa.BestCaseScenario = uw.BestCaseScenario
-                uwa.BestCaseScenario.Id = Nothing
-
-                uwa.CashScenario = uw.CashScenario
-                uw.CashScenario.Id = Nothing
-
-                uwa.LoanScenario = uw.LoanScenario
-                uw.LoanScenario.Id = Nothing
-
-                uwa.RentalModel = uw.RentalModel
-                uw.RentalModel.Id = Nothing
-
-                uwa.Others = uw.Others
-                uw.Others.Id = Nothing
                 ctx.UnderwritingArchived.Add(uwa)
                 ctx.SaveChanges()
 
@@ -113,12 +100,6 @@ Public Class UnderwritingManager
             u.RentalInfo = New UnderwritingRentalInfo
             u.LienInfo = New UnderwritingLienInfo
             u.LienCosts = New UnderwritingLienCosts
-            u.MinimumBaselineScenario = New UnderwritingMinimumBaselineScenario
-            u.BestCaseScenario = New UnderwritingBestCaseScenario
-            u.CashScenario = New UnderwritingCashScenario
-            u.LoanScenario = New UnderwritingLoanScenario
-            u.RentalModel = New UnderwritingRentalModel
-            u.Others = New UnderwritingOthers
 
             u.CreateBy = createby
             u.CreateDate = DateTime.Now
