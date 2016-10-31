@@ -1,8 +1,17 @@
 ﻿<div>
     <div class="row">
+        <div ng-show="archive.isLoaded" style="background-color: #295268; width: 100%; text-align:center; color: white">
+            <h5>
+                Archived loaded. Version: {{archive.ArchivedDate}}.
+                <span class="fa-stack" type="button" ng-click="restoreCurrent()" tooltip="Restore current version.">
+                    <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                    <i class="fa fa-undo "></i>
+                </span>
+            </h5>
+        </div>
+        <br />
         <div id="data_input_area" class="col-md-9 col-lg-9">
             <div class="row">
-
                 <div class="col-md-4 col-lg-4">
                     <div class="pt-panel">
                         <table>
@@ -657,9 +666,6 @@
 
             </div>
             <hr />
-            <div class="clearfix">
-                <span class="btn btn-primary" ng-click="save()">SnapShot</span>
-            </div>
 
 
         </div>

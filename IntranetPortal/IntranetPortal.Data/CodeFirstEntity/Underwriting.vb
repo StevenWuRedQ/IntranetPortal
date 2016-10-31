@@ -40,6 +40,9 @@ Public Class UnderwritingArchived
     Public Property ArchivedBy As String
     Public Property ArchivedDate As DateTime?
 
+    <MaxLength(50)>
+    Public Property ArchivedNote As String
+
     Public Overridable Property PropertyInfo As UnderwritingPropertyInfo
     Public Overridable Property DealCosts As UnderwritingDealCosts
     Public Overridable Property RehabInfo As UnderwritingRehabInfo

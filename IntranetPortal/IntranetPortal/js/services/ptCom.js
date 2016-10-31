@@ -111,8 +111,8 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         return $rootScope.confirm(message, callback);
     };
 
-    this.prompt = function (message, callback) {
-        return $rootScope.prompt(message, callback);
+    this.prompt = function (message, callback, showArea) {
+        return $rootScope.prompt(message, callback, showArea);
     }
 
     this.addOverlay = function () {
@@ -156,4 +156,43 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
+
+    /**
+     * assign all reference property from source to target
+     * @param: target
+     * @param: source
+     * @param: skipped //reference that will not be replaced by source
+     * @param: keeped // level two 
+     */
+    this.assignReference = function (target, source, /* optional*/ skipped, /* optional*/ keeped) {
+        var temp = {}; // object backup keeped values
+        var props = Object.keys(source);
+        for (i = 0; i < props.length ; i++) {
+            if (typeof source[props[i]] == 'object') {
+                // skip some reference
+                if (skipped && skipped.indexOf(props[i]) >= 0) {
+                    continue;
+                }
+                // keep some value inside reference, usually id or something ;)
+                if (keeped && keeped.length) {
+                    temp[props[i]] = {};
+                    for (j = 0; j < keeped.length; j++) {
+                        if (target[props[i]] && target[props[i]][keeped[j]]) {
+                            temp[props[i]][keeped[j]] = target[props[i]][keeped[j]];
+                        }
+                    }
+                }
+                target[props[i]] = source[props[i]];
+                if (keeped && keeped.length) {
+                    for (j = 0; j < keeped.length; j++) {
+                        if (temp[props[i]] && target[props[i]][keeped[j]]) {
+                            target[props[i]][keeped[j]] = temp[props[i]][keeped[j]];
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
 }])

@@ -7254,7 +7254,9 @@
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\common\portalRouteProvider.js" />
     <Content Include="js\common\PortalUIRouteProvider.js" />
+    <Content Include="js\components\ptAudit.js" />
     <Content Include="js\components\ptItemList.js" />
+    <Content Include="js\components\ptSelectableInput.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
     <Content Include="js\controllers\LeadTaxSearchController.js" />
@@ -7329,6 +7331,7 @@
     <Content Include="js\models\Team.js" />
     <Content Include="js\models\Wizard.js" />
     <Content Include="js\models\WizardStep.js" />
+    <Content Include="js\templates\ptAudit.html" />
     <Content Include="js\templates\ptItemList.html" />
     <Content Include="js\test\model.PreSign.spec.js" />
     <Content Include="js\test\model.underwriting.spec.js" />
@@ -7353,8 +7356,9 @@
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
+    <Content Include="js\Views\Underwriter\archived.tpl.html" />
+    <Content Include="js\Views\Underwriter\audit.tpl.html" />
     <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
-    <Content Include="js\Views\Underwriter\searchsummary.tpl.html" />
     <Content Include="js\Views\Underwriter\tables.tpl.html" />
     <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
     <Content Include="js\Views\Underwriter\datainput.tpl.html" />
