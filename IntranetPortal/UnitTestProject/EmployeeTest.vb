@@ -114,4 +114,21 @@ Public Class EmployeeTest
         emails = Employee.GetEmpsEmails(steven)
         Assert.IsTrue(String.IsNullOrEmpty(emails))
     End Sub
+    <TestMethod>
+    Public Sub CryptoPasswordTest()
+        Dim e = New Employee()
+        Dim testPassword = "Hello wolrd!"
+        e.Password = testPassword
+        ' not crypto yet the verify password should not equal
+        Assert.IsFalse(e.VerifyPassword(testPassword))
+
+        Dim hash = e.CryptoPasswrod(e.Password)
+        ' check hello world md5 crypto if you change the password it may not pass this unit test
+        ' run CryptoPasswrod function and copy test crypto password to here
+        Assert.AreEqual(hash, "52e7a4e9de7dc90f7eb53d67c2d79547")
+        e.ChangePassword(testPassword)
+        Assert.AreEqual(hash, e.Password)
+        ' after change password it should pass verify password
+        Assert.IsTrue(e.VerifyPassword(testPassword))
+    End Sub
 End Class

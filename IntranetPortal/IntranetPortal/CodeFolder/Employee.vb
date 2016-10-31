@@ -3,7 +3,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
 Imports Newtonsoft.Json
 Imports System.ComponentModel.DataAnnotations
-
+Imports System.Security.Cryptography
 
 ''' <summary>
 ''' The Employee Object
@@ -888,7 +888,68 @@ Partial Public Class Employee
     Public Function GetData() As EmployeeData
         Return Core.Utility.CopyTo(Me, New EmployeeData())
     End Function
+    ''' <summary>
+    ''' verify plain text to md5 crypted 
+    ''' </summary>
+    ''' <param name="input">input plain text  to compare with password in database</param>
+    ''' <returns>t</returns>
+    Public Function VerifyPassword(input As String) As Boolean
 
+        Return Password = CryptoPasswrod(input)
+    End Function
+    ''' <summary>
+    ''' Change  password
+    ''' </summary>
+    ''' <param name="newPassword"></param>
+    Public Sub ChangePassword(newPassword As String)
+        Password = CryptoPasswrod(newPassword)
+    End Sub
+    ''' <summary>
+    ''' crypto password using md5 crypto algorithm
+    ''' </summary>
+    ''' <param name="password">password need crypto</param>
+    ''' <returns></returns>
+    Public Function CryptoPasswrod(password As String) As String
+        Using md5Hash = MD5.Create()
+            Dim hash = GetMd5Hash(md5Hash, password)
+            Return hash
+        End Using
+
+    End Function
+
+    Private Shared Function GetMd5Hash(md5Hash As MD5, input As String) As String
+
+        ' Convert the input string to a byte array and compute the hash.
+        Dim data As Byte() = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input))
+
+        ' Create a new Stringbuilder to collect the bytes
+        ' and create a string.
+        Dim sBuilder As New StringBuilder()
+
+        ' Loop through each byte of the hashed data 
+        ' and format each one as a hexadecimal string.
+        For i As Integer = 0 To data.Length - 1
+            sBuilder.Append(data(i).ToString("x2"))
+        Next
+
+        ' Return the hexadecimal string.
+        Return sBuilder.ToString()
+    End Function
+
+    ' Verify a hash against a string.
+    Private Shared Function VerifyMd5Hash(md5Hash As MD5, input As String, hash As String) As Boolean
+        ' Hash the input.
+        Dim hashOfInput As String = GetMd5Hash(md5Hash, input)
+
+        ' Create a StringComparer an compare the hashes.
+        Dim comparer As StringComparer = StringComparer.OrdinalIgnoreCase
+
+        If 0 = comparer.Compare(hashOfInput, hash) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
     ''' <summary>
     ''' The employee data object, used for JSON serialized
     ''' </summary>
