@@ -1160,4 +1160,14 @@ Public Class Troubleshooting
         Dim rule As New NewOfferNotifyRule
         rule.Execute()
     End Sub
+
+    Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+
+        Using ctx As New Entities
+            Dim emp = ctx.Employees.Where(Function(em) em.Name = "Chris Yan").FirstOrDefault()
+            emp.ChangePassword(emp.Password)
+            ctx.SaveChanges()
+            MsgBox("Update to MD5 is finished !")
+        End Using
+    End Sub
 End Class
