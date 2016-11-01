@@ -115,7 +115,11 @@ Public Class MgrEmployee
         Using Context As New Entities
             Dim emp = Context.Employees.Where(Function(em) em.EmployeeID = empID).FirstOrDefault
 
-            emp.Password = cnpsw.Text
+            ' emp.Password = cnpsw.Text
+            If (emp.Password <> cnpsw.Text) Then
+                emp.ChangePassword(cnpsw.Text)
+            End If
+
             If Context.GetValidationErrors().Count = 0 Then
                 Context.SaveChanges()
             Else

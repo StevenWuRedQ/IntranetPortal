@@ -569,7 +569,10 @@ Partial Public Class Lead
             Dim addComStr = If(String.IsNullOrEmpty(addCommend), "", "<br/>" & " Comments: " & addCommend)
             If lead IsNot Nothing Then
                 Dim originateStatus = lead.Status
-                lead.Status = status
+                ' If achive same rules them can not update status
+                ' such as achieve follow up 
+                lead.UpdateStatus(status)
+                ' lead.Status = status
                 If Not callbackDate = Nothing Then
                     lead.CallbackDate = callbackDate
                 End If
@@ -1038,6 +1041,23 @@ Partial Public Class Lead
         'UserMessage.AddNewMessage("Recycle Message", "Failed Recycle Leads: " & BBLE, String.Format("Failed Recycle Leads BBLE: {0}, Employee name:{1}. ", BBLE, EmployeeName), BBLE, DateTime.Now, "Recycle")
     End Sub
 
+    Public Sub UpdateStatus(status As LeadStatus)
+        Dim owner = IntranetPortal.Employee.GetInstance(EmployeeName)
+        If (owner IsNot Nothing) Then
+            Dim fStr = "Can not move to {0} becuase achieve to limit."
+            If (status = LeadStatus.LoanMod) Then
+                If (owner.IsAchieveLoanModLimit()) Then
+                    Throw New Exception(String.Format(fStr, "Loan Mod"))
+                End If
+            End If
+            If (status = LeadStatus.Callback) Then
+                If (owner.IsAchieveFollowUpLimit()) Then
+                    Throw New Exception(String.Format(fStr, "Follow Up"))
+                End If
+            End If
+        End If
+        Me.Status = status
+    End Sub
     <JsonIgnoreAttribute>
     Public ReadOnly Property Task As UserTask
         Get
