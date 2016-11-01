@@ -59,9 +59,11 @@
              * load all achived version in databases
              */
             $scope.loadArchivedList = function (bble) {
-                ptUnderwriter.loadArchivedList(bble).then(function (d) {
-                    $scope.archivedList = d.data;
-                })
+                if (bble) {
+                    ptUnderwriter.loadArchivedList(bble).then(function (d) {
+                        $scope.archivedList = d.data;
+                    })
+                }
             }
 
             /**

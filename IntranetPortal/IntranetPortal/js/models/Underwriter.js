@@ -8,6 +8,7 @@
             UnderwritingModel: function () {
                 this.PropertyInfo = {
                     PropertyAddress: '',
+                    CurrentOwner: '',
                     TaxClass: '',
                     LotSize: '',
                     BuildingDimension: '',
@@ -66,7 +67,7 @@
                     PersonalJudgements: 0.0,
                     NYSTaxWarrants: 0.0,
                     FederalTaxLien: 0.0,
-                    SidewalkLien: 0.0,
+                    SidewalkLiens: false,
                     ParkingViolation: 0.0,
                     TransitAuthority: 0.0,
                     VacateOrder: false,
@@ -265,35 +266,39 @@
                     d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
                     d.LienCosts.WaterCharges = r.waterCharges || 0.0;
                     d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
-                    d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets || 0.0;
+                    d.LienCosts.ECBCityPay = r.Amount_ECB_Tickets || 0.0;
                     d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
                     d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
                     d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
-                    d.LienCosts.IRSNYSTaxLiens = (function () {
-                        var total = 0.0;
-
-                        if (r.irsTaxLien)
-                            total += parseFloat(r.irsTaxLien);
-                        if (r.Amount_NYS_Tax_Lien)
-                            total += parseFloat(r.Amount_NYS_Tax_Lien);
-
-                        return total;
-
-                    })();
+                    d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0; // added: 2016/11/1
+                    d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0; // added: 2016/11/1
                     d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
                     d.LienCosts.RelocationLien = (function () {
                         if (r.has_Vacate_Order_Vacate_Order)
-                            return r.Amount_Vacate_Order || 0.0;
+                            return parseFloat(r.Amount_Vacate_Order) || 0.0;
                     })()
+                    // removed : 2016/11/01
+                    // d.LienCosts.IRSNYSTaxLiens = (function () {
+                    //    var total = 0.0;
+                    //    if (r.irsTaxLien)
+                    //        total += parseFloat(r.irsTaxLien);
+                    //    if (r.Amount_NYS_Tax_Lien)
+                    //        total += parseFloat(r.Amount_NYS_Tax_Lien);
+                    //    return total;
+                    // })();
 
                 }
                 // map to Leads Info if we have data
                 if (d.leadsInfo) {
+                    debugger;
                     d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
+                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
                     d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
+                    d.PropertyInfo.LotSize = d.leadsInfo.LotDem;
                     d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
-                    d.PropertyInfo.LotSize = d.leadsInfo.Lot;
                     d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
+                    d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
+                    d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
                 }
             }
 
@@ -339,7 +344,8 @@
                 d.Liens.ECBCityPaySettlement = 1.0;
                 d.Liens.DOBCivilPenaltiesSettlement = 1.0;
                 d.Liens.HPDChargesSettlement = 1.0;
-                d.Liens.HPDJudgementsSettlment = 0.15;
+
+                d.Liens.HPDJudgementsSettlement = 0.15;
                 d.Liens.PersonalJudgementsSettlement = 0.40;
                 d.Liens.ParkingViolationSettlement = 1.0;
                 d.Liens.TransitAuthoritySettlement = 1.0;
@@ -366,7 +372,6 @@
                 d.RentalModel.MinROI = 0.18;
                 d.RentalModel.Insurance = 85.0;
 
-
             };
 
             /**
@@ -375,8 +380,18 @@
             */
             var applyRule = function (d) {
                 //debugger;
-                var float = parseFloat;
-                var int = parseInt;
+                var float = function (data) {
+                    if (data)
+                        return parseFloat(data);
+                    else
+                        return 0.0;
+                }
+                var int = function (data) {
+                    if (data)
+                        return parseInt(data);
+                    else
+                        return 0;
+                }
 
                 /**
                  * PropertyInfo 
@@ -386,7 +401,7 @@
                 d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? 1 : 2 })();
 
                 // Liens
-                d.Liens.TaxLienCertificate = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienSettlement * float(d.RehabInfo.DealTimeMonths));
+                d.Liens.TaxLienCertificate = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienCertificateSettlement * float(d.RehabInfo.DealTimeMonths));
                 d.Liens.PropertyTaxes = float(d.LienCosts.PropertyTaxes) * d.Liens.PropertyTaxesSettlement;
                 d.Liens.WaterCharges = float(d.LienCosts.WaterCharges) * d.Liens.WaterChargesSettlement;
                 d.Liens.ECBCityPay = float(d.LienCosts.ECBCityPay) * d.Liens.ECBCityPaySettlement;
@@ -402,16 +417,13 @@
                     return float(d.LienCosts.FederalTaxLien) < 12500 ? 1.0 : 0.0
                 })();
                 d.Liens.FederalTaxLien = float(d.LienCosts.FederalTaxLien) * d.Liens.FederalTaxLienSettlement;
-                d.Liens.ParkingViolation = float(d.LienCosts.ParkingViolation) * d.LienCosts.ParkingViolationSettlement;
-                d.Liens.TransitAuthority = float(d.LienCosts.TransitAuthority) * d.LienCosts.TransitAuthoritySettlement;
+                d.Liens.ParkingViolation = float(d.LienCosts.ParkingViolation) * d.Liens.ParkingViolationSettlement;
+                d.Liens.TransitAuthority = float(d.LienCosts.TransitAuthority) * d.Liens.TransitAuthoritySettlement;
                 d.Liens.RelocationLien = (function () {
-                    function getTodayDate() {
-                        return new Date(new Date().toJSON().slice(0, 10));
-                    }
                     if (!d.LienCosts.RelocationLienDate)
                         return 0.0;
                     else {
-                        return float(d.LienCosts.RelocationLien) * (1.0 + (getTodayDate().getTime() + 180 * 24 * 60 * 60 * 1000 - new Date(d.LienCosts.RelocationLienDate).getTime()) * d.Liens.RelocationLienSettlement)
+                        return float(d.LienCosts.RelocationLien) * (1.0 + (moment().diff(moment(d.LienCosts.RelocationLienDate), 'days') + 180) * d.Liens.RelocationLienSettlement)
                     }
                 })();
                 // DealCost added: 2016/10/31
@@ -424,7 +436,7 @@
                 // DealExpense
                 d.DealExpenses.MoneySpent = float(d.DealCosts.MoneySpent);
                 d.DealExpenses.HOILienSettlement = float(d.DealCosts.HOIRatio);
-                d.DealExpenses.HOILien = d.DealCosts.HAFA ? float(d.DealCosts.HOI) * DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * DealExpenses.HOILienSettlement;
+                d.DealExpenses.HOILien = d.DealCosts.HAFA ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
                 d.DealExpenses.COSTermination = float(d.DealCosts.COSTermination);
                 d.DealExpenses.Tenants = float(d.PropertyInfo.NumOfTenants) * 7000.00;
                 d.DealExpenses.Agent = float(d.DealCosts.AgentCommission);
@@ -518,7 +530,7 @@
                 d.HOI.ROILoan = d.HOI.NetProfit / d.HOI.TotalInvestment;
 
                 // Best Case For HOI
-                d.HOIBestCase.PurchasePriceAllIn = d.RehabInfo.AverageLowValue + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
+                d.HOIBestCase.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
                 d.HOIBestCase.TotalInvestment = d.HOIBestCase.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
                 d.HOIBestCase.CashRequirement = d.HOIBestCase.TotalInvestment - d.LoanTerms.LoanAmount;
                 d.HOIBestCase.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOIBestCase.TotalInvestment;

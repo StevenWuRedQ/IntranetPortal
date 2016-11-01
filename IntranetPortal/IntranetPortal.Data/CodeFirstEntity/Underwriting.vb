@@ -50,24 +50,25 @@ End Class
 Public Class UnderwritingPropertyInfo
     <Key>
     Public Property Id As Integer
-
-    Public Property ActualNumOfUnits As Integer?
-    <MaxLength(50)>
-    Public Property BuildingDimension As String
-    <MaxLength(50)>
-    Public Property LotSize As String
-    Public Property NumOfTenants As Integer?
-    Public Property OccupancyStatus As OccupancyStatusEnum
-
-    Public Property PropertyAddress As String
-    Public Property PropertyTaxYear As Decimal?
-
     Public Property PropertyType As PropertyTypeEnum
-    Public Property SellerOccupied As Boolean
+    Public Property PropertyAddress As String
+    <MaxLength(50)>
+    Public Property CurrentOwner As String
     <MaxLength(50)>
     Public Property TaxClass As String
     <MaxLength(50)>
+    Public Property LotSize As String
+    <MaxLength(50)>
+    Public Property BuildingDimension As String
+    <MaxLength(50)>
     Public Property Zoning As String
+    Public Property FARActual As Decimal?
+    Public Property FARMax As Decimal?
+    Public Property PropertyTaxYear As Decimal?
+    Public Property ActualNumOfUnits As Integer?
+    Public Property OccupancyStatus As OccupancyStatusEnum
+    Public Property SellerOccupied As Boolean
+    Public Property NumOfTenants As Integer?
 
     Enum OccupancyStatusEnum
         Unknown = 1
@@ -88,7 +89,9 @@ Public Class UnderwritingDealCosts
     <Key>
     Public Property Id As Integer
     Public Property MoneySpent As Decimal?
+    Public Property HAFA As Boolean
     Public Property HOI As Decimal?
+    Public Property HOIRatio As Decimal?
     Public Property COSTermination As Decimal?
     Public Property AgentCommission As Decimal?
 End Class
@@ -96,35 +99,38 @@ Public Class UnderwritingRehabInfo
     <Key>
     Public Property Id As Integer
     Public Property AverageLowValue As Decimal?
-    Public Property DealROICash As Decimal?
-    Public Property DealTimeMonths As Integer?
     Public Property RenovatedValue As Decimal?
     Public Property RepairBid As Decimal?
+    Public Property NeedsPlans As Boolean
+    Public Property DealTimeMonths As Integer?
     Public Property SalesCommission As Decimal?
+    Public Property DealROICash As Decimal?
+
 End Class
 Public Class UnderwritingLienInfo
     <Key>
     Public Property Id As Integer
-    Public Property AuctionDate As DateTime?
+    Public Property FirstMortgage As Decimal?
+    Public Property SecondMortgage As Decimal?
     Public Property COSRecorded As Boolean
-    Public Property CurrentPayoff As Decimal?
-    Public Property CurrentSSValue As Decimal?
     Public Property DeedRecorded As Boolean?
-    Public Property DefaultDate As DateTime?
+    Public Property OtherLiens As OtherLiensEnum
+    Public Property LisPendens As Boolean
     Public Property FHA As Boolean?
     Public Property FannieMae As Boolean?
-    Public Property FirstMortgage As Decimal?
-    <MaxLength(50)>
-    Public Property ForeclosureIndexNum As String
-    <MaxLength(256)>
-    Public Property ForeclosureNote As String
-    Public Property ForeclosureStatus As String
     Public Property FreddieMac As Boolean?
-    Public Property OtherLiens As OtherLiensEnum
-    Public Property PayoffDate As DateTime?
-    Public Property SecondMortgage As Decimal?
     <MaxLength(50)>
     Public Property Servicer As String
+    <MaxLength(50)>
+    Public Property ForeclosureIndexNum As String
+    Public Property ForeclosureStatus As String
+    <MaxLength(256)>
+    Public Property ForeclosureNote As String
+    Public Property AuctionDate As DateTime?
+    Public Property DefaultDate As DateTime?
+    Public Property CurrentPayoff As Decimal?
+    Public Property PayoffDate As DateTime?
+    Public Property CurrentSSValue As Decimal?
 
     Enum OtherLiensEnum
         No = 1
@@ -142,7 +148,6 @@ Public Class UnderwritingLienInfo
         RJI = 5
         OrderOfReference = 6
         JudgmentOfForeclosureAndSale = 7
-
     End Enum
 
 End Class
@@ -152,15 +157,22 @@ Public Class UnderwritingLienCosts
     Public Property TaxLienCertificate As Decimal?
     Public Property PropertyTaxes As Decimal?
     Public Property WaterCharges As Decimal?
-    Public Property HPDCharges As Decimal?
-    Public Property ECBDOBViolations As Decimal?
+    Public Property ECBCityPay As Decimal?
     Public Property DOBCivilPenalty As Decimal?
-    Public Property PersonalJudgements As Decimal?
+    Public Property HPDCharges As Decimal?
     Public Property HPDJudgements As Decimal?
-    Public Property IRSNYSTaxLiens As Decimal?
+    Public Property PersonalJudgements As Decimal?
+    Public Property NYSTaxWarrants As Decimal?
+    Public Property FederalTaxLien As Decimal?
+    Public Property SidewalkLiens As Boolean
+    Public Property ParkingViolation As Decimal?
+    Public Property TransitAuthority As Decimal?
+
     Public Property VacateOrder As Boolean?
     Public Property RelocationLien As Decimal?
     Public Property RelocationLienDate As DateTime?
+    'Public Property ECBDOBViolations As Decimal?
+    'Public Property IRSNYSTaxLiens As Decimal?
 End Class
 
 Public Class UnderwritingMinimumBaselineScenario
