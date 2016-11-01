@@ -1101,5 +1101,13 @@ Partial Public Class Lead
         MgrDisapproved = 7
     End Enum
 
+    Public Shared Function getTeamByBBLE(BBLE As String) As String
+        Dim leadOwner = Lead.GetLeadsOwner(BBLE)
+        If leadOwner IsNot Nothing Then
+            Return Employee.GetEmpTeam(leadOwner)
+        Else
+            Return Nothing
+        End If
 
+    End Function
 End Class

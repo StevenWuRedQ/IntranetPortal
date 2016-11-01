@@ -35,12 +35,31 @@ Namespace Controllers
             Return Ok()
         End Function
 
+        <Route("api/underwriter/archive")>
+        <HttpPost>
+        Public Function postArchive(<FromBody> data As Object()) As IHttpActionResult
+            Dim uw = data(0).ToObject(GetType(Underwriting))
+            Dim note = CStr(data(1))
+            UnderwritingManager.save(uw, HttpContext.Current.User.Identity.Name)
+            Dim uwa = UnderwritingManager.archive(uw.BBLE, HttpContext.Current.User.Identity.Name, note)
+            Return uwa
+        End Function
+
+        <Route("api/underwriter/archived/{bble}")>
+        <HttpGet>
+        Public Function loadArchivedList(bble As String) As IHttpActionResult
+            Return Ok(UnderwritingManager.loadArchivedList(bble).AsEnumerable)
+        End Function
+
+        <Route("api/underwriter/archived/id/{id}")>
+        <HttpGet>
+        Public Function getArchived(id As String) As IHttpActionResult
+            Return Ok(UnderwritingManager.getArchived(id))
+        End Function
 
         <Route("api/underwriter/generatexml/{bble}")>
         <HttpGet>
         Function GenerateExcel(bble As String) As IHttpActionResult
-
-
 
             If Not String.IsNullOrEmpty(bble) Then
                 Dim ms As New MemoryStream

@@ -27,7 +27,8 @@ angular.module("PortalApp")
                     case 'percentage':
                         formatConfig = {
                             symbol: "%",
-                            positiveFormat: '%n%s'
+                            positiveFormat: '%n%s',
+                            negativeFormat: '(%n%s)'
                         }
                         break;
                     default:
@@ -51,9 +52,13 @@ angular.module("PortalApp")
 
                 scope.$watch(attrs.ngModel, function (newvalue) {
                     if ($(el).is(":focus")) return;
+                    if (format = 'percentage') {
+                        $(el)[0].value = newvalue * 100;
+                    }
                     $(el).formatCurrency(formatConfig);
                 });
                 $(el).on('blur', function () {
+                    debugger;
                     if (isValidate) {
                         var res = validate(this.value);
                         if (!res) {
@@ -63,14 +68,24 @@ angular.module("PortalApp")
                         } else {
                             $(this).css("background-color", "");
                             $(this).attr('error', '');
+                            if (format = 'percentage') {
+                                $(el)[0].value = $(el)[0].value * 100;
+                            }
                             $(this).formatCurrency(formatConfig);
                         }
                     } else {
+                        if (format = 'percentage') {
+                            $(el)[0].value = $(el)[0].value * 100;
+                        }
                         $(this).formatCurrency(formatConfig);
                     }
                 });
                 $(el).on('focus', function () {
-                    $(this).toNumber()
+
+                    $(this).toNumber();
+                    if (format = 'percentage') {
+                        $(el)[0].value = $(el)[0].value / 100;
+                    }
                 });
             },
         };

@@ -3,22 +3,36 @@ Public Class UnderwritingManager
 
     Public Shared Function getInstance(bble As String) As Underwriting
         Using ctx As New CodeFirstEntity
-            Dim uw = From c In ctx.Underwritings
-                     Where c.BBLE = bble
-            Dim rt = uw.FirstOrDefault
+            Dim uws = From c In ctx.Underwritings
+                      Where c.BBLE = bble
+            Dim uw = uws.FirstOrDefault
 
-            If Nothing IsNot rt Then
+            If Nothing IsNot uw Then
                 For Each p In Core.EntityHelper(Of Underwriting).GetNavigationProperties(ctx)
-                    ctx.Entry(rt).Reference(p.ToString).Load()
+                    ctx.Entry(uw).Reference(p.ToString).Load()
                 Next
             End If
 
-            Return rt
+            Return uw
         End Using
 
     End Function
 
+    Public Shared Function getArchived(id As String) As UnderwritingArchived
+        Using ctx As New CodeFirstEntity
+            Dim archiveds = From a In ctx.UnderwritingArchived
+                            Where a.Id = id
+                            Select a
+            Dim archived = archiveds.FirstOrDefault
 
+            If archived IsNot Nothing Then
+                For Each p In Core.EntityHelper(Of UnderwritingArchived).GetNavigationProperties(ctx)
+                    ctx.Entry(archived).Reference(p.ToString).Load()
+                Next
+            End If
+            Return archived
+        End Using
+    End Function
     Public Shared Function save(uw As Underwriting, saveby As String) As Underwriting
 
         Using ctx As New CodeFirstEntity
@@ -37,12 +51,45 @@ Public Class UnderwritingManager
                 ctx.Underwritings.Add(uw)
 
             End If
-            ctx.SaveChanges()
+            ctx.SaveChanges(saveby)
             Return u
         End Using
 
     End Function
 
+    Public Shared Function archive(bble As String, saveBy As String, note As String) As Underwriting
+        Using ctx As New CodeFirstEntity
+
+            Dim uw = getInstance(bble)
+            If uw IsNot Nothing Then
+                Dim uwa = New UnderwritingArchived
+
+                uwa.BBLE = uw.BBLE
+                uwa.ArchivedBy = saveBy
+                uwa.ArchivedDate = DateTime.Now
+                uwa.ArchivedNote = note
+
+                uwa.PropertyInfo = uw.PropertyInfo
+                uwa.PropertyInfo.Id = Nothing
+                uwa.DealCosts = uw.DealCosts
+                uwa.DealCosts.Id = Nothing
+                uwa.RehabInfo = uw.RehabInfo
+                uwa.RehabInfo.Id = Nothing
+                uwa.RentalInfo = uw.RentalInfo
+                uwa.RentalInfo.Id = Nothing
+                uwa.LienInfo = uw.LienInfo
+                uwa.LienInfo.Id = Nothing
+                uwa.LienCosts = uw.LienCosts
+                uwa.LienCosts.Id = Nothing
+
+                ctx.UnderwritingArchived.Add(uwa)
+                ctx.SaveChanges()
+
+            End If
+            Return Nothing
+        End Using
+
+    End Function
 
     Public Shared Function create(BBLE As String, createby As String) As Underwriting
         Using ctx As New CodeFirstEntity
@@ -53,12 +100,6 @@ Public Class UnderwritingManager
             u.RentalInfo = New UnderwritingRentalInfo
             u.LienInfo = New UnderwritingLienInfo
             u.LienCosts = New UnderwritingLienCosts
-            u.MinimumBaselineScenario = New UnderwritingMinimumBaselineScenario
-            u.BestCaseScenario = New UnderwritingBestCaseScenario
-            u.CashScenario = New UnderwritingCashScenario
-            u.LoanScenario = New UnderwritingLoanScenario
-            u.RentalModel = New UnderwritingRentalModel
-            u.Others = New UnderwritingOthers
 
             u.CreateBy = createby
             u.CreateDate = DateTime.Now
@@ -68,8 +109,12 @@ Public Class UnderwritingManager
         End Using
     End Function
 
-    Public Shared Function archive(uw As Underwriting, archivedBy As String) As Underwriting
-
+    Public Shared Function loadArchivedList(BBLE As String) As UnderwritingArchived()
+        Using ctx As New CodeFirstEntity
+            Dim list = From archived In ctx.UnderwritingArchived
+                       Where archived.BBLE = BBLE
+                       Select archived
+            Return list.ToArray
+        End Using
     End Function
-
 End Class

@@ -4,29 +4,29 @@
     -- author: Steven Wu
     -- Fix anuglar ng-if bug  mutiple date source have bug when switch yes no
     -- and fix committed cc18bff grid yes no
-     --%>
+--%>
 
 <%-- 
     -- author: Steven Wu
     -- add css make ui compact in new version doc search
     -- and fix committed 4357930 Check in style change
-     --%>
+--%>
 <%-- 
     -- author: Steven Wu
     -- test init-grid in new doc search to fix angular two way bind problem with Devextreme grid
     -- and fix committed 72ece32 check test
-     --%>
+--%>
 
 <%-- 
     -- author: Steven Wu
     -- add DocSearchNewVersion start with new doc search html
     -- fix committed bf79f5e leads task search
-     --%>
+--%>
 <%-- 
     -- author: Steven Wu
     -- Change Doc search new version back-end control switch to new version
     -- fix committed 5f8c1dd Switch to new views
-     --%>
+--%>
 <style>
     .ss_warning a {
         color: red !important;
@@ -64,6 +64,40 @@
                         </li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Requested By</label><input class="ss_form_input" ng-model="DocSearch.CreateBy" readonly="readonly" /></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <%-----------------------End Request Info----------------------------------------%>
+
+            <%-- spent 2 hours add yes or no disable relatived filed and test if it's correct
+                 becusae the key vaule too long .
+                 it may cause some problem .
+                 @see /js/directives/preCondition for todo list
+            --%>
+
+            <%-- Ownership Mortgage Info --%>
+
+
+            <div class="ss_form  ">
+                <h4 class="ss_form_title ">Ownership Mortgage Info                               
+                    <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info">                            </pt-collapse>
+                </h4>
+
+
+                <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Ownership_Mortgage_Info">
+                                     <div>
+                        <ul class="ss_form_box clearfix">
+                            <li class="ss_form_item ">
+                                <label class="ss_form_input_title ">Geodata</label>
+                                <a href="http://www.geodataplus.com/" target="_blank">Go to Geodata</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <ul class="ss_form_box clearfix">
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Block</label><input class="ss_form_input" ng-model="LeadsInfo.Block" readonly="readonly" /></li>
                         <li class="ss_form_item ">
@@ -83,240 +117,11 @@
                             <input class="ss_form_input" ng-model="DocSearch.LeadResearch.ownerAddress" />
                         </li>
                     </ul>
-                </div>
-            </div>
-            <%-----------------------End Request Info----------------------------------------%>
-
-            <%--- new version should have sub title so need deleted all ---%>
-            <%-- links --%>
-
-            <%--<ul class="ss_form_box clearfix">
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">Geodata</label>
-  
-                        <a href="http://www.geodataplus.com/" target="_blank">Go to Geodata</a>
-           
-                </li>
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">Acris</label>
-                    
-                        <a href="https://a836-acris.nyc.gov/DS/DocumentSearch/BBL" target="_blank">Go to Acris</a>
-                    
-                </li>
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">NYCSERV </label>
-
-                        <a href="http://nycserv.nyc.gov/NYCServWeb/NYCSERVMain" target="_blank">Go to NYCSERV</a>
-
-                </li>
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">DOB </label>
-
-                        <a href="http://www1.nyc.gov/site/buildings/index.page" target="_blank">Go to DOB</a>
-
-                </li>
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">HPD </label>
-            
-                        <a href="https://hpdonline.hpdnyc.org/HPDonline/provide_address.aspx" target="_blank">Go to HPD</a>
-                </li>
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">NY Data</label>
-                        <a href="https://oma.edatatrace.com/oma/" target="_blank">Go to NY Data</a>
-                </li>
-            </ul>--%>
-            <%-- --links ----%>
-            <%--  <a href="http://nycprop.nyc.gov/nycproperty/nynav/jsp/selectbbl.jsp" target="_blank">Servicer </a>
-            <a href="https://www.knowyouroptions.com/loanlookup" target="_blank">Fannie </a>
-            <a href="https://ww3.freddiemac.com/loanlookup/" target="_blank">Freddie Mac</a>--%>
-
-
-            <%-- end links --%>
-            <%-- by steven
-                 used 5 hours in devextrem grid
-                 becuase the initinal of grid should take an array.
-                 and two way bind should use bindingOptions instand dataSource.
-            --%>
-            <%--
-            <div class="ss_form  ">
-                <h5 class="ss_form_title  ">Other Mortgage                                 
-                        <pt-collapse model="DocSearch.LeadResearch.OtherMortgageDiv"> </pt-collapse>
-                </h5>
-                <div uib-collapse="DocSearch.LeadResearch.OtherMortgageDiv" class="ss_border">
-                    <div init-grid dx-data-grid='{
-                        bindingOptions: {
-                            dataSource: "DocSearch.LeadResearch.OtherMortgage"
-                        },
-                        paging: {
-                            pageSize: 10
-                        },
-                        pager: {
-                            showPageSizeSelector: true,
-                            allowedPageSizes: [5, 10, 20],
-                            showInfo: true
-                        },
-                        editing: {
-                            editMode: "cell",
-                            editEnabled: true,
-                            insertEnabled: true,
-                            removeEnabled: true
-                        },
-                        columns: ["Amount"]
-                    }'>
-                    </div>
-                </div>
-            </div>
-            <div class="ss_form  ">
-                <h5 class="ss_form_title  ">Other Liens                                 
-                        <pt-collapse model="DocSearch.LeadResearch.OtherLiensDiv"> </pt-collapse>
-                </h5>
-                <div uib-collapse="DocSearch.LeadResearch.OtherLiensDiv" class="ss_border">
-                    <div init-grid dx-data-grid='{
-                        bindingOptions: {
-                            dataSource: "DocSearch.LeadResearch.OtherLiens"
-                        },
-                        paging: {
-                            pageSize: 10
-                        },
-                        pager: {
-                            showPageSizeSelector: true,
-                            allowedPageSizes: [5, 10, 20],
-                            showInfo: true
-                        },
-                        editing: {
-                            editMode: "cell",
-                            editEnabled: true,
-                            insertEnabled: true,
-                            removeEnabled: true
-                        },
-                        columns: ["Lien","Amount","Date"],
-                    }'
-                        ng-show="newVersion">
-                    </div>
-                </div>
-
-            </div>
-            <div class="ss_form  ">
-                <h5 class="ss_form_title  ">Tax Lien Certificate                                
-                        <pt-collapse model="DocSearch.LeadResearch.TaxLienCertificateDiv"> </pt-collapse>
-                </h5>
-
-                <div uib-collapse="DocSearch.LeadResearch.TaxLienCertificateDiv" class="ss_border">
-                    <div init-grid dx-data-grid='{
-                        bindingOptions: {
-                            dataSource: "DocSearch.LeadResearch.TaxLienCertificate"
-                        },
-                        paging: {
-                            pageSize: 10
-                        },
-                        pager: {
-                            showPageSizeSelector: true,
-                            allowedPageSizes: [5, 10, 20],
-                            showInfo: true
-                        },
-                        editing: {
-                            editMode: "cell",
-                            editEnabled: true,
-                            insertEnabled: true,
-                            removeEnabled: true
-                        },
-                        columns: ["Year","Amount"],
-                    }'>
-                    </div>
-                </div>
-
-
-
-            </div>
-
-            <div class="ss_form  ">
-                <h5 class="ss_form_title  ">COS Recorded                                
-                        <pt-collapse model="DocSearch.LeadResearch.COSRecordedDiv"> </pt-collapse>
-                </h5>
-                <div uib-collapse="DocSearch.LeadResearch.COSRecordedDiv" class="ss_border">
-                    <div init-grid dx-data-grid='{
-                        bindingOptions: {
-                            dataSource: "DocSearch.LeadResearch.COSRecorded"
-                        },
-                        paging: {
-                            pageSize: 10
-                        },
-                        pager: {
-                            showPageSizeSelector: true,
-                            allowedPageSizes: [5, 10, 20],
-                            showInfo: true
-                        },
-                        editing: {
-                            editMode: "cell",
-                            editEnabled: true,
-                            insertEnabled: true,
-                            removeEnabled: true
-                        },
-                        columns: ["Date","Buyer"],
-                    }'>
-                    </div>
-                </div>
-
-            </div>
-            <div class="ss_form  ">
-                <h5 class="ss_form_title  ">Deed Recorded                                
-                        <pt-collapse model="DocSearch.LeadResearch.DeedRecordedDiv"> </pt-collapse>
-                </h5>
-                <div uib-collapse="DocSearch.LeadResearch.DeedRecordedDiv" class="ss_border">
-                    <div init-grid dx-data-grid='{
-                        bindingOptions: {
-                            dataSource: "DocSearch.LeadResearch.DeedRecorded"
-                        },
-                        paging: {
-                            pageSize: 10
-                        },
-                        pager: {
-                            showPageSizeSelector: true,
-                            allowedPageSizes: [5, 10, 20],
-                            showInfo: true
-                        },
-                        editing: {
-                            editMode: "cell",
-                            editEnabled: true,
-                            insertEnabled: true,
-                            removeEnabled: true
-                        },
-                        columns: ["Date","Buyer"],
-                    }'>
-                    </div>
-                </div>
-
-            </div>
-            --%>
-            <%-- spent 2 hours add yes or no disable relatived filed and test if it's correct
-                 becusae the key vaule too long .
-                 it may cause some problem .
-                 @see /js/directives/preCondition for todo list
-            --%>
-
-            <%-- Ownership Mortgage Info --%>
-
-
-            <div class="ss_form  ">
-                <h4 class="ss_form_title ">Ownership Mortgage Info                               
-                    <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info">                            </pt-collapse>
-                </h4>
-
-
-                <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Ownership_Mortgage_Info">
                     <div>
                         <ul class="ss_form_box clearfix">
                             <li class="ss_form_item ">
-                                <label class="ss_form_input_title ">Geodata</label>
-
-                                <a href="http://www.geodataplus.com/" target="_blank">Go to Geodata</a>
-
-                            </li>
-                            <li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Acris</label>
-
                                 <a href="https://a836-acris.nyc.gov/DS/DocumentSearch/BBL" target="_blank">Go to Acris</a>
-
                             </li>
                         </ul>
                     </div>
@@ -353,7 +158,7 @@
                     </div>
 
                     <div class="ss_form  ">
-                        <h5 class="ss_form_title  ">1st Mortgage                                       
+                        <h5 class="ss_form_title">1st Mortgage                                       
                             <pt-collapse model="DocSearch.LeadResearch.c_1st_Mortgage_Ownership_Mortgage_Info"> </pt-collapse>
                         </h5>
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.c_1st_Mortgage_Ownership_Mortgage_Info">
@@ -662,15 +467,23 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="ss_form  ">
+                    <div class="ss_form">
                         <h5 class="ss_form_title  ">LP Index #                                       
-                            <pt-collapse model="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info"> </pt-collapse>
+                            <pt-collapse model="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info"></pt-collapse>
                         </h5>
                         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.LP_Index___Num_Ownership_Mortgage_Info">
                             <ul class="ss_form_box clearfix" style="list-style: none">
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">LP Index #</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.LP_Index___Num_LP_Index___Num">
+                                </li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title ">Current FC Stage</label>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Current_FC_Stage">
+                                </li>
+                                <li class="ss_form_item ">
+                                    <label class="ss_form_input_title ">Next Court Date</label>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Next_Court_Date" pt-date>
                                 </li>
                                 <li class="clear-fix"></li>
                                 <li class="ss_form_item_line">
@@ -759,7 +572,7 @@
                                         Has Due *</label>
                                     <pt-radio name="PropertyDuesViolations_HasDue2" model="DocSearch.LeadResearch.Has_Due_Property_Taxes_Due"></pt-radio>
                                 </li>
-                                <li class="ss_form_item " >
+                                <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Property Taxes per YR</label>
                                     <input class="ss_form_input " ng-model="DocSearch.LeadResearch.Property_Taxes_per_YR_Property_Taxes_Due">
                                 </li>
@@ -787,6 +600,10 @@
                                 <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Water_Charges_Due">
                                     <label class="ss_form_input_title ">Amount</label>
                                     <input class="ss_form_input " pt-number-mask maskformat='money' pt-number-mask-patch ng-model="DocSearch.LeadResearch.waterCharges">
+                                </li>
+                                <li class="ss_form_item " ng-show="DocSearch.LeadResearch.Has_Due_Water_Charges_Due">
+                                    <label class="ss_form_input_title ">Account #</label>
+                                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.AccountNum">
                                 </li>
                             </ul>
                         </div>
@@ -839,7 +656,28 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="ss_form  ">
+                    <div class="ss_form">
+                        <h5 class="ss_form_title  ">Job/Filings                                       
+                            <pt-collapse model="DocSearch.LeadResearch.Job_Filings_Property_Dues_Violations"> </pt-collapse>
+                        </h5>
+                        <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Job_Filings_Property_Dues_Violations">
+                            <ul class="ss_form_box clearfix">
+                                <li class="ss_form_item " ng-show="true">
+                                    <label class="ss_form_input_title "
+                                        ng-class="{ss_warning:DivError.boolValidate(DocSearch.LeadResearch,'Has_Open_Job_Filings')}"
+                                        data-message="Please check Job Filings Open marked in red.">
+                                        Has Open *</label>
+                                    <pt-radio name="PropertyDuesViolations_HasOpenJobFilings" model="DocSearch.LeadResearch.Has_Open_Job_Filings"></pt-radio>
+                                </li>
+                                <li class="clearfix"></li>
+                                <li class="ss_form_item_line" ng-show="DocSearch.LeadResearch.Has_Open_Job_Filings">
+                                    <label class="ss_form_input_title ">Servicer notes</label>
+                                    <textarea class="edit_text_area text_area_ss_form " ng-model="DocSearch.LeadResearch.JobFilingsNote"></textarea>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ss_form">
                         <h5 class="ss_form_title  ">C O                                       
                             <pt-collapse model="DocSearch.LeadResearch.C_O_Property_Dues_Violations"> </pt-collapse>
                         </h5>

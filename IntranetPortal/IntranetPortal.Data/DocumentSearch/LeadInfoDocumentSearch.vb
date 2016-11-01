@@ -1,12 +1,15 @@
 ﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
 Imports Humanizer
+Imports IntranetPortal
 
 <MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
 Public Class LeadInfoDocumentSearch
     Public Property ResutContent As String
     Public Property IsSave As Boolean
     Public Property CaseName As String
+    Public Property IsInProcess As Integer?
+    Public Property Team As String
 
     ''' <summary>
     ''' The property to indicate if the search is expired
@@ -49,19 +52,22 @@ Public Class LeadInfoDocumentSearch
             Dim result = From search In ctx.LeadInfoDocumentSearches
                          Join ld In ctx.ShortSaleLeadsInfoes On search.BBLE Equals ld.BBLE
                          Join lead In ctx.SSLeads On ld.BBLE Equals lead.BBLE
+                         Group Join tracking In ctx.UnderwritingTrackingViews On search.BBLE Equals tracking.BBLE Into Group
+                         From tracking In Group.DefaultIfEmpty
                          Select New With {
-               .BBLE = search.BBLE,
-               .CaseName = ld.PropertyAddress,
-               .ExpectedSigningDate = search.ExpectedSigningDate,
-               .CompletedBy = search.CompletedBy,
-               .CompletedOn = search.CompletedOn,
-               .CreateBy = search.CreateBy,
-               .CreateDate = search.CreateDate,
-               .Status = search.Status,
-               .UpdateBy = search.UpdateBy,
-               .UpdateDate = search.UpdateDate,
-               .UnderwriteStatus = search.UnderwriteStatus,
-                     .UnderwriteCompletedOn = search.UnderwriteCompletedOn
+                           .BBLE = search.BBLE,
+                           .CaseName = ld.PropertyAddress,
+                           .ExpectedSigningDate = search.ExpectedSigningDate,
+                           .CompletedBy = search.CompletedBy,
+                           .CompletedOn = search.CompletedOn,
+                           .CreateBy = search.CreateBy,
+                           .CreateDate = search.CreateDate,
+                           .Status = search.Status,
+                           .UpdateBy = search.UpdateBy,
+                           .UpdateDate = search.UpdateDate,
+                           .UnderwriteStatus = search.UnderwriteStatus,
+                           .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
+                           .IsInProcess = CType(tracking.IsInProcess, Integer?)
             }
 
             'Return result.ToList
@@ -79,7 +85,8 @@ Public Class LeadInfoDocumentSearch
                                                                    .UpdateBy = search.UpdateBy,
                                                                    .UpdateDate = search.UpdateDate,
                                                                    .UnderwriteStatus = search.UnderwriteStatus,
-                                                                   .UnderwriteCompletedOn = search.UnderwriteCompletedOn
+                                                                   .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
+                                                                   .IsInProcess = CType(search.IsInProcess, Integer?)
                                                         }
                                                 End Function).ToList
         End Using

@@ -86,6 +86,14 @@
                 auditLog.toggle('UnderwritingRequest', id);
             }
         }
+        function markCompleted(status) {
+            debugger;
+            var searchResultDiv = angular.element('#search_result');
+            if(searchResultDiv){
+                var scope = searchResultDiv.scope();
+                scope.markCompleted(status);
+            }
+        }
     </script>
     <script>
         angular.module("PortalApp").config(function ($stateProvider) {
@@ -93,7 +101,7 @@
                 name: 'searchSummary',
                 url: '/searchSummary',
                 controller: 'LeadTaxSearchCtrl',
-                templateUrl: '/js/Views/Underwriter/searchsummary.tpl.html',
+                templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
             }
 
             var underwriterRequest = {
@@ -133,6 +141,16 @@
                 url: '/tables',
                 templateUrl: '/js/Views/Underwriter/tables.tpl.html'
             }
+            var audit = {
+                name: 'underwriter.audit',
+                url: '/audit',
+                templateUrl: '/js/Views/Underwriter/audit.tpl.html'
+            }
+            var archived = {
+                name: 'underwriter.archived',
+                url: '/archived',
+                templateUrl: '/js/Views/Underwriter/archived.tpl.html'
+            }
 
             $stateProvider
                 .state(searchSummary)
@@ -141,6 +159,8 @@
                 .state(flipsheets)
                 .state(rentalmodels)
                 .state(tables)
+                .state(audit)
+                .state(archived)
                 .state(underwriterRequest);
         })
     </script>
@@ -155,6 +175,7 @@
                     <div class="font_size_bold" style="width: 100px">Summary</div>
                 </a>
             </li>
+
             <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
                 <a role="tab" href="#underwritingRequest?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
                     <i class="fa fa-book head_tab_icon_padding"></i>
@@ -163,15 +184,15 @@
                     </div>
                 </a>
             </li>
+
             <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
                 <a role="tab" href="#underwriter/datainput?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
                     <i class="fa fa-calculator head_tab_icon_padding"></i>
                     <div class="font_size_bold" style="width: 100px">
-                        Calculate
+                        Calculator
                     </div>
                 </a>
             </li>
-
 
             <li class="short_sale_head_tab activity_light_blue pull-right">
                 <a class="tab_button_a">
@@ -180,14 +201,14 @@
                 </a>
                 <div class="shot_sale_sub">
                     <ul class="nav  clearfix" role="tablist">
-                        <li class="short_sale_head_tab " ng-click="markCompleted(1)">
-                            <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Accept">
+                        <li class="short_sale_head_tab " onclick="markCompleted(1)">
+                            <a role="tab" class="tab_button_a" data-toggle="tooltip" data-placement="bottom" title="Mark As Accept">
                                 <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
-                                <div class="font_size_bold" style="width: 100px">Accpet</div>
+                                <div class="font_size_bold" style="width: 100px">Accept</div>
                             </a>
                         </li>
-                        <li class="short_sale_head_tab" ng-click="markCompleted(2)">
-                            <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Reject">
+                        <li class="short_sale_head_tab" onclick="markCompleted(2)">
+                            <a role="tab" class="tab_button_a" data-toggle="tooltip" data-placement="bottom" title="Mark As Reject">
                                 <i class="fa fa-times head_tab_icon_padding" style="color: white !important"></i>
                                 <div class="font_size_bold" style="width: 100px">Reject</div>
                             </a>
@@ -199,9 +220,7 @@
     </div>
     <div id="underwriting-summary">
 
-
         <ui-view></ui-view>
-
 
         <div id='uwrhistory' class="container" style="max-width: 800px; margin-bottom: 40px" ng-show="$state.current.name=='underwritingRequest'">
             <button type="button" class="btn btn-info" onclick="showHistory()">History</button>

@@ -8,6 +8,7 @@ Imports Twilio.TwiML
 ''' <summary>
 ''' for testing
 ''' should move to data base later
+''' call it TwilioRecord maybe batter
 ''' </summary>
 Public Class AutoDialerRecord
     Public Enum CallingStatus
@@ -24,6 +25,8 @@ Public Class AutoDialerRecord
     Public Shared ReadOnly TWILIO_CALL_STATUS_PENDDING As String = "pendding"
 
     ''' '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Public Property BBLE As String
+    Public Property LeadName As String
     Public Property Phone As String
     Public Property OwnerName As String
     ' Public Property Status As String = TWILIO_CALL_STATUS_PENDDING
@@ -465,11 +468,13 @@ Namespace Controllers
         Public Shared db As List(Of AutoDialerRecord) = New List(Of AutoDialerRecord) From
                 {
                    New AutoDialerRecord With {
+                   .LeadName = "123 Main Street Flushing NY, 10000",
                    .Phone = "19298883289",
                    .OwnerName = "Steven Wu",
                    .CallStatus = AutoDialerRecord.TWILIO_CALL_STATUS_PENDDING
                    },
                    New AutoDialerRecord With {
+                   .LeadName = "124 Main Street Queens NY, 10000",
                    .Phone = "19175175856",
                    .OwnerName = "Stephen Zhange",
                    .CallStatus = AutoDialerRecord.TWILIO_CALL_STATUS_PENDDING
@@ -497,9 +502,14 @@ Namespace Controllers
         Function TwilioCallNumber(phone As String) As [Call]
             Dim twilio = New TwilioRestClient(AccountSid, AuthToken)
             Dim options = New CallOptions()
-            options.To = phone
 
-            options.From = "19179633481"
+            ' Get agent number here use Chris's number for testing now 
+            ' but have a problem is showing called from number is custom self's number 
+            ' using conference or do more research will solve this problem.
+            ' Call agent first
+            options.To = "19179633481"
+            ' from set up 
+            options.From = phone ' 
             options.Timeout = 999 'for testing 
             options.Url = TwilioAPICallBackBase & "/api/AutoDialer/Answer/" & options.From
             ' options.Url = HttpContext.Current.Server.UrlEncode(options.Url)
@@ -516,7 +526,7 @@ Namespace Controllers
             Dim tr = New TwilioResponse()
 
             ' Dim tcall = db2.Where(Function(c) c.From.Contains(phone)).FirstOrDefault()
-            Dim tcall = db.Where(Function(c) c.IsThisNumber(obj.To)).FirstOrDefault()
+            Dim tcall = db.Where(Function(c) c.IsThisNumber(obj.[From])).FirstOrDefault()
             tcall.update(obj)
             Dim options = New PhoneNumberOptions()
 

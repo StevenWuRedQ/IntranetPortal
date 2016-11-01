@@ -52,15 +52,15 @@ Partial Public Class PortalEntities
                      .Entity = dbEntry
                     }
 
-        For Each propName In entityConfig.Properties
-            log.ColumnName = propName
+        For Each prop In entityConfig.Properties
+            log.ColumnName = prop.Key
 
             If dbEntry.State = EntityState.Deleted Then
-                If Not dbEntry.OriginalValues.PropertyNames.Contains(propName) Then
+                If Not dbEntry.OriginalValues.PropertyNames.Contains(prop.Key) Then
                     Continue For
                 End If
 
-                If dbEntry.OriginalValues.GetValue(Of Object)(propName) Is Nothing Then
+                If dbEntry.OriginalValues.GetValue(Of Object)(prop.Key) Is Nothing Then
                     Continue For
                 End If
 
@@ -68,20 +68,20 @@ Partial Public Class PortalEntities
                      .UserName = userName,
                      .EventDate = eventTime,
                      .EventType = AuditLog.LogType.Deleted,
-                     .ColumnName = propName,
+                     .ColumnName = prop.Key,
                      .TableName = entityConfig.TableName,
-                     .OriginalValue = dbEntry.OriginalValues.GetValue(Of Object)(propName),
+                     .OriginalValue = dbEntry.OriginalValues.GetValue(Of Object)(prop.Key),
                      .Entity = dbEntry,
                      .RecordId = dbEntry.OriginalValues.GetValue(Of Object)(entityConfig.KeyNames(0))
                           })
                 Continue For
             End If
 
-            If Not dbEntry.CurrentValues.PropertyNames.Contains(propName) Then
+            If Not dbEntry.CurrentValues.PropertyNames.Contains(prop.Key) Then
                 Continue For
             End If
 
-            Dim propValue = dbEntry.CurrentValues.GetValue(Of Object)(propName)
+            Dim propValue = dbEntry.CurrentValues.GetValue(Of Object)(prop.Key)
 
             If dbEntry.State = EntityState.Added Then
 
@@ -93,7 +93,7 @@ Partial Public Class PortalEntities
             End If
 
             If dbEntry.State = EntityState.Modified Then
-                Dim originalValue = dbEntry.OriginalValues.GetValue(Of Object)(propName)
+                Dim originalValue = dbEntry.OriginalValues.GetValue(Of Object)(prop.Key)
 
                 If Object.Equals(originalValue, propValue) Then
                     Continue For
@@ -168,19 +168,20 @@ Partial Public Class PortalEntities
             config.TableName = tableName
             config.KeyNames = keyNames
 
-            Dim propInfo As New List(Of String)
-            Dim fields = entityType.GetProperties().Select(Function(p) p.Name).ToList
+            Dim propInfo As New Dictionary(Of String, Type)
 
-            For Each propName In fields
-                If AuditConfigSetting.IgnoreColumns.Contains(propName) Then
+            Dim fields = entityType.GetProperties().Select(Function(p) New With {p.Name, p.PropertyType}).ToList
+
+            For Each prop In fields
+                If AuditConfigSetting.IgnoreColumns.Contains(prop.Name) Then
                     Continue For
                 End If
 
-                If keyNames.Contains(propName) Then
+                If keyNames.Contains(prop.Name) Then
                     Continue For
                 End If
 
-                propInfo.Add(propName)
+                propInfo.Add(prop.Name, prop.PropertyType)
             Next
             config.Properties = propInfo
 

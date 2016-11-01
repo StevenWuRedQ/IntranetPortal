@@ -1,15 +1,19 @@
 ﻿<div class="item-detail">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <ul class=" nav navbar-nav">
+            <ul class="nav navbar-nav">
                 <li ui-sref-active="active"><a ui-sref="underwriter.datainput">Data Input</a></li>
                 <li ui-sref-active="active"><a ui-sref="underwriter.flipsheets">FlipSheets</a></li>
                 <li ui-sref-active="active"><a ui-sref="underwriter.rentalmodels">Rental Model</a></li>
+                <li ui-sref-active="active"><a ui-sref="underwriter.audit">Audit</a></li>
+                <li ui-sref-active="active"><a ui-sref="underwriter.archived">Archives</a></li>
                 <!-- <li ui-sref-active="active"><a ui-sref="underwriter.tables">Tables</a></li>-->
             </ul>
-            <!-- /.navbar-collapse -->
+            <div class="nav-form navbar-right">
+                <button type="button" class="btn btn-lg btn-blue" ng-click="save()">Save</button>
+                <button type="button" class="btn btn-lg btn-blue" ng-click="archive()">Archive</button>
+            </div>
         </div>
-        <!-- /.container-fluid -->
     </nav>
     <div class="container" style="min-width: 800px; width: 95%">
         <ui-view></ui-view>
