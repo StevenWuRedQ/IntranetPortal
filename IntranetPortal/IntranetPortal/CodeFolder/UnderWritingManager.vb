@@ -57,10 +57,11 @@ Public Class UnderwritingManager
 
     End Function
 
-    Public Shared Function archive(bble As String, saveBy As String, note As String) As Underwriting
+    Public Shared Function archive(bble As String, saveBy As String, note As String) As Boolean
         Using ctx As New CodeFirstEntity
 
             Dim uw = getInstance(bble)
+
             If uw IsNot Nothing Then
                 Dim uwa = New UnderwritingArchived
 
@@ -84,9 +85,9 @@ Public Class UnderwritingManager
 
                 ctx.UnderwritingArchived.Add(uwa)
                 ctx.SaveChanges()
-
+                Return True
             End If
-            Return Nothing
+            Return False
         End Using
 
     End Function
