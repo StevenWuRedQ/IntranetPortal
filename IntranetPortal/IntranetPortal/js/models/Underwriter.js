@@ -1,4 +1,10 @@
-﻿angular.module('PortalApp')
+﻿/***
+ *  Author: Shaopeng Zhang
+ *  Date: 2016/11/01
+ *  Description:
+ *  Updates:
+ ***/
+angular.module('PortalApp')
     .factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
 
         var underwriter = ptBaseResource('underwriter', 'BBLE', null, {});
