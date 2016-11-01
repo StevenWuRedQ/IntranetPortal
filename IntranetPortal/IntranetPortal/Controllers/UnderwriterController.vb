@@ -38,11 +38,16 @@ Namespace Controllers
         <Route("api/underwriter/archive")>
         <HttpPost>
         Public Function postArchive(<FromBody> data As Object()) As IHttpActionResult
-            Dim uw = data(0)
+            Dim uw = data(0).ToObject(GetType(Underwriting))
             Dim note = CStr(data(1))
             UnderwritingManager.save(uw, HttpContext.Current.User.Identity.Name)
-            Dim uwa = UnderwritingManager.archive(uw.BBLE, HttpContext.Current.User.Identity.Name)
-            Return uwa
+            Dim isSaved = UnderwritingManager.archive(uw.BBLE, HttpContext.Current.User.Identity.Name, note)
+            If isSaved Then
+                Return Ok()
+            Else
+                Return BadRequest()
+            End If
+
         End Function
 
         <Route("api/underwriter/archived/{bble}")>

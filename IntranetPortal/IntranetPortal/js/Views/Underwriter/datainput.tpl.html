@@ -2,7 +2,8 @@
     <div class="row">
         <div ng-show="archive.isLoaded" style="background-color: #295268; width: 100%; text-align:center; color: white">
             <h5>
-                Archived loaded. Version: {{archive.ArchivedDate}}.
+                Archived loaded. Version: {{archive.ArchivedDate | date:'yyyy-MM-dd'}}.<br />
+                Note: <b>{{archive.ArchivedNote || "No Note.."}}.</b>
                 <span class="fa-stack" type="button" ng-click="restoreCurrent()" tooltip="Restore current version.">
                     <i class="fa fa-circle fa-stack-2x text-danger"></i>
                     <i class="fa fa-undo "></i>
@@ -26,12 +27,19 @@
                                 <td class="td-label" colspan="2">
                                     Property Address:
                                 </td>
-
                             </tr>
 
                             <tr>
                                 <td class="td-value" colspan="2">
                                     <input ng-change='calculate()' ng-model="data.PropertyInfo.PropertyAddress" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    CurrentOwner:
+                                </td>
+                                <td class="td-value">
+                                    <input ng-change='calculate()' ng-model='data.PropertyInfo.CurrentOwner' />
                                 </td>
                             </tr>
                             <tr>
@@ -44,15 +52,15 @@
                             </tr>
                             <tr>
                                 <td class="td-label">
-                                    Building Dimension:
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.PropertyInfo.BuildingDimension' /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
                                     Lot Size:
                                 </td>
                                 <td class="td-value"><input ng-change='calculate()' ng-model='data.PropertyInfo.LotSize' /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Building Dimension:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.PropertyInfo.BuildingDimension' /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
@@ -62,16 +70,30 @@
                             </tr>
                             <tr>
                                 <td class="td-label">
-                                    Actual # of Units:
+                                    FAR Actual:
                                 </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.PropertyInfo.ActualNumOfUnits' /></td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.PropertyInfo.FARActual' /></td>
                             </tr>
+                            <tr>
+                                <td class="td-label">
+                                    FAR Max:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.PropertyInfo.FARMax' /></td>
+                            </tr>
+
                             <tr>
                                 <td class="td-label">
                                     Property Tax (Year):
                                 </td>
                                 <td class="td-value"><input ng-change='calculate()' ng-model='data.PropertyInfo.PropertyTaxYear' pt-number-mask maskformat="money" isvalidate /></td>
                             </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Actual # of Units:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.PropertyInfo.ActualNumOfUnits' /></td>
+                            </tr>
+
                             <tr>
                                 <td class="td-label">
                                     Occupancy Status:
@@ -114,9 +136,23 @@
                             </tr>
                             <tr>
                                 <td class="td-label">
+                                    HAFA
+                                </td>
+                                <td class="td-value">
+                                    <select ng-change='calculate()' style="width: 100%" ng-model='data.DealCosts.HAFA' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
                                     HOI:
                                 </td>
                                 <td class="td-value"><input ng-change='calculate()' ng-model='data.DealCosts.HOI' pt-number-mask maskformat='money' isvalidate /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    HOI Ratio:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.DealCosts.HOIRatio' pt-number-mask maskformat='percentage' isvalidate /></td>
                             </tr>
                             <tr>
                                 <td class="td-label">
@@ -162,6 +198,14 @@
                             </tr>
                             <tr>
                                 <td class="td-label">
+                                    Needs Plans:
+                                </td>
+                                <td class="td-value">
+                                    <select ng-change='calculate()' style="width: 100%" ng-model='data.RehabInfo.NeedsPlans' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
                                     Deal Time (Months):
                                 </td>
                                 <td class="td-value"><input ng-change='calculate()' ng-model='data.RehabInfo.DealTimeMonths' /></td>
@@ -184,54 +228,7 @@
 
                     </div>
 
-                    <div class="pt-panel">
-                        <table>
-                            <tr>
-                                <th class="td-label excel-default" colspan="2">Rental Info</th>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Deed Purchase:
 
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.DeedPurchase' /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Currently Rented:
-                                </td>
-                                <td class="td-value">
-                                    <select ng-change='calculate()' style="width: 100%" ng-model='data.RentalInfo.CurrentlyRented' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Repair Bid Total:
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.RepairBidTotal' /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    # of Units
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.NumOfUnits' /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Market Rent Total:
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.MarketRentTotal' /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Rental Time:
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.RentalTime' /></td>
-                            </tr>
-
-                        </table>
-
-                    </div>
 
                 </div>
 
@@ -284,6 +281,15 @@
                                         <td class="td-value">
                                             <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.OtherLiens' ng-options="o.v as o.l for o in [{l:'No' ,v:1},{l:'Court Order' ,v:2},{l:'Mechanics Lien' ,v:3},{l:'Specific Performance' ,v:4},{l:'Specific Sundry Agreement' ,v:5},{l:'UCC' ,v:6}]"></select>
 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-label">
+                                            Lis Pendens:
+
+                                        </td>
+                                        <td class="td-value">
+                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.LisPendens' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -365,7 +371,7 @@
                                             Current Payoff:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienInfo.CurrentPayoff' /></td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienInfo.CurrentPayoff' pt-number-mask maskformat='money' isvalidate /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -377,9 +383,8 @@
                                     <tr>
                                         <td class="td-label">
                                             Current SS Value:
-
                                         </td>
-                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienInfo.CurrentSSValue' /></td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienInfo.CurrentSSValue' pt-number-mask maskformat='money' isvalidate /></td>
                                     </tr>
 
                                 </table>
@@ -420,16 +425,9 @@
                                     </tr>
                                     <tr>
                                         <td class="td-label">
-                                            HPD Charges:
-
+                                            ECB City Pay:
                                         </td>
-                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.HPDCharges' pt-number-mask maskformat='money' isvalidate /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="td-label">
-                                            ECB/DOB Violations:
-                                        </td>
-                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.ECBDOBViolations' pt-number-mask maskformat='money' isvalidate /></td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.ECBCityPay' pt-number-mask maskformat='money' isvalidate /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -440,10 +438,10 @@
                                     </tr>
                                     <tr>
                                         <td class="td-label">
-                                            Personal Judgements:
+                                            HPD Charges:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.PersonalJudgements' pt-number-mask maskformat='money' isvalidate /></td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.HPDCharges' pt-number-mask maskformat='money' isvalidate /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -454,10 +452,47 @@
                                     </tr>
                                     <tr>
                                         <td class="td-label">
-                                            IRS/NYS Tax Liens:
+                                            Personal Judgements:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.IRSNYSTaxLiens' pt-number-mask maskformat='money' isvalidate /></td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.PersonalJudgements' pt-number-mask maskformat='money' isvalidate /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-label">
+                                            NYS Tax Warrants:
+
+                                        </td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.NYSTaxWarrants' pt-number-mask maskformat='money' isvalidate /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-label">
+                                            Federal Tax Liens:
+
+                                        </td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.FederalTaxLien' pt-number-mask maskformat='money' isvalidate /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-label">
+                                            Sidewalk Liens:
+
+                                        </td>
+                                        <td class="td-value">
+                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienCosts.SidewalkLiens' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-label">
+                                            Parking Violations:
+
+                                        </td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.ParkingViolation' pt-number-mask maskformat='money' isvalidate /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-label">
+                                            Transit Authority:
+
+                                        </td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.TransitAuthority' pt-number-mask maskformat='money' isvalidate /></td>
                                     </tr>
                                     <tr>
                                         <td class="td-label">
@@ -480,7 +515,7 @@
                                             Relocation Lien Date:
 
                                         </td>
-                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.RelocationLienDate' /></td>
+                                        <td class="td-value"><input ng-change='calculate()' ng-model='data.LienCosts.RelocationLienDate' pt-date /></td>
                                     </tr>
 
                                 </table>
@@ -618,36 +653,25 @@
             <div class="pt-panel">
                 <table>
                     <tr>
-                        <th class="td-label excel-orange" colspan="2">RENTAL BRAEKDOWN</th>
+                        <th class="td-label excel-orange" colspan="2">Flip SCENARIO</th>
                     </tr>
-                    <tr>
-                        <td class="td-label">Upfront Cost</td>
+
+                    <tr class="success">
+                        <td class="td-label">Total Cost</td>
                         <td class="td-value">
-                            {{data.RentalModel.TotalUpfront | currency}}
+                            {{data.FlipScenario.Purchase_TotalCost |currency}}
                         </td>
                     </tr>
-                    <tr>
-                        <td class="td-label">Net Rent</td>
+                    <tr class="success">
+                        <td class="td-label">Flip Price</td>
                         <td class="td-value">
-                            {{data.RentalModel.NetMontlyRent | currency}}
+                            {{data.FlipScenario.Resale_SalePrice | currency}}
                         </td>
                     </tr>
-                    <tr>
-                        <td class="td-label">Breakeven (Month)</td>
+                    <tr class="success">
+                        <td class="td-label">Flip Profit</td>
                         <td class="td-value">
-                            {{data.RentalModel.Breakeven}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-label">Target Time (Months)</td>
-                        <td class="td-value">
-                            {{data.RentalModel.TargetTime}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-label">Target Profit</td>
-                        <td class="td-value">
-                            {{data.RentalModel.TargetProfit | currency}}
+                            {{data.FlipScenario.FlipProfit | currency}}
                         </td>
                     </tr>
                 </table>
@@ -656,7 +680,7 @@
 
             <div class="pt-panel">
                 <table>
-                    <tr>
+                    <tr class="excel-blue">
                         <td class="td-label">MAX HOI</td>
                         <td class="td-value">
                             {{data.Others.MaxHOI | currency}}

@@ -185,7 +185,7 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
                 target[props[i]] = source[props[i]];
                 if (keeped && keeped.length) {
                     for (j = 0; j < keeped.length; j++) {
-                        if (temp[props[i]] && target[props[i]][keeped[j]]) {
+                        if (temp[props[i]] && temp[props[i]][keeped[j]]) {
                             target[props[i]][keeped[j]] = temp[props[i]][keeped[j]];
                         }
                     }

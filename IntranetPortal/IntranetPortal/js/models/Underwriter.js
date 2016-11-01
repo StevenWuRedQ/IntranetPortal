@@ -1,55 +1,46 @@
-﻿angular.module('PortalApp')
+﻿/***
+ *  Author: Shaopeng Zhang
+ *  Date: 2016/11/01
+ *  Description:
+ *  Updates:
+ ***/
+angular.module('PortalApp')
     .factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
 
         var underwriter = ptBaseResource('underwriter', 'BBLE', null, {});
 
-        /* constructor for empty model */
-        
-
+        /* Factory for empty model */
         var underwritingFactory = {
-            UnderwritingModel : function () {
-                this.BestCaseScenario = {
-                    CashRequirement: 0,
-                    NetProfit: 0,
-                    PurchasePriceAllIn: 0,
-                    ROI: 0,
-                    TotalInvestment: 0
-                };
-                this.CarryingCosts = {
-                    RETaxs: 0.0,
-                    Utilities: 0,
-                    Insurance: 0,
-                    Sums: 0
-                };
-                this.CashScenario = {};
-                this.ClosingCost = {};
-                this.Construction = {};
+            UnderwritingModel: function () {
+                this.PropertyInfo = {
+                    PropertyAddress: '',
+                    CurrentOwner: '',
+                    TaxClass: '',
+                    LotSize: '',
+                    BuildingDimension: '',
+                    Zoning: '',
+                    PropertyTaxYear: 0.0,
+                    ActualNumOfUnits: 0,
+                    OccupancyStatus: undefined,
+                    SellerOccupied: false,
+                    NumOfTenants: 0,
+                }
                 this.DealCosts = {
                     MoneySpent: 0.0,
+                    HAFA: false,
                     HOI: 0.0,
+                    HOIRatio: 0.0,
                     COSTermination: 0.0,
                     AgentCommission: 0.0
                 }
-                this.DealExpenses = {};
-                this.FlipCalculation = {};
-                this.FlipScenario = {};
-                this.HOI = {};
-                this.HOIBestCase = {};
-                this.InsurancePremium = {};
-                this.Liens = {};
-                this.LienCosts = {
-                    TaxLienCertificate: 0.0,
-                    PropertyTaxes: 0.0,
-                    WaterCharges: 0.0,
-                    HPDCharges: 0.0,
-                    ECBDOBViolations: 0.0,
-                    DOBCivilPenalty: 0.0,
-                    PersonalJudgements: 0.0,
-                    HPDJudgements: 0.0,
-                    IRSNYSTaxLiens: 0.0,
-                    VacateOrder: false,
-                    RelocationLien: 0.0,
-                    RelocationLienDate: undefined
+                this.RehabInfo = {
+                    AverageLowValue: 0.0,
+                    RenovatedValue: 0.0,
+                    RepairBid: 0.0,
+                    NeedsPlans: false,
+                    DealTimeMonths: 0,
+                    SalesCommission: 0.0,
+                    DealROICash: 0.0
                 }
                 this.LienInfo = {
                     FirstMortgage: 0.0,
@@ -57,6 +48,7 @@
                     COSRecorded: false,
                     DeedRecorded: false,
                     OtherLiens: undefined,
+                    LisPendens: false,
                     FHA: false,
                     FannieMae: false,
                     FreddieMac: false,
@@ -70,32 +62,34 @@
                     PayoffDate: undefined,
                     CurrentSSValue: 0.0
                 }
-                this.LoanCosts = {};
-                this.LoanScenario = {};
-                this.LoanTerms = {};
+                this.LienCosts = {
+                    TaxLienCertificate: 0.0,
+                    PropertyTaxes: 0.0,
+                    WaterCharges: 0.0,
+                    ECBCityPay: 0.0,
+                    DOBCivilPenalty: 0.0,
+                    HPDCharges: 0.0,
+                    HPDJudgements: 0.0,
+                    PersonalJudgements: 0.0,
+                    NYSTaxWarrants: 0.0,
+                    FederalTaxLien: 0.0,
+                    SidewalkLiens: false,
+                    ParkingViolation: 0.0,
+                    TransitAuthority: 0.0,
+                    VacateOrder: false,
+                    RelocationLien: 0.0,
+                    RelocationLienDate: undefined
+                }
                 this.MinimumBaselineScenario = {};
-                this.MoneyFactor = {};
+                this.BestCaseScenario = {
+                };
+                // this.FlipScenario = {};
                 this.Others = {};
-                this.PropertyInfo = {
-                    PropertyAddress: '',
-                    TaxClass: '',
-                    BuildingDimension: '',
-                    LotSize: '',
-                    Zoning: '',
-                    ActualNumOfUnits: 0,
-                    PropertyTaxYear: 0.0,
-                    OccupancyStatus: undefined,
-                    SellerOccupied: false,
-                    NumOfTenants: 0,
-                }
-                this.RehabInfo = {
-                    AverageLowValue: 0.0,
-                    RenovatedValue: 0.0,
-                    RepairBid: 0.0,
-                    DealTimeMonths: 0,
-                    SalesCommission: 0.0,
-                    DealROICash: 0.0
-                }
+
+                this.CashScenario = {};
+                this.LoanScenario = {};
+                this.FlipScenario = {};
+
                 this.RentalInfo = {
                     DeedPurchase: 0.0,
                     CurrentlyRented: false,
@@ -105,12 +99,30 @@
                     RentalTime: 0
                 }
                 this.RentalModel = {};
+
+
+                this.Liens = {};
+                this.DealExpenses = {};
+                this.ClosingCost = {};
+                this.Construction = {}; //Improvements
+                this.CarryingCosts = {
+                    RETaxs: 0.0,
+                    Utilities: 0,
+                    Insurance: 0,
+                    Sums: 0
+                };
                 this.Resale = {};
+                this.LoanTerms = {};
+                this.LoanCosts = {};
+                this.FlipCalculation = {};
+                this.MoneyFactor = {};
+                this.HOI = {};
+                this.HOIBestCase = {};
+                this.InsurancePremium = {};
 
             },
             build: function () {
                 var data = new this.UnderwritingModel();
-                underwriter.calculator.applyFixedRules(data);
                 return data;
             }
         }
@@ -260,35 +272,39 @@
                     d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
                     d.LienCosts.WaterCharges = r.waterCharges || 0.0;
                     d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
-                    d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets || 0.0;
+                    d.LienCosts.ECBCityPay = r.Amount_ECB_Tickets || 0.0;
                     d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
                     d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
                     d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
-                    d.LienCosts.IRSNYSTaxLiens = (function () {
-                        var total = 0.0;
-
-                        if (r.irsTaxLien)
-                            total += parseFloat(r.irsTaxLien);
-                        if (r.Amount_NYS_Tax_Lien)
-                            total += parseFloat(r.Amount_NYS_Tax_Lien);
-
-                        return total;
-
-                    })();
+                    d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0; // added: 2016/11/1
+                    d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0; // added: 2016/11/1
                     d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
                     d.LienCosts.RelocationLien = (function () {
                         if (r.has_Vacate_Order_Vacate_Order)
-                            return r.Amount_Vacate_Order || 0.0;
+                            return parseFloat(r.Amount_Vacate_Order) || 0.0;
                     })()
+                    // removed : 2016/11/01
+                    // d.LienCosts.IRSNYSTaxLiens = (function () {
+                    //    var total = 0.0;
+                    //    if (r.irsTaxLien)
+                    //        total += parseFloat(r.irsTaxLien);
+                    //    if (r.Amount_NYS_Tax_Lien)
+                    //        total += parseFloat(r.Amount_NYS_Tax_Lien);
+                    //    return total;
+                    // })();
 
                 }
                 // map to Leads Info if we have data
                 if (d.leadsInfo) {
+                    debugger;
                     d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
+                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
                     d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
+                    d.PropertyInfo.LotSize = d.leadsInfo.LotDem;
                     d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
-                    d.PropertyInfo.LotSize = d.leadsInfo.Lot;
                     d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
+                    d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
+                    d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
                 }
             }
 
@@ -298,27 +314,29 @@
             var applyFixedRules = function (d) {
 
                 d.RehabInfo.SalesCommission = 0.05;
-                d.RehabInfo.DealROICash = 0.3
+                d.RehabInfo.DealROICash = 0.35;
                 // Insurance Premium
                 d.InsurancePremium.From = [35001, 50001, 100001, 500001, 1000001, 5000001, 10000001, 15000001];
                 d.InsurancePremium.To = [50000, 100000, 500000, 1000000, 5000000, 10000000, 15000000];
                 d.InsurancePremium.OwnersPolicyRate = [.00667, .00543, .00436, .00398, .00366, .00325, .00307, .00276];
                 d.InsurancePremium.LoanPolicyRate = [0.00555, 0.00454, 0.00364, 0.00331, 0.00305, 0.00271, 0.00255, 0.00231];
-                d.InsurancePremium.CostOwnersPolicy = _.zip(d.InsurancePremium.From, d.InsurancePremium.To, d.InsurancePremium.OwnersPolicyRate)
-                                                        .reduce(function (cum, v) {
-                                                            var l = cum.length;
-                                                            cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
-                                                            cum[l] = cum[l - 1];
-                                                            return cum;
-                                                        }, [402])
+                d.InsurancePremium.CostOwnersPolicy = _.zip(d.InsurancePremium.From,
+                                                            d.InsurancePremium.To,
+                                                            d.InsurancePremium.OwnersPolicyRate).reduce(function (cum, v) {
+                                                                var l = cum.length;
+                                                                cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
+                                                                cum[l] = cum[l - 1];
+                                                                return cum;
+                                                            }, [402])
 
-                d.InsurancePremium.CostLoanPolicy = _.zip(d.InsurancePremium.From, d.InsurancePremium.To, d.InsurancePremium.LoanPolicyRate)
-                                                        .reduce(function (cum, v) {
-                                                            var l = cum.length;
-                                                            cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
-                                                            cum[l] = cum[l - 1];
-                                                            return cum;
-                                                        }, [344])
+                d.InsurancePremium.CostLoanPolicy = _.zip(d.InsurancePremium.From,
+                                                          d.InsurancePremium.To,
+                                                          d.InsurancePremium.LoanPolicyRate).reduce(function (cum, v) {
+                                                              var l = cum.length;
+                                                              cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
+                                                              cum[l] = cum[l - 1];
+                                                              return cum;
+                                                          }, [344])
                 // Flip Calculation
                 d.FlipCalculation.FlipROI = 0.15;
                 // Money Factor
@@ -326,17 +344,21 @@
                 d.MoneyFactor.InterestOnMoney = 0.18;
                 // Liens
                 d.Liens.LienPayoffsSettlement = 1.0
-                d.Liens.TaxLienSettlement = 0.09 / 12;
-                d.Liens.PropertyTaxesSettlement = 1.0;
+                d.Liens.TaxLienCertificateSettlement = 0.09 / 12;
                 d.Liens.WaterChargesSettlement = 1.0;
-                d.Liens.HPDChargesSettlement = 1.0;
-                d.Liens.ECBDOBViolationsSettlement = 0.35;
+                d.Liens.PropertyTaxesSettlement = 1.0;
+                d.Liens.ECBCityPaySettlement = 1.0;
                 d.Liens.DOBCivilPenaltiesSettlement = 1.0;
-                d.Liens.PersonalJudgementsSettlement = 0.4;
+                d.Liens.HPDChargesSettlement = 1.0;
+
                 d.Liens.HPDJudgementsSettlement = 0.15;
+                d.Liens.PersonalJudgementsSettlement = 0.40;
+                d.Liens.ParkingViolationSettlement = 1.0;
+                d.Liens.TransitAuthoritySettlement = 1.0;
                 d.Liens.RelocationLienSettlement = .09 / 365;
-                // Deal Expenses
-                d.DealExpenses.HOILienSettlement = 0.75;
+
+                // d.Liens.ECBDOBViolationsSettlement = 0.35; removed: 2016/10/31
+
                 // Closing Costs
                 d.ClosingCost.TitleBill = 1200.00;
                 d.ClosingCost.BuyerAttorney = 1250.00;
@@ -356,7 +378,6 @@
                 d.RentalModel.MinROI = 0.18;
                 d.RentalModel.Insurance = 85.0;
 
-
             };
 
             /**
@@ -365,62 +386,78 @@
             */
             var applyRule = function (d) {
                 //debugger;
-                var float = parseFloat;
-                var int = parseInt;
-                // PropertyInfo 1:residential 2: nonresidential
+                var float = function (data) {
+                    if (data)
+                        return parseFloat(data);
+                    else
+                        return 0.0;
+                }
+                var int = function (data) {
+                    if (data)
+                        return parseInt(data);
+                    else
+                        return 0;
+                }
+
+                /**
+                 * PropertyInfo 
+                 * 1:residential
+                 * 2: nonresidential
+                 */
                 d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? 1 : 2 })();
 
                 // Liens
-                d.Liens.TaxLien = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienSettlement * float(d.RehabInfo.DealTimeMonths));
+                d.Liens.TaxLienCertificate = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienCertificateSettlement * float(d.RehabInfo.DealTimeMonths));
                 d.Liens.PropertyTaxes = float(d.LienCosts.PropertyTaxes) * d.Liens.PropertyTaxesSettlement;
                 d.Liens.WaterCharges = float(d.LienCosts.WaterCharges) * d.Liens.WaterChargesSettlement;
-                d.Liens.HPDCharges = float(d.LienCosts.HPDCharges) * d.Liens.HPDChargesSettlement;
-                d.Liens.ECBDOBViolations = float(d.LienCosts.ECBDOBViolations) * (1.0 + 0.0075 * float(d.RehabInfo.DealTimeMonths)) * d.Liens.ECBDOBViolationsSettlement;
+                d.Liens.ECBCityPay = float(d.LienCosts.ECBCityPay) * d.Liens.ECBCityPaySettlement;
                 d.Liens.DOBCivilPenalties = float(d.LienCosts.DOBCivilPenalty) * d.Liens.DOBCivilPenaltiesSettlement;
-                d.Liens.PersonalJudgements = float(d.LienCosts.PersonalJudgements) * d.Liens.PersonalJudgementsSettlement;
+                d.Liens.HPDCharges = float(d.LienCosts.HPDCharges) * d.Liens.HPDChargesSettlement;
                 d.Liens.HPDJudgements = float(d.LienCosts.HPDJudgements) * d.Liens.HPDJudgementsSettlement;
-                d.Liens.IRSNYSTaxLienSettlement = (function () {
-                    return float(d.LienCosts.IRSNYSTaxLiens) < 12500 ? 1.0 : 0.0
+                d.Liens.PersonalJudgements = float(d.LienCosts.PersonalJudgements) * d.Liens.PersonalJudgementsSettlement;
+                d.Liens.NYSTaxWarrantsSettlement = (function () {
+                    return float(d.LienCosts.NYSTaxWarrantsSettlement) < 12500 ? 1.0 : 0.0
                 })();
-                d.Liens.IRSNYSTaxLien = float(d.LienCosts.IRSNYSTaxLiens) * d.Liens.IRSNYSTaxLienSettlement;
+                d.Liens.NYSTaxWarrants = float(d.LienCosts.NYSTaxWarrants) * d.Liens.NYSTaxWarrantsSettlement;
+                d.Liens.FederalTaxLienSettlement = (function () {
+                    return float(d.LienCosts.FederalTaxLien) < 12500 ? 1.0 : 0.0
+                })();
+                d.Liens.FederalTaxLien = float(d.LienCosts.FederalTaxLien) * d.Liens.FederalTaxLienSettlement;
+                d.Liens.ParkingViolation = float(d.LienCosts.ParkingViolation) * d.Liens.ParkingViolationSettlement;
+                d.Liens.TransitAuthority = float(d.LienCosts.TransitAuthority) * d.Liens.TransitAuthoritySettlement;
                 d.Liens.RelocationLien = (function () {
-
-                    function getTodayDate() {
-                        return new Date(new Date().toJSON().slice(0, 10));
-                    }
                     if (!d.LienCosts.RelocationLienDate)
                         return 0.0;
                     else {
-                        return float(d.LienCosts.RelocationLien) * (1.0 + (getTodayDate().getTime() + 180 * 24 * 60 * 60 * 1000 - new Date(d.LienCosts.RelocationLienDate).getTime()) * d.Liens.RelocationLienSettlement)
+                        return float(d.LienCosts.RelocationLien) * (1.0 + (moment().diff(moment(d.LienCosts.RelocationLienDate), 'days') + 180) * d.Liens.RelocationLienSettlement)
                     }
                 })();
+                // DealCost added: 2016/10/31
+                d.DealCosts.HAFA = (d.PropertyInfo.SellerOccupied || int(d.PropertyInfo.NumOfTenants) > 0) &&
+                                    !d.LienInfo.FHA &&
+                                    !d.LienInfo.FannieMae &&
+                                    !d.LienInfo.FreddieMac &&
+                                    float(d.DealCosts.HOI) > 0.0;
+
                 // DealExpense
                 d.DealExpenses.MoneySpent = float(d.DealCosts.MoneySpent);
-
-                d.DealExpenses.HOILien = (function () {
-                    var c1 = d.PropertyInfo.SellerOccupied;
-                    var c2 = int(d.PropertyInfo.NumOfTenants) > 0;
-                    var c3 = !d.LienInfo.FHA;
-                    var c4 = !d.LienInfo.FannieMae;
-                    var c5 = !d.LienInfo.FreddieMac;
-                    var c6 = float(d.DealCosts.HOI) > 0.0;
-                    //debugger;
-                    return (c1 | c2) & c3 & c4 & c5 & c6 ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
-
-                })();
+                d.DealExpenses.HOILienSettlement = float(d.DealCosts.HOIRatio);
+                d.DealExpenses.HOILien = d.DealCosts.HAFA ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
                 d.DealExpenses.COSTermination = float(d.DealCosts.COSTermination);
-                d.DealExpenses.Tenants = float(d.PropertyInfo.NumOfTenants) * 5000.00;
+                d.DealExpenses.Tenants = float(d.PropertyInfo.NumOfTenants) * 7000.00;
                 d.DealExpenses.Agent = float(d.DealCosts.AgentCommission);
+
                 // Construction(Improvement)
                 d.Construction.Construction = float(d.RehabInfo.RepairBid);
-                d.Construction.Architect = d.Liens.ECBDOBViolations > 4000 ? 10000.0 : 0;
+                d.Construction.Architect = d.RehabInfo.NeedsPlans ? 8500 : 0;
+
                 // CarryingCosts
                 d.CarryingCosts.RETaxs = float(d.PropertyInfo.PropertyTaxYear) / 12 * float(d.RehabInfo.DealTimeMonths);
                 d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.ActualNumOfUnits), 2) + 400 * float(d.PropertyInfo.ActualNumOfUnits);
 
                 // Resale
                 d.Resale.ProbableResale = float(d.RehabInfo.RenovatedValue);
-                d.Resale.Commissions = float(d.Resale.ProbableResale) * float(d.RehabInfo.SalesCommission);
+                d.Resale.Commissions = d.Resale.ProbableResale * float(d.RehabInfo.SalesCommission);
                 d.Resale.TransferTax = (function () {
                     var pr = parseFloat(d.Resale.ProbableResale);
                     var rate;
@@ -441,7 +478,7 @@
                     return (rate + 0.004) * pr;
                 })();
                 // LoanTerms
-                d.LoanTerms.LoanAmount = float(d.Resale.ProbableResale) * float(d.LoanTerms.LTV);
+                d.LoanTerms.LoanAmount = d.Resale.ProbableResale * d.LoanTerms.LTV;
                 d.CarryingCosts.Insurance = d.LoanTerms.LoanAmount / 100.0 * 0.45 / 12 * float(d.RehabInfo.DealTimeMonths);
                 // LoanCosts
                 d.LoanCosts.LoanClosingCost = (function () {
@@ -468,15 +505,14 @@
                 d.LoanCosts.LoanInterest = d.LoanTerms.LoanAmount * d.LoanTerms.LoanRate / 12.0 * float(d.RehabInfo.DealTimeMonths);
 
                 // Sums
-                d.Liens.Sums = d.Liens.TaxLien + d.Liens.PropertyTaxes + d.Liens.WaterCharges + d.Liens.HPDCharges + d.Liens.ECBDOBViolations + d.Liens.DOBCivilPenalties + d.Liens.PersonalJudgements + d.Liens.HPDJudgements + d.Liens.IRSNYSTaxLien + d.Liens.RelocationLien;
-                d.Liens.AdditonalCostsSums = d.Liens.WaterCharges + d.Liens.HPDCharges + d.Liens.ECBDOBViolations + d.Liens.DOBCivilPenalties + d.Liens.PersonalJudgements + d.Liens.HPDJudgements + d.Liens.IRSNYSTaxLien + d.Liens.RelocationLien;
+                d.Liens.Sums = d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes + d.Liens.WaterCharges + d.Liens.ECBCityPay + d.Liens.DOBCivilPenalties + d.Liens.HPDCharges + d.Liens.HPDJudgements + d.Liens.PersonalJudgements + d.Liens.NYSTaxWarrants + d.Liens.FederalTaxLien + d.Liens.ParkingViolation + d.Liens.TransitAuthority + d.Liens.RelocationLien;
                 d.DealExpenses.Sums = d.DealExpenses.MoneySpent + d.DealExpenses.HOILien + d.DealExpenses.COSTermination + d.DealExpenses.Tenants + d.DealExpenses.Agent;
                 d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
                 d.Construction.Sums = d.Construction.Construction + d.Construction.Architect;
                 d.CarryingCosts.Sums = d.CarryingCosts.Insurance + d.CarryingCosts.RETaxs + d.CarryingCosts.Utilities;
-                d.Resale.Sums = d.Resale.Commissions + d.Resale.TransferTax + d.Resale.Concession + d.Resale.Attorney + d.Resale.NDC;
-                d.Liens.LienPayoffs = (d.Resale.ProbableResale - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums) * float(d.RehabInfo.DealROICash)) / (float(d.RehabInfo.DealROICash) * 1.0058 + 1.0058);
-
+                d.Resale.Sums = d.Resale.Concession + d.Resale.Commissions + d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
+                d.Liens.LienPayoffs = (d.Resale.ProbableResale - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums) * float(d.RehabInfo.DealROICash)) / ((float(d.RehabInfo.DealROICash) + 1) * 1.0058);
+                d.Liens.AdditonalCostsSums = d.Liens.WaterCharges + d.Liens.ECBCityPay + d.Liens.DOBCivilPenalties + d.Liens.HPDCharges + d.Liens.HPDJudgements + d.Liens.PersonalJudgements + d.Liens.NYSTaxWarrants + d.Liens.FederalTaxLien + d.Liens.ParkingViolation + d.Liens.TransitAuthority + d.Liens.RelocationLien;
 
                 // InsurancePremium
                 d.InsurancePremium.PurchasePrice = d.Liens.LienPayoffs;
@@ -487,27 +523,27 @@
                 d.InsurancePremium.OwnersLoanPolicyFullPremium = insurancePolicyCalculation(d.InsurancePremium.LoanAmountFullPremium, d.InsurancePremium.LoanPolicyRate, d.InsurancePremium.CostLoanPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
                 d.InsurancePremium.TitleInsurance = d.InsurancePremium.OwnersLoanPolicyDiscounted * 1.3 + d.InsurancePremium.OwnersLoanPolicyFullPremium;
                 d.ClosingCost.OwnersPolicy = d.InsurancePremium.OwnersPolicy;
-                d.ClosingCost.Sums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney + d.ClosingCost.OwnersPolicy;
+                d.ClosingCost.Sums = d.ClosingCost.OwnersPolicy + d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
                 d.LoanCosts.LoanPolicy = d.InsurancePremium.TitleInsurance - d.InsurancePremium.OwnersPolicy;
-                d.FlipCalculation.FlipPrice = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums) * d.FlipCalculation.FlipROI) / (d.FlipCalculation.FlipROI * 1 + 1)
+                d.FlipCalculation.FlipPrice = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums) * d.FlipCalculation.FlipROI) / ((d.FlipCalculation.FlipROI + 1) * 1.0);
 
                 // HOI
                 d.LoanCosts.Sums = d.LoanCosts.LoanPolicy + d.LoanCosts.LoanClosingCost + d.LoanCosts.Points + d.LoanCosts.LoanInterest;
-                d.HOI.PurchasePriceAllIn = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums + d.LoanCosts.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums) * d.HOI.Value) / (d.HOI.Value * 1 + 1);
+                d.HOI.PurchasePriceAllIn = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums + d.LoanCosts.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums) * d.HOI.Value) / ((d.HOI.Value + 1) * 1.0);
                 d.HOI.TotalInvestment = d.HOI.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
                 d.HOI.CashRequirement = d.HOI.TotalInvestment - d.LoanTerms.LoanAmount;
                 d.HOI.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOI.TotalInvestment;
                 d.HOI.ROILoan = d.HOI.NetProfit / d.HOI.TotalInvestment;
 
                 // Best Case For HOI
-                d.HOIBestCase.PurchasePriceAllIn = d.RehabInfo.AverageLowValue + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
+                d.HOIBestCase.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
                 d.HOIBestCase.TotalInvestment = d.HOIBestCase.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
                 d.HOIBestCase.CashRequirement = d.HOIBestCase.TotalInvestment - d.LoanTerms.LoanAmount;
                 d.HOIBestCase.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOIBestCase.TotalInvestment;
                 d.HOIBestCase.ROILoan = d.HOIBestCase.NetProfit / d.HOIBestCase.TotalInvestment;
 
                 // Cash Scenario
-                d.CashScenario.Purchase_LienPayoffs = d.Liens.LienPayoffs + d.Liens.TaxLien + d.Liens.PropertyTaxes;
+                d.CashScenario.Purchase_LienPayoffs = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
                 d.CashScenario.Purchase_OffHUDCosts = d.Liens.AdditonalCostsSums;
                 d.CashScenario.Purchase_DealCosts = d.DealExpenses.Sums;
                 d.CashScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
@@ -524,7 +560,7 @@
                 d.CashScenario.ROI = d.CashScenario.Resale_NetProfit / d.CashScenario.Purchase_TotalInvestment;
                 d.CashScenario.ROIAnnual = d.CashScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
                 // Loan Scenario
-                d.LoanScenario.Purchase_PurchasePrice = d.Liens.LienPayoffs + d.Liens.TaxLien + d.Liens.PropertyTaxes;
+                d.LoanScenario.Purchase_PurchasePrice = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
                 d.LoanScenario.Purchase_AdditonalCosts = d.Liens.AdditonalCostsSums;
                 d.LoanScenario.Purchase_DealCosts = d.DealExpenses.Sums;
                 d.LoanScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
@@ -564,7 +600,7 @@
                 d.FlipScenario.CashRequirement = d.FlipScenario.Purchase_TotalInvestment
                 d.FlipScenario.ROI = d.FlipScenario.Resale_NetProfit / d.FlipScenario.Purchase_TotalInvestment;
                 // Others 
-                d.Others.MaximumLienPayoff = d.Liens.LienPayoffs + d.Liens.TaxLien + d.Liens.PropertyTaxes;
+                d.Others.MaximumLienPayoff = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
                 d.Others.MaximumSSPrice = d.Liens.LienPayoffs + d.Liens.Sums;
                 d.Others.MaxHOI = d.HOIBestCase.NetProfit - d.HOI.NetProfit;
                 // Minimum Baseline (~=Loan)
@@ -616,6 +652,8 @@
         underwriter.load = function (/* optional */ bble) {
             //debugger;
             var data = underwritingFactory.build();
+            underwriter.calculator.applyFixedRules(data);
+
             if (bble) {
                 var _data = underwriter.get({ BBLE: bble.trim() }, function (d) {
                     _data.BBLE = bble;
@@ -650,7 +688,7 @@
         }
 
         underwriter.archive = function (data, msg) {
-            
+
             return $http({
                 method: 'POST',
                 url: '/api/underwriter/archive',
@@ -665,14 +703,13 @@
             })
         }
 
-        underwriter.loadArchived = function(id){
-        
+        underwriter.loadArchived = function (id) {
+
             return $http({
                 method: 'GET',
                 url: '/api/underwriter/archived/id/' + id
             })
         }
-
 
         return underwriter;
 
