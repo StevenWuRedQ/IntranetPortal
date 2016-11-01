@@ -3963,7 +3963,7 @@ angular.module("PortalApp")
 
                 }
                 //debugger;
-                var rule = /^(\d+|\d*\.\d+)$/;
+                var rule = /^-?(\d+|\d*\.\d+)$/;
                 var validate = function (val) {
                     if (typeof (val) == 'number') {
                         return true;
@@ -3977,7 +3977,7 @@ angular.module("PortalApp")
 
                 scope.$watch(attrs.ngModel, function (newvalue) {
                     if ($(el).is(":focus")) return;
-                    if (format = 'percentage') {
+                    if (format == 'percentage') {
                         $(el)[0].value = newvalue * 100;
                     }
                     $(el).formatCurrency(formatConfig);
@@ -3993,13 +3993,13 @@ angular.module("PortalApp")
                         } else {
                             $(this).css("background-color", "");
                             $(this).attr('error', '');
-                            if (format = 'percentage') {
+                            if (format == 'percentage') {
                                 $(el)[0].value = $(el)[0].value * 100;
                             }
                             $(this).formatCurrency(formatConfig);
                         }
                     } else {
-                        if (format = 'percentage') {
+                        if (format == 'percentage') {
                             $(el)[0].value = $(el)[0].value * 100;
                         }
                         $(this).formatCurrency(formatConfig);
@@ -4008,7 +4008,7 @@ angular.module("PortalApp")
                 $(el).on('focus', function () {
 
                     $(this).toNumber();
-                    if (format = 'percentage') {
+                    if (format == 'percentage') {
                         $(el)[0].value = $(el)[0].value / 100;
                     }
                 });
