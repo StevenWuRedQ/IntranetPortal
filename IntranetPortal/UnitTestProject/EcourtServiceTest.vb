@@ -28,11 +28,11 @@ Imports IntranetPortal.Data
     End Sub
 
     <TestMethod()>
-    <ExpectedException(GetType(Exception))>
     Public Sub GetCaseChanges_exception()
-        Dim startDate = DateTime.Today.AddDays(-1)
+        Dim startDate = DateTime.Today.AddDays(-5)
         Dim endDate = startDate.AddDays(1)
         Dim cases = EcourtService.Instance.GetStatusChanges(startDate, endDate)
+        Assert.IsTrue(cases.Count > 0)
     End Sub
 
 End Class

@@ -39,6 +39,12 @@ Public Class EcourtService
         Return Execute(Of CaseDetail)(request)
     End Function
 
+    ''' <summary>
+    ''' Get cases that the status changed during the certian time range
+    ''' </summary>
+    ''' <param name="startDate">The start date</param>
+    ''' <param name="endDate">The end date</param>
+    ''' <returns></returns>
     Public Function GetStatusChanges(startDate As DateTime, endDate As DateTime) As List(Of EcourtCaseChange)
         Dim request = GetRequest("api/cases/columnvaluechanges/{columnName}/{startDate}/{endDate}", Method.GET)
         request.AddUrlSegment("columnName", "CaseStatus")
@@ -219,6 +225,7 @@ End Class
 ''' The ecourt case 
 ''' </summary>
 Partial Public Class EcourtCase
+
     ''' <summary>
     ''' Update the leads ecourt case data
     ''' </summary>

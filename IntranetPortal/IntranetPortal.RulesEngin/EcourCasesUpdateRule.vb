@@ -13,6 +13,7 @@ Public Class EcourtCasesUpdateRule
             Try
                 LeadsEcourtData.DailyUpdate()
                 Log("Ecourt Data Daily Update is completed.")
+                Return
             Catch ex As Exception
                 Log("Error in " & RuleName, ex)
                 Threading.Thread.Sleep((try_count + 1) * 60 * 1000)

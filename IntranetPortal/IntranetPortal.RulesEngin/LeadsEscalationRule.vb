@@ -1,4 +1,8 @@
 ﻿
+''' <summary>
+''' The escalation rule for leads
+''' The rule is configured by leads status and time escalation.
+''' </summary>
 Public Class LeadsEscalationRule
     Public Shared Sub Execute(ld As Lead)
         For Each Rule In GetRule(ld)
@@ -34,6 +38,71 @@ Public Class LeadsEscalationRule
 
     Private Shared Function TaskRules() As List(Of EscalationRule)
         Dim rules As New List(Of EscalationRule)
+        rules.Add(New EscalationRule("NewLead", "7.00:00:00",
+                                     Sub(leads)
+                                         Dim ld = CType(leads, Lead)
+                                         If RulesService.Mode = RulesService.RunningMode.Trial Then
+                                             ld.UpdateAssignDate()
+                                             Return
+                                         End If
+
+                                         'move leads to portal main pool
+                                         ld.MoveToMainPool("RuleEngine")
+                                         ServiceLog.Log("Recycle of Leads is done, BBLE: " & ld.BBLE)
+                                     End Sub,
+                                     Function(leads)
+                                         'Dim ld = CType(leads, Lead)
+                                         'Return ld.LastUserUpdate <= ld.AssignDate
+                                         Return True
+                                     End Function, 1,
+                                      Function(leads)
+                                          Dim ld = CType(leads, Lead)
+                                          Return ld.AssignDate
+                                      End Function))
+        rules.Add(New EscalationRule("Warm", "20.00:00:00",
+                                     Sub(leads)
+                                         Dim ld = CType(leads, Lead)
+                                         If RulesService.Mode = RulesService.RunningMode.Trial Then
+                                             ld.UpdateAssignDate()
+                                             Return
+                                         End If
+                                         'move leads to portal main pool
+                                         ld.MoveToMainPool("RuleEngine")
+                                         ServiceLog.Log("Recycle of Leads is done, BBLE: " & ld.BBLE)
+                                     End Sub,
+                                     Function(leads)
+                                         'Dim ld = CType(leads, Lead)
+                                         'Return ld.LastUserUpdate <= ld.AssignDate
+                                         Return True
+                                     End Function, 1,
+                                      Function(leads)
+                                          Dim ld = CType(leads, Lead)
+                                          Return ld.GetStatusChangedDate()
+                                      End Function))
+        rules.Add(New EscalationRule("Priority", "15.00:00:00",
+                               Sub(leads)
+                                   Dim ld = CType(leads, Lead)
+
+                                   If RulesService.Mode = RulesService.RunningMode.Trial Then
+                                       Return
+                                   End If
+
+                                   ld.StartRecycleProcess()
+                               End Sub,
+                               Function(leads)
+                                   Dim ld = CType(leads, Lead)
+                                   Dim offer = ld.GetNewOffer()
+                                   Return offer Is Nothing
+                               End Function, 1, Function(leads)
+                                                    Dim ld = CType(leads, Lead)
+                                                    Return ld.GetStatusChangedDate()
+                                                End Function))
+        Return rules
+    End Function
+
+    Private Shared Function TaskRules2() As List(Of EscalationRule)
+        Dim rules As New List(Of EscalationRule)
+
         rules.Add(New EscalationRule("NewLead", "3.00:00:00",
                                      Sub(leads)
                                          Dim ld = CType(leads, Lead)

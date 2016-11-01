@@ -616,6 +616,7 @@ Partial Public Class Lead
 
                         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString, empId, empName, action)
                     End If
+                    LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.StatusChange, lead.EmployeeName, empName, lead.Status)
                 Else
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
                     Dim empName = HttpContext.Current.User.Identity.Name
@@ -638,6 +639,24 @@ Partial Public Class Lead
             Return ctx.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = userName).ToList.Where(Function(ld) ld.CallbackDate < DateTime.Today.AddDays(1)).ToList
         End Using
     End Function
+
+    ''' <summary>
+    ''' Get last status changed time
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function GetStatusChangedDate() As DateTime
+        Using ctx As New Entities
+            Dim log = ctx.LeadsStatusLogs.Where(Function(l) l.BBLE = BBLE AndAlso l.Type = LeadsStatusLog.LogType.StatusChange AndAlso l.Description = Status) _
+                         .OrderByDescending(Function(a) a.CreateDate).FirstOrDefault
+
+            If log IsNot Nothing AndAlso log.CreateDate.HasValue Then
+                Return log.CreateDate.Value
+            End If
+
+            Return AssignDate
+        End Using
+    End Function
+
     ''' <summary>
     ''' Set leads to dead and expire all rule enginee and task
     ''' </summary>
@@ -888,6 +907,10 @@ Partial Public Class Lead
         End Using
     End Sub
 
+    Public Sub MoveToMainPool(moveBy As String)
+        ReAssignLeads("Leads MainPool", moveBy)
+    End Sub
+
     Public Sub ReAssignLeads(empName As String, Optional assignBy As String = "Portal", Optional archieve As Boolean = False)
         If String.Equals(EmployeeName, empName, StringComparison.CurrentCultureIgnoreCase) Then
             Return
@@ -966,9 +989,12 @@ Partial Public Class Lead
                 End If
             End Using
         End If
-
-
     End Sub
+
+    Public Function GetNewOffer() As IntranetPortal.Data.PropertyOffer
+        Dim offer = IntranetPortal.Data.PropertyOffer.GetOffer(BBLE)
+        Return offer
+    End Function
 
     Public Sub StartRecycleProcess()
         If Not InRecycle Then

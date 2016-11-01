@@ -961,12 +961,8 @@
                                                             <asp:Literal runat="server" ID="ltRecycleDays"></asp:Literal></span>
                                                         <dx:ASPxComboBox runat="server" ID="cbRecycleDays" Width="80px" Visible="false" Native="true">
                                                             <Items>
-                                                                <dx:ListEditItem Text="Extend..." Value="0" Selected="true" />
-                                                                <dx:ListEditItem Text="1 Day" Value="1" />
-                                                                <dx:ListEditItem Text="2 Days" Value="2" />
-                                                                <dx:ListEditItem Text="3 Days" Value="3" />
-                                                                <dx:ListEditItem Text="4 Days" Value="4" />
-                                                                <dx:ListEditItem Text="5 Days" Value="5" />
+                                                                <dx:ListEditItem Text="Extend..." Value="0" Selected="true" />                                                                
+                                                                <dx:ListEditItem Text="15 Days" Value="15" />
                                                             </Items>
                                                         </dx:ASPxComboBox>
                                                     </div>
