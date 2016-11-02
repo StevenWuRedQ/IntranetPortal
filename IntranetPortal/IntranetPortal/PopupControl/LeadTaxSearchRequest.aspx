@@ -41,11 +41,11 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                                                     <div class="font_size_bold" id="LegalTabHead">Searches</div>
                                                 </a>
                                             </li>
-                                            <% If Nothing Is Request.QueryString("mode") OrElse CInt(Request.QueryString("mode")) < 1 %>
+                                            <% If Nothing Is Request.QueryString("mode") OrElse CInt(Request.QueryString("mode")) < 1 OrElse (Request.QueryString("mode")) >= 2 Then%>
                                             <li style="margin-right: 30px; color: #ffa484; float: right">
                                                 <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="Save" ng-click="SearchComplete(true)"></i>
                                             </li>
-                                            <% End if %>
+                                            <% End If %>
                                         </ul>
                                     </div>
                                 </div>

@@ -10,8 +10,8 @@
                 <!-- <li ui-sref-active="active"><a ui-sref="underwriter.tables">Tables</a></li>-->
             </ul>
             <div class="nav-form navbar-right">
-                <button type="button" class="btn btn-lg btn-blue" ng-click="save()" ng-disabled="archive.isLoaded">Save</button>
-                <button type="button" class="btn btn-lg btn-blue" ng-click="archiveFunc()" ng-disabled="archive.isLoaded">Archive</button>
+                <button type="button" class="btn btn-lg btn-blue" ng-click="save()" ng-disabled="isProtectedView ||archive.isLoaded">Save</button>
+                <button type="button" class="btn btn-lg btn-blue" ng-click="archiveFunc()" ng-disabled="isProtectedView || archive.isLoaded">Archive</button>
             </div>
         </div>
     </nav>
