@@ -1,4 +1,9 @@
-﻿<div>
+﻿<div pt-editable-div>
+    <div ng-show="isProtectedView && !archive.isLoaded" style="background-color: #295268; width: 100%; text-align: center; color: white; padding: 2px; border-radius: 3px">
+        <h5>
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> You are currently in Protected View. &nbsp;<span class="btn btn-sm btn-danger" ng-click="enableEditing()">Enable Editing</span> 
+        </h5>
+    </div>
     <div class="row">
         <div id="data_input_area" class="col-md-9 col-lg-9">
             <div class="row">
@@ -217,7 +222,54 @@
 
                     </div>
 
+                    <div class="pt-panel">
+                        <table>
+                            <tr>
+                                <th class="td-label excel-default" colspan="2">Rental Info</th>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Deed Purchase:
 
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.DeedPurchase' pt-number-mask maskformat='money' isvalidate /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Currently Rented:
+                                </td>
+                                <td class="td-value">
+                                    <select dir="rtl" ng-change='calculate()' style="width: 100%" ng-model='data.RentalInfo.CurrentlyRented' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Repair Bid Total:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.RepairBidTotal' pt-number-mask maskformat='money' isvalidate /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    # of Units
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.NumOfUnits' /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Market Rent Total:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.MarketRentTotal' pt-number-mask maskformat='money' isvalidate /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Rental Time:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.RentalTime' /></td>
+                            </tr>
+
+                        </table>
+
+                    </div>
 
                 </div>
 

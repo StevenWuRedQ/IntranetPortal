@@ -11,7 +11,7 @@
             </ul>
             <div class="nav-form navbar-right">
                 <button type="button" class="btn btn-lg btn-blue" ng-click="save()" ng-disabled="archive.isLoaded">Save</button>
-                <button type="button" class="btn btn-lg btn-blue" ng-click="archive()" ng-disabled="archive.isLoaded">Archive</button>
+                <button type="button" class="btn btn-lg btn-blue" ng-click="archiveFunc()" ng-disabled="archive.isLoaded">Archive</button>
             </div>
         </div>
     </nav>
@@ -32,7 +32,7 @@
             <span ng-show="data.UpdateBy">Last Update: {{data.UpdateDate | date: 'medium'}} by {{data.UpdateBy}}</span>
         </h5>
     </div>
-
+    <br />
     <div class="container" style="min-width: 800px; width: 95%">
         <ui-view></ui-view>
     </div>
