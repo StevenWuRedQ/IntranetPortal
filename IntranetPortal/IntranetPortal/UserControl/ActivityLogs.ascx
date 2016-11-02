@@ -952,7 +952,7 @@
                             <table style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <td style="font-weight: bold">Recycle</td>
+                                        <td style="font-weight: bold">Hot Leads Recycle</td>
                                         <td style="text-align: right; width: 120px;">
                                             <div style="float: right">
                                                 <asp:Panel runat="server" ID="pnlRecylce">

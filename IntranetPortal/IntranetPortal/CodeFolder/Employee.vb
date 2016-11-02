@@ -579,6 +579,12 @@ Partial Public Class Employee
         End Using
     End Function
 
+    Public Shared Function GetAllActiveAgents() As String()
+        Using Context As New Entities
+            Return Context.Employees.Where(Function(em) em.Active = True AndAlso em.Position = "Finder").Select(Function(em) em.Name).ToArray
+        End Using
+    End Function
+
     ''' <summary>
     ''' Get the list of active employee's names under given application
     ''' </summary>

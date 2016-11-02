@@ -1,5 +1,4 @@
-﻿
-''' <summary>
+﻿''' <summary>
 ''' The escalation rule for leads
 ''' The rule is configured by leads status and time escalation.
 ''' </summary>
@@ -79,7 +78,7 @@ Public Class LeadsEscalationRule
                                           Dim ld = CType(leads, Lead)
                                           Return ld.GetStatusChangedDate()
                                       End Function))
-        rules.Add(New EscalationRule("Priority", "15.00:00:00",
+        rules.Add(New EscalationRule("Priority", "14.00:00:00",
                                Sub(leads)
                                    Dim ld = CType(leads, Lead)
 
@@ -87,7 +86,7 @@ Public Class LeadsEscalationRule
                                        Return
                                    End If
 
-                                   ld.StartRecycleProcess()
+                                   ld.StartRecycleProcess(DateTime.Now.AddDays(2))
                                End Sub,
                                Function(leads)
                                    Dim ld = CType(leads, Lead)

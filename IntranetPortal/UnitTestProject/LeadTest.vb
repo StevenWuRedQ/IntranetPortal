@@ -128,6 +128,35 @@ Public Class LeadTest
     End Sub
 
     ''' <summary>
+    ''' Check the start recyle process
+    ''' </summary>
+    <TestMethod> Public Sub StartRecycleProcess_returnNull()
+        Dim bble = "1000251493 "
+        Dim ld = Lead.GetInstance(bble)
+        ld.StartRecycleProcess()
+    End Sub
+
+    ''' <summary>
+    ''' Test recyle action, the leads will move to lead pool.
+    ''' </summary>
+    <TestMethod> Public Sub Recycle_LeadsPool()
+        Dim bble = "1000251493 "
+        Dim ld = Lead.GetInstance(bble)
+        ld.Recycle("testing")
+        ld = Lead.GetInstance(bble)
+        Assert.AreEqual(ld.EmployeeName, Lead.GetHotPoolUser().Name)
+    End Sub
+
+    <TestMethod> Public Sub NewLeadsRule_Recycle()
+        Dim bble = "1000251493 "
+        Dim ld = Lead.GetInstance(bble)
+        ld.AssignDate = New DateTime(2016, 10, 1)
+        ld.Status = LeadStatus.NewLead
+        IntranetPortal.RulesEngine.LeadsEscalationRule.Execute(ld)
+        Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name)
+    End Sub
+
+    ''' <summary>
     ''' Check the limitation for users not in agent team
     ''' </summary>
     <TestMethod> Public Sub LeadsCreationLimitFunction_NoLimitAdmin()

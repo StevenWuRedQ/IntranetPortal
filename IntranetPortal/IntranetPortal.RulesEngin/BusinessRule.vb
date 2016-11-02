@@ -113,7 +113,26 @@ Public Class LeadsAndTaskRule
     Inherits BaseRule
 
     Public Overrides Sub Execute()
-        RunRules()
+        ' RunRules()
+        RunNewRules()
+    End Sub
+
+    Private Sub RunNewRules()
+        Dim lds = Lead.GetAllAgentActiveLeads
+        Log("Total Active Leads: " & lds.Count)
+        Dim NoRulesUser = IntranetPortal.Core.PortalSettings.GetValue("NoRulesUser")
+
+        'Run Leads Rule
+        For Each ld In lds
+            Try
+                If Not NoRulesUser.Contains(ld.EmployeeName) Then
+                    LeadsEscalationRule.Execute(ld)
+                End If
+            Catch ex As Exception
+                Log("Exception when execute Leads Rule. BBLE: " & ld.BBLE & ", Employee: " & ld.EmployeeName & ", Exception: " & ex.Message, ex)
+            End Try
+        Next
+        Log("Leads Rule finished.")
     End Sub
 
     Private Sub RunRules()
@@ -673,7 +692,7 @@ Public Class RecycleProcessRule
             Try
                 Dim ld = Lead.GetInstance(rld.BBLE)
 
-                If ld.LastUserUpdate < rld.CreateDate Then
+                If ld.IsValidToRecycle Then
                     'for now don not do real recycle.
                     ld.Recycle("RecycleRule")
 
@@ -685,6 +704,7 @@ Public Class RecycleProcessRule
                     'Since user did action against this leads, the Recycle action expired
                     WorkflowService.ExpiredRecycleProcess(rld.BBLE)
                     rld.Expire()
+                    Log("Lead recycle is expired. BBLE: " & ld.BBLE)
                 End If
             Catch ex As Exception
                 Log("Error in recycle leads, BBLE: " & rld.BBLE, ex)
