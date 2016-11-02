@@ -54,6 +54,20 @@ Public Class EcourtService
         Return Execute(Of List(Of EcourtCaseChange))(request)
     End Function
 
+    ''' <summary>
+    ''' Get new cases during the time range
+    ''' </summary>
+    ''' <param name="startDate">The start date</param>
+    ''' <param name="endDate">The end date</param>
+    ''' <returns></returns>
+    Public Function GetNewCases(startDate As DateTime, endDate As DateTime) As List(Of EcourtCase)
+        Dim request = GetRequest("api/cases/newmortgageforeclosures/{startDate}/{endDate}", Method.GET)
+        request.AddUrlSegment("startDate", startDate.ToString("yyyyMMdd"))
+        request.AddUrlSegment("endDate", endDate.ToString("yyyyMMdd"))
+
+        Return Execute(Of List(Of EcourtCase))(request)
+    End Function
+
     Private Function Execute(Of T As New)(request As RestRequest) As T
         Dim result = client.Execute(Of T)(request)
 

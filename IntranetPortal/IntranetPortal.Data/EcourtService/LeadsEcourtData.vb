@@ -169,6 +169,29 @@ Public Class LeadsEcourtData
         Core.SystemLog.Log(UPDATE_LOG_TITLE, "UpdateCompleted", Core.SystemLog.LogCategory.Operation, Nothing, "DailyUpdate")
     End Sub
 
+    Public Shared Sub AddNewCases(dtStart As DateTime, dtEnd As DateTime)
+        Dim cases = EcourtService.Instance.GetNewCases(dtStart, dtEnd)
+
+        Using ctx As New PortalEntities
+            For Each cas In cases
+                If Not ctx.EcourtCases.Any(Function(a) a.BBLE = cas.BBLE AndAlso a.CountyId = cas.CountyId AndAlso a.CaseIndexNumber = cas.CaseIndexNumber) Then
+                    ctx.EcourtCases.Add(cas)
+
+                    If ctx.LeadsEcourtDatas.Any(Function(a) a.BBLE = cas.BBLE) Then
+                        Dim data = New LeadsEcourtData
+                        data.BBLE = cas.BBLE
+                        data.LastUpdate = DateTime.Now
+                        data.UpdateBy = "Ecourt"
+                        ctx.LeadsEcourtDatas.Add(data)
+                    End If
+                End If
+            Next
+
+            ctx.SaveChanges()
+        End Using
+
+    End Sub
+
     ''' <summary>
     ''' Save the data
     ''' </summary>
