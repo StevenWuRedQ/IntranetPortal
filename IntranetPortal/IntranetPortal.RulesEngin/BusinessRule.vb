@@ -118,7 +118,9 @@ Public Class LeadsAndTaskRule
     End Sub
 
     Private Sub RunNewRules()
-        Dim lds = Lead.GetAllAgentActiveLeads
+        Dim dtStart = New DateTime(2016, 11, 2)
+        Dim lds = Lead.GetAllAgentActiveLeads(dtStart)
+
         Log("Total Active Leads: " & lds.Count)
         Dim NoRulesUser = IntranetPortal.Core.PortalSettings.GetValue("NoRulesUser")
 

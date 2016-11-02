@@ -311,7 +311,8 @@ Partial Public Class Lead
     ''' <param name="status"></param>
     ''' <returns></returns>
     Public Shared Function GetRecycledLeads(username As String, status As LeadStatus) As List(Of Lead)
-        Dim lds = GetUserLeadsData(username, status)
+        Dim dtStart = New DateTime(2016, 11, 2)
+        Dim lds = GetUserLeadsData(username, status).Where(Function(a) a.AssignDate > dtStart).ToList
         Dim dt = DateTime.Today.AddDays(-RecycleConfig(status))
         Return lds.Where(Function(a) a.GetStatusChangedDate() < dt).ToList
     End Function
@@ -727,12 +728,12 @@ Partial Public Class Lead
     ''' Return all active finder's leads
     ''' </summary>
     ''' <returns></returns>
-    Public Shared Function GetAllAgentActiveLeads() As List(Of Lead)
+    Public Shared Function GetAllAgentActiveLeads(dtStart As DateTime) As List(Of Lead)
         Dim ctx As New Entities
         Dim emps = Team.GetActiveTeamFinders()
 
         Dim results = (From ld In ctx.Leads
-                       Where emps.Contains(ld.EmployeeName) And (ld.Status <> LeadStatus.DeadEnd And ld.Status <> LeadStatus.InProcess)
+                       Where emps.Contains(ld.EmployeeName) And ld.AssignDate > dtStart And (ld.Status <> LeadStatus.DeadEnd And ld.Status <> LeadStatus.InProcess)
                        Select ld).ToList
         Return results
     End Function

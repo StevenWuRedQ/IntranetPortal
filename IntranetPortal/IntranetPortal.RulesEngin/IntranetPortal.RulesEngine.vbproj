@@ -66,9 +66,10 @@
       <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MyIdealProp.Workflow.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -212,7 +213,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DLL\log4net.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.Client.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
     <None Include="Service References\PortalService\CommonService.disco" />

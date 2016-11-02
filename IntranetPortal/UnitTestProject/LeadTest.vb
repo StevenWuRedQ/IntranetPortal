@@ -132,8 +132,12 @@ Public Class LeadTest
     ''' </summary>
     <TestMethod> Public Sub StartRecycleProcess_returnNull()
         Dim bble = "1000251493 "
+        RecycleManage.ExpireRecycles(bble)
         Dim ld = Lead.GetInstance(bble)
+        ld.ReAssignLeads("Steven Wu")
         ld.StartRecycleProcess()
+        Dim rc = RecycleManage.GetRecycledLead(bble)
+        Assert.IsNotNull(rc)
     End Sub
 
     ''' <summary>
@@ -150,9 +154,24 @@ Public Class LeadTest
     <TestMethod> Public Sub NewLeadsRule_Recycle()
         Dim bble = "1000251493 "
         Dim ld = Lead.GetInstance(bble)
+        ld.ReAssignLeads("Chris Yan")
         ld.AssignDate = New DateTime(2016, 10, 1)
         ld.Status = LeadStatus.NewLead
+        ld.EmployeeName = "Chris Yan"
         IntranetPortal.RulesEngine.LeadsEscalationRule.Execute(ld)
+        ld = Lead.GetInstance(bble)
+        Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name)
+    End Sub
+
+    <TestMethod> Public Sub WarmLeadsRule_Recycle()
+        Dim bble = "1000251493 "
+        Dim ld = Lead.GetInstance(bble)
+        ld.ReAssignLeads("Chris Yan")
+        ld.AssignDate = New DateTime(2016, 10, 1)
+        ld.Status = LeadStatus.Warm
+        ld.EmployeeName = "Chris Yan"
+        IntranetPortal.RulesEngine.LeadsEscalationRule.Execute(ld)
+        ld = Lead.GetInstance(bble)
         Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name)
     End Sub
 

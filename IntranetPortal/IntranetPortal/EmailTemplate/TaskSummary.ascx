@@ -14,16 +14,6 @@
         font-family: Calibri 'Source Sans Pro';
     }
 
-    /*.clearfix:before,
-    .clearfix:after {
-        display: table;
-        content: " ";
-    }
-
-    .clearfix:after {
-        clear: both;
-    }*/
-
     .body_content {
         /*padding: 60px 70px;*/
     }
@@ -135,7 +125,6 @@
                     </td>
                 </tr>
             </table>
-
             <table width="100%" bgcolor="white">
                 <tr>
                     <td style="padding: 80px 70px 60px 70px">
@@ -256,7 +245,7 @@
                             <!-- leads to be recyled -->
                             <tr runat="server" visible="<%# IsFinder %>">
                                 <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
-                                    <h3>Leads to be Recycled</h3>
+                                    <h3 style="color:red">Leads to be Recycled</h3>
                                     <asp:Repeater runat="server" ID="rptRecycled" OnItemDataBound="rptRecycled_ItemDataBound">
                                         <ItemTemplate>
                                             <span class="email_title" runat="server" id="spanTitle"></span>&nbsp&nbsp;
