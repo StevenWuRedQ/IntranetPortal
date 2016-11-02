@@ -1529,6 +1529,12 @@ angular.module('PortalApp').factory('Team', function ($http) {
     }
     return _class;
 });
+/***
+ *  Author: Shaopeng Zhang
+ *  Date: 2016/11/01
+ *  Description:
+ *  Updates:
+ ***/
 angular.module('PortalApp')
     .factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
 
@@ -3412,6 +3418,41 @@ angular.module("PortalApp")
             template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
         }
     })
+/***
+ * Author: Shaopeng Zhang
+ * Date: 2016/11/01
+ * Description: A control to lock/unlock are area, make all
+ */
+angular.module("PortalApp")
+    .directive('ptEditableDiv', [function () {
+        return {
+            restrict: 'A',
+            scope: {
+                isEditable: '='
+            },
+            link: function (scope, el, attrs) {
+                debugger;
+                angular.element(el).addClass("pt-editable-div");
+                scope.isLocked = true;
+                scope.unlock = function () {
+                    angular.element(".pt-editable-div input, .pt-editable-div textarea, .pt-editable-div select").prop('disabled', false);
+                    scope.isLocked = false;
+                }
+                scope.lock = function () {
+                    angular.element(".pt-editable-div input, .pt-editable-div textarea, .pt-editable-div select").prop('disabled', true);
+                    scope.isLocked = true;
+                }
+                scope.$on('pt-editable-div-lock', function () {
+                    scope.lock();
+                })
+                scope.$on('pt-editable-div-unlock', function () {
+                    debugger;
+                    scope.unlock();
+                })
+                scope.lock();
+            }
+        }
+    }])
 angular.module("PortalApp")
     .directive('ptEditor', [function () {
         return {
@@ -3957,7 +3998,7 @@ angular.module("PortalApp")
 
                 }
                 //debugger;
-                var rule = /^(\d+|\d*\.\d+)$/;
+                var rule = /^-?(\d+|\d*\.\d+)$/;
                 var validate = function (val) {
                     if (typeof (val) == 'number') {
                         return true;
@@ -3971,7 +4012,7 @@ angular.module("PortalApp")
 
                 scope.$watch(attrs.ngModel, function (newvalue) {
                     if ($(el).is(":focus")) return;
-                    if (format = 'percentage') {
+                    if (format == 'percentage') {
                         $(el)[0].value = newvalue * 100;
                     }
                     $(el).formatCurrency(formatConfig);
@@ -3987,13 +4028,13 @@ angular.module("PortalApp")
                         } else {
                             $(this).css("background-color", "");
                             $(this).attr('error', '');
-                            if (format = 'percentage') {
+                            if (format == 'percentage') {
                                 $(el)[0].value = $(el)[0].value * 100;
                             }
                             $(this).formatCurrency(formatConfig);
                         }
                     } else {
-                        if (format = 'percentage') {
+                        if (format == 'percentage') {
                             $(el)[0].value = $(el)[0].value * 100;
                         }
                         $(this).formatCurrency(formatConfig);
@@ -4002,7 +4043,7 @@ angular.module("PortalApp")
                 $(el).on('focus', function () {
 
                     $(this).toNumber();
-                    if (format = 'percentage') {
+                    if (format == 'percentage') {
                         $(el)[0].value = $(el)[0].value / 100;
                     }
                 });
@@ -9173,6 +9214,14 @@ angular.module("PortalApp")
 
 
 }])
+/**
+ * Author: Shaopeng Zhang
+ * Date: 2016/11/02
+ * Description: General Controller for underwriting
+ * Update: 
+ *          --- 2016/11/02
+ *              1. Add Enable Editing Function to unlock datainput area.
+ */
 angular.module("PortalApp").controller("UnderwriterController",
                 ['$scope', 'ptCom', 'ptUnderwriter', '$location',
         function ($scope, ptCom, ptUnderwriter, $location) {
@@ -9180,6 +9229,7 @@ angular.module("PortalApp").controller("UnderwriterController",
             $scope.data = {};
             $scope.archive = {};
             $scope.currentDataCopy = {};
+            $scope.isProtectedView = true;
 
             $scope.init = function (bble) {
                 //ptCom.startLoading()
@@ -9214,7 +9264,7 @@ angular.module("PortalApp").controller("UnderwriterController",
              * snapshot current values of forms,
              * and sava copy in database for future analysis
              */
-            $scope.archive = function () {
+            $scope.archiveFunc = function () {
                 ptCom.prompt('Please give a name to this archive.', function (msg) {
                     //debugger;
                     if (msg != null) {
@@ -9304,6 +9354,11 @@ angular.module("PortalApp").controller("UnderwriterController",
                 $scope.data.LienCosts.WaterCharges = 1101.33;
                 $scope.data.LienCosts.PersonalJudgements = 14892.09;
                 $scope.update();
+            }
+
+            $scope.enableEditing = function () {
+                $scope.$broadcast('pt-editable-div-unlock');
+                $scope.isProtectedView = false;
             }
 
             // init controller;

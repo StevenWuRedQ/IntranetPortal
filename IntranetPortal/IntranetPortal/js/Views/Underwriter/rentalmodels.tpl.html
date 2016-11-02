@@ -5,57 +5,7 @@
 
         <div id="data_input_area1" class="col-md-12 col-lg-12">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="pt-panel">
-                        <table>
-                            <tr>
-                                <th class="td-label excel-default" colspan="2">Rental Info</th>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Deed Purchase:
-
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.DeedPurchase' pt-number-mask maskformat='money' isvalidate /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Currently Rented:
-                                </td>
-                                <td class="td-value">
-                                    <select ng-change='calculate()' style="width: 100%" ng-model='data.RentalInfo.CurrentlyRented' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Repair Bid Total:
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.RepairBidTotal' pt-number-mask maskformat='money' isvalidate /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    # of Units
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.NumOfUnits' /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Market Rent Total:
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.MarketRentTotal' pt-number-mask maskformat='money' isvalidate /></td>
-                            </tr>
-                            <tr>
-                                <td class="td-label">
-                                    Rental Time:
-                                </td>
-                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.RentalTime' /></td>
-                            </tr>
-
-                        </table>
-
-                    </div>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="pt-panel">
                         <table>
                             <tr>

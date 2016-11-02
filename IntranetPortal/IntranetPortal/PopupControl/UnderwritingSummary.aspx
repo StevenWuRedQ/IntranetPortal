@@ -89,7 +89,7 @@
         function markCompleted(status) {
             debugger;
             var searchResultDiv = angular.element('#search_result');
-            if(searchResultDiv){
+            if (searchResultDiv) {
                 var scope = searchResultDiv.scope();
                 scope.markCompleted(status);
             }
@@ -189,7 +189,7 @@
                 <a role="tab" href="#underwriter/datainput?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
                     <i class="fa fa-calculator head_tab_icon_padding"></i>
                     <div class="font_size_bold" style="width: 100px">
-                        Calculator
+                        Underwriting
                     </div>
                 </a>
             </li>
@@ -219,6 +219,7 @@
         </ul>
     </div>
     <div id="underwriting-summary">
+
 
         <ui-view></ui-view>
 

@@ -1,10 +1,19 @@
-﻿angular.module("PortalApp").controller("UnderwriterController",
+﻿/**
+ * Author: Shaopeng Zhang
+ * Date: 2016/11/02
+ * Description: General Controller for underwriting
+ * Update: 
+ *          --- 2016/11/02
+ *              1. Add Enable Editing Function to unlock datainput area.
+ */
+angular.module("PortalApp").controller("UnderwriterController",
                 ['$scope', 'ptCom', 'ptUnderwriter', '$location',
         function ($scope, ptCom, ptUnderwriter, $location) {
 
             $scope.data = {};
             $scope.archive = {};
             $scope.currentDataCopy = {};
+            $scope.isProtectedView = true;
 
             $scope.init = function (bble) {
                 //ptCom.startLoading()
@@ -39,7 +48,7 @@
              * snapshot current values of forms,
              * and sava copy in database for future analysis
              */
-            $scope.archive = function () {
+            $scope.archiveFunc = function () {
                 ptCom.prompt('Please give a name to this archive.', function (msg) {
                     //debugger;
                     if (msg != null) {
@@ -129,6 +138,11 @@
                 $scope.data.LienCosts.WaterCharges = 1101.33;
                 $scope.data.LienCosts.PersonalJudgements = 14892.09;
                 $scope.update();
+            }
+
+            $scope.enableEditing = function () {
+                $scope.$broadcast('pt-editable-div-unlock');
+                $scope.isProtectedView = false;
             }
 
             // init controller;
