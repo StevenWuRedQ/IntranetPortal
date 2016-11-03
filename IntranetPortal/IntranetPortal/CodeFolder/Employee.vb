@@ -12,7 +12,12 @@ Imports System.Security.Cryptography
 Partial Public Class Employee
     ' it better to separate to two const but now both of them is 30
     ' so make it as one const number
+#If DEBUG Then
+    Private Shared ReadOnly FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT As Integer = 3
+#Else
     Private Shared ReadOnly FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT As Integer = 30
+#End If
+
 
     Private Shared _ceo As Employee
     ''' <summary>
@@ -969,7 +974,12 @@ Partial Public Class Employee
     ''' <param name="limitCount"></param>
     ''' <returns>true is achived limit , false is not</returns>
     Private Function LeadsCountAchiveLimited(limitStatus As LeadStatus, limitCount As Integer) As Boolean
-        Using ctx As New Entities
+
+        Dim ctx = New Entities
+
+
+
+        Using ctx
             Return ctx.Leads.Where(Function(l) l.Status = limitStatus And l.EmployeeName = Name).Count >= limitCount
         End Using
         ' use leads is better for unit test

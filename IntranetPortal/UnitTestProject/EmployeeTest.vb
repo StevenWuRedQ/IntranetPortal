@@ -131,4 +131,21 @@ Public Class EmployeeTest
         ' after change password it should pass verify password
         Assert.IsTrue(e.VerifyPassword(testPassword))
     End Sub
+
+    <TestMethod>
+    Public Sub LeadsLimitTest()
+        Dim mockEntity = New Entities()
+        Dim ls = New Lead(29) {}
+
+        ls.ToList.ForEach(Function(l)
+                              l = New Lead()
+                              l.Status = LeadStatus.LoanMod
+                              Return l
+                          End Function
+                              )
+        Dim count = mockEntity.Leads.Count()
+        Assert.IsTrue(count = 29)
+
+
+    End Sub
 End Class

@@ -569,8 +569,9 @@ Partial Public Class Lead
             Dim addComStr = If(String.IsNullOrEmpty(addCommend), "", "<br/>" & " Comments: " & addCommend)
             If lead IsNot Nothing Then
                 Dim originateStatus = lead.Status
-                ' If achive same rules them can not update status
+                ' If achive leads update rules them can not update status
                 ' such as achieve follow up 
+                ' throw error.
                 lead.UpdateStatus(status)
                 ' lead.Status = status
                 If Not callbackDate = Nothing Then
@@ -1041,9 +1042,16 @@ Partial Public Class Lead
         'UserMessage.AddNewMessage("Recycle Message", "Failed Recycle Leads: " & BBLE, String.Format("Failed Recycle Leads BBLE: {0}, Employee name:{1}. ", BBLE, EmployeeName), BBLE, DateTime.Now, "Recycle")
     End Sub
 
+    ''' <summary>
+    ''' update lead stauts
+    ''' </summary>
+    ''' <param name="status">stauts need update to</param>
     Public Sub UpdateStatus(status As LeadStatus)
         Dim owner = IntranetPortal.Employee.GetInstance(EmployeeName)
-        If (owner IsNot Nothing) Then
+        ' check leads has owner and status need change
+        ' then check status can be update or not
+        ' if its update to same status ignore the verify of update rules
+        If (owner IsNot Nothing And Me.Status <> status) Then
             Dim fStr = "Can not move to {0} becuase achieve to limit."
             If (status = LeadStatus.LoanMod) Then
                 If (owner.IsAchieveLoanModLimit()) Then
