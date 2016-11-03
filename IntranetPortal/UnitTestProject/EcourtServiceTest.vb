@@ -35,4 +35,13 @@ Imports IntranetPortal.Data
         Assert.IsTrue(cases.Count > 0)
     End Sub
 
+    <TestMethod()>
+    Public Sub GetNewCases_True()
+        Dim startDate = New DateTime(2016, 10, 27)
+        Dim endDate = startDate.AddDays(1)
+        Dim cases = EcourtService.Instance.GetNewCases(startDate, endDate)
+        Assert.IsTrue(cases.Count > 0)
+        Assert.IsFalse(cases.Any(Function(a) a.BBLE Is Nothing))
+    End Sub
+
 End Class

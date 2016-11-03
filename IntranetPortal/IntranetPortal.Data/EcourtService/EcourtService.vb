@@ -65,7 +65,11 @@ Public Class EcourtService
         request.AddUrlSegment("startDate", startDate.ToString("yyyyMMdd"))
         request.AddUrlSegment("endDate", endDate.ToString("yyyyMMdd"))
 
-        Return Execute(Of List(Of EcourtCase))(request)
+        Dim cases = Execute(Of List(Of EcourtCase))(request)
+        Return cases.Select(Function(c)
+                                c.BBLE = c.BBL
+                                Return c
+                            End Function).ToList
     End Function
 
     Private Function Execute(Of T As New)(request As RestRequest) As T
@@ -239,6 +243,8 @@ End Class
 ''' The ecourt case 
 ''' </summary>
 Partial Public Class EcourtCase
+
+    Public Property BBL As String
 
     ''' <summary>
     ''' Update the leads ecourt case data

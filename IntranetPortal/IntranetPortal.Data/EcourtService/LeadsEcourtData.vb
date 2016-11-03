@@ -107,12 +107,14 @@ Public Class LeadsEcourtData
         End If
     End Sub
 
+    <Obsolete>
     Public Shared Sub SyncNewLeads()
         For Each bbl In GetUnSyncLeads()
             Update(bbl, "System")
         Next
     End Sub
 
+    <Obsolete>
     Public Shared Function GetUnSyncLeads() As String()
         Using ctx As New PortalEntities
             Dim bbles = From ld In ctx.SSLeads
@@ -158,17 +160,36 @@ Public Class LeadsEcourtData
     ''' The update will base on the change since last update
     ''' </summary>
     Public Shared Sub DailyUpdate()
-        Dim lastUpdateLog = Core.SystemLog.GetLastLogs(UPDATE_LOG_TITLE, DateTime.Now, Nothing)
+        Dim lastUpdateLog = GetLastUpdateTime()
 
         Dim dtStart = DateTime.Today
-        If lastUpdateLog IsNot Nothing Then
-            dtStart = lastUpdateLog.CreateDate
+        If lastUpdateLog > DateTime.MinValue Then
+            dtStart = lastUpdateLog
         End If
 
+        Dim dtEnd = DateTime.Now
+        AddNewCases(dtStart, dtEnd)
         UpdateByChanges(dtStart, DateTime.Now, "System")
         Core.SystemLog.Log(UPDATE_LOG_TITLE, "UpdateCompleted", Core.SystemLog.LogCategory.Operation, Nothing, "DailyUpdate")
     End Sub
 
+    ''' <summary>
+    ''' Return last daily update datetime
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function GetLastUpdateTime() As DateTime
+        Dim lastUpdateLog = Core.SystemLog.GetLastLogs(UPDATE_LOG_TITLE, DateTime.Now, Nothing)
+        If lastUpdateLog IsNot Nothing Then
+            Return lastUpdateLog.CreateDate
+        End If
+        Return Nothing
+    End Function
+
+    ''' <summary>
+    ''' Check ecourt new cases during the time range and add into system
+    ''' </summary>
+    ''' <param name="dtStart">The start date</param>
+    ''' <param name="dtEnd">The end date</param>
     Public Shared Sub AddNewCases(dtStart As DateTime, dtEnd As DateTime)
         Dim cases = EcourtService.Instance.GetNewCases(dtStart, dtEnd)
 
@@ -177,7 +198,7 @@ Public Class LeadsEcourtData
                 If Not ctx.EcourtCases.Any(Function(a) a.BBLE = cas.BBLE AndAlso a.CountyId = cas.CountyId AndAlso a.CaseIndexNumber = cas.CaseIndexNumber) Then
                     ctx.EcourtCases.Add(cas)
 
-                    If ctx.LeadsEcourtDatas.Any(Function(a) a.BBLE = cas.BBLE) Then
+                    If Not ctx.LeadsEcourtDatas.Any(Function(a) a.BBLE = cas.BBLE) Then
                         Dim data = New LeadsEcourtData
                         data.BBLE = cas.BBLE
                         data.LastUpdate = DateTime.Now
@@ -189,7 +210,6 @@ Public Class LeadsEcourtData
 
             ctx.SaveChanges()
         End Using
-
     End Sub
 
     ''' <summary>

@@ -585,6 +585,15 @@ Partial Public Class Lead
         Return listProp.Create()
     End Function
 
+    Public Sub UpdateStatus(status As LeadStatus)
+        Using ctx As New Entities
+            Me.Status = status
+            Dim ld = ctx.Leads.Find(BBLE)
+            ld.Status = status
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, Optional addCommend As String = Nothing, Optional subStatus As String = Nothing) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault

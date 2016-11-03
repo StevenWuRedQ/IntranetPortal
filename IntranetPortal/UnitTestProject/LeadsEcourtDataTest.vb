@@ -19,4 +19,18 @@ Imports IntranetPortal.Data
         LeadsEcourtData.UpdateByChanges(dtStart, dtEnd, "unittest")
     End Sub
 
+    <TestMethod()>
+    Public Sub UpdateNewCases_returnNothing()
+        Dim dtStart = New DateTime(2016, 10, 27)
+        Dim dtEnd = dtStart.AddDays(1)
+        LeadsEcourtData.AddNewCases(dtStart, dtEnd)
+    End Sub
+
+    <TestMethod()>
+    Public Sub DailyUpdate_returnNothing()
+        LeadsEcourtData.DailyUpdate()
+        Dim lastUpdate = LeadsEcourtData.GetLastUpdateTime
+        Assert.IsTrue(lastUpdate > DateTime.MinValue)
+    End Sub
+
 End Class

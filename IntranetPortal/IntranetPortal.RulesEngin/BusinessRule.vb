@@ -676,9 +676,7 @@ Public Class CreateReminderBaseOnErrorProcess
             WorkflowService.StartTaskProcess("ReminderProcess", displayName, taskId, bble, mgr, "Important")
             Log("Reminder Process is created. pId: " & pId)
         Next
-
     End Sub
-
 End Class
 
 ''' <summary>
@@ -691,27 +689,31 @@ Public Class RecycleProcessRule
         Dim rleads = Core.RecycleLead.GetActiveRecycleLeads
 
         For Each rld In rleads
-            Try
-                Dim ld = Lead.GetInstance(rld.BBLE)
-
-                If ld.IsValidToRecycle Then
-                    'for now don not do real recycle.
-                    ld.Recycle("RecycleRule")
-
-                    rld.Recycle()
-                    Log("Leads is Recycled. BBLE: " & ld.BBLE)
-
-                    WorkflowService.ExpiredRecycleProcess(rld.BBLE)
-                Else
-                    'Since user did action against this leads, the Recycle action expired
-                    WorkflowService.ExpiredRecycleProcess(rld.BBLE)
-                    rld.Expire()
-                    Log("Lead recycle is expired. BBLE: " & ld.BBLE)
-                End If
-            Catch ex As Exception
-                Log("Error in recycle leads, BBLE: " & rld.BBLE, ex)
-            End Try
+            ExecuteRecycle(rld)
         Next
+    End Sub
+
+    Public Sub ExecuteRecycle(rld As Core.RecycleLead)
+        Try
+            Dim ld = Lead.GetInstance(rld.BBLE)
+
+            If ld.IsValidToRecycle Then
+                'for now don not do real recycle.
+                ld.Recycle("RecycleRule")
+
+                rld.Recycle()
+                Log("Leads is Recycled. BBLE: " & ld.BBLE)
+
+                WorkflowService.ExpiredRecycleProcess(rld.BBLE)
+            Else
+                'Since user did action against this leads, the Recycle action expired
+                WorkflowService.ExpiredRecycleProcess(rld.BBLE)
+                rld.Expire()
+                Log("Lead recycle is expired. BBLE: " & ld.BBLE)
+            End If
+        Catch ex As Exception
+            Log("Error in recycle leads, BBLE: " & rld.BBLE, ex)
+        End Try
     End Sub
 End Class
 
