@@ -200,7 +200,7 @@ Public Class LeadTest
     <TestMethod> Public Sub ExpiredRecycleWhenLeadsMoveToInProcess_returnTrue()
         Dim bble = "1000251493 "
         Dim ld = Lead.GetInstance(bble)
-        ld.UpdateStatus(LeadStatus.InProcess)
+        ld.UpdateStatus2(LeadStatus.InProcess)
         Dim rc = RecycleManage.GetRecycledLead(bble)
 
         If rc Is Nothing Then
@@ -211,7 +211,7 @@ Public Class LeadTest
         rule.ExecuteRecycle(rc)
         rc = Core.RecycleLead.GetInstance(rc.RecycleId)
         Assert.AreEqual(rc.Status, CInt(Core.RecycleLead.RecycleStatus.Expired))
-        ld.UpdateStatus(LeadStatus.NewLead)
+        ld.UpdateStatus2(LeadStatus.NewLead)
     End Sub
 
     ''' <summary>

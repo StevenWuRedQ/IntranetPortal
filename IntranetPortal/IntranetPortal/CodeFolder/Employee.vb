@@ -12,11 +12,12 @@ Imports System.Security.Cryptography
 Partial Public Class Employee
     ' it better to separate to two const but now both of them is 30
     ' so make it as one const number
-#If DEBUG Then
-    Private Shared ReadOnly FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT As Integer = 3
-#Else
-    Private Shared ReadOnly FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT As Integer = 30
-#End If
+
+    ' using public for unit test
+    ' otherwise it should in database
+    ' or using friend namespace like c++ but not sure VB.net have it or not.
+    Public Shared ReadOnly FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT As Integer = 30
+
 
 
     Private Shared _ceo As Employee

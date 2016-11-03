@@ -585,7 +585,7 @@ Partial Public Class Lead
         Return listProp.Create()
     End Function
 
-    Public Sub UpdateStatus(status As LeadStatus)
+    Public Sub UpdateStatus2(status As LeadStatus)
         Using ctx As New Entities
             Me.Status = status
             Dim ld = ctx.Leads.Find(BBLE)
