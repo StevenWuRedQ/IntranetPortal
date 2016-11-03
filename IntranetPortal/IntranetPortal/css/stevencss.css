@@ -2464,3 +2464,7 @@ a.shot_sale_tab_a {
         color: #fff;
         background-color: #295268;
     }
+
+.alert-condensed {
+    padding: 2px 10px;
+}

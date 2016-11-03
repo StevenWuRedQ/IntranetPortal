@@ -1,6 +1,5 @@
 ﻿angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$timeout', 'ptCom', function ($log, $q, $timeout, ptCom) {
     $log.debug('$log is here to show you that this is a regular factory with injection');
-
     var myInterceptor = {
         delayHide: function () {
             $timeout(ptCom.stopLoading, 300);
@@ -8,10 +7,10 @@
         BuildAjaxErrorMessage: function (response) {
             var message = "";
             /*Only error handle*/
-            if (response.status > 300 || response.status < 200) {
+            if (response.status > 300 || response.status < 200 || response.status == 203) {
                 var dataObj = JSON.parse(response.responseText);
                 if (dataObj) {
-                    var eMssage = dataObj.ExceptionMessage || dataObj.Message
+                    var eMssage = dataObj.ExceptionMessage || dataObj.Message || dataObj.message;
                     var messageObj = { Message: eMssage };
                     message = myInterceptor.BuildErrorMessgeStr(messageObj);
                 } else {

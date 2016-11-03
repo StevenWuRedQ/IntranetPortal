@@ -3,6 +3,7 @@
 
 angular.module('PortalApp')
     .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state', function ($rootScope, $uibModal, $timeout, $state) {
+        $rootScope.globaldata = {};
         $rootScope.AlertModal = null;
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');

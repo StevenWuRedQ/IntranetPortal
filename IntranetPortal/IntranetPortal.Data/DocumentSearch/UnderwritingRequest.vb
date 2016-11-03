@@ -3,6 +3,17 @@
 ''' </summary>
 Partial Public Class UnderwritingRequest
 
+    Public ReadOnly Property Status As Integer
+        Get
+            Using ctx As New PortalEntities
+                Dim r = From c In ctx.LeadInfoDocumentSearches
+                        Where c.BBLE = BBLE
+                Return r.Count
+            End Using
+        End Get
+
+    End Property
+
     ''' <summary>
     ''' Return UnderwritingRequest instance by Id
     ''' </summary>

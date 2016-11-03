@@ -296,7 +296,7 @@ angular.module('PortalApp')
                 }
                 // map to Leads Info if we have data
                 if (d.leadsInfo) {
-                    debugger;
+                    // debugger;
                     d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
                     d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
                     d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();

@@ -4,51 +4,51 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        div#underwriting-summary table {
+        .underwriting-summary table {
             width: 98%;
             table-layout: fixed;
         }
 
-            div#underwriting-summary table th {
+            .underwriting-summary table th {
                 font-size: 12px;
                 border: 1px solid #ddd;
                 padding-left: 2px;
             }
 
-            div#underwriting-summary table td {
+            .underwriting-summary table td {
                 font-size: 12px;
                 border: 1px solid #ddd;
                 padding-left: 2px;
             }
 
-        div#underwriting-summary td.td-label {
+        .underwriting-summary td.td-label {
             padding-right: 10px;
             width: 160px;
             height: 100%;
             font-weight: bold;
         }
 
-        div#underwriting-summary td input {
+        .underwriting-summary td input {
             border: none;
             padding: 0;
             text-align: right;
             width: 100%;
         }
 
-        div#underwriting-summary th input {
+        .underwriting-summary th input {
             border: 1px solid #ddd;
             padding: 0;
             text-align: right;
             width: 100%;
         }
 
-        div textarea {
+        .underwriting-summary textarea {
             width: 100%;
             min-height: 300px;
             resize: vertical;
         }
 
-        div .pt-panel {
+        .pt-panel {
             margin: 10px 2px;
         }
 
@@ -73,28 +73,6 @@
             color: white;
         }
     </style>
-    <script>
-        function getUWRID() {
-            //debugger;
-            var scope = angular.element('#uwrview').scope();
-            return scope.data.Id;
-
-        }
-        function showHistory() {
-            var id = getUWRID()
-            if (id) {
-                auditLog.toggle('UnderwritingRequest', id);
-            }
-        }
-        function markCompleted(status) {
-            debugger;
-            var searchResultDiv = angular.element('#search_result');
-            if (searchResultDiv) {
-                var scope = searchResultDiv.scope();
-                scope.markCompleted(status);
-            }
-        }
-    </script>
     <script>
         angular.module("PortalApp").config(function ($stateProvider) {
             var searchSummary = {
@@ -166,66 +144,70 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
-    <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
-    <div id="dataPanelDiv" style="font-size: 12px; color: #9fa1a8;">
-        <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
-            <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
-                <a role="tab" href="#searchSummary?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
-                    <i class="fa fa-history head_tab_icon_padding"></i>
-                    <div class="font_size_bold" style="width: 100px">Summary</div>
-                </a>
-            </li>
+    <div ng-controller="UnderwritingSummaryController" id="dataPanelDiv">
+        <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
+        <div style="font-size: 12px; color: #9fa1a8;">
+            <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
+                <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
+                    <a role="tab" ui-sref="searchSummary" class="tab_button_a">
+                        <i class="fa fa-history head_tab_icon_padding"></i>
+                        <div class="font_size_bold" style="width: 100px">Summary</div>
+                    </a>
+                </li>
 
-            <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
-                <a role="tab" href="#underwritingRequest?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
-                    <i class="fa fa-book head_tab_icon_padding"></i>
-                    <div class="font_size_bold" style="width: 100px">
-                        Story
+                <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
+                    <a role="tab" ui-sref="underwritingRequest" class="tab_button_a">
+                        <i class="fa fa-book head_tab_icon_padding"></i>
+                        <div class="font_size_bold" style="width: 100px">
+                            Story
+                        </div>
+                    </a>
+                </li>
+
+                <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
+                    <a role="tab" ui-sref="underwriter.datainput" class="tab_button_a">
+                        <i class="fa fa-calculator head_tab_icon_padding"></i>
+                        <div class="font_size_bold" style="width: 100px">
+                            Underwriting
+                        </div>
+                    </a>
+                </li>
+
+                <li class="short_sale_head_tab activity_light_blue pull-right" ng-show="search.UnderwriteStatus < 1">
+                    <a class="tab_button_a">
+                        <i class="fa fa-list-ul head_tab_icon_padding"></i>
+                        <div class="font_size_bold" style="width: 100px">Status</div>
+                    </a>
+                    <div class="shot_sale_sub">
+                        <ul class="nav clearfix" role="tablist">
+                            <li class="short_sale_head_tab " ng-click="markCompleted(1)">
+                                <a role="tab" class="tab_button_a" data-toggle="tooltip" data-placement="bottom" title="Mark As Accept">
+                                    <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
+                                    <div class="font_size_bold" style="width: 100px">Accept</div>
+                                </a>
+                            </li>
+                            <li class="short_sale_head_tab" ng-click="markCompleted(2)">
+                                <a role="tab" class="tab_button_a" data-toggle="tooltip" data-placement="bottom" title="Mark As Reject">
+                                    <i class="fa fa-times head_tab_icon_padding" style="color: white !important"></i>
+                                    <div class="font_size_bold" style="width: 100px">Reject</div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </a>
-            </li>
-
-            <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
-                <a role="tab" href="#underwriter/datainput?BBLE=<%=  Request.QueryString("BBLE") %>" class="tab_button_a">
-                    <i class="fa fa-calculator head_tab_icon_padding"></i>
-                    <div class="font_size_bold" style="width: 100px">
-                        Underwriting
-                    </div>
-                </a>
-            </li>
-
-            <li class="short_sale_head_tab activity_light_blue pull-right">
-                <a class="tab_button_a">
-                    <i class="fa fa-list-ul head_tab_icon_padding"></i>
-                    <div class="font_size_bold" style="width: 100px">Status</div>
-                </a>
-                <div class="shot_sale_sub">
-                    <ul class="nav  clearfix" role="tablist">
-                        <li class="short_sale_head_tab " onclick="markCompleted(1)">
-                            <a role="tab" class="tab_button_a" data-toggle="tooltip" data-placement="bottom" title="Mark As Accept">
-                                <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
-                                <div class="font_size_bold" style="width: 100px">Accept</div>
-                            </a>
-                        </li>
-                        <li class="short_sale_head_tab" onclick="markCompleted(2)">
-                            <a role="tab" class="tab_button_a" data-toggle="tooltip" data-placement="bottom" title="Mark As Reject">
-                                <i class="fa fa-times head_tab_icon_padding" style="color: white !important"></i>
-                                <div class="font_size_bold" style="width: 100px">Reject</div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div id="underwriting-summary">
-
-
-        <ui-view></ui-view>
-
-        <div id='uwrhistory' class="container" style="max-width: 800px; margin-bottom: 40px" ng-show="$state.current.name=='underwritingRequest'">
-            <button type="button" class="btn btn-info" onclick="showHistory()">History</button>
-            <uc1:AuditLogs runat="server" ID="AuditLogs" />
+                </li>
+            </ul>
         </div>
-    </di>
+        <div id="underwriting-summary">
+            <div id='summary-expired-warning' ng-show="$state.current.name=='searchSummary' && search.Expired">
+                <div style="background-color: yellow; width: 100%; text-align: center; color: red; padding: 0px 20px">The Search is out of date.</div>
+            </div>
+            <div style='padding: 2px 20px; overflow-y: scroll'>
+                <ui-view></ui-view>
+            </div>
+            <div id='uwrhistory' class="container" style="max-width: 800px; margin-bottom: 40px" ng-show="$state.current.name=='underwritingRequest'">
+                <button type="button" class="btn btn-info" ng-click="showStoryHistory()">History</button>
+                <uc1:AuditLogs runat="server" ID="AuditLogs" />
+            </div>
+        </div>
+    </div>
 </asp:Content>

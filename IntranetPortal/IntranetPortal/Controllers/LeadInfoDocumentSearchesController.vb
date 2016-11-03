@@ -52,7 +52,9 @@ Namespace Controllers
         Function GetLeadInfoDocumentSearch(ByVal id As String) As IHttpActionResult
             Dim leadInfoDocumentSearch As LeadInfoDocumentSearch = db.LeadInfoDocumentSearches.Find(id)
             If IsNothing(leadInfoDocumentSearch) Then
-                Throw New Exception("Please make sure you submit a search first!")
+                Dim c = New With {.Message = "Please make sure you submit a search first!"}
+                Dim result = Content(HttpStatusCode.NonAuthoritativeInformation, c)
+                Return result
             End If
 
             Return Ok(leadInfoDocumentSearch)
