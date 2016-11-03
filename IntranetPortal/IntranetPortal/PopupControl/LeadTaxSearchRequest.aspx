@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="LeadTaxSearchRequest.aspx.vb" Inherits="IntranetPortal.LeadTaxSearchRequest" %>
+
 <%-- 
 According To different mode in url, Page will show in different behavier
 mode 0(or no mode): DocSearch Mode, user can modify search, user cannot view story, user cannot view underwriting status, user cannot export
@@ -39,6 +40,12 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                                                 <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
                                                     <i class="fa fa-search head_tab_icon_padding"></i>
                                                     <div class="font_size_bold" id="LegalTabHead">Searches</div>
+                                                </a>
+                                            </li>
+                                            <li class="active short_sale_head_tab">
+                                                <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
+                                                    <i class="fa fa-search head_tab_icon_padding"></i>
+                                                    <div class="font_size_bold" id="LegalTabHead">Home Owner</div>
                                                 </a>
                                             </li>
                                             <% If Nothing Is Request.QueryString("mode") OrElse CInt(Request.QueryString("mode")) < 1 OrElse (Request.QueryString("mode")) >= 2 Then%>

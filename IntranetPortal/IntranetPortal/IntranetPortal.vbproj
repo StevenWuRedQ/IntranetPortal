@@ -7255,6 +7255,7 @@
     <Content Include="js\common\portalRouteProvider.js" />
     <Content Include="js\common\PortalUIRouteProvider.js" />
     <Content Include="js\components\ptAudit.js" />
+    <Content Include="js\components\ptHomeowner.js" />
     <Content Include="js\components\ptItemList.js" />
     <Content Include="js\components\ptSelectableInput.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
