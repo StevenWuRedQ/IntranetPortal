@@ -464,32 +464,34 @@ Public Class LeadsInfo1
 
     Sub RefreshBBLE(bble As String, type As String)
         Dim comments = ""
+        Dim username = HttpContext.Current.User.Identity.Name
         Select Case type
             Case "All"
-                comments = String.Format("All leads info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("All leads info is refreshed by {0}", username)
                 DataWCFService.UpdateLeadInfo(bble, True)
                 'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)
 
             Case "Assessment"
-                comments = String.Format("General property info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("General property info is refreshed by {0}", username)
                 DataWCFService.UpdateAssessInfo(bble)
             Case "PropData"
-                comments = String.Format("Mortgage and Violations is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("Mortgage and Violations is refreshed by {0}", username)
                 'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.Mortgage, HttpContext.Current.User.Identity.Name)
                 DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, False)
             Case "TLO"
-                comments = String.Format("Home Owner info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("Home Owner info is refreshed by {0}", username)
                 'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.HomeOwner, HttpContext.Current.User.Identity.Name)
                 If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
                     Throw New Exception("This Lead didn't have owner info in our database.")
                 End If
             Case "ZEstimate"
-                comments = String.Format("ZEstimate info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("ZEstimate info is refreshed by {0}", username)
                 If Not DataWCFService.GetZillowValue(bble) Then
                     Throw New Exception("The ZEstimate info failed refreshing.")
                 End If
             Case "JudgmentSearch"
-                comments = String.Format("Judgement Search info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("Judgement Search info is refreshed by {0}", username)
+                IntranetPortal.Data.LeadsEcourtData.Update(bble, username)
         End Select
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.RefreshLeads)

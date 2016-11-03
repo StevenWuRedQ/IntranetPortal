@@ -273,6 +273,35 @@
           <Property Name="Active" Type="bit" />
           <Property Name="AppId" Type="int" />
         </EntityType>
+        <EntityType Name="EcourtCaseChanges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountyId" Type="tinyint" Nullable="false" />
+          <Property Name="CaseIndexNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ColumnName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NewValue" Type="nvarchar" MaxLength="252" />
+          <Property Name="OldValue" Type="nvarchar" MaxLength="252" />
+          <Property Name="TransactionDateTime" Type="datetime" />
+          <Property Name="DateTimeProcessed" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="EcourtCases">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="CountyId" />
+            <PropertyRef Name="CaseIndexNumber" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="CountyId" Type="tinyint" Nullable="false" />
+          <Property Name="CaseIndexNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+          <Property Name="FormattedCaseIndexNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CaseStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="CaseDispositionDate" Type="datetime" />
+          <Property Name="CaseType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -386,6 +415,14 @@
           <Property Name="AssignBy" Type="nvarchar" MaxLength="50" />
           <Property Name="MarkColor" Type="int" />
           <Property Name="AppId" Type="int" />
+        </EntityType>
+        <EntityType Name="LeadsEcourtData">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LeadsInfo">
           <Key>
@@ -1254,6 +1291,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
 warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UnderwritingTrackingView">
           <Key>
+            
+            
             <PropertyRef Name="BBLE" />
           </Key>
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
@@ -1275,6 +1314,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Parameter Name="bble" Type="nchar" Mode="In" />
           <Parameter Name="archiveBy" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="UpdateEcourtCases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="updateBy" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="AuctionProperties" EntityType="Self.AuctionProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLogs" Schema="dbo" store:Type="Tables" />
@@ -1291,6 +1333,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySet Name="DataStatus" EntityType="Self.DataStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeedCorpProperties" EntityType="Self.DeedCorpProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeedCorps" EntityType="Self.DeedCorps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EcourtCaseChanges" EntityType="Self.EcourtCaseChanges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EcourtCases" EntityType="Self.EcourtCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EvictionCases" EntityType="Self.EvictionCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormDataItems" EntityType="Self.FormDataItems" Schema="dbo" store:Type="Tables" />
@@ -1298,6 +1342,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySet Name="LawReferences" EntityType="Self.LawReferences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadInfoDocumentSearch" EntityType="Self.LeadInfoDocumentSearch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Leads" EntityType="Self.Leads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsEcourtData" EntityType="Self.LeadsEcourtData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsStatusLogs" EntityType="Self.LeadsStatusLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LegalCase" EntityType="Self.LegalCase" Schema="dbo" store:Type="Tables" />
@@ -1550,6 +1595,12 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           </FunctionImport>
           <EntitySet Name="UnderwritingRequests" EntityType="IntranetPortalModel.UnderwritingRequest" />
           <EntitySet Name="UnderwritingTrackingViews" EntityType="IntranetPortalModel.UnderwritingTrackingView" />
+          <EntitySet Name="EcourtCases" EntityType="IntranetPortalModel.EcourtCase" />
+          <EntitySet Name="LeadsEcourtDatas" EntityType="IntranetPortalModel.LeadsEcourtData" />
+          <EntitySet Name="EcourtCaseChanges" EntityType="IntranetPortalModel.EcourtCaseChange" />
+          <FunctionImport Name="UpdateEcourtCases">
+            <Parameter Name="updateBy" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2805,6 +2856,43 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="IsInProcess" Type="Int32" Nullable="false" />
           <Property Name="InProcessDate" Type="DateTime" Precision="3" />
           <Property Name="InProcessBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EcourtCase">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="CountyId" />
+            <PropertyRef Name="CaseIndexNumber" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="CountyId" Type="Byte" Nullable="false" />
+          <Property Name="CaseIndexNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FormattedCaseIndexNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseDispositionDate" Type="DateTime" Precision="3" />
+          <Property Name="CaseType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LeadsEcourtData">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EcourtCaseChange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountyId" Type="Byte" Nullable="false" />
+          <Property Name="CaseIndexNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColumnName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NewValue" Type="String" MaxLength="252" FixedLength="false" Unicode="true" />
+          <Property Name="OldValue" Type="String" MaxLength="252" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeProcessed" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4122,6 +4210,45 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EcourtCases">
+            <EntityTypeMapping TypeName="IntranetPortalModel.EcourtCase">
+              <MappingFragment StoreEntitySet="EcourtCases">
+                <ScalarProperty Name="CaseType" ColumnName="CaseType" />
+                <ScalarProperty Name="CaseDispositionDate" ColumnName="CaseDispositionDate" />
+                <ScalarProperty Name="CaseStatus" ColumnName="CaseStatus" />
+                <ScalarProperty Name="FormattedCaseIndexNumber" ColumnName="FormattedCaseIndexNumber" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="CaseIndexNumber" ColumnName="CaseIndexNumber" />
+                <ScalarProperty Name="CountyId" ColumnName="CountyId" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsEcourtDatas">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsEcourtData">
+              <MappingFragment StoreEntitySet="LeadsEcourtData">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EcourtCaseChanges">
+            <EntityTypeMapping TypeName="IntranetPortalModel.EcourtCaseChange">
+              <MappingFragment StoreEntitySet="EcourtCaseChanges">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateTimeProcessed" ColumnName="DateTimeProcessed" />
+                <ScalarProperty Name="TransactionDateTime" ColumnName="TransactionDateTime" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="CaseIndexNumber" ColumnName="CaseIndexNumber" />
+                <ScalarProperty Name="CountyId" ColumnName="CountyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateEcourtCases" FunctionName="IntranetPortalModel.Store.UpdateEcourtCases" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

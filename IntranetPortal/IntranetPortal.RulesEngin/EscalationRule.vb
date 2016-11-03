@@ -1,5 +1,6 @@
 ﻿Imports IntranetPortal.Core
 
+
 Public Class TaskEscalationRule
     Public Shared Sub Excute(t As UserTask)
         Dim rule = GetRule(t)
@@ -77,6 +78,9 @@ Public Class TaskEscalationRule
     End Function
 End Class
 
+''' <summary>
+''' The basic escalation rule for Task and Leads
+''' </summary>
 Public Class EscalationRule
     Public Property Name As String
     Public Property StartDate As RuleStartDate

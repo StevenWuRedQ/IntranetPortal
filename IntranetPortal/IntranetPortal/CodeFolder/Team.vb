@@ -36,6 +36,25 @@ Partial Public Class Team
         End Using
     End Function
 
+    Private Shared _teamFinders As String()
+    ''' <summary>
+    ''' Return finders in all active teams
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function GetActiveTeamFinders() As String()
+        If _teamFinders Is Nothing Then
+            Dim teams = GetActiveTeamNames()
+            Dim result As New List(Of String)
+            For Each tm In teams
+                result.AddRange(UserInTeam.GetTeamFinders(tm))
+            Next
+
+            _teamFinders = result.ToArray
+        End If
+
+        Return _teamFinders
+    End Function
+
     Public Shared Function GetActiveTeamNames() As String()
         Using ctx As New Entities
             Return ctx.Teams.Where(Function(a) a.Active).Select(Function(t) t.Name).ToArray

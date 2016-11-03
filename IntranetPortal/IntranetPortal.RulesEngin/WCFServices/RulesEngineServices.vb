@@ -2,9 +2,9 @@
 Public Class RulesEngineServices
     Implements IRulesEngineServices
 
-    Public Function GetRules() As BaseRule() Implements IRulesEngineServices.GetRules
+    Public Function GetRules() As Rule() Implements IRulesEngineServices.GetRules
         Dim services = RulesService.GetInstance
-        Return services.Rules.ToArray
+        Return services.Rules.Select(Function(a) a.RuleData).ToArray
     End Function
 
     Public Sub ExecuteRule(ruleId As String) Implements IRulesEngineServices.ExecuteRule
@@ -26,11 +26,11 @@ Public Class RulesEngineServices
         Return GetRules().ToJsonString()
     End Function
 
-    Public Function GetRule(ruleId As String) As BaseRule Implements IRulesEngineServices.GetRule
+    Public Function GetRule(ruleId As String) As Rule Implements IRulesEngineServices.GetRule
         Return GetRules().FirstOrDefault(Function(r) r.RuleId.ToString = ruleId)
     End Function
 
-    Public Function GetRuleById(ruleId As String) As BaseRule Implements IRulesEngineServices.GetRuleById
+    Public Function GetRuleById(ruleId As String) As Rule Implements IRulesEngineServices.GetRuleById
         Return GetRules().FirstOrDefault(Function(r) r.RuleId.ToString = ruleId)
     End Function
 End Class

@@ -8,6 +8,13 @@ Public Class Root
         If Page.IsCallback Then
             'BindSearchGrid("")
         End If
+
+        If Not Page.IsPostBack Then
+            If Page.User.IsInRole("DocSearch-OutSide") Then
+                txtSearchKey.Visible = False
+                btnSearch.Visible = False
+            End If
+        End If
     End Sub
 
     Protected Sub gridSearch_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
@@ -118,7 +125,6 @@ Public Class Root
             Catch ex As Exception
 
             End Try
-
         End If
     End Sub
 

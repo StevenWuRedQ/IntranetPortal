@@ -14,12 +14,12 @@ Public Class RulesEngineServices
         Me.Open()
     End Sub
 
-    Public Function Rules() As RulesEngine.BaseRule()
+    Public Function Rules() As RulesEngine.Rule()
         If rulesEngine Is Nothing Then
             Me.Open()
         End If
         'Dim r = rulesEngine.GetRulesString
-        Dim result As BaseRule() = rulesEngine.GetRules
+        Dim result As Rule() = rulesEngine.GetRules
         Return result.Where(Function(r) Not String.IsNullOrEmpty(r.StatusStr)).ToArray
     End Function
 
@@ -107,7 +107,7 @@ End Class
 
 Namespace RulesEngine
 
-    Partial Public Class BaseRule
+    Partial Public Class Rule
         <DataMember>
         Public Property StatusStr As String
             Get

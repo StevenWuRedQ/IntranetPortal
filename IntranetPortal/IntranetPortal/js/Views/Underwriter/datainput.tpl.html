@@ -1,16 +1,10 @@
-﻿<div>
+﻿<div pt-editable-div>
+    <div ng-show="isProtectedView && !archive.isLoaded" style="background-color: #295268; width: 100%; text-align: center; color: white; padding: 2px; border-radius: 3px">
+        <h5>
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> You are currently in Protected View. &nbsp;<span class="btn btn-sm btn-danger" ng-click="enableEditing()">Enable Editing</span> 
+        </h5>
+    </div>
     <div class="row">
-        <div ng-show="archive.isLoaded" style="background-color: #295268; width: 100%; text-align:center; color: white">
-            <h5>
-                Archived loaded. Version: {{archive.ArchivedDate | date:'yyyy-MM-dd'}}.<br />
-                Note: <b>{{archive.ArchivedNote || "No Note.."}}.</b>
-                <span class="fa-stack" type="button" ng-click="restoreCurrent()" tooltip="Restore current version.">
-                    <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                    <i class="fa fa-undo "></i>
-                </span>
-            </h5>
-        </div>
-        <br />
         <div id="data_input_area" class="col-md-9 col-lg-9">
             <div class="row">
                 <div class="col-md-4 col-lg-4">
@@ -99,7 +93,7 @@
                                     Occupancy Status:
                                 </td>
                                 <td class="td-value">
-                                    <select ng-change='calculate()' style="width: 100%" ng-model='data.PropertyInfo.OccupancyStatus' ng-options="o.v as o.l for o in [{l:'Unknown',v:1},{l:'Vacant',v:2},{l:'Seller',v:3},{l:'Seller + Tenant',v:4},{l:'Tenant',v:5},{l:'MultipleTenant',v:6}]"></select>
+                                    <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.PropertyInfo.OccupancyStatus' ng-options="o.v as o.l for o in [{l:'Unknown',v:1},{l:'Vacant',v:2},{l:'Seller',v:3},{l:'Seller + Tenant',v:4},{l:'Tenant',v:5},{l:'MultipleTenant',v:6}]"></select>
                                 </td>
                             </tr>
                             <tr>
@@ -107,7 +101,7 @@
                                     Seller Occupied:
                                 </td>
                                 <td class="td-value">
-                                    <select ng-change='calculate()' style="width: 100%" ng-model='data.PropertyInfo.SellerOccupied' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                    <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.PropertyInfo.SellerOccupied' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                 </td>
                             </tr>
                             <tr>
@@ -139,7 +133,7 @@
                                     HAFA
                                 </td>
                                 <td class="td-value">
-                                    <select ng-change='calculate()' style="width: 100%" ng-model='data.DealCosts.HAFA' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                    <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.DealCosts.HAFA' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                 </td>
                             </tr>
                             <tr>
@@ -201,7 +195,7 @@
                                     Needs Plans:
                                 </td>
                                 <td class="td-value">
-                                    <select ng-change='calculate()' style="width: 100%" ng-model='data.RehabInfo.NeedsPlans' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                    <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.RehabInfo.NeedsPlans' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                 </td>
                             </tr>
                             <tr>
@@ -228,7 +222,54 @@
 
                     </div>
 
+                    <div class="pt-panel">
+                        <table>
+                            <tr>
+                                <th class="td-label excel-default" colspan="2">Rental Info</th>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Deed Purchase:
 
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.DeedPurchase' pt-number-mask maskformat='money' isvalidate /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Currently Rented:
+                                </td>
+                                <td class="td-value">
+                                    <select dir="rtl" ng-change='calculate()' style="width: 100%" ng-model='data.RentalInfo.CurrentlyRented' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Repair Bid Total:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.RepairBidTotal' pt-number-mask maskformat='money' isvalidate /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    # of Units
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.NumOfUnits' /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Market Rent Total:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.MarketRentTotal' pt-number-mask maskformat='money' isvalidate /></td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Rental Time:
+                                </td>
+                                <td class="td-value"><input ng-change='calculate()' ng-model='data.RentalInfo.RentalTime' /></td>
+                            </tr>
+
+                        </table>
+
+                    </div>
 
                 </div>
 
@@ -262,7 +303,7 @@
                                             COS Recorded:
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.COSRecorded' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.COSRecorded' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -270,7 +311,7 @@
                                             Deed Recorded:
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.DeedRecorded' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.DeedRecorded' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -279,7 +320,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.OtherLiens' ng-options="o.v as o.l for o in [{l:'No' ,v:1},{l:'Court Order' ,v:2},{l:'Mechanics Lien' ,v:3},{l:'Specific Performance' ,v:4},{l:'Specific Sundry Agreement' ,v:5},{l:'UCC' ,v:6}]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.OtherLiens' ng-options="o.v as o.l for o in [{l:'No' ,v:1},{l:'Court Order' ,v:2},{l:'Mechanics Lien' ,v:3},{l:'Specific Performance' ,v:4},{l:'Specific Sundry Agreement' ,v:5},{l:'UCC' ,v:6}]"></select>
 
                                         </td>
                                     </tr>
@@ -289,7 +330,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.LisPendens' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.LisPendens' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -298,7 +339,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.FHA' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.FHA' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -307,7 +348,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.FannieMae' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.FannieMae' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -316,7 +357,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.FreddieMac' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.FreddieMac' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -338,7 +379,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.ForeclosureStatus' ng-options="o.v as o.l for o in [{l:'Not Sure',v:1},{l:'No Action / Dismissed',v:2},{l:'Summons & Complaint',v:3},{l:'Settlement Conference',v:4},{l:'RJI',v:5},{l:'Order Of Reference',v:6},{l:'Judgment Of Foreclosure And Sale',v:7}]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienInfo.ForeclosureStatus' ng-options="o.v as o.l for o in [{l:'Not Sure',v:1},{l:'No Action / Dismissed',v:2},{l:'Summons & Complaint',v:3},{l:'Settlement Conference',v:4},{l:'RJI',v:5},{l:'Order Of Reference',v:6},{l:'Judgment Of Foreclosure And Sale',v:7}]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -477,7 +518,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienCosts.SidewalkLiens' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienCosts.SidewalkLiens' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -500,7 +541,7 @@
 
                                         </td>
                                         <td class="td-value">
-                                            <select ng-change='calculate()' style="width: 100%" ng-model='data.LienCosts.VacateOrder' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
+                                            <select dir='rtl'  ng-change='calculate()' style="width: 100%" ng-model='data.LienCosts.VacateOrder' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]"></select>
                                         </td>
                                     </tr>
                                     <tr>

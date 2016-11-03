@@ -7272,6 +7272,7 @@
     <Content Include="js\directives\auditLogs.js" />
     <Content Include="js\directives\bindId.js" />
     <Content Include="js\directives\initGrid.js" />
+    <Content Include="js\directives\ptEditableDiv.js" />
     <Content Include="js\directives\ptInputMask.js" />
     <Content Include="js\directives\ptNumberMask.js" />
     <Content Include="js\directives\preCondition.js" />
