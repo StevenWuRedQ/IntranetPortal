@@ -30,26 +30,55 @@
         }
 
         #preview {
-            float: left;
+            float: right;
+            position: relative;
+            top: 0px;
+            right: 0px;
             height: 875px;
         }
 
-        #hideicon {
+        #iconarea {
             visibility: hidden;
+            float: left;
+            position: relative;
+            top: 5px;
+            margin-left: -35px;
         }
 
-            #hideicon:hover {
-                cursor: pointer;
-            }
+        #hideicon:hover {
+            cursor: pointer;
+        }
+
+
+        #maximizeicon:hover {
+            cursor: pointer;
+        }
+
+        #previewWindow {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
     </style>
 
     <input type="text" style="display: none" />
     <div class="content">
-        <div id="xwrapper">
+        <div id="xwrapper" style="visibility: visible">
             <div id="gridContainer" style="margin: 10px"></div>
         </div>
 
         <div id="preview" style="visibility: hidden">
+            <div id="iconarea">
+                <div id='hideicon' data-toggle='tooltip' data-placement='right' title='hide right panel' style="height: 32px; width: 32px">
+                    <a class="btn btn-sm btn-blue" onclick='previewControl.undo()'>
+                        <i class='fa fa-arrow-right'></i></a>
+                </div>
+                <div style="height:5px"></div>
+                <div id='maximizeicon' data-toggle='tooltip' data-placement='right' title='maximize right panel' style="height: 32px; width: 32px">
+                    <a class="btn btn-sm btn-blue" onclick='previewControl.togglemaximize()'>
+                        <i class='fa fa-square-o'></i></a>
+                </div>
+            </div>
             <iframe id="previewWindow"></iframe>
         </div>
     </div>
@@ -83,31 +112,6 @@
             var bble = e.selectedRowKeys[0].BBLE || '';
             var status = e.selectedRowKeys[0].Status || 0;
             previewControl.showCaseInfo(bble, status)
-        }
-        previewControl = {
-            showCaseInfo: function (CaseId, status) {
-                if (status == 0) {
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?BBLE=' + CaseId
-                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
-                } else {
-                    $("#xwrapper").css("width", "50%");
-                    $("#preview").css("visibility", "visible");
-                    $("#preview").css("width", "50%");
-                    var url = '/PopupControl/UnderwritingSummary.aspx?BBLE=' + CaseId + '#searchSummary';
-                    $("#previewWindow").attr("src", url);
-                    $("#hideicon").css("visibility", "visible");
-                }
-
-            },
-
-            undo: function () {
-                $("#preview").css("width", "0%");
-                $("#preview").css("visibility", "hidden");
-                $("#hideicon").css("visibility", "hidden");
-                $("#xwrapper").css("width", "100%");
-                $("#previewWindow").attr("src", "");
-            }
-
         }
 
         $(document).ready(function () {
@@ -276,8 +280,7 @@
                             }
                         }]
                 }).dxDataGrid('instance');
-                $(".dx-datagrid-header-panel").prepend($("<div id='uw-properties-title' style='margin-bottom: -35px'><label class='grid-title-icon' style='display: inline-block'>UW</label><span id='useFilterApplyButton' style='z-index: 999'></span></div>"))
-                $(".dx-datagrid-header-panel").prepend($("<span id='hideicon' class='btn btn-blue pull-right' data-toggle='tooltip' data-placement='right' title='hide right panel' onclick='previewControl.undo()'><i class='fa fa-angle-double-right fa-lg'></i></span>"))
+                $(".dx-datagrid-header-panel").prepend($("<div id='uw-properties-title' style='margin-bottom: -35px'><label class='grid-title-icon' style='display: inline-block'>UW</label><span id='useFilterApplyButton' style='z-index: 999'></span></div>"));
                 var filterDataDelegate = function (data) {
                     previewControl.undo();
                     filterData(data.value);
@@ -380,6 +383,52 @@
 
 
         })
+        previewControl = {
+            showCaseInfo: function (CaseId, status) {
+                if (status == 0) {
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId;
+                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
+                } else {
+                    $("#xwrapper").css("width", "50%");
+                    $("#xwrapper").css("visibility", "visible");
+                    $("#preview").css("width", "50%");
+                    $("#preview").css("visibility", "visible");
+                    $("#iconarea").css("visibility", "visible");
+                    var url = '/PopupControl/UnderwritingSummary.aspx?mode=2&BBLE=' + CaseId + '#searchSummary';
+                    $("#previewWindow").attr("src", url);
+                }
+
+            },
+            undo: function () {
+                $("#xwrapper").css("width", "99%");
+                $("#xwrapper").css("visibility", "visible");
+                $("#preview").css("width", "0%");
+                $("#preview").css("visibility", "hidden");
+                $("#iconarea").css("visibility", "hidden");
+                $("#previewWindow").attr("src", "");
+            },
+            maximize: function () {
+                $("#xwrapper").css("width", "0%");
+                $("#xwrapper").css("visibility", "hidden");
+                $("#preview").css("width", "97%");
+                $("#preview").css("visibility", "visible");
+            },
+            unmaximize: function () {
+                $("#xwrapper").css("width", "50%");
+                $("#xwrapper").css("visibility", "visible");
+                $("#preview").css("width", "50%");
+                $("#preview").css("visibility", "visible");
+            },
+            togglemaximize: function () {
+                var visible = $("#xwrapper").css("visibility")
+                if (visible == 'visible') {
+                    this.maximize();
+                } else {
+                    this.unmaximize();
+                }
+            }
+        }
+
 
     </script>
 

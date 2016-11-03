@@ -7268,6 +7268,7 @@
     <Content Include="js\controllers\TitleController.js" />
     <Content Include="js\controllers\UnderwriterController.js" />
     <Content Include="js\controllers\UnderwritingRequestController.js" />
+    <Content Include="js\controllers\UnderwritingSummaryController.js" />
     <Content Include="js\controllers\VendorController.js" />
     <Content Include="js\directives\auditLogs.js" />
     <Content Include="js\directives\bindId.js" />

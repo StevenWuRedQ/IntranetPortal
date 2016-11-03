@@ -68,18 +68,7 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                                     </li>
 
                                     <% If CInt(Request.QueryString("mode")) >= 1 %>
-                                    <script>
-                                        function showUiView() {
-                                            $('a[data-toggle="tab"]').on('shown.bs.tab',
-                                                function (e) {
-                                                    // debugger;
-                                                    if (location.hash == '#/agent_story') {
-                                                        location.hash = '#/?BBLE=<%= Request.QueryString("BBLE")%>';
-                                                    }
-                                                })
-                                            }
-                                    </script>
-                                    <li class="short_sale_head_tab activity_light_blue" onclick="showUiView()">
+                                    <li class="short_sale_head_tab activity_light_blue">
                                         <a role="tab" href="#agent_story" data-toggle="tab" class="tab_button_a">
                                             <i class="fa fa-book head_tab_icon_padding"></i>
                                             <div class="font_size_bold" style="width: 100px">
@@ -134,9 +123,6 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                                                     url: '/agent_story',
                                                     controller: 'UnderwritingRequestController',
                                                     templateUrl: '/js/Views/Underwriter/underwriting_request.tpl.html',
-                                                    data: {
-                                                        Review: true
-                                                    }
                                                 }
                                                 $stateProvider.state(underwriterRequest);
                                             });
@@ -177,7 +163,10 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
 
     <script>
         function LoadSearch(bble) {
-            angular.element(document.getElementById('LeadTaxSearchCtrl')).scope().init(bble);
+            angular.element('#LeadTaxSearchCtrl').scope().init(bble);
+        }
+        function loadStory() {
+            angular.element("#uwrview").scope().init(bble);
         }
 
         function exportsheet() {

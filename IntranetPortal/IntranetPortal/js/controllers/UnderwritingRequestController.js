@@ -1,32 +1,11 @@
 ﻿angular.module("PortalApp")
-.controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom) {
-    $scope.init = function () {
+.controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', 'DocSearch', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom, DocSearch) {
+    $scope.init = function (bble) {
         $scope.data = {};
-        $scope.BBLE = $location.search().BBLE || '';
-        if ($state.current.data) {
-            $scope.Review = $state.current.data.Review || '';
-        }
         if ($scope.BBLE) {
-            $scope.data = UnderwritingRequest.get(
-                { BBLE: $scope.BBLE.trim() },
-                function () {
-                    $scope.data.BBLE = $scope.BBLE;
-                    UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(
-                        function success(res) {
-                            $scope.data.Address = res.data.Address;
-                            $scope.data.Status = res.data.Status || $scope.data.Status;
-                            $scope.data.CompletedDate = res.data.CompletedDate || undefined;
-
-                        }, function error() {
-                            console.log('fail to fetch addiontal infomation.')
-                        }
-                    );
-
-                },
-                function () {
-                    $scope.data.BBLE = $scope.BBLE;
-                }
-            )
+            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim() }, function () {
+                $scope.search = DocSearch.get({ BBLE: bble.trim() });
+            })
         }
     }
 
@@ -35,9 +14,8 @@
         var oldId = $scope.data.Id;
         $scope.data = {};
         $scope.data.Id = oldId;
-        if ($scope.BBLE) $scope.data.BBLE = $scope.BBLE;
         $scope.formCleaned = true;
-    
+
     }
 
     //check input and textarea to see if there is a error attribute
@@ -86,7 +64,7 @@
             return;
         }
 
-        UnderwritingRequest.saveByBBLE($scope.data).then(function () {
+        UnderwritingRequest.saveByBBLE($scope.data, $scope.BBLE).then(function () {
             if (!isSlient) {
                 ptCom.alert('Save Successful!')
             }
@@ -108,15 +86,15 @@
             return;
         }
 
-        UnderwritingRequest.createSearch($scope.BBLE).then(function () {
+        UnderwritingRequest.createSearch($scope.BBLE).then(function (r) {
+            debugger;
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
-            debugger;
             if (isResubmit) {
-                $scope.data.CompletedDate = undefined;
+                $scope.search.CompletedDate = undefined;
+                $scope.search.Expired = false;
                 $scope.formCleaned = false;
             }
-            debugger;
             $scope.save(true);
 
         }, function () {
@@ -127,11 +105,11 @@
 
 
     $scope.remainDays = function () {
-        if (!$scope.data || !$scope.data.CompletedDate) {
+        if (!$scope.search || !$scope.search.CompletedDate) {
             return "more than 60";
         } else {
             var timenow = new Date().getTime();
-            var timeCompleted = new Date($scope.data.CompletedDate);
+            var timeCompleted = new Date($scope.search.CompletedDate);
             var diff = timenow - timeCompleted;
             var dayinmsec = 1000 * 60 * 60 * 24;
             return 60 - Math.ceil(diff / dayinmsec);
@@ -140,27 +118,17 @@
     }
 
     $scope.completedOver60days = function () {
-        if (!$scope.data || $scope.data.CompletedDate == undefined) {
+        if (!$scope.search || $scope.search.CompletedDate == undefined) {
             return false;
         }
         else {
             return $scope.remainDays() < 0 ? true : false;
-        } 
-
-    }
-
-
-    $scope.$watch(function () { return $location.search() }, function () {
-        // debugger;
-        if ($location.search().BBLE) {
-            $scope.init();
         }
 
-    }, true);
-
-    if (!$state.current.data || !$state.current.data.Review) {
-        $scope.init();
     }
 
 
+    $scope.viewmode = ptCom.getGlobal("viewmode") || ptCom.parseSearch(location.search).mode || 0;
+    $scope.BBLE = ptCom.getGlobal("BBLE") || ptCom.parseSearch(location.search).BBLE || "";
+    $scope.init($scope.BBLE);
 }]);

@@ -1,6 +1,11 @@
 /**
- * a utility library provide common function in angular
- * 
+ * Author: Shaopeng Zhang
+ * Date: ???
+ * Description: An utility library provide common function in angular
+ * Update: 
+ *          2016/11/02:
+ *              1. add function parseSearch to get paires from Location.Search
+ *          
  **/
 
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
@@ -195,4 +200,32 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
 
     }
 
+    this.parseSearch = function (/*string*/ searchString) {
+        var result = {};
+        if (!searchString || typeof searchString != 'string')   //not a string
+            return result;
+        if (searchString.slice(0, 1) != '?')    //not a search string
+            return result;
+        var entriesString = searchString.slice(1).replace(/%20/g, '');  //remove leading ?
+        var entries = entriesString.split("&");
+        for (var i = 0; i < entries.length; i++) {
+            entry = entries[i].split("=");
+            if (entry.length > 1) {
+                result[entry[0]] = entry[1];
+            }
+        }
+        return result;
+    }
+
+    this.setGlobal = function (key, value) {
+        $rootScope.globaldata[key] = value
+    }
+
+    this.getGlobal = function (key) {
+        if ($rootScope.globaldata[key] != null) {
+            return $rootScope.globaldata[key];
+        } else {
+            return undefined;
+        }
+    }   
 }])
