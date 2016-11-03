@@ -11,7 +11,7 @@ angular.module("PortalApp")
                 isEditable: '='
             },
             link: function (scope, el, attrs) {
-                debugger;
+                // debugger;
                 angular.element(el).addClass("pt-editable-div");
                 scope.isLocked = true;
                 scope.unlock = function () {
@@ -26,7 +26,7 @@ angular.module("PortalApp")
                     scope.lock();
                 })
                 scope.$on('pt-editable-div-unlock', function () {
-                    debugger;
+                    // debugger;
                     scope.unlock();
                 })
                 scope.lock();

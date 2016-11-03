@@ -242,36 +242,21 @@ angular.module('PortalApp')
         })
 
         $scope.markCompleted = function (status, msg) {
-            var xhrfunc = function (note) {
-                //debugger;
-
-                payload = {
-                    bble: $scope.DocSearch.BBLE,
-                    status: status,
-                    note: note
-                }
-                $http({
-                    method: 'POST',
-                    url: '/api/LeadInfoDocumentSearches/MarkCompleted',
-                    data: payload
-                }).then(function succ(d) {
-                    //debugger;
-                    $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
-                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                    $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-                    $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
-                }, function err() {
-
-                })
-            };
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
-
             msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
-                    xhrfunc(result);
+                    DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                        //debugger;
+                        $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                        $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                        $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                        $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                    }, function err() {
+                        console.log("fail to update docsearch");
+                    });
                 }
 
             }, true);

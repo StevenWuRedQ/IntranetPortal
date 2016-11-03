@@ -1,8 +1,11 @@
 ﻿angular.module('PortalApp')
-    .factory('UnderwritingRequest', ['$http', 'ptBaseResource', function ($http, ptBaseResource) {
+    .factory('UnderwritingRequest', ['$http', 'ptBaseResource', 'DocSearch', function ($http, ptBaseResource, DocSearch) {
 
         var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
-        resource.saveByBBLE = function (data) {
+        resource.saveByBBLE = function (data, bble) {
+            if (bble) {
+                data.BBLE = bble;
+            }
             // debugger;
             var promise = $http({
                 method: 'POST',
@@ -24,15 +27,6 @@
             });
             return promise;
         }
-
-        resource.getAdditionalInfo = function (BBLE) {
-            var promise = $http({
-                method: 'GET',
-                url: '/api/UnderwritingRequest/GetAdditionalInfo/' + BBLE,
-            });
-            return promise;
-        }
-
 
         return resource;
     }]);

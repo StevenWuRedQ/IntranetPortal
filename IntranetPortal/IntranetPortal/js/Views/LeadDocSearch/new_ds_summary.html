@@ -16,6 +16,7 @@ a template to display new doc search.
 
     table.summary {
         color: black;
+        font-size: 12px;
     }
 
         table.summary > tbody > tr > td {
@@ -30,7 +31,7 @@ a template to display new doc search.
     }
 </style>
 <div>
-    <div class="alert alert-info" ng-show="DocSearch.UnderwriteStatus > 0 && viewmode>=1">
+    <div class="alert alert-info alert-condensed" ng-show="DocSearch.UnderwriteStatus > 0 && viewmode>=1">
         <h5>The Underwriting {{DocSearch.UnderwriteStatus==1?'Completed':'Rejected'}} by {{DocSearch.UnderwriteCompletedBy}} on {{DocSearch.UnderwriteCompletedOn | date:'MM/dd/yyyy'}}!</h5>
         <h5>
             <b>Comments:</b>
@@ -39,7 +40,9 @@ a template to display new doc search.
         </h5>
     </div>
     <div id="search_summary_div">
-        <div class="alert alert-warning" ng-show="DocSearch.UpdateDate">The last search updated on {{updateon | date:'MM/dd/yyyy'}} by {{DocSearch.UpdateBy}}</div>
+        <div class="alert alert-warning alert-condensed" ng-show="DocSearch.UpdateDate">
+            <h5>The last search updated on {{updateon | date:'MM/dd/yyyy'}} by {{DocSearch.UpdateBy}}</h5>
+        </div>
         <table class="table summary" ng-show="viewmode>0">
             <tr class="newsec">
                 <td colspan="3"><b>Request Info</b></td>

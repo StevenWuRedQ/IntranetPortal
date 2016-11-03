@@ -14,7 +14,7 @@
             }
         }
         ctrl.show = function (/* optional */objName, /* optional*/ recordId) {
-            debugger;
+            // debugger;
             if (objName != null || recordId != null) {
                 ctrl.objectName = objName || ctrl.objectName;
                 ctrl.recordId = recordId || ctrl.recordId;

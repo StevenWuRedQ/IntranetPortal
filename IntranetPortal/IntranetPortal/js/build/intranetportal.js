@@ -3,6 +3,7 @@ var portalApp = angular.module('PortalApp',
 
 angular.module('PortalApp')
     .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state', function ($rootScope, $uibModal, $timeout, $state) {
+        $rootScope.globaldata = {};
         $rootScope.AlertModal = null;
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');
@@ -887,11 +888,9 @@ angular.module('PortalApp')
 angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
 
     /*api service funciton declear*/
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
-        {
-            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
-        });
-
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null, {
+        completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
+    });
 
     docSearch.Status = {
         New: 0,
@@ -928,8 +927,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 
         return data1;
     }
-
-
     /**
      * static function define use class object docSearch.static function;
      */
@@ -950,6 +947,26 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         }
         return this.LeadResearch;
     }
+
+    /**
+     * Caution:
+     * this method mark underwriting status but not doc search status.
+     * doc search status is controlled by docSearch.Status.
+     */
+    docSearch.prototype.markCompleted = function (bble, status, note) {
+
+        payload = {
+            bble: bble,
+            status: status,
+            note: note
+        }
+
+        return $http({
+            method: 'POST',
+            url: '/api/LeadInfoDocumentSearches/MarkCompleted',
+            data: payload
+        })
+    };
 
     return docSearch;
 });
@@ -1827,7 +1844,7 @@ angular.module('PortalApp')
                 }
                 // map to Leads Info if we have data
                 if (d.leadsInfo) {
-                    debugger;
+                    // debugger;
                     d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
                     d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
                     d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
@@ -2246,10 +2263,13 @@ angular.module('PortalApp')
 
     }]);
 angular.module('PortalApp')
-    .factory('UnderwritingRequest', ['$http', 'ptBaseResource', function ($http, ptBaseResource) {
+    .factory('UnderwritingRequest', ['$http', 'ptBaseResource', 'DocSearch', function ($http, ptBaseResource, DocSearch) {
 
         var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
-        resource.saveByBBLE = function (data) {
+        resource.saveByBBLE = function (data, bble) {
+            if (bble) {
+                data.BBLE = bble;
+            }
             // debugger;
             var promise = $http({
                 method: 'POST',
@@ -2271,15 +2291,6 @@ angular.module('PortalApp')
             });
             return promise;
         }
-
-        resource.getAdditionalInfo = function (BBLE) {
-            var promise = $http({
-                method: 'GET',
-                url: '/api/UnderwritingRequest/GetAdditionalInfo/' + BBLE,
-            });
-            return promise;
-        }
-
 
         return resource;
     }]);
@@ -2400,8 +2411,13 @@ angular.module("PortalApp")
 })
 
 /**
- * a utility library provide common function in angular
- * 
+ * Author: Shaopeng Zhang
+ * Date: ???
+ * Description: An utility library provide common function in angular
+ * Update: 
+ *          2016/11/02:
+ *              1. add function parseSearch to get paires from Location.Search
+ *          
  **/
 
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
@@ -2596,6 +2612,34 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
 
     }
 
+    this.parseSearch = function (/*string*/ searchString) {
+        var result = {};
+        if (!searchString || typeof searchString != 'string')   //not a string
+            return result;
+        if (searchString.slice(0, 1) != '?')    //not a search string
+            return result;
+        var entriesString = searchString.slice(1).replace(/%20/g, '');  //remove leading ?
+        var entries = entriesString.split("&");
+        for (var i = 0; i < entries.length; i++) {
+            entry = entries[i].split("=");
+            if (entry.length > 1) {
+                result[entry[0]] = entry[1];
+            }
+        }
+        return result;
+    }
+
+    this.setGlobal = function (key, value) {
+        $rootScope.globaldata[key] = value
+    }
+
+    this.getGlobal = function (key) {
+        if ($rootScope.globaldata[key] != null) {
+            return $rootScope.globaldata[key];
+        } else {
+            return undefined;
+        }
+    }   
 }])
 angular.module("PortalApp").service('ptConstructionService', ['$http', function ($http) {
     this.getConstructionCases = function (bble, callback) {
@@ -3018,7 +3062,6 @@ angular.module("PortalApp")
     })
 angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$timeout', 'ptCom', function ($log, $q, $timeout, ptCom) {
     $log.debug('$log is here to show you that this is a regular factory with injection');
-
     var myInterceptor = {
         delayHide: function () {
             $timeout(ptCom.stopLoading, 300);
@@ -3026,10 +3069,10 @@ angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$ti
         BuildAjaxErrorMessage: function (response) {
             var message = "";
             /*Only error handle*/
-            if (response.status > 300 || response.status < 200) {
+            if (response.status > 300 || response.status < 200 || response.status == 203) {
                 var dataObj = JSON.parse(response.responseText);
                 if (dataObj) {
-                    var eMssage = dataObj.ExceptionMessage || dataObj.Message
+                    var eMssage = dataObj.ExceptionMessage || dataObj.Message || dataObj.message;
                     var messageObj = { Message: eMssage };
                     message = myInterceptor.BuildErrorMessgeStr(messageObj);
                 } else {
@@ -3431,7 +3474,7 @@ angular.module("PortalApp")
                 isEditable: '='
             },
             link: function (scope, el, attrs) {
-                debugger;
+                // debugger;
                 angular.element(el).addClass("pt-editable-div");
                 scope.isLocked = true;
                 scope.unlock = function () {
@@ -3446,7 +3489,7 @@ angular.module("PortalApp")
                     scope.lock();
                 })
                 scope.$on('pt-editable-div-unlock', function () {
-                    debugger;
+                    // debugger;
                     scope.unlock();
                 })
                 scope.lock();
@@ -5125,36 +5168,21 @@ angular.module('PortalApp')
         })
 
         $scope.markCompleted = function (status, msg) {
-            var xhrfunc = function (note) {
-                //debugger;
-
-                payload = {
-                    bble: $scope.DocSearch.BBLE,
-                    status: status,
-                    note: note
-                }
-                $http({
-                    method: 'POST',
-                    url: '/api/LeadInfoDocumentSearches/MarkCompleted',
-                    data: payload
-                }).then(function succ(d) {
-                    //debugger;
-                    $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
-                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                    $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-                    $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
-                }, function err() {
-
-                })
-            };
 
             // because the underwriting completion is not reversible, comfirm it before save to db.
-
             msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
-                    xhrfunc(result);
+                    DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                        //debugger;
+                        $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                        $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                        $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                        $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                    }, function err() {
+                        console.log("fail to update docsearch");
+                    });
                 }
 
             }, true);
@@ -9223,181 +9251,177 @@ angular.module("PortalApp")
  *              1. Add Enable Editing Function to unlock datainput area.
  */
 angular.module("PortalApp").controller("UnderwriterController",
-                ['$scope', 'ptCom', 'ptUnderwriter', '$location',
-        function ($scope, ptCom, ptUnderwriter, $location) {
+                ['$scope', 'ptCom', 'ptUnderwriter', '$location', 'DocSearch', '$state', function ($scope, ptCom, ptUnderwriter, $location, DocSearch, $state) {
 
-            $scope.data = {};
-            $scope.archive = {};
-            $scope.currentDataCopy = {};
-            $scope.isProtectedView = true;
 
-            $scope.init = function (bble) {
-                //ptCom.startLoading()
-                //$scope.feedData();
-                $scope.load(bble);
-                $scope.loadArchivedList(bble);
-            }
+                    $scope.data = {};
+                    $scope.archive = {};
+                    $scope.currentDataCopy = {};
+                    $scope.isProtectedView = true;
 
-            $scope.load = function (bble) {
-                $scope.data = ptUnderwriter.load(bble);
-                if ($scope.data.$promise) {
-                    $scope.data.$promise.then(function () {
-                        $scope.calculate();
-                    })
-                }
-            }
-
-            $scope.save = function () {
-                ptUnderwriter.save($scope.data).then(function (d) {
-                    //debugger;
-                    if (d.data) {
-                        $scope.data = d.data;
+                    $scope.init = function (bble) {
+                        //ptCom.startLoading()
+                        //$scope.feedData();
+                        $scope.load(bble);
+                        $scope.loadArchivedList(bble);
                     }
-                    alert("Save Successful");
-                }, function () {
-                    alert("fail to save");
-                })
 
-            }
+                    $scope.load = function (bble) {
+                        $scope.data = ptUnderwriter.load(bble);
+                        if ($scope.data.$promise) {
+                            $scope.data.$promise.then(function () {
+                                $scope.calculate();
+                            })
+                        }
+                    }
 
-            /*
-             * snapshot current values of forms,
-             * and sava copy in database for future analysis
-             */
-            $scope.archiveFunc = function () {
-                ptCom.prompt('Please give a name to this archive.', function (msg) {
-                    //debugger;
-                    if (msg != null) {
-                        ptUnderwriter.archive($scope.data, msg).then(function (d) {
-                            alert("Archive succesful.")
-                        }, function () {
-                            alert("Sorry...Some error...")
+                    $scope.save = function () {
+                        ptCom.confirm("Are you going to Save?", function (response) {
+                            if (response) {
+                                ptUnderwriter.save($scope.data).then(function (d) {
+                                    //debugger;
+                                    if (d.data) {
+                                        $scope.data = d.data;
+                                    }
+                                    ptCom.alert("Save Successful");
+                                }, function () {
+                                    ptCom.alert("fail to save");
+                                })
+                            }
                         })
+
+
                     }
 
-                })
-                
-
-            }
-
-            /**
-             * load all achived version in databases
-             */
-            $scope.loadArchivedList = function (bble) {
-                if (bble) {
-                    ptUnderwriter.loadArchivedList(bble).then(function (d) {
-                        $scope.archivedList = d.data;
-                    })
-                }
-            }
-
-            /**
-             * load a single archived entry in database
-             * @param: archive
-             */
-            $scope.loadArchived = function (archive) {
-                //debugger;
-                if (archive.Id) {
-                    ptUnderwriter.loadArchived(archive.Id).then(function (d) {
-                        if (d.data) {
+                    /*
+                     * snapshot current values of forms,
+                     * and sava copy in database for future analysis
+                     */
+                    $scope.archiveFunc = function () {
+                        ptCom.prompt('Please give a name to this archive.', function (msg) {
                             //debugger;
-                            angular.copy($scope.data, $scope.currentDataCopy);
-                            ptCom.assignReference($scope.data, d.data, [], ['Id']);
-                            $scope.archive = archive;
-                            $scope.archive.isLoaded = true;
-                            ptCom.alert("Load successful");
+                            if (msg != null) {
+                                ptUnderwriter.archive($scope.data, msg).then(function (d) {
+                                    alert("Archive succesful.")
+                                }, function () {
+                                    alert("Sorry...Some error...")
+                                })
+                            }
 
+                        })
+
+
+                    }
+
+                    /**
+                     * load all achived version in databases
+                     */
+                    $scope.loadArchivedList = function (bble) {
+                        if (bble) {
+                            ptUnderwriter.loadArchivedList(bble).then(function (d) {
+                                $scope.archivedList = d.data;
+                            })
                         }
-                    }, function (d) {
-                        ptCom.alert("Fail to load.");
+                    }
+
+                    /**
+                     * load a single archived entry in database
+                     * @param: archive
+                     */
+                    $scope.loadArchived = function (archive) {
+                        //debugger;
+                        if (archive.Id) {
+                            ptUnderwriter.loadArchived(archive.Id).then(function (d) {
+                                if (d.data) {
+                                    //debugger;
+                                    angular.copy($scope.data, $scope.currentDataCopy);
+                                    ptCom.assignReference($scope.data, d.data, [], ['Id']);
+                                    $scope.archive = archive;
+                                    $scope.archive.isLoaded = true;
+                                    ptCom.alert("Load successful");
+
+                                }
+                            }, function (d) {
+                                ptCom.alert("Fail to load.");
+                            })
+                        }
+
+                    }
+
+                    $scope.restoreCurrent = function () {
+                        if ($scope.currentDataCopy) {
+                            ptCom.assignReference($scope.data, $scope.currentDataCopy);
+                            $scope.archive.isLoaded = false;
+                            ptCom.alert("Restore to current version.")
+                        }
+                    }
+
+                    /*
+                     * Core function to apply predefined rule, 
+                     * and update model values 
+                     */
+                    $scope.calculate = function () {
+                        $scope.$applyAsync(function () {
+                            ptUnderwriter.calculator.calculate($scope.data);
+                        });
+                    }
+
+                    /*
+                     * A predefined model to validate with excel data
+                     */
+                    $scope.feedData = function () {
+                        $scope.data.PropertyInfo.TaxClass = 'A0',
+                        $scope.data.PropertyInfo.ActualNumOfUnits = 1
+                        $scope.data.PropertyInfo.SellerOccupied = true;
+                        $scope.data.PropertyInfo.PropertyTaxYear = 4297.0;
+                        $scope.data.DealCosts.HOI = 20000.0;
+                        $scope.data.DealCosts.AgentCommission = 2500;
+                        $scope.data.RehabInfo.AverageLowValue = 205166;
+                        $scope.data.RehabInfo.RenovatedValue = 510000;
+                        $scope.data.RehabInfo.RepairBid = 75000;
+                        $scope.data.RehabInfo.DealTimeMonths = 6;
+
+                        $scope.data.LienInfo.FirstMortgage = 340000;
+                        $scope.data.LienInfo.SecondMortgage = 284000;
+                        $scope.data.LienCosts.PropertyTaxes = 9113.32;
+                        $scope.data.LienCosts.WaterCharges = 1101.33;
+                        $scope.data.LienCosts.PersonalJudgements = 14892.09;
+                        $scope.update();
+                    }
+
+                    $scope.enableEditing = function () {
+                        $scope.$broadcast('pt-editable-div-unlock');
+                        $scope.isProtectedView = false;
+                    }
+
+                    $scope.$watch(function () {
+                        return $state.$current.name
+                    }, function (newVal, oldVal) {
+                        if (newVal == 'underwriter.datainput') {
+                            if ($scope.isProtectedView == false) {
+                                $scope.enableEditing();
+                            }
+                        }
                     })
-                }
 
-            }
 
-            $scope.restoreCurrent = function () {
-                if ($scope.currentDataCopy) {
-                    ptCom.assignReference($scope.data, $scope.currentDataCopy);
-                    $scope.archive.isLoaded = false;
-                    ptCom.alert("Restore to current version.")
-                }
-            }
 
-            /*
-             * Core function to apply predefined rule, 
-             * and update model values 
-             */
-            $scope.calculate = function () {
-                $scope.$applyAsync(function () {
-                    ptUnderwriter.calculator.calculate($scope.data);
-                });
-            }
 
-            /*
-             * A predefined model to validate with excel data
-             */
-            $scope.feedData = function () {
-                $scope.data.PropertyInfo.TaxClass = 'A0',
-                $scope.data.PropertyInfo.ActualNumOfUnits = 1
-                $scope.data.PropertyInfo.SellerOccupied = true;
-                $scope.data.PropertyInfo.PropertyTaxYear = 4297.0;
-                $scope.data.DealCosts.HOI = 20000.0;
-                $scope.data.DealCosts.AgentCommission = 2500;
-                $scope.data.RehabInfo.AverageLowValue = 205166;
-                $scope.data.RehabInfo.RenovatedValue = 510000;
-                $scope.data.RehabInfo.RepairBid = 75000;
-                $scope.data.RehabInfo.DealTimeMonths = 6;
+                    // init controller;
+                    // debugger;
+                    $scope.BBLE = ptCom.getGlobal("BBLE") || "";
+                    $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
+                    $scope.init($scope.BBLE);
 
-                $scope.data.LienInfo.FirstMortgage = 340000;
-                $scope.data.LienInfo.SecondMortgage = 284000;
-                $scope.data.LienCosts.PropertyTaxes = 9113.32;
-                $scope.data.LienCosts.WaterCharges = 1101.33;
-                $scope.data.LienCosts.PersonalJudgements = 14892.09;
-                $scope.update();
-            }
-
-            $scope.enableEditing = function () {
-                $scope.$broadcast('pt-editable-div-unlock');
-                $scope.isProtectedView = false;
-            }
-
-            // init controller;
-            var search = $location.search();
-            if (search && search.BBLE) {
-                $scope.init(search.BBLE)
-            } else {
-                $scope.init();
-            }
-        }]);
+                }]);
 angular.module("PortalApp")
-.controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom) {
-    $scope.init = function () {
+.controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', 'DocSearch', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom, DocSearch) {
+    $scope.init = function (bble) {
         $scope.data = {};
-        $scope.BBLE = $location.search().BBLE || '';
-        if ($state.current.data) {
-            $scope.Review = $state.current.data.Review || '';
-        }
         if ($scope.BBLE) {
-            $scope.data = UnderwritingRequest.get(
-                { BBLE: $scope.BBLE.trim() },
-                function () {
-                    $scope.data.BBLE = $scope.BBLE;
-                    UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(
-                        function success(res) {
-                            $scope.data.Address = res.data.Address;
-                            $scope.data.Status = res.data.Status || $scope.data.Status;
-                            $scope.data.CompletedDate = res.data.CompletedDate || undefined;
-
-                        }, function error() {
-                            console.log('fail to fetch addiontal infomation.')
-                        }
-                    );
-
-                },
-                function () {
-                    $scope.data.BBLE = $scope.BBLE;
-                }
-            )
+            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim() }, function () {
+                $scope.search = DocSearch.get({ BBLE: bble.trim() });
+            })
         }
     }
 
@@ -9406,9 +9430,8 @@ angular.module("PortalApp")
         var oldId = $scope.data.Id;
         $scope.data = {};
         $scope.data.Id = oldId;
-        if ($scope.BBLE) $scope.data.BBLE = $scope.BBLE;
         $scope.formCleaned = true;
-    
+
     }
 
     //check input and textarea to see if there is a error attribute
@@ -9457,7 +9480,7 @@ angular.module("PortalApp")
             return;
         }
 
-        UnderwritingRequest.saveByBBLE($scope.data).then(function () {
+        UnderwritingRequest.saveByBBLE($scope.data, $scope.BBLE).then(function () {
             if (!isSlient) {
                 ptCom.alert('Save Successful!')
             }
@@ -9479,15 +9502,15 @@ angular.module("PortalApp")
             return;
         }
 
-        UnderwritingRequest.createSearch($scope.BBLE).then(function () {
+        UnderwritingRequest.createSearch($scope.BBLE).then(function (r) {
+            debugger;
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
-            debugger;
             if (isResubmit) {
-                $scope.data.CompletedDate = undefined;
+                $scope.search.CompletedDate = undefined;
+                $scope.search.Expired = false;
                 $scope.formCleaned = false;
             }
-            debugger;
             $scope.save(true);
 
         }, function () {
@@ -9498,11 +9521,11 @@ angular.module("PortalApp")
 
 
     $scope.remainDays = function () {
-        if (!$scope.data || !$scope.data.CompletedDate) {
+        if (!$scope.search || !$scope.search.CompletedDate) {
             return "more than 60";
         } else {
             var timenow = new Date().getTime();
-            var timeCompleted = new Date($scope.data.CompletedDate);
+            var timeCompleted = new Date($scope.search.CompletedDate);
             var diff = timenow - timeCompleted;
             var dayinmsec = 1000 * 60 * 60 * 24;
             return 60 - Math.ceil(diff / dayinmsec);
@@ -9511,29 +9534,66 @@ angular.module("PortalApp")
     }
 
     $scope.completedOver60days = function () {
-        if (!$scope.data || $scope.data.CompletedDate == undefined) {
+        if (!$scope.search || $scope.search.CompletedDate == undefined) {
             return false;
         }
         else {
             return $scope.remainDays() < 0 ? true : false;
-        } 
-
-    }
-
-
-    $scope.$watch(function () { return $location.search() }, function () {
-        // debugger;
-        if ($location.search().BBLE) {
-            $scope.init();
         }
 
-    }, true);
-
-    if (!$state.current.data || !$state.current.data.Review) {
-        $scope.init();
     }
 
 
+    $scope.viewmode = ptCom.getGlobal("viewmode") || ptCom.parseSearch(location.search).mode || 0;
+    $scope.BBLE = ptCom.getGlobal("BBLE") || ptCom.parseSearch(location.search).BBLE || "";
+    $scope.init($scope.BBLE);
+}]);
+angular.module("PortalApp").controller("UnderwritingSummaryController", ['$scope', 'ptCom', 'ptUnderwriter', 'DocSearch', function ($scope, ptCom, ptUnderwriter, DocSearch) {
+
+    $scope.showStoryHistory = function () {
+        //debugger;
+        var scope = angular.element('#uwrview').scope();
+        if (scope.data && scope.data.Id) {
+            auditLog.toggle('UnderwritingRequest', scope.data.Id);
+        }
+    }
+
+    $scope.markCompleted = function(status, msg) {
+        // because the underwriting completion is not reversible, comfirm it before save to db.
+        msg = 'Please provide Note or press no to cancel';
+        ptCom.prompt(msg, function (result) {
+            //debugger;
+            if (result != null && $scope.search) {
+                debugger;
+                DocSearch.markCompleted($scope.search.BBLE, status, result).then(function succ(d) {
+                    $scope.search.UnderwriteStatus = d.data.UnderwriteStatus;
+                    $scope.search.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                    $scope.search.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                    $scope.search.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                }, function err() {
+                    console.log("fail to update docsearch");
+                });
+            }
+
+        }, true);
+
+    }
+    $scope.loadAdditionalInfo = function (bble) {
+        $scope.search = DocSearch.get({ BBLE: bble.trim()})
+    }
+    try {
+        var searchs = ptCom.parseSearch(location.search);
+        if (searchs) {
+            $scope.BBLE = searchs.BBLE || "";
+            $scope.viewmode = searchs.mode || 0;
+        }
+        ptCom.setGlobal("BBLE", $scope.BBLE);
+        ptCom.setGlobal("viewmode", $scope.viewmode);
+        $scope.loadAdditionalInfo($scope.BBLE);
+    } catch (ex) {
+        ptCom.setGlobal("BBLE", "");
+        ptCom.setGlobal("viewmode", 0);
+    }
 }]);
 angular.module("PortalApp")
     .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {
@@ -9735,7 +9795,7 @@ angular.module('PortalApp').component('ptAudit', {
             }
         }
         ctrl.show = function (/* optional */objName, /* optional*/ recordId) {
-            debugger;
+            // debugger;
             if (objName != null || recordId != null) {
                 ctrl.objectName = objName || ctrl.objectName;
                 ctrl.recordId = recordId || ctrl.recordId;

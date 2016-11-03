@@ -585,7 +585,7 @@ Partial Public Class Lead
         Return listProp.Create()
     End Function
 
-    Public Sub UpdateStatus(status As LeadStatus)
+    Public Sub UpdateStatus2(status As LeadStatus)
         Using ctx As New Entities
             Me.Status = status
             Dim ld = ctx.Leads.Find(BBLE)
@@ -600,7 +600,11 @@ Partial Public Class Lead
             Dim addComStr = If(String.IsNullOrEmpty(addCommend), "", "<br/>" & " Comments: " & addCommend)
             If lead IsNot Nothing Then
                 Dim originateStatus = lead.Status
-                lead.Status = status
+                ' If achive leads update rules them can not update status
+                ' such as achieve follow up 
+                ' throw error.
+                lead.UpdateStatus(status)
+                ' lead.Status = status
                 If Not callbackDate = Nothing Then
                     lead.CallbackDate = callbackDate
                 End If
@@ -1139,6 +1143,30 @@ Partial Public Class Lead
         Return True
     End Function
 
+    ''' <summary>
+    ''' update lead stauts
+    ''' </summary>
+    ''' <param name="status">stauts need update to</param>
+    Public Sub UpdateStatus(status As LeadStatus)
+        Dim owner = IntranetPortal.Employee.GetInstance(EmployeeName)
+        ' check leads has owner and status need change
+        ' then check status can be update or not
+        ' if its update to same status ignore the verify of update rules
+        If (owner IsNot Nothing And Me.Status <> status) Then
+            Dim fStr = "Can not move to {0} becuase achieve to limit."
+            If (status = LeadStatus.LoanMod) Then
+                If (owner.IsAchieveLoanModLimit()) Then
+                    Throw New Exception(String.Format(fStr, "Loan Mod"))
+                End If
+            End If
+            If (status = LeadStatus.Callback) Then
+                If (owner.IsAchieveFollowUpLimit()) Then
+                    Throw New Exception(String.Format(fStr, "Follow Up"))
+                End If
+            End If
+        End If
+        Me.Status = status
+    End Sub
     <JsonIgnoreAttribute>
     Public ReadOnly Property Task As UserTask
         Get

@@ -1,5 +1,7 @@
 ﻿Imports IntranetPortal
 Imports System.Web.Security
+Imports Newtonsoft.Json.Linq
+Imports Newtonsoft.Json
 
 <TestClass()>
 Public Class EmployeeTest
@@ -130,5 +132,132 @@ Public Class EmployeeTest
         Assert.AreEqual(hash, e.Password)
         ' after change password it should pass verify password
         Assert.IsTrue(e.VerifyPassword(testPassword))
+    End Sub
+
+    ' by steven
+    ' if our code have data proivder layer or we have mock database
+    ' we don't need this
+    ' mock test leads will delete it automatically
+    ' Func(Of Void, Void) not working now will do research later
+    Private Shared Sub MockLeads(mLead As Lead, mCount As Integer, testFunc As Func(Of Integer, Integer))
+        Dim ls = New Lead(mCount) {}
+        Dim jlead = mLead.ToJsonString()
+        Dim i = 0
+        For Each lt In ls
+            ls(i) = JsonConvert.DeserializeObject(Of Lead)(jlead)
+            Dim ld = ls(i)
+
+            ' BBLE start at 8 may never used BBLE 
+            ' If there Then is any error ask Chris when changed 
+            ' BBLE after this
+            ld.BBLE = CStr(8000151131 + i)
+            ' for safety
+            ld.AssignDate = DateTime.Now()
+            i = i + 1
+            ' Return ld
+        Next
+        'ls.ToList.ForEach(Function(l)
+        '                      ' like memcpy or deep clone
+
+        '                  End Function
+        '                      )
+        Using mockCtx As New Entities
+            mockCtx.Leads.AddRange(ls)
+            mockCtx.Leads.Count()
+            mockCtx.SaveChanges()
+            ' use try catch to clear database anyway
+            ' can change to goto
+            Try
+                testFunc(1)
+            Catch ex As Exception
+                ' need clear test database any way
+                mockCtx.Leads.RemoveRange(ls)
+                mockCtx.SaveChanges()
+                Throw ex
+            End Try
+
+
+        End Using
+    End Sub
+
+    Private Sub MockLead(mockEntity As Entities, mLead As Lead, testFunc As Func(Of Integer, Integer))
+        mockEntity.Leads.Add(mLead)
+        mockEntity.SaveChanges()
+        Try
+            testFunc(1)
+        Catch ex As Exception
+            mockEntity.Leads.Remove(mLead)
+            mockEntity.SaveChanges()
+            Throw ex
+        End Try
+
+    End Sub
+
+    Private Shared Function GetLeadsCountByStatusHelper(ctx As Entities, testEmloyee As String, status As LeadStatus) As Integer
+        Return ctx.Leads.Where(Function(l) l.Status = status AndAlso l.EmployeeName = testEmloyee).Count
+    End Function
+
+    <TestMethod>
+    Public Sub LeadsLimitTest()
+        Using mockEntity As New Entities()
+            ' set up test data
+            Dim testEmloyee = "Chris Yan"
+            Dim tChrisYan = Employee.GetInstance(testEmloyee)
+            Dim testLead = New Lead()
+            testLead.Status = LeadStatus.Callback
+            testLead.BBLE = "8900151131"
+            testLead.EmployeeName = tChrisYan.Name
+            testLead.EmployeeID = tChrisYan.EmployeeID ' for safety
+            testLead.AssignBy = "Testing"
+
+            ' dont care about speed in unit test so using leads
+            Dim followUpLeadCount = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
+
+            If (followUpLeadCount < Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT) Then
+                Dim limitCount = Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT - followUpLeadCount
+                'test 29 leads
+
+                MockLeads(testLead, limitCount - 2,
+                          Function(x)
+                              ' have 29 leads
+                              Dim folloUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
+                              Assert.AreEqual(folloUpNow, 29)
+                              Assert.IsFalse(tChrisYan.IsAchieveFollowUpLimit())
+
+                              ' insert other follow up leads
+                              testLead.Status = LeadStatus.Callback
+                              mockEntity.Leads.Add(testLead)
+                              mockEntity.SaveChanges()
+
+                              folloUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
+
+
+                              Assert.AreEqual(folloUpNow, 30)
+                              Assert.IsTrue(tChrisYan.IsAchieveFollowUpLimit())
+
+                              ' delete test leads
+                              mockEntity.Leads.Remove(testLead)
+                              mockEntity.SaveChanges()
+
+                              ' todo
+                              ' it should not allow insert
+                              ' Do not pass the 
+                              ' Lead.UpdateStatus(LeadStatus.Callback)
+                              Return x
+                          End Function)
+            Else
+                Console.WriteLine("Chris Yan has more than " &
+                                  Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT &
+                                  "follo Up lead please delete or change test employee")
+                Assert.IsTrue(False)
+            End If
+
+
+
+
+        End Using
+
+
+
     End Sub
 End Class
