@@ -19,5 +19,6 @@ Partial Public Class EcourtCase
     Public Property CaseStatus As String
     Public Property CaseDispositionDate As Nullable(Of Date)
     Public Property CaseType As String
+    Public Property UpdateDate As Nullable(Of Date)
 
 End Class
