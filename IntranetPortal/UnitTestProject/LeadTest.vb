@@ -128,6 +128,93 @@ Public Class LeadTest
     End Sub
 
     ''' <summary>
+    ''' Check the start recyle process
+    ''' </summary>
+    <TestMethod> Public Sub StartRecycleProcess_returnNull()
+        Dim bble = "1000251493 "
+        RecycleManage.ExpireRecycles(bble)
+        Dim ld = Lead.GetInstance(bble)
+        ld.ReAssignLeads("Steven Wu")
+        ld.StartRecycleProcess()
+        Dim rc = RecycleManage.GetRecycledLead(bble)
+        Assert.IsNotNull(rc)
+    End Sub
+
+    ''' <summary>
+    ''' Test recyle action, the leads will move to lead pool.
+    ''' </summary>
+    <TestMethod> Public Sub Recycle_LeadsPool()
+        Dim bble = "1000251493 "
+        Dim ld = Lead.GetInstance(bble)
+        ld.Recycle("testing")
+        ld = Lead.GetInstance(bble)
+        Assert.AreEqual(ld.EmployeeName, Lead.GetHotPoolUser().Name)
+    End Sub
+
+    <TestMethod> Public Sub NewLeadsRule_Recycle()
+        Dim bble = "1000251493 "
+        Dim ld = Lead.GetInstance(bble)
+        ld.ReAssignLeads("Chris Yan")
+        ld.AssignDate = New DateTime(2016, 10, 1)
+        ld.Status = LeadStatus.NewLead
+        ld.EmployeeName = "Chris Yan"
+        IntranetPortal.RulesEngine.LeadsEscalationRule.Execute(ld)
+        ld = Lead.GetInstance(bble)
+        Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name)
+    End Sub
+
+    <TestMethod> Public Sub WarmLeadsRule_Recycle()
+        Dim bble = "1000251493 "
+        Dim ld = Lead.GetInstance(bble)
+        ld.ReAssignLeads("Chris Yan")
+        ld.AssignDate = New DateTime(2016, 10, 1)
+        ld.Status = LeadStatus.Warm
+        ld.EmployeeName = "Chris Yan"
+        IntranetPortal.RulesEngine.LeadsEscalationRule.Execute(ld)
+        ld = Lead.GetInstance(bble)
+        Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name)
+    End Sub
+
+    <TestMethod> Public Sub PriorityLeadsRule_CreateRecycle()
+        Dim bble = "1000251493 "
+        RecycleManage.ExpireRecycles(bble)
+
+        Dim ld = Lead.GetInstance(bble)
+        ld.ReAssignLeads("Chris Yan")
+        ld.AssignDate = New DateTime(2016, 10, 1)
+        ld.Status = LeadStatus.Priority
+        ld.EmployeeName = "Chris Yan"
+        IntranetPortal.RulesEngine.LeadsEscalationRule.Execute(ld)
+        Dim rc = RecycleManage.GetRecycledLead(bble)
+        Assert.IsNotNull(rc)
+    End Sub
+
+    <TestMethod> Public Sub RecyclePostpone_returnTrue()
+        Dim bble = "1000251493 "
+        Dim rc = RecycleManage.GetRecycledLead(bble)
+        rc.PostponeDays(15)
+        rc = RecycleManage.GetRecycledLead(bble)
+        Assert.IsTrue(rc.Status, Core.RecycleLead.RecycleStatus.Postponed)
+    End Sub
+
+    <TestMethod> Public Sub ExpiredRecycleWhenLeadsMoveToInProcess_returnTrue()
+        Dim bble = "1000251493 "
+        Dim ld = Lead.GetInstance(bble)
+        ld.UpdateStatus(LeadStatus.InProcess)
+        Dim rc = RecycleManage.GetRecycledLead(bble)
+
+        If rc Is Nothing Then
+            PriorityLeadsRule_CreateRecycle()
+        End If
+
+        Dim rule As New RulesEngine.RecycleProcessRule
+        rule.ExecuteRecycle(rc)
+        rc = Core.RecycleLead.GetInstance(rc.RecycleId)
+        Assert.AreEqual(rc.Status, CInt(Core.RecycleLead.RecycleStatus.Expired))
+        ld.UpdateStatus(LeadStatus.NewLead)
+    End Sub
+
+    ''' <summary>
     ''' Check the limitation for users not in agent team
     ''' </summary>
     <TestMethod> Public Sub LeadsCreationLimitFunction_NoLimitAdmin()

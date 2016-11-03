@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel.DataAnnotations
 Imports System.Web.Script.Serialization
 Imports Newtonsoft.Json
+Imports IntranetPortal.Data
 
 ''' <summary>
 ''' Represents the data related to leads or property
@@ -32,6 +33,18 @@ Public Class LeadsInfo
     Public ReadOnly Property InShortSale As Boolean
         Get
             Return ShortSaleManage.IsInShortSale(BBLE)
+        End Get
+    End Property
+
+    Private _ecourtData As LeadsEcourtData
+    <JsonIgnore>
+    Public ReadOnly Property EcourtData As LeadsEcourtData
+        Get
+            If _ecourtData Is Nothing Then
+                _ecourtData = LeadsEcourtData.GetData(BBLE)
+            End If
+
+            Return _ecourtData
         End Get
     End Property
 

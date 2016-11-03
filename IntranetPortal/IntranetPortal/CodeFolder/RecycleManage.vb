@@ -34,6 +34,18 @@ Public Class RecycleManage
         End Try
     End Sub
 
+    Public Shared Sub ExpireRecycles(bble As String)
+        Dim rc = GetRecycledLead(bble)
+        While rc IsNot Nothing
+            rc.Expire()
+            rc = GetRecycledLead(bble)
+        End While
+    End Sub
+
+    Public Shared Function GetRecycledLead(bble As String) As Core.RecycleLead
+        Return Core.RecycleLead.GetInstanceByBBLE(bble)
+    End Function
+
     Public Shared Sub BatchPostponeRecycle(userName As String, days As Integer)
         Dim wlis = WorkflowService.GetUserWorklist(userName).Where(Function(wl) wl.ProcessName = "RecycleProcess").ToList
 

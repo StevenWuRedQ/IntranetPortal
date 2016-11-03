@@ -1164,8 +1164,12 @@ Public Class Troubleshooting
     Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
 
         Using ctx As New Entities
-            Dim emp = ctx.Employees.Where(Function(em) em.Name = "Chris Yan").FirstOrDefault()
-            emp.ChangePassword(emp.Password)
+            Dim emps = ctx.Employees.ToList() ' .Where(Function(em) em.Name = "Chris Yan").FirstOrDefault()
+            emps.ForEach(Function(emp)
+                             emp.ChangePassword(emp.Password)
+                             Return Nothing
+                         End Function)
+            'emp.ChangePassword(emp.Password)
             ctx.SaveChanges()
             MsgBox("Update to MD5 is finished !")
         End Using

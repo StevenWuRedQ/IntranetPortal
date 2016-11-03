@@ -252,6 +252,33 @@
                         <% i += 1%>
                         <% End If%>
 
+                        <% If LeadsInfoData.EcourtData IsNot Nothing Then%>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>                                                        
+                            <% If (LeadsInfoData.EcourtData.IsNewUpdate) Then %>
+                            <span style="background-color:red; color:white; border-radius:14px;min-width:24px;padding:3px 7px;font-weight:900;font-size:14px">New</span>
+                            <%Else %>
+                            <i class="fa fa-exclamation-circle note_img"></i>                           
+                            <%end if %>
+                            <span class="note_text">                            
+                            <% If LeadsInfoData.EcourtData.Active Then %>
+                            Active Cases: <b><%= String.Join(",", LeadsInfoData.EcourtData.ActiveCaseNumbers) %> </b>
+                            <% Else %>
+                            <b style="color:red; font-weight:600">
+                                No Active Cases in Ecourt.</b>
+                            <% End If %>
+                            </span>                            
+                        </div>
+                        <% i += 1%>
+                        <% else %>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>                            
+                            <i class="fa fa-exclamation-circle note_img"></i>                            
+                            <span class="note_text">                            
+                            <b style="color:red">No Cases found in Ecourt, please check.</b>
+                            </span>                            
+                        </div>
+                        <% i += 1%>
+                        <% End If%>
+
                         <asp:HiddenField ID="hfBBLE" runat="server" />
 
                         <% For Each comment In LeadsInfoData.UserComments%>

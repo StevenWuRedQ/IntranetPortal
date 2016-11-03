@@ -10,6 +10,14 @@ Imports System.Security.Cryptography
 ''' </summary>
 <MetadataType(GetType(EmployeeMetaData))>
 Partial Public Class Employee
+    ' it better to separate to two const but now both of them is 30
+    ' so make it as one const number
+#If DEBUG Then
+    Private Shared ReadOnly FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT As Integer = 3
+#Else
+    Private Shared ReadOnly FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT As Integer = 30
+#End If
+
 
     Private Shared _ceo As Employee
     ''' <summary>
@@ -579,6 +587,12 @@ Partial Public Class Employee
         End Using
     End Function
 
+    Public Shared Function GetAllActiveAgents() As String()
+        Using Context As New Entities
+            Return Context.Employees.Where(Function(em) em.Active = True AndAlso em.Position = "Finder").Select(Function(em) em.Name).ToArray
+        End Using
+    End Function
+
     ''' <summary>
     ''' Get the list of active employee's names under given application
     ''' </summary>
@@ -917,6 +931,13 @@ Partial Public Class Employee
 
     End Function
 
+
+    ''' <summary>
+    ''' MD5 encrypt password
+    ''' </summary>
+    ''' <param name="md5Hash">MD5 hash algorithm</param>
+    ''' <param name="input">string need to encrypt</param>
+    ''' <returns></returns>
     Private Shared Function GetMd5Hash(md5Hash As MD5, input As String) As String
 
         ' Convert the input string to a byte array and compute the hash.
@@ -950,6 +971,43 @@ Partial Public Class Employee
             Return False
         End If
     End Function
+
+
+    ''' <summary>
+    ''' Check limit status leads count achieve to limit or not 
+    ''' </summary>
+    ''' <param name="limitStatus"></param>
+    ''' <param name="limitCount"></param>
+    ''' <returns>true is achived limit , false is not</returns>
+    Private Function LeadsCountAchiveLimited(limitStatus As LeadStatus, limitCount As Integer) As Boolean
+
+        Dim ctx = New Entities
+
+
+
+        Using ctx
+            Return ctx.Leads.Where(Function(l) l.Status = limitStatus And l.EmployeeName = Name).Count >= limitCount
+        End Using
+        ' use leads is better for unit test
+        ' Return Me.Leads.Where(Function(e) e.s)
+    End Function
+
+    ''' <summary>
+    ''' Check leads count achive follow up limit
+    ''' </summary>
+    ''' <returns>true is achived limit</returns>
+    Public Function IsAchieveFollowUpLimit() As Boolean
+        Return LeadsCountAchiveLimited(LeadStatus.Callback, FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT)
+    End Function
+
+    ''' <summary>
+    ''' Check leads of employee achive loan mod limit
+    ''' </summary>
+    ''' <returns> true is achieve loan mod limit</returns>
+    Public Function IsAchieveLoanModLimit() As Boolean
+        Return LeadsCountAchiveLimited(LeadStatus.LoanMod, FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT)
+    End Function
+
     ''' <summary>
     ''' The employee data object, used for JSON serialized
     ''' </summary>

@@ -200,6 +200,8 @@
     <Compile Include="ShortSaleManageUnitTest.vb" />
     <Compile Include="SMTPUnitTest.vb" />
     <Compile Include="ExcelBuilderTest.vb" />
+    <Compile Include="EcourtServiceTest.vb" />
+    <Compile Include="LeadsEcourtDataTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />

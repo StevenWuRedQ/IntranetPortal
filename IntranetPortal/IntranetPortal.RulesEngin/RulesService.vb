@@ -83,6 +83,7 @@ Public Class RulesService
         Rules = New List(Of BaseRule)
         Rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
         Rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
+        Rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("19:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads business rule"})
         Rules.Add(New AgentActivitySummaryRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Team Activity Email Rule"})
 
         'Rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("01:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
@@ -120,6 +121,10 @@ Public Class RulesService
         'New Offer
         Rules.Add(New NewOfferNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", (days + 1) Mod 7)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "New Offer Accepted Weekly Notify Rule", .ExecuteOnWeekend = True})
         Rules.Add(New NewOfferNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:10:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "New Offer Accepted Weekly Notify Rule", .ExecuteOnWeekend = False, .IsWeekly = False})
+
+        'Ecourt data update
+        Rules.Add(New EcourtCasesUpdateRule With {.ExecuteOn = TimeSpan.Parse("21:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Ecourt Data Syncing Rule", .ExecuteNow = False, .ExecuteOnWeekend = True})
+
     End Sub
 
     ''' <summary>

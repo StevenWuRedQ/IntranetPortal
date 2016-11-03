@@ -14,16 +14,6 @@
         font-family: Calibri 'Source Sans Pro';
     }
 
-    /*.clearfix:before,
-    .clearfix:after {
-        display: table;
-        content: " ";
-    }
-
-    .clearfix:after {
-        clear: both;
-    }*/
-
     .body_content {
         /*padding: 60px 70px;*/
     }
@@ -135,7 +125,6 @@
                     </td>
                 </tr>
             </table>
-
             <table width="100%" bgcolor="white">
                 <tr>
                     <td style="padding: 80px 70px 60px 70px">
@@ -253,11 +242,48 @@
                                     </div>
                                 </td>
                             </tr>
+                            <!-- leads to be recyled -->
+                            <tr runat="server" visible="<%# IsFinder %>">
+                                <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
+                                    <h3 style="color:red">Leads to be Recycled</h3>
+                                    <asp:Repeater runat="server" ID="rptRecycled" OnItemDataBound="rptRecycled_ItemDataBound">
+                                        <ItemTemplate>
+                                            <span class="email_title" runat="server" id="spanTitle"></span>&nbsp&nbsp;
+                                            <span class="index_bullet" runat="server" id="spanAmount"></span>
+                                            <asp:Repeater runat="server" ID="rptLeadsRecycled">
+                                                <HeaderTemplate>
+                                                    <br />
+                                                    <br />
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <td class="email_item">
+                                                                <table style="width: 100%">
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="email_link">
+                                                                <a href='http://portal.myidealprop.com/viewleadsinfo.aspx?id=<%# Eval("BBLE") %>'><%# Eval("LeadsName")%></a>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                                <FooterTemplate>
+                                                    </table>
+                                                    </td>
+                                                </tr>
+                                            </table>                       
+                                                </FooterTemplate>                                                
+                                            </asp:Repeater>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </td>
+                            </tr>
                             <!-- hot leads -->
                             <tr runat="server" visible="<%# hotCount > 0 %>">
                                 <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
                                     <span class="email_title">Hot Leads</span>&nbsp&nbsp;
-                                    <span class="index_bullet"> (<%# hotCount %>)</span>
+                                    <span class="index_bullet">(<%# hotCount %>)</span>
                                     <asp:Repeater runat="server" ID="HotLeadsReapter">
                                         <HeaderTemplate>
                                             <br />
@@ -277,7 +303,7 @@
                                             </tr>
                                         </ItemTemplate>
                                         <FooterTemplate>
-                                                        </table>
+                                            </table>
                                                     </td>
                                                 </tr>
                                             </table>                       
@@ -289,7 +315,7 @@
                             <tr runat="server" visible="<%# loanModCount > 0 %>">
                                 <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
                                     <span class="email_title">LoadMod Leads:</span>&nbsp&nbsp;
-                                    <span class="index_bullet"> (<%# loanModCount %>)</span>
+                                    <span class="index_bullet">(<%# loanModCount %>)</span>
                                     <asp:Repeater runat="server" ID="LoanModReapter">
                                         <HeaderTemplate>
                                             <br />
@@ -309,7 +335,7 @@
                                             </tr>
                                         </ItemTemplate>
                                         <FooterTemplate>
-                                                        </table>
+                                            </table>
                                                     </td>
                                                 </tr>
                                             </table>                       

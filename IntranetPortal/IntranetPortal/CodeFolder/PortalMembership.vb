@@ -8,7 +8,7 @@ Public Class PortalMembershipProvider
 
     Public Overrides Function ChangePassword(username As String, oldPassword As String, newPassword As String) As Boolean
         Using context As New Entities
-            Dim emp = context.Employees.Where(Function(em) em.Name = username And em.Password = oldPassword).SingleOrDefault
+            Dim emp = context.Employees.Where(Function(em) em.Name = username).ToArray().Where(Function(u) u.VerifyPassword(oldPassword)).SingleOrDefault
 
             If emp IsNot Nothing Then
                 ' emp.Password = newPassword

@@ -5,16 +5,18 @@ Public Class PortalNavManage
 
     Private Shared XmlDataFile As String = "~/App_Data/PortalMenu.xml"
     Private Shared _navItems As List(Of PortalNavItem)
+    Private Shared _updateTime As DateTime
 
     ' get all menu
     Public Shared Function LoadMenuFromXml(context As HttpContext) As List(Of PortalNavItem)
-        If _navItems Is Nothing Then
+        If _navItems Is Nothing OrElse _updateTime < DateTime.Now Then
             Dim reader As New System.Xml.Serialization.XmlSerializer(GetType(List(Of PortalNavItem)))
             Dim file As New System.IO.StreamReader(context.Server.MapPath(XmlDataFile))
             Dim menuItems = CType(reader.Deserialize(file), List(Of PortalNavItem))
             file.Close()
             AddTeamsMenu(menuItems)
             _navItems = menuItems
+            _updateTime = DateTime.Now.AddMinutes(30)
         End If
 
         Return _navItems
