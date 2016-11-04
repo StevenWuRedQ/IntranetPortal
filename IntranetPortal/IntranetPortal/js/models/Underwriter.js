@@ -297,12 +297,12 @@ angular.module('PortalApp')
                 // map to Leads Info if we have data
                 if (d.leadsInfo) {
                     // debugger;
-                    d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
-                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
-                    d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
+                    d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress;
+                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner;
+                    d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass;
                     d.PropertyInfo.LotSize = d.leadsInfo.LotDem;
-                    d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
-                    d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
+                    d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem;
+                    d.PropertyInfo.Zoning = d.leadsInfo.Zoning;
                     d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
                     d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
                 }

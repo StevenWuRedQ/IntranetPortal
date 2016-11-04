@@ -905,14 +905,13 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
 
     docSearch.prototype.initLeadsResearch = function () {
+        //debugger;
         var self = this;
-
         var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
             data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
         } else {
-
             var _LeadSearch = new LeadResearch();
             angular.extend(_LeadSearch, self.LeadResearch);
             self.LeadResearch = _LeadSearch;
@@ -1845,12 +1844,12 @@ angular.module('PortalApp')
                 // map to Leads Info if we have data
                 if (d.leadsInfo) {
                     // debugger;
-                    d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
-                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
-                    d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
+                    d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress;
+                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner;
+                    d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass;
                     d.PropertyInfo.LotSize = d.leadsInfo.LotDem;
-                    d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
-                    d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
+                    d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem;
+                    d.PropertyInfo.Zoning = d.leadsInfo.Zoning;
                     d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
                     d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
                 }
@@ -4995,12 +4994,14 @@ angular.module('PortalApp')
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                $scope.DocSearch.initLeadsResearch();
-                $scope.DocSearch.initTeam();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                     
+                    $scope.DocSearch.initLeadsResearch();
+                    $scope.DocSearch.initTeam();
+                    ////////// font end switch to new version //////////////
+                    $scope.versionController.start2Eaves();
+                });
 
-                ////////// font end switch to new version //////////////
-                $scope.versionController.start2Eaves();
             });
 
         }
@@ -9834,6 +9835,44 @@ angular.module('PortalApp').component('ptAudit', {
         ctrl.init();
     }
 })
+angular.module('PortalApp').component('ptHomeowner', {
+
+    templateUrl: '/js/Views/LeadDocSearch/searchOwner.tpl.html',
+    controller: function ($http) {
+        this.init = function (bble) {
+            var that = this;
+            if (bble) {
+                $http({
+                    method: 'GET',
+                    url: '/api/homeowner/' + bble,
+                }).then(function (r) {
+                    that.rawdata = r.data;
+                })
+            }
+        }
+
+        this.parseDate = function (dateField) {
+            if (dateField) {
+                return (dateField.yearField ? dateField.yearField : 'xxxx') +
+                       "/" + (dateField.monthField ? dateField.monthField : 'xx') +
+                       "/" + (dateField.dayField ? dateField.dayField : 'xx');
+            }
+
+        }
+
+        this.parseAddress = function (addressField) {
+            if (addressField) {
+                return (addressField.line1Field ? addressField.line1Field + ' ' : '') +
+                       (addressField.line2Field ? addressField.line2Field + ' ' : '') +
+                       (addressField.line3Field ? addressField.line3Field + ' ' : '') +
+                       ', ' +
+                       (addressField.cityField ? addressField.cityField + ', ' : 'Unknown City,') +
+                       (addressField.stateField ? addressField.stateField + ', ' : 'Unknown State,') +
+                       (addressField.zipField ? addressField.zipField : '')
+            }
+        }
+    }
+});
 angular.module('PortalApp').component('ptItemList', {
 
     templateUrl: '/js/templates/ptItemList.html',

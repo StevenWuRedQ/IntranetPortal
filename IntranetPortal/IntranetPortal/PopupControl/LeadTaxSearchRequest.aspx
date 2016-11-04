@@ -33,30 +33,36 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div id="dataPanelDiv">
-                                <div style="align-content: center; height: 100%">
-                                    <div class="legal-menu row " style="margin-left: 0px; margin-right: 0px">
-                                        <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
-                                            <li class="active short_sale_head_tab">
-                                                <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
-                                                    <i class="fa fa-search head_tab_icon_padding"></i>
-                                                    <div class="font_size_bold" id="LegalTabHead">Searches</div>
-                                                </a>
-                                            </li>
-                                            <li class="active short_sale_head_tab">
-                                                <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
-                                                    <i class="fa fa-search head_tab_icon_padding"></i>
-                                                    <div class="font_size_bold" id="LegalTabHead">Home Owner</div>
-                                                </a>
-                                            </li>
-                                            <% If Nothing Is Request.QueryString("mode") OrElse CInt(Request.QueryString("mode")) < 1 OrElse (Request.QueryString("mode")) >= 2 Then%>
-                                            <li style="margin-right: 30px; color: #ffa484; float: right">
-                                                <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="Save" ng-click="SearchComplete(true)"></i>
-                                            </li>
-                                            <% End If %>
-                                        </ul>
+                                <div class="legal-menu row " style="margin-left: 0px; margin-right: 0px">
+                                    <ul class="nav nav-tabs clearfix" role="tablist" style="background: #ff400d; font-size: 18px; color: white; height: 70px">
+                                        <li class="active short_sale_head_tab">
+                                            <a href="#search-form" role="tab" data-toggle="tab" class="tab_button_a">
+                                                <i class="fa fa-search head_tab_icon_padding"></i>
+                                                <div class="font_size_bold">Searches</div>
+                                            </a>
+                                        </li>
+                                        <li class="short_sale_head_tab">
+                                            <a href="#search-page-owner" role="tab" data-toggle="tab" class="tab_button_a">
+                                                <i class="fa fa-home head_tab_icon_padding"></i>
+                                                <div class="font_size_bold">Home Owner</div>
+                                            </a>
+                                        </li>
+                                        <% If Nothing Is Request.QueryString("mode") OrElse CInt(Request.QueryString("mode")) < 1 OrElse (Request.QueryString("mode")) >= 2 Then%>
+                                        <li style="margin-right: 30px; color: #ffa484; float: right">
+                                            <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="Save" ng-click="SearchComplete(true)"></i>
+                                        </li>
+                                        <% End If %>
+                                    </ul>
+                                </div>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="search-form">
+                                        <uc1:DocSearchNewVersion runat="server" ID="DocSearchNewVersion" />
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="search-page-owner">
+                                        <pt-homeowner bble="123454321"></pt-homeowner>
                                     </div>
                                 </div>
-                                <uc1:DocSearchNewVersion runat="server" ID="DocSearchNewVersion" />
+
                             </div>
                         </dx:SplitterContentControl>
                     </ContentCollection>
@@ -171,6 +177,7 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
     <script>
         function LoadSearch(bble) {
             angular.element('#LeadTaxSearchCtrl').scope().init(bble);
+            angular.element('#pt-homeowner').scope().$ctrl.init(bble);
         }
         function loadStory() {
             angular.element("#uwrview").scope().init(bble);

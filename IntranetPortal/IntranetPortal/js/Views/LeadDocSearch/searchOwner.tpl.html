@@ -1,0 +1,89 @@
+﻿
+<div id="pt-homeowner" style="margin-top:20px">
+    <table style="margin: 5px; table-layout:fixed">
+        <tr>
+            <td style="border-right: 3px solid #808080; width: 400px;vertical-align:top">
+                <div>
+                    <div class="basic-info">
+                        <h3 class="text-primary" style="padding-left:10px"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;{{$ctrl.rawdata[0].Name || "Unknown"}}</h3>
+                        <ul style="list-style:none">
+                            <li>
+                                <h4><b>Age</b></h4>
+                                <h5>{{$ctrl.rawdata[0].TLOLocateReport.dateOfBirthField.currentAgeField}}&nbsp;</h5>
+                            </li>
+                            <li>
+                                <h4><b>DEATH INDICATOR</b></h4>
+                                <h5>{{$ctrl.rawdata[0].TLOLocateReport.dateOfDeathField?"Dead":"Alive"}}&nbsp;</h5>
+                            </li>
+                            <li>
+                                <h4><b>BANKRUPTCY</b></h4>
+                                <h5>{{$ctrl.rawdata[0].TLOLocateReport.numberOfBankruptciesField && $ctrl.rawdata[0].TLOLocateReport.numberOfBankruptciesField > 0 ? 'Yes' : 'No'}}&nbsp;&nbsp;</h5>
+                            </li>
+                            <li>
+                                <h4><b>SSN</b></h4>
+                                <h5>{{$ctrl.rawdata[0].TLOLocateReport.sSNField.sSNField}}&nbsp;</h5>
+                            </li>
+                            <li>
+                                <h4><b>DATE OF BIRTH</b></h4>
+                                <h5>{{$ctrl.parseDOB($ctrl.rawdata[0].TLOLocateReport.dateOfBirthField.dateOfBirthField)}}&nbsp;</h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <br />
+                    <div class="address-info">
+                        <h3 class="text-primary" style="padding-left:10px"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Address</h3>
+                        <ul style="list-style:none">
+                            <li ng-repeat="add in $ctrl.rawdata[0].TLOLocateReport.addressesField ">
+                                <div>
+                                    <h5 class="text-info"><b>{{$ctrl.parseAddress(add.addressField)}}</b></h5>
+                                </div>
+                                <div>{{$ctrl.parseDate(add.dateFirstSeenField)}} - {{$ctrl.parseDate(add.dateLastSeenField)}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+            <td ng-show="$ctrl.rawdata[1]" style="width: 400px;vertical-align:top">
+                <div>
+                    <div class="basic-info">
+                        <h3 class="text-primary" style="padding-left:10px"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;{{$ctrl.rawdata[1].Name || "Unknown"}}</h3>
+                        <ul style="list-style:none">
+                            <li>
+                                <h4><b>Age</b></h4>
+                                <h5>{{$ctrl.rawdata[1].TLOLocateReport.dateOfBirthField.currentAgeField}}&nbsp;</h5>
+                            </li>
+                            <li>
+                                <h4><b>DEATH INDICATOR</b></h4>
+                                <h5>{{$ctrl.rawdata[1].TLOLocateReport.dateOfDeathField?"Dead":"Alive"}}&nbsp;</h5>
+                            </li>
+                            <li>
+                                <h4><b>BANKRUPTCY</b></h4>
+                                <h5>{{$ctrl.rawdata[1].TLOLocateReport.numberOfBankruptciesField && $ctrl.rawdata[1].TLOLocateReport.numberOfBankruptciesField > 0 ? 'Yes' : 'No'}}&nbsp;</h5>
+                            </li>
+                            <li>
+                                <h4><b>SSN</b></h4>
+                                <h5>{{$ctrl.rawdata[1].TLOLocateReport.sSNField.sSNField}}&nbsp;</h5>
+                            </li>
+                            <li>
+                                <h4><b>DATE OF BIRTH</b></h4>
+                                <h5>{{$ctrl.parseDOB($ctrl.rawdata[1].TLOLocateReport.dateOfBirthField.dateOfBirthField)}}&nbsp;</h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <br />
+                    <div class="address-info">
+                        <h3 class="text-primary" style="padding-left:10px"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Address</h3>
+                        <ul style="list-style:none">
+                            <li ng-repeat="add in $ctrl.rawdata[1].TLOLocateReport.addressesField ">
+                                <div>
+                                    <h5 class="text-info"><b>{{$ctrl.parseAddress(add.addressField)}}</b></h5>
+                                </div>
+                                <div>{{$ctrl.parseDate(add.dateFirstSeenField)}} - {{$ctrl.parseDate(add.dateLastSeenField)}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

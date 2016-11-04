@@ -69,12 +69,14 @@ angular.module('PortalApp')
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                $scope.DocSearch.initLeadsResearch();
-                $scope.DocSearch.initTeam();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                     
+                    $scope.DocSearch.initLeadsResearch();
+                    $scope.DocSearch.initTeam();
+                    ////////// font end switch to new version //////////////
+                    $scope.versionController.start2Eaves();
+                });
 
-                ////////// font end switch to new version //////////////
-                $scope.versionController.start2Eaves();
             });
 
         }

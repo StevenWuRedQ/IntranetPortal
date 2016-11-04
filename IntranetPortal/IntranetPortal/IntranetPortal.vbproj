@@ -7352,6 +7352,7 @@
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
     <Content Include="js\Views\LeadDocSearch\NewDsSummary.js" />
     <Content Include="js\Views\LeadDocSearch\new_ds_summary.html" />
+    <Content Include="js\Views\LeadDocSearch\searchOwner.tpl.html" />
     <Content Include="js\Views\NewOffer\newoffer-assigncorp-tpl.bak.html" />
     <Content Include="js\Views\NewOffer\newoffer.tpl.html" />
     <Content Include="js\Views\NewOffer\index.tpl.html" />
