@@ -139,7 +139,7 @@ Public Class EmployeeTest
     ' we don't need this
     ' mock test leads will delete it automatically
     ' Func(Of Void, Void) not working now will do research later
-    Private Shared Sub MockLeads(mLead As Lead, mCount As Integer, testFunc As Func(Of Integer, Integer))
+    Private Shared Sub MockLeads(mockCtx As Entities, mLead As Lead, mCount As Integer, testFunc As Func(Of Integer, Integer))
         Dim ls = New Lead(mCount) {}
         Dim jlead = mLead.ToJsonString()
         Dim i = 0
@@ -156,13 +156,9 @@ Public Class EmployeeTest
             i = i + 1
             ' Return ld
         Next
-        'ls.ToList.ForEach(Function(l)
-        '                      ' like memcpy or deep clone
 
-        '                  End Function
-        '                      )
-        Using mockCtx As New Entities
-            mockCtx.Leads.AddRange(ls)
+        'Using mockCtx As New Entities
+        mockCtx.Leads.AddRange(ls)
             mockCtx.Leads.Count()
             mockCtx.SaveChanges()
             ' use try catch to clear database anyway
@@ -175,9 +171,10 @@ Public Class EmployeeTest
                 mockCtx.SaveChanges()
                 Throw ex
             End Try
+        mockCtx.Leads.RemoveRange(ls)
+        mockCtx.SaveChanges()
 
-
-        End Using
+        'End Using
     End Sub
 
     Private Sub MockLead(mockEntity As Entities, mLead As Lead, testFunc As Func(Of Integer, Integer))
@@ -190,13 +187,16 @@ Public Class EmployeeTest
             mockEntity.SaveChanges()
             Throw ex
         End Try
-
+        mockEntity.Leads.Remove(mLead)
+        mockEntity.SaveChanges()
     End Sub
 
     Private Shared Function GetLeadsCountByStatusHelper(ctx As Entities, testEmloyee As String, status As LeadStatus) As Integer
         Return ctx.Leads.Where(Function(l) l.Status = status AndAlso l.EmployeeName = testEmloyee).Count
     End Function
-
+    ''' <summary>
+    ''' test employee have loan mod or follow up count limit
+    ''' </summary>
     <TestMethod>
     Public Sub LeadsLimitTest()
         Using mockEntity As New Entities()
@@ -209,35 +209,42 @@ Public Class EmployeeTest
             testLead.EmployeeName = tChrisYan.Name
             testLead.EmployeeID = tChrisYan.EmployeeID ' for safety
             testLead.AssignBy = "Testing"
-
+            ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            '  unit testing follow up limit
             ' dont care about speed in unit test so using leads
             Dim followUpLeadCount = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
 
-            If (followUpLeadCount < Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT) Then
-                Dim limitCount = Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT - followUpLeadCount
+            If (followUpLeadCount < Employee.FOLLOW_UP_COUNT_LIMIT) Then
+                Dim limitCount = Employee.FOLLOW_UP_COUNT_LIMIT - followUpLeadCount
                 'test 29 leads
 
-                MockLeads(testLead, limitCount - 2,
+                MockLeads(mockEntity, testLead, limitCount - 2,
                           Function(x)
                               ' have 29 leads
-                              Dim folloUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
-                              Assert.AreEqual(folloUpNow, 29)
+                              Dim followUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
+                              Assert.AreEqual(followUpNow, 59)
+                              ' agent have 29 follow up now leads
                               Assert.IsFalse(tChrisYan.IsAchieveFollowUpLimit())
 
                               ' insert other follow up leads
                               testLead.Status = LeadStatus.Callback
-                              mockEntity.Leads.Add(testLead)
-                              mockEntity.SaveChanges()
+                              MockLead(mockEntity,
+                                       testLead,
+                                       Function(xx)
+                                           followUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
 
-                              folloUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
+                                           Assert.AreEqual(followUpNow, 60)
+                                           Assert.IsTrue(tChrisYan.IsAchieveFollowUpLimit())
 
+                                           testLead.Status = LeadStatus.NewLead
+                                           Try
+                                               testLead.UpdateStatus(LeadStatus.Callback)
+                                           Catch ex As Exception
+                                               Assert.AreEqual(ex.Message, "Can not move to Follow Up becuase achieve to limit.")
+                                           End Try
 
-                              Assert.AreEqual(folloUpNow, 30)
-                              Assert.IsTrue(tChrisYan.IsAchieveFollowUpLimit())
-
-                              ' delete test leads
-                              mockEntity.Leads.Remove(testLead)
-                              mockEntity.SaveChanges()
+                                           Return xx
+                                       End Function)
 
                               ' todo
                               ' it should not allow insert
@@ -246,13 +253,64 @@ Public Class EmployeeTest
                               Return x
                           End Function)
             Else
-                Console.WriteLine("Chris Yan has more than " &
-                                  Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT &
-                                  "follo Up lead please delete or change test employee")
-                Assert.IsTrue(False)
+                ' test when have more than 30 hot leads
+                Assert.IsTrue(followUpLeadCount >= 60)
+                ' test employee achive follo up limit
+                Assert.IsFalse(tChrisYan.IsAchieveFollowUpLimit())
+
+
             End If
+            ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+            ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            ' unit testing follow up limit
+            ' do not care about speed in unit test so using leads
+            Dim loanModLeadCount = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.LoanMod)
+            testLead.Status = LeadStatus.LoanMod
+            If (loanModLeadCount < Employee.LOAN_MODS_COUNT_LIMIT) Then
+                Dim limitCount = Employee.LOAN_MODS_COUNT_LIMIT - loanModLeadCount
+                'test 29 leads
 
+                MockLeads(mockEntity, testLead, limitCount - 2,
+                          Function(x)
+                              ' have 29 leads
+                              Dim loanModNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.LoanMod)
+                              Assert.AreEqual(loanModNow, 29)
+                              ' agent have 29 follow up now leads
+
+                              Assert.IsFalse(tChrisYan.IsAchieveLoanModLimit())
+
+                              ' insert one more follow up lead
+                              testLead.Status = LeadStatus.LoanMod
+                              MockLead(mockEntity,
+                                       testLead,
+                                       Function(xx)
+                                           loanModNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.LoanMod)
+
+                                           Assert.AreEqual(loanModNow, 30)
+                                           Assert.IsTrue(tChrisYan.IsAchieveLoanModLimit())
+
+                                           testLead.Status = LeadStatus.NewLead
+                                           Try
+                                               testLead.UpdateStatus(LeadStatus.LoanMod)
+                                           Catch ex As Exception
+                                               Assert.AreEqual(ex.Message, "Can not move to Loan Mod becuase achieve to limit.")
+                                           End Try
+
+                                           Return xx
+                                       End Function)
+
+                              ' todo
+                              ' it should not allow insert
+                              ' Do not pass the 
+                              ' Lead.UpdateStatus(LeadStatus.Callback)
+                              Return x
+                          End Function)
+            Else
+                ' when test employee loan mod leads over 30
+                Assert.IsTrue(loanModLeadCount >= 30)
+                Assert.IsFalse(tChrisYan.IsAchieveLoanModLimit())
+            End If
 
 
         End Using
