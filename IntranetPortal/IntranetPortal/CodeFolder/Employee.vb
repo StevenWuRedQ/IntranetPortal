@@ -15,12 +15,20 @@ Partial Public Class Employee
 
     ' using public for unit test
     ' otherwise it should in database
-    ' or using friend namespace like c++ but not sure VB.net have it or not.
-    Public Shared ReadOnly FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT As Integer = 30
+    ' or using friend namespace like c# but not sure VB.net have it or not.
 
-
+#If DEBUG Then
+    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 3
+    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 3
+#Else
+    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 60
+    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 30
+#End If
 
     Private Shared _ceo As Employee
+
+
+
     ''' <summary>
     ''' Get company CEO
     ''' </summary>
@@ -998,7 +1006,7 @@ Partial Public Class Employee
     ''' </summary>
     ''' <returns>true is achived limit</returns>
     Public Function IsAchieveFollowUpLimit() As Boolean
-        Return LeadsCountAchiveLimited(LeadStatus.Callback, FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT)
+        Return LeadsCountAchiveLimited(LeadStatus.Callback, FOLLOW_UP_COUNT_LIMIT)
     End Function
 
     ''' <summary>
@@ -1006,7 +1014,7 @@ Partial Public Class Employee
     ''' </summary>
     ''' <returns> true is achieve loan mod limit</returns>
     Public Function IsAchieveLoanModLimit() As Boolean
-        Return LeadsCountAchiveLimited(LeadStatus.LoanMod, FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT)
+        Return LeadsCountAchiveLimited(LeadStatus.LoanMod, LOAN_MODS_COUNT_LIMIT)
     End Function
 
     ''' <summary>

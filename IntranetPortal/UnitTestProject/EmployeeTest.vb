@@ -214,15 +214,15 @@ Public Class EmployeeTest
             ' dont care about speed in unit test so using leads
             Dim followUpLeadCount = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
 
-            If (followUpLeadCount < Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT) Then
-                Dim limitCount = Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT - followUpLeadCount
+            If (followUpLeadCount < Employee.FOLLOW_UP_COUNT_LIMIT) Then
+                Dim limitCount = Employee.FOLLOW_UP_COUNT_LIMIT - followUpLeadCount
                 'test 29 leads
 
                 MockLeads(mockEntity, testLead, limitCount - 2,
                           Function(x)
                               ' have 29 leads
                               Dim followUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
-                              Assert.AreEqual(followUpNow, 29)
+                              Assert.AreEqual(followUpNow, 59)
                               ' agent have 29 follow up now leads
                               Assert.IsFalse(tChrisYan.IsAchieveFollowUpLimit())
 
@@ -233,7 +233,7 @@ Public Class EmployeeTest
                                        Function(xx)
                                            followUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
 
-                                           Assert.AreEqual(followUpNow, 30)
+                                           Assert.AreEqual(followUpNow, 60)
                                            Assert.IsTrue(tChrisYan.IsAchieveFollowUpLimit())
 
                                            testLead.Status = LeadStatus.NewLead
@@ -254,7 +254,7 @@ Public Class EmployeeTest
                           End Function)
             Else
                 ' test when have more than 30 hot leads
-                Assert.IsTrue(followUpLeadCount >= 30)
+                Assert.IsTrue(followUpLeadCount >= 60)
                 ' test employee achive follo up limit
                 Assert.IsFalse(tChrisYan.IsAchieveFollowUpLimit())
 
@@ -267,8 +267,8 @@ Public Class EmployeeTest
             ' do not care about speed in unit test so using leads
             Dim loanModLeadCount = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.LoanMod)
             testLead.Status = LeadStatus.LoanMod
-            If (loanModLeadCount < Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT) Then
-                Dim limitCount = Employee.FOLLOW_UP_OR_LOAN_MODS_COUNT_LIMIT - loanModLeadCount
+            If (loanModLeadCount < Employee.LOAN_MODS_COUNT_LIMIT) Then
+                Dim limitCount = Employee.LOAN_MODS_COUNT_LIMIT - loanModLeadCount
                 'test 29 leads
 
                 MockLeads(mockEntity, testLead, limitCount - 2,
