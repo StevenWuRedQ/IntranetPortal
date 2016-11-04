@@ -18,5 +18,15 @@ Namespace Controllers
             Return Ok("")
         End Function
 
+        <Route("api/Homeowner/{bble}")>
+        Public Function GetHomeownerSSN(bble As String) As IHttpActionResult
+            Dim owners = HomeOwner.GetHomeOwenrs(bble)
+            Dim li = LeadsInfo.GetInstance(bble)
+
+            Dim owner = owners.Where(Function(o) o.Name = li.Owner OrElse o.Name = li.CoOwner).Select(Function(a) New With {a.Name, a.TLOLocateReport})
+            Return Ok(owner)
+        End Function
+
+
     End Class
 End Namespace

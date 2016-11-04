@@ -147,7 +147,7 @@ Public Class LeadsEcourtData
     Public Shared Sub SaveNewChanges(changes As List(Of EcourtCaseChange), updateby As String)
         Using ctx As New PortalEntities
             Dim result = ctx.EcourtCaseChanges
-            ctx.EcourtCaseChanges.RemoveRange(result)
+            ' ctx.EcourtCaseChanges.RemoveRange(result)
             ctx.EcourtCaseChanges.AddRange(changes)
             ctx.SaveChanges()
 
