@@ -261,7 +261,7 @@ angular.module('PortalApp')
                         console.log("fail to update docsearch");
                     });
                 }
-
+                
             }, true);
 
         }

@@ -5186,7 +5186,7 @@ angular.module('PortalApp')
                         console.log("fail to update docsearch");
                     });
                 }
-
+                
             }, true);
 
         }
@@ -9463,30 +9463,24 @@ angular.module("PortalApp")
     //broadcast ptSelfCheck event make ptRequried directive check it self
     $scope.selfCheck = function () {
         $scope.$broadcast('ptSelfCheck');
-
         var startFlag = false
         var checkingcounter = 0;
         $scope.$on('ptSelfCheckStart', function () {
             startFlag = true;
             checkingcounter++;
         });
-
     }
-
 
     $scope.save = function (isSlient) {
         $scope.$broadcast('ptSelfCheck');
-
         if ($scope.checkValidate()) {
             ptCom.alert('Please correct Highlight Field first.');
             return;
         }
-
         UnderwritingRequest.saveByBBLE($scope.data, $scope.BBLE).then(function () {
             if (!isSlient) {
                 ptCom.alert('Save Successful!')
             }
-
         }, function () {
             if (!isSlient) {
                 ptCom.alert('Fail to Save!')
@@ -9495,7 +9489,6 @@ angular.module("PortalApp")
 
     }
 
-
     $scope.requestDocSearch = function (isResubmit) {
         $scope.$broadcast('ptSelfCheck');
         // debugger;
@@ -9503,9 +9496,9 @@ angular.module("PortalApp")
             ptCom.alert('Please correct Highlight Field first.');
             return;
         }
-
         UnderwritingRequest.createSearch($scope.BBLE).then(function (r) {
-            debugger;
+            //debugger;
+            $scope.search.CreateDate = new Date().toISOString();
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
             if (isResubmit) {
@@ -9514,20 +9507,18 @@ angular.module("PortalApp")
                 $scope.formCleaned = false;
             }
             $scope.save(true);
-
         }, function () {
             ptCom.alert('Fail to create search')
-
         })
     }
 
 
     $scope.remainDays = function () {
-        if (!$scope.search || !$scope.search.CompletedDate) {
+        if (!$scope.search || !$scope.search.CompletedOn) {
             return "more than 60";
         } else {
             var timenow = new Date().getTime();
-            var timeCompleted = new Date($scope.search.CompletedDate);
+            var timeCompleted = new Date($scope.search.CompletedOn);
             var diff = timenow - timeCompleted;
             var dayinmsec = 1000 * 60 * 60 * 24;
             return 60 - Math.ceil(diff / dayinmsec);
@@ -9536,7 +9527,7 @@ angular.module("PortalApp")
     }
 
     $scope.completedOver60days = function () {
-        if (!$scope.search || $scope.search.CompletedDate == undefined) {
+        if (!$scope.search || $scope.search.CompletedOn == undefined) {
             return false;
         }
         else {

@@ -5,8 +5,8 @@
             <div style="text-align:center; margin-top: 10px">
                 <h3 style="">{{search.Address}}</h3>
                 <h3 style="color: blue">Underwriting Questionnaire</h3>
-                <h5>Updated By: {{data.UpdateBy}}</h5>
-                <h5>Last Updated Date: {{data.UpdateDate|date:'medium'}}</h5>
+                <h5>Updated By: {{data.UpdateBy || data.CreateBy}}</h5>
+                <h5>Last Updated Date: {{data.UpdateDate || data.CreateDate |date:'medium'}}</h5>
             </div>
             <hr />
             <div class="form col-md-6" style="height:260px">
@@ -101,14 +101,14 @@
         <div ng-show="!viewmode || viewmode == 0" class="col-md-12">
             <div class="row">
                 <div class='pull-right clearfix' style="margin: 20px">
-                    <button type="button" class="btn btn-danger" ng-show="!search.Expired && data.Status !=1" ng-click="requestDocSearch()">Request Underwriting</button>
+                    <button type="button" class="btn btn-danger" ng-show="search.CreateDate == undefined && !search.Expired" ng-click="requestDocSearch()">Request Underwriting</button>
                     <button type="button" class="btn btn-warning" ng-show="search.Expired" ng-click="cleanForm()"><i class="fa fa-question-circle" aria-hidden="true" tooltip="Exsiting questionnaire will be cleaned."></i>&nbsp;Clean the Form</button>
                     <button type="button" class="btn btn-danger" ng-show="search.Expired" ng-click="requestDocSearch(true)">Submit new request</button>
                     <button type="button" class="btn btn-primary" ng-click="save()" ng-show="!search.Expired">Save</button>
                 </div>
                 <div class="clearfix"></div>
                 <div id="summited_info" style="text-align:center">
-                    <div ng-show="data.Status==1 && !search.Expired" class="alert alert-warning" role="alert">
+                    <div ng-show="search.CreateDate != undefined && !search.Expired" class="alert alert-warning" role="alert">
                         <h5><b>Your Underwriting and Search Request was submitted. It will expire in {{remainDays()}} days</b></h5>
                         <h5>You can still modify any information in the Underwriting Questionnaire.</h5>
                         <h5>Please press Save after adding or modifying any information. Thank you.</h5>
