@@ -47,7 +47,7 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                                                 <div class="font_size_bold">Home Owner</div>
                                             </a>
                                         </li>
-                                        <% If Nothing Is Request.QueryString("mode") OrElse CInt(Request.QueryString("mode")) < 1 OrElse (Request.QueryString("mode")) >= 2 Then%>
+                                        <% If Not HttpContext.Current.User.IsInRole("Sales-Executive") Then%>
                                         <li style="margin-right: 30px; color: #ffa484; float: right">
                                             <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="Save" ng-click="SearchComplete(true)"></i>
                                         </li>
@@ -107,13 +107,13 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                                             <ul class="nav  clearfix" role="tablist">
 
                                                 <li class="short_sale_head_tab " ng-click="markCompleted(1)">
-                                                    <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Accept">
+                                                    <a role="tab" class="tab_button_a" data-toggle="tooltip" data-placement="bottom" title="Mark As Accept">
                                                         <i class="fa fa-check head_tab_icon_padding" style="color: white !important"></i>
                                                         <div class="font_size_bold" style="width: 100px">Accept</div>
                                                     </a>
                                                 </li>
                                                 <li class="short_sale_head_tab" ng-click="markCompleted(2)">
-                                                    <a role="tab" class="tab_button_a" ata-toggle="tooltip" data-placement="bottom" title="Mark As Reject">
+                                                    <a role="tab" class="tab_button_a" data-toggle="tooltip" data-placement="bottom" title="Mark As Reject">
                                                         <i class="fa fa-times head_tab_icon_padding" style="color: white !important"></i>
                                                         <div class="font_size_bold" style="width: 100px">Reject</div>
                                                     </a>

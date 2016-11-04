@@ -250,7 +250,8 @@ angular.module('PortalApp')
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
-                    DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                    //debugger;
+                    $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
                         //debugger;
                         $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
                         $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
