@@ -20,5 +20,6 @@ Partial Public Class EcourtCase
     Public Property CaseDispositionDate As Nullable(Of Date)
     Public Property CaseType As String
     Public Property UpdateDate As Nullable(Of Date)
+    Public Property CreateDate As Nullable(Of Date)
 
 End Class

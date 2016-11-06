@@ -5,6 +5,7 @@
 Public Class LeadsEcourtData
 
     Private Const UPDATE_LOG_TITLE = "EcourtCasesUpdate"
+    Private Const DAYS_UPDATE_RANGE = 14
 
     ''' <summary>
     ''' Indicate if the data was updated recently
@@ -12,11 +13,22 @@ Public Class LeadsEcourtData
     ''' <returns></returns>
     Public ReadOnly Property IsNewUpdate As Boolean
         Get
-            If LastUpdate.HasValue Then
-                Return LastUpdate.Value.AddDays(30) > DateTime.Today
-            End If
+            Return LatestUpdatedCases IsNot Nothing AndAlso LatestUpdatedCases.Count > 0
+        End Get
+    End Property
 
-            Return False
+    Private _lastestUpdateCases As List(Of EcourtCase)
+
+    ''' <summary>
+    ''' Indicate cases that is just updated
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property LatestUpdatedCases As List(Of EcourtCase)
+        Get
+            If _lastestUpdateCases Is Nothing Then
+                _lastestUpdateCases = Cases.Where(Function(a) a.UpdateDate.HasValue AndAlso a.UpdateDate > DateTime.Today.AddDays(-DAYS_UPDATE_RANGE)).ToList
+            End If
+            Return _lastestUpdateCases
         End Get
     End Property
 
@@ -196,6 +208,7 @@ Public Class LeadsEcourtData
         Using ctx As New PortalEntities
             For Each cas In cases
                 If Not ctx.EcourtCases.Any(Function(a) a.BBLE = cas.BBLE AndAlso a.CountyId = cas.CountyId AndAlso a.CaseIndexNumber = cas.CaseIndexNumber) Then
+                    cas.CreateDate = DateTime.Now
                     ctx.EcourtCases.Add(cas)
 
                     If Not ctx.LeadsEcourtDatas.Any(Function(a) a.BBLE = cas.BBLE) Then

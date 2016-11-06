@@ -13,7 +13,7 @@ Imports IntranetPortal.Data
 
     <TestMethod()>
     Public Sub UpdateByChanges_returnNothing()
-        Dim dtStart = New DateTime(2016, 10, 26)
+        Dim dtStart = New DateTime(2016, 11, 2)
         Dim dtEnd = dtStart.AddDays(1)
 
         LeadsEcourtData.UpdateByChanges(dtStart, dtEnd, "unittest")

@@ -311,7 +311,11 @@ Partial Public Class Lead
     ''' <param name="status"></param>
     ''' <returns></returns>
     Public Shared Function GetRecycledLeads(username As String, status As LeadStatus) As List(Of Lead)
-        Dim dtStart = New DateTime(2016, 11, 2)
+        Dim ruleStartDate = (IntranetPortal.Core.PortalSettings.GetValue("LeadsRuleStartDate"))
+        Dim dtStart As DateTime
+        If ruleStartDate Is Nothing OrElse Not DateTime.TryParse(ruleStartDate, dtStart) Then
+            Throw New Exception("The rule start date is not valid.")
+        End If
         Dim lds = GetUserLeadsData(username, status).Where(Function(a) a.AssignDate > dtStart).ToList
         Dim dt = DateTime.Today.AddDays(-RecycleConfig(status))
         Return lds.Where(Function(a) a.GetStatusChangedDate() < dt).ToList
