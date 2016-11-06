@@ -17,13 +17,13 @@ Partial Public Class Employee
     ' otherwise it should in database
     ' or using friend namespace like c# but not sure VB.net have it or not.
 
-#If DEBUG Then
-    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 3
-    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 3
-#Else
+    '#If DEBUG Then
+    '    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 3
+    '    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 3
+    '#Else
     Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 60
     Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 30
-#End If
+    '#End If
 
     Private Shared _ceo As Employee
 

@@ -163,6 +163,7 @@
     <Compile Include="EmailParseTest.vb" />
     <Compile Include="EmployeeTest.vb" />
     <Compile Include="LeadTest.vb" />
+    <Compile Include="MockDB.vb" />
     <Compile Include="PortalDBUnitTest.vb">
       <SubType>Designer</SubType>
     </Compile>
