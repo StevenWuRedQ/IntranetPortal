@@ -1157,7 +1157,7 @@ Partial Public Class Lead
         ' then check status can be update or not
         ' if its update to same status ignore the verify of update rules
         If (owner IsNot Nothing And Me.Status <> status) Then
-            Dim fStr = "Can not move to {0} becuase achieve to limit."
+            Dim fStr = "Can not move to {0} because achieve to limit."
             If (status = LeadStatus.LoanMod) Then
                 If (owner.IsAchieveLoanModLimit()) Then
                     Throw New Exception(String.Format(fStr, "Loan Mod"))

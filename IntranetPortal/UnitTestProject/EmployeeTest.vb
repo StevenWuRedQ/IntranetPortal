@@ -216,14 +216,14 @@ Public Class EmployeeTest
 
             If (followUpLeadCount < Employee.FOLLOW_UP_COUNT_LIMIT) Then
                 Dim limitCount = Employee.FOLLOW_UP_COUNT_LIMIT - followUpLeadCount
-                'test 29 leads
+                'test 59 leads
 
                 MockLeads(mockEntity, testLead, limitCount - 2,
                           Function(x)
                               ' have 29 leads
                               Dim followUpNow = GetLeadsCountByStatusHelper(mockEntity, testEmloyee, LeadStatus.Callback)
                               Assert.AreEqual(followUpNow, 59)
-                              ' agent have 29 follow up now leads
+                              ' agent have 59 follow up now leads
                               Assert.IsFalse(tChrisYan.IsAchieveFollowUpLimit())
 
                               ' insert other follow up leads
@@ -240,7 +240,7 @@ Public Class EmployeeTest
                                            Try
                                                testLead.UpdateStatus(LeadStatus.Callback)
                                            Catch ex As Exception
-                                               Assert.AreEqual(ex.Message, "Can not move to Follow Up becuase achieve to limit.")
+                                               Assert.AreEqual(ex.Message, "Can not move to Follow Up because achieve to limit.")
                                            End Try
 
                                            Return xx
@@ -253,9 +253,9 @@ Public Class EmployeeTest
                               Return x
                           End Function)
             Else
-                ' test when have more than 30 hot leads
+                ' test when have more than 60 follow up leads
                 Assert.IsTrue(followUpLeadCount >= 60)
-                ' test employee achive follo up limit
+                ' test employee achive follow up limit
                 Assert.IsFalse(tChrisYan.IsAchieveFollowUpLimit())
 
 
@@ -294,7 +294,7 @@ Public Class EmployeeTest
                                            Try
                                                testLead.UpdateStatus(LeadStatus.LoanMod)
                                            Catch ex As Exception
-                                               Assert.AreEqual(ex.Message, "Can not move to Loan Mod becuase achieve to limit.")
+                                               Assert.AreEqual(ex.Message, "Can not move to Loan Mod because achieve to limit.")
                                            End Try
 
                                            Return xx
