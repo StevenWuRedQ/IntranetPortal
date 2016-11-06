@@ -302,6 +302,7 @@
           <Property Name="CaseDispositionDate" Type="datetime" />
           <Property Name="CaseType" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -2873,6 +2874,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CaseDispositionDate" Type="DateTime" Precision="3" />
           <Property Name="CaseType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="LeadsEcourtData">
           <Key>
@@ -4215,6 +4217,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="EcourtCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.EcourtCase">
               <MappingFragment StoreEntitySet="EcourtCases">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CaseType" ColumnName="CaseType" />
                 <ScalarProperty Name="CaseDispositionDate" ColumnName="CaseDispositionDate" />

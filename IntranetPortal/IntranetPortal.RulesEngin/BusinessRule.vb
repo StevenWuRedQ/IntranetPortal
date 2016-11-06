@@ -118,7 +118,12 @@ Public Class LeadsAndTaskRule
     End Sub
 
     Private Sub RunNewRules()
-        Dim dtStart = New DateTime(2016, 11, 2)
+        Dim ruleStartDate = (IntranetPortal.Core.PortalSettings.GetValue("LeadsRuleStartDate"))
+        Dim dtStart As DateTime
+        If ruleStartDate Is Nothing OrElse Not DateTime.TryParse(ruleStartDate, dtStart) Then
+            Throw New Exception("The rule start date is not valid.")
+        End If
+
         Dim lds = Lead.GetAllAgentActiveLeads(dtStart)
 
         Log("Total Active Leads: " & lds.Count)

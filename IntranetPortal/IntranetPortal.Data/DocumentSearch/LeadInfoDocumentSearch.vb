@@ -26,6 +26,22 @@ Public Class LeadInfoDocumentSearch
         End Get
     End Property
 
+    Public ReadOnly Property Address As String
+        Get
+            Using ctx As New PortalEntities
+                Dim leads = From l In ctx.ShortSaleLeadsInfoes
+                            Where l.BBLE = Me.BBLE
+                            Select l
+                Dim lead = leads.FirstOrDefault
+                If lead IsNot Nothing Then
+                    Return lead.PropertyAddress
+                Else
+                    Return ""
+                End If
+            End Using
+        End Get
+    End Property
+
     ''' <summary>
     ''' Notify roles when updating or completing
     ''' </summary>

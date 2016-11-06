@@ -214,6 +214,15 @@ Public Class LeadTest
         ld.UpdateStatus2(LeadStatus.NewLead)
     End Sub
 
+    <TestMethod>
+    <ExpectedException(GetType(Exception))>
+    Public Sub LeadsTaskRule_ReturnNothing()
+        Dim rule As New RulesEngine.LeadsAndTaskRule
+        Dim data = Core.PortalSettings.GetValue("LeadsRuleStartDate")
+        Core.PortalSettings.SetValue("LeadsRuleStartDate", "Test")
+        rule.Execute()
+    End Sub
+
     ''' <summary>
     ''' Check the limitation for users not in agent team
     ''' </summary>

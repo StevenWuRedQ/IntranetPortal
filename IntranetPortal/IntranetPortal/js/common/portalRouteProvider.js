@@ -34,8 +34,7 @@
         // We use it to create routes for CRUD operations.  We give it some basic information about
         // the resource and the urls then it it returns our own special routeProvider.
         this.routesFor = function (resourceName, urlPrefix, routePrefix) {
-            var baseUrl = resourceName.toLowerCase();
-
+            var baseUrl = resourceName.toLowerCase();            
             var baseRoute = '/' + resourceName.toLowerCase();
             routePrefix = routePrefix || urlPrefix;
 
@@ -114,7 +113,7 @@
                     return routeBuilder;
                 },
                 // Pass-through to `$routeProvider.otherwise()`
-                otherwise: function (params) {
+                otherwise: function (params) {                    
                     $routeProvider.otherwise(params);
                     return routeBuilder;
                 },

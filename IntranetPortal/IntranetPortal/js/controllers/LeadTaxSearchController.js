@@ -69,12 +69,14 @@ angular.module('PortalApp')
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                $scope.DocSearch.initLeadsResearch();
-                $scope.DocSearch.initTeam();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                     
+                    $scope.DocSearch.initLeadsResearch();
+                    $scope.DocSearch.initTeam();
+                    ////////// font end switch to new version //////////////
+                    $scope.versionController.start2Eaves();
+                });
 
-                ////////// font end switch to new version //////////////
-                $scope.versionController.start2Eaves();
             });
 
         }
@@ -248,7 +250,8 @@ angular.module('PortalApp')
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
-                    DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                    //debugger;
+                    $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
                         //debugger;
                         $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
                         $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
@@ -258,7 +261,7 @@ angular.module('PortalApp')
                         console.log("fail to update docsearch");
                     });
                 }
-
+                
             }, true);
 
         }

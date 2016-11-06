@@ -102,7 +102,6 @@ Public Class EcourtService
         Return resultMessage
     End Function
 
-
     Private client As RestClient
 
     Private Sub New()

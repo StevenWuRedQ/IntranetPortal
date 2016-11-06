@@ -160,7 +160,7 @@
             }
         }
 
-    }
+    }   
 
     $(document).ready(function () {
         init_currency();
@@ -208,7 +208,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
                 <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx?bble=" + leadsInfoBBLE + "#/preassign/new?BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
-                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>                
+                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("Underwriting Request" + leadsInfoBBLE, "/LeadDocSearch/UnderwritingRequest.aspx?BBLE=<%= LeadsInfoData.BBLE %>#/")'>Request Underwriting</span>
                 <% End If %>
             </div>
@@ -222,15 +222,43 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-                        <%-- 
-                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
-                            <label class="btn btn-default">
-                                <input type="checkbox" name="123" style="display:inline;margin:5px">
-                                Mark as LoanMod   
-                            </label>                                                 
+                        <% If LeadsInfoData.EcourtData IsNot Nothing Then%>
+                        <div class="note_item" style="background-color: #e4ffe4">
+                            <% If (LeadsInfoData.EcourtData.IsNewUpdate) Then %>
+                            <span style="background-color: red; color: white; border-radius: 14px; min-width: 24px; padding: 3px 7px; font-weight: 900; font-size: 14px">New</span>
+                            <%Else %>
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <%end if %>
+                            <span class="note_text">
+                                <% If LeadsInfoData.EcourtData.Active Then %>
+                                Current Active Cases: <b><%= String.Join(",", LeadsInfoData.EcourtData.ActiveCaseNumbers) %> </b>
+                                <% Else %>
+                                <b style="color: red; font-weight: 600">No Active Cases in Ecourt.</b>
+                                <% End If %>
+                            </span>
+                            <!-- case status -->
+                            <% If LeadsInfoData.EcourtData.LatestUpdatedCases IsNot Nothing %>
+                            <div style="display: block; margin-left:56px">
+                                <% For each cas In LeadsInfoData.EcourtData.LatestUpdatedCases %>
+                                <i class="note_img"></i>
+                                <span style="font-size: 14px;">
+                                    <%= String.Format("Case (<b>{0}</b>) changed to {1} on {2:d}.", cas.FormattedCaseIndexNumber, cas.CaseStatus, cas.UpdateDate) %>
+                                </span><br />
+                                <% Next %>
+                            </div>
+                            <% End if %>
                         </div>
-                        --%>
                         <% i += 1%>
+                        <%-- else %>
+                        <div class="note_item" style="background-color: #e4ffe4">
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <span class="note_text">
+                                <b style="color: red">No Cases found in Ecourt, please check.</b>
+                            </span>
+                        </div>
+                        <% i += 1 --%>
+                        <% End If%>
+
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
@@ -244,40 +272,15 @@
                         <% i += 1%>
                         <% End If%>
 
-                        <% If LeadsInfoData.Type.HasValue Then%>
+                        <%-- <% If LeadsInfoData.Type.HasValue Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text">Leads type: <b><%= CType(LeadsInfoData.Type, IntranetPortal.LeadsInfo.LeadsType).ToString %></b></span>
                         </div>
                         <% i += 1%>
-                        <% End If%>
+                        <% End If%>--%>
 
-                        <% If LeadsInfoData.EcourtData IsNot Nothing Then%>
-                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>                                                        
-                            <% If (LeadsInfoData.EcourtData.IsNewUpdate) Then %>
-                            <span style="background-color:red; color:white; border-radius:14px;min-width:24px;padding:3px 7px;font-weight:900;font-size:14px">New</span>
-                            <%Else %>
-                            <i class="fa fa-exclamation-circle note_img"></i>                           
-                            <%end if %>
-                            <span class="note_text">                            
-                            <% If LeadsInfoData.EcourtData.Active Then %>
-                            Active Cases: <b><%= String.Join(",", LeadsInfoData.EcourtData.ActiveCaseNumbers) %> </b>
-                            <% Else %>
-                            <b style="color:red; font-weight:600">
-                                No Active Cases in Ecourt.</b>
-                            <% End If %>
-                            </span>                            
-                        </div>
-                        <% i += 1%>
-                        <% else %>
-                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>                            
-                            <i class="fa fa-exclamation-circle note_img"></i>                            
-                            <span class="note_text">                            
-                            <b style="color:red">No Cases found in Ecourt, please check.</b>
-                            </span>                            
-                        </div>
-                        <% i += 1%>
-                        <% End If%>
+
 
                         <asp:HiddenField ID="hfBBLE" runat="server" />
 
