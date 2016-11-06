@@ -905,14 +905,13 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
 
     docSearch.prototype.initLeadsResearch = function () {
+        //debugger;
         var self = this;
-
         var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
             data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
         } else {
-
             var _LeadSearch = new LeadResearch();
             angular.extend(_LeadSearch, self.LeadResearch);
             self.LeadResearch = _LeadSearch;
@@ -1845,12 +1844,12 @@ angular.module('PortalApp')
                 // map to Leads Info if we have data
                 if (d.leadsInfo) {
                     // debugger;
-                    d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
-                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
-                    d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
+                    d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress;
+                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner;
+                    d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass;
                     d.PropertyInfo.LotSize = d.leadsInfo.LotDem;
-                    d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
-                    d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
+                    d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem;
+                    d.PropertyInfo.Zoning = d.leadsInfo.Zoning;
                     d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
                     d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
                 }
@@ -4995,12 +4994,14 @@ angular.module('PortalApp')
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                $scope.DocSearch.initLeadsResearch();
-                $scope.DocSearch.initTeam();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                     
+                    $scope.DocSearch.initLeadsResearch();
+                    $scope.DocSearch.initTeam();
+                    ////////// font end switch to new version //////////////
+                    $scope.versionController.start2Eaves();
+                });
 
-                ////////// font end switch to new version //////////////
-                $scope.versionController.start2Eaves();
             });
 
         }
@@ -5174,7 +5175,8 @@ angular.module('PortalApp')
             ptCom.prompt(msg, function (result) {
                 //debugger;
                 if (result != null) {
-                    DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                    //debugger;
+                    $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
                         //debugger;
                         $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
                         $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
@@ -5184,7 +5186,7 @@ angular.module('PortalApp')
                         console.log("fail to update docsearch");
                     });
                 }
-
+                
             }, true);
 
         }
@@ -9461,30 +9463,24 @@ angular.module("PortalApp")
     //broadcast ptSelfCheck event make ptRequried directive check it self
     $scope.selfCheck = function () {
         $scope.$broadcast('ptSelfCheck');
-
         var startFlag = false
         var checkingcounter = 0;
         $scope.$on('ptSelfCheckStart', function () {
             startFlag = true;
             checkingcounter++;
         });
-
     }
-
 
     $scope.save = function (isSlient) {
         $scope.$broadcast('ptSelfCheck');
-
         if ($scope.checkValidate()) {
             ptCom.alert('Please correct Highlight Field first.');
             return;
         }
-
         UnderwritingRequest.saveByBBLE($scope.data, $scope.BBLE).then(function () {
             if (!isSlient) {
                 ptCom.alert('Save Successful!')
             }
-
         }, function () {
             if (!isSlient) {
                 ptCom.alert('Fail to Save!')
@@ -9493,7 +9489,6 @@ angular.module("PortalApp")
 
     }
 
-
     $scope.requestDocSearch = function (isResubmit) {
         $scope.$broadcast('ptSelfCheck');
         // debugger;
@@ -9501,9 +9496,9 @@ angular.module("PortalApp")
             ptCom.alert('Please correct Highlight Field first.');
             return;
         }
-
         UnderwritingRequest.createSearch($scope.BBLE).then(function (r) {
-            debugger;
+            //debugger;
+            $scope.search.CreateDate = new Date().toISOString();
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
             if (isResubmit) {
@@ -9512,20 +9507,18 @@ angular.module("PortalApp")
                 $scope.formCleaned = false;
             }
             $scope.save(true);
-
         }, function () {
             ptCom.alert('Fail to create search')
-
         })
     }
 
 
     $scope.remainDays = function () {
-        if (!$scope.search || !$scope.search.CompletedDate) {
+        if (!$scope.search || !$scope.search.CompletedOn) {
             return "more than 60";
         } else {
             var timenow = new Date().getTime();
-            var timeCompleted = new Date($scope.search.CompletedDate);
+            var timeCompleted = new Date($scope.search.CompletedOn);
             var diff = timenow - timeCompleted;
             var dayinmsec = 1000 * 60 * 60 * 24;
             return 60 - Math.ceil(diff / dayinmsec);
@@ -9534,7 +9527,7 @@ angular.module("PortalApp")
     }
 
     $scope.completedOver60days = function () {
-        if (!$scope.search || $scope.search.CompletedDate == undefined) {
+        if (!$scope.search || $scope.search.CompletedOn == undefined) {
             return false;
         }
         else {
@@ -9834,6 +9827,44 @@ angular.module('PortalApp').component('ptAudit', {
         ctrl.init();
     }
 })
+angular.module('PortalApp').component('ptHomeowner', {
+
+    templateUrl: '/js/Views/LeadDocSearch/searchOwner.tpl.html',
+    controller: function ($http) {
+        this.init = function (bble) {
+            var that = this;
+            if (bble) {
+                $http({
+                    method: 'GET',
+                    url: '/api/homeowner/' + bble,
+                }).then(function (r) {
+                    that.rawdata = r.data;
+                })
+            }
+        }
+
+        this.parseDate = function (dateField) {
+            if (dateField) {
+                return (dateField.yearField ? dateField.yearField : 'xxxx') +
+                       "/" + (dateField.monthField ? dateField.monthField : 'xx') +
+                       "/" + (dateField.dayField ? dateField.dayField : 'xx');
+            }
+
+        }
+
+        this.parseAddress = function (addressField) {
+            if (addressField) {
+                return (addressField.line1Field ? addressField.line1Field + ' ' : '') +
+                       (addressField.line2Field ? addressField.line2Field + ' ' : '') +
+                       (addressField.line3Field ? addressField.line3Field + ' ' : '') +
+                       ', ' +
+                       (addressField.cityField ? addressField.cityField + ', ' : 'Unknown City,') +
+                       (addressField.stateField ? addressField.stateField + ', ' : 'Unknown State,') +
+                       (addressField.zipField ? addressField.zipField : '')
+            }
+        }
+    }
+});
 angular.module('PortalApp').component('ptItemList', {
 
     templateUrl: '/js/templates/ptItemList.html',

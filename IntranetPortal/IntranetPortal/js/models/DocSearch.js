@@ -22,14 +22,13 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
 
     docSearch.prototype.initLeadsResearch = function () {
+        //debugger;
         var self = this;
-
         var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
             data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
         } else {
-
             var _LeadSearch = new LeadResearch();
             angular.extend(_LeadSearch, self.LeadResearch);
             self.LeadResearch = _LeadSearch;
