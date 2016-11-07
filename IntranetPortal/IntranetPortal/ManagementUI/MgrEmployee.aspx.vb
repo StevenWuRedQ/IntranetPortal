@@ -47,7 +47,7 @@ Public Class MgrEmployee
         emp.CellPhone = e.NewValues("Cellphone")
         emp.EmployeeSince = e.NewValues("EmployeeSince")
         emp.Picture = e.NewValues("Picture")
-        emp.Password = e.NewValues("Password")
+        emp.Password = emp.CryptoPasswrod(e.NewValues("Password"))
         emp.ReportTo = e.NewValues("ReportTo")
         emp.Description = e.NewValues("Description")
         emp.Active = e.NewValues("Active")
