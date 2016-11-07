@@ -13,6 +13,18 @@ PortalUtility = {
 
         return ""
     },
+    customizeDateText2: function (cellInfo) {
+        if (cellInfo.target == "headerFilter")
+            return cellInfo.valueText;
+
+        if (!cellInfo.value)
+            return ""
+        var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+        if (dt)
+            return moment(dt).format('MM/DD/YYYY');
+
+        return ""
+    },
     FormatLocalDateTime: function (utcDate) {
         if (!utcDate)
             return
