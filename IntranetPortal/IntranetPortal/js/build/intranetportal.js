@@ -165,8 +165,7 @@ if (typeof requirejs === "function") {
         // We use it to create routes for CRUD operations.  We give it some basic information about
         // the resource and the urls then it it returns our own special routeProvider.
         this.routesFor = function (resourceName, urlPrefix, routePrefix) {
-            var baseUrl = resourceName.toLowerCase();
-
+            var baseUrl = resourceName.toLowerCase();            
             var baseRoute = '/' + resourceName.toLowerCase();
             routePrefix = routePrefix || urlPrefix;
 
@@ -245,7 +244,7 @@ if (typeof requirejs === "function") {
                     return routeBuilder;
                 },
                 // Pass-through to `$routeProvider.otherwise()`
-                otherwise: function (params) {
+                otherwise: function (params) {                    
                     $routeProvider.otherwise(params);
                     return routeBuilder;
                 },
@@ -9830,7 +9829,7 @@ angular.module('PortalApp').component('ptAudit', {
 angular.module('PortalApp').component('ptHomeowner', {
 
     templateUrl: '/js/Views/LeadDocSearch/searchOwner.tpl.html',
-    controller: function ($http) {
+    controller: function ($http, ptCom) {
         this.init = function (bble) {
             var that = this;
             if (bble) {
@@ -9850,7 +9849,7 @@ angular.module('PortalApp').component('ptHomeowner', {
                        "/" + (dateField.dayField ? dateField.dayField : 'xx');
             }
 
-        }
+        } 
 
         this.parseAddress = function (addressField) {
             if (addressField) {
@@ -9863,6 +9862,9 @@ angular.module('PortalApp').component('ptHomeowner', {
                        (addressField.zipField ? addressField.zipField : '')
             }
         }
+
+        this.BBLE = ptCom.getGlobal("BBLE") || ptCom.parseSearch(location.search).BBLE || "";
+        this.init(this.BBLE);
     }
 });
 angular.module('PortalApp').component('ptItemList', {

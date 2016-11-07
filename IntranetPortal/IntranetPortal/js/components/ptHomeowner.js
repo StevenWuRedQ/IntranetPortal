@@ -1,7 +1,7 @@
 ﻿angular.module('PortalApp').component('ptHomeowner', {
 
     templateUrl: '/js/Views/LeadDocSearch/searchOwner.tpl.html',
-    controller: function ($http) {
+    controller: function ($http, ptCom) {
         this.init = function (bble) {
             var that = this;
             if (bble) {
@@ -21,7 +21,7 @@
                        "/" + (dateField.dayField ? dateField.dayField : 'xx');
             }
 
-        }
+        } 
 
         this.parseAddress = function (addressField) {
             if (addressField) {
@@ -34,5 +34,8 @@
                        (addressField.zipField ? addressField.zipField : '')
             }
         }
+
+        this.BBLE = ptCom.getGlobal("BBLE") || ptCom.parseSearch(location.search).BBLE || "";
+        this.init(this.BBLE);
     }
 });

@@ -78,50 +78,63 @@
                 }
             }
         })();
-        var onSelectionChangedCallback = function (e) {
+        //var onSelectionChangedCallback = function (e) {
+        //    //debugger;
+        //    var bble = e.selectedRowKeys[0].BBLE || '';
+        //    var status = e.selectedRowKeys[0].Status || 0;
+        //    previewControl.showCaseInfo(bble, status)
+        //}
+        var onRowClickCallback = function (e) {
             //debugger;
-            var bble = e.selectedRowKeys[0].BBLE || '';
-            var status = e.selectedRowKeys[0].Status || 0;
+            var bble = e.key.BBLE || '';
+            var status = e.key.Status || 0;
             previewControl.showCaseInfo(bble, status)
         }
-        previewControl = {
-            showCaseInfo: function (CaseId, status) {
-                if (status == 0) {
-                    <% If HttpContext.Current.User.IsInRole("Underwriter") %>
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId
-                    <% ELSE %>
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId
-                    <% End IF%>
-                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url, 1700);
-                } else {
-                    $("#xwrapper").css("width", "50%");
-                    $("#preview").css("visibility", "visible");
-                    $("#preview").css("width", "50%");
-                    <% If HttpContext.Current.User.IsInRole("Underwriter") %>
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=3&BBLE=' + CaseId + '#/';
-                    <% ELSE%>
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId + '#/';
-                    <% End IF%>
-                    $("#previewWindow").attr("src", url);
-                    $("#hideicon").css("visibility", "visible");
+        previewControl = (function () {
+            var previewShown = false;
+            var that = this;
+            return {
+                showCaseInfo: function (CaseId, status) {
+                    if (status == 0) {
+                        <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId
+                        <% ELSE %>
+                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId
+                        <% End IF%>
+                        PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url, 1700);
+                    } else {
+                        $("#xwrapper").css("width", "50%");
+                        $("#preview").css("visibility", "visible");
+                        $("#preview").css("width", "50%");
+                        <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=3&BBLE=' + CaseId + '#/';
+                        <% ELSE%>
+                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId + '#/';
+                        <% End IF%>
+                        $("#previewWindow").attr("src", url);
+                        $("#hideicon").css("visibility", "visible");
+                    }
+                    that.previewShown = true;
+                },
+
+                undo: function () {
+                    $("#preview").css("width", "0%");
+                    $("#preview").css("visibility", "hidden");
+                    $("#hideicon").css("visibility", "hidden");
+                    $("#xwrapper").css("width", "100%");
+                    $("#previewWindow").attr("src", "");
+                    that.previewShown = false;
                 }
-
-            },
-
-            undo: function () {
-                $("#preview").css("width", "0%");
-                $("#preview").css("visibility", "hidden");
-                $("#hideicon").css("visibility", "hidden");
-                $("#xwrapper").css("width", "100%");
-                $("#previewWindow").attr("src", "");
             }
 
-        }
+        })();
 
         $(document).ready(function () {
             var url = "/api/LeadInfoDocumentSearches";
-            var that = this;
             $.getJSON(url).done(function (data) {
+                var that = this;
+                this.bble = location.hash.split('/')[2];
+                this.hashnum = parseInt(location.hash.split('/')[1]);
                 var dataGrid = $("#gridContainer").dxDataGrid({
                     dataSource: data,
                     searchPanel: {
@@ -160,7 +173,8 @@
                         }
                         highlightcallback(e);
                     },
-                    onSelectionChanged: onSelectionChangedCallback,
+                    //onSelectionChanged: onSelectionChangedCallback,
+                    onRowClick: onRowClickCallback,
                     selection: {
                         mode: 'single'
                     },
@@ -276,9 +290,7 @@
                     previewControl.undo();
                     filterData(data.value);
                 }
-
                 var columns = ['CaseName', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'Duration'];
-
                 var displayall = function () {
                     _.forEach(columns, function (v, i) {
                         dataGrid.columnOption(v, 'visible', true)
@@ -291,7 +303,6 @@
                         dataGrid.columnOption(v, 'visible', false)
                     })
                 }
-
                 var filterData = function (data) {
                     dataGrid.clearFilter();
                     displayall();
@@ -341,34 +352,36 @@
                     width: '250',
                     onValueChanged: filterDataDelegate
                 }).dxSelectBox('instance');
-                var hashnum = parseInt(location.hash.split('/')[1]);
-                var bble = location.hash.split('/')[2];
-                if (hashnum) {
-                    filterBox.option('value', hashnum);
+                if (this.hashnum) {
+                    filterBox.option('value', this.hashnum);
                 } else {
                     filterBox.option('value', 0);
                 }
                 //debugger;
-                if (bble) {
-                    previewControl.showCaseInfo(bble);
+                if (this.bble) {
+                    previewControl.showCaseInfo(this.bble);
                 }
-
                 //high light column by refresh
                 var highlightcallback = function (e) {
-                    // debugger;
-                    if (bble) {
+                    if (that.bble) {
                         var grid = e.element.dxDataGrid('instance');
                         var data = grid.option('dataSource');
                         var items = []
                         _.forEach(data, function (v, i) {
-                            if (v.BBLE.trim() == bble.trim())
+                            if (v.BBLE.trim() == that.bble.trim())
                                 items.push(v)
                         });
                         if (items.length > 0) {
+                            var ibble = items[0].BBLE || '';
+                            var istatus = items[0].Status || 0;
+                            previewControl.showCaseInfo(ibble, istatus);
+                            //debugger;
                             grid.selectRows(items, true);
                         }
-                        bble = undefined;
                     }
+                    location.hash = "";
+                    that.bble = undefined;
+                    that.hashnum = undefined;
                 }
 
 
