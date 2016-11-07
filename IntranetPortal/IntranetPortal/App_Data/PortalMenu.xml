@@ -372,7 +372,7 @@
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwriterSummary" Text="New Properties" NavigationUrl="/UnderWriter/DocSearchListNew.aspx" ShowAmount="false" Visible="false">
+      <PortalNavItem Name="UnderwriterSummary" Text="New Properties" NavigationUrl="/UnderWriter/DocSearchListNew.aspx" ShowAmount="false" Visible="true">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>

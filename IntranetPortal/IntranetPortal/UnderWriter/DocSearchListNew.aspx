@@ -73,7 +73,7 @@
                     <a class="btn btn-sm btn-blue" onclick='previewControl.undo()'>
                         <i class='fa fa-arrow-right'></i></a>
                 </div>
-                <div style="height:5px"></div>
+                <div style="height: 5px"></div>
                 <div id='maximizeicon' data-toggle='tooltip' data-placement='right' title='maximize right panel' style="height: 32px; width: 32px">
                     <a class="btn btn-sm btn-blue" onclick='previewControl.togglemaximize()'>
                         <i class='fa fa-square-o'></i></a>
@@ -359,7 +359,11 @@
         previewControl = {
             showCaseInfo: function (CaseId, status) {
                 if (status == 0) {
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId;
+                    <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId
+                    <% ELSE %>
+                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId
+                    <% End IF%>
                     PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
                 } else {
                     $("#xwrapper").css("width", "50%");
@@ -367,7 +371,11 @@
                     $("#preview").css("width", "50%");
                     $("#preview").css("visibility", "visible");
                     $("#iconarea").css("visibility", "visible");
-                    var url = '/PopupControl/UnderwritingSummary.aspx?mode=2&BBLE=' + CaseId + '#searchSummary';
+                    <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                    var url = '/PopupControl/UnderwritingSummary.aspx?mode=2&BBLE=' + CaseId + '#/searchSummary';
+                    <% ELSE%>
+                    var url = '/PopupControl/UnderwritingSummary.aspx?mode=1&BBLE=' + CaseId + '#/searchSummary';
+                    <% End IF%>
                     $("#previewWindow").attr("src", url);
                 }
 
