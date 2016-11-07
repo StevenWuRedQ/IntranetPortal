@@ -175,10 +175,7 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
     </div>
 
     <script>
-        function LoadSearch(bble) {
-            angular.element('#LeadTaxSearchCtrl').scope().init(bble);
-            angular.element('#pt-homeowner').scope().$ctrl.init(bble);
-        }
+
         function loadStory() {
             angular.element("#uwrview").scope().init(bble);
         }
