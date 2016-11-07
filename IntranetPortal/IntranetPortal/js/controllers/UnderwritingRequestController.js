@@ -84,7 +84,8 @@
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
             if (isResubmit) {
-                $scope.search.CompletedDate = undefined;
+                debugger;
+                $scope.search.CompletedOn = undefined;
                 $scope.search.Expired = false;
                 $scope.formCleaned = false;
             }
