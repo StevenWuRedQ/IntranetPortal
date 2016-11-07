@@ -10,7 +10,7 @@ Public Class LeadInfoDocumentSearch
     Public Property CaseName As String
     Public Property IsInProcess As Integer?
     Public Property Team As String
-
+    Public Property Owner As String
     ''' <summary>
     ''' The property to indicate if the search is expired
     ''' </summary>
@@ -83,7 +83,8 @@ Public Class LeadInfoDocumentSearch
                            .UpdateDate = search.UpdateDate,
                            .UnderwriteStatus = search.UnderwriteStatus,
                            .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
-                           .IsInProcess = CType(tracking.IsInProcess, Integer?)
+                           .IsInProcess = CType(tracking.IsInProcess, Integer?),
+                           .Owner = lead.EmployeeName
             }
 
             'Return result.ToList
@@ -102,7 +103,8 @@ Public Class LeadInfoDocumentSearch
                                                                    .UpdateDate = search.UpdateDate,
                                                                    .UnderwriteStatus = search.UnderwriteStatus,
                                                                    .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
-                                                                   .IsInProcess = CType(search.IsInProcess, Integer?)
+                                                                   .IsInProcess = CType(search.IsInProcess, Integer?),
+                                                                   .Owner = search.Owner
                                                         }
                                                 End Function).ToList
         End Using

@@ -210,16 +210,7 @@
                             dataField: "CreateDate",
                             caption: "UW Requested Date",
                             dataType: "date",
-                            customizeText: function (cellInfo) {
-                                if (!cellInfo.value)
-                                    return ""
-
-                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                                if (dt)
-                                    return moment(dt).format('MM/DD/YYYY');
-
-                                return ""
-                            }
+                            customizeText: PortalUtility.customizeDateText2
                         }, {
                             dataField: "Status",
                             caption: "Search Status",
@@ -240,16 +231,7 @@
                             dataField: "CompletedOn",
                             caption: "Search Completion Date",
                             dataType: "date",
-                            customizeText: function (cellInfo) {
-                                if (!cellInfo.value)
-                                    return ""
-
-                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                                if (dt)
-                                    return moment(dt).format('MM/DD/YYYY');
-
-                                return ""
-                            },
+                            customizeText: PortalUtility.customizeDateText2,
                             sortIndex: 0,
                             sortOrder: 'desc',
                         }, {
@@ -271,16 +253,7 @@
                             dataField: 'UnderwriteCompletedOn',
                             caption: 'UW Completion Date',
                             dataType: "date",
-                            customizeText: function (cellInfo) {
-                                if (!cellInfo.value)
-                                    return ""
-
-                                var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
-                                if (dt)
-                                    return moment(dt).format('MM/DD/YYYY');
-
-                                return ""
-                            }
+                            customizeText: PortalUtility.customizeDateText2
 
                         }, {
                             dataField: 'IsInProcess',

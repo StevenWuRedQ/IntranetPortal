@@ -358,57 +358,17 @@ Public Class LeadTest
     <TestMethod>
     Public Sub HotLeadRecycleRuleTest()
         Dim mockLead = New Lead()
-        Dim txtChrisYan = "Chris Yan"
-        Dim mockEmp = Employee.GetInstance(txtChrisYan)
-
-        mockLead.BBLE = "8000000001"
-        mockLead.EmployeeName = mockEmp.Name
-        mockLead.EmployeeID = mockEmp.EmployeeID
-        mockLead.Status = LeadStatus.Priority
-        Using mockEntity As New Entities
-            MockDB.MockLead(mockEntity, mockLead,
-                            Function()
-                                ' lead assign before 12 days
-                                mockLead.AssignDate = AddBusinessDays(DateTime.Now, -12)
-                                ' RecycleManage.ExpireRecycles(mockLead.BBLE)
-
-                                ' ld.ReAssignLeads("Chris Yan")
-
-                                RulesEngine.LeadsEscalationRule.Execute(mockLead)
-                                Dim ld = Lead.GetInstance(mockLead.BBLE)
-                                ' @todo check if the employee don't have manager
-                                Dim rl = RecycleManage.GetRecycledLead(mockLead.BBLE)
-                                Assert.IsNull(rl, "the lead stay in hot leads in 12 days the leads should not be recycle")
-                                ' set remider to manager
-
-
-                                ' lead stay in hot lead 13 days
-                                mockLead.AssignDate = AddBusinessDays(DateTime.Now, -13).AddHours(-1)
-                                Return 0
-                            End Function)
-        End Using
-
-    End Sub
-    Private Sub clearRecycleLeads(BBLE As String)
-        Using ctx As New Core.CoreEntities
-
-            Dim rls = ctx.RecycleLeads.Where(Function(x) x.BBLE = BBLE)
-            If (rls.Any()) Then
-                ctx.RecycleLeads.RemoveRange(rls)
-            End If
-            ctx.SaveChanges()
-        End Using
-    End Sub
-    <TestMethod>
-    Sub MockDbTest()
-        Dim mockLead = New Lead()
         mockLead.BBLE = "8000000001"
         mockLead.Status = LeadStatus.Priority
+        Dim testEmp = Employee.GetInstance("Chris Yan")
+        mockLead.EmployeeID = testEmp.EmployeeID
+        mockLead.EmployeeName = testEmp.Name
         mockLead.AssignBy = "testing"
         ' assigned 100 days ago
         mockLead.AssignDate = DateTime.Now.AddDays(-100)
         Dim statusLog = New LeadsStatusLog()
         statusLog.Type = LeadsStatusLog.LogType.StatusChange
+        statusLog.Employee = testEmp.Name
         statusLog.BBLE = mockLead.BBLE
         statusLog.CreateBy = "testing"
         ' change to hot leads
@@ -422,6 +382,7 @@ Public Class LeadTest
 
                                                MockDB.Mock(Of Lead)(mockEntity, mockLead,
                                                                     Function()
+
                                                                         RecycleManage.ExpireRecycles(mockLead.BBLE)
                                                                         ' staying hot leads 12 days 
                                                                         statusLog.CreateDate = AddBusinessDays(Date.Now, -12)
@@ -438,17 +399,24 @@ Public Class LeadTest
                                                                         RulesEngine.LeadsEscalationRule.Execute(mockLead)
 
                                                                         ld = Lead.GetInstance(mockLead.BBLE)
-                                                                        rl = RecycleManage.GetRecycledLead(mockLead.BBLE)
-                                                                        Assert.IsNotNull(rl, "the lead stay in hot leads in 13 days the leads should be recycle")
 
-                                                                        ' lead staying hot leads 14 days
-                                                                        ' lead arleady exist in recycel lead
+                                                                        rl = RecycleManage.GetRecycledLead(mockLead.BBLE)
+
+                                                                        Dim rlId = rl.RecycleId
+
+                                                                        Assert.IsNotNull(rl, "lead stay in hot leads in 13 days the leads should be recycle")
+
+                                                                        ' lead staying hot lead 14 days
+                                                                        ' lead arleady exist in recycle lead
                                                                         statusLog.CreateDate = AddBusinessDays(Date.Now, -14).AddHours(-1)
                                                                         mockEntity.SaveChanges()
                                                                         RulesEngine.LeadsEscalationRule.Execute(mockLead)
                                                                         ld = Lead.GetInstance(mockLead.BBLE)
                                                                         rl = RecycleManage.GetRecycledLead(mockLead.BBLE)
-                                                                        Assert.IsNotNull(rl, "the lead stay in hot leads in 14 days and leads recyceld once should stay in recycle")
+                                                                        Assert.IsNotNull(rl, "lead stay in hot leads in 14 days and leads recyceld once should stay in recycle")
+
+                                                                        Assert.AreEqual(rlId, rl.RecycleId, "Hot lead recycel reminder only set once")
+
                                                                         Return 0
                                                                     End Function,
                                                               Function(x) x.BBLE = mockLead.BBLE ' clear leads        
@@ -461,6 +429,21 @@ Public Class LeadTest
         End Using
 
         clearRecycleLeads(mockLead.BBLE)
+
+    End Sub
+    Private Sub clearRecycleLeads(BBLE As String)
+        Using ctx As New Core.CoreEntities
+
+            Dim rls = ctx.RecycleLeads.Where(Function(x) x.BBLE = BBLE)
+            If (rls.Any()) Then
+                ctx.RecycleLeads.RemoveRange(rls)
+            End If
+            ctx.SaveChanges()
+        End Using
+    End Sub
+    <TestMethod>
+    Sub MockDbTest()
+
         ' 
         ' MockDB.Ctx(ctx).Mock(Of LeadsStatusLog)(statusLog).Test()
     End Sub

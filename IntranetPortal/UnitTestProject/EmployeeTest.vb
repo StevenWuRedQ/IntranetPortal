@@ -185,6 +185,8 @@ Public Class EmployeeTest
                                            Catch ex As Exception
                                                Assert.AreEqual(ex.Message, "Can not move to Follow Up because achieve to limit.")
                                            End Try
+                                           Assert.AreEqual(testLead.Status, CInt(LeadStatus.NewLead),
+                                                           "Lead should stay original folder such as new lead")
                                            Return 0
                                        End Function)
 
@@ -223,7 +225,6 @@ Public Class EmployeeTest
             testLead.AssignBy = "Testing"
 
 
-
             ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             ' unit testing follow up limit
             ' do not care about speed in unit test so using leads
@@ -251,14 +252,16 @@ Public Class EmployeeTest
 
                                            Assert.AreEqual(loanModCountNow, 30)
                                            Assert.IsTrue(tChrisYan.IsAchieveLoanModLimit())
-
+                                           ' move from new lead 
                                            testLead.Status = LeadStatus.NewLead
                                            Try
                                                testLead.UpdateStatus(LeadStatus.LoanMod)
                                            Catch ex As Exception
-                                               Assert.AreEqual(ex.Message, "Can not move to Loan Mod because achieve to limit.")
+                                               Assert.AreEqual(ex.Message, "Can not move to Loan Mod because achieve to limit.",
+                                                               "update from new lead to loan mod when user have 60 loan mod leads error message should match ")
                                            End Try
-
+                                           Assert.AreEqual(testLead.Status, CInt(LeadStatus.NewLead),
+                                                           "Lead should stay original folder such as new lead")
                                            Return 0
                                        End Function)
 
