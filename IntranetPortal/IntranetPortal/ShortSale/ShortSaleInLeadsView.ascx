@@ -177,7 +177,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label>LockupDate</label>
-                                <input class="form-control" ss-date ng-model="floor.LockupDate" />
+                                <input class="form-control" pt-date ng-model="floor.LockupDate" />
                             </div>
                             <div class="col-sm-6">
                                 <label>LockedBy</label>
@@ -185,7 +185,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label>LastChecked</label>
-                                <input class="form-control" ss-date ng-model="floor.LastChecked" />
+                                <input class="form-control" pt-date ng-model="floor.LastChecked" />
                             </div>
                         </div>
                     </div>

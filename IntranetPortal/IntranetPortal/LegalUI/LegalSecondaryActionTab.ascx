@@ -170,15 +170,15 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Mortgage  Date <span class="mandatory_star">*</span></label>
-                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsMortgageDate" ss-date>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsMortgageDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Mortgage Amount <span class="mandatory_star">*</span></label>
-                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsMortgageAmount" money-mask>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsMortgageAmount" pt-number-mask maskformat='money'>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Date of recording  <span class="mandatory_star">*</span></label>
-                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsDateOfRecording " ss-date>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionsDateOfRecording " pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">CRFN # <span class="mandatory_star">*</span></label>
@@ -357,7 +357,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">DATE OF DEED TO PLAINTIFF <span class="mandatory_star">*</span></label>
-                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DeedToPlaintiffDate" ss-date>
+                <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.QTA_DeedToPlaintiffDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">County</label>
@@ -394,7 +394,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">DATE OF LP </label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCFiledDate" disabled="disabled" ss-date>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.FCFiledDate" disabled="disabled" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">FC Index #</label>
@@ -402,7 +402,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">DEFAULT DATE <span class="mandatory_star">*</span></label>
-                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.QTA_DefaultDate" ss-date>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.QTA_DefaultDate" pt-date>
             </li>
 
         </ul>

@@ -395,7 +395,7 @@
                 return model
             }
             $scope.GetType = function (type) {
-                var types = [{ type: 'date', model: 'ss-date' }, { type: 'money', model: 'money-mask' }, { type: 'phone', model: 'mask="(999) 999-9999"' }]
+                var types = [{ type: 'date', model: 'pt-date' }, { type: 'money', model: 'pt-number-mask maskformat='money'' }, { type: 'phone', model: 'mask="(999) 999-9999"' }]
                 var mType = types.filter(function (o) { return o.type == type })[0];
                 return mType ? mType.model : '';
             }

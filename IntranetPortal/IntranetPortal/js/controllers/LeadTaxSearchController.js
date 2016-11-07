@@ -7,23 +7,17 @@
  * naming wrong becuase the name always change from spec guys.
  */
 angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
-        ptContactServices, ptCom, DocSearch, LeadsInfo
-        , DocSearchEavesdropper, DivError
-        ) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
         //New Model(this,arguments)
         leadsInfoBBLE = $('#BBLE').val();
         $scope.ShowInfo = $('#ShowInfo').val();
         $scope.ptContactServices = ptContactServices;
-
-
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
         //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
-
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -75,12 +69,14 @@ angular.module('PortalApp')
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                $scope.DocSearch.initLeadsResearch();
-                $scope.DocSearch.initTeam();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                     
+                    $scope.DocSearch.initLeadsResearch();
+                    $scope.DocSearch.initTeam();
+                    ////////// font end switch to new version //////////////
+                    $scope.versionController.start2Eaves();
+                });
 
-                ////////// font end switch to new version //////////////
-                $scope.versionController.start2Eaves();
             });
 
         }
@@ -114,91 +110,86 @@ angular.module('PortalApp')
             }
 
             if (!$scope.DivError.passValidate()) {
-
                 return false;
             }
 
             return true;
             ////////////under are old validate///////////////////
-            var errormsg = '';
+            //var errormsg = '';
+            //var validateFields = [
+            //    "Has_Deed_Purchase_Deed",
+            //    "Has_c_1st_Mortgage_c_1st_Mortgage",
+            //    "fha",
+            //    "Has_c_2nd_Mortgage_c_2nd_Mortgage",
+            //    "has_Last_Assignment_Last_Assignment",
+            //    "fannie",
+            //    "Freddie_Mac_",
+            //    "Has_Due_Property_Taxes_Due",
+            //    "Has_Due_Water_Charges_Due",
+            //    "Has_Open_ECB_Violoations",
+            //    "Has_Open_DOB_Violoations",
+            //    "hasCO",
+            //    "Has_Violations_HPD_Violations",
+            //    "Is_Open_HPD_Charges_Not_Paid_Transferred",
+            //    "has_Judgments_Personal_Judgments",
+            //    "has_Judgments_HPD_Judgments",
+            //    "has_IRS_Tax_Lien_IRS_Tax_Lien",
+            //    "hasNysTaxLien",
+            //    "has_Sidewalk_Liens_Sidewalk_Liens",
+            //    "has_Vacate_Order_Vacate_Order",
+            //    "has_ECB_Tickets_ECB_Tickets",
+            //    "has_ECB_on_Name_ECB_on_Name_other_known_address",
 
-            var validateFields = [
-                "Has_Deed_Purchase_Deed",
-                "Has_c_1st_Mortgage_c_1st_Mortgage",
-                "fha",
-                "Has_c_2nd_Mortgage_c_2nd_Mortgage",
-                "has_Last_Assignment_Last_Assignment",
-                "fannie",
-                "Freddie_Mac_",
-                "Has_Due_Property_Taxes_Due",
-                "Has_Due_Water_Charges_Due",
-                "Has_Open_ECB_Violoations",
-                "Has_Open_DOB_Violoations",
-                "hasCO",
-                "Has_Violations_HPD_Violations",
-                "Is_Open_HPD_Charges_Not_Paid_Transferred",
-                "has_Judgments_Personal_Judgments",
-                "has_Judgments_HPD_Judgments",
-                "has_IRS_Tax_Lien_IRS_Tax_Lien",
-                "hasNysTaxLien",
-                "has_Sidewalk_Liens_Sidewalk_Liens",
-                "has_Vacate_Order_Vacate_Order",
-                "has_ECB_Tickets_ECB_Tickets",
-                "has_ECB_on_Name_ECB_on_Name_other_known_address",
+            //    /**
+            //     * @author Steven
+            //     * @date   8/19/2016
+            //     * 
+            //     * @fix 
+            //     * git commit bde6b6d tax search
+            //     * add validated to new version doc search at least one item add 
+            //     * when select yes control grid
+            //     */
+            //    // under are one to multiple//
+            //    "Has_Other_Mortgage",
+            //    "Has_Other_Liens",
+            //    "Has_TaxLiensCertifcate",
+            //    "Has_COS_Recorded",
+            //    "Has_Deed_Recorded",
+            //    ///////////////////////////
 
-                /**
-                 * @author Steven
-                 * @date   8/19/2016
-                 * 
-                 * @fix 
-                 * git commit bde6b6d tax search
-                 * add validated to new version doc search at least one item add 
-                 * when select yes control grid
-                 */
-                // under are one to multiple//
-                "Has_Other_Mortgage",
-                "Has_Other_Liens",
-                "Has_TaxLiensCertifcate",
-                "Has_COS_Recorded",
-                "Has_Deed_Recorded",
-                ///////////////////////////
+            //];
+            //var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
+            //                    ["Has_Other_Liens", "OtherLiens"],
+            //                    ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
+            //                    ["Has_COS_Recorded", "COSRecorded"],
+            //                    ["Has_Deed_Recorded", "DeedRecorded"]];
 
-            ];
-            var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
-                                ["Has_Other_Liens", "OtherLiens"],
-                                ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
-                                ["Has_COS_Recorded", "COSRecorded"],
-                                ["Has_Deed_Recorded", "DeedRecorded"]];
+            //var fields = $scope.DocSearch.LeadResearch;
+            //if (fields) {
+            //    for (var i = 0; i < validateFields.length; i++) {
+            //        var f = validateFields[i];
+            //        if (fields[f] === undefined) {
+            //            errormsg += "The fields marked * must been filled please check them before submit!<br>";
+            //            break;
+            //        }
+            //    }
 
-            var fields = $scope.DocSearch.LeadResearch;
-            if (fields) {
-                for (var i = 0; i < validateFields.length; i++) {
-                    var f = validateFields[i];
-                    if (fields[f] === undefined) {
-                        errormsg += "The fields marked * must been filled please check them before submit!<br>";
+            //    for (var j = 0; j < checkedAttrs.length; j++) {
+            //        var f1 = checkedAttrs[j];
+            //        if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
+            //            errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
+            //        }
+            //    }
+            //}
 
-                        break;
-                    }
-                }
-
-                for (var j = 0; j < checkedAttrs.length; j++) {
-                    var f1 = checkedAttrs[j];
-                    if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
-                        errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
-                    }
-                }
-            }
-
-
-            return errormsg;
+            //return errormsg;
 
         }
 
         $scope.SearchComplete = function (isSave) {
             // only completed need check validate
             // when saving don't need validate input.
-            if (!isSave)
-            {
+            if (!isSave) {
                 if (!$scope.newVersionValidate()) {
                     var msg = $scope.DivError.getMessage();
 
@@ -206,17 +197,16 @@ angular.module('PortalApp')
                     return;
                 };
             }
-            
+
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            $scope.DocSearch.ResutContent = $("#search_summary_div").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
                     AngularRoot.alert("Save successfully!");
                 });
             } else {
-
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -230,34 +220,62 @@ angular.module('PortalApp')
 
         }
 
-        $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
 
-        for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
-            $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
-                if (nv) {
-                    var rest_exclusive_filed = _.without($scope.EXCLUSIVE_FIELD, this.exp);
-                    for (var j = 0; j < rest_exclusive_filed.length; j++) {
-                        if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
-                    }
+        // only one of fha, fannie, freddie_mac can be yes at the same time
+
+        $scope.$watch('DocSearch.LeadResearch.fha', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                if ($scope.DocSearch.LeadResearch.Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+            }
+        })
+        $scope.$watch('DocSearch.LeadResearch.fannie', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+                if ($scope.DocSearch.LeadResearch.Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+            }
+        })
+
+        $scope.$watch('DocSearch.LeadResearch.Freddie_Mac_', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+            }
+        })
+
+        $scope.markCompleted = function (status, msg) {
+
+            // because the underwriting completion is not reversible, comfirm it before save to db.
+            msg = 'Please provide Note or press no to cancel';
+            ptCom.prompt(msg, function (result) {
+                //debugger;
+                if (result != null) {
+                    //debugger;
+                    $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                        //debugger;
+                        $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                        $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                        $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                        $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                    }, function err() {
+                        console.log("fail to update docsearch");
+                    });
                 }
+                
+            }, true);
 
-            })
         }
 
-
-        $scope.markCompleted = function () {
-
-            $http({
-                method: 'GET',
-                url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
-            }).then(function succ(d) {
-                //debugger;
-                $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
-                $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-            }, function err() {
-
-            })
-
+        try {
+            var modePatten = /mode=\d/;
+            var matches = modePatten.exec(location.search);
+            //debugger;
+            if (matches && matches[0]) {
+                $scope.viewmode = parseInt(matches[0].split('=')[1]);
+            } else {
+                $scope.viewmode = 0;
+            }
+        } catch (ex) {
+            $scope.viewmode = 0;
         }
     });

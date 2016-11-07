@@ -34,7 +34,6 @@ Public Class CommonService
                 toAdds.Add(tmpEmp.Email)
             End If
         Next
-        ' Dim emp = Employee.GetInstance(userName)
 
         If toAdds IsNot Nothing AndAlso toAdds.Count > 0 Then
             Dim taskId = 0
@@ -71,33 +70,33 @@ Public Class CommonService
 
     Public Sub SendTeamActivityEmail(teamName As String) Implements ICommonService.SendTeamActivityEmail
         Dim objTeam = Team.GetTeam(teamName)
-        Dim toAdds = New List(Of String)
 
-        For Each mgr In objTeam.TeamManagers
-            Dim emp = Employee.GetInstance(mgr)
-            If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
-                toAdds.Add(emp.Email)
-            End If
-        Next
+        If objTeam Is Nothing OrElse Not objTeam.Active Then
+            Return
+        End If
 
-        'toAdds.Add("ron@myidealprop.com")
-        'toAdds.Add("chris@gvs4u.com")
+        Dim emails As String = Employee.GetEmpsEmails(objTeam.Manager)
+        If String.IsNullOrEmpty(emails) Then
+            Core.SystemLog.Log("TeamActivityEmail", String.Format("Can't load manager email. team: {0}, Manager: {1}.", teamName, objTeam.Manager), Core.SystemLog.LogCategory.Error, Nothing, "CommonService")
+            Return
+        End If
 
         Dim ccEmail = ""
         If Employee.CEO IsNot Nothing Then
             ccEmail = Employee.CEO.Email
         End If
 
-        Dim emailData As New Dictionary(Of String, String)
-        'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
-        emailData.Add("Date", DateTime.Today.ToString("m"))
+        Dim mgrUses = Roles.GetUsersInRole("Management-User")
+        If mgrUses IsNot Nothing AndAlso mgrUses.Count > 0 Then
+            ccEmail = ccEmail & ";" & Employee.GetEmpsEmails(mgrUses)
+        End If
 
+        Dim emailData As New Dictionary(Of String, String)
+        emailData.Add("Date", DateTime.Today.ToString("m"))
         Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, teamName)
         Dim attachment As New System.Net.Mail.Attachment(GetPDf(teamName), name)
 
-        If toAdds.Count > 0 Then
-            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), ccEmail, "TeamActivitySummary", emailData, {attachment})
-        End If
+        IntranetPortal.Core.EmailService.SendMail(emails, ccEmail, "TeamActivitySummary", emailData, {attachment})
     End Sub
 
     ''' <summary>
@@ -170,7 +169,6 @@ Public Class CommonService
         If toAdds.Count > 0 Then
             IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), String.Join(";", ccAdds.ToArray), "TeamActivitySummary", emailData, {attachment})
         End If
-
     End Sub
 
     ''' <summary>
@@ -221,9 +219,6 @@ Public Class CommonService
                 toAdds.Add(emp.Email)
             End If
         Next
-
-        'toAdds.Add("ron@myidealprop.com")
-        'toAdds.Add("chris@gvs4u.com")
 
         Dim emailData As New Dictionary(Of String, String)
         'emailData.Add("Body", LoadTeamActivityEmail(objTeam))

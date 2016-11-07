@@ -1,6 +1,18 @@
 ﻿wx_deubg = true;
 wx_show_bug = false;
 PortalUtility = {
+    customizeDateText: function (cellInfo) {
+        if(cellInfo.target == "headerFilter")
+            return cellInfo.valueText;
+
+        if (!cellInfo.value)
+            return ""                                
+        var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+        if (dt)
+            return moment(dt).format('MM/DD/YYYY hh:mm a');
+
+        return ""
+    },
     FormatLocalDateTime: function (utcDate) {
         if (!utcDate)
             return
@@ -23,8 +35,8 @@ PortalUtility = {
         window.location.href = url;
     },
     fileWindows: {},
-    ShowPopWindow: function (windowId, url) {
-        this.OpenWindow(url, windowId);
+    ShowPopWindow: function (windowId, url, width, height) {
+        this.OpenWindow(url, windowId, width, height);
     },
     OpenWindow: function (url, title, width, height) {
         for (var win in this.fileWindows) {

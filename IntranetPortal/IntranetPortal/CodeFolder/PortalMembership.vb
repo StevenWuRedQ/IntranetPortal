@@ -1,4 +1,6 @@
-﻿Public Class PortalMembershipProvider
+﻿
+
+Public Class PortalMembershipProvider
     Inherits MembershipProvider
 
 
@@ -6,10 +8,13 @@
 
     Public Overrides Function ChangePassword(username As String, oldPassword As String, newPassword As String) As Boolean
         Using context As New Entities
-            Dim emp = context.Employees.Where(Function(em) em.Name = username And em.Password = oldPassword).SingleOrDefault
+            Dim emp = context.Employees.Where(Function(em) em.Name = username).ToArray().Where(Function(u) u.VerifyPassword(oldPassword)).SingleOrDefault
 
             If emp IsNot Nothing Then
-                emp.Password = newPassword
+                ' emp.Password = newPassword
+
+                ' change to MD5 cypto password
+                emp.ChangePassword(newPassword)
                 context.SaveChanges()
                 Return True
             Else
@@ -17,6 +22,8 @@
             End If
         End Using
     End Function
+
+
 
     Public Overrides Function ChangePasswordQuestionAndAnswer(username As String, password As String, newPasswordQuestion As String, newPasswordAnswer As String) As Boolean
         Throw New NotImplementedException()
@@ -113,7 +120,12 @@
 
     Public Overrides Function ValidateUser(username As String, password As String) As Boolean
         Using context As New Entities
-            Return context.Employees.Where(Function(em) (em.Name = username Or em.Email = username) And em.Password = password And em.Active = True).Count > 0
+
+            ' Return context.Employees.Where(Function(em) (em.Name = username Or em.Email = username) And em.Password = password And em.Active = True).Count > 0
+
+            ' change verify password to with md5 crypto
+            Return context.Employees.Where(Function(em) (em.Name = username Or em.Email = username) And em.Active = True).
+                ToArray().Where(Function(e) e.VerifyPassword(password)).Count > 0
         End Using
     End Function
 

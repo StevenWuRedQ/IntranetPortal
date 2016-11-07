@@ -51,6 +51,9 @@ Public Class PortalNavItem
         End Get
     End Property
 
+    <XmlIgnore>
+    Public Property Parent As PortalNavItem
+
     Public Function ToHtml() As String
         If IsVisible() Then
             Dim htmlNode = ""

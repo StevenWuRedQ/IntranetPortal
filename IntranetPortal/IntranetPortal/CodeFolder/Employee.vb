@@ -3,15 +3,32 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
 Imports Newtonsoft.Json
 Imports System.ComponentModel.DataAnnotations
-
+Imports System.Security.Cryptography
 
 ''' <summary>
 ''' The Employee Object
 ''' </summary>
 <MetadataType(GetType(EmployeeMetaData))>
 Partial Public Class Employee
+    ' it better to separate to two const but now both of them is 30
+    ' so make it as one const number
+
+    ' using public for unit test
+    ' otherwise it should in database
+    ' or using friend namespace like c# but not sure VB.net have it or not.
+
+    '#If DEBUG Then
+    '    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 3
+    '    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 3
+    '#Else
+    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 60
+    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 30
+    '#End If
 
     Private Shared _ceo As Employee
+
+
+
     ''' <summary>
     ''' Get company CEO
     ''' </summary>
@@ -579,6 +596,12 @@ Partial Public Class Employee
         End Using
     End Function
 
+    Public Shared Function GetAllActiveAgents() As String()
+        Using Context As New Entities
+            Return Context.Employees.Where(Function(em) em.Active = True AndAlso em.Position = "Finder").Select(Function(em) em.Name).ToArray
+        End Using
+    End Function
+
     ''' <summary>
     ''' Get the list of active employee's names under given application
     ''' </summary>
@@ -887,6 +910,111 @@ Partial Public Class Employee
     ''' <returns></returns>
     Public Function GetData() As EmployeeData
         Return Core.Utility.CopyTo(Me, New EmployeeData())
+    End Function
+    ''' <summary>
+    ''' verify plain text to md5 crypted 
+    ''' </summary>
+    ''' <param name="input">input plain text  to compare with password in database</param>
+    ''' <returns>t</returns>
+    Public Function VerifyPassword(input As String) As Boolean
+
+        Return Password = CryptoPasswrod(input)
+    End Function
+    ''' <summary>
+    ''' Change  password
+    ''' </summary>
+    ''' <param name="newPassword"></param>
+    Public Sub ChangePassword(newPassword As String)
+        Password = CryptoPasswrod(newPassword)
+    End Sub
+    ''' <summary>
+    ''' crypto password using md5 crypto algorithm
+    ''' </summary>
+    ''' <param name="password">password need crypto</param>
+    ''' <returns></returns>
+    Public Function CryptoPasswrod(password As String) As String
+        Using md5Hash = MD5.Create()
+            Dim hash = GetMd5Hash(md5Hash, password)
+            Return hash
+        End Using
+
+    End Function
+
+
+    ''' <summary>
+    ''' MD5 encrypt password
+    ''' </summary>
+    ''' <param name="md5Hash">MD5 hash algorithm</param>
+    ''' <param name="input">string need to encrypt</param>
+    ''' <returns></returns>
+    Private Shared Function GetMd5Hash(md5Hash As MD5, input As String) As String
+
+        ' Convert the input string to a byte array and compute the hash.
+        Dim data As Byte() = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input))
+
+        ' Create a new Stringbuilder to collect the bytes
+        ' and create a string.
+        Dim sBuilder As New StringBuilder()
+
+        ' Loop through each byte of the hashed data 
+        ' and format each one as a hexadecimal string.
+        For i As Integer = 0 To data.Length - 1
+            sBuilder.Append(data(i).ToString("x2"))
+        Next
+
+        ' Return the hexadecimal string.
+        Return sBuilder.ToString()
+    End Function
+
+    ' Verify a hash against a string.
+    Private Shared Function VerifyMd5Hash(md5Hash As MD5, input As String, hash As String) As Boolean
+        ' Hash the input.
+        Dim hashOfInput As String = GetMd5Hash(md5Hash, input)
+
+        ' Create a StringComparer an compare the hashes.
+        Dim comparer As StringComparer = StringComparer.OrdinalIgnoreCase
+
+        If 0 = comparer.Compare(hashOfInput, hash) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+
+    ''' <summary>
+    ''' Check limit status leads count achieve to limit or not 
+    ''' </summary>
+    ''' <param name="limitStatus"></param>
+    ''' <param name="limitCount"></param>
+    ''' <returns>true is achived limit , false is not</returns>
+    Private Function LeadsCountAchiveLimited(limitStatus As LeadStatus, limitCount As Integer) As Boolean
+
+        Dim ctx = New Entities
+
+
+
+        Using ctx
+            Return ctx.Leads.Where(Function(l) l.Status = limitStatus And l.EmployeeName = Name).Count >= limitCount
+        End Using
+        ' use leads is better for unit test
+        ' Return Me.Leads.Where(Function(e) e.s)
+    End Function
+
+    ''' <summary>
+    ''' Check leads count achive follow up limit
+    ''' </summary>
+    ''' <returns>true is achived limit</returns>
+    Public Function IsAchieveFollowUpLimit() As Boolean
+        Return LeadsCountAchiveLimited(LeadStatus.Callback, FOLLOW_UP_COUNT_LIMIT)
+    End Function
+
+    ''' <summary>
+    ''' Check leads of employee achive loan mod limit
+    ''' </summary>
+    ''' <returns> true is achieve loan mod limit</returns>
+    Public Function IsAchieveLoanModLimit() As Boolean
+        Return LeadsCountAchiveLimited(LeadStatus.LoanMod, LOAN_MODS_COUNT_LIMIT)
     End Function
 
     ''' <summary>

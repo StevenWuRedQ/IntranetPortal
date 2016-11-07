@@ -2,7 +2,7 @@
 Imports DevExpress.Web.ASPxTreeList
 
 Public Class MgrEmployee
-    Inherits System.Web.UI.Page
+    Inherits PortalPage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
@@ -47,7 +47,7 @@ Public Class MgrEmployee
         emp.CellPhone = e.NewValues("Cellphone")
         emp.EmployeeSince = e.NewValues("EmployeeSince")
         emp.Picture = e.NewValues("Picture")
-        emp.Password = e.NewValues("Password")
+        emp.Password = emp.CryptoPasswrod(e.NewValues("Password"))
         emp.ReportTo = e.NewValues("ReportTo")
         emp.Description = e.NewValues("Description")
         emp.Active = e.NewValues("Active")
@@ -115,7 +115,11 @@ Public Class MgrEmployee
         Using Context As New Entities
             Dim emp = Context.Employees.Where(Function(em) em.EmployeeID = empID).FirstOrDefault
 
-            emp.Password = cnpsw.Text
+            ' emp.Password = cnpsw.Text
+            If (emp.Password <> cnpsw.Text) Then
+                emp.ChangePassword(cnpsw.Text)
+            End If
+
             If Context.GetValidationErrors().Count = 0 Then
                 Context.SaveChanges()
             Else

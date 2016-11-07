@@ -263,11 +263,11 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date of mortgage</label>
-                                    <input class="ss_form_input " ss-date ng-model="mortgage.Date_of_mortgage">
+                                    <input class="ss_form_input " pt-date ng-model="mortgage.Date_of_mortgage">
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " money-mask ng-model="mortgage.Amount">
+                                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="mortgage.Amount">
                                 </li>
                             </ul>
                         </div>
@@ -298,7 +298,7 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date filed</label>
-                                    <input class="ss_form_input " ss-date ng-model="lis_penden.Lis_Pendens_Date_filed">
+                                    <input class="ss_form_input " pt-date ng-model="lis_penden.Lis_Pendens_Date_filed">
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">County</label>
@@ -378,7 +378,7 @@
                             </div>
                             <div class="input-group col-sm-4" style="margin-top:10px" ng-show="n.status == 'ECB Resolution Received' ">
                                 <span class="input-group-addon">Received Date</span>
-                                <input class="form-control" type="text" ng-model="n.ReceivedDate" ss-date />
+                                <input class="form-control" type="text" ng-model="n.ReceivedDate" pt-date />
                             </div>
 
                             <div class="ss_form_item_line">
@@ -459,7 +459,7 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date filed</label>
-                                    <input class="ss_form_input " ss-date ng-model="ucc.UCC_Date_filed">
+                                    <input class="ss_form_input " pt-date ng-model="ucc.UCC_Date_filed">
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">CRFN Num</label>
@@ -495,11 +495,11 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date filed</label>
-                                    <input class="ss_form_input " ss-date ng-model="federalTaxLien.Federal_Tax_Liens_Date_filed">
+                                    <input class="ss_form_input " pt-date ng-model="federalTaxLien.Federal_Tax_Liens_Date_filed">
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " money-mask ng-model="federalTaxLien.Federal_Tax_Liens_Amount">
+                                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="federalTaxLien.Federal_Tax_Liens_Amount">
                                 </li>
                             </ul>
                         </div>
@@ -528,11 +528,11 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date filed</label>
-                                    <input class="ss_form_input " ss-date ng-model="mechanicsLien.Mechanics_Lien_Date_filed">
+                                    <input class="ss_form_input " pt-date ng-model="mechanicsLien.Mechanics_Lien_Date_filed">
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Amount</label>
-                                    <input class="ss_form_input " money-mask ng-model="mechanicsLien.Mechanics_Lien_Amount">
+                                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="mechanicsLien.Mechanics_Lien_Amount">
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Attorney</label>
@@ -560,11 +560,11 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date Of Document</label>
-                                    <input class="ss_form_input " ng-model="taxLiensSaleCert.Date_Of_Document" ss-date>
+                                    <input class="ss_form_input " ng-model="taxLiensSaleCert.Date_Of_Document" pt-date>
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date Of Recording</label>
-                                    <input class="ss_form_input " ng-model="taxLiensSaleCert.Date_Of_Recording" ss-date>
+                                    <input class="ss_form_input " ng-model="taxLiensSaleCert.Date_Of_Recording" pt-date>
                                 </li>
                             </ul>
                         </div>
@@ -588,7 +588,7 @@
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Date Filed</label>
-                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Date_Filed" ss-date>
+                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Date_Filed" pt-date>
                                 </li>
                                 <li class="ss_form_item ">
                                     <label class="ss_form_input_title ">Index</label>
@@ -601,7 +601,7 @@
                                 </li>
                                 <li class="ss_form_item " ng-show="vacateRelocationLien.Relocation_Lien">
                                     <label class="ss_form_input_title ">Relocation payoff</label>
-                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Relocation_Payoff" money-mask>
+                                    <input class="ss_form_input " ng-model="vacateRelocationLien.Relocation_Payoff" pt-number-mask maskformat='money'>
                                 </li>
                             </ul>
                         </div>

@@ -93,8 +93,8 @@ Namespace Controllers
         Public Function PostPerformance(<FromBody> data As Object) As IHttpActionResult
             Dim x = Request.Content
             If data IsNot Nothing Then
-                Dim startDate = New DateTime().Parse(data("StartDate").ToString)
-                Dim endDate = New DateTime().Parse(data("EndDate").ToString)
+                Dim startDate = DateTime.Parse(data("StartDate").ToString)
+                Dim endDate = DateTime.Parse(data("EndDate").ToString)
                 Dim empName = data("EmpName").ToString
                 Dim teamName = data("TeamName").ToString
 
@@ -103,6 +103,20 @@ Namespace Controllers
             End If
             Return Ok()
         End Function
+
+        <HttpGet>
+        <Route("api/PropertyOffer/UnderwritingNewoffer")>
+        Public Function getUnderwritingNewoffer() As IHttpActionResult
+
+            Using ctx As New PortalEntities
+                Dim result = ctx.UnderwritingTrackingViews.OrderBy(Function(a) a.BBLE)
+
+
+                Return Ok(result.ToArray)
+            End Using
+
+        End Function
+
 
     End Class
 End Namespace

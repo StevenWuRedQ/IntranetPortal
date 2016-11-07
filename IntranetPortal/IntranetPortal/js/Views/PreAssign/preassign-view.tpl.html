@@ -13,7 +13,7 @@
                
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing </label>
-                    <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date  />
+                    <input class="ss_form_input" ng-model="preAssign.ExpectedDate" pt-date  />
 
                 </li>
               
@@ -29,7 +29,7 @@
               
                 <li class="ss_form_item">
                     <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
-                    <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
+                    <input class="ss_form_input" ng-model="preAssign.DealAmount" pt-number-mask maskformat='money' />
                 </li>
                 <div ng-show="preAssign.NeedCheck">
                     <li class="ss_form_item">

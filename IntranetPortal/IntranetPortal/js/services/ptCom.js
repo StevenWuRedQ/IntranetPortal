@@ -1,6 +1,11 @@
 /**
- * a utility library provide common function in angular
- * 
+ * Author: Shaopeng Zhang
+ * Date: ???
+ * Description: An utility library provide common function in angular
+ * Update: 
+ *          2016/11/02:
+ *              1. add function parseSearch to get paires from Location.Search
+ *          
  **/
 
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
@@ -105,9 +110,16 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
-    this.confirm = function (message) {
-        return $rootScope.confirm(message);
+
+
+    this.confirm = function (message, callback) {
+        return $rootScope.confirm(message, callback);
     };
+
+    this.prompt = function (message, callback, showArea) {
+        return $rootScope.prompt(message, callback, showArea);
+    }
+
     this.addOverlay = function () {
         $rootScope.addOverlay();
     };
@@ -149,4 +161,71 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
+
+    /**
+     * assign all reference property from source to target
+     * @param: target
+     * @param: source
+     * @param: skipped //reference that will not be replaced by source
+     * @param: keeped // level two 
+     */
+    this.assignReference = function (target, source, /* optional*/ skipped, /* optional*/ keeped) {
+        var temp = {}; // object backup keeped values
+        var props = Object.keys(source);
+        for (i = 0; i < props.length ; i++) {
+            if (typeof source[props[i]] == 'object') {
+                // skip some reference
+                if (skipped && skipped.indexOf(props[i]) >= 0) {
+                    continue;
+                }
+                // keep some value inside reference, usually id or something ;)
+                if (keeped && keeped.length) {
+                    temp[props[i]] = {};
+                    for (j = 0; j < keeped.length; j++) {
+                        if (target[props[i]] && target[props[i]][keeped[j]]) {
+                            temp[props[i]][keeped[j]] = target[props[i]][keeped[j]];
+                        }
+                    }
+                }
+                target[props[i]] = source[props[i]];
+                if (keeped && keeped.length) {
+                    for (j = 0; j < keeped.length; j++) {
+                        if (temp[props[i]] && temp[props[i]][keeped[j]]) {
+                            target[props[i]][keeped[j]] = temp[props[i]][keeped[j]];
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    this.parseSearch = function (/*string*/ searchString) {
+        var result = {};
+        if (!searchString || typeof searchString != 'string')   //not a string
+            return result;
+        if (searchString.slice(0, 1) != '?')    //not a search string
+            return result;
+        var entriesString = searchString.slice(1).replace(/%20/g, '');  //remove leading ?
+        var entries = entriesString.split("&");
+        for (var i = 0; i < entries.length; i++) {
+            entry = entries[i].split("=");
+            if (entry.length > 1) {
+                result[entry[0]] = entry[1];
+            }
+        }
+        return result;
+    }
+
+    this.setGlobal = function (key, value) {
+        $rootScope.globaldata[key] = value
+    }
+
+    this.getGlobal = function (key) {
+        if ($rootScope.globaldata[key] != null) {
+            return $rootScope.globaldata[key];
+        } else {
+            return undefined;
+        }
+    }   
 }])

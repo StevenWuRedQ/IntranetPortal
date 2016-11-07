@@ -25,6 +25,7 @@ Imports System.Configuration
 <KnownType(GetType(ShortSaleFollowUpRule))>
 <KnownType(GetType(AuctionNotifyRule))>
 <KnownType(GetType(NewOfferNotifyRule))>
+<KnownType(GetType(EcourtCasesUpdateRule))>
 <DataContract>
 Public Class BaseRule
     <DataMember>
@@ -69,6 +70,39 @@ Public Class BaseRule
         InProcess
         Stoped
     End Enum
+
+    Public ReadOnly Property RuleData As Rule
+        Get
+            Return New Rule With {
+                .RuleId = RuleId,
+                .RuleName = RuleName,
+                .ExecuteNow = ExecuteNow,
+                .ExecuteOn = ExecuteOn,
+                .ExecuteOnWeekend = ExecuteOnWeekend,
+                .Period = Period,
+                .Status = Status
+                }
+        End Get
+    End Property
+End Class
+
+<DataContract>
+Public Class Rule
+    <DataMember>
+    Public Property RuleId As Guid
+    <DataMember>
+    Public Property RuleName As String
+    <DataMember>
+    Public Property ExecuteOn As TimeSpan
+    <DataMember>
+    Public Property Period As TimeSpan
+    <DataMember>
+    Public Property ExecuteNow As Boolean
+    <DataMember>
+    Public Property Status As BaseRule.RuleStatus = BaseRule.RuleStatus.Stoped
+    <DataMember>
+    Public Property ExecuteOnWeekend As Boolean
+
 End Class
 
 ''' <summary>
@@ -79,7 +113,33 @@ Public Class LeadsAndTaskRule
     Inherits BaseRule
 
     Public Overrides Sub Execute()
-        RunRules()
+        ' RunRules()
+        RunNewRules()
+    End Sub
+
+    Private Sub RunNewRules()
+        Dim ruleStartDate = (IntranetPortal.Core.PortalSettings.GetValue("LeadsRuleStartDate"))
+        Dim dtStart As DateTime
+        If ruleStartDate Is Nothing OrElse Not DateTime.TryParse(ruleStartDate, dtStart) Then
+            Throw New Exception("The rule start date is not valid.")
+        End If
+
+        Dim lds = Lead.GetAllAgentActiveLeads(dtStart)
+
+        Log("Total Active Leads: " & lds.Count)
+        Dim NoRulesUser = IntranetPortal.Core.PortalSettings.GetValue("NoRulesUser")
+
+        'Run Leads Rule
+        For Each ld In lds
+            Try
+                If Not NoRulesUser.Contains(ld.EmployeeName) Then
+                    LeadsEscalationRule.Execute(ld)
+                End If
+            Catch ex As Exception
+                Log("Exception when execute Leads Rule. BBLE: " & ld.BBLE & ", Employee: " & ld.EmployeeName & ", Exception: " & ex.Message, ex)
+            End Try
+        Next
+        Log("Leads Rule finished.")
     End Sub
 
     Private Sub RunRules()
@@ -621,9 +681,7 @@ Public Class CreateReminderBaseOnErrorProcess
             WorkflowService.StartTaskProcess("ReminderProcess", displayName, taskId, bble, mgr, "Important")
             Log("Reminder Process is created. pId: " & pId)
         Next
-
     End Sub
-
 End Class
 
 ''' <summary>
@@ -636,26 +694,31 @@ Public Class RecycleProcessRule
         Dim rleads = Core.RecycleLead.GetActiveRecycleLeads
 
         For Each rld In rleads
-            Try
-                Dim ld = Lead.GetInstance(rld.BBLE)
-
-                If ld.LastUserUpdate < rld.CreateDate Then
-                    'for now don not do real recycle.
-                    ld.Recycle("RecycleRule")
-
-                    rld.Recycle()
-                    Log("Leads is Recycled. BBLE: " & ld.BBLE)
-
-                    WorkflowService.ExpiredRecycleProcess(rld.BBLE)
-                Else
-                    'Since user did action against this leads, the Recycle action expired
-                    WorkflowService.ExpiredRecycleProcess(rld.BBLE)
-                    rld.Expire()
-                End If
-            Catch ex As Exception
-                Log("Error in recycle leads, BBLE: " & rld.BBLE, ex)
-            End Try
+            ExecuteRecycle(rld)
         Next
+    End Sub
+
+    Public Sub ExecuteRecycle(rld As Core.RecycleLead)
+        Try
+            Dim ld = Lead.GetInstance(rld.BBLE)
+
+            If ld.IsValidToRecycle Then
+                'for now don not do real recycle.
+                ld.Recycle("RecycleRule")
+
+                rld.Recycle()
+                Log("Leads is Recycled. BBLE: " & ld.BBLE)
+
+                WorkflowService.ExpiredRecycleProcess(rld.BBLE)
+            Else
+                'Since user did action against this leads, the Recycle action expired
+                WorkflowService.ExpiredRecycleProcess(rld.BBLE)
+                rld.Expire()
+                Log("Lead recycle is expired. BBLE: " & ld.BBLE)
+            End If
+        Catch ex As Exception
+            Log("Error in recycle leads, BBLE: " & rld.BBLE, ex)
+        End Try
     End Sub
 End Class
 

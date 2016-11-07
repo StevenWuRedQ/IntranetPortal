@@ -1,4 +1,4 @@
-﻿/* a directive to bind contact with it's contact it*/
+﻿// a directive to bind contact with it's contact it
 angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {

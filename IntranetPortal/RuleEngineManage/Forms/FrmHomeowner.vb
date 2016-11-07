@@ -14,17 +14,24 @@ Public Class FrmHomeowner
             End If
 
             Dim tp = Threading.ThreadPool.QueueUserWorkItem(Sub()
-                                                                initSSN(id)
+                                                                initData(id)
                                                             End Sub)
         Next
     End Sub
 
-    Public Sub initSSN(id As Integer)
+    Public Sub initData(id As Integer)
         If stopTag Then
             Return
         End If
 
-        HomeOwner.InitOwnerSSN(id)
+        If chkSSN.Checked Then
+            HomeOwner.InitOwnerSSN(id)
+        End If
+
+        If chkPhone.Checked Then
+            HomeOwner.InitPhoneNums(id)
+        End If
+
         UpdateCount()
     End Sub
 
@@ -68,7 +75,7 @@ Public Class FrmHomeowner
                 End If
 
                 Dim tp = Threading.ThreadPool.QueueUserWorkItem(Sub()
-                                                                    initSSN(id)
+                                                                    initData(id)
                                                                 End Sub)
             Next
         Else
@@ -78,7 +85,7 @@ Public Class FrmHomeowner
                                              Return
                                          End If
 
-                                         initSSN(id)
+                                         initData(id)
                                      Next
                                  End Sub)
             ts.Start()

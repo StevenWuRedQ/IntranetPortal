@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ArrayOfPortalNavItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
   <PortalNavItem Name="MyTaskMain" Text="Tasks &lt;span class='notification' style='display:none' id='SpanAmount_TotalTask'&gt;&lt;/span&gt;" NavigationUrl="/Task/MyTask.aspx" ShowAmount="false" ItemType="" Expanded="false">
     <level>1</level>
     <Applications>1,2</Applications>
@@ -32,7 +33,7 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="Agent" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent" Expanded="true">
+  <PortalNavItem Name="Agent" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent" Expanded="false">
     <level>1</level>
     <FontClass>
       <![CDATA[
@@ -138,7 +139,7 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="Manager" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false"  ItemType="Manager" Expanded="true">
+  <PortalNavItem Name="Manager" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false"  ItemType="Manager" Expanded="false">
     <Items>
       <PortalNavItem Name="Summary" Text="Summary" NavigationUrl="/SummaryPage.aspx" ShowAmount="false">
         <FontClass>
@@ -319,7 +320,6 @@
           <![CDATA[<i class="fa fa-group"></i>]]>
         </FontClass>
       </PortalNavItem>
-
       <PortalNavItem Name="Calendar" Text="Calendar" NavigationUrl="/Calendar.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
@@ -330,6 +330,75 @@
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
         </FontClass>
       </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+
+  <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
+    <UserRoles>OfficeManager-*</UserRoles>
+    <Items>
+    </Items>
+  </PortalNavItem>
+
+  <PortalNavItem Name="PreShortSale" Text="New Offer" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <!--Temporarily use Admin roles for Eviction-->
+    <UserRoles>OfficeManager-*,OfficeExecutive</UserRoles>
+    <Items>
+      <PortalNavItem Name="PSS-Summary" Text="Summary" NavigationUrl="/mydefault.aspx?name=NewOffer" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="PSS-MyFiles" Text="My Files" NavigationUrl="/NewOffer/NewOfferList.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bullseye"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+
+  <PortalNavItem Name="Underwriting" Text="Underwriting" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <UserRoles>Underwriter,Sales-Executive</UserRoles>
+    <Items>
+      <PortalNavItem Name="UnderwriterSummary2" Text="Summary" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+
+      <PortalNavItem Name="UnderwriterSummary" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pencil"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="UnderwriterSummary" Text="New Properties" NavigationUrl="/UnderWriter/DocSearchListNew.aspx" ShowAmount="false" Visible="false">
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pencil"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <!--<PortalNavItem Name="UnderwritingDocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
+        <UserRoles>Entity-Manager,Relation-Manager,Underwriter,Sales-Executive,DocSearch-Outside</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-search-plus"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="UnderwritingNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+        <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-star"></i>]]>
+        </FontClass>
+        <FrontButton>
+          <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
+        </FrontButton>
+      </PortalNavItem>
+      <PortalNavItem Name="UnderwritingReport" Text="Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=leadsDocSearch" ShowAmount="false">
+        <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-line-chart"></i>]]>
+        </FontClass>
+      </PortalNavItem>-->
     </Items>
   </PortalNavItem>
 
@@ -453,93 +522,6 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>Legal-*,ShortSale-Manager</UserRoles>
-    <Applications>1</Applications>
-    <Items>
-      <PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalSummaryUI.aspx" ShowAmount="false">
-        <UserRoles></UserRoles>
-        <FontClass>
-          <![CDATA[<i class="fa fa-university"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-FollowUps" Text="Follow Up" NavigationUrl="/LegalUI/LegalFollowUps.aspx" ShowAmount="true" AmountManageClass="LegalCaseManage">
-        <UserRoles></UserRoles>
-        <FontClass>
-          <![CDATA[<i class="fa fa-rotate-right"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-LawReferences" Text="Law References" NavigationUrl="/LegalUI/CaseLawRef.aspx" ShowAmount="true" AmountManageClass="LegalCaseManage">
-        <UserRoles></UserRoles>
-        <FontClass>
-          <![CDATA[<i class="fa fa-bullhorn"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-ManagerPreview" Text="New Cases" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=0" ShowAmount="true">
-        <FontClass>
-          <![CDATA[<i class="fa fa-star"></i>]]>
-        </FontClass>
-        <FrontButton>
-          <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
-        </FrontButton>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-LegalResearch" Text="Research" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=1" ShowAmount="true">
-        <FontClass>
-          <![CDATA[<i class="fa fa-codepen"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-ManagerAssign" Text="Review" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=2" ShowAmount="true">
-        <FontClass>
-          <![CDATA[<i class="fa fa-university"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-AttorneyHandle" Text="In Court" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true&amp;lc=3" ShowAmount="true">
-        <FontClass>
-          <![CDATA[<i class="fa fa-check"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-Closed" Text="Closed" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true&amp;lc=4" ShowAmount="true">
-        <FontClass>
-          <![CDATA[<i class="fa fa-check-circle"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-Report" Text="Custom Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=legal" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-table"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-Parties" Text="Parties Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=legalParties" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-bar-chart"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="Legal-Settings" Text="Settings" NavigationUrl="/ManagementUI/LegalManagement.aspx" ShowAmount="false">
-        <UserRoles>Legal-Manager</UserRoles>
-        <FontClass>
-          <![CDATA[<i class="fa fa-cog"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-    </Items>
-
-  </PortalNavItem>
-
-  <PortalNavItem Name="PreShortSale" Text="New Offer" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <!--Temporarily use Admin roles for Eviction-->    
-    <UserRoles>OfficeManager-*,OfficeExecutive</UserRoles>
-    <Items>
-      <PortalNavItem Name="PSS-Summary" Text="Summary" NavigationUrl="/mydefault.aspx?name=NewOffer" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-university"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="PSS-MyFiles" Text="My Files" NavigationUrl="/NewOffer/NewOfferList.aspx" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-bullseye"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-    </Items>
-  </PortalNavItem>
-
   <PortalNavItem Name="Title" Text="Title" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Title-*</UserRoles>
     <Applications>1</Applications>
@@ -619,6 +601,76 @@
     </Items>
   </PortalNavItem>
 
+  <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <UserRoles>Legal-*,ShortSale-Manager</UserRoles>
+    <Applications>1</Applications>
+    <Items>
+      <PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalSummaryUI.aspx" ShowAmount="false">
+        <UserRoles></UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-FollowUps" Text="Follow Up" NavigationUrl="/LegalUI/LegalFollowUps.aspx" ShowAmount="true" AmountManageClass="LegalCaseManage">
+        <UserRoles></UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-rotate-right"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-LawReferences" Text="Law References" NavigationUrl="/LegalUI/CaseLawRef.aspx" ShowAmount="true" AmountManageClass="LegalCaseManage">
+        <UserRoles></UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-bullhorn"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-ManagerPreview" Text="New Cases" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=0" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-star"></i>]]>
+        </FontClass>
+        <FrontButton>
+          <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
+        </FrontButton>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-LegalResearch" Text="Research" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=1" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-codepen"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-ManagerAssign" Text="Review" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=2" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-AttorneyHandle" Text="In Court" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true&amp;lc=3" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-Closed" Text="Closed" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true&amp;lc=4" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-Report" Text="Custom Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=legal" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-table"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-Parties" Text="Parties Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=legalParties" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bar-chart"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-Settings" Text="Settings" NavigationUrl="/ManagementUI/LegalManagement.aspx" ShowAmount="false">
+        <UserRoles>Legal-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-cog"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+
+  </PortalNavItem>
+
   <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Construction-*</UserRoles>
     <Items>
@@ -650,25 +702,8 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
-    <UserRoles>OfficeManager-*,OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
-    <Items>
-    </Items>
-  </PortalNavItem>
-  <PortalNavItem Name="Underwriter" Text="Underwriter" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>Underwriter</UserRoles>
-    <Items>
-      <PortalNavItem Name="UnderwriterSummary" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
-        <UserRoles>Underwriter</UserRoles>
-        <FontClass>
-          <![CDATA[<i class="fa fa-pencil"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-    </Items>
-  </PortalNavItem>
-
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <UserRoles>OfficeManager-*,Entity-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager</UserRoles>
+    <UserRoles>DocSearch-Outside,OfficeManager-*,Entity-Manager,ShortSale-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <UserRoles>OfficeManager-*</UserRoles>
@@ -706,19 +741,26 @@
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ReportCalendar" Text="Entity Manage" NavigationUrl="/ManagementUI/BuyerEntiyManage.aspx" ShowAmount="false">
+      <PortalNavItem Name="EntityManage" Text="Entity Manage" NavigationUrl="/ManagementUI/BuyerEntiyManage.aspx" ShowAmount="false">
         <UserRoles>Entity-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-building"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="CorpList" Text="Entity List" NavigationUrl="/popupControl/buyerentitypopupcontent.aspx" ShowAmount="false" visible="false">
+        <UserRoles>Entity-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="DocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
-        <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
+        <UserRoles>Entity-Manager,Relation-Manager,Sales-Executive,DocSearch-Outside,Underwriter</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
         </FontClass>
         <Items>
           <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+            <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
             <FontClass>
               <![CDATA[<i class="fa fa-star"></i>]]>
             </FontClass>
@@ -727,6 +769,7 @@
             </FrontButton>
           </PortalNavItem>
           <PortalNavItem Name="AgentNewLeads" Text="Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=leadsDocSearch" ShowAmount="false">
+            <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
             <FontClass>
               <![CDATA[<i class="fa fa-line-chart"></i>]]>
             </FontClass>
@@ -734,6 +777,7 @@
         </Items>
       </PortalNavItem>
       <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
+        <UserRoles>OfficeManager-*,Complaints-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
@@ -762,6 +806,7 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+
     </Items>
   </PortalNavItem>
 

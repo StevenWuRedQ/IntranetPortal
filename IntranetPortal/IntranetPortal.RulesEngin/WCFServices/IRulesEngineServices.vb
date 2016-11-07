@@ -20,19 +20,20 @@ Imports System.Runtime.Serialization
 <ServiceKnownType(GetType(ConstructionNotifyRule))>
 <ServiceKnownType(GetType(AutoAssignRule))>
 <ServiceKnownType(GetType(NewOfferNotifyRule))>
+<ServiceKnownType(GetType(EcourtCasesUpdateRule))>
 Public Interface IRulesEngineServices
 
     <OperationContract()>
     <ServiceKnownType(GetType(ScanECourtsRule))>
-    Function GetRules() As BaseRule()
+    Function GetRules() As Rule()
 
     <OperationContract()>
     <ServiceKnownType(GetType(ScanECourtsRule))>
-    Function GetRule(ruleName As String) As BaseRule
+    Function GetRule(ruleName As String) As Rule
 
     <OperationContract()>
     <ServiceKnownType(GetType(ScanECourtsRule))>
-    Function GetRuleById(ruleId As String) As BaseRule
+    Function GetRuleById(ruleId As String) As Rule
 
     <OperationContract()>
     Function GetRulesString() As String

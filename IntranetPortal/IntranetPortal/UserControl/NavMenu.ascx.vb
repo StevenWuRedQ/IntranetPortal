@@ -11,105 +11,105 @@ Public Class NavMenu
     Public Property PortalMenuItems As List(Of PortalNavItem)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        PortalMenuItems = LoadMenuFromXml(HttpContext.Current)
+        PortalMenuItems = PortalNavManage.LoadMenuFromXml(HttpContext.Current)
 
         'InitialMenu()
         'WriteXML()
 
     End Sub
 
-    Shared Sub AddTeamsMenu(menus As List(Of PortalNavItem))
-        Dim teamList As New List(Of PortalNavItem)
+    'Shared Sub AddTeamsMenu(menus As List(Of PortalNavItem))
+    '    Dim teamList As New List(Of PortalNavItem)
 
-        For Each t In Team.GetAllTeams()
-            Dim item As New PortalNavItem
-            item.Name = String.Format("Team-{0}-Management", t.TeamId)
-            item.Text = t.Name
-            item.NavigationUrl = "#"
-            item.ShowAmount = True
-            BuildTeamMenu(item, t.TeamId, t.Name)
-            item.UserRoles = "OfficeManager-" & t.Name
+    '    For Each t In Team.GetActiveTeams()
+    '        Dim item As New PortalNavItem
+    '        item.Name = String.Format("Team-{0}-Management", t.TeamId)
+    '        item.Text = t.Name
+    '        item.NavigationUrl = "#"
+    '        item.ShowAmount = True
+    '        BuildTeamMenu(item, t.TeamId, t.Name)
+    '        item.UserRoles = "OfficeManager-" & t.Name
 
-            teamList.Add(item)
-        Next
+    '        teamList.Add(item)
+    '    Next
 
-        Dim teamMgr = menus.Where(Function(mi) mi.Name = "OfficeManagement").Single
-        teamMgr.Items.AddRange(teamList)
-    End Sub
+    '    Dim teamMgr = menus.Where(Function(mi) mi.Name = "OfficeManagement").Single
+    '    teamMgr.Items.AddRange(teamList)
+    'End Sub
 
-    Shared Sub BuildTeamMenu(item As PortalNavItem, teamId As Integer, teamName As String)
-        If item.Items Is Nothing Then
-            item.Items = New List(Of PortalNavItem)
-        End If
+    'Shared Sub BuildTeamMenu(item As PortalNavItem, teamId As Integer, teamName As String)
+    '    If item.Items Is Nothing Then
+    '        item.Items = New List(Of PortalNavItem)
+    '    End If
 
-        item.Items.Add(GetTeamAssignItem(teamId, teamName, "fa-check-square-o"))
-        item.Items.Add(GetTeamNavItem("New Leads", teamId, "fa-star"))
-        item.Items.Add(GetTeamNavItem("Hot Leads", teamId, "glyphicon glyphicon-fire"))
-        item.Items.Add(GetTeamNavItem("LoanMod", teamId, "fa-money"))
-        item.Items.Add(GetTeamNavItem("Warm", teamId, "fa-circle-o"))
-        item.Items.Add(GetTeamNavItem("Follow Up", teamId, "fa-rotate-right"))
-        item.Items.Add(GetTeamNavItem("Door Knock", teamId, "fa-sign-in"))
-        item.Items.Add(GetTeamNavItem("In Process", teamId, "fa-refresh"))
-        item.Items.Add(GetTeamNavItem("Dead Lead", teamId, "fa-times-circle"))
-        item.Items.Add(GetTeamNavItem("Closed", teamId, "fa-check-circle"))
+    '    item.Items.Add(GetTeamAssignItem(teamId, teamName, "fa-check-square-o"))
+    '    item.Items.Add(GetTeamNavItem("New Leads", teamId, "fa-star"))
+    '    item.Items.Add(GetTeamNavItem("Hot Leads", teamId, "glyphicon glyphicon-fire"))
+    '    item.Items.Add(GetTeamNavItem("LoanMod", teamId, "fa-money"))
+    '    item.Items.Add(GetTeamNavItem("Warm", teamId, "fa-circle-o"))
+    '    item.Items.Add(GetTeamNavItem("Follow Up", teamId, "fa-rotate-right"))
+    '    item.Items.Add(GetTeamNavItem("Door Knock", teamId, "fa-sign-in"))
+    '    item.Items.Add(GetTeamNavItem("In Process", teamId, "fa-refresh"))
+    '    item.Items.Add(GetTeamNavItem("Dead Lead", teamId, "fa-times-circle"))
+    '    item.Items.Add(GetTeamNavItem("Closed", teamId, "fa-check-circle"))
 
-    End Sub
+    'End Sub
 
-    Shared Function GetTeamNavItem(type As String, teamId As Integer, fontClass As String)
-        Dim item As New PortalNavItem
-        item.Name = String.Format("Team-{0}-{1}", teamId, type.Replace(" ", ""))
-        item.Text = type
-        item.NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}", type, teamId)
-        item.ShowAmount = True
-        item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
+    'Shared Function GetTeamNavItem(type As String, teamId As Integer, fontClass As String)
+    '    Dim item As New PortalNavItem
+    '    item.Name = String.Format("Team-{0}-{1}", teamId, type.Replace(" ", ""))
+    '    item.Text = type
+    '    item.NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}", type, teamId)
+    '    item.ShowAmount = True
+    '    item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
 
-        If type = "In Process" Then
-            item.Items = New List(Of PortalNavItem)
-            item.Items.AddRange({New PortalNavItem With {
-                                .Name = String.Format("{0}-ShortSale", item.Name),
-                                .Text = "Short Sale",
-                                .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=ShortSale", type, teamId), '"/MgrViewLeads.aspx?t=ShortSale&amp;teamId=" & teamId,
-                                .ShowAmount = True,
-                                .FontClass = "<i class=""fa fa-line-chart""></i>",
-                                .AmountManageClass = "LeadManage"
-                                }, New PortalNavItem With {
-                                .Name = String.Format("{0}-Eviction", item.Name),
-                                .Text = "Eviction",
-                                .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Eviction", type, teamId),
-                                .ShowAmount = True,
-                                .FontClass = "<i class=""fa fa-sign-out""></i>",
-                                .AmountManageClass = "LeadManage"
-                                }, New PortalNavItem With {
-                                .Name = String.Format("{0}-Construction", item.Name),
-                                .Text = "Construction",
-                                .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Construction", type, teamId),
-                                .ShowAmount = True,
-                                .FontClass = "<i class=""fa  fa-wrench""></i>",
-                                .AmountManageClass = "LeadManage"
-                                }, New PortalNavItem With {
-                                .Name = String.Format("{0}-Legal", item.Name),
-                                .Text = "Litigation",
-                                .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Legal", type, teamId),
-                                .ShowAmount = True,
-                                .FontClass = "<i class=""fa fa-university""></i>",
-                                .AmountManageClass = "LeadManage"
-                                }
-                           })
-        End If
+    '    If type = "In Process" Then
+    '        item.Items = New List(Of PortalNavItem)
+    '        item.Items.AddRange({New PortalNavItem With {
+    '                            .Name = String.Format("{0}-ShortSale", item.Name),
+    '                            .Text = "Short Sale",
+    '                            .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=ShortSale", type, teamId), '"/MgrViewLeads.aspx?t=ShortSale&amp;teamId=" & teamId,
+    '                            .ShowAmount = True,
+    '                            .FontClass = "<i class=""fa fa-line-chart""></i>",
+    '                            .AmountManageClass = "LeadManage"
+    '                            }, New PortalNavItem With {
+    '                            .Name = String.Format("{0}-Eviction", item.Name),
+    '                            .Text = "Eviction",
+    '                            .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Eviction", type, teamId),
+    '                            .ShowAmount = True,
+    '                            .FontClass = "<i class=""fa fa-sign-out""></i>",
+    '                            .AmountManageClass = "LeadManage"
+    '                            }, New PortalNavItem With {
+    '                            .Name = String.Format("{0}-Construction", item.Name),
+    '                            .Text = "Construction",
+    '                            .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Construction", type, teamId),
+    '                            .ShowAmount = True,
+    '                            .FontClass = "<i class=""fa  fa-wrench""></i>",
+    '                            .AmountManageClass = "LeadManage"
+    '                            }, New PortalNavItem With {
+    '                            .Name = String.Format("{0}-Legal", item.Name),
+    '                            .Text = "Litigation",
+    '                            .NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}&amp;t=Legal", type, teamId),
+    '                            .ShowAmount = True,
+    '                            .FontClass = "<i class=""fa fa-university""></i>",
+    '                            .AmountManageClass = "LeadManage"
+    '                            }
+    '                       })
+    '    End If
 
-        Return item
-    End Function
+    '    Return item
+    'End Function
 
-    Shared Function GetTeamAssignItem(teamId As Integer, teamName As String, fontClass As String)
-        Dim item As New PortalNavItem
-        item.Name = String.Format("Team-{0}-AssignLeads", teamId)
-        item.Text = "Assign Leads"
-        item.NavigationUrl = String.Format("/Management/LeadsManagement.aspx?office={0}&team={1}", teamName, teamId)
-        item.ShowAmount = True
-        item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
+    'Shared Function GetTeamAssignItem(teamId As Integer, teamName As String, fontClass As String)
+    '    Dim item As New PortalNavItem
+    '    item.Name = String.Format("Team-{0}-AssignLeads", teamId)
+    '    item.Text = "Assign Leads"
+    '    item.NavigationUrl = String.Format("/Management/LeadsManagement.aspx?office={0}&team={1}", teamName, teamId)
+    '    item.ShowAmount = True
+    '    item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
 
-        Return item
-    End Function
+    '    Return item
+    'End Function
 
     Public Sub InitialMenu()
         Dim item As New PortalNavItem
@@ -128,14 +128,14 @@ Public Class NavMenu
         file.Close()
     End Sub
 
-    Public Shared Function LoadMenuFromXml(context As HttpContext) As List(Of PortalNavItem)
-        Dim reader As New System.Xml.Serialization.XmlSerializer(GetType(List(Of PortalNavItem)))
-        Dim file As New System.IO.StreamReader(context.Server.MapPath(XmlDataFile))
-        Dim menuItems = CType(reader.Deserialize(file), List(Of PortalNavItem))
-        file.Close()
-        AddTeamsMenu(menuItems)
-        Return menuItems
-    End Function
+    'Public Shared Function LoadMenuFromXml(context As HttpContext) As List(Of PortalNavItem)
+    '    Dim reader As New System.Xml.Serialization.XmlSerializer(GetType(List(Of PortalNavItem)))
+    '    Dim file As New System.IO.StreamReader(context.Server.MapPath(XmlDataFile))
+    '    Dim menuItems = CType(reader.Deserialize(file), List(Of PortalNavItem))
+    '    file.Close()
+    '    AddTeamsMenu(menuItems)
+    '    Return menuItems
+    'End Function
 End Class
 
 Public Class RefreshLeadsCountHandler
@@ -163,7 +163,7 @@ Public Class RefreshLeadsCountHandler
     End Property
 
     Public Sub ProcessRequest(context As HttpContext) Implements IHttpHandler.ProcessRequest
-        Dim items = GetAllMenuItems(NavMenu.LoadMenuFromXml(context), context)
+        Dim items = PortalNavManage.GetMyMenuItems(PortalNavManage.LoadMenuFromXml(context), context)
         Dim results = From item In items.Where(Function(nav) nav.ShowAmount = True)
                      Select New With {
                          .Name = item.LeadsCountSpanId,

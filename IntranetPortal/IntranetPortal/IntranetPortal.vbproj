@@ -546,6 +546,13 @@
     <Compile Include="AutoDialer\DialerAjaxService.svc.vb">
       <DependentUpon>DialerAjaxService.svc</DependentUpon>
     </Compile>
+    <Compile Include="AutoDialer\DialPhoneList.aspx.designer.vb">
+      <DependentUpon>DialPhoneList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AutoDialer\DialPhoneList.aspx.vb">
+      <DependentUpon>DialPhoneList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="AutoDialer\Twiml.aspx.designer.vb">
       <DependentUpon>Twiml.aspx</DependentUpon>
     </Compile>
@@ -613,6 +620,9 @@
     <Compile Include="CodeFolder\Lead.vb" />
     <Compile Include="CodeFolder\LeadManage.vb" />
     <Compile Include="CodeFolder\LeadsActivityLog.vb" />
+    <Compile Include="CodeFolder\LeadsBasePage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CodeFolder\LeadsSearchTask.vb" />
     <Compile Include="CodeFolder\LeadsStatusLog.vb" />
     <Compile Include="CodeFolder\LegalCaseManage.vb" />
@@ -625,6 +635,7 @@
     <Compile Include="CodeFolder\PortalLisPen.vb" />
     <Compile Include="CodeFolder\PortalMembership.vb" />
     <Compile Include="CodeFolder\PortalNavItem.vb" />
+    <Compile Include="CodeFolder\PortalNavManage.vb" />
     <Compile Include="CodeFolder\PortalPage.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -633,6 +644,9 @@
     <Compile Include="CodeFolder\PropertyOfferManage.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
+    <Compile Include="CodeFolder\RoleBasePage.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
     <Compile Include="CodeFolder\SummaryItemBase.vb">
@@ -641,6 +655,7 @@
     <Compile Include="CodeFolder\SystemModelSetting.vb" />
     <Compile Include="CodeFolder\Team.vb" />
     <Compile Include="CodeFolder\TitleManage.vb" />
+    <Compile Include="CodeFolder\UnderWritingManager.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserFollowUpManage.vb" />
     <Compile Include="CodeFolder\UserInTeam.vb" />
@@ -784,6 +799,7 @@
     </Compile>
     <Compile Include="Controllers\AuctionController.vb" />
     <Compile Include="Controllers\AuditLogController.vb" />
+    <Compile Include="Controllers\AutoDialerController.vb" />
     <Compile Include="Controllers\BuildingCodes1Controller.vb" />
     <Compile Include="Controllers\BusinessCheckController.vb" />
     <Compile Include="Controllers\BusinessFormController.vb" />
@@ -1142,6 +1158,27 @@
     </Compile>
     <Compile Include="EmailTemplate\DeadleadsReport.ascx.vb">
       <DependentUpon>DeadleadsReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferPendingDue.ascx.designer.vb">
+      <DependentUpon>NewOfferPendingDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferPendingDue.ascx.vb">
+      <DependentUpon>NewOfferPendingDue.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferInProcessDue.ascx.designer.vb">
+      <DependentUpon>NewOfferInProcessDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferInProcessDue.ascx.vb">
+      <DependentUpon>NewOfferInProcessDue.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferCompletedDue.ascx.designer.vb">
+      <DependentUpon>NewOfferCompletedDue.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\NewOfferCompletedDue.ascx.vb">
+      <DependentUpon>NewOfferCompletedDue.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EmailTemplate\NewOfferNotification.ascx.designer.vb">
@@ -1762,13 +1799,6 @@
       <DependentUpon>NewOfferPreview.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="NewOffer\NewOfferTracking.aspx.designer.vb">
-      <DependentUpon>NewOfferTracking.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="NewOffer\NewOfferTracking.aspx.vb">
-      <DependentUpon>NewOfferTracking.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.designer.vb">
       <DependentUpon>LoadFileFromSharepoint.aspx</DependentUpon>
     </Compile>
@@ -1907,6 +1937,13 @@
     </Compile>
     <Compile Include="PopupControl\testPopup.aspx.vb">
       <DependentUpon>testPopup.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PopupControl\UnderwritingSummary.aspx.designer.vb">
+      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\UnderwritingSummary.aspx.vb">
+      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\VendorsPopup.ascx.designer.vb">
@@ -2424,6 +2461,13 @@
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UnderWriter\DocSearchListNew.aspx.designer.vb">
+      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\DocSearchListNew.aspx.vb">
+      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UnderWriter\DocSearchList.aspx.designer.vb">
       <DependentUpon>DocSearchList.aspx</DependentUpon>
     </Compile>
@@ -2431,11 +2475,11 @@
       <DependentUpon>DocSearchList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="UnderWriter\UnderwriterClac.aspx.designer.vb">
-      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+    <Compile Include="UnderWriter\UnderwritingTracking.aspx.designer.vb">
+      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UnderWriter\UnderwriterClac.aspx.vb">
-      <DependentUpon>UnderwriterClac.aspx</DependentUpon>
+    <Compile Include="UnderWriter\UnderwritingTracking.aspx.vb">
+      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
@@ -2648,6 +2692,13 @@
       <DependentUpon>TitlesByCategoryItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\SummaryItem\UnderWriterItem.ascx.designer.vb">
+      <DependentUpon>UnderWriterItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\UnderWriterItem.ascx.vb">
+      <DependentUpon>UnderWriterItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\TitleInLeadsControl.ascx.designer.vb">
       <DependentUpon>TitleInLeadsControl.ascx</DependentUpon>
     </Compile>
@@ -2759,6 +2810,7 @@
     <Content Include="AutoDialer\CallManagement.aspx" />
     <Content Include="AutoDialer\Dialer.aspx" />
     <Content Include="AutoDialer\DialerAjaxService.svc" />
+    <Content Include="AutoDialer\DialPhoneList.aspx" />
     <Content Include="AutoDialer\Twiml.aspx" />
     <Content Include="BingViewMap.aspx" />
     <Content Include="bower_components\angular-animate-css\build\nga.all.css" />
@@ -6883,6 +6935,9 @@
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
     <Content Include="EmailTemplate\AuctionDailyReport.ascx" />
     <Content Include="EmailTemplate\DeadleadsReport.ascx" />
+    <Content Include="EmailTemplate\NewOfferPendingDue.ascx" />
+    <Content Include="EmailTemplate\NewOfferInProcessDue.ascx" />
+    <Content Include="EmailTemplate\NewOfferCompletedDue.ascx" />
     <Content Include="EmailTemplate\NewOfferNotification.ascx" />
     <Content Include="EmailTemplate\PreSignNotify.ascx" />
     <Content Include="EmailTemplate\ShortSaleUserFollowUp.ascx" />
@@ -7199,9 +7254,12 @@
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\common\portalRouteProvider.js" />
     <Content Include="js\common\PortalUIRouteProvider.js" />
+    <Content Include="js\components\ptAudit.js" />
+    <Content Include="js\components\ptHomeowner.js" />
+    <Content Include="js\components\ptItemList.js" />
+    <Content Include="js\components\ptSelectableInput.js" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
-    <Content Include="js\controllers\es6\TestController.js" />
     <Content Include="js\controllers\LeadTaxSearchController.js" />
     <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\PreSignController.js" />
@@ -7211,15 +7269,14 @@
     <Content Include="js\controllers\TitleController.js" />
     <Content Include="js\controllers\UnderwriterController.js" />
     <Content Include="js\controllers\UnderwritingRequestController.js" />
+    <Content Include="js\controllers\UnderwritingSummaryController.js" />
     <Content Include="js\controllers\VendorController.js" />
     <Content Include="js\directives\auditLogs.js" />
     <Content Include="js\directives\bindId.js" />
     <Content Include="js\directives\initGrid.js" />
-    <Content Include="js\directives\inputMask.js" />
-    <Content Include="js\directives\integerMask.js" />
-    <Content Include="js\directives\moneyMask.js" />
-    <Content Include="js\directives\numberMask.js" />
-    <Content Include="js\directives\percentMask.js" />
+    <Content Include="js\directives\ptEditableDiv.js" />
+    <Content Include="js\directives\ptInputMask.js" />
+    <Content Include="js\directives\ptNumberMask.js" />
     <Content Include="js\directives\preCondition.js" />
     <Content Include="js\directives\ptAdd.js" />
     <Content Include="js\directives\ptCollapse.js" />
@@ -7231,12 +7288,11 @@
     <Content Include="js\directives\ptInitBind.js" />
     <Content Include="js\directives\ptInitModel.js" />
     <Content Include="js\directives\ptLink.js" />
+    <Content Include="js\directives\ptNumberMaskPatch.js" />
     <Content Include="js\directives\ptRadio.js" />
-    <Content Include="js\directives\radioInit.js" />
-    <Content Include="js\directives\ssDate.js" />
-    <Content Include="js\e2etest\conf.js" />
-    <Content Include="js\e2etest\ContructionController.js" />
-    <Content Include="js\filters.js" />
+    <Content Include="js\directives\ptRadioInit.js" />
+    <Content Include="js\directives\ptDate.js" />
+    <Content Include="js\directives\ptRequired.js" />
     <Content Include="js\filters\booleanToString.js" />
     <Content Include="js\filters\ByContact.js" />
     <Content Include="js\filters\percentage.js" />
@@ -7261,7 +7317,6 @@
     <Content Include="js\services\ptPortalHttpInterceptor.js" />
     <Content Include="js\services\ptShortsSaleService.js" />
     <Content Include="js\services\ptTime.js" />
-    <Content Include="js\test\models\DivError.spec.js" />
     <Content Include="js\models\DocNewVersionConfig.js" />
     <Content Include="js\models\DocSearchEavesdropper.js" />
     <Content Include="js\models\DxGridModel.js" />
@@ -7279,23 +7334,25 @@
     <Content Include="js\models\Team.js" />
     <Content Include="js\models\Wizard.js" />
     <Content Include="js\models\WizardStep.js" />
-    <Content Include="js\PortalHttpFactory.js" />
-    <Content Include="js\test\models\PreSign.spec.js" />
-    <Content Include="js\test\models\ptDocSearch.spec.js" />
+    <Content Include="js\services\ptUnderwritingCaculator.js" />
+    <Content Include="js\templates\ptAudit.html" />
+    <Content Include="js\templates\ptItemList.html" />
+    <Content Include="js\test\model.PreSign.spec.js" />
+    <Content Include="js\test\model.underwriting.spec.js" />
+    <Content Include="js\test\service.ptDocSearch.spec.js" />
     <Content Include="js\Views\AuditLogs\AuditLogs.tpl.html" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.html" />
     <Content Include="js\templates\ptEditor.html" />
     <Content Include="js\test\conf.js" />
-    <Content Include="js\test\controllers\BuyerEntityControllerSpec.js" />
-    <Content Include="js\test\controllers\ConstructionControllerSpec.js" />
-    <Content Include="js\test\controllers\PreDealCtrlSpec.js" />
-    <Content Include="js\test\directiveSpec.js" />
-    <Content Include="js\test\controllers\NewOfferCtrlSpec.js" />
-    <Content Include="js\test\ptFilesDirectiveSpec.js" />
-    <Content Include="js\test\servicesSpec.js" />
+    <Content Include="js\test\controller.ConstructionController.spec.js" />
+    <Content Include="js\test\model.PreDealCtrl.spec.js" />
+    <Content Include="js\test\directive.spec.js" />
+    <Content Include="js\test\directive.ptFilesDirective.spec.js" />
+    <Content Include="js\test\services.spec.js" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.js" />
     <Content Include="js\Views\LeadDocSearch\NewDsSummary.js" />
     <Content Include="js\Views\LeadDocSearch\new_ds_summary.html" />
+    <Content Include="js\Views\LeadDocSearch\searchOwner.tpl.html" />
     <Content Include="js\Views\NewOffer\newoffer-assigncorp-tpl.bak.html" />
     <Content Include="js\Views\NewOffer\newoffer.tpl.html" />
     <Content Include="js\Views\NewOffer\index.tpl.html" />
@@ -7304,10 +7361,13 @@
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
+    <Content Include="js\Views\Underwriter\archived.tpl.html" />
+    <Content Include="js\Views\Underwriter\audit.tpl.html" />
     <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
     <Content Include="js\Views\Underwriter\tables.tpl.html" />
     <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
     <Content Include="js\Views\Underwriter\datainput.tpl.html" />
+    <Content Include="js\Views\Underwriter\underwriting.tpl.html" />
     <Content Include="js\Views\Underwriter\underwriting_request.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
@@ -7380,7 +7440,6 @@
     <Content Include="NewOffer\NewOfferList.aspx" />
     <Content Include="NewOffer\NewOfferPreview.aspx" />
     <Content Include="NewOffer\Templates\offer-business-form.html" />
-    <Content Include="NewOffer\NewOfferTracking.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />
@@ -7488,6 +7547,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="NewOffer\ShortSaleNewOffer.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
+    <Content Include="PopupControl\UnderwritingSummary.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
@@ -7503,7 +7563,6 @@
     <Content Include="CustomReport\ReportWizard.aspx" />
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
-    <Content Include="js\directives.js" />
     <Content Include="Content.Master" />
     <Content Include="css\Web.config" />
     <Content Include="pdfViewer\LICENSE" />
@@ -7816,7 +7875,7 @@
     <Content Include="bower_components\lodash\README.md" />
     <Content Include="bower_components\lodash\vendor\backbone\LICENSE" />
     <Content Include="bower_components\lodash\vendor\underscore\LICENSE" />
-    <Content Include="js\test\models\dxModel.spec.js" />
+    <Content Include="js\test\model.dxModel.spec.js" />
     <Content Include="bower_components\moment\.bower.json" />
     <Content Include="bower_components\moment\bower.json" />
     <Content Include="bower_components\moment\CHANGELOG.md" />
@@ -7862,14 +7921,16 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
+    <Content Include="UnderWriter\DocSearchListNew.aspx" />
     <Content Include="UnderWriter\DocSearchList.aspx" />
-    <Content Include="UnderWriter\UnderwriterClac.aspx" />
+    <Content Include="UnderWriter\UnderwritingTracking.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem2.ascx" />
     <Content Include="UserControl\SummaryItem\NewOfferItem.ascx" />
     <Content Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx" />
+    <Content Include="UserControl\SummaryItem\UnderWriterItem.ascx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="App_Data\SpecificPerformanceComplaintTemplate.docx" />
     <Content Include="App_Data\QuietTitleComplantTemplate.docx" />
@@ -8138,7 +8199,6 @@
     <Content Include="bower_components\prototypejs\LICENSE" />
     <Content Include="Scripts\LeadsSubMenu.js" />
     <Content Include="Scripts\PortalMessager.js" />
-    <Content Include="js\services.js" />
     <Content Include="Scripts\stevenjs.js" />
     <Content Include="js\templates\ptfile.html" />
     <Content Include="js\templates\ptfiles.html" />
@@ -8430,6 +8490,7 @@
     <Folder Include="Content\layouts\Simple\" />
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
+    <Folder Include="js\controllers\es6\" />
     <Folder Include="Scripts\dx\" />
     <Folder Include="TempDataFile\AuctionFiles\" />
     <Folder Include="TempDataFile\OfferDoc\" />
@@ -8450,6 +8511,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="js\components\Test.ts" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />
@@ -8509,16 +8573,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52585</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

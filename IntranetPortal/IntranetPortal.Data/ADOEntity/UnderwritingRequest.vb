@@ -12,6 +12,7 @@ Imports System.Collections.Generic
 
 Partial Public Class UnderwritingRequest
     Public Property Id As Integer
+    Public Property BBLE As String
     Public Property BriefDescription As String
     Public Property Occupancy As String
     Public Property OccupancyDescription As String
@@ -27,7 +28,5 @@ Partial Public Class UnderwritingRequest
     Public Property CreateDate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property UpdateDate As Nullable(Of Date)
-    Public Property BBLE As String
-    Public Property Status As Nullable(Of Integer)
 
 End Class

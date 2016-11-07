@@ -1,0 +1,39 @@
+﻿<div class="item-detail">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li ui-sref-active="active"><a ui-sref="underwriter.datainput">Data Input</a></li>
+                <li ui-sref-active="active"><a ui-sref="underwriter.flipsheets">FlipSheets</a></li>
+                <li ui-sref-active="active"><a ui-sref="underwriter.rentalmodels">Rental Model</a></li>
+                <li ui-sref-active="active"><a ui-sref="underwriter.audit">Audit</a></li>
+                <li ui-sref-active="active"><a ui-sref="underwriter.archived">Archives</a></li>
+                <!-- <li ui-sref-active="active"><a ui-sref="underwriter.tables">Tables</a></li>-->
+            </ul>
+            <div class="nav-form navbar-right">
+                <button type="button" class="btn btn-lg btn-blue" ng-click="save()" ng-disabled="isProtectedView ||archive.isLoaded">Save</button>
+                <button type="button" class="btn btn-lg btn-blue" ng-click="archiveFunc()" ng-disabled="isProtectedView || archive.isLoaded">Archive</button>
+            </div>
+        </div>
+    </nav>
+
+    <div ng-show="archive.isLoaded" style="background-color: #295268; width: 100%; text-align: center; color: white; padding: 2px 2px 0px 2px; border-radius: 3px">
+        <h5>
+            Version: Archived. {{archive.ArchivedDate | date:'medium'}} by {{archive.ArchivedBy}}<br />
+            Note: <b>{{archive.ArchivedNote || "No Note.."}}.</b>
+            <span class="fa-stack" type="button" ng-click="restoreCurrent()" tooltip="Restore current version.">
+                <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                <i class="fa fa-undo "></i>
+            </span>
+        </h5>
+    </div>
+    <div ng-show="!archive.isLoaded" style="background-color: #295268; width: 100%; text-align: center; color: white; padding: 2px; border-radius: 3px">
+        <h5>
+            Version: Current.<br />
+            <span ng-show="data.UpdateBy">Last Update: {{data.UpdateDate | date: 'medium'}} by {{data.UpdateBy}}</span>
+        </h5>
+    </div>
+    <br />
+    <div class="underwriting-summary">
+        <ui-view></ui-view>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿<style>
+    div.items-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    div.list-header {
+        flex: 0 0 80px;
+        margin: 5px 20px;
+    }
+
+    div.list-container {
+        flex: auto;
+        overflow-y: scroll;
+    }
+</style>
+
+<div class="items-list">
+    <div class="list-header">
+        <i class="fa fa-list-ol with_circle" style="color: #ccc; width: 48px; height: 48px; line-height: 48px;"></i>
+        <span style="font-size: 30px; cursor: pointer;">{{$ctrl.itemName}}</span>
+    </div>
+    <div class="list-container">
+        <div class="dx-searchbar">
+            <div dx-text-box="searchOptions"></div>
+        </div>
+        <div dx-data-grid="listOptions"></div>
+    </div>
+</div>

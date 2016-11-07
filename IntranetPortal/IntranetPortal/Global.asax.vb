@@ -19,6 +19,9 @@ Public Class Global_asax
         GlobalConfiguration.Configuration.EnsureInitialized()
 
         'Core.WorkingLog.CloseAll()
+        'Dim json = GlobalConfiguration.Configuration.Formatters.JsonFormatter
+        'json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects
+        'json.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
     End Sub
 
     Sub Session_Start(ByVal sender As Object, ByVal e As EventArgs)

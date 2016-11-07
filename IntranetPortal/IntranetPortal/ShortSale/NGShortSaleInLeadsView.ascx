@@ -98,23 +98,23 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Bedroom</label>
-                                    <input class="form-control" ng-model="floor.Bedroom" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Bedroom" pt-number-mask maskformat='integer'/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Bathroom</label>
-                                    <input class="form-control" ng-model="floor.Bathroom" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Bathroom" pt-number-mask maskformat='integer'/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Livingroom</label>
-                                    <input class="form-control" ng-model="floor.Livingroom" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Livingroom" pt-number-mask maskformat='integer'/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Kitchen</label>
-                                    <input class="form-control" ng-model="floor.Kitchen" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Kitchen" pt-number-mask maskformat='integer'/>
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Diningroom</label>
-                                    <input class="form-control" ng-model="floor.Diningroom" integer-mask/>
+                                    <input class="form-control" ng-model="floor.Diningroom" pt-number-mask maskformat='integer'/>
                                 </div>
                             </div>
                             <hr />
@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>LockupDate</label>
-                                    <input class="form-control" ss-date ng-model="floor.LockupDate" />
+                                    <input class="form-control" pt-date ng-model="floor.LockupDate" />
                                 </div>
                                 <div class="col-sm-6">
                                     <label>LockedBy</label>
@@ -165,7 +165,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>LastChecked</label>
-                                    <input class="form-control" ss-date ng-model="floor.LastChecked" />
+                                    <input class="form-control" pt-date ng-model="floor.LastChecked" />
                                 </div>
                             </div>
                         </div>

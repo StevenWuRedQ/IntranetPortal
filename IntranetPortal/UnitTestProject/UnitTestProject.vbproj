@@ -163,6 +163,7 @@
     <Compile Include="EmailParseTest.vb" />
     <Compile Include="EmployeeTest.vb" />
     <Compile Include="LeadTest.vb" />
+    <Compile Include="MockDB.vb" />
     <Compile Include="PortalDBUnitTest.vb">
       <SubType>Designer</SubType>
     </Compile>
@@ -200,6 +201,8 @@
     <Compile Include="ShortSaleManageUnitTest.vb" />
     <Compile Include="SMTPUnitTest.vb" />
     <Compile Include="ExcelBuilderTest.vb" />
+    <Compile Include="EcourtServiceTest.vb" />
+    <Compile Include="LeadsEcourtDataTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />

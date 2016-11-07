@@ -8,6 +8,13 @@ Partial Public Class RecycleLead
         End Using
     End Function
 
+    Public Shared Function GetInstanceByBBLE(bble As String) As RecycleLead
+        Using ctx As New CoreEntities
+            Dim status = {RecycleStatus.Active, RecycleStatus.Postponed}
+            Return ctx.RecycleLeads.Where(Function(a) a.BBLE = bble AndAlso status.Contains(a.Status)).FirstOrDefault
+        End Using
+    End Function
+
     Public Shared Function GetInstanceByLogId(logId As Integer) As RecycleLead
         Using ctx As New CoreEntities
             Return ctx.RecycleLeads.Where(Function(r) r.LogId = logId).FirstOrDefault

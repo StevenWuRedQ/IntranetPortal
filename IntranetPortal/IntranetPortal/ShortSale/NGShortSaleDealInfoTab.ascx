@@ -25,21 +25,21 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Reviewed</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.ReviewedDate" ss-date>
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.ReviewedDate" pt-date>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Order Date</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.ReportOrderDate" ss-date>
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.ReportOrderDate" pt-date>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Confirmation Date</label>
-                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.ConfirmationDate" ss-date>
+                <input class="ss_form_input" ng-model="SsCase.BuyerTitle.ConfirmationDate" pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Received Date</label>
-                <input class="ss_form_input"  ng-model="SsCase.BuyerTitle.ReceivedDate" ss-date>
+                <input class="ss_form_input"  ng-model="SsCase.BuyerTitle.ReceivedDate" pt-date>
             </li>
         </ul>
     </div>
@@ -65,17 +65,17 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">List Price</label>
-                <input class="ss_form_input currency_input" ng-model="SsCase.ListPrice" money-mask>
+                <input class="ss_form_input currency_input" ng-model="SsCase.ListPrice" pt-number-mask maskformat='money'>
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Listing Date</label>
-                <input class="ss_form_input" ss-date="" ng-model="SsCase.ListingDate">
+                <input class="ss_form_input" pt-date="" ng-model="SsCase.ListingDate">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Listing Expiry Date</label>
-                <input class="ss_form_input " ss-date="" ng-model="SsCase.ListingExpireDate">
+                <input class="ss_form_input " pt-date="" ng-model="SsCase.ListingExpireDate">
             </li>
         </ul>
     </div>
@@ -150,15 +150,15 @@
                             </div>
                             <div>
                                 <label>Date of Valuation</label>
-                                <input class="form-control" ng-model="value.DateOfValue" ss-date />
+                                <input class="form-control" ng-model="value.DateOfValue" pt-date />
                             </div>
                             <div>
                                 <label>Value</label>
-                                <input class="form-control" ng-model="value.BankValue" money-mask />
+                                <input class="form-control" ng-model="value.BankValue" pt-number-mask maskformat='money' />
                             </div>
                             <div>
                                 <label>Date Expires</label>
-                                <input class="form-control" ng-model="value.ExpiredOn" ss-date />
+                                <input class="form-control" ng-model="value.ExpiredOn" pt-date />
                             </div>
                             <div>
                                 <label>Access</label>
@@ -248,7 +248,7 @@
                             </div>
                             <div>
                                 <label>Signor</label>
-                                <input class="form-control" ng-model="SsCase.BuyerEntity.Signor" disabled ss-date />
+                                <input class="form-control" ng-model="SsCase.BuyerEntity.Signor" disabled pt-date />
                             </div>
                             <div>
                                 <label>Date Corp Formed</label>
@@ -256,15 +256,15 @@
                             </div>
                             <div>
                                 <label>Date Of Contract</label>
-                                <input class="form-control" ss-date ng-model="offer.DateOfContract" />
+                                <input class="form-control" pt-date ng-model="offer.DateOfContract" />
                             </div>
                             <div>
                                 <label>Offer Amount</label>
-                                <input class="form-control" ng-model="offer.OfferAmount" money-mask />
+                                <input class="form-control" ng-model="offer.OfferAmount" pt-number-mask maskformat='money' />
                             </div>
                             <div>
                                 <label>Date Submited</label>
-                                <input class="form-control" ss-date ng-model="offer.DateSubmited" />
+                                <input class="form-control" pt-date ng-model="offer.DateSubmited" />
                             </div>
                         </form>
                         <br />

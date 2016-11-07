@@ -2,17 +2,26 @@
     ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
 
 angular.module('PortalApp')
-    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
+    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state', function ($rootScope, $uibModal, $timeout, $state) {
+        $rootScope.globaldata = {};
         $rootScope.AlertModal = null;
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');
         $rootScope.panelLoading = false;
-
+        $rootScope.isPromptModalArea = false;
+        $rootScope.loadPanelPosition = (function () {
+            var dataPanelDiv = document.getElementById('dataPanelDiv');
+            if (dataPanelDiv != null) {
+                return { of: '#dataPanelDiv' }
+            } else {
+                return { of: 'body' }
+            }
+        })();
+        $rootScope.$state = $state;
         $rootScope.alert = function (message) {
             $rootScope.alertMessage = message ? message : '';
             $rootScope.AlertModal = $uibModal.open({
                 templateUrl: 'AlertModal',
-
             });
         }
         $rootScope.alertOK = function () {
@@ -40,14 +49,15 @@ angular.module('PortalApp')
                 $rootScope.ConfirmModal.confrimFunc(false);
             }
         }
-
-        $rootScope.prompt = function (message, promptFunc) {
+        $rootScope.prompt = function (message, callback, /*optional*/ showArea){
             $rootScope.promptMessage = message ? message : '';
             $rootScope.promptModalTxt = '';
+            $rootScope.isPromptModalArea = showArea || false;
             $rootScope.promptModal = $uibModal.open({
                 templateUrl: 'PromptModal'
             });
-            $rootScope.promptModal.promptFunc = promptFunc;
+            $rootScope.promptModal.promptFunc = callback;
+
         }
         $rootScope.promptYes = function () {
             $rootScope.promptModal.close($rootScope.promptModalTxt);
@@ -63,7 +73,6 @@ angular.module('PortalApp')
                 $rootScope.promptModal.promptFunc(null)
             }
         }
-
         $rootScope.showLoading = function (divId) {
             $($rootScope.loadingCover).show();
         }
@@ -71,10 +80,14 @@ angular.module('PortalApp')
             $($rootScope.loadingCover).hide();
         }
         $rootScope.toggleLoading = function () {
-            $rootScope.panelLoading = !$scope.panelLoading;
+            $timeout(function () {
+                $rootScope.panelLoading = !$scope.panelLoading;
+            })
         }
         $rootScope.startLoading = function () {
-            $rootScope.panelLoading = true;
+            $timeout(function () {
+                $rootScope.panelLoading = true;
+            })
         }
         $rootScope.stopLoading = function () {
             $timeout(function () {
@@ -84,7 +97,6 @@ angular.module('PortalApp')
     }]);
 
 /**
-
 portalApp.config(function ($locationProvider) {
 
     /* because need use anguler support url parameters $location.search();

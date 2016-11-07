@@ -15,7 +15,6 @@
                 controller: 'UnderwritingRequestController',
                 templateUrl: '/js/Views/Underwriter/underwriting_request.tpl.html'
             }
-
             $stateProvider.state(underwriterRequest);
         });
     </script>

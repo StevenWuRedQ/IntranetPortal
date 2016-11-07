@@ -168,7 +168,7 @@
 
                         <li class="ss_form_item" ng-show="mortgage.LenderName!='N/A'">
                             <label class="ss_form_input_title">Loan Amount</label>
-                            <input type="text" class="ss_form_input" ng-model="mortgage.LoanAmount" money-mask readonly="readonly">
+                            <input type="text" class="ss_form_input" ng-model="mortgage.LoanAmount" pt-number-mask maskformat='money' readonly="readonly">
                         </li>
                     </ul>
                 </div>
@@ -277,11 +277,11 @@
                     <ul class="ss_form_box clearfix">
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Contract Price</label>
-                            <input class="ss_form_input" ng-model="contract.contractPrice" money-mask readonly="readonly"/>
+                            <input class="ss_form_input" ng-model="contract.contractPrice" pt-number-mask maskformat='money' readonly="readonly"/>
                         </li>
                         <li class="ss_form_item ">
                             <label class="ss_form_input_title">Down Payment</label>
-                            <input class="ss_form_input" ng-model="contract.downPayment" money-mask readonly="readonly"/>
+                            <input class="ss_form_input" ng-model="contract.downPayment" pt-number-mask maskformat='money' readonly="readonly"/>
                         </li>
                     </ul>
                 </div>

@@ -506,7 +506,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                 };
 
             }
-        })
+        }, true)
 
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
@@ -627,7 +627,7 @@ portalApp.controller('preAssignListCtrl', function ($scope, PreSignList) {
 });
 
 /*************************old style contoller******************************/
-portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterceptor,$http) {
+portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterceptor, $http) {
 
 
     $scope.preAssign = {
@@ -825,7 +825,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
                 };
 
             }
-        })
+        }, true)
 
         $('#gridChecks').dxDataGrid('instance').refresh();
     }

@@ -3,9 +3,7 @@
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
-
 <link rel="stylesheet" href="/css/right-pane.css" />
-<%--<script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>--%>
 <script>
     $(document).ready(function () {
 
@@ -625,7 +623,7 @@
 
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="position:fixed; right:0; left:0; bottom:0">
                             <div class="col-md-12" style="background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 2px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 19px;">
                                 <div style="float: left; font-size: 30px; margin-left: 30px; margin-top: 5px;">“</div>
                                 <p style="width: 90%; padding-top: 5px; padding-bottom: 5px; padding-left: 65px;">

@@ -135,15 +135,16 @@ Public Class PropertyOfferManage
     End Function
 
     Private Shared Function getHistory(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
+        Return Nothing
 
     End Function
 
     Private Shared Function getCommision(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
-
+        Return Nothing
     End Function
 
     Private Shared Function getrank(startDate As Date, endDate As Date, empName As String, teamName As String) As Object
-
+        Return Nothing
     End Function
 
     Private Shared Function getAcceptedCount(startDate As Date, endDate As Date, empName As String, teamName As String) As Integer
@@ -156,8 +157,66 @@ Public Class PropertyOfferManage
         Else
             Return PropertyOffer.GetSSAccepted(New String() {empName}, startDate, endDate).Count
         End If
+    End Function
 
+    ''' <summary>
+    ''' Return completed NewOffers which are not move to InProcess for over 7 days
+    ''' </summary>
+    ''' <param name="teamName">Team Name</param>
+    ''' <returns></returns>
+    Public Shared Function CompletedNewOfferDue(teamName As String, Optional summary As Boolean = True) As PropertyOffer()
+        Dim dt = DateTime.Today
+        Dim offers = OffersByManagerView(Team.GetTeamUsers(teamName), ManagerView.Completed, summary)
+        Return offers.Where(Function(o) o.UpdateDate < dt.AddDays(-7)).ToArray
+    End Function
 
+    ''' <summary>
+    ''' Return if the given team has completed NewOffer due today
+    ''' </summary>
+    ''' <param name="teamName"></param>
+    ''' <returns></returns>
+    Public Shared Function HasCompletedNewOfferDue(teamName As String) As Boolean
+        Return CompletedNewOfferDue(teamName).Count > 0
+    End Function
+
+    ''' <summary>
+    ''' Return InProcess NewOffers which are not move to ShortSale for over 7 days
+    ''' </summary>
+    ''' <param name="teamName">The employee lists</param>
+    ''' <returns></returns>
+    Public Shared Function InProcessNewOfferDue(teamName As String, Optional summary As Boolean = True) As PropertyOffer()
+        Dim dt = DateTime.Today
+        Dim offers = OffersByManagerView(Team.GetTeamUsers(teamName), ManagerView.InProcess, summary)
+        Return offers.Where(Function(o) o.InProcessDate < dt.AddDays(-7)).ToArray
+    End Function
+
+    ''' <summary>
+    ''' Return if the given team has InProcess new offer due today
+    ''' </summary>
+    ''' <param name="teamName">Team Name</param>
+    ''' <returns></returns>
+    Public Shared Function HasInProcessNewOfferDue(teamName As String) As Boolean
+        Return InProcessNewOfferDue(teamName).Count > 0
+    End Function
+
+    ''' <summary>
+    ''' Return the properties that underwriting was accepted but new offer was not created for over 2 ydays
+    ''' </summary>
+    ''' <param name="teamName">Team name</param>
+    ''' <returns></returns>
+    Public Shared Function PendingNewOfferDue(teamName As String) As UnderwritingTrackingView()
+        Return PropertyOffer.PendingForNewOffer(Team.GetTeamUsers(teamName)) _
+                            .Where(Function(a) a.UnderwriteCompletedOn < DateTime.Now.AddDays(-1)) _
+                            .ToArray
+    End Function
+
+    ''' <summary>
+    ''' Return if the given team has due on new offer creating
+    ''' </summary>
+    ''' <param name="teamName"></param>
+    ''' <returns></returns>
+    Public Shared Function HasPendingNewOfferDue(teamName As String) As Boolean
+        Return PendingNewOfferDue(teamName).Count > 0
     End Function
 
     ''' <summary>
@@ -191,8 +250,10 @@ Public Class PropertyOfferManage
     ''' Return accepted shortsale last two weeks
     ''' </summary>
     ''' <returns></returns>
-    Public Shared Function GetSSAcceptedOfferLastWeek(userTeam As String) As PropertyOffer()
-        Dim dtStart = DateTime.Today.AddDays(-7)
+    Public Shared Function GetSSAcceptedOfferLastWeek(userTeam As String, ByRef dtStart As DateTime, ByRef dtEnd As DateTime) As PropertyOffer()
+        Dim dayofWeek = DateTime.Today.DayOfWeek - 1
+        dtStart = DateTime.Today.AddDays(-7 - dayofWeek)
+        dtEnd = DateTime.Today.AddDays(-dayofWeek)
         Dim emps = New List(Of String)
 
         If userTeam = "*" Then
@@ -203,7 +264,7 @@ Public Class PropertyOfferManage
             emps.AddRange(Team.GetTeam(userTeam).AllUsers)
         End If
 
-        Dim data = PropertyOffer.GetSSAccepted(emps.ToArray, dtStart)
+        Dim data = PropertyOffer.GetSSAccepted(emps.ToArray, dtStart, dtEnd)
         data.ForEach(Function(d)
                          Return InitData(d, ManagerView.SSAccepted)
                      End Function)

@@ -5,11 +5,9 @@
 angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
 
     /*api service funciton declear*/
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
-        {
-            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
-        });
-
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null, {
+        completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
+    });
 
     docSearch.Status = {
         New: 0,
@@ -24,14 +22,13 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
 
     docSearch.prototype.initLeadsResearch = function () {
+        //debugger;
         var self = this;
-
         var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
             data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
         } else {
-
             var _LeadSearch = new LeadResearch();
             angular.extend(_LeadSearch, self.LeadResearch);
             self.LeadResearch = _LeadSearch;
@@ -46,8 +43,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 
         return data1;
     }
-
-
     /**
      * static function define use class object docSearch.static function;
      */
@@ -68,6 +63,26 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         }
         return this.LeadResearch;
     }
+
+    /**
+     * Caution:
+     * this method mark underwriting status but not doc search status.
+     * doc search status is controlled by docSearch.Status.
+     */
+    docSearch.prototype.markCompleted = function (bble, status, note) {
+
+        payload = {
+            bble: bble,
+            status: status,
+            note: note
+        }
+
+        return $http({
+            method: 'POST',
+            url: '/api/LeadInfoDocumentSearches/MarkCompleted',
+            data: payload
+        })
+    };
 
     return docSearch;
 });

@@ -29,7 +29,7 @@ Namespace Controllers
         Public Function GetPreSignRecordByUser() As IHttpActionResult
             Dim name = HttpContext.Current.User.Identity.Name
 
-            If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
+            If Employee.IsAdmin(name) OrElse User.IsInRole("HOI-Viewer") Then
                 name = "*"
             End If
 
@@ -74,8 +74,13 @@ Namespace Controllers
         End Function
         Public Function GetPreSignRecord(id As Integer) As IHttpActionResult
             Dim record = PreSignRecord.GetInstance(id)
+
             If IsNothing(record) Then
                 Return NotFound()
+            End If
+
+            If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, record.BBLE) Then
+                Return Unauthorized()
             End If
 
             Return Ok(record)
@@ -91,6 +96,10 @@ Namespace Controllers
             Dim record = PreSignRecord.GetInstanceByBBLE(bble)
             If IsNothing(record) Then
                 Return NotFound()
+            End If
+
+            If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, record.BBLE) Then
+                Return Unauthorized()
             End If
 
             Return Ok(record)

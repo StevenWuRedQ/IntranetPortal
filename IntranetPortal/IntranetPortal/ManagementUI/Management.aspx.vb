@@ -2,10 +2,10 @@
 Imports System.Web.Script.Services
 Imports System.Web.Script.Serialization
 Public Class ManagementUI
-    Inherits System.Web.UI.Page
+    Inherits PortalPage
 
     Protected Function GetAllTeam() As List(Of String)
-        Dim allTeams = Employee.GetMyEmployeesByTeam(Page.User.Identity.Name).Select(Function(ut) ut.TeamName).Distinct.ToArray
+        Dim allTeams = Employee.GetMyEmployeesByTeam(UserName).Select(Function(ut) ut.TeamName).Distinct.ToArray
         Return Team.GetActiveTeams().Where(Function(t) allTeams.Contains(t.Name)).Select(Function(a) a.Name).ToList
 
         'Return Team.GetAllTeams().Select(Function(t) t.Name).ToList

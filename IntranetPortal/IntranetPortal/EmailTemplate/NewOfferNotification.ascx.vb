@@ -5,9 +5,12 @@ Imports IntranetPortal.Data
 Public Class NewOfferNotification1
     Inherits EmailTemplateControl
 
+    Public Property TeamView As Boolean = False
+    Public Property StartDate As DateTime
+    Public Property EndDate As DateTime
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            OfferData = PropertyOfferManage.GetSSAcceptedOfferLastWeek("*")
+            OfferData = PropertyOfferManage.GetSSAcceptedOfferLastWeek("*", StartDate, EndDate)
         End If
     End Sub
 
@@ -23,7 +26,8 @@ Public Class NewOfferNotification1
         MyBase.BindData(params)
         If params.ContainsKey("team") Then
             Dim tm = params("team")
-            OfferData = PropertyOfferManage.GetSSAcceptedOfferLastWeek(tm)
+            OfferData = PropertyOfferManage.GetSSAcceptedOfferLastWeek(tm, StartDate, EndDate)
+            TeamView = True
         End If
     End Sub
 

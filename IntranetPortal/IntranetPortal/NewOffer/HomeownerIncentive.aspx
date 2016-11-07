@@ -71,8 +71,8 @@
                             </li>--%>
                                     <li class="ss_form_item ">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing </label>
-                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date required data-date-start-date="+0d" ng-if="model!='View'" />
-                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" ss-date ng-if="model=='View'" />
+                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" pt-date required data-date-start-date="+0d" ng-if="model!='View'" />
+                                        <input class="ss_form_input" ng-model="preAssign.ExpectedDate" pt-date ng-if="model=='View'" />
                                     </li>
                                     <%--  <li class="ss_form_item">
                                         <label class="ss_form_input_title">Doc Search</label>
@@ -97,7 +97,7 @@
                             </li>--%>
                                     <%--<li class="ss_form_item ">
                                 <label class="ss_form_input_title ">Total Check Amount</label>
-                                <input class="ss_form_input " money-mask ng-model="preAssignCtrl.Total_Check_Amount">
+                                <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="preAssignCtrl.Total_Check_Amount">
                             </li>--%>
 
                                     <%--<li class="ss_form_item ">
@@ -107,7 +107,7 @@
                             </li>--%>
                                     <li class="ss_form_item">
                                         <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
-                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" money-mask />
+                                        <input class="ss_form_input" ng-model="preAssign.DealAmount" pt-number-mask maskformat='money' />
                                     </li>
                                     <div ng-show="preAssign.NeedCheck">
                                         <li class="ss_form_item">

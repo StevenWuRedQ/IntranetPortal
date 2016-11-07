@@ -2,17 +2,26 @@ var portalApp = angular.module('PortalApp',
     ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
 
 angular.module('PortalApp')
-    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', function ($rootScope, $uibModal, $timeout) {
+    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state', function ($rootScope, $uibModal, $timeout, $state) {
+        $rootScope.globaldata = {};
         $rootScope.AlertModal = null;
         $rootScope.ConfirmModal = null;
         $rootScope.loadingCover = document.getElementById('LodingCover');
         $rootScope.panelLoading = false;
-
+        $rootScope.isPromptModalArea = false;
+        $rootScope.loadPanelPosition = (function () {
+            var dataPanelDiv = document.getElementById('dataPanelDiv');
+            if (dataPanelDiv != null) {
+                return { of: '#dataPanelDiv' }
+            } else {
+                return { of: 'body' }
+            }
+        })();
+        $rootScope.$state = $state;
         $rootScope.alert = function (message) {
             $rootScope.alertMessage = message ? message : '';
             $rootScope.AlertModal = $uibModal.open({
                 templateUrl: 'AlertModal',
-
             });
         }
         $rootScope.alertOK = function () {
@@ -40,14 +49,15 @@ angular.module('PortalApp')
                 $rootScope.ConfirmModal.confrimFunc(false);
             }
         }
-
-        $rootScope.prompt = function (message, promptFunc) {
+        $rootScope.prompt = function (message, callback, /*optional*/ showArea){
             $rootScope.promptMessage = message ? message : '';
             $rootScope.promptModalTxt = '';
+            $rootScope.isPromptModalArea = showArea || false;
             $rootScope.promptModal = $uibModal.open({
                 templateUrl: 'PromptModal'
             });
-            $rootScope.promptModal.promptFunc = promptFunc;
+            $rootScope.promptModal.promptFunc = callback;
+
         }
         $rootScope.promptYes = function () {
             $rootScope.promptModal.close($rootScope.promptModalTxt);
@@ -63,7 +73,6 @@ angular.module('PortalApp')
                 $rootScope.promptModal.promptFunc(null)
             }
         }
-
         $rootScope.showLoading = function (divId) {
             $($rootScope.loadingCover).show();
         }
@@ -71,10 +80,14 @@ angular.module('PortalApp')
             $($rootScope.loadingCover).hide();
         }
         $rootScope.toggleLoading = function () {
-            $rootScope.panelLoading = !$scope.panelLoading;
+            $timeout(function () {
+                $rootScope.panelLoading = !$scope.panelLoading;
+            })
         }
         $rootScope.startLoading = function () {
-            $rootScope.panelLoading = true;
+            $timeout(function () {
+                $rootScope.panelLoading = true;
+            })
         }
         $rootScope.stopLoading = function () {
             $timeout(function () {
@@ -84,7 +97,6 @@ angular.module('PortalApp')
     }]);
 
 /**
-
 portalApp.config(function ($locationProvider) {
 
     /* because need use anguler support url parameters $location.search();
@@ -876,11 +888,9 @@ angular.module('PortalApp')
 angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
 
     /*api service funciton declear*/
-    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null,
-        {
-            completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
-        });
-
+    var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null, {
+        completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
+    });
 
     docSearch.Status = {
         New: 0,
@@ -895,14 +905,13 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
 
     docSearch.prototype.initLeadsResearch = function () {
+        //debugger;
         var self = this;
-
         var data1 = null;
         if (self.LeadResearch == null) {
             self.LeadResearch = new LeadResearch();
             data1 = self.LeadResearch.initFromLeadsInfo(self.BBLE);
         } else {
-
             var _LeadSearch = new LeadResearch();
             angular.extend(_LeadSearch, self.LeadResearch);
             self.LeadResearch = _LeadSearch;
@@ -917,8 +926,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 
         return data1;
     }
-
-
     /**
      * static function define use class object docSearch.static function;
      */
@@ -939,6 +946,26 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         }
         return this.LeadResearch;
     }
+
+    /**
+     * Caution:
+     * this method mark underwriting status but not doc search status.
+     * doc search status is controlled by docSearch.Status.
+     */
+    docSearch.prototype.markCompleted = function (bble, status, note) {
+
+        payload = {
+            bble: bble,
+            status: status,
+            note: note
+        }
+
+        return $http({
+            method: 'POST',
+            url: '/api/LeadInfoDocumentSearches/MarkCompleted',
+            data: payload
+        })
+    };
 
     return docSearch;
 });
@@ -1189,11 +1216,18 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
         // 8/26/2016
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
             self.ownerName = self.ownerName || data1.Owner;
-            self.waterCharges = self.waterCharges || data1.WaterAmt;
-            self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
-            self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
-            self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
             self.getOwnerSSN(BBLE);
+
+            // disable the water tax from leads 
+            // @see jira link
+            // https://myidealprop.atlassian.net/browse/PORTAL-484
+
+            //self.waterCharges = self.waterCharges || data1.WaterAmt;
+            //self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
+            //self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
+            //self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
+
+            
         });
         return data1;
     }
@@ -1511,124 +1545,671 @@ angular.module('PortalApp').factory('Team', function ($http) {
     }
     return _class;
 });
+/***
+ *  Author: Shaopeng Zhang
+ *  Date: 2016/11/01
+ *  Description:
+ *  Updates:
+ ***/
 angular.module('PortalApp')
     .factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
 
-        var Underwriter = ptBaseResource('underwriter', 'BBLE', null, {});
+        var underwriter = ptBaseResource('underwriter', 'BBLE', null, {});
 
-        /* constructor for empty model */
-        var _Model = function () {
+        /* Factory for empty model */
+        var underwritingFactory = {
+            UnderwritingModel: function () {
+                this.PropertyInfo = {
+                    PropertyAddress: '',
+                    CurrentOwner: '',
+                    TaxClass: '',
+                    LotSize: '',
+                    BuildingDimension: '',
+                    Zoning: '',
+                    PropertyTaxYear: 0.0,
+                    ActualNumOfUnits: 0,
+                    OccupancyStatus: undefined,
+                    SellerOccupied: false,
+                    NumOfTenants: 0,
+                }
+                this.DealCosts = {
+                    MoneySpent: 0.0,
+                    HAFA: false,
+                    HOI: 0.0,
+                    HOIRatio: 0.0,
+                    COSTermination: 0.0,
+                    AgentCommission: 0.0
+                }
+                this.RehabInfo = {
+                    AverageLowValue: 0.0,
+                    RenovatedValue: 0.0,
+                    RepairBid: 0.0,
+                    NeedsPlans: false,
+                    DealTimeMonths: 0,
+                    SalesCommission: 0.0,
+                    DealROICash: 0.0
+                }
+                this.LienInfo = {
+                    FirstMortgage: 0.0,
+                    SecondMortgage: 0.0,
+                    COSRecorded: false,
+                    DeedRecorded: false,
+                    OtherLiens: undefined,
+                    LisPendens: false,
+                    FHA: false,
+                    FannieMae: false,
+                    FreddieMac: false,
+                    Servicer: '',
+                    ForeclosureIndexNum: '',
+                    ForeclosureStatus: undefined,
+                    ForeclosureNote: '',
+                    AuctionDate: undefined,
+                    DefaultDate: undefined,
+                    CurrentPayoff: 0.0,
+                    PayoffDate: undefined,
+                    CurrentSSValue: 0.0
+                }
+                this.LienCosts = {
+                    TaxLienCertificate: 0.0,
+                    PropertyTaxes: 0.0,
+                    WaterCharges: 0.0,
+                    ECBCityPay: 0.0,
+                    DOBCivilPenalty: 0.0,
+                    HPDCharges: 0.0,
+                    HPDJudgements: 0.0,
+                    PersonalJudgements: 0.0,
+                    NYSTaxWarrants: 0.0,
+                    FederalTaxLien: 0.0,
+                    SidewalkLiens: false,
+                    ParkingViolation: 0.0,
+                    TransitAuthority: 0.0,
+                    VacateOrder: false,
+                    RelocationLien: 0.0,
+                    RelocationLienDate: undefined
+                }
+                this.MinimumBaselineScenario = {};
+                this.BestCaseScenario = {
+                };
+                // this.FlipScenario = {};
+                this.Others = {};
 
-            this.BestCaseScenario = {};
-            this.CarryingCosts = {};
-            this.CarryingCosts = {};
-            this.CashScenario = {};
-            this.ClosingCost = {};
-            this.Construction = {};
-            this.DealCosts = {
-                MoneySpent: 0.0,
-                HOI: 0.0,
-                COSTermination: 0.0,
-                AgentCommission: 0.0
-            }
-            this.DealExpenses = {};
-            this.FlipCalculation = {};
-            this.FlipScenario = {};
-            this.HOI = {};
-            this.HOIBestCase = {};
-            this.InsurancePremium = {};
-            this.Liens = {};
-            this.LienCosts = {
-                TaxLienCertificate: 0.0,
-                PropertyTaxes: 0.0,
-                WaterCharges: 0.0,
-                HPDCharges: 0.0,
-                ECBDOBViolations: 0.0,
-                DOBCivilPenalty: 0.0,
-                PersonalJudgements: 0.0,
-                HPDJudgements: 0.0,
-                IRSNYSTaxLiens: 0.0,
-                VacateOrder: undefined,
-                RelocationLien: 0.0,
-                RelocationLienDate: undefined
-            }
-            this.LienInfo = {
-                FirstMortgage: 0.0,
-                SecondMortgage: 0.0,
-                COSRecorded: false,
-                DeedRecorded: false,
-                OtherLiens: undefined,
-                FHA: false,
-                FannieMae: false,
-                FreddieMac: false,
-                Servicer: undefined,
-                ForeclosureIndexNum: undefined,
-                ForeclosureStatus: undefined,
-                ForeclosureNote: undefined,
-                AuctionDate: undefined,
-                DefaultDate: undefined,
-                CurrentPayoff: undefined,
-                PayoffDate: undefined,
-                CurrentSSValue: 0.0
-            }
-            this.LoanCosts = {};
-            this.LoanScenario = {};
-            this.LoanTerms = {};
-            this.MinimumBaselineScenario = {};
-            this.MoneyFactor = {};
-            this.Others = {};
-            this.PropertyInfo = {
-                PropertyAddress: undefined,
-                TaxClass: undefined,
-                BuildingDimension: undefined,
-                LotSize: undefined,
-                Zoning: undefined,
-                ActualNumOfUnits: 0,
-                PropertyTaxYear: 0.0,
-                OccupancyStatus: undefined,
-                SellerOccupied: false,
-                NumOfTenants: 0,
-            }
-            this.RehabInfo = {
-                AverageLowValue: 0.0,
-                RenovatedValue: 0.0,
-                RepairBid: 0.0,
-                DealTimeMonths: 0,
-                SalesCommission: undefined,
-                DealROICash: undefined
-            }
-            this.RentalInfo = {
-                DeedPurchase: 0.0,
-                CurrentlyRented: undefined,
-                RepairBidTotal: 0.0,
-                NumOfUnits: 0,
-                MarketRentTotal: 0.0,
-                RentalTime: 0
-            }
-            this.RentalModel = {};
-            this.Resale = {};
+                this.CashScenario = {};
+                this.LoanScenario = {};
+                this.FlipScenario = {};
 
+                this.RentalInfo = {
+                    DeedPurchase: 0.0,
+                    CurrentlyRented: false,
+                    RepairBidTotal: 0.0,
+                    NumOfUnits: 0,
+                    MarketRentTotal: 0.0,
+                    RentalTime: 0
+                }
+                this.RentalModel = {};
+
+
+                this.Liens = {};
+                this.DealExpenses = {};
+                this.ClosingCost = {};
+                this.Construction = {}; //Improvements
+                this.CarryingCosts = {
+                    RETaxs: 0.0,
+                    Utilities: 0,
+                    Insurance: 0,
+                    Sums: 0
+                };
+                this.Resale = {};
+                this.LoanTerms = {};
+                this.LoanCosts = {};
+                this.FlipCalculation = {};
+                this.MoneyFactor = {};
+                this.HOI = {};
+                this.HOIBestCase = {};
+                this.InsurancePremium = {};
+
+            },
+            build: function () {
+                var data = new this.UnderwritingModel();
+                return data;
+            }
         }
 
-        Underwriter.create = function () {
-            return new _Model();
-        }
+        underwriter.calculator = (function () {
+
+            var insurancePolicyCalculation = function (v1, policyCol, cosCol, fromCol, toCol) {
+                if (v1 < fromCol[0]) {
+                    return 402;
+                } else {
+                    if (v1 <= toCol[0])
+                        return (v1 - fromCol[0]) * policyCol[0];
+                    else {
+                        if (v1 <= toCol[1])
+                            return (v1 - fromCol[1]) * policyCol[1] + cosCol[1];
+                        else {
+                            if (v1 <= toCol[2])
+                                return (v1 - fromCol[2]) * policyCol[2] + cosCol[1];
+                            else {
+                                if (v1 <= toCol[3])
+                                    return (v1 - fromCol[3]) * policyCol[3] + cosCol[2];
+                                else {
+                                    if (v1 <= toCol[4])
+                                        return (v1 - fromCol[4]) * policyCol[4] + cosCol[3];
+                                    else {
+                                        if (v1 <= toCol[5])
+                                            return (v1 - fromCol[5]) * policyCol[5] + cosCol[4];
+                                        else {
+                                            if (v1 <= toCol[6])
+                                                return (v1 - fromCol[6]) * policyCol[6] + cosCol[5];
+                                            else {
+                                                if (v1 <= toCol[7])
+                                                    return (v1 - fromCol[7]) * policyCol[7] + cosCol[6];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /**
+             * helper function to calculate rental model
+             */
+            var RentalHelper = function (isRented, rentalTime, model) {
+                var i, j, k = 0, temp = model.NetMontlyRent;
+                this._model = [];
+                this._model[k] = {
+                    Month: k + 1,
+                    Rent: 0,
+                    Interest: -(model.TotalUpfront * model.CostOfMoneyRate / 12.0)
+                };
+                this._model[k].Total = -(model.TotalUpfront - this._model[k].Interest);
+                k++;
+
+                for (; k < 3; k++) {
+                    this._model[k] = {
+                        Month: k + 1,
+                        Rent: isRented ? 0 : model.NetMontlyRent,
+                        Interest: this._model[k - 1].Total * model.CostOfMoneyRate / 12.0
+                    }
+                    this._model[k].Total = this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent;
+                }
+
+                for (i = 0; i < 7; i++, temp = temp * 1.02) {
+                    for (j = 0; j < 12; j++, k++) {
+                        this._model[k] = {
+                            Month: k + 1,
+                            Rent: temp,
+                        }
+                        if (k < 28) {
+                            this._model[k].Interest = this._model[k - 1].Total < 0 ? this._model[k - 1].Total * model.CostOfMoneyRate / 12 : 0.0;
+                        } else {
+                            this._model[k].Interest = this._model[k - 1].Total < 0 ? this._model[k - 1].Total * 0.18 / 12 : 0.0;
+                        }
+                        this._model[k].Total = this._model[k - 1].Total < 0 ? this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent : this._model[k - 1].Total + this._model[k].Rent;
+                    }
+
+                }
+
+                this.costOfMoney = 0.0;
+
+                for (i = 0; i < 60; i++) {
+                    this.costOfMoney += this._model[i].Interest;
+                }
+                this.costOfMoney = -this.costOfMoney;
+
+                this.totalCost = model.TotalUpfront + this.costOfMoney;
+                for (var m = 1 ; m < this._model.length; m++) {
+                    this._model[m].ROI = this._model[m].Total / this.totalCost / this._model[m].Month * 12;
+                }
+
+                this.totalMonths = 0;
+                this.targetProfit = 0.0;
+                for (m = 1; m < this._model.length; m++) {
+                    if (this._model[m].ROI > model.MinROI) {
+                        this.totalMonths = this._model[m].Month;
+                        this.targetProfit = this._model[m].Total;
+                        break;
+                    }
+                }
+                this.totalMonths = rentalTime ? rentalTime : this.totalMonths;
+
+                this.breakeven = 0;
+                for (i = 0; i < 60; i++) {
+                    if (this._model[i].Total > 0) {
+                        this.breakeven = this._model[i].Month;
+                        break;
+                    }
+                }
+
+                this.ROIYear = this.targetProfit / this.totalCost / this.totalMonths * 12;
+                this.ROITotal = this.targetProfit / this.totalCost;
+            }
+
+            /**
+             * map portal existing data onto new created underwriting model
+             */
+            var importData = function (d) {
+                // map to docsearch if we have data
+                if (d.docSearch && d.docSearch.LeadResearch) {
+
+                    var r = d.docSearch.LeadResearch;
+
+                    d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
+                    d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
+                    d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
+                    d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
+                    d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
+                    d.LienInfo.FHA = r.fha || false;
+                    d.LienInfo.FannieMae = r.fannie || false;
+                    d.LienInfo.FreddieMac = r.Freddie_Mac_ || false;
+                    d.LienInfo.Servicer = r.servicer;
+                    d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
+                    d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
+                    d.LienCosts.TaxLienCertificate = (function () {
+                        var total = 0.0;
+                        if (r.TaxLienCertificate) {
+                            for (var i = 0; i < r.TaxLienCertificate.length; i++) {
+                                total += parseFloat(r.TaxLienCertificate[i].Amount);
+                            }
+                        }
+                        return total;
+                    })();
+                    d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
+                    d.LienCosts.WaterCharges = r.waterCharges || 0.0;
+                    d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
+                    d.LienCosts.ECBCityPay = r.Amount_ECB_Tickets || 0.0;
+                    d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
+                    d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
+                    d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
+                    d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0; // added: 2016/11/1
+                    d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0; // added: 2016/11/1
+                    d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
+                    d.LienCosts.RelocationLien = (function () {
+                        if (r.has_Vacate_Order_Vacate_Order)
+                            return parseFloat(r.Amount_Vacate_Order) || 0.0;
+                    })()
+                    // removed : 2016/11/01
+                    // d.LienCosts.IRSNYSTaxLiens = (function () {
+                    //    var total = 0.0;
+                    //    if (r.irsTaxLien)
+                    //        total += parseFloat(r.irsTaxLien);
+                    //    if (r.Amount_NYS_Tax_Lien)
+                    //        total += parseFloat(r.Amount_NYS_Tax_Lien);
+                    //    return total;
+                    // })();
+
+                }
+                // map to Leads Info if we have data
+                if (d.leadsInfo) {
+                    // debugger;
+                    d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress;
+                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner;
+                    d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass;
+                    d.PropertyInfo.LotSize = d.leadsInfo.LotDem;
+                    d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem;
+                    d.PropertyInfo.Zoning = d.leadsInfo.Zoning;
+                    d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
+                    d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
+                }
+            }
+
+            /**
+             * initialized fixed parameter in underwriting model
+             */
+            var applyFixedRules = function (d) {
+
+                d.RehabInfo.SalesCommission = 0.05;
+                d.RehabInfo.DealROICash = 0.35;
+                // Insurance Premium
+                d.InsurancePremium.From = [35001, 50001, 100001, 500001, 1000001, 5000001, 10000001, 15000001];
+                d.InsurancePremium.To = [50000, 100000, 500000, 1000000, 5000000, 10000000, 15000000];
+                d.InsurancePremium.OwnersPolicyRate = [.00667, .00543, .00436, .00398, .00366, .00325, .00307, .00276];
+                d.InsurancePremium.LoanPolicyRate = [0.00555, 0.00454, 0.00364, 0.00331, 0.00305, 0.00271, 0.00255, 0.00231];
+                d.InsurancePremium.CostOwnersPolicy = _.zip(d.InsurancePremium.From,
+                                                            d.InsurancePremium.To,
+                                                            d.InsurancePremium.OwnersPolicyRate).reduce(function (cum, v) {
+                                                                var l = cum.length;
+                                                                cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
+                                                                cum[l] = cum[l - 1];
+                                                                return cum;
+                                                            }, [402])
+
+                d.InsurancePremium.CostLoanPolicy = _.zip(d.InsurancePremium.From,
+                                                          d.InsurancePremium.To,
+                                                          d.InsurancePremium.LoanPolicyRate).reduce(function (cum, v) {
+                                                              var l = cum.length;
+                                                              cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
+                                                              cum[l] = cum[l - 1];
+                                                              return cum;
+                                                          }, [344])
+                // Flip Calculation
+                d.FlipCalculation.FlipROI = 0.15;
+                // Money Factor
+                d.MoneyFactor.CostOfMoney = 0.0;
+                d.MoneyFactor.InterestOnMoney = 0.18;
+                // Liens
+                d.Liens.LienPayoffsSettlement = 1.0
+                d.Liens.TaxLienCertificateSettlement = 0.09 / 12;
+                d.Liens.WaterChargesSettlement = 1.0;
+                d.Liens.PropertyTaxesSettlement = 1.0;
+                d.Liens.ECBCityPaySettlement = 1.0;
+                d.Liens.DOBCivilPenaltiesSettlement = 1.0;
+                d.Liens.HPDChargesSettlement = 1.0;
+
+                d.Liens.HPDJudgementsSettlement = 0.15;
+                d.Liens.PersonalJudgementsSettlement = 0.40;
+                d.Liens.ParkingViolationSettlement = 1.0;
+                d.Liens.TransitAuthoritySettlement = 1.0;
+                d.Liens.RelocationLienSettlement = .09 / 365;
+
+                // d.Liens.ECBDOBViolationsSettlement = 0.35; removed: 2016/10/31
+
+                // Closing Costs
+                d.ClosingCost.TitleBill = 1200.00;
+                d.ClosingCost.BuyerAttorney = 1250.00;
+                // Resale
+                d.Resale.Concession = 0.0;
+                d.Resale.Attorney = 1250.0;
+                d.Resale.NDC = 500;
+                // LoanTerms
+                d.LoanTerms.LoanRate = 0.12;
+                d.LoanTerms.LoanPoints = 2;
+                d.LoanTerms.LoanTermMonths = 12;
+                d.LoanTerms.LTV = 0.6;
+                // HOI
+                d.HOI.Value = 0.25;
+                //Rental Model
+                d.RentalModel.CostOfMoneyRate = 0.16;
+                d.RentalModel.MinROI = 0.18;
+                d.RentalModel.Insurance = 85.0;
+
+            };
+
+            /**
+            * pre-defined rules to rebuild underwrting model
+            * @param d: data represent underwriting model
+            */
+            var applyRule = function (d) {
+                //debugger;
+                var float = function (data) {
+                    if (data)
+                        return parseFloat(data);
+                    else
+                        return 0.0;
+                }
+                var int = function (data) {
+                    if (data)
+                        return parseInt(data);
+                    else
+                        return 0;
+                }
+
+                /**
+                 * PropertyInfo 
+                 * 1:residential
+                 * 2: nonresidential
+                 */
+                d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? 1 : 2 })();
+
+                // Liens
+                d.Liens.TaxLienCertificate = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienCertificateSettlement * float(d.RehabInfo.DealTimeMonths));
+                d.Liens.PropertyTaxes = float(d.LienCosts.PropertyTaxes) * d.Liens.PropertyTaxesSettlement;
+                d.Liens.WaterCharges = float(d.LienCosts.WaterCharges) * d.Liens.WaterChargesSettlement;
+                d.Liens.ECBCityPay = float(d.LienCosts.ECBCityPay) * d.Liens.ECBCityPaySettlement;
+                d.Liens.DOBCivilPenalties = float(d.LienCosts.DOBCivilPenalty) * d.Liens.DOBCivilPenaltiesSettlement;
+                d.Liens.HPDCharges = float(d.LienCosts.HPDCharges) * d.Liens.HPDChargesSettlement;
+                d.Liens.HPDJudgements = float(d.LienCosts.HPDJudgements) * d.Liens.HPDJudgementsSettlement;
+                d.Liens.PersonalJudgements = float(d.LienCosts.PersonalJudgements) * d.Liens.PersonalJudgementsSettlement;
+                d.Liens.NYSTaxWarrantsSettlement = (function () {
+                    return float(d.LienCosts.NYSTaxWarrantsSettlement) < 12500 ? 1.0 : 0.0
+                })();
+                d.Liens.NYSTaxWarrants = float(d.LienCosts.NYSTaxWarrants) * d.Liens.NYSTaxWarrantsSettlement;
+                d.Liens.FederalTaxLienSettlement = (function () {
+                    return float(d.LienCosts.FederalTaxLien) < 12500 ? 1.0 : 0.0
+                })();
+                d.Liens.FederalTaxLien = float(d.LienCosts.FederalTaxLien) * d.Liens.FederalTaxLienSettlement;
+                d.Liens.ParkingViolation = float(d.LienCosts.ParkingViolation) * d.Liens.ParkingViolationSettlement;
+                d.Liens.TransitAuthority = float(d.LienCosts.TransitAuthority) * d.Liens.TransitAuthoritySettlement;
+                d.Liens.RelocationLien = (function () {
+                    if (!d.LienCosts.RelocationLienDate)
+                        return 0.0;
+                    else {
+                        return float(d.LienCosts.RelocationLien) * (1.0 + (moment().diff(moment(d.LienCosts.RelocationLienDate), 'days') + 180) * d.Liens.RelocationLienSettlement)
+                    }
+                })();
+                // DealCost added: 2016/10/31
+                d.DealCosts.HAFA = (d.PropertyInfo.SellerOccupied || int(d.PropertyInfo.NumOfTenants) > 0) &&
+                                    !d.LienInfo.FHA &&
+                                    !d.LienInfo.FannieMae &&
+                                    !d.LienInfo.FreddieMac &&
+                                    float(d.DealCosts.HOI) > 0.0;
+
+                // DealExpense
+                d.DealExpenses.MoneySpent = float(d.DealCosts.MoneySpent);
+                d.DealExpenses.HOILienSettlement = float(d.DealCosts.HOIRatio);
+                d.DealExpenses.HOILien = d.DealCosts.HAFA ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
+                d.DealExpenses.COSTermination = float(d.DealCosts.COSTermination);
+                d.DealExpenses.Tenants = float(d.PropertyInfo.NumOfTenants) * 7000.00;
+                d.DealExpenses.Agent = float(d.DealCosts.AgentCommission);
+
+                // Construction(Improvement)
+                d.Construction.Construction = float(d.RehabInfo.RepairBid);
+                d.Construction.Architect = d.RehabInfo.NeedsPlans ? 8500 : 0;
+
+                // CarryingCosts
+                d.CarryingCosts.RETaxs = float(d.PropertyInfo.PropertyTaxYear) / 12 * float(d.RehabInfo.DealTimeMonths);
+                d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.ActualNumOfUnits), 2) + 400 * float(d.PropertyInfo.ActualNumOfUnits);
+
+                // Resale
+                d.Resale.ProbableResale = float(d.RehabInfo.RenovatedValue);
+                d.Resale.Commissions = d.Resale.ProbableResale * float(d.RehabInfo.SalesCommission);
+                d.Resale.TransferTax = (function () {
+                    var pr = parseFloat(d.Resale.ProbableResale);
+                    var rate;
+                    if (d.PropertyInfo.PropertyType == 1) {
+                        if (pr <= 500000) {
+                            rate = 0.01;
+                        } else if (pr > 500000) {
+                            rate = 0.01425;
+                        }
+                    } else {
+                        if (pr <= 500000) {
+                            rate = 0.01425;
+                        } else if (pr > 500000) {
+                            rate = 0.02625;
+                        }
+                    }
+
+                    return (rate + 0.004) * pr;
+                })();
+                // LoanTerms
+                d.LoanTerms.LoanAmount = d.Resale.ProbableResale * d.LoanTerms.LTV;
+                d.CarryingCosts.Insurance = d.LoanTerms.LoanAmount / 100.0 * 0.45 / 12 * float(d.RehabInfo.DealTimeMonths);
+                // LoanCosts
+                d.LoanCosts.LoanClosingCost = (function () {
+                    var la = d.LoanTerms.LoanAmount;
+                    var rate;
+                    if (d.PropertyInfo.PropertyType == 1) {
+                        if (la <= 500000) {
+                            rate = 0.02;
+
+                        } else if (la > 500000) {
+                            rate = 0.02125
+                        }
+                    } else {
+                        if (la <= 500000) {
+                            rate = 0.02;
+
+                        } else if (la > 500000) {
+                            rate = 0.0275;
+                        }
+                    }
+                    return la * rate + 275 + 1500;
+                })();
+                d.LoanCosts.Points = d.LoanTerms.LoanAmount * d.LoanTerms.LoanPoints / 100.0;
+                d.LoanCosts.LoanInterest = d.LoanTerms.LoanAmount * d.LoanTerms.LoanRate / 12.0 * float(d.RehabInfo.DealTimeMonths);
+
+                // Sums
+                d.Liens.Sums = d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes + d.Liens.WaterCharges + d.Liens.ECBCityPay + d.Liens.DOBCivilPenalties + d.Liens.HPDCharges + d.Liens.HPDJudgements + d.Liens.PersonalJudgements + d.Liens.NYSTaxWarrants + d.Liens.FederalTaxLien + d.Liens.ParkingViolation + d.Liens.TransitAuthority + d.Liens.RelocationLien;
+                d.DealExpenses.Sums = d.DealExpenses.MoneySpent + d.DealExpenses.HOILien + d.DealExpenses.COSTermination + d.DealExpenses.Tenants + d.DealExpenses.Agent;
+                d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
+                d.Construction.Sums = d.Construction.Construction + d.Construction.Architect;
+                d.CarryingCosts.Sums = d.CarryingCosts.Insurance + d.CarryingCosts.RETaxs + d.CarryingCosts.Utilities;
+                d.Resale.Sums = d.Resale.Concession + d.Resale.Commissions + d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
+                d.Liens.LienPayoffs = (d.Resale.ProbableResale - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums) * float(d.RehabInfo.DealROICash)) / ((float(d.RehabInfo.DealROICash) + 1) * 1.0058);
+                d.Liens.AdditonalCostsSums = d.Liens.WaterCharges + d.Liens.ECBCityPay + d.Liens.DOBCivilPenalties + d.Liens.HPDCharges + d.Liens.HPDJudgements + d.Liens.PersonalJudgements + d.Liens.NYSTaxWarrants + d.Liens.FederalTaxLien + d.Liens.ParkingViolation + d.Liens.TransitAuthority + d.Liens.RelocationLien;
+
+                // InsurancePremium
+                d.InsurancePremium.PurchasePrice = d.Liens.LienPayoffs;
+                d.InsurancePremium.LoanAmountDiscounted = d.LoanTerms.LoanAmount >= d.Liens.LienPayoffs ? d.Liens.LienPayoffs : d.LoanTerms.LoanAmount;
+                d.InsurancePremium.LoanAmountFullPremium = d.LoanTerms.LoanAmount - d.InsurancePremium.LoanAmountDiscounted;
+                d.InsurancePremium.OwnersPolicy = insurancePolicyCalculation(d.InsurancePremium.PurchasePrice, d.InsurancePremium.OwnersPolicyRate, d.InsurancePremium.CostOwnersPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
+                d.InsurancePremium.OwnersLoanPolicyDiscounted = insurancePolicyCalculation(d.InsurancePremium.LoanAmountDiscounted, d.InsurancePremium.LoanPolicyRate, d.InsurancePremium.CostLoanPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
+                d.InsurancePremium.OwnersLoanPolicyFullPremium = insurancePolicyCalculation(d.InsurancePremium.LoanAmountFullPremium, d.InsurancePremium.LoanPolicyRate, d.InsurancePremium.CostLoanPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
+                d.InsurancePremium.TitleInsurance = d.InsurancePremium.OwnersLoanPolicyDiscounted * 1.3 + d.InsurancePremium.OwnersLoanPolicyFullPremium;
+                d.ClosingCost.OwnersPolicy = d.InsurancePremium.OwnersPolicy;
+                d.ClosingCost.Sums = d.ClosingCost.OwnersPolicy + d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
+                d.LoanCosts.LoanPolicy = d.InsurancePremium.TitleInsurance - d.InsurancePremium.OwnersPolicy;
+                d.FlipCalculation.FlipPrice = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums) * d.FlipCalculation.FlipROI) / ((d.FlipCalculation.FlipROI + 1) * 1.0);
+
+                // HOI
+                d.LoanCosts.Sums = d.LoanCosts.LoanPolicy + d.LoanCosts.LoanClosingCost + d.LoanCosts.Points + d.LoanCosts.LoanInterest;
+                d.HOI.PurchasePriceAllIn = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums + d.LoanCosts.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums) * d.HOI.Value) / ((d.HOI.Value + 1) * 1.0);
+                d.HOI.TotalInvestment = d.HOI.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
+                d.HOI.CashRequirement = d.HOI.TotalInvestment - d.LoanTerms.LoanAmount;
+                d.HOI.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOI.TotalInvestment;
+                d.HOI.ROILoan = d.HOI.NetProfit / d.HOI.TotalInvestment;
+
+                // Best Case For HOI
+                d.HOIBestCase.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
+                d.HOIBestCase.TotalInvestment = d.HOIBestCase.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
+                d.HOIBestCase.CashRequirement = d.HOIBestCase.TotalInvestment - d.LoanTerms.LoanAmount;
+                d.HOIBestCase.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOIBestCase.TotalInvestment;
+                d.HOIBestCase.ROILoan = d.HOIBestCase.NetProfit / d.HOIBestCase.TotalInvestment;
+
+                // Cash Scenario
+                d.CashScenario.Purchase_LienPayoffs = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
+                d.CashScenario.Purchase_OffHUDCosts = d.Liens.AdditonalCostsSums;
+                d.CashScenario.Purchase_DealCosts = d.DealExpenses.Sums;
+                d.CashScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
+                d.CashScenario.Purchase_Construction = d.Construction.Sums;
+                d.CashScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
+                d.CashScenario.Purchase_TotalInvestment = d.CashScenario.Purchase_LienPayoffs + d.CashScenario.Purchase_OffHUDCosts + d.CashScenario.Purchase_DealCosts + d.CashScenario.Purchase_ClosingCost + d.CashScenario.Purchase_Construction + d.CashScenario.Purchase_CarryingCosts;
+                d.CashScenario.Resale_SalePrice = d.Resale.ProbableResale;
+                d.CashScenario.Resale_Concession = d.Resale.Concession;
+                d.CashScenario.Resale_Commissions = d.Resale.Commissions;
+                d.CashScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
+                d.CashScenario.Resale_NetProfit = d.CashScenario.Resale_SalePrice - (d.CashScenario.Resale_Concession + d.CashScenario.Resale_Commissions + d.CashScenario.Resale_ClosingCost) - d.CashScenario.Purchase_TotalInvestment;
+                d.CashScenario.Time = float(d.RehabInfo.DealTimeMonths);
+                d.CashScenario.CashRequired = d.CashScenario.Purchase_TotalInvestment;
+                d.CashScenario.ROI = d.CashScenario.Resale_NetProfit / d.CashScenario.Purchase_TotalInvestment;
+                d.CashScenario.ROIAnnual = d.CashScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
+                // Loan Scenario
+                d.LoanScenario.Purchase_PurchasePrice = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
+                d.LoanScenario.Purchase_AdditonalCosts = d.Liens.AdditonalCostsSums;
+                d.LoanScenario.Purchase_DealCosts = d.DealExpenses.Sums;
+                d.LoanScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
+                d.LoanScenario.Purchase_Construction = d.Construction.Sums;
+                d.LoanScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
+                d.LoanScenario.Purchase_LoanClosingCost = d.LoanCosts.LoanPolicy + d.LoanCosts.LoanClosingCost + d.LoanCosts.Points;
+                d.LoanScenario.Purchase_LoanInterest = d.LoanCosts.LoanInterest;
+                d.LoanScenario.Purchase_TotalInvestment = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
+                d.LoanScenario.Resale_SalePrice = d.Resale.ProbableResale;
+                d.LoanScenario.Resale_Concession = d.Resale.Concession;
+                d.LoanScenario.Resale_Commissions = d.Resale.Commissions;
+                d.LoanScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
+                d.LoanScenario.Resale_NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - d.LoanScenario.Purchase_TotalInvestment;
+                d.LoanScenario.Time = float(d.RehabInfo.DealTimeMonths);
+                d.LoanScenario.LoanAmount = d.LoanTerms.LoanAmount;
+                d.LoanScenario.LTV = d.LoanScenario.LoanAmount / d.LoanScenario.Resale_SalePrice;
+                d.LoanScenario.CashRequirement = d.LoanScenario.Purchase_TotalInvestment - d.LoanScenario.LoanAmount;
+                d.LoanScenario.ROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.Purchase_TotalInvestment;
+                d.LoanScenario.ROIAnnual = d.LoanScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
+                d.LoanScenario.CashROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.CashRequirement;
+                d.LoanScenario.CashROIAnnual = d.LoanScenario.CashROI / d.RehabInfo.DealTimeMonths * 12;
+                // FlipScenario
+                d.FlipScenario.Purchase_TotalCost = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
+                d.FlipScenario.FlipPrice_SalePrice = d.FlipCalculation.FlipPrice;
+
+                d.FlipScenario.Purchase_PurchasePrice = d.FlipScenario.FlipPrice_SalePrice;
+                d.FlipScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
+                d.FlipScenario.Purchase_Construction = d.Construction.Sums;
+                d.FlipScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
+                d.FlipScenario.Purchase_TotalInvestment = d.FlipScenario.Purchase_PurchasePrice + d.FlipScenario.Purchase_ClosingCost + d.FlipScenario.Purchase_Construction + d.FlipScenario.Purchase_CarryingCosts;
+                d.FlipScenario.Resale_SalePrice = d.Resale.ProbableResale;
+                d.FlipScenario.Resale_Concession = d.Resale.Concession;
+                d.FlipScenario.Resale_Commissions = d.Resale.Commissions;
+                d.FlipScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
+                d.FlipScenario.Resale_NetProfit = d.FlipScenario.Resale_SalePrice - (d.FlipScenario.Resale_Commissions + d.FlipScenario.Resale_ClosingCost) - d.FlipScenario.Purchase_TotalInvestment;
+                d.FlipScenario.FlipProfit = d.FlipScenario.FlipPrice_SalePrice - d.FlipScenario.Purchase_TotalCost;
+                d.FlipScenario.CashRequirement = d.FlipScenario.Purchase_TotalInvestment
+                d.FlipScenario.ROI = d.FlipScenario.Resale_NetProfit / d.FlipScenario.Purchase_TotalInvestment;
+                // Others 
+                d.Others.MaximumLienPayoff = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
+                d.Others.MaximumSSPrice = d.Liens.LienPayoffs + d.Liens.Sums;
+                d.Others.MaxHOI = d.HOIBestCase.NetProfit - d.HOI.NetProfit;
+                // Minimum Baseline (~=Loan)
+                d.MinimumBaselineScenario.PurchasePriceAllIn = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
+                d.MinimumBaselineScenario.TotalInvestment = d.LoanScenario.Purchase_TotalInvestment;
+                d.MinimumBaselineScenario.CashRequirement = d.LoanScenario.CashRequirement;
+                d.MinimumBaselineScenario.NetProfit = d.LoanScenario.Resale_NetProfit;
+                d.MinimumBaselineScenario.ROI = d.LoanScenario.ROI;
+                // Best Case Scenario
+                d.BestCaseScenario.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums;
+                d.BestCaseScenario.TotalInvestment = d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
+                d.BestCaseScenario.CashRequirement = d.BestCaseScenario.TotalInvestment - d.LoanTerms.LoanAmount;
+                d.BestCaseScenario.NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - (d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums);
+                d.BestCaseScenario.ROI = d.BestCaseScenario.NetProfit / d.BestCaseScenario.TotalInvestment
+                // Rental Model
+                d.RentalModel.NumOfUnits = int(d.RentalInfo.NumOfUnits);
+                d.RentalModel.DeedPurchase = float(d.RentalInfo.DeedPurchase);
+                d.RentalModel.TotalRepairs = float(d.RentalInfo.RepairBidTotal);
+                d.RentalModel.AgentCommission = float(d.DealCosts.AgentCommission);
+                d.RentalModel.TotalUpfront = d.RentalModel.DeedPurchase + d.RentalModel.TotalRepairs + d.RentalModel.AgentCommission;
+                d.RentalModel.Rent = float(d.RentalInfo.MarketRentTotal);
+                d.RentalModel.ManagementFee = d.RentalModel.Rent * 0.1;
+                d.RentalModel.Maintenance = 50 + (d.RentalModel.NumOfUnits - 1) * 25;
+                d.RentalModel.MiscRepairs = 75 * d.RentalModel.NumOfUnits;
+                d.RentalModel.NetMontlyRent = d.RentalModel.Rent - d.RentalModel.ManagementFee - d.RentalModel.Maintenance - d.RentalModel.Insurance - d.RentalModel.MiscRepairs;
+                var helper = new RentalHelper(d.RentalInfo.CurrentlyRented, d.RentalInfo.RentalTime, d.RentalModel);
+                d.RentalModel.TotalMonth = helper.totalMonths;
+                d.RentalModel.CostOfMoney = helper.costOfMoney;
+                d.RentalModel.TotalCost = helper.totalCost;
+                d.RentalModel.Breakeven = helper.breakeven;
+                d.RentalModel.TargetTime = d.RentalModel.TotalMonth;
+                d.RentalModel.TargetProfit = helper.targetProfit;
+                d.RentalModel.ROIYear = helper.ROIYear;
+                d.RentalModel.ROITotal = helper.ROITotal;
+            }
+
+            return {
+                calculate: applyRule,
+                applyFixedRules: applyFixedRules,
+                importData: importData,
+            }
+        })();
 
         /**
-         *
-         * if no bble present only recreate data with empty model
-         * if isImport present also load data from Doc Search and Leads Info
+         * load underwriting from database, if not loaded, use factory new one and import infomation from portal
+         * @param: bble // if no present, only create new model from factory
          * 
          **/
-        Underwriter.load = function (/* optional */ bble, /* optional */ isImport) {
-            var data = this.create();
+        underwriter.load = function (/* optional */ bble) {
+            //debugger;
+            var data = underwritingFactory.build();
+            underwriter.calculator.applyFixedRules(data);
+
             if (bble) {
-                var _data = Underwriter.get({ BBLE: bble.trim() }, function () {
-                    _.default(_data, data);
-                    if (isImport) {
+                var _data = underwriter.get({ BBLE: bble.trim() }, function (d) {
+                    _data.BBLE = bble;
+                    _.defaults(_data, data);
+                    //debugger;
+                    if (!_data.Id) {  // data is not load from database, load data from portal
                         data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
                             data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {
-                                mapData(data);
+                                underwriter.calculator.importData(data);
                             })
 
                         });
@@ -1640,189 +2221,55 @@ angular.module('PortalApp')
             return data;
         }
 
-        /* map rule from docsearch and leadsinfo to underwriting */
-        function mapData(d) {
-            // map to docsearch if we have data
-            if (d.docSearch && d.docSearch.LeadResearch) {
-
-                var r = d.docSearch.LeadResearch;
-
-                d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due;
-                d.LienInfo.FirstMortgage = r.mortgageAmount;
-                d.LienInfo.SecondMortgage = r.secondMortgageAmount;
-                d.LienInfo.COSRecorded = r.Has_COS_Recorded;
-                d.LienInfo.DeedRecorded = r.Has_Deed_Recorded;
-                d.LienInfo.FHA = r.fha;
-                d.LienInfo.FannieMae = r.fannie;
-                d.LienInfo.FreddieMac = r.Freddie_Mac_;
-                d.LienInfo.Servicer = r.servicer;
-                d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
-                d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
-                d.LienCosts.TaxLienCertificate = (function () {
-                    var total = 0.0;
-                    if (r.TaxLienCertificate) {
-                        for (var i = 0; i < r.TaxLienCertificate.length; i++) {
-                            total += Number.parseFloat(r.TaxLienCertificate[i].Amount);
-                        }
-                    }
-                    return total;
-                })();
-                d.LienCosts.PropertyTaxes = r.propertyTaxes;
-                d.LienCosts.WaterCharges = r.waterCharges;
-                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred;
-                d.LienCosts.ECBDOBViolations = r.Amount_ECB_Tickets;
-                d.LienCosts.DOBCivilPenalty = r.dobWebsites;
-                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments;
-                d.LienCosts.HPDJudgements = r.HPDjudgementAmount;
-                d.LienCosts.IRSNYSTaxLiens = (function () {
-                    var total = 0.0;
-
-                    if (r.irsTaxLien)
-                        total += Number.parseFloat(r.irsTaxLien);
-                    if (r.Amount_NYS_Tax_Lien)
-                        total += Number.parseFloat(r.Amount_NYS_Tax_Lien);
-
-                    return total;
-
-                })();
-                d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order;
-                d.LienCosts.RelocationLien = (function () {
-                    if (r.has_Vacate_Order_Vacate_Order)
-                        return r.Amount_Vacate_Order;
-                })()
-
-            }
-            // map to Leads Info if we have data
-            if (d.leadsInfo) {
-                d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
-                d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
-                d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
-                d.PropertyInfo.LotSize = d.leadsInfo.Lot;
-                d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
-            }
-        }
-
-        // helper Functions
-        Underwriter.insurancePolicyCalculation = function (v1, policyCol, cosCol, fromCol, toCol) {
-            if (v1 < fromCol[0]) {
-                return 402;
-            } else {
-                if (v1 <= toCol[0])
-                    return (v1 - fromCol[0]) * policyCol[0];
-                else {
-                    if (v1 <= toCol[1])
-                        return (v1 - fromCol[1]) * policyCol[1] + cosCol[1];
-                    else {
-                        if (v1 <= toCol[2])
-                            return (v1 - fromCol[2]) * policyCol[2] + cosCol[1];
-                        else {
-                            if (v1 <= toCol[3])
-                                return (v1 - fromCol[3]) * policyCol[3] + cosCol[2];
-                            else {
-                                if (v1 <= toCol[4])
-                                    return (v1 - fromCol[4]) * policyCol[4] + cosCol[3];
-                                else {
-                                    if (v1 <= toCol[5])
-                                        return (v1 - fromCol[5]) * policyCol[5] + cosCol[4];
-                                    else {
-                                        if (v1 <= toCol[6])
-                                            return (v1 - fromCol[6]) * policyCol[6] + cosCol[5];
-                                        else {
-                                            if (v1 <= toCol[7])
-                                                return (v1 - fromCol[7]) * policyCol[7] + cosCol[6];
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // Constructor!!! for RentalModel
-        Underwriter.RentalHelper = function (isRented, rentalTime, model) {
-            var i, j, k = 0, temp = model.NetMontlyRent;
-            this._model = [];
-            this._model[k] = {
-                Month: k + 1,
-                Rent: 0,
-                Interest: -(model.TotalUpfront * model.CostOfMoneyRate / 12.0)
-            };
-            this._model[k].Total = -(model.TotalUpfront - this._model[k].Interest);
-            k++;
-
-            for (; k < 3; k++) {
-                this._model[k] = {
-                    Month: k + 1,
-                    Rent: isRented ? 0 : model.NetMontlyRent,
-                    Interest: this._model[k - 1].Total * model.CostOfMoneyRate / 12.0
-                }
-                this._model[k].Total = this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent;
-            }
-
-            for (i = 0; i < 7; i++, temp = temp * 1.02) {
-                for (j = 0; j < 12; j++, k++) {
-                    this._model[k] = {
-                        Month: k + 1,
-                        Rent: temp,
-                    }
-                    if (k < 28) {
-                        this._model[k].Interest = this._model[k - 1].Total < 0 ? this._model[k - 1].Total * model.CostOfMoneyRate / 12 : 0.0;
-                    } else {
-                        this._model[k].Interest = this._model[k - 1].Total < 0 ? this._model[k - 1].Total * 0.18 / 12 : 0.0;
-                    }
-                    this._model[k].Total = this._model[k - 1].Total < 0 ? this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent : this._model[k - 1].Total + this._model[k].Rent;
+        underwriter.save = function (data) {
+            return $http({
+                method: 'POST',
+                url: '/api/underwriter',
+                data: data,
+                headers: {
+                    'Content-Type': 'application/json'
                 }
 
-            }
-
-            this.costOfMoney = 0.0;
-
-            for (i = 0; i < 60; i++) {
-                this.costOfMoney += this._model[i].Interest;
-            }
-            this.costOfMoney = -this.costOfMoney;
-
-            this.totalCost = model.TotalUpfront + this.costOfMoney;
-            for (var m = 1 ; m < this._model.length; m++) {
-                this._model[m].ROI = this._model[m].Total / this.totalCost / this._model[m].Month * 12;
-            }
-
-            this.totalMonths = 0;
-            this.targetProfit = 0.0;
-            for (m = 1; m < this._model.length; m++) {
-                if (this._model[m].ROI > model.MinROI) {
-                    this.totalMonths = this._model[m].Month;
-                    this.targetProfit = this._model[m].Total;
-                    break;
-                }
-            }
-            this.totalMonths = rentalTime ? rentalTime : this.totalMonths;
-
-            this.breakeven = 0;
-            for (i = 0; i < 60; i++) {
-                if (this._model[i].Total > 0) {
-                    this.breakeven = this._model[i].Month;
-                    break;
-                }
-            }
-
-            this.ROIYear = this.targetProfit / this.totalCost / this.totalMonths * 12;
-            this.ROITotal = this.targetProfit / this.totalCost;
-
+            })
 
         }
 
-        return Underwriter;
+        underwriter.archive = function (data, msg) {
+
+            return $http({
+                method: 'POST',
+                url: '/api/underwriter/archive',
+                data: [data, msg]
+            })
+        }
+
+        underwriter.loadArchivedList = function (bble) {
+            return $http({
+                method: 'GET',
+                url: '/api/underwriter/archived/' + bble
+            })
+        }
+
+        underwriter.loadArchived = function (id) {
+
+            return $http({
+                method: 'GET',
+                url: '/api/underwriter/archived/id/' + id
+            })
+        }
+
+        return underwriter;
 
     }]);
 angular.module('PortalApp')
-    .factory('UnderwritingRequest', ['$http', 'ptBaseResource', function ($http, ptBaseResource) {
+    .factory('UnderwritingRequest', ['$http', 'ptBaseResource', 'DocSearch', function ($http, ptBaseResource, DocSearch) {
 
         var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
-        resource.saveByBBLE = function (data) {
-            //debugger;
+        resource.saveByBBLE = function (data, bble) {
+            if (bble) {
+                data.BBLE = bble;
+            }
+            // debugger;
             var promise = $http({
                 method: 'POST',
                 url: '/api/UnderwritingRequest',
@@ -1832,7 +2279,7 @@ angular.module('PortalApp')
         }
 
         resource.createSearch = function (BBLE) {
-            debugger;
+            // debugger;
             var promise = $http({
                 method: "POST",
                 url: '/api/LeadInfoDocumentSearches',
@@ -1844,54 +2291,75 @@ angular.module('PortalApp')
             return promise;
         }
 
-        resource.getAdditionalInfo = function (BBLE) {
-            var promise = $http({
-                method: 'GET',
-                url: '/api/UnderwritingRequest/GetAdditionalInfo/' + BBLE,
-            });
-            return promise;
-        }
-
-
         return resource;
     }]);
+/// <reference path="DocSearch.js" />
 /**
+ * Wizard control to support comstom display and show current step
  * @return {[class]}                 Wizard class
  */
 angular.module('PortalApp').factory('Wizard', function (WizardStep) {
-
+    /**
+     * Wizard class constructor
+     */
     var _class = function () {
        
     }
-
+    /**
+     * valule of steped filted by conditions 
+     */
     _class.prototype.filteredSteps = [];
-
+    /**
+     * `public set filtered steps
+     * @param {array of WizardStep object} filteredSteps
+     */
     _class.prototype.setFilteredSteps = function(filteredSteps)
     {
         this.filteredSteps = filteredSteps;
     }
+    /**
+     * contorller scope 
+     * similar to other MVC framework context
+     */
     _class.prototype.scope = { step: 1 };
-
+    /**
+     * get current max step of current steps
+     * @returns {int} 
+     */
     _class.prototype.MaxStep = function()
     {
         return this.filteredSteps.length;
     }
+    /**
+     * get class scope, other MVC framework UI context 
+     * 
+     * @param {angular scope} scope
+     */
     _class.prototype.setScope = function (scope)
     {
         this.scope = scope;
     }
+    /**
+     * get current step
+     * @returns {WizardStep object} current step object
+     */
     _class.prototype.currentStep = function()
     {
         return this.filteredSteps[this.scope.step - 1];
     }
     
-    //return $scope.filteredSteps.length;
+    
     return _class;
 });
 /**
- * @return {[class]}                 WizardStep class
+ * Wizard step item  class
+ * @return {[WizardStep]}                 WizardStep class
  */
 angular.module('PortalApp').factory('WizardStep', function () {
+    /**
+     * WizardStep constructor
+     * @param {object} step
+     */
     var _class = function (step) {
         
         this.title = step.title;
@@ -1899,12 +2367,23 @@ angular.module('PortalApp').factory('WizardStep', function () {
         this.init = step.init;
         angular.extend(this, step);
     }
+    /**
+     * wizard title
+     */
     _class.prototype.title = "";
-
+    /**
+     * interface of wizard can move to next or not default is true
+     * @returns {boolean} wizard can move to next or not
+     */
     _class.prototype.next = function ()
     {
         return true;
     }
+    /**
+     * interface of wizard preload function it will call
+     * before wizard contet showup.
+     * @returns {boolean} wizard preload function
+     */
     _class.prototype.init = function()
     {
         return true;
@@ -1926,25 +2405,18 @@ angular.module("PortalApp")
 .directive('newDsSummary', function () {
     return {
         restrict: 'E',
-        scope: {
-            summary: '=',
-            updateby: '=',
-            updateon: '=',
-            docsearch: '=',
-            leadsinfo: '=',
-            showinfo: '='
-        },
         templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
-        link: function (scope)
-        {
-
-        }
     };
 })
 
 /**
- * a utility library provide common function in angular
- * 
+ * Author: Shaopeng Zhang
+ * Date: ???
+ * Description: An utility library provide common function in angular
+ * Update: 
+ *          2016/11/02:
+ *              1. add function parseSearch to get paires from Location.Search
+ *          
  **/
 
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
@@ -2049,9 +2521,16 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
-    this.confirm = function (message) {
-        return $rootScope.confirm(message);
+
+
+    this.confirm = function (message, callback) {
+        return $rootScope.confirm(message, callback);
     };
+
+    this.prompt = function (message, callback, showArea) {
+        return $rootScope.prompt(message, callback, showArea);
+    }
+
     this.addOverlay = function () {
         $rootScope.addOverlay();
     };
@@ -2093,6 +2572,73 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
+
+    /**
+     * assign all reference property from source to target
+     * @param: target
+     * @param: source
+     * @param: skipped //reference that will not be replaced by source
+     * @param: keeped // level two 
+     */
+    this.assignReference = function (target, source, /* optional*/ skipped, /* optional*/ keeped) {
+        var temp = {}; // object backup keeped values
+        var props = Object.keys(source);
+        for (i = 0; i < props.length ; i++) {
+            if (typeof source[props[i]] == 'object') {
+                // skip some reference
+                if (skipped && skipped.indexOf(props[i]) >= 0) {
+                    continue;
+                }
+                // keep some value inside reference, usually id or something ;)
+                if (keeped && keeped.length) {
+                    temp[props[i]] = {};
+                    for (j = 0; j < keeped.length; j++) {
+                        if (target[props[i]] && target[props[i]][keeped[j]]) {
+                            temp[props[i]][keeped[j]] = target[props[i]][keeped[j]];
+                        }
+                    }
+                }
+                target[props[i]] = source[props[i]];
+                if (keeped && keeped.length) {
+                    for (j = 0; j < keeped.length; j++) {
+                        if (temp[props[i]] && temp[props[i]][keeped[j]]) {
+                            target[props[i]][keeped[j]] = temp[props[i]][keeped[j]];
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    this.parseSearch = function (/*string*/ searchString) {
+        var result = {};
+        if (!searchString || typeof searchString != 'string')   //not a string
+            return result;
+        if (searchString.slice(0, 1) != '?')    //not a search string
+            return result;
+        var entriesString = searchString.slice(1).replace(/%20/g, '');  //remove leading ?
+        var entries = entriesString.split("&");
+        for (var i = 0; i < entries.length; i++) {
+            entry = entries[i].split("=");
+            if (entry.length > 1) {
+                result[entry[0]] = entry[1];
+            }
+        }
+        return result;
+    }
+
+    this.setGlobal = function (key, value) {
+        $rootScope.globaldata[key] = value
+    }
+
+    this.getGlobal = function (key) {
+        if ($rootScope.globaldata[key] != null) {
+            return $rootScope.globaldata[key];
+        } else {
+            return undefined;
+        }
+    }   
 }])
 angular.module("PortalApp").service('ptConstructionService', ['$http', function ($http) {
     this.getConstructionCases = function (bble, callback) {
@@ -2515,7 +3061,6 @@ angular.module("PortalApp")
     })
 angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$timeout', 'ptCom', function ($log, $q, $timeout, ptCom) {
     $log.debug('$log is here to show you that this is a regular factory with injection');
-
     var myInterceptor = {
         delayHide: function () {
             $timeout(ptCom.stopLoading, 300);
@@ -2523,10 +3068,10 @@ angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$ti
         BuildAjaxErrorMessage: function (response) {
             var message = "";
             /*Only error handle*/
-            if (response.status > 300 || response.status < 200) {
+            if (response.status > 300 || response.status < 200 || response.status == 203) {
                 var dataObj = JSON.parse(response.responseText);
                 if (dataObj) {
-                    var eMssage = dataObj.ExceptionMessage || dataObj.Message
+                    var eMssage = dataObj.ExceptionMessage || dataObj.Message || dataObj.message;
                     var messageObj = { Message: eMssage };
                     message = myInterceptor.BuildErrorMessgeStr(messageObj);
                 } else {
@@ -2696,6 +3241,7 @@ angular.module("PortalApp").service("ptTime", [function () {
     }
 
     }])
+
 angular.module("PortalApp").filter('booleanToString', function () {
 
     return function (v) {
@@ -2759,7 +3305,7 @@ angular.module("PortalApp")
             }
         }
     }])
-/* a directive to bind contact with it's contact it*/
+// a directive to bind contact with it's contact it
 angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
@@ -2820,143 +3366,6 @@ angular.module("PortalApp")
             }
         };
     }]);
-/* a mask to automaticly convert number to money value*/
-angular.module("PortalApp")
-    .directive('inputMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-                $(el).mask(attrs.inputMask);
-                $(el).on('change', function () {
-                    scope.$eval(attrs.ngModel + "='" + el.val() + "'");
-                });
-            }
-        };
-    })
-angular.module("PortalApp")
-    .directive('integerMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-
-                scope.$watch(attrs.ngModel, function () {
-                    if ($(el).is(":focus")) return;
-                    $(el).formatCurrency({
-                        symbol: "",
-                        roundToDecimalPlace: 0
-                    });
-                });
-                $(el).on('blur', function () {
-                    $(this).formatCurrency({
-                        symbol: "",
-                        roundToDecimalPlace: 0
-                    });
-                });
-                $(el).on('focus', function () {
-                    $(this).toNumber()
-                });
-
-            },
-        };
-    })
-angular.module("PortalApp")
-    .directive('moneyMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-
-                scope.$watch(attrs.ngModel, function () {
-                    if ($(el).is(":focus")) return;
-                    $(el).formatCurrency();
-                });
-                $(el).on('blur', function () {
-                    $(this).formatCurrency();
-                });
-                $(el).on('focus', function () {
-                    $(this).toNumber()
-                });
-
-            },
-        };
-    })
-angular.module("PortalApp")
-    .directive('numberMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-                var isValidate = attrs.hasOwnProperty('isvalidate');
-                //debugger;
-                var rule = /^(\d+|\d*\.\d+)$/;
-                var validate = function (val) {
-                    if (typeof (val) == 'number') {
-                        return true;
-                    } else if (typeof (val) == 'string') {
-                        return !!rule.exec(val);
-                    } else {
-                        return false;
-                    }
-
-                }
-                scope.$watch(attrs.ngModel, function () {
-                    if ($(el).is(":focus")) return;
-                    $(el).formatCurrency({
-                        symbol: ""
-                    });
-                });
-                $(el).on('blur', function () {
-                    if (isValidate) {
-                        var res = validate(this.value);
-                        if (!res) {
-                            $(this).css("background-color", "yellow");
-                            $(this).attr('error', 'true');
-
-                        } else {
-                            $(this).css("background-color", "");
-                            $(this).attr('error', '');
-                            $(this).formatCurrency({
-                                symbol: ""
-                            });
-                        }
-                    } else {
-                        $(this).formatCurrency({
-                            symbol: ""
-                        });
-                    }
-
-
-                });
-                $(el).on('focus', function () {
-                    $(this).toNumber()
-                });
-            },
-        };
-    })
-angular.module("PortalApp")
-    .directive('percentMask', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, el, attrs) {
-
-                scope.$watch(attrs.ngModel, function () {
-                    if ($(el).is(":focus")) return;
-                    $(el).formatCurrency({
-                        symbol: "%",
-                        positiveFormat: '%n%s'
-                    });
-                });
-                $(el).on('blur', function () {
-                    $(this).formatCurrency({
-                        symbol: "%",
-                        positiveFormat: '%n%s'
-                    });
-                });
-                $(el).on('focus', function () {
-                    $(this).toNumber()
-                });
-
-            },
-        };
-    })
     /**
      * @author steven
      * @date 8/11/2016
@@ -3021,12 +3430,71 @@ angular.module("PortalApp")
         }
     })
 angular.module("PortalApp")
+    .directive('ptDate', function () {
+        return {
+            restrict: 'A',
+            scope: true,
+            compile: function (tel, tAttrs) {
+                return {
+                    post: function (scope, el, attrs) {
+                        $(el).datepicker({
+                            forceParse: false,
+                        });
+                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
+                            var dateStr = newValue;
+                            if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
+                                var dd = new Date(dateStr);
+                                dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
+                                $(el).datepicker('update', new Date(dd))
+                            }
+                        });
+                    }
+                }
+            }
+        };
+    })
+angular.module("PortalApp")
     .directive('ptDel', function () {
         return {
             restrict: 'E',
             template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
         }
     })
+/***
+ * Author: Shaopeng Zhang
+ * Date: 2016/11/01
+ * Description: A control to lock/unlock are area, make all
+ */
+angular.module("PortalApp")
+    .directive('ptEditableDiv', [function () {
+        return {
+            restrict: 'A',
+            scope: {
+                isEditable: '='
+            },
+            link: function (scope, el, attrs) {
+                // debugger;
+                angular.element(el).addClass("pt-editable-div");
+                scope.isLocked = true;
+                scope.unlock = function () {
+                    angular.element(".pt-editable-div input, .pt-editable-div textarea, .pt-editable-div select").prop('disabled', false);
+                    scope.isLocked = false;
+                }
+                scope.lock = function () {
+                    angular.element(".pt-editable-div input, .pt-editable-div textarea, .pt-editable-div select").prop('disabled', true);
+                    scope.isLocked = true;
+                }
+                scope.$on('pt-editable-div-lock', function () {
+                    scope.lock();
+                })
+                scope.$on('pt-editable-div-unlock', function () {
+                    // debugger;
+                    scope.unlock();
+                })
+                scope.lock();
+            }
+        }
+    }])
 angular.module("PortalApp")
     .directive('ptEditor', [function () {
         return {
@@ -3504,6 +3972,19 @@ angular.module("PortalApp")
             }
         }
     })
+/* a mask to automaticly convert number to money value*/
+angular.module("PortalApp")
+    .directive('ptInputMask', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                $(el).mask(attrs.inputMask);
+                $(el).on('change', function () {
+                    scope.$eval(attrs.ngModel + "='" + el.val() + "'");
+                });
+            }
+        };
+    })
 angular.module("PortalApp")
     .directive('ptLink', ['ptFileService', function (ptFileService) {
         return {
@@ -3519,6 +4000,130 @@ angular.module("PortalApp")
 
         }
     }])
+/**
+ * a input attribute directive to automatic convert input to certain data format
+ * example <input pt-number-mask maskformat='money' isvalidate/>
+ * (optional) maskerformat: control how data will present.
+ * (optional) isvalidate: if the attribute present, will validate if the user input is correct
+ */
+angular.module("PortalApp")
+    .directive('ptNumberMask', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                var isValidate = attrs.hasOwnProperty('isvalidate');
+                var format = attrs['maskformat'] || '';
+                var formatConfig;
+                switch (format) {
+                    case 'integer':
+                        formatConfig = {
+                            symbol: "",
+                            roundToDecimalPlace: 0
+                        }
+                        break;
+                    case 'money':
+                        formatConfig = {
+
+                        }
+                        break;
+                    case 'percentage':
+                        formatConfig = {
+                            symbol: "%",
+                            positiveFormat: '%n%s',
+                            negativeFormat: '(%n%s)'
+                        }
+                        break;
+                    default:
+                        formatConfig = {
+                            symbol: ""
+                        }
+
+                }
+                //debugger;
+                var rule = /^-?(\d+|\d*\.\d+)$/;
+                var validate = function (val) {
+                    if (typeof (val) == 'number') {
+                        return true;
+                    } else if (typeof (val) == 'string') {
+                        return !!rule.exec(val);
+                    } else {
+                        return false;
+                    }
+
+                }
+
+                scope.$watch(attrs.ngModel, function (newvalue) {
+                    if ($(el).is(":focus")) return;
+                    if (format == 'percentage') {
+                        $(el)[0].value = newvalue * 100;
+                    }
+                    $(el).formatCurrency(formatConfig);
+                });
+                $(el).on('blur', function () {
+                    debugger;
+                    if (isValidate) {
+                        var res = validate(this.value);
+                        if (!res) {
+                            $(this).css("background-color", "yellow");
+                            $(this).attr('error', 'true');
+
+                        } else {
+                            $(this).css("background-color", "");
+                            $(this).attr('error', '');
+                            if (format == 'percentage') {
+                                $(el)[0].value = $(el)[0].value * 100;
+                            }
+                            $(this).formatCurrency(formatConfig);
+                        }
+                    } else {
+                        if (format == 'percentage') {
+                            $(el)[0].value = $(el)[0].value * 100;
+                        }
+                        $(this).formatCurrency(formatConfig);
+                    }
+                });
+                $(el).on('focus', function () {
+
+                    $(this).toNumber();
+                    if (format == 'percentage') {
+                        $(el)[0].value = $(el)[0].value / 100;
+                    }
+                });
+            },
+        };
+    })
+angular.module("PortalApp")
+    .directive('ptNumberMaskPatch', function () {
+        return {
+            priority: 1,
+            restrict: 'A',
+            link: function (scope, el, attrs) {
+                var format = attrs['maskformat'] || '';
+                scope.$watch(attrs.ngModel, function (newvalue) {
+                    if ($(el).is(":focus")) return;
+                    if (format == 'money') {
+                        if (typeof newvalue == 'string') {
+                            var cleanedvalue = newvalue.replace("$", "").replace(",", "")
+                            angular.element(el).scope().$eval(attrs.ngModel + "='" + cleanedvalue + "'")
+                        }
+                    }
+                });
+                $(el).on('blur', function () {
+                    if (format == 'money') {
+                        if (typeof this.value == 'string') {
+                            var cleanedvalue = this.value.replace("$", "").replace(",", "");
+                            if (cleanedvalue.length != this.value.length) {
+                                var targetScope = angular.element(el).scope();
+                                targetScope.$eval(attrs.ngModel + "='" + cleanedvalue + "'");
+                                targetScope.$apply();
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    })
+
 angular.module("PortalApp")
     .directive('ptRadio', function () {
         return {
@@ -3550,8 +4155,10 @@ angular.module("PortalApp")
 
         }
     })
+// the original attribute apply to regular <input type=radio>
+// @deprecated, use <pt-radio> instead!
 angular.module("PortalApp")
-    .directive('radioInit', function () {
+    .directive('ptRadioInit', function () {
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {
@@ -3565,27 +4172,55 @@ angular.module("PortalApp")
         }
     })
 angular.module("PortalApp")
-    .directive('ssDate', function () {
+    .directive('ptRequired', function () {
         return {
             restrict: 'A',
-            scope: true,
-            compile: function (tel, tAttrs) {
-                return {
-                    post: function (scope, el, attrs) {
-                        $(el).datepicker({
-                            forceParse: false,
-                        });
-                        scope.$watch(attrs.ngModel, function (newValue, oldValue) {
-                            var dateStr = newValue;
-                            if (dateStr && typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
-                                var dd = new Date(dateStr);
-                                dd = (dd.getUTCMonth() + 1) + '/' + (dd.getUTCDate()) + '/' + dd.getUTCFullYear();
-                                $(el).datepicker('update', new Date(dd))
-                            }
-                        });
+            link: function (scope, el, attrs) {
+                // debugger;
+                var eltype = $(el)[0].type;
+
+                if (eltype != 'text' && eltype != 'textarea' && eltype != 'select-one') {
+                    return;
+                }
+
+
+                var validate = function (v) {
+                    if (eltype == 'text' || eltype == 'textarea') {
+                        if (v && typeof v == 'string' && v.trim().length > 0) {
+                            return true;
+                        } else {
+                            return false
+                        }
+                    } else if (eltype == 'select-one') {
+                        return v == undefined || (typeof v == 'string' && (v.trim().length == 0 || v.indexOf('?') == 0)) ? false : true;
+                    } else {
+                        return false;
                     }
                 }
-            }
+
+                var callback = function () {
+                    //debugger
+                    var res = validate($(el)[0].value);
+                    if (!res) {
+                        $(el).css("background-color", "yellow");
+                        $(el).attr('error', 'true');
+                        if ($(el)[0].type == 'text' || $(el)[0].type == 'textarea') {
+                            $(el)[0].placeholder = 'content is required.'
+                        }
+
+                    } else {
+                        $(el).css("background-color", "");
+                        $(el).attr('error', '');
+                        if ($(el)[0].type == 'text' || $(el)[0].type == 'textarea') {
+                            $(el)[0].placeholder = ''
+                        }
+                    }
+                }
+
+                $(el).on('blur', callback);
+                scope.$on('ptSelfCheck', callback);
+
+            },
         };
     })
 angular.module("PortalApp")
@@ -4297,23 +4932,17 @@ angular.module('PortalApp')
  * naming wrong becuase the name always change from spec guys.
  */
 angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
-        ptContactServices, ptCom, DocSearch, LeadsInfo
-        , DocSearchEavesdropper, DivError
-        ) {
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
         //New Model(this,arguments)
         leadsInfoBBLE = $('#BBLE').val();
         $scope.ShowInfo = $('#ShowInfo').val();
         $scope.ptContactServices = ptContactServices;
-
-
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
         //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
-
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -4365,12 +4994,14 @@ angular.module('PortalApp')
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                $scope.DocSearch.initLeadsResearch();
-                $scope.DocSearch.initTeam();
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                     
+                    $scope.DocSearch.initLeadsResearch();
+                    $scope.DocSearch.initTeam();
+                    ////////// font end switch to new version //////////////
+                    $scope.versionController.start2Eaves();
+                });
 
-                ////////// font end switch to new version //////////////
-                $scope.versionController.start2Eaves();
             });
 
         }
@@ -4404,91 +5035,86 @@ angular.module('PortalApp')
             }
 
             if (!$scope.DivError.passValidate()) {
-
                 return false;
             }
 
             return true;
             ////////////under are old validate///////////////////
-            var errormsg = '';
+            //var errormsg = '';
+            //var validateFields = [
+            //    "Has_Deed_Purchase_Deed",
+            //    "Has_c_1st_Mortgage_c_1st_Mortgage",
+            //    "fha",
+            //    "Has_c_2nd_Mortgage_c_2nd_Mortgage",
+            //    "has_Last_Assignment_Last_Assignment",
+            //    "fannie",
+            //    "Freddie_Mac_",
+            //    "Has_Due_Property_Taxes_Due",
+            //    "Has_Due_Water_Charges_Due",
+            //    "Has_Open_ECB_Violoations",
+            //    "Has_Open_DOB_Violoations",
+            //    "hasCO",
+            //    "Has_Violations_HPD_Violations",
+            //    "Is_Open_HPD_Charges_Not_Paid_Transferred",
+            //    "has_Judgments_Personal_Judgments",
+            //    "has_Judgments_HPD_Judgments",
+            //    "has_IRS_Tax_Lien_IRS_Tax_Lien",
+            //    "hasNysTaxLien",
+            //    "has_Sidewalk_Liens_Sidewalk_Liens",
+            //    "has_Vacate_Order_Vacate_Order",
+            //    "has_ECB_Tickets_ECB_Tickets",
+            //    "has_ECB_on_Name_ECB_on_Name_other_known_address",
 
-            var validateFields = [
-                "Has_Deed_Purchase_Deed",
-                "Has_c_1st_Mortgage_c_1st_Mortgage",
-                "fha",
-                "Has_c_2nd_Mortgage_c_2nd_Mortgage",
-                "has_Last_Assignment_Last_Assignment",
-                "fannie",
-                "Freddie_Mac_",
-                "Has_Due_Property_Taxes_Due",
-                "Has_Due_Water_Charges_Due",
-                "Has_Open_ECB_Violoations",
-                "Has_Open_DOB_Violoations",
-                "hasCO",
-                "Has_Violations_HPD_Violations",
-                "Is_Open_HPD_Charges_Not_Paid_Transferred",
-                "has_Judgments_Personal_Judgments",
-                "has_Judgments_HPD_Judgments",
-                "has_IRS_Tax_Lien_IRS_Tax_Lien",
-                "hasNysTaxLien",
-                "has_Sidewalk_Liens_Sidewalk_Liens",
-                "has_Vacate_Order_Vacate_Order",
-                "has_ECB_Tickets_ECB_Tickets",
-                "has_ECB_on_Name_ECB_on_Name_other_known_address",
+            //    /**
+            //     * @author Steven
+            //     * @date   8/19/2016
+            //     * 
+            //     * @fix 
+            //     * git commit bde6b6d tax search
+            //     * add validated to new version doc search at least one item add 
+            //     * when select yes control grid
+            //     */
+            //    // under are one to multiple//
+            //    "Has_Other_Mortgage",
+            //    "Has_Other_Liens",
+            //    "Has_TaxLiensCertifcate",
+            //    "Has_COS_Recorded",
+            //    "Has_Deed_Recorded",
+            //    ///////////////////////////
 
-                /**
-                 * @author Steven
-                 * @date   8/19/2016
-                 * 
-                 * @fix 
-                 * git commit bde6b6d tax search
-                 * add validated to new version doc search at least one item add 
-                 * when select yes control grid
-                 */
-                // under are one to multiple//
-                "Has_Other_Mortgage",
-                "Has_Other_Liens",
-                "Has_TaxLiensCertifcate",
-                "Has_COS_Recorded",
-                "Has_Deed_Recorded",
-                ///////////////////////////
+            //];
+            //var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
+            //                    ["Has_Other_Liens", "OtherLiens"],
+            //                    ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
+            //                    ["Has_COS_Recorded", "COSRecorded"],
+            //                    ["Has_Deed_Recorded", "DeedRecorded"]];
 
-            ];
-            var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
-                                ["Has_Other_Liens", "OtherLiens"],
-                                ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
-                                ["Has_COS_Recorded", "COSRecorded"],
-                                ["Has_Deed_Recorded", "DeedRecorded"]];
+            //var fields = $scope.DocSearch.LeadResearch;
+            //if (fields) {
+            //    for (var i = 0; i < validateFields.length; i++) {
+            //        var f = validateFields[i];
+            //        if (fields[f] === undefined) {
+            //            errormsg += "The fields marked * must been filled please check them before submit!<br>";
+            //            break;
+            //        }
+            //    }
 
-            var fields = $scope.DocSearch.LeadResearch;
-            if (fields) {
-                for (var i = 0; i < validateFields.length; i++) {
-                    var f = validateFields[i];
-                    if (fields[f] === undefined) {
-                        errormsg += "The fields marked * must been filled please check them before submit!<br>";
+            //    for (var j = 0; j < checkedAttrs.length; j++) {
+            //        var f1 = checkedAttrs[j];
+            //        if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
+            //            errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
+            //        }
+            //    }
+            //}
 
-                        break;
-                    }
-                }
-
-                for (var j = 0; j < checkedAttrs.length; j++) {
-                    var f1 = checkedAttrs[j];
-                    if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
-                        errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
-                    }
-                }
-            }
-
-
-            return errormsg;
+            //return errormsg;
 
         }
 
         $scope.SearchComplete = function (isSave) {
             // only completed need check validate
             // when saving don't need validate input.
-            if (!isSave)
-            {
+            if (!isSave) {
                 if (!$scope.newVersionValidate()) {
                     var msg = $scope.DivError.getMessage();
 
@@ -4496,17 +5122,16 @@ angular.module('PortalApp')
                     return;
                 };
             }
-            
+
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            $scope.DocSearch.ResutContent = $("#searchReslut").html();
+            $scope.DocSearch.ResutContent = $("#search_summary_div").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
                     AngularRoot.alert("Save successfully!");
                 });
             } else {
-
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -4520,35 +5145,63 @@ angular.module('PortalApp')
 
         }
 
-        $scope.EXCLUSIVE_FIELD = ['DocSearch.LeadResearch.fha', 'DocSearch.LeadResearch.fannie', 'DocSearch.LeadResearch.Freddie_Mac_'];
 
-        for (var i = 0; i < $scope.EXCLUSIVE_FIELD.length; i++) {
-            $scope.$watch($scope.EXCLUSIVE_FIELD[i], function (nv, ov) {
-                if (nv) {
-                    var rest_exclusive_filed = _.without($scope.EXCLUSIVE_FIELD, this.exp);
-                    for (var j = 0; j < rest_exclusive_filed.length; j++) {
-                        if ($scope.$eval(rest_exclusive_filed[j])) $scope.$eval(rest_exclusive_filed[j] + '=false');
-                    }
+        // only one of fha, fannie, freddie_mac can be yes at the same time
+
+        $scope.$watch('DocSearch.LeadResearch.fha', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                if ($scope.DocSearch.LeadResearch.Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+            }
+        })
+        $scope.$watch('DocSearch.LeadResearch.fannie', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+                if ($scope.DocSearch.LeadResearch.Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+            }
+        })
+
+        $scope.$watch('DocSearch.LeadResearch.Freddie_Mac_', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+            }
+        })
+
+        $scope.markCompleted = function (status, msg) {
+
+            // because the underwriting completion is not reversible, comfirm it before save to db.
+            msg = 'Please provide Note or press no to cancel';
+            ptCom.prompt(msg, function (result) {
+                //debugger;
+                if (result != null) {
+                    //debugger;
+                    $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                        //debugger;
+                        $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                        $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                        $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                        $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                    }, function err() {
+                        console.log("fail to update docsearch");
+                    });
                 }
+                
+            }, true);
 
-            })
         }
 
-
-        $scope.markCompleted = function () {
-
-            $http({
-                method: 'GET',
-                url: '/api/LeadInfoDocumentSearches/MarkCompleted/' + $scope.DocSearch.BBLE
-            }).then(function succ(d) {
-                //debugger;
-                $scope.DocSearch.UnderwriteCompleted = d.data.UnderwriteCompleted;
-                $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-            }, function err() {
-
-            })
-
+        try {
+            var modePatten = /mode=\d/;
+            var matches = modePatten.exec(location.search);
+            //debugger;
+            if (matches && matches[0]) {
+                $scope.viewmode = parseInt(matches[0].split('=')[1]);
+            } else {
+                $scope.viewmode = 0;
+            }
+        } catch (ex) {
+            $scope.viewmode = 0;
         }
     });
 /* global LegalShowAll */
@@ -5978,7 +6631,7 @@ portalApp.controller('preAssignEditCtrl', function ($scope, ptCom, PreSignItem, 
                 };
 
             }
-        })
+        }, true)
 
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
@@ -6099,7 +6752,7 @@ portalApp.controller('preAssignListCtrl', function ($scope, PreSignList) {
 });
 
 /*************************old style contoller******************************/
-portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterceptor,$http) {
+portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterceptor, $http) {
 
 
     $scope.preAssign = {
@@ -6297,7 +6950,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
                 };
 
             }
-        })
+        }, true)
 
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
@@ -8591,451 +9244,243 @@ angular.module("PortalApp")
 
 
 }])
-angular.module("PortalApp").config(function ($stateProvider) {
+/**
+ * Author: Shaopeng Zhang
+ * Date: 2016/11/02
+ * Description: General Controller for underwriting
+ * Update: 
+ *          --- 2016/11/02
+ *              1. Add Enable Editing Function to unlock datainput area.
+ */
+angular.module("PortalApp").controller("UnderwriterController",
+                ['$scope', 'ptCom', 'ptUnderwriter', '$location', 'DocSearch', '$state', function ($scope, ptCom, ptUnderwriter, $location, DocSearch, $state) {
 
-    var underwriter = {
-        name: 'underwriter',
-        url: '/underwriter',
-        controller: 'UnderwriterController'
+
+                    $scope.data = {};
+                    $scope.archive = {};
+                    $scope.currentDataCopy = {};
+                    $scope.isProtectedView = true;
+
+                    $scope.init = function (bble) {
+                        //ptCom.startLoading()
+                        //$scope.feedData();
+                        $scope.load(bble);
+                        $scope.loadArchivedList(bble);
+                    }
+
+                    $scope.load = function (bble) {
+                        $scope.data = ptUnderwriter.load(bble);
+                        if ($scope.data.$promise) {
+                            $scope.data.$promise.then(function () {
+                                $scope.calculate();
+                            })
+                        }
+                    }
+
+                    $scope.save = function () {
+                        ptCom.confirm("Are you going to Save?", function (response) {
+                            if (response) {
+                                ptUnderwriter.save($scope.data).then(function (d) {
+                                    //debugger;
+                                    if (d.data) {
+                                        $scope.data = d.data;
+                                    }
+                                    ptCom.alert("Save Successful");
+                                }, function () {
+                                    ptCom.alert("fail to save");
+                                })
+                            }
+                        })
+
+
+                    }
+
+                    /*
+                     * snapshot current values of forms,
+                     * and sava copy in database for future analysis
+                     */
+                    $scope.archiveFunc = function () {
+                        ptCom.prompt('Please give a name to this archive.', function (msg) {
+                            //debugger;
+                            if (msg != null) {
+                                ptUnderwriter.archive($scope.data, msg).then(function (d) {
+                                    alert("Archive succesful.")
+                                }, function () {
+                                    alert("Sorry...Some error...")
+                                })
+                            }
+
+                        })
+
+
+                    }
+
+                    /**
+                     * load all achived version in databases
+                     */
+                    $scope.loadArchivedList = function (bble) {
+                        if (bble) {
+                            ptUnderwriter.loadArchivedList(bble).then(function (d) {
+                                $scope.archivedList = d.data;
+                            })
+                        }
+                    }
+
+                    /**
+                     * load a single archived entry in database
+                     * @param: archive
+                     */
+                    $scope.loadArchived = function (archive) {
+                        //debugger;
+                        if (archive.Id) {
+                            ptUnderwriter.loadArchived(archive.Id).then(function (d) {
+                                if (d.data) {
+                                    //debugger;
+                                    angular.copy($scope.data, $scope.currentDataCopy);
+                                    ptCom.assignReference($scope.data, d.data, [], ['Id']);
+                                    $scope.archive = archive;
+                                    $scope.archive.isLoaded = true;
+                                    ptCom.alert("Load successful");
+
+                                }
+                            }, function (d) {
+                                ptCom.alert("Fail to load.");
+                            })
+                        }
+
+                    }
+
+                    $scope.restoreCurrent = function () {
+                        if ($scope.currentDataCopy) {
+                            ptCom.assignReference($scope.data, $scope.currentDataCopy);
+                            $scope.archive.isLoaded = false;
+                            ptCom.alert("Restore to current version.")
+                        }
+                    }
+
+                    /*
+                     * Core function to apply predefined rule, 
+                     * and update model values 
+                     */
+                    $scope.calculate = function () {
+                        $scope.$applyAsync(function () {
+                            ptUnderwriter.calculator.calculate($scope.data);
+                        });
+                    }
+
+                    /*
+                     * A predefined model to validate with excel data
+                     */
+                    $scope.feedData = function () {
+                        $scope.data.PropertyInfo.TaxClass = 'A0',
+                        $scope.data.PropertyInfo.ActualNumOfUnits = 1
+                        $scope.data.PropertyInfo.SellerOccupied = true;
+                        $scope.data.PropertyInfo.PropertyTaxYear = 4297.0;
+                        $scope.data.DealCosts.HOI = 20000.0;
+                        $scope.data.DealCosts.AgentCommission = 2500;
+                        $scope.data.RehabInfo.AverageLowValue = 205166;
+                        $scope.data.RehabInfo.RenovatedValue = 510000;
+                        $scope.data.RehabInfo.RepairBid = 75000;
+                        $scope.data.RehabInfo.DealTimeMonths = 6;
+
+                        $scope.data.LienInfo.FirstMortgage = 340000;
+                        $scope.data.LienInfo.SecondMortgage = 284000;
+                        $scope.data.LienCosts.PropertyTaxes = 9113.32;
+                        $scope.data.LienCosts.WaterCharges = 1101.33;
+                        $scope.data.LienCosts.PersonalJudgements = 14892.09;
+                        $scope.update();
+                    }
+
+                    $scope.enableEditing = function () {
+                        $scope.$broadcast('pt-editable-div-unlock');
+                        $scope.isProtectedView = false;
+                    }
+
+                    $scope.$watch(function () {
+                        return $state.$current.name
+                    }, function (newVal, oldVal) {
+                        if (newVal == 'underwriter.datainput') {
+                            if ($scope.isProtectedView == false) {
+                                $scope.enableEditing();
+                            }
+                        }
+                    })
+
+
+
+
+                    // init controller;
+                    // debugger;
+                    $scope.BBLE = ptCom.getGlobal("BBLE") || "";
+                    $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
+                    $scope.init($scope.BBLE);
+
+                }]);
+angular.module("PortalApp")
+.controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', 'DocSearch', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom, DocSearch) {
+    $scope.init = function (bble) {
+        $scope.data = {};
+        if ($scope.BBLE) {
+            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim() }, function () {
+                $scope.search = DocSearch.get({ BBLE: bble.trim() });
+            })
+        }
     }
 
-    var dataInput = {
-        name: 'underwriter.datainput',
-        url: '/datainput',
-        //controller: 'UnderwriterController',
-        templateUrl: '/js/Views/Underwriter/datainput.tpl.html'
-    }
-    var flipsheets = {
-        name: 'underwriter.flipsheets',
-        url: '/flipsheets',
-        //controller: 'UnderwriterController',
-        templateUrl: '/js/Views/Underwriter/flipsheets.tpl.html'
-    }
-    var rentalmodels = {
-        name: 'underwriter.rentalmodels',
-        url: '/rentalmodels',
-        //controller: 'UnderwriterController',
-        templateUrl: '/js/Views/Underwriter/rentalmodels.tpl.html'
-    }
-    var tables = {
-        name: 'underwriter.tables',
-        url: '/tables',
-        //controller: 'UnderwriterController',
-        templateUrl: '/js/Views/Underwriter/tables.tpl.html'
+
+    $scope.cleanForm = function () {
+        var oldId = $scope.data.Id;
+        $scope.data = {};
+        $scope.data.Id = oldId;
+        $scope.formCleaned = true;
+
     }
 
-    $stateProvider.state(underwriter)
-                    .state(dataInput)
-                    .state(flipsheets)
-                    .state(rentalmodels)
-                    .state(tables);
-
-});
-
-angular.module("PortalApp").controller("UnderwriterController", ['$scope', 'ptCom', 'ptUnderwriter', function ($scope, ptCom, ptUnderwriter) {
-
-    $scope.data = {};
-    $scope.uw = ptUnderwriter;
-
-    $scope.init = function (bble, isImport) {
-        //ptCom.startLoading()
-        $scope.data = ptUnderwriter.load(bble, isImport);
-        if ($scope.data.$promise) {
-            $scope.data.$promise.then(function () {
-                $scope.applyRule();
-            }).finally(function () {
-                //ptCom.stopLoading()
-
+    //check input and textarea to see if there is a error attribute
+    $scope.checkValidate = function (async) {
+        if (!async) {
+            return _.some($('input, textarea, select'), function (v) {
+                return $(v).attr('error') == 'true';
             })
         } else {
-            $scope.applyRule();
-        }
-        $scope.feedData();
-    }
+            var dfd = $.Deferred();
 
+            var err = _.some($('input, textarea, select'), function (v) {
+                return $(v).attr('error') == 'true';
+            });
 
-    $scope.feedData = function () {
-
-        $scope.data.PropertyInfo.TaxClass = 'A0',
-        $scope.data.PropertyInfo.ActualNumOfUnits = 1
-        $scope.data.PropertyInfo.SellerOccupied = true;
-        $scope.data.PropertyInfo.PropertyTaxYear = 4297.0;
-        $scope.data.DealCosts.HOI = 20000.0;
-        $scope.data.DealCosts.AgentCommission = 2500;
-        $scope.data.RehabInfo.AverageLowValue = 205166;
-        $scope.data.RehabInfo.RenovatedValue = 510000;
-        $scope.data.RehabInfo.RepairBid = 75000;
-        $scope.data.RehabInfo.DealTimeMonths = 6;
-
-        $scope.data.LienInfo.FirstMortgage = 340000;
-        $scope.data.LienInfo.SecondMortgage = 284000;
-        $scope.data.LienCosts.PropertyTaxes = 9113.32;
-        $scope.data.LienCosts.WaterCharges = 1101.33;
-        $scope.data.LienCosts.PersonalJudgements = 14892.09;
-
-    }
-    $scope.save = function () {
-    }
-
-    $scope.update = function () {
-        $scope.applyRule();
-    }
-
-    $scope.applyFixedRules = function () {
-        var d = $scope.data;
-
-        if (!$scope.fixedRulesApplied) {
-            $scope.fixedRulesApplied = 1;
-
-            d.RehabInfo.SalesCommission = 0.05;
-            d.RehabInfo.DealROICash = 0.3
-            // Insurance Premium
-            d.InsurancePremium.From = [35001, 50001, 100001, 500001, 1000001, 5000001, 10000001, 15000001];
-            d.InsurancePremium.To = [50000, 100000, 500000, 1000000, 5000000, 10000000, 15000000];
-            d.InsurancePremium.OwnersPolicyRate = [.00667, .00543, .00436, .00398, .00366, .00325, .00307, .00276];
-            d.InsurancePremium.LoanPolicyRate = [0.00555, 0.00454, 0.00364, 0.00331, 0.00305, 0.00271, 0.00255, 0.00231];
-            d.InsurancePremium.CostOwnersPolicy = _.zip(d.InsurancePremium.From, d.InsurancePremium.To, d.InsurancePremium.OwnersPolicyRate)
-                                                    .reduce(function (cum, v) {
-                                                        var l = cum.length;
-                                                        cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
-                                                        cum[l] = cum[l - 1];
-                                                        return cum;
-                                                    }, [402])
-
-            d.InsurancePremium.CostLoanPolicy = _.zip(d.InsurancePremium.From, d.InsurancePremium.To, d.InsurancePremium.LoanPolicyRate)
-                                                    .reduce(function (cum, v) {
-                                                        var l = cum.length;
-                                                        cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
-                                                        cum[l] = cum[l - 1];
-                                                        return cum;
-                                                    }, [344])
-            // Flip Calculation
-            d.FlipCalculation.FlipROI = 0.15;
-            // Money Factor
-            d.MoneyFactor.CostOfMoney = 0.0;
-            d.MoneyFactor.InterestOnMoney = 0.18;
-            // Liens
-            d.Liens.LienPayoffsSettlement = 1.0
-            d.Liens.TaxLienSettlement = 0.09 / 12;
-            d.Liens.PropertyTaxesSettlement = 1.0;
-            d.Liens.WaterChargesSettlement = 1.0;
-            d.Liens.HPDChargesSettlement = 1.0;
-            d.Liens.ECBDOBViolationsSettlement = 0.35;
-            d.Liens.DOBCivilPenaltiesSettlement = 1.0;
-            d.Liens.PersonalJudgementsSettlement = 0.4;
-            d.Liens.HPDJudgementsSettlement = 0.15;
-            d.Liens.RelocationLienSettlement = .09 / 365;
-            // Deal Expenses
-            d.DealExpenses.HOILienSettlement = 0.75;
-            // Closing Costs
-            d.ClosingCost.TitleBill = 1200.00;
-            d.ClosingCost.BuyerAttorney = 1250.00;
-            // Resale
-            d.Resale.Concession = 0.0;
-            d.Resale.Attorney = 1250.0;
-            d.Resale.NDC = 500;
-            // LoanTerms
-            d.LoanTerms.LoanRate = 0.12;
-            d.LoanTerms.LoanPoints = 2;
-            d.LoanTerms.LoanTermMonths = 12;
-            d.LoanTerms.LTV = 0.6;
-            // HOI
-            d.HOI.Value = 0.25;
-            //Rental Model
-            d.RentalModel.CostOfMoneyRate = 0.16;
-            d.RentalModel.MinROI = 0.18;
-            d.RentalModel.Insurance = 85.0;
-
-        }
-    };
-
-    $scope.applyRule = function () {
-        //debugger;
-        var d = $scope.data;
-        var float = parseFloat;
-        var int = parseInt;
-
-        $scope.applyFixedRules();
-
-        // PropertyInfo
-        d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? "Residential" : "Not Residential" })();
-
-        // Liens
-        d.Liens.TaxLien = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienSettlement * float(d.RehabInfo.DealTimeMonths));
-        d.Liens.PropertyTaxes = float(d.LienCosts.PropertyTaxes) * d.Liens.PropertyTaxesSettlement;
-        d.Liens.WaterCharges = float(d.LienCosts.WaterCharges) * d.Liens.WaterChargesSettlement;
-        d.Liens.HPDCharges = float(d.LienCosts.HPDCharges) * d.Liens.HPDChargesSettlement;
-        d.Liens.ECBDOBViolations = float(d.LienCosts.ECBDOBViolations) * (1.0 + 0.0075 * float(d.RehabInfo.DealTimeMonths)) * d.Liens.ECBDOBViolationsSettlement;
-        d.Liens.DOBCivilPenalties = float(d.LienCosts.DOBCivilPenalty) * d.Liens.DOBCivilPenaltiesSettlement;
-        d.Liens.PersonalJudgements = float(d.LienCosts.PersonalJudgements) * d.Liens.PersonalJudgementsSettlement;
-        d.Liens.HPDJudgements = float(d.LienCosts.HPDJudgements) * d.Liens.HPDJudgementsSettlement;
-        d.Liens.IRSNYSTaxLienSettlement = (function () {
-            return float(d.LienCosts.IRSNYSTaxLiens) < 12500 ? 1.0 : 0.0
-        })();
-        d.Liens.IRSNYSTaxLien = float(d.LienCosts.IRSNYSTaxLiens) * d.Liens.IRSNYSTaxLienSettlement;
-        d.Liens.RelocationLien = (function () {
-
-            function getTodayDate() {
-                return new Date(new Date().toJSON().slice(0, 10));
-            }
-            if (!d.LienCosts.RelocationLienDate)
-                return 0.0;
-            else {
-                return float(d.LienCosts.RelocationLien) * (1.0 + (getTodayDate().getTime() + 180 * 24 * 60 * 60 * 1000 - new Date(d.LienCosts.RelocationLienDate).getTime()) * d.Liens.RelocationLienSettlement)
-            }
-        })();
-        // DealExpense
-        d.DealExpenses.MoneySpent = float(d.DealCosts.MoneySpent);
-
-        d.DealExpenses.HOILien = (function () {
-            var c1 = d.PropertyInfo.SellerOccupied;
-            var c2 = int(d.PropertyInfo.NumOfTenants) > 0;
-            var c3 = !d.LienInfo.FHA;
-            var c4 = !d.LienInfo.FannieMae;
-            var c5 = !d.LienInfo.FreddieMac;
-            var c6 = float(d.DealCosts.HOI) > 0.0;
-            //debugger;
-            return (c1 | c2) & c3 & c4 & c5 & c6 ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
-
-        })();
-        d.DealExpenses.COSTermination = float(d.DealCosts.COSTermination);
-        d.DealExpenses.Tenants = float(d.PropertyInfo.NumOfTenants) * 5000.00;
-        d.DealExpenses.Agent = float(d.DealCosts.AgentCommission);
-        // Construction(Improvement)
-        d.Construction.Construction = float(d.RehabInfo.RepairBid);
-        d.Construction.Architect = d.Liens.ECBDOBViolations > 4000 ? 10000.0 : 0;
-        // CarryingCosts
-        d.CarryingCosts.RETaxs = float(d.PropertyInfo.PropertyTaxYear) / 12 * float(d.RehabInfo.DealTimeMonths);
-        d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.ActualNumOfUnits), 2) + 400 * float(d.PropertyInfo.ActualNumOfUnits);
-
-        // Resale
-        d.Resale.ProbableResale = float(d.RehabInfo.RenovatedValue);
-        d.Resale.Commissions = float(d.Resale.ProbableResale) * float(d.RehabInfo.SalesCommission);
-        d.Resale.TransferTax = (function () {
-            var pr = parseFloat($scope.data.Resale.ProbableResale);
-            var rate;
-            if ($scope.data.PropertyInfo.PropertyType == 'Residential') {
-                if (pr <= 500000) {
-                    rate = 0.01;
-                } else if (pr > 500000) {
-                    rate = 0.01425;
-                }
+            if (err) {
+                dfd.resolve();
             } else {
-                if (pr <= 500000) {
-                    rate = 0.01425;
-                } else if (pr > 500000) {
-                    rate = 0.02625;
-                }
+                dfd.reject();
             }
 
-            return (rate + 0.004) * pr;
-        })();
-        // LoanTerms
-        d.LoanTerms.LoanAmount = float(d.Resale.ProbableResale) * float(d.LoanTerms.LTV);
-        d.CarryingCosts.Insurance = d.LoanTerms.LoanAmount / 100.0 * 0.45 / 12 * float(d.RehabInfo.DealTimeMonths);
-        // LoanCosts
-        d.LoanCosts.LoanClosingCost = (function () {
-            var la = $scope.data.LoanTerms.LoanAmount;
-            var rate;
-            if ($scope.data.PropertyInfo.PropertyType == 'Residential') {
-                if (la <= 500000) {
-                    rate = 0.02;
+            return dfd;
+        }
 
-                } else if (la > 500000) {
-                    rate = 0.02125
-                }
-            } else {
-                if (la <= 500000) {
-                    rate = 0.02;
-
-                } else if (la > 500000) {
-                    rate = 0.0275;
-                }
-            }
-            return la * rate + 275 + 1500;
-        })();
-        d.LoanCosts.Points = d.LoanTerms.LoanAmount * d.LoanTerms.LoanPoints / 100.0;
-        d.LoanCosts.LoanInterest = d.LoanTerms.LoanAmount * d.LoanTerms.LoanRate / 12.0 * float(d.RehabInfo.DealTimeMonths);
-
-        // Sums
-        d.Liens.Sums = d.Liens.TaxLien + d.Liens.PropertyTaxes + d.Liens.WaterCharges + d.Liens.HPDCharges + d.Liens.ECBDOBViolations + d.Liens.DOBCivilPenalties + d.Liens.PersonalJudgements + d.Liens.HPDJudgements + d.Liens.IRSNYSTaxLien + d.Liens.RelocationLien;
-        d.Liens.AdditonalCostsSums = d.Liens.WaterCharges + d.Liens.HPDCharges + d.Liens.ECBDOBViolations + d.Liens.DOBCivilPenalties + d.Liens.PersonalJudgements + d.Liens.HPDJudgements + d.Liens.IRSNYSTaxLien + d.Liens.RelocationLien;
-        d.DealExpenses.Sums = d.DealExpenses.MoneySpent + d.DealExpenses.HOILien + d.DealExpenses.COSTermination + d.DealExpenses.Tenants + d.DealExpenses.Agent;
-        d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
-        d.Construction.Sums = d.Construction.Construction + d.Construction.Architect;
-        d.CarryingCosts.Sums = d.CarryingCosts.Insurance + d.CarryingCosts.RETaxs + d.CarryingCosts.Utilities;
-        d.Resale.Sums = d.Resale.Commissions + d.Resale.TransferTax + d.Resale.Concession + d.Resale.Attorney + d.Resale.NDC;
-        d.Liens.LienPayoffs = (d.Resale.ProbableResale - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums) * float(d.RehabInfo.DealROICash)) / (float(d.RehabInfo.DealROICash) * 1.0058 + 1.0058);
-
-
-        // InsurancePremium
-        d.InsurancePremium.PurchasePrice = d.Liens.LienPayoffs;
-        d.InsurancePremium.LoanAmountDiscounted = d.LoanTerms.LoanAmount >= d.Liens.LienPayoffs ? d.Liens.LienPayoffs : d.LoanTerms.LoanAmount;
-        d.InsurancePremium.LoanAmountFullPremium = d.LoanTerms.LoanAmount - d.InsurancePremium.LoanAmountDiscounted;
-        d.InsurancePremium.OwnersPolicy = ptUnderwriter.insurancePolicyCalculation(d.InsurancePremium.PurchasePrice, d.InsurancePremium.OwnersPolicyRate, d.InsurancePremium.CostOwnersPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
-        d.InsurancePremium.OwnersLoanPolicyDiscounted = ptUnderwriter.insurancePolicyCalculation(d.InsurancePremium.LoanAmountDiscounted, d.InsurancePremium.LoanPolicyRate, d.InsurancePremium.CostLoanPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
-        d.InsurancePremium.OwnersLoanPolicyFullPremium = ptUnderwriter.insurancePolicyCalculation(d.InsurancePremium.LoanAmountFullPremium, d.InsurancePremium.LoanPolicyRate, d.InsurancePremium.CostLoanPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
-        d.InsurancePremium.TitleInsurance = d.InsurancePremium.OwnersLoanPolicyDiscounted * 1.3 + d.InsurancePremium.OwnersLoanPolicyFullPremium;
-        d.ClosingCost.OwnersPolicy = d.InsurancePremium.OwnersPolicy;
-        d.ClosingCost.Sums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney + d.ClosingCost.OwnersPolicy;
-        d.LoanCosts.LoanPolicy = d.InsurancePremium.TitleInsurance - d.InsurancePremium.OwnersPolicy;
-        d.FlipCalculation.FlipPrice = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums) * d.FlipCalculation.FlipROI) / (d.FlipCalculation.FlipROI * 1 + 1)
-
-        // HOI
-        d.LoanCosts.Sums = d.LoanCosts.LoanPolicy + d.LoanCosts.LoanClosingCost + d.LoanCosts.Points + d.LoanCosts.LoanInterest;
-        d.HOI.PurchasePriceAllIn = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums + d.LoanCosts.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums) * d.HOI.Value) / (d.HOI.Value * 1 + 1);
-        d.HOI.TotalInvestment = d.HOI.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
-        d.HOI.CashRequirement = d.HOI.TotalInvestment - d.LoanTerms.LoanAmount;
-        d.HOI.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOI.TotalInvestment;
-        d.HOI.ROILoan = d.HOI.NetProfit / d.HOI.TotalInvestment;
-
-        // Best Case For HOI
-        d.HOIBestCase.PurchasePriceAllIn = d.RehabInfo.AverageLowValue + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
-        d.HOIBestCase.TotalInvestment = d.HOIBestCase.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
-        d.HOIBestCase.CashRequirement = d.HOIBestCase.TotalInvestment - d.LoanTerms.LoanAmount;
-        d.HOIBestCase.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOIBestCase.TotalInvestment;
-        d.HOIBestCase.ROILoan = d.HOIBestCase.NetProfit / d.HOIBestCase.TotalInvestment;
-
-        // Cash Scenario
-        d.CashScenario.Purchase_LienPayoffs = d.Liens.LienPayoffs + d.Liens.TaxLien + d.Liens.PropertyTaxes;
-        d.CashScenario.Purchase_OffHUDCosts = d.Liens.AdditonalCostsSums;
-        d.CashScenario.Purchase_DealCosts = d.DealExpenses.Sums;
-        d.CashScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
-        d.CashScenario.Purchase_Construction = d.Construction.Sums;
-        d.CashScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
-        d.CashScenario.Purchase_TotalInvestment = d.CashScenario.Purchase_LienPayoffs + d.CashScenario.Purchase_OffHUDCosts + d.CashScenario.Purchase_DealCosts + d.CashScenario.Purchase_ClosingCost + d.CashScenario.Purchase_Construction + d.CashScenario.Purchase_CarryingCosts;
-        d.CashScenario.Resale_SalePrice = d.Resale.ProbableResale;
-        d.CashScenario.Resale_Concession = d.Resale.Concession;
-        d.CashScenario.Resale_Commissions = d.Resale.Commissions;
-        d.CashScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-        d.CashScenario.Resale_NetProfit = d.CashScenario.Resale_SalePrice - (d.CashScenario.Resale_Concession + d.CashScenario.Resale_Commissions + d.CashScenario.Resale_ClosingCost) - d.CashScenario.Purchase_TotalInvestment;
-        d.CashScenario.Time = float(d.RehabInfo.DealTimeMonths);
-        d.CashScenario.CashRequired = d.CashScenario.Purchase_TotalInvestment;
-        d.CashScenario.ROI = d.CashScenario.Resale_NetProfit / d.CashScenario.Purchase_TotalInvestment;
-        d.CashScenario.ROIAnnual = d.CashScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
-        // Loan Scenario
-        d.LoanScenario.Purchase_PurchasePrice = d.Liens.LienPayoffs + d.Liens.TaxLien + d.Liens.PropertyTaxes;
-        d.LoanScenario.Purchase_AdditonalCosts = d.Liens.AdditonalCostsSums;
-        d.LoanScenario.Purchase_DealCosts = d.DealExpenses.Sums;
-        d.LoanScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
-        d.LoanScenario.Purchase_Construction = d.Construction.Sums;
-        d.LoanScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
-        d.LoanScenario.Purchase_LoanClosingCost = d.LoanCosts.LoanPolicy + d.LoanCosts.LoanClosingCost + d.LoanCosts.Points;
-        d.LoanScenario.Purchase_LoanInterest = d.LoanCosts.LoanInterest;
-        d.LoanScenario.Purchase_TotalInvestment = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
-        d.LoanScenario.Resale_SalePrice = d.Resale.ProbableResale;
-        d.LoanScenario.Resale_Concession = d.Resale.Concession;
-        d.LoanScenario.Resale_Commissions = d.Resale.Commissions;
-        d.LoanScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-        d.LoanScenario.Resale_NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - d.LoanScenario.Purchase_TotalInvestment;
-        d.LoanScenario.Time = float(d.RehabInfo.DealTimeMonths);
-        d.LoanScenario.LoanAmount = d.LoanTerms.LoanAmount;
-        d.LoanScenario.LTV = d.LoanScenario.LoanAmount / d.LoanScenario.Resale_SalePrice;
-        d.LoanScenario.CashRequirement = d.LoanScenario.Purchase_TotalInvestment - d.LoanScenario.LoanAmount;
-        d.LoanScenario.ROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.Purchase_TotalInvestment;
-        d.LoanScenario.ROIAnnual = d.LoanScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
-        d.LoanScenario.CashROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.CashRequirement;
-        d.LoanScenario.CashROIAnnual = d.LoanScenario.CashROI / d.RehabInfo.DealTimeMonths * 12;
-        // FlipScenario
-        d.FlipScenario.Purchase_TotalCost = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
-        d.FlipScenario.FlipPrice_SalePrice = d.FlipCalculation.FlipPrice;
-
-        d.FlipScenario.Purchase_PurchasePrice = d.FlipScenario.FlipPrice_SalePrice;
-        d.FlipScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
-        d.FlipScenario.Purchase_Construction = d.Construction.Sums;
-        d.FlipScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
-        d.FlipScenario.Purchase_TotalInvestment = d.FlipScenario.Purchase_PurchasePrice + d.FlipScenario.Purchase_ClosingCost + d.FlipScenario.Purchase_Construction + d.FlipScenario.Purchase_CarryingCosts;
-        d.FlipScenario.Resale_SalePrice = d.Resale.ProbableResale;
-        d.FlipScenario.Resale_Concession = d.Resale.Concession;
-        d.FlipScenario.Resale_Commissions = d.Resale.Commissions;
-        d.FlipScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-        d.FlipScenario.Resale_NetProfit = d.FlipScenario.Resale_SalePrice - (d.FlipScenario.Resale_Commissions + d.FlipScenario.Resale_ClosingCost) - d.FlipScenario.Purchase_TotalInvestment;
-        d.FlipScenario.FlipProfit = d.FlipScenario.FlipPrice_SalePrice - d.FlipScenario.Purchase_TotalCost;
-        d.FlipScenario.CashRequirement = d.FlipScenario.Purchase_TotalInvestment
-        d.FlipScenario.ROI = d.FlipScenario.Resale_NetProfit / d.FlipScenario.Purchase_TotalInvestment;
-        // Others 
-        d.Others.MaximumLienPayoff = d.Liens.LienPayoffs + d.Liens.TaxLien + d.Liens.PropertyTaxes;
-        d.Others.MaximumSSPrice = d.Liens.LienPayoffs + d.Liens.Sums;
-        d.Others.MaxHOI = d.HOIBestCase.NetProfit - d.HOI.NetProfit;
-        // Minimum Baseline (=Loan)
-        d.MinimumBaselineScenario.PurchasePriceAllIn = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
-        d.MinimumBaselineScenario.TotalInvestment = d.LoanScenario.Purchase_TotalInvestment;
-        d.MinimumBaselineScenario.CashRequirement = d.LoanScenario.CashRequirement;
-        d.MinimumBaselineScenario.NetProfit = d.LoanScenario.Resale_NetProfit;
-        d.MinimumBaselineScenario.ROI = d.LoanScenario.ROI;
-        // Best Case Scenario
-        d.BestCaseScenario.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums;
-        d.BestCaseScenario.TotalInvestment = d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
-        d.BestCaseScenario.CashRequirement = d.BestCaseScenario.TotalInvestment - d.LoanTerms.LoanAmount;
-        d.BestCaseScenario.NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - (d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums);
-        d.BestCaseScenario.ROI = d.BestCaseScenario.NetProfit / d.BestCaseScenario.TotalInvestment
-        // Rental Model
-        d.RentalModel.NumOfUnits = int(d.RentalInfo.NumOfUnits);
-        d.RentalModel.DeedPurchase = float(d.RentalInfo.DeedPurchase);
-        d.RentalModel.TotalRepairs = float(d.RentalInfo.RepairBidTotal);
-        d.RentalModel.AgentCommission = float(d.DealCosts.AgentCommission);
-        d.RentalModel.TotalUpfront = d.RentalModel.DeedPurchase + d.RentalModel.TotalRepairs + d.RentalModel.AgentCommission;
-        d.RentalModel.Rent = float(d.RentalInfo.MarketRentTotal);
-        d.RentalModel.ManagementFee = d.RentalModel.Rent * 0.1;
-        d.RentalModel.Maintenance = 50 + (d.RentalModel.NumOfUnits - 1) * 25;
-        d.RentalModel.MiscRepairs = 75 * d.RentalModel.NumOfUnits;
-        d.RentalModel.NetMontlyRent = d.RentalModel.Rent - d.RentalModel.ManagementFee - d.RentalModel.Maintenance - d.RentalModel.Insurance - d.RentalModel.MiscRepairs;
-        $scope.RentalHelper = new ptUnderwriter.RentalHelper(d.RentalInfo.CurrentlyRented, d.RentalInfo.RentalTime, d.RentalModel);
-        d.RentalModel.TotalMonth = $scope.RentalHelper.totalMonths;
-        d.RentalModel.CostOfMoney = $scope.RentalHelper.costOfMoney;
-        d.RentalModel.TotalCost = $scope.RentalHelper.totalCost;
-        d.RentalModel.Breakeven = $scope.RentalHelper.breakeven;
-        d.RentalModel.TargetTime = d.RentalModel.TotalMonth;
-        d.RentalModel.TargetProfit = $scope.RentalHelper.targetProfit;
-        d.RentalModel.ROIYear = $scope.RentalHelper.ROIYear;
-        d.RentalModel.ROITotal = $scope.RentalHelper.ROITotal;
     }
 
-}]);
-
-angular.module("PortalApp")
-.controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom) {
-    $scope.init = function () {
-        $scope.data = {};
-        $scope.BBLE = $location.search().BBLE || '';
-        if ($state.current.data) {
-            $scope.Review = $state.current.data.Review || '';
-        }
-        if ($scope.BBLE) {
-            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim(), }, function () {
-                $scope.data.BBLE = $scope.BBLE;
-                UnderwritingRequest.getAdditionalInfo($scope.data.BBLE).then(function success(res) {
-                    $scope.data.Address = res.data.Address;
-                    $scope.data.Status = res.data.Status || $scope.data.Status;
-
-                }, function error() {
-                    console.log('fail to fetch addiontal infomation.')
-                });
-
-            }, function () {
-                $scope.data.BBLE = $scope.BBLE;
-            })
-        }
-    }
-
-    $scope.checkValidate = function () {
-        return _.some($('input'), function (v) {
-            return $(v).attr('error') == 'true';
-        })
+    //broadcast ptSelfCheck event make ptRequried directive check it self
+    $scope.selfCheck = function () {
+        $scope.$broadcast('ptSelfCheck');
+        var startFlag = false
+        var checkingcounter = 0;
+        $scope.$on('ptSelfCheckStart', function () {
+            startFlag = true;
+            checkingcounter++;
+        });
     }
 
     $scope.save = function (isSlient) {
-
+        $scope.$broadcast('ptSelfCheck');
         if ($scope.checkValidate()) {
-            ptCom.alert('Please correct Highlight Field before Save.');
+            ptCom.alert('Please correct Highlight Field first.');
             return;
         }
-
-        UnderwritingRequest.saveByBBLE($scope.data).then(function () {
+        UnderwritingRequest.saveByBBLE($scope.data, $scope.BBLE).then(function () {
             if (!isSlient) {
                 ptCom.alert('Save Successful!')
             }
-
         }, function () {
             if (!isSlient) {
                 ptCom.alert('Fail to Save!')
@@ -9044,31 +9489,104 @@ angular.module("PortalApp")
 
     }
 
-    $scope.requestDocSearch = function () {
-        debugger;
-        UnderwritingRequest.createSearch($scope.BBLE).then(function () {
+    $scope.requestDocSearch = function (isResubmit) {
+        $scope.$broadcast('ptSelfCheck');
+        // debugger;
+        if ($scope.checkValidate()) {
+            ptCom.alert('Please correct Highlight Field first.');
+            return;
+        }
+        UnderwritingRequest.createSearch($scope.BBLE).then(function (r) {
+            //debugger;
+            $scope.search.CreateDate = new Date().toISOString();
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
+            if (isResubmit) {
+                $scope.search.CompletedDate = undefined;
+                $scope.search.Expired = false;
+                $scope.formCleaned = false;
+            }
             $scope.save(true);
         }, function () {
             ptCom.alert('Fail to create search')
-
         })
     }
 
-    $scope.$watch(function () { return $location.search() }, function () {
-        // debugger;
-        if ($location.search().BBLE) {
-            $scope.init();
+
+    $scope.remainDays = function () {
+        if (!$scope.search || !$scope.search.CompletedOn) {
+            return "more than 60";
+        } else {
+            var timenow = new Date().getTime();
+            var timeCompleted = new Date($scope.search.CompletedOn);
+            var diff = timenow - timeCompleted;
+            var dayinmsec = 1000 * 60 * 60 * 24;
+            return 60 - Math.ceil(diff / dayinmsec);
         }
 
-    }, true);
+    }
 
-    if (!$state.current.data || !$state.current.data.Review) {
-        $scope.init();
+    $scope.completedOver60days = function () {
+        if (!$scope.search || $scope.search.CompletedOn == undefined) {
+            return false;
+        }
+        else {
+            return $scope.remainDays() < 0 ? true : false;
+        }
+
     }
 
 
+    $scope.viewmode = ptCom.getGlobal("viewmode") || ptCom.parseSearch(location.search).mode || 0;
+    $scope.BBLE = ptCom.getGlobal("BBLE") || ptCom.parseSearch(location.search).BBLE || "";
+    $scope.init($scope.BBLE);
+}]);
+angular.module("PortalApp").controller("UnderwritingSummaryController", ['$scope', 'ptCom', 'ptUnderwriter', 'DocSearch', function ($scope, ptCom, ptUnderwriter, DocSearch) {
+
+    $scope.showStoryHistory = function () {
+        //debugger;
+        var scope = angular.element('#uwrview').scope();
+        if (scope.data && scope.data.Id) {
+            auditLog.toggle('UnderwritingRequest', scope.data.Id);
+        }
+    }
+
+    $scope.markCompleted = function(status, msg) {
+        // because the underwriting completion is not reversible, comfirm it before save to db.
+        msg = 'Please provide Note or press no to cancel';
+        ptCom.prompt(msg, function (result) {
+            //debugger;
+            if (result != null && $scope.search) {
+                debugger;
+                DocSearch.markCompleted($scope.search.BBLE, status, result).then(function succ(d) {
+                    $scope.search.UnderwriteStatus = d.data.UnderwriteStatus;
+                    $scope.search.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                    $scope.search.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                    $scope.search.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                }, function err() {
+                    console.log("fail to update docsearch");
+                });
+            }
+
+        }, true);
+
+    }
+    $scope.loadAdditionalInfo = function (bble) {
+        $scope.search = DocSearch.get({ BBLE: bble.trim()})
+    }
+    try {
+        var searchs = ptCom.parseSearch(location.search);
+        if (searchs) {
+            $scope.BBLE = searchs.BBLE || "";
+            $scope.viewmode = searchs.mode || 0;
+        }
+        ptCom.setGlobal("BBLE", $scope.BBLE);
+        ptCom.setGlobal("viewmode", $scope.viewmode);
+        $scope.loadAdditionalInfo($scope.BBLE);
+    } catch (ex) {
+        ptCom.setGlobal("BBLE", "");
+        ptCom.setGlobal("viewmode", 0);
+    }
 }]);
 angular.module("PortalApp")
     .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {
@@ -9254,3 +9772,206 @@ angular.module("PortalApp")
     }
 
 }]);
+angular.module('PortalApp').component('ptAudit', {
+
+    templateUrl: '/js/templates/ptAudit.html',
+    bindings: {
+        label: '@',
+        objName: '@',
+        recordId: '<',
+    },
+    controller: function ($scope, $element, $attrs, $http) {
+        var ctrl = this;
+        ctrl.init = function () {
+            if (ctrl.objName != null && ctrl.recordId != null) {
+                ctrl.updateData();
+            }
+        }
+        ctrl.show = function (/* optional */objName, /* optional*/ recordId) {
+            // debugger;
+            if (objName != null || recordId != null) {
+                ctrl.objectName = objName || ctrl.objectName;
+                ctrl.recordId = recordId || ctrl.recordId;
+                ctrl.updateData();
+            }
+            ctrl.showDetail = true;
+            return;
+        }
+        ctrl.hide = function () {
+            ctrl.showDetail = false;
+        }
+        ctrl.toggle = function (objName, recordId) {
+            if (ctrl.showDetail) {
+                ctrl.hide();
+            } else {
+                ctrl.show(objName, recordId)
+            }
+        }
+        ctrl.updateData = function () {
+            $http({
+                method: 'GET',
+                url: '/api/auditlog/' + ctrl.objName + "/" + ctrl.recordId
+            }).then(function (d) {
+                var result = _.groupBy(d.data, function (item) {
+                    return item.EventDate;
+                });
+                ctrl.AuditLogs = result;
+                if (result && Object.keys(result).length > 0) {
+                    ctrl.logsize = Object.keys(result).length;
+                } else {
+                    ctrl.logsize = 0;
+                }
+            })
+
+        }
+        ctrl.init();
+    }
+})
+angular.module('PortalApp').component('ptHomeowner', {
+
+    templateUrl: '/js/Views/LeadDocSearch/searchOwner.tpl.html',
+    controller: function ($http) {
+        this.init = function (bble) {
+            var that = this;
+            if (bble) {
+                $http({
+                    method: 'GET',
+                    url: '/api/homeowner/' + bble,
+                }).then(function (r) {
+                    that.rawdata = r.data;
+                })
+            }
+        }
+
+        this.parseDate = function (dateField) {
+            if (dateField) {
+                return (dateField.yearField ? dateField.yearField : 'xxxx') +
+                       "/" + (dateField.monthField ? dateField.monthField : 'xx') +
+                       "/" + (dateField.dayField ? dateField.dayField : 'xx');
+            }
+
+        }
+
+        this.parseAddress = function (addressField) {
+            if (addressField) {
+                return (addressField.line1Field ? addressField.line1Field + ' ' : '') +
+                       (addressField.line2Field ? addressField.line2Field + ' ' : '') +
+                       (addressField.line3Field ? addressField.line3Field + ' ' : '') +
+                       ', ' +
+                       (addressField.cityField ? addressField.cityField + ', ' : 'Unknown City,') +
+                       (addressField.stateField ? addressField.stateField + ', ' : 'Unknown State,') +
+                       (addressField.zipField ? addressField.zipField : '')
+            }
+        }
+    }
+});
+angular.module('PortalApp').component('ptItemList', {
+
+    templateUrl: '/js/templates/ptItemList.html',
+    bindings: {
+        itemName: '@',
+        itemUrl: '@',
+        itemField: '@',
+        onSelectionChanged: '&'
+    },
+    controller: function ($scope, $element, $attrs, $http) {
+        $scope.list = {}
+        $scope.searchOptions = {
+            valueChangeEvent: "keyup",
+            placeholder: "Search",
+            mode: "search",
+            onValueChanged: function (args) {
+                $scope.list.searchValue(args.value);
+                $scope.list.load();
+            }
+        };
+        $scope.listOptions = {
+            selectionMode: "single",
+            onSelectionChanged: function (data) {
+                $scope.$ctrl.onSelectionChanged(data);
+            },
+            columns: [
+                {
+                    dataField: $scope.$ctrl.itemField,
+                    itemTemplate: function (data, index) {
+                        var result = $("<div>").addClass("list-item");
+                        $("<div>").text(data[$scope.$ctrl.itemField]).css("padding-left", "10px").appendTo(result);
+                        return result;
+                    }
+                }
+            ],
+
+            bindingOptions: {
+                dataSource: 'list',
+            },
+
+        }
+        $scope.bindList = function () {
+            //debugger;
+            $http({
+                method: 'GET',
+                url: $scope.$ctrl.itemUrl
+            }).then(function (d) {
+                $scope.list = new DevExpress.data.DataSource({
+                    searchOperation: "contains",
+                    searchExpr: $scope.$ctrl.itemField,
+                    store: d.data
+                });
+            })
+        }
+
+        $scope.bindList();
+
+
+    }
+
+})
+angular.module('PortalApp').component('ptSelectableInput', {
+
+    template: '<div>' +
+              '<select ng-model="$ctrl.selected">' +
+              '<option ng-repeat="p in $ctrl.options">{{p}}</option>' +
+              '</select>&nbsp;' +
+              '<input type="text" ng-model="$ctrl.ngModel" ng-show="$ctrl.isOtherSelected" placeholder="other">' +
+              '</input>' +
+              '</div>',
+    bindings: {
+        optionss: '@',
+        disableOptions: '=',
+        ngModel: '='
+    },
+    controller: function ($scope, $element, $attrs, $http) {
+        var ctrl = this;
+        ctrl.options = ctrl.optionss.split("|");
+        if (!ctrl.disableOptions || !ctrl.options) {
+            ctrl.isOtherSelected = true;
+        }
+        $scope.$watch('$ctrl.selected', function (newValue, oldValue) {
+            //debugger;
+            if (!newValue) {
+                ctrl.ngModel = "";
+                return;
+            }
+            if (newValue == 'other') {
+                ctrl.isOtherSelected = true;
+                ctrl.ngModel = "";
+                return;
+            }
+            if (ctrl.options.indexOf(newValue) >= 0) {
+                ctrl.isOtherSelected = false;
+                ctrl.ngModel = newValue;
+                return;
+            }
+
+            ctrl.ngModel = "";
+
+        })
+        $scope.$watch('$ctrl.ngModel', function (newValue, oldValue) {
+            if (newValue != "other" && ctrl.options.indexOf(newValue) >= 0) {
+                ctrl.selected = newValue;
+            }
+        })
+    }
+
+})
+//# sourceMappingURL=Test.js.map

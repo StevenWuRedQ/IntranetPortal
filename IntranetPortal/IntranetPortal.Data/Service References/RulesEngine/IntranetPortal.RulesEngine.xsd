@@ -136,46 +136,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ConstructionNotifyRule" nillable="true" type="tns:ConstructionNotifyRule" />
-  <xs:complexType name="LegalActivityReportRule">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseRule">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="LegalActivityReportRule" nillable="true" type="tns:LegalActivityReportRule" />
-  <xs:complexType name="NoticeECourtRule">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseRule">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="NoticeECourtRule" nillable="true" type="tns:NoticeECourtRule" />
-  <xs:complexType name="ShortSaleFollowUpRule">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseRule">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ShortSaleFollowUpRule" nillable="true" type="tns:ShortSaleFollowUpRule" />
-  <xs:complexType name="AuctionNotifyRule">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseRule">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="AuctionNotifyRule" nillable="true" type="tns:AuctionNotifyRule" />
-  <xs:complexType name="NewOfferNotifyRule">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:BaseRule">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="NewOfferNotifyRule" nillable="true" type="tns:NewOfferNotifyRule" />
   <xs:complexType name="AutoAssignRule">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:BaseRule">
@@ -184,10 +144,38 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="AutoAssignRule" nillable="true" type="tns:AutoAssignRule" />
-  <xs:complexType name="ArrayOfBaseRule">
+  <xs:complexType name="NewOfferNotifyRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NewOfferNotifyRule" nillable="true" type="tns:NewOfferNotifyRule" />
+  <xs:complexType name="EcourtCasesUpdateRule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseRule">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EcourtCasesUpdateRule" nillable="true" type="tns:EcourtCasesUpdateRule" />
+  <xs:complexType name="ArrayOfRule">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="BaseRule" nillable="true" type="tns:BaseRule" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Rule" nillable="true" type="tns:Rule" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfBaseRule" nillable="true" type="tns:ArrayOfBaseRule" />
+  <xs:element name="ArrayOfRule" nillable="true" type="tns:ArrayOfRule" />
+  <xs:complexType name="Rule">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExecuteNow" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ExecuteOn" type="ser:duration" />
+      <xs:element minOccurs="0" name="ExecuteOnWeekend" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Period" type="ser:duration" />
+      <xs:element minOccurs="0" name="RuleId" type="ser:guid" />
+      <xs:element minOccurs="0" name="RuleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:BaseRule.RuleStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Rule" nillable="true" type="tns:Rule" />
 </xs:schema>
