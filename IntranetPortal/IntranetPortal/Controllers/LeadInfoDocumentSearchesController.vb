@@ -33,18 +33,13 @@ Namespace Controllers
 
                 Return Ok()
             Else
-
-                Using ctx As New PortalEntities
-                    Dim searchs = LeadInfoDocumentSearch.GetDocumentSearchs()
-                    searchs.ForEach(Function(s)
-                                        s.Team = Lead.getTeamByBBLE(s.BBLE)
-                                        Return s
-                                    End Function)
-                    Return Ok(searchs)
-                End Using
-                Return Ok()
+                Dim searchs = LeadInfoDocumentSearch.GetDocumentSearchs()
+                searchs.ForEach(Function(s)
+                                    s.Team = Employee.GetEmpTeam(s.Owner)
+                                    Return s
+                                End Function)
+                Return Ok(searchs)
             End If
-
         End Function
 
         ' GET: api/LeadInfoDocumentSearches/5
