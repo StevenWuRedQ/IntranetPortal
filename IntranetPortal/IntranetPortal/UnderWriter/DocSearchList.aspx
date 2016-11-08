@@ -290,7 +290,7 @@
                     previewControl.undo();
                     filterData(data.value);
                 }
-                var columns = ['CaseName', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'Duration'];
+                var columns = ['CaseName', 'Team', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'Duration'];
                 var displayall = function () {
                     _.forEach(columns, function (v, i) {
                         dataGrid.columnOption(v, 'visible', true)
