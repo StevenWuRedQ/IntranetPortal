@@ -74,14 +74,12 @@
     --%>
 
     <%-- Ownership Mortgage Info --%>
-
-
-    <div class="ss_form  ">
+    <div pt-editable-div pt-lock="viewmode && viewmode == 1">
+    <div class="ss_form">
         <h4 class="ss_form_title ">Ownership Mortgage Info                               
-                    <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info">                            </pt-collapse>
+            <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info">
+            </pt-collapse>
         </h4>
-
-
         <div class="ss_border" uib-collapse="DocSearch.LeadResearch.Ownership_Mortgage_Info">
             <div>
                 <ul class="ss_form_box clearfix">
@@ -521,9 +519,8 @@
             </ul>
         </div>
     </div>
-
     <%-- Property Dues Violations --%>
-    <div class="ss_form  ">
+    <div class="ss_form">
         <h4 class="ss_form_title ">Property Dues Violations                               
                     <pt-collapse model="DocSearch.LeadResearch.Property_Dues_Violations"></pt-collapse>
         </h4>
@@ -760,8 +757,7 @@
             </ul>
         </div>
     </div>
-
-    <div class="ss_form  ">
+    <div class="ss_form">
         <h4 class="ss_form_title ">Judgements & Liens                               
                     <pt-collapse model="DocSearch.LeadResearch.Judgements_Liens"> </pt-collapse>
         </h4>
@@ -975,11 +971,10 @@
 
         </div>
     </div>
-
+    </div>
     <hr />
     <% If Not HttpContext.Current.User.IsInRole("Sales-Executive") Then%>
     <div class="ss_form" ng-show="DocSearch.Status!=1">
-
         <div>
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item " style="visibility: hidden">
