@@ -31,10 +31,16 @@
     Public Shared Function AddWorkDays(startDate As DateTime, days As Integer) As DateTime
         Dim returnDate = startDate
         Dim count = 0
-        While count < days
-            returnDate = returnDate.AddDays(1)
+
+        Dim steps = 1
+        If days < 0 Then
+            steps = -1
+        End If
+
+        While Math.Abs(count) < Math.Abs(days)
+            returnDate = returnDate.AddDays(steps)
             If IsWorkingDay(returnDate) Then
-                count = count + 1
+                count = count + steps
             End If
         End While
 
