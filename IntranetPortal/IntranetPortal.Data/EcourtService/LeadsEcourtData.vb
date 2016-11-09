@@ -174,9 +174,9 @@ Public Class LeadsEcourtData
     Public Shared Sub DailyUpdate()
         Dim lastUpdateLog = GetLastUpdateTime()
 
-        Dim dtStart = DateTime.Today
+        Dim dtStart = DateTime.Today.AddDays(-1)
         If lastUpdateLog > DateTime.MinValue Then
-            dtStart = lastUpdateLog
+            dtStart = IIf(lastUpdateLog < dtStart, lastUpdateLog, dtStart)
         End If
 
         Dim dtEnd = DateTime.Now
