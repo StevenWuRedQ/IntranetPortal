@@ -23,7 +23,13 @@ Namespace Controllers
             Dim owners = HomeOwner.GetHomeOwenrs(bble)
             Dim li = LeadsInfo.GetInstance(bble)
 
-            Dim owner = owners.Where(Function(o) o.Name = li.Owner OrElse o.Name = li.CoOwner).Select(Function(a) New With {a.Name, a.TLOLocateReport})
+            Dim owner = owners.Where(Function(o) o.Name = li.Owner OrElse o.Name = li.CoOwner).Select(Function(a)
+                                                                                                          If a.TLOLocateReport IsNot Nothing AndAlso a.TLOLocateReport.sSNField IsNot Nothing Then
+                                                                                                              a.TLOLocateReport.sSNField.sSNField = a.Last4SSN
+                                                                                                          End If
+
+                                                                                                          Return New With {a.Name, a.TLOLocateReport}
+                                                                                                      End Function)
             Return Ok(owner)
         End Function
 
