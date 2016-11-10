@@ -256,15 +256,20 @@
                             customizeText: PortalUtility.customizeDateText2
 
                         }, {
-                            dataField: 'IsInProcess',
-                            caption: 'In Process',
+                            dataField: 'NewOfferStatus',
+                            caption: 'OF Status',
                             alignment: "left",
                             customizeText: function (cellInfo) {
-                                if (cellInfo.value == 1) {
-                                    return "In Process";
-                                } else {
-                                    return "";
-                                }
+                                switch (cellInfo.value) {
+                                    case 0:
+                                        return "New Offer";
+                                    case 1:
+                                        return "In Process";
+                                    case 2:
+                                        return "SS Accepted";
+                                    default:
+                                            return ""
+                                        }
 
                             }
                         }, {
@@ -290,7 +295,7 @@
                     previewControl.undo();
                     filterData(data.value);
                 }
-                var columns = ['CaseName', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'Duration'];
+                var columns = ['CaseName', 'Team', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'NewOfferStatus', 'Duration'];
                 var displayall = function () {
                     _.forEach(columns, function (v, i) {
                         dataGrid.columnOption(v, 'visible', true)
@@ -309,7 +314,7 @@
                     switch (data) {
                         case 1:
                             dataGrid.filter(['Status', '=', '0']);
-                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration', 'IsInProcess'])
+                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration', 'NewOfferStatus'])
                             break;
                         case 2:
                             dataGrid.filter(['Status', '=', '1']);

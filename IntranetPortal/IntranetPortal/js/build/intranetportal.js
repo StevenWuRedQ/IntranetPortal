@@ -3469,7 +3469,7 @@ angular.module("PortalApp")
         return {
             restrict: 'A',
             scope: {
-                isEditable: '='
+                ptLock: '='
             },
             link: function (scope, el, attrs) {
                 // debugger;
@@ -3490,7 +3490,9 @@ angular.module("PortalApp")
                     // debugger;
                     scope.unlock();
                 })
-                scope.lock();
+                if (scope.ptLock) {
+                    scope.lock();
+                }
             }
         }
     }])
@@ -4141,13 +4143,11 @@ angular.module("PortalApp")
             },
             link: function (scope, el, attrs) {
                 //scope.ngDisabled = attrs.ngDisabled;
-                // scope.disabled = attrs.disabled;
                 scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
                 scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
                 scope.defaultValue = scope.defaultValue === 'true' ? true : false;
                 if (typeof scope.model != 'undefined') {
                     scope.model = scope.model == null ? scope.defaultValue : scope.model;
-
                 }
 
             }
@@ -9501,7 +9501,8 @@ angular.module("PortalApp")
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
             if (isResubmit) {
-                $scope.search.CompletedDate = undefined;
+                debugger;
+                $scope.search.CompletedOn = undefined;
                 $scope.search.Expired = false;
                 $scope.formCleaned = false;
             }
