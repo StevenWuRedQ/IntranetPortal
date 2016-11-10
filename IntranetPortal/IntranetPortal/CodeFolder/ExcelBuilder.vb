@@ -222,45 +222,43 @@ Public Class ExcelBuilder
 
             Dim fileConfig As New GenerateFileConfig
             Dim file = New GenerateFileConfig With {.ConfigKey = "Test"}
-            Dim phs = {
+            Dim placeholder = {
                         New DocumentPlaceHolder("C3", "LeadsInfo.PropertyAddress"),
-                        New DocumentPlaceHolder("C4", "LeadsInfo.TaxClass"),
-                        New DocumentPlaceHolder("C5", "LeadsInfo.BuildingDem"),
-                        New DocumentPlaceHolder("C6", "LeadsInfo.Lot"),
-                        New DocumentPlaceHolder("C7", "LeadsInfo.Zoning"),
-                        New DocumentPlaceHolder("C8", "", DocumentPlaceHolder.ValueType.FixedString),
-                        New DocumentPlaceHolder("C9", "Property_Taxes_per_YR_Property_Taxes_Due"),
+                        New DocumentPlaceHolder("C4", "LeadsInfo.Owner"),
+                        New DocumentPlaceHolder("C5", "LeadsInfo.TaxClass"),
+                        New DocumentPlaceHolder("C6", "LeadsInfo.LotDem"),
+                        New DocumentPlaceHolder("C7", "LeadsInfo.BuildingDem"),
+                        New DocumentPlaceHolder("C8", "LeadsInfo.Zoning"),
+                        New DocumentPlaceHolder("C8", "LeadsInfo.ActualFar"),
+                        New DocumentPlaceHolder("C10", "LeadsInfo.MaxFar"),
+                        New DocumentPlaceHolder("C11", "Property_Taxes_per_YR_Property_Taxes_Due"),
                         New DocumentPlaceHolder("F3", decideBBaseOnA("Has_c_1st_Mortgage_c_1st_Mortgage", "mortgageAmount")),
                         New DocumentPlaceHolder("F4", decideBBaseOnA("Has_c_2nd_Mortgage_c_2nd_Mortgage", "secondMortgageAmount")),
                         New DocumentPlaceHolder("F5", booleanToYN("Has_COS_Recorded")),
                         New DocumentPlaceHolder("F6", booleanToYN("Has_Deed_Recorded")),
                         New DocumentPlaceHolder("F7", concatOtherLiens()),
-                        New DocumentPlaceHolder("F8", booleanToYN("fha")),
-                        New DocumentPlaceHolder("F9", booleanToYN("fannie")),
-                        New DocumentPlaceHolder("F10", booleanToYN("Freddie_Mac_")),
-                        New DocumentPlaceHolder("F11", "servicer"),
-                        New DocumentPlaceHolder("F12", "LP_Index___Num_LP_Index___Num"),
-                        New DocumentPlaceHolder("F13", "", DocumentPlaceHolder.ValueType.FixedString),
-                        New DocumentPlaceHolder("F14", "Servicer_notes"),
-                        New DocumentPlaceHolder("F16", "", DocumentPlaceHolder.ValueType.FixedString),
-                        New DocumentPlaceHolder("F17", "", DocumentPlaceHolder.ValueType.FixedString),
-                        New DocumentPlaceHolder("F18", "", DocumentPlaceHolder.ValueType.FixedString),
-                        New DocumentPlaceHolder("F19", "", DocumentPlaceHolder.ValueType.FixedString),
+                        New DocumentPlaceHolder("F9", booleanToYN("fha")),
+                        New DocumentPlaceHolder("F10", booleanToYN("fannie")),
+                        New DocumentPlaceHolder("F11", booleanToYN("Freddie_Mac_")),
+                        New DocumentPlaceHolder("F12", "servicer"),
+                        New DocumentPlaceHolder("F13", "LP_Index___Num_LP_Index___Num"),
+                        New DocumentPlaceHolder("F14", "Current_FC_Stage"),
+                        New DocumentPlaceHolder("F15", "Servicer_notes"),
                         New DocumentPlaceHolder("I3", addUpTaxLienCertificate()),
                         New DocumentPlaceHolder("I4", decideBBaseOnA("Has_Due_Property_Taxes_Due", "propertyTaxes")),
-                         New DocumentPlaceHolder("I5", decideBBaseOnA("Has_Due_Water_Charges_Due", "waterCharges")),
-                         New DocumentPlaceHolder("I6", decideBBaseOnA("Is_Open_HPD_Charges_Not_Paid_Transferred", "Open_Amount_HPD_Charges_Not_Paid_Transferred")),
-                         New DocumentPlaceHolder("I7", decideBBaseOnA("has_ECB_Tickets_ECB_Tickets", "Amount_ECB_Tickets")),
-                         New DocumentPlaceHolder("I8", decideBBaseOnA("Has_Open_DOB_Violoations", "dobWebsites")),
-                         New DocumentPlaceHolder("I9", decideBBaseOnA("has_Judgments_Personal_Judgments", "Amount_Personal_Judgments")),
-                         New DocumentPlaceHolder("I10", decideBBaseOnA("has_Judgments_HPD_Judgments", "HPDjudgementAmount")),
-                         New DocumentPlaceHolder("I11", addIRSNYS()),
-                         New DocumentPlaceHolder("I12", booleanToYN("has_Vacate_Order_Vacate_Order")),
-                         New DocumentPlaceHolder("I13", decideBBaseOnA("has_Vacate_Order_Vacate_Order", "Amount_Vacate_Order")),
-                         New DocumentPlaceHolder("I14", "", DocumentPlaceHolder.ValueType.FixedString)
+                        New DocumentPlaceHolder("I5", decideBBaseOnA("Has_Due_Water_Charges_Due", "waterCharges")),
+                        New DocumentPlaceHolder("I6", decideBBaseOnA("has_ECB_Tickets_ECB_Tickets", "Amount_ECB_Tickets")),
+                        New DocumentPlaceHolder("I7", decideBBaseOnA("Has_Open_DOB_Violoations", "dobWebsites")),
+                        New DocumentPlaceHolder("I8", decideBBaseOnA("Is_Open_HPD_Charges_Not_Paid_Transferred", "Open_Amount_HPD_Charges_Not_Paid_Transferred")),
+                             New DocumentPlaceHolder("I9", decideBBaseOnA("has_Judgments_HPD_Judgments", "HPDjudgementAmount")),
+                         New DocumentPlaceHolder("I10", decideBBaseOnA("has_Judgments_Personal_Judgments", "Amount_Personal_Judgments")),
+                         New DocumentPlaceHolder("I11", decideBBaseOnA("hasNysTaxLien", "Amount_NYS_Tax_Lien")),
+                         New DocumentPlaceHolder("I12", decideBBaseOnA("has_IRS_Tax_Lien_IRS_Tax_Lien", "irsTaxLien")),
+                         New DocumentPlaceHolder("I16", booleanToYN("has_Vacate_Order_Vacate_Order")),
+                         New DocumentPlaceHolder("I17", decideBBaseOnA("has_Vacate_Order_Vacate_Order", "Amount_Vacate_Order"))
            }
 
-            file.PlaceHolders = phs.ToList
+            file.PlaceHolders = placeholder.ToList
 
             Dim gene As New DocumentGenerator(jobj, "1017700038")
             gene.GenerateExcel(ws, file)
