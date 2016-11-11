@@ -205,8 +205,10 @@ Namespace Controllers
                                  params.Add("IsUpdate", isUpdate)
 
                                  Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
+
                                  If Not String.IsNullOrEmpty(emails) Then
-                                     svr.SendEmailByControlWithCC(emails, Employee.GetEmpsEmails(record.CreateBy), "HOI Request from " & record.CreateBy & " about " & record.Title, "PreSignNotify", params)
+                                     Dim attachment = record.LoadApprovalFile()
+                                     svr.SendEmailByControlWithCC(emails, Employee.GetEmpsEmails(record.CreateBy), "HOI Request from " & record.CreateBy & " about " & record.Title, "PreSignNotify", params, attachment)
                                  End If
                              End If
                          End Sub

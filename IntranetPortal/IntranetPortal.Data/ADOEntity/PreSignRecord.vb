@@ -29,5 +29,6 @@ Partial Public Class PreSignRecord
     Public Property UpdateTime As Nullable(Of Date)
     Public Property Owner As String
     Public Property Title As String
+    Public Property ApprovalFile As String
 
 End Class

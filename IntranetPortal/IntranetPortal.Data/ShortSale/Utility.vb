@@ -65,4 +65,5 @@ Public Class ShortSaleUtility
         End Get
     End Property
 
+
 End Class

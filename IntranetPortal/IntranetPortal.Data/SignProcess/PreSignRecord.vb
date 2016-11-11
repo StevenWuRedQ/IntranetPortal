@@ -55,6 +55,14 @@ Partial Public Class PreSignRecord
         End Using
     End Function
 
+    Public Function LoadApprovalFile() As Object
+        If String.IsNullOrEmpty(ApprovalFile) Then
+            Return Nothing
+        End If
+
+        Return Core.DocumentService.GetFileByJS(ApprovalFile)
+    End Function
+
     ''' <summary>
     ''' Return Pre Sign process instance by property BBLE
     ''' </summary>
@@ -213,4 +221,7 @@ End Class
 Public Class PreSignRecordmMetaData
     <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
     Public Property Parties As String
+
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
+    Public Property ApprovalFile As String
 End Class

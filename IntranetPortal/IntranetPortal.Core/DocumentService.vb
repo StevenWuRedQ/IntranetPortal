@@ -41,6 +41,25 @@ Public Class DocumentService
         End Using
     End Function
 
+    Public Shared Function GetFileByJS(jsFile As String) As Object
+        Dim json = Newtonsoft.Json.Linq.JObject.Parse(jsFile)
+
+        If json IsNot Nothing Then
+            Dim path = json("path")
+            Dim name = json("name")
+            If path IsNot Nothing AndAlso Not String.IsNullOrEmpty(path) Then
+                Dim file = GetPDFContent(path)
+
+                If file IsNot Nothing AndAlso name IsNot Nothing Then
+                    Return New With {.Data = file, .Name = name.ToString}
+                End If
+            End If
+        End If
+
+        Return Nothing
+    End Function
+
+
     ''' <summary>
     ''' 
     ''' </summary>

@@ -1,10 +1,7 @@
-﻿
-<div class="wizard-content">
+﻿<div class="wizard-content">
     <section>
         <div>
             <h4 class="ss_form_title ">Homeowner Incentive <a role="button" class="btn btn-default pull-right" ng-show="model=='View'&&allowEdit" href="/NewOffer/HomeownerIncentive.aspx?model=Edit&Id={{preAssign.Id}}"><i class="fa fa-edit"></i>Edit</a></h4>
-            
-            
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item online">
                     <label class="ss_form_input_title">Property Address</label>
@@ -108,11 +105,19 @@
                 </li>
             </ul>
         </div>
+        <div class="ss-form">
+            <h4 class="ss_form_title ">Approval File</h4>
+            <ul class="ss_form_box clearfix">
+                <li style="list-style: none; padding-top:10px">
+                    <pt-file file-model="preAssign.ApprovalFile" file-bble="preAssign.BBLE" file-id="fileid" file-name="emails" upload-type="emails"></pt-file>
+                </li>
+            </ul>
+        </div>
     </section>
 </div>
 
 <div class="modal-footer">
-   
+
     <button type="button" class="btn btn-default" ng-click="Save()">{{preAssign.Id ?'Update':'Submit'}} </button>
-    
+
 </div>
