@@ -48,7 +48,7 @@ Dear <%=  UserName%>,
         <td>Deal Amount: </td>
         <td><%= PreSign.DealAmount %> </td>
     </tr>
-    <% If PreSign.CheckRequestData IsNot Nothing Then %>
+    <% If PreSign.NeedCheck AndAlso PreSign.CheckRequestData IsNot Nothing Then %>
     <tr>
         <td>Type of Check Request: </td>
         <td><%= PreSign.CheckRequestData.Type %> </td>
@@ -71,7 +71,7 @@ Dear <%=  UserName%>,
     </tr>
 </table>
 
-<% If PreSign.CheckRequestData IsNot Nothing %>
+<% If PreSign.NeedCheck AndAlso PreSign.CheckRequestData IsNot Nothing %>
 <br />
 <table style="margin-left: 15px; border: 1px solid black; border-collapse: collapse; border-spacing: 0px; width: 700px" border="1">
     <thead>
