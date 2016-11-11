@@ -5,10 +5,10 @@
             templateUrl: '/js/templates/ptfile.html',
             scope: {
                 fileModel: '=',
-                fileBble: '=',
+                fileBble: '=',  // 
                 fileName: '@',
                 fileId: '@',
-                uploadType: '@'
+                uploadType: '@' // which folder to upload
             },
             link: function (scope, el, attrs) {
                 scope.uploadType = scope.uploadType || 'construction';

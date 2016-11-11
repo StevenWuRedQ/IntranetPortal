@@ -1,4 +1,6 @@
-﻿/* code area steven*/
+﻿/**
+ * @author: steven
+ */
 $.wait = function (ms) {
     var defer = $.Deferred();
     setTimeout(function () { defer.resolve(); }, ms);

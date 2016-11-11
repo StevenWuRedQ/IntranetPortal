@@ -10,7 +10,7 @@
                 fileColumns: '@',
                 folderEnable: '@',
                 baseFolder: '@',
-                uploadType: '@' // control server folder
+                uploadType: '@' // which folder to upload
             },
             link: function (scope, el, attrs) {
                 scope.ptFileService = ptFileService;
