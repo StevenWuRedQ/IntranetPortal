@@ -71,22 +71,14 @@ Namespace Controllers
                 Using fs = File.Open(HttpContext.Current.Server.MapPath("~/App_Data/underwriter.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                     fs.CopyTo(ms)
                 End Using
-
-                Dim li As LeadsInfo
-                Dim ds As LeadInfoDocumentSearch
-
-
-                li = LeadsInfo.GetInstance(bble)
-
+                Dim leadinfo As LeadsInfo
+                Dim docsearch As LeadInfoDocumentSearch
+                leadinfo = LeadsInfo.GetInstance(bble)
                 Using ctx As New PortalEntities
-                    ds = ctx.LeadInfoDocumentSearches.Find(bble)
+                    docsearch = ctx.LeadInfoDocumentSearches.Find(bble)
                 End Using
-
-
-                If Not ms Is Nothing AndAlso Not li Is Nothing AndAlso Not ds Is Nothing Then
-
-                    Dim excelbytes = ExcelBuilder.fillUpUnderWriterSheet(ms, li, ds)
-
+                If Not ms Is Nothing AndAlso Not leadinfo Is Nothing AndAlso Not docsearch Is Nothing Then
+                    Dim excelbytes = ExcelBuilder.fillUpUnderWriterSheet(ms, leadinfo, docsearch)
                     Using tempFile = New FileStream(HttpContext.Current.Server.MapPath("~/TempDataFile/underwriter.xlsx"), FileMode.OpenOrCreate, FileAccess.ReadWrite)
                         tempFile.Write(excelbytes, 0, excelbytes.Length)
                         Return Ok()
