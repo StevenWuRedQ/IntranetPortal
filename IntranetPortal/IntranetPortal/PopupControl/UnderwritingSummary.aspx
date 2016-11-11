@@ -164,7 +164,7 @@
                     </a>
                 </li>
 
-                <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
+                <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active" ng-show="viewmode && viewmode>=2">
                     <a role="tab" ui-sref="underwriter.datainput" class="tab_button_a">
                         <i class="fa fa-calculator head_tab_icon_padding"></i>
                         <div class="font_size_bold" style="width: 100px">
@@ -173,7 +173,7 @@
                     </a>
                 </li>
 
-                <li class="short_sale_head_tab activity_light_blue pull-right" ng-show="search.UnderwriteStatus < 1">
+                <li class="short_sale_head_tab activity_light_blue pull-right" ng-show="viewmode && viewmode>=2 && search.UnderwriteStatus < 1">
                     <a class="tab_button_a">
                         <i class="fa fa-list-ul head_tab_icon_padding"></i>
                         <div class="font_size_bold" style="width: 100px">Status</div>

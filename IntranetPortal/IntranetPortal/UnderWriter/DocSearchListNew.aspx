@@ -73,7 +73,7 @@
                     <a class="btn btn-sm btn-blue" onclick='previewControl.undo()'>
                         <i class='fa fa-arrow-right'></i></a>
                 </div>
-                <div style="height:5px"></div>
+                <div style="height: 5px"></div>
                 <div id='maximizeicon' data-toggle='tooltip' data-placement='right' title='maximize right panel' style="height: 32px; width: 32px">
                     <a class="btn btn-sm btn-blue" onclick='previewControl.togglemaximize()'>
                         <i class='fa fa-square-o'></i></a>
@@ -107,13 +107,18 @@
                 }
             }
         })();
-        var onSelectionChangedCallback = function (e) {
+        //var onSelectionChangedCallback = function (e) {
+        //    //debugger;
+        //    var bble = e.selectedRowKeys[0].BBLE || '';
+        //    var status = e.selectedRowKeys[0].Status || 0;
+        //    previewControl.showCaseInfo(bble, status)
+        //}
+        var onRowClickCallback = function (e) {
             //debugger;
-            var bble = e.selectedRowKeys[0].BBLE || '';
-            var status = e.selectedRowKeys[0].Status || 0;
+            var bble = e.key.BBLE || '';
+            var status = e.key.Status || 0;
             previewControl.showCaseInfo(bble, status)
         }
-
         $(document).ready(function () {
             var url = "/api/LeadInfoDocumentSearches";
             var that = this;
@@ -156,7 +161,8 @@
                         }
                         highlightcallback(e);
                     },
-                    onSelectionChanged: onSelectionChangedCallback,
+                    //onSelectionChanged: onSelectionChangedCallback,
+                    onRowClick: onRowClickCallback,
                     selection: {
                         mode: 'single'
                     },
@@ -183,6 +189,9 @@
                             dataField: "CaseName",
                             width: 400,
                             caption: "Property Address",
+                        },
+                        {
+                            dataField: "Team"
                         }, {
                             dataField: "CreateBy",
                             caption: "UW Requested By"
@@ -194,7 +203,6 @@
                         }, {
                             dataField: "Status",
                             caption: "Search Status",
-
                             alignment: "left",
                             customizeText: function (cell) {
                                 switch (cell.value) {
@@ -237,6 +245,23 @@
                             customizeText: PortalUtility.customizeDateText2
 
                         }, {
+                            dataField: 'NewOfferStatus',
+                            caption: 'OF Status',
+                            alignment: "left",
+                            customizeText: function (cellInfo) {
+                                switch (cellInfo.value) {
+                                    case 0:
+                                        return "New Offer";
+                                    case 1:
+                                        return "In Process";
+                                    case 2:
+                                        return "SS Accepted";
+                                    default:
+                                        return ""
+                                }
+
+                            }
+                        }, {
                             caption: "Duration",
                             width: '80px',
                             allowSorting: true,
@@ -259,7 +284,7 @@
                     filterData(data.value);
                 }
 
-                var columns = ['CaseName', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'Duration'];
+                var columns = ['CaseName', 'Team', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'NewOfferStatus', 'Duration'];
 
                 var displayall = function () {
                     _.forEach(columns, function (v, i) {
@@ -280,7 +305,7 @@
                     switch (data) {
                         case 1:
                             dataGrid.filter(['Status', '=', '0']);
-                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration'])
+                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration', 'NewOfferStatus'])
                             break;
                         case 2:
                             dataGrid.filter(['Status', '=', '1']);
@@ -291,9 +316,11 @@
                             break;
                         case 4:
                             dataGrid.filter([['UnderwriteStatus', '=', '1'], ['Status', '=', '1']]);
+                            hidesome(['Team']);
                             break;
                         case 5:
                             dataGrid.filter([['UnderwriteStatus', '=', '2'], ['Status', '=', '1']]);
+                            hidesome(['Team']);
                     }
                 }
                 var filterBox = $("#useFilterApplyButton").dxSelectBox({
@@ -356,51 +383,64 @@
 
 
         })
-        previewControl = {
-            showCaseInfo: function (CaseId, status) {
-                if (status == 0) {
-                    var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId;
-                    PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
-                } else {
+        previewControl = (function () {
+            var previewShown = false;
+            var that = this;
+            return {
+                showCaseInfo: function (CaseId, status) {
+                    if (status == 0) {
+                        <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId
+                        <% ELSE %>
+                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId
+                        <% End IF%>
+                        PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url);
+                    } else {
+                        $("#xwrapper").css("width", "50%");
+                        $("#xwrapper").css("visibility", "visible");
+                        $("#preview").css("width", "50%");
+                        $("#preview").css("visibility", "visible");
+                        $("#iconarea").css("visibility", "visible");
+                        <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                        var url = '/PopupControl/UnderwritingSummary.aspx?mode=2&BBLE=' + CaseId + '#/searchSummary';
+                        <% ELSE%>
+                        var url = '/PopupControl/UnderwritingSummary.aspx?mode=1&BBLE=' + CaseId + '#/searchSummary';
+                        <% End IF%>
+                        $("#previewWindow").attr("src", url);
+                    }
+                    that.previewShown = true;
+                },
+                undo: function () {
+                    $("#xwrapper").css("width", "99%");
+                    $("#xwrapper").css("visibility", "visible");
+                    $("#preview").css("width", "0%");
+                    $("#preview").css("visibility", "hidden");
+                    $("#iconarea").css("visibility", "hidden");
+                    $("#previewWindow").attr("src", "");
+                    that.previewShown = false;
+                },
+                maximize: function () {
+                    $("#xwrapper").css("width", "0%");
+                    $("#xwrapper").css("visibility", "hidden");
+                    $("#preview").css("width", "97%");
+                    $("#preview").css("visibility", "visible");
+                },
+                unmaximize: function () {
                     $("#xwrapper").css("width", "50%");
                     $("#xwrapper").css("visibility", "visible");
                     $("#preview").css("width", "50%");
                     $("#preview").css("visibility", "visible");
-                    $("#iconarea").css("visibility", "visible");
-                    var url = '/PopupControl/UnderwritingSummary.aspx?mode=2&BBLE=' + CaseId + '#searchSummary';
-                    $("#previewWindow").attr("src", url);
-                }
-
-            },
-            undo: function () {
-                $("#xwrapper").css("width", "99%");
-                $("#xwrapper").css("visibility", "visible");
-                $("#preview").css("width", "0%");
-                $("#preview").css("visibility", "hidden");
-                $("#iconarea").css("visibility", "hidden");
-                $("#previewWindow").attr("src", "");
-            },
-            maximize: function () {
-                $("#xwrapper").css("width", "0%");
-                $("#xwrapper").css("visibility", "hidden");
-                $("#preview").css("width", "97%");
-                $("#preview").css("visibility", "visible");
-            },
-            unmaximize: function () {
-                $("#xwrapper").css("width", "50%");
-                $("#xwrapper").css("visibility", "visible");
-                $("#preview").css("width", "50%");
-                $("#preview").css("visibility", "visible");
-            },
-            togglemaximize: function () {
-                var visible = $("#xwrapper").css("visibility")
-                if (visible == 'visible') {
-                    this.maximize();
-                } else {
-                    this.unmaximize();
+                },
+                togglemaximize: function () {
+                    var visible = $("#xwrapper").css("visibility")
+                    if (visible == 'visible') {
+                        this.maximize();
+                    } else {
+                        this.unmaximize();
+                    }
                 }
             }
-        }
+        })();
 
 
     </script>
