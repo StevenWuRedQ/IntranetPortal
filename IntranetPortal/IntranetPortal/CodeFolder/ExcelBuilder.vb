@@ -229,7 +229,7 @@ Public Class ExcelBuilder
                         New DocumentPlaceHolder("C6", "LeadsInfo.LotDem"),
                         New DocumentPlaceHolder("C7", "LeadsInfo.BuildingDem"),
                         New DocumentPlaceHolder("C8", "LeadsInfo.Zoning"),
-                        New DocumentPlaceHolder("C8", "LeadsInfo.ActualFar"),
+                        New DocumentPlaceHolder("C9", "LeadsInfo.ActualFar"),
                         New DocumentPlaceHolder("C10", "LeadsInfo.MaxFar"),
                         New DocumentPlaceHolder("C11", "Property_Taxes_per_YR_Property_Taxes_Due"),
                         New DocumentPlaceHolder("F3", decideBBaseOnA("Has_c_1st_Mortgage_c_1st_Mortgage", "mortgageAmount")),
