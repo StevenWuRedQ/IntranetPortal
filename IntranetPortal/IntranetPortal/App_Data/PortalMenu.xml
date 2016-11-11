@@ -748,7 +748,7 @@
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="CorpList" Text="Entity List" NavigationUrl="/popupControl/buyerentitypopupcontent.aspx" ShowAmount="false" visible="false">
-        <UserRoles>Entity-Manager</UserRoles>
+        <UserRoles>Entity-Manager,Legal-*,ShortSale-*,Title-*</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
