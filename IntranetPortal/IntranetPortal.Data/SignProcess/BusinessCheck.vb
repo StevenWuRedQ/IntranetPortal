@@ -11,9 +11,10 @@
         End Using
     End Function
 
-    Public Sub Complete(amount As Decimal, completeBy As String)
+    Public Sub Complete(amount As Decimal, checkNo As String, completeBy As String)
         Me.ConfirmedAmount = amount
         Me.ProcessedBy = completeBy
+        Me.CheckNo = checkNo
         Me.ProcessedDate = DateTime.Now
         Me.Status = CheckStatus.Confirmed
         Me.Save(completeBy)

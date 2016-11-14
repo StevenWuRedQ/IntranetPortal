@@ -67,6 +67,7 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="CheckFor" Type="nvarchar" MaxLength="256" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="CheckNo" Type="nvarchar" MaxLength="50" />
           <Property Name="ConfirmedAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ProcessedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ProcessedDate" Type="datetime" />
@@ -2597,6 +2598,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="ConfirmedAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ProcessedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProcessedDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CheckRequest">
           <Key>
@@ -3928,6 +3930,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="BusinessChecks">
             <EntityTypeMapping TypeName="IntranetPortalModel.BusinessCheck">
               <MappingFragment StoreEntitySet="BusinessChecks">
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
                 <ScalarProperty Name="ProcessedDate" ColumnName="ProcessedDate" />
                 <ScalarProperty Name="ProcessedBy" ColumnName="ProcessedBy" />
                 <ScalarProperty Name="ConfirmedAmount" ColumnName="ConfirmedAmount" />

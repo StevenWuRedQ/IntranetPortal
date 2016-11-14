@@ -27,5 +27,6 @@ Partial Public Class BusinessCheck
     Public Property ConfirmedAmount As Nullable(Of Decimal)
     Public Property ProcessedBy As String
     Public Property ProcessedDate As Nullable(Of Date)
+    Public Property CheckNo As String
 
 End Class
