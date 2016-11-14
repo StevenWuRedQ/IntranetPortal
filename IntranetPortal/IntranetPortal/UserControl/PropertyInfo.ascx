@@ -99,7 +99,6 @@
         });
     }
 
-
     function openZoningUrl(zoingcode) {
         window.open("http://www.nyc.gov/html/dcp/pdf/zone/zoning_handbook/" + zoingcode + ".pdf");
     }
@@ -279,8 +278,6 @@
                         </div>
                         <% i += 1%>
                         <% End If%>--%>
-
-
 
                         <asp:HiddenField ID="hfBBLE" runat="server" />
 
