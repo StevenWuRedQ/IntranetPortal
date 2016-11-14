@@ -7913,6 +7913,7 @@
     <Content Include="App_Data\docsearchmap.csv" />
     <Content Include="App_Data\test.csv" />
     <None Include="Scripts\x_references.js" />
+    <Content Include="Scripts\pt-compute-engine\pt-compute-engine.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />
     <Content Include="ShortSale\ShortPreSignControl.ascx" />
