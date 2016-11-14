@@ -7909,6 +7909,7 @@
     <Content Include="bower_components\angular-route\README.md" />
     <Content Include="App_Data\OfferDoc\ShortSalePackage.docx" />
     <Content Include="App_Data\underwriter.xlsx" />
+    <None Include="App_Data\underwriter.xlsx.bak" />
     <Content Include="App_Data\docsearchmap.csv" />
     <Content Include="App_Data\test.csv" />
     <None Include="Scripts\x_references.js" />

@@ -208,6 +208,7 @@ Public Class LeadsEcourtData
         Using ctx As New PortalEntities
             For Each cas In cases
                 If Not ctx.EcourtCases.Any(Function(a) a.BBLE = cas.BBLE AndAlso a.CountyId = cas.CountyId AndAlso a.CaseIndexNumber = cas.CaseIndexNumber) Then
+                    cas.UpdateDate = DateTime.Now
                     cas.CreateDate = DateTime.Now
                     ctx.EcourtCases.Add(cas)
 
