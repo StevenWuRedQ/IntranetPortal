@@ -7,7 +7,7 @@
                 <li ui-sref-active="active"><a ui-sref="underwriter.rentalmodels">Rental Model</a></li>
                 <li ui-sref-active="active"><a ui-sref="underwriter.audit">Audit</a></li>
                 <li ui-sref-active="active"><a ui-sref="underwriter.archived">Archives</a></li>
-                <!-- <li ui-sref-active="active"><a ui-sref="underwriter.tables">Tables</a></li>-->
+                <li ui-sref-active="active" ng-show="debugmode"><a ui-sref="underwriter.tables">Tables</a></li>
             </ul>
             <div class="nav-form navbar-right">
                 <button type="button" class="btn btn-lg btn-blue" ng-click="save()" ng-disabled="isProtectedView ||archive.isLoaded">Save</button>

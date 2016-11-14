@@ -453,7 +453,7 @@ angular.module('PortalApp')
 
                 // CarryingCosts
                 d.CarryingCosts.RETaxs = float(d.PropertyInfo.PropertyTaxYear) / 12 * float(d.RehabInfo.DealTimeMonths);
-                d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.ActualNumOfUnits), 2) + 400 * float(d.PropertyInfo.ActualNumOfUnits);
+                d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.NumOfTenants), 2) + 400 * float(d.PropertyInfo.NumOfTenants);
 
                 // Resale
                 d.Resale.ProbableResale = float(d.RehabInfo.RenovatedValue);

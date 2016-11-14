@@ -1,5 +1,5 @@
 var portalApp = angular.module('PortalApp',
-    ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router', 'chart.js']);
+    ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']); 
 
 angular.module('PortalApp')
     .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state',
@@ -2000,7 +2000,7 @@ angular.module('PortalApp')
 
                 // CarryingCosts
                 d.CarryingCosts.RETaxs = float(d.PropertyInfo.PropertyTaxYear) / 12 * float(d.RehabInfo.DealTimeMonths);
-                d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.ActualNumOfUnits), 2) + 400 * float(d.PropertyInfo.ActualNumOfUnits);
+                d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.NumOfTenants), 2) + 400 * float(d.PropertyInfo.NumOfTenants);
 
                 // Resale
                 d.Resale.ProbableResale = float(d.RehabInfo.RenovatedValue);
@@ -3545,10 +3545,10 @@ angular.module("PortalApp")
             templateUrl: '/js/templates/ptfile.html',
             scope: {
                 fileModel: '=',
-                fileBble: '=',
+                fileBble: '=',  // 
                 fileName: '@',
                 fileId: '@',
-                uploadType: '@'
+                uploadType: '@' // which folder to upload
             },
             link: function (scope, el, attrs) {
                 scope.uploadType = scope.uploadType || 'construction';
@@ -3653,7 +3653,7 @@ angular.module("PortalApp")
                 fileColumns: '@',
                 folderEnable: '@',
                 baseFolder: '@',
-                uploadType: '@' // control server folder
+                uploadType: '@' // which folder to upload
             },
             link: function (scope, el, attrs) {
                 scope.ptFileService = ptFileService;
@@ -4062,7 +4062,7 @@ angular.module("PortalApp")
                     $(el).formatCurrency(formatConfig);
                 });
                 $(el).on('blur', function () {
-                    debugger;
+                    //debugger;
                     if (isValidate) {
                         var res = validate(this.value);
                         if (!res) {

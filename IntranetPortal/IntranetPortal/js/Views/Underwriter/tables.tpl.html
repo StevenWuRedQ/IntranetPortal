@@ -183,7 +183,6 @@
                         </table>
                     </div>
                 </div>
-
                 <div class="col-lg-6 col-md-6">
 
                     <div class="pt-panel">
@@ -394,10 +393,10 @@
                                         </tr>
                                         <tr>
                                             <td class="td-label">
-                                                Tax Lien
+                                                Tax Lien Certificate
                                             </td>
-                                            <td class="td-value">{{data.Liens.TaxLien | currency}}</td>
-                                            <td class="td-value">{{data.Liens.TaxLienSettlement | percentage}}</td>
+                                            <td class="td-value">{{data.Liens.TaxLienCertificate | currency}}</td>
+                                            <td class="td-value">{{data.Liens.TaxLienCertificateSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Property Taxes</td>
@@ -411,19 +410,24 @@
                                             <td class="td-value">{{data.Liens.WaterChargesSettlement | percentage}}</td>
                                         </tr>
                                         <tr>
-                                            <td class="td-label">HPD Charges</td>
-                                            <td class="td-value">{{data.Liens.HPDCharges | currency}}</td>
-                                            <td class="td-value">{{data.Liens.HPDChargesSettlement | percentage}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-label">ECB/DOB Violations</td>
-                                            <td class="td-value">{{data.Liens.ECBDOBViolations | currency}}</td>
-                                            <td class="td-value">{{data.Liens.ECBDOBViolationsSettlement | percentage}}</td>
+                                            <td class="td-label">ECB (Amnesty):</td>
+                                            <td class="td-value">{{data.Liens.ECBCityPay | currency}}</td>
+                                            <td class="td-value">{{data.Liens.ECBCityPaySettlement | percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">DOB Civil Penalties</td>
                                             <td class="td-value">{{data.Liens.DOBCivilPenalties | currency}}</td>
                                             <td class="td-value">{{data.Liens.DOBCivilPenaltiesSettlement | percentage}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-label">HPD Charges</td>
+                                            <td class="td-value">{{data.Liens.HPDCharges | currency}}</td>
+                                            <td class="td-value">{{data.Liens.HPDChargesSettlement | percentage}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-label">HPD Judgements</td>
+                                            <td class="td-value">{{data.Liens.HPDJudgements | currency}}</td>
+                                            <td class="td-value">{{data.Liens.HPDJudgementsSettlement | percentage}}</td>
                                         </tr>
 
                                         <tr>
@@ -431,15 +435,26 @@
                                             <td class="td-value">{{data.Liens.PersonalJudgements | currency}}</td>
                                             <td class="td-value">{{data.Liens.PersonalJudgementsSettlement | percentage}}</td>
                                         </tr>
+
                                         <tr>
-                                            <td class="td-label">HPD Judgements</td>
-                                            <td class="td-value">{{data.Liens.HPDJudgements | currency}}</td>
-                                            <td class="td-value">{{data.Liens.HPDJudgementsSettlement | percentage}}</td>
+                                            <td class="td-label">NYS Tax Warrants</td>
+                                            <td class="td-value">{{data.Liens.NYSTaxWarrants | currency}}</td>
+                                            <td class="td-value">{{data.Liens.NYSTaxWarrantsSettlement| percentage}}</td>
                                         </tr>
                                         <tr>
-                                            <td class="td-label">IRS/NYS Tax Lien</td>
-                                            <td class="td-value">{{data.Liens.IRSNYSTaxLien | currency}}</td>
-                                            <td class="td-value">{{data.Liens.IRSNYSTaxLienSettlement| percentage}}</td>
+                                            <td class="td-label">Federal Tax Liens</td>
+                                            <td class="td-value">{{data.Liens.FederalTaxLien | currency}}</td>
+                                            <td class="td-value">{{data.Liens.FederalTaxLienSettlement| percentage}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-label">Parking Violations</td>
+                                            <td class="td-value">{{data.Liens.ParkingViolation | currency}}</td>
+                                            <td class="td-value">{{data.Liens.ParkingViolationSettlement| percentage}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-label">Transit Authority</td>
+                                            <td class="td-value">{{data.Liens.TransitAuthority | currency}}</td>
+                                            <td class="td-value">{{data.Liens.TransitAuthoritySettlement| percentage}}</td>
                                         </tr>
                                         <tr>
                                             <td class="td-label">Relocation Lien</td>
@@ -677,7 +692,7 @@
 
 
 
-
+                        <!--
                         <div class="col-lg-4 col-md-4">
                             <div class="pt-panel">
                                 <table>
@@ -779,7 +794,7 @@
 
 
                         </div>
-
+                            -->
 
 
                     </div>

@@ -1,5 +1,5 @@
 ﻿var portalApp = angular.module('PortalApp',
-    ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router', 'chart.js']);
+    ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']); 
 
 angular.module('PortalApp')
     .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state',
