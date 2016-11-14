@@ -192,19 +192,29 @@ Namespace Controllers
                              Dim svr As New CommonService
                              Dim params = New Dictionary(Of String, String)
                              Dim cfo = Roles.GetUsersInRole("Accounting-CFO")
-                             Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
+                             Dim users = Roles.GetUsersInRole("Accounting-Manager")
+
                              Dim userName = "All"
                              If cfo IsNot Nothing AndAlso cfo.Count > 0 Then
                                  userName = cfo(0)
-                                 finMgr = finMgr.Concat(cfo).Distinct.ToArray
+                                 users = users.Concat(cfo).Distinct.ToArray
+                             End If
+                             Dim underwriters = Roles.GetUsersInRole("Underwriter")
+                             If underwriters IsNot Nothing AndAlso underwriters.Count > 0 Then
+                                 users = users.Concat(underwriters).Distinct.ToArray
                              End If
 
-                             If finMgr.Count > 0 Then
+                             Dim notifyUsers = Roles.GetUsersInRole("HOI-Notify")
+                             If notifyUsers IsNot Nothing AndAlso notifyUsers.Count > 0 Then
+                                 users = users.Concat(notifyUsers).Distinct.ToArray
+                             End If
+
+                             If users.Count > 0 Then
                                  params.Add("RecordId", record.Id)
                                  params.Add("UserName", userName)
                                  params.Add("IsUpdate", isUpdate)
 
-                                 Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
+                                 Dim emails = Employee.GetEmpsEmails(users.ToArray)
 
                                  If Not String.IsNullOrEmpty(emails) Then
                                      Dim attachment = record.LoadApprovalFile()

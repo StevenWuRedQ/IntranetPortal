@@ -2666,6 +2666,13 @@
       <DependentUpon>FollowUpItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\SummaryItem\HOIItem.ascx.designer.vb">
+      <DependentUpon>HOIItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\HOIItem.ascx.vb">
+      <DependentUpon>HOIItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\SummaryItem\TaskItem.ascx.designer.vb">
       <DependentUpon>TaskItem.ascx</DependentUpon>
     </Compile>
@@ -7930,6 +7937,7 @@
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem2.ascx" />
+    <Content Include="UserControl\SummaryItem\HOIItem.ascx" />
     <Content Include="UserControl\SummaryItem\NewOfferItem.ascx" />
     <Content Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx" />
     <Content Include="UserControl\SummaryItem\UnderWriterItem.ascx" />

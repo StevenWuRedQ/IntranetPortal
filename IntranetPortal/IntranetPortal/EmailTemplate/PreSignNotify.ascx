@@ -20,9 +20,9 @@
     }
 </style>
 
-
+<!--
 Dear <%=  UserName%>,
-<br />
+<br /> -->
 <br />
 <% If IsUpdateMode Then %>
 <%= PreSign.UpdateBy %> just update the HOI request, please review.

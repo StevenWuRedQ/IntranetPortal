@@ -1061,15 +1061,12 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
         bindingOptions: {
             dataSource: 'preAssign.CheckRequestData.Checks'
         },
-        sorting: { mode: 'none' },
-        //dataSource: $scope.preAssign.CheckRequestData.Checks,
+        sorting: { mode: 'none' },       
         paging: {
             pageSize: 10
         },
-
         editing: $scope.gridEdit,
         pager: {
-
             showInfo: true
         },
         wordWrapEnabled: true,
@@ -1082,8 +1079,10 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
         }, {
             dataField: 'Amount',
             dataType: 'number',
-            format: 'currency',
-            precision: 2,
+            format: {
+                type: 'currency',
+                precision: 2
+            },            
             validationRules: [{
                 type: "required"
             }]
@@ -1148,8 +1147,11 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
                         caption: 'Payable To',
                     }, {
                         dataField: 'Amount',
-                        format: 'currency', dataType: 'number', precision: 2
-
+                        format: {
+                            type: 'currency',
+                            precision: 2
+                        },
+                        dataType: 'number'
                     }, {
                         dataField: 'Date',
                         caption: 'Date of Release',
@@ -1190,9 +1192,11 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
             dataType: 'date'
         }), {
             dataField: 'CheckAmount',
-            format: 'currency',
-            dataType: 'number',
-            precision: 2
+            format: {
+                type: 'currency',
+                precision: 2
+            },
+            dataType: 'number'            
         }, ]
     }
     if (_model == 'Edit') {

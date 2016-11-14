@@ -11,6 +11,14 @@
         End Using
     End Function
 
+    Public Sub Complete(amount As Decimal, completeBy As String)
+        Me.ConfirmedAmount = amount
+        Me.ProcessedBy = completeBy
+        Me.ProcessedDate = DateTime.Now
+        Me.Status = CheckStatus.Confirmed
+        Me.Save(completeBy)
+    End Sub
+
     Public Sub Save(saveby As String)
         Using ctx As New PortalEntities
 
@@ -45,7 +53,8 @@
     Public Enum CheckStatus
         Active = 0
         Canceled = 1
-        Completed = 2
+        Confirmed = 2
+        Completed = 3
     End Enum
 
 End Class

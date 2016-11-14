@@ -24,5 +24,8 @@ Partial Public Class BusinessCheck
     Public Property UpdateDate As Nullable(Of Date)
     Public Property Status As Nullable(Of Integer)
     Public Property Comments As String
+    Public Property ConfirmedAmount As Nullable(Of Decimal)
+    Public Property ProcessedBy As String
+    Public Property ProcessedDate As Nullable(Of Date)
 
 End Class

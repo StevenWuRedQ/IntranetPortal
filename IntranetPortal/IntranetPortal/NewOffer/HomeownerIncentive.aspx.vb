@@ -22,6 +22,8 @@ Public Class HomeownerIncentivePage
                 If Not Employee.GetManagedEmployees(UserName).Contains(record.Owner) Then
                     ' linkEdit.Visible = False
                 End If
+
+                Response.Redirect("/NewOffer/HomeownerIncentive.aspx#/preassign/view/" & record.Id)
             End If
         Else
 

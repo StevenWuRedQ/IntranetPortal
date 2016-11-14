@@ -117,14 +117,6 @@
                                     .appendTo(container);
                             }
                         }, {
-                            caption: "New Offer Completed On",
-                            dataField: "UpdateDate",
-                            dataType: "date",
-                            customizeText: PortalUtility.customizeDateText
-                        }, {
-                            caption: "Completed By",
-                            dataField: "Owner"
-                        }, {
                             caption: "Agent",
                             dataField: "LeadsOwner"
                         }, {
@@ -135,6 +127,32 @@
                             dataField: "OfferStage"
                         }]
                     };
+
+                    if (view == 4){
+                        var hoi = [ {
+                            caption: "HOI Completed On",
+                            dataField: "HOICreateOn",
+                            dataType: "date",
+                            customizeText: PortalUtility.customizeDateText
+                        }, {
+                            caption: "Completed By",
+                            dataField: "HOICreateBy"
+                        }];
+                        options.columns = options.columns.concat(hoi);   
+                    }
+                    else
+                    {
+                        var completed = [ {
+                            caption: "New Offer Completed On",
+                            dataField: "UpdateDate",
+                            dataType: "date",
+                            customizeText: PortalUtility.customizeDateText
+                        }, {
+                            caption: "Completed By",
+                            dataField: "Owner"
+                        }];
+                        options.columns = options.columns.concat(completed);   
+                    }
 
                     if(view == 3){
                         var duration = [{
@@ -179,6 +197,9 @@
                 {
                     key: 0,
                     name: "All Cases"
+                },{
+                    key: 4,
+                    name: "Pending OF"
                 }, {
                     key: 1,
                     name: "New Offer"
