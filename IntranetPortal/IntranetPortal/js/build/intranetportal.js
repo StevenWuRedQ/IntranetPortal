@@ -6403,7 +6403,7 @@ portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'Dx
                  $scope.preAssign.Title = data.PropertyAddress;
              });
     }
-
+    $scope.accoutingMode = $("#accoutingMode").length > 0 || false;
 
     $scope.Save = function () {
         if ($scope.preAssign.validation()) {
@@ -6451,11 +6451,11 @@ portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'Dx
         editing: {
             editMode: 'cell',
             texts: {
-                deleteRow: 'Void',
+                deleteRow: 'delete',
                 confirmDeleteMessage: ''
             },
             editEnabled: true,
-            removeEnabled: true,
+            removeEnabled: false,
             insertEnabled: true
         },
         sorting: { mode: 'none' },
@@ -6487,6 +6487,25 @@ portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'Dx
         }
     };
     $scope.scopeColumns = [{
+        caption: 'Status',
+        cellTemplate: function (cellElement, cellInfo) {
+            var Status = cellInfo.data && cellInfo.data.Status;
+            switch (Status) {
+                case 0:
+                    cellElement.html('Unpaid');
+                    break;
+                case 1:
+                    cellElement.html('Void');
+                    break;
+                case 2:
+                    cellElement.html('Processced');
+                    break;
+                default:
+                    cellElement.html('Unpaid');
+            }
+        },
+        visible: true,
+    }, {
         dataField: "PaybleTo",
         caption: 'Payable To',
         validationRules: [{
@@ -6567,7 +6586,7 @@ portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'Dx
         return cancel;
     }
     $scope.CancelCheck = function (e) {
-        e.cancel = true;
+        debugger;
         if (e.data.Status == 1) {
             $('#gridChecks').dxDataGrid('instance').refresh();
             return;
@@ -6582,13 +6601,10 @@ portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'Dx
                     dataType: "json",
                     async: false,
                     success: function (data, textStatus, xhr) {
-                        data.Comments = voidReason;
-                        e.model.Status = 1;
+                        debugger;
                         e.data.Status = 1;
                         e.data.Comments = voidReason;
-
                         $('#gridChecks').dxDataGrid('instance').refresh();
-                        $scope.deletedCheck = data;
                     }
                 });
                 var message = PortalHttpInterceptor.BuildAjaxErrorMessage(response);
@@ -6601,10 +6617,8 @@ portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'Dx
     }
     var path = $location.path();
     // if in edit mode but not new mode, 
-    // void button crsos out item
-    $scope.isAccounting = true;
+    // void button cross out item
     if (path.indexOf('new') < 0) {
-        $scope.checkGridOptions.onRowRemoving = $scope.CancelCheck;
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
         /**
          * Add Accouting Function under editing mode
@@ -6615,11 +6629,33 @@ portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'Dx
             caption: 'Accouting',
             cellTemplate: function (cellElement, cellInfo) {
                 var checkId = cellInfo.data && cellInfo.data.CheckId;
-                cellElement.html('<a onclick="PreSignHelper.onAccoutingReview(' + checkId + ')" href="javascript:void(0)">Review</a>')
+                var Status = cellInfo.data && cellInfo.data.Status;
+                if (!checkId || Status > 0) return;
+                var $button = $('<span type="button" class="btn btn-sm btn-default">').text('Process')
+                                           .on("click", function () { PreSignHelper.onAccoutingReview(checkId) });
+                cellElement.append($button);
             },
-            visible: $scope.isAccounting,
+            visible: false,
+        }
+        var void_col = {
+            caption: 'Void',
+            cellTemplate: function (cellElement, cellInfo) {
+                var checkId = cellInfo.data && cellInfo.data.CheckId;
+                var Status = cellInfo.data && cellInfo.data.Status;
+
+                if (checkId
+                    && (($scope.accoutingMode && Status == 2)
+                    || (!$scope.accoutingMode && Status == 0))
+                 ) {
+                    var $button = $('<span type="button" class="btn btn-sm btn-default">').text('void')
+                                               .on("click", $.proxy($scope.CancelCheck, this, cellInfo));
+                    cellElement.append($button);
+                }
+            },
+            visible: true
         }
         $scope.scopeColumns.push(accounting_col);
+        $scope.scopeColumns.push(void_col);
     }
     $scope.test = function () {
         console.log('test');
@@ -6629,18 +6665,115 @@ portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'Dx
         if (checkGrid) {
             checkGrid.refresh();
         }
+        var accoutingMode = $("#accoutingMode");
+        if (accoutingMode.length > 0) {
+            $scope.scopeColumns[6].visible = true;
+        }
     })
 
 }]);
 
 portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridModel, CheckRequest) {
     $scope.preAssign = PreSignItem;
-    if (!$scope.preAssign.CheckRequestData) {
-        $scope.preAssign.CheckRequestData = { Checks: [{}] };
-    }
-
+    $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Checks: [{}] };
     $scope.partiesGridOptions = new DxGridModel(CONSTANT_ASSIGN_PARTIES_GRID_OPTION);
-    $scope.checkGridOptions = new DxGridModel(CONSTANT_ASSIGN_CHECK_GRID_OPTION);
+    $scope.checkGridOptions = {
+        bindingOptions: {
+            dataSource: 'preAssign.CheckRequestData.Checks',
+            columns: 'scopeColumns'
+        },
+        sorting: { mode: 'none' },
+        paging: {
+            pageSize: 10
+        },
+        pager: {
+            showInfo: true
+        },
+        wordWrapEnabled: true,
+        //show avoid check any time
+        initEdit: function () {
+            var self = this;
+            var voidReasonColumn = {
+                dataField: 'Comments',
+                caption: 'Void Reason',
+                allowEditing: false
+            }
+            if (self.columns.indexOf(voidReasonColumn) < 0) {
+                self.columns.push(voidReasonColumn)
+            }
+        },
+        summary: {
+            calculateCustomSummary: function (options) {
+                if (options.name == 'SumAmount') {
+                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                        return o.Status != 1;
+                    }), "Amount"); //$scope.CheckTotalAmount();
+                }
+            },
+            totalItems: [{
+                column: "Name",
+                summaryType: "count"
+            }, {
+                name: "SumAmount",
+                showInColumn: "Amount",
+                summaryType: "sum",
+                displayFormat: "Sum: {0}",
+                valueFormat: "currency",
+                precision: 2,
+                summaryType: "custom"
+            }]
+        }
+    };
+    $scope.scopeColumns = [{
+        caption: 'Status',
+        cellTemplate: function (cellElement, cellInfo) {
+            var Status = cellInfo.data && cellInfo.data.Status;
+            switch (Status) {
+                case 0:                
+                    cellElement.html('Unpaid');
+                    break;
+                case 1:
+                    cellElement.html('Void');
+                    break;
+                case 2:
+                    cellElement.html('Processced');
+                    break;
+                default:
+                    cellElement.html('Unpaid');
+            }
+        },
+        visible: true,
+    }, {
+        dataField: "PaybleTo",
+        caption: 'Payable To',
+        validationRules: [{
+            type: "required"
+        }]
+    }, {
+        dataField: 'Amount',
+        dataType: 'number',
+        format: 'currency',
+        precision: 2,
+        validationRules: [{
+            type: "required"
+        }]
+    }, new dxGridColumnModel(
+        {
+            dataField: 'Date',
+            dataType: 'date',
+            caption: 'Date of Release',
+            validationRules: [{
+                type: "required"
+            }]
+        }), {
+            dataField: 'Description',
+            validationRules: [{
+                type: "required"
+            }]
+        }, {
+            dataField: 'Comments',
+            caption: 'Void Reason'
+        }, ],
     $scope.CheckRowPrepared = function (e) {
         if (e.data && e.data.Status == 1) {
             e.rowElement.addClass('avoid-check');
@@ -6656,6 +6789,7 @@ portalApp.controller('preAssignViewCtrl', function ($scope, PreSignItem, DxGridM
 
         $("#preDealForm input").prop("disabled", true);
         $("#preDealForm select").prop("disabled", true);
+
     });
 
 });
@@ -6730,9 +6864,19 @@ portalApp.controller('preAssignListCtrl', function ($scope, PreSignList) {
     $scope.preSignRecordsGridOpt = angular.extend({}, CONSTANT_ASSIGN_LIST_GRID_OPTION);
 });
 
-portalApp.controller('ptPreAssignAccoutingCtrl', function ($scope, $http, $uibModal) {
+portalApp.controller('ptPreAssignAccoutingCtrl', function ($scope, $http, $uibModal, ptCom) {
     $scope.data = {};
+    $scope.editmode = false;
+    $scope.toggleEdit = function () {
+        //debugger;
+        if ($scope.editmode) {
+            $scope.editmode = false;
+        } else {
+            $scope.editmode = true;
+        }
+    }
     $scope.load = function (checkid) {
+        $scope.editmode = false;
         $scope.data = {
             "CheckId": checkid,
             "ConfirmedAmount": undefined,
@@ -6740,27 +6884,44 @@ portalApp.controller('ptPreAssignAccoutingCtrl', function ($scope, $http, $uibMo
         }
 
         $http({
-            url: 'api/BusinessCheck/' + checkid,
+            url: '/api/BusinessCheck/' + checkid,
             method: 'GET',
-            options: {noError: true}
+            options: { noError: true }
         }).then(function (d) {
+            if (!d.data.ProcessedBy) {
+                $scope.editmode = true;
+            }
             $scope.data = d.data;
+
         })
         // debugger;
         $scope.modal = $uibModal.open({
-            templateUrl: 'pt-preassign-accouting-modal'
+            templateUrl: 'pt-preassign-accouting-modal',
+            scope: $scope
         })
     }
-
     $scope.update = function () {
-        $http({
-            url: '/api/BusinessCheck/' + checkid + '/Process',
-            method: 'POST',
-            data: this$scope.data
+        ptCom.confirm("Are you going to Save?", function (response) {
+            if (response) {
+                $scope.closeModal();
+                if ($scope.data.CheckId) {
+                    $http({
+                        url: '/api/BusinessCheck/' + $scope.data.CheckId + '/Process',
+                        method: 'POST',
+                        data: $scope.data
+                    }).then(
+                       function () {
+                           ptCom.alert("Save Successful");
+                       }, function () {
+                           ptCom.alert("fail to save");
+                       })
+                }
+            }
         })
+
     }
     $scope.closeModal = function () {
-        debugger;
+        // debugger;
         if ($scope.modal) {
             $scope.modal.close();
         }
