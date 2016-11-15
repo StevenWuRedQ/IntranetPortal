@@ -7,26 +7,11 @@
                     <label class="ss_form_input_title">Property Address</label>
                     <input class="ss_form_input" ng-model="preAssign.Title" disabled>
                 </li>
-                <!--<%--
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title "># of Parties</label>
-                    <input class="ss_form_input " ng-model="preAssignCtrl.Numberof_Parties">
-                </li>--%>
-                <%--
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">Name Of parties</label>
-                    <input class="ss_form_input " ng-model="preAssignCtrl.Name_Of_parties">
-                </li>--%>-->
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title " ng-class="{ss_warning:!preAssign.ExpectedDate}">Expected Date of Signing </label>
                     <input class="ss_form_input" ng-model="preAssign.ExpectedDate" pt-date required data-date-start-date="+0d" />
 
                 </li>
-                <!--<%--
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Doc Search</label>
-                    <pt-radio name="PreAssign_Needdosearch0" model="preAssign.NeedSearch"></pt-radio>
-                </li>--%>-->
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Check request</label>
                     <pt-radio name="PreAssign_Checkrequest0" model="preAssign.NeedCheck"></pt-radio>
@@ -36,22 +21,6 @@
 
                     <input class="ss_form_input" ng-value="preAssign.CreateBy" disabled />
                 </li>
-                <!--<%--
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title "># of checks</label>
-                    <input class="ss_form_input " ng-model="preAssignCtrl.Number_of_checks">
-                </li>--%>-->
-                <!--<%--
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">Total Check Amount</label>
-                    <input class="ss_form_input " pt-number-mask maskformat='money' ng-model="preAssignCtrl.Total_Check_Amount">
-                </li>--%>-->
-                <!--<%--
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">Check Issued by</label>
-                    <input class="ss_form_input" ng-model="preAssign.CheckIssuedBy" ng-show="CheckTotalAmount()<=100000" />
-                    <input class="ss_form_input" ng-show="CheckTotalAmount()>10000" value="MyIdealProperty" disabled />
-                </li>--%>-->
                 <li class="ss_form_item">
                     <label class="ss_form_input_title " ng-class="{ss_warning:CheckTotalAmount() > preAssign.DealAmount}">Total Amount paid for the deal</label>
                     <input class="ss_form_input" ng-model="preAssign.DealAmount" pt-number-mask maskformat='money' />
@@ -67,25 +36,12 @@
                         </select>
                     </li>
                 </div>
-                <!--<%--
-                <li class="ss_form_item ">
-                    <label class="ss_form_input_title ">Name On Check</label>
-                    <input class="ss_form_input " ng-model="preAssignCtrl.Name_On_Check">
-                </li>--%>-->
             </ul>
-            <!--<div class="alert alert-warning" role="alert" id="divSearchWarning" runat="server" visible="false">
-                <strong><i class="fa fa-warning"></i>Warning!</strong> Please make sure that you have requested the Doc search already.
-            </div>-->
         </div>
 
         <div class="ss_form">
             <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.Parties.length<1 }">Parties  </h4>
             <ul class="ss_form_box clearfix">
-                <!--<%--
-                <li class="ss_form_item" ng-repeat="p in preAssign.Parties">
-                    <label class="ss_form_input_title ">Party {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.Parties, $index)"></i></label>
-                    <input class="ss_form_input " type="text" ng-model="p.Name" />
-                </li>--%>-->
                 <li style="list-style: none">
                     <div id="gridParties" dx-data-grid="partiesGridOptions"></div>
                 </li>
@@ -95,11 +51,6 @@
         <div class="ss_form" ng-if="preAssign.NeedCheck">
             <h4 class="ss_form_title " ng-class="{ss_warning:preAssign.CheckRequestData.Checks.length<1}">Checks </h4>
             <ul class="ss_form_box clearfix">
-                <!--<%--
-                <li class="ss_form_item" ng-repeat="p in preAssign.CheckRequestData.Checks">
-                    <label class="ss_form_input_title ">Check {{$index+1}} <i class="fa fa-times icon_btn" ng-click="arrayRemove(preAssign.CheckRequestData.Checks, $index)"></i></label>
-                    <input class="ss_form_input " type="text" ng-model="p.Name" />
-                </li>--%>-->
                 <li style="list-style: none">
                     <div id="gridChecks" dx-data-grid="checkGridOptions"></div>
                 </li>
