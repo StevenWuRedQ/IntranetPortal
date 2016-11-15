@@ -6,12 +6,12 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
 
     var preSign = ptBaseResource('PreSign', 'Id', null, {
         getByBBLE: {
-            method: "GET", url: '/api/PreSign/BBLE/:BBLE'
-            , params: {
+            method: "GET",
+            url: '/api/PreSign/BBLE/:BBLE',
+            params: {
                 BBLE: '@BBLE',
-                //Test: '@Test'
             },
-            options:{noError:true}
+            options: { noError: true }
         },
         financeList: {
             method: "GET", url: '/api/PreSign/CheckRequests', isArray: true

@@ -1,5 +1,4 @@
-﻿
-angular.module('PortalApp').factory('DxGridModel', function ($location, $routeParams) {
+﻿angular.module('PortalApp').factory('DxGridModel', function ($location, $routeParams) {
 
     var dxGridModel = function (opt, texts) {
         angular.extend(this, opt);
