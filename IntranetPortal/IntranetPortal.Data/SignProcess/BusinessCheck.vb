@@ -26,7 +26,7 @@ Partial Public Class BusinessCheck
         Me.ProcessedBy = completeBy
         Me.CheckNo = checkNo
         Me.ProcessedDate = DateTime.Now
-        Me.Status = CheckStatus.Confirmed
+        Me.Status = CheckStatus.Processed
         Me.Save(completeBy)
     End Sub
 
@@ -64,7 +64,7 @@ Partial Public Class BusinessCheck
     Public Enum CheckStatus
         Active = 0
         Canceled = 1
-        Confirmed = 2
+        Processed = 2
         Completed = 3
     End Enum
 

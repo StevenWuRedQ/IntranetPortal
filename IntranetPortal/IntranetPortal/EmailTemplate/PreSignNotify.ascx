@@ -83,7 +83,6 @@ Dear <%=  UserName%>,
             <td>Description</td>
         </tr>
     </thead>
-
     <% 
         Dim i = 1
         For Each check In PreSign.CheckRequestData.Checks %>

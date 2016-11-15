@@ -209,6 +209,10 @@ Public Class Utility
         Return result
     End Function
 
+    Public Shared Function GetApplictionURL() As String
+        Return Core.PortalSettings.GetValue("ApplicationUrl")
+    End Function
+
     ''' <summary>
     ''' Return leads display name from leads info
     ''' </summary>

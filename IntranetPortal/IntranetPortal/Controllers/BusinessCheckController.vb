@@ -121,6 +121,7 @@ Namespace Controllers
                                  params.Add("ConfirmedAmount", String.Format("{0:c}", check.ConfirmedAmount))
                                  params.Add("CheckNo", check.CheckNo)
                                  params.Add("Description", check.Description)
+                                 params.Add("FormLink", String.Format("{0}/NewOffer/HomeownerIncentive.aspx?bble={1}", Utility.GetApplictionURL(), cr.BBLE))
 
                                  Dim emails = Employee.GetEmpsEmails(users.ToArray)
                                  Core.EmailService.SendMail(Employee.GetEmpsEmails(check.CreateBy), emails, "CheckProcessedNotify", params)
