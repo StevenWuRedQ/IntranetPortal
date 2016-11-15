@@ -545,8 +545,9 @@ portalApp.controller('preAssignFinanceCtrl', function ($scope, PreSignFinaceList
                     caption: 'Payable To',
                 }, {
                     dataField: 'Amount',
-                    format: 'currency', dataType: 'number', precision: 2
-
+                    format: 'currency',
+                    dataType: 'number',
+                    precision: 2
                 }, {
                     dataField: 'Date',
                     caption: 'Date of Release',

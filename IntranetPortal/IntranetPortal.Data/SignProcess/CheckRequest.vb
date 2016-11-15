@@ -13,6 +13,18 @@ Public Class CheckRequest
     Public Property PropertyAddress As String
     Public Property ExpectedDate As Date?
 
+    Public ReadOnly Property Balance As Decimal
+        Get
+            If TotalAmount.HasValue Then
+                If Checks IsNot Nothing AndAlso Checks.Count > 0 Then
+                    Return TotalAmount - Checks.Sum(Function(a) a.ConfirmedAmount)
+                End If
+            End If
+
+            Return 0.0
+        End Get
+    End Property
+
     ''' <summary>
     ''' Load all check request list
     ''' </summary>
@@ -129,6 +141,5 @@ Public Class CheckRequest
         End Using
 
     End Sub
-
 
 End Class
