@@ -1,4 +1,8 @@
-﻿Partial Public Class BusinessCheck
+﻿
+''' <summary>
+''' The business check object
+''' </summary>
+Partial Public Class BusinessCheck
 
     ''' <summary>
     ''' Get business check instance
@@ -11,6 +15,12 @@
         End Using
     End Function
 
+    ''' <summary>
+    ''' Complete the check
+    ''' </summary>
+    ''' <param name="amount">The confirmed Amount</param>
+    ''' <param name="checkNo">Check No.</param>
+    ''' <param name="completeBy">The user who processed check</param>
     Public Sub Complete(amount As Decimal, checkNo As String, completeBy As String)
         Me.ConfirmedAmount = amount
         Me.ProcessedBy = completeBy

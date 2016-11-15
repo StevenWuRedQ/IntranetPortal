@@ -47,8 +47,6 @@ Public Class CheckRequest
         End Using
     End Function
 
-
-
     ''' <summary>
     ''' Return check request instance
     ''' </summary>
@@ -143,6 +141,5 @@ Public Class CheckRequest
         End Using
 
     End Sub
-
 
 End Class

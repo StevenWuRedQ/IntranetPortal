@@ -14,9 +14,9 @@
         background: blue;
     }
 </style>
-<div >
+<div>
     <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block">
-        <h5 ng-class="{alert-success:$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </h5>
+        <div ng-class="{'alert alert-success':$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </div>
         <table class="" style="width: 100%" ng-show="prop[0].EventType!=0">
             <tr>
                 <th style="width: 20%">Field</th>
@@ -25,8 +25,14 @@
             </tr>
             <tr ng-repeat="log in prop" style="border: none">
                 <td style="width: 20%">{{log.ColumnName}}</td>
-                <td style="width: 40%">{{log.FormatOriginalValue}}</td>
-                <td style="width: 40%">{{log.FormatNewValue}}</td>
+                <td style="width: 40%" ng-if="log.CustomType=='file'">
+                    <pt-file file-model="log.FormatOriginalValue" file-bble="log.AuditId" file-id="fileid" file-name="emails" upload-type="emails"></pt-file>
+                </td>
+                <td style="width: 40%" ng-if="log.CustomType!='file'">{{log.FormatOriginalValue}}</td>
+                <td style="width: 40%" ng-if="log.CustomType=='file'">
+                    <pt-file file-model="log.FormatNewValue" file-bble="log.AuditId" file-id="fileid" file-name="emails" upload-type="emails"></pt-file>
+                </td>
+                <td style="width: 40%" ng-if="log.CustomType!='file'">{{log.FormatNewValue}}</td>
             </tr>
         </table>
     </div>

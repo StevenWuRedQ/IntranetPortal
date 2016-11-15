@@ -6,6 +6,17 @@ Namespace Controllers
     Public Class BusinessCheckController
         Inherits ApiController
 
+        <Authorize(Roles:="Admin,Accounting-*")>
+        Public Function GetBusinessCheck(id As Integer) As IHttpActionResult
+            Dim record = BusinessCheck.GetInstance(id)
+
+            If IsNothing(record) Then
+                Return NotFound()
+            End If
+
+            Return Ok(record)
+        End Function
+
         Public Function PutBusinessCheck(id As Integer, check As BusinessCheck) As IHttpActionResult
 
             If Not ModelState.IsValid Then

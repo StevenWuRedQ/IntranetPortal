@@ -222,6 +222,6 @@ Public Class PreSignRecordmMetaData
     <Newtonsoft.Json.JsonConverter(GetType(Core.JsArrayToStringConverter))>
     Public Property Parties As String
 
-    <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
+    <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToFileConverter))>
     Public Property ApprovalFile As String
 End Class
