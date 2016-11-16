@@ -191,11 +191,17 @@ Namespace Controllers
             Dim notify = Sub()
                              Dim svr As New CommonService
                              Dim params = New Dictionary(Of String, String)
-
+                             Dim cfo = Roles.GetUsersInRole("Accounting-CFO")
                              Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
+                             Dim userName = "All"
+                             If cfo IsNot Nothing AndAlso cfo.Count > 0 Then
+                                 userName = cfo(0)
+                                 finMgr = finMgr.Concat(cfo).Distinct.ToArray
+                             End If
+
                              If finMgr.Count > 0 Then
                                  params.Add("RecordId", record.Id)
-                                 params.Add("UserName", finMgr(0))
+                                 params.Add("UserName", userName)
                                  params.Add("IsUpdate", isUpdate)
 
                                  Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)

@@ -174,9 +174,9 @@ Public Class LeadsEcourtData
     Public Shared Sub DailyUpdate()
         Dim lastUpdateLog = GetLastUpdateTime()
 
-        Dim dtStart = DateTime.Today
+        Dim dtStart = DateTime.Today.AddDays(-1)
         If lastUpdateLog > DateTime.MinValue Then
-            dtStart = lastUpdateLog
+            dtStart = IIf(lastUpdateLog < dtStart, lastUpdateLog, dtStart)
         End If
 
         Dim dtEnd = DateTime.Now
@@ -208,6 +208,7 @@ Public Class LeadsEcourtData
         Using ctx As New PortalEntities
             For Each cas In cases
                 If Not ctx.EcourtCases.Any(Function(a) a.BBLE = cas.BBLE AndAlso a.CountyId = cas.CountyId AndAlso a.CaseIndexNumber = cas.CaseIndexNumber) Then
+                    cas.UpdateDate = DateTime.Now
                     cas.CreateDate = DateTime.Now
                     ctx.EcourtCases.Add(cas)
 

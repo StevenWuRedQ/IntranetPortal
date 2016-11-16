@@ -8,7 +8,7 @@ angular.module("PortalApp")
         return {
             restrict: 'A',
             scope: {
-                isEditable: '='
+                ptLock: '='
             },
             link: function (scope, el, attrs) {
                 // debugger;
@@ -29,7 +29,9 @@ angular.module("PortalApp")
                     // debugger;
                     scope.unlock();
                 })
-                scope.lock();
+                if (scope.ptLock) {
+                    scope.lock();
+                }
             }
         }
     }])

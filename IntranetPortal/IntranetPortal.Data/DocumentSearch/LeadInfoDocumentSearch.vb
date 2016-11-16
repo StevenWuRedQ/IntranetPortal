@@ -9,6 +9,7 @@ Public Class LeadInfoDocumentSearch
     Public Property IsSave As Boolean
     Public Property CaseName As String
     Public Property IsInProcess As Integer?
+    Public Property NewOfferStatus As Integer?
     Public Property Team As String
     Public Property Owner As String
     ''' <summary>
@@ -84,6 +85,7 @@ Public Class LeadInfoDocumentSearch
                            .UnderwriteStatus = search.UnderwriteStatus,
                            .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
                            .IsInProcess = CType(tracking.IsInProcess, Integer?),
+                           .NewOfferStatus = tracking.NewOfferStatus,
                            .Owner = lead.EmployeeName
             }
 
@@ -104,6 +106,7 @@ Public Class LeadInfoDocumentSearch
                                                                    .UnderwriteStatus = search.UnderwriteStatus,
                                                                    .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
                                                                    .IsInProcess = CType(search.IsInProcess, Integer?),
+                                                                   .NewOfferStatus = search.NewOfferStatus,
                                                                    .Owner = search.Owner
                                                         }
                                                 End Function).ToList
