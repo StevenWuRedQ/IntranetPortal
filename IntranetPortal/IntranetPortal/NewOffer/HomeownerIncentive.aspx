@@ -36,7 +36,6 @@
     <div id="dataPanelDiv">
         <div ng-view class="container"></div>
     </div>
-
     <div ng-controller="ptPreAssignAccoutingCtrl">
         <div id="pt-preassign-accouting-ctrl">
             <script type="text/ng-template" id="pt-preassign-accouting-modal">
@@ -46,19 +45,19 @@
                     <br />
                     <table class="table">
                         <tr ng-show="data.ProcessedDate">
-                            <td colspan="2"><b>Last Processed By {{data.ProcessedBy}} on {{data.ProcessedDate| date: 'medium'}}</b></td>
+                            <td colspan="2"><b>Last Processed By {{cellinfo.data.ProcessedBy}} on {{cellinfo.data.ProcessedDate| date: 'medium'}}</b></td>
                         </tr>
                         <tr>
                             <td>Check No.</td>
                             <td>
-                                <input class="form-control" ng-model="data.CheckNo" ng-disabled="!editmode"></input></td>
+                                <input class="form-control" ng-model="cellinfo.data.CheckNo" ng-disabled="!editmode"></input></td>
                         </tr>
                         </tr>
                             <td>Confirm Amount</td>
                             <td>
                                 <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                <input class="form-control" ng-model="data.ConfirmedAmount" ng-disabled="!editmode"></input></td>
+                                <input class="form-control" ng-model="cellinfo.data.ConfirmedAmount" ng-disabled="!editmode" pt-number-mask isvalidate></input></td>
                                 </div>
                             </tr>
                     </table>

@@ -18,7 +18,6 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Manager </label>
-
                     <input class="ss_form_input" ng-value="preAssign.CreateBy" disabled />
                 </li>
                 <li class="ss_form_item">
@@ -27,9 +26,9 @@
                 </li>
                 <div ng-show="preAssign.NeedCheck">
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title">Type of Check request</label>
+                        <label class="ss_form_input_title" >Type of Check request</label>
                         <!--<%--ng-disabled="mode=='Edit'"--%>-->
-                        <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" disabled="disabled">
+                        <select class="ss_form_input" ng-model="preAssign.CheckRequestData.Type" disabled>
                             <option>Short Sale</option>
                             <option>Straight Sale</option>
                             <option>Other</option>
