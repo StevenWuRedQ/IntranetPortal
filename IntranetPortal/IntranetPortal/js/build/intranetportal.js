@@ -6901,6 +6901,9 @@ function ($scope, $http, $uibModal, ptCom) {
         $scope.cellinfo = cellinfo;
         $scope.editmode = false;
         if ($scope.cellinfo.data.Status == 0) {
+            if ($scope.cellinfo.data.ConfirmedAmount == null) {
+                $scope.cellinfo.data.ConfirmedAmount = $scope.cellinfo.data.Amount;
+            }
             $scope.editmode = true;
         }
 
