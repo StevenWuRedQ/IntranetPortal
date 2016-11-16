@@ -274,7 +274,8 @@ Public Class LeadTest
 
                                 RulesEngine.LeadsEscalationRule.Execute(mockLead)
                                 Dim ld = Lead.GetInstance(mockLead.BBLE)
-                                Assert.AreEqual(ld.EmployeeName, txtChrisYan)
+                                Assert.AreEqual(ld.EmployeeName, txtChrisYan,
+                                                "Lead stay in same user when new lead in 6 days")
 
                                 ' update test leads assign date to 7 business days before
                                 Dim sevenBussinessDaysBefore = AddBusinessDays(DateTime.Now, -7).AddHours(-1)
@@ -283,9 +284,11 @@ Public Class LeadTest
                                 RulesEngine.LeadsEscalationRule.Execute(mockLead)
                                 ld = Lead.GetInstance(mockLead.BBLE)
 
-                                Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name)
+                                Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name,
+                                                "Lead assign to main pool after stay in new lead 7 days")
                                 'assign date should update to today
-                                Assert.AreEqual(Day(ld.AssignDate), Day(Date.Now))
+                                Assert.AreEqual(Day(ld.AssignDate), Day(Date.Now),
+                                                "Assgin date should change to date now")
 
                                 ' update test lead assign date to 8 bussiness days before
                                 Dim eightBussinessDaysBefore = AddBusinessDays(DateTime.Now, -8)
@@ -294,7 +297,8 @@ Public Class LeadTest
 
                                 RulesEngine.LeadsEscalationRule.Execute(mockLead)
                                 ld = Lead.GetInstance(mockLead.BBLE)
-                                Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name)
+                                Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name,
+                                                "Lead assign to main pool after stay in new lead 8 days")
                                 ' assign date should update to today
                                 Assert.AreEqual(CDate(ld.AssignDate).ToShortDateString, Date.Now.ToShortDateString())
                                 ' assign to new leads folder 
@@ -341,8 +345,10 @@ Public Class LeadTest
                                 RulesEngine.LeadsEscalationRule.Execute(mockLead)
                                 ld = Lead.GetInstance(mockLead.BBLE)
                                 ' lead move  to main pool
-                                Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name, "Should move to lead main pool")
-                                Assert.AreEqual(Day(ld.AssignDate), Day(Date.Now), "Move to main pool should date should be now")
+                                Assert.AreEqual(ld.EmployeeName, Lead.GetMainPooluser().Name,
+                                                "Should move to lead main pool when lead in warm lead 20 days")
+                                Assert.AreEqual(Day(ld.AssignDate), Day(Date.Now),
+                                                "Move to main pool should date should be now")
 
                                 Return 0
                             End Function)
@@ -374,7 +380,7 @@ Public Class LeadTest
         ' change to hot leads
         statusLog.Description = "1"
         clearRecycleLeads(mockLead.BBLE)
-
+        ' Core.WorkingHours.AddWorkDays(DateTime.Now, -20)
         Using mockEntity As New Entities
 
             MockDB.Mock(Of LeadsStatusLog)(mockEntity, statusLog,
@@ -405,7 +411,8 @@ Public Class LeadTest
                                                                         Dim rlId = rl.RecycleId
 
                                                                         Assert.IsNotNull(rl, "lead stay in hot leads in 13 days the leads should be recycle")
-
+                                                                        ' Core.WorkingHours.AddWorkDays()
+                                                                        ' Assert.AreEqual(Core.wor)
                                                                         ' lead staying hot lead 14 days
                                                                         ' lead arleady exist in recycle lead
                                                                         statusLog.CreateDate = AddBusinessDays(Date.Now, -14).AddHours(-1)
@@ -414,9 +421,26 @@ Public Class LeadTest
                                                                         ld = Lead.GetInstance(mockLead.BBLE)
                                                                         rl = RecycleManage.GetRecycledLead(mockLead.BBLE)
                                                                         Assert.IsNotNull(rl, "lead stay in hot leads in 14 days and leads recyceld once should stay in recycle")
+                                                                        Assert.AreEqual(ld.EmployeeName, "Chris Yan",
+                                                                                        "lead should not move to main pool")
 
-                                                                        Assert.AreEqual(rlId, rl.RecycleId, "Hot lead recycel reminder only set once")
+                                                                        Assert.AreEqual(rlId, rl.RecycleId,
+                                                                                        "Hot lead recycel send reminder only once")
 
+                                                                        ' lead stay hot lead more than 15 day and didn't extend
+                                                                        statusLog.CreateDate = AddBusinessDays(Date.Now, -15).AddHours(-1)
+                                                                        mockEntity.SaveChanges()
+                                                                        RulesEngine.LeadsEscalationRule.Execute(mockLead)
+
+                                                                        ld = Lead.GetInstance(mockLead.BBLE)
+
+                                                                        'Using coreCtx As New Core.CoreEntities
+                                                                        '    Dim 
+                                                                        '    MockDB.Mock(Of Core.RecycleLead)(coreCtx)
+                                                                        'End Using
+
+                                                                        Assert.AreEqual(ld.EmployeeName, Lead.GetHotPoolUser().Name,
+                                                                                        "lead should move to main pool")
                                                                         Return 0
                                                                     End Function,
                                                               Function(x) x.BBLE = mockLead.BBLE ' clear leads        
@@ -443,7 +467,9 @@ Public Class LeadTest
     End Sub
     <TestMethod>
     Sub MockDbTest()
-
+        Dim d = Date.Now
+        Dim workingDay = Core.WorkingHours.AddWorkDays(DateTime.Parse("11/8/2016"), -7)
+        Assert.AreEqual(workingDay.ToShortDateString(), "10/28/2016", "7 working days after 11/8/2016 should ")
         ' 
         ' MockDB.Ctx(ctx).Mock(Of LeadsStatusLog)(statusLog).Test()
     End Sub

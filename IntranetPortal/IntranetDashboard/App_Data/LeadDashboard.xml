@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource ComponentName="dashboardSqlDataSource1">
+      <Name>SQL Data Source 1</Name>
+      <Connection Name="ChrisPC,4436_IntranetPortal_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="ChrisPC,4436" />
+          <Parameter Name="database" Value="IntranetPortal" />
+          <Parameter Name="useIntegratedSecurity" Value="False" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="Steven" />
+          <Parameter Name="password" Value="P@ssw0rd" />
+        </Parameters>
+      </Connection>
+      <Query Type="TableQuery" Name="Leads">
+        <Table Name="Leads">
+          <Column Name="BBLE" />
+          <Column Name="LeadsName" />
+          <Column Name="EmployeeID" />
+          <Column Name="EmployeeName" />
+          <Column Name="Process" />
+          <Column Name="Status" />
+          <Column Name="SubStatus" />
+          <Column Name="CallbackDate" />
+          <Column Name="Neighborhood" />
+          <Column Name="DeadReason" />
+          <Column Name="Description" />
+          <Column Name="LastUpdate" />
+          <Column Name="UpdateBy" />
+          <Column Name="AssignDate" />
+          <Column Name="AssignBy" />
+          <Column Name="MarkColor" />
+          <Column Name="AppId" />
+        </Table>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="Leads">
+            <Field Name="BBLE" Type="String" />
+            <Field Name="LeadsName" Type="String" />
+            <Field Name="EmployeeID" Type="Int32" />
+            <Field Name="EmployeeName" Type="String" />
+            <Field Name="Process" Type="Int32" />
+            <Field Name="Status" Type="Int32" />
+            <Field Name="SubStatus" Type="Int32" />
+            <Field Name="CallbackDate" Type="DateTime" />
+            <Field Name="Neighborhood" Type="String" />
+            <Field Name="DeadReason" Type="Int32" />
+            <Field Name="Description" Type="String" />
+            <Field Name="LastUpdate" Type="DateTime" />
+            <Field Name="UpdateBy" Type="String" />
+            <Field Name="AssignDate" Type="DateTime" />
+            <Field Name="AssignBy" Type="String" />
+            <Field Name="MarkColor" Type="Int32" />
+            <Field Name="AppId" Type="Int32" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+    </SqlDataSource>
+    <SqlDataSource ComponentName="dashboardSqlDataSource2">
+      <Name>SQL Data Source 2</Name>
+      <Connection Name="ChrisPC,4436_IntranetPortal_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="ChrisPC,4436" />
+          <Parameter Name="database" Value="IntranetPortal" />
+          <Parameter Name="useIntegratedSecurity" Value="False" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="Steven" />
+          <Parameter Name="password" Value="P@ssw0rd" />
+        </Parameters>
+      </Connection>
+      <Query Type="TableQuery" Name="LeadInfoDocumentSearch">
+        <Table Name="LeadInfoDocumentSearch">
+          <Column Name="BBLE" />
+          <Column Name="LeadResearch" />
+          <Column Name="ExpectedSigningDate" />
+          <Column Name="CompletedOn" />
+          <Column Name="CompletedBy" />
+          <Column Name="CreateDate" />
+          <Column Name="CreateBy" />
+          <Column Name="UpdateDate" />
+          <Column Name="UpdateBy" />
+          <Column Name="UnderwriteCompleted" />
+          <Column Name="UnderwriteCompletedOn" />
+          <Column Name="UnderwriteCompletedBy" />
+          <Column Name="Version" />
+          <Column Name="Status" />
+          <Column Name="UnderwriteStatus" />
+          <Column Name="UnderwriteCompletedNotes" />
+          <Column Name="Description" />
+        </Table>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 2">
+          <View Name="LeadInfoDocumentSearch">
+            <Field Name="BBLE" Type="String" />
+            <Field Name="LeadResearch" Type="String" />
+            <Field Name="ExpectedSigningDate" Type="DateTime" />
+            <Field Name="CompletedOn" Type="DateTime" />
+            <Field Name="CompletedBy" Type="String" />
+            <Field Name="CreateDate" Type="DateTime" />
+            <Field Name="CreateBy" Type="String" />
+            <Field Name="UpdateDate" Type="DateTime" />
+            <Field Name="UpdateBy" Type="String" />
+            <Field Name="UnderwriteCompleted" Type="Boolean" />
+            <Field Name="UnderwriteCompletedOn" Type="DateTime" />
+            <Field Name="UnderwriteCompletedBy" Type="String" />
+            <Field Name="Version" Type="Int32" />
+            <Field Name="Status" Type="Int32" />
+            <Field Name="UnderwriteStatus" Type="Byte" />
+            <Field Name="UnderwriteCompletedNotes" Type="String" />
+            <Field Name="Description" Type="String" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+    </SqlDataSource>
+    <SqlDataSource ComponentName="dashboardSqlDataSource3">
+      <Name>SQL Data Source 3</Name>
+      <Connection Name="207.97.206.28,4436_IntranetPortal_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="207.97.206.28,4436" />
+          <Parameter Name="database" Value="IntranetPortal" />
+          <Parameter Name="useIntegratedSecurity" Value="False" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="Chris" />
+          <Parameter Name="password" Value="P@ssw0rd1" />
+        </Parameters>
+      </Connection>
+      <Query Type="TableQuery" Name="TeamLeadsView">
+        <Table Name="TeamLeadsView">
+          <Column Name="Team Name" />
+          <Column Name="BBLE" />
+          <Column Name="LeadsName" />
+          <Column Name="Name" />
+          <Column Name="Status" />
+          <Column Name="LastUpdate" />
+          <Column Name="UpdateBy" />
+        </Table>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 3">
+          <View Name="TeamLeadsView">
+            <Field Name="Team Name" Type="String" />
+            <Field Name="BBLE" Type="String" />
+            <Field Name="LeadsName" Type="String" />
+            <Field Name="Name" Type="String" />
+            <Field Name="Status" Type="Int32" />
+            <Field Name="LastUpdate" Type="DateTime" />
+            <Field Name="UpdateBy" Type="String" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <CalculatedFields>
+        <CalculatedField Name="Calculated Field 1" Expression="[Status] = 1" DataType="Boolean" DataMember="TeamLeadsView" />
+      </CalculatedFields>
+    </SqlDataSource>
+    <SqlDataSource ComponentName="dashboardSqlDataSource4">
+      <Name>LeadTeamCountReport</Name>
+      <Connection Name="207.97.206.29,4436_IntranetPortalReport_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="207.97.206.29,4436" />
+          <Parameter Name="database" Value="IntranetPortalReport" />
+          <Parameter Name="useIntegratedSecurity" Value="False" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="Chris" />
+          <Parameter Name="password" Value="P@ssw0rd1" />
+        </Parameters>
+      </Connection>
+      <Query Type="CustomSqlQuery" Name="LeadTeamCountReport">
+        <Sql>select "LeadTeamCountReport"."Name", "LeadTeamCountReport"."Total",
+       "LeadTeamCountReport"."HotLeadsCount", "LeadTeamCountReport"."MoveOut"
+  from "dbo"."LeadTeamCountReport" "LeadTeamCountReport"</Sql>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="LeadTeamCountReport">
+          <View Name="LeadTeamCountReport">
+            <Field Name="Name" Type="String" />
+            <Field Name="Total" Type="String" />
+            <Field Name="HotLeadsCount" Type="Int32" />
+            <Field Name="MoveOut" Type="Decimal" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+    </SqlDataSource>
+    <SqlDataSource ComponentName="dashboardSqlDataSource5">
+      <Name>SQL Data Source 4</Name>
+      <Connection Name="207.97.206.29,4436_IntranetPortalReport_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="207.97.206.29,4436" />
+          <Parameter Name="database" Value="IntranetPortalReport" />
+          <Parameter Name="useIntegratedSecurity" Value="False" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="Chris" />
+          <Parameter Name="password" Value="P@ssw0rd1" />
+        </Parameters>
+      </Connection>
+      <Query Type="CustomSqlQuery" Name="HotLeadMoveInOutInTeam">
+        <Sql>select "HotLeadMoveInOutInTeam"."LogID",
+       "HotLeadMoveInOutInTeam"."BBLE",
+       "HotLeadMoveInOutInTeam"."EmployeeID",
+       "HotLeadMoveInOutInTeam"."EmployeeName",
+       "HotLeadMoveInOutInTeam"."Category",
+       "HotLeadMoveInOutInTeam"."ActionType",
+       "HotLeadMoveInOutInTeam"."ActivityDate",
+       "HotLeadMoveInOutInTeam"."MoveInHot",
+       "HotLeadMoveInOutInTeam"."MoveOutHot",
+       "HotLeadMoveInOutInTeam"."Active",
+       "HotLeadMoveInOutInTeam"."Name",
+	"HotLeadMoveInOutInTeam"."PropertyAddress"
+  from "dbo"."HotLeadMoveInOutInTeam" "HotLeadMoveInOutInTeam"</Sql>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 4">
+          <View Name="HotLeadMoveInOutInTeam">
+            <Field Name="LogID" Type="Int32" />
+            <Field Name="BBLE" Type="String" />
+            <Field Name="EmployeeID" Type="Int32" />
+            <Field Name="EmployeeName" Type="String" />
+            <Field Name="Category" Type="String" />
+            <Field Name="ActionType" Type="Int32" />
+            <Field Name="ActivityDate" Type="DateTime" />
+            <Field Name="MoveInHot" Type="Int32" />
+            <Field Name="MoveOutHot" Type="Int32" />
+            <Field Name="Active" Type="Boolean" />
+            <Field Name="Name" Type="String" />
+            <Field Name="PropertyAddress" Type="String" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+    </SqlDataSource>
+  </DataSources>
+  <Parameters>
+    <Parameter Name="Parameter1" Value="" />
+  </Parameters>
+  <Items>
+    <Chart ComponentName="chartDashboardItem2" Name="Lead and hot lead Count " DataSource="dashboardSqlDataSource4" DataMember="LeadTeamCountReport" Rotated="true">
+      <DataItems>
+        <Dimension DataMember="Name" UniqueName="DataItem0" />
+        <Measure DataMember="Total" SummaryType="Count" UniqueName="DataItem1" />
+        <Measure DataMember="HotLeadsCount" UniqueName="DataItem2" />
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple SeriesType="StackedBar">
+              <Value UniqueName="DataItem1" />
+            </Simple>
+            <Simple SeriesType="StackedBar">
+              <Value UniqueName="DataItem2" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+      <ChartLegend OutsidePosition="TopCenterHorizontal" />
+    </Chart>
+    <RangeFilter ComponentName="rangeFilterDashboardItem1" Name="Date filter" ShowCaption="true" DataSource="dashboardSqlDataSource5" DataMember="HotLeadMoveInOutInTeam">
+      <DataItems>
+        <Dimension DataMember="ActivityDate" DateTimeGroupInterval="DayMonthYear" UniqueName="DataItem0" />
+        <Measure DataMember="MoveOutHot" UniqueName="DataItem2" />
+        <Measure DataMember="MoveInHot" UniqueName="DataItem1" />
+      </DataItems>
+      <Argument UniqueName="DataItem0" />
+      <Series>
+        <Simple SeriesType="Line">
+          <Value UniqueName="DataItem2" />
+        </Simple>
+        <Simple SeriesType="Line">
+          <Value UniqueName="DataItem1" />
+        </Simple>
+      </Series>
+    </RangeFilter>
+    <Chart ComponentName="chartDashboardItem1" Name="Lead move in move out hot lead" DataSource="dashboardSqlDataSource5" DataMember="HotLeadMoveInOutInTeam">
+      <DataItems>
+        <Dimension DataMember="Name" SortOrder="Descending" UniqueName="DataItem0" />
+        <Measure DataMember="MoveOutHot" UniqueName="DataItem1" />
+        <Measure DataMember="MoveInHot" UniqueName="DataItem3" />
+        <Dimension DataMember="PropertyAddress" UniqueName="DataItem5" />
+        <Dimension DataMember="ActivityDate" DateTimeGroupInterval="MonthYear" UniqueName="DataItem6" />
+      </DataItems>
+      <HiddenDimensions>
+        <Dimension UniqueName="DataItem5" />
+        <Dimension UniqueName="DataItem6" />
+      </HiddenDimensions>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple SeriesType="StackedBar">
+              <Value UniqueName="DataItem1" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem3" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem3" Name="Chart 1" DataSource="dashboardSqlDataSource5" DataMember="HotLeadMoveInOutInTeam">
+      <ColoringOptions UseGlobalColors="false" />
+      <InteractivityOptions IsDrillDownEnabled="true" />
+      <DataItems>
+        <Dimension DataMember="ActivityDate" DateTimeGroupInterval="MonthYear" UniqueName="DataItem0" />
+        <Measure DataMember="MoveOutHot" UniqueName="DataItem2" />
+        <Dimension DataMember="PropertyAddress" UniqueName="DataItem4" />
+        <Measure DataMember="MoveInHot" UniqueName="DataItem3" />
+        <Dimension DataMember="Name" UniqueName="DataItem5" />
+      </DataItems>
+      <HiddenDimensions>
+        <Dimension UniqueName="DataItem4" />
+        <Dimension UniqueName="DataItem5" />
+      </HiddenDimensions>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple SeriesType="StackedBar">
+              <Value UniqueName="DataItem2" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem3" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <ComboBox ComponentName="comboBoxDashboardItem1" Name="Combo Box 1" DataSource="dashboardSqlDataSource5" DataMember="HotLeadMoveInOutInTeam">
+      <DataItems>
+        <Dimension DataMember="Name" SortOrder="Descending" UniqueName="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension UniqueName="DataItem0" />
+      </FilterDimensions>
+    </ComboBox>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutGroup Weight="56.95">
+        <LayoutItem DashboardItem="chartDashboardItem2" Weight="63" />
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="37" />
+      </LayoutGroup>
+      <LayoutGroup Weight="43.05">
+        <LayoutItem DashboardItem="rangeFilterDashboardItem1" Weight="50" />
+        <LayoutItem DashboardItem="chartDashboardItem3" Weight="30" />
+        <LayoutItem DashboardItem="comboBoxDashboardItem1" Weight="20" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource ComponentName="dashboardSqlDataSource1">
+      <Name>SQL Data Source 1</Name>
+      <Connection Name="ChrisPC,4436_IntranetPortal_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="ChrisPC,4436" />
+          <Parameter Name="database" Value="IntranetPortal" />
+          <Parameter Name="useIntegratedSecurity" Value="False" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="userid" Value="Steven" />
+          <Parameter Name="password" Value="P@ssw0rd" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+        </Parameters>
+      </Connection>
+      <Query Type="TableQuery" Name="Leads">
+        <Table Name="Leads">
+          <Column Name="BBLE" />
+          <Column Name="LeadsName" />
+          <Column Name="EmployeeID" />
+          <Column Name="EmployeeName" />
+          <Column Name="Process" />
+          <Column Name="Status" />
+          <Column Name="SubStatus" />
+          <Column Name="CallbackDate" />
+          <Column Name="Neighborhood" />
+          <Column Name="DeadReason" />
+          <Column Name="Description" />
+          <Column Name="LastUpdate" />
+          <Column Name="UpdateBy" />
+          <Column Name="AssignDate" />
+          <Column Name="AssignBy" />
+          <Column Name="MarkColor" />
+          <Column Name="AppId" />
+        </Table>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="Leads">
+            <Field Name="BBLE" Type="String" />
+            <Field Name="LeadsName" Type="String" />
+            <Field Name="EmployeeID" Type="Int32" />
+            <Field Name="EmployeeName" Type="String" />
+            <Field Name="Process" Type="Int32" />
+            <Field Name="Status" Type="Int32" />
+            <Field Name="SubStatus" Type="Int32" />
+            <Field Name="CallbackDate" Type="DateTime" />
+            <Field Name="Neighborhood" Type="String" />
+            <Field Name="DeadReason" Type="Int32" />
+            <Field Name="Description" Type="String" />
+            <Field Name="LastUpdate" Type="DateTime" />
+            <Field Name="UpdateBy" Type="String" />
+            <Field Name="AssignDate" Type="DateTime" />
+            <Field Name="AssignBy" Type="String" />
+            <Field Name="MarkColor" Type="Int32" />
+            <Field Name="AppId" Type="Int32" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Chart 1" DataSource="dashboardSqlDataSource1" DataMember="Leads">
+      <DataItems>
+        <Dimension DataMember="EmployeeName" UniqueName="DataItem0" />
+        <Measure DataMember="BBLE" SummaryType="Count" UniqueName="DataItem1" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension UniqueName="DataItem0" />
+      </SeriesDimensions>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple>
+              <Value UniqueName="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Pie ComponentName="pieDashboardItem1" Name="Pies 1" DataSource="dashboardSqlDataSource1" DataMember="Leads">
+      <DataItems>
+        <Measure DataMember="BBLE" SummaryType="Count" UniqueName="DataItem0" />
+        <Dimension DataMember="EmployeeName" UniqueName="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem1" />
+      </Arguments>
+      <Values>
+        <Value UniqueName="DataItem0" />
+      </Values>
+    </Pie>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="chartDashboardItem1" Weight="0.25" />
+      <LayoutItem DashboardItem="pieDashboardItem1" Weight="0.25" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
