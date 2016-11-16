@@ -6407,7 +6407,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
     }
     $scope.accoutingMode = $("#accoutingMode").length > 0 || false;
 
-    $scope.Save = function () {
+    $scope.Save = function () { 
         if ($scope.preAssign.validation()) {
             if ($scope.preAssign.hasId()) {
                 $scope.preAssign.$update(function () {
@@ -6458,7 +6458,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
             },
             editEnabled: true,
             removeEnabled: false,
-            insertEnabled: true
+            insertEnabled: true 
         },
         sorting: { mode: 'none' },
         pager: {
@@ -6468,20 +6468,21 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         wordWrapEnabled: true,
         summary: {
             calculateCustomSummary: function (options) {
-                if (options.name == 'SumAmount') {
-                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                if (options.name == 'Balance') {
+                     var AmountTotal = _.sum(_.filter(options.component._options.dataSource, function (o) {
                         return o.Status != 1;
-                    }), "Amount");
+                     }), "Amount");
+                     var ConfirmedTotal = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                         return o.Status != 1;
+                     }), "ConfirmedAmount");
+
+                     options.totalValue = AmountTotal - ConfirmedTotal;
                 }
             },
-            totalItems: [{
-                column: "Name",
-                summaryType: "count"
-            }, {
-                name: "SumAmount",
-                showInColumn: "Amount",
-                summaryType: "sum",
-                displayFormat: "Sum: {0}",
+            totalItems: [ {
+                name: "Balance",
+                showInColumn: "Status",
+                displayFormat: "Balance: {0}",
                 valueFormat: "currency",
                 precision: 2,
                 summaryType: "custom"
@@ -6619,10 +6620,9 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         }, true)
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
-    var path = $location.path();
 
     // code for if in edit mode but not new mode, 
-    if (path.indexOf('new') < 0) {
+    if ($location.path().indexOf('new') < 0) {
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
         // add Accouting Function under editing mode
         var accounting_col = {
@@ -6677,7 +6677,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         }
         // check if user is an accountant, magic number 6!!
         var accoutingMode = $("#accoutingMode");
-        if (accoutingMode.length > 0 && path.indexOf('new') < 0) {
+        if (accoutingMode.length > 0 && $location.path().indexOf('new') < 0) {
             $scope.scopeColumns[6].visible = true;
         }
     })
@@ -6716,20 +6716,21 @@ function ($scope, PreSignItem, DxGridModel, CheckRequest) {
         },
         summary: {
             calculateCustomSummary: function (options) {
-                if (options.name == 'SumAmount') {
-                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                if (options.name == 'Balance') {
+                    var AmountTotal = _.sum(_.filter(options.component._options.dataSource, function (o) {
                         return o.Status != 1;
-                    }), "Amount"); //$scope.CheckTotalAmount();
+                    }), "Amount");
+                    var ConfirmedTotal = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                        return o.Status != 1;
+                    }), "ConfirmedAmount");
+
+                    options.totalValue = AmountTotal - ConfirmedTotal;
                 }
             },
             totalItems: [{
-                column: "Name",
-                summaryType: "count"
-            }, {
-                name: "SumAmount",
-                showInColumn: "Amount",
-                summaryType: "sum",
-                displayFormat: "Sum: {0}",
+                name: "Balance",
+                showInColumn: "Status",
+                displayFormat: "Balance: {0}",
                 valueFormat: "currency",
                 precision: 2,
                 summaryType: "custom"
@@ -9597,3 +9598,4 @@ angular.module('PortalApp').component('ptSelectableInput', {
     }
 
 })
+//# sourceMappingURL=Test.js.map
