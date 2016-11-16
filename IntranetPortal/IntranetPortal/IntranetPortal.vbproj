@@ -598,6 +598,7 @@
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\AssignRule.vb" />
+    <Compile Include="CodeFolder\BusinessCheckManage.vb" />
     <Compile Include="CodeFolder\CallbackException.vb" />
     <Compile Include="CodeFolder\ComplaintsManage.vb" />
     <Compile Include="CodeFolder\ConstructionManage.vb" />
@@ -6939,6 +6940,7 @@
     <Content Include="DLL\PublicSiteData.dll" />
     <Content Include="DLL\Spire.Pdf.dll" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\CheckProcessedNotify.html" />
     <Content Include="EmailTemplate\ComplaintContent.ascx" />
     <Content Include="EmailTemplate\ComplaintsDetailNotify.ascx" />
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />

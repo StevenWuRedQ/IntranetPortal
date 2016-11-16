@@ -28,5 +28,7 @@ Partial Public Class BusinessCheck
     Public Property ProcessedBy As String
     Public Property ProcessedDate As Nullable(Of Date)
     Public Property CheckNo As String
+    Public Property CancelBy As String
+    Public Property CancelDate As Nullable(Of Date)
 
 End Class

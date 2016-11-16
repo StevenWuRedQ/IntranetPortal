@@ -30,6 +30,19 @@ Partial Public Class BusinessCheck
         Me.Save(completeBy)
     End Sub
 
+    ''' <summary>
+    ''' Cancel the check
+    ''' </summary>
+    ''' <param name="comments">The comments to cancel</param>
+    ''' <param name="cancelBy">The user who cancel the check</param>
+    Public Sub Cancel(comments As String, cancelBy As String)
+        Me.Comments = comments
+        Me.CancelBy = cancelBy
+        Me.CancelDate = DateTime.Now
+        Me.Status = CheckStatus.Canceled
+        Me.Save(cancelBy)
+    End Sub
+
     Public Sub Save(saveby As String)
         Using ctx As New PortalEntities
 

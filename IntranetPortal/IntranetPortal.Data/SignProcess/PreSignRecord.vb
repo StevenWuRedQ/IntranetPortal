@@ -55,6 +55,10 @@ Partial Public Class PreSignRecord
         End Using
     End Function
 
+    ''' <summary>
+    ''' Return HOI approval file data that can be attached to email
+    ''' </summary>
+    ''' <returns></returns>
     Public Function LoadApprovalFile() As Object
         If String.IsNullOrEmpty(ApprovalFile) Then
             Return Nothing
@@ -152,6 +156,8 @@ Partial Public Class PreSignRecord
                 Throw New DataException("The records already exist.")
             Else
                 If Me.NeedCheck Then
+                    Me.CheckRequestData.BBLE = BBLE
+                    ' Me.CheckRequestData.TotalAmount = DealAmount
                     Me.CheckRequestData.Create(createBy)
                     Me.CheckRequestId = Me.CheckRequestData.RequestId
                 End If
@@ -182,7 +188,6 @@ Partial Public Class PreSignRecord
             Else
                 Me.CreateBy = saveBy
                 Me.CreateDate = DateTime.Now
-
             End If
 
             ctx.SaveChanges(saveBy)

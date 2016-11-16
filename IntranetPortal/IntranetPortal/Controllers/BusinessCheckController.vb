@@ -83,11 +83,14 @@ Namespace Controllers
                 Return NotFound()
             End If
 
-            check.Status = BusinessCheck.CheckStatus.Canceled
-            check.Comments = comments
+            Dim currentUser = HttpContext.Current.User.Identity.Name
+
+            If Not BusinessCheckManage.CheckCancelPermission(currentUser, check) Then
+                Return Unauthorized()
+            End If
 
             Try
-                check.Save(HttpContext.Current.User.Identity.Name)
+                check.Cancel(comments, currentUser)
             Catch ex As Exception
                 Throw ex
             End Try
