@@ -30,42 +30,41 @@
     <input type="hidden" id="preSignId" value='<%= Request.QueryString("preSignId")%>' />
     <input type="hidden" id="BBLE" value='<%= Request.QueryString("BBLE")%>' />
     <input type="hidden" id="currentUser" value='<%=Page.User.Identity.Name %>' />
+    <% If Page.User.IsInRole("Accounting-*") OrElse Page.User.IsInRole("Admin") %>
+        <input type="hidden" id="accoutingMode" value="true"/>
+    <% End If %>
     <div id="dataPanelDiv">
         <div ng-view class="container"></div>
     </div>
-     <div ng-controller="preAssignCtrl" class="container" id="dataPanelDiv">
-        <div class="row">
-            <div class="col-md-12" ng-hide="!preSignList">
-                <div style="padding: 20px">
-                    <h2 ng-if="role==null">Homeowner Incentive Request List</h2>
-                    <input type="text" hidden="hidden" value="1234" />
-                    <h2 ng-if="role=='finance'">Check Requests List</h2>
-                    <div dx-data-grid="preSignRecordsGridOpt">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div ng-controller="ptPreAssignAccoutingCtrl" >
+    <div ng-controller="ptPreAssignAccoutingCtrl">
         <div id="pt-preassign-accouting-ctrl">
         <script type="text/ng-template" id="pt-preassign-accouting-modal">
                 <div class="modal-body">
-                    <table>
+                    <button class="btn btn-default pull-right" type="button" ng-click="toggleEdit()">{{editmode?'Lock':'Edit'}}</button>
+                    <br />
+                    <br />
+                    <table class="table">
+                        <tr ng-show="data.ProcessedDate">
+                            <td colspan="2"><b>Last Processed By {{cellinfo.data.ProcessedBy}} on {{cellinfo.data.ProcessedDate| date: 'medium'}}</b></td>
+                        </tr>
                         <tr>
                             <td>Check No.</td>
                             <td>
-                                <input ng-model="data.CheckNo"></input></td>
+                                <input class="form-control" ng-model="cellinfo.data.CheckNo" ng-disabled="!editmode"></input></td>
                         </tr>
                         </tr>
                                     <td>Confirm Amount</td>
                         <td>
-                            <input ng-model="data.ConfirmedAmount"></input></td>
+                                <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input class="form-control" ng-model="cellinfo.data.ConfirmedAmount" ng-disabled="!editmode" pt-number-mask isvalidate></input></td>
+                                </div>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" type="button" ng-click="closeModal()">Cancel</button>
-                    <button class="btn btn-primary" type="button" ng-click="update()">Update</button>
+                    <button class="btn btn-primary" type="button" ng-click="update()" ng-show="editmode">Update</button>
                 </div>
         </script>
             
