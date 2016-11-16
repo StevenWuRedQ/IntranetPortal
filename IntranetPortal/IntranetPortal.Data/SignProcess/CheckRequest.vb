@@ -13,11 +13,15 @@ Public Class CheckRequest
     Public Property PropertyAddress As String
     Public Property ExpectedDate As Date?
 
+    ''' <summary>
+    ''' Return the balance amount left on check request
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property Balance As Decimal
         Get
             If TotalAmount.HasValue Then
                 If Checks IsNot Nothing AndAlso Checks.Count > 0 Then
-                    Return TotalAmount - Checks.Sum(Function(a) a.ConfirmedAmount)
+                    Return TotalAmount - Checks.Where(Function(a) a.Status = BusinessCheck.CheckStatus.Processed).Sum(Function(a) a.ConfirmedAmount)
                 End If
             End If
 
