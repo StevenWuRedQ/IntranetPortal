@@ -27,7 +27,6 @@ angular.module('PortalApp')
         $rootScope.alertOK = function () {
             $rootScope.AlertModal.close();
         }
-
         $rootScope.confirm = function (message, confrimFunc) {
             $rootScope.confirmMessage = message ? message : '';
             $rootScope.ConfirmModal = $uibModal.open({
@@ -2796,6 +2795,7 @@ angular.module("PortalApp").service('ptFileService', function () {
     this.isIE = function (fileName) {
         return fileName.indexOf(':\\') > -1;
     };
+    // get filename by path
     this.getFileName = function (fullPath) {
         var paths;
         if (fullPath) {
@@ -2836,10 +2836,10 @@ angular.module("PortalApp").service('ptFileService', function () {
         el.prop('files')[0] = null;
         el.replaceWith(el.clone());
     };
+    // replace special character into underscore
     this.cleanName = function (filename) {
         return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
     };
-
     this.getThumb = function (thumbId) {
         return '/downloadfile.aspx?thumb=' + thumbId;
 
@@ -2848,75 +2848,11 @@ angular.module("PortalApp").service('ptFileService', function () {
         return _.trunc(fileName, length);
 
     };
-    
     this.isPicture = function (fullPath) {
         var ext = this.getFileExt(fullPath);
         var pictureExts = ['jpg', 'jpeg', 'gif', 'bmp', 'png'];
         return pictureExts.indexOf(ext) > -1;
     };
-
-    
-    this.uploadFile = function (data, bble, rename, folder, type, callback) {
-        switch (type) {
-            case 'construction':
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-            case 'title':
-                this.uploadTitleFile(data, bble, rename, folder, callback);
-                break;
-            default:
-                this.uploadConstructionFile(data, bble, rename, folder, callback);
-                break;
-
-        }
-    };
-    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        folder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!');
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + folder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename);
-                }
-            });
-        }
-    };
-    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
-        var fileName = rename ? rename : '';
-        var tofolder = folder ? folder : '';
-        if (!data || !bble) {
-            callback('Upload infomation missing!');
-        } else {
-            bble = bble.trim();
-            $.ajax({
-                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + fileName + '&folder=' + tofolder,
-                type: 'POST',
-                data: data,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function (data1) {
-                    callback(null, data1, rename);
-                },
-                error: function () {
-                    callback('Upload fails!', null, rename);
-                }
-            });
-        }
-    };
-
     this.makePreviewUrl = function (filePath) {
         var ext = this.getFileExt(filePath);
         switch (ext) {
@@ -2942,7 +2878,6 @@ angular.module("PortalApp").service('ptFileService', function () {
         }
     };
     this.onFilePreview = function (filePath) {
-
         var ext = this.getFileExt(filePath);
         switch (ext) {
             case 'pdf':
@@ -2974,7 +2909,91 @@ angular.module("PortalApp").service('ptFileService', function () {
 
         }
     };
+    // if bbleORoption a string, then use old method, if it's a object, use configuration
+    this.uploadFile = function (data, bbleORoptions, rename, folder, type, callback) {
+        if (typeof bbleORoptions == 'string') {
+            switch (type) {
+                case 'construction':
+                    this.uploadConstructionFile(data, bbleORoptions, rename, folder, callback);
+                    break;
+                case 'title':
+                    this.uploadTitleFile(data, bbleORoptions, rename, folder, callback);
+                    break;
+                default:
+                    this.uploadConstructionFile(data, bbleORoptions, rename, folder, callback);
+                    break;
+            }
+        } else {
+            var options = bbleORoptions;
+            var url = options.url || '';
+            var filename = options.filename || '';
+            var callback = options.callback;
+            if (!data || !url || !filename) {
+                callback('error');
+            }
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    callback(null, data, filename);
+                },
+                error: function (data) {
+                    callback('fail to upload.', data, filename);
+                }
 
+            })
+        }
+       
+    };
+    this.uploadTitleFile = function (data, bble, rename, folder, callback) {
+        var rename =  rename || '';
+        var folder =  folder || '';
+        if (!data || !bble) {
+            callback('Upload infomation missing!');
+        } else {
+            bble = bble.trim();
+            $.ajax({
+                url: '/api/Title/UploadFiles?bble=' + bble + '&fileName=' + rename + '&folder=' + folder,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data1) {
+                    callback(null, data1, rename);
+                },
+                error: function () {
+                    callback('Upload fails!', null, rename);
+                }
+            });
+        }
+    };
+    this.uploadConstructionFile = function (data, bble, rename, folder, callback) {
+        var rename = rename || '';
+        var folder = folder || '';
+        if (!data || !bble) {
+            callback('Upload infomation missing!');
+        } else {
+            bble = bble.trim();
+            $.ajax({
+                url: '/api/ConstructionCases/UploadFiles?bble=' + bble + '&fileName=' + rename + '&folder=' + folder,
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data1) {
+                    callback(null, data1, rename);
+                },
+                error: function () {
+                    callback('Upload fails!', null, rename);
+                }
+            });
+        }
+    };
 })
 angular.module("PortalApp")
     .factory('ptHomeBreakDownService', ["$http", function ($http) {
@@ -3547,23 +3566,46 @@ angular.module("PortalApp")
             }
         };
     }])
+/**
+ * @param fileModel: the angular model, store url for uploaded file.
+ * @param fileBBLE: if provide, will use old style upload. (compatiable with first version)
+ *                  if not provide, use configuration to upload file.
+ * @param uploadType: come with 
+ * @param uploadUrl: webservice url for uploading file. 
+ * @param fileName: rename uploaded file at server end. (optional)
+ * @param enableEdit: if usercan edit file after upload. (optional)
+ * @param enableDelete: if user can delete file after upload. (optional)
+ */
 angular.module("PortalApp")
-    .directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
+    .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
             restrict: 'E',
             templateUrl: '/js/templates/ptfile.html',
             scope: {
                 fileModel: '=',
-                fileBble: '=',
-                fileName: '@',
-                fileId: '@',
-                uploadType: '@'
+                fileBble: '=',  
+                uploadType: '@',
+                uploadUrl: '@',
+                fileName: '@', 
+                disableDelete: '=?',
+                disableModify: '=?',
+                ngDisabled: '=?'
             },
             link: function (scope, el, attrs) {
-                scope.uploadType = scope.uploadType || 'construction';
                 scope.ptFileService = ptFileService;
+                scope.fileId = "ptFile" + scope.$id;
+                var mode = 0; // legency mode, bble is require for uploading 
+                debugger;
+                if (attrs['fileBble'] == undefined) {
+                    mode = 1; // new mode, upload based on configuration
+                }
+                scope.uploadType = scope.uploadType || 'construction';
+                scope.ngDisabled = scope.ngDisabled || false;
+                scope.disableModify = scope.disableModify || scope.ngDisabled;
+                scope.disableDelete = scope.disableDelete || scope.ngDisabled;
                 scope.fileChoosed = false;
                 scope.loading = false;
+
                 scope.delFile = function () {
                     scope.fileModel = null;
                 }
@@ -3585,26 +3627,37 @@ angular.module("PortalApp")
                     });
                 }
                 scope.uploadFile = function () {
+                    debugger;
                     scope.startLoading();
                     var data = new FormData();
                     data.append("file", scope.File);
-                    var targetName = ptFileService.getFileName(scope.File.name);
-                    ptFileService.uploadFile(data, scope.fileBble, targetName, '', scope.uploadType, function (error, data) {
+                    var filename = ptFileService.getFileName(scope.File.name); 
+                    var rename = scope.fileName || '';
+                    var callback = function (error, data) {
                         scope.stopLoading();
                         if (error) {
-                            alert(error);
+                            ptCom.alert(error);
                         } else {
                             scope.$apply(function () {
                                 scope.fileModel = {}
                                 scope.fileModel.path = data[0];
-                                if (data[1]) scope.fileModel.thumb = data[1];
+                                scope.fileModel.thumb = data[1] || '';
                                 scope.fileModel.name = ptFileService.getFileName(scope.fileModel.path);
                                 scope.fileModel.uploadTime = new Date();
                                 scope.delChoosed();
                             });
                         }
 
-                    });
+                    } 
+                    if (mode == 0) {
+                        ptFileService.uploadFile(data, scope.fileBble, filename , rename , scope.uploadType, callback);
+                    } else {
+                        ptFileService.uploadFile(data, {
+                            url: scope.uploadUrl,
+                            filename: rename || filename,
+                            callback: callback
+                        })
+                    }
                 }
                 el.find('input:file').bind('change', function () {
                     var file = this.files[0];
@@ -3615,12 +3668,11 @@ angular.module("PortalApp")
                         });
                     }
                 });
-
-                scope.modifyName = function (mdl) {
-                    if (mdl) {
+                scope.modifyName = function (model) {
+                    if (model) {
                         scope.ModifyNamePop = true;
-                        scope.NewFileName = mdl.name ? mdl.name : '';
-                        scope.editingFileModel = mdl;
+                        scope.NewFileName = model.name ? model.name : '';
+                        scope.editingFileModel = model;
                         scope.editingFileExt = ptFileService.getFileExt(scope.NewFileName);
                     }
 
@@ -3643,10 +3695,7 @@ angular.module("PortalApp")
                     scope.editingFileModel = null;
                     scope.editingFileExt = '';
                     scope.ModifyNamePop = false;
-
                 }
-
-
             }
         }
     }])
@@ -6407,7 +6456,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
     }
     $scope.accoutingMode = $("#accoutingMode").length > 0 || false;
 
-    $scope.Save = function () {
+    $scope.Save = function () { 
         if ($scope.preAssign.validation()) {
             if ($scope.preAssign.hasId()) {
                 $scope.preAssign.$update(function () {
@@ -6458,7 +6507,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
             },
             editEnabled: true,
             removeEnabled: false,
-            insertEnabled: true
+            insertEnabled: true 
         },
         sorting: { mode: 'none' },
         pager: {
@@ -6468,20 +6517,21 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         wordWrapEnabled: true,
         summary: {
             calculateCustomSummary: function (options) {
-                if (options.name == 'SumAmount') {
-                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                if (options.name == 'Balance') {
+                     var AmountTotal = _.sum(_.filter(options.component._options.dataSource, function (o) {
                         return o.Status != 1;
-                    }), "Amount");
+                     }), "Amount");
+                     var ConfirmedTotal = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                         return o.Status != 1;
+                     }), "ConfirmedAmount");
+
+                     options.totalValue = AmountTotal - ConfirmedTotal;
                 }
             },
-            totalItems: [{
-                column: "Name",
-                summaryType: "count"
-            }, {
-                name: "SumAmount",
-                showInColumn: "Amount",
-                summaryType: "sum",
-                displayFormat: "Sum: {0}",
+            totalItems: [ {
+                name: "Balance",
+                showInColumn: "Status",
+                displayFormat: "Balance: {0}",
                 valueFormat: "currency",
                 precision: 2,
                 summaryType: "custom"
@@ -6619,10 +6669,9 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         }, true)
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
-    var path = $location.path();
 
     // code for if in edit mode but not new mode, 
-    if (path.indexOf('new') < 0) {
+    if ($location.path().indexOf('new') < 0) {
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
         // add Accouting Function under editing mode
         var accounting_col = {
@@ -6677,7 +6726,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         }
         // check if user is an accountant, magic number 6!!
         var accoutingMode = $("#accoutingMode");
-        if (accoutingMode.length > 0 && path.indexOf('new') < 0) {
+        if (accoutingMode.length > 0 && $location.path().indexOf('new') < 0) {
             $scope.scopeColumns[6].visible = true;
         }
     })
@@ -6716,20 +6765,21 @@ function ($scope, PreSignItem, DxGridModel, CheckRequest) {
         },
         summary: {
             calculateCustomSummary: function (options) {
-                if (options.name == 'SumAmount') {
-                    options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                if (options.name == 'Balance') {
+                    var AmountTotal = _.sum(_.filter(options.component._options.dataSource, function (o) {
                         return o.Status != 1;
-                    }), "Amount"); //$scope.CheckTotalAmount();
+                    }), "Amount");
+                    var ConfirmedTotal = _.sum(_.filter(options.component._options.dataSource, function (o) {
+                        return o.Status != 1;
+                    }), "ConfirmedAmount");
+
+                    options.totalValue = AmountTotal - ConfirmedTotal;
                 }
             },
             totalItems: [{
-                column: "Name",
-                summaryType: "count"
-            }, {
-                name: "SumAmount",
-                showInColumn: "Amount",
-                summaryType: "sum",
-                displayFormat: "Sum: {0}",
+                name: "Balance",
+                showInColumn: "Status",
+                displayFormat: "Balance: {0}",
                 valueFormat: "currency",
                 precision: 2,
                 summaryType: "custom"
