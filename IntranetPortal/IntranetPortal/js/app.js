@@ -27,7 +27,6 @@ angular.module('PortalApp')
         $rootScope.alertOK = function () {
             $rootScope.AlertModal.close();
         }
-
         $rootScope.confirm = function (message, confrimFunc) {
             $rootScope.confirmMessage = message ? message : '';
             $rootScope.ConfirmModal = $uibModal.open({
