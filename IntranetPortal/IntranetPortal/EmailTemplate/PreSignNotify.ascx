@@ -105,7 +105,7 @@ Dear <%=  UserName%>,
 <br />
 <% End if %>
 <br />
-More info, please <a href="http://portal.myidealprop.com/">click here</a>.
+More info, please <a href="<%= String.Format("{0}/NewOffer/HomeownerIncentive.aspx?bble={1}", IntranetPortal.Utility.GetApplictionURL(), PreSign.BBLE) %>">click here</a>.
 <br />
 <br />
 <br />

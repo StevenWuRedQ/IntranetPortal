@@ -6500,7 +6500,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
                     cellElement.html('Void');
                     break;
                 case 2:
-                    cellElement.html('Processced');
+                    cellElement.html('Processed');
                     break;
                 default:
                     cellElement.html('Unpaid');
@@ -6748,7 +6748,7 @@ function ($scope, PreSignItem, DxGridModel, CheckRequest) {
                     cellElement.html('Void');
                     break;
                 case 2:
-                    cellElement.html('Processced');
+                    cellElement.html('Processed');
                     break;
                 default:
                     cellElement.html('Unpaid');
@@ -9597,3 +9597,4 @@ angular.module('PortalApp').component('ptSelectableInput', {
     }
 
 })
+//# sourceMappingURL=Test.js.map

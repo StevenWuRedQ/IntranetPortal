@@ -56,6 +56,7 @@ Partial Public Class BusinessCheck
                 ctx.Entry(Me).State = Entity.EntityState.Modified
                 ctx.Entry(Me).OriginalValues.SetValues(ctx.Entry(Me).GetDatabaseValues)
             Else
+                Me.Status = CheckStatus.Active
                 Me.CreateBy = saveby
                 Me.CreateDate = DateTime.Now
                 ctx.BusinessChecks.Add(Me)
