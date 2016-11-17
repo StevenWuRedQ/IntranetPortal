@@ -134,7 +134,8 @@ angular.module("PortalApp").service('ptFileService', function () {
         } else {
             var options = bbleORoptions;
             var url = options.url || '';
-            var filename = opitions.filename || '';
+            var filename = options.filename || '';
+            var callback = options.callback;
             if (!data || !url || !filename) {
                 callback('error');
             }
@@ -143,7 +144,7 @@ angular.module("PortalApp").service('ptFileService', function () {
                 type: 'POST',
                 data: data,
                 cache: false,
-                processData: falsea,
+                processData: false,
                 success: function (data) {
                     callback(null, data, filename);
                 },

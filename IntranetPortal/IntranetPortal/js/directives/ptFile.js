@@ -9,7 +9,7 @@
  * @param enableDelete: if user can delete file after upload. (optional)
  */
 angular.module("PortalApp")
-    .directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout, ptCom) {
+    .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
             restrict: 'E',
             templateUrl: '/js/templates/ptfile.html',
@@ -27,7 +27,8 @@ angular.module("PortalApp")
                 scope.ptFileService = ptFileService;
                 scope.fileId = "ptFile" + scope.$id;
                 var mode = 0; // legency mode, bble is require for uploading 
-                if (scope.fileBble == undefined) {
+                debugger;
+                if (attrs['fileBble'] == undefined) {
                     mode = 1; // new mode, upload based on configuration
                 }
                 scope.uploadType = scope.uploadType || 'construction';
@@ -58,6 +59,7 @@ angular.module("PortalApp")
                     });
                 }
                 scope.uploadFile = function () {
+                    debugger;
                     scope.startLoading();
                     var data = new FormData();
                     data.append("file", scope.File);

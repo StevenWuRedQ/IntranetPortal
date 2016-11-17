@@ -2926,7 +2926,8 @@ angular.module("PortalApp").service('ptFileService', function () {
         } else {
             var options = bbleORoptions;
             var url = options.url || '';
-            var filename = opitions.filename || '';
+            var filename = options.filename || '';
+            var callback = options.callback;
             if (!data || !url || !filename) {
                 callback('error');
             }
@@ -2935,7 +2936,7 @@ angular.module("PortalApp").service('ptFileService', function () {
                 type: 'POST',
                 data: data,
                 cache: false,
-                processData: falsea,
+                processData: false,
                 success: function (data) {
                     callback(null, data, filename);
                 },
@@ -3576,7 +3577,7 @@ angular.module("PortalApp")
  * @param enableDelete: if user can delete file after upload. (optional)
  */
 angular.module("PortalApp")
-    .directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout, ptCom) {
+    .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
             restrict: 'E',
             templateUrl: '/js/templates/ptfile.html',
@@ -3594,7 +3595,8 @@ angular.module("PortalApp")
                 scope.ptFileService = ptFileService;
                 scope.fileId = "ptFile" + scope.$id;
                 var mode = 0; // legency mode, bble is require for uploading 
-                if (scope.fileBble == undefined) {
+                debugger;
+                if (attrs['fileBble'] == undefined) {
                     mode = 1; // new mode, upload based on configuration
                 }
                 scope.uploadType = scope.uploadType || 'construction';
@@ -3625,6 +3627,7 @@ angular.module("PortalApp")
                     });
                 }
                 scope.uploadFile = function () {
+                    debugger;
                     scope.startLoading();
                     var data = new FormData();
                     data.append("file", scope.File);
