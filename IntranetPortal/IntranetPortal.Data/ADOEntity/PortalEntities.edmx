@@ -67,8 +67,14 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="CheckFor" Type="nvarchar" MaxLength="256" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="CheckNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConfirmedAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProcessedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProcessedDate" Type="datetime" />
           <Property Name="Status" Type="int" />
           <Property Name="Comments" Type="nvarchar" MaxLength="1024" />
+          <Property Name="CancelBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CancelDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
@@ -648,6 +654,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="512" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApprovalFile" Type="nvarchar" MaxLength="512" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
@@ -1305,9 +1312,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="NewOfferStatus" Type="int" />
           <Property Name="NewOfferDate" Type="datetime" />
           <Property Name="NewOfferBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShortSalesStatus" Type="int" />
           <Property Name="IsShortSaleAccpeted" Type="int" Nullable="false" />
           <Property Name="AcceptedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="AcceptedDate" Type="datetime" />
+          <Property Name="InProcessType" Type="int" />
           <Property Name="IsInProcess" Type="int" Nullable="false" />
           <Property Name="InProcessDate" Type="datetime" />
           <Property Name="InProcessBy" Type="nvarchar" MaxLength="50" />
@@ -1522,9 +1531,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
     [UnderwritingTrackingView].[NewOfferStatus] AS [NewOfferStatus], 
     [UnderwritingTrackingView].[NewOfferDate] AS [NewOfferDate], 
     [UnderwritingTrackingView].[NewOfferBy] AS [NewOfferBy], 
+    [UnderwritingTrackingView].[ShortSalesStatus] AS [ShortSalesStatus], 
     [UnderwritingTrackingView].[IsShortSaleAccpeted] AS [IsShortSaleAccpeted], 
     [UnderwritingTrackingView].[AcceptedBy] AS [AcceptedBy], 
     [UnderwritingTrackingView].[AcceptedDate] AS [AcceptedDate], 
+    [UnderwritingTrackingView].[InProcessType] AS [InProcessType], 
     [UnderwritingTrackingView].[IsInProcess] AS [IsInProcess], 
     [UnderwritingTrackingView].[InProcessDate] AS [InProcessDate], 
     [UnderwritingTrackingView].[InProcessBy] AS [InProcessBy]
@@ -2586,6 +2597,12 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
           <Property Name="Comments" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmedAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProcessedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessedDate" Type="DateTime" Precision="3" />
+          <Property Name="CheckNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CancelBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="CheckRequest">
           <Key>
@@ -2624,6 +2641,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovalFile" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DeedCorp">
           <Key>
@@ -2858,6 +2876,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="IsInProcess" Type="Int32" Nullable="false" />
           <Property Name="InProcessDate" Type="DateTime" Precision="3" />
           <Property Name="InProcessBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortSalesStatus" Type="Int32" />
+          <Property Name="InProcessType" Type="Int32" />
         </EntityType>
         <EntityType Name="EcourtCase">
           <Key>
@@ -3914,6 +3934,12 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="BusinessChecks">
             <EntityTypeMapping TypeName="IntranetPortalModel.BusinessCheck">
               <MappingFragment StoreEntitySet="BusinessChecks">
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="CancelBy" ColumnName="CancelBy" />
+                <ScalarProperty Name="CheckNo" ColumnName="CheckNo" />
+                <ScalarProperty Name="ProcessedDate" ColumnName="ProcessedDate" />
+                <ScalarProperty Name="ProcessedBy" ColumnName="ProcessedBy" />
+                <ScalarProperty Name="ConfirmedAmount" ColumnName="ConfirmedAmount" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
@@ -3949,6 +3975,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="PreSignRecords">
             <EntityTypeMapping TypeName="IntranetPortalModel.PreSignRecord">
               <MappingFragment StoreEntitySet="PreSignRecords">
+                <ScalarProperty Name="ApprovalFile" ColumnName="ApprovalFile" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
@@ -4197,6 +4224,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="UnderwritingTrackingViews">
             <EntityTypeMapping TypeName="IntranetPortalModel.UnderwritingTrackingView">
               <MappingFragment StoreEntitySet="UnderwritingTrackingView">
+                <ScalarProperty Name="InProcessType" ColumnName="InProcessType" />
+                <ScalarProperty Name="ShortSalesStatus" ColumnName="ShortSalesStatus" />
                 <ScalarProperty Name="InProcessBy" ColumnName="InProcessBy" />
                 <ScalarProperty Name="InProcessDate" ColumnName="InProcessDate" />
                 <ScalarProperty Name="IsInProcess" ColumnName="IsInProcess" />

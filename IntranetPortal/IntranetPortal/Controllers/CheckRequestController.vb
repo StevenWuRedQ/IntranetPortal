@@ -13,9 +13,9 @@ Namespace Controllers
         ''' <returns></returns>
         <ResponseType(GetType(CheckRequest))>
         <Route("api/CheckRequests")>
-        Public Function GetCheckRequest(checkId As Integer) As IHttpActionResult
+        Public Function GetCheckRequest(id As Integer) As IHttpActionResult
             Try
-                Dim cr = CheckRequest.GetInstance(checkId)
+                Dim cr = CheckRequest.GetInstance(id)
 
                 If cr Is Nothing Then
                     Return StatusCode(HttpStatusCode.NotFound)

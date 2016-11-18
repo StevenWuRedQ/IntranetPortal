@@ -20,9 +20,9 @@
     }
 </style>
 
-
+<!--
 Dear <%=  UserName%>,
-<br />
+<br /> -->
 <br />
 <% If IsUpdateMode Then %>
 <%= PreSign.UpdateBy %> just update the HOI request, please review.
@@ -83,7 +83,6 @@ Dear <%=  UserName%>,
             <td>Description</td>
         </tr>
     </thead>
-
     <% 
         Dim i = 1
         For Each check In PreSign.CheckRequestData.Checks %>
@@ -106,7 +105,7 @@ Dear <%=  UserName%>,
 <br />
 <% End if %>
 <br />
-More info, please <a href="http://portal.myidealprop.com/">click here</a>.
+More info, please <a href="<%= String.Format("{0}/NewOffer/HomeownerIncentive.aspx?bble={1}", IntranetPortal.Utility.GetApplictionURL(), PreSign.BBLE) %>">click here</a>.
 <br />
 <br />
 <br />

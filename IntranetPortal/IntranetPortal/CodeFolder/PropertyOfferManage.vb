@@ -41,6 +41,9 @@ Public Class PropertyOfferManage
         Public Shared Property SSAccepted As New ManagerView With {
         .Key = 3, .Name = "SS Accepted"}
 
+        Public Shared Property PendingOF As New ManagerView With {
+        .Key = 4, .Name = "Pending OF"}
+
         Public Shared Widening Operator CType(ByVal status As Integer) As ManagerView
             Select Case status
                 Case 0
@@ -51,6 +54,8 @@ Public Class PropertyOfferManage
                     Return InProcess
                 Case 3
                     Return SSAccepted
+                Case 4
+                    Return PendingOF
             End Select
 
             Return Nothing
@@ -97,6 +102,7 @@ Public Class PropertyOfferManage
         Select Case view
             Case ManagerView.AllCompleted
                 Dim offers = PropertyOffer.GetAllCompleted(emps.ToArray)
+                offers = offers.Concat(PropertyOffer.GetPendingOF(emps.ToArray)).ToArray
                 offers.ForEach(Function(o)
                                    If o.ShortSaleStatus > 0 Then
                                        Return InitData(o, ManagerView.SSAccepted)
@@ -104,6 +110,10 @@ Public Class PropertyOfferManage
 
                                    If o.LeadsStatus = 5 Then
                                        Return InitData(o, ManagerView.InProcess)
+                                   End If
+
+                                   If o.HOICreateOn.HasValue Then
+                                       Return InitData(o, ManagerView.PendingOF)
                                    End If
 
                                    Return InitData(o, ManagerView.Completed)
@@ -235,6 +245,8 @@ Public Class PropertyOfferManage
                 offer = PropertyOffer.GetInProcess(emps.ToArray)
             Case ManagerView.SSAccepted
                 offer = PropertyOffer.GetSSAccepted(emps.ToArray)
+            Case ManagerView.PendingOF
+                offer = PropertyOffer.GetPendingOF(emps.ToArray)
         End Select
 
         If Not isSummary Then

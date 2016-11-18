@@ -598,6 +598,7 @@
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\AssignRule.vb" />
+    <Compile Include="CodeFolder\BusinessCheckManage.vb" />
     <Compile Include="CodeFolder\CallbackException.vb" />
     <Compile Include="CodeFolder\ComplaintsManage.vb" />
     <Compile Include="CodeFolder\ConstructionManage.vb" />
@@ -2664,6 +2665,13 @@
     </Compile>
     <Compile Include="UserControl\SummaryItem\FollowUpItem.ascx.vb">
       <DependentUpon>FollowUpItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\HOIItem.ascx.designer.vb">
+      <DependentUpon>HOIItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SummaryItem\HOIItem.ascx.vb">
+      <DependentUpon>HOIItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\SummaryItem\TaskItem.ascx.designer.vb">
@@ -6932,6 +6940,7 @@
     <Content Include="DLL\PublicSiteData.dll" />
     <Content Include="DLL\Spire.Pdf.dll" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\CheckProcessedNotify.html" />
     <Content Include="EmailTemplate\ComplaintContent.ascx" />
     <Content Include="EmailTemplate\ComplaintsDetailNotify.ascx" />
     <Content Include="EmailTemplate\ComplaintsNotify.ascx" />
@@ -7931,6 +7940,7 @@
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem2.ascx" />
+    <Content Include="UserControl\SummaryItem\HOIItem.ascx" />
     <Content Include="UserControl\SummaryItem\NewOfferItem.ascx" />
     <Content Include="UserControl\SummaryItem\TitlesByCategoryItem.ascx" />
     <Content Include="UserControl\SummaryItem\UnderWriterItem.ascx" />
