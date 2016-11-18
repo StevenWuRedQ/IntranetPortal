@@ -40,6 +40,12 @@ Imports IntranetPortal.Data
     End Sub
 
     <TestMethod()>
+    Public Sub PendingNewOffer_returnListOfOffer()
+        Dim offer = PropertyOffer.GetPendingOF({"Chris Yan"})
+        Assert.IsTrue(offer.Count > 0)
+    End Sub
+
+    <TestMethod()>
     Public Sub CompletedNewOfferDue_returnListOfOffer()
         Dim offer = PropertyOfferManage.CompletedNewOfferDue("*")
         Assert.IsTrue(offer.Count > 0)

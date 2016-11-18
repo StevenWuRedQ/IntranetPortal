@@ -5,6 +5,8 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglifyjs');
 var replace = require('gulp-replace');
 var babel = require('gulp-babel');
+var strip = require('gulp-strip-comments');
+
 var buffer = '';
 var angularPath = ['js/app.js',
                 'js/common/*.js',
@@ -30,10 +32,10 @@ gulp.task('clean', function () {
 })
 
 gulp.task('concat', function () {
-
     gulp.src(angularPath)
         //.pipe(babel({            presets: ['es2015-without-strict']        }))
         .pipe(concat(p.name + '.js'))
+        .pipe(strip())
         .pipe(gulp.dest('js/build/'))
 })
 

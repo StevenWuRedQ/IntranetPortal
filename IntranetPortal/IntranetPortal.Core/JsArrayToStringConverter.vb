@@ -51,3 +51,8 @@ Public Class JsObjectToStringConverter
         jData.WriteTo(writer)
     End Sub
 End Class
+
+Public Class JsObjectToFileConverter
+    Inherits JsObjectToStringConverter
+
+End Class

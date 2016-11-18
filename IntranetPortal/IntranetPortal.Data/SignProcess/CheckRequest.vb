@@ -14,6 +14,22 @@ Public Class CheckRequest
     Public Property ExpectedDate As Date?
 
     ''' <summary>
+    ''' Return the balance amount left on check request
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property Balance As Decimal
+        Get
+            If TotalAmount.HasValue Then
+                If Checks IsNot Nothing AndAlso Checks.Count > 0 Then
+                    Return TotalAmount - Checks.Where(Function(a) a.Status = BusinessCheck.CheckStatus.Processed).Sum(Function(a) a.ConfirmedAmount)
+                End If
+            End If
+
+            Return 0.0
+        End Get
+    End Property
+
+    ''' <summary>
     ''' Load all check request list
     ''' </summary>
     ''' <returns>The check request array</returns>
@@ -129,6 +145,5 @@ Public Class CheckRequest
         End Using
 
     End Sub
-
 
 End Class

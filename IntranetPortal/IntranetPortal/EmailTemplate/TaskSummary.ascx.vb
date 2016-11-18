@@ -68,7 +68,7 @@ Public Class TaskSummary
         Dim emps = Team.GetActiveTeamFinders()
         If emps.Contains(DestinationUser) Then
             IsFinder = True
-            Dim status = {LeadStatus.NewLead, LeadStatus.Priority, LeadStatus.Warm}
+            Dim status = {LeadStatus.NewLead, LeadStatus.Priority, LeadStatus.Warm, LeadStatus.DoorKnocks}
             rptRecycled.DataSource = status
             rptRecycled.DataBind()
         Else
@@ -82,7 +82,6 @@ Public Class TaskSummary
         LoanModReapter.DataSource = loanMods
         LoanModReapter.DataBind()
     End Sub
-
 
     Protected Sub rptWorklist_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
         If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then

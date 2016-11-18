@@ -51,7 +51,8 @@ Public Class DocumentsUI
     End Sub
 
     Protected Sub cbpDocumentUI_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
-        BindFilesFromSharepoint(e.Parameter)
+        ' disable agent file upload options
+        ' BindFilesFromSharepoint(e.Parameter)
     End Sub
 
     Protected Sub rptFiles_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)

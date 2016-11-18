@@ -96,6 +96,27 @@ Public Class LeadsEscalationRule
                                                     Dim ld = CType(leads, Lead)
                                                     Return ld.GetStatusChangedDate()
                                                 End Function))
+        rules.Add(New EscalationRule("DoorKnocks", "20.00:00:00",
+                                     Sub(leads)
+                                         Dim ld = CType(leads, Lead)
+                                         If RulesService.Mode = RulesService.RunningMode.Trial Then
+                                             ld.UpdateAssignDate()
+                                             Return
+                                         End If
+                                         'move leads to portal main pool
+                                         ld.MoveToMainPool("RuleEngine")
+                                         ServiceLog.Log("Recycle of Leads is done, BBLE: " & ld.BBLE)
+                                     End Sub,
+                                     Function(leads)
+                                         'Dim ld = CType(leads, Lead)
+                                         'Return ld.LastUserUpdate <= ld.AssignDate
+                                         Return True
+                                     End Function, 1,
+                                      Function(leads)
+                                          Dim ld = CType(leads, Lead)
+                                          Return ld.GetStatusChangedDate()
+                                      End Function))
+
         Return rules
     End Function
 

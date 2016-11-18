@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NewOfferItem.ascx.vb" Inherits="IntranetPortal.NewOfferItem" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="HOIItem.ascx.vb" Inherits="IntranetPortal.HOIItem" %>
 
 <style type="text/css">
     a.dx-link-MyIdealProp:hover {
@@ -18,27 +18,18 @@
         color: blue;
     }
 </style>
-<h4 id="NewOffer_<%= ClientID %>" style="padding-top: 5px">
-    <%--<img src="../images/<%= If(Not IsTitleStatus, "grid_task_icon.png", "grid_upcoming_icon.png") %>" class="vertical-img" />--%>
-    <% If ManagerView = IntranetPortal.PropertyOfferManage.ManagerView.Completed %>
-     <label class='grid-title-icon'>OF</label>
-    <% ElseIf ManagerView = IntranetPortal.PropertyOfferManage.ManagerView.InProcess %>
-     <label class='grid-title-icon'>I.P</label>
-    <% ElseIf ManagerView = IntranetPortal.PropertyOfferManage.ManagerView.SSAccepted %>
-     <label class='grid-title-icon'>SS</label>
-    <% ElseIf ManagerView = IntranetPortal.PropertyOfferManage.ManagerView.PendingOF %>
-     <label class='grid-title-icon'>PO</label>
-    <% End if %>
+<h4 id="NewOffer_<%= ClientID %>" style="padding-top: 5px"> 
+     <label class='grid-title-icon'>HO</label> 
    
-    <a href="/NewOffer/NewOfferList.aspx?view=<%=CInt(ManagerView)%>">
-        <label class="xlink">&nbsp;<%= ManagerView.ToString %></label>
+    <a href="/NewOffer/NewOfferList.aspx">
+        <label class="xlink">&nbsp;HOI</label>
         <label class="employee_lest_head_number_label" style="margin-left: 5px; color: white;"></label>
     </a>
 </h4>
 <div id="gridContainer" runat="server" style="margin: 3px; height: 330px"></div>
 <script>
     var CategoryItem_<%= Me.ClientID%> = {
-        url: "/api/propertyoffer?summary=true&mgrview=<%=CInt(ManagerView)%>",
+        url: "/api/propertyoffer?summary=true&mgrview=",
         dxGridName: "#<%= gridContainer.ClientID%>",
         headName: "NewOffer_<%= ClientID%>",
         loadData: function () {
@@ -74,10 +65,7 @@
                                 .text(options.value)
                                 .on('dxclick', function(){
                                     //Do something with options.data;
-                                    var url = '/ViewLeadsInfo.aspx?id=' + options.data.BBLE;
-                                     <% If ManagerView = IntranetPortal.PropertyOfferManage.ManagerView.SSAccepted %>
-                                     url = '/NewOffer/NewOfferAccepted.aspx?bble=' + options.data.BBLE;
-                                     <% End if %>
+                                    var url = '/ViewLeadsInfo.aspx?id=' + options.data.BBLE;                                   
                                     PortalUtility.ShowPopWindow("View Case - " + options.data.BBLE, url);                                                                       
                                 })
                                 .appendTo(container);

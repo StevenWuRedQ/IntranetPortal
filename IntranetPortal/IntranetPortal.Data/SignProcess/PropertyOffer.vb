@@ -15,6 +15,9 @@ Partial Public Class PropertyOffer
     Public Property LeadsOwner As String
     Public Property InProcessDate As DateTime
     Public Property InProcessBy As String
+    Public Property HOICreateOn As DateTime?
+    Public Property HOICreateBy As String
+
     Public ReadOnly Property AcceptedDuration As TimeSpan?
         Get
             If AcceptedDate.HasValue AndAlso UpdateDate.HasValue Then
@@ -37,6 +40,29 @@ Partial Public Class PropertyOffer
 
             Return offers
         End Using
+    End Function
+
+    Public Shared Function GetPendingOF(names As String()) As PropertyOffer()
+        Using ctx As New PortalEntities
+            Dim records = From record In ctx.PreSignRecords
+                          Join ld In ctx.SSLeads.Where(Function(p) names.Contains(p.EmployeeName)) On record.BBLE Equals ld.BBLE
+                          From offer In ctx.PropertyOffers.Where(Function(p) p.BBLE = record.BBLE).DefaultIfEmpty
+                          Where offer Is Nothing OrElse offer.Status < 2
+                          Select record, ld.EmployeeName, offer
+
+            Return records.AsEnumerable.Select(Function(r)
+                                                   Dim offer As New PropertyOffer
+                                                   offer.BBLE = r.record.BBLE
+                                                   offer.LeadsOwner = r.EmployeeName
+                                                   offer.CreateDate = r.record.CreateDate
+                                                   offer.CreateBy = r.record.CreateBy
+                                                   offer.Title = r.record.Title
+                                                   offer.HOICreateOn = r.record.CreateDate
+                                                   offer.HOICreateBy = r.record.CreateBy
+                                                   Return offer
+                                               End Function).ToArray
+        End Using
+
     End Function
 
     ''' <summary>

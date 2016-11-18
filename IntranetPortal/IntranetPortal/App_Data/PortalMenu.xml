@@ -372,7 +372,7 @@
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwriterSummary" Text="New Properties" NavigationUrl="/UnderWriter/DocSearchListNew.aspx" ShowAmount="false" Visible="true">
+      <PortalNavItem Name="UnderwriterSummary" Text="New Properties" NavigationUrl="/UnderWriter/DocSearchListNew.aspx" ShowAmount="false" Visible="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
@@ -711,7 +711,7 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="PreDealsMenu" Text="HOI" NavigationUrl="/NewOffer/HomeownerIncentive.aspx?model=List" ShowAmount="false">
+      <PortalNavItem Name="PreDealsMenu" Text="HOI" NavigationUrl="/NewOffer/HomeownerIncentive.aspx?#/preassign" ShowAmount="false">
         <UserRoles>OfficeManager-*,HOI-Viewer</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
@@ -723,7 +723,7 @@
           <![CDATA[<i class="fa fa-bullseye"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="CheckRequest" Text="Check Requests" NavigationUrl="/NewOffer/HomeownerIncentive.aspx?model=List&amp;role=finance" ShowAmount="false">
+      <PortalNavItem Name="CheckRequest" Text="Check Requests" NavigationUrl="/NewOffer/HomeownerIncentive.aspx?#/preassign/finance/list" ShowAmount="false">
         <UserRoles>Accounting-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-flag-checkered"></i>]]>

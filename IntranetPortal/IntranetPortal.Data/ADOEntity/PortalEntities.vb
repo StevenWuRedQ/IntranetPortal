@@ -3,6 +3,7 @@ Imports System.ComponentModel.DataAnnotations.Schema
 Imports System.Data.Entity
 Imports System.Data.Entity.Core.Objects
 Imports System.Data.Entity.Infrastructure
+Imports System.Reflection
 
 Partial Public Class PortalEntities
 
@@ -170,10 +171,29 @@ Partial Public Class PortalEntities
 
             Dim propInfo As New Dictionary(Of String, Type)
 
-            Dim fields = entityType.GetProperties().Select(Function(p) New With {p.Name, p.PropertyType}).ToList
+            Dim fields = entityType.GetProperties().Select(Function(p)
+                                                               Return New With {p.Name, p.PropertyType, p}
+                                                           End Function).ToList
+
+            Dim metaAttrs = entityType.GetCustomAttribute(GetType(MetadataTypeAttribute), True)
+            If metaAttrs IsNot Nothing Then
+                Dim metaType = CType(metaAttrs, MetadataTypeAttribute).MetadataClassType
+                fields = fields.Select(Function(p)
+                                           Dim prop = metaType.GetProperty(p.Name)
+                                           If prop IsNot Nothing Then
+                                               p.PropertyType = prop.PropertyType
+                                               p.p = prop
+                                           End If
+                                           Return p
+                                       End Function).ToList
+            End If
 
             For Each prop In fields
                 If AuditConfigSetting.IgnoreColumns.Contains(prop.Name) Then
+                    Continue For
+                End If
+
+                If AuditIgnoreAttribute.IsDefined(prop.p, GetType(AuditIgnoreAttribute)) Then
                     Continue For
                 End If
 
@@ -190,4 +210,10 @@ Partial Public Class PortalEntities
 
         Return AuditConfigSetting.AuditInfo(entityType)
     End Function
+End Class
+
+<AttributeUsage(AttributeTargets.Property)>
+Public Class AuditIgnoreAttribute
+    Inherits Attribute
+
 End Class

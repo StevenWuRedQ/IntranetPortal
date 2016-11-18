@@ -25,5 +25,7 @@ Partial Public Class UnderwritingTrackingView
     Public Property IsInProcess As Integer
     Public Property InProcessDate As Nullable(Of Date)
     Public Property InProcessBy As String
+    Public Property ShortSalesStatus As Nullable(Of Integer)
+    Public Property InProcessType As Nullable(Of Integer)
 
 End Class

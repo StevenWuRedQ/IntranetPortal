@@ -219,3 +219,11 @@ IntranetPortal/IntranetPortal/TempDataFile/OfferDoc/
 # Visual Studio Code 
 .vscode
 /IntranetPortal/InterPortalSQL
+/IntranetPortal/IntranetPortal/App_Data/SalesContract.docx
+/IntranetPortal/IntranetPortal/App_Data/OfferDoc/AcrisPreparing.docx
+/IntranetPortal/IntranetPortal/App_Data/OfferDoc/ClientInfo.docx
+/IntranetPortal/IntranetPortal/EmailTemplate/ShortSaleActivityReport - Copy.aspx
+/IntranetPortal/IntranetPortal/EmailTemplate/ShortSaleActivityReport - Copy.aspx.vb
+/IntranetPortal/IntranetPortal/js/components
+/IntranetPortal/IntranetPortal/TempDataFile
+/IntranetPortal/RuleEngineManage/My Project/app.manifest

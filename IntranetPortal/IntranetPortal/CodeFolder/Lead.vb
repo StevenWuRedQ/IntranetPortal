@@ -333,6 +333,7 @@ Partial Public Class Lead
                 _recycleConfig.Add(LeadStatus.NewLead, 5)
                 _recycleConfig.Add(LeadStatus.Priority, 13)
                 _recycleConfig.Add(LeadStatus.Warm, 18)
+                _recycleConfig.Add(LeadStatus.DoorKnocks, 18)
             End If
 
             Return _recycleConfig
