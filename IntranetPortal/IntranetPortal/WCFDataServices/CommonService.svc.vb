@@ -404,7 +404,7 @@ Public Class CommonService
         SendEmailByControlWithCC(toAddresses, Nothing, subject, controlName, params)
     End Sub
 
-    Public Sub SendEmailByControlWithCC(toAddresses As String, ccAddress As String, subject As String, controlName As String, params As Dictionary(Of String, String))
+    Public Sub SendEmailByControlWithCC(toAddresses As String, ccAddress As String, subject As String, controlName As String, params As Dictionary(Of String, String), Optional attachments As Object = Nothing)
         Dim ts As EmailTemplateControl
         Using page As New Page
             ts = CType(page.LoadControl("~/EmailTemplate/" & controlName & ".ascx"), EmailTemplateControl)
@@ -416,7 +416,13 @@ Public Class CommonService
             emailData.Add("Body", body)
             emailData.Add("Subject", subject)
 
-            Core.EmailService.SendMail(toAddresses, ccAddress, "EmailControlTemplate", emailData)
+            If attachments IsNot Nothing Then
+                Dim attachment As Mail.Attachment
+                attachment = New Mail.Attachment(New IO.MemoryStream(CType(attachments.Data, Byte())), attachments.Name.ToString)
+                Core.EmailService.SendMail(toAddresses, ccAddress, "EmailControlTemplate", emailData, {attachment})
+            Else
+                Core.EmailService.SendMail(toAddresses, ccAddress, "EmailControlTemplate", emailData)
+            End If
         End Using
     End Sub
 End Class

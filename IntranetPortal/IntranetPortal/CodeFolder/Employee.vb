@@ -656,6 +656,22 @@ Partial Public Class Employee
     End Function
 
     ''' <summary>
+    ''' Indicator if user is in given roles
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <param name="roleNames">The roles name</param>
+    ''' <returns></returns>
+    Public Shared Function IsUserInRoles(userName As String, roleNames As String()) As Boolean
+        For Each r In roleNames
+            If Roles.IsUserInRole(r) Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
+    ''' <summary>
     ''' Return if the given employee has subordinates
     ''' </summary>
     ''' <param name="employeeName">The Employee Name</param>

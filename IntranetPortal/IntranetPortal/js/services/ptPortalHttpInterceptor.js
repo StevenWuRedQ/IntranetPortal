@@ -55,13 +55,20 @@
                 }
                 // 
             }
-            myInterceptor.noError = config.options && config.options.noError;
+            //debugger;
+             
             return config;
         },
         responseError: function (rejection) {
             myInterceptor.delayHide();
-            if (!myInterceptor.noError) {
-                ptCom.alert(myInterceptor.BuildErrorMessage(rejection));
+            try {
+                var opt = rejection.config.options;
+                if (!(opt && opt.noError)) {
+                    ptCom.alert(myInterceptor.BuildErrorMessage(rejection));
+                }
+            }
+            catch (error) {
+                console.error(error);
             }
             return $q.reject(rejection);
         },

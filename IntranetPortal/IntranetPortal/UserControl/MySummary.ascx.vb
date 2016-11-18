@@ -64,6 +64,11 @@ Public Class MySummary
                     New SummaryControlSetting() With {
                         .Name = "NewOffer",
                         .ControlSettings = New List(Of SummaryItemBase) From {
+                            New SummaryItemBase() With {.ControlFileName = "NewOfferItem.ascx",
+                                                         .Parameters = New Dictionary(Of String, Object) From {
+                                                                               {"mgrView", PropertyOfferManage.ManagerView.PendingOF}
+                                                                           }
+                                                        },
                              New SummaryItemBase() With {.ControlFileName = "NewOfferItem.ascx",
                                                          .Parameters = New Dictionary(Of String, Object) From {
                                                                                {"mgrView", PropertyOfferManage.ManagerView.Completed}

@@ -32,17 +32,19 @@ Partial Class AuditLog
         End Using
     End Function
     <NotMapped>
-    Public ReadOnly Property FormatOriginalValue As String
+    Public ReadOnly Property FormatOriginalValue As Object
         Get
             Return FormatValue(Me.OriginalValue)
         End Get
     End Property
     <NotMapped>
-    Public ReadOnly Property FormatNewValue As String
+    Public ReadOnly Property FormatNewValue As Object
         Get
             Return FormatValue(Me.NewValue)
         End Get
     End Property
+
+    Public Property CustomType As String
 
     Public Sub Delete()
 
@@ -52,7 +54,7 @@ Partial Class AuditLog
         End Using
     End Sub
 
-    Private Function FormatValue(value As String) As String
+    Private Function FormatValue(value As String) As Object
         If String.IsNullOrEmpty(value) Then
             Return value
         End If
@@ -82,7 +84,7 @@ Partial Class AuditLog
         End Select
     End Function
 
-    Private Function FormatJSONTypeValue(prop As PropertyInfo, value As String) As String
+    Private Function FormatJSONTypeValue(prop As PropertyInfo, value As String) As Object
         Dim jsconvert = CType(prop.GetCustomAttribute(GetType(JsonConverterAttribute)), JsonConverterAttribute)
         Select Case jsconvert.ConverterType
             Case GetType(Core.JsArrayToStringConverter)
@@ -96,7 +98,11 @@ Partial Class AuditLog
 
                 Return String.Join(";", result.ToArray)
             Case GetType(Core.JsObjectToStringConverter)
-
+                Me.CustomType = "js"
+                Return value
+            Case GetType(Core.JsObjectToFileConverter)
+                Me.CustomType = "file"
+                Return JObject.Parse(value)
             Case Else
                 Return value
         End Select
