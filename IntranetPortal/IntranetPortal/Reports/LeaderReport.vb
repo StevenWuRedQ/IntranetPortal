@@ -101,7 +101,7 @@ Public Class LeaderReport
     Friend WithEvents EXPIRATION As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents PLAINTIFF As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents DEFENDANT As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents INDEX As DevExpress.XtraReports.UI.XRTableCell
+    Friend Shadows WithEvents INDEX As DevExpress.XtraReports.UI.XRTableCell
 
     'Required by the Designer
     Private components As System.ComponentModel.IContainer

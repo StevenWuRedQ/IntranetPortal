@@ -8,7 +8,7 @@ Public Class UserSummary
 
         If Not IsPostBack Then
             BindData()
-            BindNotes()
+            ' BindNotes()
         End If
     End Sub
 
@@ -52,19 +52,23 @@ Public Class UserSummary
     End Property
 
     Sub BindData()
-        Using Context As New Entities
-            gridAppointment.DataBind()
-            gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
 
+        gridAppointment.DataBind()
+        gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
 
-            gridTask.DataBind()
-            gridTask.GroupBy(gridTask.Columns("ProcSchemeDisplayName"))
+        gridTask.DataBind()
+        gridTask.GroupBy(gridTask.Columns("ProcSchemeDisplayName"))
 
-            gridPriority.DataBind()
-            
-            gridCallback.DataBind()
-            CType(gridCallback.Columns("CallbackDate"), GridViewDataColumn).GroupBy()
-        End Using
+        gridPriority.DataBind()
+
+        gridWarmer.DataBind()
+
+        gridLoanMod.DataBind()
+        CType(gridLoanMod.Columns("SubStatusStr"), GridViewDataColumn).GroupBy()
+
+        gridCallback.DataBind()
+        CType(gridCallback.Columns("CallbackDate"), GridViewDataColumn).GroupBy()
+
     End Sub
 
     Protected Sub gridAppointment_DataBinding(sender As Object, e As EventArgs)
@@ -72,13 +76,13 @@ Public Class UserSummary
             Dim Context As New Entities
             'Bind Appointment
             Dim leads = (From al In Context.Leads
-                                         Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
-                                        Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name) And appoint.ScheduleDate >= Today
-                                          Select New With {
-                                              .BBLE = al.BBLE,
-                                              .LeadsName = al.LeadsName,
-                                              .ScheduleDate = appoint.ScheduleDate
-                                              }).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
+                         Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
+                         Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name) And appoint.ScheduleDate >= Today
+                         Select New With {
+                             .BBLE = al.BBLE,
+                             .LeadsName = al.LeadsName,
+                             .ScheduleDate = appoint.ScheduleDate
+                             }).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
 
             gridAppointment.DataSource = leads
         End If
@@ -99,9 +103,22 @@ Public Class UserSummary
 
     Protected Sub gridCallback_DataBinding(sender As Object, e As EventArgs)
         If gridCallback.DataSource Is Nothing Then
-            Dim Context As New Entities
             Dim callbackleads = Lead.GetUserLeadsData(Page.User.Identity.Name, LeadStatus.Callback) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
             gridCallback.DataSource = callbackleads
+        End If
+    End Sub
+
+    Protected Sub gridWarmer_DataBinding(sender As Object, e As EventArgs)
+        If gridWarmer.DataSource Is Nothing Then
+            Dim priorityData = Lead.GetUserLeadsData(Page.User.Identity.Name, LeadStatus.Warm)
+            gridWarmer.DataSource = priorityData
+        End If
+    End Sub
+
+    Protected Sub gridLoanMod_DataBinding(sender As Object, e As EventArgs)
+        If gridLoanMod.DataSource Is Nothing Then
+            Dim loanModleads = Lead.GetLoanModDue(Page.User.Identity.Name) ' , Nothing, New Date(2016, 12, 1)) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
+            gridLoanMod.DataSource = loanModleads
         End If
     End Sub
 
@@ -110,20 +127,20 @@ Public Class UserSummary
             Dim user = Page.User.Identity.Name
             Dim users = Employee.GetManagedEmployees(user)
             Dim appoints = (From appoint In Context.UserAppointments.Where(Function(ua) ua.Status = UserAppointment.AppointmentStatus.Accepted AndAlso (users.Contains(ua.Agent) Or ua.Manager = user)).ToList
-                           Select New With {
-                               .AppointmentId = appoint.LogID,
-                               .Subject = appoint.Subject,
-                               .Start = appoint.ScheduleDate,
-                               .TitleLink = BuilerSubject(appoint),
-                               .End = appoint.EndDate,
-                               .Description = appoint.Description,
-                               .Location = appoint.Location,
-                               .Agent = appoint.Agent,
-                               .Manager = appoint.Manager,
-                               .Status = 0,
-                               .Label = 0,
-                               .Type = 0,
-                               .AppointType = appoint.Type}).Distinct.ToList
+                            Select New With {
+                                .AppointmentId = appoint.LogID,
+                                .Subject = appoint.Subject,
+                                .Start = appoint.ScheduleDate,
+                                .TitleLink = BuilerSubject(appoint),
+                                .End = appoint.EndDate,
+                                .Description = appoint.Description,
+                                .Location = appoint.Location,
+                                .Agent = appoint.Agent,
+                                .Manager = appoint.Manager,
+                                .Status = 0,
+                                .Label = 0,
+                                .Type = 0,
+                                .AppointType = appoint.Type}).Distinct.ToList
 
             todayScheduler.AppointmentDataSource = appoints
             todayScheduler.DataBind()
@@ -161,7 +178,6 @@ Public Class UserSummary
         EndStr = strArry(1)
 
         Return String.Format("{0}<br>-<span style=""font-weight:700;"">{1}</span>", FontStr, EndStr)
-        'Return "<span style=""font-weight: 900;""> 720 QUINCY ST</span> - " & leadData
     End Function
 
     'Change to span let it show the blod font by steven <span style="font-weight: 900;"> 720 QUINCY ST</span> by steven
@@ -206,7 +222,6 @@ Public Class UserSummary
             End If
         End If
     End Function
-
 
     Protected Sub gridAppointment_CustomColumnGroup(sender As Object, e As CustomColumnSortEventArgs) Handles gridAppointment.CustomColumnGroup, gridTask.CustomColumnGroup, gridCallback.CustomColumnGroup
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then
@@ -322,8 +337,4 @@ Public Class UserSummary
         e.Menu.Items.Clear()
     End Sub
 
-  
-    
- 
-    
 End Class

@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="ShortSaleNewOffer.aspx.vb" Inherits="IntranetPortal.ShortSaleNewOfferPage" %>
-
 <%@ Register Src="~/ShortSale/NGShortSaleHomewonerTab.ascx" TagPrefix="uc1" TagName="NGShortSaleHomewonerTab" %>
 <%@ Register Src="~/ShortSale/NGShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="NGShortSaleMortgageTab" %>
 <%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
@@ -194,7 +193,7 @@
     <input runat="server" id="txtSearchCompleted" type="hidden" class="pt-search-completed" />
     <div id="content" runat="server">
         <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
-       <%-- 
+        <%-- 
            //todo 
            we don't have time to finish split controllers and views .
            for new offer, so we maybe do it latter or we will not use angular any more .
@@ -203,8 +202,8 @@
         <a ui-sref="newoffer.newoffer">State 2</a>
         <a ui-sref="newoffer.ssinfo">State 3</a>--%>
         <!-- We'll also add some navigation: -->
-       
-        <div style="padding: 20px" ng-controller="shortSalePreSignCtrl" >
+
+        <div style="padding: 20px" ng-controller="shortSalePreSignCtrl" id="dataPanelDiv">
             <div class="container" ng-hide="QueryUrl.model!='List' && QueryUrl.BBLE">
                 <div>
                     <h2>New Offer List</h2>
@@ -264,13 +263,14 @@
                     </div>--%>
                     </div>
                     <%--select team and assign corps--%>
-                    <uc1:NewOfferAssignCorp runat="server" id="NewOfferAssignCorp" />
+                    <uc1:NewOfferAssignCorp runat="server" ID="NewOfferAssignCorp" />
                     <%--documents required--%>
 
                     <div ng-show="currentStep().title=='Documents Required'" class="view-animate">
                         <h3 class="wizard-title" ng-class="{ss_warning:!DocRequiredNext(true)}">{{currentStep().title}}</h3>
                         <div id="todo-list">
                             <div class="dx-fieldset">
+
                                 <div class="dx-field">
                                     <div class="dx-field-label">Contract</div>
                                     <div class="dx-field-value">
@@ -299,6 +299,12 @@
                                     <div class="dx-field-label">POA</div>
                                     <div class="dx-field-value">
                                         <div dx-check-box="{ bindingOptions: { value: 'DeadType.POA' }}"></div>
+                                    </div>
+                                </div>
+                                <div class="dx-field">
+                                    <div class="dx-field-label">ShortSale Package</div>
+                                    <div class="dx-field-value">
+                                        <div dx-check-box="{ bindingOptions: { value: 'DeadType.ShortSale' }}"></div>
                                     </div>
                                 </div>
                             </div>
@@ -400,11 +406,11 @@
                                         <ul class="ss_form_box clearfix">
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.contractPrice}" data-message="Please fill Contract Price">Contract Price</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.contractPrice" money-mask />
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.contractPrice" pt-number-mask maskformat='money' />
                                             </li>
                                             <li class="ss_form_item ">
                                                 <label class="ss_form_input_title" ng-class="{ss_warning:!SSpreSign.DealSheet.ContractOrMemo.downPayment}" data-message="Please fill Down Payment">Down Payment</label>
-                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment" money-mask />
+                                                <input class="ss_form_input" ng-model="SSpreSign.DealSheet.ContractOrMemo.downPayment" pt-number-mask maskformat='money' />
                                             </li>
                                         </ul>
                                     </div>
@@ -649,7 +655,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="exampleModalLabel">Audit Logs</h4>
                     </div>
-                    <div class="modal-body"  style="overflow: auto; max-height: 300px">
+                    <div class="modal-body" style="overflow: auto; max-height: 300px">
                         <uc1:AuditLogs runat="server" ID="AuditLogs" />
                     </div>
                 </div>
@@ -658,5 +664,9 @@
 
         <%--help script for this page--%>
     </div>
-    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
+    <script>
+        portalApp.config(['$httpProvider', function ($httpProvider) {
+            $httpProvider.interceptors.push('PortalHttpInterceptor');
+        }]);
+    </script>
 </asp:Content>

@@ -1,0 +1,251 @@
+﻿
+<div>
+    <div class="row">
+
+
+        <div id="data_input_area1" class="col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="pt-panel">
+                        <table>
+                            <tr>
+                                <th class="td-label excel-orange" colspan="2">RENTAL BRAEKDOWN</th>
+                            </tr>
+                            <tr>
+                                <td class="td-label">Upfront Cost</td>
+                                <td class="td-value">
+                                    {{data.RentalModel.TotalUpfront | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">Net Rent</td>
+                                <td class="td-value">
+                                    {{data.RentalModel.NetMontlyRent | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">Breakeven (Month)</td>
+                                <td class="td-value">
+                                    {{data.RentalModel.Breakeven}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">Target Time (Months)</td>
+                                <td class="td-value">
+                                    {{data.RentalModel.TargetTime}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">Target Profit</td>
+                                <td class="td-value">
+                                    {{data.RentalModel.TargetProfit | currency}}
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="pt-panel">
+                        <table>
+                            <tr>
+                                <td class="td-label">
+                                    Property Address:
+                                </td>
+                                <td class="td-value" colspan="3">
+                                    {{data.PropertyInfo.PropertyAddress}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    # of Units:
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.NumOfUnits}}
+                                </td>
+                                <td class="td-label">
+                                    Cost of Money :
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.CostOfMoneyRate | percentage}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Total Months:
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.TotalMonth}}
+                                </td>
+                                <td class="td-label">
+                                    Min ROI:
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.MinROI | percentage}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="td-label excel-orange">
+                                    Upfront Costs
+                                </td>
+                                <td colspan="2" class="td-label excel-orange">
+                                    Monthly Rent Breakdown
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Deed Purchase
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.DeedPurchase | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Rent
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.Rent | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Total Repairs
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.TotalRepairs | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Mgt Fee (10%)
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.ManagementFee | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Agent Commission
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.AgentCommission | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Insurance
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.Insurance | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Total Upfront
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.TotalUpfront | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Maintenance
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.Maintenance | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Cost of Money
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.CostOfMoney | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Misc Repairs
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.MiscRepairs | currency}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td-label">
+                                    Total Cost
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.TotalCost | currency}}
+                                </td>
+                                <td class="td-label">
+                                    Net Montly Rent
+                                </td>
+                                <td class="td-value">
+                                    {{data.RentalModel.NetMontlyRent | currency}}
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+                <div class="col-md-2 col-lg-2">
+                    <div class="pt-panel">
+                        <table>
+                            <tr>
+                                <td class="td-label">
+                                    Breakeven (Month)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.RentalModel.Breakeven}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Target Time
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.RentalModel.TargetTime}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    Target Profit
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.RentalModel.TargetProfit| currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    ROI (Year)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.RentalModel.ROIYear | percentage}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">
+                                    ROI (Total)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-value">
+                                    {{data.RentalModel.ROITotal | percentage}}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

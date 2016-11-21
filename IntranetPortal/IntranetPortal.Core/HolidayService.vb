@@ -4,8 +4,10 @@
             Return True
         End If
 
-        If IsPersonalOff(dt, emp) Then
-            Return True
+        If Not String.IsNullOrEmpty(emp) Then
+            If IsPersonalOff(dt, emp) Then
+                Return True
+            End If
         End If
 
         Return False

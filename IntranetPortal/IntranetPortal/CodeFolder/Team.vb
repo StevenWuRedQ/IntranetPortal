@@ -4,6 +4,26 @@
 ''' The team object and related actions
 ''' </summary>
 Partial Public Class Team
+
+    ''' <summary>
+    ''' Return all the user names in the team which given user is assistant
+    ''' </summary>
+    ''' <param name="assistantName">The Assistant Name</param>
+    ''' <returns>The User Names</returns>
+    Public Shared Function GetTeamUsersByAssistant(assistantName As String) As String()
+        Using ctx As New Entities
+            Dim result = (From tm In ctx.Teams.Where(Function(t) t.Assistant = assistantName)
+                          Join emp In ctx.UserInTeams On tm.TeamId Equals emp.TeamId
+                          Select emp.EmployeeName).Distinct.ToArray
+
+            Return result
+        End Using
+    End Function
+
+    Public Shared Function GetTeamUsers(teamname As String) As String()
+        Return UserInTeam.GetTeamUsers(teamname, True).Select(Function(t) t.EmployeeName).ToArray
+    End Function
+
     Public Shared Function GetAllTeams() As List(Of Team)
         Using ctx As New Entities
             Return ctx.Teams.ToList
@@ -13,6 +33,31 @@ Partial Public Class Team
     Public Shared Function GetActiveTeams() As List(Of Team)
         Using ctx As New Entities
             Return ctx.Teams.Where(Function(a) a.Active).ToList
+        End Using
+    End Function
+
+    Private Shared _teamFinders As String()
+    ''' <summary>
+    ''' Return finders in all active teams
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Function GetActiveTeamFinders() As String()
+        If _teamFinders Is Nothing Then
+            Dim teams = GetActiveTeamNames()
+            Dim result As New List(Of String)
+            For Each tm In teams
+                result.AddRange(UserInTeam.GetTeamFinders(tm))
+            Next
+
+            _teamFinders = result.ToArray
+        End If
+
+        Return _teamFinders
+    End Function
+
+    Public Shared Function GetActiveTeamNames() As String()
+        Using ctx As New Entities
+            Return ctx.Teams.Where(Function(a) a.Active).Select(Function(t) t.Name).ToArray
         End Using
     End Function
 
@@ -36,7 +81,6 @@ Partial Public Class Team
                 ctx.SaveChanges()
             End If
         End Using
-
     End Sub
 
     Public Sub Save(saveBy As String)
@@ -158,6 +202,23 @@ Partial Public Class Team
                 _managers = Roles.GetUsersInRole(roleName)
             End If
             Return _managers
+        End Get
+    End Property
+
+    Private _reporters As String()
+    <JsonIgnoreAttribute>
+    Public ReadOnly Property TeamReporters As String()
+        Get
+            If _reporters Is Nothing Then
+                Dim roleName = String.Format("TeamReporter-{0}", Name)
+                _reporters = Roles.GetUsersInRole(roleName)
+
+                If _reporters Is Nothing OrElse _reporters.Count = 0 Then
+                    _reporters = TeamManagers
+                End If
+            End If
+
+            Return _reporters
         End Get
     End Property
 

@@ -10,6 +10,8 @@
 Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
+Imports System.Data.Entity.Core.Objects
+Imports System.Linq
 
 Partial Public Class PortalEntities
     Inherits DbContext
@@ -75,5 +77,26 @@ Partial Public Class PortalEntities
     Public Overridable Property ShortSaleLeadsInfoes() As DbSet(Of ShortSaleLeadsInfo)
     Public Overridable Property PropertyOffers() As DbSet(Of PropertyOffer)
     Public Overridable Property AuditLogs() As DbSet(Of AuditLog)
+    Public Overridable Property SSLeads() As DbSet(Of SSLead)
+    Public Overridable Property SSLeadsStatusLogs() As DbSet(Of SSLeadsStatusLog)
+    Public Overridable Property UnderwritingRequests() As DbSet(Of UnderwritingRequest)
+    Public Overridable Property UnderwritingTrackingViews() As DbSet(Of UnderwritingTrackingView)
+    Public Overridable Property EcourtCases() As DbSet(Of EcourtCase)
+    Public Overridable Property LeadsEcourtDatas() As DbSet(Of LeadsEcourtData)
+    Public Overridable Property EcourtCaseChanges() As DbSet(Of EcourtCaseChange)
+
+    Public Overridable Function ArchiveDocumentSearch(bble As String, archiveBy As String) As Integer
+        Dim bbleParameter As ObjectParameter = If(bble IsNot Nothing, New ObjectParameter("bble", bble), New ObjectParameter("bble", GetType(String)))
+
+        Dim archiveByParameter As ObjectParameter = If(archiveBy IsNot Nothing, New ObjectParameter("archiveBy", archiveBy), New ObjectParameter("archiveBy", GetType(String)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("ArchiveDocumentSearch", bbleParameter, archiveByParameter)
+    End Function
+
+    Public Overridable Function UpdateEcourtCases(updateBy As String) As Integer
+        Dim updateByParameter As ObjectParameter = If(updateBy IsNot Nothing, New ObjectParameter("updateBy", updateBy), New ObjectParameter("updateBy", GetType(String)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("UpdateEcourtCases", updateByParameter)
+    End Function
 
 End Class

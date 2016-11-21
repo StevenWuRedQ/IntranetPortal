@@ -10,7 +10,7 @@
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Documents Received</label>
-                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.DocumentsReceived" ss-date>
+                    <input class="ss_form_input " ng-model="DocSearch.LeadResearch.DocumentsReceived" pt-date>
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Date Recorded select</label>
@@ -75,7 +75,7 @@
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Requested On</label>
-                    <input class="ss_form_input " ss-date ng-model="DocSearch.LeadResearch.RequestedOn">
+                    <input class="ss_form_input " pt-date ng-model="DocSearch.LeadResearch.RequestedOn">
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Requested By</label>
@@ -83,7 +83,7 @@
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Date of Submission</label>
-                    <input class="ss_form_input " ss-date ng-model="DocSearch.LeadResearch.DateofSubmission">
+                    <input class="ss_form_input " pt-date ng-model="DocSearch.LeadResearch.DateofSubmission">
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Transaction ID</label>
@@ -111,7 +111,7 @@
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Date Recorded </label>
-                    <input class="ss_form_input " ss-date ng-model="DocSearch.LeadResearch.DateRecorded">
+                    <input class="ss_form_input " pt-date ng-model="DocSearch.LeadResearch.DateRecorded">
                 </li>
                 <li class="ss_form_item ">
                     <label class="ss_form_input_title ">Recorded File</label>

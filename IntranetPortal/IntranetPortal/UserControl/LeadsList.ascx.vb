@@ -43,24 +43,26 @@ Public Class LeadsList
         End Using
 
         If Not Page.IsPostBack Then
-            If category = LeadStatus.Callback Then
-                gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
-                gridLeads.ExpandAll()
-            Else
-                gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
-            End If
+            'If category = LeadStatus.Callback Then
+            '    gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
+            '    gridLeads.ExpandAll()
+            'Else
+            '    gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+            'End If
 
-            If category = LeadStatus.DoorKnocks Then
-                gridLeads.Columns("colSelect").Visible = True
-                gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
-                gridLeads.ClientSideEvents.FocusedRowChanged = ""
-                gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
+            'If category = LeadStatus.DoorKnocks Then
+            '    gridLeads.Columns("colSelect").Visible = True
+            '    gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
+            '    gridLeads.ClientSideEvents.FocusedRowChanged = ""
+            '    gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
 
-                'Show View Lead Menu
-                LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
-            Else
-                gridLeads.Columns("colSelect").Visible = False
-            End If
+            '    'Show View Lead Menu
+            '    LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
+            'Else
+            '    gridLeads.Columns("colSelect").Visible = False
+            'End If
+
+            SettingGridLeads(category)
 
             gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
             divExpand.Visible = True
@@ -103,24 +105,26 @@ Public Class LeadsList
         End Using
 
         If Not Page.IsPostBack Then
-            If category = LeadStatus.Callback Then
-                gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
-                gridLeads.ExpandAll()
-            Else
-                gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
-            End If
+            'If category = LeadStatus.Callback Then
+            '    gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
+            '    gridLeads.ExpandAll()
+            'Else
+            '    gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+            'End If
 
-            If category = LeadStatus.DoorKnocks Then
-                gridLeads.Columns("colSelect").Visible = True
-                gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
-                gridLeads.ClientSideEvents.FocusedRowChanged = ""
-                gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
+            'If category = LeadStatus.DoorKnocks Then
+            '    gridLeads.Columns("colSelect").Visible = True
+            '    gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
+            '    gridLeads.ClientSideEvents.FocusedRowChanged = ""
+            '    gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
 
-                'Show View Lead Menu
-                LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
-            Else
-                gridLeads.Columns("colSelect").Visible = False
-            End If
+            '    'Show View Lead Menu
+            '    LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
+            'Else
+            '    gridLeads.Columns("colSelect").Visible = False
+            'End If
+
+            SettingGridLeads(category)
 
             gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
             divExpand.Visible = True
@@ -286,7 +290,15 @@ Public Class LeadsList
             Return
         End If
 
-        Dim category = Utility.GetLeadStatus(CategoryName)
+        Dim category As LeadStatus
+
+        If (CategoryName.StartsWith("other")) Then
+            Dim cat_num = CategoryName.Split("|")(1)
+            category = Utility.getLeadStatusByCode(cat_num)
+            lblLeadCategory.Text = category.ToString
+        Else
+            category = Utility.GetLeadStatus(CategoryName)
+        End If
 
         If CategoryName = "Create" AndAlso Not Page.IsCallback Then
             gridLeads.SettingsBehavior.AllowClientEventsOnLoad = False
@@ -364,6 +376,15 @@ Public Class LeadsList
             divExpand.Visible = True
         Else
             gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+        End If
+
+        ' Group by SubStatus
+        If category = LeadStatus.LoanMod Then
+            gridLeads.GroupBy(gridLeads.Columns("SubStatusStr"))
+            gridLeads.ExpandAll()
+            divExpand.Visible = True
+        Else
+            gridLeads.UnGroup(gridLeads.Columns("SubStatusStr"))
         End If
 
         If category = LeadStatus.DoorKnocks Then

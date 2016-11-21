@@ -255,6 +255,8 @@ Public Class PortalReportService
             statusToShow.Add(3, "Follow Up")
             statusToShow.Add(4, "Dead End")
             statusToShow.Add(5, "In Process")
+            statusToShow.Add(20, "LoanMod")
+            statusToShow.Add(21, "Warm")
 
             'NewLead = 0
             'Priority = 1

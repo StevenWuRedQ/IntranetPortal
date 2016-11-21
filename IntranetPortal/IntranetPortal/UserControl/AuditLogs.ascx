@@ -13,14 +13,8 @@
             me.angularApp.module('PortalApp')
                      .controller('AuditLogController', ['$scope', '$http', function ($scope, $http) {
                          me.http = $http;
-                         me.scope = $scope;                       
-                         //me.http.get('/api/auditlog/' + me.objectName + "/" + me.recordId).success(function (data) {
-                         //    var result = _.groupBy(data, function (item) {
-                         //        return item.EventDate;
-                         //    });                           
-                         //    me.scope.AuditLogs = result;
-                         //});
-                     }]);          
+                         me.scope = $scope;
+                     }]);
         },
         show: function (objName, recordId) {
             me = this;
@@ -34,9 +28,20 @@
                 var result = _.groupBy(data, function (item) {
                     return item.EventDate;
                 });
-                console.log(result);
                 me.scope.AuditLogs = result;
+                me.scope.showDetail = true;
             });
+        },
+        hide: function () {
+            me.scope.showDetail = false;
+            me.scope.$apply();
+        },
+        toggle: function (objName, recordId) {
+            if (me.scope.showDetail) {
+                me.hide();
+            } else {
+                me.show(objName, recordId)
+            }
         }
     };
 
@@ -44,29 +49,27 @@
 </script>
 
 <style type="text/css">
-
     .audit_log_block {
         padding: 10px;
         border-bottom: 1px solid #ccc;
     }
 
-    .audit_log_block:hover {
-        background-color: #f5f5f5;
-        border-left: 5px solid #3572b0;
-        padding-left: 5px;
-    }
+        .audit_log_block:hover {
+            background-color: #f5f5f5;
+            border-left: 5px solid #3572b0;
+            padding-left: 5px;
+        }
 
-    .frist-line-log{
-        background:blue;
+    .frist-line-log {
+        background: blue;
     }
-
 </style>
 
-<div ng-controller="AuditLogController" >
-    <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block">
-        <h5 ng-class="{alert-success:$index==0}"><strong> {{prop[0].UserName}}</strong> <span style="color:blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </h5>        
-        <table class="" style="width: 100%; font-size:14px" ng-show="prop[0].EventType!=0">
-             <tr>
+<div ng-controller="AuditLogController">
+    <div ng-repeat="(key, prop) in AuditLogs" class="audit_log_block" ng-show="showDetail">
+        <div ng-class="$index==0?'alert alert-success':''"><strong>{{prop[0].UserName}}</strong> <span style="color: blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </div>
+        <table class="" style="width: 100%; font-size: 14px" ng-show="prop[0].EventType!=0">
+            <tr>
                 <th style="width: 20%">Field</th>
                 <th style="width: 40%">Previous Value</th>
                 <th style="width: 40%">New Value</th>

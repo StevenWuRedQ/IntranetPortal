@@ -1,5 +1,7 @@
 ﻿Imports IntranetPortal
 Imports Newtonsoft.Json.Linq
+
+
 ''' <summary>
 ''' Handle lead related action
 ''' </summary>
@@ -30,6 +32,7 @@ Public Class LeadManage
 
         Return False
     End Function
+
 
     ''' <summary>
     ''' Return the leads which is in process
@@ -107,7 +110,7 @@ Public Class LeadManage
 
     Public Overrides Function LogDataSource(bble As String) As List(Of LeadsActivityLog)
         Dim categories = Me.LogCategoryFilter.ToList
-        Dim subCategories = {LeadsActivityLog.LogCategory.Approval, LeadsActivityLog.LogCategory.Approved, LeadsActivityLog.LogCategory.Appointment,
+        Dim subCategories = {LeadsActivityLog.LogCategory.Approval, LeadsActivityLog.LogCategory.Approved, LeadsActivityLog.LogCategory.Appointment, LeadsActivityLog.LogCategory.RecycleTask,
                              LeadsActivityLog.LogCategory.Declined, LeadsActivityLog.LogCategory.DoorknockTask, LeadsActivityLog.LogCategory.PublicUpdate}
         categories.AddRange(subCategories)
 

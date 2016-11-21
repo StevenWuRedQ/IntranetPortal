@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class TaskSummary
-
+    
     '''<summary>
     '''rptAppointments control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class TaskSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rptAppointments As Global.System.Web.UI.WebControls.Repeater
-
+    
     '''<summary>
     '''rptFollowUp control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class TaskSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rptFollowUp As Global.System.Web.UI.WebControls.Repeater
-
+    
     '''<summary>
     '''lblNoFollowUp control.
     '''</summary>
@@ -39,7 +39,34 @@ Partial Public Class TaskSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblNoFollowUp As Global.System.Web.UI.WebControls.Label
-
+    
+    '''<summary>
+    '''rptRecycled control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptRecycled As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''HotLeadsReapter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HotLeadsReapter As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''LoanModReapter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LoanModReapter As Global.System.Web.UI.WebControls.Repeater
+    
     '''<summary>
     '''rptWorklist control.
     '''</summary>

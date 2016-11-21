@@ -27,7 +27,7 @@
                     <input type="text" class="form-control" ng-model="CSCase.CSCase.Plans[o.val+'Examiner']">
                 </td>
                 <td>
-                    <input class=" form-control" ss-date ng-model="CSCase.CSCase.Plans[o.val+'ExaminationDate']">
+                    <input class=" form-control" pt-date ng-model="CSCase.CSCase.Plans[o.val+'ExaminationDate']">
                 </td>
                 <td>
                     <pt-file file-bble="CSCase.BBLE" file-id="Plans_{{o.val+'_DOBApproved'}}" file-model="CSCase.CSCase.Plans[o.val+'_DOBApproved']"></pt-file>

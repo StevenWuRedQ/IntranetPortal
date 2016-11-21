@@ -22,7 +22,7 @@
     <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="/bower_components/jquery-form/jquery.form.js"></script>
     <script src="/bower_components/jquery-backstretch/jquery.backstretch.min.js"></script>
-    <script src="/Scripts/js/main.js"></script>
+    <script src="/Scripts/stevenjs.js"></script>
 
 
     <script>
@@ -148,8 +148,6 @@
                     top.window.location.href = window.location.href;
                 }
             });
-        </script>
-        <script type="text/javascript">
             window.onload = setupRefresh;
 
             function setupRefresh() {
@@ -158,6 +156,8 @@
             function refreshPage() {
                 window.location = location.href;
             }
+
+            init_loading();
         </script>
 
     </form>

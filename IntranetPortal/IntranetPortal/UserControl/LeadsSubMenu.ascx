@@ -15,6 +15,22 @@
         <dx:MenuItem GroupName="Sort" Text="Hot Leads" Name="Priority" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drap_prority_icons.png"></Image>
         </dx:MenuItem>
+        <dx:MenuItem GroupName="Sort" Text="Warmer" Name="Warmer" Image-Url="">
+            <Template>
+                <div class="dxm-content dxm-hasText" style="float: none;">
+                    <i class="fa fa-circle-o dxm-image dx-vam"></i>
+                    <span class="dx-vam"><%# Container.Item.Text %></span>
+                </div>
+            </Template>
+        </dx:MenuItem>
+        <dx:MenuItem GroupName="Sort" Text="LoanMod" Name="LoanMod">
+            <Template>
+                <div class="dxm-content dxm-hasText" style="float: none">
+                    <i class="fa fa-money dxm-image dx-vam"></i>
+                    <span class="dx-vam"><%# Container.Item.Text %></span>
+                </div>
+            </Template>
+        </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drap_doorknock_icons.png"></Image>
         </dx:MenuItem>
@@ -24,7 +40,7 @@
         <dx:MenuItem GroupName="Sort" Text="Dead Lead" Name="DeadLead" Image-Url="/images/drap_deadlead_icons.png">
             <Image Url="/images/drap_deadlead_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" Image-Url="/images/drap_inprocess_icons.png">
+        <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" Image-Url="/images/drap_inprocess_icons.png" Visible="false">
             <Image Url="/images/drap_inprocess_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="View Lead" Name="ViewLead" Visible="false">
@@ -113,7 +129,7 @@
             <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" TextField="Name" ValueField="EmployeeID"
                 SelectedIndex="0" Width="100%">
             </dx:ASPxListBox>
-            <table style="margin-top:3px;">
+            <table style="margin-top: 3px;">
                 <tr>
                     <td style="width: 100px">
                         <dx:ASPxCheckBox runat="server" Text="Archive Logs" ID="cbArchived"></dx:ASPxCheckBox>
@@ -248,36 +264,68 @@
             <script>
                 function ConfirmClick() {
                     popupShow = false;
+                    aspxPopupInprocessClient.Hide();
                     var selected = lbSelectionModeClient.GetSelectedValues();
-                    var index3 = selected.indexOf("3");
-                    if (index3 >= 0) {
-                        aspxPopupInprocessClient.Hide();
-                        // aspxPopupLegalInfoClient.Show();                        
-                        // ASPLegalPopupClient.SetContentUrl('/LegalUI/LegalUI.aspx?InPopUp=true&bble=' + bble);
-                        // $("#LegalPopUp").modal();
-                        // ASPLegalPopupClient.Show();
-                        var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
-                        window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=1024, height=800");
-                        aspxPopupInprocessClient.PerformCallback('Save');
-                    } else {
+                    var legalSelected = selected.indexOf("3");
+                    var ssSelected = selected.indexOf("0");
+                    var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
 
-                        aspxPopupInprocessClient.PerformCallback('Save');
+                    if (ssSelected >= 0) {   // check if move to shortsale in process  
+                        checkNewOffer(bble).done(function (resp) {
+                            if (resp) {
+                                if (legalSelected >= 0) {
+                                    window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=1024, height=800");
+                                    aspxPopupInprocessClient.PerformCallback('Save');
+                                } else aspxPopupInprocessClient.PerformCallback('Save');
+                            } else {
+                                ConfirmMessager.Show();
+                            }
+
+                        })
+                    } else {
+                        if (legalSelected >= 0) {
+                            window.open('/LegalUI/LegalPreQuestions.aspx?bble=' + bble, 'LegalPreQuestion', "width=1024, height=800");
+                            aspxPopupInprocessClient.PerformCallback('Save');
+                        } else aspxPopupInprocessClient.PerformCallback('Save');
                     }
+
+
+                }
+
+                /*  function to check if the New Offer done on a lead
+                *   @return: a promise for caller to check the new offer status
+                */
+                function checkNewOffer(id) {
+                    return $.ajax({
+                        url: "api/PropertyOffer/IsCompleted/" + id,
+                        type: 'GET',
+                    });
                 }
             </script>
             <span class="time_buttons" onclick="aspxPopupInprocessClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="ConfirmClick();">Confirm</span>
         </div>
     </FooterContentTemplate>
-    <ClientSideEvents EndCallback="function(s,e){
-        if(popupShow)
-            s.Show();
-        else{
-            s.Hide();
-            OnSetStatusComplete(s,e);
-        }
-        }" />
+    <ClientSideEvents EndCallback="function(s,e){ if(popupShow) s.Show(); else { s.Hide(); OnSetStatusComplete(s,e);} }" />
 </dx:ASPxPopupControl>
+
+<dx:ASPxPopupControl ID="ASPxPopupControlConfirm" runat="server" PopupElementID="popupArea" CloseAction="CloseButton" Width="320" Height="240"
+    AllowDragging="true" ShowOnPageLoad="false" ClientInstanceName="ConfirmMessager" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter">
+    <HeaderContentTemplate>
+        <h3 style="color: red">Attention!</h3>
+    </HeaderContentTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" ClientInstanceName="ConfirmMessagerContent">
+            <div>
+                <div>
+                    <h5><b>New offer</b> is not completed on this lead!</h5>
+                </div>
+                <h5>Please complete <b>new offer</b> before moving to the short sale process.</h5>
+            </div>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
+
 
 <dx:ASPxPopupControl ClientInstanceName="ASPLegalPopupClient" ID="ASPLegalPopup" Width="670" Height="550"
     Modal="true" ShowFooter="true" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentUrl="about:blank">
@@ -309,7 +357,6 @@
     </FooterContentTemplate>
 </dx:ASPxPopupControl>
 
-
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupDeadLeadsClient" Width="356px" Height="350px" ID="ASPxPopupControl5" Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl5_WindowCallback"
     runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
@@ -329,7 +376,7 @@
             <div style="color: #b1b2b7;">
                 <div class="form-group ">
                     <label class="upcase_text">Select Reason</label>
-                    <dx:ASPxComboBox ID="cbDeadReasons" ClientInstanceName="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">                        
+                    <dx:ASPxComboBox ID="cbDeadReasons" ClientInstanceName="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
                         <Items>
                             <dx:ListEditItem Text="Full Sale Completed" Value="8" />
                             <dx:ListEditItem Text="Dead Recorded with Other Party" Value="1" />
@@ -340,34 +387,28 @@
                             <dx:ListEditItem Text="Unable to contact" Value="6" />
                             <dx:ListEditItem Text="Manager disapproved" Value="7" />
                         </Items>
-                        <ClientSideEvents SelectedIndexChanged="function(s,e){}" />                        
+                        <ClientSideEvents SelectedIndexChanged="function(s,e){}" />
                     </dx:ASPxComboBox>
                 </div>
                 <div class="form-group ">
                     <label class="upcase_text" style="display: block">Description</label>
                     <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="txtDeadLeadDescription" CssClass="edit_text_area"></dx:ASPxMemo>
                 </div>
+                <input type="hidden" id="hdmark" />
             </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
     <FooterContentTemplate>
-        <div style="height: 30px; vertical-align: central">
+        <div style="height: 30px; vertical-align: central" id="divFoot">
             <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('Save');}else{ alert('please select reason.');}">Confirm</span>
-            <span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>
+            <%--<span class="time_buttons" onclick="if(cbDeadReasons.GetText() != ''){popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');}else{ alert('please select reason.');}">Dump Dead Leads</span>--%>
         </div>
     </FooterContentTemplate>
-    <ClientSideEvents EndCallback="function(s,e){
-        if(popupShow)
-            s.Show();
-        else{
-            s.Hide();
-            OnSetStatusComplete(s,e);
-        }
-        }" />
+    <ClientSideEvents EndCallback="function(s,e){if($('#hdmark').length) $('#divFoot').show(); else {$('#divFoot').hide();}  if(popupShow) s.Show();  else{ s.Hide(); OnSetStatusComplete(s,e); } }" />
 </dx:ASPxPopupControl>
 
-<dx:ASPxPopupControl ClientInstanceName="aspxPopupChangeLeadsStatusClient" Width="356px" Height="350px" ID="aspxPopupChangeLeadsStatus" Modal="true" ShowFooter="true" 
+<dx:ASPxPopupControl ClientInstanceName="aspxPopupChangeLeadsStatusClient" Width="356px" Height="350px" ID="aspxPopupChangeLeadsStatus" Modal="true" ShowFooter="true"
     runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
         <div class="clearfix">
@@ -381,15 +422,26 @@
         </div>
     </HeaderTemplate>
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server" ID="PopupControlContentControl1" >
-           
+        <dx:PopupControlContentControl runat="server" ID="PopupControlContentControl1">
             <div style="color: #b1b2b7;">
-                
+                <dx:ASPxPanel runat="server" ID="Panel_LoanModSubStatus" ClientInstanceName="panel_LoanModSubStatus" ClientVisible="false">
+                    <PanelCollection>
+                        <dx:PanelContent>
+                            <label class="upcase_text" style="display: block">Current Loan Mod Status:</label>
+                            <dx:ASPxRadioButtonList runat="server" ID="Radios_LoanModSubStatus" ClientInstanceName="radios_LoanModSubStatus" RepeatLayout="Flow" RepeatDirection="Horizontal">
+                                <Items>
+                                    <dx:ListEditItem Text="In Progress" Value="0" Selected="true" />
+                                    <dx:ListEditItem Text="Completed" Value="1" />
+                                </Items>
+                            </dx:ASPxRadioButtonList>
+                        </dx:PanelContent>
+                    </PanelCollection>
+                </dx:ASPxPanel>
                 <div class="form-group ">
                     <label class="upcase_text" style="display: block">Reason</label>
                     <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="ChangeStatusResonText" ClientInstanceName="ChangeStatusResonTextClient" CssClass="edit_text_area"></dx:ASPxMemo>
                 </div>
-               
+
             </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
@@ -397,10 +449,8 @@
         <div style="height: 30px; vertical-align: central">
             <span class="time_buttons" onclick="aspxPopupChangeLeadsStatusClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="CofrimLeadStatusChange();">Confirm</span>
-          
         </div>
     </FooterContentTemplate>
-    
 </dx:ASPxPopupControl>
 
 <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"
@@ -473,19 +523,12 @@
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
                                 <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
-                                    <ClientSideEvents Click="function(){      if(txtRequestUpdateDescription.GetIsValid()) {                                                                                                               
-                                                                                                                        ASPxPopupRequestUpdateControl.Hide();
-                                                                                                                        ASPxPopupRequestUpdateControl.PerformCallback('SendRequest');
-                                                                                                                        isSendRequest =true;  } 
-                                                                                                                        }"></ClientSideEvents>
+                                    <ClientSideEvents Click="function(){if(txtRequestUpdateDescription.GetIsValid()) {  ASPxPopupRequestUpdateControl.Hide();ASPxPopupRequestUpdateControl.PerformCallback('SendRequest'); isSendRequest =true;  }   }"></ClientSideEvents>
                                 </dx:ASPxButton>
                                 &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupRequestUpdateControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
+                                <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
+                                    <ClientSideEvents Click="function(){   ASPxPopupRequestUpdateControl.Hide(); }"></ClientSideEvents>
+                                </dx:ASPxButton>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
@@ -496,21 +539,12 @@
     <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
 </dx:ASPxPopupControl>
 
-<%--<dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="popupMenuLeads"
-    AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-    <ItemStyle Paddings-PaddingLeft="20px" />
-    <Items>
-        <dx:MenuItem Text="Leads" Name="Leads"></dx:MenuItem>
-        <dx:MenuItem Text="Short Sale" Name="ShortSale"></dx:MenuItem>
-        <dx:MenuItem Text="Eviction" Name="Eviction"></dx:MenuItem>
-        <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>
-    </Items>
-    <ClientSideEvents ItemClick="OnPopupMenuLeadsClick" />
-</dx:ASPxPopupMenu>--%>
-
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="function(s,e) {OnSetStatusComplete(s,e)}" />
 </dx:ASPxCallback>
+
 <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback">
     <ClientSideEvents CallbackComplete="function(s,e){OnGetAddressCallbackComplete(s,e);}" CallbackError="function(s,e){OnGetAddressCallbackError(s,e)}" />
 </dx:ASPxCallback>
+
+

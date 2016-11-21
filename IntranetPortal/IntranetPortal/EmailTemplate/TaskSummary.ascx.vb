@@ -6,9 +6,18 @@ Public Class TaskSummary
     Public Property DestinationUser As String
     Public Property TaskCount As Integer
     Public Property followUpCount As Integer = 0
+    Public Property hotCount As Integer = 0
+    Public Property loanModCount As Integer = 0
+    Public Property IsFinder As Boolean
     Protected Property Worklist As List(Of MyIdealProp.Workflow.Client.WorklistItem)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        DestinationUser = Page.User.Identity.Name
+
+        If Page.Request.QueryString("dest") IsNot Nothing Then
+            DestinationUser = Request.QueryString("dest").ToString
+        End If
+
         BindData()
     End Sub
 
@@ -16,8 +25,8 @@ Public Class TaskSummary
         Dim wls = WorkflowService.GetUserWorklist(DestinationUser)
         TaskCount = wls.Count
         Dim procList = (From proc In wls
-                       Group proc By proc.ProcSchemeDisplayName Into Data = Group
-                       Select New With {
+                        Group proc By proc.ProcSchemeDisplayName Into Data = Group
+                        Select New With {
                            .ProcSchemeDisplayName = ProcSchemeDisplayName,
                            .Data = Data,
                            .Count = Data.Count
@@ -41,7 +50,37 @@ Public Class TaskSummary
             rptFollowUp.DataBind()
         End If
 
+        bindHot()
+        bindLoanMod()
+        BindRecycleLeads()
+
         Me.DataBind()
+    End Sub
+
+    Public Sub bindHot()
+        Dim hots = Lead.GetHotLeadsDue(DestinationUser)
+        hotCount = hots.Count
+        HotLeadsReapter.DataSource = hots
+        HotLeadsReapter.DataBind()
+    End Sub
+
+    Public Sub BindRecycleLeads()
+        Dim emps = Team.GetActiveTeamFinders()
+        If emps.Contains(DestinationUser) Then
+            IsFinder = True
+            Dim status = {LeadStatus.NewLead, LeadStatus.Priority, LeadStatus.Warm, LeadStatus.DoorKnocks}
+            rptRecycled.DataSource = status
+            rptRecycled.DataBind()
+        Else
+            IsFinder = False
+        End If
+    End Sub
+
+    Public Sub bindLoanMod()
+        Dim loanMods = Lead.GetLoanModDue(DestinationUser)
+        loanModCount = loanMods.Count
+        LoanModReapter.DataSource = loanMods
+        LoanModReapter.DataBind()
     End Sub
 
     Protected Sub rptWorklist_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
@@ -114,6 +153,20 @@ Public Class TaskSummary
     Protected Sub rptFollowUp_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
         If e.Item.ItemType = ListItemType.Footer Then
 
+        End If
+    End Sub
+
+    Protected Sub rptRecycled_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
+        If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
+            Dim status = CType(e.Item.DataItem, LeadStatus)
+            Dim spanTitle = CType(e.Item.FindControl("spanTitle"), HtmlGenericControl)
+            spanTitle.InnerText = status.ToString
+            Dim spanAmount = CType(e.Item.FindControl("spanAmount"), HtmlGenericControl)
+            Dim lds = Lead.GetRecycledLeads(DestinationUser, status)
+            spanAmount.InnerText = String.Format("({0})", lds.Count)
+            Dim rptItems = CType(e.Item.FindControl("rptLeadsRecycled"), Repeater)
+            rptItems.DataSource = lds
+            rptItems.DataBind()
         End If
     End Sub
 End Class

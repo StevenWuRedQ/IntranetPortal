@@ -5,6 +5,15 @@
 
     var postponedCallbackRequired = false;
     var leadsInfoBBLE = null;
+    var tmpBBLE = null;
+    var tempAddress = null;
+    var mapContentframeID = "MapContent";
+    var IsAddNewLead = false;
+    var streets = null;
+    var lastBorough = null;
+    var loadedBorough = null;
+    var temStar = null;
+
 
     //function is called on changing focused row
     function OnGridFocusedRowChanged() {
@@ -13,17 +22,17 @@
 
             //if (typeof ContentCallbackPanel != 'undefined')
             //{
-                if (ContentCallbackPanel.InCallback()) {
-                    postponedCallbackRequired = true;
+            if (ContentCallbackPanel.InCallback()) {
+                postponedCallbackRequired = true;
+            }
+            else {
+                if (gridLeads.GetFocusedRowIndex() >= 0) {
+                    // alert(gridLeads.GetFocusedRowIndex());
+                    var rowKey = gridLeads.GetRowKey(gridLeads.GetFocusedRowIndex());
+                    if (rowKey != null)
+                        OnGetRowValues(rowKey);
                 }
-                else {
-                    if (gridLeads.GetFocusedRowIndex() >= 0) {
-                        // alert(gridLeads.GetFocusedRowIndex());
-                        var rowKey = gridLeads.GetRowKey(gridLeads.GetFocusedRowIndex());
-                        if (rowKey != null)
-                            OnGetRowValues(rowKey);
-                    }
-                }
+            }
             //}            
         }
     }
@@ -40,7 +49,6 @@
         }
     }
 
-    var IsAddNewLead = false;
     function OnGridLeadsEndCallback(s, e) {
         if (IsAddNewLead) {
             IsAddNewLead = false;
@@ -69,14 +77,13 @@
         //InitScrollBar();
         init_currency();
         initToolTips();
-        
+
     }
 
     function InitScrollBar() {
-        return;       
+        return;
     }
 
-    var mapContentframeID = "MapContent";
     function OnGridLeadsSelectionChanged(s, e) {
         e.processOnServer = false;
         var bble = s.GetRowKey(e.visibleIndex);
@@ -90,10 +97,6 @@
         }
     }
 
-    var tmpBBLE = null;
-    
-    var tempAddress = null;
-
     function SearchGridLeads() {
         var filterCondition = "";
         var key = txtkeyWordClient.GetText();
@@ -102,7 +105,6 @@
         gridLeads.PerformCallback("Search|" + key);
     }
 
-    var streets = null;
     function BindStreetValues(result) {
         cbStreetlookupClient.SetEnabled(false);
         streets = result.split(';');
@@ -116,8 +118,6 @@
         //alert(cbStreetlookupClient.GetEnabled());
     }
 
-    var lastBorough = null;
-    var loadedBorough = null;
     function OnBoroughChanged(cbBorough) {
         if (cbStreetlookupClient.InCallback())
             lastBorough = cbBorough.GetValue().toString();
@@ -204,17 +204,10 @@
     }
 
     function AddScrollbarOnLeadsList() {
-        return;        
+        return;
     }
 
-    $(document).ready(function () {
-        //Handler for .ready() called.
-        if (LeadCategory.GetText() != "Create") {
-            AddScrollbarOnLeadsList();
-        }
-    });
 
-    var temBBLE = null;
     function OnColorMark(s, e) {
         var index = e.item.index;
         onColoMarkClick(index);
@@ -235,19 +228,21 @@
         }
         return "";
     }
-    var temStar = null;
+
     function onColoMarkClick(index, e) {
         if (index == 0) {
             index = 1000;
         }
         $(temStar).css("color", GetMarkColor(index));
-        debugger;
-        MarkColorCallBack.PerformCallback("MarkColor|" + temBBLE + "|" + index)
+        // debugger;
+        MarkColorCallBack.
+            PerformCallback("MarkColor|" + temBBLE + "|" + index)
     }
     function PopupColorMark(e, BBLE) {
         temBBLE = BBLE;
         AspPopupColorMark.ShowAtElement(e);
     }
+
     function click_item(e, index) {
 
 
@@ -255,7 +250,13 @@
 
         $("#color_drop").css("top", "-1000px")
     }
-    
+
+    $(document).ready(function () {
+        //Handler for .ready() called.
+        if (LeadCategory.GetText() != "Create") {
+            AddScrollbarOnLeadsList();
+        }
+    });
 </script>
 
 <style>
@@ -283,30 +284,30 @@
         border-radius: 4px;
     }
 
-    .arrow_box2:after, .arrow_box2:before {
-        bottom: 100%;
-        left: 15%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-    }
+        .arrow_box2:after, .arrow_box2:before {
+            bottom: 100%;
+            left: 15%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
 
-    .arrow_box2:after {
-        border-color: rgba(255, 255, 255, 0);
-        border-bottom-color: #fff;
-        border-width: 10px;
-        margin-left: -10px;
-    }
+        .arrow_box2:after {
+            border-color: rgba(255, 255, 255, 0);
+            border-bottom-color: #fff;
+            border-width: 10px;
+            margin-left: -10px;
+        }
 
-    .arrow_box2:before {
-        border-color: rgba(205, 212, 216, 0);
-        border-bottom-color: #cdd4d8;
-        border-width: 11px;
-        margin-left: -11px;
-    }
+        .arrow_box2:before {
+            border-color: rgba(205, 212, 216, 0);
+            border-bottom-color: #cdd4d8;
+            border-width: 11px;
+            margin-left: -11px;
+        }
 
     .color_star {
         cursor: pointer;
@@ -330,7 +331,7 @@
 </div>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
-    <div style="margin: 30px 10px 10px 10px; text-align: left;" class="clearfix">
+    <div style="margin: 10px 10px 10px 10px; text-align: left;" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
             <div class="clearfix">
                 <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
@@ -345,7 +346,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 768px; padding: 0px 0px;" id="leads_list_left">
+    <div style="height: 798px; padding: 0px 0px;" id="leads_list_left">
         <dx:ASPxGridView EnableViewState="false" runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText"
             OnSummaryDisplayText="gridLeads_SummaryDisplayText"
             OnCustomDataCallback="gridLeads_CustomDataCallback"
@@ -429,6 +430,24 @@
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="ThirdPartyCategory" Visible="false" VisibleIndex="6">
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 45px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                            <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="SubStatusStr" Visible="false" VisibleIndex="6">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 45px">
@@ -675,8 +694,8 @@
             </Templates>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" />
-            <SettingsPager Mode="EndlessPaging" PageSize="16"></SettingsPager>
-            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
+            <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
+            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="820"></Settings>
             <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
             <SettingsCommandButton CancelButton-ButtonType="Button" UpdateButton-ButtonType="Button">
                 <UpdateButton ButtonType="Button" Text="OK"></UpdateButton>
@@ -706,8 +725,7 @@
     </div>
 
     <div style="position: absolute; bottom: 0; padding-left: 34px; margin-bottom: 20px">
-
-        <div style="position: relative; float: left">
+        <div style="position: relative; float: left; display:none">
             <table>
                 <tbody>
                     <tr>

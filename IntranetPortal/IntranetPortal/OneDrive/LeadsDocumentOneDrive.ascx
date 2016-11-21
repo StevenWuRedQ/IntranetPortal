@@ -6,7 +6,8 @@
 <label id="info"></label>
 
 <script type="text/javascript">
-    var LeadsFolderId = "folder.d21d5166dd1004e8.D21D5166DD1004E8!173135"
+    init_tooltip_and_scroll();
+    var LeadsFolderId = "folder.d21d5166dd1004e8.D21D5166DD1004E8!173135";
 
     //WL.Event.subscribe("auth.login", onLogin);
     WL.init({

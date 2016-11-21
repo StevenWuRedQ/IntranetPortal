@@ -3,14 +3,13 @@ function ShowCateMenu(s, bble) {
     ASPxPopupMenuCategory.Hide();
     tmpBBLE = bble;
     s.getBoundingClientRect();
-       
+
     ASPxPopupMenuCategory.ShowAtElement(s);
-    var popmenu = ASPxPopupMenuCategory.GetMainElement();    
+    var popmenu = ASPxPopupMenuCategory.GetMainElement();
     var pop_postion = popmenu.getBoundingClientRect();
     var target_top = s.getBoundingClientRect().bottom;
-    var pop_content = (popmenu.firstElementChild || popmenu.firstChild);    
-    if (Math.ceil(pop_postion.top) < Math.ceil(target_top))
-    {        
+    var pop_content = (popmenu.firstElementChild || popmenu.firstChild);
+    if (Math.ceil(pop_postion.top) < Math.ceil(target_top)) {
         popmenu.style.top = target_top + 5;
         pop_content.className = pop_content.className + " dxm-popup-bottom";
         //alert(pop_postion.top+','+ target_top+' >>>here change to the arrow down and fix the postion ');
@@ -43,7 +42,7 @@ function popupControlMapTabClick(index) {
                 alert("Server is busy, try later!");
             }
             else {
-                var url = "/StreetView.aspx"
+                var url = "/StreetView.aspx?bble=" + tmpBBLE
                 SetPopupControlMapURL(url);
             }
         }
@@ -55,7 +54,7 @@ function popupControlMapTabClick(index) {
                 alert("Server is busy, try later!");
             }
             else {
-                var url = "/StreetView.aspx?t=map";
+                var url = "/StreetView.aspx?t=map&bble=" + tmpBBLE;
                 SetPopupControlMapURL(url);
             }
         }
@@ -82,14 +81,14 @@ function popupControlMapTabClick(index) {
             ASPxPopupMapControl.SetContentUrl(url);
         }
     }
-   
+
     if (index == 4) {
-       
+
         if (tmpBBLE != null) {
             var url = "http://gis.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA";
-         
+
             var iframe = ASPxPopupMapControl.GetContentIFrame();
-            iframe.onload = function () { };            
+            iframe.onload = function () { };
             ASPxPopupMapControl.SetContentUrl(url);
         }
     }
@@ -106,17 +105,17 @@ function popupControlMapTabClick(index) {
 }
 
 function ShowPropertyMap(propBBLE) {
-    tmpBBLE = propBBLE;    
+    tmpBBLE = propBBLE;
     if (propBBLE != null) {
-      
+
         if (getAddressCallback.InCallback()) {
             alert("Server is busy, try later!");
         }
         else {
-            var url = "/StreetView.aspx"
+            var url = "/StreetView.aspx?bble=" + tmpBBLE.trim() 
             ASPxPopupMapControl.SetContentUrl(url);
             //var streetViewFrm = "streetViewFrm";
-            var iframe = ASPxPopupMapControl.GetContentIFrame();          
+            var iframe = ASPxPopupMapControl.GetContentIFrame();
             if (iframe.src == "") {
                 ASPxPopupMapControl.SetContentUrl(url);
                 iframe.onload = function () {
@@ -144,11 +143,10 @@ function AdjustPopupSize(popup) {
 }
 
 function OnLeadsCategoryClick(s, e) {
-    
+
     var idx = e.item.index;
-    debugger
     if (tmpBBLE != null) {
-       
+
         if (e.item.index == 0) {
             ShowPropertyMap(tmpBBLE);
         }
@@ -157,29 +155,33 @@ function OnLeadsCategoryClick(s, e) {
             SetLeadStatus('5' + '|' + tmpBBLE);
         }
 
+        if (e.item.name == 'LoanMod') {
+            SetLeadStatus('x' + '|' + 'LoanMod' + '|' + '20' + '|' + tmpBBLE);
+        }
+
+        if (e.item.name == 'Warmer') {
+            SetLeadStatus('x' + '|' + 'Warmer' + '|' + '21' + '|' + tmpBBLE);
+        }
+
         if (e.item.name == "DoorKnock")
             SetLeadStatus('4' + '|' + tmpBBLE);
 
         if (e.item.name == "Callback")
             SetLeadStatus('Tomorrow' + '|' + tmpBBLE);
 
-        if (e.item.name == "DeadLead")
-        {
-            debugger;
+        if (e.item.name == "DeadLead") {
             ShowDeadLeadsPopup(tmpBBLE);
-            //SetLeadStatus('6' + '|' + tmpBBLE);
         }
 
-        if (e.item.name == "InProcess")
-        {
+        if (e.item.name == "InProcess") {
             //SetLeadStatus('7' + '|' + tmpBBLE);
             ShowInProcessPopup(tmpBBLE);
-        }        
+        }
 
         if (e.item.name == "Closed")
             SetLeadStatus('8' + '|' + tmpBBLE)
 
-        if (e.item.name == "ViewLead") {           
+        if (e.item.name == "ViewLead") {
             var url = '/ViewLeadsInfo.aspx?id=' + tmpBBLE;
             var left = (screen.width / 2) - (1350 / 2);
             var top = (screen.height / 2) - (930 / 2);
@@ -201,15 +203,14 @@ function OnLeadsCategoryClick(s, e) {
 
         if (e.item.name == "Reassign") {
             popupCtrReassignEmployeeListCtr.PerformCallback();
-            popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());         
+            popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());
         }
 
         if (e.item.name == "Upload") {
             var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
             //var centerLeft = parseInt((window.screen.availWidth - 640) / 2);
             //var centerTop = parseInt(((window.screen.availHeight - 400) / 2) - 50);          
-            if (popupCtrUploadFiles)
-            {
+            if (popupCtrUploadFiles) {
                 popupCtrUploadFiles.SetContentUrl(url);
                 popupCtrUploadFiles.Show();
             }
@@ -217,8 +218,7 @@ function OnLeadsCategoryClick(s, e) {
                 window.open(url, 'Upload Files', popup_params(640, 400)); //'Width=640px,Height=400px,top=' + centerTop + ",left=" + centerLeft);            
         }
 
-        if (e.item.name == "ViewFiles")
-        {           
+        if (e.item.name == "ViewFiles") {
             if (popupViewFiles) {
                 popupViewFiles.Show();
                 popupViewFiles.PerformCallback("Show|" + tmpBBLE)
@@ -232,16 +232,14 @@ function OnLeadsCategoryClick(s, e) {
 }
 
 var popupShow = true;
-function ShowDeadLeadsPopup(tmpBBLE)
-{
+function ShowDeadLeadsPopup(tmpBBLE) {
     popupShow = true;
     aspxPopupDeadLeadsClient.PerformCallback("Show|" + tmpBBLE);
 }
 
-function ShowInProcessPopup(tmpBBLE)
-{
+function ShowInProcessPopup(tmpBBLE) {
     popupShow = true;
-    aspxPopupInprocessClient.PerformCallback("Show|" + tmpBBLE);  
+    aspxPopupInprocessClient.PerformCallback("Show|" + tmpBBLE);
 }
 
 function popup_params(width, height) {
@@ -255,33 +253,55 @@ function popup_params(width, height) {
     return 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top + ',scrollbars=1';
 }
 var SEND_STATUS = null;
+
 function SetLeadStatus(status) {
     ChangeStatusResonTextClient.SetText("");
     if (leadStatusCallbackClient.InCallback()) {
         alert("Server is busy! Please wait!")
     } else {
+
         SEND_STATUS = status;
         aspxPopupChangeLeadsStatusClient.Show();
-        //leadStatusCallbackClient.PerformCallback(status);
+
+        // show up substatus selection for loan mod
+        if (status.startsWith("x|LoanMod|20")) {
+            if (panel_LoanModSubStatus) {
+                //debugger;
+                panel_LoanModSubStatus.SetVisible(true);
+            }
+        } else {
+            if (panel_LoanModSubStatus) {
+
+                panel_LoanModSubStatus.SetVisible(false);
+            }
+            //leadStatusCallbackClient.PerformCallback(status);
+        }
     }
 }
 
-function CofrimLeadStatusChange()
-{
-
+function CofrimLeadStatusChange() {
+    debugger;
     var comments = ChangeStatusResonTextClient.GetText();
+    var loanModSubStatus = "";
+
+    if (panel_LoanModSubStatus && panel_LoanModSubStatus.clientVisible) {
+        loanModSubStatus = String(radios_LoanModSubStatus.GetSelectedIndex().toString());
+    }
+
+
     if (!comments) {
         alert("The reason can not be empty please make sure you input change reason !");
-        
         return;
     }
-    if(SEND_STATUS)
-    {
-        
-        leadStatusCallbackClient.PerformCallback(SEND_STATUS + "|" + comments);
-        
-    }else
-    {
+    if (SEND_STATUS) {
+        var sendData = SEND_STATUS + "|" + comments;
+        debugger;
+        if (loanModSubStatus != "") {
+            sendData += "|" + loanModSubStatus;
+        }
+        leadStatusCallbackClient.PerformCallback(sendData);
+
+    } else {
         alert("Cofrim LeadStatus Change faled SEND_STATUS is null");
     }
     aspxPopupChangeLeadsStatusClient.Hide();
@@ -292,19 +312,19 @@ function OnGetAddressCallbackError(s, e) {
 
 var tempAddress = null;
 function OnGetAddressCallbackComplete(s, e) {
-    
+
     if (e.result == null) {
         alert("Property Address is empty!");
         return;
     }
-   
+
     tempAddress = e.result.split("|")[0];
 
-    $('#leads_address_popup').html(tempAddress + "(" + e.result.split("|")[1]+")");
+    $('#leads_address_popup').html(tempAddress + "(" + e.result.split("|")[1] + ")");
     //var streetViewFrm = "streetViewFrm";
     var streenViewWinFrm = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);
     var streenViewWin = (streenViewWinFrm.contentWindow || streenViewWinFrm.contentDocument);
-    
+
     if (streenViewWin != null) {
         //alert(streenViewWin);
         if (streenViewWin.showAddress) {
@@ -333,7 +353,7 @@ function OnSetStatusComplete(s, e) {
     if (typeof gridCallbackClient != "undefined")
         gridCallbackClient.Refresh();
 
-    if (typeof gridLeads != "undefined")        
+    if (typeof gridLeads != "undefined")
         gridLeads.Refresh();
 
     if (typeof gridTrackingClient != "undefined")
@@ -360,8 +380,7 @@ function OnRequestUpdate(bble) {
 
 function OnEndCallbackPanelRequestUpdate(s, e) {
     if (isSendRequest) {
-        if (typeof gridLeads != "undefined")
-        {
+        if (typeof gridLeads != "undefined") {
             gridLeads.CancelEdit();
         }
 

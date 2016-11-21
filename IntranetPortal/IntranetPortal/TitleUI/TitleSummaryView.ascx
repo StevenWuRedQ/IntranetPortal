@@ -49,8 +49,12 @@
             var url = '/BusinessForm/Default.aspx?tag=' + CaseId;
             PortalUtility.ShowPopWindow("View Title Case - " + CaseId, url);
         }
-
+        <% If Category = "Follow Up" %>
+        var url = "/api/Followup?filter=title"
+        <% Else %>
         var url = "/api/Title/TitleCases/<%=CategoryId%>";
+        <% End If %>
+        
         $.getJSON(url).done(function (data) {
             var dataGrid = $("#gridContainer").dxDataGrid({
                 dataSource: data,

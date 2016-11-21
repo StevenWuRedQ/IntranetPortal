@@ -18,7 +18,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title"  ng-class="{ss_warning:!owner.DOB}" data-message="Please fill seller {{$index+1}} DOB">DOB</label>
-                <input class="ss_form_input" ng-model="owner.DOB" ss-date readonly>
+                <input class="ss_form_input" ng-model="owner.DOB" pt-date readonly>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">SSN</label>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label>DOB</label>
-                    <input class="form-control" ng-model="owner.DOB" ss-date>
+                    <input class="form-control" ng-model="owner.DOB" pt-date>
                 </div>
                 <div class="col-sm-4">
                     <label>SSN</label>

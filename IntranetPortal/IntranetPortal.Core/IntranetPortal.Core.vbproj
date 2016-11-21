@@ -250,7 +250,7 @@
     <Compile Include="DBJSONUtil.vb" />
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />
-    <Compile Include="ExcelBuilder.vb" />
+    <Compile Include="EntityHelper.vb" />
     <Compile Include="ExcelHelper.vb" />
     <Compile Include="Extension.vb" />
     <Compile Include="HolidayService.vb" />

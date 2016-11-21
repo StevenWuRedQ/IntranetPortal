@@ -347,6 +347,15 @@ Partial Public Class ActivityLogs
     Protected WithEvents cbTaskImportant As Global.DevExpress.Web.ASPxComboBox
     
     '''<summary>
+    '''dueDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dueDate As Global.DevExpress.Web.ASPxDateEdit
+    
+    '''<summary>
     '''txtTaskDes control.
     '''</summary>
     '''<remarks>

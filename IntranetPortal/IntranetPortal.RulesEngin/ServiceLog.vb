@@ -1,6 +1,9 @@
 ﻿Imports log4net
 Imports log4net.Config
 
+''' <summary>
+''' The Service Log singleton class
+''' </summary>
 Public Class ServiceLog
     Public Delegate Sub WriteLog(msg As String)
     Public Delegate Sub WriteException(msg As String, ex As Exception)
@@ -15,6 +18,10 @@ Public Class ServiceLog
     End Sub
 
     Private Shared logInstance As ServiceLog
+    ''' <summary>
+    ''' Get Singleton instance
+    ''' </summary>
+    ''' <returns></returns>
     Public Shared Function GetInstance() As ServiceLog
         If logInstance Is Nothing Then
             logInstance = New ServiceLog

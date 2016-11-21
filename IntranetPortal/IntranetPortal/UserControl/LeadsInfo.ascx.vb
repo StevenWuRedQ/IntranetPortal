@@ -16,6 +16,16 @@ Public Class LeadsInfo1
             If Not String.IsNullOrEmpty(Request.QueryString("c")) Then
                 CategoryName = Request.QueryString("c")
                 category = Utility.GetLeadStatus(CategoryName)
+                Dim folders = Utility.GetLeadsCustomStatus()
+                If folders.Length > 0 Then
+                    For Each o In folders
+                        OtherFolderPopup.Items.Add(New MenuItem With {
+                                                   .Text = o.ToString,
+                                                   .Name = o.ToString & "|" & Int(o).ToString})
+                    Next
+                Else
+                    otherFolderIcon.Visible = False
+                End If
 
                 If CategoryName = "Door Knock" Then
                     doorKnockMapPanel.Visible = True
@@ -23,6 +33,7 @@ Public Class LeadsInfo1
                 Else
                     doorKnockMapPanel.Visible = False
                 End If
+
             End If
 
             If Not ShowLogPanel Then
@@ -317,12 +328,14 @@ Public Class LeadsInfo1
             Dim comments = String.Format("{0} did phone ({1}) call.", Page.User.Identity.Name, phoneNo)
             LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.CallOwner)
             BindActivityLog(hfBBLE.Value)
+            HomeOwnerPhone.CallAllPhones(hfBBLE.Value, phoneNo)
             needRefesh = True
         End If
 
         If e.Parameter.StartsWith("BadPhone") Then
             Dim phoneNo = e.Parameter.Split("|")(1)
             UpdateContact(OwnerContact.ContactStatus.Wrong, phoneNo, OwnerContact.OwnerContactType.Phone)
+
         End If
 
         If e.Parameter.StartsWith("RightPhone") Then
@@ -385,7 +398,7 @@ Public Class LeadsInfo1
                     Context.OwnerContacts.Remove(contact)
                     Context.SaveChanges()
                 End If
-                
+
                 Return
             End If
 
@@ -451,32 +464,34 @@ Public Class LeadsInfo1
 
     Sub RefreshBBLE(bble As String, type As String)
         Dim comments = ""
+        Dim username = HttpContext.Current.User.Identity.Name
         Select Case type
             Case "All"
-                comments = String.Format("All leads info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("All leads info is refreshed by {0}", username)
                 DataWCFService.UpdateLeadInfo(bble, True)
                 'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)
 
             Case "Assessment"
-                comments = String.Format("General property info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("General property info is refreshed by {0}", username)
                 DataWCFService.UpdateAssessInfo(bble)
             Case "PropData"
-                comments = String.Format("Mortgage and Violations is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("Mortgage and Violations is refreshed by {0}", username)
                 'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.Mortgage, HttpContext.Current.User.Identity.Name)
                 DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, False)
             Case "TLO"
-                comments = String.Format("Home Owner info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("Home Owner info is refreshed by {0}", username)
                 'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.HomeOwner, HttpContext.Current.User.Identity.Name)
                 If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
                     Throw New Exception("This Lead didn't have owner info in our database.")
                 End If
             Case "ZEstimate"
-                comments = String.Format("ZEstimate info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("ZEstimate info is refreshed by {0}", username)
                 If Not DataWCFService.GetZillowValue(bble) Then
                     Throw New Exception("The ZEstimate info failed refreshing.")
                 End If
             Case "JudgmentSearch"
-                comments = String.Format("Judgement Search info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                comments = String.Format("Judgement Search info is refreshed by {0}", username)
+                IntranetPortal.Data.LeadsEcourtData.Update(bble, username)
         End Select
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.RefreshLeads)

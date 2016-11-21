@@ -22,7 +22,7 @@
                 </li>
                 <li class="ss_form_item2">
                     <label class="ss_form_input_title ">DATE</label>
-                    <input class="ss_form_input" ng-model="data.signdate" ss-date />
+                    <input class="ss_form_input" ng-model="data.signdate" pt-date />
                 </li>
             </ul>
 

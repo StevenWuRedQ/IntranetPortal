@@ -24,30 +24,30 @@
             <td ng-style="getStyle(d)" popover-template="budgetPopover" popover-placement="bottom" popover-trigger="mouseenter">
                 <input type="checkbox" ng-model="d.checked" style="display: inline-block" /><span>{{d.description}}</span></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.materials" money-mask /></td>
+                <input style="width: 60px; border: none" ng-model="d.materials" pt-number-mask maskformat='money' /></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.labor" money-mask /></td>
+                <input style="width: 60px; border: none" ng-model="d.labor" pt-number-mask maskformat='money' /></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.contract" money-mask ng-change="update(d)" /></td>
+                <input style="width: 60px; border: none" ng-model="d.contract" pt-number-mask maskformat='money' ng-change="update(d)" /></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.toDay" money-mask ng-change="update(d)" /></td>
+                <input style="width: 60px; border: none" ng-model="d.toDay" pt-number-mask maskformat='money' ng-change="update(d)" /></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.paid" money-mask ng-change="update(d)" /></td>
+                <input style="width: 60px; border: none" ng-model="d.paid" pt-number-mask maskformat='money' ng-change="update(d)" /></td>
             <td>
-                <input style="width: 60px; border: none" ng-model="d.balance" money-mask readonly /></td>
+                <input style="width: 60px; border: none" ng-model="d.balance" pt-number-mask maskformat='money' readonly /></td>
         </tr>
         <tr style="background-color: yellow; font-weight: bolder">
             <td>Total</td>
             <td></td>
             <td></td>
             <td>
-                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.contract" money-mask readonly /></td>
+                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.contract" pt-number-mask maskformat='money' readonly /></td>
             <td>
-                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.toDay" money-mask readonly /></td>
+                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.toDay" pt-number-mask maskformat='money' readonly /></td>
             <td>
-                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.paid" money-mask readonly /></td>
+                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.paid" pt-number-mask maskformat='money' readonly /></td>
             <td>
-                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.balance" money-mask readonly /></td>
+                <input style="width: 60px; border: none; background-color: yellow" ng-model="total.balance" pt-number-mask maskformat='money' readonly /></td>
         </tr>
     </table>
 </div>

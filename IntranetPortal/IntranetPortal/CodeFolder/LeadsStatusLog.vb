@@ -54,7 +54,6 @@
             ctx.SaveChanges()
 
         End Using
-
     End Sub
 
     Public Enum LogType
@@ -64,5 +63,6 @@
         Recycled = 3
         DeadLeads = 4
         CreateNew = 5
+        StatusChange = 6
     End Enum
 End Class

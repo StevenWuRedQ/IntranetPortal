@@ -2,8 +2,6 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.common.css" />
-    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/15.1.6/css/dx.light.css" />
     <style>
         .nofoucs:focus {
             border: none !important;
@@ -11,9 +9,7 @@
     </style>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    <script src="/bower_components/globalize/lib/globalize.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.chartjs.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/15.1.6/js/dx.webappjs.js"></script>
+<%--    <script src="/bower_components/globalize/lib/globalize.js"></script>--%>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -73,121 +69,7 @@
             </div>
         </div>
         <div style="margin-top: 40px;">
-            <%--body Left--%>
-            <%--<div class="row" style="display:none">
-                <div class="col-md-7">
-                    <div role="tabpanel" class="mag_tab_panel">
-
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active mag_tab"><a class="mag_tab_text" href="#phone_callsTab" aria-controls="phone_callsTab" role="tab" data-toggle="tab"><i class="fa fa-phone"></i>
-                                <br />
-                                Phone Calls</a></li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#geomap" aria-controls="profile" role="tab" data-toggle="tab">
-                                <i class="fa fa-map-marker"></i>
-                                <br />
-                                Geo map</a>
-
-                            </li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-                                <i class="fa fa-sign-in"></i>
-                                <br />
-                                Door Knocks</a>
-
-                            </li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#deals_tab" aria-controls="deals_tab" role="tab" data-toggle="tab"><i class="fa fa-check-circle"></i>
-                                <br />
-                                Deals</a></li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><i class="fa fa-crosshairs"></i>
-                                <br />
-                                HR Analytics</a></li>
-
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content" style="padding: 30px;">
-                            <div role="tabpanel" class="tab-pane active" id="phone_callsTab">
-                                <div class="mag_tab_input_group">
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <select class="form-control">
-                                                <option>Last Month</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select class="form-control" id="selAgents">
-                                                <option>All Agents</option>
-                                                <option>Agents 1</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="button" value="Display" class="rand-button bg_color_blue rand-button-padding" onclick="LoadGrid()" />
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="button" value="Chart" class="rand-button bg_color_blue rand-button-padding" onclick="LoadPhoneBarChart()" />
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="margin: 30px 0; font-size: 24px; color: #234b60; display: none" id="divPhoneSummary">
-                                    <span style="font-weight: 900" id="CallTotalCount">52,013 </span>Phone Calls<br />
-                                    <span style="font-size: 14px; color: #77787b">January 1, 2015 - January 31, 2015</span>
-                                </div>
-                                <div style="font-size: 14px;">
-                                    <div id="chartContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto; display: none"></div>
-                                    <div id="gridContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto; display: none"></div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="profile">...</div>
-                            <div role="tabpanel" class="tab-pane" id="geomap">
-                                <iframe src="/Map/ZipMap.aspx" style="width: 100%; min-height: 600px"></iframe>
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane" id="deals_tab">deals_tab</div>
-                            <div role="tabpanel" class="tab-pane" id="messages">...</div>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div style="padding-left: 10px">
-                        <div>
-                            <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Status Of Leads</span>
-                        </div>
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div id="container" class="containers" style="height: 250px; width: 100%;"></div>
-                                    <div class="chart_text">
-                                        In Process Leads: <span id="InProcessCount" class="font_black">0</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div id="current_leads" class="containers" style="height: 250px; width: 100%;"></div>
-                                    <div class="chart_text">
-                                        Current Leads: <span id="spanTotalLeads" class="font_black">0</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="margin: 30px 0;">
-                            <i class="fa fa-bar-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Monthly Leads Process</span>
-                        </div>
-                        <div>
-                            <div id="leads_process_chart" class="containers" style="height: 250px; width: 100%;"></div>
-                        </div>
-                        <div style="margin: 30px 0;">
-                            <i class="fa fa-line-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Compare Offices</span>
-                        </div>
-                        <div>
-                            <div id="compare_offices_chart" class="containers" style="height: 200px; width: 100%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
+           
             <%-- New layout --%>
             <div class="container-fluid">
                 <div class="row">
@@ -197,6 +79,7 @@
                             <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Team_Activity_Tab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Team Activity</a></li>
                             <% If IntranetPortal.Employee.IsAdmin(Page.User.Identity.Name) Then%>
+                            <li role="presentation" class="mag_tabv"><a href="#ssAcceptedTab" onclick="" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>SS Accepted</a></li>                            
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <%End If%>
                             <%--  <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
@@ -244,8 +127,10 @@
                                                             selectionMode: "allArgumentPoints",
                                                             label: {
                                                                 visible: true,
-                                                                format: "fixedPoint",
-                                                                precision: 0
+                                                                format: {
+                                                                    type: "fixedPoint",
+                                                                    precision: 0
+                                                                }
                                                             }
                                                         },
                                                         argumentAxis: {
@@ -342,9 +227,11 @@
                                                         startValue: scaleStart,
                                                         endValue: endDate,
                                                         minorTickInterval: "day",
-                                                        majorTickInterval: 'week',
+                                                        tickInterval: 'week',
                                                         minRange: "day",
-                                                        showMinorTicks: false
+                                                        minorTick: {
+                                                            visible: false,
+                                                        }
                                                     },
                                                     sliderMarker: {
                                                         format: "monthAndDay"
@@ -362,7 +249,6 @@
                                                 if (this.Visible() || noCheck) {
                                                     if (this.TeamName == name)
                                                         return;
-
                                                     this.TeamName = name;
                                                     var range = this.DateRange();
                                                     var selectedRange = range.getSelectedRange();
@@ -550,12 +436,13 @@
 
                                     </script>
                                 </div>
+
                                 <div role="tabpanel" class="tab-pane " id="Status_Of_Leads_Tab">
                                     <div class="mag_tab_input_group">
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <label for="selAgents" style="float: left">Select Agents:&nbsp;</label>
-                                                <select class="form-control" style="width: 200px; float: left; margin-left: 20px;" id="selAgents" name="selAgents">
+                                                <select class="form-control selAgents" style="width: 200px; float: left; margin-left: 20px;" id="selAgents" name="selAgents">
                                                     <option>All Agents</option>
                                                     <option>Agents 1</option>
                                                 </select>
@@ -671,7 +558,7 @@
                                                     caption: "Callback",
                                                     dataType: 'date',
                                                     visible: false
-                                                }, , {
+                                                }, {
                                                     dataField: "LastUpdate",
                                                     caption: "Last Update",
                                                     dataType: 'date',
@@ -754,8 +641,7 @@
                                                                 }
                                                             },
                                                         }],
-                                                        title: "In Process Leads",
-                                                        palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
+                                                        title: "In Process Leads"
                                                     }
 
                                                     option.onDone = function (e) {
@@ -778,14 +664,17 @@
                                                         $("#gridTitle").html(point.originalArgument);
                                                         //point.isVisible() ? point.hide() : point.show();
                                                     };
-                                                    $("#ProcessStatusChart").dxPieChart(option);
+                                                    option.series[0].type = 'bar';
+                                                    option.rotated = true;
+                                                    option.legend.visible = false;
+                                                    $("#ProcessStatusChart").dxChart(option);
                                                 }
                                                 else {
                                                     var chart = $("#InProcessLeadsChart").dxPieChart("instance");
                                                     chart.option("dataSource", tab.DisplayView.LeadsInProcessDataSource);
                                                     //chart.render({ force: true });
 
-                                                    chart = $("#ProcessStatusChart").dxPieChart("instance");
+                                                    chart = $("#ProcessStatusChart").dxChart("instance");
                                                     chart.option("dataSource", tab.DisplayView.LeadsDataSource);
                                                     //chart.render({ force: true });
                                                 }
@@ -829,11 +718,9 @@
                                         };
                                     </script>
                                 </div>
-                                <%--<div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
-                                    <iframe src="/Map/ZipMap.aspx" style="width: 100%; height: 800px"></iframe>
-                                </div>--%>
+                      
                                 <div role="tabpanel" class="tab-pane" id="Team_Activity_Tab">
-                                   <div class="mag_tab_input_group">
+                                    <div class="mag_tab_input_group">
                                         <div class="row">
                                             <div id="dateRange2" class="containers" style="width: 100%;"></div>
                                         </div>
@@ -843,15 +730,15 @@
                                             <div id="leadsImportChart" class="containers" style="height: 440px; width: 100%;"></div>
                                         </div>
                                     </div>
-                                     <div id="divTeamLeadsPopup" style="width: 700px">
+                                    <div id="divTeamLeadsPopup" style="width: 700px">
                                         <div id="gridTeamLeads" style="height: 450px; max-width: 700px; width: 100%; margin: 0 auto;"></div>
                                     </div>
                                     <script type="text/javascript">
                                         var TeamActivityTab = {
                                             DateRange: function () { return $('#dateRange2').has("svg").length ? $('#dateRange2').dxRangeSelector('instance') : null },
-                                            ShowTab: function() {
+                                            ShowTab: function () {
                                                 var range = this.DateRange();
-                                                var selectedRange = range.getSelectedRange();                                               
+                                                var selectedRange = range.getSelectedRange();
                                                 this.UpdateChart(selectedRange.startValue, selectedRange.endValue);
                                             },
                                             InitalTab: function () {
@@ -873,9 +760,11 @@
                                                         startValue: scaleStart,
                                                         endValue: endDate,
                                                         minorTickInterval: "day",
-                                                        majorTickInterval: 'week',
+                                                        tickInterval: 'week',
                                                         minRange: "day",
-                                                        showMinorTicks: false                                                        
+                                                        minorTick: {
+                                                            visible: false,
+                                                        }
                                                     },
                                                     sliderMarker: {
                                                         format: "monthAndDay"
@@ -911,7 +800,7 @@
                                                         tab.UpdateTeamChart(clickedPoint.argument);
                                                     },
                                                 });
-                                                chart.endUpdate();                                                
+                                                chart.endUpdate();
                                             },
                                             UpdateTeamChart: function (teamName) {
                                                 var chart = this.BarChart();
@@ -919,7 +808,7 @@
                                                 chart.showLoadingIndicator();
                                                 chart.clearSelection();
                                                 var ds = new DevExpress.data.DataSource("/api/portalreport/" + teamName);
-                                                chart.beginUpdate();                                                
+                                                chart.beginUpdate();
                                                 chart.option({
                                                     dataSource: ds,
                                                     series: [
@@ -950,8 +839,10 @@
                                                             selectionMode: "allArgumentPoints",
                                                             label: {
                                                                 visible: true,
-                                                                format: "fixedPoint",
-                                                                precision: 0
+                                                                format: {
+                                                                    type:"fixedPoint",
+                                                                    precision: 0
+                                                                }
                                                             }
                                                         },
                                                         series: [
@@ -960,7 +851,7 @@
                                                         ],
                                                         argumentAxis: {
                                                             argumentType: 'string'
-                                                        },                                                     
+                                                        },
                                                         title: "Leads Import Amount of the Teams",
                                                         legend: {
                                                             verticalAlignment: "bottom",
@@ -968,12 +859,12 @@
                                                         },
                                                         loadingIndicator: {
                                                             show: true
-                                                        },                                                        
+                                                        },
                                                         onPointSelectionChanged: function (info) {
-                                                           
+
                                                         },
                                                         onLegendClick: function (info) {
-                                                           
+
                                                         }
                                                     });
                                                     return $("#leadsImportChart").dxChart("instance");
@@ -997,7 +888,7 @@
                                                 });
                                                 $("#divTeamLeadsPopup").dxPopup("instance").show();
 
-                                                var dsUrl = "/api/PortalReport/?teamName=" + teamName + "&startDate=" + Globalize.format(importDate, "yyyy-MM-dd");                                               
+                                                var dsUrl = "/api/PortalReport/?teamName=" + teamName + "&startDate=" + Globalize.format(importDate, "yyyy-MM-dd");
                                                 $("#gridTeamLeads").dxDataGrid({
                                                     dataSource: new DevExpress.data.DataSource(dsUrl),
                                                     showColumnLines: false,
@@ -1009,7 +900,7 @@
                                                     },
                                                     "export": {
                                                         enabled: true,
-                                                        fileName: "leads"                                                        
+                                                        fileName: "leads"
                                                     }, groupPanel: {
                                                         visible: true
                                                     },
@@ -1048,424 +939,272 @@
 
                                             }
                                         }
-
                                     </script>
 
                                 </div>
+
+                                <div role="tabpanel" class="tab-pane" id="ssAcceptedTab" ng-controller="SSAcceptedTabCtrl">
+
+                                    <style>
+                                        .manageui-title {
+                                            font-size: 28px;
+                                            font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+                                            font-weight: 200;
+                                            fill: #232323;
+                                            cursor: default;
+                                        }
+
+                                        div .summary-box {
+                                            border-top: 2px solid #585858;
+                                            border-bottom: 2px solid #ddd;
+                                            border-left: 1px solid #ddd;
+                                            border-right: 1px solid #ddd;
+                                            border-radius: 2px;
+                                            height: 160px;
+                                            text-align: center;
+                                            margin: 10px;
+                                            box-shadow: 1px 1px 1px #888888;
+                                        }
+
+                                        .col-md-x20 {
+                                            width: 20%;
+                                            float: left;
+                                        }
+
+                                        .summary-detail {
+                                            padding-top: 5px;
+                                            font-size: 64px;
+                                            font-weight: bold;
+                                        }
+                                    </style>
+                                    <div class="mag_tab_input_group">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="selAgents" style="float: left">Select Agents:&nbsp;</label>
+                                                <select id="ssAcceptedAgents" class="form-control .selAgents" ng-model="selectedEmp" ng-change="onAgentSelected()">
+                                                    <option>All</option>
+                                                    <option ng-repeat="o in teamMembers" ng-value="o">{{o}}</option>
+                                                </select>
+                                            </div>
+                                            <div id="acceptedRange" class="col-md-9 containers"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id="SS_Accepted_Chart"></div>
+                                                </div>
+
+
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Shortsale Accepted</span>
+                                                        <div><span class="summary-detail">{{data.totalaccepted||0}}</span></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Total Sales Commission</span>
+                                                        <div><span class="summary-detail">$2400.00</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Rank In Team</span>
+                                                        <div><span class="summary-detail">1</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Overall Rank</span>
+                                                        <div><span class="summary-detail">3</span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-x20 ">
+                                                    <div class="summary-box">
+                                                        <span class="manageui-title">Team Rank</span>
+                                                        <div><span class="summary-detail">2</span></div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <script>
+                                    angular.module("PortalApp").controller('SSAcceptedTabCtrl', function ($scope, $http) {
+
+                                        $scope.dataSource = [{
+                                            label: "Jan",
+                                            value: 3
+                                        }, {
+                                            label: "Feb",
+                                            value: 2
+                                        }, {
+                                            label: "Mar",
+                                            value: 3
+                                        }, {
+                                            label: "Apr",
+                                            value: 4
+                                        }, {
+                                            label: "May",
+                                            value: 6
+                                        }, {
+                                            label: "Jun",
+                                            value: 11
+                                        }, {
+                                            label: "Jul",
+                                            value: 4
+                                        }, {
+                                            label: "Aug",
+                                            value: 6
+                                        }, {
+                                            label: "Sep",
+                                            value: 11
+                                        }, {
+                                            label: "Oct",
+                                            value: 4
+                                        }, {
+                                            label: "Nov",
+                                            value: 6
+                                        }, {
+                                            label: "Dec",
+                                            value: 11
+                                        }];
+                                        $scope.TeamName = null;
+                                        $scope.CurrentAgentName = null;
+                                        $scope.Visible = function () { return $("#ssAcceptedTab").hasClass("active") ? true : false };
+                                        $scope.InitalTab = function () {
+                                            var tab = this;
+                                            var dateNow = new Date();
+                                            var endDate = new Date();
+                                            endDate = endDate.setDate(dateNow.getDate() + 1);
+                                            var scaleStart = new Date();
+                                            scaleStart.setMonth(scaleStart.getMonth() - 12);
+                                            var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                            $scope.DateRange = $("#acceptedRange").dxRangeSelector({
+                                                margin: {
+                                                    top: 5
+                                                },
+                                                size: {
+                                                    height: 120
+                                                },
+                                                scale: {
+                                                    startValue: scaleStart,
+                                                    endValue: endDate,
+                                                    minorTickInterval: "day",
+                                                    tickInterval: 'week',
+                                                    minRange: "day",
+                                                    minorTick: {
+                                                        visible: false,
+                                                    }
+                                                },
+                                                marker: { visible: false },
+                                                sliderMarker: {
+                                                    format: "monthAndDay"
+                                                },
+                                                selectedRange: {
+                                                    startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
+                                                    endValue: endDate
+                                                },
+                                                onSelectedRangeChanged: function (e) {
+                                                    $scope.update($scope.TeamName, $scope.selectedEmp, $scope.DateRange.getSelectedRange())
+                                                }
+                                            }).dxRangeSelector('instance');
+                                            $("#SS_Accepted_Chart").dxChart({
+                                                dataSource: $scope.dataSource,
+                                                size: {
+                                                    height: 300,
+                                                },
+                                                barWidth: 0.5,
+                                                border: {
+                                                    width: 2
+                                                },
+                                                legend: {
+                                                    visible: false
+                                                },
+                                                series: [{
+                                                    argumentField: "label",
+                                                    valueField: "value",
+                                                    type: "bar",
+                                                    color: '#ffaa66'
+                                                }, {
+                                                    argumentField: "label",
+                                                    valueField: "value",
+                                                    color: '#ff400d'
+                                                }]
+
+
+                                            });
+                                            $scope.data = {};
+                                        };
+                                        $scope.ShowTab = function (name, users, noCheck) {
+                                            if ($scope.Visible() || noCheck) {
+                                                if ($scope.TeamName == name)
+                                                    return;
+                                                $scope.TeamName = name;
+                                                $scope.teamMembers = users;
+                                                $scope.selectedEmp = 'All';
+                                                $scope.update($scope.TeamName, 'All', $scope.DateRange.getSelectedRange());
+                                                $scope.$apply();
+                                            }
+                                        };
+                                        $scope.onAgentSelected = function () {
+
+                                            $scope.update($scope.TeamName, $scope.selectedEmp, $scope.DateRange.getSelectedRange())
+
+                                        }
+                                        $scope.update = function (team, name, range) {
+                                            $scope.data = {}
+                                            if (team == null)
+                                                return;
+                                            else {
+                                                $.ajax({
+                                                    method: 'POST',
+                                                    url: '/api/PropertyOffer/PostPerformance',
+                                                    contentType: 'application/json; charset=utf-8',
+                                                    data: JSON.stringify({
+                                                        StartDate: range.startValue,
+                                                        EndDate: range.endValue,
+                                                        EmpName: name,
+                                                        TeamName: team
+                                                    })
+
+                                                }).then(function (d) {
+                                                    if (d.totalaccepted)
+                                                        $scope.data.totalaccepted = d.totalaccepted;
+                                                    $scope.$apply();
+                                                })
+
+                                            }
+
+                                        }
+                                    });
+                                    $(function () {
+                                        ssAcceptedTab = angular.element('#ssAcceptedTab').scope();
+                                    })
+
+                                </script>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        function BindAgents() {
-            if (currentTeamInfo != null) {
-                $("#selAgents").html("");
-                $.each(currentTeamInfo.Users, function (key, value) {
-                    $('#selAgents')
-                    .append($("<option></option>")
-                    .attr("value", value)
-                    .text(value));
-                });
-
-                $("#selAgents").prepend("<option value='' selected='selected'>All</option>");
-            }
-        }
-
-        function LoadPhoneBarChart() {
-            $("#chartContainer").show();
-            var localCallLogs = null;
-            var customStore = new DevExpress.data.CustomStore({
-                load: function (loadOptions) {
-                    var d = $.Deferred();
-                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
-                        d.resolve(data, { totalCount: data.length });
-                    });
-                    return d.promise();
-                }
-            });
-
-            var gridDataSourceConfiguration = { store: customStore };
-
-            var logDataSource = new DevExpress.data.DataSource({
-                store: customStore,
-                paginate: false
-            });
-
-            $("#chartContainer").dxChart({
-                dataSource: customStore,
-                commonSeriesSettings: {
-                    argumentField: "EmployeeName",
-                    type: "stackedbar"
-                },
-                series: [
-                     { valueField: "Inbound", name: "Inbound" },
-                     { valueField: "Outbound", name: "Outbound" },
-                     { valueField: "Internal", name: "Internal" },
-                     { valueField: "Count", name: "Total", type: 'spline', color: 'blue' }
-                ],
-                argumentAxis: {
-                    argumentType: 'string'
-                },
-                tooltip: {
-                    enabled: true
-                },
-                legend: {
-                    verticalAlignment: 'bottom',
-                    horizontalAlignment: 'center'
-                },
-                onPointClick: function (info) {
-                    var clickedPoint = info.target;
-                    clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
-                },
-                onPointSelectionChanged: function (info) {
-                    var selectedPoint = info.target;
-                    ShowEmployeeReport(selectedPoint.originalArgument);
-                }
-            });
-        }
-
-        function LoadGrid() {
-            $("#gridContainer").show();
-            var agent = $("#selAgents").val();
-            if (agent != "") {
-                ShowEmployeeReport(agent);
-                return;
-            }
-
-            var localCallLogs = null;
-            var customStore = new DevExpress.data.CustomStore({
-                load: function (loadOptions) {
-                    var d = $.Deferred();
-                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
-                        DevExpress.data.query(data).sum("Count").done(function (result) {
-                            $("#divPhoneSummary").show();
-                            $("#CallTotalCount").html(result);
-                        });
-                        d.resolve(data, { totalCount: data.length });
-                    });
-                    return d.promise();
-                }
-            });
-
-            var gridDataSourceConfiguration = { store: customStore };
-
-            var logDataSource = new DevExpress.data.DataSource({
-                store: customStore,
-                paginate: false
-            });
-
-            $(function () {
-                var datagrid = $("#gridContainer").dxDataGrid({
-                    dataSource: logDataSource,
-                    showColumnLines: false,
-                    showRowLines: true,
-                    rowAlternationEnabled: true,
-                    paging: { enabled: false },
-                    columns: [{
-                        dataField: "EmployeeName",
-                        caption: "Name",
-                        cellTemplate: function (container, options) {
-                            if (options.value != null) {
-                                var fieldHTML = '<a href="javascript:ShowEmployeeReport(\'' + options.value + '\')">' + options.value + "</a>"
-                                container.html(fieldHTML);
-                            }
-                        }
-                    }, "Inbound", {
-                        dataField: "Outbound",
-                        caption: "Outbound"
-                    }, {
-                        dataField: "Count",
-                        caption: "Phone Calls"
-                    }, {
-                        dataField: "Duration",
-                        caption: "Total Time"
-                    }],
-                    summary: {
-                        totalItems: [{
-                            column: 'Count',
-                            summaryType: 'sum'
-                        }]
-                    }
-                });
-            });
-        }
-
-        function ShowEmployeeReport(empName) {
-            $("#gridContainer").show();
-            var empCallLogs = null;
-            var empCallLogsDs = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/CallLog/" + empName);
-            empCallLogsDs.load().done(function (result) {
-                empCallLogs = result;
-
-                $("#gridContainer").dxDataGrid({
-                    dataSource: empCallLogs,
-                    showColumnLines: false,
-                    showRowLines: true,
-                    rowAlternationEnabled: true,
-                    paging: { enabled: false },
-                    columns: [{
-                        dataField: "DateTime",
-                        caption: "Date",
-                        dataType: "date",
-                        format: "shortDate",
-                        calculateGroupValue: function (rowData) {
-                            var callDate = new Date(rowData.DateTime);
-                            return callDate.toLocaleDateString();
-                        }
-                    }, {
-                        dataField: "DateTime",
-                        caption: "Time",
-                        dataType: "date",
-                        format: "shortTime",
-                    },
-                    "CallingNumber", "TimeZone", "Direction", "Duration", "DialedNumber", "Talk", "Answer"
-                    ],
-                    groupPanel: {
-                        visible: true
-                    },
-                    allowColumnReordering: true,
-                    grouping: {
-                        autoExpandAll: true,
-                    },
-                    searchPanel: {
-                        visible: true
-                    },
-                    summary: {
-                        totalItems: [{
-                            column: 'CallingNumber',
-                            summaryType: 'count'
-                        }, {
-                            column: 'Duration',
-                            summaryType: 'sum'
-                        }]
-                    }
-                });
-            });
-        }
-
-        var palette_color = ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7'];
-        function loadCharts(office) {
-
-            $("#monthly_intake").dxChart({
-                legend: { visible: false },
-                rotated: true,
-                dataSource: [
-                    { day: "Monday", oranges: 3 },
-                    { day: "Tuesday", oranges: 2 },
-                    { day: "Wednesday", oranges: 3 },
-                    { day: "Thursday", oranges: 4 },
-                    { day: "Friday", oranges: 6 },
-                    { day: "Saturday", oranges: 11 },
-                    { day: "Sunday", oranges: 4 }],
-
-                series: {
-                    argumentField: "day",
-                    valueField: "oranges",
-
-                    type: "bar",
-
-                },
-                palette: palette_color,
-            });
-            var dataSource = [
-                  { language: "English", percent: 55.5 },
-                  { language: "Chinese", percent: 4.0 },
-                  { language: "Spanish", percent: 4.3 },
-                  { language: "Japanese", percent: 4.9 },
-                  { language: "Portuguese", percent: 2.3 },
-                  { language: "German", percent: 5.6 },
-                  { language: "French", percent: 3.8 },
-                  { language: "Russian", percent: 6.3 },
-                  { language: "Italian", percent: 1.6 },
-                  { language: "Polish", percent: 1.8 }
-            ];
-
-            $("#team_hours_chart").dxPieChart({
-
-                dataSource: dataSource,
-                legend: {
-                    horizontalAlignment: "center",
-                    verticalAlignment: "bottom",
-
-                    visible: false
-                },
-
-                series: [{
-                    smallValuesGrouping: {
-                        mode: "topN",
-                        topCount: 3
-                    },
-                    type: "doughnut",
-                    argumentField: "language",
-                    valueField: "percent",
-                    label: {
-                        visible: true,
-                        format: "fixedPoint",
-
-                        connector: {
-                            visible: true,
-                            width: 1
-                        }
-                    }
-                }]
-            });
-
-
-            var dataSource = new DevExpress.data.DataSource({
-                load: function (loadOptions) {
-                    var d = $.Deferred();
-                    $.getJSON('/WCFDataServices/PortalReportService.svc/LeadsInProcessReport/' + office).done(function (data) {
-                        d.resolve(data);
-                        var inporcessCount = data.reduce(function (a, b) {
-                            return { Count: a.Count + b.Count };
-                        });
-                        $("#InProcessCount").html(inporcessCount.Count)
-                    });
-                    return d.promise();
-                }
-            });
-            var leadstatusData = null;
-            var dataSource2 = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LeadsStatusReport/" + office);
-
-
-            dataSource2.load().done(function (result) {
-                leadstatusData = result;
-                DevExpress.data.query(leadstatusData).sum("Count").done(function (result) {
-                    $("#spanTotalLeads").html(result);
-                });
-            });
-
-            var option =
-                {
-                    dataSource: dataSource,
-                    tooltip: {
-                        enabled: true,
-
-                        percentPrecision: 2,
-                        customizeText: function () {
-
-                            return this.argumentText + " - " + this.percentText;
-                        }
-                    },
-                    legend: { visible: false },
-                    series: [{
-                        type: "doughnut",
-                        argumentField: "Status",
-                        valueField: "Count",
-                        label: {
-                            visible: true,
-
-                            connector: {
-                                visible: true
-                            }
-                        },
-
-                    }],
-                    palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
-
-                }
-            $("#LeadsStatusChart").dxPieChart(option);
-            option.dataSource = dataSource2;
-            $("#current_leads").dxPieChart(option);
-
-
-
-            var leadsProcess = [
-                { state: "May", young: 6.7, middle: 28.6, older: 5.1 },
-                { state: "Jun", young: 9.6, middle: 43.4, older: 9 },
-                { state: "Jul", young: 13.5, middle: 49, older: 5.8 },
-                { state: "Aug", young: 30, middle: 90.3, older: 14.5 }
-            ];
-
-            $("#leads_process_chart").dxChart({
-                dataSource: leadsProcess,
-                commonSeriesSettings: {
-                    argumentField: "state",
-                    type: "stackedBar"
-                },
-                series: [
-                    { valueField: "young", name: "Closed" },
-                    { valueField: "middle", name: "In Process" },
-                    { valueField: "older", name: "Appointments" }
-                ],
-                legend: {
-                    verticalAlignment: "bottom",
-                    horizontalAlignment: "center",
-                    itemTextPosition: 'top'
-                },
-                valueAxis: {
-                    title: {
-                        text: "millions"
-                    },
-                    position: "right"
-                },
-
-                tooltip: {
-                    enabled: true,
-                    location: "edge",
-                    customizeText: function () {
-                        return this.seriesName + " years: " + this.valueText;
-                    }
-                },
-                palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
-            });
-            var compateOfficeData = [
-                { year: "November,2014", Queens: 190, Brooklyn: 180, Bronx: 100, Manhattan: 150 },
-                { year: "December,2014", Queens: 263, Brooklyn: 280, Bronx: 230, Manhattan: 150 },
-                { year: "January", Queens: 220, Brooklyn: 380, Bronx: 190, Manhattan: 150 },
-
-            ];
-
-
-
-            var chartOptions = {
-                dataSource: compateOfficeData,
-                commonSeriesSettings: {
-                    type: "spline",
-                    argumentField: "year"
-                },
-                commonAxisSettings: {
-                    grid: {
-                        visible: true
-                    }
-                },
-                margin: {
-                    bottom: 20
-                },
-                series: [
-                    { valueField: "Queens", name: "Queens Office" },
-                    { valueField: "Brooklyn", name: "Queens Office" },
-                    { valueField: "Bronx", name: "Bronx Office" },
-                    { valueField: "Manhattan", name: "Manhattan Office" }
-                ],
-                tooltip: {
-                    enabled: true
-                },
-                legend: {
-                    verticalAlignment: "bottom",
-                    horizontalAlignment: "center",
-                    itemTextPosition: 'top'
-                },
-                //title: "Architecture Share Over Time (Count)",
-                commonPaneSettings: {
-                    border: {
-                        visible: true
-                    }
-                }
-            };
-            var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
-        }
-        //loadCharts("RonTeam");
-    </script>
-
-    <script type="text/javascript">
 
         var currentTeamInfo = null;
+        var dropDownMenuData = <%= AllTameJson()%>
 
         function ViewLeadsInfo(bble) {
             var url = '/ViewLeadsInfo.aspx?id=' + bble;
@@ -1484,20 +1223,23 @@
             });
         }
 
-        var dropDownMenuData = <%= AllTameJson()%>
+        function menuItemClicked(e) {
+            //debugger;
+            DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
+            agentActivityTab.ShowTab(e.itemData);
 
-           menuItemClicked = function (e) {
-               DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
-               //        $('#teams_link').html(e.itemData);
-               //officeDropDown.option("buttonText", e.itemData );
-               //loadCharts(e.itemData.replace("Office", '').trim());
-               agentActivityTab.ShowTab(e.itemData);
-               $.when(LoadTeamInfo(e.itemData)).done(function () {
-                   LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
-               });
-               if(TeamActivityTab.Visible())
+            $.when(LoadTeamInfo(e.itemData)).done(function () {
+                LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
+            });
+            $.when(LoadTeamInfo(e.itemData)).done(function () {
+                ssAcceptedTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
+            });
+
+            if (TeamActivityTab.Visible())
                 TeamActivityTab.UpdateTeamChart(e.itemData);
-           };
+
+        };
+
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
             onItemClick: menuItemClicked,
@@ -1520,6 +1262,14 @@
                 }
             },
             <% If User.IsInRole("Admin") %>
+            'SS Accepted': {
+                text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>SS Accepted",
+                action: function () {
+                    $('#mytab a[href="#ssAcceptedTab"]').tab('show');
+                    ssAcceptedTab.InitalTab();
+                    ssAcceptedTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
+                }
+            },        
             'Team Activity': {
                 text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>Team Activity",
                 action: function () {
@@ -1549,7 +1299,7 @@
 
         $(document).ready(function () {
             agentActivityTab.InitalTab();
-           
+
             if (dropDownMenuData && dropDownMenuData.length > 0)
                 ShowTeamData(dropDownMenuData[0]);
         });

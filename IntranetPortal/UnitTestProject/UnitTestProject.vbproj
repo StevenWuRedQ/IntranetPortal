@@ -52,6 +52,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -162,6 +163,7 @@
     <Compile Include="EmailParseTest.vb" />
     <Compile Include="EmployeeTest.vb" />
     <Compile Include="LeadTest.vb" />
+    <Compile Include="MockDB.vb" />
     <Compile Include="PortalDBUnitTest.vb">
       <SubType>Designer</SubType>
     </Compile>
@@ -196,6 +198,11 @@
     <Compile Include="DeedCorpUnitTest.vb" />
     <Compile Include="DataAuditUnitTest.vb" />
     <Compile Include="DocumentSearchUnitTest.vb" />
+    <Compile Include="ShortSaleManageUnitTest.vb" />
+    <Compile Include="SMTPUnitTest.vb" />
+    <Compile Include="ExcelBuilderTest.vb" />
+    <Compile Include="EcourtServiceTest.vb" />
+    <Compile Include="LeadsEcourtDataTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />

@@ -12,31 +12,4 @@ Option Explicit On
 
 
 Partial Public Class HomeownerIncentivePage
-    
-    '''<summary>
-    '''linkEdit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents linkEdit As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''divSearchWarning control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents divSearchWarning As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''AuditLogs control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AuditLogs As Global.IntranetPortal.AuditLogs
 End Class

@@ -5,6 +5,6 @@
         scope: {
             summary:'='
         },
-        templateUrl:'/js/Views/LeadDocSearch/dsSummary.html'
+        templateUrl: '/js/Views/LeadDocSearch/dsSummary.html'
     };
 })

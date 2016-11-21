@@ -32,7 +32,7 @@
             
             <li class="ss_form_item">
                 <label class="ss_form_input_title"  ng-class="{ss_warning:!owner.DOB}" data-message="Please fill seller {{$index+1}} DOB">DOB *</label>
-                <input class="ss_form_input" ng-model="owner.DOB" mask="99/99/9999" readonly>
+                <input class="ss_form_input" ng-model="owner.DOB" type='text' pt-date>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title" ng-class="{ss_warning:!owner.SSN}" data-message="Please fill seller {{$index+1}} SSN">SSN *</label>
@@ -178,7 +178,7 @@
                
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:!owner.DOB}">DOB *</label>
-                    <input class="form-control" ng-model="owner.DOB" placeholder="mm/dd/yyyy" clean="true" mask="19/39/9999">
+                    <input class="form-control" ng-model="owner.DOB" type="text" pt-date>
                 </div>
                 <div class="col-sm-4">
                     <label ng-class="{ss_warning2:!owner.SSN}">SSN *</label>
@@ -331,7 +331,7 @@
 
                                 <li class="ss_form_item"  ng-show="mortgage.LenderName!='N/A'">
                                     <label class="ss_form_input_title" ng-class="{ss_warning:mortgage.LenderName!='N/A'&& !mortgage.LoanAmount }" data-message="Please fill {{$index+1|ordered}} Mortgage Loan Amount"> Loan Amount</label>
-                                    <input class="ss_form_input" ng-model="mortgage.LoanAmount" money-mask>
+                                    <input class="ss_form_input" ng-model="mortgage.LoanAmount" pt-number-mask maskformat='money'>
                                 </li>
                                 
                             </ul>

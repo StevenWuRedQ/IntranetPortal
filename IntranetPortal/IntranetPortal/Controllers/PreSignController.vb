@@ -29,7 +29,7 @@ Namespace Controllers
         Public Function GetPreSignRecordByUser() As IHttpActionResult
             Dim name = HttpContext.Current.User.Identity.Name
 
-            If Employee.IsAdmin(name) OrElse User.IsInRole("NewOffer-Viewer") Then
+            If Employee.IsAdmin(name) OrElse User.IsInRole("HOI-Viewer") Then
                 name = "*"
             End If
 
@@ -74,8 +74,13 @@ Namespace Controllers
         End Function
         Public Function GetPreSignRecord(id As Integer) As IHttpActionResult
             Dim record = PreSignRecord.GetInstance(id)
+
             If IsNothing(record) Then
                 Return NotFound()
+            End If
+
+            If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, record.BBLE) Then
+                Return Unauthorized()
             End If
 
             Return Ok(record)
@@ -91,6 +96,10 @@ Namespace Controllers
             Dim record = PreSignRecord.GetInstanceByBBLE(bble)
             If IsNothing(record) Then
                 Return NotFound()
+            End If
+
+            If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, record.BBLE) Then
+                Return Unauthorized()
             End If
 
             Return Ok(record)
@@ -182,16 +191,34 @@ Namespace Controllers
             Dim notify = Sub()
                              Dim svr As New CommonService
                              Dim params = New Dictionary(Of String, String)
+                             Dim cfo = Roles.GetUsersInRole("Accounting-CFO")
+                             Dim users = Roles.GetUsersInRole("Accounting-Manager")
 
-                             Dim finMgr = Roles.GetUsersInRole("Accounting-Manager")
-                             If finMgr.Count > 0 Then
+                             Dim userName = "All"
+                             If cfo IsNot Nothing AndAlso cfo.Count > 0 Then
+                                 userName = cfo(0)
+                                 users = users.Concat(cfo).Distinct.ToArray
+                             End If
+                             Dim underwriters = Roles.GetUsersInRole("Underwriter")
+                             If underwriters IsNot Nothing AndAlso underwriters.Count > 0 Then
+                                 users = users.Concat(underwriters).Distinct.ToArray
+                             End If
+
+                             Dim notifyUsers = Roles.GetUsersInRole("HOI-Notify")
+                             If notifyUsers IsNot Nothing AndAlso notifyUsers.Count > 0 Then
+                                 users = users.Concat(notifyUsers).Distinct.ToArray
+                             End If
+
+                             If users.Count > 0 Then
                                  params.Add("RecordId", record.Id)
-                                 params.Add("UserName", finMgr(0))
+                                 params.Add("UserName", userName)
                                  params.Add("IsUpdate", isUpdate)
 
-                                 Dim emails = Employee.GetEmpsEmails(finMgr.ToArray)
+                                 Dim emails = Employee.GetEmpsEmails(users.ToArray)
+
                                  If Not String.IsNullOrEmpty(emails) Then
-                                     svr.SendEmailByControlWithCC(emails, Employee.GetEmpsEmails(record.CreateBy), "HOI Request from " & record.CreateBy & " about " & record.Title, "PreSignNotify", params)
+                                     Dim attachment = record.LoadApprovalFile()
+                                     svr.SendEmailByControlWithCC(emails, Employee.GetEmpsEmails(record.CreateBy), "HOI Request from " & record.CreateBy & " about " & record.Title, "PreSignNotify", params, attachment)
                                  End If
                              End If
                          End Sub

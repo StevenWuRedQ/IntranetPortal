@@ -17,6 +17,7 @@
         var myPano = null;
         var geocoder;
         var isMap = false;
+
         function initialize() {
             geocoder = new google.maps.Geocoder();
 
@@ -50,42 +51,41 @@
         }
 
         window.showAddress = function (address) {
-            //alert(geocoder.geocode);
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                //alert(status);
-                if (status == google.maps.GeocoderStatus.OK) {
-                    //alert(isMap);
-                    if (isMap) {
+            // alert(geocoder.geocode);
+            // debugger;
+            if (address && address != "") {
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    //alert(status);
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        //alert(isMap);
+                        if (isMap) {
+                            if (myPano != null) {
+                                myPano.setCenter(results[0].geometry.location, 12);
+                                var marker = new google.maps.Marker({
+                                    position: results[0].geometry.location,
+                                    title: address
+                                });
 
-                        if (myPano != null) {
-                            myPano.setCenter(results[0].geometry.location, 12);
-                            var marker = new google.maps.Marker({
-                                position: results[0].geometry.location,
-                                title: address
-                            });
-
-                            marker.setMap(myPano);
-                            myPano.setZoom(17);
-                            //alert("Finish");
+                                marker.setMap(myPano);
+                                myPano.setZoom(17);
+                            }
                         }
-                    }
-                    else {
-                        if (myPano != null) {
-                            //alert(results[0].formatted_address);
-                            //alert(address);
-                            myPano.setPosition(results[0].geometry.location);
-
+                        else {
+                            if (myPano != null) {
+                                myPano.setPosition(results[0].geometry.location);
+                            }
                         }
-                    }
 
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status + ". Address is " + address);
-                }
-            });
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status + ". Address is " + address);
+                    }
+                });
+            }
+
 
         }
 
-        google.maps.event.addDomListener(window, 'load', initialize);             
+        google.maps.event.addDomListener(window, 'load', initialize);
 
 
     </script>

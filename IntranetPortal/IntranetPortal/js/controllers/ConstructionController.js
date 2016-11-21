@@ -1,6 +1,7 @@
 ﻿angular.module('PortalApp')
 .controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService', function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
+    //data structure defination
     var CSCaseModel = function () {
         this.CSCase = {
             InitialIntake: {},
@@ -79,7 +80,7 @@
                                     info: 'Electrical Sign Off Date'
                                 }];
 
-    // end scope variables defination
+
 
     $scope.arrayRemove = ptCom.arrayRemove;
     $scope.ptContactServices = ptContactServices;
@@ -108,7 +109,7 @@
         ptCom.startLoading();
         bble = bble.trim();
         $scope.reload();
-        var done1, done2, done3, done4;
+        var done1, done2, done3, done4; // status marker to indicate all async job finished
 
         ptConstructionService.getConstructionCases(bble, function (res) {
             ptCom.nullToUndefined(res);
@@ -167,7 +168,6 @@
                 ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
             });
     }
-    /* end status change function */
 
     $scope.saveCSCase = function () {
         var data = angular.toJson($scope.CSCase);

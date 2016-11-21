@@ -55,6 +55,7 @@ Partial Class Troubleshooting
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.btnNewOfferNotify = New System.Windows.Forms.Button()
         Me.AutoAssignRules = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.tabEmail = New System.Windows.Forms.TabPage()
@@ -115,6 +116,7 @@ Partial Class Troubleshooting
         Me.btnFollowUp = New System.Windows.Forms.Button()
         Me.btnRefreshLegalReport = New System.Windows.Forms.Button()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.btnComplaintEmail = New System.Windows.Forms.Button()
         Me.btnRefreshComplaints = New System.Windows.Forms.Button()
         Me.txtNotifyNames = New System.Windows.Forms.TextBox()
         Me.btnNotifyAll = New System.Windows.Forms.Button()
@@ -142,11 +144,12 @@ Partial Class Troubleshooting
         Me.txtReportTables = New System.Windows.Forms.TextBox()
         Me.txtTemplateResult = New System.Windows.Forms.TextBox()
         Me.TitleTab = New System.Windows.Forms.TabPage()
+        Me.TestEntitiesBtn = New System.Windows.Forms.Button()
         Me.TitleButton1 = New System.Windows.Forms.Button()
         Me.tpAuction = New System.Windows.Forms.TabPage()
         Me.txtFiles = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.btnComplaintEmail = New System.Windows.Forms.Button()
+        Me.Button22 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -475,6 +478,8 @@ Partial Class Troubleshooting
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Button22)
+        Me.TabPage2.Controls.Add(Me.btnNewOfferNotify)
         Me.TabPage2.Controls.Add(Me.AutoAssignRules)
         Me.TabPage2.Controls.Add(Me.Button11)
         Me.TabPage2.Controls.Add(Me.TextBox1)
@@ -491,6 +496,15 @@ Partial Class Troubleshooting
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Leads and Tasks"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'btnNewOfferNotify
+        '
+        Me.btnNewOfferNotify.Location = New System.Drawing.Point(222, 163)
+        Me.btnNewOfferNotify.Name = "btnNewOfferNotify"
+        Me.btnNewOfferNotify.Size = New System.Drawing.Size(153, 23)
+        Me.btnNewOfferNotify.TabIndex = 11
+        Me.btnNewOfferNotify.Text = "New Offer Notify Rule"
+        Me.btnNewOfferNotify.UseVisualStyleBackColor = True
         '
         'AutoAssignRules
         '
@@ -1080,6 +1094,15 @@ Partial Class Troubleshooting
         Me.TabPage8.Text = "Complaints"
         Me.TabPage8.UseVisualStyleBackColor = True
         '
+        'btnComplaintEmail
+        '
+        Me.btnComplaintEmail.Location = New System.Drawing.Point(138, 76)
+        Me.btnComplaintEmail.Name = "btnComplaintEmail"
+        Me.btnComplaintEmail.Size = New System.Drawing.Size(108, 29)
+        Me.btnComplaintEmail.TabIndex = 9
+        Me.btnComplaintEmail.Text = "Test Notify"
+        Me.btnComplaintEmail.UseVisualStyleBackColor = True
+        '
         'btnRefreshComplaints
         '
         Me.btnRefreshComplaints.Location = New System.Drawing.Point(262, 15)
@@ -1337,6 +1360,7 @@ Partial Class Troubleshooting
         '
         'TitleTab
         '
+        Me.TitleTab.Controls.Add(Me.TestEntitiesBtn)
         Me.TitleTab.Controls.Add(Me.TitleButton1)
         Me.TitleTab.Location = New System.Drawing.Point(4, 22)
         Me.TitleTab.Name = "TitleTab"
@@ -1345,6 +1369,15 @@ Partial Class Troubleshooting
         Me.TitleTab.TabIndex = 11
         Me.TitleTab.Text = "TitleTab"
         Me.TitleTab.UseVisualStyleBackColor = True
+        '
+        'TestEntitiesBtn
+        '
+        Me.TestEntitiesBtn.Location = New System.Drawing.Point(132, 22)
+        Me.TestEntitiesBtn.Name = "TestEntitiesBtn"
+        Me.TestEntitiesBtn.Size = New System.Drawing.Size(75, 23)
+        Me.TestEntitiesBtn.TabIndex = 1
+        Me.TestEntitiesBtn.Text = "TestEntities"
+        Me.TestEntitiesBtn.UseVisualStyleBackColor = True
         '
         'TitleButton1
         '
@@ -1382,14 +1415,14 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'btnComplaintEmail
+        'Button22
         '
-        Me.btnComplaintEmail.Location = New System.Drawing.Point(138, 76)
-        Me.btnComplaintEmail.Name = "btnComplaintEmail"
-        Me.btnComplaintEmail.Size = New System.Drawing.Size(108, 29)
-        Me.btnComplaintEmail.TabIndex = 9
-        Me.btnComplaintEmail.Text = "Test Notify"
-        Me.btnComplaintEmail.UseVisualStyleBackColor = True
+        Me.Button22.Location = New System.Drawing.Point(222, 206)
+        Me.Button22.Name = "Button22"
+        Me.Button22.Size = New System.Drawing.Size(153, 26)
+        Me.Button22.TabIndex = 12
+        Me.Button22.Text = "Update password to MD5"
+        Me.Button22.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1567,4 +1600,7 @@ Partial Class Troubleshooting
     Friend WithEvents cbForms As ComboBox
     Friend WithEvents AutoAssignRules As Button
     Friend WithEvents btnComplaintEmail As Button
+    Friend WithEvents TestEntitiesBtn As Button
+    Friend WithEvents btnNewOfferNotify As Button
+    Friend WithEvents Button22 As Button
 End Class

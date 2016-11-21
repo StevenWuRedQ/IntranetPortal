@@ -37,7 +37,7 @@ portalApp.controller('newofferCtrl', function ($scope) {
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
-    ptContactServices, $location,
+    ptContactServices, $location,PortalHttpInterceptor,
 
     /**** Models *****/
     PropertyOffer
@@ -121,8 +121,17 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             }
         }
     };
-
-    angular.extend($scope.SSpreSign,new PropertyOffer());
+    
+    angular.extend($scope.SSpreSign, new PropertyOffer());
+    /**
+     * @author Steven
+     * @date   8/19/2016
+     * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
+     * @description
+     *  fix the new offer can not save type
+     *  1.It maybe the bug of NG-resource or angular.extend
+     */
+    $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
     $scope.SSpreSign.assignCrop = new AssignCorp();
     //setTimeout(function () {
     //    $scope.SSpreSign.Type = 'Short Sale';
@@ -168,10 +177,9 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     if (PortalUtility.QueryUrl().BBLE) {
         $scope.DocSearch = DocSearch.get(PortalUtility.QueryUrl());
     }
-
-
-
+    
     $scope.DeadType = {
+        ShortSale: false,
         Contract: true,
         Memo: false,
         Deed: false,
@@ -195,10 +203,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                 $scope.refreshSave(formdata);
                 //location.reload();
                 window.location.href = oldUrl;
-
             });
-
-
         })
     }
     $scope.shortSaleInfoNext = function () {
@@ -301,7 +306,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                 async: false
             });
 
-            var errorMsg = PortalHttp.BuildAjaxErrorMessage(response);
+            var errorMsg = PortalHttpInterceptor.BuildAjaxErrorMessage(response);
             if (!errorMsg) {
                 $scope.SSpreSign.DealSheet.Deed.EntityId = $scope.SSpreSign.DealSheet.Deed.Buyer.EntityId;
                 return true;
@@ -310,14 +315,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                 deedCrop.EntityId = null;
                 return false;
             }
-
-
-            //$http.post(,JSON.stringify($scope.SSpreSign.DealSheet.Deed.Buyer)).success(function()
-            //{
-
-            //}).error(function(){
-
-            //});
         }
 
         var eMessages = $scope.getErrorMessage('preAssignDeed');
@@ -503,36 +500,33 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val());
 
     $scope.CheckCurrentStep = function (BBLE) {
-        //var offer = new PropertyOffer()
-        //offer.BBLE = BBLE.trim();
-
-        //$scope.SSpreSign = offer
-        //offer.$getByBBLE(function (data) {
-
-        //    $scope.SSpreSign.Type = 'Short Sale';
-        //    $scope.SSpreSign.FormName = 'PropertyOffer';
-        //    anguler.extend($scope.SSpreSign,)
-        //    $scope.SSpreSign = {
-        //        ContractOrMemo: {
-        //            Sellers: [{}],
-        //            Buyers: [{}]
-        //        },
-        //        Deed: {
-        //            Sellers: [{}]
-        //        },
-        //        CorrectionDeed: {
-        //            Sellers: [{}],
-        //            Buyers: [{}]
-        //        }
-
-        //    }
-
         $scope.SSpreSign = PropertyOffer.getByBBLE({ BBLE: BBLE.trim() }, function (data) {
-
             /**
              * need carefully test 
              * @see PropertyOffer assignOfferId function
-             **/
+             **/            
+            if (data.FormData) {
+                if (data.FormData.DataId == 0)
+                {
+                    data.FormData.DataId = data.DataId;
+                    data.FormData.CreateBy = data.CreateBy;
+                    data.FormData.CreateDate = data.CreateDate;
+                }
+
+                angular.extend($scope.SSpreSign, data.FormData);
+
+                $scope.DeadType = $scope.SSpreSign.DeadType;                
+                $scope.SSpreSign.Status = data.BusinessData.Status;
+
+                // $scope.refreshSave(data);
+
+                var ss = ScopeHelper.getShortSaleScope();
+                if (ss) {
+                    ss.SsCase = $scope.SSpreSign.SsCase;
+                }
+            } else {
+                $scope.SSpreSign.BBLE = data.Tag;
+            }
 
             if (!$scope.SSpreSign.assignCrop) {
                 $scope.SSpreSign.assignCrop = new AssignCorp();
@@ -548,55 +542,23 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             if (!$scope.SSpreSign.DealSheet) {
                 $scope.SSpreSign.DealSheet = $scope.SSpreSign.DealSheetMetaData;
             }
-
-            //$scope.SSpreSign.getByBBLE(function (data) {
-            //$http.get('/api/businessform/PropertyOffer/Tag/' + BBLE).success(function (data) {
-
-            if (data.FormData) {
-
-                angular.extend($scope.SSpreSign, data.FormData);
-
-                if (!$scope.SSpreSign.assignCrop) {
-                    $scope.SSpreSign.assignCrop = new AssignCorp();
-                } else {
-                    var _new = new AssignCorp();
-                    var obj = $scope.SSpreSign.assignCrop;
-                    angular.extend(_new, obj);
-                    angular.extend(obj, _new);
-                    $scope.SSpreSign.assignCrop = _new;
-                }
-
-                $scope.SSpreSign.assignOfferId($scope.onAssignCorpSuccessed);
-
-              
-                $scope.DeadType = $scope.SSpreSign.DeadType;
-                //$scope.SSpreSign.SsCase = data.FormData.SsCase;
-                $scope.SSpreSign.Status = data.BusinessData.Status;
-
-                $scope.refreshSave(data);
-                // setTimeout(function () {
-
-                var ss = ScopeHelper.getShortSaleScope();
-                if (ss) {
-                    ss.SsCase = $scope.SSpreSign.SsCase;
-                }
-                //}
-                //, 1000);
-
-            } else {
-                $scope.SSpreSign.BBLE = data.Tag;
-            }
-
-            var BBLE = $("#BBLE").val();
+                        
             if (BBLE) {
                 LeadsInfo.get({ BBLE: BBLE.trim() }, function (data) {
                     $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
                     $scope.SSpreSign.BBLE = BBLE;
                 });
             }
+            /**
+             * @author Steven
+             * @date   8/19/2016
+             * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
+             * @description
+             *  fix the new offer can not save type
+             *  1.It maybe the bug of NG-resource or angular.extend
+             */
+            $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
         });
-
-        
     }
 
     var BBLE = $("#BBLE").val();
@@ -649,7 +611,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     }
     $scope.NextStep = function () {
         var cStep = $scope.currentStep();
-
         if (cStep.next) {
             if (cStep.next()) {
                 $scope.constractFromData();
@@ -662,7 +623,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                     }
                 })
             }
-
         } else {
             $scope.step++;
         }

@@ -7,7 +7,11 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <link href="/css/Contacts.css" rel="stylesheet" type="text/css" />
-    <script src="/Scripts/ContactJs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-sidebar').accordion();
+        });
+    </script>
     <div ng-controller="VendorCtrl" id="VendorCtrl">
         <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
@@ -128,7 +132,7 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">office #</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.OfficeNO" />
+                                                                <input class="ss_form_input ss_phone" pt-input-mask="(000) 000-0000" ng-model="addContact.OfficeNO" />
 
                                                                 <%--  <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
@@ -137,7 +141,7 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Customer Service</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.CustomerService" />
+                                                                <input class="ss_form_input ss_phone" pt-input-mask="(000) 000-0000" ng-model="addContact.CustomerService" />
 
                                                             </li>
                                                             <li class="ss_form_item">
@@ -148,12 +152,12 @@
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Fax </label>
                                                                 <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
-                                                                <input class="ss_form_input" input-mask="(000) 000-0000" ng-model="addContact.Fax" />
+                                                                <input class="ss_form_input" pt-input-mask="(000) 000-0000" ng-model="addContact.Fax" />
                                                             </li>
 
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Cell #</label>
-                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.Cell" />
+                                                                <input class="ss_form_input ss_phone" pt-input-mask="(000) 000-0000" ng-model="addContact.Cell" />
                                                                 <%--<dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
@@ -205,8 +209,8 @@
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
                             <div style="margin-top: 10px; height: 350px; overflow: auto" id="employee_list">
                                 <div>
-                                  
-                                    <ul class="list-group" style="box-shadow: none" >
+
+                                    <ul class="list-group" style="box-shadow: none">
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
@@ -300,7 +304,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.OfficeNO" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" pt-input-mask="(000) 000-0000" ng-model="currentContact.OfficeNO" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -309,7 +313,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.CustomerService" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" pt-input-mask="(000) 000-0000" ng-model="currentContact.CustomerService" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -328,7 +332,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.Fax" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" pt-input-mask="(000) 000-0000" ng-model="currentContact.Fax" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -344,7 +348,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.Cell" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" pt-input-mask="(000) 000-0000" ng-model="currentContact.Cell" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>

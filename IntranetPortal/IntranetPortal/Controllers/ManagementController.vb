@@ -17,15 +17,15 @@ Namespace Controllers
 
         Private ruleEngineName = System.Configuration.ConfigurationManager.AppSettings("RulesEngineServer")
 
-        <ResponseType(GetType(BaseRule()))>
+        <ResponseType(GetType(Rule()))>
         <Route("api/Management/RulesEngine")>
-        Function GetRulesInEngine() As BaseRule()
+        Function GetRulesInEngine() As Rule()
             Using svr As New RulesEngineServices(ruleEngineName)
                 Return svr.Rules
             End Using
         End Function
 
-        <ResponseType(GetType(BaseRule()))>
+        <ResponseType(GetType(Rule()))>
         <Route("api/Management/RulesEngine/Start/{ruleid}")>
         Function PostStartRule(ruleId As String) As Boolean
             Using svr As New RulesEngineServices(ruleEngineName)
@@ -33,7 +33,6 @@ Namespace Controllers
             End Using
         End Function
 
-        <ResponseType(GetType(BaseRule()))>
         <Route("api/Management/RulesEngine/Stop/{ruleId}")>
         Function PostStopRule(ruleId As String) As Boolean
             Using svr As New RulesEngineServices(ruleEngineName)
@@ -42,7 +41,6 @@ Namespace Controllers
             End Using
         End Function
 
-        <ResponseType(GetType(BaseRule()))>
         <Route("api/Management/RulesEngine/Run/{ruleId}")>
         Function PostRunRule(ruleId As String) As Boolean
             Using svr As New RulesEngineServices(ruleEngineName)

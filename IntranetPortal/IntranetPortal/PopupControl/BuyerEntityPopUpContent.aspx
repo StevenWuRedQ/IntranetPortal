@@ -6,7 +6,11 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
     <link href="/css/Contacts.css" rel="stylesheet" type="text/css" />
-    <script src="/Scripts/ContactJs.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-sidebar').accordion();
+        });
+    </script>
     <style>
         .datepicker {
             z-index: 10000 !important;
@@ -176,7 +180,7 @@
                                                                 <label class="ss_form_input_title">
                                                                     Filling Date
                                                                 </label>
-                                                                <input class="ss_form_input " ss-date ng-model="addContact.FillingDate">
+                                                                <input class="ss_form_input " pt-date ng-model="addContact.FillingDate">
                                                             </li>
 
                                                             <li class="ss_form_item">
@@ -203,13 +207,13 @@
                                                                     Assign On
                                                                 </label>
 
-                                                                <input class="ss_form_input " ss-date ng-model="addContact.AssignOn">
+                                                                <input class="ss_form_input " pt-date ng-model="addContact.AssignOn">
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">
                                                                     Received On
                                                                 </label>
-                                                                <input class="ss_form_input " ss-date ng-model="addContact.ReceivedOn">
+                                                                <input class="ss_form_input " pt-date ng-model="addContact.ReceivedOn">
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -339,7 +343,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary" type="button" ng-click="AssginEntity()" style=" margin-left:10px">Assign</button>
+                                        <button class="btn btn-primary" type="button" ng-click="AssginEntity()" style="margin-left: 10px">Assign</button>
                                     </td>
                                 </tr>
 
@@ -348,7 +352,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right input_info_table">
-                                            <input class="form-control " ss-date ng-model="currentContact.FillingDate" placeholder="Click to input">
+                                            <input class="form-control " pt-date ng-model="currentContact.FillingDate" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -431,7 +435,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right input_info_table">
-                                            <input class="form-control " ss-date ng-model="currentContact.ReceivedOn">
+                                            <input class="form-control " pt-date ng-model="currentContact.ReceivedOn">
                                         </div>
                                     </td>
                                 </tr>
@@ -440,27 +444,27 @@
                                     </td>
                                     <td>
                                         <div class="detail_right input_info_table">
-                                            <span style="color:black">
-                                               <strong>{{currentContact.assignDateNow()}} </strong> 
-                                                <%--<input class="form-control " ss-date ng-model="currentContact.AssignOn" placeholder="Click to input">--%>
+                                            <span style="color: black">
+                                                <strong>{{currentContact.assignDateNow()}} </strong>
+                                                <%--<input class="form-control " pt-date ng-model="currentContact.AssignOn" placeholder="Click to input">--%>
                                             </span>
                                         </div>
                                     </td>
-                                </tr>  
+                                </tr>
                                 <tr class="vendor_info" ng-if="currentContact && currentContact.AssignOn && currentContact.Status!='Available'">
                                     <td class="vendor_info_left">Assigned on
                                     </td>
                                     <td>
                                         <div class="detail_right input_info_table">
                                             <span>
-                                                
+
                                                 <%-- |date:'m Months d day' --%>                                                 
                                                {{currentContact.AssignOn |date:'MM/dd/yyyy'}}
-                                                <%--<input class="form-control " ss-date ng-model="currentContact.AssignOn" placeholder="Click to input">--%>
+                                                <%--<input class="form-control " pt-date ng-model="currentContact.AssignOn" placeholder="Click to input">--%>
                                             </span>
                                         </div>
                                     </td>
-                                </tr>                             
+                                </tr>
                             </table>
                         </div>
                         <div>

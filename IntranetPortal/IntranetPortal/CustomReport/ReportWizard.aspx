@@ -4,8 +4,26 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
     <link rel="stylesheet" href="/css/right-pane.css" />
-    <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
-    <input type="hidden" value="<%=ReportId%>" id="txtReportID"/>
+    <script>
+        $(document).ready(function () {
+
+            $("#right-pane-button").mouseenter(function () {
+                $("#right-pane-container").css("right", "0");
+            });
+
+            $('body').click(function (e) {
+                if (e.target.id == 'right-pane-container')
+                { return true; }
+                else
+                {
+                    $("#right-pane-container").css("right", "-290px");
+                }
+
+            });
+        })
+
+    </script>
+    <input type="hidden" value="<%=ReportId%>" id="txtReportID" />
     <div id="ReportWizardCtrl" ng-controller="ReportWizardCtrl" class="wx_scorll_list" data-bottom="90">
         <div class="container" style="padding-top: 30px; font-size: small">
             <div class="nga-fast nga-fade" ng-show="step==1" style="margin-left: -50px">
@@ -52,7 +70,7 @@
                                                     <option value="2">is after</option>
                                                     <option value="3">equals</option>
                                                 </select>
-                                                <input type="text" ng-model="x.input1" ng-change="updateDateFilter(x)" type="text" ss-date />
+                                                <input type="text" ng-model="x.input1" ng-change="updateDateFilter(x)" type="text" pt-date />
                                             </span>
                                             <span ng-if="f.type=='number'">
                                                 <select ng-model="x.criteria" ng-change="updateNumberFilter(x)">

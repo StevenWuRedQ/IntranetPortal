@@ -6,12 +6,12 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
 
     var preSign = ptBaseResource('PreSign', 'Id', null, {
         getByBBLE: {
-            method: "GET", url: '/api/PreSign/BBLE/:BBLE'
-            , params: {
+            method: "GET",
+            url: '/api/PreSign/BBLE/:BBLE',
+            params: {
                 BBLE: '@BBLE',
-                //Test: '@Test'
             },
-            options:{noError:true}
+            options: { noError: true }
         },
         financeList: {
             method: "GET", url: '/api/PreSign/CheckRequests', isArray: true
@@ -40,8 +40,12 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
         }
 
         if (this.CheckRequestData && this.CheckRequestData.getTotalAmount() > this.DealAmount) {
-           this.pushErrorMsg("The check's total amount must less than the deal amount, Please correct! ");
-           
+           this.pushErrorMsg("The check's total amount must less than the deal amount, Please correct! ");           
+        }
+
+        if (!this.ApprovalFile) {
+            this.pushErrorMsg("Please attach the approval file.");
+
         }
 
         return this.hasErrorMsg() == false;

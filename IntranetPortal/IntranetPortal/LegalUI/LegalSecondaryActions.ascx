@@ -155,7 +155,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Breach date </label>
-                <input class="ss_form_input " ss-date="" ng-model="LegalCase.SecondaryInfo.BreachOfContractDate" />
+                <input class="ss_form_input " pt-date="" ng-model="LegalCase.SecondaryInfo.BreachOfContractDate" />
             </li>
 
             <li class="ss_form_item">
@@ -274,7 +274,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">last payment date</label>
-                <input class="ss_form_input" ss-date="" ng-model="LegalCase.SecondaryInfo.LastPaymentDate" />
+                <input class="ss_form_input" pt-date="" ng-model="LegalCase.SecondaryInfo.LastPaymentDate" />
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Credit Report</label>

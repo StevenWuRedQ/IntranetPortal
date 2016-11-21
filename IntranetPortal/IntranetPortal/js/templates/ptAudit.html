@@ -1,0 +1,45 @@
+﻿<style type="text/css">
+    .audit_log_block {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+        .audit_log_block:hover {
+            background-color: #f5f5f5;
+            border-left: 5px solid #3572b0;
+            padding-left: 5px;
+        }
+
+    .frist-line-log {
+        background: blue;
+    }
+</style>
+<div>
+    <div>
+        <h4 class="label label-primary">{{$ctrl.label || $ctrl.ObjName}}:</h4>&nbsp;
+        <span class="badge">{{$ctrl.logsize}}</span>
+        <span class="pull-right" title="show history" data-toggle="tooltip" data-placement="top" ng-click="$ctrl.toggle()"><i class="fa fa-lg fa-caret-square-o-down" aria-hidden="true"></i></span>
+    </div>
+    <div ng-show="!$ctrl.logsize">
+        <div class="audit_log_block" ng-show="$ctrl.showDetail">
+            No Data.
+        </div>
+    </div>
+    <div ng-show="$ctrl.logsize">
+        <div ng-repeat="(key, prop) in $ctrl.AuditLogs" class="audit_log_block" ng-show="$ctrl.showDetail">
+            <div ng-class="$index==0?'alert alert-success':''"><strong>{{prop[0].UserName}}</strong> <span style="color: blue;">{{prop[0].EventType==0?'first created this form':'made changes'}} on {{key | date:"MM/dd/yyyy HH:mm"}}</span>  </div>
+            <table class="" style="width: 100%; font-size: 14px" ng-show="prop[0].EventType!=0">
+                <tr>
+                    <th style="width: 20%">Field</th>
+                    <th style="width: 40%">Previous Value</th>
+                    <th style="width: 40%">New Value</th>
+                </tr>
+                <tr ng-repeat="log in prop" style="border: none">
+                    <td style="width: 20%">{{log.ColumnName}}</td>
+                    <td style="width: 40%">{{log.FormatOriginalValue}}</td>
+                    <td style="width: 40%">{{log.FormatNewValue}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

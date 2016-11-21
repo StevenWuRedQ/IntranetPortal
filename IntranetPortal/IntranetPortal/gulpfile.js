@@ -1,52 +1,81 @@
-﻿var gulp = require('gulp');
+﻿var p = require('./package.json');
+var del = require('del')
+var gulp = require('gulp');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var del = require('del');
-var watch = require('gulp-watch');
-var batch = require('gulp-batch');
-var rename = require('gulp-rename');
+var uglify = require('gulp-uglifyjs');
+var replace = require('gulp-replace');
+var babel = require('gulp-babel');
+var buffer = '';
+var angularPath = ['js/app.js',
+                'js/common/*.js',
+                'js/models/*.js',
+                'js/Views/**/*.js',
+                'js/services/*.js',
+                'js/filters/*.js',
+                'js/directives/*.js',
+                'js/controllers/*.js',
+                'js/components/*.js',
+                'js/build/' + p.name + '.es6.js'];
 
-var config = {
-    //Include all js files 
-    src: ['js/*.js', 'js/controllers/*.js','js/models/*.js','js/Views/**/*.js','!js/PortalHttpFactory.js'],
+
+var getTimeString = function () {
+    if (buffer) return buffer;
+    var now = new Date();
+    buffer = buffer + now.getFullYear() + (now.getMonth() + 1) + now.getDate()
+    return buffer;
 }
 
-//delete the output file(s)
 gulp.task('clean', function () {
-    //del is an async function and not a gulp plugin (just standard nodejs)
-    //It returns a promise, so make sure you return that from this task function
-    //  so gulp knows when the delete is complete
-    //return del(['js/build/intranetportal.min.js']);
-});
+    del('js/build/*.js')
+})
+
+gulp.task('concat', function () {
+
+    gulp.src(angularPath)
+        //.pipe(babel({            presets: ['es2015-without-strict']        }))
+        .pipe(concat(p.name + '.js'))
+        .pipe(gulp.dest('js/build/'))
+})
+
+gulp.task('uglify', function () {
+    gulp.src('js/build/' + p.name + '.js')
+    .pipe(uglify(p.name + '.min.js'))
+    .pipe(gulp.dest('js/build/'))
+
+})
+
+gulp.task('replace', function () {
+
+    gulp.src('Content.Master')
+        .pipe(replace(/src="\/js\/build\/intranetportal.js(\?v=\d{0,8})?"/g,
+        'src="/js/build\/intranetportal.js?v=' + getTimeString() + '"'))
+        .pipe(replace(/src="\/Scripts\/autosave.js(\?v=\d{0,8})?"/g,
+        'src="/Scripts\/autosave.js?v=' + getTimeString() + '"'))
+        .pipe(replace(/src="\/Scripts\/stevenjs.js(\?v=\d{0,8})?"/g,
+        'src="/Scripts\/stevenjs.js?v=' + getTimeString() + '"'))
+        .pipe(replace(/src="\/Scripts\/autologout.js(\?v=\d{0,8})?"/g,
+        'src="/Scripts\/autologout.js?v=' + getTimeString() + '"'))
+        .pipe(replace(/href="\/css\/stevencss.css(\?v=\d{0,8})?"/g,
+        'href="/css\/stevencss.css?v=' + getTimeString() + '"'))
+        .pipe(gulp.dest(''), { overwrite: true })
+
+    gulp.src('Root.Master')
+        .pipe(replace(/src="\/js\/build\/intranetportal.js(\?v=\d{0,8})?"/g,
+        'src="/js/build\/intranetportal.js?v=' + getTimeString() + '"'))
+        .pipe(replace(/src="\/Scripts\/autosave.js(\?v=\d{0,8})?"/g,
+        'src="/Scripts\/autosave.js?v=' + getTimeString() + '"'))
+        .pipe(replace(/src="\/Scripts\/stevenjs.js(\?v=\d{0,8})?"/g,
+        'src="/Scripts\/stevenjs.js?v=' + getTimeString() + '"'))
+        .pipe(replace(/src="\/Scripts\/autologout.js(\?v=\d{0,8})?"/g,
+        'src="/Scripts\/autologout.js?v=' + getTimeString() + '"'))
+        .pipe(replace(/href="\/css\/stevencss.css(\?v=\d{0,8})?"/g,
+        'href="/css\/stevencss.css?v=' + getTimeString() + '"'))
+        .pipe(gulp.dest(''), { overwrite: true })
+
+})
+
+gulp.task('default', ['concat', 'uglify', 'replace'])
 
 gulp.task('watch', function () {
-    watch('js/controllers/*.js', batch(function (events, done) {
-        gulp.start('scripts', done);
-    }));
-    watch('js/*.js', batch(function (events, done) {
-        gulp.start('scripts', done);
-    }));
-    watch('js/models/*.js', batch(function (events, done) {
-        gulp.start('scripts', done);
-    }));
-    watch('js/Views/**/*.js', batch(function (events, done) {
-        gulp.start('scripts', done);
-    }));
+    gulp.watch(angularPath, ['concat'])
 });
-
-// Combine and minify all files from the app folder
-// This tasks depends on the clean task which means gulp will ensure that the 
-// Clean task is completed before running the scripts task.
-gulp.task('scripts', ['clean'], function () {
-
-    return gulp.src(config.src)
-      //.pipe(uglify())
-      .pipe(concat('intranetportal.js'))
-      .pipe(gulp.dest('js/build/'))
-      .pipe(rename('intranetportal.min.js'))
-      .pipe(uglify())
-      .pipe(gulp.dest('js/build/'));
-});
-
-//Set a default tasks
-gulp.task('default', ['scripts'], function () { });

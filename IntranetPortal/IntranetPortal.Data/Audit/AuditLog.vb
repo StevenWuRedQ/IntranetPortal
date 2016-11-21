@@ -3,16 +3,19 @@ Imports System.Data.Entity.Infrastructure
 Imports System.Reflection
 Imports Newtonsoft.Json.Linq
 Imports System.ComponentModel.DataAnnotations
+Imports System.ComponentModel.DataAnnotations.Schema
 
 ''' <summary>
 ''' The Audit log model
 ''' </summary>
+<MetadataType(GetType(AuditLogMetaData))>
 Partial Class AuditLog
     ''' <summary>
     ''' The database entity entry that related to this log
     ''' </summary>
     ''' <returns></returns>
     <JsonIgnore>
+    <NotMapped>
     Public Property Entity As DbEntityEntry
 
     ''' <summary>
@@ -28,18 +31,20 @@ Partial Class AuditLog
 
         End Using
     End Function
-
-    Public ReadOnly Property FormatOriginalValue As String
+    <NotMapped>
+    Public ReadOnly Property FormatOriginalValue As Object
         Get
             Return FormatValue(Me.OriginalValue)
         End Get
     End Property
-
-    Public ReadOnly Property FormatNewValue As String
+    <NotMapped>
+    Public ReadOnly Property FormatNewValue As Object
         Get
             Return FormatValue(Me.NewValue)
         End Get
     End Property
+
+    Public Property CustomType As String
 
     Public Sub Delete()
 
@@ -49,7 +54,7 @@ Partial Class AuditLog
         End Using
     End Sub
 
-    Private Function FormatValue(value As String) As String
+    Private Function FormatValue(value As String) As Object
         If String.IsNullOrEmpty(value) Then
             Return value
         End If
@@ -64,6 +69,10 @@ Partial Class AuditLog
     End Function
 
     Private Function FormatSimpleTypeValue(prop As PropertyInfo, value As String) As String
+        If prop Is Nothing Then
+            Return value
+        End If
+
         Dim data = CTypeDynamic(value, prop.PropertyType)
         Select Case prop.PropertyType
             Case GetType(System.Decimal), GetType(System.Decimal?)
@@ -75,7 +84,7 @@ Partial Class AuditLog
         End Select
     End Function
 
-    Private Function FormatJSONTypeValue(prop As PropertyInfo, value As String) As String
+    Private Function FormatJSONTypeValue(prop As PropertyInfo, value As String) As Object
         Dim jsconvert = CType(prop.GetCustomAttribute(GetType(JsonConverterAttribute)), JsonConverterAttribute)
         Select Case jsconvert.ConverterType
             Case GetType(Core.JsArrayToStringConverter)
@@ -89,7 +98,11 @@ Partial Class AuditLog
 
                 Return String.Join(";", result.ToArray)
             Case GetType(Core.JsObjectToStringConverter)
-
+                Me.CustomType = "js"
+                Return value
+            Case GetType(Core.JsObjectToFileConverter)
+                Me.CustomType = "file"
+                Return JObject.Parse(value)
             Case Else
                 Return value
         End Select
@@ -111,21 +124,31 @@ Partial Class AuditLog
         If Not _objectProperties.ContainsKey(key) Then
 
             Dim tp = Type.GetType("IntranetPortal.Data." & objName)
-            Dim prop As PropertyInfo = tp.GetProperty(propName)
 
-            Dim tpAttrs = tp.GetCustomAttribute(GetType(MetadataTypeAttribute), True)
-            If tpAttrs IsNot Nothing Then
-                Dim metaType = CType(tpAttrs, MetadataTypeAttribute).MetadataClassType
-                If metaType.GetProperty(propName) IsNot Nothing Then
-                    prop = metaType.GetProperty(propName)
+            If tp Is Nothing Then
+                _objectProperties.Add(key, Nothing)
+            Else
+                Dim prop As PropertyInfo = tp.GetProperty(propName)
+
+                Dim tpAttrs = tp.GetCustomAttribute(GetType(MetadataTypeAttribute), True)
+                If tpAttrs IsNot Nothing Then
+                    Dim metaType = CType(tpAttrs, MetadataTypeAttribute).MetadataClassType
+                    If metaType.GetProperty(propName) IsNot Nothing Then
+                        prop = metaType.GetProperty(propName)
+                    End If
                 End If
-            End If
 
-            _objectProperties.Add(key, prop)
+                _objectProperties.Add(key, prop)
+            End If
         End If
 
         Return _objectProperties(key)
     End Function
+End Class
+
+Friend Class AuditLogMetaData
+    <Key>
+    Public Property AuditId As Integer
 End Class
 
 ''' <summary>
@@ -142,7 +165,7 @@ End Class
 ''' include the object properties, object table name and keynames.
 ''' </summary>
 Class AuditConfig
-    Public Property Properties As List(Of String)
+    Public Property Properties As Dictionary(Of String, Type)
     Public Property TableName As String
     Public Property KeyNames As List(Of String)
 

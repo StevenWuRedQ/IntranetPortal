@@ -1,4 +1,101 @@
-﻿if (typeof $().formatCurrency != 'function') {
+﻿wx_deubg = true;
+wx_show_bug = false;
+PortalUtility = {
+    customizeDateText: function (cellInfo) {
+        if(cellInfo.target == "headerFilter")
+            return cellInfo.valueText;
+
+        if (!cellInfo.value)
+            return ""                                
+        var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+        if (dt)
+            return moment(dt).format('MM/DD/YYYY hh:mm a');
+
+        return ""
+    },
+    customizeDateText2: function (cellInfo) {
+        if (cellInfo.target == "headerFilter")
+            return cellInfo.valueText;
+
+        if (!cellInfo.value)
+            return ""
+        var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
+        if (dt)
+            return moment(dt).format('MM/DD/YYYY');
+
+        return ""
+    },
+    FormatLocalDateTime: function (utcDate) {
+        if (!utcDate)
+            return
+
+        // create Date object for current location
+        var d = new Date();
+
+        // convert to msec
+        // add local time zone offset
+        // get UTC time in msec
+        var utc = new Date(utcDate.getTime() + d.getTimezoneOffset() * 60000);
+
+        // return time as a string
+        return utc
+    },
+    FormatISODate: function (utcDate) {
+        return moment(PortalUtility.FormatLocalDateTime(utcDate)).format('MM/DD/YYYY');
+    },
+    GoToCase: function (url) {
+        window.location.href = url;
+    },
+    fileWindows: {},
+    ShowPopWindow: function (windowId, url, width, height) {
+        this.OpenWindow(url, windowId, width, height);
+    },
+    OpenWindow: function (url, title, width, height) {
+        for (var win in this.fileWindows) {
+            if (this.fileWindows.hasOwnProperty(win) && win == title) {
+                var caseWin = this.fileWindows[win];
+                if (!caseWin.closed) {
+                    caseWin.focus();
+                    return;
+                }
+            }
+        }
+
+        var vwidth = width ? width : 1350;
+        var vheight = height ? height : 930;
+        var left = (screen.width / 2) - (vwidth / 2);
+        var top = (screen.height / 2) - (vheight / 2);
+        this.fileWindows[title] = window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
+        return win;
+    },
+    QueryUrl: function () {
+        // This function is anonymous, is executed immediately and 
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        }
+        return query_string;
+    },
+    ShowConfirm: function () {
+
+    }
+}
+
+if (typeof $().formatCurrency != 'function') {
     $.getScript("/bower_components/jquery-formatcurrency/jquery.formatCurrency-1.4.0.js");
 }
 function clickCollapse(e) {
@@ -32,8 +129,8 @@ function collapse_all(collapse_all) {
     })
 
 }
-var wx_deubg = true;
-/*band data in short Sale*/
+
+
 function d_alert(s) {
     if (wx_deubg) {
         alert(s);
@@ -54,6 +151,7 @@ function d_log_assert(cond, s) {
         d_log(s)
     }
 }
+
 /*when has value then is send object by value */
 function get_sub_property(obj, id_str, value) {
 
@@ -314,7 +412,7 @@ function refreshDiv(field, obj) {
     //ShortSaleDataBand(2);
 
 }
-wx_show_bug = false;
+
 /*set or get short sale data if value is null get data*/
 function ss_field_data(elem, value) {
 
@@ -999,37 +1097,357 @@ function STDownloadFile(url, fileName) {
     link.click();
     document.body.removeChild(link);
 }
-$(document).ready(function () {
-    initToolTips();
-    $(".ss_disable").prop('disabled', 'disabled');
-    $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
-    $(document.body).on('change', '.ss_visable', function () {
-        var checked = this.checked; // $(e).porp("checked")
-        var filed = this.getAttribute("data-field")
 
-        $("[data-visiable='" + filed + "']").css("display", checked ? '' : "none");
+function hashStr(str) {
+    var hash = 0;
+    //if (!str) {
+    //    return 2;
+    //}
+    for (i = 0; i < str.length; i++) {
+        char = str.charCodeAt(i);
+        hash += char;
+    }
+
+    if (hash == 800) {
+        return 1000
+    } else {
+        // do not move working phone and normal phone
+        if (hash > 5000)
+        {
+            return hash;
+        }
+        return 2;
+    }
+    return hash;
+};
+
+// use bubble sor for quick sort for same color not move
+function swap(items, firstIndex, secondIndex) {
+    var temp = items[firstIndex];
+    items[firstIndex] = items[secondIndex];
+    items[secondIndex] = temp;
+    return items;
+}
+
+function bubbleSort(items, comFunc) {
+
+    var len = items.length;
+    var i = j = stop = 0;
+
+    for (i = 0; i < len; i++) {
+        for (j = 0, stop = len - i; j < stop; j++) {
+            var comp = comFunc(items[j], items[j + 1]);
+            if (comp > 0) {
+                items = swap(items, j, j + 1);
+            }
+        }
+    }
+
+    return items;
+}
+
+
+function popUpAtBottomRight(pageToLoad, winName, width, height) {
+    xposition = 0; yposition = 0;
+    if ((parseInt(navigator.appVersion) >= 4)) {
+        xposition = (screen.width - width);
+        yposition = (screen.height - height);
+    }
+
+    var args = "";
+    args += "width=" + width + "," + "height=" + height + ","
+            + "location=0,"
+            + "menubar=0,"
+            + "resizable=0,"
+            + "scrollbars=0,"
+            + "statusbar=false,dependent,alwaysraised,"
+            + "status=false,"
+            + "titlebar=no,"
+            + "toolbar=0,"
+            + "hotkeys=0,"
+            + "screenx=" + xposition + ","  //NN Only
+            + "screeny=" + (yposition - 100) + ","  //NN Only
+            + "left=" + xposition + ","     //IE Only
+            + "top=" + yposition;           //IE Only
+    var dmcaWin = window.open(pageToLoad, winName, args);
+    dmcaWin.focus();
+};
+
+function wrongPhone(phone) {
+    var phoneLink = $(phone).find(".PhoneLink:first");
+    var color = phoneLink.css("color");
+    var hcolor = hashStr(color);
+    return hcolor == 1000;
+}
+
+function GetPhoneNumber(span)
+{
+    var text = span.find(".phone-text:first").text();
+    return text.match(/\d+/g).join("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+}
+
+function GetUndoIndex(span)
+{
+    var undo_index = $(span).attr('data-undo-wrong');
+    if (!undo_index)
+    {
+        return -1;
+    }
+    return parseInt(undo_index);
+}
+
+function compareByActive(a, b) {
+
+    var phoneLinkA = $(a).find(".PhoneLink:first");
+    var phoneLinkB = $(b).find(".PhoneLink:first");
+    var color = phoneLinkA.css("color");
+    var colorB = phoneLinkB.css("color");
+    var hcolor = hashStr(color);
+    var hcolorB = hashStr(colorB);
+
+    // move wrong phone down by color
+    var diff = hcolor - hcolorB;
+
+    if (diff == 0) {
+       
+
+        /***********************************************
+        // disable sort phone function on release 9/23/2016 //
+        // move undo wrong number under acitve number list 
+        var undo_indexA = GetUndoIndex(phoneLinkA);
+        var undo_indexB = GetUndoIndex(phoneLinkB);
+        diff = undo_indexA - undo_indexB;
+
+        if (diff == 0)
+        {
+            // do not move working phone and normal phone
+            var phoneLinkStrA = GetPhoneNumber(phoneLinkA);
+            var phoneLinkStrB = GetPhoneNumber(phoneLinkB);
+            var phoneAHash = hashStr(phoneLinkStrA);
+            var phoneBHash = hashStr(phoneLinkStrB);
+            diff = phoneAHash - phoneBHash;
+        }
+        
+        *****************************************************/
+       
+    }
+
+    return diff;
+}
+
+function GetCallCount(_temTelLink) {
+    var countInt = 0;
+    var parent = $(_temTelLink);
+    var callCountSpan = parent.find(".phone-call-count:first");
+    if (callCountSpan) {
+        var countText = callCountSpan.text().trim();
+        countText = countText.length > 0 ? countText : "(0)";
+        countInt = parseInt(countText.match(/\d+/));
+        if (countInt) {
+            countInt = countInt || 0;
+        }
+    }
+
+    return countInt;
+}
+
+function compareLastCalledDate(a, b) {
+    var diff = 0;
+
+    var dateA = Date.parse($(a).find(".phone-last-called:first").text());
+    var dateB = Date.parse($(b).find(".phone-last-called:first").text());
+
+    var dateATime = 0;
+    var dateBTime = 0;
+
+    dateATime = dateA > 0 ? dateA : 0;
+    dateBTime = dateB > 0 ? dateB : 0;
+
+    if (wrongPhone(a)) {
+        dateATime = -1;
+    }
+
+    if (wrongPhone(b)) {
+        dateBTime = -1;
+    }
+
+    diff = dateBTime - dateATime;
+
+    return diff;
+}
+
+function compareByCallCount(a, b) {
+    var diff = 0;
+    var CountA = GetCallCount(a)
+    var CountB = GetCallCount(b);
+    if (wrongPhone(a)) {
+        CountA = -1;
+    }
+
+    if (wrongPhone(b)) {
+        CountB = -1;
+    }
+
+    diff = CountB - CountA;
+    return diff;
+}
+
+function sortPhoneFunc(compareFunc) {
+    var colors = {};
+    var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
+    var phones_div = $(".homeowner_info_label:has(.PhoneLink)").each(function (id) {
+        var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
+        var html = "";
+
+        phones.sort(function (a, b) {
+            return compareFunc(a, b);
+        });
+
+        phones.each(function (ind) {
+            var ptext = $(this).text();
+            html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
+        });
+       
+        phones.parent().html('<div>' + html + '</div>');
+        // add split line the first undo phone added
+        //var last_undo_wrong =  $("[data-undo-wrong='0']")
+        //    .closest(".color_gray:has(.color_gray)");
+        //if (last_undo_wrong.length > 0 && !$(last_undo_wrong).prev().is("hr"))
+        //{
+        //    $("<hr />").insertBefore(last_undo_wrong);
+        //}
+        
+
+    });
+}
+
+function reSortUndoWrongPhone(phones)
+{
+    var data_undo_wrong_attr = "data-undo-wrong";
+    var undoWrongs = $.grep(phones, function (n, i) {
+        return $(n).attr(data_undo_wrong_attr) != null;
+    }, true);
+
+    var phonesLeft = $.grep(phones, function (n) {
+        return undoWrongs.indexOf(n) < 0;
+    });
+    var phonesWrong = $.grep(phones, function (n) {
+        return undoWrongs.indexOf(n) < 0;
     });
 
-});
-$(document).ready(function () {
-    $('body').tooltip({
-        selector: '.tooltip-examples',
-        placement: 'bottom'
+    undoWrongs.sort(function (a, b) {
+        var undoWA = parseInt($(a).attr(data_undo_wrong_attr));
+        var undoWB = parseInt($(b).attr(data_undo_wrong_attr));
+        return undoWA - undoWB;
+    })
+
+}
+
+function buildPhonesHtml(phones)
+{
+    var html = "";
+
+    phones.each(function (ind) {
+        var ptext = $(this).text();
+        html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
     });
-})
-$(document).on("click", ".tab_button_a", function (e) {
-    $(".tab_button_a").parent().removeClass("active");
-    var list = $(".tab_button_a").parent();
-    var currentList = $(e.currentTarget).parent();
 
-    setTimeout(function () {
+    return html;
+}
+function sortPhones() {
+    sortPhoneFunc(compareByActive);
+    //var colors = {}
+    //var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
+    //var phones_div = $(".homeowner_info_label:has(.PhoneLink)").each(function (id) {
+    //    var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
+    //    var html = "";
+    //    phones.sort(function (a, b) {
+    //        return compareByActive(a, b);
+    //    });
+    //    phones.each(function (ind) {
+    //        var ptext = $(this).text();
+    //        html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
+    //    });
+    //    phones.parent().html('<div>' + html + '</div>');
+    //});
+};
+function CallPhone(phone) {
+    var url = '/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
+    $("#AutoDialer").css('display', '');
+    $("#AutoDialer").attr("src", encodeURI(url));
+};
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+};
+function calc_scorll_heigh(elem) {
+    //var elem = $(".wx_scorll_list")[0];
+    var windowVisbleHeight = $(window.top).height();
+    var elemTop = $(elem).position().top;
+    var paddingBottom = parseInt($(elem).attr('data-bottom'))
+    paddingBottom = paddingBottom ? paddingBottom : 40;
+    $(elem).height(windowVisbleHeight - elemTop - paddingBottom);
+}
+function calc_scorll_heigh_resize() {
+    $('.wx_scorll_list').each(function () {
+        calc_scorll_heigh(this);
+    })
+}
+function calc_scorll_heigh_all() {
+    /*windowd resize*/
+    $(window).resize(function () {
+        calc_scorll_heigh_resize();
+    });
+    /*frist init heights */
+    calc_scorll_heigh_resize();
+    $(document).bind("DOMSubtreeModified", function () {
+        calc_scorll_heigh_resize();
+    });
 
-        currentList.addClass("active");
-        var i = 0;
-    }, 500);
+}
 
-});
-jQuery.fn.fitToParent = function (options) {
+$.fn.accordion = function (options) {
+    var settings = $.extend({
+        autoCollapse: false
+    }, options);
+
+    var
+      $accordion = $(this),
+      blockName = $accordion.attr('data-block'),
+      $items = $('.' + blockName + '__item', $accordion);
+
+    $accordion.delegate('.' + blockName + '__title', 'click', triggerAccordion);
+
+    function triggerAccordion() {
+        var
+          $that = $(this),
+          $parent = $that.parent(),
+          $content = $parent.children('.' + blockName + '__content'),
+          isOpen = $that.hasClass('js-accordion--open'),
+          autoCollapse = true,
+          contentHeight = $content.prop('scrollHeight');
+
+        if (isOpen) {
+            $that.removeClass('js-accordion--open');
+            $parent.removeClass('js-accordion--open');
+            $content.css('height', contentHeight);
+            setTimeout(function () {
+                $content.removeClass('js-accordion--open').css('height', '');
+            }, 4);
+        } else {
+            if (settings.autoCollapse) {
+                //auto collapse open accordions
+            }
+            $that.addClass('js-accordion--open');
+            $parent.addClass('js-accordion--open');
+            $content.addClass('js-accordion--open').css('height', contentHeight).one('webkitTransitionEnd', event, function () {
+                if (event.propertyName === 'height') {
+                    $(this).css('height', '');
+                }
+            });
+        }
+    }
+};
+$.fn.fitToParent = function (options) {
 
     this.each(function () {
 
@@ -1084,176 +1502,190 @@ jQuery.fn.fitToParent = function (options) {
     });
 };
 
-/*autodial*/
-function hashStr(str) {
-    var hash = 0;
-    for (i = 0; i < str.length; i++) {
-        char = str.charCodeAt(i);
-        hash += char;
-    }
 
-    if (hash == 800) {
-        return 1000
-    }
-    return hash;
-};
-
-function popUpAtBottomRight(pageToLoad, winName, width, height) {
-    xposition = 0; yposition = 0;
-    if ((parseInt(navigator.appVersion) >= 4)) {
-        xposition = (screen.width - width);
-        yposition = (screen.height - height);
-    }
-
-    var args = "";
-    args += "width=" + width + "," + "height=" + height + ","
-            + "location=0,"
-            + "menubar=0,"
-            + "resizable=0,"
-            + "scrollbars=0,"
-            + "statusbar=false,dependent,alwaysraised,"
-            + "status=false,"
-            + "titlebar=no,"
-            + "toolbar=0,"
-            + "hotkeys=0,"
-            + "screenx=" + xposition + ","  //NN Only
-            + "screeny=" + (yposition - 100) + ","  //NN Only
-            + "left=" + xposition + ","     //IE Only
-            + "top=" + yposition;           //IE Only
-    var dmcaWin = window.open(pageToLoad, winName, args);
-    dmcaWin.focus();
-};
-
-function sortPhones() {
-    var colors = {}
-    var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
-    var phones_div = $(".homeowner_info_label:has(.PhoneLink)").each(function (id) {
-        var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
-        var html = "";
-        phones.sort(function (a, b) {
-            var color = $(a).find(".PhoneLink:first").css("color");
-            var colorB = $(b).find(".PhoneLink:first").css("color");
-            var hcolor = hashStr(color);
-            var hcolorB = hashStr(colorB);
-            colors["cc" + hcolor] = hcolor + "-" + color;
-            colors["cc" + hcolorB] = hcolorB + "-" + colorB;
-            return hcolor - hcolorB;
+function mip() {
+    if (window.devicePixelRatio > 1) {
+        $('.go-retina').each(function (i) {
+            var lowres = $(this).attr('src');
+            var highres = lowres.replace('.', '@2x.');
+            $(this).attr('src', highres);
         });
-        phones.each(function (ind) {
-            var ptext = $(this).text();
-            html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
-        });
-        phones.parent().html('<div>' + html + '</div>');
-    });
-};
+    }
 
-function CallPhone(phone) {
-    var url = '/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
-    $("#AutoDialer").css('display', '');
-    $("#AutoDialer").attr("src", encodeURI(url));
-};
-
-function endsWith(str, suffix) {
-    return str.indexOf(suffix, str.length - suffix.length) !== -1;
-};
-
-var PortalUtility = {
-    FormatLocalDateTime: function (utcDate) {
-        if (!utcDate)
-            return
-
-        // create Date object for current location
-        var d = new Date();
-
-        // convert to msec
-        // add local time zone offset
-        // get UTC time in msec
-        var utc = new Date(utcDate.getTime() + d.getTimezoneOffset() * 60000);
-
-        // return time as a string
-        return utc
-    },
-    FormatISODate:function(utcDate)
-    {
-        return moment(PortalUtility.FormatLocalDateTime(utcDate)).format('MM/DD/YYYY');
-    },
-    GoToCase: function (url) {
-        window.location.href = url;
-    },
-    fileWindows: {},
-    ShowPopWindow: function (windowId, url) {
-        this.OpenWindow(url, windowId);
-    },    
-    OpenWindow: function (url, title, width, height) {
-        for (var win in this.fileWindows) {
-            if (this.fileWindows.hasOwnProperty(win) && win == title) {
-                var caseWin = this.fileWindows[win];
-                if (!caseWin.closed) {
-                    caseWin.focus();
-                    return;
-                }
+    function submenu_height_reset() {
+        var max_submenu_height = $(window).height() - $('#global-nav .mip-navbar-header').outerHeight() - ($('#main-nav .mip-nav .category').outerHeight() * $('#main-nav .mip-nav .category').length) - $('#side-footer').outerHeight() - 10;
+        $('#main-nav .mip-nav .nav-level-2-container').each(function () {
+            if ($(this).outerHeight() > (max_submenu_height + 10)) {
+                $(this).addClass('tall-submenu');
+                $(this).css({ 'max-height': max_submenu_height + 'px', 'padding-bottom': '10px' });
+                $(this).mCustomScrollbar({
+                    theme: "minimal-dark"
+                });
             }
+        });
+    }
+    submenu_height_reset();
+
+    $(window).on('debouncedresize', function (event) {
+        var max_submenu_height = $(window).height() - $('#global-nav .mip-navbar-header').outerHeight() - ($('#main-nav .mip-nav .category').outerHeight() * $('#main-nav .mip-nav .category').length) - $('#side-footer').outerHeight() - 10;
+        $('.tall-submenu').each(function () {
+            $(this).css({ 'max-height': max_submenu_height + 'px' });
+            $(this).children('.mCustomScrollBox').css({ 'max-height': max_submenu_height + 'px' });
+        });
+    });
+
+    $('#main-nav .mip-nav .nav-level-2-container:not(#main-nav .mip-nav .current + .nav-level-2-container), #main-nav .mip-nav .nav-level-3').hide();
+
+    $('#main-nav .mip-nav .category').click(function () {
+        var current_category = $(this);
+        if (!$(this).hasClass('current')) {
+            $('#main-nav .mip-nav .category').removeClass('current');
+            $(this).addClass('current');
+            if ($('#main-nav .mip-nav .nav-level-2-container').is(':visible')) {
+                $('#main-nav .mip-nav .nav-level-2-container:visible').slideUp('slow', 'easeOutCirc', function () {
+                    if ($(this).parent().has("#SpanAmount_TotalTask").length) {
+                        //Show total task amount
+                        $(this).parent().find("#SpanAmount_TotalTask").show();
+                    }
+
+                    current_category.next('.nav-level-2-container').slideDown('slow', 'easeOutCirc', function () {
+                        if ($(this).parent().has("#SpanAmount_TotalTask").length) {
+                            //hide total task amount
+                            $(this).parent().find("#SpanAmount_TotalTask").hide();
+                        }
+                    });
+                });
+            } else {
+                current_category.next('.nav-level-2-container').slideDown('slow', 'easeOutCirc', function () {
+                    if ($(this).parent().has("#SpanAmount_TotalTask").length) {
+                        //hide total task amount
+                        $(this).parent().find("#SpanAmount_TotalTask").hide();
+                    }
+                });
+            }
+        } else {
+            current_category.next('.nav-level-2-container').slideToggle('slow', 'easeOutCirc', function () {
+                if ($(this).parent().has("#SpanAmount_TotalTask").length) {
+                    if ($(this).is(':visible')) {
+                        $(this).parent().find("#SpanAmount_TotalTask").hide();
+                    } else {
+                        $(this).parent().find("#SpanAmount_TotalTask").show();
+                    }
+                }
+            });
         }
 
-        var vwidth = width ? width : 1350;
-        var vheight = height ? height : 930;
-        var left = (screen.width / 2) - (vwidth / 2);
-        var top = (screen.height / 2) - (vheight / 2);
-        this.fileWindows[title] = window.open(url, title, 'Width=' + vwidth + 'px,Height=' + vheight + 'px, top=' + top + ', left=' + left);
-        return win;
-    },
-    QueryUrl: function () {
-        // This function is anonymous, is executed immediately and 
-        // the return value is assigned to QueryString!
-        var query_string = {};
-        var query = window.location.search.substring(1);
-        var vars = query.split("&");
-        for (var i=0;i<vars.length;i++) {
-            var pair = vars[i].split("=");
-            // If first entry with this name
-            if (typeof query_string[pair[0]] === "undefined") {
-                query_string[pair[0]] = decodeURIComponent(pair[1]);
-                // If second entry with this name
-            } else if (typeof query_string[pair[0]] === "string") {
-                var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
-                query_string[pair[0]] = arr;
-                // If third or later entry with this name
-            } else {
-                query_string[pair[0]].push(decodeURIComponent(pair[1]));
-            }
-        } 
-        return query_string;
+        return false;
+    });
+
+    $('#main-nav .mip-nav .nav-level-2 .has-level-3-menu').click(function () {
+        var current_menu_item = $(this);
+        var target_menu = $(this).next('.nav-level-3');
+        target_menu.slideToggle('slow', 'easeOutCirc', function () {
+            if (target_menu.is(':visible')) current_menu_item.find('.fa-caret-right').removeClass('fa-caret-right').addClass('fa-caret-down');
+            else current_menu_item.find('.fa-caret-down').removeClass('fa-caret-down').addClass('fa-caret-right');
+        });
+
+        var href = current_menu_item.attr("href");
+
+        if (href == "#")
+            return false;
+        else
+            return true;
+    });
+
+    $('#main-nav .mip-nav .nav-level-2 .nav-level-3 .has-level-4-menu').click(function () {
+        var current_menu_item = $(this);
+        var target_menu = $(this).next('.nav-level-4');
+        target_menu.slideToggle('slow', 'easeOutCirc', function () {
+            if (target_menu.is(':visible')) current_menu_item.find('.fa-caret-right').removeClass('fa-caret-right').addClass('fa-caret-down');
+            else current_menu_item.find('.fa-caret-down').removeClass('fa-caret-down').addClass('fa-caret-right');
+        });
+        return true;
+    });
+
+    $('#main-nav .mip-nav .nav-level-2-container:not(#main-nav .mip-nav .current + .nav-level-2-container), #main-nav .mip-nav .nav-level-3 .nav-level-4').hide();
+
+
+    $('.landing').hide();
+
+    // FORM HANDLING
+
+    $('div.landing').append('<div class="form-validation-message"><i class="fa fa-exclamation-circle fa-lg"></i> Authentication failed, please check your username and password.</div>');
+
+    var form_options = {
+        success: afterloginsubmission
+    }
+
+    if ($('#portal-sign-in-form').ajaxForm) {
+        $('#portal-sign-in-form').ajaxForm(form_options);
     }
 }
-
-/**** resize all element unknow height scorll bar*******/
-function calc_scorll_heigh(elem) {
-    //var elem = $(".wx_scorll_list")[0];
-    var windowVisbleHeight = $(window.top).height();
-    var elemTop = $(elem).position().top;
-    var paddingBottom = parseInt($(elem).attr('data-bottom'))
-    paddingBottom = paddingBottom ? paddingBottom : 40;
-    $(elem).height(windowVisbleHeight - elemTop - paddingBottom);
+function afterloginsubmission() {
+    $('.form-validation-message').animate({ "top": "0" }, 500, 'easeOutCirc');
+    $(':input').focus(function () {
+        if ($('.form-validation-message').is(':visible')) $('.form-validation-message').animate({ "top": "-80px" }, 500, 'easeOutCirc');
+    });
 }
-function calc_scorll_heigh_resize() {
-    $('.wx_scorll_list').each(function () {
-        calc_scorll_heigh(this);
+
+/** combine old main.js and stevenjs.js document.ready init functions here **/
+function init_tooltip_and_scroll() {
+    $(document).ready(function () {
+        initToolTips();
+        $(".ss_disable").prop('disabled', 'disabled');
+        $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
+        $(document.body).on('change', '.ss_visable', function () {
+            var checked = this.checked; // $(e).porp("checked")
+            var filed = this.getAttribute("data-field")
+
+            $("[data-visiable='" + filed + "']").css("display", checked ? '' : "none");
+        });
+
+    });
+    $(document).ready(function () {
+        $('body').tooltip({
+            selector: '.tooltip-examples',
+            placement: 'bottom'
+        });
     })
-}
-function calc_scorll_heigh_all() {
-    /*windowd resize*/
-    $(window).resize(function () {
-        calc_scorll_heigh_resize();
-    });
-    /*frist init heights */
-    calc_scorll_heigh_resize();
-    $(document).bind("DOMSubtreeModified", function () {
-        calc_scorll_heigh_resize();
-    });
+    $(document).on("click", ".tab_button_a", function (e) {
+        $(".tab_button_a").parent().removeClass("active");
+        var list = $(".tab_button_a").parent();
+        var currentList = $(e.currentTarget).parent();
 
-}
-$(document).ready(function () {
-    calc_scorll_heigh_all();
-});
+        setTimeout(function () {
 
-/******** end function **********/
+            currentList.addClass("active");
+            var i = 0;
+        }, 500);
+
+    });
+    $(document).ready(function () {
+        calc_scorll_heigh_all();
+    });
+}
+function init_loading() {
+    $(document).ready(
+         function () {
+             setTimeout(function () {
+                 mip();
+             }, 1)
+         }
+    );
+
+    $(window).load(function () {
+        $('#landing-loader').fadeOut('slow', function () {
+            setTimeout(function () {
+                $('.landing').show();
+                $('#username').focus();
+                $('.landing-bg').backstretch([
+                      '/images/img/landing_bg/1.jpg'
+                    , '/images/img/landing_bg/2.jpg'
+                    , '/images/img/landing_bg/3.jpg'
+                    , '/images/img/landing_bg/4.jpg'
+                    , '/images/img/landing_bg/5.jpg'
+                ], { duration: 2000, fade: 4000 });
+            }, 0);
+        });
+    });
+}

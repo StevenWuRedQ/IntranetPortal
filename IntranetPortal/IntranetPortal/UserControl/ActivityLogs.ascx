@@ -952,7 +952,7 @@
                             <table style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <td style="font-weight: bold">Recycle</td>
+                                        <td style="font-weight: bold">Hot Leads Recycle</td>
                                         <td style="text-align: right; width: 120px;">
                                             <div style="float: right">
                                                 <asp:Panel runat="server" ID="pnlRecylce">
@@ -961,12 +961,8 @@
                                                             <asp:Literal runat="server" ID="ltRecycleDays"></asp:Literal></span>
                                                         <dx:ASPxComboBox runat="server" ID="cbRecycleDays" Width="80px" Visible="false" Native="true">
                                                             <Items>
-                                                                <dx:ListEditItem Text="Extend..." Value="0" Selected="true" />
-                                                                <dx:ListEditItem Text="1 Day" Value="1" />
-                                                                <dx:ListEditItem Text="2 Days" Value="2" />
-                                                                <dx:ListEditItem Text="3 Days" Value="3" />
-                                                                <dx:ListEditItem Text="4 Days" Value="4" />
-                                                                <dx:ListEditItem Text="5 Days" Value="5" />
+                                                                <dx:ListEditItem Text="Extend..." Value="0" Selected="true" />                                                                
+                                                                <dx:ListEditItem Text="15 Days" Value="15" />
                                                             </Items>
                                                         </dx:ASPxComboBox>
                                                     </div>
@@ -1117,22 +1113,11 @@
                             <div class="col-md-7">&nbsp;</div>
                             <div class="col-md-5">
                                 <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                    <ClientSideEvents Click="function(){
-                                                                                                                        var container = popupBpo.GetMainElement();
-                                                                                                                        if (ASPxClientEdit.ValidateEditorsInContainer(container))
-                                                                                                                        {
-                                                                                                                            refreshLogs = true;
-                                                                                                                            popupBpo.PerformCallback('Add');
-                                                                                                                            popupBpo.Hide();
-                                                                                                                        }                                                                                                                                                                                                                                        
-                                                                                                                  }"></ClientSideEvents>
+                                    <ClientSideEvents Click="function(){var container = popupBpo.GetMainElement(); if (ASPxClientEdit.ValidateEditorsInContainer(container)){ refreshLogs = true; popupBpo.PerformCallback('Add'); popupBpo.Hide(); } }"></ClientSideEvents>
                                 </dx:ASPxButton>
-                                &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CausesValidation="false" CssClass="rand-button rand-button-gray">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        popupBpo.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-                                                            </dx:ASPxButton>
+                                &nbsp;<dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CausesValidation="false" CssClass="rand-button rand-button-gray">
+                                    <ClientSideEvents Click="function(){ popupBpo.Hide(); }"></ClientSideEvents>
+                                </dx:ASPxButton>
                             </div>
                         </div>
                     </div>
@@ -1276,12 +1261,7 @@
                     </table>
                 </dx:PopupControlContentControl>
             </ContentCollection>
-            <ClientSideEvents EndCallback="function(s,e){
-                                            if(showAppointmentPopup)
-                                                s.Show();
-                                            else
-                                                s.Hide();
-                                        }" />
+            <ClientSideEvents EndCallback="function(s,e){if(showAppointmentPopup) s.Show(); else s.Hide(); }" />
         </dx:ASPxPopupControl>
 
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
@@ -1304,7 +1284,7 @@
                     <asp:HiddenField runat="server" ID="hfResend" />
                     <div style="color: #b1b2b7; padding: 10px">
                         <div class="form-group ">
-                            <label class="upcase_text">Action</label>
+                            <label class="upcase_text">Task Name</label>
                             <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbTaskAction" ClientInstanceName="cbTaskAction" CssClass="edit_drop">
                                 <Items>
                                     <dx:ListEditItem Text="" Value="" />
@@ -1318,22 +1298,14 @@
                                 <ValidationSettings ErrorDisplayMode="None">
                                     <RequiredField IsRequired="true" />
                                 </ValidationSettings>
-                                <ClientSideEvents SelectedIndexChanged="function(s,e){
-                                       if(s.GetText() != '')
-                                       {
-                                            callbackGetEmployeesByAction.PerformCallback(s.GetText());                                           
-                                            return;
-                                       }
-                                    }" />
+                                <ClientSideEvents SelectedIndexChanged="function(s,e){ if(s.GetText() != '') { callbackGetEmployeesByAction.PerformCallback(s.GetText()); return; } }" />
                             </dx:ASPxComboBox>
                             <dx:ASPxCallback runat="server" ID="callbackGetEmployeesByAction" ClientInstanceName="callbackGetEmployeesByAction" OnCallback="callbackGetEmployeesByAction_Callback">
-                                <ClientSideEvents CallbackComplete="function(s,e){                                       
-                                            empCheckComboBox.SetText(e.result);
-                                    }" />
+                                <ClientSideEvents CallbackComplete="function(s,e){  empCheckComboBox.SetText(e.result); }" />
                             </dx:ASPxCallback>
                         </div>
                         <div class="form-group ">
-                            <label class="upcase_text">employees</label>
+                            <label class="upcase_text">Assignee</label>
                             <dx:ASPxDropDownEdit ClientInstanceName="empCheckComboBox" ID="empsDropDownEdit" Width="100%" runat="server" CssClass="edit_drop" AnimationType="None">
                                 <DropDownWindowStyle BackColor="#EDEDED" />
                                 <DropDownWindowTemplate>
@@ -1342,8 +1314,7 @@
                                             <dx:TabPage Text="Recently" Name="tabRecent">
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
-                                                        <dx:ASPxListBox Width="100%" ID="lbRecentEmps" Height="260px" ClientInstanceName="empRecentlyListbox" SelectionMode="CheckColumn"
-                                                            runat="server">
+                                                        <dx:ASPxListBox Width="100%" ID="lbRecentEmps" Height="260px" ClientInstanceName="empRecentlyListbox" SelectionMode="CheckColumn" runat="server">
                                                             <Items>
                                                                 <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
                                                                 <dx:ListEditItem Text="Allen Glover" Value="Allen Glover" />
@@ -1362,9 +1333,7 @@
                                                             <tr>
                                                                 <td>
                                                                     <dx:ASPxTextBox runat="server" ID="txtTaskEmpSearch" CssClass="edit_drop" ClientInstanceName="txtTaskEmpSearchClient" Width="100%" NullText="Type Employees Name">
-                                                                        <ClientSideEvents KeyDown="function(s,e){                                                                                                                                     
-                                                                                                                                        OnEmplistSearch(s.GetText());                                                                                                                                    
-                                                                                                                                    }" />
+                                                                        <ClientSideEvents KeyDown="function(s,e){ OnEmplistSearch(s.GetText());  }" />
                                                                     </dx:ASPxTextBox>
                                                                 </td>
                                                             </tr>
@@ -1398,13 +1367,24 @@
                             <dx:ASPxComboBox runat="server" Width="100%" ID="cbTaskImportant" CssClass="edit_drop">
                                 <Items>
                                     <dx:ListEditItem Text="Normal" Value="Normal" />
-                                    <dx:ListEditItem Text="Important" Value="Important" />
+                                    <dx:ListEditItem Text="High" Value="Important" />
                                     <dx:ListEditItem Text="Urgent" Value="Urgent" />
                                 </Items>
                                 <ValidationSettings ErrorDisplayMode="None">
                                     <RequiredField IsRequired="true" />
                                 </ValidationSettings>
                             </dx:ASPxComboBox>
+                        </div>
+                        <div class="form-group">
+                            <label class="upcase_text">Due Date</label>
+                            <dx:ASPxDateEdit ID="dueDate" runat="server" EditFormat="Custom" Width="100%" CssClass="edit_drop">
+                                <TimeSectionProperties Visible="false">
+                                    <TimeEditProperties EditFormatString="hh:mm tt" />
+                                </TimeSectionProperties>
+                                <ValidationSettings ErrorDisplayMode="None">
+                                   <RequiredField IsRequired="True" />
+                                </ValidationSettings>
+                            </dx:ASPxDateEdit>
                         </div>
                         <div class="form-group ">
                             <label class="upcase_text" style="display: block">Description</label>
@@ -1416,22 +1396,11 @@
                                 <div class="col-md-7">&nbsp;</div>
                                 <div class="col-md-5">
                                     <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                        <ClientSideEvents Click="function(){
-                                                                                                                        var container = ASPxPopupSetAsTaskControl.GetMainElement();
-                                                                                                                        if (ASPxClientEdit.ValidateEditorsInContainer(container))
-                                                                                                                        {
-                                                                                                                            gridTrackingClient.PerformCallback('Task');
-                                                                                                                            ASPxPopupSetAsTaskControl.Hide(); 
-                                                                                                                        }                                                                                                                                                                                                                                        
-                                                                                                                        }"></ClientSideEvents>
+                                        <ClientSideEvents Click="function(){ var container = ASPxPopupSetAsTaskControl.GetMainElement();if(ASPxClientEdit.ValidateEditorsInContainer(container)) { gridTrackingClient.PerformCallback('Task'); ASPxPopupSetAsTaskControl.Hide(); }}"></ClientSideEvents>
                                     </dx:ASPxButton>
-                                    &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CausesValidation="false" CssClass="rand-button rand-button-gray">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
+                                    &nbsp;<dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CausesValidation="false" CssClass="rand-button rand-button-gray">
+                                        <ClientSideEvents Click="function(){ASPxPopupSetAsTaskControl.Hide(); }"></ClientSideEvents>
+                                    </dx:ASPxButton>
                                 </div>
 
                             </div>

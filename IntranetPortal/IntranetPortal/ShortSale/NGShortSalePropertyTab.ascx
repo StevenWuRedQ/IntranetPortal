@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>LockupDate</label>
-                                    <input class="form-control" ss-date ng-model="floor.LockupDate" />
+                                    <input class="form-control" pt-date ng-model="floor.LockupDate" />
                                 </div>
                                 <div class="col-sm-6">
                                     <label>LockedBy</label>
@@ -194,7 +194,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label>LastChecked</label>
-                                    <input class="form-control" ss-date ng-model="floor.LastChecked" />
+                                    <input class="form-control" pt-date ng-model="floor.LastChecked" />
                                 </div>
                             </div>
                         </div>
@@ -258,7 +258,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Unbuilt Sqft</label>
-                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnbuiltSqft" readonly="readonly" number-mask>
+                <input class="ss_form_input" ng-model="SsCase.LeadsInfo.UnbuiltSqft" readonly="readonly" pt-number-mask>
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Zoning Code</label>

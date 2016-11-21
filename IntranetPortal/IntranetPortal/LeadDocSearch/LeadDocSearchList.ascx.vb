@@ -15,15 +15,20 @@
                 Dim Searches = Data.LeadInfoDocumentSearch.GetAllSearches
                 Dim BBlEs = Searches.Select(Function(s) s.BBLE).ToList
                 Dim leads = ctx.Leads.Where(Function(l) BBlEs.Contains(l.BBLE)).ToList
-
-                gridDocSearch.DataSource = (From s In Searches
-                                            Join l In leads On s.BBLE Equals l.BBLE
-                                            Select New With
+                Dim datasource = (From s In Searches
+                                  Join l In leads On s.BBLE Equals l.BBLE
+                                  Select New With
                                                 {.BBLE = s.BBLE,
                                                  .Name = l.LeadsName,
                                                  .Status = s.Status,
                                                  .UpdateDate = s.UpdateDate,
                                                  .ExpectedSigningDate = s.ExpectedSigningDate})
+                If HttpContext.Current.User.IsInRole("DocSearch-Outside") Then
+                    datasource = datasource.AsEnumerable.Where(Function(c)
+                                                                   Return c.Status = Data.LeadInfoDocumentSearch.SearchStatus.NewSearch
+                                                               End Function)
+                End If
+                gridDocSearch.DataSource = datasource
 
                 gridDocSearch.DataBind()
 

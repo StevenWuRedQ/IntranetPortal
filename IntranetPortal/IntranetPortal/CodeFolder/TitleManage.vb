@@ -14,6 +14,7 @@ Public Class TitleManage
     Implements INavMenuAmount
 
     Private Const MgrRoleName As String = "Title-Manager"
+    Private Const SuperMgrRoleName As String = "Title-SuperManager"
     Public Const FormName As String = "TitleCase"
 
     ''' <summary>
@@ -24,6 +25,20 @@ Public Class TitleManage
     Public Shared Function IsManager(userName As String) As String
 
         If Roles.IsUserInRole(userName, MgrRoleName) OrElse Roles.IsUserInRole(userName, "Admin") OrElse IsViewable(userName) Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' Check if the user is title manager
+    ''' </summary>
+    ''' <param name="userName">The user name</param>
+    ''' <returns></returns>
+    Public Shared Function IsSuperManager(userName As String) As String
+
+        If Roles.IsUserInRole(userName, SuperMgrRoleName) OrElse Roles.IsUserInRole(userName, "Admin") Then
             Return True
         End If
 
@@ -256,22 +271,22 @@ Public Class TitleManage
     End Function
 
     Public Shared Function GetCasesByCategory(userName As String, Optional cateId As Integer = -1) As TitleCase()
-        'If IsManager(userName) Then
-        '    Return TitleCase.GetCasesBySSCategory("All", cateId)
-        'Else
-        '    Return TitleCase.GetCasesBySSCategory(userName, cateId)
-        'End If
-        Return TitleCase.GetCasesBySSCategory(userName, cateId)
+        If IsSuperManager(userName) Then
+            Return TitleCase.GetCasesBySSCategory("All", cateId)
+        Else
+            Return TitleCase.GetCasesBySSCategory(userName, cateId)
+        End If
+        'Return TitleCase.GetCasesBySSCategory(userName, cateId)
     End Function
 
     Public Shared Function GetMyCases(userName As String, Optional status As TitleCase.DataStatus = TitleCase.DataStatus.All) As TitleCase()
-        'If IsManager(userName) Then
-        '    Return TitleCase.GetAllCases(status)
-        'Else
-        '    Return TitleCase.GetAllCases(userName, status)
-        'End If
+        If IsSuperManager(userName) Then
+            Return TitleCase.GetAllCases(status)
+        Else
+            Return TitleCase.GetAllCases(userName, status)
+        End If
 
-        Return TitleCase.GetAllCases(userName, status)
+        'Return TitleCase.GetAllCases(userName, status)
     End Function
 
     Public Shared Function TitleCategories(cateId As String) As String

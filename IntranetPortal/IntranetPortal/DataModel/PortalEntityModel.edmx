@@ -179,6 +179,8 @@
           <Property Name="Source" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="120" />
           <Property Name="Comment" Type="nchar" MaxLength="100" />
+          <Property Name="LastCalledDate" Type="datetime" />
+          <Property Name="CallCount" Type="int" />
         </EntityType>
         <EntityType Name="HomeOwners">
           <Key>
@@ -215,6 +217,7 @@
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
           <Property Name="Process" Type="int" />
           <Property Name="Status" Type="int" />
+          <Property Name="SubStatus" Type="int" />
           <Property Name="CallbackDate" Type="date" />
           <Property Name="Neighborhood" Type="nvarchar" MaxLength="120" />
           <Property Name="DeadReason" Type="int" />
@@ -1150,6 +1153,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="MarkColor" Type="Int32" />
           <Property Name="AppId" Type="Int32" />
+          <Property Name="SubStatus" Type="Int32" />
         </EntityType>
         <EntityType Name="LeadsInfo">
           <Key>
@@ -1563,6 +1567,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Source" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="Comment" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="LastCalledDate" Type="DateTime" Precision="3" />
+          <Property Name="CallCount" Type="Int32" />
         </EntityType>
         <EntityType Name="UserProfileData">
           <Key>
@@ -2037,6 +2043,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="Leads">
             <EntityTypeMapping TypeName="IntranetPortalModel.Lead">
               <MappingFragment StoreEntitySet="Leads">
+                <ScalarProperty Name="SubStatus" ColumnName="SubStatus" />
                 <ScalarProperty Name="AppId" ColumnName="AppId" />
                 <ScalarProperty Name="MarkColor" ColumnName="MarkColor" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2407,6 +2414,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="HomeOwnerPhones">
             <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwnerPhone">
               <MappingFragment StoreEntitySet="HomeOwnerPhone">
+                <ScalarProperty Name="CallCount" ColumnName="CallCount" />
+                <ScalarProperty Name="LastCalledDate" ColumnName="LastCalledDate" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Source" ColumnName="Source" />

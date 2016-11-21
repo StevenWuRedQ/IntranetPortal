@@ -1,13 +1,27 @@
 ﻿Public Class PropertyInfo
-    Inherits System.Web.UI.UserControl
+    Inherits UserControl
+    Implements ICallbackEventHandler
+
+    Public Property LeadsInfoData As LeadsInfo = New LeadsInfo
+    Public Property LeadsData As Lead
+
+    Public Property callbackResult As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            Dim cm As ClientScriptManager = Page.ClientScript
+            Dim cbReference As String
+            cbReference = cm.GetCallbackEventReference(Me, "arg",
+                "ReceiveServerData", "")
+            Dim callbackScript As String = ""
+            callbackScript &= "function CallServer(arg, context)" &
+                "{" & cbReference & "; }"
+            cm.RegisterClientScriptBlock(Me.GetType(),
+                "CallServer", callbackScript, True)
+        End If
 
     End Sub
 
-    Public Property LeadsInfoData As LeadsInfo = New LeadsInfo
-
-    Public Property LeadsData As Lead
 
     Public Function BindData() As Boolean
         'If LeadsInfoData.IsApartment Then
@@ -161,5 +175,25 @@
         End If
 
         Return 0
+    End Function
+
+    Public Sub RaiseCallbackEvent(eventArgument As String) Implements ICallbackEventHandler.RaiseCallbackEvent
+        If String.IsNullOrEmpty(eventArgument) Then
+            callbackResult = "-1"
+
+        ElseIf eventArgument.StartsWith("getLeadsStatus") Then
+
+            Dim bble = eventArgument.Split("|")(1)
+            LeadsData = Lead.GetInstance(bble)
+            callbackResult = "getLeadsStatusResult|" & LeadsData.Status & "|" & LeadsData.SubStatus
+        Else
+            callbackResult = "-1"
+
+
+        End If
+    End Sub
+
+    Public Function GetCallbackResult() As String Implements ICallbackEventHandler.GetCallbackResult
+        Return callbackResult
     End Function
 End Class

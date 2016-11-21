@@ -1,5 +1,11 @@
-﻿Imports DevExpress.Web.ASPxHtmlEditor
+﻿Imports System.ComponentModel
+Imports System.Globalization
+Imports DevExpress.Web.ASPxHtmlEditor
+Imports IntranetPortal
 
+''' <summary>
+''' Leads Status Enum
+''' </summary>
 Public Enum LeadStatus
     NewLead = 0
     Priority = 1
@@ -17,7 +23,84 @@ Public Enum LeadStatus
     Declined = 15
     Publishing = 16
     Published = 17
+    LoanMod = 20
+    Warm = 21
 End Enum
+
+''' <summary>
+''' Represents SubStatus of leads
+''' </summary>
+Public Class LeadSubStatus
+    Inherits Status
+    ''' <summary>
+    ''' Represents the LoanMod In Process status
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Property LoanModInProcess As New LeadSubStatus With {
+        .Key = 0, .Name = "LoanMod In Progress"}
+    ''' <summary>
+    ''' Represents the LoanMod Completed Status
+    ''' </summary>
+    ''' <returns></returns>
+    Public Shared Property LoanModCompleted As New LeadSubStatus With {
+        .Key = 1, .Name = "LoanMod Completed"}
+
+    Public Shared Widening Operator CType(ByVal status As Integer) As LeadSubStatus
+        Select Case status
+            Case 0
+                Return LoanModInProcess
+            Case 1
+                Return LoanModCompleted
+        End Select
+
+        Return Nothing
+    End Operator
+
+    Public Shared Narrowing Operator CType(v As LeadSubStatus) As Integer
+        Return v.Key
+    End Operator
+
+    Public Shared Operator =(ByVal v As LeadSubStatus, ByVal i As Integer?) As Boolean
+        If Not i.HasValue Then
+            Return False
+        End If
+
+        Return v.Key = i
+    End Operator
+
+    Public Shared Operator <>(ByVal v As LeadSubStatus, ByVal i As Integer?) As Boolean
+        If Not i.HasValue Then
+            Return True
+        End If
+
+        Return v.Key <> i
+    End Operator
+End Class
+
+''' <summary>
+''' The base class of Status
+''' </summary>
+Public Class Status
+    ''' <summary>
+    ''' The key of status
+    ''' </summary>
+    ''' <returns></returns>
+    Protected Property Key As Integer
+    ''' <summary>
+    ''' The name of status
+    ''' </summary>
+    ''' <returns></returns>
+    Protected Property Name As String
+    ''' <summary>
+    ''' The display name of status
+    ''' </summary>
+    ''' <returns></returns>
+    Protected Property DisplayName As String
+
+    Public Overrides Function ToString() As String
+        Return Name
+    End Function
+End Class
 
 ''' <summary>
 ''' The Portal Utility Class
@@ -50,9 +133,23 @@ Public Class Utility
                 category = LeadStatus.Closed
             Case "Create" 'Save as new leads
                 category = LeadStatus.NewLead
+            Case Else
+                If [Enum].TryParse(Of LeadStatus)(cateName, category) Then
+                    Return category
+                End If
         End Select
 
+        For Each o In [Enum].GetValues(GetType(LeadStatus))
+            If cateName.Equals(o.ToString) Then
+                category = o
+            End If
+        Next
+
         Return category
+    End Function
+
+    Public Shared Function getLeadStatusByCode(statusCode As String) As LeadStatus
+        Return CType([Enum].Parse(GetType(LeadStatus), statusCode), LeadStatus)
     End Function
 
     ''' <summary>
@@ -68,6 +165,11 @@ Public Class Utility
             VenderTypes.Add(CInt(v), Core.Utility.GetEnumDescription(v))
         Next
         Return VenderTypes
+    End Function
+
+    Public Shared Function GetLeadsCustomStatus() As LeadStatus()
+        Dim vals = [Enum].GetValues(GetType(LeadStatus)).Cast(Of LeadStatus).Where(Function(l) l >= 20)
+        Return vals.ToArray
     End Function
 
     ''' <summary>
@@ -105,6 +207,10 @@ Public Class Utility
         End If
 
         Return result
+    End Function
+
+    Public Shared Function GetApplictionURL() As String
+        Return Core.PortalSettings.GetValue("ApplicationUrl")
     End Function
 
     ''' <summary>
@@ -294,8 +400,8 @@ Public Class Utility
             Dim unActiveUser = Employee.GetDeptUnActiveUserList(office).Select(Function(emp) emp.Name).ToArray
 
             Dim count = (From ld In context.Leads
-                                   Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
-                                   Select ld).Count
+                         Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
+                         Select ld).Count
             Return count
         End Using
     End Function
@@ -327,6 +433,87 @@ Public Class Utility
                     myNumber.Substring(10)
         End If
         Return mynewNumber
+    End Function
+
+    ''' <summary>
+    '''  returned formats are: 
+    '''  example1               (620) 123-4567 Ext: 890
+    '''  example2                     123-4567 Ext: 890
+    '''  example3               (620) 123-4567 
+    '''  example4                     123-4567
+    '''  The user can input a 7 or 10 digit number followed by a character(s) and digits for the extension
+    ''' 
+    ''' </summary>
+    ''' <param name="OriginalNumber"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function FormatPhone(ByVal OriginalNumber As String) As String
+
+        Dim sReturn As String
+        Dim tester() As String
+        Dim R As Regex
+        Dim M As Match
+        Dim sTemp As String
+
+        sReturn = ""
+        ' removes anything that is not a digit or letter
+        sTemp = UnFormatPhone(OriginalNumber)
+        ' splits sTemp based on user input of character(s) to signify an extension i.e. x or ext or anything else you can think of (abcdefg...)
+        tester = Regex.Split(sTemp, "\D+")
+        ' if the string was split then replace sTemp with the first part, i.e. the phone number less the extension
+        If tester.Count > 1 Then
+            sTemp = tester(0)
+        End If
+        ' Based on the NANP (North American Numbering Plan),  we better have a 7 or 10 digit number.  anything else will not parse
+        If sTemp.Length = 7 Then
+            R = New Regex("^(?<First>\d{3})(?<Last>\d{4})")
+        ElseIf sTemp.Length = 10 Then
+            R = New Regex("^(?<AC>\d{3})(?<First>\d{3})(?<Last>\d{4})")
+        Else
+            Return OriginalNumber
+        End If
+        ' now format the phone number nice and purtee...
+        M = R.Match(sTemp)
+        If M.Groups("AC").Length > 0 Then
+            sReturn &= String.Format("({0}) {1}-{2}", CStr(M.Groups("AC").Value), CStr(M.Groups("First").Value), CStr(M.Groups("Last").Value))
+        Else
+            sReturn &= String.Format("{0}-{1}", CStr(M.Groups("First").Value), CStr(M.Groups("Last").Value))
+        End If
+        If tester.Count > 1 Then
+            sReturn &= " Ext: " + tester(1)
+        End If
+        Return sReturn
+
+    End Function
+
+    ''' <summary>
+    ''' Strips NON ALPHANUMERICS from a string
+    ''' 
+    ''' </summary>
+    ''' <param name="sTemp"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function UnFormatPhone(ByVal sTemp As String) As String
+        sTemp = ClearNull(sTemp)
+        Dim sb As New System.Text.StringBuilder
+        For Each ch As Char In sTemp
+            If Char.IsLetterOrDigit(ch) OrElse ch = " "c Then
+                sb.Append(ch)
+            End If
+        Next
+        UnFormatPhone = sb.ToString
+
+    End Function
+
+    ''' <summary>
+    ''' Returns a trimmed string with vbNullChar replaced by a blank
+    ''' </summary>
+    ''' <param name="sTemp"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function ClearNull(ByRef sTemp As String) As String
+        sTemp = Replace(sTemp, vbNullChar, "")
+        ClearNull = Trim(sTemp)
     End Function
 
     Public Shared Function RemoveHtmlTags(html As String) As String

@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="margin:10px">
+        <div style="margin: 10px">
             Select Company: &nbsp;<asp:DropDownList ID="ddlApplications" runat="server" OnSelectedIndexChanged="ddlApplications_SelectedIndexChanged" AutoPostBack="true">
             </asp:DropDownList>
         </div>
@@ -21,7 +21,9 @@
                             <br />
                             <dx:ASPxTextBox runat="server" Width="100%" ID="txtRoles"></dx:ASPxTextBox>
                             <dx:ASPxButton runat="server" Text="Add" ID="btnAddRole"></dx:ASPxButton>
-                            <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveRole"></dx:ASPxButton>
+                            <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveRole">
+                                <ClientSideEvents Click="function(s, e) { e.processOnServer = confirm('are your sure?'); }" />
+                            </dx:ASPxButton>
                         </dx:PanelContent>
                     </PanelCollection>
                 </dx:ASPxRoundPanel>
@@ -34,7 +36,9 @@
                         <br />
                         <dx:ASPxComboBox runat="server" Width="100%" ID="cbEmps"></dx:ASPxComboBox>
                         <dx:ASPxButton runat="server" Text="Add" ID="btnAddEmp"></dx:ASPxButton>
-                        <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp"></dx:ASPxButton>
+                        <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp">
+                            <ClientSideEvents Click="function(s, e) { e.processOnServer = confirm('are your sure?'); }" />
+                        </dx:ASPxButton>
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxRoundPanel>

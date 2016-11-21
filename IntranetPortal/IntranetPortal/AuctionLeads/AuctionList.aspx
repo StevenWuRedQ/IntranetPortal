@@ -12,7 +12,7 @@
     <div class="container">
 
         <h2><%=ControlType %>  </h2>
-        <div class="row">
+        <div class="row" id="dataPanelDiv">
             <uc1:AuctionListCtrl runat="server" ID="AuctionListCtrl" Visible="false" />
             <uc1:VacantListCtrl runat="server" ID="VacantListCtrl" Visible="false" />
             <div class="col-md-6">
@@ -168,8 +168,10 @@
                    });
              }]);
         /************end router map config *******************/
-
+        portalApp.config(['$httpProvider', function ($httpProvider) {
+            $httpProvider.interceptors.push('PortalHttpInterceptor');
+        }]);
 
     </script>
-    <script type="text/javascript" src="/js/PortalHttpFactory.js"></script>
+
 </asp:Content>

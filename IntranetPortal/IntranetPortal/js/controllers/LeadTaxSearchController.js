@@ -1,33 +1,23 @@
-﻿angular.module('PortalApp')
-    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout,
-        ptContactServices, ptCom, DocSearch, LeadsInfo
-        , DocSearchEavesdropper, DivError
-        ) {
+﻿/**
+ * @author Steven Wu
+ * @date 9/15/2016
+ * @fix git committed bde6b6d
+ * add tax search js cotroller
+ * LeadTaxSearchController is doc search. 
+ * naming wrong becuase the name always change from spec guys.
+ */
+angular.module('PortalApp')
+    .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
         //New Model(this,arguments)
-        $scope.ptContactServices = ptContactServices;
         leadsInfoBBLE = $('#BBLE').val();
+        $scope.ShowInfo = $('#ShowInfo').val();
+        $scope.ptContactServices = ptContactServices;
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
         //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
         // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
-
-        /////////////////////////////////////////////////////////////////////
-        // @date 8/11/2016
-        // for devextrem angular bugs have to init array frist
-        // fast prototype of grid bug on 8/11/2016 may spend two hours on it
-        //var INITS = {
-        //   OtherMortgage: [],
-        //   DeedRecorded: [],
-        //   COSRecorded: [],
-        //   OtherLiens: [],
-        //   TaxLienCertificate:[]
-        //};
-        //$scope.DocSearch.LeadResearch = {}
-        //angular.extend($scope.DocSearch.LeadResearch, INITS);
-        // ///////////////////////////////////////////////////////////////// 
-        // put here should not right for fast prototype ////////////////////
 
         ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
@@ -58,9 +48,8 @@
 
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
-       
-        $scope.multipleValidated = function (base, boolKey, arraykey)
-        {
+
+        $scope.multipleValidated = function (base, boolKey, arraykey) {
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
             /**
@@ -73,180 +62,151 @@
         $scope.init = function (bble) {
 
             leadsInfoBBLE = bble || $('#BBLE').val();
+            $scope.ShowInfo = $('#ShowInfo').val();
             if (!leadsInfoBBLE) {
                 console.log("Can not load page without BBLE !")
                 return;
             }
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() });
-                $scope.DocSearch.initLeadsResearch();
-                $scope.DocSearch.initTeam();
-
-                ////////// font end switch to new version //////////////
-                $scope.versionController.start2Eaves();
-                /////////////////// 8/12/2016 //////////////////////////
-
-                /////////////////////////////// saving and grid init bug for faster portotype ///////////////////
-                //
-                // use fast prototype it have same bug
-                // this is faster solution of grid init will remove to initGrid
-                // put here should not right that not right it should like this 
-                // scope.DocSearch.LeadResearch.OtherMortgage = scope.DocSearch.LeadResearch.OtherMortgage || [] 
-                // and put it to model inside;
-                // angular.extend($scope.DocSearch.LeadResearch, INITS);
-                //
-                /////////////////////////////// end saving and grid init bug for faster portotype ////////////////
-
+                $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
+                     
+                    $scope.DocSearch.initLeadsResearch();
+                    $scope.DocSearch.initTeam();
+                    ////////// font end switch to new version //////////////
+                    $scope.versionController.start2Eaves();
+                });
 
             });
-            // ////remove all code to model version date is some time of June 2016 /////////////////////////////////////////////
-            //$scope.DocSearch;
-            // $http.get("/api/LeadInfoDocumentSearches/" + leadsInfoBBLE).
-            // success(function (data, status, headers, config) {
-            //     $scope.DocSearch = data;
-            //     $http.get('/Services/TeamService.svc/GetTeam?userName=' + $scope.DocSearch.CreateBy).success(function (data) {
-            //         $scope.DocSearch.team = data;
 
-            //     });
-
-            //     $http.get("/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + leadsInfoBBLE).
-            //       success(function (data1, status, headers, config) {
-            //           $scope.LeadsInfo = data1;
-            //           $scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {};
-            //           $scope.DocSearch.LeadResearch.ownerName = $scope.DocSearch.LeadResearch.ownerName || data1.Owner;
-            //           $scope.DocSearch.LeadResearch.waterCharges = $scope.DocSearch.LeadResearch.waterCharges || data1.WaterAmt;
-            //           $scope.DocSearch.LeadResearch.propertyTaxes = $scope.DocSearch.LeadResearch.propertyTaxes || data1.TaxesAmt;
-            //           $scope.DocSearch.LeadResearch.mortgageAmount = $scope.DocSearch.LeadResearch.mortgageAmount || data1.C1stMotgrAmt;
-            //           $scope.DocSearch.LeadResearch.secondMortgageAmount = $scope.DocSearch.LeadResearch.secondMortgageAmount || data1.C2ndMotgrAmt;
-            //           var ownerName = $scope.DocSearch.LeadResearch.ownerName;
-            //           if (ownerName) {
-            //               $http.post("/api/homeowner/ssn/" + leadsInfoBBLE, JSON.stringify(ownerName)).
-            //               success(function (ssn, status, headers, config) {
-            //                   $scope.DocSearch.LeadResearch.ownerSSN = ssn;
-            //               }).error(function () {
-
-            //               });
-            //           }
-
-
-            //       }).error(function (data, status, headers, config) {
-            //           alert("Get Leads Info failed BBLE = " + leadsInfoBBLE + " error : " + JSON.stringify(data));
-            //       });
-            // });
-            // ////////////////////////////////// remove all code to model version date is some time of June 2016 ////////////////////
         }
 
         $scope.init(leadsInfoBBLE)
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         * @fix
+         *  git commit f679a81 'finish the new doc search page'
+         *  add javascript version of validate in new version of doc search
+         *  it's not right to add the goal in git commit should create jira task.
+         */
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         *  
+         * @description
+         *  new version validate javascript version validate
+         * @returns {bool} true then pass validate
+         */
         $scope.newVersionValidate = function () {
-
+            /**
+             * change java script version validate 
+             * to oop model version validate
+             */
             if (!$scope.newVersion) {
                 return true;
             }
 
-            if (!$scope.DivError.passValidate())
-            {
-               
+            if (!$scope.DivError.passValidate()) {
                 return false;
             }
 
             return true;
             ////////////under are old validate///////////////////
-            var errormsg = '';
+            //var errormsg = '';
+            //var validateFields = [
+            //    "Has_Deed_Purchase_Deed",
+            //    "Has_c_1st_Mortgage_c_1st_Mortgage",
+            //    "fha",
+            //    "Has_c_2nd_Mortgage_c_2nd_Mortgage",
+            //    "has_Last_Assignment_Last_Assignment",
+            //    "fannie",
+            //    "Freddie_Mac_",
+            //    "Has_Due_Property_Taxes_Due",
+            //    "Has_Due_Water_Charges_Due",
+            //    "Has_Open_ECB_Violoations",
+            //    "Has_Open_DOB_Violoations",
+            //    "hasCO",
+            //    "Has_Violations_HPD_Violations",
+            //    "Is_Open_HPD_Charges_Not_Paid_Transferred",
+            //    "has_Judgments_Personal_Judgments",
+            //    "has_Judgments_HPD_Judgments",
+            //    "has_IRS_Tax_Lien_IRS_Tax_Lien",
+            //    "hasNysTaxLien",
+            //    "has_Sidewalk_Liens_Sidewalk_Liens",
+            //    "has_Vacate_Order_Vacate_Order",
+            //    "has_ECB_Tickets_ECB_Tickets",
+            //    "has_ECB_on_Name_ECB_on_Name_other_known_address",
 
-            var validateFields = [
-                "Has_Deed_Purchase_Deed",
-                "Has_c_1st_Mortgage_c_1st_Mortgage",
-                "fha",
-                "Has_c_2nd_Mortgage_c_2nd_Mortgage",
-                "has_Last_Assignment_Last_Assignment",
-                "fannie",
-                "Freddie_Mac_",
-                "Has_Due_Property_Taxes_Due",
-                "Has_Due_Water_Charges_Due",
-                "Has_Open_ECB_Violoations",
-                "Has_Open_DOB_Violoations",
-                "hasCO",
-                "Has_Violations_HPD_Violations",
-                "Is_Open_HPD_Charges_Not_Paid_Transferred",
-                "has_Judgments_Personal_Judgments",
-                "has_Judgments_HPD_Judgments",
-                "has_IRS_Tax_Lien_IRS_Tax_Lien",
-                "hasNysTaxLien",
-                "has_Sidewalk_Liens_Sidewalk_Liens",
-                "has_Vacate_Order_Vacate_Order",
-                "has_ECB_Tickets_ECB_Tickets",
-                "has_ECB_on_Name_ECB_on_Name_other_known_address",
-                //under are one to multiple//
-                "Has_Other_Mortgage",
-                "Has_Other_Liens",
-                "Has_TaxLiensCertifcate",
-                "Has_COS_Recorded",
-                "Has_Deed_Recorded",
-                ///////////////////////////
+            //    /**
+            //     * @author Steven
+            //     * @date   8/19/2016
+            //     * 
+            //     * @fix 
+            //     * git commit bde6b6d tax search
+            //     * add validated to new version doc search at least one item add 
+            //     * when select yes control grid
+            //     */
+            //    // under are one to multiple//
+            //    "Has_Other_Mortgage",
+            //    "Has_Other_Liens",
+            //    "Has_TaxLiensCertifcate",
+            //    "Has_COS_Recorded",
+            //    "Has_Deed_Recorded",
+            //    ///////////////////////////
 
-            ];
-            var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
-                                ["Has_Other_Liens", "OtherLiens"],
-                                ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
-                                ["Has_COS_Recorded", "COSRecorded"],
-                                ["Has_Deed_Recorded", "DeedRecorded"]];
+            //];
+            //var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
+            //                    ["Has_Other_Liens", "OtherLiens"],
+            //                    ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
+            //                    ["Has_COS_Recorded", "COSRecorded"],
+            //                    ["Has_Deed_Recorded", "DeedRecorded"]];
 
-            var fields = $scope.DocSearch.LeadResearch;
-            if (fields) {
-                for (var i = 0; i < validateFields.length; i++) {
-                    var f = validateFields[i];
-                    if (fields[f] === undefined) {
-                        errormsg += "The fields marked * must been filled please check them before submit!<br>";
+            //var fields = $scope.DocSearch.LeadResearch;
+            //if (fields) {
+            //    for (var i = 0; i < validateFields.length; i++) {
+            //        var f = validateFields[i];
+            //        if (fields[f] === undefined) {
+            //            errormsg += "The fields marked * must been filled please check them before submit!<br>";
+            //            break;
+            //        }
+            //    }
 
-                        break;
-                    }
-                }
+            //    for (var j = 0; j < checkedAttrs.length; j++) {
+            //        var f1 = checkedAttrs[j];
+            //        if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
+            //            errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
+            //        }
+            //    }
+            //}
 
-                for (var j = 0; j < checkedAttrs.length; j++) {
-                    var f1 = checkedAttrs[j];
-                    if( ( fields[f1[0]] === true && !Array.isArray(fields[f1[1]]) ) || (fields[f1[0]] === true && fields[f1[1]].length === 0)){
-                        errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
-                    }
-                }
-            }
-
-
-            return errormsg;
+            //return errormsg;
 
         }
 
-
-
-
         $scope.SearchComplete = function (isSave) {
+            // only completed need check validate
+            // when saving don't need validate input.
+            if (!isSave) {
+                if (!$scope.newVersionValidate()) {
+                    var msg = $scope.DivError.getMessage();
 
-            if (!$scope.newVersionValidate())
-            {
-                var msg = $scope.DivError.getMessage();
+                    AngularRoot.alert(msg[0]);
+                    return;
+                };
+            }
 
-                AngularRoot.alert(msg[0]);
-                return;
-            };
-            // $scope.DivError.getMessage();
-            // $scope.newVersionValidate();
-
-            //if (msg) {
-            //    AngularRoot.alert(msg);
-            //    return;
-            //}
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+            $scope.DocSearch.ResutContent = $("#search_summary_div").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
                     AngularRoot.alert("Save successfully!");
                 });
             } else {
-
-                $scope.DocSearch.ResutContent = $("#searchReslut").html();
                 $scope.DocSearch.$completed(null, function () {
 
                     AngularRoot.alert("Document completed!")
@@ -254,41 +214,68 @@
                 });
             }
 
+            $scope.test = function () {
+                $scope.$digest();
+            }
 
-            //$http.put('/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE, JSON.stringify(PostData)).success(function () {
-            //    alert(isSave ? 'Save success!' : 'Lead info search completed !');
-            //    if (typeof gridCase != 'undefined') {
-            //        if (!isSave) {
-            //            $scope.DocSearch.Status = 1;
-            //            gridCase.Refresh();
-            //        }
-            //    }
-            //}).error(function (data) {
-            //    alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //});
+        }
 
-            //Ajax anonymous function not work for angular scope need check about this.
-            //$.ajax({
-            //    type: "PUT",
-            //    url: '/api/LeadInfoDocumentSearches/' + $scope.DocSearch.BBLE,
-            //    data: JSON.stringify(PostData),
-            //    dataType: 'json',
-            //    contentType: 'application/json',
-            //    success: function (data) {
 
-            //        alert(isSave ? 'Save success!' : 'Lead info search completed !');cen
-            //        if (typeof gridCase != 'undefined') {
-            //            if (!isSave) {
-            //                $scope.DocSearch.Status = 1;
-            //                gridCase.Refresh();
-            //            }
+        // only one of fha, fannie, freddie_mac can be yes at the same time
 
-            //        }
-            //    },
-            //    error: function (data) {
-            //        alert('Some error Occurred url api/LeadInfoDocumentSearches ! Detail: ' + JSON.stringify(data));
-            //    }
+        $scope.$watch('DocSearch.LeadResearch.fha', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                if ($scope.DocSearch.LeadResearch.Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+            }
+        })
+        $scope.$watch('DocSearch.LeadResearch.fannie', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+                if ($scope.DocSearch.LeadResearch.Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+            }
+        })
 
-            //});
+        $scope.$watch('DocSearch.LeadResearch.Freddie_Mac_', function (nv, ov) {
+            if (nv == true) {
+                if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+            }
+        })
+
+        $scope.markCompleted = function (status, msg) {
+
+            // because the underwriting completion is not reversible, comfirm it before save to db.
+            msg = 'Please provide Note or press no to cancel';
+            ptCom.prompt(msg, function (result) {
+                //debugger;
+                if (result != null) {
+                    //debugger;
+                    $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                        //debugger;
+                        $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                        $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                        $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                        $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                    }, function err() {
+                        console.log("fail to update docsearch");
+                    });
+                }
+                
+            }, true);
+
+        }
+
+        try {
+            var modePatten = /mode=\d/;
+            var matches = modePatten.exec(location.search);
+            //debugger;
+            if (matches && matches[0]) {
+                $scope.viewmode = parseInt(matches[0].split('=')[1]);
+            } else {
+                $scope.viewmode = 0;
+            }
+        } catch (ex) {
+            $scope.viewmode = 0;
         }
     });
