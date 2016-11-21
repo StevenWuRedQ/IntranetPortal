@@ -8,18 +8,22 @@
 <head runat="server">
     <title></title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.0/lodash.min.js"></script>
+    
     <script>
-        
+
+
+
         function itemClick(s, args) {
             //console.log(JSON.stringify(s));
             //console.log(JSON.stringify(e));
+            loadpanel.show();
             var underlyingData = [];
             args.RequestUnderlyingData(function (data) {
                 dataMembers = data.GetDataMembers();
                 dataMembers = _.filter(dataMembers, function (o) {
-                    return ['MoveOutHot', 'MoveInHot','MovInHot'].indexOf(o) < 0
+                    return ['MoveOutHot', 'MoveInHot', 'MovInHot'].indexOf(o) < 0
                 });
-              
+
                 for (var i = 0; i < data.GetRowCount() ; i++) {
                     var dataTableRow = {};
                     $.each(dataMembers, function (__, dataMember) {
@@ -44,21 +48,34 @@
                 $popupContent.empty();
                 $popupContent.append($grid);
                 popup.show();
-
+                loadpanel.hide();
             });
         }
+        var loadpanel;
         function initPopup() {
             $("#myPopup").dxPopup({
                 width: 800, height: 600,
                 title: "Underlying data",
                 showCloseButton: true
             });
+            loadpanel = $(".loadpanel").dxLoadPanel({
+                shadingColor: "rgba(0,0,0,0.4)",
+                position: { of: "#dashContent" },
+                visible: false,
+                showIndicator: true,
+                showPane: true,
+                shading: true,
+
+            }).dxLoadPanel("instance");
         }
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div class="loadpanel">
+
+        </div>
+        <div id="dashContent">
             <div id="myPopup"></div>
             <dx:ASPxDashboardViewer ID="ASPxDashboardViewer1" runat="server"
                 FullscreenMode="True" DashboardSource="~/App_Data/LeadDashboard.xml" Height="100%" Width="100%"
