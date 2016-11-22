@@ -941,14 +941,10 @@ Public Class DataWCFService
                 End If
             End If
 
-            If bble.StartsWith("3") Then
-                If Not String.IsNullOrEmpty(city) Then
+            If Not String.IsNullOrEmpty(city) Then
+                If (city.Trim.ToUpper.Contains("BK")) Then
                     city = "Brooklyn"
-                End If
-            End If
-
-            If bble.StartsWith("2") Then
-                If Not String.IsNullOrEmpty(city) Then
+                ElseIf city.Trim.ToUpper.Contains("BX")
                     city = "Bronx"
                 End If
             End If

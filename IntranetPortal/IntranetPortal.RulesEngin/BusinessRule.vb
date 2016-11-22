@@ -432,7 +432,6 @@ InitialLine:
             Return
         End If
 
-
         Dim bble = rule.BBLE
         Select Case rule.LoopType
             Case Core.DataLoopRule.DataLoopType.All
