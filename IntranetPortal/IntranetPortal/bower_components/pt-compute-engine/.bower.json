@@ -1,0 +1,13 @@
+{
+  "name": "pt-compute-engine",
+  "_release": "a72268dcef",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "a72268dcefd105b4853f883dbbe1af43efba90d6"
+  },
+  "_source": "https://stephenzz@bitbucket.org/stephenzz/pt-compute-engine.git",
+  "_target": "*",
+  "_originalSource": "pt-compute-engine",
+  "_direct": true
+}

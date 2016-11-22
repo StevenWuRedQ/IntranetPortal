@@ -227,3 +227,6 @@ IntranetPortal/IntranetPortal/TempDataFile/OfferDoc/
 /IntranetPortal/IntranetPortal/js/components
 /IntranetPortal/IntranetPortal/TempDataFile
 /IntranetPortal/RuleEngineManage/My Project/app.manifest
+
+# IDEA Products
+/IntranetPortal/.idea
