@@ -279,6 +279,180 @@
           <Property Name="Active" Type="bit" />
           <Property Name="AppId" Type="int" />
         </EntityType>
+        <EntityType Name="DialerContacts">
+          <Key>
+            <PropertyRef Name="inin-outbound-id" />
+          </Key>
+          <Property Name="inin-outbound-id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactListId" Type="nvarchar" MaxLength="50" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="Leads" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="CoOwner" Type="nvarchar" MaxLength="50" />
+          <Property Name="OwnerPhone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone3" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone3" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone4" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone4" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone5" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone5" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone6" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone6" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone7" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone7" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone8" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone8" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone9" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone9" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone10" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone10" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone11" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone11" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone12" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone12" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone13" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone13" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone14" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone14" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone15" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone15" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone16" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone16" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone17" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone17" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone18" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone18" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone19" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone19" Type="nvarchar" MaxLength="255" />
+          <Property Name="OwnerPhone20" Type="nvarchar" MaxLength="255" />
+          <Property Name="CoOwnerPhone20" Type="nvarchar" MaxLength="255" />
+          <Property Name="ContactCallable" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone3" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone3" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone4" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone4" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone4" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone5" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone5" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone5" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone6" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone6" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone6" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone7" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone7" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone7" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone8" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone8" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone8" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone9" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone9" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone9" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone10" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone10" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone10" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone11" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone11" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone11" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone12" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone12" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone12" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone13" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone13" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone13" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone14" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone14" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone14" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone15" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone15" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone15" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone16" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone16" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone16" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone17" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone17" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone17" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone18" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone18" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone18" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone19" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone19" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone19" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-OwnerPhone20" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-OwnerPhone20" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-OwnerPhone20" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone1" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone2" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone3" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone3" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone4" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone4" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone4" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone5" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone5" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone5" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone6" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone6" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone6" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone7" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone7" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone7" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone8" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone8" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone8" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone9" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone9" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone9" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone10" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone10" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone10" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone11" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone11" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone11" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone12" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone12" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone12" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone13" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone13" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone13" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone14" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone14" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone14" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone15" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone15" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone15" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone16" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone16" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone16" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone17" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone17" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone17" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone18" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone18" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone18" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone19" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone19" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone19" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastAttempt-CoOwnerPhone20" Type="nvarchar" MaxLength="255" />
+          <Property Name="CallRecordLastResult-CoOwnerPhone20" Type="nvarchar" MaxLength="255" />
+          <Property Name="Callable-CoOwnerPhone20" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="EcourtCaseChanges">
           <Key>
             <PropertyRef Name="Id" />
@@ -1344,6 +1518,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySet Name="DataStatus" EntityType="Self.DataStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeedCorpProperties" EntityType="Self.DeedCorpProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeedCorps" EntityType="Self.DeedCorps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DialerContacts" EntityType="Self.DialerContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EcourtCaseChanges" EntityType="Self.EcourtCaseChanges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EcourtCases" EntityType="Self.EcourtCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
@@ -1614,6 +1789,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <FunctionImport Name="UpdateEcourtCases">
           <Parameter Name="updateBy" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="DialerContacts" EntityType="IntranetPortalModel.DialerContact" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2917,6 +3093,180 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="TransactionDateTime" Type="DateTime" Precision="3" />
           <Property Name="DateTimeProcessed" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DialerContact">
+          <Key>
+            <PropertyRef Name="inin_outbound_id" />
+          </Key>
+          <Property Name="inin_outbound_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactListId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Leads" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ContactCallable" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_OwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_OwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_OwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastAttempt_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CallRecordLastResult_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Callable_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4284,6 +4634,181 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UpdateEcourtCases" FunctionName="IntranetPortalModel.Store.UpdateEcourtCases" />
+          <EntitySetMapping Name="DialerContacts">
+            <EntityTypeMapping TypeName="IntranetPortalModel.DialerContact">
+              <MappingFragment StoreEntitySet="DialerContacts">
+                <ScalarProperty Name="Callable_CoOwnerPhone20" ColumnName="Callable-CoOwnerPhone20" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone20" ColumnName="CallRecordLastResult-CoOwnerPhone20" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone20" ColumnName="CallRecordLastAttempt-CoOwnerPhone20" />
+                <ScalarProperty Name="Callable_CoOwnerPhone19" ColumnName="Callable-CoOwnerPhone19" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone19" ColumnName="CallRecordLastResult-CoOwnerPhone19" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone19" ColumnName="CallRecordLastAttempt-CoOwnerPhone19" />
+                <ScalarProperty Name="Callable_CoOwnerPhone18" ColumnName="Callable-CoOwnerPhone18" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone18" ColumnName="CallRecordLastResult-CoOwnerPhone18" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone18" ColumnName="CallRecordLastAttempt-CoOwnerPhone18" />
+                <ScalarProperty Name="Callable_CoOwnerPhone17" ColumnName="Callable-CoOwnerPhone17" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone17" ColumnName="CallRecordLastResult-CoOwnerPhone17" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone17" ColumnName="CallRecordLastAttempt-CoOwnerPhone17" />
+                <ScalarProperty Name="Callable_CoOwnerPhone16" ColumnName="Callable-CoOwnerPhone16" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone16" ColumnName="CallRecordLastResult-CoOwnerPhone16" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone16" ColumnName="CallRecordLastAttempt-CoOwnerPhone16" />
+                <ScalarProperty Name="Callable_CoOwnerPhone15" ColumnName="Callable-CoOwnerPhone15" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone15" ColumnName="CallRecordLastResult-CoOwnerPhone15" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone15" ColumnName="CallRecordLastAttempt-CoOwnerPhone15" />
+                <ScalarProperty Name="Callable_CoOwnerPhone14" ColumnName="Callable-CoOwnerPhone14" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone14" ColumnName="CallRecordLastResult-CoOwnerPhone14" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone14" ColumnName="CallRecordLastAttempt-CoOwnerPhone14" />
+                <ScalarProperty Name="Callable_CoOwnerPhone13" ColumnName="Callable-CoOwnerPhone13" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone13" ColumnName="CallRecordLastResult-CoOwnerPhone13" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone13" ColumnName="CallRecordLastAttempt-CoOwnerPhone13" />
+                <ScalarProperty Name="Callable_CoOwnerPhone12" ColumnName="Callable-CoOwnerPhone12" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone12" ColumnName="CallRecordLastResult-CoOwnerPhone12" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone12" ColumnName="CallRecordLastAttempt-CoOwnerPhone12" />
+                <ScalarProperty Name="Callable_CoOwnerPhone11" ColumnName="Callable-CoOwnerPhone11" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone11" ColumnName="CallRecordLastResult-CoOwnerPhone11" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone11" ColumnName="CallRecordLastAttempt-CoOwnerPhone11" />
+                <ScalarProperty Name="Callable_CoOwnerPhone10" ColumnName="Callable-CoOwnerPhone10" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone10" ColumnName="CallRecordLastResult-CoOwnerPhone10" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone10" ColumnName="CallRecordLastAttempt-CoOwnerPhone10" />
+                <ScalarProperty Name="Callable_CoOwnerPhone9" ColumnName="Callable-CoOwnerPhone9" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone9" ColumnName="CallRecordLastResult-CoOwnerPhone9" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone9" ColumnName="CallRecordLastAttempt-CoOwnerPhone9" />
+                <ScalarProperty Name="Callable_CoOwnerPhone8" ColumnName="Callable-CoOwnerPhone8" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone8" ColumnName="CallRecordLastResult-CoOwnerPhone8" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone8" ColumnName="CallRecordLastAttempt-CoOwnerPhone8" />
+                <ScalarProperty Name="Callable_CoOwnerPhone7" ColumnName="Callable-CoOwnerPhone7" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone7" ColumnName="CallRecordLastResult-CoOwnerPhone7" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone7" ColumnName="CallRecordLastAttempt-CoOwnerPhone7" />
+                <ScalarProperty Name="Callable_CoOwnerPhone6" ColumnName="Callable-CoOwnerPhone6" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone6" ColumnName="CallRecordLastResult-CoOwnerPhone6" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone6" ColumnName="CallRecordLastAttempt-CoOwnerPhone6" />
+                <ScalarProperty Name="Callable_CoOwnerPhone5" ColumnName="Callable-CoOwnerPhone5" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone5" ColumnName="CallRecordLastResult-CoOwnerPhone5" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone5" ColumnName="CallRecordLastAttempt-CoOwnerPhone5" />
+                <ScalarProperty Name="Callable_CoOwnerPhone4" ColumnName="Callable-CoOwnerPhone4" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone4" ColumnName="CallRecordLastResult-CoOwnerPhone4" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone4" ColumnName="CallRecordLastAttempt-CoOwnerPhone4" />
+                <ScalarProperty Name="Callable_CoOwnerPhone3" ColumnName="Callable-CoOwnerPhone3" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone3" ColumnName="CallRecordLastResult-CoOwnerPhone3" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone3" ColumnName="CallRecordLastAttempt-CoOwnerPhone3" />
+                <ScalarProperty Name="Callable_CoOwnerPhone2" ColumnName="Callable-CoOwnerPhone2" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone2" ColumnName="CallRecordLastResult-CoOwnerPhone2" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone2" ColumnName="CallRecordLastAttempt-CoOwnerPhone2" />
+                <ScalarProperty Name="Callable_CoOwnerPhone1" ColumnName="Callable-CoOwnerPhone1" />
+                <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone1" ColumnName="CallRecordLastResult-CoOwnerPhone1" />
+                <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone1" ColumnName="CallRecordLastAttempt-CoOwnerPhone1" />
+                <ScalarProperty Name="Callable_OwnerPhone20" ColumnName="Callable-OwnerPhone20" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone20" ColumnName="CallRecordLastResult-OwnerPhone20" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone20" ColumnName="CallRecordLastAttempt-OwnerPhone20" />
+                <ScalarProperty Name="Callable_OwnerPhone19" ColumnName="Callable-OwnerPhone19" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone19" ColumnName="CallRecordLastResult-OwnerPhone19" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone19" ColumnName="CallRecordLastAttempt-OwnerPhone19" />
+                <ScalarProperty Name="Callable_OwnerPhone18" ColumnName="Callable-OwnerPhone18" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone18" ColumnName="CallRecordLastResult-OwnerPhone18" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone18" ColumnName="CallRecordLastAttempt-OwnerPhone18" />
+                <ScalarProperty Name="Callable_OwnerPhone17" ColumnName="Callable-OwnerPhone17" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone17" ColumnName="CallRecordLastResult-OwnerPhone17" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone17" ColumnName="CallRecordLastAttempt-OwnerPhone17" />
+                <ScalarProperty Name="Callable_OwnerPhone16" ColumnName="Callable-OwnerPhone16" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone16" ColumnName="CallRecordLastResult-OwnerPhone16" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone16" ColumnName="CallRecordLastAttempt-OwnerPhone16" />
+                <ScalarProperty Name="Callable_OwnerPhone15" ColumnName="Callable-OwnerPhone15" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone15" ColumnName="CallRecordLastResult-OwnerPhone15" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone15" ColumnName="CallRecordLastAttempt-OwnerPhone15" />
+                <ScalarProperty Name="Callable_OwnerPhone14" ColumnName="Callable-OwnerPhone14" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone14" ColumnName="CallRecordLastResult-OwnerPhone14" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone14" ColumnName="CallRecordLastAttempt-OwnerPhone14" />
+                <ScalarProperty Name="Callable_OwnerPhone13" ColumnName="Callable-OwnerPhone13" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone13" ColumnName="CallRecordLastResult-OwnerPhone13" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone13" ColumnName="CallRecordLastAttempt-OwnerPhone13" />
+                <ScalarProperty Name="Callable_OwnerPhone12" ColumnName="Callable-OwnerPhone12" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone12" ColumnName="CallRecordLastResult-OwnerPhone12" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone12" ColumnName="CallRecordLastAttempt-OwnerPhone12" />
+                <ScalarProperty Name="Callable_OwnerPhone11" ColumnName="Callable-OwnerPhone11" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone11" ColumnName="CallRecordLastResult-OwnerPhone11" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone11" ColumnName="CallRecordLastAttempt-OwnerPhone11" />
+                <ScalarProperty Name="Callable_OwnerPhone10" ColumnName="Callable-OwnerPhone10" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone10" ColumnName="CallRecordLastResult-OwnerPhone10" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone10" ColumnName="CallRecordLastAttempt-OwnerPhone10" />
+                <ScalarProperty Name="Callable_OwnerPhone9" ColumnName="Callable-OwnerPhone9" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone9" ColumnName="CallRecordLastResult-OwnerPhone9" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone9" ColumnName="CallRecordLastAttempt-OwnerPhone9" />
+                <ScalarProperty Name="Callable_OwnerPhone8" ColumnName="Callable-OwnerPhone8" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone8" ColumnName="CallRecordLastResult-OwnerPhone8" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone8" ColumnName="CallRecordLastAttempt-OwnerPhone8" />
+                <ScalarProperty Name="Callable_OwnerPhone7" ColumnName="Callable-OwnerPhone7" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone7" ColumnName="CallRecordLastResult-OwnerPhone7" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone7" ColumnName="CallRecordLastAttempt-OwnerPhone7" />
+                <ScalarProperty Name="Callable_OwnerPhone6" ColumnName="Callable-OwnerPhone6" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone6" ColumnName="CallRecordLastResult-OwnerPhone6" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone6" ColumnName="CallRecordLastAttempt-OwnerPhone6" />
+                <ScalarProperty Name="Callable_OwnerPhone5" ColumnName="Callable-OwnerPhone5" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone5" ColumnName="CallRecordLastResult-OwnerPhone5" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone5" ColumnName="CallRecordLastAttempt-OwnerPhone5" />
+                <ScalarProperty Name="Callable_OwnerPhone4" ColumnName="Callable-OwnerPhone4" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone4" ColumnName="CallRecordLastResult-OwnerPhone4" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone4" ColumnName="CallRecordLastAttempt-OwnerPhone4" />
+                <ScalarProperty Name="Callable_OwnerPhone3" ColumnName="Callable-OwnerPhone3" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone3" ColumnName="CallRecordLastResult-OwnerPhone3" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone3" ColumnName="CallRecordLastAttempt-OwnerPhone3" />
+                <ScalarProperty Name="Callable_OwnerPhone2" ColumnName="Callable-OwnerPhone2" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone2" ColumnName="CallRecordLastResult-OwnerPhone2" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone2" ColumnName="CallRecordLastAttempt-OwnerPhone2" />
+                <ScalarProperty Name="Callable_OwnerPhone1" ColumnName="Callable-OwnerPhone1" />
+                <ScalarProperty Name="CallRecordLastResult_OwnerPhone1" ColumnName="CallRecordLastResult-OwnerPhone1" />
+                <ScalarProperty Name="CallRecordLastAttempt_OwnerPhone1" ColumnName="CallRecordLastAttempt-OwnerPhone1" />
+                <ScalarProperty Name="ContactCallable" ColumnName="ContactCallable" />
+                <ScalarProperty Name="CoOwnerPhone20" ColumnName="CoOwnerPhone20" />
+                <ScalarProperty Name="OwnerPhone20" ColumnName="OwnerPhone20" />
+                <ScalarProperty Name="CoOwnerPhone19" ColumnName="CoOwnerPhone19" />
+                <ScalarProperty Name="OwnerPhone19" ColumnName="OwnerPhone19" />
+                <ScalarProperty Name="CoOwnerPhone18" ColumnName="CoOwnerPhone18" />
+                <ScalarProperty Name="OwnerPhone18" ColumnName="OwnerPhone18" />
+                <ScalarProperty Name="CoOwnerPhone17" ColumnName="CoOwnerPhone17" />
+                <ScalarProperty Name="OwnerPhone17" ColumnName="OwnerPhone17" />
+                <ScalarProperty Name="CoOwnerPhone16" ColumnName="CoOwnerPhone16" />
+                <ScalarProperty Name="OwnerPhone16" ColumnName="OwnerPhone16" />
+                <ScalarProperty Name="CoOwnerPhone15" ColumnName="CoOwnerPhone15" />
+                <ScalarProperty Name="OwnerPhone15" ColumnName="OwnerPhone15" />
+                <ScalarProperty Name="CoOwnerPhone14" ColumnName="CoOwnerPhone14" />
+                <ScalarProperty Name="OwnerPhone14" ColumnName="OwnerPhone14" />
+                <ScalarProperty Name="CoOwnerPhone13" ColumnName="CoOwnerPhone13" />
+                <ScalarProperty Name="OwnerPhone13" ColumnName="OwnerPhone13" />
+                <ScalarProperty Name="CoOwnerPhone12" ColumnName="CoOwnerPhone12" />
+                <ScalarProperty Name="OwnerPhone12" ColumnName="OwnerPhone12" />
+                <ScalarProperty Name="CoOwnerPhone11" ColumnName="CoOwnerPhone11" />
+                <ScalarProperty Name="OwnerPhone11" ColumnName="OwnerPhone11" />
+                <ScalarProperty Name="CoOwnerPhone10" ColumnName="CoOwnerPhone10" />
+                <ScalarProperty Name="OwnerPhone10" ColumnName="OwnerPhone10" />
+                <ScalarProperty Name="CoOwnerPhone9" ColumnName="CoOwnerPhone9" />
+                <ScalarProperty Name="OwnerPhone9" ColumnName="OwnerPhone9" />
+                <ScalarProperty Name="CoOwnerPhone8" ColumnName="CoOwnerPhone8" />
+                <ScalarProperty Name="OwnerPhone8" ColumnName="OwnerPhone8" />
+                <ScalarProperty Name="CoOwnerPhone7" ColumnName="CoOwnerPhone7" />
+                <ScalarProperty Name="OwnerPhone7" ColumnName="OwnerPhone7" />
+                <ScalarProperty Name="CoOwnerPhone6" ColumnName="CoOwnerPhone6" />
+                <ScalarProperty Name="OwnerPhone6" ColumnName="OwnerPhone6" />
+                <ScalarProperty Name="CoOwnerPhone5" ColumnName="CoOwnerPhone5" />
+                <ScalarProperty Name="OwnerPhone5" ColumnName="OwnerPhone5" />
+                <ScalarProperty Name="CoOwnerPhone4" ColumnName="CoOwnerPhone4" />
+                <ScalarProperty Name="OwnerPhone4" ColumnName="OwnerPhone4" />
+                <ScalarProperty Name="CoOwnerPhone3" ColumnName="CoOwnerPhone3" />
+                <ScalarProperty Name="OwnerPhone3" ColumnName="OwnerPhone3" />
+                <ScalarProperty Name="CoOwnerPhone2" ColumnName="CoOwnerPhone2" />
+                <ScalarProperty Name="OwnerPhone2" ColumnName="OwnerPhone2" />
+                <ScalarProperty Name="CoOwnerPhone1" ColumnName="CoOwnerPhone1" />
+                <ScalarProperty Name="OwnerPhone1" ColumnName="OwnerPhone1" />
+                <ScalarProperty Name="CoOwner" ColumnName="CoOwner" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Leads" ColumnName="Leads" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="ContactListId" ColumnName="ContactListId" />
+                <ScalarProperty Name="inin_outbound_id" ColumnName="inin-outbound-id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
