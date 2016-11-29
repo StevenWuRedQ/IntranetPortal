@@ -136,6 +136,9 @@
     <Compile Include="ADOEntity\DeedCorpProperty.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\DialerContact.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\EcourtCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
