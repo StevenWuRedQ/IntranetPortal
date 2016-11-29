@@ -5,7 +5,7 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
     <TestMethod()> Public Async Function TestMethod1() As Task
         Dim dialerapi As New IntranetPortal.Data.DialerService
-        Await dialerapi.ExportListDetail("4de28bcd-d5de-4cbb-a7c1-303dd0cbbd0e", False)
+        Await dialerapi.ExportList("e358b71a-e908-4da3-9201-ca0dcbef9d8a", True)
     End Function
 
 End Class
