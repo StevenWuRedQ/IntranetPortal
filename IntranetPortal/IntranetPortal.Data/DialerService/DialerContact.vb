@@ -1,5 +1,4 @@
-﻿
-Partial Class DialerContact
+﻿Partial Class DialerContact
 
     Public Shared Function BatchSave(agentName As String, contacts As DialerContact()) As Integer
         Using ctx As New PortalEntities

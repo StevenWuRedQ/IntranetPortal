@@ -161,6 +161,7 @@
     <Compile Include="Construction\ConstructionNotifyRuleTest.vb" />
     <Compile Include="DBUtilTest.vb" />
     <Compile Include="DialerRuleTest.vb" />
+    <Compile Include="DialerServiceManageUnitTest.vb" />
     <Compile Include="EmailParseTest.vb" />
     <Compile Include="EmployeeTest.vb" />
     <Compile Include="LeadTest.vb" />
