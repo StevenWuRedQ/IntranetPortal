@@ -180,5 +180,8 @@ Partial Public Class DialerContact
     Public Property CallRecordLastAttempt_CoOwnerPhone20 As String
     Public Property CallRecordLastResult_CoOwnerPhone20 As String
     Public Property Callable_CoOwnerPhone20 As String
+    Public Property Agent As String
+    Public Property LeadsStatus As Nullable(Of Integer)
+    Public Property Status As Nullable(Of Integer)
 
 End Class

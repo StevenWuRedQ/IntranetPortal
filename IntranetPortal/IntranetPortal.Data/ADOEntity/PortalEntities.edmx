@@ -286,9 +286,12 @@
           <Property Name="inin-outbound-id" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContactListId" Type="nvarchar" MaxLength="50" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadsStatus" Type="int" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="int" />
           <Property Name="Leads" Type="nvarchar" MaxLength="255" />
           <Property Name="Address" Type="nvarchar" MaxLength="255" />
-          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="CoOwner" Type="nvarchar" MaxLength="50" />
           <Property Name="OwnerPhone1" Type="nvarchar" MaxLength="255" />
@@ -3267,6 +3270,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CallRecordLastAttempt_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CallRecordLastResult_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Callable_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadsStatus" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4637,6 +4643,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="DialerContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.DialerContact">
               <MappingFragment StoreEntitySet="DialerContacts">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LeadsStatus" ColumnName="LeadsStatus" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
                 <ScalarProperty Name="Callable_CoOwnerPhone20" ColumnName="Callable-CoOwnerPhone20" />
                 <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone20" ColumnName="CallRecordLastResult-CoOwnerPhone20" />
                 <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone20" ColumnName="CallRecordLastAttempt-CoOwnerPhone20" />
