@@ -68,10 +68,9 @@ Public Class DialerService
                 request.Headers.Add("Authorization", "bearer " & Token)
                 Dim response = request.GetResponse()
                 Dim content = response.GetResponseStream()
-                Dim memory = New MemoryStream
-                content.CopyTo(memory)
+                Dim list = ParseCSV(content)
                 response.Close()
-                Return ParseCSV(memory)
+                Return list
             End If
             Return Nothing
         Catch ex As Exception
@@ -94,19 +93,21 @@ Public Class DialerService
             Try
                 Dim request As HttpWebRequest = WebRequest.Create(path)
                 request.AllowAutoRedirect = True
+                request.KeepAlive = True
                 request.MaximumAutomaticRedirections = 10
                 request.Headers.Add("Authorization", "bearer " & Token)
+                request.ContentType = "application/json"
                 Dim response = request.GetResponse()
                 Dim content = response.GetResponseStream()
-                Dim memory = New MemoryStream
-                content.CopyTo(memory)
+                Dim reader = New StreamReader(content, Text.Encoding.UTF8)
+                Dim str = reader.ReadToEnd()
+                Dim list = ParseCSV(content)
                 response.Close()
-                Return ParseCSV(memory)
+                Return list
             Catch ex As Exception
                 Return Nothing
             End Try
         End If
-
     End Function
 
     Public Async Function AddContactList(listName As String) As Task(Of JObject)
@@ -421,20 +422,29 @@ Public Class DialerService
     End Function
 
     Public Function ParseCSV(stream As Stream) As List(Of DialerContact)
-        If stream IsNot Nothing Then
-            Dim csv = New CsvReader(New StreamReader(stream, Text.UTF8Encoding.UTF8))
-            csv.Configuration.QuoteAllFields = True
+        Try
+            If stream IsNot Nothing Then
+                Dim csv = New CsvReader(New StreamReader(stream, Text.UTF8Encoding.UTF8))
+                csv.Configuration.QuoteAllFields = True
 
-            Dim contactMap = New DefaultCsvClassMap(Of DialerContact)()
-            For Each prop In GetType(DialerContact).GetProperties
-                Dim newMap = New CsvPropertyMap(prop)
-                newMap.Name(prop.Name.Replace("_", "-"))
-                contactMap.PropertyMaps.Add(newMap)
-            Next
+                Dim contactMap = New DefaultCsvClassMap(Of DialerContact)()
+                For Each prop In GetType(DialerContact).GetProperties
+                    If prop.Name = "ContactListId" Then
+                        Continue For
+                    End If
+                    Dim newMap = New CsvPropertyMap(prop)
+                    newMap.Name(prop.Name.Replace("_", "-"))
+                    contactMap.PropertyMaps.Add(newMap)
+                Next
 
-            csv.Configuration.RegisterClassMap(contactMap)
-            Dim records = csv.GetRecords(Of DialerContact)().ToList()
-        End If
+                csv.Configuration.RegisterClassMap(contactMap)
+                Dim records = csv.GetRecords(Of DialerContact)().ToList()
+                Return records
+            End If
+            Return Nothing
+        Catch ex As Exception
+            Return Nothing
+        End Try
     End Function
 
     Public Function ConvertContactToJson(contact As DialerContact, Optional isTry As Boolean = False) As JObject
