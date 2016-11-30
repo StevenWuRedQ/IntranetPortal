@@ -5,7 +5,17 @@
 ''' </summary>
 Public Class DialerServiceManage
 
+    Private Shared contactlists As New Dictionary(Of String, String) From {
+            {"Chris Yan", "aca8647e-8346-49f6-8938-4df54168afbd"}
+    }
+
+    Private Const CONTACTLISTNAME = "List_{0}"
+
     Public Shared Function GetContactListId(userName As String) As String
+        If contactlists.ContainsKey(userName) Then
+            Return contactlists(userName)
+        End If
+
         Return "3f247b83-5bcc-41e5-acad-ed71cfdec111"
     End Function
 
@@ -104,6 +114,16 @@ Public Class DialerServiceManage
         End If
 
         Return ct
+    End Function
+
+    Public Shared Async Function CreateContactList(userName As String) As Threading.Tasks.Task(Of String)
+        Dim service As New DialerService
+        Dim list = Await service.AddContactList(String.Format(CONTACTLISTNAME, userName))
+        If list Is Nothing Then
+            Throw New Exception("Error happend")
+        End If
+
+        Return list("id")
     End Function
 
     Public Shared Function UpdatePhoneNums(contact As DialerContact)

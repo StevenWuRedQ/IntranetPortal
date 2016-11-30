@@ -16,4 +16,16 @@ Public Class DialerServiceManageUnitTest
         Assert.IsTrue(result > 0)
     End Function
 
+    <TestMethod()> Public Async Function CreateContactList_returnId() As Task
+        Dim userName = "Chris Yan"
+        Dim result = Await DialerServiceManage.CreateContactList(userName)
+        Assert.IsNotNull(result)
+    End Function
+
+    <TestMethod()> Public Sub AddContacts_returnId()
+        Dim userName = "Chris Yan"
+        Dim result = DialerServiceManage.SyncNewLeadsFolder(userName)
+        Assert.IsNotNull(result)
+    End Sub
+
 End Class
