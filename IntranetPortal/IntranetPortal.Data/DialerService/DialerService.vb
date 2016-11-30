@@ -423,6 +423,22 @@ Public Class DialerService
 
     End Function
 
+    Public Async Function GetContactListByName(listName As String) As Task(Of JObject)
+        Try
+            Dim url = "/api/v2/outbound/contactlists?name={0}"
+            url = String.Format(url, listName)
+            Dim response = Await APIClient.GetAsync(url)
+            If response.IsSuccessStatusCode Then
+                Dim responsestr = Await response.Content.ReadAsStringAsync()
+                Dim lists = JsonConvert.DeserializeObject(Of JObject)(responsestr)
+                Return lists("entities").First
+            End If
+            Return Nothing
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function ParseCSV(stream As Stream) As List(Of DialerContact)
         Try
             If stream IsNot Nothing Then
@@ -563,6 +579,7 @@ Public Class DialerService
             target.Add(propertyName, value)
         End If
     End Sub
+
 End Class
 
 
