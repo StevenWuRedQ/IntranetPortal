@@ -103,6 +103,9 @@ Imports IntranetPortal
         Assert.IsFalse(downloaded.Count = directdownload.Count)
     End Function
 
-
+    <TestMethod> Public Async Function GetTokenTest() As Task
+        Dim token = Await TokenGenerator.getPureCloudeToken()
+        Assert.IsNotNull(token)
+    End Function
 
 End Class

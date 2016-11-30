@@ -201,7 +201,7 @@
     <Compile Include="Construction\ConstructionSpotCheck.vb" />
     <Compile Include="Construction\ConstructionViolations.vb" />
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
-    <Compile Include="DialerService\Class1.vb" />
+    <Compile Include="DialerService\TokenGenerator.vb" />
     <Compile Include="DialerService\DialerContact.vb" />
     <Compile Include="DialerService\DialerService.vb" />
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />

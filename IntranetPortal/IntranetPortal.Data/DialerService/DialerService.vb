@@ -15,7 +15,9 @@ Public Class DialerService
         APIClient = New HttpClient()
         'System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 Or SecurityProtocolType.Tls11 Or SecurityProtocolType.Tls
         APIClient.BaseAddress = New Uri("https://api.mypurecloud.com")
-        Token = ConfigurationManager.AppSettings("pure_cloud_token")
+        Dim tokentask = TokenGenerator.getPureCloudeToken()
+        tokentask.Wait()
+        Token = tokentask.Result
         If Not String.IsNullOrEmpty(Token) Then
             Dim BearerToken = "bearer " & Token
             APIClient.DefaultRequestHeaders.Add("Authorization", BearerToken)
