@@ -10,4 +10,39 @@
         DoorKnock = 2
         Undo = 3
     End Enum
+
+    Public Shared Sub UpdateContact(bble As String, status As ContactStatus, phoneNo As String, type As OwnerContactType)
+        Using Context As New Entities
+
+            Dim contact = Context.OwnerContacts.Where(Function(c) c.BBLE = bble And c.Contact.Contains(phoneNo)).FirstOrDefault
+
+            'Remove the saved info. 
+            If status = OwnerContact.ContactStatus.Undo Then
+                If contact IsNot Nothing Then
+                    Context.OwnerContacts.Remove(contact)
+                    Context.SaveChanges()
+                End If
+
+                Return
+            End If
+
+            If contact Is Nothing Then
+                contact = New OwnerContact
+                contact.BBLE = bble
+                contact.Contact = phoneNo
+                contact.ContactType = type
+                contact.Status = status
+                'contact.OwnerName = home
+                Context.OwnerContacts.Add(contact)
+            Else
+                contact.BBLE = bble
+                contact.Contact = phoneNo
+                contact.ContactType = type
+                contact.Status = status
+            End If
+
+            Context.SaveChanges()
+
+        End Using
+    End Sub
 End Class

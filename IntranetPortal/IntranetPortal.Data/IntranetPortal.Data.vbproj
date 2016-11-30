@@ -199,6 +199,7 @@
     <Compile Include="Construction\ConstructionSpotCheck.vb" />
     <Compile Include="Construction\ConstructionViolations.vb" />
     <Compile Include="DataServices\TLOLocateReportOutput.vb" />
+    <Compile Include="DialerService\DialerContact.vb" />
     <Compile Include="DialerService\DialerService.vb" />
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
     <Compile Include="EcourtService\EcourtService.vb" />
