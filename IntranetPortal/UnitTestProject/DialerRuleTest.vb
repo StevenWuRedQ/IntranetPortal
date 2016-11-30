@@ -103,11 +103,6 @@ Imports IntranetPortal
         Assert.IsFalse(downloaded.Count = directdownload.Count)
     End Function
 
-    <TestMethod()> Public Sub TestInitContact()
-        Dim ld = Lead.GetInstance("1000251493")
-        Dim result = DialerServiceManage.InitContact(ld)
-        Assert.IsNotNull(result)
-        Assert.IsNotNull(result.OwnerPhone1)
-    End Sub
+
 
 End Class

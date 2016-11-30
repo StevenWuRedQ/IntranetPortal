@@ -5,6 +5,21 @@
 ''' </summary>
 Public Class DialerServiceManage
 
+    Public Shared Function GetContactListId(userName As String) As String
+        Return "3f247b83-5bcc-41e5-acad-ed71cfdec111"
+    End Function
+
+    Public Shared Async Function LoadContactList(userName As String) As Threading.Tasks.Task(Of Integer)
+        Dim service As New DialerService
+        Dim list = Await service.ExportList(GetContactListId(userName), False)
+        If list IsNot Nothing AndAlso list.Count > 0 Then
+            Dim result = DialerContact.BatchSave(userName, list.ToArray)
+            Return result
+        End If
+
+        Return 0
+    End Function
+
     ''' <summary>
     ''' Update contactlist result to portal
     ''' </summary>
@@ -13,11 +28,15 @@ Public Class DialerServiceManage
     Public Shared Function UpdatePortal(userName As String) As Boolean
 
         Dim contacts = DialerContact.LoadContacts(userName, DialerContact.RecordStatus.Active)
+        Dim service As New DialerService
 
         For Each ct In contacts
             If ct.LeadsStatus.HasValue Then
                 Dim ld = Lead.GetInstance(ct.BBLE)
-                Lead.UpdateLeadStatus(ct.BBLE, ct.LeadsStatus, DateTime.Now.AddDays(1), ct.Comments)
+                If ct.Status > 0 Then
+                    Lead.UpdateLeadStatus(ct.BBLE, ct.LeadsStatus, DateTime.Now.AddDays(1), ct.Comments)
+                    service.RemoveContactFromList(ct.ContactListId, ct.inin_outbound_id)
+                End If
             End If
 
             ct.Processed()
@@ -35,12 +54,16 @@ Public Class DialerServiceManage
         Dim lds = Lead.GetUserLeadsData(userName, LeadStatus.NewLead)
         Dim contacts = DialerContact.LoadContacts(userName, DialerContact.RecordStatus.Processed).Select(Function(a) a.BBLE).ToList
         Dim items = lds.Where(Function(l) Not contacts.Contains(l.BBLE)).ToList
-
+        Dim data As New List(Of DialerContact)
         For Each item In items
             Dim ct = InitContact(item)
-            ct.Save()
+            data.Add(ct)
         Next
 
+        If data.Count > 0 Then
+            Dim service As New DialerService
+            service.AddContactsToList(GetContactListId(userName), data)
+        End If
     End Function
 
     ''' <summary>
