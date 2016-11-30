@@ -6,7 +6,7 @@
 Public Class DialerServiceManage
 
     Private Shared contactlists As New Dictionary(Of String, String) From {
-            {"Chris Yan", "aca8647e-8346-49f6-8938-4df54168afbd"}
+            {"Chris Yan", "2bfc9812-0502-4d57-b345-87f851326f73"}
     }
 
     Private Const CONTACTLISTNAME = "List_{0}"
@@ -74,6 +74,8 @@ Public Class DialerServiceManage
             Dim service As New DialerService
             service.AddContactsToList(GetContactListId(userName), data)
         End If
+
+        Return data.Count
     End Function
 
     ''' <summary>
@@ -116,6 +118,11 @@ Public Class DialerServiceManage
         Return ct
     End Function
 
+    ''' <summary>
+    ''' Create Contact list base on User Name
+    ''' </summary>
+    ''' <param name="userName"></param>
+    ''' <returns></returns>
     Public Shared Async Function CreateContactList(userName As String) As Threading.Tasks.Task(Of String)
         Dim service As New DialerService
         Dim list = Await service.AddContactList(String.Format(CONTACTLISTNAME, userName))
@@ -126,6 +133,11 @@ Public Class DialerServiceManage
         Return list("id")
     End Function
 
+    ''' <summary>
+    ''' Update phone number status base on the dialer result
+    ''' </summary>
+    ''' <param name="contact"></param>
+    ''' <returns></returns>
     Public Shared Function UpdatePhoneNums(contact As DialerContact)
         Dim props = contact.GetType().GetProperties()
 

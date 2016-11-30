@@ -25,7 +25,7 @@ Public Class DialerServiceManageUnitTest
     <TestMethod()> Public Sub AddContacts_returnId()
         Dim userName = "Chris Yan"
         Dim result = DialerServiceManage.SyncNewLeadsFolder(userName)
-        Assert.IsNotNull(result)
+        Assert.IsTrue(result > 0)
     End Sub
 
 End Class
