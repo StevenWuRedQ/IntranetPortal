@@ -96,7 +96,11 @@ Imports IntranetPortal
 
         ' test indirect download
         Dim downloaded = Await service.ExportList(listid, False)
+        Assert.IsTrue(downloaded.Count > 0)
 
+        ' test direct download not working now
+        Dim directdownload = Await service.ExportList(listid, True)
+        Assert.IsFalse(downloaded.Count = directdownload.Count)
     End Function
 
 
