@@ -100,9 +100,17 @@ Imports IntranetPortal
 
         ' test direct download not working now
         Dim directdownload = Await service.ExportList(listid, True)
-        Assert.IsFalse(downloaded.Count = directdownload.Count)
+        Assert.IsNull(directdownload)
     End Function
 
+    <TestMethod> Public Async Function GetTokenTest() As Task
+        Dim token = Await TokenGenerator.getPureCloudeToken()
+        Assert.IsNotNull(token)
+    End Function
 
-
+    <TestMethod> Public Async Function GetListByNameTest() As Task
+        Dim list = Await service.GetContactListByName("UnitTestExportList")
+        Assert.IsNotNull(list)
+        Assert.IsTrue(Not String.IsNullOrEmpty(list("id").ToString))
+    End Function
 End Class

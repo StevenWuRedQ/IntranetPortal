@@ -15,7 +15,9 @@ Public Class DialerService
         APIClient = New HttpClient()
         'System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 Or SecurityProtocolType.Tls11 Or SecurityProtocolType.Tls
         APIClient.BaseAddress = New Uri("https://api.mypurecloud.com")
-        Token = ConfigurationManager.AppSettings("pure_cloud_token")
+        Dim tokentask = TokenGenerator.getPureCloudeToken()
+        tokentask.Wait()
+        Token = tokentask.Result
         If Not String.IsNullOrEmpty(Token) Then
             Dim BearerToken = "bearer " & Token
             APIClient.DefaultRequestHeaders.Add("Authorization", BearerToken)
@@ -421,6 +423,22 @@ Public Class DialerService
 
     End Function
 
+    Public Async Function GetContactListByName(listName As String) As Task(Of JObject)
+        Try
+            Dim url = "/api/v2/outbound/contactlists?name={0}"
+            url = String.Format(url, listName)
+            Dim response = Await APIClient.GetAsync(url)
+            If response.IsSuccessStatusCode Then
+                Dim responsestr = Await response.Content.ReadAsStringAsync()
+                Dim lists = JsonConvert.DeserializeObject(Of JObject)(responsestr)
+                Return lists("entities").First
+            End If
+            Return Nothing
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function ParseCSV(stream As Stream) As List(Of DialerContact)
         Try
             If stream IsNot Nothing Then
@@ -561,6 +579,7 @@ Public Class DialerService
             target.Add(propertyName, value)
         End If
     End Sub
+
 End Class
 
 
