@@ -21,6 +21,15 @@
 
     End Sub
 
+    Public Sub Completed()
+        Me.Status = RecordStatus.Updated
+        Using ctx As New PortalEntities
+            Dim item = ctx.DialerContacts.Find(Me.inin_outbound_id)
+            item.Status = Me.Status
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Sub Processed()
         Me.Status = RecordStatus.Processed
         Using ctx As New PortalEntities

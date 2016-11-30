@@ -435,8 +435,10 @@ Public Class DialerService
                         Continue For
                     End If
                     Dim newMap = New CsvPropertyMap(prop)
-                    newMap.Name(prop.Name.Replace("_", "-"))
-                    contactMap.PropertyMaps.Add(newMap)
+                    If prop.Name.Contains("_") Then
+                        newMap.Name(prop.Name.Replace("_", "-"))
+                        contactMap.PropertyMaps.Add(newMap)
+                    End If
                 Next
 
                 csv.Configuration.RegisterClassMap(contactMap)
