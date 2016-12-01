@@ -10,11 +10,11 @@ Public Class DialerServiceManageUnitTest
         Assert.IsNotNull(result.OwnerPhone1)
     End Sub
 
-    <TestMethod()> Public Async Function TestLoadContactList() As Task
+    <TestMethod()> Public Sub TestLoadContactList()
         Dim userName = "Chris Yan"
-        Dim result = Await DialerServiceManage.LoadContactList(userName)
+        Dim result = DialerServiceManage.LoadContactList(userName)
         Assert.IsTrue(result > 0)
-    End Function
+    End Sub
 
     <TestMethod()> Public Async Function CreateContactList_returnId() As Task
         Dim userName = "Chris Yan"
@@ -30,13 +30,19 @@ Public Class DialerServiceManageUnitTest
 
     <TestMethod()> Public Sub AddContacts_returnId()
         Dim userName = "Chris Yan"
-        Dim result = DialerServiceManage.SyncNewLeadsFolder(userName)
+        Dim result = DialerServiceManage.UploadNewLeadsToContactlist(userName)
         Assert.IsTrue(result > 0)
     End Sub
 
     <TestMethod()> Public Sub ClearContactList_returnAmount()
         Dim userName = "Chris Yan"
         Dim result = DialerServiceManage.ClearContactList(userName)
+        Assert.IsTrue(result > 0)
+    End Sub
+
+    <TestMethod()> Public Sub SyncNewLeads_returnAmount()
+        Dim userName = "Chris Yan"
+        Dim result = DialerServiceManage.SyncNewLeadsFolder(userName)
         Assert.IsTrue(result > 0)
     End Sub
 
@@ -51,7 +57,5 @@ Public Class DialerServiceManageUnitTest
         Assert.IsNotNull(result)
         Assert.AreEqual(result.Status, CInt(OwnerContact.ContactStatus.Right))
     End Sub
-
-
 
 End Class
