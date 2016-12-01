@@ -292,6 +292,7 @@
           <Property Name="Status" Type="int" />
           <Property Name="Leads" Type="nvarchar" MaxLength="255" />
           <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastUpdate" Type="datetime" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="CoOwner" Type="nvarchar" MaxLength="50" />
           <Property Name="OwnerPhone1" Type="nvarchar" MaxLength="255" />
@@ -3273,6 +3274,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LeadsStatus" Type="Int32" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4643,6 +4645,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="DialerContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.DialerContact">
               <MappingFragment StoreEntitySet="DialerContacts">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="LeadsStatus" ColumnName="LeadsStatus" />
                 <ScalarProperty Name="Agent" ColumnName="Agent" />

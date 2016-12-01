@@ -45,4 +45,10 @@
 
         End Using
     End Sub
+
+    Public Shared Function GetContact(bble As String, phoneNo As String) As OwnerContact
+        Using ctx As New Entities
+            Return ctx.OwnerContacts.Where(Function(c) c.BBLE = bble AndAlso c.Contact = phoneNo).FirstOrDefault
+        End Using
+    End Function
 End Class

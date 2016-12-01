@@ -1,11 +1,12 @@
 ﻿Partial Class DialerContact
 
-    Public Shared Function BatchSave(agentName As String, contacts As DialerContact()) As Integer
+    Public Shared Function BatchSave(agentName As String, listid As String, contacts As DialerContact()) As Integer
         Using ctx As New PortalEntities
 
             For Each contact In contacts
                 contact.Status = RecordStatus.Active
                 contact.Agent = agentName
+                contact.ContactListId = listid
                 If ctx.DialerContacts.Any(Function(a) a.inin_outbound_id = contact.inin_outbound_id) Then
                     ctx.Entry(contact).State = Entity.EntityState.Modified
                 Else
@@ -26,6 +27,7 @@
         Using ctx As New PortalEntities
             Dim item = ctx.DialerContacts.Find(Me.inin_outbound_id)
             item.Status = Me.Status
+            item.LastUpdate = DateTime.Now
             ctx.SaveChanges()
         End Using
     End Sub
@@ -35,6 +37,7 @@
         Using ctx As New PortalEntities
             Dim item = ctx.DialerContacts.Find(Me.inin_outbound_id)
             item.Status = Me.Status
+            item.LastUpdate = DateTime.Now
             ctx.SaveChanges()
         End Using
     End Sub
