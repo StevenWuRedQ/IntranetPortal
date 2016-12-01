@@ -209,6 +209,10 @@ Public Class NGShortSale
         End If
     End Sub
 
+    Protected Overrides Sub NotAllowdAccess()
+
+    End Sub
+
     Private Sub BindCaseData(caseId As Integer)
         ShortSaleCaseData = ShortSaleCase.GetCase(caseId)
         'contentSplitter.ClientVisible = True

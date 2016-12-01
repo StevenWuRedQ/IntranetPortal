@@ -183,5 +183,6 @@ Partial Public Class DialerContact
     Public Property Agent As String
     Public Property LeadsStatus As Nullable(Of Integer)
     Public Property Status As Nullable(Of Integer)
+    Public Property LastUpdate As Nullable(Of Date)
 
 End Class

@@ -420,7 +420,6 @@ Public Class DialerService
             Return JsonConvert.DeserializeObject(responsestr)
         End If
         Return Nothing
-
     End Function
 
     Public Async Function GetContactListByName(listName As String) As Task(Of JObject)
@@ -444,22 +443,39 @@ Public Class DialerService
             If stream IsNot Nothing Then
                 Dim csv = New CsvReader(New StreamReader(stream, Text.UTF8Encoding.UTF8))
                 csv.Configuration.QuoteAllFields = True
+                If csv.ReadHeader() Then
+                    Dim contactMap = New DefaultCsvClassMap(Of DialerContact)()
+                    Dim props = GetType(DialerContact).GetProperties
 
-                Dim contactMap = New DefaultCsvClassMap(Of DialerContact)()
-                For Each prop In GetType(DialerContact).GetProperties
-                    If prop.Name = "ContactListId" Then
-                        Continue For
-                    End If
-                    Dim newMap = New CsvPropertyMap(prop)
-                    If prop.Name.Contains("_") Then
-                        newMap.Name(prop.Name.Replace("_", "-"))
-                        contactMap.PropertyMaps.Add(newMap)
-                    End If
-                Next
+                    For Each prop In csv.FieldHeaders
+                        Dim propName = prop
+                        If prop.Contains("-") Then
+                            propName = prop.Replace("-", "_")
+                        End If
 
-                csv.Configuration.RegisterClassMap(contactMap)
-                Dim records = csv.GetRecords(Of DialerContact)().ToList()
-                Return records
+                        If props.Any(Function(p) p.Name = propName) Then
+                            Dim pi = props.Where(Function(p) p.Name = propName).FirstOrDefault
+                            Dim newMap = New CsvPropertyMap(pi)
+                            newMap.Name(prop)
+                            contactMap.PropertyMaps.Add(newMap)
+                        End If
+                    Next
+
+                    'For Each prop In GetType(DialerContact).GetProperties
+                    '    If prop.Name = "ContactListId" Then
+                    '        Continue For
+                    '    End If
+                    '    Dim newMap = New CsvPropertyMap(prop)
+                    '    If csv.FieldHeaders Then
+                    '        newMap.Name(prop.Name.Replace("_", "-"))
+                    '        contactMap.PropertyMaps.Add(newMap)
+                    '    End If
+                    'Next
+
+                    csv.Configuration.RegisterClassMap(contactMap)
+                    Dim records = csv.GetRecords(Of DialerContact)().ToList()
+                    Return records
+                End If
             End If
             Return Nothing
         Catch ex As Exception
