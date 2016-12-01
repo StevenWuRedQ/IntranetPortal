@@ -8217,7 +8217,6 @@
     <Content Include="js\templates\ptfile.html" />
     <Content Include="js\templates\ptfiles.html" />
     <Content Include="Scripts\Web.config" />
-    <Content Include="scrollbar\Web.config" />
     <Content Include="bower_components\signalr\.bower.json" />
     <Content Include="bower_components\signalr\bower.json" />
     <Content Include="bower_components\signalr\LICENSE.md" />
@@ -8286,10 +8285,6 @@
     <None Include="Service References\CallTrackingService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="scrollbar\jquery-1.11.0.min.js" />
-    <Content Include="scrollbar\jquery.mCustomScrollbar.concat.min.js" />
-    <Content Include="scrollbar\jquery.mCustomScrollbar.css" />
-    <Content Include="scrollbar\jquery.mCustomScrollbar.js" />
     <None Include="Service References\CallTrackingService\item.disco" />
     <None Include="Service References\CallTrackingService\configuration91.svcinfo" />
     <None Include="Service References\CallTrackingService\configuration.svcinfo" />

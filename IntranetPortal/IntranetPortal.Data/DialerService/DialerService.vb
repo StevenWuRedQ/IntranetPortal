@@ -582,10 +582,7 @@ Public Class DialerService
 
 End Class
 
-
-
 Public Class ContactListExportURLItem
     Public Property uri As String
     Public Property exportTimestamp As DateTime
 End Class
-

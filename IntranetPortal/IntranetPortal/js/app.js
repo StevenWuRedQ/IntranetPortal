@@ -48,7 +48,7 @@ angular.module('PortalApp')
                 $rootScope.ConfirmModal.confrimFunc(false);
             }
         }
-        $rootScope.prompt = function (message, callback, /*optional*/ showArea){
+        $rootScope.prompt = function (message, callback, /* optional */ showArea){
             $rootScope.promptMessage = message ? message : '';
             $rootScope.promptModalTxt = '';
             $rootScope.isPromptModalArea = showArea || false;
