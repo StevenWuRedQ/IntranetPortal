@@ -10,6 +10,11 @@ Public Class DialerServiceManage
         Return String.Format(CONTACTLISTNAME, userName)
     End Function
 
+    ''' <summary>
+    ''' Return contact list id by agent name
+    ''' </summary>
+    ''' <param name="userName">Agent Name</param>
+    ''' <returns>Contact List Id</returns>
     Public Shared Function GetContactListId(userName As String) As String
         Dim service As New DialerService
         Dim task = service.GetContactListByName(GetAgentContactListName(userName))
@@ -30,6 +35,11 @@ Public Class DialerServiceManage
         Return task.Result
     End Function
 
+    ''' <summary>
+    ''' Save agent's contact list to Portal database
+    ''' </summary>
+    ''' <param name="userName">Agent Name</param>
+    ''' <returns>The amount of records</returns>
     Public Shared Function LoadContactList(userName As String) As Integer
         Dim list = GetAgentContactList(userName)
         If list IsNot Nothing AndAlso list.Count > 0 Then
@@ -40,6 +50,11 @@ Public Class DialerServiceManage
         Return 0
     End Function
 
+    ''' <summary>
+    ''' Clear agent's contact list from clound
+    ''' </summary>
+    ''' <param name="userName">Agent Name</param>
+    ''' <returns></returns>
     Public Shared Function ClearContactList(userName As String) As Integer
         Dim contacts = GetAgentContactList(userName)
         Dim service As New DialerService
@@ -78,7 +93,7 @@ Public Class DialerServiceManage
     End Function
 
     ''' <summary>
-    ''' Sync new leads into contact list
+    ''' Sync new leads into contact list base on database
     ''' </summary>
     ''' <param name="userName">Agent name</param>
     ''' <returns></returns>
@@ -97,13 +112,12 @@ Public Class DialerServiceManage
     End Function
 
     ''' <summary>
-    ''' Sync new leads into contact list
+    ''' Sync new leads into contact list base on clound contact list
     ''' </summary>
     ''' <param name="userName">Agent name</param>
     ''' <returns></returns>
     Public Shared Function UploadNewLeadsToContactlist(userName As String) As Integer
         Dim lds = Lead.GetUserLeadsData(userName, LeadStatus.NewLead)
-
         Dim contacts = GetAgentContactList(userName)
         Dim contactBBLEs = contacts.Select(Function(c) c.BBLE).ToArray
         Dim items = lds.Where(Function(l) Not contactBBLEs.Contains(l.BBLE)).ToList
