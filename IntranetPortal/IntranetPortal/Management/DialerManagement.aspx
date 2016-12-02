@@ -6,16 +6,20 @@
 
     <div class="container-fluid" ng-controller="DialerManagementController">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="dx-fieldset">
-                    <div class="dx-fieldset-header">Add Contact List</div>
+                    <div class="dx-fieldset-header">Pure Cloud Contact List</div>
                     <div class="dx-field">
-                         <div id="lookup"></div>
+                        <h4>Employee List</h4>
+                        <div id="lookup"></div>
                     </div>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-default" data-ng-click="CreateContactList()">CreateContactList</button>
-                    <button type="button" class="btn btn-default" data-ng-click="SyncNewLeadsFolder()">SyncNewLeadsFolder</button>
+                    <br />
+                    <div class="dx-fieldset-footer">
+                        <button type="button" class="btn btn-default" data-ng-click="CreateContactList()">CreateContactList</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-default" data-ng-click="SyncNewLeadsFolder()">SyncNewLeadsFolder</button>
+                    </div>
                 </div>
             </div>
             <hr />
@@ -24,7 +28,7 @@
     </div>
 
     <script>
-        angular.module("PortalApp").controller("DialerManagementController", ['$scope', 'EmployeeModel', 'ptCom','$http',  function ($scope, EmployeeModel, ptCom, $http) {
+        angular.module("PortalApp").controller("DialerManagementController", ['$scope', 'EmployeeModel', 'ptCom', '$http', function ($scope, EmployeeModel, ptCom, $http) {
 
             $scope.lookup = undefined;
             EmployeeModel.getEmpNames().then(
@@ -37,7 +41,7 @@
                     });
                     $scope.lookup = $("#lookup").dxLookup("instance");
                 });
-            
+
             $scope.CreateContactList = function () {
                 if ($scope.lookup) {
                     var emp = $scope.lookup.option('value');
