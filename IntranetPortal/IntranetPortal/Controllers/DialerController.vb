@@ -18,12 +18,14 @@ Namespace Controllers
         End Function
 
         <Route("api/dialer/SyncNewLeadsFolder/{username}")>
-        Public Function PostSyncNewLeadsFolder(username As String) As IHttpActionResult
+        Public Async Function PostSyncNewLeadsFolder(username As String) As Task(Of Integer)
             Try
-                Dim count = DialerServiceManage.UploadNewLeadsToContactlist(username)
-                Return Ok(count)
+                Dim count = Await Task.Run(Function()
+                                               Return DialerServiceManage.UploadNewLeadsToContactlist(username)
+                                           End Function)
+                Return count
             Catch ex As Exception
-                Return StatusCode(System.Net.HttpStatusCode.InternalServerError)
+                Throw ex
             End Try
 
         End Function

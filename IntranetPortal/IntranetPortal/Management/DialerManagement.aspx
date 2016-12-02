@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
         angular.module("PortalApp").controller("DialerManagementController", ['$scope', 'EmployeeModel', 'ptCom', '$http', function ($scope, EmployeeModel, ptCom, $http) {
 
             $scope.lookup = undefined;
@@ -52,7 +52,7 @@
                         }).then(function (d) {
                             ptCom.alert("Contact For " + emp + " is: " + d.data);
                         }, function () {
-                            ptCom.alert("Fail to create list");
+                            ptCom.alert("Fail to create list, may existing");
                         }
                         )
                     } else {
@@ -68,7 +68,7 @@
                     if (emp) {
                         $http({
                             method: 'POST',
-                            url: 'api/dialer/PostSyncNewLeadsFolder' + emp
+                            url: '/api/dialer/SyncNewLeadsFolder/' + emp
                         }).then(function sucs(resp) {
                             ptCom.alert("Sync " + resp.data + " leads to new folder");
                         }, function err() {
