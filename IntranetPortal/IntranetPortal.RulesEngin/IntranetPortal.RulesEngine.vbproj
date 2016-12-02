@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssignLeadsRule.vb" />
+    <Compile Include="DialerIntegrationRule.vb" />
     <Compile Include="EcourCasesUpdateRule.vb" />
     <Compile Include="NewofferNotifyRule.vb" />
     <Compile Include="AuctionNotifyRule.vb" />

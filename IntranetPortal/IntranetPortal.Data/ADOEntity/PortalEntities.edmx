@@ -287,14 +287,18 @@
           <Property Name="ContactListId" Type="nvarchar" MaxLength="50" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" />
           <Property Name="Agent" Type="nvarchar" MaxLength="50" />
-          <Property Name="LeadsStatus" Type="int" />
-          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
-          <Property Name="Status" Type="int" />
-          <Property Name="Leads" Type="nvarchar" MaxLength="255" />
-          <Property Name="Address" Type="nvarchar" MaxLength="255" />
-          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="CoOwner" Type="nvarchar" MaxLength="50" />
+          <Property Name="C1stMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C2ndMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DOBViolationsAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="WaterAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
+          <Property Name="LeadsStatus" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="LastUpdate" Type="datetime" />
           <Property Name="OwnerPhone1" Type="nvarchar" MaxLength="255" />
           <Property Name="CoOwnerPhone1" Type="nvarchar" MaxLength="255" />
           <Property Name="OwnerPhone2" Type="nvarchar" MaxLength="255" />
@@ -3105,11 +3109,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="inin_outbound_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContactListId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="Leads" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CoOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C1stMotgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="C2ndMotgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DOBViolationsAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WaterAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LeadsStatus" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="OwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CoOwnerPhone1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="OwnerPhone2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -3271,10 +3283,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CallRecordLastAttempt_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CallRecordLastResult_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Callable_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LeadsStatus" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4645,10 +4653,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="DialerContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.DialerContact">
               <MappingFragment StoreEntitySet="DialerContacts">
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="LeadsStatus" ColumnName="LeadsStatus" />
-                <ScalarProperty Name="Agent" ColumnName="Agent" />
                 <ScalarProperty Name="Callable_CoOwnerPhone20" ColumnName="Callable-CoOwnerPhone20" />
                 <ScalarProperty Name="CallRecordLastResult_CoOwnerPhone20" ColumnName="CallRecordLastResult-CoOwnerPhone20" />
                 <ScalarProperty Name="CallRecordLastAttempt_CoOwnerPhone20" ColumnName="CallRecordLastAttempt-CoOwnerPhone20" />
@@ -4810,11 +4814,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
                 <ScalarProperty Name="OwnerPhone2" ColumnName="OwnerPhone2" />
                 <ScalarProperty Name="CoOwnerPhone1" ColumnName="CoOwnerPhone1" />
                 <ScalarProperty Name="OwnerPhone1" ColumnName="OwnerPhone1" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LeadsStatus" ColumnName="LeadsStatus" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TaxesAmt" ColumnName="TaxesAmt" />
+                <ScalarProperty Name="WaterAmt" ColumnName="WaterAmt" />
+                <ScalarProperty Name="DOBViolationsAmt" ColumnName="DOBViolationsAmt" />
+                <ScalarProperty Name="C2ndMotgrAmt" ColumnName="C2ndMotgrAmt" />
+                <ScalarProperty Name="C1stMotgrAmt" ColumnName="C1stMotgrAmt" />
                 <ScalarProperty Name="CoOwner" ColumnName="CoOwner" />
                 <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Leads" ColumnName="Leads" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="ContactListId" ColumnName="ContactListId" />
                 <ScalarProperty Name="inin_outbound_id" ColumnName="inin-outbound-id" />

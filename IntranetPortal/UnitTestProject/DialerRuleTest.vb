@@ -13,8 +13,7 @@ Imports IntranetPortal
         service = New DialerService
         contact = New DialerContact
         contact.BBLE = "123456789"
-        contact.Leads = "fake leads"
-        contact.Address = "fake address"
+        contact.PropertyAddress = "fake address"
         contact.Comments = ""
         contact.Owner = "Owner1"
         contact.CoOwner = "Owner2"
@@ -25,8 +24,7 @@ Imports IntranetPortal
 
         contact2 = New DialerContact
         contact2.BBLE = "123456780"
-        contact2.Leads = "fake leadsx"
-        contact2.Address = "fake addressx"
+        contact2.PropertyAddress = "fake addressx"
         contact2.Comments = ""
         contact2.Owner = "Owner1x"
         contact2.CoOwner = "Owner2x"
