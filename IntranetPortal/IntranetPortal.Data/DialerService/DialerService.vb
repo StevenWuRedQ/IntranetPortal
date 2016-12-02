@@ -14,19 +14,27 @@ Public Class DialerService
     Shared APIClient As HttpClient
     Shared Token As String
 
+    ''' <summary>
+    ''' initialize class create a http client and assign a token to it
+    ''' </summary>
     Sub New()
         APIClient = New HttpClient()
         'System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 Or SecurityProtocolType.Tls11 Or SecurityProtocolType.Tls
         APIClient.BaseAddress = New Uri("https://api.mypurecloud.com")
-        Dim tokentask = TokenGenerator.getPureCloudeToken()
-        tokentask.Wait()
-        Token = tokentask.Result
+        Token = TokenGenerator.getPureCloudeToken()
         If Not String.IsNullOrEmpty(Token) Then
             Dim BearerToken = "bearer " & Token
             APIClient.DefaultRequestHeaders.Add("Authorization", BearerToken)
         End If
     End Sub
 
+
+    ''' <summary>
+    ''' async function to initlize a new download
+    ''' should call before download csv file or you always get old version
+    ''' </summary>
+    ''' <param name="listid"></param>
+    ''' <returns>a task to resolve</returns>
     Public Async Function InitialExport(listid As String) As Task(Of Boolean)
         Try
             Dim url = "/api/v2/outbound/contactlists/{0}/export"
@@ -42,6 +50,12 @@ Public Class DialerService
         End Try
     End Function
 
+    ''' <summary>
+    ''' get export infomation for a contact list
+    ''' in api return, url infomation inside url property
+    ''' </summary>
+    ''' <param name="ListId"></param>
+    ''' <returns></returns>
     Public Async Function GetExportURL(ListId As String) As Task(Of ContactListExportURLItem)
         Dim item As ContactListExportURLItem = Nothing
         Try
@@ -58,6 +72,11 @@ Public Class DialerService
         End Try
     End Function
 
+    ''' <summary>
+    ''' an indirect export version, which works.
+    ''' </summary>
+    ''' <param name="ListId"></param>
+    ''' <returns></returns>
     Public Async Function ExportList(ListId As String) As Task(Of List(Of DialerContact))
         Try
             Dim initResult = Await InitialExport(ListId)
@@ -83,10 +102,18 @@ Public Class DialerService
         End Try
     End Function
 
+
+    ''' <summary>
+    ''' a version which allow you to download directly.
+    ''' attention, the direct download version never works.
+    ''' </summary>
+    ''' <param name="ListId"></param>
+    ''' <param name="isDirectDownLoad">Please Please set false to use indirect version</param>
+    ''' <returns></returns>
     Public Async Function ExportList(ListId As String, isDirectDownLoad As Boolean) As Task(Of List(Of DialerContact))
         If isDirectDownLoad <> True Then
-            Dim stream = Await ExportList(ListId)
-            Return stream
+            Dim list = Await ExportList(ListId)
+            Return list
         Else
             Dim initResult = Await InitialExport(ListId)
             If initResult = False Then
@@ -115,6 +142,12 @@ Public Class DialerService
         End If
     End Function
 
+    ''' <summary>
+    ''' create a new contact list with given list name
+    ''' remember to chagne the template when the database schema update
+    ''' </summary>
+    ''' <param name="listName"></param>
+    ''' <returns></returns>
     Public Async Function AddContactList(listName As String) As Task(Of JObject)
         Try
             Dim template = <![CDATA[{
@@ -353,6 +386,11 @@ Public Class DialerService
 
     End Function
 
+    ''' <summary>
+    ''' remove a contact list from pure cloud
+    ''' </summary>
+    ''' <param name="listid"></param>
+    ''' <returns></returns>
     Public Async Function DeleteContactList(listid As String) As Task(Of Boolean)
         Dim url = "/api/v2/outbound/contactlists/{0}"
         url = String.Format(url, listid)
@@ -363,6 +401,12 @@ Public Class DialerService
         Return False
     End Function
 
+    ''' <summary>
+    ''' get a contact instance from contact list
+    ''' </summary>
+    ''' <param name="listId"></param>
+    ''' <param name="contactId"></param>
+    ''' <returns></returns>
     Public Async Function GetContactFromList(listId As String, contactId As String) As Task(Of JObject)
         Dim url = "/api/v2/outbound/contactlists/{0}/contacts/{1}"
         url = String.Format(url, listId, contactId)
@@ -374,6 +418,12 @@ Public Class DialerService
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' Add many contacts to contact list
+    ''' </summary>
+    ''' <param name="listId"></param>
+    ''' <param name="contacts">a list of DialerContact instance</param>
+    ''' <returns></returns>
     Public Async Function AddContactsToList(listId As String, contacts As List(Of DialerContact)) As Task(Of List(Of JObject))
         Dim jsonlist = New List(Of JObject)
         For Each contact In contacts
@@ -395,6 +445,12 @@ Public Class DialerService
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' delete a contact from list as its name
+    ''' </summary>
+    ''' <param name="listId"></param>
+    ''' <param name="contactId"></param>
+    ''' <returns></returns>
     Public Async Function RemoveContactFromList(listId As String, contactId As String) As Task(Of Boolean)
         Dim url = "/api/v2/outbound/contactlists/{0}/contacts/{1}"
         url = String.Format(url, listId, contactId)
@@ -405,10 +461,21 @@ Public Class DialerService
         Return False
     End Function
 
+    ''' <summary>
+    ''' facade version, save you one line code
+    ''' </summary>
+    ''' <param name="contact"></param>
+    ''' <returns></returns>
     Public Async Function RemoveContactFromList(contact As DialerContact) As Task(Of Boolean)
         Return Await RemoveContactFromList(contact.ContactListId, contact.inin_outbound_id)
     End Function
 
+
+    ''' <summary>
+    ''' facde version of update, save you one line code
+    ''' </summary>
+    ''' <param name="contact"></param>
+    ''' <returns></returns>
     Public Async Function UpdateContactInList(contact As DialerContact) As Task(Of JObject)
         Dim json = Await GetContactFromList(contact.ContactListId, contact.inin_outbound_id)
         Dim newdata = ConvertContactToJson(contact, True)
@@ -430,6 +497,11 @@ Public Class DialerService
         Return Nothing
     End Function
 
+    ''' <summary>
+    ''' query pure cloud to get a list (or many) by given list name
+    ''' </summary>
+    ''' <param name="listName"></param>
+    ''' <returns></returns>
     Public Async Function GetContactListByName(listName As String) As Task(Of JObject)
         Try
             Dim url = "/api/v2/outbound/contactlists?name={0}"
@@ -446,6 +518,11 @@ Public Class DialerService
         End Try
     End Function
 
+    ''' <summary>
+    ''' use csvhelper to convert csvfile stream to a list of dialercontract
+    ''' </summary>
+    ''' <param name="stream"></param>
+    ''' <returns></returns>
     Public Function ParseCSV(stream As Stream) As List(Of DialerContact)
         Try
             If stream IsNot Nothing Then
@@ -491,6 +568,14 @@ Public Class DialerService
         End Try
     End Function
 
+    ''' <summary>
+    ''' convert a dilaercontact to json format.
+    ''' because to add a contact is different from update
+    ''' add a contact can use null value while upate dont allow
+    ''' </summary>
+    ''' <param name="contact"></param>
+    ''' <param name="isTry">ture for update, false for create</param>
+    ''' <returns></returns>
     Public Function ConvertContactToJson(contact As DialerContact, Optional isTry As Boolean = False) As JObject
         Dim dataObject = New JObject()
         If Not isTry Then
@@ -603,6 +688,12 @@ Public Class DialerService
         Return dataObject
     End Function
 
+    ''' <summary>
+    ''' helper class for csv mapping
+    ''' </summary>
+    ''' <param name="target"></param>
+    ''' <param name="propertyName"></param>
+    ''' <param name="value"></param>
     Public Sub TryAdd(target As JObject, propertyName As String, value As JToken)
         If String.IsNullOrEmpty(value.ToString) Then
             Return

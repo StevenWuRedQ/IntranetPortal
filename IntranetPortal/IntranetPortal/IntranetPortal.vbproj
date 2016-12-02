@@ -818,6 +818,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controllers\CorporationEntitiesController.vb" />
+    <Compile Include="Controllers\DialerController.vb" />
+    <Compile Include="Controllers\EmployeeController.vb" />
     <Compile Include="Controllers\FollowUpController.vb" />
     <Compile Include="Controllers\HomeownerController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
@@ -1259,6 +1261,13 @@
     <Compile Include="EmailTemplate\Testing.ascx.vb">
       <DependentUpon>Testing.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\DialerManagement.aspx.designer.vb">
+      <DependentUpon>DialerManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\DialerManagement.aspx.vb">
+      <DependentUpon>DialerManagement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Module\CacheAvoidModule.vb" />
     <Compile Include="Global.asax.vb">
@@ -7316,6 +7325,7 @@
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
+    <Content Include="js\models\Employee.js" />
     <Content Include="js\models\Underwriter.js" />
     <Content Include="js\models\UnderwritingRequest.js" />
     <Content Include="js\services\ptCom.js" />
@@ -7417,6 +7427,7 @@
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
+    <Content Include="Management\DialerManagement.aspx" />
     <Content Include="Management\FormGenerator2.aspx" />
     <Content Include="Management\FormGenerator.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
