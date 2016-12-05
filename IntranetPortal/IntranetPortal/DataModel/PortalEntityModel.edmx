@@ -177,7 +177,7 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="Score" Type="int" />
-          <Property Name="ListingType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ListingType" Type="int" />
           <Property Name="Source" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="120" />
           <Property Name="Comment" Type="nchar" MaxLength="100" />
@@ -1994,7 +1994,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Score" Type="Int32" />
-          <Property Name="ListingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ListingType" Type="Int32" />
           <Property Name="Source" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="Comment" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
