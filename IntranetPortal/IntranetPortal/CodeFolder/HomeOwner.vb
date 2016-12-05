@@ -355,6 +355,8 @@ Partial Public Class HomeOwner
         phone.Phone = item.phoneField
         phone.Type = item.phoneTypeField.ToString
         phone.Source = PhoneSource.TLOLocateReport
+        phone.Score = item.scoreField
+        phone.ListingType = item.listingTypeField
         Return phone
     End Function
 

@@ -17,7 +17,12 @@
 
     Public Shared Function GetPhoneNums(bble As String, ownerName As String) As String()
         Using ctx As New Entities
-            Return ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = bble AndAlso p.OwnerName = ownerName).Select(Function(p) p.Phone).Distinct.ToArray
+            Dim result = From ph In ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = bble AndAlso p.OwnerName = ownerName)
+                         Group ph By ph.Phone Into Max(ph.Score)
+                         Order By Max Descending
+                         Select Phone
+
+            Return result.ToArray
         End Using
     End Function
 
