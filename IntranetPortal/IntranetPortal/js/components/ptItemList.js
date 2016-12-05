@@ -1,6 +1,6 @@
 ﻿angular.module('PortalApp').component('ptItemList', {
 
-    templateUrl: '/js/templates/ptItemList.html',
+    templateUrl: '/js/components/ptItemList.html',
     bindings: {
         itemName: '@',
         itemUrl: '@',

@@ -2,7 +2,7 @@
     .directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
         return {
             restrict: 'E',
-            templateUrl: '/js/templates/ptfile.html',
+            templateUrl: '/js/directives/ptFile.tpl.html',
             scope: {
                 fileModel: '=',
                 fileBble: '=',

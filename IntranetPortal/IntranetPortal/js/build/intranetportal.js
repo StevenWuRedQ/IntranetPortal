@@ -3287,7 +3287,7 @@ angular.module("PortalApp")
     .directive('auditLogs', ['AuditLog', function (AuditLog) {
         return {
             restrict: 'E',
-            templateUrl: '/js/Views/AuditLogs/AuditLogs.tpl.html',
+            templateUrl: '/js/directives/AuditLogs.tpl.html',
             scope: {
                 tableName: '@',
                 recordId: '=',
@@ -3500,7 +3500,7 @@ angular.module("PortalApp")
     .directive('ptEditor', [function () {
         return {
 
-            templateUrl: '/js/templates/ptEditor.html',
+            templateUrl: '/js/directives/ptEditor.html',
             require: 'ngModel',
             scope: {
                 ptModel: '=ngModel'
@@ -3541,7 +3541,7 @@ angular.module("PortalApp")
     .directive('ptFile', ['ptFileService', '$timeout', function (ptFileService, $timeout) {
         return {
             restrict: 'E',
-            templateUrl: '/js/templates/ptfile.html',
+            templateUrl: '/js/directives/ptFile.tpl.html',
             scope: {
                 fileModel: '=',
                 fileBble: '=',
@@ -3644,7 +3644,7 @@ angular.module("PortalApp")
     .directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
         return {
             restrict: 'E',
-            templateUrl: '/js/templates/ptfiles.html',
+            templateUrl: '/js/directives/ptFiles.tpl.html',
             scope: {
                 fileModel: '=',
                 fileBble: '=',
@@ -9774,7 +9774,7 @@ angular.module("PortalApp")
 }]);
 angular.module('PortalApp').component('ptAudit', {
 
-    templateUrl: '/js/templates/ptAudit.html',
+    templateUrl: '/js/components/ptAudit.tpl.html',
     bindings: {
         label: '@',
         objName: '@',
@@ -9870,7 +9870,7 @@ angular.module('PortalApp').component('ptHomeowner', {
 });
 angular.module('PortalApp').component('ptItemList', {
 
-    templateUrl: '/js/templates/ptItemList.html',
+    templateUrl: '/js/components/ptItemList.html',
     bindings: {
         itemName: '@',
         itemUrl: '@',
@@ -9977,4 +9977,3 @@ angular.module('PortalApp').component('ptSelectableInput', {
     }
 
 })
-//# sourceMappingURL=Test.js.map
