@@ -7,6 +7,9 @@ Imports CsvHelper.Configuration
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 
+''' <summary>
+''' 
+''' </summary>
 Public Class DialerService
     Shared APIClient As HttpClient
     Shared Token As String
@@ -152,11 +155,16 @@ Public Class DialerService
             "version": 1,
             "columnNames": [
                 "BBLE",
-                "Leads",
-                "Address",
-                "Comments",
+                "PropertyAddress",
                 "Owner",
                 "CoOwner",
+                "C1stMotgrAmt",
+                "C2ndMotgrAmt",
+                "DOBViolationsAmt",
+                "WaterAmt",
+                "TaxesAmt",
+                "Comments",
+                "LeadsStatus",
                 "OwnerPhone1",
                 "CoOwnerPhone1",
                 "OwnerPhone2",
@@ -572,12 +580,16 @@ Public Class DialerService
         Dim dataObject = New JObject()
         If Not isTry Then
             dataObject.Add("BBLE", contact.BBLE)
-            dataObject.Add("Leads", contact.Leads)
-            dataObject.Add("Address", contact.Address)
-            dataObject.Add("Comments", contact.Comments)
+            dataObject.Add("PropertyAddress", contact.PropertyAddress)
+            dataObject.Add("C1stMotgrAmt", contact.C1stMotgrAmt)
+            dataObject.Add("C2ndMotgrAmt", contact.C2ndMotgrAmt)
+            dataObject.Add("DOBViolationsAmt", contact.DOBViolationsAmt)
+            dataObject.Add("WaterAmt", contact.WaterAmt)
+            dataObject.Add("TaxesAmt", contact.TaxesAmt)
             dataObject.Add("Owner", contact.Owner)
             dataObject.Add("CoOwner", contact.CoOwner)
-
+            dataObject.Add("LeadsStatus", contact.LeadsStatus)
+            dataObject.Add("Comments", contact.Comments)
             dataObject.Add("OwnerPhone1", contact.OwnerPhone1)
             dataObject.Add("CoOwnerPhone1", contact.CoOwnerPhone1)
             dataObject.Add("OwnerPhone2", contact.OwnerPhone2)
@@ -620,12 +632,15 @@ Public Class DialerService
             dataObject.Add("CoOwnerPhone20", contact.CoOwnerPhone20)
         Else
             TryAdd(dataObject, "BBLE", contact.BBLE)
-            TryAdd(dataObject, "Leads", contact.Leads)
-            TryAdd(dataObject, "Address", contact.Address)
+            TryAdd(dataObject, "PropertyAddress", contact.PropertyAddress)
+            TryAdd(dataObject, "C1stMotgrAmt", contact.C1stMotgrAmt)
+            TryAdd(dataObject, "C2ndMotgrAmt", contact.C2ndMotgrAmt)
+            TryAdd(dataObject, "DOBViolationsAmt", contact.DOBViolationsAmt)
+            TryAdd(dataObject, "WaterAmt", contact.WaterAmt)
+            TryAdd(dataObject, "TaxesAmt", contact.TaxesAmt)
             TryAdd(dataObject, "Comments", contact.Comments)
             TryAdd(dataObject, "Owner", contact.Owner)
             TryAdd(dataObject, "CoOwner", contact.CoOwner)
-
             TryAdd(dataObject, "OwnerPhone1", contact.OwnerPhone1)
             TryAdd(dataObject, "CoOwnerPhone1", contact.CoOwnerPhone1)
             TryAdd(dataObject, "OwnerPhone2", contact.OwnerPhone2)

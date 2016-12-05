@@ -51,4 +51,25 @@
             Return ctx.OwnerContacts.Where(Function(c) c.BBLE = bble AndAlso c.Contact = phoneNo).FirstOrDefault
         End Using
     End Function
+
+    Public Shared Function FormatPhoneNumber(ByVal myNumber As String) As String
+        If (String.IsNullOrEmpty(myNumber)) Then
+            Return Nothing
+        End If
+        Dim mynewNumber As String
+
+        mynewNumber = ""
+        myNumber = myNumber.Replace("(", "").Replace(")", "").Replace("-", "")
+        If myNumber.Length < 10 Then
+            mynewNumber = myNumber
+        ElseIf myNumber.Length = 10 Then
+            mynewNumber = "(" & myNumber.Substring(0, 3) & ") " &
+                    myNumber.Substring(3, 3) & "-" & myNumber.Substring(6, 4)
+        ElseIf myNumber.Length > 10 Then
+            mynewNumber = "(" & myNumber.Substring(0, 3) & ") " &
+                    myNumber.Substring(3, 3) & "-" & myNumber.Substring(6, 4) & " " &
+                    myNumber.Substring(10)
+        End If
+        Return mynewNumber
+    End Function
 End Class

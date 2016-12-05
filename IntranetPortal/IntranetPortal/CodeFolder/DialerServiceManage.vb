@@ -6,9 +6,25 @@
 Public Class DialerServiceManage
 
     Private Const CONTACTLISTNAME = "List_{0}"
+
+    ''' <summary>
+    ''' Return agent contact list id
+    ''' </summary>
+    ''' <param name="userName"></param>
+    ''' <returns></returns>
     Private Shared Function GetAgentContactListName(userName As String) As String
         Return String.Format(CONTACTLISTNAME, userName)
     End Function
+
+    ''' <summary>
+    ''' Run the daily task in the rule engine
+    ''' </summary>
+    ''' <param name="userName">Agent Name</param>
+    Public Shared Sub RunDailyTask(userName As String)
+        LoadContactList(userName)
+        UpdatePortal(userName)
+        SyncNewLeadsFolder(userName)
+    End Sub
 
     ''' <summary>
     ''' Return contact list id by agent name
@@ -25,14 +41,6 @@ Public Class DialerServiceManage
         Else
             Throw New Exception("Can't find agent contact list. Agent name: " & userName)
         End If
-    End Function
-
-    Private Shared Function GetAgentContactList(userName As String) As List(Of DialerContact)
-        Dim service As New DialerService
-        Dim listId = GetContactListId(userName)
-        Dim task = service.ExportList(listId, False)
-        task.Wait()
-        Return task.Result
     End Function
 
     ''' <summary>
@@ -57,10 +65,9 @@ Public Class DialerServiceManage
     ''' <returns></returns>
     Public Shared Function ClearContactList(userName As String) As Integer
         Dim contacts = GetAgentContactList(userName)
-        Dim service As New DialerService
+        Dim listId = GetContactListId(userName)
         For Each ct In contacts
-            Dim task2 = service.RemoveContactFromList(GetContactListId(userName), ct.inin_outbound_id)
-            task2.Wait()
+            RemoveContactFromlist(listId, ct.inin_outbound_id)
         Next
         Return contacts.Count
     End Function
@@ -76,12 +83,21 @@ Public Class DialerServiceManage
         Dim service As New DialerService
 
         For Each ct In contacts
+            Dim ld = Lead.GetInstance(ct.BBLE)
+
+            ' leads was archived
+            ' leads was tansferred to other user
+            ' leads was move to other folder
+            If ld Is Nothing OrElse ld.EmployeeName <> userName OrElse ld.Status > 0 Then
+                RemoveContactFromlist(ct.ContactListId, ct.inin_outbound_id)
+                ct.Removed()
+                Continue For
+            End If
+
             If ct.LeadsStatus.HasValue Then
-                Dim ld = Lead.GetInstance(ct.BBLE)
                 If ct.LeadsStatus > 0 Then
-                    Lead.UpdateLeadStatus(ct.BBLE, ct.LeadsStatus, DateTime.Now.AddDays(1), ct.Comments)
-                    Dim task = service.RemoveContactFromList(ct.ContactListId, ct.inin_outbound_id)
-                    task.Wait()
+                    Lead.UpdateLeadStatus(ct.BBLE, ct.LeadsStatus, DateTime.Now.AddDays(1), ct.Comments, Nothing, ct.Agent)
+                    RemoveContactFromlist(ct.ContactListId, ct.inin_outbound_id)
                 End If
             End If
 
@@ -100,6 +116,9 @@ Public Class DialerServiceManage
     Public Shared Function SyncNewLeadsFolder(userName As String) As Integer
         Dim lds = Lead.GetUserLeadsData(userName, LeadStatus.NewLead)
         Dim contacts = DialerContact.LoadContacts(userName, DialerContact.RecordStatus.Processed).ToList
+        If contacts Is Nothing Then
+            Throw New Exception("Agent contact list is nothing. agent name: " & userName)
+        End If
         Dim contactBBLEs = contacts.Select(Function(c) c.BBLE).ToArray
         Dim items = lds.Where(Function(l) Not contactBBLEs.Contains(l.BBLE)).ToList
         Dim result = UploadContactsByLeads(userName, items)
@@ -112,7 +131,7 @@ Public Class DialerServiceManage
     End Function
 
     ''' <summary>
-    ''' Sync new leads into contact list base on clound contact list
+    ''' Sync new leads into contact list base on cloud contact list
     ''' </summary>
     ''' <param name="userName">Agent name</param>
     ''' <returns></returns>
@@ -124,43 +143,27 @@ Public Class DialerServiceManage
         Return UploadContactsByLeads(userName, items)
     End Function
 
-    Private Shared Function UploadContactsByLeads(userName As String, lds As List(Of Lead)) As Integer
-        If lds Is Nothing OrElse lds.Count = 0 Then
-            Return 0
-        End If
-
-        Dim listId = GetContactListId(userName)
-        Dim data As New List(Of DialerContact)
-        For Each item In lds
-            Dim ct = InitContact(item)
-            If ct IsNot Nothing Then
-                data.Add(ct)
-            End If
-        Next
-
-        Dim service As New DialerService
-        If data.Count > 0 Then
-            Dim task = service.AddContactsToList(listId, data)
-            task.Wait()
-        End If
-
-        Return data.Count
-    End Function
-
     ''' <summary>
     ''' Init the contact object from leads
     ''' </summary>
     ''' <param name="ld">The Leads</param>
     ''' <returns></returns>
     Public Shared Function InitContact(ld As Lead) As DialerContact
+        Dim li = ld.LeadsInfo
         Dim ct As New DialerContact
         ct.BBLE = ld.BBLE
-        ct.Address = ld.LeadsInfo.PropertyAddress
+        ct.PropertyAddress = li.PropertyAddress
         ct.Agent = ld.EmployeeName
+        ct.C1stMotgrAmt = li.C1stMotgrAmt
+        ct.C2ndMotgrAmt = li.C2ndMotgrAmt
+        ct.DOBViolationsAmt = li.DOBViolationsAmt
+        ct.WaterAmt = li.WaterAmt
+        ct.TaxesAmt = li.TaxesAmt
+
         Dim hasPhone = False
 
-        If Not String.IsNullOrEmpty(ld.LeadsInfo.Owner) Then
-            ct.Owner = ld.LeadsInfo.Owner
+        If Not String.IsNullOrEmpty(li.Owner) Then
+            ct.Owner = li.Owner
             Dim ownerPhones = HomeOwnerPhone.GetPhoneNums(ld.BBLE, ct.Owner)
             For i = 0 To 19
                 If i >= ownerPhones.Length Then
@@ -173,8 +176,8 @@ Public Class DialerServiceManage
             Next
         End If
 
-        If Not String.IsNullOrEmpty(ld.LeadsInfo.CoOwner) Then
-            ct.CoOwner = ld.LeadsInfo.CoOwner
+        If Not String.IsNullOrEmpty(li.CoOwner) Then
+            ct.CoOwner = li.CoOwner
 
             Dim ownerPhones = HomeOwnerPhone.GetPhoneNums(ld.BBLE, ct.CoOwner)
             For i = 0 To 19
@@ -229,10 +232,58 @@ Public Class DialerServiceManage
         Next
     End Sub
 
+    ''' <summary>
+    ''' Remove contact from agent list
+    ''' </summary>
+    ''' <param name="listId"></param>
+    ''' <param name="contactId"></param>
+    Private Shared Sub RemoveContactFromlist(listId As String, contactId As String)
+        Dim service As New DialerService
+        Dim task = service.RemoveContactFromList(listId, contactId)
+        task.Wait()
+    End Sub
+
+    ''' <summary>
+    ''' Upload agent's contact list by leads
+    ''' </summary>
+    ''' <param name="userName"></param>
+    ''' <param name="lds"></param>
+    ''' <returns></returns>
+    Private Shared Function UploadContactsByLeads(userName As String, lds As List(Of Lead)) As Integer
+        If lds Is Nothing OrElse lds.Count = 0 Then
+            Return 0
+        End If
+
+        Dim listId = GetContactListId(userName)
+        Dim data As New List(Of DialerContact)
+        For Each item In lds
+            Dim ct = InitContact(item)
+            If ct IsNot Nothing Then
+                data.Add(ct)
+            End If
+        Next
+
+        Dim service As New DialerService
+        If data.Count > 0 Then
+            Dim task = service.AddContactsToList(listId, data)
+            task.Wait()
+        End If
+
+        Return data.Count
+    End Function
+
+    Private Shared Function GetAgentContactList(userName As String) As List(Of DialerContact)
+        Dim service As New DialerService
+        Dim listId = GetContactListId(userName)
+        Dim task = service.ExportList(listId, False)
+        task.Wait()
+        Return task.Result
+    End Function
+
     Public Shared Function UpdatePhoneResult(bble As String, phone As String, result As String)
         Select Case result
             Case "Active - Right Contact"
-                OwnerContact.UpdateContact(bble, OwnerContact.ContactStatus.Right, phone, OwnerContact.OwnerContactType.Phone)
+                OwnerContact.UpdateContact(bble, OwnerContact.ContactStatus.Right, OwnerContact.FormatPhoneNumber(phone), OwnerContact.OwnerContactType.Phone)
         End Select
 
         Return True

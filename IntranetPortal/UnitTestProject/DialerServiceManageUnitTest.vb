@@ -58,4 +58,11 @@ Public Class DialerServiceManageUnitTest
         Assert.AreEqual(result.Status, CInt(OwnerContact.ContactStatus.Right))
     End Sub
 
+
+    <TestMethod()> Public Sub DailyTask_return()
+
+        DialerServiceManage.RunDailyTask("Chris Yan")
+
+    End Sub
+
 End Class

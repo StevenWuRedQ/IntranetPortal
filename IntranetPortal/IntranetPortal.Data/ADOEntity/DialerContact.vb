@@ -14,11 +14,19 @@ Partial Public Class DialerContact
     Public Property inin_outbound_id As String
     Public Property ContactListId As String
     Public Property BBLE As String
-    Public Property Leads As String
-    Public Property Address As String
-    Public Property Comments As String
+    Public Property Agent As String
+    Public Property PropertyAddress As String
     Public Property Owner As String
     Public Property CoOwner As String
+    Public Property C1stMotgrAmt As Nullable(Of Decimal)
+    Public Property C2ndMotgrAmt As Nullable(Of Decimal)
+    Public Property DOBViolationsAmt As Nullable(Of Decimal)
+    Public Property WaterAmt As Nullable(Of Decimal)
+    Public Property TaxesAmt As Nullable(Of Decimal)
+    Public Property Comments As String
+    Public Property LeadsStatus As Nullable(Of Integer)
+    Public Property Status As Nullable(Of Integer)
+    Public Property LastUpdate As Nullable(Of Date)
     Public Property OwnerPhone1 As String
     Public Property CoOwnerPhone1 As String
     Public Property OwnerPhone2 As String
@@ -180,9 +188,5 @@ Partial Public Class DialerContact
     Public Property CallRecordLastAttempt_CoOwnerPhone20 As String
     Public Property CallRecordLastResult_CoOwnerPhone20 As String
     Public Property Callable_CoOwnerPhone20 As String
-    Public Property Agent As String
-    Public Property LeadsStatus As Nullable(Of Integer)
-    Public Property Status As Nullable(Of Integer)
-    Public Property LastUpdate As Nullable(Of Date)
 
 End Class
