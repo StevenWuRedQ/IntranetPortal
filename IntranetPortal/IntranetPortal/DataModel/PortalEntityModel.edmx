@@ -176,6 +176,7 @@
           <Property Name="OwnerName" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Score" Type="int" />
           <Property Name="Source" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="120" />
           <Property Name="Comment" Type="nchar" MaxLength="100" />
@@ -1052,7 +1053,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="HomeOwners" EntityType="IntranetPortalModel.HomeOwner" />
           <EntitySet Name="LoginLogs" EntityType="IntranetPortalModel.LoginLog" />
           <EntitySet Name="SharedLeads" EntityType="IntranetPortalModel.SharedLead" />
-          <EntitySet Name="HomeOwnerPhones" EntityType="IntranetPortalModel.HomeOwnerPhone" />
           <EntitySet Name="UserProfileDatas" EntityType="IntranetPortalModel.UserProfileData" />
           <FunctionImport Name="UpdateEmployeeName">
             <Parameter Name="OldName" Mode="In" Type="String" />
@@ -1090,6 +1090,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="NYC_Scan_TaxLiens_Per_Year" EntityType="IntranetPortalModel.NYC_Scan_TaxLiens_Per_Year" />
           <EntitySet Name="InProcessBBLEs" EntityType="IntranetPortalModel.InProcessBBLE" />
           <EntitySet Name="TLODatas" EntityType="IntranetPortalModel.TLOData" />
+          <EntitySet Name="HomeOwnerPhones" EntityType="IntranetPortalModel.HomeOwnerPhone" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1555,21 +1556,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="HomeOwnerPhone">
-          <Key>
-            <PropertyRef Name="PhoneID" />
-          </Key>
-          <Property Name="PhoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Source" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="Comment" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="LastCalledDate" Type="DateTime" Precision="3" />
-          <Property Name="CallCount" Type="Int32" />
-        </EntityType>
         <EntityType Name="UserProfileData">
           <Key>
             <PropertyRef Name="ProfileID" />
@@ -1997,6 +1983,22 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="HomeOwnerPhone">
+          <Key>
+            <PropertyRef Name="PhoneID" />
+          </Key>
+          <Property Name="PhoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="Source" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="LastCalledDate" Type="DateTime" Precision="3" />
+          <Property Name="CallCount" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2408,22 +2410,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="SharedID" ColumnName="SharedID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HomeOwnerPhones">
-            <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwnerPhone">
-              <MappingFragment StoreEntitySet="HomeOwnerPhone">
-                <ScalarProperty Name="CallCount" ColumnName="CallCount" />
-                <ScalarProperty Name="LastCalledDate" ColumnName="LastCalledDate" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Source" ColumnName="Source" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-                <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2881,6 +2867,23 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="ReportToken" ColumnName="ReportToken" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeOwnerPhones">
+            <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwnerPhone">
+              <MappingFragment StoreEntitySet="HomeOwnerPhone">
+                <ScalarProperty Name="CallCount" ColumnName="CallCount" />
+                <ScalarProperty Name="LastCalledDate" ColumnName="LastCalledDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

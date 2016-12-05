@@ -16,6 +16,7 @@ Partial Public Class HomeOwnerPhone
     Public Property OwnerName As String
     Public Property Phone As String
     Public Property Type As String
+    Public Property Score As Nullable(Of Integer)
     Public Property Source As Nullable(Of Integer)
     Public Property Description As String
     Public Property Comment As String
