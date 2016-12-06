@@ -167,23 +167,6 @@
           <Property Name="Source" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="120" />
         </EntityType>
-        <EntityType Name="HomeOwnerPhone">
-          <Key>
-            <PropertyRef Name="PhoneID" />
-          </Key>
-          <Property Name="PhoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BBLE" Type="nchar" MaxLength="11" />
-          <Property Name="OwnerName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
-          <Property Name="Score" Type="int" />
-          <Property Name="ListingType" Type="int" />
-          <Property Name="Source" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="120" />
-          <Property Name="Comment" Type="nchar" MaxLength="100" />
-          <Property Name="LastCalledDate" Type="datetime" />
-          <Property Name="CallCount" Type="int" />
-        </EntityType>
         <EntityType Name="HomeOwners">
           <Key>
             <PropertyRef Name="OwnerID" />
@@ -872,7 +855,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="FileAttachments" EntityType="Self.FileAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomeOwnerAddress" EntityType="Self.HomeOwnerAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomeOwnerEmail" EntityType="Self.HomeOwnerEmail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="HomeOwnerPhone" EntityType="Self.HomeOwnerPhone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomeOwners" EntityType="Self.HomeOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Leads" EntityType="Self.Leads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsActivityLog" EntityType="Self.LeadsActivityLog" Schema="dbo" store:Type="Tables" />
@@ -1091,7 +1073,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="NYC_Scan_TaxLiens_Per_Year" EntityType="IntranetPortalModel.NYC_Scan_TaxLiens_Per_Year" />
           <EntitySet Name="InProcessBBLEs" EntityType="IntranetPortalModel.InProcessBBLE" />
           <EntitySet Name="TLODatas" EntityType="IntranetPortalModel.TLOData" />
-          <EntitySet Name="HomeOwnerPhones" EntityType="IntranetPortalModel.HomeOwnerPhone" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
