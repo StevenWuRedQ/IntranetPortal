@@ -886,9 +886,6 @@
     <Compile Include="DataModel\HomeOwnerEmail.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\HomeOwnerPhone.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataModel\InProcessBBLE.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
