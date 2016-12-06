@@ -101,8 +101,8 @@ Imports IntranetPortal
         Assert.IsNull(directdownload)
     End Function
 
-    <TestMethod> Public Async Function GetTokenTest() As Task
-        Dim token = Await TokenGenerator.getPureCloudeToken()
+    <TestMethod> Public Function GetTokenTest() As Task
+        Dim token = TokenGenerator.getPureCloudeToken()
         Assert.IsNotNull(token)
     End Function
 

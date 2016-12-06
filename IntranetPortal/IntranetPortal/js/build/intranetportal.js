@@ -2668,7 +2668,7 @@ angular.module("PortalApp")
     .directive('auditLogs', ['AuditLog', function (AuditLog) {
         return {
             restrict: 'E',
-            templateUrl: '/js/Views/AuditLogs/AuditLogs.tpl.html',
+            templateUrl: '/js/directives/AuditLogs.tpl.html',
             scope: {
                 tableName: '@',
                 recordId: '=',
@@ -2827,7 +2827,7 @@ angular.module("PortalApp")
     .directive('ptEditor', [function () {
         return {
 
-            templateUrl: '/js/templates/ptEditor.html',
+            templateUrl: '/js/directives/ptEditor.html',
             require: 'ngModel',
             scope: {
                 ptModel: '=ngModel'
@@ -2869,7 +2869,7 @@ angular.module("PortalApp")
     .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
             restrict: 'E',
-            templateUrl: '/js/templates/ptfile.html',
+            templateUrl: '/js/directives/ptFile.tpl.html',
             scope: {
                 fileModel: '=',
                 fileBble: '=',  
@@ -2992,7 +2992,7 @@ angular.module("PortalApp")
     .directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
         return {
             restrict: 'E',
-            templateUrl: '/js/templates/ptfiles.html',
+            templateUrl: '/js/directives/ptFiles.tpl.html',
             scope: {
                 fileModel: '=',
                 fileBble: '=',
@@ -3794,7 +3794,8 @@ angular.module("PortalApp")
 
 }]);
 angular.module('PortalApp')
-.controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService', function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
+.controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService',
+function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
     var CSCaseModel = function () {
         this.CSCase = {
@@ -3976,10 +3977,10 @@ angular.module('PortalApp')
         if (newValue) {
             var ds = $scope.UTILITY_SHOWN;
             var target = $scope.CSCase.CSCase.Utilities.Company;
-            _.each(target, function(k, i) {
+            _.each(target, function (k, i) {
                 $scope.$eval(ds[k] + '=false');
             });
-            _.each(newValue, function(el, i) {
+            _.each(newValue, function (el, i) {
                 $scope.$eval(ds[el] + '=true');
             });
         }
@@ -4036,13 +4037,13 @@ angular.module('PortalApp')
     }
 
     $scope.initWatchedModel = function () {
-        _.each($scope.WATCHED_MODEL, function(el, i) {
+        _.each($scope.WATCHED_MODEL, function (el, i) {
             $scope.$eval(el.backedModel + '=' + el.model);
         });
     }
     $scope.checkWatchedModel = function () {
         var res = "";
-        _.each($scope.WATCHED_MODEL, function(el, i) {
+        _.each($scope.WATCHED_MODEL, function (el, i) {
             if ($scope.$eval(el.backedModel + "!=" + el.model)) {
                 $scope.$eval(el.backedModel + "=" + el.model);
                 res += (el.info + " changes to " + $scope.$eval(el.model) + ".<br>");
@@ -4209,8 +4210,62 @@ angular.module('PortalApp')
     $scope.getOrdersLength = function () {
         return
     }
-}]
-);
+}]);
+angular.module("PortalApp").controller("DialerManagementController",
+['$scope', 'EmployeeModel', 'ptCom', '$http',
+function ($scope, EmployeeModel, ptCom, $http) {
+    $scope.lookup = undefined;
+    EmployeeModel.getEmpNames().then(
+        function success(d) {
+            var employeesList = d.data;
+            $("#lookup").dxLookup({
+                items: employeesList,
+                value: employeesList[0],
+                showPopupTitle: false
+            });
+            $scope.lookup = $("#lookup").dxLookup("instance");
+        });
+
+    $scope.CreateContactList = function () {
+        if ($scope.lookup) {
+            var emp = $scope.lookup.option('value');
+            if (emp) {
+                $http({
+                    method: "POST",
+                    url: '/api/dialer/CreateContactList/' + emp
+                }).then(function (d) {
+                    ptCom.alert("Contact For " + emp + " is: " + d.data);
+                }, function () {
+                    ptCom.alert("Fail to create list, may existing");
+                }
+                    )
+            } else {
+                ptCom.alert("Employee not select corretly");
+            }
+        } else {
+            ptCom.alert("Lookup not init yet.")
+        }
+    }
+    $scope.SyncNewLeadsFolder = function () {
+        if ($scope.lookup) {
+            var emp = $scope.lookup.option("value");
+            if (emp) {
+                $http({
+                    method: 'POST',
+                    url: '/api/dialer/SyncNewLeadsFolder/' + emp
+                }).then(function sucs(resp) {
+                    ptCom.alert("Sync " + resp.data + " leads to new folder");
+                }, function err() {
+                    ptCom.alert("fail to sync new folder")
+                })
+            }
+
+        } else {
+            ptCom.alert("Lookup not init yet. ")
+        }
+    }
+
+}])
 
 angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
@@ -8265,7 +8320,7 @@ angular.module("PortalApp")
 }]);
 angular.module('PortalApp').component('ptAudit', {
 
-    templateUrl: '/js/templates/ptAudit.html',
+    templateUrl: '/js/components/ptAudit.tpl.html',
     bindings: {
         label: '@',
         objName: '@',
@@ -8360,7 +8415,7 @@ angular.module('PortalApp').component('ptHomeowner', {
 });
 angular.module('PortalApp').component('ptItemList', {
 
-    templateUrl: '/js/templates/ptItemList.html',
+    templateUrl: '/js/components/ptItemList.html',
     bindings: {
         itemName: '@',
         itemUrl: '@',
