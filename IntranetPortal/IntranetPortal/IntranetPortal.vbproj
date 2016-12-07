@@ -7292,7 +7292,7 @@
     <Content Include="js\controllers\UnderwritingRequestController.js" />
     <Content Include="js\controllers\UnderwritingSummaryController.js" />
     <Content Include="js\controllers\VendorController.js" />
-    <Content Include="js\directives\auditLogs.js" />
+    <Content Include="js\directives\AuditLogs.js" />
     <Content Include="js\directives\bindId.js" />
     <Content Include="js\directives\initGrid.js" />
     <Content Include="js\directives\ptEditableDiv.js" />
@@ -7357,14 +7357,14 @@
     <Content Include="js\models\Wizard.js" />
     <Content Include="js\models\WizardStep.js" />
     <Content Include="js\services\ptUnderwritingCaculator.js" />
-    <Content Include="js\templates\ptAudit.html" />
-    <Content Include="js\templates\ptItemList.html" />
+    <Content Include="js\components\ptAudit.tpl.html" />
+    <Content Include="js\components\ptItemList.tpl.html" />
     <Content Include="js\test\model.PreSign.spec.js" />
     <Content Include="js\test\model.underwriting.spec.js" />
     <Content Include="js\test\service.ptDocSearch.spec.js" />
-    <Content Include="js\Views\AuditLogs\AuditLogs.tpl.html" />
+    <Content Include="js\directives\AuditLogs.tpl.html" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.html" />
-    <Content Include="js\templates\ptEditor.html" />
+    <Content Include="js\directives\ptEditor.tpl.html" />
     <Content Include="js\test\conf.js" />
     <Content Include="js\test\controller.ConstructionController.spec.js" />
     <Content Include="js\test\model.PreDealCtrl.spec.js" />
@@ -8225,8 +8225,8 @@
     <Content Include="Scripts\LeadsSubMenu.js" />
     <Content Include="Scripts\PortalMessager.js" />
     <Content Include="Scripts\stevenjs.js" />
-    <Content Include="js\templates\ptfile.html" />
-    <Content Include="js\templates\ptfiles.html" />
+    <Content Include="js\directives\ptFile.tpl.html" />
+    <Content Include="js\directives\ptFiles.tpl.html" />
     <Content Include="Scripts\Web.config" />
     <Content Include="bower_components\signalr\.bower.json" />
     <Content Include="bower_components\signalr\bower.json" />
@@ -8477,6 +8477,7 @@
     <Content Include="App_Data\TitleDoc\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
     <Content Include="App_Data\TitleDoc\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
     <Content Include="TempDataFile\LeadsList.xlsx" />
+    <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -8510,7 +8511,6 @@
     <Folder Include="Content\layouts\Simple\" />
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
-    <Folder Include="js\controllers\es6\" />
     <Folder Include="Scripts\dx\" />
     <Folder Include="TempDataFile\AuctionFiles\" />
     <Folder Include="TempDataFile\OfferDoc\" />
@@ -8534,6 +8534,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="js\components\Test.ts" />
+    <Content Include="js\controllers\DiarlerManagementController.js" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

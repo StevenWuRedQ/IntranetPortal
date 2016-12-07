@@ -1,5 +1,6 @@
 ﻿angular.module('PortalApp')
-.controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService', function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
+.controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService',
+function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
     //data structure defination
     var CSCaseModel = function () {
@@ -185,10 +186,10 @@
         if (newValue) {
             var ds = $scope.UTILITY_SHOWN;
             var target = $scope.CSCase.CSCase.Utilities.Company;
-            _.each(target, function(k, i) {
+            _.each(target, function (k, i) {
                 $scope.$eval(ds[k] + '=false');
             });
-            _.each(newValue, function(el, i) {
+            _.each(newValue, function (el, i) {
                 $scope.$eval(ds[el] + '=true');
             });
         }
@@ -253,13 +254,13 @@
     }
 
     $scope.initWatchedModel = function () {
-        _.each($scope.WATCHED_MODEL, function(el, i) {
+        _.each($scope.WATCHED_MODEL, function (el, i) {
             $scope.$eval(el.backedModel + '=' + el.model);
         });
     }
     $scope.checkWatchedModel = function () {
         var res = "";
-        _.each($scope.WATCHED_MODEL, function(el, i) {
+        _.each($scope.WATCHED_MODEL, function (el, i) {
             if ($scope.$eval(el.backedModel + "!=" + el.model)) {
                 $scope.$eval(el.backedModel + "=" + el.model);
                 res += (el.info + " changes to " + $scope.$eval(el.model) + ".<br>");
@@ -439,5 +440,4 @@
     $scope.getOrdersLength = function () {
         return
     }
-}]
-);
+}]);
