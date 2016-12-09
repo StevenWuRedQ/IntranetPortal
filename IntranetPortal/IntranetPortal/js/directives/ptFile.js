@@ -12,7 +12,7 @@ angular.module("PortalApp")
     .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
             restrict: 'E',
-            templateUrl: '/js/templates/ptfile.html',
+            templateUrl: '/js/directives/ptFile.tpl.html',
             scope: {
                 fileModel: '=',
                 fileBble: '=',  

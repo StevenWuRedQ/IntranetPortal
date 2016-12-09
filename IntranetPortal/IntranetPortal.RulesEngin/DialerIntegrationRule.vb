@@ -9,6 +9,7 @@ Public Class DialerIntegrationRule
         Dim users = Roles.GetUsersInRole("Dialer-Users")
         For Each user In users
             Try
+                Log("start dialer integration for: " & user)
                 DialerServiceManage.RunDailyTask(user)
             Catch ex As Exception
                 Log("Dialer Service Error on user: " & user, ex)

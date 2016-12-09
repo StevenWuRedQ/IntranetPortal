@@ -6,16 +6,12 @@
 Public Class DialerServiceManage
 
     Private Const CONTACTLISTNAME = "List_{0}"
-    'Private Shared service As DialerService
 
-    'Private Function GetService() As DialerService
-    '    If service Is Nothing Then
-    '        service = New DialerService
-    '    End If
-
-    '    Return service
-    'End Function
-
+    ''' <summary>
+    ''' Return agent contact list id
+    ''' </summary>
+    ''' <param name="userName"></param>
+    ''' <returns></returns>
     Private Shared Function GetAgentContactListName(userName As String) As String
         Return String.Format(CONTACTLISTNAME, userName)
     End Function
@@ -45,14 +41,6 @@ Public Class DialerServiceManage
         Else
             Throw New Exception("Can't find agent contact list. Agent name: " & userName)
         End If
-    End Function
-
-    Private Shared Function GetAgentContactList(userName As String) As List(Of DialerContact)
-        Dim service As New DialerService
-        Dim listId = GetContactListId(userName)
-        Dim task = service.ExportList(listId, False)
-        task.Wait()
-        Return task.Result
     End Function
 
     ''' <summary>
@@ -120,12 +108,6 @@ Public Class DialerServiceManage
         Return True
     End Function
 
-    Private Shared Sub RemoveContactFromlist(listId As String, contactId As String)
-        Dim service As New DialerService
-        Dim task = service.RemoveContactFromList(listId, contactId)
-        task.Wait()
-    End Sub
-
     ''' <summary>
     ''' Sync new leads into contact list base on database
     ''' </summary>
@@ -159,29 +141,6 @@ Public Class DialerServiceManage
         Dim contactBBLEs = contacts.Select(Function(c) c.BBLE).ToArray
         Dim items = lds.Where(Function(l) Not contactBBLEs.Contains(l.BBLE)).ToList
         Return UploadContactsByLeads(userName, items)
-    End Function
-
-    Private Shared Function UploadContactsByLeads(userName As String, lds As List(Of Lead)) As Integer
-        If lds Is Nothing OrElse lds.Count = 0 Then
-            Return 0
-        End If
-
-        Dim listId = GetContactListId(userName)
-        Dim data As New List(Of DialerContact)
-        For Each item In lds
-            Dim ct = InitContact(item)
-            If ct IsNot Nothing Then
-                data.Add(ct)
-            End If
-        Next
-
-        Dim service As New DialerService
-        If data.Count > 0 Then
-            Dim task = service.AddContactsToList(listId, data)
-            task.Wait()
-        End If
-
-        Return data.Count
     End Function
 
     ''' <summary>
@@ -272,6 +231,54 @@ Public Class DialerServiceManage
             UpdatePhoneResult(contact.BBLE, phoneNo, lastResult)
         Next
     End Sub
+
+    ''' <summary>
+    ''' Remove contact from agent list
+    ''' </summary>
+    ''' <param name="listId"></param>
+    ''' <param name="contactId"></param>
+    Private Shared Sub RemoveContactFromlist(listId As String, contactId As String)
+        Dim service As New DialerService
+        Dim task = service.RemoveContactFromList(listId, contactId)
+        task.Wait()
+    End Sub
+
+    ''' <summary>
+    ''' Upload agent's contact list by leads
+    ''' </summary>
+    ''' <param name="userName"></param>
+    ''' <param name="lds"></param>
+    ''' <returns></returns>
+    Private Shared Function UploadContactsByLeads(userName As String, lds As List(Of Lead)) As Integer
+        If lds Is Nothing OrElse lds.Count = 0 Then
+            Return 0
+        End If
+
+        Dim listId = GetContactListId(userName)
+        Dim data As New List(Of DialerContact)
+        For Each item In lds
+            Dim ct = InitContact(item)
+            If ct IsNot Nothing Then
+                data.Add(ct)
+            End If
+        Next
+
+        Dim service As New DialerService
+        If data.Count > 0 Then
+            Dim task = service.AddContactsToList(listId, data)
+            task.Wait()
+        End If
+
+        Return data.Count
+    End Function
+
+    Private Shared Function GetAgentContactList(userName As String) As List(Of DialerContact)
+        Dim service As New DialerService
+        Dim listId = GetContactListId(userName)
+        Dim task = service.ExportList(listId, False)
+        task.Wait()
+        Return task.Result
+    End Function
 
     Public Shared Function UpdatePhoneResult(bble As String, phone As String, result As String)
         Select Case result

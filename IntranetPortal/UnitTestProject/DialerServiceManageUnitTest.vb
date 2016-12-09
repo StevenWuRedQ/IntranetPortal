@@ -11,6 +11,7 @@ Public Class DialerServiceManageUnitTest
         Assert.AreEqual(result.OwnerPhone1, "6464549318")
         Assert.AreEqual(result.OwnerPhone2, "6463989288")
         Assert.AreEqual(result.OwnerPhone3, "6464549310")
+        Assert.AreEqual(result.OwnerPhone4, "6463989221")
     End Sub
 
     <TestMethod()> Public Sub TestLoadContactList()

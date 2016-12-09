@@ -1,6 +1,6 @@
 ﻿angular.module('PortalApp').component('ptAudit', {
 
-    templateUrl: '/js/templates/ptAudit.html',
+    templateUrl: '/js/components/ptAudit.tpl.html',
     bindings: {
         label: '@',
         objName: '@',

@@ -2,7 +2,7 @@
     .directive('auditLogs', ['AuditLog', function (AuditLog) {
         return {
             restrict: 'E',
-            templateUrl: '/js/Views/AuditLogs/AuditLogs.tpl.html',
+            templateUrl: '/js/directives/AuditLogs.tpl.html',
             scope: {
                 tableName: '@',
                 recordId: '=',
