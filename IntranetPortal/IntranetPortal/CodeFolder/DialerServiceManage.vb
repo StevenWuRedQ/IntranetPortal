@@ -20,6 +20,10 @@ Public Class DialerServiceManage
         Return String.Format(CONTACTLISTNAME, userName)
     End Function
 
+    ''' <summary>
+    ''' Execute the daily task to sync the contactlist and new leads folder
+    ''' </summary>
+    ''' <param name="userName">The agent name</param>
     Public Shared Sub RunDailyTask(userName As String)
         LoadContactList(userName)
         UpdatePortal(userName)
