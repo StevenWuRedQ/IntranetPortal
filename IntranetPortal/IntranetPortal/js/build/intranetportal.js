@@ -6441,12 +6441,17 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
     $scope.preAssign = PreSignItem;
     $scope.preAssign.CreateBy = $scope.preAssign.CreateBy || $('#currentUser').val();
     $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Type: 'Short Sale', Checks: [] };
-    if (!$scope.preAssign.Id) {
-        $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
-        $scope.preAssign.Parties = [];
-        $scope.preAssign.NeedSearch = true;
-        $scope.preAssign.NeedCheck = true;
+    if ($scope.preAssign.$promise) {
+        $scope.preAssign.$promise.then(function() {
+            if (!$scope.preAssign.Id) {
+                $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
+                $scope.preAssign.Parties = [];
+                $scope.preAssign.NeedSearch = true;
+                $scope.preAssign.NeedCheck = true;
+            }
+        });
     }
+
     // debugger;
     if ($scope.preAssign.BBLE) {
         $http.get('/api/Leads/LeadsInfo/' + $scope.preAssign.BBLE, { options: { noError: true } })
