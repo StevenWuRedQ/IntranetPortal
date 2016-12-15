@@ -12,16 +12,24 @@ Public Class EntityHelper(Of T As Class)
         Return properties
     End Function
 
+    public Shared Function TryLoad(ctx As DbContext, t As T)
+        If t IsNot Nothing
+            for each navigationProperties in GetNavigationProperties(ctx)
+                ctx.Entry(t).Reference(navigationProperties.ToString()).Load()
+            Next 
+        End If
+
+    End Function
+
     ' Update Reference Type in DBEntry Recursively
     Public Shared Sub ReferenceUpdate(ctx As DbContext, oldv As T, newv As T)
-
         For Each np In GetNavigationProperties(ctx)
             Dim refentry = ctx.Entry(oldv).Reference(np.ToString)
             refentry.Load()
             Dim p = GetType(T).GetProperty(np.ToString)
             Dim dp = p.PropertyType
             Dim orgobj = p.GetValue(oldv)
-            Dim tarobj = p.GetValue(CType(newv, T))
+            Dim tarobj = p.GetValue(newv)
 
             For Each dpp In dp.GetProperties
                 dp.GetProperty(dpp.Name).SetValue(orgobj, dp.GetProperty(dpp.Name).GetValue(tarobj, Nothing))
@@ -29,11 +37,4 @@ Public Class EntityHelper(Of T As Class)
         Next
     End Sub
 
-    'Public Shared Function clone(original As T) As T
-    '    Dim x = GetType(T).GetConstructors()
-    '    Dim newObj = GetType(T).GetConstructor(New Type() {GetType(T)}).Invoke(New Object() {original})
-    '    newObj("id") = Nothing
-    '    Return newObj
-
-    'End Function
 End Class

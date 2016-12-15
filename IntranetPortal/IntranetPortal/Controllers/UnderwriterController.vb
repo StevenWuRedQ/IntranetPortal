@@ -26,7 +26,7 @@ Namespace Controllers
             End If
 
             Try
-                Dim u = UnderwritingManager.save(uw, HttpContext.Current.User.Identity.Name)
+                Dim u = UnderwritingManager.SaveOrUpdate(uw, HttpContext.Current.User.Identity.Name)
                 Return Ok(u)
             Catch ex As Exception
 
@@ -40,7 +40,7 @@ Namespace Controllers
         Public Function postArchive(<FromBody> data As Object()) As IHttpActionResult
             Dim uw = data(0).ToObject(GetType(Underwriting))
             Dim note = CStr(data(1))
-            UnderwritingManager.save(uw, HttpContext.Current.User.Identity.Name)
+            UnderwritingManager.SaveOrUpdate(uw, HttpContext.Current.User.Identity.Name)
             Dim isSaved = UnderwritingManager.archive(uw.BBLE, HttpContext.Current.User.Identity.Name, note)
             If isSaved Then
                 Return Ok()

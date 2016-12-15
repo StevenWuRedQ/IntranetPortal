@@ -1,66 +1,55 @@
+Imports System.Data.Entity
+Imports IntranetPortal.Core
 Imports IntranetPortal.Data
+
 Public Class UnderwritingManager
-
-    Public Shared Function getInstance(bble As String) As Underwriting
+    Public Shared Function GetInstance(bble As String) As Underwriting
         Using ctx As New CodeFirstEntity
-            Dim uws = From c In ctx.Underwritings
-                      Where c.BBLE = bble
-            Dim uw = uws.FirstOrDefault
-
+            Dim uw = ctx.Underwritings.FirstOrDefault(Function(underwriting) underwriting.BBLE = bble)
             If Nothing IsNot uw Then
-                For Each p In Core.EntityHelper(Of Underwriting).GetNavigationProperties(ctx)
+                For Each p In EntityHelper(Of Underwriting).GetNavigationProperties(ctx)
                     ctx.Entry(uw).Reference(p.ToString).Load()
                 Next
             End If
-
             Return uw
         End Using
-
     End Function
 
-    Public Shared Function getArchived(id As String) As UnderwritingArchived
+    Public Shared Function GetArchived(id As String) As UnderwritingArchived
         Using ctx As New CodeFirstEntity
-            Dim archiveds = From a In ctx.UnderwritingArchived
-                            Where a.Id = id
-                            Select a
-            Dim archived = archiveds.FirstOrDefault
-
+            Dim archived = ctx.UnderwritingArchived.FirstOrDefault(Function(ad) ad.Id = id)
             If archived IsNot Nothing Then
-                For Each p In Core.EntityHelper(Of UnderwritingArchived).GetNavigationProperties(ctx)
+                For Each p In EntityHelper(Of UnderwritingArchived).GetNavigationProperties(ctx)
                     ctx.Entry(archived).Reference(p.ToString).Load()
                 Next
             End If
             Return archived
         End Using
     End Function
-    Public Shared Function save(uw As Underwriting, saveby As String) As Underwriting
+
+    Public Shared Function SaveOrUpdate(uw As Underwriting, saveby As String) As Underwriting
 
         Using ctx As New CodeFirstEntity
-
             Dim u = ctx.Underwritings.SingleOrDefault(Function(t) t.BBLE = uw.BBLE)
-
             If u IsNot Nothing Then
-
                 uw.UpdateBy = saveby
                 uw.UpdateDate = DateTime.Now
                 ctx.Entry(u).CurrentValues.SetValues(uw)
-                Core.EntityHelper(Of Underwriting).ReferenceUpdate(ctx, u, uw)
+                EntityHelper(Of Underwriting).ReferenceUpdate(ctx, u, uw)
             Else
                 uw.CreateBy = saveby
                 uw.CreateDate = DateTime.Now
                 ctx.Underwritings.Add(uw)
-
             End If
             ctx.SaveChanges(saveby)
             Return u
         End Using
-
     End Function
 
-    Public Shared Function archive(bble As String, saveBy As String, note As String) As Boolean
+    Public Shared Function Archive(bble As String, saveBy As String, note As String) As Boolean
         Using ctx As New CodeFirstEntity
 
-            Dim uw = getInstance(bble)
+            Dim uw = GetInstance(bble)
 
             If uw IsNot Nothing Then
                 Dim uwa = New UnderwritingArchived
@@ -89,10 +78,9 @@ Public Class UnderwritingManager
             End If
             Return False
         End Using
-
     End Function
 
-    Public Shared Function create(BBLE As String, createby As String) As Underwriting
+    Public Shared Function Create(BBLE As String, createby As String) As Underwriting
         Using ctx As New CodeFirstEntity
             Dim u = New Underwriting
             u.PropertyInfo = New UnderwritingPropertyInfo
@@ -110,7 +98,7 @@ Public Class UnderwritingManager
         End Using
     End Function
 
-    Public Shared Function loadArchivedList(BBLE As String) As UnderwritingArchived()
+    Public Shared Function LoadArchivedList(BBLE As String) As UnderwritingArchived()
         Using ctx As New CodeFirstEntity
             Dim list = From archived In ctx.UnderwritingArchived
                        Where archived.BBLE = BBLE

@@ -646,7 +646,6 @@
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="DLL\CMAModels.dll" />
   </ItemGroup>
