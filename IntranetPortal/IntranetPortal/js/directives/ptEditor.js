@@ -2,7 +2,7 @@
     .directive('ptEditor', [function () {
         return {
 
-            templateUrl: '/js/templates/ptEditor.html',
+            templateUrl: '/js/directives/ptEditor.html',
             require: 'ngModel',
             scope: {
                 ptModel: '=ngModel'

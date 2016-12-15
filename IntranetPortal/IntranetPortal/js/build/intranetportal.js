@@ -48,7 +48,7 @@ angular.module('PortalApp')
                 $rootScope.ConfirmModal.confrimFunc(false);
             }
         }
-        $rootScope.prompt = function (message, callback, /*optional*/ showArea){
+        $rootScope.prompt = function (message, callback,  showArea){
             $rootScope.promptMessage = message ? message : '';
             $rootScope.promptModalTxt = '';
             $rootScope.isPromptModalArea = showArea || false;
@@ -61,7 +61,6 @@ angular.module('PortalApp')
         $rootScope.promptYes = function () {
             $rootScope.promptModal.close($rootScope.promptModalTxt);
             if ($rootScope.promptModal.promptFunc) {
-                //UI Modal use async call send result so use jquery instand now 
                 $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
             }
 
@@ -95,104 +94,36 @@ angular.module('PortalApp')
         }
     }]);
 
-/**
-portalApp.config(function ($locationProvider) {
 
-    /* because need use anguler support url parameters $location.search();
-     * but it only work when open html 5 model 
-     * so need open html 5 model 
-
-
-//$locationProvider.html5Mode({
-//    enabled: true,
-//    requireBase: false
-//});
-
-function TestRequirePortalApp() {
-    var portalApp = angular.module('PortalApp', []);
-    return portalApp;
-}
-
-
-*this is model define has to be the last line
-*like compile script will call when use require js solove the dependency 
-Import xx  xx1
- 
-if (typeof requirejs === "function") {
-    define(["jquery", "angular", "angular-resource", "angular-route", "angular-animate", "angular-sanitize"],
-        function ($, angular, ngResource, ngRoute, ngAnimate, ngSanitize) {
-            //the jquery.alpha.js and jquery.beta.js plugins have been loaded.
-            return RequirePortalApp();
-        });
-} else {
-    var portalApp = RequirePortalApp();
-}
-*/
 (function () {
-    /*define public shared var of class portalRouteProvider register var in the below*/
     var ITEM_ID = 'itemId';
 
     function portalRouteProvider($routeProvider) {
 
-        // This $get noop is because at the moment in AngularJS "providers" must provide something
-        // via a $get method.
-        // When AngularJS has "provider helpers" then this will go away!
 
-        /**/
         this.$get = angular.noop;
         this.ITEM_ID = ITEM_ID;
-        // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
-        // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
-        // like:
-        //
-        // ```
-        // myMod.config(function(portalRouteProvider) {
-        //   var routeProvider = portalRouteProvider.routesFor('MyBook', '/myApp');
-        // });
-        // ```
-        //
-        // but instead have something like:
-        //
-        //
-        // ```
-        // myMod.config(function(portalRouteProvider) {
-        //   var routeProvider = portalRouteProvider('MyBook', '/myApp');
-        // });
-        // ```
-        //
-        // In any case, the point is that this function is the key part of this "provider helper".
-        // We use it to create routes for CRUD operations.  We give it some basic information about
-        // the resource and the urls then it it returns our own special routeProvider.
         this.routesFor = function (resourceName, urlPrefix, routePrefix) {
             var baseUrl = resourceName.toLowerCase();            
             var baseRoute = '/' + resourceName.toLowerCase();
             routePrefix = routePrefix || urlPrefix;
 
-            // Prepend the urlPrefix if available.
             if (angular.isString(urlPrefix) && urlPrefix !== '') {
                 baseUrl = urlPrefix + '/' + baseUrl;
             }
 
-            // Prepend the routePrefix if it was provided;
             if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
                 baseRoute = '/' + routePrefix + baseRoute;
             }
 
-            // Create the templateUrl for a route to our resource that does the specified operation.
             var templateUrl = function (operation) {
                 return '/js/Views/' + resourceName.toLowerCase() + '/' + resourceName.toLowerCase() + '-' + operation.toLowerCase() + '.tpl.html';
             };
-            // Create the controller name for a route to our resource that does the specified operation.
             var controllerName = function (operation) {
                 return resourceName + operation + 'Ctrl';
             };
 
-            // This is the object that our `routesFor()` function returns.  It decorates `$routeProvider`,
-            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
-            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
             var routeBuilder = {
-                // Create a route that will handle showing a list of items
-                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
                 whenList: function (resolveFns) {
                     routeBuilder.when(baseRoute, {
                         templateUrl: templateUrl('List'),
@@ -201,7 +132,6 @@ if (typeof requirejs === "function") {
                     });
                     return routeBuilder;
                 },
-                // Create a route that will handle creating a new item
                 whenNew: function (resolveFns) {
                     routeBuilder.when(baseRoute + '/new', {
                         templateUrl: templateUrl('Edit'),
@@ -210,7 +140,6 @@ if (typeof requirejs === "function") {
                     });
                     return routeBuilder;
                 },
-                // Create a route that will handle editing an existing item
                 whenEdit: function (resolveFns) {
                     routeBuilder.when(baseRoute + '/:' + ITEM_ID, {
                         templateUrl: templateUrl('Edit'),
@@ -228,7 +157,6 @@ if (typeof requirejs === "function") {
                     });
                     return routeBuilder;
                 },
-                // Readonly views and controllers
                 whenView: function (resolveFns) {
                     routeBuilder.when(baseRoute + '/view/:' + ITEM_ID, {
                         templateUrl: templateUrl('View'),
@@ -237,192 +165,55 @@ if (typeof requirejs === "function") {
                     });
                     return routeBuilder;
                 },
-                // Pass-through to `$routeProvider.when()`
                 when: function (path, route) {
                     $routeProvider.when(path, route);
                     return routeBuilder;
                 },
-                // Pass-through to `$routeProvider.otherwise()`
                 otherwise: function (params) {                    
                     $routeProvider.otherwise(params);
                     return routeBuilder;
                 },
-                // Access to the core $routeProvider.
                 $routeProvider: $routeProvider
             };
             return routeBuilder;
         };
     }
-    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
-    // we add our injection dependencies using the $inject form
     portalRouteProvider.$inject = ['$routeProvider'];
 
-    /*define public shared var of class portalRouteProvider*/
     portalRouteProvider.ITEM_ID = ITEM_ID;
-    // Create our provider - it would be nice to be able to do something like this instead:
-    //
-    // ```
-    // angular.module('services.portalRouteProvider', [])
-    //   .configHelper('portalRouteProvider', ['$routeProvider, portalRouteProvider]);
-    // ```
-    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
     angular.module('PortalApp').provider('portalRoute', portalRouteProvider);
 })();
-/*
- * Portal UI Route will be the main router we use base on UI-router
- * The Portal Route will be Deprecated
- * 
- */
+
 
 
 (function () {
-    /*define public shared var of class portalUIRouteProvider register var in the below*/
     var ITEM_ID = 'itemId';
 
-    /**
-     * @date 7/25/2016 - 7/26/2016  
-     * by the way 7/25/2016 have some time box to 
-     * monitor Drone make sure finished refresh leads we assgin to
-     * about full day
-     * 
-     * @class
-     * This should be my class in every other language 
-     * class name should be Name capital frist word.
-     * PortalUIRouteProvider
-     * I send two days to find this stupid bug.
-     * portalUIRouteProvider should be in class use 
-     * This should not portalUIRouteProvider
-     * but can not use no capital name like this 
-     * 
-     * @other
-     * also can not use model define such as we do before,
-     * Because this is special provide 
-     */
     function portalUIRouteProvider($stateProvider) {
 
-        // This $get noop is because at the moment in AngularJS "providers" must provide something
-        // via a $get method.
-        // When AngularJS has "provider helpers" then this will go away!
 
-        /**/
         this.super = $stateProvider;
         this.$get = angular.noop;
         this.ITEM_ID = ITEM_ID;
 
-        // Again, if AngularJS had "provider helpers" we might be able to return `statesFor()` as the
-        // portalUIRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
-        // like:
-        //
-        // ```
-        // myMod.config(function(portalUIRouteProvider) {
-        //   var routeProvider = portalUIRouteProvider.statesFor('MyBook', '/myApp');
-        // });
-        // ```
-        //
-        // but instead have something like:
-        //
-        //
-        // ```
-        // myMod.config(function(portalUIRouteProvider) {
-        //   var routeProvider = portalUIRouteProvider('MyBook', '/myApp');
-        // });
-        // ```
-        //
-        // In any case, the point is that this function is the key part of this "provider helper".
-        // We use it to create routes for CRUD operations.  We give it some basic information about
-        // the resource and the urls then it it returns our own special routeProvider.
-        /**
-        * @author : Steven Wu
-        * @date   : 7/25/2016
-        *
-        * @summery
-        * like {@link #description} 
-        * to expain what's different OOP style bewteen to define class,
-        * use usually javascrip OOP (such as JQuery) and Agualar OOP 
-        *
-        * @description
-        *  Angular OOP style is different than JQuery OOP style
-        *  Jquery don't have $inject and model, 
-        *  so it design OOB use Function way like this
-        *
-        *  ````````````````````````````````````````````
-        *  `JQuery Style version under v 1.6
-        *  class Base
-        *  function Base {}
-        *
-        *  class 
-        *  var Derived = (function (_super) {
-        *  _extends(Derived, _super)
-        *      
-        *  })(Car)
-        * 
-        *  Derived.prototype = {
-        *   //functions define
-        *  }
-        * 
-        * ````````````````````````````````````````````
-        * `````````````````````````````````````````````
-        *  `JQuery Style version after v 1.6 use AMD model require.
-        *  to manage dependency so AMD and tool babel to generate javascript.
-        *  so I have suggest 
-        *  1. use babel and AMD generate bundle.js
-        *  2. use require js manage dependency in the page themselves.
-        **/
 
-        /**
-         * @description
-         * map views and controllers with ui-router
-         * @param  {string} resourceName 
-         *         main controller name
-         *         in view and map it to index view
-         * @return {StateBuilder}
-         *         $stateProvider build with pre defined function
-         *         such as CRUD router
-         *         list edit view new
-         *         
-         */
         this.statesFor = function (resourceName) {
             if (!resourceName) {
                 console.error("resourceName must be defined in $stateProvider");
             }
-            // Create the stateTemplateUrl for a route to our resource that does the specified operation.
             var stateTemplateUrl = function (statePath) {
                 return '/js/Views/' + resourceName.toLowerCase() + '/' + templateFile(statePath) + '.tpl.html';
             };
 
             var stateUrl = function(statePath)
             {
-                /// get root url name with resourceName
-                /// other get state path url
 
                 return  '/' +( !statePath ? resourceName : statePath.replace(".","/") );
             }
-            /**
-             * @summery
-             * Use camelCase style to name controller and end with Ctrl
-             * @todo 
-             *   For best practice Use pascal case is better 
-             *   but lodash dosen't support pascal case function
-             *   Use camelCase and capitalize can solve this problem.
-             * @example test.edit -> testEditCtrl
-             **/
             var stateControllerName = function (statePath) {
                 return _.camelCase(resourceName + ' ' + (statePath || '') ) + 'Ctrl';
             };
 
-            /**
-             * @description
-             * 	find template file name 
-             * 	if the state for root contorller the default view is index.tpl file
-             * 	
-             * @param  {string} statePath 
-             *         1. sate path @example new list
-             *         2. deep path with . to split
-             *            @example list.owner list.manager		
-             *         
-             * @return {string} 
-             *         The file template file name to bind view         
-             */
             var templateFile = function (statePath) {
 
                 if (!statePath) {
@@ -431,25 +222,9 @@ if (typeof requirejs === "function") {
 
                 return _.kebabCase(statePath.toLowerCase());
             }
-            // This is the object that our `statesFor()` function returns.  It decorates `$stateProvider`,
-            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
-            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
             var stateBuilder = {
-                // Create a route that will handle showing a list of items
-                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
 
-                /**
-                 * @todo 
-                 * better create base curd 
-                 * @example
-                 * 1. stateNew
-                 * 2. stateList
-                 * 3. .........
-                 * And combine it with function
-                 * `stateCURD` will imporve develop effects
-                 */
 
-                // Pass-through to `$stateProvider.state()`
                 state: function (statePath, resolveFns) {
                     $stateProvider.state(resourceName, {
                         url: stateUrl(statePath),
@@ -459,15 +234,12 @@ if (typeof requirejs === "function") {
                     });
                     return stateBuilder;
                 },
-                // Pass-through to `$stateProvider.otherwise()`
                 otherwise: function (params) {
                     $stateProvider.otherwise(params);
                     return stateBuilder;
                 },
-                // Access to the core $stateProvider.
                 $stateProvider: $stateProvider
             };
-            /** config for defaunt controller and view index page  **/
             stateBuilder.state(null, null);
             return stateBuilder;
 
@@ -475,32 +247,20 @@ if (typeof requirejs === "function") {
     }
 
 
-    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
-    // we add our injection dependencies using the $inject form
     portalUIRouteProvider.$inject = ['$stateProvider'];
 
-    /*define public shared var of class portalUIRouteProvider*/
     portalUIRouteProvider.ITEM_ID = ITEM_ID;
-    // Create our provider - it would be nice to be able to do something like this instead:
-    //
-    // ```
-    // angular.module('services.portalUIRouteProvider', [])
-    //   .configHelper('portalUIRouteProvider', ['$stateProvider, portalUIRouteProvider]);
-    // ```
-    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
     angular.module('PortalApp').provider('portalUIRoute', portalUIRouteProvider);
 })();
-/**
- * @return {[class]}                 AssignCorp class
- */
+
 angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, CorpEntity, $http, DivError) {
     var _class = function ()
     {
         this.onAssignSucceed = null;
         this.BBLE = null;
     }
-    
-    _class.prototype.test = function()
+
+        _class.prototype.test = function()
     {
         this.text = "1234555";
     }
@@ -520,13 +280,11 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
         var _assignCrop = this;
 
         var eMessages = new DivError('assignBtnForm').getMessage();
-        //var eMessages = $scope.getErrorMessage('assignBtnForm');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
         }
 
-        //var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
         var assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
 
         var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
@@ -535,8 +293,8 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
 
             confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + '';
         }
-        
-        $http.get(assignApi).success(function (data) {
+
+                $http.get(assignApi).success(function (data) {
 
             AngularRoot.confirm(confirmMsg).then(function (r) {
                 if (r) {
@@ -560,18 +318,10 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
         });
     }
 
-    /**
-     * This is not right have parent ID
-     * */
     _class.prototype.newOfferId = 0    
     return _class;
 });
-/**
- * rewite audit log in model view
- */
-/**
- * @return {[class]}                 AuditLog class
- */
+
 angular.module('PortalApp').factory('AuditLog', function (ptBaseResource) {
     var auditLog = ptBaseResource('AuditLog', 'AuditId', null, {
         load: {
@@ -598,7 +348,6 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
         var primaryKey = {};
         primaryKey[key] = '@' + key;
 
-        /*default actions add put */
         var _actions = {
             'update': { method: 'PUT' }
         };
@@ -608,7 +357,6 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 
         var Resource = $resource(uri, primaryKey, _actions);
 
-        //static function
         Resource.all = function () { }
         Resource.CType = function (obj, Class) {
 
@@ -628,12 +376,9 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
         Resource.prototype.hasId = function () {
             return this[key] != null && this[key] != 0;
         }
-        /*********Use for Derived class implement validation interface *************/
-        /**************** string array to hold error messages **********************/
         Resource.prototype.errorMsg = [];
 
         Resource.prototype.clearErrorMsg = function () {
-            /* maybe cause memory leak if javascript garbage collection is not good */
             this.errorMsg = []
         }
 
@@ -652,8 +397,6 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             this.errorMsg.push(msg);
         }
 
-        /***************************************************************************/
-        /*base class instance function*/
         Resource.prototype.$put = function () {}
 
         Resource.prototype.$cType = function (_this, Class) {
@@ -665,9 +408,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 
     return PtBaseResource;
 });
-/**
- * @return {[class]}                 BusinessCheck class
- */
+
 angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
     var businessCheck = ptBaseResource('BusinessCheck', 'Id', null, null);
     businessCheck.CheckStatus = {
@@ -675,12 +416,9 @@ angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
         Canceled : 1,
         Completed : 2
     }
-    /*** for instance object to use ****/
     businessCheck.prototype.CheckStatus = {};
     angular.extend(businessCheck.prototype.CheckStatus, businessCheck.CheckStatus);
-    /***********************************/
 
-    /* return true if check status is avoid */
     businessCheck.prototype.isVoid = function ()
     {
         return this.Status == this.CheckStatus.Canceled;
@@ -688,21 +426,17 @@ angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
     return businessCheck;
 
 });
-/**
- * @return {[class]}                 CheckRequest class
- */
+
 angular.module('PortalApp').factory('CheckRequest', function (ptBaseResource, BusinessCheck) {
     var checkRequest =  ptBaseResource("CheckRequest",'Id',null,null);
-    
-    checkRequest.prototype.getTotalAmount = function ()
+
+        checkRequest.prototype.getTotalAmount = function ()
     {
         if(this.Checks)
         {
-            /*** Covert checks data to BusinessCheck type ***/
             var _checks = _.map(this.Checks, function (o) { return checkRequest.CType(o, BusinessCheck) });
-            /************************************************/
-            
-            return _.sum(_.filter(_checks, function (o) { return !o.isVoid() }), 'Amount');
+
+                        return _.sum(_.filter(_checks, function (o) { return !o.isVoid() }), 'Amount');
         }
 
         return 0;
@@ -719,12 +453,6 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
     var corpEntity = ptBaseResource('CorporationEntities', 'EntityId',null,
     { assign: { url: '/api/CorporationEntities/:EntityId/BBLE', method: 'Post' } });
 
-    //corpEntity.prototype.assignCorp = function () {
-    //    this
-    //        self = corpEntity.assign(self.EntityId, JSON.stringify(leadInfo.BBLE));
-    //        //return self.$assign(JSON.stringify(leadInfo.BBLE));
-    //    });
-    //}
 
     corpEntity.prototype.assignDateNow = function()
     {
@@ -733,12 +461,12 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
             var now = Date.now();
             var assignOn = Date.parse(this.AssignOn);
             var times = now - assignOn;
-            
-            return get_time_diff(assignOn);
+
+                        return get_time_diff(assignOn);
         }
     }
-    
-    function get_time_diff(datetime) {
+
+        function get_time_diff(datetime) {
         var datetime = typeof datetime !== 'undefined' ? datetime : "2014-01-01 01:02:03.123456";
 
         var datetime = new Date(datetime).getTime();
@@ -760,63 +488,30 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
 
         var date_diff = new Date(milisec_diff);
 
-        return days  + " Days " //+ date_diff.getHours() + " Hours " + date_diff.getMinutes(); // + " Minutes " + date_diff.getSeconds() + " Seconds";
+        return days  + " Days " 
     }
 
     return corpEntity;
 });
-/**
- * @author Steven
- * @date   8/17/2016 
- * @todo
- *  right now we using this in contoller javascript code
- *  but it better warp it to Angular directive let it handle error by itself.  
- * 
- * @description
- *  DivError model class
- * @return {DivError Class}
- */
+
 
 angular.module('PortalApp')
     .factory('DivError', function () {
         var _class = function (id) {
             this.id = id;
         }
-        /**
-         * @author Steven
-         * @date   8/16/2016
-         * @description
-         *  return all error messages under div
-         *  which need validate
-         */
         _class.prototype.getMessage = function () {
             var eMessages = [];
-            /*ignore every parent of has form-ignore */
             $('#' + this.id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
                 eMessages.push($(this).attr('data-message'));
             });
             return eMessages;
         }
 
-        /**
-         * @returns {boolen} true if the div pass the validate 
-         */
         _class.prototype.passValidate = function () {
             return this.getMessage().length == 0;
         }
 
-        /**
-          * @author steven
-          * @date   8/17/2016
-          * @description
-          *  check both have yes no bool type with date
-          * @bug
-          *  bugs over here boolVal can not check with null
-          *  @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
-          *  @solution
-          * 
-          * @return {boolen} true if it pass validate
-          */
         _class.prototype.boolValidate = function (base, boolKey) {
             if (!base)
             {
@@ -827,15 +522,6 @@ angular.module('PortalApp')
             return boolVal === undefined;
         }
 
-        /**
-         * @author steven
-         * @date   8/17/2016
-         * @description
-         *  check both have yes no and have related array must have at lest one
-         *  row of date
-         * 
-         * @return {boolen} true if it pass validate
-         */
         _class.prototype.multipleValidated = function (base, boolKey, arraykey) {
             if (!base)
             {
@@ -843,12 +529,6 @@ angular.module('PortalApp')
             }
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
-            /**
-             * bugs over here boolVal can not check with null
-             * @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
-             * @solution
-             *  
-             */
             var hasWarning = (boolVal === undefined) || (boolVal && arrayVal == false);
             return hasWarning;
         }
@@ -857,35 +537,22 @@ angular.module('PortalApp')
         return _class;
     });
 angular.module('PortalApp')
-    /**
-     * @author steven
-     * @date   8/12/2016
-     * @returns class of DocNewVersionConfig 
-     */
     .factory('DocNewVersionConfig', function () {
         CONSTANT_DATE = '8/11/2016';
         var docNewVersionConfig = function()
         {
             this.date = CONSTANT_DATE;
         }
-        /**
-         * CONSTANT value do not allow to change
-         * @returns {DocNewVersionConfig object} 
-         */
         docNewVersionConfig.getInstance = function()
         {
             return new docNewVersionConfig();
         }
-        
-        return docNewVersionConfig;
+
+                return docNewVersionConfig;
     })
 
-/**
- * @return {[class]}                 DocSearch class
- */
 angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
 
-    /*api service funciton declear*/
     var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null, {
         completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
     });
@@ -903,7 +570,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
 
     docSearch.prototype.initLeadsResearch = function () {
-        //debugger;
         var self = this;
         var data1 = null;
         if (self.LeadResearch == null) {
@@ -913,7 +579,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             var _LeadSearch = new LeadResearch();
             angular.extend(_LeadSearch, self.LeadResearch);
             self.LeadResearch = _LeadSearch;
-            /*always get refershed ssn*/
             if (self.LeadResearch.ownerName) {
                 self.LeadResearch.getOwnerSSN(self.BBLE);
             }
@@ -924,20 +589,10 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 
         return data1;
     }
-    /**
-     * static function define use class object docSearch.static function;
-     */
-    /**
-     * instance function defanlt use prototype
-     * @return {[type]} [description]
-     */
     docSearch.prototype.actionTest = function () {
         this.$update()
     }
 
-    /**
-     *If property has type use function get property
-     */
     docSearch.prototype._leadResearch = function () {
         if (this.LeadResearch && !(this instanceof LeadResearch)) {
             angular.extend(this.LeadResearch, new LeadResearch())
@@ -945,11 +600,6 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         return this.LeadResearch;
     }
 
-    /**
-     * Caution:
-     * this method mark underwriting status but not doc search status.
-     * doc search status is controlled by docSearch.Status.
-     */
     docSearch.prototype.markCompleted = function (bble, status, note) {
 
         payload = {
@@ -969,40 +619,14 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 });
 
 
-/**
-    * @author steven
-    * 
-    * @fix committed bf79f5e leads task search
-    *  add Doc search version switch
-    * 
-    */
 
 angular.module('PortalApp')
-    /**
-     * @author steven
-     * @date   8/12/2016
-     * @description
-     *  we have do this becuase can not use server side to contorl
-     *  to switch new version.
-     *  and we can not use ng-view and ng-router beacuse we want to it 
-     *  faster we decide to mix ascx and angular.
-     *  
-     *  so we have to wirte a small switch by our self.
-     * 
-     * @returns class of Eaves dropper 
-     */
 
     .factory('DocSearchEavesdropper', function (DocNewVersionConfig) {
         var docSearchEavesdropper = function () {
 
         }
 
-        /**
-         * @author steven
-         * @date   8/12/2016
-         * @description:
-         *  set evaesdrapper public function very import
-         */
         docSearchEavesdropper.prototype.setEavesdropper = function (_eavesdropper, revFunc) {
             this.eavesDropper = _eavesdropper;
             this.endorseCheckFuncs();
@@ -1010,12 +634,6 @@ angular.module('PortalApp')
             this.endorse(revFunc);
         }
 
-        /**
-         * @author steven
-         * @date   8/12/2016
-         * @description:
-         *  endorse evaesdropper
-         */
         docSearchEavesdropper.prototype.endorse = function (revFunc) {
             if (!this.eavesDropper) {
                 console.error('unable to eavesdropper it not set yet');
@@ -1029,12 +647,6 @@ angular.module('PortalApp')
             this.revFunc = revFunc;
         }
 
-        /**
-         * @author steven
-         * @date   8/12/2016
-         * @description: 
-         *  public function very import start function
-         */
         docSearchEavesdropper.prototype.start2Eaves = function () {
             this.endorseCheckFuncs();
 
@@ -1047,12 +659,6 @@ angular.module('PortalApp')
 
         }
 
-        /**
-         * @author steven
-         * @date   8/12/2016
-         * @description:
-         *  check all necessary check function registered
-         */
         docSearchEavesdropper.prototype.endorseCheckFuncs = function () {
             var eaves = this.eavesDropper;
 
@@ -1065,12 +671,6 @@ angular.module('PortalApp')
             }
 
         }
-        /**
-         * @author steven
-         * @date   8/12/2016
-         * @description:
-         *  registerd check functions
-         */
         docSearchEavesdropper.prototype._registerCheckFuncs = function () {
             var eaves = this.eavesDropper;
             this.endorseCheckFuncs();
@@ -1079,12 +679,6 @@ angular.module('PortalApp')
             this.endorseCheckVersion = eaves.endorseCheckVersion;
         }
 
-        /**
-         * @author steven
-         * @date   8/12/2016
-         * @description:
-         *  unendorse evaesdrapper
-         */
         docSearchEavesdropper.prototype.unendorse = function () {
             this.eavesDropper = null;
         }
@@ -1108,20 +702,15 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
         {
             this.texts = texts;
         }
-        
-    }
-   
-    
-    // dxGridModel.prototype.editing = new EditingModel();
+
+            }
+
+
 
     dxGridModel.prototype.setNewText = function(texts)
     {
         this.editing = new EditingModel(texts);
     }
-    /**
-     * In devextrme grid view model 
-     * The eidt permission should be handle by itself
-     **/
     dxGridModel.prototype.initFormUrl = function () {
         var path = '';
 
@@ -1141,25 +730,18 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
 
     return dxGridModel;
 });
-/*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
+
 
 function dxModel() {
 
 
 }
 
-//function dxGridModel() {
 
 
 
-//}
 
 
-/**
- * [dxGridColumnModel description]
- * @param  {dxGridColumn Option} opt [dxGridColumn Option]
- * @return {[dxGridColumnModel]}     [return model have dx Grid column with special handler]
- */
 function dxGridColumnModel(opt) {
 
     _.extend(this, opt);
@@ -1178,15 +760,26 @@ dxGridColumnModel.prototype.customizeTextDateFunc = function(e) {
     return ''
 }
 
-//Leads/LeadsInfo
+angular.module('PortalApp').factory('EmployeeModel', ['$resource','$http', function($resource,$http){
+
+    var resource = $resource('/api/employees/:id');
+
+    resource.getEmpNames = function () {
+        var promise = $http({
+            method: 'GET',
+            url: '/api/employeenames'
+        })
+
+        return promise;
+    }
+
+        return resource;
+}])
+
 angular.module('PortalApp').factory('HomeOwner', function (ptBaseResource) {
 
     var homeOwner = ptBaseResource('Homeowner', 'BBLE');
-   
-    //leadResearch.prototype.func
-    //def function
-    //leadResearch.func
-    //constructor
+
     return homeOwner;
 });
 
@@ -1208,45 +801,30 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     leadResearch.prototype.initFromLeadsInfo = function(BBLE)
     {
         var self = this;
-        
-        // bug fix for mortgageAmount secondMortgageAmount not saving
-        // 8/26/2016
+
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
             self.ownerName = self.ownerName || data1.Owner;
             self.getOwnerSSN(BBLE);
 
-            // disable the water tax from leads 
-            // @see jira link
-            // https://myidealprop.atlassian.net/browse/PORTAL-484
 
-            //self.waterCharges = self.waterCharges || data1.WaterAmt;
-            //self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
-            //self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
-            //self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
 
-            
-        });
+
+                    });
         return data1;
     }
 
     return leadResearch;
 });
-//Leads/LeadsInfo
+
 angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
 
     var leadsInfo = ptBaseResource('LeadsInfo', 'BBLE',null,
     { verify: { url: '/api/LeadsInfo/Verify' } });
-   
 
-    //leadResearch.prototype.func
-    //def function
-    //leadResearch.func
-    //constructor
+
     return leadsInfo;
 });
-/**
- * @return {[class]}                 NewOfferListGrid class
- */
+
 angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
     var _class = function (data) {
 
@@ -1307,8 +885,6 @@ angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
         $('<a/>').addClass('dx-link-MyIdealProp')
             .text(options.value)
             .on('dxclick', function () {
-                //Do something with options.data;
-                //ShowCaseInfo(options.data.BBLE);
                 var request = options.data;
 
                 PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
@@ -1319,9 +895,6 @@ angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
     return _class;
 });
 
-/**
- * @return {[class]}                 PreSign class
- */
 angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckRequest,LeadsInfo) {
 
     var preSign = ptBaseResource('PreSign', 'Id', null, {
@@ -1336,28 +909,25 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
         financeList: {
             method: "GET", url: '/api/PreSign/CheckRequests', isArray: true
         }
-  
-    });
-    /*** here use class desgin super key work spend 3 hours ***/
+
+      });
 
     preSign.prototype.validation = function ()
     {
         this.clearErrorMsg();
         if (!this.ExpectedDate) {
             this.pushErrorMsg("Please fill expected date !");
-            // throw "Please fill expected date !";
-           
-        }
+
+                   }
         if ((!this.Parties) || this.Parties.length < 1) {
-            //$scope.alert("Please fill at least one Party !");
             this.pushErrorMsg("Please fill at least one Party !");
         }
         this.CheckRequestData = preSign.CType(this.CheckRequestData, CheckRequest);
 
         if (this.NeedCheck &&  this.CheckRequestData.Checks.length < 1) {
            this.pushErrorMsg("Check Request is enabled. Please enter checks to be issued.");
-           
-        }
+
+                   }
 
         if (this.CheckRequestData && this.CheckRequestData.getTotalAmount() > this.DealAmount) {
            this.pushErrorMsg("The check's total amount must less than the deal amount, Please correct! ");           
@@ -1370,89 +940,44 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
 
         return this.hasErrorMsg() == false;
     }
-    /** init Id in font end model**/
-    // preSign.prototype.Id = 0;
     preSign.prototype.BBLE = '';
 
-    //preSign.prototype.Parties = [];
-    //Later will change to Checks to Check Class
-    //preSign.prototype.CheckRequestData = new CheckRequest();
 
-    //preSign.prototype.NeedSearch = true;
-    //preSign.prototype.NeedCheck = true;
 
 
     return preSign;
 });
 
-/**
- * in refactoring need spent time box 
- * on 7/27/2016 after 1:30PM
- * stop refactoring
- */
-/**
- * @return {[class]}                 PropertyOffer class
- */
 angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, AssignCorp) {
     var propertyOffer = ptBaseResource('PropertyOffer', 'OfferId', null, {
         getByBBLE: {
             url: '/api/businessform/PropertyOffer/Tag/:BBLE',
             params: {
                 BBLE: '@BBLE',
-                //Test: '@Test'
             }
         }
 
     });
-   
-    /**
-     * @todo
-     * by Steven
-     * worng spelling sorry about that will fix it after we refactory all 
-     **/
 
-    /**
-     * @todo
-     * by Steven
-     * for speed it should be assignCrop type is (AssignCorp) not an Instances 
-     */
 
-    //propertyOffer.prototype.assignCrop = new AssignCorp();
 
-    /**
-     * @data 7/28/2016
-     * need carefully test
-     * 1. in check current step called this function
-     * 2. maybe in new PropertyOffer also need call this function
-     */
+
     propertyOffer.prototype.assignOfferId = function (onAssignCorpSuccessed) {
         this.assignCrop.newOfferId = this.BusinessData.OfferId;
         this.assignCrop.BBLE = this.Tag;
         this.assignCrop.onAssignSucceed = onAssignCorpSuccessed;
-       
-    }
-    // propertyOffer.prototype.BusinessData = new BusinessForm();
+
+           }
 
     propertyOffer.prototype.Type = 'Short Sale';
     propertyOffer.prototype.FormName = 'PropertyOffer';
 
-    /**
-     * reload data
-     * @param {type} formdata
-     */
     propertyOffer.prototype.refreshSave = function (formdata) {
         this.DataId = formdata.DataId;
         this.Tag = formdata.Tag;
         this.CreateDate = formdata.CreateDate;
         this.CreateBy = formdata.CreateBy;
     }
-    /**
-     * @todo
-     * by steven
-     * for speed we define deal sheet class 
-     * like this will move out when I have time
-     * such as Seller class Buyer class and so on
-     */
     propertyOffer.prototype.DealSheetMetaData = {
         ContractOrMemo: {
             Sellers: [{}],
@@ -1470,41 +995,30 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
     return propertyOffer;
 });
 
-/**
- * @return {[class]}                 QueryUrl class
- */
 
 angular.module('PortalApp').factory('QueryUrl', function ($http) {
     var _class = function () {
-        // This function is anonymous, is executed immediately and 
-        // the return value is assigned to QueryString!
         var query_string = {};
         var query = window.location.search.substring(1);
         var vars = query.split("&");
         for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split("=");
-            // If first entry with this name
             if (typeof query_string[pair[0]] === "undefined") {
                 query_string[pair[0]] = decodeURIComponent(pair[1]);
-                // If second entry with this name
             } else if (typeof query_string[pair[0]] === "string") {
                 var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
                 query_string[pair[0]] = arr;
-                // If third or later entry with this name
             } else {
                 query_string[pair[0]].push(decodeURIComponent(pair[1]));
             }
         }
         return query_string;
     }
-    
 
-    return _class;
+
+        return _class;
 });
 
-/**
- * @return {[class]}                 ScopeHelper class
- */
 angular.module('PortalApp').factory('ScopeHelper', function ($http) {
     var _class = function () {
 
@@ -1515,8 +1029,8 @@ angular.module('PortalApp').factory('ScopeHelper', function ($http) {
     }
     _class.getShortSaleScope = function () {
 
-        
-        return _class.getScope('ShortSaleCtrl');
+
+                return _class.getScope('ShortSaleCtrl');
     }
     _class.getLeadsSearchScope = function()
     {
@@ -1526,9 +1040,6 @@ angular.module('PortalApp').factory('ScopeHelper', function ($http) {
 });
 
 
-/**
- * @return {[class]}                 Team class
- */
 angular.module('PortalApp').factory('Team', function ($http) {
     var _class = function () {
 
@@ -1546,18 +1057,12 @@ angular.module('PortalApp').factory('Team', function ($http) {
     }
     return _class;
 });
-/***
- *  Author: Shaopeng Zhang
- *  Date: 2016/11/01
- *  Description:
- *  Updates:
- ***/
+
 angular.module('PortalApp')
     .factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
 
         var underwriter = ptBaseResource('underwriter', 'BBLE', null, {});
 
-        /* Factory for empty model */
         var underwritingFactory = {
             UnderwritingModel: function () {
                 this.PropertyInfo = {
@@ -1631,7 +1136,6 @@ angular.module('PortalApp')
                 this.MinimumBaselineScenario = {};
                 this.BestCaseScenario = {
                 };
-                // this.FlipScenario = {};
                 this.Others = {};
 
                 this.CashScenario = {};
@@ -1652,7 +1156,7 @@ angular.module('PortalApp')
                 this.Liens = {};
                 this.DealExpenses = {};
                 this.ClosingCost = {};
-                this.Construction = {}; //Improvements
+                this.Construction = {}; 
                 this.CarryingCosts = {
                     RETaxs: 0.0,
                     Utilities: 0,
@@ -1714,9 +1218,6 @@ angular.module('PortalApp')
                 }
             }
 
-            /**
-             * helper function to calculate rental model
-             */
             var RentalHelper = function (isRented, rentalTime, model) {
                 var i, j, k = 0, temp = model.NetMontlyRent;
                 this._model = [];
@@ -1788,11 +1289,7 @@ angular.module('PortalApp')
                 this.ROITotal = this.targetProfit / this.totalCost;
             }
 
-            /**
-             * map portal existing data onto new created underwriting model
-             */
             var importData = function (d) {
-                // map to docsearch if we have data
                 if (d.docSearch && d.docSearch.LeadResearch) {
 
                     var r = d.docSearch.LeadResearch;
@@ -1824,27 +1321,16 @@ angular.module('PortalApp')
                     d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
                     d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
                     d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
-                    d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0; // added: 2016/11/1
-                    d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0; // added: 2016/11/1
+                    d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0; 
+                    d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0; 
                     d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
                     d.LienCosts.RelocationLien = (function () {
                         if (r.has_Vacate_Order_Vacate_Order)
                             return parseFloat(r.Amount_Vacate_Order) || 0.0;
                     })()
-                    // removed : 2016/11/01
-                    // d.LienCosts.IRSNYSTaxLiens = (function () {
-                    //    var total = 0.0;
-                    //    if (r.irsTaxLien)
-                    //        total += parseFloat(r.irsTaxLien);
-                    //    if (r.Amount_NYS_Tax_Lien)
-                    //        total += parseFloat(r.Amount_NYS_Tax_Lien);
-                    //    return total;
-                    // })();
 
                 }
-                // map to Leads Info if we have data
                 if (d.leadsInfo) {
-                    // debugger;
                     d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress;
                     d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner;
                     d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass;
@@ -1856,14 +1342,10 @@ angular.module('PortalApp')
                 }
             }
 
-            /**
-             * initialized fixed parameter in underwriting model
-             */
             var applyFixedRules = function (d) {
 
                 d.RehabInfo.SalesCommission = 0.05;
                 d.RehabInfo.DealROICash = 0.35;
-                // Insurance Premium
                 d.InsurancePremium.From = [35001, 50001, 100001, 500001, 1000001, 5000001, 10000001, 15000001];
                 d.InsurancePremium.To = [50000, 100000, 500000, 1000000, 5000000, 10000000, 15000000];
                 d.InsurancePremium.OwnersPolicyRate = [.00667, .00543, .00436, .00398, .00366, .00325, .00307, .00276];
@@ -1885,12 +1367,9 @@ angular.module('PortalApp')
                                                               cum[l] = cum[l - 1];
                                                               return cum;
                                                           }, [344])
-                // Flip Calculation
                 d.FlipCalculation.FlipROI = 0.15;
-                // Money Factor
                 d.MoneyFactor.CostOfMoney = 0.0;
                 d.MoneyFactor.InterestOnMoney = 0.18;
-                // Liens
                 d.Liens.LienPayoffsSettlement = 1.0
                 d.Liens.TaxLienCertificateSettlement = 0.09 / 12;
                 d.Liens.WaterChargesSettlement = 1.0;
@@ -1905,35 +1384,24 @@ angular.module('PortalApp')
                 d.Liens.TransitAuthoritySettlement = 1.0;
                 d.Liens.RelocationLienSettlement = .09 / 365;
 
-                // d.Liens.ECBDOBViolationsSettlement = 0.35; removed: 2016/10/31
 
-                // Closing Costs
                 d.ClosingCost.TitleBill = 1200.00;
                 d.ClosingCost.BuyerAttorney = 1250.00;
-                // Resale
                 d.Resale.Concession = 0.0;
                 d.Resale.Attorney = 1250.0;
                 d.Resale.NDC = 500;
-                // LoanTerms
                 d.LoanTerms.LoanRate = 0.12;
                 d.LoanTerms.LoanPoints = 2;
                 d.LoanTerms.LoanTermMonths = 12;
                 d.LoanTerms.LTV = 0.6;
-                // HOI
                 d.HOI.Value = 0.25;
-                //Rental Model
                 d.RentalModel.CostOfMoneyRate = 0.16;
                 d.RentalModel.MinROI = 0.18;
                 d.RentalModel.Insurance = 85.0;
 
             };
 
-            /**
-            * pre-defined rules to rebuild underwrting model
-            * @param d: data represent underwriting model
-            */
             var applyRule = function (d) {
-                //debugger;
                 var float = function (data) {
                     if (data)
                         return parseFloat(data);
@@ -1947,14 +1415,8 @@ angular.module('PortalApp')
                         return 0;
                 }
 
-                /**
-                 * PropertyInfo 
-                 * 1:residential
-                 * 2: nonresidential
-                 */
                 d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? 1 : 2 })();
 
-                // Liens
                 d.Liens.TaxLienCertificate = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienCertificateSettlement * float(d.RehabInfo.DealTimeMonths));
                 d.Liens.PropertyTaxes = float(d.LienCosts.PropertyTaxes) * d.Liens.PropertyTaxesSettlement;
                 d.Liens.WaterCharges = float(d.LienCosts.WaterCharges) * d.Liens.WaterChargesSettlement;
@@ -1980,14 +1442,12 @@ angular.module('PortalApp')
                         return float(d.LienCosts.RelocationLien) * (1.0 + (moment().diff(moment(d.LienCosts.RelocationLienDate), 'days') + 180) * d.Liens.RelocationLienSettlement)
                     }
                 })();
-                // DealCost added: 2016/10/31
                 d.DealCosts.HAFA = (d.PropertyInfo.SellerOccupied || int(d.PropertyInfo.NumOfTenants) > 0) &&
                                     !d.LienInfo.FHA &&
                                     !d.LienInfo.FannieMae &&
                                     !d.LienInfo.FreddieMac &&
                                     float(d.DealCosts.HOI) > 0.0;
 
-                // DealExpense
                 d.DealExpenses.MoneySpent = float(d.DealCosts.MoneySpent);
                 d.DealExpenses.HOILienSettlement = float(d.DealCosts.HOIRatio);
                 d.DealExpenses.HOILien = d.DealCosts.HAFA ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
@@ -1995,15 +1455,12 @@ angular.module('PortalApp')
                 d.DealExpenses.Tenants = float(d.PropertyInfo.NumOfTenants) * 7000.00;
                 d.DealExpenses.Agent = float(d.DealCosts.AgentCommission);
 
-                // Construction(Improvement)
                 d.Construction.Construction = float(d.RehabInfo.RepairBid);
                 d.Construction.Architect = d.RehabInfo.NeedsPlans ? 8500 : 0;
 
-                // CarryingCosts
                 d.CarryingCosts.RETaxs = float(d.PropertyInfo.PropertyTaxYear) / 12 * float(d.RehabInfo.DealTimeMonths);
                 d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.ActualNumOfUnits), 2) + 400 * float(d.PropertyInfo.ActualNumOfUnits);
 
-                // Resale
                 d.Resale.ProbableResale = float(d.RehabInfo.RenovatedValue);
                 d.Resale.Commissions = d.Resale.ProbableResale * float(d.RehabInfo.SalesCommission);
                 d.Resale.TransferTax = (function () {
@@ -2025,10 +1482,8 @@ angular.module('PortalApp')
 
                     return (rate + 0.004) * pr;
                 })();
-                // LoanTerms
                 d.LoanTerms.LoanAmount = d.Resale.ProbableResale * d.LoanTerms.LTV;
                 d.CarryingCosts.Insurance = d.LoanTerms.LoanAmount / 100.0 * 0.45 / 12 * float(d.RehabInfo.DealTimeMonths);
-                // LoanCosts
                 d.LoanCosts.LoanClosingCost = (function () {
                     var la = d.LoanTerms.LoanAmount;
                     var rate;
@@ -2052,7 +1507,6 @@ angular.module('PortalApp')
                 d.LoanCosts.Points = d.LoanTerms.LoanAmount * d.LoanTerms.LoanPoints / 100.0;
                 d.LoanCosts.LoanInterest = d.LoanTerms.LoanAmount * d.LoanTerms.LoanRate / 12.0 * float(d.RehabInfo.DealTimeMonths);
 
-                // Sums
                 d.Liens.Sums = d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes + d.Liens.WaterCharges + d.Liens.ECBCityPay + d.Liens.DOBCivilPenalties + d.Liens.HPDCharges + d.Liens.HPDJudgements + d.Liens.PersonalJudgements + d.Liens.NYSTaxWarrants + d.Liens.FederalTaxLien + d.Liens.ParkingViolation + d.Liens.TransitAuthority + d.Liens.RelocationLien;
                 d.DealExpenses.Sums = d.DealExpenses.MoneySpent + d.DealExpenses.HOILien + d.DealExpenses.COSTermination + d.DealExpenses.Tenants + d.DealExpenses.Agent;
                 d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
@@ -2062,7 +1516,6 @@ angular.module('PortalApp')
                 d.Liens.LienPayoffs = (d.Resale.ProbableResale - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums) * float(d.RehabInfo.DealROICash)) / ((float(d.RehabInfo.DealROICash) + 1) * 1.0058);
                 d.Liens.AdditonalCostsSums = d.Liens.WaterCharges + d.Liens.ECBCityPay + d.Liens.DOBCivilPenalties + d.Liens.HPDCharges + d.Liens.HPDJudgements + d.Liens.PersonalJudgements + d.Liens.NYSTaxWarrants + d.Liens.FederalTaxLien + d.Liens.ParkingViolation + d.Liens.TransitAuthority + d.Liens.RelocationLien;
 
-                // InsurancePremium
                 d.InsurancePremium.PurchasePrice = d.Liens.LienPayoffs;
                 d.InsurancePremium.LoanAmountDiscounted = d.LoanTerms.LoanAmount >= d.Liens.LienPayoffs ? d.Liens.LienPayoffs : d.LoanTerms.LoanAmount;
                 d.InsurancePremium.LoanAmountFullPremium = d.LoanTerms.LoanAmount - d.InsurancePremium.LoanAmountDiscounted;
@@ -2075,7 +1528,6 @@ angular.module('PortalApp')
                 d.LoanCosts.LoanPolicy = d.InsurancePremium.TitleInsurance - d.InsurancePremium.OwnersPolicy;
                 d.FlipCalculation.FlipPrice = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums) * d.FlipCalculation.FlipROI) / ((d.FlipCalculation.FlipROI + 1) * 1.0);
 
-                // HOI
                 d.LoanCosts.Sums = d.LoanCosts.LoanPolicy + d.LoanCosts.LoanClosingCost + d.LoanCosts.Points + d.LoanCosts.LoanInterest;
                 d.HOI.PurchasePriceAllIn = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums + d.LoanCosts.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums) * d.HOI.Value) / ((d.HOI.Value + 1) * 1.0);
                 d.HOI.TotalInvestment = d.HOI.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
@@ -2083,14 +1535,12 @@ angular.module('PortalApp')
                 d.HOI.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOI.TotalInvestment;
                 d.HOI.ROILoan = d.HOI.NetProfit / d.HOI.TotalInvestment;
 
-                // Best Case For HOI
                 d.HOIBestCase.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
                 d.HOIBestCase.TotalInvestment = d.HOIBestCase.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
                 d.HOIBestCase.CashRequirement = d.HOIBestCase.TotalInvestment - d.LoanTerms.LoanAmount;
                 d.HOIBestCase.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOIBestCase.TotalInvestment;
                 d.HOIBestCase.ROILoan = d.HOIBestCase.NetProfit / d.HOIBestCase.TotalInvestment;
 
-                // Cash Scenario
                 d.CashScenario.Purchase_LienPayoffs = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
                 d.CashScenario.Purchase_OffHUDCosts = d.Liens.AdditonalCostsSums;
                 d.CashScenario.Purchase_DealCosts = d.DealExpenses.Sums;
@@ -2107,7 +1557,6 @@ angular.module('PortalApp')
                 d.CashScenario.CashRequired = d.CashScenario.Purchase_TotalInvestment;
                 d.CashScenario.ROI = d.CashScenario.Resale_NetProfit / d.CashScenario.Purchase_TotalInvestment;
                 d.CashScenario.ROIAnnual = d.CashScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
-                // Loan Scenario
                 d.LoanScenario.Purchase_PurchasePrice = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
                 d.LoanScenario.Purchase_AdditonalCosts = d.Liens.AdditonalCostsSums;
                 d.LoanScenario.Purchase_DealCosts = d.DealExpenses.Sums;
@@ -2130,7 +1579,6 @@ angular.module('PortalApp')
                 d.LoanScenario.ROIAnnual = d.LoanScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
                 d.LoanScenario.CashROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.CashRequirement;
                 d.LoanScenario.CashROIAnnual = d.LoanScenario.CashROI / d.RehabInfo.DealTimeMonths * 12;
-                // FlipScenario
                 d.FlipScenario.Purchase_TotalCost = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
                 d.FlipScenario.FlipPrice_SalePrice = d.FlipCalculation.FlipPrice;
 
@@ -2147,23 +1595,19 @@ angular.module('PortalApp')
                 d.FlipScenario.FlipProfit = d.FlipScenario.FlipPrice_SalePrice - d.FlipScenario.Purchase_TotalCost;
                 d.FlipScenario.CashRequirement = d.FlipScenario.Purchase_TotalInvestment
                 d.FlipScenario.ROI = d.FlipScenario.Resale_NetProfit / d.FlipScenario.Purchase_TotalInvestment;
-                // Others 
                 d.Others.MaximumLienPayoff = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
                 d.Others.MaximumSSPrice = d.Liens.LienPayoffs + d.Liens.Sums;
                 d.Others.MaxHOI = d.HOIBestCase.NetProfit - d.HOI.NetProfit;
-                // Minimum Baseline (~=Loan)
                 d.MinimumBaselineScenario.PurchasePriceAllIn = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
                 d.MinimumBaselineScenario.TotalInvestment = d.LoanScenario.Purchase_TotalInvestment;
                 d.MinimumBaselineScenario.CashRequirement = d.LoanScenario.CashRequirement;
                 d.MinimumBaselineScenario.NetProfit = d.LoanScenario.Resale_NetProfit;
                 d.MinimumBaselineScenario.ROI = d.LoanScenario.ROI;
-                // Best Case Scenario
                 d.BestCaseScenario.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums;
                 d.BestCaseScenario.TotalInvestment = d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
                 d.BestCaseScenario.CashRequirement = d.BestCaseScenario.TotalInvestment - d.LoanTerms.LoanAmount;
                 d.BestCaseScenario.NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - (d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums);
                 d.BestCaseScenario.ROI = d.BestCaseScenario.NetProfit / d.BestCaseScenario.TotalInvestment
-                // Rental Model
                 d.RentalModel.NumOfUnits = int(d.RentalInfo.NumOfUnits);
                 d.RentalModel.DeedPurchase = float(d.RentalInfo.DeedPurchase);
                 d.RentalModel.TotalRepairs = float(d.RentalInfo.RepairBidTotal);
@@ -2192,13 +1636,7 @@ angular.module('PortalApp')
             }
         })();
 
-        /**
-         * load underwriting from database, if not loaded, use factory new one and import infomation from portal
-         * @param: bble // if no present, only create new model from factory
-         * 
-         **/
-        underwriter.load = function (/* optional */ bble) {
-            //debugger;
+        underwriter.load = function ( bble) {
             var data = underwritingFactory.build();
             underwriter.calculator.applyFixedRules(data);
 
@@ -2206,8 +1644,7 @@ angular.module('PortalApp')
                 var _data = underwriter.get({ BBLE: bble.trim() }, function (d) {
                     _data.BBLE = bble;
                     _.defaults(_data, data);
-                    //debugger;
-                    if (!_data.Id) {  // data is not load from database, load data from portal
+                    if (!_data.Id) {  
                         data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
                             data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {
                                 underwriter.calculator.importData(data);
@@ -2270,7 +1707,6 @@ angular.module('PortalApp')
             if (bble) {
                 data.BBLE = bble;
             }
-            // debugger;
             var promise = $http({
                 method: 'POST',
                 url: '/api/UnderwritingRequest',
@@ -2280,7 +1716,6 @@ angular.module('PortalApp')
         }
 
         resource.createSearch = function (BBLE) {
-            // debugger;
             var promise = $http({
                 method: "POST",
                 url: '/api/LeadInfoDocumentSearches',
@@ -2294,97 +1729,47 @@ angular.module('PortalApp')
 
         return resource;
     }]);
-/// <reference path="DocSearch.js" />
-/**
- * Wizard control to support comstom display and show current step
- * @return {[class]}                 Wizard class
- */
+
 angular.module('PortalApp').factory('Wizard', function (WizardStep) {
-    /**
-     * Wizard class constructor
-     */
     var _class = function () {
-       
-    }
-    /**
-     * valule of steped filted by conditions 
-     */
+
+           }
     _class.prototype.filteredSteps = [];
-    /**
-     * `public set filtered steps
-     * @param {array of WizardStep object} filteredSteps
-     */
     _class.prototype.setFilteredSteps = function(filteredSteps)
     {
         this.filteredSteps = filteredSteps;
     }
-    /**
-     * contorller scope 
-     * similar to other MVC framework context
-     */
     _class.prototype.scope = { step: 1 };
-    /**
-     * get current max step of current steps
-     * @returns {int} 
-     */
     _class.prototype.MaxStep = function()
     {
         return this.filteredSteps.length;
     }
-    /**
-     * get class scope, other MVC framework UI context 
-     * 
-     * @param {angular scope} scope
-     */
     _class.prototype.setScope = function (scope)
     {
         this.scope = scope;
     }
-    /**
-     * get current step
-     * @returns {WizardStep object} current step object
-     */
     _class.prototype.currentStep = function()
     {
         return this.filteredSteps[this.scope.step - 1];
     }
-    
-    
-    return _class;
+
+
+            return _class;
 });
-/**
- * Wizard step item  class
- * @return {[WizardStep]}                 WizardStep class
- */
+
 angular.module('PortalApp').factory('WizardStep', function () {
-    /**
-     * WizardStep constructor
-     * @param {object} step
-     */
     var _class = function (step) {
-        
-        this.title = step.title;
+
+                this.title = step.title;
         this.next = step.next;
         this.init = step.init;
         angular.extend(this, step);
     }
-    /**
-     * wizard title
-     */
     _class.prototype.title = "";
-    /**
-     * interface of wizard can move to next or not default is true
-     * @returns {boolean} wizard can move to next or not
-     */
     _class.prototype.next = function ()
     {
         return true;
     }
-    /**
-     * interface of wizard preload function it will call
-     * before wizard contet showup.
-     * @returns {boolean} wizard preload function
-     */
     _class.prototype.init = function()
     {
         return true;
@@ -2410,15 +1795,6 @@ angular.module("PortalApp")
     };
 })
 
-/**
- * Author: Shaopeng Zhang
- * Date: ???
- * Description: An utility library provide common function in angular
- * Update: 
- *          2016/11/02:
- *              1. add function parseSearch to get paires from Location.Search
- *          
- **/
 
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
     var that = this;
@@ -2431,7 +1807,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     };
 
 
-    // delete a element from a array with promte
     this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
             if (confirm) {
@@ -2447,7 +1822,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         }
     };
 
-    // concat a validate address string by giving infomation
     this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
         var result = '';
         if (strNO) result += strNO + ' ';
@@ -2471,7 +1845,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         return result;
     };
     this.ensureArray = function (scope, modelName) {
-        /* caution: due to the ".", don't eval to create an array more than one level*/
         if (!scope.$eval(modelName)) {
             scope.$eval(modelName + '=[]');
         }
@@ -2482,8 +1855,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var model = scope.$eval(modelName);
         model.push(data);
     };
-    // when use jquery.extend, jquery will override the dst even src is null,
-    // this function convert null recursively to make the extend works as expected 
     this.nullToUndefined = function (obj) {
         for (var property in obj) {
             if (obj.hasOwnProperty(property)) {
@@ -2544,7 +1915,7 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
 
     this.removeOverlay = function () {
         $rootScope.removeOverlay();
-    }; // get next index of value in the array, 
+    }; 
     this.next = function (array, value, from) {
         return array.indexOf(value, from);
     };
@@ -2574,23 +1945,14 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
 
-    /**
-     * assign all reference property from source to target
-     * @param: target
-     * @param: source
-     * @param: skipped //reference that will not be replaced by source
-     * @param: keeped // level two 
-     */
-    this.assignReference = function (target, source, /* optional*/ skipped, /* optional*/ keeped) {
-        var temp = {}; // object backup keeped values
+    this.assignReference = function (target, source,  skipped,  keeped) {
+        var temp = {}; 
         var props = Object.keys(source);
         for (i = 0; i < props.length ; i++) {
             if (typeof source[props[i]] == 'object') {
-                // skip some reference
                 if (skipped && skipped.indexOf(props[i]) >= 0) {
                     continue;
                 }
-                // keep some value inside reference, usually id or something ;)
                 if (keeped && keeped.length) {
                     temp[props[i]] = {};
                     for (j = 0; j < keeped.length; j++) {
@@ -2612,13 +1974,13 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
 
     }
 
-    this.parseSearch = function (/*string*/ searchString) {
+    this.parseSearch = function ( searchString) {
         var result = {};
-        if (!searchString || typeof searchString != 'string')   //not a string
+        if (!searchString || typeof searchString != 'string')   
             return result;
-        if (searchString.slice(0, 1) != '?')    //not a search string
+        if (searchString.slice(0, 1) != '?')    
             return result;
-        var entriesString = searchString.slice(1).replace(/%20/g, '');  //remove leading ?
+        var entriesString = searchString.slice(1).replace(/%20/g, '');  
         var entries = entriesString.split("&");
         for (var i = 0; i < entries.length; i++) {
             entry = entries[i].split("=");
@@ -2725,7 +2087,7 @@ angular.module("PortalApp")
             });
     };
 
-    this.getContacts = function (args, /* optional */ groupId) {
+    this.getContacts = function (args,  groupId) {
         groupId = groupId === undefined ? null : groupId;
         return $http.get('/Services/ContactService.svc/GetContacts?args=' + args, { noIndicator:true})
             .then(function (response) {
@@ -2743,9 +2105,9 @@ angular.module("PortalApp")
     this.getContactsByGroup = function (groupId) {
         if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
     };
-    
-    
-    this.getContact = function (id, name) {
+
+
+            this.getContact = function (id, name) {
         if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
         return {};
     };
@@ -2758,9 +2120,9 @@ angular.module("PortalApp")
         if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
         return {};
     };
-    
-    
-    this.getEntities = function (name, status) {
+
+
+            this.getEntities = function (name, status) {
         status = status === undefined ? 'Available' : status;
         name = name ? '' : name;
         return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
@@ -2768,8 +2130,8 @@ angular.module("PortalApp")
                 return limitToFilter(res.data, 10);
             });
     };
-    
-    this.getTeamByName = function (teamName) {
+
+        this.getTeamByName = function (teamName) {
         if (allTeam) {
             return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
         }
@@ -2791,11 +2153,10 @@ angular.module("PortalApp")
     };
 }]);
 angular.module("PortalApp").service('ptFileService', function () {
-    
-    this.isIE = function (fileName) {
+
+        this.isIE = function (fileName) {
         return fileName.indexOf(':\\') > -1;
     };
-    // get filename by path
     this.getFileName = function (fullPath) {
         var paths;
         if (fullPath) {
@@ -2836,7 +2197,6 @@ angular.module("PortalApp").service('ptFileService', function () {
         el.prop('files')[0] = null;
         el.replaceWith(el.clone());
     };
-    // replace special character into underscore
     this.cleanName = function (filename) {
         return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
     };
@@ -2909,7 +2269,6 @@ angular.module("PortalApp").service('ptFileService', function () {
 
         }
     };
-    // if bbleORoption a string, then use old method, if it's a object, use configuration
     this.uploadFile = function (data, bbleORoptions, rename, folder, type, callback) {
         if (typeof bbleORoptions == 'string') {
             switch (type) {
@@ -2946,8 +2305,8 @@ angular.module("PortalApp").service('ptFileService', function () {
 
             })
         }
-       
-    };
+
+           };
     this.uploadTitleFile = function (data, bble, rename, folder, callback) {
         var rename =  rename || '';
         var folder =  folder || '';
@@ -3088,7 +2447,6 @@ angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$ti
         },
         BuildAjaxErrorMessage: function (response) {
             var message = "";
-            /*Only error handle*/
             if (response.status > 300 || response.status < 200 || response.status == 203) {
                 var dataObj = JSON.parse(response.responseText);
                 if (dataObj) {
@@ -3130,16 +2488,13 @@ angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$ti
             return 'Get error !' + '<br/> <small>( Status: ' + data.status + ' ' + urlName + ' )</small>';
         },
         request: function (config) {
-            /*config some where do not need show indicator like typeahead and get contacts*/
             if (!config.noIndicator) {
                 if (config.url.indexOf('template') < 0) {
                     ptCom.startLoading();
                 }
-                // 
             }
-            //debugger;
-             
-            return config;
+
+                         return config;
         },
         responseError: function (rejection) {
             myInterceptor.delayHide();
@@ -3210,7 +2565,6 @@ angular.module("PortalApp").service("ptTime", [function () {
         var start_date = new Date(start);
         var end_date = new Date(end);
 
-        // Do the math.
         var millisecondsPerDay = 1000 * 60 * 60 * 24;
         var millisBetween = end_date.getTime() - start_date.getTime();
         var days = millisBetween / millisecondsPerDay;
@@ -3225,7 +2579,6 @@ angular.module("PortalApp").service("ptTime", [function () {
         var start_date = new Date(start);
         var end_date = new Date(end);
 
-        // Do the math.
         var millisecondsPerDay = 1000 * 60 * 60 * 24;
         var millisBetween = end_date.getTime() - start_date.getTime();
         var days = millisBetween / millisecondsPerDay;
@@ -3240,7 +2593,6 @@ angular.module("PortalApp").service("ptTime", [function () {
         var start_date = new Date(start);
         var end_date = new Date(end);
 
-        // Do the math.
         var millisecondsPerDay = 1000 * 60 * 60 * 24;
         var millisBetween = end_date.getTime() - start_date.getTime();
         var days = millisBetween / millisecondsPerDay;
@@ -3316,7 +2668,7 @@ angular.module("PortalApp")
     .directive('auditLogs', ['AuditLog', function (AuditLog) {
         return {
             restrict: 'E',
-            templateUrl: '/js/Views/AuditLogs/AuditLogs.tpl.html',
+            templateUrl: '/js/directives/AuditLogs.tpl.html',
             scope: {
                 tableName: '@',
                 recordId: '=',
@@ -3333,7 +2685,7 @@ angular.module("PortalApp")
             }
         }
     }])
-// a directive to bind contact with it's contact it
+
 angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
@@ -3349,28 +2701,7 @@ angular.module("PortalApp")
 
         }
     }])
-/**
- * *********************************************************
- * @author Steven
- * @date 8/11/2016
- * 
- * sent time to write this initGrid to fix the save bug 
- * and init data bug
- *
- * @returns directive init Grid
- * 
- * 
- * @*********************************************************
- * @author Steven
- * @datetime 8/12/2016 2:54
- * @bug
- *  When switch to other cases the grid dataSource is empty
- *  It can not add new rows
- *  
- * @fix Steven
- * @end datetime 
- * @*********************************************************
- */
+
 angular.module("PortalApp")
     .directive('initGrid', ['$parse', function ($parse) {
         return {
@@ -3388,39 +2719,12 @@ angular.module("PortalApp")
                         var array = scope.$eval(option);
                         if (array == null || array == undefined)
                             eval('scope.' + option + '=[];');
-                        // scope.$eval(option + '=[];');
                     });
                 }
             }
         };
     }]);
-    /**
-     * @author steven
-     * @date 8/11/2016
-     * @todo
-     *  the pre condition should will in the control which need
-     *  be controller and cleared by yes or no selected.
-     * 
-     * @param {'ngModel'} ) {
-        return {
-            require
-     * @param {function (scope} link
-     * @param element
-     * @param attrs
-     * @param ngModelController) {
-                scope.$watch(attrs.preCondition
-     * @param function (newVal
-     * @param oldVal) {
-                    if (!newVal)
-                        eval('scope.' + attrs.ngModel + '=null');                  
-                }
-     * @param true);
-
-            }
-        };
-    }
-     * @returns {type} 
-     */
+    
 angular.module("PortalApp")
     .directive('preCondition', function () {
         return {
@@ -3488,11 +2792,7 @@ angular.module("PortalApp")
             template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
         }
     })
-/***
- * Author: Shaopeng Zhang
- * Date: 2016/11/01
- * Description: A control to lock/unlock are area, make all
- */
+
 angular.module("PortalApp")
     .directive('ptEditableDiv', [function () {
         return {
@@ -3501,7 +2801,6 @@ angular.module("PortalApp")
                 ptLock: '='
             },
             link: function (scope, el, attrs) {
-                // debugger;
                 angular.element(el).addClass("pt-editable-div");
                 scope.isLocked = true;
                 scope.unlock = function () {
@@ -3516,7 +2815,6 @@ angular.module("PortalApp")
                     scope.lock();
                 })
                 scope.$on('pt-editable-div-unlock', function () {
-                    // debugger;
                     scope.unlock();
                 })
                 if (scope.ptLock) {
@@ -3529,7 +2827,7 @@ angular.module("PortalApp")
     .directive('ptEditor', [function () {
         return {
 
-            templateUrl: '/js/templates/ptEditor.html',
+            templateUrl: '/js/directives/ptEditor.html',
             require: 'ngModel',
             scope: {
                 ptModel: '=ngModel'
@@ -3566,21 +2864,12 @@ angular.module("PortalApp")
             }
         };
     }])
-/**
- * @param fileModel: the angular model, store url for uploaded file.
- * @param fileBBLE: if provide, will use old style upload. (compatiable with first version)
- *                  if not provide, use configuration to upload file.
- * @param uploadType: come with 
- * @param uploadUrl: webservice url for uploading file. 
- * @param fileName: rename uploaded file at server end. (optional)
- * @param enableEdit: if usercan edit file after upload. (optional)
- * @param enableDelete: if user can delete file after upload. (optional)
- */
+
 angular.module("PortalApp")
     .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
             restrict: 'E',
-            templateUrl: '/js/templates/ptfile.html',
+            templateUrl: '/js/directives/ptFile.tpl.html',
             scope: {
                 fileModel: '=',
                 fileBble: '=',  
@@ -3594,10 +2883,10 @@ angular.module("PortalApp")
             link: function (scope, el, attrs) {
                 scope.ptFileService = ptFileService;
                 scope.fileId = "ptFile" + scope.$id;
-                var mode = 0; // legency mode, bble is require for uploading 
+                var mode = 0; 
                 debugger;
                 if (attrs['fileBble'] == undefined) {
-                    mode = 1; // new mode, upload based on configuration
+                    mode = 1; 
                 }
                 scope.uploadType = scope.uploadType || 'construction';
                 scope.ngDisabled = scope.ngDisabled || false;
@@ -3703,7 +2992,7 @@ angular.module("PortalApp")
     .directive('ptFiles', ['$timeout', 'ptFileService', 'ptCom', function ($timeout, ptFileService, ptCom) {
         return {
             restrict: 'E',
-            templateUrl: '/js/templates/ptfiles.html',
+            templateUrl: '/js/directives/ptFiles.tpl.html',
             scope: {
                 fileModel: '=',
                 fileBble: '=',
@@ -3711,22 +3000,21 @@ angular.module("PortalApp")
                 fileColumns: '@',
                 folderEnable: '@',
                 baseFolder: '@',
-                uploadType: '@' // control server folder
+                uploadType: '@' 
             },
             link: function (scope, el, attrs) {
                 scope.ptFileService = ptFileService;
                 scope.ptCom = ptCom;
 
-                // init scope variale
-                scope.files = []; // file to upload
-                scope.columns = []; // addtional infomation for files
-                scope.nameTable = []; // record choosen files
+                scope.files = []; 
+                scope.columns = []; 
+                scope.nameTable = []; 
                 scope.currentFolder = '';
                 scope.showFolder = false;
                 scope.uploadType = scope.uploadType || 'construction';
                 scope.loading = false;
                 scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
-                scope.count = 0; // count for uploaded files
+                scope.count = 0; 
 
 
                 if (scope.fileColumns) {
@@ -3779,7 +3067,6 @@ angular.module("PortalApp")
                     }
                 }
 
-                // utility functions
                 scope.changeFolder = function (folderName) {
                     scope.currentFolder = folderName;
                     scope.showFolder = true;
@@ -3850,7 +3137,7 @@ angular.module("PortalApp")
                     var len = scope.files.length;
 
                     scope.fileModel = scope.fileModel ? scope.fileModel : [];
-                    scope.result = []; // final result will store here, but we build up it first for counting
+                    scope.result = []; 
 
                     scope.showUpoading();
                     scope.uploading = true;
@@ -4002,7 +3289,7 @@ angular.module("PortalApp")
         }
     }])
 angular.module("PortalApp")
-    .directive('ptInitBind', function () { //one way bind of ptInitModel
+    .directive('ptInitBind', function () { 
         return {
             restrict: 'A',
             require: '?ngBind',
@@ -4032,7 +3319,7 @@ angular.module("PortalApp")
             }
         }
     })
-/* a mask to automaticly convert number to money value*/
+
 angular.module("PortalApp")
     .directive('ptInputMask', function () {
         return {
@@ -4060,12 +3347,7 @@ angular.module("PortalApp")
 
         }
     }])
-/**
- * a input attribute directive to automatic convert input to certain data format
- * example <input pt-number-mask maskformat='money' isvalidate/>
- * (optional) maskerformat: control how data will present.
- * (optional) isvalidate: if the attribute present, will validate if the user input is correct
- */
+
 angular.module("PortalApp")
     .directive('ptNumberMask', function () {
         return {
@@ -4099,7 +3381,6 @@ angular.module("PortalApp")
                         }
 
                 }
-                //debugger;
                 var rule = /^-?(\d+|\d*\.\d+)$/;
                 var validate = function (val) {
                     if (typeof (val) == 'number') {
@@ -4201,7 +3482,6 @@ angular.module("PortalApp")
                 ngDisabled: '='
             },
             link: function (scope, el, attrs) {
-                //scope.ngDisabled = attrs.ngDisabled;
                 scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
                 scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
                 scope.defaultValue = scope.defaultValue === 'true' ? true : false;
@@ -4213,8 +3493,7 @@ angular.module("PortalApp")
 
         }
     })
-// the original attribute apply to regular <input type=radio>
-// @deprecated, use <pt-radio> instead!
+
 angular.module("PortalApp")
     .directive('ptRadioInit', function () {
         return {
@@ -4234,7 +3513,6 @@ angular.module("PortalApp")
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {
-                // debugger;
                 var eltype = $(el)[0].type;
 
                 if (eltype != 'text' && eltype != 'textarea' && eltype != 'select-one') {
@@ -4257,7 +3535,6 @@ angular.module("PortalApp")
                 }
 
                 var callback = function () {
-                    //debugger
                     var res = validate($(el)[0].value);
                     if (!res) {
                         $(el).css("background-color", "yellow");
@@ -4288,27 +3565,16 @@ angular.module("PortalApp")
     $scope.ptContactServices = ptContactServices;
     $scope.selectType = 'All Entities';
     $scope.loadPanelVisible = true;
-    //for view and upload document -- add by chris
     $scope.encodeURIComponent = window.encodeURIComponent;
 
-    /*new method*/
     $scope.CorpEntites = CorpEntity.query(function () {
         $scope.currentContact = $scope.CorpEntites[0];
         $scope.loadPanelVisible = false;
     }, function () {
         alert('Get All buyers Entities error : ' + JSON.stringify(data));
     });
-    /*old method*/
-    //$http.get('/Services/ContactService.svc/GetAllBuyerEntities')
-    //    .success(function (data) {
-    //        $scope.CorpEntites = data;
-    //        $scope.currentContact = $scope.CorpEntites[0];
-    //        $scope.loadPanelVisible = false;
-    //    }).error(function (data) {
-    //        alert('Get All buyers Entities error : ' + JSON.stringify(data));
-    //    });
-    
-    $http.get('/Services/TeamService.svc/GetAllTeam')
+
+        $http.get('/Services/TeamService.svc/GetAllTeam')
         .success(function (data) {
             $scope.AllTeam = data;
         }).error(function (data) {
@@ -4404,7 +3670,6 @@ angular.module("PortalApp")
                 return employees.slice(0, 10);
             },
             byKey: function (key, extra) {
-                // . . .
             },
 
 
@@ -4479,8 +3744,8 @@ angular.module("PortalApp")
     $scope.AssginEntity = function () {
 
         $scope.loadPanelVisible = true;
-       
-        $scope.currentContact.$assign(function () {
+
+               $scope.currentContact.$assign(function () {
             $scope.loadPanelVisible = false;
             alert("Assigned succeed !");
         },function () {
@@ -4488,14 +3753,6 @@ angular.module("PortalApp")
             alert('Can not find BBLE of address:(' + $scope.currentContact.PropertyAssigned + ") Please make sure this address is available");
         });
 
-        //$http.post('/Services/ContactService.svc/AssginEntity', { c: JSON.stringify($scope.currentContact) }).success(function (data, status, headers, config) {
-        //    $scope.loadPanelVisible = false;
-        //    $scope.currentContact.BBLE = data;
-        //    alert("Assigned succeed !")
-        //}).error(function (data, status, headers, config) {
-        //    $scope.loadPanelVisible = false;
-        //    alert('Can not find BBLE of address:(' + $scope.currentContact.PropertyAssigned + ") Please make sure this address is available");
-        //});
     }
     $scope.ChangeTeam = function (team) {
         $scope.SelectedTeam = team;
@@ -4511,7 +3768,6 @@ angular.module("PortalApp")
         var contact = $scope.currentContact;
         var entityId = contact.EntityId;
 
-        // grab file object from a file input
         var fileData = document.getElementById(fileUploadId).files[0];
 
         $.ajax({
@@ -4520,8 +3776,8 @@ angular.module("PortalApp")
             data: fileData,
             cache: false,
             dataType: 'json',
-            processData: false, // Don't process the files
-            contentType: "application/octet-stream", // Set content type to false as jQuery will tell the server its a query string request
+            processData: false, 
+            contentType: "application/octet-stream", 
             success: function (data) {
                 alert('successful..');
                 $scope.currentContact[field] = data;
@@ -4536,12 +3792,11 @@ angular.module("PortalApp")
         });
     }
 
-    //end - view and upload document
 }]);
 angular.module('PortalApp')
-.controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService', function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
+.controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService',
+function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
-    //data structure defination
     var CSCaseModel = function () {
         this.CSCase = {
             InitialIntake: {},
@@ -4582,7 +3837,6 @@ angular.module('PortalApp')
 
     $scope._ = _;
 
-    // scope variables defination
     $scope.ReloadedData = {}
     $scope.CSCase = new CSCaseModel();
     $scope.percentage = new PercentageModel();
@@ -4649,7 +3903,7 @@ angular.module('PortalApp')
         ptCom.startLoading();
         bble = bble.trim();
         $scope.reload();
-        var done1, done2, done3, done4; // status marker to indicate all async job finished
+        var done1, done2, done3, done4; 
 
         ptConstructionService.getConstructionCases(bble, function (res) {
             ptCom.nullToUndefined(res);
@@ -4695,7 +3949,6 @@ angular.module('PortalApp')
 
     }
 
-    /* Status change function -- Chris */
     $scope.ChangeStatus = function (scuessfunc, status) {
         $http.post('/api/ConstructionCases/ChangeStatus/' + leadsInfoBBLE, status)
             .success(function () {
@@ -4720,15 +3973,14 @@ angular.module('PortalApp')
     }
 
 
-    /* multiple company selection */
     $scope.$watch('CSCase.CSCase.Utilities.Company', function (newValue) {
         if (newValue) {
             var ds = $scope.UTILITY_SHOWN;
             var target = $scope.CSCase.CSCase.Utilities.Company;
-            _.each(target, function(k, i) {
+            _.each(target, function (k, i) {
                 $scope.$eval(ds[k] + '=false');
             });
-            _.each(newValue, function(el, i) {
+            _.each(newValue, function (el, i) {
                 $scope.$eval(ds[el] + '=true');
             });
         }
@@ -4748,15 +4000,11 @@ angular.module('PortalApp')
 
 
     });
-    /* end multiple company selection */
 
-    /* reminder */
     $scope.sendNotice = function (id, name) {
         confirm("Send Intake Sheet To " + name + " ?");
     }
-    /* end reminder */
 
-    /* comments */
     $scope.showPopover = function (e) {
         aspxConstructionCommentsPopover.ShowAtElement(e.target);
     }
@@ -4774,16 +4022,12 @@ angular.module('PortalApp')
         $scope.addComment(comment);
         $scope.addCommentTxt = '';
     }
-    /* end comments */
 
-    /* active tab */
     $scope.activeTab = 'CSInitialIntake';
     $scope.updateActive = function (id) {
         $scope.activeTab = id;
     }
-    /* end active tab */
 
-    /* highlight */
     $scope.isHighlight = function (criteria) {
         return $scope.$eval(criteria);
     }
@@ -4793,13 +4037,13 @@ angular.module('PortalApp')
     }
 
     $scope.initWatchedModel = function () {
-        _.each($scope.WATCHED_MODEL, function(el, i) {
+        _.each($scope.WATCHED_MODEL, function (el, i) {
             $scope.$eval(el.backedModel + '=' + el.model);
         });
     }
     $scope.checkWatchedModel = function () {
         var res = "";
-        _.each($scope.WATCHED_MODEL, function(el, i) {
+        _.each($scope.WATCHED_MODEL, function (el, i) {
             if ($scope.$eval(el.backedModel + "!=" + el.model)) {
                 $scope.$eval(el.backedModel + "=" + el.model);
                 res += (el.info + " changes to " + $scope.$eval(el.model) + ".<br>");
@@ -4808,17 +4052,13 @@ angular.module('PortalApp')
         if (res) AddActivityLog(res);
     }
 
-    /* end highlight */
 
-    /* header editing */
     $scope.HeaderEditing = false;
     $scope.toggleHeaderEditing = function (open) {
         $scope.HeaderEditing = !$scope.HeaderEditing;
         if (open) $("#ConstructionTitleInput").focus();
     }
-    /* end header editing */
 
-    /* dob fetch */
     $scope.addNewDOBViolation = function () {
         $scope.ensurePush('CSCase.CSCase.Violations.DOBViolations');
         $scope.setPopupVisible('ReloadedData.DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length - 1), true);
@@ -4883,9 +4123,7 @@ angular.module('PortalApp')
 
         })
     }
-    /* end dob fetch */
 
-    /* intakeComplete */
     $scope.test = $scope.checkIntake;
     $scope.intakeComplete = function () {
         if (!$scope.checkIntake(function (el) {
@@ -4935,9 +4173,7 @@ angular.module('PortalApp')
     $scope.updatePercentage = function () {
         $scope.checkIntake();
     }
-    /* end intakeComplte */
 
-    /*check file be modify*/
     $scope.GetTimeUrl = function () {
         return $scope.CSCase.BBLE ? "/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE : "";
     }
@@ -4947,22 +4183,17 @@ angular.module('PortalApp')
     $scope.GetModifyUserUrl = function () {
         return "/api/ConstructionCases/LastModifyUser/" + $scope.CSCase.BBLE;
     }
-    /****** end check file be modify*********/
 
-    /* printWindows*/
     $scope.printWindow = function () {
         window.open("/Construction/ConstructionPrint.aspx?bble=" + $scope.CSCase.BBLE, 'Print', 'width=1024, height=800');
     }
-    /* end printWindows */
 
-    /* open form windows */
     $scope.openInitialForm = function () {
         window.open("/Construction/ConstructionInitialForm.aspx?bble=" + $scope.CSCase.BBLE, 'Initial Form', 'width=1280, height=960')
     }
     $scope.openBudgetForm = function () {
         window.open("/Construction/ConstructionBudgetForm.aspx?bble=" + $scope.CSCase.BBLE, 'Budget Form', 'width=1024, height=768')
     }
-    /* end open form windows */
 
     $scope.updateInitialFormOwner = function () {
         var url = "/api/ConstructionCases/UpdateInitialFormOwner?BBLE=" + $scope.CSCase.BBLE + "&owner=" + $scope.CSCase.CSCase.InitialIntake.InitialFormAssign
@@ -4979,32 +4210,74 @@ angular.module('PortalApp')
     $scope.getOrdersLength = function () {
         return
     }
-}]
-);
-/**
- * @author Steven Wu
- * @date 9/15/2016
- * @fix git committed bde6b6d
- * add tax search js cotroller
- * LeadTaxSearchController is doc search. 
- * naming wrong becuase the name always change from spec guys.
- */
+}]);
+angular.module("PortalApp").controller("DialerManagementController",
+['$scope', 'EmployeeModel', 'ptCom', '$http',
+function ($scope, EmployeeModel, ptCom, $http) {
+    $scope.lookup = undefined;
+    EmployeeModel.getEmpNames().then(
+        function success(d) {
+            var employeesList = d.data;
+            $("#lookup").dxLookup({
+                items: employeesList,
+                value: employeesList[0],
+                showPopupTitle: false
+            });
+            $scope.lookup = $("#lookup").dxLookup("instance");
+        });
+
+    $scope.CreateContactList = function () {
+        if ($scope.lookup) {
+            var emp = $scope.lookup.option('value');
+            if (emp) {
+                $http({
+                    method: "POST",
+                    url: '/api/dialer/CreateContactList/' + emp
+                }).then(function (d) {
+                    ptCom.alert("Contact For " + emp + " is: " + d.data);
+                }, function () {
+                    ptCom.alert("Fail to create list, may existing");
+                }
+                    )
+            } else {
+                ptCom.alert("Employee not select corretly");
+            }
+        } else {
+            ptCom.alert("Lookup not init yet.")
+        }
+    }
+    $scope.SyncNewLeadsFolder = function () {
+        if ($scope.lookup) {
+            var emp = $scope.lookup.option("value");
+            if (emp) {
+                $http({
+                    method: 'POST',
+                    url: '/api/dialer/SyncNewLeadsFolder/' + emp
+                }).then(function sucs(resp) {
+                    ptCom.alert("Sync " + resp.data + " leads to new folder");
+                }, function err() {
+                    ptCom.alert("fail to sync new folder")
+                })
+            }
+
+        } else {
+            ptCom.alert("Lookup not init yet. ")
+        }
+    }
+
+}])
+
 angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
-        //New Model(this,arguments)
         leadsInfoBBLE = $('#BBLE').val();
         $scope.ShowInfo = $('#ShowInfo').val();
         $scope.ptContactServices = ptContactServices;
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
-        //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
-        // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
 
-        ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
-            // form chris ask delpoy 8/16/2016
             return false;
             var that = $scope.DocSearch;
 
@@ -5027,7 +4300,6 @@ angular.module('PortalApp')
         }
 
 
-        /////////////////// 8/12/2016 //////////////////////////
 
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
@@ -5035,10 +4307,6 @@ angular.module('PortalApp')
         $scope.multipleValidated = function (base, boolKey, arraykey) {
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
-            /**
-             * bugs over here bool value can not check with null
-             * @see Jira #PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
-             */
             var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
             return hasWarning;
         }
@@ -5053,10 +4321,9 @@ angular.module('PortalApp')
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
                 $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-                     
-                    $scope.DocSearch.initLeadsResearch();
+
+                                         $scope.DocSearch.initLeadsResearch();
                     $scope.DocSearch.initTeam();
-                    ////////// font end switch to new version //////////////
                     $scope.versionController.start2Eaves();
                 });
 
@@ -5066,28 +4333,8 @@ angular.module('PortalApp')
 
         $scope.init(leadsInfoBBLE)
 
-        /**
-         * @author  Steven
-         * @date    8/19/2016
-         * @fix
-         *  git commit f679a81 'finish the new doc search page'
-         *  add javascript version of validate in new version of doc search
-         *  it's not right to add the goal in git commit should create jira task.
-         */
 
-        /**
-         * @author  Steven
-         * @date    8/19/2016
-         *  
-         * @description
-         *  new version validate javascript version validate
-         * @returns {bool} true then pass validate
-         */
         $scope.newVersionValidate = function () {
-            /**
-             * change java script version validate 
-             * to oop model version validate
-             */
             if (!$scope.newVersion) {
                 return true;
             }
@@ -5097,81 +4344,15 @@ angular.module('PortalApp')
             }
 
             return true;
-            ////////////under are old validate///////////////////
-            //var errormsg = '';
-            //var validateFields = [
-            //    "Has_Deed_Purchase_Deed",
-            //    "Has_c_1st_Mortgage_c_1st_Mortgage",
-            //    "fha",
-            //    "Has_c_2nd_Mortgage_c_2nd_Mortgage",
-            //    "has_Last_Assignment_Last_Assignment",
-            //    "fannie",
-            //    "Freddie_Mac_",
-            //    "Has_Due_Property_Taxes_Due",
-            //    "Has_Due_Water_Charges_Due",
-            //    "Has_Open_ECB_Violoations",
-            //    "Has_Open_DOB_Violoations",
-            //    "hasCO",
-            //    "Has_Violations_HPD_Violations",
-            //    "Is_Open_HPD_Charges_Not_Paid_Transferred",
-            //    "has_Judgments_Personal_Judgments",
-            //    "has_Judgments_HPD_Judgments",
-            //    "has_IRS_Tax_Lien_IRS_Tax_Lien",
-            //    "hasNysTaxLien",
-            //    "has_Sidewalk_Liens_Sidewalk_Liens",
-            //    "has_Vacate_Order_Vacate_Order",
-            //    "has_ECB_Tickets_ECB_Tickets",
-            //    "has_ECB_on_Name_ECB_on_Name_other_known_address",
 
-            //    /**
-            //     * @author Steven
-            //     * @date   8/19/2016
-            //     * 
-            //     * @fix 
-            //     * git commit bde6b6d tax search
-            //     * add validated to new version doc search at least one item add 
-            //     * when select yes control grid
-            //     */
-            //    // under are one to multiple//
-            //    "Has_Other_Mortgage",
-            //    "Has_Other_Liens",
-            //    "Has_TaxLiensCertifcate",
-            //    "Has_COS_Recorded",
-            //    "Has_Deed_Recorded",
-            //    ///////////////////////////
 
-            //];
-            //var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
-            //                    ["Has_Other_Liens", "OtherLiens"],
-            //                    ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
-            //                    ["Has_COS_Recorded", "COSRecorded"],
-            //                    ["Has_Deed_Recorded", "DeedRecorded"]];
 
-            //var fields = $scope.DocSearch.LeadResearch;
-            //if (fields) {
-            //    for (var i = 0; i < validateFields.length; i++) {
-            //        var f = validateFields[i];
-            //        if (fields[f] === undefined) {
-            //            errormsg += "The fields marked * must been filled please check them before submit!<br>";
-            //            break;
-            //        }
-            //    }
 
-            //    for (var j = 0; j < checkedAttrs.length; j++) {
-            //        var f1 = checkedAttrs[j];
-            //        if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
-            //            errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
-            //        }
-            //    }
-            //}
 
-            //return errormsg;
 
         }
 
         $scope.SearchComplete = function (isSave) {
-            // only completed need check validate
-            // when saving don't need validate input.
             if (!isSave) {
                 if (!$scope.newVersionValidate()) {
                     var msg = $scope.DivError.getMessage();
@@ -5204,7 +4385,6 @@ angular.module('PortalApp')
         }
 
 
-        // only one of fha, fannie, freddie_mac can be yes at the same time
 
         $scope.$watch('DocSearch.LeadResearch.fha', function (nv, ov) {
             if (nv == true) {
@@ -5228,14 +4408,10 @@ angular.module('PortalApp')
 
         $scope.markCompleted = function (status, msg) {
 
-            // because the underwriting completion is not reversible, comfirm it before save to db.
             msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
-                //debugger;
                 if (result != null) {
-                    //debugger;
                     $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
-                        //debugger;
                         $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
                         $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
                         $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
@@ -5244,15 +4420,14 @@ angular.module('PortalApp')
                         console.log("fail to update docsearch");
                     });
                 }
-                
-            }, true);
+
+                            }, true);
 
         }
 
         try {
             var modePatten = /mode=\d/;
             var matches = modePatten.exec(location.search);
-            //debugger;
             if (matches && matches[0]) {
                 $scope.viewmode = parseInt(matches[0].split('=')[1]);
             } else {
@@ -5262,8 +4437,7 @@ angular.module('PortalApp')
             $scope.viewmode = 0;
         }
     });
-/* global LegalShowAll */
-/* global angular */
+
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime', '$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
 
     $scope.ptContactServices = ptContactServices;
@@ -5737,7 +4911,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         return (array && array.length > 0) ? 'Yes' : '';
     }
 
-    // return true it hight light check date  
     $scope.HighLightFunc = function (funcStr) {
         var args = funcStr.split(",");
 
@@ -5753,10 +4926,8 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
             }
             if (!arr || !Array.isArray($scope.LegalCase.SecondaryInfo[name])) {
                 $scope.LegalCase.SecondaryInfo[name] = [];
-                //arr = $scope.LegalCase.SecondaryInfo[name];
             }
             $scope.LegalCase.SecondaryInfo[name].push({});
-            //$scope.LegalCase.SecondaryInfo.StatuteOfLimitations.push({});
         }
     }
     $scope.LegalCase.SecondaryInfo.SelectedType = $scope.SecondaryTypeSource[0];
@@ -5801,7 +4972,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
             data: {
                 "Plantiff": $scope.LegalCase.ForeclosureInfo.Plantiff,
                 "PlantiffAttorney": $scope.LegalCase.ForeclosureInfo.PlantiffAttorney,
-                "PlantiffAttorneyAddress": $scope.LegalCase.ForeclosureInfo.PlantiffAttorneyAddress,//ptContactServices.getContact($scope.LegalCase.ForeclosureInfo.PlantiffAttorneyId, $scope.LegalCase.ForeclosureInfo.PlantiffAttorney).Address,
+                "PlantiffAttorneyAddress": $scope.LegalCase.ForeclosureInfo.PlantiffAttorneyAddress,
                 "FCFiledDate": $scope.LegalCase.ForeclosureInfo.FCFiledDate,
                 "FCIndexNum": $scope.LegalCase.ForeclosureInfo.FCIndexNum,
                 "BoroughName": $scope.LeadsInfo.BoroughName,
@@ -5929,7 +5100,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
                 }
             }
             $scope.DocGenerator2(tpl.tplName, tpl.data, function (url) {
-                //window.open(url,'blank');
                 STDownloadFile(url, tpl.tplName.replace("Template", ""));
             });
         } else {
@@ -6181,7 +5351,7 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         $window.open('/LegalUI/Legalinfo.aspx?logid=' + logid, '_blank', 'width=1024, height=768')
     }
 }]);
-// global item will be called by datagrid celltemplete functions
+
 var PreSignHelper = (function () {
     var onAccoutingReview = function (cellinfo) {
         var element = angular.element('#pt-preassign-accouting-ctrl');
@@ -6205,7 +5375,6 @@ portalApp.config(function (portalRouteProvider) {
     var newPreSignResolve = ['$route', 'PreSign', function ($route, PreSign) {
         var preSign = new PreSign();
         preSign.BBLE = $route.current.params.BBLE.toString();
-        // debugger;
         return preSign;
     }];
 
@@ -6221,44 +5390,22 @@ portalApp.config(function (portalRouteProvider) {
         return PreSign.financeList();
     }];
 
-    /***
-     * Leave this for example that nomal router resgister   
-     **/
-    //$routeProvider.when('/preAssign/new', {
-    //    templateUrl: '/js/Views/preAssign/preassign-edit.tpl.html',
-    //    controller: 'preAssignEditCtrl',
-    //    resolve:{BBLE:BBLE},
-    //})
 
     var config = portalRouteProvider.routesFor('preAssign')
-        // /preassign/new?BBLE=BBLE becuse javascript case sensitive
-        // so the portalRouteProvider url should be lower case
-        // #/preassign/new?BBLE=123456789
         .whenNew({ PreSignItem: newPreSignResolve })
-        // #/preassign/28
         .whenEdit({ PreSignItem: preSignItemResolve })
-        // #/preassign/view/28
         .whenView({ PreSignItem: preSignItemResolve })
-        // #/preassign
         .whenList({ PreSignList: preSignListResolve })
-        // #/preassign/finance/list
-        // I don not know why need the suffix url list
-        // otherwise it will go to edit view
         .whenOther({ PreSignFinaceList: preSignFinanceListResolve }, 'Finance', 'list')
-    //.when({BBLE:BBLE})
 
 });
-/**************************************** constant define *********************************/
-/* do not change constant value , if you want change make a copy and change copied object */
 var CONSTANT_ASSIGN_PARTIES_GRID_OPTION = {
     bindingOptions: {
         dataSource: 'preAssign.Parties'
     },
-    //dataSource: $scope.preAssign.CheckRequestData.Checks,
     paging: {
         pageSize: 10
     },
-    //editing: { insertEnabled: true },//$.extend({}, $scope.gridEdit),
     pager: {
         showPageSizeSelector: true,
         allowedPageSizes: [5, 10, 20],
@@ -6288,12 +5435,10 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION = {
         dataSource: 'preAssign.CheckRequestData.Checks',
     },
     sorting: { mode: 'none' },
-    //dataSource: $scope.preAssign.CheckRequestData.Checks,
     paging: {
         pageSize: 10
     },
 
-    // editing: $scope.gridEdit,
     pager: {
 
         showInfo: true
@@ -6330,7 +5475,6 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION = {
         dataField: 'Comments',
         caption: 'Void Reason'
     }],
-    //show avoid check any time
     initEdit: function () {
         var self = this;
         var voidReasonColumn = {
@@ -6347,7 +5491,7 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION = {
             if (options.name == 'SumAmount') {
                 options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
                     return o.Status != 1;
-                }), "Amount"); //$scope.CheckTotalAmount();
+                }), "Amount"); 
             }
         },
         totalItems: [{
@@ -6393,8 +5537,6 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
             $('<a/>').addClass('dx-link-MyIdealProp')
                 .text(options.value)
                 .on('dxclick', function () {
-                    //Do something with options.data;
-                    //ShowCaseInfo(options.data.BBLE);
                     var request = options.data;
                     PortalUtility.OpenWindow('/NewOffer/HomeownerIncentive.aspx#/preassign/view/' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
                 })
@@ -6420,25 +5562,11 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
     wordWrapEnabled: true
 }
 
-/**************************************** end constant define ******************************/
-/**
- * HOI name histroy
- * Now the pre Assign is named HIO
- * But the version name history is 
- * if in code or file named 
- * please maintenance this list blow if the name changed again 
- * pre sssign == pre sign ==  pre deal == HOI
- * 1. pre assign
- * 2. pre sign  
- * 3. pre deal
- * 4. HOI
- *
- **/
 
 portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'DxGridModel', '$location', 'PortalHttpInterceptor', '$http',
 function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpInterceptor, $http) {
-    
-    $scope.preAssign = PreSignItem;
+
+        $scope.preAssign = PreSignItem;
     $scope.preAssign.CreateBy = $scope.preAssign.CreateBy || $('#currentUser').val();
     $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Type: 'Short Sale', Checks: [] };
     if (!$scope.preAssign.Id) {
@@ -6447,7 +5575,6 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         $scope.preAssign.NeedSearch = true;
         $scope.preAssign.NeedCheck = true;
     }
-    // debugger;
     if ($scope.preAssign.BBLE) {
         $http.get('/api/Leads/LeadsInfo/' + $scope.preAssign.BBLE, { options: { noError: true } })
              .then(function (d) {
@@ -6474,16 +5601,12 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
 
     }
 
-    // check if we need redirect
     $scope.CheckByBBLE = function () {
         var preAssign = $scope.preAssign;
-        // preAssign have already been requested, now in edit mode.
         if (preAssign.$promise != null) {
             return;
         }
-        // if we can get result from database, redirect to view mode.
         if (preAssign.Id == 0 || preAssign.Id == null) {
-            // debugger;
             preAssign.$getByBBLE(function () {
                 $location.path('/preassign/view/' + preAssign.Id);
             })
@@ -6594,7 +5717,6 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
             e.rowElement.addClass('avoid-check');
         }
     }
-    // add class to cross out void items
     $scope.checkGridOptions.onEditingStart = function (e) {
         if (e.data.Status == 1 || e.data.CheckId) {
             e.cancel = true;
@@ -6605,9 +5727,6 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         var cancel = false;
         e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
         e.data.Date = new Date(e.data.Date).toISOString();
-        // can not use anguler model here
-        // for devextreme 15.1 only can use sync call for control the event of grid 
-        // when we moved to 16.1 grid view support 'promise' it can change to ng model function
         var response = $.ajax({
             url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
             type: 'POST',
@@ -6620,8 +5739,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
                 e.component.refresh();
                 var pageExpectedDate = $scope.preAssign.ExpectedDate;
                 var pageParties = $scope.preAssign.Parties;
-                //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
-                angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
+                angular.extend($scope.preAssign, data) 
                 if (pageExpectedDate) {
                     $scope.preAssign.ExpectedDate = pageExpectedDate;
 
@@ -6640,7 +5758,6 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         return cancel;
     }
     $scope.CancelCheck = function (e) {
-        // debugger;
         if (e.data.Status == 1) {
             $('#gridChecks').dxDataGrid('instance').refresh();
             return;
@@ -6655,7 +5772,6 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
                     dataType: "json",
                     async: false,
                     success: function (data, textStatus, xhr) {
-                        // debugger;
                         e.data.Status = 1;
                         e.data.Comments = voidReason;
                         $('#gridChecks').dxDataGrid('instance').refresh();
@@ -6670,24 +5786,19 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
 
-    // code for if in edit mode but not new mode, 
     if ($location.path().indexOf('new') < 0) {
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
-        // add Accouting Function under editing mode
         var accounting_col = {
             caption: 'Accouting',
             cellTemplate: function (cellElement, cellInfo) {
                 var checkId = cellInfo.data && cellInfo.data.CheckId;
                 var Status = cellInfo.data && cellInfo.data.Status;
-                // condition to view button
-                // if check is not void, accouting priviledge see viewContentLoaded event
                 if (!checkId || Status == 1) return;
                 var $button = $('<span type="button" class="btn btn-sm btn-default">').text('Process').on("click", $.proxy(PreSignHelper.onAccoutingReview, this, cellInfo));
                 cellElement.append($button);
             },
             visible: false,
         }
-        // move void from delete button to a seperate column.
         var void_col = {
             caption: 'Void',
             cellTemplate: function (cellElement, cellInfo) {
@@ -6706,10 +5817,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         }
         $scope.scopeColumns.push(accounting_col);
         $scope.scopeColumns.push(void_col);
-        // prevent change from yes to no for check request.
-        // debugger;
         $scope.$watch('preAssign.NeedCheck', function (newvalue, oldvalue) {
-            //debugger;
             if (oldvalue == true && newvalue == false) {
                 $scope.preAssign.NeedCheck = true;
                 ptCom.alert("Cannot change check request from yes to no.")
@@ -6724,7 +5832,6 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         if (checkGrid) {
             checkGrid.refresh();
         }
-        // check if user is an accountant, magic number 6!!
         var accoutingMode = $("#accoutingMode");
         if (accoutingMode.length > 0 && $location.path().indexOf('new') < 0) {
             $scope.scopeColumns[6].visible = true;
@@ -6751,7 +5858,6 @@ function ($scope, PreSignItem, DxGridModel, CheckRequest) {
             showInfo: true
         },
         wordWrapEnabled: true,
-        //show avoid check any time
         initEdit: function () {
             var self = this;
             var voidReasonColumn = {
@@ -6853,9 +5959,7 @@ function ($scope, PreSignItem, DxGridModel, CheckRequest) {
         $("#preDealForm select").prop("disabled", true);
 
     });
-    // prevent check request change on view mode
     $scope.$watch('preAssign.NeedCheck', function (newvalue, oldvalue) {
-        //debugger;
         if (oldvalue != null) {
             $scope.preAssign.NeedCheck = oldvalue;
         }
@@ -6939,7 +6043,6 @@ function ($scope, $http, $uibModal, ptCom) {
     $scope.cellinfo = {};
     $scope.editmode = false;
     $scope.toggleEdit = function () {
-        //debugger;
         if ($scope.editmode) {
             $scope.editmode = false;
         } else {
@@ -6947,7 +6050,6 @@ function ($scope, $http, $uibModal, ptCom) {
         }
     }
     $scope.load = function (cellinfo) {
-        // debugger;
         $scope.cellinfo = cellinfo;
         $scope.editmode = false;
         if ($scope.cellinfo.data.Status == 0) {
@@ -6957,7 +6059,6 @@ function ($scope, $http, $uibModal, ptCom) {
             $scope.editmode = true;
         }
 
-        // debugger;
         $scope.modal = $uibModal.open({
             templateUrl: 'pt-preassign-accouting-modal',
             scope: $scope
@@ -6974,7 +6075,6 @@ function ($scope, $http, $uibModal, ptCom) {
                         data: $scope.cellinfo.data
                     }).then(
                        function (d) {
-                           // debugger;
                            $scope.cellinfo.data.Status = 2;
                            $('#gridChecks').dxDataGrid('instance').refresh();
                            ptCom.alert("Save Successful");
@@ -6987,7 +6087,6 @@ function ($scope, $http, $uibModal, ptCom) {
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
     $scope.closeModal = function () {
-        // debugger;
         if ($scope.modal) {
             $scope.modal.close();
         }
@@ -6995,9 +6094,7 @@ function ($scope, $http, $uibModal, ptCom) {
 
 }])
 
-/** fucking below is uesless! **/
 
-/*************************old style contoller******************************/
 portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterceptor, $http) {
 
     $scope.showHistroy = function () {
@@ -7005,7 +6102,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
     }
 
 });
-/*************************end old style contoller**************************/
+
 angular.module('PortalApp')
 .controller("ReportWizardCtrl", function ($scope, $http, $timeout, ptCom) {
     $scope.camel = _.camelCase;
@@ -7047,7 +6144,7 @@ angular.module('PortalApp')
             }
         }
 
-    }; // load saved query
+    }; 
     $scope.load = function (q) {
         $scope.reload(
             function () {
@@ -7367,12 +6464,11 @@ angular.module("PortalApp")
             if ($scope.bankNameOptions) {
                 $scope.bankNameOptions.push({Name:'N/A'});
             }
- 
-        }).error(function (data) {
+
+         }).error(function (data) {
             $scope.bankNameOptions = [];
         });
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
-        //move to construction - add by chris
         $scope.MoveToConstruction = function (scuessfunc) {
             var json = $scope.SsCase;
             var data = { bble: leadsInfoBBLE };
@@ -7403,7 +6499,7 @@ angular.module("PortalApp")
                 }).error(function (data1, status) {
                     ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data1));
                 });
-        }; // -- end --
+        }; 
 
         $scope.GetShortSaleCase = function (caseId, callback) {
             if (!caseId) {
@@ -7442,7 +6538,7 @@ angular.module("PortalApp")
                         }
                     }).error(function (data1) {
                         ptCom.stopLoading();
-                        console.log("Fail to load data : " + leadsInfoBBLE + " :" + JSON.stringify(data1)); // alert("Fail to load data : " + leadsInfoBBLE + " :" + 
+                        console.log("Fail to load data : " + leadsInfoBBLE + " :" + JSON.stringify(data1)); 
                     });
                 }).error(function (data) {
                     ptCom.stopLoading();
@@ -7473,7 +6569,6 @@ angular.module("PortalApp")
             }
         };
 
-        //-- auto save function, add by Chris ---
         var UpdatedProperties = ['UpdateTime', 'UpdateDate', 'UpdateBy', 'OwnerId', 'MortgageId', 'OfferId', 'ValueId', 'CallbackDate', 'LastUpdate'];
         var autoSaveError = false;
 
@@ -7484,10 +6579,8 @@ angular.module("PortalApp")
             $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function (data) {
                         autoSaveError = false;
-                        // Remove deleted mortgages
                         RemoveDeletedMortgages();
 
-                        //Sync objects
                         SyncObjects(data, $scope.SsCase);
 
                         if (!callback) {
@@ -7513,7 +6606,6 @@ angular.module("PortalApp")
         var SyncObjects = function (obj, toObj) {
             var copy = toObj;
 
-            // Handle Date
             if (obj instanceof Date) {
                 if (copy == null)
                     copy = new Date();
@@ -7524,7 +6616,6 @@ angular.module("PortalApp")
                 return;
             }
 
-            // Handle Array
             if (obj instanceof Array) {
                 if (copy == null)
                     copy = [];
@@ -7536,7 +6627,6 @@ angular.module("PortalApp")
                 return;
             }
 
-            // Handle Object
             if (obj instanceof Object) {
                 if (copy == null)
                     copy = {};
@@ -7546,7 +6636,6 @@ angular.module("PortalApp")
                         if (null == obj[attr] || "object" != typeof obj[attr]) {
                             if (typeof copy[attr] == 'undefined' || copy[attr] == null || copy[attr] != obj[attr]) {
                                 if (UpdatedProperties.indexOf(attr) > 0) {
-                                    //console.log("Changed: " + attr + " from " + copy[attr] + " to " + obj[attr]);
                                     copy[attr] = obj[attr];
                                 }
                             }
@@ -7562,7 +6651,6 @@ angular.module("PortalApp")
 
             throw new Error("Unable to copy obj! Its type isn't supported.");
         }
-        //--- end auto save function ---
 
         $scope.SaveShortSale = function (callback) {
             var json = $scope.SsCase;
@@ -7570,7 +6658,6 @@ angular.module("PortalApp")
 
             $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function () {
-                        // if save scuessed load data again                      
                         $scope.GetShortSaleCase($scope.SsCase.CaseId);
                         if (!callback) {
                             ptCom.alert("Save Successed !");
@@ -7641,9 +6728,8 @@ angular.module("PortalApp")
             $scope.$apply(function () {
                 $scope.Approval_popupVisible = !$scope.Approval_popupVisible;
             });
-        }; /* end approval popup */
+        }; 
 
-        /* valuation popup */
         $scope.ValuationWatchField = {
             Method: 'Type of Valuation',
             DateOfCall: 'Date of Call',
@@ -7705,7 +6791,7 @@ angular.module("PortalApp")
                     }
 
                 }
-            }); //console.log(updates)
+            }); 
             return updates;
         };
         $scope.restorePendingModified = function () {
@@ -7744,9 +6830,8 @@ angular.module("PortalApp")
                 $scope.ensurePendingValue();
                 $scope.Valuation_popupVisible = !$scope.Valuation_popupVisible;
             });
-        }; /* end valuation popup */
+        }; 
 
-        /* update mortage status */
         $scope.UpdateMortgageStatus = function (selType1, selStatusUpdate, selCategory) {
             var index = 0;
             switch (selType1) {
@@ -7767,7 +6852,7 @@ angular.module("PortalApp")
                 }
 
             });
-        }; /* end update mortage status*/
+        }; 
     }]);
 
 var portalApp = angular.module('PortalApp');
@@ -7776,20 +6861,6 @@ portalApp.config(function (portalUIRouteProvider) {
 
     portalUIRouteProvider
         .statesFor('newoffer')
-    //$stateProvider
-    //  // router /#/newoffer
-    //  .state('newoffer', {
-    //      url: "/newoffer",
-    //      templateUrl: "/js/views/newoffer/index.tpl.html"
-    //  })
-    //  // router /#/newoffer
-    //  .state('newoffer.newoffer', {
-    //      url: "/newoffer",
-    //      templateUrl: "/js/views/newoffer/newoffer.tpl.html"
-    //  }).state('newoffer.ssinfo', {
-    //      url: "/ssinfo",
-    //      templateUrl: "/js/views/newoffer/ssinfo.tpl.html"
-    //  });
 
 });
 
@@ -7804,14 +6875,12 @@ portalApp.controller('newofferCtrl', function ($scope) {
     $scope.text = 'newofferCtrl';
 });
 
-/*************old style without model contoller *********************/
 
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     ptContactServices, $location,PortalHttpInterceptor,
 
-    /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
     Team, NewOfferListGrid, ScopeHelper, QueryUrl, AssignCorp
@@ -7823,56 +6892,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     if ($scope.QueryUrl.model == 'List') {
 
         PropertyOffer.query(function (data) {
-            //$http.get('/api/PropertyOffer').success(function (data) {
             $scope.newOfferGridOpt = new NewOfferListGrid(data);
-            //    {
-            //    dataSource: data,
-            //    headerFilter: {
-            //        visible: true
-            //    },
-            //    searchPanel: {
-            //        visible: true,
-            //        width: 250
-            //    },
-            //    paging: {
-            //        pageSize: 10
-            //    },
-            //    columnAutoWidth: true,
-            //    wordWrapEnabled: true,
-            //    onRowPrepared: function (rowInfo) {
-            //        if (rowInfo.rowType != 'data')
-            //            return;
-            //        rowInfo.rowElement
-            //            .addClass('myRow');
-            //    },
-            //    columns: [{
-            //        dataField: 'Title',
-            //        caption: 'Address',
-            //        cellTemplate: function (container, options) {
-            //            $('<a/>').addClass('dx-link-MyIdealProp')
-            //                .text(options.value)
-            //                .on('dxclick', function () {
-            //                    //Do something with options.data;
-            //                    //ShowCaseInfo(options.data.BBLE);
-            //                    var request = options.data;
 
-            //                    PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
-            //                })
-            //                .appendTo(container);
-            //        }
-            //    },
-            //        'OfferType', {
-            //            dataField: 'CreateBy',
-            //            caption: 'Submit By'
-            //        }, {
-            //            dataField: 'CreateDate',
-            //            caption: 'Contract Date',
-            //            dataType: 'date',
-            //            sortOrder: 'desc',
-            //            format: 'shortDate'
-            //        },
-            //    ]
-            //}
         });
     }
 
@@ -7893,64 +6914,17 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             }
         }
     };
-    
-    angular.extend($scope.SSpreSign, new PropertyOffer());
-    /**
-     * @author Steven
-     * @date   8/19/2016
-     * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
-     * @description
-     *  fix the new offer can not save type
-     *  1.It maybe the bug of NG-resource or angular.extend
-     */
+
+        angular.extend($scope.SSpreSign, new PropertyOffer());
     $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
     $scope.SSpreSign.assignCrop = new AssignCorp();
-    //setTimeout(function () {
-    //    $scope.SSpreSign.Type = 'Short Sale';
-    //    $scope.SSpreSign.FormName = 'PropertyOffer';
-    //    angular.extend($scope.SSpreSign,
-    //        {
-    //            ContractOrMemo: {
-    //                Sellers: [{}],
-    //                Buyers: [{}]
-    //            },
-    //            Deed: {
-    //                Sellers: [{}]
-    //            },
-    //            CorrectionDeed: {
-    //                Sellers: [{}],
-    //                Buyers: [{}]
-    //            }
 
-    //        })
 
-    //    //$scope.SSpreSign = 
-    //}, 1000);
-    /// old ////////////
-    //    {
-    //    Type: 'Short Sale',
-    //    FormName: 'PropertyOffer',
-    //    DealSheet: {
-    //        ContractOrMemo: {
-    //            Sellers: [{}],
-    //            Buyers: [{}]
-    //        },
-    //        Deed: {
-    //            Sellers: [{}]
-    //        },
-    //        CorrectionDeed: {
-    //            Sellers: [{}],
-    //            Buyers: [{}]
-    //        }
-    //    }
-    //};
-    ////////////////////////////
-    //var urlParam = //$location.search(); close html model use my libary
     if (PortalUtility.QueryUrl().BBLE) {
         $scope.DocSearch = DocSearch.get(PortalUtility.QueryUrl());
     }
-    
-    $scope.DeadType = {
+
+        $scope.DeadType = {
         ShortSale: false,
         Contract: true,
         Memo: false,
@@ -7970,10 +6944,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             $scope.SSpreSign.Status = 2;
 
             $scope.constractFromData();
-            /*for dowload file frist wait 5 second then redecTo file*/
             $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
                 $scope.refreshSave(formdata);
-                //location.reload();
                 window.location.href = oldUrl;
             });
         })
@@ -7986,7 +6958,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         var _dealSheet = $scope.SSpreSign.DealSheet;
         var eMessages = new DivError('ShortSaleCtrl').getMessage();
 
-        //$scope.getErrorMessage('ShortSaleCtrl');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
@@ -7994,7 +6965,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         _dealSheet.CorrectionDeed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
         var _sellers = _.map(_sellers, function (o) {
             o.Name = ss.formatName(o.FirstName, o.MiddleName, o.LastName);
-            o.Address = $scope.SSpreSign.PropertyAddress; //ss.formatAddr(o.MailNumber, o.MailStreetName, o.MailApt, o.MailCity, o.MailState, o.MailZip);
+            o.Address = $scope.SSpreSign.PropertyAddress; 
             o.PropertyAddress = $scope.SSpreSign.PropertyAddress;
             return o
         });
@@ -8002,7 +6973,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         _dealSheet.ContractOrMemo.Sellers = $.extend(true, _dealSheet.ContractOrMemo.Sellers || [], _sellers);
         _dealSheet.Deed.Sellers = $.extend(true, _dealSheet.Deed.Sellers || [], _sellers);
         _dealSheet.CorrectionDeed.Sellers = _dealSheet.CorrectionDeed.Sellers || [];
-        //_dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
         _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
         return true;
     }
@@ -8015,16 +6985,11 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         });
     }
 
-    // $scope.$watch('SSpreSign.assignCrop.Name', function(newValue, oldValue) {
-    //     if (newValue) {
 
-    //     }
-    // });
 
     $scope.constractFromData = function () {
         var ss = ScopeHelper.getShortSaleScope();
 
-        //var _sellers = ss.SsCase.PropertyInfo.Owners;
         $scope.SSpreSign.DeadType = $scope.DeadType
 
         $scope.SSpreSign.SsCase = ss ? ss.SsCase : null;
@@ -8040,15 +7005,10 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         }
 
         var leadSearch = ScopeHelper.getLeadsSearchScope();
-        //do not copy lead search infomation to assignCrop WellsFargo
-        //$.extend($scope.SSpreSign.assignCrop, {
-        //    isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo
-        //});
         return true;
     }
     $scope.getErrorMessage = function (id) {
         var eMessages = [];
-        /*ignore every parent of has form-ignore*/
         $('#' + id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
             eMessages.push($(this).attr('data-message'));
         });
@@ -8066,7 +7026,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     $scope.DeedNext = function () {
         var deedCrop = $scope.SSpreSign.DealSheet.Deed;
-        /*use like synchronously call*/
 
         if (!deedCrop.EntityId) {
 
@@ -8117,9 +7076,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     $scope.onAssignCorpSuccessed = function (data) {
         $scope.SSpreSign.Status = 1;
-        /*should save to data base*/
         $scope.constractFromData();
-        //console.log( JSON.stringify($scope.SSpreSign));
         $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
             $scope.refreshSave(formdata);
         });
@@ -8142,7 +7099,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
         }
-        //var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
         var assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
 
         var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
@@ -8169,7 +7125,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     });
 
-    //$http.get('/api/CorporationEntities/Teams').success()
     $scope.AssignCropsNext = function () {
 
         var eMessages = $scope.getErrorMessage('preSignAssignCrops');
@@ -8181,7 +7136,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
         var _cropData = $scope.SSpreSign.assignCrop.CropData;
         _dealSheet.ContractOrMemo.Buyer = _cropData;
-        //_dealSheet.Deed.Buyer = _cropData;
         return true;
     }
 
@@ -8198,7 +7152,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     }
     $scope.DeedWizardInit = function () {
         var deedCrop = $scope.SSpreSign.DealSheet.Deed;
-        /*use like synchronously call*/
 
         if (!deedCrop.EntityId) {
             $http.get('/api/CorporationEntities/DeedCorpsByTeam?team=' + $scope.SSpreSign.assignCrop.Name).success(function (data) {
@@ -8229,7 +7182,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             next: $scope.DocRequiredNext
         }),
 
-        //{ title: "Deal Sheet" },
          new WizardStep({
              title: 'Contract',
              caption: 'Contract Or Memo',
@@ -8265,18 +7217,12 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         if (needSearch || searchCompleted) {
             $scope.steps.splice(1, 0, searchWized)
         } else {
-            /*Should make sure the document before LeadTaxSearchCtrl initial this error handle move to server side*/
-            //$("#LeadTaxSearchCtrl").remove();
         }
     }
     $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val());
 
     $scope.CheckCurrentStep = function (BBLE) {
         $scope.SSpreSign = PropertyOffer.getByBBLE({ BBLE: BBLE.trim() }, function (data) {
-            /**
-             * need carefully test 
-             * @see PropertyOffer assignOfferId function
-             **/            
             if (data.FormData) {
                 if (data.FormData.DataId == 0)
                 {
@@ -8290,7 +7236,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                 $scope.DeadType = $scope.SSpreSign.DeadType;                
                 $scope.SSpreSign.Status = data.BusinessData.Status;
 
-                // $scope.refreshSave(data);
 
                 var ss = ScopeHelper.getShortSaleScope();
                 if (ss) {
@@ -8314,21 +7259,13 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             if (!$scope.SSpreSign.DealSheet) {
                 $scope.SSpreSign.DealSheet = $scope.SSpreSign.DealSheetMetaData;
             }
-                        
-            if (BBLE) {
+
+                                    if (BBLE) {
                 LeadsInfo.get({ BBLE: BBLE.trim() }, function (data) {
                     $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
                     $scope.SSpreSign.BBLE = BBLE;
                 });
             }
-            /**
-             * @author Steven
-             * @date   8/19/2016
-             * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
-             * @description
-             *  fix the new offer can not save type
-             *  1.It maybe the bug of NG-resource or angular.extend
-             */
             $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
         });
     }
@@ -8339,14 +7276,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
             $scope.SSpreSign.BBLE = BBLE;
         });
-        //$http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
-        //    $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
-        //    $scope.SSpreSign.BBLE = BBLE;
-        //})
-        /*anyc call need time out by Steven */
-        //setTimeout(function () {
         $scope.CheckCurrentStep(BBLE);
-        //}, 1000);
     }
 
     $scope.step = 1;
@@ -8425,7 +7355,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         }
     }
 })
-/************* end old style without model contoller ****************/
 portalApp.filter('wizardFilter', function () {
     return function (items, sheetFilter) {
         var filtered = [];
@@ -8467,7 +7396,6 @@ portalApp.filter('ordered', function () {
 
 angular.module("PortalApp")
 .controller("TitleController", ['$scope', '$http', 'ptCom', 'ptContactServices', 'ptLeadsService', 'ptShortsSaleService', function ($scope, $http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
-    /* model define*/
     $scope.OwnerModel = function (name) {
         this.name = name;
         this.Mortgages = [{}];
@@ -8542,7 +7470,7 @@ angular.module("PortalApp")
             $scope.updateBuyerTitle();
         }
         return $scope.Form;
-    }; /* end convention function */
+    }; 
 
     $scope.checkReadOnly = function (ro) {
 
@@ -8691,7 +7619,7 @@ angular.module("PortalApp")
     };
     $scope.$on('titleComment', function (e, args) {
         $scope.addComment(args.message);
-    }); /* end comments */
+    }); 
 }])
 .controller('TitleLienCtrl', ['$scope', 'ptCom', '$timeout', function ($scope, ptCom, $timeout) {
     $scope.Form = $scope.$parent.Form;
@@ -8913,14 +7841,7 @@ angular.module("PortalApp")
 
 
 }])
-/**
- * Author: Shaopeng Zhang
- * Date: 2016/11/02
- * Description: General Controller for underwriting
- * Update: 
- *          --- 2016/11/02
- *              1. Add Enable Editing Function to unlock datainput area.
- */
+
 angular.module("PortalApp").controller("UnderwriterController",
                 ['$scope', 'ptCom', 'ptUnderwriter', '$location', 'DocSearch', '$state', function ($scope, ptCom, ptUnderwriter, $location, DocSearch, $state) {
 
@@ -8931,8 +7852,6 @@ angular.module("PortalApp").controller("UnderwriterController",
                     $scope.isProtectedView = true;
 
                     $scope.init = function (bble) {
-                        //ptCom.startLoading()
-                        //$scope.feedData();
                         $scope.load(bble);
                         $scope.loadArchivedList(bble);
                     }
@@ -8950,7 +7869,6 @@ angular.module("PortalApp").controller("UnderwriterController",
                         ptCom.confirm("Are you going to Save?", function (response) {
                             if (response) {
                                 ptUnderwriter.save($scope.data).then(function (d) {
-                                    //debugger;
                                     if (d.data) {
                                         $scope.data = d.data;
                                     }
@@ -8964,13 +7882,8 @@ angular.module("PortalApp").controller("UnderwriterController",
 
                     }
 
-                    /*
-                     * snapshot current values of forms,
-                     * and sava copy in database for future analysis
-                     */
                     $scope.archiveFunc = function () {
                         ptCom.prompt('Please give a name to this archive.', function (msg) {
-                            //debugger;
                             if (msg != null) {
                                 ptUnderwriter.archive($scope.data, msg).then(function (d) {
                                     alert("Archive succesful.")
@@ -8984,9 +7897,6 @@ angular.module("PortalApp").controller("UnderwriterController",
 
                     }
 
-                    /**
-                     * load all achived version in databases
-                     */
                     $scope.loadArchivedList = function (bble) {
                         if (bble) {
                             ptUnderwriter.loadArchivedList(bble).then(function (d) {
@@ -8995,16 +7905,10 @@ angular.module("PortalApp").controller("UnderwriterController",
                         }
                     }
 
-                    /**
-                     * load a single archived entry in database
-                     * @param: archive
-                     */
                     $scope.loadArchived = function (archive) {
-                        //debugger;
                         if (archive.Id) {
                             ptUnderwriter.loadArchived(archive.Id).then(function (d) {
                                 if (d.data) {
-                                    //debugger;
                                     angular.copy($scope.data, $scope.currentDataCopy);
                                     ptCom.assignReference($scope.data, d.data, [], ['Id']);
                                     $scope.archive = archive;
@@ -9027,19 +7931,12 @@ angular.module("PortalApp").controller("UnderwriterController",
                         }
                     }
 
-                    /*
-                     * Core function to apply predefined rule, 
-                     * and update model values 
-                     */
                     $scope.calculate = function () {
                         $scope.$applyAsync(function () {
                             ptUnderwriter.calculator.calculate($scope.data);
                         });
                     }
 
-                    /*
-                     * A predefined model to validate with excel data
-                     */
                     $scope.feedData = function () {
                         $scope.data.PropertyInfo.TaxClass = 'A0',
                         $scope.data.PropertyInfo.ActualNumOfUnits = 1
@@ -9078,8 +7975,6 @@ angular.module("PortalApp").controller("UnderwriterController",
 
 
 
-                    // init controller;
-                    // debugger;
                     $scope.BBLE = ptCom.getGlobal("BBLE") || "";
                     $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
                     $scope.init($scope.BBLE);
@@ -9105,7 +8000,6 @@ angular.module("PortalApp")
 
     }
 
-    //check input and textarea to see if there is a error attribute
     $scope.checkValidate = function (async) {
         if (!async) {
             return _.some($('input, textarea, select'), function (v) {
@@ -9129,7 +8023,6 @@ angular.module("PortalApp")
 
     }
 
-    //broadcast ptSelfCheck event make ptRequried directive check it self
     $scope.selfCheck = function () {
         $scope.$broadcast('ptSelfCheck');
         var startFlag = false
@@ -9160,13 +8053,11 @@ angular.module("PortalApp")
 
     $scope.requestDocSearch = function (isResubmit) {
         $scope.$broadcast('ptSelfCheck');
-        // debugger;
         if ($scope.checkValidate()) {
             ptCom.alert('Please correct Highlight Field first.');
             return;
         }
         UnderwritingRequest.createSearch($scope.BBLE).then(function (r) {
-            //debugger;
             $scope.search.CreateDate = new Date().toISOString();
             ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
             $scope.data.Status = 1;
@@ -9214,7 +8105,6 @@ angular.module("PortalApp")
 angular.module("PortalApp").controller("UnderwritingSummaryController", ['$scope', 'ptCom', 'ptUnderwriter', 'DocSearch', function ($scope, ptCom, ptUnderwriter, DocSearch) {
 
     $scope.showStoryHistory = function () {
-        //debugger;
         var scope = angular.element('#uwrview').scope();
         if (scope.data && scope.data.Id) {
             auditLog.toggle('UnderwritingRequest', scope.data.Id);
@@ -9222,10 +8112,8 @@ angular.module("PortalApp").controller("UnderwritingSummaryController", ['$scope
     }
 
     $scope.markCompleted = function(status, msg) {
-        // because the underwriting completion is not reversible, comfirm it before save to db.
         msg = 'Please provide Note or press no to cancel';
         ptCom.prompt(msg, function (result) {
-            //debugger;
             if (result != null && $scope.search) {
                 debugger;
                 DocSearch.markCompleted($scope.search.BBLE, status, result).then(function succ(d) {
@@ -9287,7 +8175,7 @@ angular.module("PortalApp")
     };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
-        var gropData = data;//groupBy(data, group_func);
+        var gropData = data;
         $scope.showingContacts = gropData;
 
         return gropData;
@@ -9296,8 +8184,8 @@ angular.module("PortalApp")
         $http.post('/CallBackServices.asmx/GetAllGroups', {}).
          success(function (data, status, headers, config) {
              $scope.Groups = data.d;
-             
-         }).error(function (data, status, headers, config) {
+
+                      }).error(function (data, status, headers, config) {
 
 
              alert("error get GetAllGroups: " + status + " error :" + data.d);
@@ -9349,15 +8237,10 @@ angular.module("PortalApp")
 
         }
         var addC = $scope.addContact;
-        //addC.OfficeNO = $('#txtOffice').val();
-        //addC.Cell = $('#txtCell').val();
-        //addC.Email = $('#txtEmail').val();
 
         debugger;
         $http.post("/CallBackServices.asmx/AddContact", { contact: $scope.addContact }).
         success(function (data, status, headers, config) {
-            // this callback will be called asynchronously
-            // when the response is available
             if (data.d.Name == 'Same')
             {
                 alert("Already have " + $scope.addContact.Name + " in system please change name to identify !")
@@ -9366,7 +8249,6 @@ angular.module("PortalApp")
             $scope.allContacts.push(data.d);
             $scope.InitData($scope.allContacts);
             var addContact = data.d;
-            //debugger;
 
             $scope.currentContact = addContact;
             m_current_contact = $scope.currentContact;
@@ -9374,23 +8256,17 @@ angular.module("PortalApp")
             var stop = $(".popup_employee_list_item_active:first").position().top;
             $('#employee_list').scrollTop(stop);
             alert("Add" + $scope.currentContact.Name + " succeed !");
-            //debugger;
         }).
         error(function (data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
             var message = data&& data.Message ?data.Message :JSON.stringify(data)
 
             alert("Add contact error: " + message);
         });
     }
-    
-    $scope.filterContactFunc = function (e, type) {
-        //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
-        //$(e).addClass("popup_menu_list_item_active");
+
+        $scope.filterContactFunc = function (e, type) {
 
         var text = angular.element(e.currentTarget).html();
-        //debugger;
         if (typeof (type) == 'string') {
             $scope.query = {};
             $scope.selectType = text;
@@ -9410,8 +8286,8 @@ angular.module("PortalApp")
     }
 
     $scope.SaveCurrent = function () {
-        
-        $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
+
+                $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
         success(function (data, status, headers, config) {
             alert("Save succeed!");
             $scope.initLenderList();
@@ -9444,7 +8320,7 @@ angular.module("PortalApp")
 }]);
 angular.module('PortalApp').component('ptAudit', {
 
-    templateUrl: '/js/templates/ptAudit.html',
+    templateUrl: '/js/components/ptAudit.tpl.html',
     bindings: {
         label: '@',
         objName: '@',
@@ -9457,8 +8333,7 @@ angular.module('PortalApp').component('ptAudit', {
                 ctrl.updateData();
             }
         }
-        ctrl.show = function (/* optional */objName, /* optional*/ recordId) {
-            // debugger;
+        ctrl.show = function (objName,  recordId) {
             if (objName != null || recordId != null) {
                 ctrl.objectName = objName || ctrl.objectName;
                 ctrl.recordId = recordId || ctrl.recordId;
@@ -9540,7 +8415,7 @@ angular.module('PortalApp').component('ptHomeowner', {
 });
 angular.module('PortalApp').component('ptItemList', {
 
-    templateUrl: '/js/templates/ptItemList.html',
+    templateUrl: '/js/components/ptItemList.html',
     bindings: {
         itemName: '@',
         itemUrl: '@',
@@ -9580,7 +8455,6 @@ angular.module('PortalApp').component('ptItemList', {
 
         }
         $scope.bindList = function () {
-            //debugger;
             $http({
                 method: 'GET',
                 url: $scope.$ctrl.itemUrl
@@ -9620,7 +8494,6 @@ angular.module('PortalApp').component('ptSelectableInput', {
             ctrl.isOtherSelected = true;
         }
         $scope.$watch('$ctrl.selected', function (newValue, oldValue) {
-            //debugger;
             if (!newValue) {
                 ctrl.ngModel = "";
                 return;
@@ -9647,4 +8520,3 @@ angular.module('PortalApp').component('ptSelectableInput', {
     }
 
 })
-//# sourceMappingURL=Test.js.map

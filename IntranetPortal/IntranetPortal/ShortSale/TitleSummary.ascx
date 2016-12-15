@@ -3,9 +3,9 @@
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 <%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 
-<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
-<script src="/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
+<link rel="stylesheet" href="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
+<script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
 <link rel="stylesheet" href="/css/right-pane.css" />
 <script type="text/javascript">
     function OnNotesKeyDown(s, e) {

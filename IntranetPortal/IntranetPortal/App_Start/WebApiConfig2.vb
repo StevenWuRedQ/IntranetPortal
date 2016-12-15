@@ -1,10 +1,6 @@
-﻿Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Web.Http
+﻿Imports System.Web.Http
 Imports System.Web.Http.OData.Builder
 Imports System.Web.Http.OData.Extensions
-Imports System.Net.Http.Formatting
 
 Public Class WebApiConfig2
     Public Shared Sub Register(ByVal config As HttpConfiguration)

@@ -432,7 +432,6 @@ InitialLine:
             Return
         End If
 
-
         Dim bble = rule.BBLE
         Select Case rule.LoopType
             Case Core.DataLoopRule.DataLoopType.All
@@ -458,7 +457,7 @@ InitialLine:
                     End If
 
                 Catch ex As Exception
-                    Log("Initial Homeower failed. Exception: " & ex.Message)
+                    Log("Initial Homeower failed. BBLE:" & bble & " Exception: " & ex.Message)
                 Finally
                     rule.Complete(Core.DataLoopRule.DataLoopType.AllMortgage)
                 End Try
