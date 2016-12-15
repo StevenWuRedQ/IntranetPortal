@@ -17,9 +17,9 @@ Public Class DialerServiceManage
     End Function
 
     ''' <summary>
-    ''' Run the daily task in the rule engine
+    ''' Execute the daily task to sync the contactlist and new leads folder
     ''' </summary>
-    ''' <param name="userName">Agent Name</param>
+    ''' <param name="userName">The agent name</param>
     Public Shared Sub RunDailyTask(userName As String)
         LoadContactList(userName)
         UpdatePortal(userName)
