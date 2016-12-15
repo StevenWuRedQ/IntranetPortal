@@ -355,6 +355,17 @@ Partial Public Class HomeOwner
         phone.Phone = item.phoneField
         phone.Type = item.phoneTypeField.ToString
         phone.Source = PhoneSource.TLOLocateReport
+
+        Dim score As Integer = 0
+        If Integer.TryParse(item.scoreField, score) Then
+            phone.Score = score
+        End If
+
+        Dim ListingType = 0
+        If Integer.TryParse(item.listingTypeField, ListingType) Then
+            phone.ListingType = ListingType
+        End If
+
         Return phone
     End Function
 

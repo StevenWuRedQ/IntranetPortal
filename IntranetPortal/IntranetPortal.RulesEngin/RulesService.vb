@@ -124,6 +124,9 @@ Public Class RulesService
 
         'Ecourt data update
         Rules.Add(New EcourtCasesUpdateRule With {.ExecuteOn = TimeSpan.Parse("12:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Ecourt Data Syncing Rule", .ExecuteNow = False, .ExecuteOnWeekend = True})
+
+        ' Dialer integration service
+        Rules.Add(New DialerIntegrationRule With {.ExecuteOn = TimeSpan.Parse("20:50:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Dialer integration Rule", .ExecuteNow = False, .ExecuteOnWeekend = True})
     End Sub
 
     ''' <summary>
