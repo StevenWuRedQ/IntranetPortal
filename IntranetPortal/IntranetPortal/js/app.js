@@ -1,7 +1,7 @@
 ﻿var portalApp = angular.module("PortalApp",
 [
-    "ngResource", "ngSanitize", "ngAnimate", "dx", "ngMask", "ui.bootstrap",
-    "ui.select", "ui.layout", "ngRoute", "firebase", "ui.router"
+    "ngResource", "ngSanitize", "ngAnimate", "ngMask", "dx", "ui.bootstrap",
+    "ui.select", "ui.layout", "ngRoute", "ui.router"
 ]);
 
 angular.module("PortalApp")
