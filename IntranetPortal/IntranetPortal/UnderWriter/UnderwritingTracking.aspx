@@ -73,10 +73,6 @@
                             }
                         }
                     },
-                    //onSelectionChanged: onSelectionChangedCallback,
-                    //selection: {
-                    //    mode: 'single'
-                    //},
                     summary: {
                         groupItems: [{
                             column: "BBLE",

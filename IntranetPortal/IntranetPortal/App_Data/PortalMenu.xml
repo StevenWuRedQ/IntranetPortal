@@ -359,24 +359,31 @@
   <PortalNavItem Name="Underwriting" Text="Underwriting" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Underwriter,Sales-Executive</UserRoles>
     <Items>
-      <PortalNavItem Name="UnderwriterSummary" Text="Summary" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
+      <PortalNavItem Name="UnderwriterSummary" Text="Summary" NavigationUrl="/underwriter/underwritinghome.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwriterProperties1" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
+      <PortalNavItem Name="UnderwriterProperties2" Text="Properties" NavigationUrl="/underwriter/DocSearchListNew.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwriterProperties2" Text="New Properties" NavigationUrl="/UnderWriter/DocSearchListNew.aspx" ShowAmount="false">
+      <PortalNavItem Name="UnderwriterSummaryOld" Text="Summary Old" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="UnderwriterProperties1" Text="Properties Old" NavigationUrl="/underwriter/DocSearchList.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
+
       <!--<PortalNavItem Name="UnderwritingDocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
         <UserRoles>Entity-Manager,Relation-Manager,Underwriter,Sales-Executive,DocSearch-Outside</UserRoles>
         <FontClass>

@@ -38,6 +38,9 @@ Public Class WebApiConfig2
         'GlobalConfiguration.Configuration.Filters.Add(New WebApiException)
 
         config.Filters.Add(New WebApiException)
+
+        Dim formatters = GlobalConfiguration.Configuration.Formatters
+        formatters.Remove(formatters.XmlFormatter)
     End Sub
 
 End Class

@@ -1,15 +1,11 @@
-Imports System
-Imports System.Data.Entity
 Imports System.ComponentModel.DataAnnotations.Schema
-Imports System.Linq
-Imports System.ComponentModel.DataAnnotations
+Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
-Imports System.Globalization
 
 Partial Public Class CodeFirstEntity
     Inherits DbContext
 
-    Public Overridable Property AuditLogs() As DbSet(Of AuditLog)
+    Public Overridable Property AuditLogs As DbSet(Of AuditLog)
     Public Property Underwritings As DbSet(Of Underwriting)
     Public Property UnderwritingArchived As DbSet(Of UnderwritingArchived)
     Public Property UnderwritingPropertyInfos As DbSet(Of UnderwritingPropertyInfo)
@@ -28,7 +24,7 @@ Partial Public Class CodeFirstEntity
     Public Overloads Function SaveChanges(userName As String) As Integer
         Dim logs As New List(Of AuditLog)
         Dim modifiedEntities = From en In ChangeTracker.Entries
-                               Where en.State = Entity.EntityState.Added Or en.State = Entity.EntityState.Deleted Or en.State = Entity.EntityState.Modified
+                Where en.State = EntityState.Added Or en.State = EntityState.Deleted Or en.State = EntityState.Modified
 
         For Each ent In modifiedEntities
             logs.AddRange(GetAuditRecordsForChange(ent, userName))
@@ -38,7 +34,9 @@ Partial Public Class CodeFirstEntity
 
         For Each log In logs
             If Not log.Entity.State = EntityState.Detached Then
-                Dim key = CType(Me, IObjectContextAdapter).ObjectContext.ObjectStateManager.GetObjectStateEntry(log.Entity.Entity).EntityKey.EntityKeyValues
+                Dim key =
+                        CType(Me, IObjectContextAdapter).ObjectContext.ObjectStateManager.GetObjectStateEntry(
+                            log.Entity.Entity).EntityKey.EntityKeyValues
                 log.RecordId = key(0).Value
             End If
 
@@ -55,11 +53,11 @@ Partial Public Class CodeFirstEntity
         Dim entityConfig = GetAuditConfig(dbEntry)
 
         Dim log = New AuditLog With {
-                     .UserName = userName,
-                     .EventDate = eventTime,
-                     .TableName = entityConfig.TableName,
-                     .Entity = dbEntry
-                    }
+                .UserName = userName,
+                .EventDate = eventTime,
+                .TableName = entityConfig.TableName,
+                .Entity = dbEntry
+                }
 
         For Each prop In entityConfig.Properties
             log.ColumnName = prop.Key
@@ -69,20 +67,20 @@ Partial Public Class CodeFirstEntity
                     Continue For
                 End If
 
-                If dbEntry.OriginalValues.GetValue(Of Object)(prop.Key) Is Nothing Then
+                If dbEntry.OriginalValues.GetValue (Of Object)(prop.Key) Is Nothing Then
                     Continue For
                 End If
 
                 logs.Add(New AuditLog With {
-                     .UserName = userName,
-                     .EventDate = eventTime,
-                     .EventType = AuditLog.LogType.Deleted,
-                     .ColumnName = prop.Key,
-                     .TableName = entityConfig.TableName,
-                     .OriginalValue = dbEntry.OriginalValues.GetValue(Of Object)(prop.Key),
-                     .Entity = dbEntry,
-                     .RecordId = dbEntry.OriginalValues.GetValue(Of Object)(entityConfig.KeyNames(0))
-                          })
+                            .UserName = userName,
+                            .EventDate = eventTime,
+                            .EventType = AuditLog.LogType.Deleted,
+                            .ColumnName = prop.Key,
+                            .TableName = entityConfig.TableName,
+                            .OriginalValue = dbEntry.OriginalValues.GetValue (Of Object)(prop.Key),
+                            .Entity = dbEntry,
+                            .RecordId = dbEntry.OriginalValues.GetValue (Of Object)(entityConfig.KeyNames(0))
+                            })
                 Continue For
             End If
 
@@ -90,7 +88,7 @@ Partial Public Class CodeFirstEntity
                 Continue For
             End If
 
-            Dim propValue = dbEntry.CurrentValues.GetValue(Of Object)(prop.Key)
+            Dim propValue = dbEntry.CurrentValues.GetValue (Of Object)(prop.Key)
 
             If dbEntry.State = EntityState.Added Then
 
@@ -102,17 +100,22 @@ Partial Public Class CodeFirstEntity
             End If
 
             If dbEntry.State = EntityState.Modified Then
-                Dim originalValue = dbEntry.OriginalValues.GetValue(Of Object)(prop.Key)
+                Dim originalValue = dbEntry.OriginalValues.GetValue (Of Object)(prop.Key)
 
-                If Object.Equals(originalValue, propValue) Then
+                If Equals(originalValue, propValue) Then
                     Continue For
                 End If
 
                 If prop.Value Is GetType(Decimal?) OrElse prop.Value Is GetType(Decimal) Then
-                    If originalValue IsNot Nothing AndAlso propValue IsNot Nothing AndAlso String.Format("{0:0.00}", Math.Truncate(originalValue * 100) / 100) = String.Format("{0:0.00}", Math.Truncate(propValue * 100) / 100) Then
+                    If _
+                        originalValue IsNot Nothing AndAlso propValue IsNot Nothing AndAlso
+                        String.Format("{0:0.00}", Math.Truncate(originalValue*100)/100) =
+                        String.Format("{0:0.00}", Math.Truncate(propValue*100)/100) Then
                         Continue For
                     End If
-                ElseIf originalValue IsNot Nothing AndAlso propValue IsNot Nothing AndAlso originalValue.ToString.Trim = propValue.ToString.Trim Then
+                ElseIf _
+                    originalValue IsNot Nothing AndAlso propValue IsNot Nothing AndAlso
+                    originalValue.ToString.Trim = propValue.ToString.Trim Then
                     Continue For
                 End If
 
@@ -123,19 +126,22 @@ Partial Public Class CodeFirstEntity
 
         Return logs
     End Function
-    Private Function AddLog(logType As AuditLog.LogType, dbEntry As DbEntityEntry, userName As String, eventTime As DateTime, tableName As String, propName As String) As AuditLog
+
+    Private Function AddLog(logType As AuditLog.LogType, dbEntry As DbEntityEntry, userName As String,
+                            eventTime As DateTime, tableName As String, propName As String) As AuditLog
 
         Return New AuditLog With {
             .UserName = userName,
-                    .EventDate = eventTime,
-                    .EventType = logType,
-                    .ColumnName = propName,
-                    .TableName = tableName,
-                    .OriginalValue = GetVaule("OriginalValues", propName, dbEntry),
-                    .NewValue = GetVaule("CurrentValues", propName, dbEntry),
-                    .Entity = dbEntry
+            .EventDate = eventTime,
+            .EventType = logType,
+            .ColumnName = propName,
+            .TableName = tableName,
+            .OriginalValue = GetVaule("OriginalValues", propName, dbEntry),
+            .NewValue = GetVaule("CurrentValues", propName, dbEntry),
+            .Entity = dbEntry
             }
     End Function
+
     Private Function AddLog(logType As AuditLog.LogType, log As AuditLog) As AuditLog
         Return AddLog(logType, log.Entity, log.UserName, log.EventDate, log.TableName, log.ColumnName)
     End Function
@@ -145,7 +151,7 @@ Partial Public Class CodeFirstEntity
     End Function
 
     ''' <summary>
-    '''Becuase entry can not use OriginalValues in added state
+    '''     Becuase entry can not use OriginalValues in added state
     ''' </summary>
     ''' <param name="dbEntry"></param>
     ''' <param name="value"></param>
@@ -165,7 +171,7 @@ Partial Public Class CodeFirstEntity
     End Function
 
     Private Function GetVaule(dbValues As DbPropertyValues, propName As String) As Object
-        Return If(dbValues Is Nothing, Nothing, dbValues.GetValue(Of Object)(propName))
+        Return If(dbValues Is Nothing, Nothing, dbValues.GetValue (Of Object)(propName))
     End Function
 
     Private Function GetAuditConfig(dbEntry As DbEntityEntry) As AuditConfig
@@ -175,10 +181,14 @@ Partial Public Class CodeFirstEntity
         Dim entityType = dbEntry.Entity.GetType
         If Not AuditConfigSetting.AuditInfo.ContainsKey(entityType) Then
             Dim config As New AuditConfig
-            Dim tableAttr = CType(dbEntry.Entity.GetType().GetCustomAttributes(GetType(TableAttribute), True).SingleOrDefault(), TableAttribute)
+            Dim tableAttr =
+                    CType(dbEntry.Entity.GetType().GetCustomAttributes(GetType(TableAttribute), True).SingleOrDefault(),
+                          TableAttribute)
             Dim tableName = If(tableAttr IsNot Nothing, tableAttr.Name, dbEntry.Entity.GetType().Name)
 
-            Dim setBase = CType(Me, IObjectContextAdapter).ObjectContext.ObjectStateManager.GetObjectStateEntry(dbEntry.Entity).EntitySet
+            Dim setBase =
+                    CType(Me, IObjectContextAdapter).ObjectContext.ObjectStateManager.GetObjectStateEntry(dbEntry.Entity) _
+                    .EntitySet
             Dim keyNames = setBase.ElementType.KeyMembers.Select(Function(k) k.Name).ToList
             config.TableName = tableName
             config.KeyNames = keyNames
@@ -205,6 +215,6 @@ Partial Public Class CodeFirstEntity
         Return AuditConfigSetting.AuditInfo(entityType)
     End Function
 
-    Protected Overrides Sub OnModelCreating(ByVal modelBuilder As DbModelBuilder)
+    Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
     End Sub
 End Class

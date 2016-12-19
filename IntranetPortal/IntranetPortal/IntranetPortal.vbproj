@@ -33,6 +33,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -612,6 +613,7 @@
     </Compile>
     <Compile Include="CodeFolder\Employee.vb" />
     <Compile Include="CodeFolder\EmployeeItemComparer.vb" />
+    <Compile Include="CodeFolder\EmployeeManage.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
     <Compile Include="CodeFolder\ExcelBuilder.vb" />
@@ -657,7 +659,7 @@
     <Compile Include="CodeFolder\SystemModelSetting.vb" />
     <Compile Include="CodeFolder\Team.vb" />
     <Compile Include="CodeFolder\TitleManage.vb" />
-    <Compile Include="CodeFolder\UnderwritingManager.vb" />
+    <Compile Include="CodeFolder\UnderwritingManage.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserFollowUpManage.vb" />
     <Compile Include="CodeFolder\UserInTeam.vb" />
@@ -838,11 +840,12 @@
     <Compile Include="Controllers\TaxLiensODataController.vb" />
     <Compile Include="Controllers\TitleController.vb" />
     <Compile Include="Controllers\TwilioController.vb" />
-    <Compile Include="Controllers\UnderwriterController.vb" />
+    <Compile Include="Controllers\UnderwritingController.vb" />
     <Compile Include="Controllers\UnderwritingRequestController.vb" />
     <Compile Include="Controllers\UserInfoController.vb" />
     <Compile Include="Controllers\WorkflowController.vb" />
     <Compile Include="Controllers\WorkingLogController.vb" />
+    <Compile Include="Controllers\WorkListController.vb" />
     <Compile Include="DataAPITesting.aspx.designer.vb">
       <DependentUpon>DataAPITesting.aspx</DependentUpon>
     </Compile>
@@ -1952,10 +1955,10 @@
       <DependentUpon>testPopup.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="PopupControl\UnderwritingSummary.aspx.designer.vb">
+    <Compile Include="UnderWriter\UnderwritingSummary.aspx.designer.vb">
       <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PopupControl\UnderwritingSummary.aspx.vb">
+    <Compile Include="UnderWriter\UnderwritingSummary.aspx.vb">
       <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
@@ -2486,6 +2489,13 @@
     </Compile>
     <Compile Include="UnderWriter\DocSearchList.aspx.vb">
       <DependentUpon>DocSearchList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UnderWriter\UnderwritingHome.aspx.designer.vb">
+      <DependentUpon>UnderwritingHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnderWriter\UnderwritingHome.aspx.vb">
+      <DependentUpon>UnderwritingHome.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UnderWriter\UnderwritingTracking.aspx.designer.vb">
@@ -7280,6 +7290,8 @@
     <Content Include="js\components\ptHomeowner.js" />
     <Content Include="js\components\ptItemList.js" />
     <Content Include="js\components\ptSelectableInput.js" />
+    <Content Include="js\components\ptSummaryItemList.js" />
+    <Content Include="js\components\ptSummaryItemList.tpl.html" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
     <Content Include="js\controllers\LeadTaxSearchController.js" />
@@ -7571,7 +7583,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="NewOffer\ShortSaleNewOffer.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
-    <Content Include="PopupControl\UnderwritingSummary.aspx" />
+    <Content Include="UnderWriter\UnderwritingSummary.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
@@ -7950,6 +7962,7 @@
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
     <Content Include="UnderWriter\DocSearchListNew.aspx" />
     <Content Include="UnderWriter\DocSearchList.aspx" />
+    <Content Include="UnderWriter\UnderwritingHome.aspx" />
     <Content Include="UnderWriter\UnderwritingTracking.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
@@ -8480,7 +8493,9 @@
     <Content Include="App_Data\TitleDoc\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
     <Content Include="App_Data\TitleDoc\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
     <Content Include="TempDataFile\LeadsList.xlsx" />
-    <Content Include="tsconfig.json" />
+    <Content Include="typings\globals\angular\typings.json" />
+    <Content Include="typings\globals\jquery\typings.json" />
+    <Content Include="typings.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -8536,8 +8551,11 @@
     <None Include="bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="js\components\Test.ts" />
     <Content Include="js\controllers\DiarlerManagementController.js" />
+    <TypeScriptCompile Include="test.ts" />
+    <TypeScriptCompile Include="typings\globals\angular\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jquery\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

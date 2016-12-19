@@ -1,5 +1,5 @@
 ﻿var p = require('./package.json');
-var del = require('del')
+var del = require('del');
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglifyjs');
@@ -16,8 +16,7 @@ var angularPath = ['js/app.js',
                 'js/filters/*.js',
                 'js/directives/*.js',
                 'js/controllers/*.js',
-                'js/components/*.js',
-                'js/build/' + p.name + '.es6.js'];
+                'js/components/*.js'];
 
 
 var getTimeString = function () {

@@ -2,8 +2,8 @@ Imports System.Data.Entity
 Imports IntranetPortal.Core
 Imports IntranetPortal.Data
 
-Public Class UnderwritingManager
-    Public Shared Function GetInstance(bble As String) As Underwriting
+Public Class UnderwritingManage
+    Public Shared Function GetUnderwritingByBBLE(bble As String) As Underwriting
         Using ctx As New CodeFirstEntity
             Dim uw = ctx.Underwritings.FirstOrDefault(Function(underwriting) underwriting.BBLE = bble)
             If Nothing IsNot uw Then
@@ -28,7 +28,6 @@ Public Class UnderwritingManager
     End Function
 
     Public Shared Function SaveOrUpdate(uw As Underwriting, saveby As String) As Underwriting
-
         Using ctx As New CodeFirstEntity
             Dim u = ctx.Underwritings.SingleOrDefault(Function(t) t.BBLE = uw.BBLE)
             If u IsNot Nothing Then
@@ -48,9 +47,7 @@ Public Class UnderwritingManager
 
     Public Shared Function Archive(bble As String, saveBy As String, note As String) As Boolean
         Using ctx As New CodeFirstEntity
-
-            Dim uw = GetInstance(bble)
-
+            Dim uw = GetUnderwritingByBBLE(bble)
             If uw IsNot Nothing Then
                 Dim uwa = New UnderwritingArchived
 

@@ -72,8 +72,6 @@
                 </div>
                 <div class="col-md-12 clearfix">
                     <div class="row">
-
-
                         <div class="form col-md-4">
                             <h5 style='font-weight:bold'>Was an HOI offered</h5>
                             <select class="form-control" ng-model='data.WasHOIOffered' ng-options="o.v as o.l for o in [{ l: 'No', v: false }, { l: 'Yes', v: true }]" pt-required></select>
@@ -94,6 +92,15 @@
                                     <input type="text" class="form-control" ng-model="data.UpfrontOffered" pt-number-mask isvalidate />
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 clearfix">
+                    <div class="row">
+                        <div class="form">
+                            <h5 class="label">Choose an underwriter:</h5>
+                            <select class="form-control" ng-model="" pt-required></select>
                         </div>
                     </div>
                 </div>

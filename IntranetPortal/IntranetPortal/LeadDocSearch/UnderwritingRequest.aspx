@@ -21,7 +21,6 @@
     <ui-view></ui-view>
 
     <hr />
-
     <% If Page.User.IsInRole("PropertyStory-Auditor") OrElse Page.User.IsInRole("Admin") Then %>
     <div id='uwrhistory' class="container" style="max-width: 800px; margin-bottom: 20px">
         <script type="text/javascript">

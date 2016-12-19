@@ -4,6 +4,7 @@ Imports System.IO
 Imports Newtonsoft.Json
 Imports System.ComponentModel.DataAnnotations
 Imports System.Security.Cryptography
+Imports System.Xml.Serialization
 
 ''' <summary>
 ''' The Employee Object
@@ -1058,15 +1059,24 @@ Partial Public Class Employee
                 MyBase.LeadsActivityLogs = value
             End Set
         End Property
+
+        'Public ReadOnly Property Roles As ICollection(Of String)
+        '    get
+        '        Using  ctx As New Entities
+        '            dim userInRole = ctx.UsersInRoles.Where(Function(cir) cir.Username = me.Name)
+        '            Return userInRole.Select(Function(item) item.Role)
+        '        end using
+        '    End Get
+        'End Property
     End Class
 End Class
 
 Public Class EmployeeMetaData
-    <JsonIgnoreAttribute>
+    <JsonIgnore, XmlIgnore, SoapIgnore>
     Public Property Password As String
-    <JsonIgnoreAttribute>
+    <JsonIgnore, XmlIgnore, SoapIgnore>
     Public Property Leads As ICollection(Of Lead)
-    <JsonIgnoreAttribute>
+    <JsonIgnore, XmlIgnore, SoapIgnore>
     Public Property LeadsActivityLogs As ICollection(Of LeadsActivityLog)
 End Class
 

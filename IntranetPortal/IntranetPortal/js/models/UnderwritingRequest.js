@@ -11,7 +11,7 @@
                 method: 'POST',
                 url: '/api/UnderwritingRequest',
                 data: data
-            })
+            });
             return promise;
         }
 

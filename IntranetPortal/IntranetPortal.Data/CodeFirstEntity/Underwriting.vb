@@ -1,9 +1,9 @@
 ﻿Imports System.ComponentModel.DataAnnotations
-Imports System.ComponentModel.DataAnnotations.Schema
 
 Public Class Underwriting
     <Key>
     Public Property Id As Integer
+
     Public Property BBLE As String
     Public Property CreateBy As String
     Public Property UpdateBy As String
@@ -30,6 +30,7 @@ End Class
 Public Class UnderwritingArchived
     <Key>
     Public Property Id As Integer
+
     Public Property BBLE As String
     Public Property ArchivedBy As String
     Public Property ArchivedDate As DateTime?
@@ -43,25 +44,30 @@ Public Class UnderwritingArchived
     Public Overridable Property LienInfo As UnderwritingLienInfo
     Public Overridable Property LienCosts As UnderwritingLienCosts
     Public Overridable Property RentalInfo As UnderwritingRentalInfo
-
-
 End Class
 
 Public Class UnderwritingPropertyInfo
     <Key>
     Public Property Id As Integer
+
     Public Property PropertyType As PropertyTypeEnum
     Public Property PropertyAddress As String
+
     <MaxLength(50)>
     Public Property CurrentOwner As String
+
     <MaxLength(50)>
     Public Property TaxClass As String
+
     <MaxLength(50)>
     Public Property LotSize As String
+
     <MaxLength(50)>
     Public Property BuildingDimension As String
+
     <MaxLength(50)>
     Public Property Zoning As String
+
     Public Property FARActual As Decimal?
     Public Property FARMax As Decimal?
     Public Property PropertyTaxYear As Decimal?
@@ -83,11 +89,12 @@ Public Class UnderwritingPropertyInfo
         Residential = 1
         NotResidential = 2
     End Enum
-
 End Class
+
 Public Class UnderwritingDealCosts
     <Key>
     Public Property Id As Integer
+
     Public Property MoneySpent As Decimal?
     Public Property HAFA As Boolean
     Public Property HOI As Decimal?
@@ -95,9 +102,11 @@ Public Class UnderwritingDealCosts
     Public Property COSTermination As Decimal?
     Public Property AgentCommission As Decimal?
 End Class
+
 Public Class UnderwritingRehabInfo
     <Key>
     Public Property Id As Integer
+
     Public Property AverageLowValue As Decimal?
     Public Property RenovatedValue As Decimal?
     Public Property RepairBid As Decimal?
@@ -105,11 +114,12 @@ Public Class UnderwritingRehabInfo
     Public Property DealTimeMonths As Integer?
     Public Property SalesCommission As Decimal?
     Public Property DealROICash As Decimal?
-
 End Class
+
 Public Class UnderwritingLienInfo
     <Key>
     Public Property Id As Integer
+
     Public Property FirstMortgage As Decimal?
     Public Property SecondMortgage As Decimal?
     Public Property COSRecorded As Boolean
@@ -119,13 +129,18 @@ Public Class UnderwritingLienInfo
     Public Property FHA As Boolean?
     Public Property FannieMae As Boolean?
     Public Property FreddieMac As Boolean?
+
     <MaxLength(50)>
     Public Property Servicer As String
+
     <MaxLength(50)>
     Public Property ForeclosureIndexNum As String
+
     Public Property ForeclosureStatus As String
+
     <MaxLength(256)>
     Public Property ForeclosureNote As String
+
     Public Property AuctionDate As DateTime?
     Public Property DefaultDate As DateTime?
     Public Property CurrentPayoff As Decimal?
@@ -140,6 +155,7 @@ Public Class UnderwritingLienInfo
         SundryAgreement = 5
         UCC = 6
     End Enum
+
     Enum ForeclosureStatusEnum
         NotSure = 1
         NoActionDismissed = 2
@@ -149,11 +165,12 @@ Public Class UnderwritingLienInfo
         OrderOfReference = 6
         JudgmentOfForeclosureAndSale = 7
     End Enum
-
 End Class
+
 Public Class UnderwritingLienCosts
     <Key>
     Public Property Id As Integer
+
     Public Property TaxLienCertificate As Decimal?
     Public Property PropertyTaxes As Decimal?
     Public Property WaterCharges As Decimal?
@@ -178,24 +195,29 @@ End Class
 Public Class UnderwritingMinimumBaselineScenario
     <Key>
     Public Property Id As Integer
+
     Public Property PurchasePriceAllIn As Decimal?
     Public Property TotalInvestment As Decimal?
     Public Property CashRequirement As Decimal?
     Public Property NetProfit As Decimal?
     Public Property ROI As Decimal?
 End Class
+
 Public Class UnderwritingBestCaseScenario
     <Key>
     Public Property Id As Integer
+
     Public Property CashRequirement As Decimal?
     Public Property NetProfit As Decimal?
     Public Property PurchasePriceAllIn As Decimal?
     Public Property ROI As Decimal?
     Public Property TotalInvestment As Decimal?
 End Class
+
 Public Class UnderwritingOthers
     <Key>
     Public Property Id As Integer
+
     Public Property MaximumLienPayoff As Decimal?
     Public Property MaximumSSPrice As Decimal?
     Public Property MaxHOI As Decimal?
@@ -205,6 +227,7 @@ End Class
 Public Class UnderwritingCashScenario
     <Key>
     Public Property Id As Integer
+
     Public Property CashRequired As Decimal?
     Public Property Purchase_CarryingCosts As Decimal?
     Public Property Purchase_ClosingCost As Decimal?
@@ -221,11 +244,12 @@ Public Class UnderwritingCashScenario
     Public Property Resale_NetProfit As Decimal?
     Public Property Resale_SalePrice As Decimal?
     Public Property Time As Integer
-
 End Class
+
 Public Class UnderwritingLoanScenario
     <Key>
     Public Property Id As Integer
+
     Public Property Purchase_PurchasePrice As Decimal?
     Public Property Purchase_AdditonalCosts As Decimal?
     Public Property Purchase_DealCosts As Decimal?
@@ -249,9 +273,11 @@ Public Class UnderwritingLoanScenario
     Public Property CashROI As Decimal?
     Public Property CashROIAnnual As Decimal?
 End Class
+
 Public Class UnderwritingFlipScenario
     <Key>
     Public Property Id As Integer
+
     Public Property CashRequirement As Decimal?
     Public Property FlipPrice_SalePrice As Decimal?
     Public Property FlipProfit As Decimal?
@@ -273,6 +299,7 @@ End Class
 Public Class UnderwritingRentalInfo
     <Key>
     Public Property Id As Integer
+
     Public Property DeedPurchase As Decimal?
     Public Property CurrentlyRented As Boolean
     Public Property RepairBidTotal As Decimal?
@@ -280,9 +307,11 @@ Public Class UnderwritingRentalInfo
     Public Property MarketRentTotal As Decimal?
     Public Property RentalTime As Integer?
 End Class
+
 Public Class UnderwritingRentalModel
     <Key>
     Public Property Id As Integer
+
     Public Property CostOfMoneyRate As Decimal?
     Public Property MinROI As Decimal?
     Public Property Insurance As Decimal?
@@ -308,10 +337,10 @@ Public Class UnderwritingRentalModel
 End Class
 
 
-
 Public Class UnderwritingLiens
     <Key>
     Public Property Id As Integer
+
     Public Property LienPayoffsSettlement As Decimal?
     Public Property TaxLienSettlement As Decimal?
     Public Property PropertyTaxesSettlement As Decimal?
@@ -336,9 +365,11 @@ Public Class UnderwritingLiens
     Public Property AdditonalCostsSums As Decimal?
     Public Property LienPayoffs As Decimal?
 End Class
+
 Public Class UnderwritingDealExpenses
     <Key>
     Public Property Id As Integer
+
     Public Property Agent As Decimal?
     Public Property COSTermination As Decimal?
     Public Property HOILien As Decimal?
@@ -346,29 +377,37 @@ Public Class UnderwritingDealExpenses
     Public Property MoneySpent As Decimal?
     Public Property Tenants As Decimal?
 End Class
+
 Public Class UnderwritingClosingCost
     <Key>
     Public Property Id As Integer
+
     Public Property TitleBill As Decimal?
     Public Property BuyerAttorney As Decimal?
     Public Property OwnersPolicy As Decimal?
 End Class
+
 Public Class UnderwritingConstruction
     <Key>
     Public Property Id As Integer
+
     Public Property Construction As Decimal?
     Public Property Architect As Decimal?
 End Class
+
 Public Class UnderwritingCarryingCost
     <Key>
     Public Property Id As Integer
+
     Public Property RETaxs As Decimal?
     Public Property Utilities As Decimal?
     Public Property Insurance As Decimal?
 End Class
+
 Public Class UnderwritingResale
     <Key>
     Public Property Id As Integer
+
     Public Property Concession As Decimal?
     Public Property Attorney As Decimal?
     Public Property NDC As Decimal?
@@ -376,18 +415,22 @@ Public Class UnderwritingResale
     Public Property Commissions As Decimal?
     Public Property TransferTax As Decimal?
 End Class
+
 Public Class UnderwritingLoanTerms
     <Key>
     Public Property Id As Integer
+
     Public Property LoanRate As Decimal?
     Public Property LoanPoints As Decimal?
     Public Property LoanTermMonths As Integer?
     Public Property LTV As Decimal?
     Public Property LoanAmount As Decimal?
 End Class
+
 Public Class UnderwritingLoanCosts
     <Key>
     Public Property Id As Integer
+
     Public Property LoanClosingCost As Decimal?
     Public Property Points As Decimal?
     Public Property LoanInterest As Decimal?
@@ -398,18 +441,23 @@ End Class
 Public Class UnderwritingFlipCalculation
     <Key>
     Public Property Id As Integer
+
     Public Property FlipROI As Decimal?
     Public Property FlipPrice As Decimal?
 End Class
+
 Public Class UnderwritingMoneyFactor
     <Key>
     Public Property Id As Integer
+
     Public Property CostOfMoney As Decimal?
     Public Property InterestOnMoney As Decimal?
 End Class
+
 Public Class UnderwritingHOI
     <Key>
     Public Property Id As Integer
+
     Public Property Value As Decimal?
     Public Property PurchasePriceAllIn As Decimal?
     Public Property TotalInvestment As Decimal?
@@ -417,24 +465,28 @@ Public Class UnderwritingHOI
     Public Property NetProfit As Decimal?
     Public Property ROILoan As Decimal?
 End Class
+
 Public Class UnderwritingHOIBestCase
     <Key>
     Public Property Id As Integer
+
     Public Property PurchasePriceAllIn As Decimal?
     Public Property TotalInvestment As Decimal?
     Public Property CashRequirement As Decimal?
     Public Property NetProfit As Decimal?
     Public Property ROILoan As Decimal?
 End Class
+
 Public Class UnderwritingInsurancePremium
     <Key>
     Public Property Id As Integer
-    Public Property From() As Decimal?
-    Public Property _To() As Decimal?
-    Public Property OwnersPolicyRate() As Decimal?
-    Public Property LoanPolicyRate() As Decimal?
-    Public Property CostOwnersPolicy() As Decimal?
-    Public Property CostLoanPolicy() As Decimal?
+
+    Public Property From As Decimal?
+    Public Property _To As Decimal?
+    Public Property OwnersPolicyRate As Decimal?
+    Public Property LoanPolicyRate As Decimal?
+    Public Property CostOwnersPolicy As Decimal?
+    Public Property CostLoanPolicy As Decimal?
     Public Property PurchasePrice As Decimal?
     Public Property LoanAmountDiscounted As Decimal?
     Public Property LoanAmountFullPremium As Decimal?
@@ -443,9 +495,5 @@ Public Class UnderwritingInsurancePremium
     Public Property OwnersLoanPolicyFullPremium As Decimal?
     Public Property TitleInsurance As Decimal?
 End Class
-
-
-
-
 
 
