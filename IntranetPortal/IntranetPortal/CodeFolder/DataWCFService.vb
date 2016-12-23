@@ -823,11 +823,17 @@ Public Class DataWCFService
         End Try
     End Sub
 
+    ''' <summary>
+    '''     Update the external data into Portal
+    ''' </summary>
+    ''' <param name="externalData">External Data</param>
+    ''' <returns></returns>
     Public Shared Function UpdateExternalData(externalData As ExternalData) As Boolean
         If externalData Is Nothing Then
             Return False
         End If
 
+        ' DOB violation
         If externalData.dobViolation IsNot Nothing Then
             Dim dob = externalData.dobViolation
             If dob.status = "Success" Then
@@ -839,6 +845,7 @@ Public Class DataWCFService
             End If
         End If
 
+        ' Tax bill
         If externalData.taxbill IsNot Nothing Then
             Dim taxbill = externalData.taxbill
             If taxbill.status = "Success" Then
@@ -849,6 +856,7 @@ Public Class DataWCFService
             End If
         End If
 
+        ' Water bill
         If externalData.waterbill IsNot Nothing Then
             Dim waterbill = externalData.waterbill
             If waterbill.status = "Success" Then
@@ -882,7 +890,6 @@ Public Class DataWCFService
                 Context.SaveChanges()
 
                 Dim svr = New PropertyService
-
                 Dim bble = apiOrder.BBLE
                 Dim lead = Context.LeadsInfoes.Where(Function(li) li.BBLE = bble).SingleOrDefault
                 Dim needCallService = False
