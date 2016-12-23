@@ -38,6 +38,9 @@ Public Class WebApiConfig2
         'GlobalConfiguration.Configuration.Filters.Add(New WebApiException)
 
         config.Filters.Add(New WebApiException)
+
+        ' web api token configure
+        config.MessageHandlers.Add(New SimpleAppTokenHandler())
     End Sub
 
 End Class

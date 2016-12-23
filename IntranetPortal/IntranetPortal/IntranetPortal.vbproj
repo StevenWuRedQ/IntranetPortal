@@ -651,6 +651,7 @@
     </Compile>
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
+    <Compile Include="CodeFolder\SimpleAppTokenHandler.vb" />
     <Compile Include="CodeFolder\SummaryItemBase.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2015,6 +2016,7 @@
       <DependentUpon>Priority.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PublicController\DataServiceController.vb" />
     <Compile Include="Publish\Publish.aspx.designer.vb">
       <DependentUpon>Publish.aspx</DependentUpon>
     </Compile>

@@ -36,7 +36,6 @@ Partial Public Class Entities
     Public Overridable Property OrderResponses() As DbSet(Of OrderRespons)
     Public Overridable Property APIOrders() As DbSet(Of APIOrder)
     Public Overridable Property UserMessages() As DbSet(Of UserMessage)
-    Public Overridable Property PortalLisPens() As DbSet(Of PortalLisPen)
     Public Overridable Property NYC_St_Names() As DbSet(Of NYC_St_Names)
     Public Overridable Property PortalQuotes() As DbSet(Of PortalQuote)
     Public Overridable Property OwnerContacts() As DbSet(Of OwnerContact)
@@ -77,6 +76,7 @@ Partial Public Class Entities
     Public Overridable Property InProcessBBLEs() As DbSet(Of InProcessBBLE)
     Public Overridable Property TLODatas() As DbSet(Of TLOData)
     Public Overridable Property HomeOwnerPhones() As DbSet(Of HomeOwnerPhone)
+    Public Overridable Property PortalLisPens() As DbSet(Of PortalLisPen)
 
     Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
         Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))

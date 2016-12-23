@@ -13,6 +13,8 @@ Imports System.Collections.Generic
 Partial Public Class PortalLisPen
     Public Property LisPenID As Integer
     Public Property BBLE As String
+    Public Property LpType As String
+    Public Property Expiration As Nullable(Of Date)
     Public Property Active As Nullable(Of Boolean)
     Public Property Docket_Number As String
     Public Property CountyNum As Nullable(Of Integer)
@@ -35,8 +37,6 @@ Partial Public Class PortalLisPen
     Public Property Attorney_Phone As String
     Public Property Terms As String
     Public Property CollectedOn As Date
-    Public Property Expiration As Nullable(Of Date)
     Public Property CreateTime As Nullable(Of Date)
-    Public Property LpType As String
 
 End Class

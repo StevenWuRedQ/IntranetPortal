@@ -205,8 +205,8 @@
     <Compile Include="DialerService\DialerContact.vb" />
     <Compile Include="DialerService\DialerService.vb" />
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
-    <Compile Include="EcourtService\EcourtService.vb" />
-    <Compile Include="EcourtService\LeadsEcourtData.vb" />
+    <Compile Include="WebApi\EcourtService.vb" />
+    <Compile Include="WebApi\LeadsEcourtData.vb" />
     <Compile Include="Exception\DataException.vb" />
     <Compile Include="Migrations\201609291834424_Initial.Designer.vb">
       <DependentUpon>201609291834424_Initial.vb</DependentUpon>
@@ -417,6 +417,8 @@
     <Compile Include="Twilio\TwilioClient.vb" />
     <Compile Include="CodeFirstEntity\Underwriting.vb" />
     <Compile Include="CodeFirstEntity\CodeFirstEntity.vb" />
+    <Compile Include="WebApi\PropertyService.vb" />
+    <Compile Include="WebApi\RedqService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609291834424_Initial.resx">
