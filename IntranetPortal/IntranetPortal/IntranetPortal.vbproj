@@ -644,6 +644,7 @@
     <Compile Include="CodeFolder\PortalReport.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
     <Compile Include="CodeFolder\PropertyOfferManage.vb" />
+    <Compile Include="CodeFolder\PropertyServiceProvider.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
     <Compile Include="CodeFolder\RoleBasePage.vb">

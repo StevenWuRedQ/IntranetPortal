@@ -416,8 +416,8 @@ End Class
 Public Class ExternalData
     Public Property taxbill As Taxbill
     Public Property waterbill As Waterbill
-    Public Property mtgServicer As MortgageServicer
-    Public Property dobViolation As Dobpenaltiesandviolations
-    Public Property zEstimate As ZillowProperty
+    Public Property mortgageServicer As MortgageServicer
+    Public Property dobPenaltiesAndViolationsSummary As Dobpenaltiesandviolations
+    Public Property zillowPorperty As ZillowProperty
 
 End Class

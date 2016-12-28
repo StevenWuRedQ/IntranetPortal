@@ -27,9 +27,9 @@ Imports IntranetPortal.Data
         Dim result = New ExternalData
         result.taxbill = New Taxbill
         result.waterbill = New Waterbill
-        result.mtgServicer = New MortgageServicer
-        result.dobViolation = New Dobpenaltiesandviolations
-        result.zEstimate = New ZillowProperty
+        result.mortgageServicer = New MortgageServicer
+        result.dobPenaltiesAndViolationsSummary = New Dobpenaltiesandviolations
+        result.zillowPorperty = New ZillowProperty
         Dim json = result.ToJsonString
         Assert.IsFalse(String.IsNullOrEmpty(json))
     End Sub

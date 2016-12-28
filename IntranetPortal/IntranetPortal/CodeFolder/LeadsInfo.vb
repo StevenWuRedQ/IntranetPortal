@@ -68,6 +68,7 @@ Public Class LeadsInfo
 
         Return False
     End Function
+
     ''' <summary>
     ''' verify lead has right fomat bble  
     ''' todo:
@@ -259,7 +260,6 @@ Public Class LeadsInfo
         Dim data As New LeadsData
         Return Core.Utility.CopyTo(GetInstance(bble), data)
     End Function
-
 
     Public Shared Function GetLeadsInfoByStreet(strNum As String, strName As String) As LeadsInfo
         Using ctx As New Entities
