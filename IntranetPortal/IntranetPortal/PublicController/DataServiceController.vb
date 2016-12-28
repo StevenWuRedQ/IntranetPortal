@@ -21,6 +21,10 @@ Namespace PublicController
         <Route("api/dataservice/completed")>
         Function PostData(data As ExternalData) As IHttpActionResult
             Try
+                If Not ModelState.IsValid Then
+                    Return BadRequest(ModelState)
+                End If
+
                 DataWCFService.UpdateExternalData(data)
                 SystemLog.Log("Completed DataService", data.ToJsonString, SystemLog.LogCategory.Operation, Nothing, "ExternalService")
                 Return Ok()

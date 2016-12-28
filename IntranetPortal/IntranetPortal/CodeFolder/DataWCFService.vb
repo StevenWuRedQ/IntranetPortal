@@ -156,6 +156,13 @@ Public Class DataWCFService
         Return provider.GetLiensInfo(bble)
     End Function
 
+    ''' <summary>
+    '''     Return BBLEs by address data
+    ''' </summary>
+    ''' <param name="num">Street Number</param>
+    ''' <param name="streetName">The Street Name</param>
+    ''' <param name="borough">Borough</param>
+    ''' <returns>The list of BBLE</returns>
     Public Shared Function GetBBLEByAddress(num As String, streetName As String, borough As String) As String()
         Using client As New DataAPI.WCFMacrosClient
             Dim strName = streetName.Trim

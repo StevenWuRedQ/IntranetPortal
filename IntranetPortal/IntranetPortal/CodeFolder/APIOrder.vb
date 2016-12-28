@@ -13,12 +13,19 @@
         [Error] = 3
     End Enum
 
-    Public Sub Save(context As Entities)
+    Public Function Save(context As Entities) As APIOrder
+        Dim result = Me
         If Status = OrderStatus.Active Then
-            Dim tmpApiOrder = context.APIOrders.Where(Function(ap) ap.BBLE = BBLE And Not ap.Status = OrderStatus.Complete).Select(Function(ap) ap.ApiOrderID).FirstOrDefault
-            If tmpApiOrder > 0 Then
-                ApiOrderID = tmpApiOrder
-                context.Entry(Me).State = Entity.EntityState.Modified
+
+            Dim tmpApiOrder = context.APIOrders.Any(Function(ap) ap.ApiOrderID = ApiOrderID)
+            If tmpApiOrder Then
+                If context.APIOrders.Local.Any(Function(ap) ap.ApiOrderID = ApiOrderID) Then
+                    Dim tmpOrder = context.APIOrders.Local.SingleOrDefault(Function(ap) ap.ApiOrderID = ApiOrderID)
+                    context.Entry(tmpOrder).CurrentValues.SetValues(Me)
+                    result = tmpOrder
+                Else
+                    context.Entry(Me).State = Entity.EntityState.Modified
+                End If
             Else
                 context.APIOrders.Add(Me)
             End If
@@ -27,7 +34,9 @@
         End If
 
         context.SaveChanges()
-    End Sub
+
+        Return result
+    End Function
 
     ''' <summary>
     '''     Return the new API order
@@ -60,7 +69,7 @@
                                     TLO As Boolean,
                                     orderBy As String) As APIOrder
 
-        Dim apiOrder As New APIOrder
+        Dim apiOrder = NewOrder(bble)
 
         apiOrder.BBLE = bble
         Dim needWait = False

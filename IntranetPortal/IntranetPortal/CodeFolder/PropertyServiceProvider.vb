@@ -54,6 +54,8 @@ Public Interface IPropertyServiceProvider
     ''' <param name="bble">Property BBLE</param>
     Sub LoadLatestOwner(bble As String)
 
+    Function GetBBLEbyAddress(num As String, strName As String, borough As String) As String
+
 End Interface
 
 ''' <summary>
@@ -350,7 +352,7 @@ Public Class PropertyServiceProvider
         Dim ld = ctx.LeadsInfoes.Find(bble)
         LoadZEstimate(ld, order)
         ctx.SaveChanges()
-
+        order.Save(ctx)
         Return ld
     End Function
 
@@ -529,7 +531,7 @@ Public Class PropertyServiceProvider
 
     Private Function OrderPropData(apiOrder As APIOrder, Optional needWait As Boolean = True) As Boolean
         Try
-            apiOrder.Save(ctx)
+            apiOrder = apiOrder.Save(ctx)
 
             Dim bble = apiOrder.BBLE
             Dim lead = ctx.LeadsInfoes.Where(Function(li) li.BBLE = bble).SingleOrDefault
@@ -761,6 +763,15 @@ Public Class PropertyServiceProvider
             Throw New Exception("Error occure in SaveHomeOwner. Error: " + ex.Message)
         End Try
     End Sub
+
+#End Region
+
+#Region "Get BBLE by Address"
+
+    Public Function GetBBLEbyAddress(num As String, strName As String, borough As String) As String Implements IPropertyServiceProvider.GetBBLEbyAddress
+
+        Return ""
+    End Function
 
 #End Region
 

@@ -22,6 +22,20 @@ Public Class RedqService
         Return request
     End Function
 
+    Protected Function Execute(request As RestRequest, Optional emptyWhenNotFound As Boolean = False) As String
+        Dim result = client.Execute(request)
+
+        If result.IsSuccessful Then
+            Return result.Content
+        Else
+            If result.StatusCode.IsNotFound AndAlso emptyWhenNotFound Then
+                Return Nothing
+            End If
+
+            Throw New Exception(HandleErrorResponse(request, result))
+        End If
+    End Function
+
     Protected Function Execute(Of T As New)(request As RestRequest, Optional emptyWhenNotFound As Boolean = False) As T
         Dim result = client.Execute(Of T)(request)
 

@@ -125,4 +125,12 @@ Public Class PropertyServiceTest
         Assert.IsNotNull(result)
     End Sub
 
+    <TestMethod()>
+    Public Sub GetBBLEByAddress_PropertyDeed()
+        Dim bble = "4089170025"
+        Dim service As New PropertyService
+        Dim result = service.GetBBLEByAddress("80-72", "87th Rd", "4")
+        Assert.IsNotNull(result)
+    End Sub
+
 End Class

@@ -136,6 +136,22 @@ Public Class PropertyService
         Return Execute(Of PropertyDeed)(request, True)
     End Function
 
+    ''' <summary>
+    '''     Return BBLE of the given address
+    ''' </summary>
+    ''' <param name="num">Street Number</param>
+    ''' <param name="strName">Street Name</param>
+    ''' <param name="borough">Borough</param>
+    ''' <returns></returns>
+    Public Function GetBBLEByAddress(num As String, strName As String, borough As String) As String
+        Dim request = GetRequest("api/physicaldata/nyc/{streetNumber}/{streetName}/{borough}/bbl", Method.GET)
+        request.AddUrlSegment("streetNumber", num)
+        request.AddUrlSegment("streetName", strName)
+        request.AddUrlSegment("borough", borough)
+
+        Return Execute(request, True)
+    End Function
+
 #Region "IDisposable Support"
     Private disposedValue As Boolean ' To detect redundant calls
 
