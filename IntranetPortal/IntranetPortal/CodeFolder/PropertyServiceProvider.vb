@@ -54,8 +54,21 @@ Public Interface IPropertyServiceProvider
     ''' <param name="bble">Property BBLE</param>
     Sub LoadLatestOwner(bble As String)
 
-    Function GetBBLEbyAddress(num As String, strName As String, borough As String) As String
+    ''' <summary>
+    '''     Return property data on street number, street name and borough
+    ''' </summary>
+    ''' <param name="num">Street Number</param>
+    ''' <param name="strName">Street Name</param>
+    ''' <param name="borough">Borough</param>
+    ''' <returns></returns>
+    Function GetPropbyAddress(num As String, strName As String, borough As String) As PhysicalData
 
+    ''' <summary>
+    '''     Return property information base on BBLE
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <returns></returns>
+    Function GetPropGeneralInfo(bble As String) As GeneralPropertyInformation
 End Interface
 
 ''' <summary>
@@ -140,7 +153,7 @@ Public Class PropertyServiceProvider
             End If
             Return li
         Catch ex As Exception
-            Throw New Exception("Error in GetFullAssessInfo: " + ex.Message)
+            Throw New Exception("Error in GetFullAssessInfo: " + ex.Message, ex)
         End Try
     End Function
 
@@ -396,7 +409,7 @@ Public Class PropertyServiceProvider
             End If
 
             If apiOrder Is Nothing Then
-                apiOrder = ctx.APIOrders.Find(bills.externalReferenceId)
+                apiOrder = ctx.APIOrders.Find(CInt(bills.externalReferenceId))
             End If
 
             If apiOrder IsNot Nothing Then
@@ -424,7 +437,7 @@ Public Class PropertyServiceProvider
             End If
 
             If apiOrder Is Nothing Then
-                apiOrder = ctx.APIOrders.Find(dobViolations.externalReferenceId)
+                apiOrder = ctx.APIOrders.Find(CInt(dobViolations.externalReferenceId))
             End If
 
             If lead IsNot Nothing Then
@@ -459,7 +472,7 @@ Public Class PropertyServiceProvider
             End If
 
             If apiOrder Is Nothing Then
-                apiOrder = ctx.APIOrders.Find(bills.externalReferenceId)
+                apiOrder = ctx.APIOrders.Find(CInt(bills.externalReferenceId))
             End If
 
             If apiOrder IsNot Nothing Then
@@ -481,7 +494,7 @@ Public Class PropertyServiceProvider
             End If
 
             If apiOrder Is Nothing Then
-                apiOrder = ctx.APIOrders.Find(zestimate.externalReferenceId)
+                apiOrder = ctx.APIOrders.Find(CInt(zestimate.externalReferenceId))
             End If
 
             If lead IsNot Nothing Then
@@ -768,9 +781,26 @@ Public Class PropertyServiceProvider
 
 #Region "Get BBLE by Address"
 
-    Public Function GetBBLEbyAddress(num As String, strName As String, borough As String) As String Implements IPropertyServiceProvider.GetBBLEbyAddress
+    ''' <summary>
+    '''     Return property data on street number, street name and borough
+    ''' </summary>
+    ''' <param name="num">Street Number</param>
+    ''' <param name="strName">Street Name</param>
+    ''' <param name="borough">Borough</param>
+    ''' <returns></returns>
+    Public Function GetPropbyAddress(num As String, strName As String, borough As String) As PhysicalData Implements IPropertyServiceProvider.GetPropbyAddress
+        Dim result = svr.GetPropByAddress(num, strName, borough)
+        Return result
+    End Function
 
-        Return ""
+    ''' <summary>
+    '''     Return property information base on BBLE
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <returns></returns>
+    Public Function GetPropGeneralInfo(bble As String) As GeneralPropertyInformation Implements IPropertyServiceProvider.GetPropGeneralInfo
+        Dim result = svr.GetGeneralInformation(bble)
+        Return result
     End Function
 
 #End Region
@@ -792,6 +822,8 @@ Public Class PropertyServiceProvider
             Throw New Exception("Get Current Identity Name: " & ex.Message)
         End Try
     End Function
+
+
 
 
 #End Region

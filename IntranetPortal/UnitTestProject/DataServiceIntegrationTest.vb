@@ -24,6 +24,22 @@ Imports IntranetPortal.Data
     End Sub
 
     <TestMethod()>
+    Public Sub AddressSearchByBBLE_GeneralInfo()
+        Dim bble = "4094390054"
+        Dim result = DataWCFService.AddressSearch(bble)
+        Assert.IsNotNull(result)
+        Assert.AreEqual(result(0).propertyInformation.BBLE, bble)
+    End Sub
+
+    <TestMethod()>
+    Public Sub AddressSearchByBlockLot_GeneralInfo()
+        Dim bble = "4094390054"
+        Dim result = DataWCFService.AddressSearch(4, 9439, 54)
+        Assert.IsNotNull(result)
+        Assert.AreEqual(result(0).propertyInformation.BBLE, bble)
+    End Sub
+
+    <TestMethod()>
     Public Sub ExternalResult_JSON()
         Dim result = New ExternalData
         result.taxbill = New Taxbill

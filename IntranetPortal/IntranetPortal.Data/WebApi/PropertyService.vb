@@ -152,6 +152,22 @@ Public Class PropertyService
         Return Execute(request, True)
     End Function
 
+    ''' <summary>
+    '''     Return BBLE of the given address
+    ''' </summary>
+    ''' <param name="num">Street Number</param>
+    ''' <param name="strName">Street Name</param>
+    ''' <param name="borough">Borough</param>
+    ''' <returns></returns>
+    Public Function GetPropByAddress(num As String, strName As String, borough As String) As PhysicalData
+        Dim request = GetRequest("api/physicaldata/nyc/{streetNumber}/{streetName}/{borough}", Method.GET)
+        request.AddUrlSegment("streetNumber", num)
+        request.AddUrlSegment("streetName", strName)
+        request.AddUrlSegment("borough", borough)
+
+        Return Execute(Of PhysicalData)(request, True)
+    End Function
+
 #Region "IDisposable Support"
     Private disposedValue As Boolean ' To detect redundant calls
 
@@ -436,4 +452,158 @@ Public Class ExternalData
     Public Property dobPenaltiesAndViolationsSummary As Dobpenaltiesandviolations
     Public Property zillowPorperty As ZillowProperty
 
+End Class
+
+
+Public Class PhysicalData
+    Public Property address As NYCAddress
+End Class
+
+Public Class NYCAddress
+    Public Property assemblyDistrict As String
+    Public Property bbl As String
+    Public Property bblBoroughCode As String
+    Public Property bblTaxBlock As String
+    Public Property bblTaxLot As String
+    Public Property boardOfElectionsPreferredLgc As String
+    Public Property boePreferredStreetName As String
+    Public Property boePreferredstreetCode As String
+    Public Property boroughCode1In As String
+    Public Property buildingIdentificationNumber As String
+    Public Property censusBlock2000 As String
+    Public Property censusBlock2010 As String
+    Public Property censusTract1990 As String
+    Public Property censusTract2000 As String
+    Public Property censusTract2010 As String
+    Public Property cityCouncilDistrict As String
+    Public Property civilCourtDistrict As String
+    Public Property coincidentSegmentCount As String
+    Public Property communityDistrict As String
+    Public Property communityDistrictBoroughCode As String
+    Public Property communityDistrictNumber As String
+    Public Property communitySchoolDistrict As String
+    Public Property condominiumBillingBbl As String
+    Public Property congressionalDistrict As String
+    Public Property cooperativeIdNumber As String
+    Public Property crossStreetNamesFlagIn As String
+    Public Property curveFlag As String
+    Public Property dcpPreferredLgc As String
+    Public Property dotStreetLightContractorArea As String
+    Public Property dynamicBlock As String
+    Public Property electionDistrict As String
+    Public Property fireBattalion As String
+    Public Property fireCompanyNumber As String
+    Public Property fireCompanyType As String
+    Public Property fireDivision As String
+    Public Property firstBoroughName As String
+    Public Property firstStreetCode As String
+    Public Property firstStreetNameNormalized As String
+    Public Property fromLionNodeId As String
+    Public Property fromPreferredLgcsFirstSetOf5 As String
+    Public Property genericId As String
+    Public Property geosupportFunctionCode As String
+    Public Property geosupportReturnCode As String
+    Public Property geosupportReturnCode2 As String
+    Public Property gi5DigitStreetCode1 As String
+    Public Property giBoroughCode1 As String
+    Public Property giBuildingIdentificationNumber1 As String
+    Public Property giDcpPreferredLgc1 As String
+    Public Property giHighHouseNumber1 As String
+    Public Property giLowHouseNumber1 As String
+    Public Property giSideOfStreetIndicator1 As String
+    Public Property giStreetCode1 As String
+    Public Property giStreetName1 As String
+    Public Property healthArea As String
+    Public Property healthCenterDistrict As String
+    Public Property highBblOfThisBuildingsCondominiumUnits As String
+    Public Property highCrossStreetB5SC1 As String
+    Public Property highCrossStreetCode1 As String
+    Public Property highCrossStreetName1 As String
+    Public Property highHouseNumberOfBlockfaceSortFormat As String
+    Public Property houseNumber As String
+    Public Property houseNumberIn As String
+    Public Property houseNumberSortFormat As String
+    Public Property hurricaneEvacuationZone As String
+    Public Property instructionalRegion As String
+    Public Property interimAssistanceEligibilityIndicator As String
+    Public Property internalLabelXCoordinate As String
+    Public Property internalLabelYCoordinate As String
+    Public Property latitude As Single
+    Public Property latitudeInternalLabel As Single
+    Public Property legacySegmentId As String
+    Public Property lionBoroughCode As String
+    Public Property lionBoroughCodeForVanityAddress As String
+    Public Property lionFaceCode As String
+    Public Property lionFaceCodeForVanityAddress As String
+    Public Property lionKey As String
+    Public Property lionKeyForVanityAddress As String
+    Public Property lionSequenceNumber As String
+    Public Property lionSequenceNumberForVanityAddress As String
+    Public Property listOf4Lgcs As String
+    Public Property longitude As Single
+    Public Property longitudeInternalLabel As Single
+    Public Property lowBblOfThisBuildingsCondominiumUnits As String
+    Public Property lowCrossStreetB5SC1 As String
+    Public Property lowCrossStreetCode1 As String
+    Public Property lowCrossStreetName1 As String
+    Public Property lowHouseNumberOfBlockfaceSortFormat As String
+    Public Property lowHouseNumberOfDefiningAddressRange As String
+    Public Property message2 As String
+    Public Property nta As String
+    Public Property ntaName As String
+    Public Property numberOfCrossStreetB5SCsHighAddressEnd As String
+    Public Property numberOfCrossStreetB5SCsLowAddressEnd As String
+    Public Property numberOfCrossStreetsHighAddressEnd As String
+    Public Property numberOfCrossStreetsLowAddressEnd As String
+    Public Property numberOfEntriesInListOfGeographicIdentifiers As String
+    Public Property numberOfExistingStructuresOnLot As String
+    Public Property numberOfStreetFrontagesOfLot As String
+    Public Property physicalId As String
+    Public Property policePatrolBoroughCommand As String
+    Public Property policePrecinct As String
+    Public Property radiusOfCircle As String
+    Public Property reasonCode1a As String
+    Public Property reasonCode2 As String
+    Public Property returnCode1a As String
+    Public Property returnCode1e As String
+    Public Property roadwayType As String
+    Public Property rpadBuildingClassificationCode As String
+    Public Property rpadSelfCheckCodeForBbl As String
+    Public Property sanbornBoroughCode As String
+    Public Property sanbornPageNumber As String
+    Public Property sanbornVolumeNumber As String
+    Public Property sanitationCollectionSchedulingSectionAndSubsection As String
+    Public Property sanitationDistrict As String
+    Public Property sanitationRecyclingCollectionSchedule As String
+    Public Property sanitationRegularCollectionSchedule As String
+    Public Property sanitationSnowPriorityCode As String
+    Public Property secantLocationRelatedToCurve As String
+    Public Property segmentAzimuth As String
+    Public Property segmentIdentifier As String
+    Public Property segmentLengthInFeet As String
+    Public Property segmentOrientation As String
+    Public Property segmentTypeCode As String
+    Public Property sideOfStreetIndicator As String
+    Public Property sideOfStreetOfVanityAddress As String
+    Public Property splitLowHouseNumber As String
+    Public Property stateSenatorialDistrict As String
+    Public Property streetName1In As String
+    Public Property streetStatus As String
+    Public Property streetWidth As String
+    Public Property taxMapNumberSectionAndVolume As String
+    Public Property toLionNodeId As String
+    Public Property toPreferredLgcsFirstSetOf5 As String
+    Public Property trafficDirection As String
+    Public Property underlyingStreetCode As String
+    Public Property uspsPreferredCityName As String
+    Public Property workAreaFormatIndicatorIn As String
+    Public Property xCoordinate As String
+    Public Property xCoordinateHighAddressEnd As String
+    Public Property xCoordinateLowAddressEnd As String
+    Public Property xCoordinateOfCenterofCurvature As String
+    Public Property yCoordinate As String
+    Public Property yCoordinateHighAddressEnd As String
+    Public Property yCoordinateLowAddressEnd As String
+    Public Property yCoordinateOfCenterofCurvature As String
+    Public Property zipCode As String
 End Class

@@ -133,4 +133,13 @@ Public Class PropertyServiceTest
         Assert.IsNotNull(result)
     End Sub
 
+    <TestMethod()>
+    Public Sub GetPropAddress_PhysicalData()
+        Dim bble = "4089170025"
+        Dim service As New PropertyService
+        Dim result = service.GetPropByAddress("80-72", "87th Rd", "4")
+        Assert.IsNotNull(result)
+        Assert.AreEqual(bble, result.address.bbl)
+    End Sub
+
 End Class

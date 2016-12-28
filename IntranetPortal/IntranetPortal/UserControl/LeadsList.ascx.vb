@@ -537,14 +537,16 @@ Public Class LeadsList
                 Dim cbStreetBorough = TryCast(pageInputData.FindControl("cbStreetBorough"), ASPxComboBox)
                 Dim txtHouseNum = TryCast(pageInputData.FindControl("txtHouseNum"), ASPxTextBox)
 
-                Dim streenAddress = client.NYC_Address_Search(cbStreetBorough.Value, txtHouseNum.Text, cbStreetlookup.Text)
-
-                For Each item In streenAddress.ToList
-                    Dim newdr = dt.NewRow
-                    newdr(0) = item.BBLE
-                    newdr(1) = String.Format("{0} {1} - {2}", item.NUMBER, item.ST_NAME, item.OWNER_NAME)
-                    dt.Rows.Add(newdr)
-                Next
+                ' Dim streenAddress = client.NYC_Address_Search(cbStreetBorough.Value, txtHouseNum.Text, cbStreetlookup.Text)
+                Dim streenAddress = DataWCFService.AddressSearch(txtHouseNum.Text, cbStreetlookup.Text, cbStreetBorough.Value)
+                If streenAddress IsNot Nothing AndAlso streenAddress.Count > 0 Then
+                    For Each item In streenAddress.ToList
+                        Dim newdr = dt.NewRow
+                        newdr(0) = item.propertyInformation.BBLE
+                        newdr(1) = String.Format("{0} {1} - {2}", item.propertyInformation.StreetNumber, item.propertyInformation.StreetName, item.owners(0).Name)
+                        dt.Rows.Add(newdr)
+                    Next
+                End If
             End If
 
             'Search by legal info
@@ -553,10 +555,10 @@ Public Class LeadsList
                 Dim txtlegalBlock = TryCast(pageInputData.FindControl("txtlegalBlock"), ASPxTextBox)
                 Dim txtLegalLot = TryCast(pageInputData.FindControl("txtLegalLot"), ASPxTextBox)
 
-                For Each item In client.NYC_Legal_Search(cblegalBorough.Value, txtlegalBlock.Text, txtLegalLot.Text)
+                For Each item In DataWCFService.AddressSearch(CInt(cblegalBorough.Value), CInt(txtlegalBlock.Text), CInt(txtLegalLot.Text))
                     Dim newdr = dt.NewRow
-                    newdr(0) = item.BBLE
-                    newdr(1) = String.Format("{0} {1} - {2}", item.NUMBER, item.ST_NAME, item.OWNER_NAME)
+                    newdr(0) = item.propertyInformation.BBLE
+                    newdr(1) = String.Format("{0} {1} - {2}", item.propertyInformation.StreetNumber, item.propertyInformation.StreetName, item.owners(0).Name)
                     dt.Rows.Add(newdr)
                 Next
             End If

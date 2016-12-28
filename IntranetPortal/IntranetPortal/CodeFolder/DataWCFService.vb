@@ -217,6 +217,43 @@ Public Class DataWCFService
         End Using
     End Function
 
+    ''' <summary>
+    '''     Return property information base on given borough, block and lot
+    ''' </summary>
+    ''' <param name="borough">Borough</param>
+    ''' <param name="block">Block</param>
+    ''' <param name="lot">Lot</param>
+    ''' <returns></returns>
+    Public Shared Function AddressSearch(borough As Integer, block As Integer, lot As Integer) As GeneralPropertyInformation()
+        Dim bble = String.Format("{0}{1:D5}{2:D4}", borough, block, lot)
+        Return AddressSearch(bble)
+    End Function
+
+    ''' <summary>
+    '''     Return property information base on street number, street name and borough
+    ''' </summary>
+    ''' <param name="num">Street Number</param>
+    ''' <param name="strName">Street Name</param>
+    ''' <param name="borough">Borough</param>
+    ''' <returns></returns>
+    Public Shared Function AddressSearch(num As String, strName As String, borough As String) As GeneralPropertyInformation()
+        Dim data = provider.GetPropbyAddress(num, strName, borough)
+        If data IsNot Nothing Then
+            Return AddressSearch(data.address.bbl)
+        End If
+        Return Nothing
+    End Function
+
+    ''' <summary>
+    '''     Return property information base on BBLE
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <returns></returns>
+    Public Shared Function AddressSearch(bble As String) As GeneralPropertyInformation()
+        Dim gData = provider.GetPropGeneralInfo(bble)
+        Return {gData}
+    End Function
+
 #End Region
 
 #Region "Update mortgages, water, tax"
