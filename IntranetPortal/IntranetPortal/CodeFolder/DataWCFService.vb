@@ -6,7 +6,7 @@ Imports IntranetPortal.Data
 ''' </summary>
 Public Class DataWCFService
 
-    Private Shared provider As PropertyServiceProvider = New PropertyServiceProvider
+    Private Shared provider As IPropertyServiceProvider = New PropertyServiceProvider
 
 #Region "TLO Related"
     Public Shared Function GetLocateReport(apiOrderNum As Integer, bble As String, owner As HomeOwner) As DataAPI.TLOLocateReportOutput
@@ -139,22 +139,12 @@ Public Class DataWCFService
 #Region "Leads Info"
 
     ''' <summary>
-    '''     Load property generate information
-    ''' </summary>
-    ''' <param name="bble">Property BBLE</param>
-    ''' <param name="li">LeadsInfo Object</param>
-    ''' <returns></returns>
-    Public Shared Function GetFullAssessInfo(bble As String, Optional li As LeadsInfo = Nothing) As LeadsInfo
-        Return provider.GetFullAssessInfo(bble, li)
-    End Function
-
-    ''' <summary>
     '''     Update general property info and lispendas data
     ''' </summary>
     ''' <param name="bble">Property BBLE</param>
     ''' <returns></returns>
     Public Shared Function UpdateAssessInfo(bble As String) As LeadsInfo
-        Return provider.UpdateAssessInfo(bble)
+        Return provider.UpdateLeadsGeneralData(bble)
     End Function
 
     ''' <summary>
@@ -193,38 +183,6 @@ Public Class DataWCFService
 
             Return result.Select(Function(r) r.BBLE).ToArray
         End Using
-    End Function
-
-    Public Shared Function UpdateBasicInfo(bble As String) As LeadsInfo
-        Try
-            'this is apartment
-            If bble.StartsWith("A") Then
-                Return UpdateApartmentBuildingInfo(bble)
-            End If
-
-            Using context As New Entities
-
-                Dim li As LeadsInfo = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
-                If li Is Nothing Then
-                    li = GetFullAssessInfo(bble, li)
-                    context.LeadsInfoes.Add(li)
-                Else
-                    li = GetFullAssessInfo(bble, li)
-                End If
-                context.SaveChanges()
-
-                GetLatestSalesInfo(bble)
-                Return li
-            End Using
-        Catch ex As System.ServiceModel.EndpointNotFoundException
-            Throw New Exception("The data serice Is Not avaiable. Please refresh later.")
-        Catch ex As Exception
-            Throw New Exception("Exception happened during updating. Please try later. Exception:  " & ex.Message)
-        End Try
-    End Function
-
-    Public Shared Function UpdateApartmentBuildingInfo(bble As String) As LeadsInfo
-        Return provider.UpdateApartmentBuildingInfo(bble)
     End Function
 
     ''' <summary>
@@ -506,6 +464,7 @@ Public Class DataWCFService
     End Function
 #End Region
 
+#Region "others"
     Public Shared Sub UpdateTaxLiens(bble As String)
         UpdateTaxLiens2(bble)
         Return
@@ -548,4 +507,6 @@ Public Class DataWCFService
             Return result
         End Using
     End Function
+#End Region
+
 End Class

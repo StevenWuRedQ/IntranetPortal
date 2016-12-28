@@ -1,9 +1,66 @@
-﻿Imports IntranetPortal.Data
+﻿Imports IntranetPortal
+Imports IntranetPortal.Data
+
+''' <summary>
+'''     The interface for property service provider
+''' </summary>
+Public Interface IPropertyServiceProvider
+    ''' <summary>
+    '''     Update leads general data
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <returns></returns>
+    Function UpdateLeadsGeneralData(bble As String) As LeadsInfo
+
+    ''' <summary>
+    '''     Update leads mortgage, tax, water, zillow etc.
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <param name="assessment">Indicate if general data is included</param>
+    ''' <param name="order">The Custom Order</param>
+    ''' <returns></returns>
+    Function UpdateLeadInfo(bble As String, assessment As Boolean, order As APIOrder) As Boolean
+
+    ''' <summary>
+    '''     Update the leads servicer
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    Sub UpdateServicer(bble As String)
+
+    ''' <summary>
+    '''     Update external data to portal
+    ''' </summary>
+    ''' <param name="externalData">The external data object</param>
+    ''' <returns></returns>
+    Function UpdateExternalData(externalData As ExternalData) As Boolean
+
+    ''' <summary>
+    '''     Update zillow estimate data to leads
+    ''' </summary>
+    ''' <param name="bble"></param>
+    ''' <returns></returns>
+    Function UpdateZillowValue(bble As String) As LeadsInfo
+
+    ''' <summary>
+    '''     Return leads lispends list
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <returns></returns>
+    Function GetLiensInfo(bble As String) As List(Of PortalLisPen)
+
+    ''' <summary>
+    '''     Update leads owner data to latest
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    Sub LoadLatestOwner(bble As String)
+
+End Interface
 
 ''' <summary>
 '''     Provide lead property data
 ''' </summary>
 Public Class PropertyServiceProvider
+    Implements IPropertyServiceProvider
 
 #Region "Private member"
 
@@ -140,7 +197,7 @@ Public Class PropertyServiceProvider
     ''' </summary>
     ''' <param name="bble">Property BBLE</param>
     ''' <returns></returns>
-    Public Function UpdateAssessInfo(bble As String) As LeadsInfo
+    Public Function UpdateLeadsGeneralData(bble As String) As LeadsInfo Implements IPropertyServiceProvider.UpdateLeadsGeneralData
         Try
             ' this is apartment
             If bble.StartsWith("A") Then
@@ -196,7 +253,7 @@ Public Class PropertyServiceProvider
     ''' </summary>
     ''' <param name="bble">Property BBLE</param>
     ''' <returns></returns>
-    Public Function GetLiensInfo(bble As String) As List(Of PortalLisPen)
+    Public Function GetLiensInfo(bble As String) As List(Of PortalLisPen) Implements IPropertyServiceProvider.GetLiensInfo
         Dim lisPens As New List(Of PortalLisPen)
 
         Try
@@ -263,9 +320,9 @@ Public Class PropertyServiceProvider
     ''' <param name="assessment">Indicate if general info is included</param>
     ''' <param name="apiOrder">API Order</param>
     ''' <returns></returns>
-    Public Function UpdateLeadInfo(bble As String, assessment As Boolean, apiOrder As APIOrder) As Boolean
+    Public Function UpdateLeadInfo(bble As String, assessment As Boolean, apiOrder As APIOrder) As Boolean Implements IPropertyServiceProvider.UpdateLeadInfo
         If assessment Then
-            UpdateAssessInfo(bble)
+            UpdateLeadsGeneralData(bble)
         End If
 
         apiOrder.OrderTime = DateTime.Now
@@ -278,7 +335,7 @@ Public Class PropertyServiceProvider
     '''     Update servicer data of given property
     ''' </summary>
     ''' <param name="bble">Property BBLE</param>
-    Public Sub UpdateServicer(bble As String)
+    Public Sub UpdateServicer(bble As String) Implements IPropertyServiceProvider.UpdateServicer
         Dim order = APIOrder.NewOrder(bble)
         LoadServicer(bble, order.ApiOrderID)
         ctx.SaveChanges()
@@ -288,7 +345,7 @@ Public Class PropertyServiceProvider
     '''     Update the property zillow value
     ''' </summary>
     ''' <param name="bble"></param>
-    Public Function UpdateZillowValue(bble As String) As LeadsInfo
+    Public Function UpdateZillowValue(bble As String) As LeadsInfo Implements IPropertyServiceProvider.UpdateZillowValue
         Dim order = APIOrder.NewOrder(bble, False, False, False, False, True, False, GetCurrentIdentityName())
         Dim ld = ctx.LeadsInfoes.Find(bble)
         LoadZEstimate(ld, order)
@@ -537,7 +594,7 @@ Public Class PropertyServiceProvider
     ''' </summary>
     ''' <param name="externalData">External Data</param>
     ''' <returns></returns>
-    Public Function UpdateExternalData(externalData As ExternalData) As Boolean
+    Public Function UpdateExternalData(externalData As ExternalData) As Boolean Implements IPropertyServiceProvider.UpdateExternalData
         If externalData Is Nothing Then
             Return False
         End If
@@ -578,7 +635,7 @@ Public Class PropertyServiceProvider
     '''     Load latest homeowner address data
     ''' </summary>
     ''' <param name="bble">Property BBLE</param>
-    Public Sub LoadLatestOwner(bble As String)
+    Public Sub LoadLatestOwner(bble As String) Implements IPropertyServiceProvider.LoadLatestOwner
         Dim li = ctx.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
         If li Is Nothing Then
             Return
@@ -724,6 +781,7 @@ Public Class PropertyServiceProvider
             Throw New Exception("Get Current Identity Name: " & ex.Message)
         End Try
     End Function
+
 
 #End Region
 

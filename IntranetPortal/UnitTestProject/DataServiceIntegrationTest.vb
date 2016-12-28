@@ -10,7 +10,8 @@ Imports IntranetPortal.Data
         Dim bble = "1010901183"
         Dim li = LeadsInfo.GetInstance(bble)
         li.PropertyAddress = "test"
-        li = DataWCFService.GetFullAssessInfo(bble, li)
+        Dim provider As New PropertyServiceProvider
+        li = provider.GetFullAssessInfo(bble, li)
         Assert.IsFalse(li.PropertyAddress = "test")
     End Sub
 
