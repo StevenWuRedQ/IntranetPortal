@@ -506,7 +506,7 @@ Public Class LeadsList
             e.Cancel = True
             gridLeads.CancelEdit()
 
-            gridLeads.DataSource = Context.Leads.Where(Function(l) l.Status = LeadStatus.NewLead And l.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(l) l.LastUpdate2)
+            gridLeads.DataSource = Context.Leads.Where(Function(l) l.Status = LeadStatus.NewLead And l.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(l) l.LastUpdate)
             gridLeads.DataBind()
         End Using
     End Sub

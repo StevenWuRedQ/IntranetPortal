@@ -405,7 +405,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">MAX FAR</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.MaxFar%>">
+                    <input class="ss_form_input" value="<%= String.Format("{0:0.##}", LeadsInfoData.MaxFar)%>">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">
@@ -417,7 +417,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">UNBUILT SQFT</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.UnbuiltSqft%>">
+                    <input class="ss_form_input" value="<%= String.Format("{0:0.##}", LeadsInfoData.UnbuiltSqft) %>">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">SALE DATE</label>

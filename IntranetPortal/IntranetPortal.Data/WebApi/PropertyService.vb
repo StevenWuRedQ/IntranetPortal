@@ -255,7 +255,7 @@ Public Class GeneralAddress
                 Return result
             End If
 
-            result = result & "," & state & " " & zip
+            result = result & city & "," & state & " " & zip
 
             Return result.TrimStart.TrimEnd
         End Get

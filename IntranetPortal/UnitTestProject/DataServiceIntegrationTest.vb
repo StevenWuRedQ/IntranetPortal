@@ -24,6 +24,28 @@ Imports IntranetPortal.Data
     End Sub
 
     <TestMethod()>
+    Public Sub BatchUpdateLeadInfo_Return()
+        Dim bble = "4094390054"
+
+        Dim fun = Sub()
+                      For i = 1 To 10
+                          Dim result = DataWCFService.UpdateAssessInfo(bble)
+                      Next
+                  End Sub
+
+        Threading.ThreadPool.QueueUserWorkItem(fun)
+        Threading.ThreadPool.QueueUserWorkItem(fun)
+        Threading.ThreadPool.QueueUserWorkItem(fun)
+        Threading.ThreadPool.QueueUserWorkItem(fun)
+        Threading.ThreadPool.QueueUserWorkItem(fun)
+        Threading.ThreadPool.QueueUserWorkItem(fun)
+
+        While (True)
+
+        End While
+    End Sub
+
+    <TestMethod()>
     Public Sub AddressSearchByBBLE_GeneralInfo()
         Dim bble = "4094390054"
         Dim result = DataWCFService.AddressSearch(bble)

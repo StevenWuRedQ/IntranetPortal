@@ -76,6 +76,7 @@ End Interface
 ''' </summary>
 Public Class PropertyServiceProvider
     Implements IPropertyServiceProvider
+    Implements IDisposable
 
 #Region "Private member"
 
@@ -116,8 +117,8 @@ Public Class PropertyServiceProvider
                 li.PropertyAddress = result.address.FormatAddress
                 li.Borough = result.propertyInformation.Borough
                 li.Zoning = result.propertyInformation.Zoning
-                li.MaxFar = CDbl(result.propertyInformation.MaxResidentialFAR)
-                li.ActualFar = CDbl(result.propertyInformation.BuiltFAR)
+                li.MaxFar = String.Format("{0:0.##}", (result.propertyInformation.MaxResidentialFAR))
+                li.ActualFar = String.Format("{0:0.##}", (result.propertyInformation.BuiltFAR))
                 li.NYCSqft = result.propertyInformation.BuildingGrossArea
                 li.Latitude = result.propertyInformation.Latitude
                 li.Longitude = result.propertyInformation.Longitude
@@ -241,7 +242,7 @@ Public Class PropertyServiceProvider
 
             ctx.SaveChanges()
 
-            ctx.Entry(li).Reload()
+            li = ctx.LeadsInfoes.Find(bble)
             LeadsInfo.AddIndicator("LPDefandant", li, GetCurrentIdentityName())
 
             ' Update leads neighborhood info
@@ -259,7 +260,7 @@ Public Class PropertyServiceProvider
         Catch ex As System.ServiceModel.EndpointNotFoundException
             Throw New Exception("The data serice is not avaiable. Please refresh later.")
         Catch ex As Exception
-            Throw New Exception("Exception happened during updating. Please try later. Exception: " & ex.Message)
+            Throw New Exception("Exception happened during updating. Please try later. Exception: " & ex.Message, ex)
         End Try
     End Function
 
@@ -823,9 +824,41 @@ Public Class PropertyServiceProvider
         End Try
     End Function
 
-
-
-
 #End Region
+
+#Region "IDisposable Support"
+    Private disposedValue As Boolean ' To detect redundant calls
+
+    ' IDisposable
+    Protected Overridable Sub Dispose(disposing As Boolean)
+        If Not disposedValue Then
+            If disposing Then
+                ' TODO: dispose managed state (managed objects).
+                ctx.Dispose()
+                svr.Dispose()
+            End If
+
+            ' TODO: free unmanaged resources (unmanaged objects) and override Finalize() below.
+            ' TODO: set large fields to null.
+        End If
+        disposedValue = True
+    End Sub
+
+    ' TODO: override Finalize() only if Dispose(disposing As Boolean) above has code to free unmanaged resources.
+    'Protected Overrides Sub Finalize()
+    '    ' Do not change this code.  Put cleanup code in Dispose(disposing As Boolean) above.
+    '    Dispose(False)
+    '    MyBase.Finalize()
+    'End Sub
+
+    ' This code added by Visual Basic to correctly implement the disposable pattern.
+    Public Sub Dispose() Implements IDisposable.Dispose
+        ' Do not change this code.  Put cleanup code in Dispose(disposing As Boolean) above.
+        Dispose(True)
+        ' TODO: uncomment the following line if Finalize() is overridden above.
+        ' GC.SuppressFinalize(Me)
+    End Sub
+#End Region
+
 
 End Class

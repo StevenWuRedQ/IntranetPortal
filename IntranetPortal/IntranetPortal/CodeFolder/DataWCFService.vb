@@ -6,7 +6,11 @@ Imports IntranetPortal.Data
 ''' </summary>
 Public Class DataWCFService
 
-    Private Shared provider As IPropertyServiceProvider = New PropertyServiceProvider
+    Private Shared ReadOnly Property provider As IPropertyServiceProvider
+        Get
+            Return New PropertyServiceProvider
+        End Get
+    End Property
 
 #Region "TLO Related"
     Public Shared Function GetLocateReport(apiOrderNum As Integer, bble As String, owner As HomeOwner) As DataAPI.TLOLocateReportOutput
