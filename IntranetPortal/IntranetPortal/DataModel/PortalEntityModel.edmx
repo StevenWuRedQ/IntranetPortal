@@ -329,7 +329,8 @@
           <Property Name="EstValue" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
-          <Property Name="NeighName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeighName" Type="nvarchar" MaxLength="250" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nvarchar" MaxLength="50" />
           <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Borough" Type="nvarchar" MaxLength="50" />
@@ -1221,7 +1222,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="EstValue" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NeighName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeighName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1237,6 +1238,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="UnitNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="LeadLeadsInfo">
           <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="0..1" />
@@ -2070,6 +2072,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="LeadsInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfo">
               <MappingFragment StoreEntitySet="LeadsInfo">
+                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="UnitNum" ColumnName="UnitNum" />

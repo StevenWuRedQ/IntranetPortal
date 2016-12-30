@@ -208,6 +208,7 @@
     <Compile Include="LeadsEcourtDataTest.vb" />
     <Compile Include="HomeOwnerTest.vb" />
     <Compile Include="DataServiceIntegrationTest.vb" />
+    <Compile Include="PropertyServiceProviderUnitTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />

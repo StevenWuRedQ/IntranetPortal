@@ -10,14 +10,39 @@ Imports IntranetPortal.Data
         Dim bble = "1010901183"
         Dim li = LeadsInfo.GetInstance(bble)
         li.PropertyAddress = "test"
-        Dim provider As New PropertyServiceProvider
+        Dim provider As New IntranetPortal.PropertyServiceProvider
         li = provider.GetFullAssessInfo(bble, li)
         Assert.IsFalse(li.PropertyAddress = "test")
     End Sub
 
     <TestMethod()>
+    Public Sub UpdateAssessInfo_ReturnLeadsInfo()
+        Dim bble = "3044650105"
+
+        Dim result = DataWCFService.UpdateAssessInfo(bble)
+        Assert.AreEqual(result.BBLE, bble)
+    End Sub
+
+    '4065270031
+    <TestMethod()>
+    Public Sub GetLatestSalesInfo_Return()
+        Dim bble = "4065270031"
+        DataWCFService.GetLatestSalesInfo(bble)
+        Assert.IsTrue(True)
+    End Sub
+
+
+    <TestMethod()>
     Public Sub UpdateLeadInfo_Return()
-        Dim bble = "4094390054"
+        Dim bble = "3044650105"
+
+        Dim result = DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, True, False)
+        Assert.IsTrue(result)
+    End Sub
+
+    <TestMethod()>
+    Public Sub UpdateLeadInfo_BadBBLE()
+        Dim bble = "4065270031"
 
         Dim result = DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, True, False)
         Assert.IsTrue(result)

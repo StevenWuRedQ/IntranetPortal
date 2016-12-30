@@ -96,6 +96,7 @@ Public Class PropertyServiceProvider
 
         Try
             Dim result = svr.GetGeneralInformation(bble)
+
             If li Is Nothing Then
                 li = New LeadsInfo
                 li.BBLE = bble
@@ -377,17 +378,19 @@ Public Class PropertyServiceProvider
 
         ' load mortgage from new services
         Dim mtgs = svr.GetMortgages(lead.BBLE)
-        lead.C1stMotgrAmt = mtgs.Max(Function(a) a.DocumentAmount)
-        If lead.C1stMotgrAmt.HasValue AndAlso lead.C1stMotgrAmt > 0 Then
-            lead.C2ndMotgrAmt = mtgs.Where(Function(a) a.DocumentAmount < lead.C1stMotgrAmt).Max(Function(a) a.DocumentAmount)
+        If mtgs IsNot Nothing AndAlso mtgs.Count > 0 Then
+            lead.C1stMotgrAmt = mtgs.Max(Function(a) a.DocumentAmount)
+            If lead.C1stMotgrAmt.HasValue AndAlso lead.C1stMotgrAmt > 0 Then
+                lead.C2ndMotgrAmt = mtgs.Where(Function(a) a.DocumentAmount < lead.C1stMotgrAmt).Max(Function(a) a.DocumentAmount)
 
-            If lead.C2ndMotgrAmt.HasValue AndAlso lead.C2ndMotgrAmt > 0 Then
-                lead.C3rdMortgrAmt = mtgs.Where(Function(a) a.DocumentAmount < lead.C2ndMotgrAmt).Max(Function(a) a.DocumentAmount)
+                If lead.C2ndMotgrAmt.HasValue AndAlso lead.C2ndMotgrAmt > 0 Then
+                    lead.C3rdMortgrAmt = mtgs.Where(Function(a) a.DocumentAmount < lead.C2ndMotgrAmt).Max(Function(a) a.DocumentAmount)
+                End If
             End If
+            lead.AcrisOrderStatus = APIOrder.ItemStatus.Complete.ToString
+            apiOrder.Acris = APIOrder.ItemStatus.Complete
+            apiOrder.UpdateOrderStatus()
         End If
-        lead.AcrisOrderStatus = APIOrder.ItemStatus.Complete.ToString
-        apiOrder.Acris = APIOrder.ItemStatus.Complete
-        apiOrder.UpdateOrderStatus()
     End Sub
 
     Private Sub LoadTaxbill(lead As LeadsInfo, apiOrder As APIOrder)
@@ -659,6 +662,10 @@ Public Class PropertyServiceProvider
         End If
 
         Dim info = svr.GetGeneralInformation(bble)
+        If info Is Nothing OrElse info.owners Is Nothing OrElse info.owners.Count = 0 Then
+            Return
+        End If
+
         Dim results = info.owners
 
         If results IsNot Nothing AndAlso results.Count > 0 Then

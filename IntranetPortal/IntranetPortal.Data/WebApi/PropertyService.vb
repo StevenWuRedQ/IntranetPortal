@@ -23,7 +23,11 @@ Public Class PropertyService
     Public Function GetGeneralInformation(bble As String) As GeneralPropertyInformation
         Dim request = GetRequest("api/physicaldata/nyc/{bble}/GeneralInformation/", Method.GET)
         request.AddUrlSegment("bble", bble.Trim)
-        Return Execute(Of GeneralPropertyInformation)(request)
+        Try
+            Return Execute(Of GeneralPropertyInformation)(request, True)
+        Catch ex As Exception
+            Return Nothing
+        End Try
     End Function
 
     ''' <summary>
@@ -48,7 +52,7 @@ Public Class PropertyService
     Public Function GetMortgages(bble As String) As List(Of DeedDocument)
         Dim request = GetRequest("api/mortgagesdeeds/{bble}/unsatisfiedMortgages/", Method.GET)
         request.AddUrlSegment("bble", bble.Trim)
-        Return Execute(Of List(Of DeedDocument))(request)
+        Return Execute(Of List(Of DeedDocument))(request, True)
     End Function
 
     ''' <summary>

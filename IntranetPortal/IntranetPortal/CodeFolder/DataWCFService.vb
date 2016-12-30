@@ -244,7 +244,7 @@ Public Class DataWCFService
     ''' <returns></returns>
     Public Shared Function AddressSearch(num As String, strName As String, borough As String) As GeneralPropertyInformation()
         Dim data = provider.GetPropbyAddress(num, strName, borough)
-        If data IsNot Nothing Then
+        If data IsNot Nothing AndAlso data.address IsNot Nothing Then
             Return AddressSearch(data.address.bbl)
         End If
         Return Nothing
@@ -256,6 +256,10 @@ Public Class DataWCFService
     ''' <param name="bble">Property BBLE</param>
     ''' <returns></returns>
     Public Shared Function AddressSearch(bble As String) As GeneralPropertyInformation()
+        If String.IsNullOrEmpty(bble) Then
+            Return {}
+        End If
+
         Dim gData = provider.GetPropGeneralInfo(bble)
         Return {gData}
     End Function

@@ -51,11 +51,35 @@ Public Class PropertyServiceTest
     End Sub
 
     <TestMethod()>
+    Public Sub GetMortgages_BadBBLE()
+        Dim bble = "4065270031"
+        Dim service As New PropertyService
+        Dim result = service.GetMortgages(bble)
+        Assert.IsNull(result)
+    End Sub
+
+    <TestMethod()>
     Public Sub GetGeneralInformation_GeneralInfo()
-        Dim bble = "1010901183"
+        Dim bble = "3033880016"
         Dim service As New PropertyService
         Dim result = service.GetGeneralInformation(bble)
         Assert.IsNotNull(result)
+    End Sub
+
+    <TestMethod()>
+    Public Sub GetGeneralInformation_ReturnNull()
+        Dim bble = "4065270031"
+        Dim service As New PropertyService
+        Dim result = service.GetGeneralInformation(bble)
+        Assert.IsNull(result)
+    End Sub
+
+    <TestMethod()>
+    Public Sub GetGeneralInformation_BadRequestReturnNull()
+        Dim bble = "6004010187"
+        Dim service As New PropertyService
+        Dim result = service.GetGeneralInformation(bble)
+        Assert.IsNull(result)
     End Sub
 
     <TestMethod()>
