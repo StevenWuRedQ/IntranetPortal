@@ -123,7 +123,7 @@
         Return apiOrder
     End Function
 
-    Public Sub UpdateOrderStatus()
+    Public Sub UpdateOrderStatus(Optional notifyUser As Boolean = True)
         Dim result As Boolean = (Not (Acris.HasValue AndAlso Acris = ItemStatus.Calling) And
                                          Not (ECBViolation.HasValue AndAlso ECBViolation = ItemStatus.Calling) And
                                               Not (TaxBill.HasValue AndAlso TaxBill = ItemStatus.Calling) And
@@ -134,6 +134,13 @@
 
         If result Then
             Status = OrderStatus.Complete
+
+            If notifyUser Then
+                Dim ld = LeadsInfo.GetInstance(BBLE)
+                If ld IsNot Nothing Then
+                    UserMessage.AddNewMessage(Orderby, "Property Data is ready", String.Format("Property ({0}) Data is ready. Please check.", ld.LeadsName), BBLE, DateTime.Now, "Portal", Nothing)
+                End If
+            End If
         Else
             Status = OrderStatus.PartialComplete
         End If
@@ -182,14 +189,6 @@
                 apiOrder.UpdateOrderStatus()
 
                 context.SaveChanges()
-
-                If apiOrder.Status = OrderStatus.Complete AndAlso status <> "Error" Then
-                    Dim ld = LeadsInfo.GetInstance(apiOrder.BBLE)
-                    If ld IsNot Nothing Then
-                        UserMessage.AddNewMessage(apiOrder.Orderby, "Property Data is ready", String.Format("Property ({0}) Data is ready. Please check.", ld.LeadsName), apiOrder.BBLE, DateTime.Now, "Portal", Nothing)
-                    End If
-                End If
-
                 Return True
             End If
         End Using
