@@ -111,9 +111,9 @@ Public Class PropertyServiceTest
 
     <TestMethod()>
     Public Sub GetZestimate_ZillowProperty()
-        Dim bble = "3033880016"
+        Dim bble = "4089730044"
         Dim service As New PropertyService
-        Dim result = service.GetZestimate(bble, 1)
+        Dim result = service.GetZestimate(bble, 3)
         Assert.IsNotNull(result)
     End Sub
 

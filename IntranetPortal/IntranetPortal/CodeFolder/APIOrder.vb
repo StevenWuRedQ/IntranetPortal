@@ -15,26 +15,21 @@
 
     Public Function Save(context As Entities) As APIOrder
         Dim result = Me
-        If Status = OrderStatus.Active Then
 
-            Dim tmpApiOrder = context.APIOrders.Any(Function(ap) ap.ApiOrderID = ApiOrderID)
-            If tmpApiOrder Then
-                If context.APIOrders.Local.Any(Function(ap) ap.ApiOrderID = ApiOrderID) Then
-                    Dim tmpOrder = context.APIOrders.Local.SingleOrDefault(Function(ap) ap.ApiOrderID = ApiOrderID)
-                    context.Entry(tmpOrder).CurrentValues.SetValues(Me)
-                    result = tmpOrder
-                Else
-                    context.Entry(Me).State = Entity.EntityState.Modified
-                End If
+        Dim tmpApiOrder = context.APIOrders.Any(Function(ap) ap.ApiOrderID = ApiOrderID)
+        If tmpApiOrder Then
+            If context.APIOrders.Local.Any(Function(ap) ap.ApiOrderID = ApiOrderID) Then
+                Dim tmpOrder = context.APIOrders.Local.SingleOrDefault(Function(ap) ap.ApiOrderID = ApiOrderID)
+                context.Entry(tmpOrder).CurrentValues.SetValues(Me)
+                result = tmpOrder
             Else
-                context.APIOrders.Add(Me)
+                context.Entry(Me).State = Entity.EntityState.Modified
             End If
         Else
             context.APIOrders.Add(Me)
         End If
 
         context.SaveChanges()
-
         Return result
     End Function
 

@@ -347,7 +347,7 @@ Public Class Waterbill
     Public Property externalReferenceId As String
     Public Property status As String
     Public Property BBL As String
-    Public Property billAmount As Decimal
+    Public Property billAmount As Decimal?
 End Class
 
 Public Class Taxbill
@@ -355,7 +355,7 @@ Public Class Taxbill
     Public Property externalReferenceId As String
     Public Property status As String
     Public Property BBL As String
-    Public Property billAmount As Decimal
+    Public Property billAmount As Decimal?
 End Class
 
 
@@ -368,12 +368,16 @@ Public Class Dobpenaltiesandviolations
     Public Property externalReferenceId As String
     Public Property status As String
     Public Property BBL As String
-    Public Property civilPenaltyAmount As Decimal
-    Public Property violationAmount As Decimal
+    Public Property civilPenaltyAmount As Decimal?
+    Public Property violationAmount As Decimal?
 
-    Public ReadOnly Property DOBViolationAmount As Decimal
+    Public ReadOnly Property DOBViolationAmount As Decimal?
         Get
-            Return civilPenaltyAmount + violationAmount
+            If civilPenaltyAmount.HasValue OrElse violationAmount.HasValue Then
+                Return civilPenaltyAmount + violationAmount
+            End If
+
+            Return Nothing
         End Get
     End Property
 
@@ -418,7 +422,7 @@ Public Class ZillowProperty
     Public Property externalReferenceId As String
     Public Property status As String
     Public Property BBL As String
-    Public Property zEstimate As Decimal
+    Public Property zEstimate As Decimal?
 End Class
 
 Public Class PropertyDeed

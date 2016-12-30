@@ -274,24 +274,25 @@ Public Class PropertyServiceProvider
 
         Try
             Dim newLPs = svr.GetLpLiens(bble)
-
-            For Each item In newLPs
-                Dim lisPen As New PortalLisPen
-                lisPen.LpType = item.LisPendensType
-                lisPen.Expiration = item.ExpirationDate
-                lisPen.BBLE = item.BBL
-                lisPen.CollectedOn = item.DataEntryDateTime
-                lisPen.County = item.CountyName
-                lisPen.CountyNum = item.CountyId
-                lisPen.Defendant = item.Debtor
-                lisPen.Docket_Number = item.CCISCaseIndexNumber
-                lisPen.FileDate = item.DataEntryDateTime
-                lisPen.Mortgage_Date = item.EffectiveDateTime
-                lisPen.Number = item.Seq
-                lisPen.Plaintiff = item.Creditor
-                lisPen.CreateTime = DateTime.Now
-                lisPens.Add(lisPen)
-            Next
+            If newLPs IsNot Nothing Then
+                For Each item In newLPs
+                    Dim lisPen As New PortalLisPen
+                    lisPen.LpType = item.LisPendensType
+                    lisPen.Expiration = item.ExpirationDate
+                    lisPen.BBLE = item.BBL
+                    lisPen.CollectedOn = item.DataEntryDateTime
+                    lisPen.County = item.CountyName
+                    lisPen.CountyNum = item.CountyId
+                    lisPen.Defendant = item.Debtor
+                    lisPen.Docket_Number = item.CCISCaseIndexNumber
+                    lisPen.FileDate = item.DataEntryDateTime
+                    lisPen.Mortgage_Date = item.EffectiveDateTime
+                    lisPen.Number = item.Seq
+                    lisPen.Plaintiff = item.Creditor
+                    lisPen.CreateTime = DateTime.Now
+                    lisPens.Add(lisPen)
+                Next
+            End If
 
             Return lisPens
         Catch ex As Exception
