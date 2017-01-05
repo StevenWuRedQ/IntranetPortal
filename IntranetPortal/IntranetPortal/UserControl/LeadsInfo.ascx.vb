@@ -472,7 +472,7 @@ Public Class LeadsInfo1
             Case "All"
                 comments = String.Format("All leads info is refreshed by {0}", username)
                 DataWCFService.UpdateLeadInfo(bble, True)
-                'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)
+            'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)vi
 
             Case "Assessment"
                 comments = String.Format("General property info is refreshed by {0}", username)

@@ -577,15 +577,16 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-    Public ReadOnly Property EstimatedMortageDefault As Decimal
+    Public ReadOnly Property EstimatedMortageDefault As Decimal?
         Get
             'Return 1234564.123486456
-            Dim EMD As Decimal
+            Dim EMD As Decimal?
             If (LisPens IsNot Nothing AndAlso LisPens.Count > 0) Then
-                Dim ListPensYear = LisPens.Select(Function(f) f.FileDate.Year).ToList
-
-                Dim oldestYear = ListPensYear.Min()
-                EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (Date.Now.Year - oldestYear))
+                Dim ListPensYear = LisPens.Where(Function(a) a.Active IsNot Nothing AndAlso a.Active).Select(Function(f) f.FileDate.Year).ToList
+                If ListPensYear IsNot Nothing AndAlso ListPensYear.Count > 0 Then
+                    Dim oldestYear = ListPensYear.Min()
+                    EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (Date.Now.Year - oldestYear))
+                End If
             Else
                 Return MortgageCombo
             End If

@@ -110,6 +110,7 @@ Public Class PropertyServiceProvider
                 li.NeighName = result.propertyInformation.NTA
                 li.State = result.address.state
                 li.ZipCode = result.propertyInformation.ZipCode
+                li.City = result.address.city
 
                 If Not String.IsNullOrEmpty(result.propertyInformation.UnitNumber) AndAlso Not String.IsNullOrEmpty(result.propertyInformation.UnitNumber) Then
                     li.UnitNum = result.propertyInformation.UnitNumber.Trim
@@ -291,6 +292,13 @@ Public Class PropertyServiceProvider
                     lisPen.Number = item.Seq
                     lisPen.Plaintiff = item.Creditor
                     lisPen.CreateTime = DateTime.Now
+
+                    If item.CaseStatus = "Active" OrElse item.CaseStatus = "Restored" Then
+                        lisPen.Active = True
+                    Else
+                        lisPen.Active = False
+                    End If
+
                     lisPens.Add(lisPen)
                 Next
             End If
@@ -379,14 +387,18 @@ Public Class PropertyServiceProvider
         ' load mortgage from new services
         Dim mtgs = svr.GetMortgages(lead.BBLE)
         If mtgs IsNot Nothing AndAlso mtgs.Count > 0 Then
-            lead.C1stMotgrAmt = mtgs.Max(Function(a) a.DocumentAmount)
-            If lead.C1stMotgrAmt.HasValue AndAlso lead.C1stMotgrAmt > 0 Then
-                lead.C2ndMotgrAmt = mtgs.Where(Function(a) a.DocumentAmount < lead.C1stMotgrAmt).Max(Function(a) a.DocumentAmount)
+            Dim amounts = mtgs.Select(Function(a) a.DocumentAmount).OrderByDescending(Function(a) a).ToArray
+            If amounts IsNot Nothing AndAlso amounts.Count > 0 Then
+                lead.C1stMotgrAmt = amounts(0)
+                If lead.C1stMotgrAmt.HasValue AndAlso lead.C1stMotgrAmt > 0 AndAlso amounts.Count > 1 Then
+                    lead.C2ndMotgrAmt = amounts(1)
 
-                If lead.C2ndMotgrAmt.HasValue AndAlso lead.C2ndMotgrAmt > 0 Then
-                    lead.C3rdMortgrAmt = mtgs.Where(Function(a) a.DocumentAmount < lead.C2ndMotgrAmt).Max(Function(a) a.DocumentAmount)
+                    If lead.C2ndMotgrAmt.HasValue AndAlso lead.C2ndMotgrAmt > 0 AndAlso amounts.Count > 2 Then
+                        lead.C3rdMortgrAmt = amounts(2)
+                    End If
                 End If
             End If
+
             lead.AcrisOrderStatus = APIOrder.ItemStatus.Complete.ToString
             apiOrder.Acris = APIOrder.ItemStatus.Complete
             apiOrder.UpdateOrderStatus()
@@ -463,6 +475,7 @@ Public Class PropertyServiceProvider
         lead.WaterOrderTime = DateTime.Now
         lead.WaterOrderStatus = APIOrder.ItemStatus.Calling.ToString
         apiOrder.WaterBill = APIOrder.ItemStatus.Complete
+        apiOrder.UpdateOrderStatus()
     End Sub
 
     Private Sub SaveWaterBill(bills As Waterbill, Optional lead As LeadsInfo = Nothing, Optional apiOrder As APIOrder = Nothing)

@@ -13,8 +13,7 @@
     var lastBorough = null;
     var loadedBorough = null;
     var temStar = null;
-
-
+    
     //function is called on changing focused row
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 

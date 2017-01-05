@@ -367,8 +367,10 @@
                     <label class="ss_form_input_title">BBLE</label>
                     <input class="ss_form_input font_black" id="BBLEId" value="<%= If(LeadsInfoData.IsApartment, LeadsInfoData.BuildingBBLE, LeadsInfoData.BBLE)%>">
                 </li>
-
-
+                 <li class="ss_form_item">
+                    <label class="ss_form_input_title">City</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.City %>">
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Neighborhood</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Neighborhood %>">
@@ -377,7 +379,6 @@
                     <label class="ss_form_input_title">Block | Lot</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Block & "| " & LeadsInfoData.Lot %>">
                 </li>
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">NYC SQFT</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.NYCSqft %>">
@@ -394,7 +395,6 @@
                     <label class="ss_form_input_title">LOT DEM</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.LotDem %>">
                 </li>
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">STORIES</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.NumFloors%>">
@@ -685,7 +685,7 @@
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Default</span>
-                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="<%=LeadsInfoData.EstimatedMortageDefault.ToString("C") %>" />
+                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="<%=String.Format("{0:C}", LeadsInfoData.EstimatedMortageDefault) %>" />
             </div>
             <%----end line ----%>
         </div>

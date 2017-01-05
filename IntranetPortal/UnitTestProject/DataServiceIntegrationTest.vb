@@ -26,7 +26,7 @@ Imports IntranetPortal.Data
     '4065270031
     <TestMethod()>
     Public Sub GetLatestSalesInfo_Return()
-        Dim bble = "4065270031"
+        Dim bble = "4110220079"
         DataWCFService.GetLatestSalesInfo(bble)
         Assert.IsTrue(True)
     End Sub
@@ -34,7 +34,7 @@ Imports IntranetPortal.Data
 
     <TestMethod()>
     Public Sub UpdateLeadInfo_Return()
-        Dim bble = "3044650105"
+        Dim bble = "4103450022"
 
         Dim result = DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, True, False)
         Assert.IsTrue(result)
