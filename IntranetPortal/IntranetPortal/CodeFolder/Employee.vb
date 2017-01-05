@@ -881,6 +881,9 @@ Partial Public Class Employee
     Private Shared _empTeams As New Dictionary(Of String, String)
     Private Shared lockObj As New Object
     Public Shared Function GetEmpTeam(empName As String) As String
+        if String.IsNullOrEmpty(empName)
+            return ""
+        End If
         If Not _empTeams.ContainsKey(empName) Then
             SyncLock lockObj
                 If _empTeams.ContainsKey(empName) Then

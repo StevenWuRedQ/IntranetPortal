@@ -14,17 +14,5 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
     End Sub
 
 
-    <TestMethod()> Public Sub TestTest()
-        Using ctx As New IntranetPortal.Data.CodeFirstEntity
-
-            Dim d = New IntranetPortal.Data.Underwriting
-            d.PropertyInfo = New IntranetPortal.Data.UnderwritingPropertyInfo
-            d.PropertyInfo.OccupancyStatus = IntranetPortal.Data.UnderwritingPropertyInfo.OccupancyStatusEnum.Seller
-
-            ctx.Underwritings.Add(d)
-            ctx.SaveChanges()
-
-        End Using
-
-    End Sub
+  
 End Class

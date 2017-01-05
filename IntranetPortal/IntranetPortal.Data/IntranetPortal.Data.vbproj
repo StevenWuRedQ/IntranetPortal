@@ -146,6 +146,9 @@
     <Compile Include="ADOEntity\DialerContact.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\DocSearchUnderwritingPropertiesList.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\EcourtCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -208,19 +211,6 @@
     <Compile Include="EcourtService\EcourtService.vb" />
     <Compile Include="EcourtService\LeadsEcourtData.vb" />
     <Compile Include="Exception\DataException.vb" />
-    <Compile Include="Migrations\201609291834424_Initial.Designer.vb">
-      <DependentUpon>201609291834424_Initial.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609291834424_Initial.vb" />
-    <Compile Include="Migrations\201610241901293_Initial1.Designer.vb">
-      <DependentUpon>201610241901293_Initial1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610241901293_Initial1.vb" />
-    <Compile Include="Migrations\201610251324198_Initial2.Designer.vb">
-      <DependentUpon>201610251324198_Initial2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610251324198_Initial2.vb" />
-    <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
     <Compile Include="FollowUps\UserFollowUp.vb" />
@@ -415,19 +405,8 @@
     <Compile Include="SignProcess\PropertyOffer.vb" />
     <Compile Include="Title\TitleCase.vb" />
     <Compile Include="Twilio\TwilioClient.vb" />
-    <Compile Include="CodeFirstEntity\Underwriting.vb" />
-    <Compile Include="CodeFirstEntity\CodeFirstEntity.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609291834424_Initial.resx">
-      <DependentUpon>201609291834424_Initial.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610241901293_Initial1.resx">
-      <DependentUpon>201610241901293_Initial1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610251324198_Initial2.resx">
-      <DependentUpon>201610251324198_Initial2.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

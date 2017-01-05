@@ -12,14 +12,13 @@ Public Class EntityHelper(Of T As Class)
         Return properties
     End Function
 
-    public Shared Function TryLoad(ctx As DbContext, t As T)
+    public Shared Sub TryLoad(ctx As DbContext, t As T)
         If t IsNot Nothing
             for each navigationProperties in GetNavigationProperties(ctx)
                 ctx.Entry(t).Reference(navigationProperties.ToString()).Load()
             Next 
         End If
-
-    End Function
+    End Sub
 
     ' Update Reference Type in DBEntry Recursively
     Public Shared Sub ReferenceUpdate(ctx As DbContext, oldv As T, newv As T)

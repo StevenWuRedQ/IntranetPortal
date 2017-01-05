@@ -8,8 +8,6 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
 --%>
 
 <%@ Register Src="~/LeadDocSearch/LeadDocSearchList.ascx" TagPrefix="uc1" TagName="LeadDocSearchList" %>
-<%@ Register Src="~/PopupControl/LeadSearchSummery.ascx" TagPrefix="uc1" TagName="LeadSearchSummery" %>
-<%@ Register Src="~/LeadDocSearch/DocSearchOldVersion.ascx" TagPrefix="uc1" TagName="DocSearchOldVersion" %>
 <%@ Register Src="~/LeadDocSearch/DocSearchNewVersion.ascx" TagPrefix="uc1" TagName="DocSearchNewVersion" %>
 <%@ Register Src="~/UserControl/AuditLogs.ascx" TagPrefix="uc1" TagName="AuditLogs" %>
 
@@ -18,7 +16,7 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentPH" runat="server">
     <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
     <input type="hidden" id="mode" value="<%= Request.QueryString("mode")%>" />
-    <div id="LeadTaxSearchCtrl" ng-controller="LeadTaxSearchCtrl">
+    <div id="DocSearchController" ng-controller="DocSearchController">
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -135,7 +133,7 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                                                     name: 'underwritingRequest',
                                                     url: '/agent_story',
                                                     controller: 'UnderwritingRequestController',
-                                                    templateUrl: '/js/Views/Underwriter/underwriting_request.tpl.html',
+                                                    templateUrl: '/js/Views/Underwriting/underwriting_request.tpl.html',
                                                 }
                                                 $stateProvider.state(underwriterRequest);
                                             });
@@ -189,9 +187,10 @@ mode 2: underwriter mode,  user can view but not modified search, user can view 
                 $.ajax({
                     method: "GET",
                     url: url,
-                }).then(function (res) {
-                    STDownloadFile("/api/underwriter/getgeneratedxml/" + bble, "underwriter.xlsx" + new Date().toLocaleDateString)
-                })
+                }).then(function(res) {
+                    STDownloadFile("/api/underwriter/getgeneratedxml/" + bble,
+                        "underwriter.xlsx" + new Date().toLocaleDateString)
+                });
             }
 
         }

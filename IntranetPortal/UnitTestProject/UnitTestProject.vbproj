@@ -88,10 +88,6 @@
       <HintPath>..\packages\RestSharp.105.2.2\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Selenium.WebDriverBackedSelenium, Version=2.48.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\Selenium.WebDriverBackedSelenium.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -123,8 +119,9 @@
       <HintPath>..\packages\Twilio.4.4.1\lib\3.5\Twilio.Api.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver">
+    <Reference Include="WebDriver, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.2.53.1\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebDriver.Support, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.Support.2.53.1\lib\net40\WebDriver.Support.dll</HintPath>
@@ -206,6 +203,7 @@
     <Compile Include="EcourtServiceTest.vb" />
     <Compile Include="LeadsEcourtDataTest.vb" />
     <Compile Include="HomeOwnerTest.vb" />
+    <Compile Include="UnderwritingTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />
@@ -261,6 +259,10 @@
     <ProjectReference Include="..\IntranetPortal\IntranetPortal.vbproj">
       <Project>{6ca9f52b-c8d7-4098-8fb4-0626d61a9e32}</Project>
       <Name>IntranetPortal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnderwritingService\UnderwritingService.csproj">
+      <Project>{d373f6bb-a566-43d3-987e-b1f0e3c8353e}</Project>
+      <Name>UnderwritingService</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

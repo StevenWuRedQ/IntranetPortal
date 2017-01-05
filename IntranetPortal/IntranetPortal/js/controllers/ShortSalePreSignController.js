@@ -1,24 +1,7 @@
 ﻿var portalApp = angular.module('PortalApp');
 
 portalApp.config(function (portalUIRouteProvider) {
-
-    portalUIRouteProvider
-        .statesFor('newoffer')
-    //$stateProvider
-    //  // router /#/newoffer
-    //  .state('newoffer', {
-    //      url: "/newoffer",
-    //      templateUrl: "/js/views/newoffer/index.tpl.html"
-    //  })
-    //  // router /#/newoffer
-    //  .state('newoffer.newoffer', {
-    //      url: "/newoffer",
-    //      templateUrl: "/js/views/newoffer/newoffer.tpl.html"
-    //  }).state('newoffer.ssinfo', {
-    //      url: "/ssinfo",
-    //      templateUrl: "/js/views/newoffer/ssinfo.tpl.html"
-    //  });
-
+    portalUIRouteProvider.statesFor('newoffer');
 });
 
 
@@ -37,8 +20,7 @@ portalApp.controller('newofferCtrl', function ($scope) {
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
-    ptContactServices, $location,PortalHttpInterceptor,
-
+    ptContactServices, $location, PortalHttpInterceptor,
     /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
@@ -53,54 +35,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         PropertyOffer.query(function (data) {
             //$http.get('/api/PropertyOffer').success(function (data) {
             $scope.newOfferGridOpt = new NewOfferListGrid(data);
-            //    {
-            //    dataSource: data,
-            //    headerFilter: {
-            //        visible: true
-            //    },
-            //    searchPanel: {
-            //        visible: true,
-            //        width: 250
-            //    },
-            //    paging: {
-            //        pageSize: 10
-            //    },
-            //    columnAutoWidth: true,
-            //    wordWrapEnabled: true,
-            //    onRowPrepared: function (rowInfo) {
-            //        if (rowInfo.rowType != 'data')
-            //            return;
-            //        rowInfo.rowElement
-            //            .addClass('myRow');
-            //    },
-            //    columns: [{
-            //        dataField: 'Title',
-            //        caption: 'Address',
-            //        cellTemplate: function (container, options) {
-            //            $('<a/>').addClass('dx-link-MyIdealProp')
-            //                .text(options.value)
-            //                .on('dxclick', function () {
-            //                    //Do something with options.data;
-            //                    //ShowCaseInfo(options.data.BBLE);
-            //                    var request = options.data;
-
-            //                    PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
-            //                })
-            //                .appendTo(container);
-            //        }
-            //    },
-            //        'OfferType', {
-            //            dataField: 'CreateBy',
-            //            caption: 'Submit By'
-            //        }, {
-            //            dataField: 'CreateDate',
-            //            caption: 'Contract Date',
-            //            dataType: 'date',
-            //            sortOrder: 'desc',
-            //            format: 'shortDate'
-            //        },
-            //    ]
-            //}
         });
     }
 
@@ -492,9 +426,6 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         };
         if (needSearch || searchCompleted) {
             $scope.steps.splice(1, 0, searchWized)
-        } else {
-            /*Should make sure the document before LeadTaxSearchCtrl initial this error handle move to server side*/
-            //$("#LeadTaxSearchCtrl").remove();
         }
     }
     $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val());

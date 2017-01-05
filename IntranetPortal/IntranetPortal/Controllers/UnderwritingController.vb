@@ -10,57 +10,6 @@ Namespace Controllers
     Public Class UnderwritingController
         Inherits ApiController
 
-        <Route("api/underwriter/{bble}")>
-        Public Function GetUnderwritingByBBLE(bble As String) As IHttpActionResult
-            'Return Ok()
-            Dim uw = UnderwritingManage.GetUnderwritingByBBLE(bble)
-            Return Ok(uw)
-        End Function
-
-        <Route("api/underwriter")>
-        <HttpPost>
-        Public Function PostUnderwriting(<FromBody> uw As Underwriting) As IHttpActionResult
-            If Not ModelState.IsValid Then
-                Return BadRequest(ModelState)
-            End If
-
-            Try
-                Dim u = UnderwritingManage.SaveOrUpdate(uw, HttpContext.Current.User.Identity.Name)
-                Return Ok(u)
-            Catch ex As Exception
-
-            End Try
-
-            Return Ok()
-        End Function
-
-        <Route("api/underwriter/archive")>
-        <HttpPost>
-        Public Function PostArchive(<FromBody> data As Object()) As IHttpActionResult
-            Dim underwriting = data(0).ToObject(GetType(Underwriting))
-            Dim archiveNote = CStr(data(1))
-            Dim currentUser = HttpContext.Current.User.Identity.Name
-            UnderwritingManage.SaveOrUpdate(underwriting, currentUser)
-            Dim isSaved = UnderwritingManage.archive(underwriting.BBLE, currentUser, archiveNote)
-            If isSaved Then
-                Return Ok()
-            Else
-                Return BadRequest()
-            End If
-        End Function
-
-        <Route("api/underwriter/archived/{bble}")>
-        <HttpGet>
-        Public Function GetArchivedListByBBLE(bble As String) As IHttpActionResult
-            Return Ok(UnderwritingManage.loadArchivedList(bble).AsEnumerable)
-        End Function
-
-        <Route("api/underwriter/archived/id/{id}")>
-        <HttpGet>
-        Public Function GetArchivedByID(id As String) As IHttpActionResult
-            Return Ok(UnderwritingManage.getArchived(id))
-        End Function
-
         <Route("api/underwriter/generatexml/{bble}")>
         <HttpGet>
         Function GenerateExcel(bble As String) As IHttpActionResult
@@ -90,8 +39,6 @@ Namespace Controllers
                     ms.Close()
                 End If
             End If
-
-
             Return Ok()
         End Function
 
@@ -106,6 +53,14 @@ Namespace Controllers
                 New MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             response.Content.Headers.ContentLength = bfs.Length
             Return response
+        End Function
+
+    <Route("api/underwriting/list"), HttpGet>
+    Public Function GetProperties() As IHttpActionResult
+        Dim list = LeadInfoDocumentSearch.GetPropertiesList().ToList()
+            Dim jArrayList = JArray.FromObject(list).ToList()
+            jArrayList.ForEach(Function(s) s.item("Team") = Employee.GetEmpTeam(s("Owner").ToString()))
+            Return Ok(jArrayList)
         End Function
     End Class
 End Namespace

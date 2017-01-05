@@ -44,7 +44,7 @@ Partial Class AuditLog
         End Get
     End Property
 
-    Public Property CustomType As String
+ 
 
     Public Sub Delete()
 
@@ -154,7 +154,7 @@ End Class
 ''' <summary>
 ''' The Audit Object Configuration Cache
 ''' </summary>
-Class AuditConfigSetting
+Public Class AuditConfigSetting
 
     Public Shared Property IgnoreColumns As String() = {"CreateBy", "CreateDate", "UpdateBy", "UpdateTime", "UpdateDate"}
     Public Shared Property AuditInfo As Dictionary(Of Type, AuditConfig)
@@ -164,9 +164,8 @@ End Class
 ''' The Audit Object settings,
 ''' include the object properties, object table name and keynames.
 ''' </summary>
-Class AuditConfig
+Public Class AuditConfig
     Public Property Properties As Dictionary(Of String, Type)
     Public Property TableName As String
     Public Property KeyNames As List(Of String)
-
 End Class

@@ -33,7 +33,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
-	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -659,7 +659,6 @@
     <Compile Include="CodeFolder\SystemModelSetting.vb" />
     <Compile Include="CodeFolder\Team.vb" />
     <Compile Include="CodeFolder\TitleManage.vb" />
-    <Compile Include="CodeFolder\UnderwritingManage.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserFollowUpManage.vb" />
     <Compile Include="CodeFolder\UserInTeam.vb" />
@@ -1303,13 +1302,6 @@
     <Compile Include="LeadDocSearch\LeadDocSearchList.ascx.vb">
       <DependentUpon>LeadDocSearchList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LeadDocSearch\UnderwritingRequest.aspx.designer.vb">
-      <DependentUpon>UnderwritingRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LeadDocSearch\UnderwritingRequest.aspx.vb">
-      <DependentUpon>UnderwritingRequest.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="LeadsGenerator\LeadsGenerator.aspx.designer.vb">
       <DependentUpon>LeadsGenerator.aspx</DependentUpon>
@@ -1955,13 +1947,6 @@
       <DependentUpon>testPopup.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="UnderWriter\UnderwritingSummary.aspx.designer.vb">
-      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwritingSummary.aspx.vb">
-      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="PopupControl\VendorsPopup.ascx.designer.vb">
       <DependentUpon>VendorsPopup.ascx</DependentUpon>
     </Compile>
@@ -2476,34 +2461,6 @@
     <Compile Include="TitleUI\TitleTab.ascx.vb">
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UnderWriter\DocSearchListNew.aspx.designer.vb">
-      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\DocSearchListNew.aspx.vb">
-      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="UnderWriter\DocSearchList.aspx.designer.vb">
-      <DependentUpon>DocSearchList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\DocSearchList.aspx.vb">
-      <DependentUpon>DocSearchList.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwritingHome.aspx.designer.vb">
-      <DependentUpon>UnderwritingHome.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwritingHome.aspx.vb">
-      <DependentUpon>UnderwritingHome.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwritingTracking.aspx.designer.vb">
-      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwritingTracking.aspx.vb">
-      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
@@ -7294,7 +7251,7 @@
     <Content Include="js\components\ptSummaryItemList.tpl.html" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
-    <Content Include="js\controllers\LeadTaxSearchController.js" />
+    <Content Include="js\controllers\DocSearchController.js" />
     <Content Include="js\controllers\LegalController.js" />
     <Content Include="js\controllers\PreSignController.js" />
     <Content Include="js\controllers\ReportWizardController.js" />
@@ -7339,7 +7296,8 @@
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
     <Content Include="js\models\Employee.js" />
-    <Content Include="js\models\Underwriter.js" />
+    <None Include="js\models\Underwriter js.bak" />
+    <Content Include="js\models\Underwriting.js" />
     <Content Include="js\models\UnderwritingRequest.js" />
     <Content Include="js\services\ptCom.js" />
     <Content Include="js\services\ptConstructionService.js" />
@@ -7376,6 +7334,7 @@
     <Content Include="js\test\model.underwriting.spec.js" />
     <Content Include="js\test\service.ptDocSearch.spec.js" />
     <Content Include="js\directives\AuditLogs.tpl.html" />
+    <Content Include="js\Views\LeadDocSearch\DocSearchForm.html" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.html" />
     <Content Include="js\directives\ptEditor.tpl.html" />
     <Content Include="js\test\conf.js" />
@@ -7396,19 +7355,20 @@
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
-    <Content Include="js\Views\Underwriter\archived.tpl.html" />
-    <Content Include="js\Views\Underwriter\audit.tpl.html" />
-    <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
-    <Content Include="js\Views\Underwriter\tables.tpl.html" />
-    <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
-    <Content Include="js\Views\Underwriter\datainput.tpl.html" />
-    <Content Include="js\Views\Underwriter\underwriting.tpl.html" />
-    <Content Include="js\Views\Underwriter\underwriting_request.tpl.html" />
+    <Content Include="js\Views\Underwriting\archived.tpl.html" />
+    <Content Include="js\Views\Underwriting\audit.tpl.html" />
+    <Content Include="js\Views\Underwriting\flipsheets.tpl.html" />
+    <Content Include="js\Views\Underwriting\tables.tpl.html" />
+    <Content Include="js\Views\Underwriting\rentalmodels.tpl.html" />
+    <Content Include="js\Views\Underwriting\datainput.tpl.html" />
+    <Content Include="js\Views\Underwriting\underwriting.tpl.html" />
+    <Content Include="js\Views\Underwriting\underwriting_request.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
-    <Content Include="LeadDocSearch\UnderwritingRequest.aspx" />
+    <Content Include="Underwriter\DocSearch.aspx" />
+    <Content Include="Underwriter\UnderwritingRequest.aspx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
@@ -7583,7 +7543,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="NewOffer\ShortSaleNewOffer.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
-    <Content Include="UnderWriter\UnderwritingSummary.aspx" />
+    <Content Include="Underwriter\UnderwritingSummary.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
@@ -7960,10 +7920,10 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
-    <Content Include="UnderWriter\DocSearchListNew.aspx" />
-    <Content Include="UnderWriter\DocSearchList.aspx" />
-    <Content Include="UnderWriter\UnderwritingHome.aspx" />
-    <Content Include="UnderWriter\UnderwritingTracking.aspx" />
+    <Content Include="Underwriter\PropertiesList.aspx" />
+    <Content Include="Underwriter\DocSearchList.aspx" />
+    <Content Include="Underwriter\UnderwritingHome.aspx" />
+    <Content Include="Underwriter\UnderwritingTracking.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />

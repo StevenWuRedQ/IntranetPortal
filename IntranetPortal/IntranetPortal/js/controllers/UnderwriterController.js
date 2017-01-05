@@ -8,8 +8,8 @@
  */
 angular.module("PortalApp").controller("UnderwriterController",
 [
-    "$scope", "ptCom", "ptUnderwriter", "$location", "DocSearch", "$state",
-    function($scope, ptCom, ptUnderwriter, $location, DocSearch, $state) {
+    "$scope", "ptCom", "ptUnderwriting", "$location", "DocSearch", "$state",
+    function($scope, ptCom, ptUnderwriting, $location, DocSearch, $state) {
 
         $scope.data = {};
         $scope.archive = {};
@@ -23,7 +23,7 @@ angular.module("PortalApp").controller("UnderwriterController",
             $scope.loadArchivedList(bble);
         };
         $scope.load = function(bble) {
-            $scope.data = ptUnderwriter.load(bble);
+            $scope.data = ptUnderwriting.load(bble);
             if ($scope.data.$promise) {
                 $scope.data.$promise.then(function() {
                     $scope.calculate();
@@ -34,15 +34,15 @@ angular.module("PortalApp").controller("UnderwriterController",
             ptCom.confirm("Are you going to Save?",
                 function(response) {
                     if (response) {
-                        ptUnderwriter.save($scope.data).then(function(d) {
+                        ptUnderwriting.save($scope.data).then(function(d) {
                                 //debugger;
                                 if (d.data) {
                                     $scope.data = d.data;
                                 }
-                                ptCom.alert("Save Successful");
+                                ptCom.alert("Save Successfully.");
                             },
                             function() {
-                                ptCom.alert("fail to save");
+                                ptCom.alert("Failed to save.");
                             });
                     }
                 });
@@ -54,11 +54,11 @@ angular.module("PortalApp").controller("UnderwriterController",
                 function(msg) {
                     //debugger;
                     if (msg != null) {
-                        ptUnderwriter.archive($scope.data, msg).then(function(d) {
+                        ptUnderwriting.archive($scope.data, msg).then(function(d) {
                                 alert("Archive succesful.");
                             },
                             function() {
-                                alert("Sorry...Some error...");
+                                alert("Sorry. Some error.");
                             });
                     }
 
@@ -68,7 +68,7 @@ angular.module("PortalApp").controller("UnderwriterController",
         // Load all achived version in databases
         $scope.loadArchivedList = function(bble) {
             if (bble) {
-                ptUnderwriter.loadArchivedList(bble).then(function(d) {
+                ptUnderwriting.loadArchivedList(bble).then(function(d) {
                     $scope.archivedList = d.data;
                 });
             }
@@ -78,24 +78,25 @@ angular.module("PortalApp").controller("UnderwriterController",
         $scope.loadArchived = function(archive) {
             //debugger;
             if (archive.Id) {
-                ptUnderwriter.loadArchived(archive.Id).then(function(d) {
+                ptUnderwriting.loadArchived(archive.Id).then(function(d) {
                         if (d.data) {
                             //debugger;
                             angular.copy($scope.data, $scope.currentDataCopy);
                             ptCom.assignReference($scope.data, d.data, [], ["Id"]);
                             $scope.archive = archive;
                             $scope.archive.isLoaded = true;
-                            ptCom.alert("Load successful");
+                            ptCom.alert("Load successfully");
 
                         }
                     },
                     function(d) {
-                        ptCom.alert("Fail to load.");
+                        ptCom.alert("Failed to load.");
                     });
             }
 
         };
 
+        // Restore from achived version to current version
         $scope.restoreCurrent = function() {
             if ($scope.currentDataCopy) {
                 ptCom.assignReference($scope.data, $scope.currentDataCopy);
@@ -107,14 +108,36 @@ angular.module("PortalApp").controller("UnderwriterController",
         // Core function to apply predefined rule, and update model values.
         $scope.calculate = function() {
             $scope.$applyAsync(function() {
-                ptUnderwriter.calculator.calculate($scope.data);
+                ptUnderwriting.calculator.calculate($scope.data);
             });
         };
 
+        $scope.enableEditing = function() {
+            $scope.$broadcast("pt-editable-div-unlock");
+            $scope.isProtectedView = false;
+        };
+
+        $scope.$watch(function() {
+                return $state.$current.name;
+            },
+            function(newVal, oldVal) {
+                if (newVal === "underwriter.datainput") {
+                    if ($scope.isProtectedView == false) {
+                        $scope.enableEditing();
+                    }
+                }
+            });
+
+
+        // Init controller;
+        $scope.BBLE = ptCom.getGlobal("BBLE") || "";
+        $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
+        $scope.init($scope.BBLE);
+
         // A predefined model to validate with excel data.
-        $scope.feedData = function() {
+        $scope.feedData = function () {
             $scope.data.PropertyInfo.TaxClass = "A0",
-                $scope.data.PropertyInfo.ActualNumOfUnits = 1;
+            $scope.data.PropertyInfo.ActualNumOfUnits = 1;
             $scope.data.PropertyInfo.SellerOccupied = true;
             $scope.data.PropertyInfo.PropertyTaxYear = 4297.0;
             $scope.data.DealCosts.HOI = 20000.0;
@@ -131,28 +154,5 @@ angular.module("PortalApp").controller("UnderwriterController",
             $scope.data.LienCosts.PersonalJudgements = 14892.09;
             $scope.update();
         };
-
-        $scope.enableEditing = function() {
-            $scope.$broadcast("pt-editable-div-unlock");
-            $scope.isProtectedView = false;
-        };
-
-        $scope.$watch(function() {
-                return $state.$current.name;
-            },
-            function(newVal, oldVal) {
-                if (newVal == "underwriter.datainput") {
-                    if ($scope.isProtectedView == false) {
-                        $scope.enableEditing();
-                    }
-                }
-            });
-
-
-        // Init controller;
-        $scope.BBLE = ptCom.getGlobal("BBLE") || "";
-        $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
-        $scope.init($scope.BBLE);
-
     }
 ]);
