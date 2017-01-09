@@ -6,6 +6,7 @@ namespace RedQ.UnderwritingService.Models.NewYork
     {
         [Key()]
         public int Id { get; set; }
+        public int Time { get; set; }
 
         public double PurchasePurchasePrice { get; set; }
         public double PurchaseAdditonalCosts { get; set; }
@@ -21,7 +22,6 @@ namespace RedQ.UnderwritingService.Models.NewYork
         public double ResaleCommissions { get; set; }
         public double ResaleClosingCost { get; set; }
         public double ResaleNetProfit { get; set; }
-        public int Time { get; set; }
         public double LoanAmount { get; set; }
         public double LTV { get; set; }
         public double CashRequirement { get; set; }

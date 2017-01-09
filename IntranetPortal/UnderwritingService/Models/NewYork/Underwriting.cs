@@ -11,10 +11,10 @@ namespace RedQ.UnderwritingService.Models.NewYork
         public string BBLE { get; set; }
         public string CreateBy { get; set; }
         public string UpdateBy { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public string StatusNote { get; set; }
-        public DateTime CompletedOn { get; set; }
+        public DateTime? CompletedOn { get; set; }
         public UnderwritingStatusEnum Status { get; set; }
         // input
         public virtual UnderwritingPropertyInfo PropertyInfo { get; set; }

@@ -270,6 +270,10 @@
     <Reference Include="Microsoft.AspNet.EntityDataSource">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
@@ -659,6 +663,7 @@
     <Compile Include="CodeFolder\SystemModelSetting.vb" />
     <Compile Include="CodeFolder\Team.vb" />
     <Compile Include="CodeFolder\TitleManage.vb" />
+    <Compile Include="CodeFolder\UnderwritingService.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserFollowUpManage.vb" />
     <Compile Include="CodeFolder\UserInTeam.vb" />
@@ -7258,7 +7263,7 @@
     <Content Include="js\controllers\ShortSaleController.js" />
     <Content Include="js\controllers\ShortSalePreSignController.js" />
     <Content Include="js\controllers\TitleController.js" />
-    <Content Include="js\controllers\UnderwriterController.js" />
+    <Content Include="js\controllers\UnderwritingController.js" />
     <Content Include="js\controllers\UnderwritingRequestController.js" />
     <Content Include="js\controllers\UnderwritingSummaryController.js" />
     <Content Include="js\controllers\VendorController.js" />
@@ -7297,7 +7302,7 @@
     <Content Include="js\models\DivError.js" />
     <Content Include="js\models\Employee.js" />
     <None Include="js\models\Underwriter js.bak" />
-    <Content Include="js\models\Underwriting.js" />
+    <Content Include="js\services\ptUnderwriting.js" />
     <Content Include="js\models\UnderwritingRequest.js" />
     <Content Include="js\services\ptCom.js" />
     <Content Include="js\services\ptConstructionService.js" />
@@ -7358,7 +7363,6 @@
     <Content Include="js\Views\Underwriting\archived.tpl.html" />
     <Content Include="js\Views\Underwriting\audit.tpl.html" />
     <Content Include="js\Views\Underwriting\flipsheets.tpl.html" />
-    <Content Include="js\Views\Underwriting\tables.tpl.html" />
     <Content Include="js\Views\Underwriting\rentalmodels.tpl.html" />
     <Content Include="js\Views\Underwriting\datainput.tpl.html" />
     <Content Include="js\Views\Underwriting\underwriting.tpl.html" />
@@ -8512,7 +8516,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\controllers\DiarlerManagementController.js" />
-    <TypeScriptCompile Include="test.ts" />
     <TypeScriptCompile Include="typings\globals\angular\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jquery\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />

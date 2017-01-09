@@ -1,13 +1,8 @@
-﻿Imports System.Data
-Imports System.Data.Entity
+﻿Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
-Imports System.Linq
 Imports System.Net
-Imports System.Net.Http
 Imports System.Web.Http
 Imports System.Web.Http.Description
-Imports System.Web.Http.Results
-Imports System.Web.Mail
 Imports IntranetPortal.Data
 Imports IntranetPortal.LeadsActivityLog
 
@@ -238,8 +233,8 @@ Namespace Controllers
         Private Function LeadInfoDocumentSearchExists(ByVal id As String) As Boolean
             Return db.LeadInfoDocumentSearches.Count(Function(e) e.BBLE = id) > 0
         End Function
-        <HttpPost>
-        <Route("api/LeadInfoDocumentSearches/MarkCompleted")>
+
+        <Route("api/LeadInfoDocumentSearches/MarkCompleted"), HttpPost>
         Public Function MarkUnderWritingCompleted(<FromBody> data As Object) As IHttpActionResult
             Dim user = HttpContext.Current.User.Identity.Name
             Dim bble As String
@@ -267,8 +262,13 @@ Namespace Controllers
             End Try
         End Function
 
-        <HttpGet>
-        <Route("api/LeadInfoDocumentSearches/UnderWritingStatus/{status}")>
+
+        ''' <summary>
+        ''' Deprecated.
+        ''' </summary>
+        ''' <param name="status"></param>
+        ''' <returns></returns>
+        <Route("api/LeadInfoDocumentSearches/UnderWritingStatus/{status}"), HttpGet>
         Public Function GetSearchByUnderWritingStatus(status As Integer) As IHttpActionResult
 
             Try
@@ -288,5 +288,23 @@ Namespace Controllers
             End Try
         End Function
 
+        <Route("api/LeadInfoDocumentSearches/Status/{status}")>
+        Public Function GetSearchByStatus(status As Integer) As IhttpActionResult
+            Try
+                Dim searchStatus = CType(status, LeadInfoDocumentSearch.SearchStatus)
+                Dim searches = LeadInfoDocumentSearch.GetSearchByStatus(searchStatus)
+                If (searches Is Nothing) Then
+                    Throw New Exception("Empty request by searches" & status)
+                End If
+
+                Dim data = New With {
+                    .data = searches.OrderByDescending(Function(s) s.UpdateDate).Take(10),
+                    .count = searches.Count()
+                }
+                Return Ok(data)
+            Catch ex As Exception
+                Return BadRequest(ex.Message)
+            End Try
+        End Function
     End Class
 End Namespace

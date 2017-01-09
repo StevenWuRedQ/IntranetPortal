@@ -85,8 +85,6 @@ Partial Class LeadInfoDocumentSearch
             Dim result = From search In ctx.LeadInfoDocumentSearches
                          Join ld In ctx.ShortSaleLeadsInfoes On search.BBLE Equals ld.BBLE
                          Join lead In ctx.SSLeads On ld.BBLE Equals lead.BBLE
-                         Group Join tracking In ctx.UnderwritingTrackingViews On search.BBLE Equals tracking.BBLE Into Group
-                         From tracking In Group.DefaultIfEmpty
                          Select New With {
                          .BBLE = search.BBLE,
                          .CaseName = ld.PropertyAddress,
@@ -100,8 +98,6 @@ Partial Class LeadInfoDocumentSearch
                          .UpdateDate = search.UpdateDate,
                          .UnderwriteStatus = search.UnderwriteStatus,
                          .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
-                         .IsInProcess = CType(tracking.IsInProcess, Integer?),
-                         .NewOfferStatus = tracking.NewOfferStatus,
                          .Owner = lead.EmployeeName
                          }
 
@@ -121,8 +117,6 @@ Partial Class LeadInfoDocumentSearch
                                                                                        .UpdateDate = search.UpdateDate,
                                                                                        .UnderwriteStatus = search.UnderwriteStatus,
                                                                                        .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
-                                                                                       .IsInProcess = CType(search.IsInProcess, Integer?),
-                                                                                       .NewOfferStatus = search.NewOfferStatus,
                                                                                        .Owner = search.Owner
                                                                                        }
                                                 End Function).ToList
@@ -408,11 +402,18 @@ Partial Class LeadInfoDocumentSearch
             End If
         End Using
     End Function
+    Public Shared Function GetSearchByStatus(status As SearchStatus) As List(Of LeadInfoDocumentSearch)
+        Dim searches = GetDocumentSearchs()
+        If (searches IsNot Nothing) Then
+            Return searches.ToList().Where(Function(s) s.Status = status).ToList
+        End If
+        Return Nothing
+    End Function
 
-    public Shared Function  GetPropertiesList() As IEnumerable(of object)
-        using ctx as new PortalEntities
-            dim propertiesLists = ctx.DocSearchUnderwritingPropertiesList.ToList()
-            return propertiesLists
+    Public Shared Function GetPropertiesList() As IEnumerable(Of Object)
+        Using ctx As New PortalEntities
+            Dim propertiesLists = ctx.DocSearchUnderwritingPropertiesList.ToList()
+            Return propertiesLists
         End Using
     End Function
 End Class

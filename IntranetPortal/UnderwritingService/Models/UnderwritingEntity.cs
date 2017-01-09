@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using IntranetPortal.Data;
 using RedQ.UnderwritingService.Models.NewYork;
 
-public partial class UnderwritingEntity : DbContext
+public class UnderwritingEntity : DbContext
 {
 
     public DbSet<Underwriting> Underwritings { get; set; }
@@ -18,14 +19,20 @@ public partial class UnderwritingEntity : DbContext
     public DbSet<UnderwritingLienInfo> UnderwritingLienInfo { get; set; }
     public DbSet<UnderwritingLienCosts> UnderwritingLienCosts { get; set; }
     public DbSet<UnderwritingRentalInfo> UnderwritingRentalInfo { get; set; }
-
+    public DbSet<UnderwritingCashScenario> UnderwritingCashScenario { get; set; }
+    public DbSet<UnderwritingLoanScenario> UnderwritingLoanScenarios { get; set; }
+    public DbSet<UnderwritingFlipScenario> UnderwritingFlipScenario { get; set; }
+    public DbSet<UnderwritingMinimumBaselineScenario> UnderwritingMinimumBaselineScenario { get; set; }
+    public DbSet<UnderwritingBestCaseScenario> UnderwritingBestCaseScenario { get; set; }
+    public DbSet<UnderwritingRentalModel> UnderwritingRentalModel { get; set; }
+    public DbSet<UnderwritingSummary> UnderwritingSummary { get; set; }
     // AuditLog From Other Entity
     public virtual DbSet<AuditLog> AuditLogs { get; set; }
 
     public UnderwritingEntity() : base("name=UnderwritingEntity")
     {
-        this.Configuration.LazyLoadingEnabled = false;
-        this.Configuration.ProxyCreationEnabled = false;
+        Configuration.LazyLoadingEnabled = false;
+        Configuration.ProxyCreationEnabled = false;
     }
 
     public int SaveChanges(string userName)
@@ -34,23 +41,36 @@ public partial class UnderwritingEntity : DbContext
         var modifiedEntities = from en in ChangeTracker.Entries()
                                where en.State == EntityState.Added || en.State == EntityState.Deleted || en.State == EntityState.Modified
                                select en;
+        foreach (var entry in modifiedEntities)
+        {
+            foreach (var name in entry.CurrentValues.PropertyNames)
+            {
+                var field = entry.CurrentValues[name];
+                if (field is double && name.ToString().ToUpper() != "ID")
+                {
+                    if (double.IsInfinity((double)field) || double.IsNaN((double)field))
+                    {
+                        entry.CurrentValues[name] = 0.0;
+                    }
+                }
 
+            }
+        }
         foreach (var entry in modifiedEntities)
         {
             logs.AddRange(GetAuditRecordsForChange(entry, userName));
         }
 
         var result = base.SaveChanges();
-
         foreach (var log in logs)
         {
-                if (log.Entity.State != EntityState.Detached)
-                {
-                    dynamic key = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.GetObjectStateEntry(log.Entity.Entity).EntityKey.EntityKeyValues;
-                    log.RecordId = key(0).Value;
-                }
+            if (log.Entity.State != EntityState.Detached)
+            {
+                dynamic key = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.GetObjectStateEntry(log.Entity.Entity).EntityKey.EntityKeyValues;
+                log.RecordId = key[0].Value.ToString();
+            }
 
-                this.AuditLogs.Add(log);
+            AuditLogs.Add(log);
         }
 
         base.SaveChanges();
@@ -60,10 +80,9 @@ public partial class UnderwritingEntity : DbContext
     private List<AuditLog> GetAuditRecordsForChange(DbEntityEntry dbEntry, string userName)
     {
         List<AuditLog> logs = new List<AuditLog>();
-        dynamic eventTime = DateTime.Now;
-        dynamic entityConfig = GetAuditConfig(dbEntry);
-
-        dynamic log = new AuditLog
+        DateTime eventTime = DateTime.Now;
+        AuditConfig entityConfig = GetAuditConfig(dbEntry);
+        var log = new AuditLog
         {
             UserName = userName,
             EventDate = eventTime,
@@ -74,10 +93,9 @@ public partial class UnderwritingEntity : DbContext
         foreach (var prop in entityConfig.Properties)
         {
             log.ColumnName = prop.Key;
-
             if (dbEntry.State == EntityState.Deleted)
             {
-                if (!Enumerable.Contains(dbEntry.OriginalValues.PropertyNames, prop.Key))
+                if (!dbEntry.OriginalValues.PropertyNames.Contains(prop.Key))
                 {
                     continue;
                 }
@@ -94,55 +112,36 @@ public partial class UnderwritingEntity : DbContext
                     EventType = (int)AuditLog.LogType.Deleted,
                     ColumnName = prop.Key,
                     TableName = entityConfig.TableName,
-                    OriginalValue = dbEntry.OriginalValues.GetValue<object>(prop.Key),
+                    OriginalValue = dbEntry.OriginalValues.GetValue<object>(prop.Key).ToString(),
                     Entity = dbEntry,
-                    RecordId = dbEntry.OriginalValues.GetValue<object>(entityConfig.KeyNames(0))
+                    RecordId = dbEntry.OriginalValues.GetValue<object>(entityConfig.KeyNames[0]).ToString()
                 });
                 continue;
             }
 
-            if (!Enumerable.Contains(dbEntry.CurrentValues.PropertyNames, prop.Key))
+            if (!dbEntry.CurrentValues.PropertyNames.Contains(prop.Key)) continue;
+            var propValue = dbEntry.CurrentValues.GetValue<object>(prop.Key);
+            if (dbEntry.State == EntityState.Added)
+            {
+                if (propValue == null) continue;
+                logs.Add(AddLog(AuditLog.LogType.Added, log));
+            }
+            if (dbEntry.State != EntityState.Modified) continue;
+            var originalValue = dbEntry.OriginalValues.GetValue<object>(prop.Key);
+
+            if (Equals(originalValue, propValue)) continue;
+            if (ReferenceEquals(prop.Value, typeof(decimal?)) || ReferenceEquals(prop.Value, typeof(decimal)))
+            {
+                if (originalValue != null && propValue != null && string.Format("{0:0.00}", Math.Truncate((decimal)originalValue * 100) / 100) == string.Format("{0:0.00}", Math.Truncate((decimal)propValue * 100) / 100))
+                {
+                    continue;
+                }
+            }
+            else if (originalValue != null && propValue != null && originalValue.ToString().Trim() == propValue.ToString().Trim())
             {
                 continue;
             }
-
-            dynamic propValue = dbEntry.CurrentValues.GetValue<object>(prop.Key);
-
-
-            if (dbEntry.State == EntityState.Added)
-            {
-                if (propValue == null)
-                {
-                    continue;
-                }
-
-                logs.Add(AddLog(AuditLog.LogType.Added, log));
-            }
-
-            if (dbEntry.State == EntityState.Modified)
-            {
-                var originalValue = dbEntry.OriginalValues.GetValue<object>(prop.Key);
-
-                if (Equals(originalValue, propValue))
-                {
-                    continue;
-                }
-
-                if (object.ReferenceEquals(prop.Value, typeof(decimal?)) || object.ReferenceEquals(prop.Value, typeof(decimal)))
-                {
-                    if (originalValue != null && propValue != null && string.Format("{0:0.00}", Math.Truncate(originalValue * 100) / 100) == string.Format("{0:0.00}", Math.Truncate(propValue * 100) / 100))
-                    {
-                        continue;
-                    }
-                }
-                else if (originalValue != null && propValue != null && originalValue.ToString().Trim() == propValue.ToString().Trim())
-                {
-                    continue;
-                }
-
-
-                logs.Add(AddLog(AuditLog.LogType.Modified, log));
-            }
+            logs.Add(AddLog(AuditLog.LogType.Modified, log));
         }
 
         return logs;
@@ -150,7 +149,6 @@ public partial class UnderwritingEntity : DbContext
 
     private AuditLog AddLog(AuditLog.LogType logType, DbEntityEntry dbEntry, string userName, DateTime eventTime, string tableName, string propName)
     {
-
         return new AuditLog
         {
             UserName = userName,
@@ -158,8 +156,8 @@ public partial class UnderwritingEntity : DbContext
             EventType = (int)logType,
             ColumnName = propName,
             TableName = tableName,
-            OriginalValue = GetVaule(dbEntry, "OriginalValues", propName),
-            NewValue = GetVaule(dbEntry, "CurrentValues", propName),
+            OriginalValue = GetProperty(dbEntry, "OriginalValues", propName).ToString(),
+            NewValue = GetProperty(dbEntry, "CurrentValues", propName).ToString(),
             Entity = dbEntry
         };
     }
@@ -169,12 +167,12 @@ public partial class UnderwritingEntity : DbContext
         return AddLog(logType, log.Entity, log.UserName, log.EventDate, log.TableName, log.ColumnName);
     }
 
-    private string GetVaule(DbEntityEntry dbEntry, string values, string propName)
+    private object GetProperty(DbEntityEntry dbEntry, string values, string propName)
     {
-        return GetVaule(GetVaule(dbEntry, values), propName).ToString();
+        return GetProperty(GetValue(dbEntry, values), propName);
     }
 
-    private DbPropertyValues GetVaule(DbEntityEntry dbEntry, string value)
+    private DbPropertyValues GetValue(DbEntityEntry dbEntry, string value)
     {
         var map = new Dictionary<string, DbPropertyValues>();
         map.Add("OriginalValues", null);
@@ -190,9 +188,15 @@ public partial class UnderwritingEntity : DbContext
         return map[value];
     }
 
-    private object GetVaule(DbPropertyValues dbValues, string propName)
+    private object GetProperty(DbPropertyValues dbValues, string propName)
     {
-        return dbValues?.GetValue<object>(propName);
+        if (dbValues == null)
+        {
+            return "";
+        } else 
+        {
+            return dbValues.GetValue<object>(propName);
+        }
     }
 
     private AuditConfig GetAuditConfig(DbEntityEntry dbEntry)

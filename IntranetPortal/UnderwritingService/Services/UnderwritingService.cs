@@ -25,11 +25,11 @@ namespace RedQ.UnderwritingService.Services
         {
             var ctx = Context.InitContext(input);
             UnderwritingService service = GetService();
-            service.CalculateSums(ctx).CalculateInsurancePremium(ctx)
-                                      .CalculateHOI(ctx).CalculateCashScenario(ctx)
-                                      .CalculateLoanScenario(ctx).CalculateFlipScenario(ctx)
-                                      .CalculateSummary(ctx).CalculateMinimumBaselineScenario(ctx)
-                                      .CalculateBestCaseScenario(ctx).CalculateRentalModel(ctx);
+            service.CalculateValues(ctx).CalculateSums(ctx).CalculateInsurancePremium(ctx)
+                                        .CalculateHOI(ctx).CalculateCashScenario(ctx)
+                                        .CalculateLoanScenario(ctx).CalculateFlipScenario(ctx)
+                                        .CalculateSummary(ctx).CalculateMinimumBaselineScenario(ctx)
+                                        .CalculateBestCaseScenario(ctx).CalculateRentalModel(ctx);
             return ctx.ToOutput();
         }
 
@@ -58,7 +58,7 @@ namespace RedQ.UnderwritingService.Services
                                      ? 0.0
                                      : new Func<Context, double>((ctxx) =>
                 {
-                    var days = ctxx.LienCosts.RelocationLienDate.Subtract(DateTime.Now).TotalDays;
+                    var days = ctxx.LienCosts.RelocationLienDate.GetValueOrDefault().Subtract(DateTime.Now).TotalDays;
                     return ctx.LienCosts.RelocationLien * (1 + days + 180) * ctx.Settlement.RelocationLienSettlement;
                 })(ctx);
             ctx.DealCosts.HAFA = (ctx.PropertyInfo.SellerOccupied || ctx.PropertyInfo.NumOfTenants > 0)
@@ -142,17 +142,17 @@ namespace RedQ.UnderwritingService.Services
             ctx.Resale.Sums = ctx.Resale.Concession + ctx.Resale.Commissions + ctx.Resale.TransferTax
                             + ctx.Resale.Attorney + ctx.Resale.NDC;
             ctx.Liens.LienPayoffs = (ctx.Resale.ProbableResale -
-                                    (ctx.Liens.Sums + ctx.DealExpenses.Sums + ctx.ClosingCost.PartialSums
-                                    + ctx.Construction.Sums + ctx.CarryingCost.Sums + ctx.Resale.Sums)
-                                    - (ctx.Liens.Sums + ctx.DealExpenses.Sums + ctx.ClosingCost.PartialSums
-                                      + ctx.Construction.Sums + ctx.CarryingCost.Sums)
-                                    * ctx.RehabInfo.DealROICash / (ctx.RehabInfo.DealROICash + 1) * 1.0058);
+                                               (ctx.Liens.Sums + ctx.DealExpenses.Sums + ctx.ClosingCost.PartialSums
+                                                + ctx.Construction.Sums + ctx.CarryingCost.Sums + ctx.Resale.Sums)
+                                               - (ctx.Liens.Sums + ctx.DealExpenses.Sums + ctx.ClosingCost.PartialSums
+                                                  + ctx.Construction.Sums + ctx.CarryingCost.Sums)
+                                               * ctx.RehabInfo.DealROICash / (ctx.RehabInfo.DealROICash + 1) * 1.0058);
             ctx.Liens.AdditonalCostsSums = ctx.Liens.WaterCharges + ctx.Liens.ECBCityPay
-                                         + ctx.Liens.DOBCivilPenalties + ctx.Liens.HPDCharges
-                                         + ctx.Liens.HPDJudgements + ctx.Liens.PersonalJudgements
-                                         + ctx.Liens.NYSTaxWarrants + ctx.Liens.FederalTaxLien
-                                         + ctx.Liens.ParkingViolation + ctx.Liens.TransitAuthority
-                                         + ctx.Liens.RelocationLien;
+                                                       + ctx.Liens.DOBCivilPenalties + ctx.Liens.HPDCharges
+                                                       + ctx.Liens.HPDJudgements + ctx.Liens.PersonalJudgements
+                                                       + ctx.Liens.NYSTaxWarrants + ctx.Liens.FederalTaxLien
+                                                       + ctx.Liens.ParkingViolation + ctx.Liens.TransitAuthority
+                                                       + ctx.Liens.RelocationLien;
             return this;
         }
 
@@ -330,7 +330,7 @@ namespace RedQ.UnderwritingService.Services
 
         public UnderwritingService CalculateMinimumBaselineScenario(Context ctx)
         {
-            ctx.MinimumBaselineScenario.PurchasePriceAllIn = ctx.Liens.LienPayoffs + ctx.Liens.Sums 
+            ctx.MinimumBaselineScenario.PurchasePriceAllIn = ctx.Liens.LienPayoffs + ctx.Liens.Sums
                                                            + ctx.DealExpenses.Sums;
             ctx.MinimumBaselineScenario.TotalInvestment = ctx.LoanScenario.PurchaseTotalInvestment;
             ctx.MinimumBaselineScenario.CashRequirement = ctx.LoanScenario.CashRequirement;
@@ -342,18 +342,18 @@ namespace RedQ.UnderwritingService.Services
         public UnderwritingService CalculateBestCaseScenario(Context ctx)
         {
             ctx.BestCaseScenario.PurchasePriceAllIn = ctx.RehabInfo.AverageLowValue
-                                                    + ctx.Liens.AdditonalCostsSums 
+                                                    + ctx.Liens.AdditonalCostsSums
                                                     + ctx.DealExpenses.Sums;
-            ctx.BestCaseScenario.TotalInvestment = ctx.BestCaseScenario.PurchasePriceAllIn 
-                                                 + ctx.ClosingCost.Sums + ctx.Construction.Sums 
+            ctx.BestCaseScenario.TotalInvestment = ctx.BestCaseScenario.PurchasePriceAllIn
+                                                 + ctx.ClosingCost.Sums + ctx.Construction.Sums
                                                  + ctx.CarryingCost.Sums + ctx.LoanCosts.Sums;
             ctx.BestCaseScenario.CashRequirement = ctx.BestCaseScenario.TotalInvestment - ctx.LoanTerms.LoanAmount;
-            ctx.BestCaseScenario.NetProfit = ctx.LoanScenario.ResaleSalePrice 
-                                           - ( ctx.LoanScenario.ResaleConcession 
-                                             + ctx.LoanScenario.ResaleCommissions 
-                                             + ctx.LoanScenario.ResaleClosingCost )
-                                           - ( ctx.BestCaseScenario.PurchasePriceAllIn 
-                                             + ctx.ClosingCost.Sums + ctx.Construction.Sums 
+            ctx.BestCaseScenario.NetProfit = ctx.LoanScenario.ResaleSalePrice
+                                           - (ctx.LoanScenario.ResaleConcession
+                                             + ctx.LoanScenario.ResaleCommissions
+                                             + ctx.LoanScenario.ResaleClosingCost)
+                                           - (ctx.BestCaseScenario.PurchasePriceAllIn
+                                             + ctx.ClosingCost.Sums + ctx.Construction.Sums
                                              + ctx.CarryingCost.Sums + ctx.LoanCosts.Sums);
             ctx.BestCaseScenario.ROI = ctx.BestCaseScenario.NetProfit / ctx.BestCaseScenario.TotalInvestment;
             return this;
@@ -412,8 +412,6 @@ namespace RedQ.UnderwritingService.Services
             }
             throw new Exception("Insurance value is too big to handle.");
         }
-
-
     }
 
     public class Context
@@ -449,11 +447,12 @@ namespace RedQ.UnderwritingService.Services
         public static Context InitContext(UnderwritingInput input)
         {
             Context ctx = new Context();
-            if(input.PropertyInfo != null) ctx.PropertyInfo = input.PropertyInfo;
-            if(input.DealCosts != null) ctx.DealCosts = input.DealCosts;
-            if(input.LienInfo != null) ctx.LienInfo = input.LienInfo;
-            if(input.RehabInfo != null) ctx.RehabInfo = input.RehabInfo;
-            if(input.RentalInfo != null) ctx.RentalInfo = input.RentalInfo;
+            if (input.PropertyInfo != null) ctx.PropertyInfo = input.PropertyInfo;
+            if (input.DealCosts != null) ctx.DealCosts = input.DealCosts;
+            if (input.LienInfo != null) ctx.LienInfo = input.LienInfo;
+            if (input.RehabInfo != null) ctx.RehabInfo = input.RehabInfo;
+            if (input.RentalInfo != null) ctx.RentalInfo = input.RentalInfo;
+            if (input.LienCosts != null) ctx.LienCosts = input.LienCosts;
             return ctx;
         }
 
@@ -471,7 +470,7 @@ namespace RedQ.UnderwritingService.Services
         }
     }
 
-    class MonthlyRentalModel 
+    class MonthlyRentalModel
     {
         public int Month { get; set; }
         public double Rent { get; set; }
@@ -544,23 +543,23 @@ namespace RedQ.UnderwritingService.Services
 
             for (var i = 0; i < 60; i++)
             {
-                this.costOfMoney += this._model[i].Interest;
+                this.costOfMoney += (double) this._model[i].Interest;
             }
             this.costOfMoney = -this.costOfMoney;
-            this.totalCost = model.TotalUpfront + this.costOfMoney;
+            this.totalCost = (double) (model.TotalUpfront + this.costOfMoney);
 
             for (var n = 1; n < this._model.Length; n++)
             {
-                this._model[n].ROI = this._model[n].Total / this.totalCost / this._model[n].Month * 12;
+                this._model[n].ROI = (this._model[n].Total /  this.totalCost / this._model[n].Month * 12);
             }
 
 
             for (var n = 1; n < this._model.Length; n++)
             {
-                if (this._model[n].ROI > model.MinROI)
+                if (this._model[n].ROI > (double) model.MinROI)
                 {
                     this.totalMonths = this._model[n].Month;
-                    this.targetProfit = this._model[n].Total;
+                    this.targetProfit = (double) this._model[n].Total;
                     break;
                 }
             }

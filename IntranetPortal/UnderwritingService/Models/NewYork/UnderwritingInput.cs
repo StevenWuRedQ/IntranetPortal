@@ -12,5 +12,6 @@ namespace RedQ.UnderwritingService.Models.NewYork
         public UnderwritingRehabInfo RehabInfo;
         public UnderwritingLienInfo LienInfo;
         public UnderwritingRentalInfo RentalInfo;
+        public UnderwritingLienCosts LienCosts;
     }
 }

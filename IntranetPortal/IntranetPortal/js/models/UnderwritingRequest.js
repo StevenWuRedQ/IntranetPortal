@@ -1,6 +1,5 @@
 ﻿angular.module('PortalApp')
     .factory('UnderwritingRequest', ['$http', 'ptBaseResource', 'DocSearch', function ($http, ptBaseResource, DocSearch) {
-
         var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
         resource.saveByBBLE = function (data, bble) {
             if (bble) {

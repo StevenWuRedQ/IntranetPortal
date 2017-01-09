@@ -593,7 +593,7 @@
                             Maximum Lien Payoff
                         </td>
                         <td class="td-value">
-                            {{data.Others.MaximumLienPayoff | currency}}
+                            {{data.Summary.MaximumLienPayoff | currency}}
                         </td>
                     </tr>
                     <tr>
@@ -601,7 +601,7 @@
                             Maximum SS Price
                         </td>
                         <td class="td-value">
-                            {{data.Others.MaximumSSPrice |currency}}
+                            {{data.Summary.MaximumSSPrice |currency}}
                         </td>
                     </tr>
                 </table>
@@ -695,13 +695,13 @@
                     <tr class="success">
                         <td class="td-label">Total Cost</td>
                         <td class="td-value">
-                            {{data.FlipScenario.Purchase_TotalCost |currency}}
+                            {{data.FlipScenario.PurchaseTotalCost |currency}}
                         </td>
                     </tr>
                     <tr class="success">
                         <td class="td-label">Flip Price</td>
                         <td class="td-value">
-                            {{data.FlipScenario.Resale_SalePrice | currency}}
+                            {{data.FlipScenario.ResaleSalePrice | currency}}
                         </td>
                     </tr>
                     <tr class="success">
@@ -719,7 +719,7 @@
                     <tr class="excel-blue">
                         <td class="td-label">MAX HOI</td>
                         <td class="td-value">
-                            {{data.Others.MaxHOI | currency}}
+                            {{data.Summary.MaxHOI | currency}}
                         </td>
                     </tr>
                 </table>

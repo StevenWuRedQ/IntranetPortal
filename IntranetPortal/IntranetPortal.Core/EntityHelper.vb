@@ -1,5 +1,6 @@
 ﻿Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
+Imports System.Web.UI.WebControls.Expressions
 
 Public Class EntityHelper(Of T As Class)
 
@@ -12,11 +13,12 @@ Public Class EntityHelper(Of T As Class)
         Return properties
     End Function
 
-    public Shared Sub TryLoad(ctx As DbContext, t As T)
-        If t IsNot Nothing
-            for each navigationProperties in GetNavigationProperties(ctx)
+    Public Shared Sub TryLoad(ctx As DbContext, t As T)
+        If t IsNot Nothing Then
+
+            For Each navigationProperties In GetNavigationProperties(ctx)
                 ctx.Entry(t).Reference(navigationProperties.ToString()).Load()
-            Next 
+            Next
         End If
     End Sub
 
@@ -31,7 +33,9 @@ Public Class EntityHelper(Of T As Class)
             Dim tarobj = p.GetValue(newv)
 
             For Each dpp In dp.GetProperties
-                dp.GetProperty(dpp.Name).SetValue(orgobj, dp.GetProperty(dpp.Name).GetValue(tarobj, Nothing))
+                If dpp.Name.ToUpper() <> "ID" Then
+                    dp.GetProperty(dpp.Name).SetValue(orgobj, dp.GetProperty(dpp.Name).GetValue(tarobj, Nothing))
+                End If
             Next
         Next
     End Sub

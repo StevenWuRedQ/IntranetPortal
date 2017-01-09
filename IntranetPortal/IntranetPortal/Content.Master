@@ -82,8 +82,11 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 
+    <meta name="description" content="The description of my page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body style="width: 100%" ng-controller="MainCtrl">
+    <input type="hidden" id="CurrentUser" value="<%= HttpContext.Current.User.Identity.Name %>"/>
     <div class="LoadingCover" id="LodingCover" style="display: none"></div>
     <form id="form1" runat="server">
         <div id="mainContentDiv">

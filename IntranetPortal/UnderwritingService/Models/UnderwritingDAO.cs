@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using IntranetPortal.Core;
 using IntranetPortal.Data;
 using RedQ.UnderwritingService.Models.NewYork;
@@ -41,9 +42,13 @@ public class UnderwritingDAO
 
     public static Underwriting SaveOrUpdate(Underwriting uw, string saveby)
     {
+        if (String.IsNullOrEmpty(uw.BBLE))
+        {
+            throw new Exception("BBLE cannot be empty");
+        }
         using (UnderwritingEntity ctx = new UnderwritingEntity())
         {
-            dynamic u = ctx.Underwritings.SingleOrDefault(t => t.BBLE == uw.BBLE);
+            var u = ctx.Underwritings.SingleOrDefault(t => t.BBLE == uw.BBLE);
             if (u != null)
             {
                 uw.UpdateBy = saveby;
@@ -62,38 +67,37 @@ public class UnderwritingDAO
         }
     }
 
-    public static bool Archive(string bble, string saveBy, string note)
+    public static UnderwritingArchived Archive(string bble, string saveBy, string note)
     {
         using (UnderwritingEntity ctx = new UnderwritingEntity())
         {
-            dynamic uw = GetUnderwritingByBBLE(bble);
-            if (uw != null)
+            Underwriting underwriting = GetUnderwritingByBBLE(bble);
+            UnderwritingArchived archived = new UnderwritingArchived();
+            if (underwriting != null)
             {
-                dynamic uwa = new UnderwritingArchived();
 
-                uwa.BBLE = uw.BBLE;
-                uwa.ArchivedBy = saveBy;
-                uwa.ArchivedDate = DateTime.Now;
-                uwa.ArchivedNote = note;
+                archived.BBLE = underwriting.BBLE;
+                archived.ArchivedBy = saveBy;
+                archived.ArchivedDate = DateTime.Now;
+                archived.ArchivedNote = note;
 
-                uwa.PropertyInfo = uw.PropertyInfo;
-                uwa.PropertyInfo.Id = null;
-                uwa.DealCosts = uw.DealCosts;
-                uwa.DealCosts.Id = null;
-                uwa.RehabInfo = uw.RehabInfo;
-                uwa.RehabInfo.Id = null;
-                uwa.RentalInfo = uw.RentalInfo;
-                uwa.RentalInfo.Id = null;
-                uwa.LienInfo = uw.LienInfo;
-                uwa.LienInfo.Id = null;
-                uwa.LienCosts = uw.LienCosts;
-                uwa.LienCosts.Id = null;
+                archived.PropertyInfo = underwriting.PropertyInfo;
+                archived.PropertyInfo.Id = 0;
+                archived.DealCosts = underwriting.DealCosts;
+                archived.DealCosts.Id = 0;
+                archived.RehabInfo = underwriting.RehabInfo;
+                archived.RehabInfo.Id = 0;
+                archived.RentalInfo = underwriting.RentalInfo;
+                archived.RentalInfo.Id = 0;
+                archived.LienInfo = underwriting.LienInfo;
+                archived.LienInfo.Id = 0;
+                archived.LienCosts = underwriting.LienCosts;
+                archived.LienCosts.Id = 0;
 
-                ctx.UnderwritingArchived.Add(uwa);
+                ctx.UnderwritingArchived.Add(archived);
                 ctx.SaveChanges(saveBy);
-                return true;
             }
-            return false;
+            return archived;
         }
     }
 
@@ -117,7 +121,7 @@ public class UnderwritingDAO
             u.Status = Underwriting.UnderwritingStatusEnum.NewCreated;
 
             ctx.Underwritings.Add(u);
-            ctx.SaveChanges();
+            ctx.SaveChanges(createby);
             return u;
         }
     }
@@ -133,5 +137,30 @@ public class UnderwritingDAO
         }
     }
 
-    
+    public static string[] GetAllUnderwritingBBLE()
+    {
+        using (var ctx = new UnderwritingEntity())
+        {
+            var bbles = from underwriting in ctx.Underwritings
+                        select underwriting.BBLE;
+            return bbles.ToArray();
+        }
+    }
+
+    public static object[] GetUnderwritingListInfo()
+    {
+        using (var ctx = new UnderwritingEntity())
+        {
+            var underwritings = from underwriting in ctx.Underwritings
+                select new
+                {
+                    BBLE = underwriting.BBLE,
+                    UnderwritingStatus = underwriting.Status,
+                    UnderwritingCreateBy = underwriting.CreateBy,
+                    UnderwritingCreateDate = underwriting.CreateDate,
+                    UnderwritingUpdateDate = underwriting.UpdateDate
+                };
+            return underwritings.ToArray();
+        }
+    }
 }

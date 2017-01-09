@@ -4,105 +4,101 @@ var portalApp = angular.module("PortalApp",
     "ui.select", "ui.layout", "ngRoute", "ui.router"
 ]);
 
-angular.module("PortalApp")
-    .controller("MainCtrl",
-    [
-        "$rootScope", "$uibModal", "$timeout", "$state",
-        function ($rootScope, $uibModal, $timeout, $state) {
-            $rootScope.scope = $rootScope;
-            $rootScope.globaldata = {};
-            $rootScope.AlertModal = null;
-            $rootScope.ConfirmModal = null;
-            $rootScope.loadingCover = document.getElementById("LodingCover");
-            $rootScope.panelLoading = false;
-            $rootScope.isPromptModalArea = false;
-            $rootScope.loadPanelPosition = (function() {
-                var dataPanelDiv = document.getElementById("dataPanelDiv");
-                if (dataPanelDiv != null) {
-                    return { of: "#dataPanelDiv" };
-                } else {
-                    return { of: "body" };
-                }
-            })();
-            $rootScope.$state = $state;
-            $rootScope.alert = function(message) {
-                $rootScope.alertMessage = message ? message : "";
-                $rootScope.AlertModal = $uibModal.open({
-                    templateUrl: "AlertModal"
-                });
-            };
-            $rootScope.alertOK = function() {
-                $rootScope.AlertModal.close();
-            };
-            $rootScope.confirm = function(message, confrimFunc) {
-                $rootScope.confirmMessage = message ? message : "";
-                $rootScope.ConfirmModal = $uibModal.open({
-                    templateUrl: "ConfirmModal"
-                });
-                $rootScope.ConfirmModal.confrimFunc = confrimFunc;
-                return $rootScope.ConfirmModal.result;
-            };
-            $rootScope.confirmYes = function() {
-                $rootScope.ConfirmModal.close(true);
-                if ($rootScope.ConfirmModal.confrimFunc) {
-                    $rootScope.ConfirmModal.confrimFunc(true);
-                }
+angular.module("PortalApp").controller("MainCtrl",
+    ["$rootScope", "$uibModal", "$timeout", "$state",
+    function ($rootScope, $uibModal, $timeout, $state) {
+        $rootScope.scope = $rootScope;
+        $rootScope.globaldata = {};
+        $rootScope.AlertModal = null;
+        $rootScope.ConfirmModal = null;
+        $rootScope.loadingCover = document.getElementById("LodingCover");
+        $rootScope.panelLoading = false;
+        $rootScope.isPromptModalArea = false;
+        $rootScope.loadPanelPosition = (function () {
+            var dataPanelDiv = document.getElementById("dataPanelDiv");
+            if (dataPanelDiv != null) {
+                return { of: "#dataPanelDiv" };
+            } else {
+                return { of: "body" };
+            }
+        })();
+        $rootScope.$state = $state;
+        $rootScope.alert = function (message) {
+            $rootScope.alertMessage = message ? message : "";
+            $rootScope.AlertModal = $uibModal.open({
+                templateUrl: "AlertModal"
+            });
+        };
+        $rootScope.alertOK = function () {
+            $rootScope.AlertModal.close();
+        };
+        $rootScope.confirm = function (message, confrimFunc) {
+            $rootScope.confirmMessage = message ? message : "";
+            $rootScope.ConfirmModal = $uibModal.open({
+                templateUrl: "ConfirmModal"
+            });
+            $rootScope.ConfirmModal.confrimFunc = confrimFunc;
+            return $rootScope.ConfirmModal.result;
+        };
+        $rootScope.confirmYes = function () {
+            $rootScope.ConfirmModal.close(true);
+            if ($rootScope.ConfirmModal.confrimFunc) {
+                $rootScope.ConfirmModal.confrimFunc(true);
+            }
 
-            };
-            $rootScope.confirmNo = function() {
-                $rootScope.ConfirmModal.close(false);
-                if ($rootScope.ConfirmModal.confrimFunc) {
-                    $rootScope.ConfirmModal.confrimFunc(false);
-                }
-            };
-            $rootScope.prompt = function(message, callback,  showArea) {
-                $rootScope.promptMessage = message ? message : "";
-                $rootScope.promptModalTxt = "";
-                $rootScope.isPromptModalArea = showArea || false;
-                $rootScope.promptModal = $uibModal.open({
-                    templateUrl: "PromptModal"
-                });
-                $rootScope.promptModal.promptFunc = callback;
+        };
+        $rootScope.confirmNo = function () {
+            $rootScope.ConfirmModal.close(false);
+            if ($rootScope.ConfirmModal.confrimFunc) {
+                $rootScope.ConfirmModal.confrimFunc(false);
+            }
+        };
+        $rootScope.prompt = function (message, callback,  showArea) {
+            $rootScope.promptMessage = message ? message : "";
+            $rootScope.promptModalTxt = "";
+            $rootScope.isPromptModalArea = showArea || false;
+            $rootScope.promptModal = $uibModal.open({
+                templateUrl: "PromptModal"
+            });
+            $rootScope.promptModal.promptFunc = callback;
 
-            };
-            $rootScope.promptYes = function() {
-                $rootScope.promptModal.close($rootScope.promptModalTxt);
-                if ($rootScope.promptModal.promptFunc) {
-                    $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
-                }
+        };
+        $rootScope.promptYes = function () {
+            $rootScope.promptModal.close($rootScope.promptModalTxt);
+            if ($rootScope.promptModal.promptFunc) {
+                $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
+            }
 
-            };
-            $rootScope.promptNo = function() {
-                $rootScope.promptModal.close(false);
-                if ($rootScope.promptModal.promptFunc) {
-                    $rootScope.promptModal.promptFunc(null);
-                }
-            };
-            $rootScope.showLoading = function(divId) {
-                $($rootScope.loadingCover).show();
-            };
-            $rootScope.hideLoading = function(divId) {
-                $($rootScope.loadingCover).hide();
-            };
-            $rootScope.toggleLoading = function() {
-                $timeout(function() {
-                    $rootScope.panelLoading = !$scope.panelLoading;
-                });
-            };
-            $rootScope.startLoading = function() {
-                $timeout(function() {
-                    $rootScope.panelLoading = true;
-                });
-            };
-            $rootScope.stopLoading = function() {
-                $timeout(function() {
-                    $rootScope.panelLoading = false;
-                });
-            };
-        }
+        };
+        $rootScope.promptNo = function () {
+            $rootScope.promptModal.close(false);
+            if ($rootScope.promptModal.promptFunc) {
+                $rootScope.promptModal.promptFunc(null);
+            }
+        };
+        $rootScope.showLoading = function (divId) {
+            $($rootScope.loadingCover).show();
+        };
+        $rootScope.hideLoading = function (divId) {
+            $($rootScope.loadingCover).hide();
+        };
+        $rootScope.toggleLoading = function () {
+            $timeout(function () {
+                $rootScope.panelLoading = !$scope.panelLoading;
+            });
+        };
+        $rootScope.startLoading = function () {
+            $timeout(function () {
+                $rootScope.panelLoading = true;
+            });
+        };
+        $rootScope.stopLoading = function () {
+            $timeout(function () {
+                $rootScope.panelLoading = false;
+            });
+        };
+    }
     ]);
-
-
 (function () {
     var ITEM_ID = 'itemId';
 
@@ -1065,130 +1061,8 @@ angular.module('PortalApp').factory('Team', function ($http) {
     }
     return _class;
 });
-
-angular.module("PortalApp")
-    .factory("ptUnderwriting",
-    [
-        "$http", "ptBaseResource", "DocSearch", "LeadsInfo", function($http, ptBaseResource, DocSearch, LeadsInfo) {
-
-            var underwriting = ptBaseResource("underwriter", "BBLE", null, {});
-            
-            var underwritingFactory = {
-                UnderwritingModel: function() {
-                    this.PropertyInfo = {
-                        PropertyAddress: "",
-                        CurrentOwner: "",
-                        TaxClass: "",
-                        LotSize: "",
-                        BuildingDimension: "",
-                        Zoning: "",
-                        PropertyTaxYear: 0.0,
-                        ActualNumOfUnits: 0,
-                        OccupancyStatus: undefined,
-                        SellerOccupied: false,
-                        NumOfTenants: 0,
-                    };
-                    this.DealCosts = {
-                        MoneySpent: 0.0,
-                        HAFA: false,
-                        HOI: 0.0,
-                        HOIRatio: 0.0,
-                        COSTermination: 0.0,
-                        AgentCommission: 0.0
-                    };
-                    this.RehabInfo = {
-                        AverageLowValue: 0.0,
-                        RenovatedValue: 0.0,
-                        RepairBid: 0.0,
-                        NeedsPlans: false,
-                        DealTimeMonths: 0,
-                        SalesCommission: 0.0,
-                        DealROICash: 0.0
-                    };
-                    this.LienInfo = {
-                        FirstMortgage: 0.0,
-                        SecondMortgage: 0.0,
-                        COSRecorded: false,
-                        DeedRecorded: false,
-                        OtherLiens: undefined,
-                        LisPendens: false,
-                        FHA: false,
-                        FannieMae: false,
-                        FreddieMac: false,
-                        Servicer: "",
-                        ForeclosureIndexNum: "",
-                        ForeclosureStatus: undefined,
-                        ForeclosureNote: "",
-                        AuctionDate: undefined,
-                        DefaultDate: undefined,
-                        CurrentPayoff: 0.0,
-                        PayoffDate: undefined,
-                        CurrentSSValue: 0.0
-                    };
-                    this.LienCosts = {
-                        TaxLienCertificate: 0.0,
-                        PropertyTaxes: 0.0,
-                        WaterCharges: 0.0,
-                        ECBCityPay: 0.0,
-                        DOBCivilPenalty: 0.0,
-                        HPDCharges: 0.0,
-                        HPDJudgements: 0.0,
-                        PersonalJudgements: 0.0,
-                        NYSTaxWarrants: 0.0,
-                        FederalTaxLien: 0.0,
-                        SidewalkLiens: false,
-                        ParkingViolation: 0.0,
-                        TransitAuthority: 0.0,
-                        VacateOrder: false,
-                        RelocationLien: 0.0,
-                        RelocationLienDate: undefined
-                    };
-                    this.MinimumBaselineScenario = {};
-                    this.BestCaseScenario = {};
-                    this.Others = {};
-                    this.CashScenario = {};
-                    this.LoanScenario = {};
-                    this.FlipScenario = {};
-                    this.RentalInfo = {
-                        DeedPurchase: 0.0,
-                        CurrentlyRented: false,
-                        RepairBidTotal: 0.0,
-                        NumOfUnits: 0,
-                        MarketRentTotal: 0.0,
-                        RentalTime: 0
-                    };
-                    this.RentalModel = {};
-                    this.Liens = {};
-                    this.DealExpenses = {};
-                    this.ClosingCost = {};
-                    this.Construction = {};
-                    this.CarryingCosts = {
-                        RETaxs: 0.0,
-                        Utilities: 0,
-                        Insurance: 0,
-                        Sums: 0
-                    };
-                    this.Resale = {};
-                    this.LoanTerms = {};
-                    this.LoanCosts = {};
-                    this.FlipCalculation = {};
-                    this.MoneyFactor = {};
-                    this.HOI = {};
-                    this.HOIBestCase = {};
-                    this.InsurancePremium = {};
-
-                },
-                build: function() {
-                    var data = new this.UnderwritingModel();
-                    return data;
-                }
-            };
-
-            
-            underwriting.load = function( bble) {
-                
+angular.module('PortalApp')
     .factory('UnderwritingRequest', ['$http', 'ptBaseResource', 'DocSearch', function ($http, ptBaseResource, DocSearch) {
-
         var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
         resource.saveByBBLE = function (data, bble) {
             if (bble) {
@@ -1292,8 +1166,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
             model.push(data);
         }
     };
-
-
     this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
             if (confirm) {
@@ -1308,7 +1180,9 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
             }
         }
     };
-
+    this.capitalizeFirstLetter = function (string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
     this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
         var result = '';
         if (strNO) result += strNO + ' ';
@@ -1319,11 +1193,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         if (zip) result += zip;
         return result;
     };
-
-    this.capitalizeFirstLetter = function (string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
     this.formatName = function (firstName, middleName, lastName) {
         var result = '';
         if (firstName) result += that.capitalizeFirstLetter(firstName) + ' ';
@@ -1371,7 +1240,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         '</head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
         popupWin.document.close();
     };
-
     this.postRequest = function (url, data) {
         $.post(url, data, function (retData) {
             $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
@@ -1380,29 +1248,24 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
-
-
     this.confirm = function (message, callback) {
         return $rootScope.confirm(message, callback);
     };
-
     this.prompt = function (message, callback, showArea) {
         return $rootScope.prompt(message, callback, showArea);
     }
-
     this.addOverlay = function () {
         $rootScope.addOverlay();
     };
+    this.removeOverlay = function () {
+        $rootScope.removeOverlay();
+    }; 
     this.stopLoading = function () {
         $rootScope.stopLoading();
     }
     this.startLoading = function () {
         $rootScope.startLoading();
     }
-
-    this.removeOverlay = function () {
-        $rootScope.removeOverlay();
-    }; 
     this.next = function (array, value, from) {
         return array.indexOf(value, from);
     };
@@ -1431,7 +1294,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
-
     this.assignReference = function (target, source,  skipped,  keeped) {
         var temp = {}; 
         var props = Object.keys(source);
@@ -1460,7 +1322,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         }
 
     }
-
     this.parseSearch = function ( searchString) {
         var result = {};
         if (!searchString || typeof searchString != 'string')   
@@ -1477,18 +1338,20 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         }
         return result;
     }
-
     this.setGlobal = function (key, value) {
-        $rootScope.globaldata[key] = value
+        $rootScope.globaldata[key] = value;
     }
-
     this.getGlobal = function (key) {
         if ($rootScope.globaldata[key] != null) {
             return $rootScope.globaldata[key];
         } else {
             return undefined;
         }
-    }   
+    }
+    this.getCurrentUser = function() {
+        var element = $("#CurrentUser");
+        return element[0].value;
+    }
 }])
 angular.module("PortalApp").service('ptConstructionService', ['$http', function ($http) {
     this.getConstructionCases = function (bble, callback) {
@@ -2108,6 +1971,234 @@ angular.module("PortalApp").service("ptTime", [function () {
     }
 
     }])
+
+angular.module("PortalApp").factory("ptUnderwriting",
+    ["$http", "ptCom", function ($http, ptCom) {
+        var underwriting = {};
+        var underwritingFactory = {
+            UnderwritingModel: function () {
+                this.PropertyInfo = {
+                    PropertyType: undefined,
+                    PropertyAddress: "",
+                    CurrentOwner: "",
+                    TaxClass: "",
+                    LotSize: "",
+                    BuildingDimension: "",
+                    Zoning: "",
+                    FARActual: 0.0,
+                    FARMax: 0.0,
+                    PropertyTaxYear: 0.0,
+                    ActualNumOfUnits: 0,
+                    OccupancyStatus: undefined,
+                    SellerOccupied: false,
+                    NumOfTenants: 0
+                };
+                this.DealCosts = {
+                    MoneySpent: 0.0,
+                    HAFA: false,
+                    HOI: 0.0,
+                    HOIRatio: 0.0,
+                    COSTermination: 0.0,
+                    AgentCommission: 0.0
+                };
+                this.RehabInfo = {
+                    AverageLowValue: 0.0,
+                    RenovatedValue: 0.0,
+                    RepairBid: 0.0,
+                    NeedsPlans: false,
+                    DealTimeMonths: 0,
+                    SalesCommission: 0.05,
+                    DealROICash: 0.35
+                };
+                this.LienInfo = {
+                    FirstMortgage: 0.0,
+                    SecondMortgage: 0.0,
+                    COSRecorded: false,
+                    DeedRecorded: false,
+                    OtherLiens: undefined,
+                    LisPendens: false,
+                    FHA: false,
+                    FannieMae: false,
+                    FreddieMac: false,
+                    Servicer: "",
+                    ForeclosureIndexNum: "",
+                    ForeclosureStatus: undefined,
+                    ForeclosureNote: "",
+                    AuctionDate: undefined,
+                    DefaultDate: undefined,
+                    CurrentPayoff: 0.0,
+                    PayoffDate: undefined,
+                    CurrentSSValue: 0.0
+                };
+                this.LienCosts = {
+                    TaxLienCertificate: 0.0,
+                    PropertyTaxes: 0.0,
+                    WaterCharges: 0.0,
+                    ECBCityPay: 0.0,
+                    DOBCivilPenalty: 0.0,
+                    HPDCharges: 0.0,
+                    HPDJudgements: 0.0,
+                    PersonalJudgements: 0.0,
+                    NYSTaxWarrants: 0.0,
+                    FederalTaxLien: 0.0,
+                    SidewalkLiens: false,
+                    ParkingViolation: 0.0,
+                    TransitAuthority: 0.0,
+                    VacateOrder: false,
+                    RelocationLien: 0.0,
+                    RelocationLienDate: undefined
+                };
+                this.RentalInfo = {
+                    DeedPurchase: 0.0,
+                    CurrentlyRented: false,
+                    RepairBidTotal: 0.0,
+                    NumOfUnits: 0,
+                    MarketRentTotal: 0.0,
+                    RentalTime: 0
+                };
+
+                this.MinimumBaselineScenario = {};
+                this.BestCaseScenario = {};
+                this.Summary = {};
+                this.CashScenario = {};
+                this.LoanScenario = {};
+                this.FlipScenario = {};
+                this.RentalModel = {};
+            },
+            build: function () {
+                var data = new this.UnderwritingModel();
+                return data;
+            }
+        };
+        var proxy;
+        $.connection.hub.url = "http://localhost:8887/signalr";
+        $.connection.logging = true;
+        var init = function () {
+            $.connection.hub.start().done(function() {
+                proxy = $.connection.underwritingServiceHub;
+            })
+        };
+        init();
+        $.connection.hub.disconnected(function () {
+            setTimeout(init, 5000); 
+        });
+        var tryGetProxy = function () {
+            var dfd = $.Deferred();
+            if (proxy) {
+                dfd.resolve(proxy);
+            } else {
+                var proxyInterval = setInterval(function () {
+                    if (proxy) {
+                        dfd.resolve(proxy);
+                        clearInterval(proxyInterval);
+                    }
+                }, 500);
+                setTimeout(function () {
+                    clearInterval(proxyInterval);
+                    dfd.reject();
+                },
+                    2000);
+            }
+            return dfd.promise();
+        }
+        
+        underwriting.new = function () {
+            var newData = underwritingFactory.build();
+            return newData;
+        }
+        underwriting.load = function (bble) {
+            if (bble) {
+                return tryGetProxy().then(function (proxy) {
+                    return proxy.server.getUnderwritingByBBLE(bble);
+                })
+            }
+        }
+        underwriting.save = function (data) {
+            var username = ptCom.getCurrentUser();
+            return tryGetProxy().then(function (proxy) {
+                return proxy.server.postUnderwriting(data, username);
+            });
+        }
+        underwriting.importData = function (d) {
+            if (d.docSearch && d.docSearch.LeadResearch) {
+                var r = d.docSearch.LeadResearch;
+                d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
+                d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
+                d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
+                d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
+                d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
+                d.LienInfo.FHA = r.fha || false;
+                d.LienInfo.FannieMae = r.fannie || false;
+                d.LienInfo.FreddieMac = r.Freddie_Mac_ || false;
+                d.LienInfo.Servicer = r.servicer;
+                d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
+                d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
+                d.LienCosts.TaxLienCertificate = (function () {
+                    var total = 0.0;
+                    if (r.TaxLienCertificate) {
+                        for (var i = 0; i < r.TaxLienCertificate.length; i++) {
+                            total += parseFloat(r.TaxLienCertificate[i].Amount);
+                        }
+                    }
+                    return total;
+                })();
+                d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
+                d.LienCosts.WaterCharges = r.waterCharges || 0.0;
+                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
+                d.LienCosts.ECBCityPay = r.Amount_ECB_Tickets || 0.0;
+                d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
+                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
+                d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
+                d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0;
+                d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0;
+                d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
+                d.LienCosts.RelocationLien = (function () {
+                    if (r.has_Vacate_Order_Vacate_Order)
+                        return parseFloat(r.Amount_Vacate_Order) || 0.0;
+                })();
+            }
+            if (d.leadsInfo) {
+                d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
+                d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
+                d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
+                d.PropertyInfo.LotSize = d.leadsInfo.LotDem.trim();
+                d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
+                d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
+                d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
+                d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
+            }
+        };
+        underwriting.archive = function (data, msg) {
+            var username = ptCom.getCurrentUser();
+            return tryGetProxy().then(function(proxy) {
+                return proxy.server.postArchive(data, msg, username);
+            });
+        }
+        underwriting.loadArchivedList = function (bble) {
+            return tryGetProxy().then(function (proxy) {
+                return proxy.server.getArchivedListByBBLE(bble);
+            });
+        }
+        underwriting.loadArchived = function (id) {
+            return tryGetProxy().then(function(proxy) {
+                return proxy.server.getArchivedByID(id);
+            });
+        }
+        underwriting.calculate = function (data) {
+            tryGetProxy().then(function(proxy) {
+                proxy.server.postSingleJob(data).done(function(output) {
+                    data.MinimumBaselineScenario = output.MinimumBaselineScenario;
+                    data.BestCaseScenario = output.BestCaseScenario;
+                    data.Summary = output.Summary;
+                    data.CashScenario = output.CashScenario;
+                    data.LoanScenario = output.LoanScenario;
+                    data.FlipScenario = output.FlipScenario;
+                    data.RentalModel = output.RentalModel;
+                });
+            });
+        }
+        return underwriting;
+    }]);
 
 angular.module("PortalApp").filter('booleanToString', function () {
 
@@ -3800,14 +3891,12 @@ angular.module("PortalApp")
             };
 
             $scope.init = function(bble) {
-
                 var leadsInfoBBLE = bble || $("#BBLE").val();
                 $scope.ShowInfo = $("#ShowInfo").val();
                 if (!leadsInfoBBLE) {
                     console.log("Can not load page without BBLE !");
                     return;
                 }
-
                 $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() },
                     function() {
                         $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() },
@@ -7378,116 +7467,110 @@ angular.module("PortalApp")
 
 }])
 
-angular.module("PortalApp").controller("UnderwriterController",
-[
-    "$scope", "ptCom", "ptUnderwriting", "$location", "DocSearch", "$state",
-    function($scope, ptCom, ptUnderwriting, $location, DocSearch, $state) {
+angular.module("PortalApp").controller("UnderwritingController", [
+    "$scope", "ptCom", "ptUnderwriting", "$location", "$state", "DocSearch", "LeadsInfo",
+    function ($scope, ptCom, ptUnderwriting, $location, $state, DocSearch, LeadsInfo) {
 
         $scope.data = {};
         $scope.archive = {};
         $scope.currentDataCopy = {};
         $scope.isProtectedView = true;
 
-        $scope.init = function(bble) {
-            $scope.load(bble);
-            $scope.loadArchivedList(bble);
-        };
-        $scope.load = function(bble) {
-            $scope.data = ptUnderwriting.load(bble);
-            if ($scope.data.$promise) {
-                $scope.data.$promise.then(function() {
-                    $scope.calculate();
-                });
-            }
-        };
-        $scope.save = function() {
-            ptCom.confirm("Are you going to Save?",
-                function(response) {
-                    if (response) {
-                        ptUnderwriting.save($scope.data).then(function(d) {
-                                if (d.data) {
-                                    $scope.data = d.data;
-                                }
-                                ptCom.alert("Save Successfully.");
-                            },
-                            function() {
-                                ptCom.alert("Failed to save.");
-                            });
-                    }
-                });
-        };
-
-        $scope.archiveFunc = function() {
-            ptCom.prompt("Please give a name to this archive.",
-                function(msg) {
-                    if (msg != null) {
-                        ptUnderwriting.archive($scope.data, msg).then(function(d) {
-                                alert("Archive succesful.");
-                            },
-                            function() {
-                                alert("Sorry. Some error.");
-                            });
-                    }
-
-                });
-        };
-
-        $scope.loadArchivedList = function(bble) {
+        $scope.init = function (bble) {
+            debugger;
             if (bble) {
-                ptUnderwriting.loadArchivedList(bble).then(function(d) {
-                    $scope.archivedList = d.data;
+                ptUnderwriting.load(bble).then(function(data) {
+                    if (data && data.Id) {
+                        $scope.data = data;
+                        ptUnderwriting.loadArchivedList(bble).then(function(list) {
+                            $scope.archivedList = list;
+                        });
+                    } else {
+                        var newData = ptUnderwriting.new();
+                        newData.BBLE = bble;
+                        DocSearch.get({ BBLE: bble }).$promise.then(function(search) {
+                            newData.docSearch = search;
+                            LeadsInfo.get({ BBLE: bble.trim() }).$promise.then(function(leadsInfo) {
+                                newData.leadsInfo = leadsInfo;
+                                ptUnderwriting.importData(newData);
+                            });
+                        });
+                        $scope.data = newData;
+                    }
+                });
+            } else {
+                $scope.data = ptUnderwriting.new();
+            }
+        };
+        $scope.save = function () {
+            ptCom.confirm("Are you going to Save?",
+                function (response) {
+                    if (response) {
+                        ptUnderwriting.save($scope.data).then(function done(data) {
+                            if (data) {
+                                $scope.data = data;
+                            }
+                            ptCom.alert("Save Successfully.");
+                        }, function fail() {
+                            ptCom.alert("Failed to save.");
+                        });
+                    }
+                });
+        };
+        $scope.archiveFunc = function () {
+            ptCom.prompt("Please give a name to this archive.",
+                function (msg) {
+                    if (msg != null) {
+                        ptUnderwriting.archive($scope.data, msg).then(function done(data) {
+                            alert("Archive succesful.");
+                        }, function fail() {
+                            alert("Sorry. Some error.");
+                        });
+                    }
+
+                });
+        };
+        $scope.loadArchived = function (archive) {
+            if (archive.Id) {
+                ptUnderwriting.loadArchived(archive.Id).then(function done(data) {
+                    if (data) {
+                        angular.copy($scope.data, $scope.currentDataCopy);
+                        ptCom.assignReference($scope.data, d.data, [], ["Id"]);
+                        $scope.archive = archive;
+                        $scope.archive.isLoaded = true;
+                        ptCom.alert("Load successfully");
+                    }
+                }, function fail(d) {
+                    ptCom.alert("Failed to load.");
                 });
             }
-        };
-
-        $scope.loadArchived = function(archive) {
-            if (archive.Id) {
-                ptUnderwriting.loadArchived(archive.Id).then(function(d) {
-                        if (d.data) {
-                            angular.copy($scope.data, $scope.currentDataCopy);
-                            ptCom.assignReference($scope.data, d.data, [], ["Id"]);
-                            $scope.archive = archive;
-                            $scope.archive.isLoaded = true;
-                            ptCom.alert("Load successfully");
-
-                        }
-                    },
-                    function(d) {
-                        ptCom.alert("Failed to load.");
-                    });
-            }
 
         };
-
-        $scope.restoreCurrent = function() {
+        $scope.restoreCurrent = function () {
             if ($scope.currentDataCopy) {
                 ptCom.assignReference($scope.data, $scope.currentDataCopy);
                 $scope.archive.isLoaded = false;
                 ptCom.alert("Restore to current version.");
             }
         };
-
-        $scope.calculate = function() {
-            $scope.$applyAsync(function() {
-                ptUnderwriting.calculator.calculate($scope.data);
+        $scope.calculate = function () {
+            $scope.$applyAsync(function () {
+                ptUnderwriting.calculate($scope.data);
             });
         };
-
-        $scope.enableEditing = function() {
+        $scope.enableEditing = function () {
             $scope.$broadcast("pt-editable-div-unlock");
             $scope.isProtectedView = false;
         };
-
-        $scope.$watch(function() {
-                return $state.$current.name;
-            },
-            function(newVal, oldVal) {
-                if (newVal === "underwriter.datainput") {
-                    if ($scope.isProtectedView == false) {
-                        $scope.enableEditing();
-                    }
+        $scope.$watch(function () {
+            return $state.$current.name;
+        }, function (newVal, oldVal) {
+            if (newVal === "underwriter.datainput") {
+                if ($scope.isProtectedView === false) {
+                    $scope.enableEditing();
                 }
-            });
+            }
+        });
 
 
         $scope.BBLE = ptCom.getGlobal("BBLE") || "";

@@ -55,14 +55,12 @@ angular.module("PortalApp")
             };
 
             $scope.init = function(bble) {
-
                 var leadsInfoBBLE = bble || $("#BBLE").val();
                 $scope.ShowInfo = $("#ShowInfo").val();
                 if (!leadsInfoBBLE) {
                     console.log("Can not load page without BBLE !");
                     return;
                 }
-
                 $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() },
                     function() {
                         $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() },

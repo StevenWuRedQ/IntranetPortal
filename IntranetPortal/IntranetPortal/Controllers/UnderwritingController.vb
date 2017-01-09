@@ -55,11 +55,11 @@ Namespace Controllers
             Return response
         End Function
 
-    <Route("api/underwriting/list"), HttpGet>
-    Public Function GetProperties() As IHttpActionResult
-        Dim list = LeadInfoDocumentSearch.GetPropertiesList().ToList()
+        <Route("api/underwriting/list"), HttpGet>
+        Public Function GetProperties() As IHttpActionResult
+            Dim list = UnderwritingService.GetPropertiesList()
             Dim jArrayList = JArray.FromObject(list).ToList()
-            jArrayList.ForEach(Function(s) s.item("Team") = Employee.GetEmpTeam(s("Owner").ToString()))
+            jArrayList.ForEach(Function(s) s.Item("Team") = Employee.GetEmpTeam(s("EmployeeName").ToString()))
             Return Ok(jArrayList)
         End Function
     End Class

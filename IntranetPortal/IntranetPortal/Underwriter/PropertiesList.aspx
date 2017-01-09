@@ -87,7 +87,7 @@
         };
 
         $(document).ready(function () {
-            var url = "/api/underwriting";
+            var url = "/api/underwriting/list";
             var that = this;
             $.getJSON(url).done(function (data) {
                 var dataGrid = $("#gridContainer").dxDataGrid({
@@ -282,22 +282,22 @@
                     displayall();
                     switch (data) {
                         case 1:
-                            dataGrid.filter(['Status', '=', '0']);
+                            dataGrid.filter(['SearchStatus', '=', '0']);
                             hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration', 'NewOfferStatus']);
                             break;
                         case 2:
-                            dataGrid.filter(['Status', '=', '1']);
+                            dataGrid.filter(['SearchStatus', '=', '1']);
                             break;
                         case 3:
-                            dataGrid.filter([['UnderwriteStatus', '=', '0'], ['Status', '=', '1']]);
+                            dataGrid.filter([['UnderwritingStatus', '=', '0']]);
                             hidesome(['UnderwriteCompletedOn', 'Duration']);
                             break;
                         case 4:
-                            dataGrid.filter([['UnderwriteStatus', '=', '1'], ['Status', '=', '1']]);
+                            dataGrid.filter([['UnderwritingStatus', '=', '1']]);
                             hidesome(['Team']);
                             break;
                         case 5:
-                            dataGrid.filter([['UnderwriteStatus', '=', '2'], ['Status', '=', '1']]);
+                            dataGrid.filter([['UnderwritingStatus', '=', '2']]);
                             hidesome(['Team']);
                     }
                 };

@@ -26,7 +26,7 @@ namespace RedQ.UnderwritingService.Models.NewYork
 
         public bool SidewalkLiens { get; set; }
         public bool VacateOrder { get; set; }
-        public DateTime RelocationLienDate { get; set; }
+        public DateTime? RelocationLienDate { get; set; }
     }
 
 }

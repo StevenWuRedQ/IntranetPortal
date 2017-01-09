@@ -25,10 +25,10 @@ namespace RedQ.UnderwritingService.Models.NewYork
         public string ForeclosureStatus { get; set; }
         [MaxLength(256)]
         public string ForeclosureNote { get; set; }
-        public DateTime AuctionDate { get; set; }
-        public DateTime DefaultDate { get; set; }
+        public DateTime? AuctionDate { get; set; }
+        public DateTime? DefaultDate { get; set; }
         public double CurrentPayoff { get; set; }
-        public DateTime PayoffDate { get; set; }
+        public DateTime? PayoffDate { get; set; }
         public double CurrentSSValue { get; set; }
 
         public enum OtherLiensEnum

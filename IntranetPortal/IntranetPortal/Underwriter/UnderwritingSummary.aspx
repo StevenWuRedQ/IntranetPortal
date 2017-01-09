@@ -73,6 +73,8 @@
             color: white;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.2.1/jquery.signalR.min.js"></script>
+    <script src="http://localhost:8887/signalr/hubs"></script>
     <script>
         angular.module("PortalApp").config(function ($stateProvider) {
             var searchSummary = {
@@ -94,9 +96,8 @@
                 name: 'underwriter',
                 url: '/underwriter',
                 templateUrl: '/js/Views/Underwriting/underwriting.tpl.html',
-                controller: 'UnderwriterController'
+                controller: 'UnderwritingController'
             }
-
             var dataInput = {
                 name: 'underwriter.datainput',
                 url: '/datainput',
@@ -111,11 +112,6 @@
                 name: 'underwriter.rentalmodels',
                 url: '/rentalmodels',
                 templateUrl: '/js/Views/Underwriting/rentalmodels.tpl.html'
-            }
-            var tables = {
-                name: 'underwriter.tables',
-                url: '/tables',
-                templateUrl: '/js/Views/Underwriting/tables.tpl.html'
             }
             var audit = {
                 name: 'underwriter.audit',
@@ -134,7 +130,6 @@
                 .state(dataInput)
                 .state(flipsheets)
                 .state(rentalmodels)
-                .state(tables)
                 .state(audit)
                 .state(archived)
                 .state(underwriterRequest);
@@ -162,7 +157,7 @@
                     </a>
                 </li>
 
-                <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active" ng-show="viewmode && viewmode>=2">
+                <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active"> <!--ng-show="viewmode && viewmode>=2"-->
                     <a role="tab" ui-sref="underwriter.datainput" class="tab_button_a">
                         <i class="fa fa-calculator head_tab_icon_padding"></i>
                         <div class="font_size_bold" style="width: 100px">
