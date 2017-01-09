@@ -97,7 +97,7 @@
                             customizeText: function (cell) {
                                 switch (cell.value) {
                                     case 0:
-                                        return 'Pending'
+                                        return 'Pending';
                                     case 1:
                                         return 'Accepted';
                                     case 2:
@@ -216,7 +216,6 @@
                     switch (data) {
                         case 1:
                             dataGrid.filter(['UnderwriteStatus', '=', '1'], 'and', ['NewOfferStatus', '<>', '2']);
-                            //hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration'])
                             break;
                     }
                 }

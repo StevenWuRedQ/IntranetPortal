@@ -35,18 +35,28 @@
                 list-name="New Search"
                 list-short-name="NS"
                 list-status-id="1"
-                list-data-url="/api/LeadInfoDocumentSearches/UnderWritingStatus/0"
-                list-href="/UnderWriter/DocSearchListNew.aspx#/1"
+                list-data-url="/api/LeadInfoDocumentSearches/status/0"
+                list-href="/UnderWriter/PropertiesList.aspx#/1"
+                item-field="CaseName"
+                item-click="summaryListItemHelper.onSummaryListItemClick"
+                item-type="0"></pt-summary-item-list>
+            <pt-summary-item-list
+                list-name="Compeleted Search"
+                list-short-name="CS"
+                list-status-id="2"
+                list-data-url="/api/LeadInfoDocumentSearches/status/1"
+                list-href="/UnderWriter/PropertiesList.aspx#/2"
                 item-field="CaseName"
                 item-click="summaryListItemHelper.onSummaryListItemClick"
                 item-type="0"></pt-summary-item-list>
             <div class="clearfix"></div>
+            <% If User.IsInRole("Underwriter") %>
             <pt-summary-item-list
                 list-name="Pending Underwriting"
                 list-short-name="PU"
                 list-status-id="3"
                 list-data-url="/api/LeadInfoDocumentSearches/UnderWritingStatus/2"
-                list-href="/UnderWriter/DocSearchListNew.aspx#/3"
+                list-href="/UnderWriter/PropertiesList.aspx#/3"
                 item-field="CaseName"
                 item-click="summaryListItemHelper.onSummaryListItemClick"
                 item-type="1"></pt-summary-item-list>
@@ -55,7 +65,7 @@
                 list-short-name="AU"
                 list-status-id="4"
                 list-data-url="/api/LeadInfoDocumentSearches/UnderWritingStatus/3"
-                list-href="/UnderWriter/DocSearchListNew.aspx#/4"
+                list-href="/UnderWriter/PropertiesList.aspx#/4"
                 item-field="CaseName"
                 item-click="summaryListItemHelper.onSummaryListItemClick"
                 item-type="1"></pt-summary-item-list>
@@ -64,10 +74,11 @@
                 list-short-name="RU"
                 list-status-id="5"
                 list-data-url="/api/LeadInfoDocumentSearches/UnderWritingStatus/4"
-                list-href="/UnderWriter/DocSearchListNew.aspx#/5"
+                list-href="/UnderWriter/PropertiesList.aspx#/5"
                 item-field="CaseName"
                 item-click="summaryListItemHelper.onSummaryListItemClick"
                 item-type="1"></pt-summary-item-list>
+            <% End If %>
         </div>
     </div>
 

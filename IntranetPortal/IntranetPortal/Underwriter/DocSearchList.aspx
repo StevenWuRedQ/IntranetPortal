@@ -78,12 +78,7 @@
                 }
             };
         })();
-        //var onSelectionChangedCallback = function (e) {
-        //    //debugger;
-        //    var bble = e.selectedRowKeys[0].BBLE || '';
-        //    var status = e.selectedRowKeys[0].Status || 0;
-        //    previewControl.showCaseInfo(bble, status)
-        //}
+
         var onRowClickCallback = function (e) {
             //debugger;
             var bble = e.key.BBLE || '';
@@ -95,7 +90,7 @@
             var that = this;
             return {
                 showCaseInfo: function (CaseId, status) {
-                    if (status == 0) {
+                    if (status === 0) {
                     <% If HttpContext.Current.User.IsInRole("Underwriter")%>
                         var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId;
                     <% ELSE%>
@@ -175,7 +170,6 @@
                         }
                         highlightcallback(e);
                     },
-                    //onSelectionChanged: onSelectionChangedCallback,
                     onRowClick: onRowClickCallback,
                     selection: {
                         mode: 'single'
