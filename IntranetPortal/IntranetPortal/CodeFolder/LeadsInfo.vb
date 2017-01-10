@@ -582,10 +582,14 @@ Public Class LeadsInfo
             'Return 1234564.123486456
             Dim EMD As Decimal?
             If (LisPens IsNot Nothing AndAlso LisPens.Count > 0) Then
-                Dim ListPensYear = LisPens.Where(Function(a) a.Active IsNot Nothing AndAlso a.Active).Select(Function(f) f.FileDate.Year).ToList
-                If ListPensYear IsNot Nothing AndAlso ListPensYear.Count > 0 Then
-                    Dim oldestYear = ListPensYear.Min()
-                    EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (Date.Now.Year - oldestYear))
+                Dim activeliens = LisPens.Where(Function(a) a.Active IsNot Nothing AndAlso a.Active).Select(Function(f) f.Docket_Number).ToArray
+                If activeliens IsNot Nothing AndAlso activeliens.Count > 0 Then
+                    Dim ListPensYear = LisPens.Where(Function(a) activeliens.Contains(a.Docket_Number)).Select(Function(a) a.FileDate.Year).ToList
+
+                    If ListPensYear IsNot Nothing AndAlso ListPensYear.Count > 0 Then
+                        Dim oldestYear = ListPensYear.Min()
+                        EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (Date.Now.Year - oldestYear))
+                    End If
                 End If
             Else
                 Return MortgageCombo

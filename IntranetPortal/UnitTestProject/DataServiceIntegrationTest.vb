@@ -34,7 +34,7 @@ Imports IntranetPortal.Data
 
     <TestMethod()>
     Public Sub UpdateLeadInfo_Return()
-        Dim bble = "4103450022"
+        Dim bble = "4133510034"
 
         Dim result = DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, True, False)
         Assert.IsTrue(result)

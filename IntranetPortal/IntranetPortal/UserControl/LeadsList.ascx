@@ -308,6 +308,15 @@
             margin-left: -11px;
         }
 
+        .newLeadsButton {
+
+        }
+
+        .newLeadsButton:hover {
+            color:gray;
+            border-width:2px;
+        }
+
     .color_star {
         cursor: pointer;
     }
@@ -333,7 +342,12 @@
     <div style="margin: 10px 10px 10px 10px; text-align: left;" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
             <div class="clearfix">
+                <% If lblLeadCategory.Text = "New Leads" %>
+                <i class="fa fa-plus with_circle newLeadsButton" style="width: 48px; height: 48px; line-height: 48px; cursor:pointer" onclick="alert('add')"></i>&nbsp;
+                <% Else %>
                 <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
+                <% End If %>
+                
                 <span style="color: #234b60; font-size: 30px;">
                     <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>

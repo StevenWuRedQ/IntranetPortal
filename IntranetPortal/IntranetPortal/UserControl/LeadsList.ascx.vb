@@ -479,7 +479,6 @@ Public Class LeadsList
                 Context.Leads.Add(ld)
                 Context.SaveChanges()
 
-
             Else
                 'use workflow engine to approval 
                 ld.Status = LeadStatus.MgrApprovalInWf

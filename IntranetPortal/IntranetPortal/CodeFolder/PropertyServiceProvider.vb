@@ -398,11 +398,11 @@ Public Class PropertyServiceProvider
                     End If
                 End If
             End If
-
-            lead.AcrisOrderStatus = APIOrder.ItemStatus.Complete.ToString
-            apiOrder.Acris = APIOrder.ItemStatus.Complete
-            apiOrder.UpdateOrderStatus()
         End If
+
+        lead.AcrisOrderStatus = APIOrder.ItemStatus.Complete.ToString
+        apiOrder.Acris = APIOrder.ItemStatus.Complete
+        apiOrder.UpdateOrderStatus()
     End Sub
 
     Private Sub LoadTaxbill(lead As LeadsInfo, apiOrder As APIOrder)
@@ -415,7 +415,7 @@ Public Class PropertyServiceProvider
     End Sub
 
     Private Sub SaveTaxBill(bills As Taxbill, Optional lead As LeadsInfo = Nothing, Optional apiOrder As APIOrder = Nothing)
-        If bills.status = "Success" Then
+        If bills IsNot Nothing AndAlso bills.status = "Success" Then
             If lead Is Nothing Then
                 lead = ctx.LeadsInfoes.Find(bills.BBL)
             End If
@@ -448,7 +448,7 @@ Public Class PropertyServiceProvider
     End Sub
 
     Private Function SaveViolations(dobViolations As Dobpenaltiesandviolations, Optional lead As LeadsInfo = Nothing, Optional apiOrder As APIOrder = Nothing) As LeadsInfo
-        If dobViolations.status = "Success" Then
+        If dobViolations IsNot Nothing AndAlso dobViolations.status = "Success" Then
             If lead Is Nothing Then
                 lead = ctx.LeadsInfoes.Find(dobViolations.BBL)
             End If
@@ -479,7 +479,7 @@ Public Class PropertyServiceProvider
     End Sub
 
     Private Sub SaveWaterBill(bills As Waterbill, Optional lead As LeadsInfo = Nothing, Optional apiOrder As APIOrder = Nothing)
-        If bills.status = "Success" Then
+        If bills IsNot Nothing AndAlso bills.status = "Success" Then
             If lead Is Nothing Then
                 lead = ctx.LeadsInfoes.Find(bills.BBL)
             End If
@@ -506,7 +506,7 @@ Public Class PropertyServiceProvider
     End Sub
 
     Private Function SaveZEstimate(zestimate As ZillowProperty, Optional lead As LeadsInfo = Nothing, Optional apiOrder As APIOrder = Nothing)
-        If zestimate.status = "Success" Then
+        If zestimate IsNot Nothing AndAlso zestimate.status = "Success" Then
             If lead Is Nothing Then
                 lead = ctx.LeadsInfoes.Find(zestimate.BBL)
             End If
@@ -539,7 +539,7 @@ Public Class PropertyServiceProvider
     End Function
 
     Private Function SaveMortgageServicer(result As MortgageServicer) As LeadsMortgageData
-        If result.status = "Success" Then
+        If result IsNot Nothing AndAlso result.status = "Success" Then
             Dim lmd = ctx.LeadsMortgageDatas.Find(result.BBL)
 
             If lmd IsNot Nothing Then
