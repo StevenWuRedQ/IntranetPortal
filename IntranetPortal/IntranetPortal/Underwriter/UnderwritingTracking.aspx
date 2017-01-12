@@ -119,7 +119,7 @@
                         },
                         {
                             dataField: "NewOfferStatus",
-                            caption: "NO. Status",
+                            caption: "OF. Status",
                             alignment: "left",
                             customizeText: function (cell) {
                                 switch (cell.value) {

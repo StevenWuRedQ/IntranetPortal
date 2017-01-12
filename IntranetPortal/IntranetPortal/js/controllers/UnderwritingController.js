@@ -16,41 +16,44 @@ angular.module("PortalApp").controller("UnderwritingController", [
         $scope.isProtectedView = true;
 
         $scope.init = function (bble) {
-            debugger;
             if (bble) {
-                ptUnderwriting.load(bble).then(function(data) {
+                ptUnderwriting.load(bble).then(function (data) {
                     if (data && data.Id) {
                         $scope.data = data;
-                        ptUnderwriting.loadArchivedList(bble).then(function(list) {
+                        ptUnderwriting.loadArchivedList(bble).then(function (list) {
                             $scope.archivedList = list;
                         });
                     } else {
                         var newData = ptUnderwriting.new();
                         newData.BBLE = bble;
-                        DocSearch.get({ BBLE: bble }).$promise.then(function(search) {
+                        DocSearch.get({ BBLE: bble }).$promise.then(function (search) {
                             newData.docSearch = search;
-                            LeadsInfo.get({ BBLE: bble.trim() }).$promise.then(function(leadsInfo) {
+                            LeadsInfo.get({ BBLE: bble.trim() }).$promise.then(function (leadsInfo) {
                                 newData.leadsInfo = leadsInfo;
                                 ptUnderwriting.importData(newData);
                             });
                         });
                         $scope.data = newData;
                     }
+                }, function (e) {
+                    console.log(e);
+                    ptCom.alert("Failed to load.");
                 });
             } else {
                 $scope.data = ptUnderwriting.new();
             }
         };
         $scope.save = function () {
-            ptCom.confirm("Are you going to Save?",
+            ptCom.confirm("Are you going to save?",
                 function (response) {
                     if (response) {
                         ptUnderwriting.save($scope.data).then(function done(data) {
                             if (data) {
                                 $scope.data = data;
                             }
-                            ptCom.alert("Save Successfully.");
-                        }, function fail() {
+                            ptCom.alert("Saved Successfully.");
+                        }, function fail(e) {
+                            console.log(e);
                             ptCom.alert("Failed to save.");
                         });
                     }
@@ -60,12 +63,12 @@ angular.module("PortalApp").controller("UnderwritingController", [
         $scope.archiveFunc = function () {
             ptCom.prompt("Please give a name to this archive.",
                 function (msg) {
-                    //debugger;
                     if (msg != null) {
                         ptUnderwriting.archive($scope.data, msg).then(function done(data) {
-                            alert("Archive succesful.");
-                        }, function fail() {
-                            alert("Sorry. Some error.");
+                            alert("Archived succesful.");
+                        }, function fail(e) {
+                            console.log(e);
+                            alert("Failed to archive.");
                         });
                     }
 
@@ -79,13 +82,14 @@ angular.module("PortalApp").controller("UnderwritingController", [
                     if (data) {
                         //debugger;
                         angular.copy($scope.data, $scope.currentDataCopy);
-                        ptCom.assignReference($scope.data, d.data, [], ["Id"]);
+                        ptCom.assignReference($scope.data, data, [], ["Id"]);
                         $scope.archive = archive;
                         $scope.archive.isLoaded = true;
                         ptCom.alert("Load successfully");
                     }
-                }, function fail(d) {
-                    ptCom.alert("Failed to load.");
+                }, function fail(e) {
+                    console.log(e);
+                    ptCom.alert("Failed to load archive.");
                 });
             }
 
@@ -95,18 +99,47 @@ angular.module("PortalApp").controller("UnderwritingController", [
             if ($scope.currentDataCopy) {
                 ptCom.assignReference($scope.data, $scope.currentDataCopy);
                 $scope.archive.isLoaded = false;
-                ptCom.alert("Restore to current version.");
+                ptCom.alert("Restored to current version.");
             }
         };
         // Core function to apply predefined rule, and update model values.
         $scope.calculate = function () {
-            $scope.$applyAsync(function () {
-                ptUnderwriting.calculate($scope.data);
+            ptUnderwriting.calculate($scope.data).then(function (output) {
+                $scope.data.MinimumBaselineScenario = output.MinimumBaselineScenario;
+                $scope.data.BestCaseScenario = output.BestCaseScenario;
+                $scope.data.Summary = output.Summary;
+                $scope.data.CashScenario = output.CashScenario;
+                $scope.data.LoanScenario = output.LoanScenario;
+                $scope.data.FlipScenario = output.FlipScenario;
+                $scope.data.RentalModel = output.RentalModel;
+            }, function (e) {
+                console.log(e);
+                console.log("Fail to get proxy: calculate.")
             });
         };
+        // Default Disable Editing for preventing accident change.
         $scope.enableEditing = function () {
             $scope.$broadcast("pt-editable-div-unlock");
             $scope.isProtectedView = false;
+        };
+        // Change Status of Underwriting.
+        $scope.changeStatus = function (status, msg) {
+            // because the underwriting completion is not reversible, comfirm it before save to db.
+            msg = msg || "Please provide note or press 'No' to cancel";
+            ptCom.prompt(msg, function then(note) {
+                if (note != null) {
+                    if (!$scope.data || !$scope.BBLE) ptCom.alert("BBLE is missing!");
+                    ptUnderwriting.changeStatus($scope.data.BBLE, status, note).then(function succ(data) {
+                        ptCom.alert("Update status successfully.")
+                    }, function fail(e) {
+                        consoel.log(e);
+                        ptCom.alert("Fail to update underwriting status.");
+                    });
+                } else {
+                    ptCom.alert("Note is required.");
+                }
+            }, true);
+
         };
         $scope.$watch(function () {
             return $state.$current.name;
@@ -117,13 +150,10 @@ angular.module("PortalApp").controller("UnderwritingController", [
                 }
             }
         });
-
-
         // Init controller;
         $scope.BBLE = ptCom.getGlobal("BBLE") || "";
         $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
         $scope.init($scope.BBLE);
-
         // A predefined model to validate with excel data.
         $scope.feedData = function () {
             $scope.data.PropertyInfo.TaxClass = "A0",

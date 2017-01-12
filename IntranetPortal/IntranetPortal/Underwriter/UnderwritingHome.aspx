@@ -34,50 +34,53 @@
             <pt-summary-item-list
                 list-name="New Search"
                 list-short-name="NS"
-                list-status-id="1"
                 list-data-url="/api/LeadInfoDocumentSearches/status/0"
                 list-href="/UnderWriter/PropertiesList.aspx#/1"
+                list-filter="1"
                 item-field="CaseName"
-                item-click="summaryListItemHelper.onSummaryListItemClick"
-                item-type="0"></pt-summary-item-list>
+                item-click="summaryListItemHelper.onSummaryListItemClick"></pt-summary-item-list>
             <pt-summary-item-list
                 list-name="Compeleted Search"
                 list-short-name="CS"
-                list-status-id="2"
                 list-data-url="/api/LeadInfoDocumentSearches/status/1"
                 list-href="/UnderWriter/PropertiesList.aspx#/2"
+                list-filter="2"
                 item-field="CaseName"
-                item-click="summaryListItemHelper.onSummaryListItemClick"
-                item-type="0"></pt-summary-item-list>
+                item-click="summaryListItemHelper.onSummaryListItemClick"></pt-summary-item-list>
             <div class="clearfix"></div>
             <% If User.IsInRole("Underwriter") %>
             <pt-summary-item-list
-                list-name="Pending Underwriting"
-                list-short-name="PU"
-                list-status-id="3"
-                list-data-url="/api/LeadInfoDocumentSearches/UnderWritingStatus/2"
-                list-href="/UnderWriter/PropertiesList.aspx#/3"
+                list-name="New Underwriting"
+                list-short-name="NU"
+                list-data-url="/api/underwriting/status/1"
+                list-href="/UnderWriter/PropertiesList.aspx#/11"
+                list-filter="11"
                 item-field="CaseName"
-                item-click="summaryListItemHelper.onSummaryListItemClick"
-                item-type="1"></pt-summary-item-list>
+                item-click="summaryListItemHelper.onSummaryListItemClick"></pt-summary-item-list>
+            <pt-summary-item-list
+                list-name="Processing Underwriting"
+                list-short-name="NU"
+                list-data-url="/api/underwriting/status/2"
+                list-href="/UnderWriter/PropertiesList.aspx#/12"
+                list-filter="12"
+                item-field="CaseName"
+                item-click="summaryListItemHelper.onSummaryListItemClick"></pt-summary-item-list>
             <pt-summary-item-list
                 list-name="Accepted Underwriting"
                 list-short-name="AU"
-                list-status-id="4"
-                list-data-url="/api/LeadInfoDocumentSearches/UnderWritingStatus/3"
-                list-href="/UnderWriter/PropertiesList.aspx#/4"
+                list-data-url="/api/underwriting/status/3"
+                list-href="/UnderWriter/PropertiesList.aspx#/13"
+                list-filter="13"
                 item-field="CaseName"
-                item-click="summaryListItemHelper.onSummaryListItemClick"
-                item-type="1"></pt-summary-item-list>
+                item-click="summaryListItemHelper.onSummaryListItemClick"></pt-summary-item-list>
             <pt-summary-item-list
                 list-name="Rejected Underwriting"
                 list-short-name="RU"
-                list-status-id="5"
-                list-data-url="/api/LeadInfoDocumentSearches/UnderWritingStatus/4"
-                list-href="/UnderWriter/PropertiesList.aspx#/5"
+                list-data-url="/api/underwriting/status/4"
+                list-href="/UnderWriter/PropertiesList.aspx#/14"
+                list-filter="14"
                 item-field="CaseName"
-                item-click="summaryListItemHelper.onSummaryListItemClick"
-                item-type="1"></pt-summary-item-list>
+                item-click="summaryListItemHelper.onSummaryListItemClick"></pt-summary-item-list>
             <% End If %>
         </div>
     </div>
@@ -88,11 +91,11 @@
             scope.summaryListItemHelper = {
                 onSummaryListItemClick: function (e) {
                     var data = e.data.data;
-                    var type = e.data.type;
-                    var locationId = e.data.locationId;
+                    var filterNum = e.data.filter;
+                    debugger;
                     if (data) {
                         var bble = data.data.BBLE.trim();
-                        location.href = "/underwriter/PropertiesList.aspx#/" + locationId + "/" + bble;
+                        location.href = "/underwriter/PropertiesList.aspx#/" + filterNum + "/" + bble + "/"
                     }
                 }
             }

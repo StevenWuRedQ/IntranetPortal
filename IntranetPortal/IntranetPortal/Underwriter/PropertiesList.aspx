@@ -80,15 +80,20 @@
     </div>
     <script>
         var onRowClickCallback = function (e) {
-            //debugger;
+            var datagrid = e.element.dxDataGrid('instance');
+            var previewType;
             var bble = e.key.BBLE || '';
-            var status = e.key.Status || 0;
-            previewControl.showCaseInfo(bble, status);
+            var filterNum = datagrid.option("filterNum");
+            if (filterNum && [11, 12, 13, 14].indexOf(filterNum)>=0) previewType = 1;
+            else previewType = 0;
+            previewControl.showCaseInfo(bble, previewType);
         };
 
         $(document).ready(function () {
+
             var url = "/api/underwriting/list";
             var that = this;
+
             $.getJSON(url).done(function (data) {
                 var dataGrid = $("#gridContainer").dxDataGrid({
                     dataSource: data,
@@ -149,7 +154,7 @@
                             visible: false
                         },
                         {
-                            dataField: 'UnderwritingUpdateDate',
+                            dataField: 'SearchUpdateDate',
                             sortIndex: 1,
                             sortOrder: 'desc',
                             visible: false
@@ -214,6 +219,8 @@
                             dataField: "UnderwritingUpdateDate",
                             caption: 'UW Updated On',
                             dataType: "date",
+                            sortIndex: 2,
+                            sortOrder: 'desc',
                             customizeText: PortalUtility.customizeDateText2
 
                         }, {
@@ -239,7 +246,7 @@
                             allowSorting: true,
                             calculateCellValue: function (data) {
                                 //debugger;
-                                if (!data.UnderwritingUpdateDate || !data.UnderwritingCreateBy ) {
+                                if (!data.UnderwritingUpdateDate || !data.UnderwritingCreateBy) {
                                     return Infinity;
                                 }
                                 return new Date(data.UnderwriteCompletedOn) - new Date(data.CreateDate);
@@ -251,6 +258,7 @@
                         }
                     ]
                 }).dxDataGrid('instance');
+
                 $(".dx-datagrid-header-panel")
                     .prepend($("<div id='uw-properties-title' style='margin-bottom: -35px'>" +
                         "<label class='grid-title-icon' style='display: inline-block'>UW</label>" +
@@ -283,21 +291,31 @@
                     switch (data) {
                         case 1:
                             dataGrid.filter(['SearchStatus', '=', '0']);
+                            dataGrid.option("filterNum", 0);
                             hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration', 'NewOfferStatus']);
                             break;
                         case 2:
                             dataGrid.filter(['SearchStatus', '=', '1']);
+                            dataGrid.option("filterNum", 1);
                             break;
-                        case 3:
-                            dataGrid.filter([['UnderwritingStatus', '=', '0']]);
+                        case 11:
+                            dataGrid.filter([['UnderwritingStatus', '=', '1']]);
+                            dataGrid.option("filterNum", 11);
                             hidesome(['UnderwriteCompletedOn', 'Duration']);
                             break;
-                        case 4:
-                            dataGrid.filter([['UnderwritingStatus', '=', '1']]);
+                        case 12:
+                            dataGrid.filter([['UnderwritingStatus', '=', '2']]);
+                            dataGrid.option("filterNum", 12);
+                            hidesome(['UnderwriteCompletedOn', 'Duration']);
+                            break
+                        case 13:
+                            dataGrid.filter([['UnderwritingStatus', '=', '3']]);
+                            dataGrid.option("filterNum", 13);
                             hidesome(['Team']);
                             break;
-                        case 5:
-                            dataGrid.filter([['UnderwritingStatus', '=', '2']]);
+                        case 14:
+                            dataGrid.filter([['UnderwritingStatus', '=', '4']]);
+                            dataGrid.option("filterNum", 12);
                             hidesome(['Team']);
                     }
                 };
@@ -310,16 +328,19 @@
                             key: 1,
                             name: "New Search"
                         }, {
-                            key: 3,
-                            name: "Pending Underwriting"
-                        }, {
                             key: 2,
                             name: "Completed Search"
                         }, {
-                            key: 4,
+                            key: 11,
+                            name: "New Underwriting"
+                        }, {
+                            key: 12,
+                            name: "Processing Underwriting"
+                        }, {
+                            key: 13,
                             name: "Accepted Underwriting"
                         }, {
-                            key: 5,
+                            key: 14,
                             name: "Rejected Underwriting"
                         }
                     ],
@@ -328,23 +349,27 @@
                     width: '250',
                     onValueChanged: filterDataDelegate
                 }).dxSelectBox('instance');
-                var hashnum = parseInt(location.hash.split('/')[1]);
+                var filterNum = parseInt(location.hash.split('/')[1]);
                 var bble = location.hash.split('/')[2];
-                if (hashnum) {
-                    filterBox.option('value', hashnum);
+                if (filterNum) {
+                    filterBox.option('value', filterNum);
                 } else {
                     filterBox.option('value', 0);
                 }
                 //debugger;
                 if (bble) {
-                    previewControl.showCaseInfo(bble);
+                    var previewType;
+                    var filterNum = parseInt(location.hash.split('/')[1]);
+                    if (filterNum && [11, 12, 13, 14].indexOf(filterNum) >= 0) previewType = 1;
+                    else previewType = 0;
+                    previewControl.showCaseInfo(bble, previewType);
                 }
 
                 //high light column by refresh
                 var highlightcallback = function (e) {
                     // debugger;
                     if (bble) {
-                        var grid = e.element.dxDataGrid('instance');
+                        var grid = dataGrid;
                         var data = grid.option('dataSource');
                         var items = [];
                         _.forEach(data,
@@ -365,58 +390,58 @@
             var previewShown = false;
             var that = this;
             return {
-                showCaseInfo: function (CaseId, status) {
-                    if (status === 0) {
+                showCaseInfo: function (CaseId, previewType) {
+                    if (previewType === 1) {
                     <% If HttpContext.Current.User.IsInRole("Underwriter")%>
-                    var url = '/underwriter/DocSearch.aspx?mode=2&BBLE=' + CaseId + '#/searchSummary';
-                    <% ELSE%>
-                    var url = '/underwriter/DocSearch.aspx?mode=1&BBLE=' + CaseId + '#/searchSummary';
-                    <% End IF%>
-                } else {
-                    <% If HttpContext.Current.User.IsInRole("Underwriter")%>
-                    var url = '/underwriter/UnderwritingSummary.aspx?mode=2&BBLE=' + CaseId + '#/searchSummary';
+                        var url = '/underwriter/UnderwritingSummary.aspx?mode=2&BBLE=' + CaseId + '#/searchSummary';
                     <% ELSE%>
                         var url = '/underwriter/UnderwritingSummary.aspx?mode=1&BBLE=' + CaseId + '#/searchSummary';
                     <% End IF%>
+                    } else {
+                    <% If HttpContext.Current.User.IsInRole("Underwriter")%>
+                        var url = '/underwriter/DocSearch.aspx?mode=2&BBLE=' + CaseId + '#/searchSummary';
+                    <% ELSE%>
+                        var url = '/underwriter/DocSearch.aspx?mode=1&BBLE=' + CaseId + '#/searchSummary';
+                    <% End IF%>
+                    }
+                    $("#xwrapper").css("width", "50%");
+                    $("#xwrapper").css("visibility", "visible");
+                    $("#preview").css("width", "50%");
+                    $("#preview").css("visibility", "visible");
+                    $("#iconarea").css("visibility", "visible");
+                    $("#previewWindow").attr("src", url);
+                    that.previewShown = true;
+                },
+                undo: function () {
+                    $("#xwrapper").css("width", "99%");
+                    $("#xwrapper").css("visibility", "visible");
+                    $("#preview").css("width", "0%");
+                    $("#preview").css("visibility", "hidden");
+                    $("#iconarea").css("visibility", "hidden");
+                    $("#previewWindow").attr("src", "");
+                    that.previewShown = false;
+                },
+                maximize: function () {
+                    $("#xwrapper").css("width", "0%");
+                    $("#xwrapper").css("visibility", "hidden");
+                    $("#preview").css("width", "97%");
+                    $("#preview").css("visibility", "visible");
+                },
+                unmaximize: function () {
+                    $("#xwrapper").css("width", "50%");
+                    $("#xwrapper").css("visibility", "visible");
+                    $("#preview").css("width", "50%");
+                    $("#preview").css("visibility", "visible");
+                },
+                togglemaximize: function () {
+                    var visible = $("#xwrapper").css("visibility");
+                    if (visible == 'visible') {
+                        this.maximize();
+                    } else {
+                        this.unmaximize();
+                    }
                 }
-                $("#xwrapper").css("width", "50%");
-                $("#xwrapper").css("visibility", "visible");
-                $("#preview").css("width", "50%");
-                $("#preview").css("visibility", "visible");
-                $("#iconarea").css("visibility", "visible");
-                $("#previewWindow").attr("src", url);
-                that.previewShown = true;
-            },
-            undo: function () {
-                $("#xwrapper").css("width", "99%");
-                $("#xwrapper").css("visibility", "visible");
-                $("#preview").css("width", "0%");
-                $("#preview").css("visibility", "hidden");
-                $("#iconarea").css("visibility", "hidden");
-                $("#previewWindow").attr("src", "");
-                that.previewShown = false;
-            },
-            maximize: function () {
-                $("#xwrapper").css("width", "0%");
-                $("#xwrapper").css("visibility", "hidden");
-                $("#preview").css("width", "97%");
-                $("#preview").css("visibility", "visible");
-            },
-            unmaximize: function () {
-                $("#xwrapper").css("width", "50%");
-                $("#xwrapper").css("visibility", "visible");
-                $("#preview").css("width", "50%");
-                $("#preview").css("visibility", "visible");
-            },
-            togglemaximize: function () {
-                var visible = $("#xwrapper").css("visibility");
-                if (visible == 'visible') {
-                    this.maximize();
-                } else {
-                    this.unmaximize();
-                }
-            }
-        };
-    })();
+            };
+        })();
     </script>
 </asp:Content>

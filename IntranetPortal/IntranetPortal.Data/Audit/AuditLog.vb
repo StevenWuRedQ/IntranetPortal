@@ -17,7 +17,6 @@ Partial Class AuditLog
     <JsonIgnore>
     <NotMapped>
     Public Property Entity As DbEntityEntry
-
     ''' <summary>
     ''' Return all the audit Logs for specific record
     ''' </summary>
@@ -26,11 +25,10 @@ Partial Class AuditLog
     ''' <returns>The list of audi logs</returns>
     Public Shared Function GetLogs(objName As String, recordId As String) As IEnumerable(Of AuditLog)
         Using ctx As New PortalEntities
-
             Return ctx.AuditLogs.Where(Function(l) l.TableName = objName AndAlso l.RecordId = recordId).ToList
-
         End Using
     End Function
+
     <NotMapped>
     Public ReadOnly Property FormatOriginalValue As Object
         Get

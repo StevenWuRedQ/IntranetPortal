@@ -27,14 +27,23 @@ Public Class EntityHelper(Of T As Class)
         For Each np In GetNavigationProperties(ctx)
             Dim refentry = ctx.Entry(oldv).Reference(np.ToString)
             refentry.Load()
-            Dim p = GetType(T).GetProperty(np.ToString)
-            Dim dp = p.PropertyType
-            Dim orgobj = p.GetValue(oldv)
-            Dim tarobj = p.GetValue(newv)
+            Dim nPropInfo = GetType(T).GetProperty(np.ToString)
+            Dim typeInfo = nPropInfo.PropertyType
+            Dim orgobj = nPropInfo.GetValue(oldv)
+            If orgobj Is Nothing Then
+                orgobj = Activator.CreateInstance(typeInfo)
+                nPropInfo.SetValue(oldv, orgobj)
+                ctx.Entry(orgobj).State = EntityState.Added
+            End If
+            Dim tarobj = nPropInfo.GetValue(newv)
+            If tarobj Is Nothing Then
+                tarobj = Activator.CreateInstance(typeInfo)
+            End If
 
-            For Each dpp In dp.GetProperties
-                If dpp.Name.ToUpper() <> "ID" Then
-                    dp.GetProperty(dpp.Name).SetValue(orgobj, dp.GetProperty(dpp.Name).GetValue(tarobj, Nothing))
+            For Each propInfo In typeInfo.GetProperties
+                If propInfo.Name.ToUpper() <> "ID" Then
+                    Dim prop = typeInfo.GetProperty(propInfo.Name)
+                    prop.SetValue(orgobj, prop.GetValue(tarobj, Nothing))
                 End If
             Next
         Next

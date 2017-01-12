@@ -156,8 +156,12 @@ public class UnderwritingEntity : DbContext
             EventType = (int)logType,
             ColumnName = propName,
             TableName = tableName,
-            OriginalValue = GetProperty(dbEntry, "OriginalValues", propName).ToString(),
-            NewValue = GetProperty(dbEntry, "CurrentValues", propName).ToString(),
+            OriginalValue = GetProperty(dbEntry, "OriginalValues", propName) == null
+                            ? ""
+                            : GetProperty(dbEntry, "OriginalValues", propName).ToString(),
+            NewValue = GetProperty(dbEntry, "CurrentValues", propName) == null
+                       ? ""
+                       : GetProperty(dbEntry, "CurrentValues", propName).ToString(),
             Entity = dbEntry
         };
     }
@@ -193,7 +197,8 @@ public class UnderwritingEntity : DbContext
         if (dbValues == null)
         {
             return "";
-        } else 
+        }
+        else
         {
             return dbValues.GetValue<object>(propName);
         }

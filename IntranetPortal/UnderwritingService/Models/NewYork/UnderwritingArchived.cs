@@ -27,5 +27,7 @@ namespace RedQ.UnderwritingService.Models.NewYork
         public virtual UnderwritingMinimumBaselineScenario MinimumBaselineScenario { get; set; }
         public virtual UnderwritingBestCaseScenario BestCaseScenario { get; set; }
         public virtual UnderwritingRentalModel RentalModel { get; set; }
+        public virtual UnderwritingSummary Summary { get; set; }
+
     }
 }

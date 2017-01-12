@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
+using NLog;
 using Owin;
 [assembly: OwinStartup(typeof(RedQ.UnderwritingService.Startup))]
 namespace RedQ.UnderwritingService
 {
-   public class Startup
+    public class Startup
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         // This code configures Web API. The Startup class is specified as a type
         // parameter in the WebApp.Start method.
         public void Configuration(IAppBuilder app)
@@ -27,8 +30,8 @@ namespace RedQ.UnderwritingService
                 };
                 // Run the SignalR pipeline. We're not using MapSignalR
                 // since this branch already runs under the "/signalr"
-                // path.
                 map.RunSignalR(hubConfiguration);
+                logger.Info("App running.");
             });
         }
     }

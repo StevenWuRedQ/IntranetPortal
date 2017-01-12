@@ -4,8 +4,20 @@
     }
 </style>
 
-<div style="height: 830px; overflow: auto; padding: 0 20px" class="shortSaleUI" id="DocSearchErrorDiv">
+<div class="navbar-xs">
+    <div class="navbar-primary">
+        <nav class="nav navbar navbar-default">
+            <div class="container-fluid">
+                <div class="nav-form navbar-right">
+                    <button type="button" class="btn btn-orange" ng-click="SearchComplete(true)" style="font-size:18px; padding: 3px 8px">Save</button>
+                    <button type="button" class="btn btn-orange" ng-click="SearchComplete()" style="font-size:18px; padding: 3px 8px">Complete</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
 
+<div style="height: 830px; overflow: auto; padding: 0 20px" class="shortSaleUI" id="DocSearchErrorDiv">
     <div class="alert alert-warning" style="font-size: 16px; margin-top: 20px;" ng-show="DocSearch.Status != 1">
         <i class="fa fa-warning"></i><strong>Warning!</strong> Document search didn't completed yet!
     </div>
@@ -14,7 +26,7 @@
     </div>
 
     <div class="ss_form">
-        <h4 class="ss_form_title ">
+        <h4 class="ss_form_title">
             Request Info
             <pt-collapse model="CollapseRequestInfo" />
         </h4>
@@ -36,7 +48,7 @@
     </div>
 
     <div pt-editable-div pt-lock="viewmode && viewmode == 1">
-        <div class="ss_form">
+        <div class="ss_form col-lg-6">
             <h4 class="ss_form_title ">
                 Ownership Mortgage Info
                 <pt-collapse model="DocSearch.LeadResearch.Ownership_Mortgage_Info">
@@ -499,7 +511,7 @@
             </div>
         </div>
 
-        <div class="ss_form">
+        <div class="ss_form col-lg-6">
             <h4 class="ss_form_title ">
                 Property Dues Violations
                 <pt-collapse model="DocSearch.LeadResearch.Property_Dues_Violations"></pt-collapse>
@@ -753,7 +765,7 @@
                 </ul>
             </div>
         </div>
-        <div class="ss_form">
+        <div class="ss_form col-lg-6">
             <h4 class="ss_form_title ">
                 Judgements & Liens
                 <pt-collapse model="DocSearch.LeadResearch.Judgements_Liens"> </pt-collapse>
@@ -991,11 +1003,6 @@
             <li class="ss_form_item " style="visibility: hidden">
                 <label class="ss_form_input_title">Documents Received On</label>
 
-            </li>
-
-            <li class="ss_form_item ">
-                <label class="ss_form_input_title">&nbsp;</label>
-                <input type="button" value="Complete" class="rand-button rand-button-blue rand-button-pad" ng-click="SearchComplete()">
             </li>
 
         </ul>

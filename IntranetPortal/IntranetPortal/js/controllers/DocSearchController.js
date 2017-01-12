@@ -6,14 +6,12 @@
  * LeadTaxSearchController is doc search. 
  * naming wrong becuase the name always change from spec guys.
  */
-angular.module("PortalApp")
-    .controller("DocSearchController",
-    [
+angular.module("PortalApp").controller("DocSearchController", [
         "$scope", "$http", "$element", "$timeout", "ptContactServices",
-        "ptCom", "DocSearch", "LeadsInfo", "DocSearchEavesdropper", "DivError",
-        function($scope, $http, $element, $timeout, ptContactServices,
-            ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError) {
-            
+        "ptCom", "DocSearch", "LeadsInfo", "DocSearchEavesdropper", "DivError", 'ptUnderwriting',
+        function ($scope, $http, $element, $timeout, ptContactServices,
+         ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, ptUnderwriting) {
+
             var leadsInfoBBLE = $("#BBLE").val();
             $scope.ShowInfo = $("#ShowInfo").val();
             $scope.ptContactServices = ptContactServices;
@@ -24,17 +22,17 @@ angular.module("PortalApp")
             $scope.DocSearch = {};
 
             ////////// font end switch to new version //////////////
-            $scope.endorseCheckDate = function(date) {
+            $scope.endorseCheckDate = function (date) {
                 return false;
             };
-            $scope.endorseCheckVersion = function() {
+            $scope.endorseCheckVersion = function () {
                 var that = $scope.DocSearch;
                 if (that.Version) {
                     return true;
                 }
                 return false;
             };
-            $scope.GoToNewVersion = function(versions) {
+            $scope.GoToNewVersion = function (versions) {
                 $scope.newVersion = versions;
             };
 
@@ -43,7 +41,7 @@ angular.module("PortalApp")
             $scope.versionController = new DocSearchEavesdropper();
             $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
 
-            $scope.multipleValidated = function(base, boolKey, arraykey) {
+            $scope.multipleValidated = function (base, boolKey, arraykey) {
                 var boolVal = base[boolKey];
                 var arrayVal = base[arraykey];
                 /**
@@ -54,7 +52,7 @@ angular.module("PortalApp")
                 return hasWarning;
             };
 
-            $scope.init = function(bble) {
+            $scope.init = function (bble) {
                 var leadsInfoBBLE = bble || $("#BBLE").val();
                 $scope.ShowInfo = $("#ShowInfo").val();
                 if (!leadsInfoBBLE) {
@@ -62,9 +60,9 @@ angular.module("PortalApp")
                     return;
                 }
                 $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() },
-                    function() {
+                    function () {
                         $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() },
-                            function() {
+                            function () {
 
                                 $scope.DocSearch.initLeadsResearch();
                                 $scope.DocSearch.initTeam();
@@ -94,7 +92,7 @@ angular.module("PortalApp")
              *  new version validate javascript version validate
              * @returns {bool} true then pass validate
              */
-            $scope.newVersionValidate = function() {
+            $scope.newVersionValidate = function () {
                 /**
                  * change java script version validate 
                  * to oop model version validate
@@ -110,7 +108,7 @@ angular.module("PortalApp")
                 return true;
             };
 
-            $scope.SearchComplete = function(isSave) {
+            $scope.SearchComplete = function (isSave) {
                 // only completed need check validate
                 // when saving don't need validate input.
                 if (!isSave) {
@@ -126,26 +124,25 @@ angular.module("PortalApp")
                 $scope.DocSearch.ResutContent = $("#search_summary_div").html();
 
                 if (isSave) {
-                    $scope.DocSearch.$update(null,
-                        function() {
-                            AngularRoot.alert("Save successfully!");
-                        });
+                    $scope.DocSearch.$update(null, function () {
+                        AngularRoot.alert("Save successfully!");
+                    });
                 } else {
-                    $scope.DocSearch.$completed(null,
-                        function() {
+                    $scope.DocSearch.$completed(null, function () {
+                        ptUnderwriting.tryCreate($scope.DocSearch.BBLE.trim()).then(function () {
                             AngularRoot.alert("Document completed!");
-                            gridCase.Refresh();
+                        }, function error(e) {
+                            console.log(e);
                         });
+                        if (gridCase) gridCase.Refresh();
+                    });
                 }
 
-                $scope.test = function() {
-                    $scope.$digest();
-                };
             };
 
             // only one of fha, fannie, freddie_mac can be yes at the same time
             $scope.$watch("DocSearch.LeadResearch.fha",
-                function(nv, ov) {
+                function (nv, ov) {
                     if (nv === true) {
                         if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
                         if ($scope.DocSearch.LeadResearch
@@ -153,7 +150,7 @@ angular.module("PortalApp")
                     }
                 });
             $scope.$watch("DocSearch.LeadResearch.fannie",
-                function(nv, ov) {
+                function (nv, ov) {
                     if (nv === true) {
                         if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
                         if ($scope.DocSearch.LeadResearch
@@ -161,29 +158,29 @@ angular.module("PortalApp")
                     }
                 });
             $scope.$watch("DocSearch.LeadResearch.Freddie_Mac_",
-                function(nv, ov) {
+                function (nv, ov) {
                     if (nv === true) {
                         if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
                         if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
                     }
                 });
 
-            $scope.markCompleted = function(status, msg) {
+            $scope.markCompleted = function (status, msg) {
                 // because the underwriting completion is not reversible, comfirm it before save to db.
                 msg = msg || "Please provide note or press no to cancel";
                 ptCom.prompt(msg,
-                    function(result) {
+                    function (result) {
                         //debugger;
                         if (result != null) {
                             //debugger;
                             $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result)
                                 .then(function succ(d) {
-                                        //debugger;
-                                        $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
-                                        $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                                        $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-                                        $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
-                                    },
+                                    //debugger;
+                                    $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                                    $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                                    $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                                },
                                     function err() {
                                         console.log("fail to update docsearch");
                                     });
@@ -204,4 +201,4 @@ angular.module("PortalApp")
                 $scope.viewmode = 0;
             }
         }
-    ]);
+]);

@@ -151,13 +151,16 @@
     <Compile Include="Models\NewYork\UnderwritingLoanScenario.cs" />
     <Compile Include="Models\NewYork\UnderwritingLoanTerms.cs" />
     <Compile Include="Models\NewYork\UnderwritingMinimumBaselineScenario.cs" />
+    <Compile Include="Settings.cs" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="SQL\CreateNLog.sql" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppStart.cs" />

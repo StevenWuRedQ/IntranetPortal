@@ -7,14 +7,16 @@ namespace RedQ.UnderwritingService.Models.NewYork
     {
         [Key()]
         public int Id { get; set; }
-
+        [MaxLength(11)]
         public string BBLE { get; set; }
+        [MaxLength(50)]
         public string CreateBy { get; set; }
+        [MaxLength(50)]
         public string UpdateBy { get; set; }
         public DateTime? CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
+        public string Notes { get; set; }
         public string StatusNote { get; set; }
-        public DateTime? CompletedOn { get; set; }
         public UnderwritingStatusEnum Status { get; set; }
         // input
         public virtual UnderwritingPropertyInfo PropertyInfo { get; set; }
@@ -30,6 +32,7 @@ namespace RedQ.UnderwritingService.Models.NewYork
         public virtual UnderwritingMinimumBaselineScenario MinimumBaselineScenario { get; set; }
         public virtual UnderwritingBestCaseScenario BestCaseScenario { get; set; }
         public virtual UnderwritingRentalModel RentalModel { get; set; }
+        public virtual UnderwritingSummary Summary { get; set; }
 
         public enum UnderwritingStatusEnum
         {

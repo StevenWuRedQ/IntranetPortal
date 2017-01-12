@@ -106,24 +106,34 @@
     }
 </style>
 <div class="item-detail">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li ui-sref-active="active"><a ui-sref="underwriter.datainput">Data Input</a></li>
-                <li ui-sref-active="active"><a ui-sref="underwriter.flipsheets">FlipSheets</a></li>
-                <li ui-sref-active="active"><a ui-sref="underwriter.rentalmodels">Rental Model</a></li>
-                <li ui-sref-active="active"><a ui-sref="underwriter.audit">Audit</a></li>
-                <li ui-sref-active="active"><a ui-sref="underwriter.archived">Archives</a></li>
-                <li ui-sref-active="active" ng-show="debugmode"><a ui-sref="underwriter.tables">Tables</a></li>
-            </ul>
-            <div class="nav-form navbar-right">
-                <button type="button" class="btn btn-lg btn-blue" ng-click="enableEditing()" ng-show="isProtectedView">Enable Editing</button>
-                <button type="button" class="btn btn-lg btn-blue" ng-click="save()" ng-show="!isProtectedView && !archive.isLoaded">Save</button>
-                <button type="button" class="btn btn-lg btn-blue" ng-click="archiveFunc()" ng-show="!isProtectedView && !archive.isLoaded">Archive</button>
-            </div>
+    <div class="navbar-xs">
+        <div class="navbar-primary">
+            <nav class="nav navbar navbar-default">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        <li ui-sref-active="active"><a ui-sref="underwriter.datainput">Data Input</a></li>
+                        <li ui-sref-active="active"><a ui-sref="underwriter.flipsheets">FlipSheets</a></li>
+                        <li ui-sref-active="active"><a ui-sref="underwriter.rentalmodels">Rental Model</a></li>
+                        <li ui-sref-active="active"><a ui-sref="underwriter.audit">Audit</a></li>
+                        <li ui-sref-active="active"><a ui-sref="underwriter.archived">Archives</a></li>
+                        <li ui-sref-active="active" ng-show="debugmode">
+                    </ul>
+                    <div class="nav-form navbar-right">
+                        <button type="button" class="btn btn-orange" ng-click="enableEditing()" ng-show="isProtectedView" style="font-size:18px; padding: 3px 8px">Enable Editing</button>
+                        <button type="button" class="btn btn-orange" ng-click="save()" ng-show="!isProtectedView && !archive.isLoaded" style="font-size:18px; padding: 3px 8px">Save</button>
+                        <button type="button" class="btn btn-orange" ng-click="archiveFunc()" ng-show="!isProtectedView && !archive.isLoaded" style="font-size:18px; padding: 3px 8px">Archive</button>
+                        <button type="button" class="btn btn-orange dropdown-toggle" data-toggle="dropdown" style="font-size:18px; padding: 3px 8px">Change Status</button>
+                        <ul class="dropdown-menu">
+                            <li><a ng-click="changeStatus(1)">New</a></li>
+                            <li><a ng-click="changeStatus(2)">Processing</a></li>
+                            <li><a ng-click="changeStatus(3)">Accepted</a></li>
+                            <li><a ng-click="changeStatus(4)">Rejected</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-
+    </div>
     <div ng-show="archive.isLoaded" style="background-color: #295268; width: 100%; text-align: center; color: white; padding: 2px 2px 0px 2px; border-radius: 3px">
         <h5>
             Version: Archived. {{archive.ArchivedDate | date:'medium'}} by {{archive.ArchivedBy}}<br />

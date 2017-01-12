@@ -1972,233 +1972,251 @@ angular.module("PortalApp").service("ptTime", [function () {
 
     }])
 
-angular.module("PortalApp").factory("ptUnderwriting",
-    ["$http", "ptCom", function ($http, ptCom) {
-        var underwriting = {};
-        var underwritingFactory = {
-            UnderwritingModel: function () {
-                this.PropertyInfo = {
-                    PropertyType: undefined,
-                    PropertyAddress: "",
-                    CurrentOwner: "",
-                    TaxClass: "",
-                    LotSize: "",
-                    BuildingDimension: "",
-                    Zoning: "",
-                    FARActual: 0.0,
-                    FARMax: 0.0,
-                    PropertyTaxYear: 0.0,
-                    ActualNumOfUnits: 0,
-                    OccupancyStatus: undefined,
-                    SellerOccupied: false,
-                    NumOfTenants: 0
-                };
-                this.DealCosts = {
-                    MoneySpent: 0.0,
-                    HAFA: false,
-                    HOI: 0.0,
-                    HOIRatio: 0.0,
-                    COSTermination: 0.0,
-                    AgentCommission: 0.0
-                };
-                this.RehabInfo = {
-                    AverageLowValue: 0.0,
-                    RenovatedValue: 0.0,
-                    RepairBid: 0.0,
-                    NeedsPlans: false,
-                    DealTimeMonths: 0,
-                    SalesCommission: 0.05,
-                    DealROICash: 0.35
-                };
-                this.LienInfo = {
-                    FirstMortgage: 0.0,
-                    SecondMortgage: 0.0,
-                    COSRecorded: false,
-                    DeedRecorded: false,
-                    OtherLiens: undefined,
-                    LisPendens: false,
-                    FHA: false,
-                    FannieMae: false,
-                    FreddieMac: false,
-                    Servicer: "",
-                    ForeclosureIndexNum: "",
-                    ForeclosureStatus: undefined,
-                    ForeclosureNote: "",
-                    AuctionDate: undefined,
-                    DefaultDate: undefined,
-                    CurrentPayoff: 0.0,
-                    PayoffDate: undefined,
-                    CurrentSSValue: 0.0
-                };
-                this.LienCosts = {
-                    TaxLienCertificate: 0.0,
-                    PropertyTaxes: 0.0,
-                    WaterCharges: 0.0,
-                    ECBCityPay: 0.0,
-                    DOBCivilPenalty: 0.0,
-                    HPDCharges: 0.0,
-                    HPDJudgements: 0.0,
-                    PersonalJudgements: 0.0,
-                    NYSTaxWarrants: 0.0,
-                    FederalTaxLien: 0.0,
-                    SidewalkLiens: false,
-                    ParkingViolation: 0.0,
-                    TransitAuthority: 0.0,
-                    VacateOrder: false,
-                    RelocationLien: 0.0,
-                    RelocationLienDate: undefined
-                };
-                this.RentalInfo = {
-                    DeedPurchase: 0.0,
-                    CurrentlyRented: false,
-                    RepairBidTotal: 0.0,
-                    NumOfUnits: 0,
-                    MarketRentTotal: 0.0,
-                    RentalTime: 0
-                };
+angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', function ($http, ptCom, $q) {
+    var underwriting = {};
+    var underwritingFactory = {
+        UnderwritingModel: function () {
+            this.PropertyInfo = {
+                PropertyType: undefined,
+                PropertyAddress: "",
+                CurrentOwner: "",
+                TaxClass: "",
+                LotSize: "",
+                BuildingDimension: "",
+                Zoning: "",
+                FARActual: 0.0,
+                FARMax: 0.0,
+                PropertyTaxYear: 0.0,
+                ActualNumOfUnits: 0,
+                OccupancyStatus: undefined,
+                SellerOccupied: false,
+                NumOfTenants: 0
+            };
+            this.DealCosts = {
+                MoneySpent: 0.0,
+                HAFA: false,
+                HOI: 0.0,
+                HOIRatio: 0.0,
+                COSTermination: 0.0,
+                AgentCommission: 0.0
+            };
+            this.RehabInfo = {
+                AverageLowValue: 0.0,
+                RenovatedValue: 0.0,
+                RepairBid: 0.0,
+                NeedsPlans: false,
+                DealTimeMonths: 0,
+                SalesCommission: 0.05,
+                DealROICash: 0.35
+            };
+            this.LienInfo = {
+                FirstMortgage: 0.0,
+                SecondMortgage: 0.0,
+                COSRecorded: false,
+                DeedRecorded: false,
+                OtherLiens: undefined,
+                LisPendens: false,
+                FHA: false,
+                FannieMae: false,
+                FreddieMac: false,
+                Servicer: "",
+                ForeclosureIndexNum: "",
+                ForeclosureStatus: undefined,
+                ForeclosureNote: "",
+                AuctionDate: undefined,
+                DefaultDate: undefined,
+                CurrentPayoff: 0.0,
+                PayoffDate: undefined,
+                CurrentSSValue: 0.0
+            };
+            this.LienCosts = {
+                TaxLienCertificate: 0.0,
+                PropertyTaxes: 0.0,
+                WaterCharges: 0.0,
+                ECBCityPay: 0.0,
+                DOBCivilPenalty: 0.0,
+                HPDCharges: 0.0,
+                HPDJudgements: 0.0,
+                PersonalJudgements: 0.0,
+                NYSTaxWarrants: 0.0,
+                FederalTaxLien: 0.0,
+                SidewalkLiens: false,
+                ParkingViolation: 0.0,
+                TransitAuthority: 0.0,
+                VacateOrder: false,
+                RelocationLien: 0.0,
+                RelocationLienDate: undefined
+            };
+            this.RentalInfo = {
+                DeedPurchase: 0.0,
+                CurrentlyRented: false,
+                RepairBidTotal: 0.0,
+                NumOfUnits: 0,
+                MarketRentTotal: 0.0,
+                RentalTime: 0
+            };
 
-                this.MinimumBaselineScenario = {};
-                this.BestCaseScenario = {};
-                this.Summary = {};
-                this.CashScenario = {};
-                this.LoanScenario = {};
-                this.FlipScenario = {};
-                this.RentalModel = {};
-            },
-            build: function () {
-                var data = new this.UnderwritingModel();
-                return data;
-            }
-        };
-        var proxy;
-        $.connection.hub.url = "http://localhost:8887/signalr";
-        $.connection.logging = true;
-        var init = function () {
-            $.connection.hub.start().done(function() {
-                proxy = $.connection.underwritingServiceHub;
-            })
-        };
-        init();
-        $.connection.hub.disconnected(function () {
-            setTimeout(init, 5000); 
-        });
-        var tryGetProxy = function () {
-            var dfd = $.Deferred();
+            this.MinimumBaselineScenario = {};
+            this.BestCaseScenario = {};
+            this.Summary = {};
+            this.CashScenario = {};
+            this.LoanScenario = {};
+            this.FlipScenario = {};
+            this.RentalModel = {};
+        },
+        build: function () {
+            var data = new this.UnderwritingModel();
+            return data;
+        }
+    };
+    var proxy;
+    $.connection.hub.url = "http://localhost:8887/signalr";
+    $.connection.logging = true;
+    var init = function () {
+        $.connection.hub.start().done(function () {
+            proxy = $.connection.underwritingServiceHub;
+        })
+    };
+    init();
+    $.connection.hub.disconnected(function () {
+        setTimeout(init, 5000); 
+    });
+    var tryGetProxy = function () {
+        return $q(function (resolve, reject) {
             if (proxy) {
-                dfd.resolve(proxy);
+                resolve(proxy);
             } else {
                 var proxyInterval = setInterval(function () {
                     if (proxy) {
-                        dfd.resolve(proxy);
+                        resolve(proxy);
                         clearInterval(proxyInterval);
                     }
                 }, 500);
                 setTimeout(function () {
                     clearInterval(proxyInterval);
-                    dfd.reject();
-                },
-                    2000);
+                    reject("Cannot get proxy.");
+                }, 2000);
             }
-            return dfd.promise();
-        }
-        
-        underwriting.new = function () {
-            var newData = underwritingFactory.build();
-            return newData;
-        }
-        underwriting.load = function (bble) {
-            if (bble) {
-                return tryGetProxy().then(function (proxy) {
-                    return proxy.server.getUnderwritingByBBLE(bble);
-                })
-            }
-        }
-        underwriting.save = function (data) {
-            var username = ptCom.getCurrentUser();
+        });
+    }
+    underwriting.new = function () {
+        var newData = underwritingFactory.build();
+        return newData;
+    }
+    underwriting.load = function (bble) {
+        if (bble) {
             return tryGetProxy().then(function (proxy) {
-                return proxy.server.postUnderwriting(data, username);
-            });
+                return proxy.server.getUnderwritingByBBLE(bble);
+            })
         }
-        underwriting.importData = function (d) {
-            if (d.docSearch && d.docSearch.LeadResearch) {
-                var r = d.docSearch.LeadResearch;
-                d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
-                d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
-                d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
-                d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
-                d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
-                d.LienInfo.FHA = r.fha || false;
-                d.LienInfo.FannieMae = r.fannie || false;
-                d.LienInfo.FreddieMac = r.Freddie_Mac_ || false;
-                d.LienInfo.Servicer = r.servicer;
-                d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
-                d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
-                d.LienCosts.TaxLienCertificate = (function () {
-                    var total = 0.0;
-                    if (r.TaxLienCertificate) {
-                        for (var i = 0; i < r.TaxLienCertificate.length; i++) {
-                            total += parseFloat(r.TaxLienCertificate[i].Amount);
-                        }
+    }
+    underwriting.save = function (data) {
+        var username = ptCom.getCurrentUser();
+        return tryGetProxy().then(function (proxy) {
+            return proxy.server.postUnderwriting(data, username);
+        });
+    }
+    underwriting.importData = function (d) {
+        if (d.docSearch && d.docSearch.LeadResearch) {
+            var r = d.docSearch.LeadResearch;
+            d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
+            d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
+            d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
+            d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
+            d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
+            d.LienInfo.FHA = r.fha || false;
+            d.LienInfo.FannieMae = r.fannie || false;
+            d.LienInfo.FreddieMac = r.Freddie_Mac_ || false;
+            d.LienInfo.Servicer = r.servicer;
+            d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
+            d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
+            d.LienCosts.TaxLienCertificate = (function () {
+                var total = 0.0;
+                if (r.TaxLienCertificate) {
+                    for (var i = 0; i < r.TaxLienCertificate.length; i++) {
+                        total += parseFloat(r.TaxLienCertificate[i].Amount);
                     }
-                    return total;
-                })();
-                d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
-                d.LienCosts.WaterCharges = r.waterCharges || 0.0;
-                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
-                d.LienCosts.ECBCityPay = r.Amount_ECB_Tickets || 0.0;
-                d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
-                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
-                d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
-                d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0;
-                d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0;
-                d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
-                d.LienCosts.RelocationLien = (function () {
-                    if (r.has_Vacate_Order_Vacate_Order)
-                        return parseFloat(r.Amount_Vacate_Order) || 0.0;
-                })();
-            }
-            if (d.leadsInfo) {
-                d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
-                d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
-                d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
-                d.PropertyInfo.LotSize = d.leadsInfo.LotDem.trim();
-                d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
-                d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
-                d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
-                d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
-            }
-        };
-        underwriting.archive = function (data, msg) {
+                }
+                return total;
+            })();
+            d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
+            d.LienCosts.WaterCharges = r.waterCharges || 0.0;
+            d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
+            d.LienCosts.ECBCityPay = r.Amount_ECB_Tickets || 0.0;
+            d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
+            d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
+            d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
+            d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0;
+            d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0;
+            d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
+            d.LienCosts.RelocationLien = (function () {
+                if (r.has_Vacate_Order_Vacate_Order)
+                    return parseFloat(r.Amount_Vacate_Order) || 0.0;
+            })();
+        }
+        if (d.leadsInfo) {
+            d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
+            d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
+            d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
+            d.PropertyInfo.LotSize = d.leadsInfo.LotDem.trim();
+            d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
+            d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
+            d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
+            d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
+        }
+    };
+    underwriting.archive = function (data, msg) {
+        var username = ptCom.getCurrentUser();
+        return tryGetProxy().then(function (proxy) {
+            return proxy.server.postArchive(data, msg, username);
+        });
+    }
+    underwriting.loadArchivedList = function (bble) {
+        return tryGetProxy().then(function (proxy) {
+            return proxy.server.getArchivedListByBBLE(bble);
+        });
+    }
+    underwriting.loadArchived = function (id) {
+        return tryGetProxy().then(function (proxy) {
+            return proxy.server.getArchivedByID(id);
+        });
+    }
+    underwriting.calculate = function (data) {
+        return tryGetProxy().then(function (proxy) { return proxy.server.postSingleJob(data) });
+    };
+    underwriting.changeStatus = function (bble, status, statusNote) {
+        var username = ptCom.getCurrentUser();
+        return tryGetProxy().then(function (proxy) {
+            return proxy.server.changeStatus(bble, status, statusNote, username);
+        })
+    }
+    underwriting.tryCreate = function (bble) {
+        return $q(function (resolve, reject) {
+            if (!bble) reject("BBLE cannot be blank.");
             var username = ptCom.getCurrentUser();
-            return tryGetProxy().then(function(proxy) {
-                return proxy.server.postArchive(data, msg, username);
-            });
-        }
-        underwriting.loadArchivedList = function (bble) {
-            return tryGetProxy().then(function (proxy) {
-                return proxy.server.getArchivedListByBBLE(bble);
-            });
-        }
-        underwriting.loadArchived = function (id) {
-            return tryGetProxy().then(function(proxy) {
-                return proxy.server.getArchivedByID(id);
-            });
-        }
-        underwriting.calculate = function (data) {
-            tryGetProxy().then(function(proxy) {
-                proxy.server.postSingleJob(data).done(function(output) {
-                    data.MinimumBaselineScenario = output.MinimumBaselineScenario;
-                    data.BestCaseScenario = output.BestCaseScenario;
-                    data.Summary = output.Summary;
-                    data.CashScenario = output.CashScenario;
-                    data.LoanScenario = output.LoanScenario;
-                    data.FlipScenario = output.FlipScenario;
-                    data.RentalModel = output.RentalModel;
+            var newData = ptUnderwriting.new();
+            newData.BBLE = bble;
+            newData.Status = 1;
+            DocSearch.get({ BBLE: bble }).$promise.then(function (search) {
+                newData.docSearch = search;
+                LeadsInfo.get({ BBLE: bble.trim() }).$promise.then(function (leadsInfo) {
+                    newData.leadsInfo = leadsInfo;
+                    ptUnderwriting.importData(newData);
+                    tryGetProxy().then(function (proxy) {
+                        proxy.server.tryCreate(newData).then(function (data) {
+                            resolve(data);
+                        }, function (e) {
+                            reject(e)
+                        });
+                    })
+                }).catch(function (e) {
+                    reject(e);
                 });
             });
-        }
-        return underwriting;
-    }]);
+        });
+    }
+    return underwriting;
+}]);
 
 angular.module("PortalApp").filter('booleanToString', function () {
 
@@ -3850,32 +3868,30 @@ function ($scope, EmployeeModel, ptCom, $http) {
 
 }])
 
-angular.module("PortalApp")
-    .controller("DocSearchController",
-    [
+angular.module("PortalApp").controller("DocSearchController", [
         "$scope", "$http", "$element", "$timeout", "ptContactServices",
-        "ptCom", "DocSearch", "LeadsInfo", "DocSearchEavesdropper", "DivError",
-        function($scope, $http, $element, $timeout, ptContactServices,
-            ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError) {
+        "ptCom", "DocSearch", "LeadsInfo", "DocSearchEavesdropper", "DivError", 'ptUnderwriting',
+        function ($scope, $http, $element, $timeout, ptContactServices,
+         ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, ptUnderwriting) {
 
-                        var leadsInfoBBLE = $("#BBLE").val();
+            var leadsInfoBBLE = $("#BBLE").val();
             $scope.ShowInfo = $("#ShowInfo").val();
             $scope.ptContactServices = ptContactServices;
             $scope.DivError = new DivError("DocSearchErrorDiv");
 
             $scope.DocSearch = {};
 
-            $scope.endorseCheckDate = function(date) {
+            $scope.endorseCheckDate = function (date) {
                 return false;
             };
-            $scope.endorseCheckVersion = function() {
+            $scope.endorseCheckVersion = function () {
                 var that = $scope.DocSearch;
                 if (that.Version) {
                     return true;
                 }
                 return false;
             };
-            $scope.GoToNewVersion = function(versions) {
+            $scope.GoToNewVersion = function (versions) {
                 $scope.newVersion = versions;
             };
 
@@ -3883,14 +3899,14 @@ angular.module("PortalApp")
             $scope.versionController = new DocSearchEavesdropper();
             $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
 
-            $scope.multipleValidated = function(base, boolKey, arraykey) {
+            $scope.multipleValidated = function (base, boolKey, arraykey) {
                 var boolVal = base[boolKey];
                 var arrayVal = base[arraykey];
                 var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
                 return hasWarning;
             };
 
-            $scope.init = function(bble) {
+            $scope.init = function (bble) {
                 var leadsInfoBBLE = bble || $("#BBLE").val();
                 $scope.ShowInfo = $("#ShowInfo").val();
                 if (!leadsInfoBBLE) {
@@ -3898,9 +3914,9 @@ angular.module("PortalApp")
                     return;
                 }
                 $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() },
-                    function() {
+                    function () {
                         $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() },
-                            function() {
+                            function () {
 
                                 $scope.DocSearch.initLeadsResearch();
                                 $scope.DocSearch.initTeam();
@@ -3913,7 +3929,7 @@ angular.module("PortalApp")
             $scope.init(leadsInfoBBLE);
 
 
-            $scope.newVersionValidate = function() {
+            $scope.newVersionValidate = function () {
                 if (!$scope.newVersion) {
                     return true;
                 }
@@ -3925,7 +3941,7 @@ angular.module("PortalApp")
                 return true;
             };
 
-            $scope.SearchComplete = function(isSave) {
+            $scope.SearchComplete = function (isSave) {
                 if (!isSave) {
                     if (!$scope.newVersionValidate()) {
                         var msg = $scope.DivError.getMessage();
@@ -3939,25 +3955,24 @@ angular.module("PortalApp")
                 $scope.DocSearch.ResutContent = $("#search_summary_div").html();
 
                 if (isSave) {
-                    $scope.DocSearch.$update(null,
-                        function() {
-                            AngularRoot.alert("Save successfully!");
-                        });
+                    $scope.DocSearch.$update(null, function () {
+                        AngularRoot.alert("Save successfully!");
+                    });
                 } else {
-                    $scope.DocSearch.$completed(null,
-                        function() {
+                    $scope.DocSearch.$completed(null, function () {
+                        ptUnderwriting.tryCreate($scope.DocSearch.BBLE.trim()).then(function () {
                             AngularRoot.alert("Document completed!");
-                            gridCase.Refresh();
+                        }, function error(e) {
+                            console.log(e);
                         });
+                        if (gridCase) gridCase.Refresh();
+                    });
                 }
 
-                $scope.test = function() {
-                    $scope.$digest();
-                };
             };
 
             $scope.$watch("DocSearch.LeadResearch.fha",
-                function(nv, ov) {
+                function (nv, ov) {
                     if (nv === true) {
                         if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
                         if ($scope.DocSearch.LeadResearch
@@ -3965,7 +3980,7 @@ angular.module("PortalApp")
                     }
                 });
             $scope.$watch("DocSearch.LeadResearch.fannie",
-                function(nv, ov) {
+                function (nv, ov) {
                     if (nv === true) {
                         if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
                         if ($scope.DocSearch.LeadResearch
@@ -3973,25 +3988,25 @@ angular.module("PortalApp")
                     }
                 });
             $scope.$watch("DocSearch.LeadResearch.Freddie_Mac_",
-                function(nv, ov) {
+                function (nv, ov) {
                     if (nv === true) {
                         if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
                         if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
                     }
                 });
 
-            $scope.markCompleted = function(status, msg) {
+            $scope.markCompleted = function (status, msg) {
                 msg = msg || "Please provide note or press no to cancel";
                 ptCom.prompt(msg,
-                    function(result) {
+                    function (result) {
                         if (result != null) {
                             $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result)
                                 .then(function succ(d) {
-                                        $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
-                                        $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                                        $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-                                        $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
-                                    },
+                                    $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                                    $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                                    $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                                },
                                     function err() {
                                         console.log("fail to update docsearch");
                                     });
@@ -4011,7 +4026,7 @@ angular.module("PortalApp")
                 $scope.viewmode = 0;
             }
         }
-    ]);
+]);
 
 angular.module("PortalApp").controller("LegalCtrl",
 [
@@ -7477,41 +7492,44 @@ angular.module("PortalApp").controller("UnderwritingController", [
         $scope.isProtectedView = true;
 
         $scope.init = function (bble) {
-            debugger;
             if (bble) {
-                ptUnderwriting.load(bble).then(function(data) {
+                ptUnderwriting.load(bble).then(function (data) {
                     if (data && data.Id) {
                         $scope.data = data;
-                        ptUnderwriting.loadArchivedList(bble).then(function(list) {
+                        ptUnderwriting.loadArchivedList(bble).then(function (list) {
                             $scope.archivedList = list;
                         });
                     } else {
                         var newData = ptUnderwriting.new();
                         newData.BBLE = bble;
-                        DocSearch.get({ BBLE: bble }).$promise.then(function(search) {
+                        DocSearch.get({ BBLE: bble }).$promise.then(function (search) {
                             newData.docSearch = search;
-                            LeadsInfo.get({ BBLE: bble.trim() }).$promise.then(function(leadsInfo) {
+                            LeadsInfo.get({ BBLE: bble.trim() }).$promise.then(function (leadsInfo) {
                                 newData.leadsInfo = leadsInfo;
                                 ptUnderwriting.importData(newData);
                             });
                         });
                         $scope.data = newData;
                     }
+                }, function (e) {
+                    console.log(e);
+                    ptCom.alert("Failed to load.");
                 });
             } else {
                 $scope.data = ptUnderwriting.new();
             }
         };
         $scope.save = function () {
-            ptCom.confirm("Are you going to Save?",
+            ptCom.confirm("Are you going to save?",
                 function (response) {
                     if (response) {
                         ptUnderwriting.save($scope.data).then(function done(data) {
                             if (data) {
                                 $scope.data = data;
                             }
-                            ptCom.alert("Save Successfully.");
-                        }, function fail() {
+                            ptCom.alert("Saved Successfully.");
+                        }, function fail(e) {
+                            console.log(e);
                             ptCom.alert("Failed to save.");
                         });
                     }
@@ -7522,9 +7540,10 @@ angular.module("PortalApp").controller("UnderwritingController", [
                 function (msg) {
                     if (msg != null) {
                         ptUnderwriting.archive($scope.data, msg).then(function done(data) {
-                            alert("Archive succesful.");
-                        }, function fail() {
-                            alert("Sorry. Some error.");
+                            alert("Archived succesful.");
+                        }, function fail(e) {
+                            console.log(e);
+                            alert("Failed to archive.");
                         });
                     }
 
@@ -7535,13 +7554,14 @@ angular.module("PortalApp").controller("UnderwritingController", [
                 ptUnderwriting.loadArchived(archive.Id).then(function done(data) {
                     if (data) {
                         angular.copy($scope.data, $scope.currentDataCopy);
-                        ptCom.assignReference($scope.data, d.data, [], ["Id"]);
+                        ptCom.assignReference($scope.data, data, [], ["Id"]);
                         $scope.archive = archive;
                         $scope.archive.isLoaded = true;
                         ptCom.alert("Load successfully");
                     }
-                }, function fail(d) {
-                    ptCom.alert("Failed to load.");
+                }, function fail(e) {
+                    console.log(e);
+                    ptCom.alert("Failed to load archive.");
                 });
             }
 
@@ -7550,17 +7570,43 @@ angular.module("PortalApp").controller("UnderwritingController", [
             if ($scope.currentDataCopy) {
                 ptCom.assignReference($scope.data, $scope.currentDataCopy);
                 $scope.archive.isLoaded = false;
-                ptCom.alert("Restore to current version.");
+                ptCom.alert("Restored to current version.");
             }
         };
         $scope.calculate = function () {
-            $scope.$applyAsync(function () {
-                ptUnderwriting.calculate($scope.data);
+            ptUnderwriting.calculate($scope.data).then(function (output) {
+                $scope.data.MinimumBaselineScenario = output.MinimumBaselineScenario;
+                $scope.data.BestCaseScenario = output.BestCaseScenario;
+                $scope.data.Summary = output.Summary;
+                $scope.data.CashScenario = output.CashScenario;
+                $scope.data.LoanScenario = output.LoanScenario;
+                $scope.data.FlipScenario = output.FlipScenario;
+                $scope.data.RentalModel = output.RentalModel;
+            }, function (e) {
+                console.log(e);
+                console.log("Fail to get proxy: calculate.")
             });
         };
         $scope.enableEditing = function () {
             $scope.$broadcast("pt-editable-div-unlock");
             $scope.isProtectedView = false;
+        };
+        $scope.changeStatus = function (status, msg) {
+            msg = msg || "Please provide note or press 'No' to cancel";
+            ptCom.prompt(msg, function then(note) {
+                if (note != null) {
+                    if (!$scope.data || !$scope.BBLE) ptCom.alert("BBLE is missing!");
+                    ptUnderwriting.changeStatus($scope.data.BBLE, status, note).then(function succ(data) {
+                        ptCom.alert("Update status successfully.")
+                    }, function fail(e) {
+                        consoel.log(e);
+                        ptCom.alert("Fail to update underwriting status.");
+                    });
+                } else {
+                    ptCom.alert("Note is required.");
+                }
+            }, true);
+
         };
         $scope.$watch(function () {
             return $state.$current.name;
@@ -7571,12 +7617,9 @@ angular.module("PortalApp").controller("UnderwritingController", [
                 }
             }
         });
-
-
         $scope.BBLE = ptCom.getGlobal("BBLE") || "";
         $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
         $scope.init($scope.BBLE);
-
         $scope.feedData = function () {
             $scope.data.PropertyInfo.TaxClass = "A0",
             $scope.data.PropertyInfo.ActualNumOfUnits = 1;
@@ -7729,27 +7772,6 @@ angular.module("PortalApp").controller("UnderwritingSummaryController",
             if (scope.data && scope.data.Id) {
                 auditLog.toggle("UnderwritingRequest", scope.data.Id);
             }
-        };
-        $scope.markCompleted = function (status, msg) {
-            msg = msg || "Please provide Note or press no to cancel";
-            ptCom.prompt(msg,
-                function (result) {
-                    if (result != null && $scope.search) {
-                        debugger;
-                        DocSearch.markCompleted($scope.search.BBLE, status, result).then(function succ(d) {
-                            $scope.search.UnderwriteStatus = d.data.UnderwriteStatus;
-                            $scope.search.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                            $scope.search.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-                            $scope.search.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
-                        },
-                            function err() {
-                                console.log("fail to update docsearch");
-                            });
-                    }
-
-                },
-                true);
-
         };
         $scope.loadAdditionalInfo = function (bble) {
             $scope.search = DocSearch.get({ BBLE: bble.trim() });
@@ -7961,6 +7983,7 @@ angular.module('PortalApp').component('ptAudit', {
     bindings: {
         label: '@',
         objName: '@',
+        isUnderwriting: "@",
         recordId: '<',
     },
     controller: function ($scope, $element, $attrs, $http) {
@@ -7990,9 +8013,11 @@ angular.module('PortalApp').component('ptAudit', {
             }
         }
         ctrl.updateData = function () {
+            var targetUrlPrefix = '/api/auditlog/';
+            if (ctrl.isUnderwriting) targetUrlPrefix = '/api/underwriting/auditlog/';
             $http({
                 method: 'GET',
-                url: '/api/auditlog/' + ctrl.objName + "/" + ctrl.recordId
+                url: targetUrlPrefix + ctrl.objName + "/" + ctrl.recordId
             }).then(function (d) {
                 var result = _.groupBy(d.data, function (item) {
                     return item.EventDate;
@@ -8159,18 +8184,18 @@ angular.module('PortalApp').component('ptSelectableInput', {
     }
 
 })
+
 angular.module("PortalApp").component("ptSummaryItemList",
 {
     templateUrl: "/js/components/ptSummaryItemList.tpl.html",
     bindings: {
         listName: "@",
         listShortName: "@",
-        listStatusId: "@",
         listDataUrl: "@",
         listHref: "@",
+        listFilter: "@",
         itemField: "@",
-        itemClick: "&",
-        itemType: "@"
+        itemClick: "&"
     },
     controller: function ($window, $element, $attrs, $http) {
         var ctrl = this;
@@ -8184,7 +8209,7 @@ angular.module("PortalApp").component("ptSummaryItemList",
                         var result = $("<div>").addClass("list-item");
                         $("<a>").text(options.data[ctrl.itemField])
                             .css("padding-left", "10px")
-                            .click({ data: options, type: ctrl.itemType, locationId: ctrl.listStatusId }, ctrl.itemClick())
+                            .click({ data: options, filter: ctrl.listFilter }, ctrl.itemClick())
                             .appendTo(result);
                         result.appendTo(container);
                     }

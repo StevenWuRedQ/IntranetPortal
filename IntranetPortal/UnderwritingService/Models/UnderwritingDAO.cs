@@ -24,19 +24,58 @@ public class UnderwritingDAO
         }
     }
 
-    public static UnderwritingArchived GetArchived(int id)
+    public static Underwriting TryCreate(Underwriting underwriting)
     {
         using (UnderwritingEntity ctx = new UnderwritingEntity())
         {
-            var archived = ctx.UnderwritingArchived.FirstOrDefault(ad => ad.Id == id);
-            if (archived != null)
+            if (string.IsNullOrEmpty(underwriting.BBLE)) throw new Exception("Cannot create new underwriting without BBLE.");
+            var uw = ctx.Underwritings.FirstOrDefault(u => u.BBLE.Trim() == underwriting.BBLE.Trim());
+            if (uw != null)
             {
-                foreach (var prop in EntityHelper<UnderwritingArchived>.GetNavigationProperties(ctx))
-                {
-                    ctx.Entry(archived).Reference(prop.ToString()).Load();
-                }
+                return null;
             }
-            return archived;
+            underwriting.UpdateBy = "System";
+            underwriting.UpdateDate = DateTime.Now;
+            ctx.Underwritings.Add(underwriting);
+            ctx.SaveChanges();
+            return underwriting;
+        }
+    }
+
+    public static Underwriting Create(string BBLE, string createby)
+    {
+        using (UnderwritingEntity ctx = new UnderwritingEntity())
+        {
+            if (string.IsNullOrEmpty(BBLE)) throw new Exception("BBLE cannot be empty.");
+            if (string.IsNullOrEmpty(createby)) throw new Exception("Creator cannot be empty");
+
+            var underwriting = ctx.Underwritings.FirstOrDefault(u => u.BBLE == BBLE);
+            if (underwriting != null) return underwriting;
+            underwriting = new Underwriting();
+            underwriting.BBLE = BBLE;
+            underwriting.CreateBy = createby;
+            underwriting.CreateDate = DateTime.Now;
+
+            underwriting.PropertyInfo = new UnderwritingPropertyInfo();
+            underwriting.DealCosts = new UnderwritingDealCosts();
+            underwriting.RehabInfo = new UnderwritingRehabInfo();
+            underwriting.RentalInfo = new UnderwritingRentalInfo();
+            underwriting.LienInfo = new UnderwritingLienInfo();
+            underwriting.LienCosts = new UnderwritingLienCosts();
+
+            underwriting.CashScenario = new UnderwritingCashScenario();
+            underwriting.LoanScenario = new UnderwritingLoanScenario();
+            underwriting.FlipScenario = new UnderwritingFlipScenario();
+            underwriting.MinimumBaselineScenario = new UnderwritingMinimumBaselineScenario();
+            underwriting.BestCaseScenario = new UnderwritingBestCaseScenario();
+            underwriting.RentalInfo = new UnderwritingRentalInfo();
+            underwriting.Summary = new UnderwritingSummary();
+
+            underwriting.Status = Underwriting.UnderwritingStatusEnum.NewCreated;
+
+            ctx.Underwritings.Add(underwriting);
+            ctx.SaveChanges(createby);
+            return underwriting;
         }
     }
 
@@ -51,6 +90,7 @@ public class UnderwritingDAO
             var u = ctx.Underwritings.SingleOrDefault(t => t.BBLE == uw.BBLE);
             if (u != null)
             {
+                if ((int)uw.Status <= 2) uw.Status = Underwriting.UnderwritingStatusEnum.Processing;
                 uw.UpdateBy = saveby;
                 uw.UpdateDate = DateTime.Now;
                 ctx.Entry(u).CurrentValues.SetValues(uw);
@@ -60,10 +100,36 @@ public class UnderwritingDAO
             {
                 uw.CreateBy = saveby;
                 uw.CreateDate = DateTime.Now;
+                uw.Status = Underwriting.UnderwritingStatusEnum.NewCreated;
                 ctx.Underwritings.Add(uw);
             }
             ctx.SaveChanges(saveby);
+
             return u;
+        }
+    }
+
+    public static AuditLog[] GetAuditLogs(String objName, String recordId)
+    {
+        using (var ctx = new UnderwritingEntity())
+        {
+            return ctx.AuditLogs.Where((l) => l.TableName == objName && l.RecordId == recordId).ToArray();
+        }
+    }
+
+    public static UnderwritingArchived GetArchived(int id)
+    {
+        using (UnderwritingEntity ctx = new UnderwritingEntity())
+        {
+            var archived = ctx.UnderwritingArchived.FirstOrDefault(ad => ad.Id == id);
+            if (archived != null)
+            {
+                foreach (var prop in EntityHelper<UnderwritingArchived>.GetNavigationProperties(ctx))
+                {
+                    ctx.Entry(archived).Reference(prop.ToString()).Load();
+                }
+            }
+            return archived;
         }
     }
 
@@ -82,17 +148,34 @@ public class UnderwritingDAO
                 archived.ArchivedNote = note;
 
                 archived.PropertyInfo = underwriting.PropertyInfo;
-                archived.PropertyInfo.Id = 0;
                 archived.DealCosts = underwriting.DealCosts;
-                archived.DealCosts.Id = 0;
                 archived.RehabInfo = underwriting.RehabInfo;
-                archived.RehabInfo.Id = 0;
                 archived.RentalInfo = underwriting.RentalInfo;
-                archived.RentalInfo.Id = 0;
                 archived.LienInfo = underwriting.LienInfo;
-                archived.LienInfo.Id = 0;
                 archived.LienCosts = underwriting.LienCosts;
+
+                archived.CashScenario = underwriting.CashScenario;
+                archived.LoanScenario = underwriting.LoanScenario;
+                archived.FlipScenario = underwriting.FlipScenario;
+                archived.MinimumBaselineScenario = underwriting.MinimumBaselineScenario;
+                archived.BestCaseScenario = underwriting.BestCaseScenario;
+                archived.RentalInfo = underwriting.RentalInfo;
+                archived.Summary = underwriting.Summary;
+
+                archived.PropertyInfo.Id = 0;
+                archived.DealCosts.Id = 0;
+                archived.RehabInfo.Id = 0;
+                archived.RentalInfo.Id = 0;
+                archived.LienInfo.Id = 0;
                 archived.LienCosts.Id = 0;
+
+                archived.CashScenario.Id = 0;
+                archived.LoanScenario.Id = 0;
+                archived.FlipScenario.Id = 0;
+                archived.MinimumBaselineScenario.Id = 0;
+                archived.BestCaseScenario.Id = 0;
+                archived.RentalInfo.Id = 0;
+                archived.Summary.Id = 0;
 
                 ctx.UnderwritingArchived.Add(archived);
                 ctx.SaveChanges(saveBy);
@@ -101,38 +184,13 @@ public class UnderwritingDAO
         }
     }
 
-    public static Underwriting Create(string BBLE, string createby)
-    {
-        using (UnderwritingEntity ctx = new UnderwritingEntity())
-        {
-            dynamic u = new Underwriting();
-            u.BBLE = BBLE;
-            u.CreateBy = createby;
-            u.CreateDate = DateTime.Now;
-
-            u.PropertyInfo = new UnderwritingPropertyInfo();
-            u.DealCosts = new UnderwritingDealCosts();
-            u.RehabInfo = new UnderwritingRehabInfo();
-            u.RentalInfo = new UnderwritingRentalInfo();
-            u.LienInfo = new UnderwritingLienInfo();
-            u.LienCosts = new UnderwritingLienCosts();
-
-
-            u.Status = Underwriting.UnderwritingStatusEnum.NewCreated;
-
-            ctx.Underwritings.Add(u);
-            ctx.SaveChanges(createby);
-            return u;
-        }
-    }
-
     public static UnderwritingArchived[] LoadArchivedList(string BBLE)
     {
         using (UnderwritingEntity ctx = new UnderwritingEntity())
         {
             var list = from archived in ctx.UnderwritingArchived
-                where archived.BBLE == BBLE
-                select archived;
+                       where archived.BBLE == BBLE
+                       select archived;
             return list.ToArray();
         }
     }
@@ -152,15 +210,56 @@ public class UnderwritingDAO
         using (var ctx = new UnderwritingEntity())
         {
             var underwritings = from underwriting in ctx.Underwritings
-                select new
-                {
-                    BBLE = underwriting.BBLE,
-                    UnderwritingStatus = underwriting.Status,
-                    UnderwritingCreateBy = underwriting.CreateBy,
-                    UnderwritingCreateDate = underwriting.CreateDate,
-                    UnderwritingUpdateDate = underwriting.UpdateDate
-                };
+                                select new
+                                {
+                                    BBLE = underwriting.BBLE,
+                                    UnderwritingStatus = underwriting.Status,
+                                    UnderwritingCreateBy = underwriting.CreateBy,
+                                    UnderwritingCreateDate = underwriting.CreateDate,
+                                    UnderwritingUpdateDate = underwriting.UpdateDate
+                                };
             return underwritings.ToArray();
+        }
+    }
+
+    public static object[] GetUnderwritingListInfoByStatus(int Status)
+    {
+        Underwriting.UnderwritingStatusEnum estatus = (Underwriting.UnderwritingStatusEnum)Status;
+        using (var ctx = new UnderwritingEntity())
+        {
+            var underwritings = from underwriting in ctx.Underwritings
+                                where underwriting.Status == estatus
+                                select new
+                                {
+                                    BBLE = underwriting.BBLE,
+                                    UnderwritingStatus = underwriting.Status,
+                                    UnderwritingCreateBy = underwriting.CreateBy,
+                                    UnderwritingCreateDate = underwriting.CreateDate,
+                                    UnderwritingUpdateDate = underwriting.UpdateDate
+                                };
+            return underwritings.ToArray();
+
+        }
+    }
+
+    public static void ChangeStatus(string BBLE, Underwriting.UnderwritingStatusEnum status, string statusNote, string updateBy)
+    {
+        using (var ctx = new UnderwritingEntity())
+        {
+            var underwriting = ctx.Underwritings.FirstOrDefault((u) => u.BBLE.Trim() == BBLE.Trim());
+            if (underwriting != null)
+            {
+                underwriting.Status = status;
+                underwriting.StatusNote = statusNote;
+                underwriting.UpdateBy = updateBy;
+                underwriting.UpdateDate = DateTime.Now;
+                ctx.SaveChanges(updateBy);
+                return;
+            }
+            else
+            {
+                throw new Exception("Underwriting with BBLE " + BBLE + " cannot be found.");
+            }
         }
     }
 }
