@@ -215,10 +215,13 @@ Partial Public Class EcourtCase
                 ctx.EcourtCases.RemoveRange(cases)
 
                 If items.Count > 0 Then
-                    ctx.EcourtCases.AddRange(items.Select(Function(a)
-                                                              a.BBLE = bble
-                                                              Return a
-                                                          End Function).ToArray)
+                    For Each item In items
+                        item.BBLE = bble
+
+                        If Not ctx.EcourtCases.Local.Any(Function(a) a.CaseIndexNumber = item.CaseIndexNumber AndAlso a.CountyId = item.CountyId) Then
+                            ctx.EcourtCases.Add(item)
+                        End If
+                    Next
                 End If
                 ctx.SaveChanges()
             End If

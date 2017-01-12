@@ -245,7 +245,7 @@ Public Class PropertyServiceProvider
             ctx.SaveChanges()
 
             li = ctx.LeadsInfoes.Find(bble)
-            LeadsInfo.AddIndicator("LPDefandant", li, GetCurrentIdentityName())
+            ' LeadsInfo.AddIndicator("LPDefandant", li, GetCurrentIdentityName())
 
             ' Update leads neighborhood info
             Dim lead = ctx.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault

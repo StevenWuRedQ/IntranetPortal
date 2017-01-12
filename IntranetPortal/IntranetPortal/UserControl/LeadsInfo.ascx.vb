@@ -622,7 +622,6 @@ Public Class LeadsInfo1
         End If
     End Sub
 
-
     Protected Sub pcMain_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         If Not pcMainPopupControl.Visible Then
             pcMainPopupControl.Visible = True

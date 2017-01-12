@@ -436,6 +436,10 @@
         if (LoanModStatusCtrl) {
             LoanModStatusCtrl.reload();
         }
+
+        if (LeadTypeCtr) {            
+            LeadTypeCtr.initData();
+        }
     }
 
     function reloadHomeBreakCtrl(bble) {

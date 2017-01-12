@@ -22,7 +22,18 @@ Public Class LeadsInfo
         AEP = 9
         ShortSale = 10
         CoOpConversion = 12
+        StraightSale = 13
     End Enum
+
+    Public Shared Sub UpdateType(bble As String, type As LeadsType, updateby As String)
+        Using ctx As New Entities
+            Dim li = ctx.LeadsInfoes.Find(bble)
+            li.Type = type
+            li.UpdateBy = updateby
+            li.LastUpdate = DateTime.Now
+            ctx.SaveChanges()
+        End Using
+    End Sub
 
     Public Shared Function GetLeadsInfoByType(type As LeadsType) As IQueryable(Of LeadsInfo)
         Dim ctx As New Entities
@@ -73,7 +84,6 @@ Public Class LeadsInfo
     ''' verify lead has right fomat bble  
     ''' todo:
     ''' if lead not exist in leads info table it should be create in leads info
-    ''' 
     ''' </summary>
     Public Sub verifiyAddress()
         If (Not String.IsNullOrEmpty(Me.PropertyAddress)) Then
@@ -88,6 +98,7 @@ Public Class LeadsInfo
             Throw New Exception("Can not find property address " & Me.PropertyAddress)
         End If
     End Sub
+
     Public ReadOnly Property IsApartment() As Boolean
         Get
             If Not String.IsNullOrEmpty(BBLE) Then
@@ -899,22 +910,25 @@ Public Class LeadsInfo
 
             str.Add(New Indicator("UnderBuilt", "This property is only built to 50% or less of its total allowable Sqft", Function(li)
                                                                                                                               If li.UnbuiltSqft.HasValue And li.NYCSqft.HasValue Then
-                                                                                                                                  Return li.UnbuiltSqft / li.NYCSqft >= 0.5
+                                                                                                                                  Return li.UnbuiltSqft / li.NYCSqft <= 0.5
                                                                                                                               End If
 
                                                                                                                               Return False
                                                                                                                           End Function))
-            str.Add(New Indicator("TaxLiens", "This property has tas liens.", Function(li)
-                                                                                  Return Not String.IsNullOrEmpty(li.TaxLiensAmount)
-                                                                              End Function))
+            'str.Add(New Indicator("TaxLiens", "This property has tas liens.", Function(li)
+            '                                                                      Return Not String.IsNullOrEmpty(li.TaxLiensAmount)
+            '                                                                  End Function))
 
-            str.Add(New Indicator("LPDefandant", "Lien is in different name than Deed Holder. Check Acris to ensure this is a good lead.", Function(li)
-                                                                                                                                               If li.LisPens IsNot Nothing AndAlso li.LisPens.Count > 0 AndAlso Not String.IsNullOrEmpty(li.Owner) Then
-                                                                                                                                                   Return Not Utility.IsSimilarName(li.LisPens(0).Defendant, li.Owner)
-                                                                                                                                               End If
+            'str.Add(New Indicator("LPDefandant", "Lien is in different name than Deed Holder. Check Acris to ensure this is a good lead.", Function(li)
+            '                                                                                                                                   If li.LisPens IsNot Nothing AndAlso li.LisPens.Count > 0 AndAlso Not String.IsNullOrEmpty(li.Owner) Then
+            '                                                                                                                                       Dim defendant = li.LisPens.Where(Function(a) a.Active).OrderByDescending(Function(a) a.FileDate).Select(Function(a) a.Defendant).FirstOrDefault
+            '                                                                                                                                       If Not String.IsNullOrEmpty(defendant) Then
+            '                                                                                                                                           Return Not Utility.IsSimilarName(li.LisPens(0).Defendant, li.Owner)
+            '                                                                                                                                       End If
+            '                                                                                                                                   End If
 
-                                                                                                                                               Return False
-                                                                                                                                           End Function))
+            '                                                                                                                                   Return False
+            '                                                                                                                               End Function))
 
             Return str
         End Get
