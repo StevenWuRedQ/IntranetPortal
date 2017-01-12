@@ -33,6 +33,18 @@ namespace RedQ.UnderwritingService.Services
             return ctx.ToOutput();
         }
 
+        public static Context DebugRule(UnderwritingInput input)
+        {
+            var ctx = Context.InitContext(input);
+            UnderwritingService service = GetService();
+            service.CalculateValues(ctx).CalculateSums(ctx).CalculateInsurancePremium(ctx)
+                                        .CalculateHOI(ctx).CalculateCashScenario(ctx)
+                                        .CalculateLoanScenario(ctx).CalculateFlipScenario(ctx)
+                                        .CalculateSummary(ctx).CalculateMinimumBaselineScenario(ctx)
+                                        .CalculateBestCaseScenario(ctx).CalculateRentalModel(ctx);
+            return ctx;
+        }
+
         public UnderwritingService CalculateValues(Context ctx)
         {
             ctx.PropertyInfo.PropertyType = new Regex(".*(A|B|C0|21|R).*").IsMatch(ctx.PropertyInfo.TaxClass)
@@ -146,7 +158,7 @@ namespace RedQ.UnderwritingService.Services
                                                 + ctx.Construction.Sums + ctx.CarryingCost.Sums + ctx.Resale.Sums)
                                                - (ctx.Liens.Sums + ctx.DealExpenses.Sums + ctx.ClosingCost.PartialSums
                                                   + ctx.Construction.Sums + ctx.CarryingCost.Sums)
-                                               * ctx.RehabInfo.DealROICash / (ctx.RehabInfo.DealROICash + 1) * 1.0058);
+                                               * ctx.RehabInfo.DealROICash) / (ctx.RehabInfo.DealROICash * 1.0058 + 1.0058);
             ctx.Liens.AdditonalCostsSums = ctx.Liens.WaterCharges + ctx.Liens.ECBCityPay
                                                        + ctx.Liens.DOBCivilPenalties + ctx.Liens.HPDCharges
                                                        + ctx.Liens.HPDJudgements + ctx.Liens.PersonalJudgements
@@ -405,7 +417,7 @@ namespace RedQ.UnderwritingService.Services
                 {
                     if (value <= to[i])
                     {
-                        return (value - from[i]) + policy[i] + cost[i - 1];
+                        return (value - from[i]) * policy[i] + cost[i - 1];
                     }
 
                 }
@@ -543,23 +555,23 @@ namespace RedQ.UnderwritingService.Services
 
             for (var i = 0; i < 60; i++)
             {
-                this.costOfMoney += (double) this._model[i].Interest;
+                this.costOfMoney += this._model[i].Interest;
             }
             this.costOfMoney = -this.costOfMoney;
-            this.totalCost = (double) (model.TotalUpfront + this.costOfMoney);
+            this.totalCost = model.TotalUpfront + this.costOfMoney;
 
             for (var n = 1; n < this._model.Length; n++)
             {
-                this._model[n].ROI = (this._model[n].Total /  this.totalCost / this._model[n].Month * 12);
+                this._model[n].ROI = (this._model[n].Total / this.totalCost / this._model[n].Month * 12);
             }
 
 
             for (var n = 1; n < this._model.Length; n++)
             {
-                if (this._model[n].ROI > (double) model.MinROI)
+                if (this._model[n].ROI > (double)model.MinROI)
                 {
                     this.totalMonths = this._model[n].Month;
-                    this.targetProfit = (double) this._model[n].Total;
+                    this.targetProfit = (double)this._model[n].Total;
                     break;
                 }
             }

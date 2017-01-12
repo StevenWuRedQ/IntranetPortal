@@ -11,7 +11,7 @@ namespace RedQ.UnderwritingService.Models.NewYork
         public int Breakeven { get; set; }
         public int TargetTime { get; set; }
 
-        public double CostOfMoneyRate { get; set; }
+        public double CostOfMoneyRate { get; set; } = 0.16;
         public double MinROI { get; set; } = 0.18; 
         public double Insurance { get; set; } = 85;
         public double DeedPurchase { get; set; }

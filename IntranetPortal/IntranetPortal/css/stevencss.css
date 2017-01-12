@@ -110,29 +110,29 @@ i.with_circle {
     text-align: center;
 }
 
-input + label.font_12 {
+.stevencss input + label.font_12 {
     float: right;
     font-size: 12px !important;
     margin-right: 20px;
 }
 
-input[type="checkbox"]:checked + label:before {
+.stevencss input[type="checkbox"]:checked + label:before {
     content: "\f046";
     padding-right: 6px;
 }
 
-input[type='checkbox'] + label, input[type='radio'] + label {
+.stevencss input[type='checkbox'] + label, .stevencss input[type='radio'] + label {
     display: inline-block;
     font-size: 18px !important;
 }
 
-    input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio'] + label .box_text {
+    .stevencss input[type='checkbox'] + label, .stevencss input[type='radio'] + label, .stevencss input[type='radio'] + label .box_text {
         font-size: 14px !important;
         margin-top: -5px !important;
         padding: 15px 0 0;
     }
 
-        input[type='checkbox'] + label:before, input[type='radio'] + label:before {
+        .stevencss input[type='checkbox'] + label:before, .stevencss input[type='radio'] + label:before {
             -webkit-font-smoothing: antialiased;
             display: inline-block;
             float: left;
@@ -146,16 +146,16 @@ input[type='checkbox'] + label, input[type='radio'] + label {
             width: 20px !important;
         }
 
-        input[type=radio] + label:before, input[type="checkbox"] + label:before {
+        .stevencss input[type=radio] + label:before, .stevencss input[type="checkbox"] + label:before {
             content: "\f096";
         }
 
-input[type=radio], input[type='checkbox'] {
+.stevencss input[type=radio], .stevencss input[type='checkbox'] {
     display: none;
     font-size: 18px !important;
 }
 
-    input[type=radio]:checked + label:before {
+    .stevencss input[type=radio]:checked + label:before {
         content: "\f046";
     }
 

@@ -2,7 +2,7 @@
  *  Author: Shaopeng Zhang
  *  Date: 2016/11/01
  *  Description:
- *  Updates:
+ *  Updates: 
  ***/
 angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', function ($http, ptCom, $q) {
     var underwriting = {};
@@ -102,17 +102,46 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', f
         }
     };
     var proxy;
-    $.connection.hub.url = "http://localhost:8887/signalr";
-    $.connection.logging = true;
+    var serviceURL;
+    var getServiceURL = function () {
+        if (serviceURL) return serviceURL;
+        $http({
+            url: "/Webconfig.json",
+            method: "GET"
+        }).then(function (d) {
+            serviceURL = d.data["UnderwritingServiceServer"] + "/signalr";
+        })
+    }
     var init = function () {
+        getServiceURL();
+        if (!serviceURL) return;
+        $.connection.hub.url = serviceURL;
+        if (proxy) return;
         $.connection.hub.start().done(function () {
             proxy = $.connection.underwritingServiceHub;
         })
     };
-    init();
-    $.connection.hub.disconnected(function () {
-        setTimeout(init, 5000); // Restart connection after 5 seconds.
-    });
+    if ($.connection) {
+        (function () {
+            var proxyInterval = setInterval(function () {
+                if (proxy) {
+                    console.log("Init proxy successfully");
+                    clearInterval(proxyInterval);
+                } else {
+                    init();
+                }
+            }, 100);
+            setTimeout(function () {
+                if (!proxy) console.log("Fail to init proxy");
+                clearInterval(proxyInterval);
+            }, 2000);
+        })();
+        $.connection.logging = true;
+        $.connection.hub.disconnected(function () {
+            setTimeout(init, 5000); // Restart connection after 5 seconds.
+        });
+    }
+
     // try to a proxy incase signalr is reconnecting.        
     var tryGetProxy = function () {
         return $q(function (resolve, reject) {
@@ -217,7 +246,8 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', f
         });
     }
     // remote calculate underwriting throught signalr websocket.
-    underwriting.calculate = function (data) {
+    underwriting.calculate = function (data, isDebug) {
+        if (isDebug) return tryGetProxy().then(function (proxy) { return proxy.server.debugRule(data) });
         return tryGetProxy().then(function (proxy) { return proxy.server.postSingleJob(data) });
     };
     // change underwrting status. @param statusNote is must 

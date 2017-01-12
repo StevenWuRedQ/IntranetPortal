@@ -14,7 +14,19 @@ angular.module("PortalApp").controller("UnderwritingController", [
         $scope.archive = {};
         $scope.currentDataCopy = {};
         $scope.isProtectedView = true;
-
+        $scope.debug = false;
+        var float = function (data) {
+            if (data)
+                return parseFloat(data);
+            else
+                return 0.0;
+        };
+        var int = function (data) {
+            if (data)
+                return parseInt(data);
+            else
+                return 0;
+        };
         $scope.init = function (bble) {
             if (bble) {
                 ptUnderwriting.load(bble).then(function (data) {
@@ -104,7 +116,16 @@ angular.module("PortalApp").controller("UnderwritingController", [
         };
         // Core function to apply predefined rule, and update model values.
         $scope.calculate = function () {
-            ptUnderwriting.calculate($scope.data).then(function (output) {
+            $scope.data.PropertyInfo.PropertyType = (function () {
+                return /.*(A|B|C0|21|R).*/.exec($scope.data.PropertyInfo.TaxClass) ? 1 : 2;
+            })();
+            $scope.data.DealCosts.HAFA = ($scope.data.PropertyInfo.SellerOccupied || int($scope.data.PropertyInfo.NumOfTenants) > 0)
+                             && !$scope.data.LienInfo.FHA
+                             && !$scope.data.LienInfo.FannieMae
+                             && !$scope.data.LienInfo.FreddieMac
+                             && float($scope.data.DealCosts.HOI) > 0.0;
+            ptUnderwriting.calculate($scope.data, $scope.debug).then(function (output) {
+                if ($scope.debug) console.log(output);
                 $scope.data.MinimumBaselineScenario = output.MinimumBaselineScenario;
                 $scope.data.BestCaseScenario = output.BestCaseScenario;
                 $scope.data.Summary = output.Summary;

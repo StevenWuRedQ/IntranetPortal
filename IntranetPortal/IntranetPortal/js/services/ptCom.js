@@ -156,15 +156,22 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
      * @param: skipped //reference that will not be replaced by source
      * @param: keeped // level two 
      */
-    this.assignReference = function (target, source, /* optional*/ skipped, /* optional*/ keeped) {
-        var temp = {}; // object backup keeped values
+    // Method to copy value to object's reference property.
+    // Caution: didn't use recursive, so only go one level deep.
+    this.assignReference = function (target, source,
+                      /* optional */ skipped,
+                      /* optional */ keeped) {
+
+        var temp = {}; // object for backuping keeped values
         var props = Object.keys(source);
         for (i = 0; i < props.length ; i++) {
+            // init target's property to prevent null point exception.
+            if (target[props[i]] == null) target[props[i]] = {};
+            // skip some reference
+            if (skipped && skipped.indexOf(props[i]) >= 0) {
+                continue;
+            }
             if (typeof source[props[i]] == 'object') {
-                // skip some reference
-                if (skipped && skipped.indexOf(props[i]) >= 0) {
-                    continue;
-                }
                 // keep some value inside reference, usually id or something ;)
                 if (keeped && keeped.length) {
                     temp[props[i]] = {};
@@ -174,7 +181,11 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
                         }
                     }
                 }
-                target[props[i]] = source[props[i]];
+                if (source[props[i]] != null) {
+                    target[props[i]] = source[props[i]];
+                } else {
+                    target[props[i]] = {};
+                }
                 if (keeped && keeped.length) {
                     for (j = 0; j < keeped.length; j++) {
                         if (temp[props[i]] && temp[props[i]][keeped[j]]) {
@@ -212,7 +223,7 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
             return undefined;
         }
     }
-    this.getCurrentUser = function() {
+    this.getCurrentUser = function () {
         var element = $("#CurrentUser");
         return element[0].value;
     }

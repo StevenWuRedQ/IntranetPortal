@@ -98,5 +98,4 @@ angular.module("PortalApp").controller("MainCtrl",
                 $rootScope.panelLoading = false;
             });
         };
-    }
-    ]);
+    }]);

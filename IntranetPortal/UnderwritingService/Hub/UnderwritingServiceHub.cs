@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using RedQ.UnderwritingService.Models.NewYork;
 using IntranetPortal.Data;
+using RedQ.UnderwritingService.Services;
 
 namespace RedQ.UnderwritingService.Hub
 {
@@ -12,6 +13,11 @@ namespace RedQ.UnderwritingService.Hub
         public UnderwritingOutput PostSingleJob(UnderwritingInput input)
         {
             return UnderwritingService.Services.UnderwritingService.ApplyRule(input);
+        }
+
+        public Context DebugRule(UnderwritingInput input) {
+            return UnderwritingService.Services.UnderwritingService.DebugRule(input);
+
         }
 
         public Underwriting PostUnderwriting(Underwriting underwriting, string username)

@@ -97,8 +97,8 @@ angular.module("PortalApp").controller("MainCtrl",
                 $rootScope.panelLoading = false;
             });
         };
-    }
-    ]);
+    }]);
+
 (function () {
     var ITEM_ID = 'itemId';
 
@@ -1294,14 +1294,18 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
-    this.assignReference = function (target, source,  skipped,  keeped) {
+    this.assignReference = function (target, source,
+ skipped,
+ keeped) {
+
         var temp = {}; 
         var props = Object.keys(source);
         for (i = 0; i < props.length ; i++) {
+            if (target[props[i]] == null) target[props[i]] = {};
+            if (skipped && skipped.indexOf(props[i]) >= 0) {
+                continue;
+            }
             if (typeof source[props[i]] == 'object') {
-                if (skipped && skipped.indexOf(props[i]) >= 0) {
-                    continue;
-                }
                 if (keeped && keeped.length) {
                     temp[props[i]] = {};
                     for (j = 0; j < keeped.length; j++) {
@@ -1310,7 +1314,11 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
                         }
                     }
                 }
-                target[props[i]] = source[props[i]];
+                if (source[props[i]] != null) {
+                    target[props[i]] = source[props[i]];
+                } else {
+                    target[props[i]] = {};
+                }
                 if (keeped && keeped.length) {
                     for (j = 0; j < keeped.length; j++) {
                         if (temp[props[i]] && temp[props[i]][keeped[j]]) {
@@ -1348,7 +1356,7 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
             return undefined;
         }
     }
-    this.getCurrentUser = function() {
+    this.getCurrentUser = function () {
         var element = $("#CurrentUser");
         return element[0].value;
     }
@@ -2070,17 +2078,46 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', f
         }
     };
     var proxy;
-    $.connection.hub.url = "http://localhost:8887/signalr";
-    $.connection.logging = true;
+    var serviceURL;
+    var getServiceURL = function () {
+        if (serviceURL) return serviceURL;
+        $http({
+            url: "/Webconfig.json",
+            method: "GET"
+        }).then(function (d) {
+            serviceURL = d.data["UnderwritingServiceServer"] + "/signalr";
+        })
+    }
     var init = function () {
+        getServiceURL();
+        if (!serviceURL) return;
+        $.connection.hub.url = serviceURL;
+        if (proxy) return;
         $.connection.hub.start().done(function () {
             proxy = $.connection.underwritingServiceHub;
         })
     };
-    init();
-    $.connection.hub.disconnected(function () {
-        setTimeout(init, 5000); 
-    });
+    if ($.connection) {
+        (function () {
+            var proxyInterval = setInterval(function () {
+                if (proxy) {
+                    console.log("Init proxy successfully");
+                    clearInterval(proxyInterval);
+                } else {
+                    init();
+                }
+            }, 100);
+            setTimeout(function () {
+                if (!proxy) console.log("Fail to init proxy");
+                clearInterval(proxyInterval);
+            }, 2000);
+        })();
+        $.connection.logging = true;
+        $.connection.hub.disconnected(function () {
+            setTimeout(init, 5000); 
+        });
+    }
+
     var tryGetProxy = function () {
         return $q(function (resolve, reject) {
             if (proxy) {
@@ -2181,7 +2218,8 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', f
             return proxy.server.getArchivedByID(id);
         });
     }
-    underwriting.calculate = function (data) {
+    underwriting.calculate = function (data, isDebug) {
+        if (isDebug) return tryGetProxy().then(function (proxy) { return proxy.server.debugRule(data) });
         return tryGetProxy().then(function (proxy) { return proxy.server.postSingleJob(data) });
     };
     underwriting.changeStatus = function (bble, status, statusNote) {
@@ -7490,7 +7528,19 @@ angular.module("PortalApp").controller("UnderwritingController", [
         $scope.archive = {};
         $scope.currentDataCopy = {};
         $scope.isProtectedView = true;
-
+        $scope.debug = false;
+        var float = function (data) {
+            if (data)
+                return parseFloat(data);
+            else
+                return 0.0;
+        };
+        var int = function (data) {
+            if (data)
+                return parseInt(data);
+            else
+                return 0;
+        };
         $scope.init = function (bble) {
             if (bble) {
                 ptUnderwriting.load(bble).then(function (data) {
@@ -7574,7 +7624,16 @@ angular.module("PortalApp").controller("UnderwritingController", [
             }
         };
         $scope.calculate = function () {
-            ptUnderwriting.calculate($scope.data).then(function (output) {
+            $scope.data.PropertyInfo.PropertyType = (function () {
+                return /.*(A|B|C0|21|R).*/.exec($scope.data.PropertyInfo.TaxClass) ? 1 : 2;
+            })();
+            $scope.data.DealCosts.HAFA = ($scope.data.PropertyInfo.SellerOccupied || int($scope.data.PropertyInfo.NumOfTenants) > 0)
+                             && !$scope.data.LienInfo.FHA
+                             && !$scope.data.LienInfo.FannieMae
+                             && !$scope.data.LienInfo.FreddieMac
+                             && float($scope.data.DealCosts.HOI) > 0.0;
+            ptUnderwriting.calculate($scope.data, $scope.debug).then(function (output) {
+                if ($scope.debug) console.log(output);
                 $scope.data.MinimumBaselineScenario = output.MinimumBaselineScenario;
                 $scope.data.BestCaseScenario = output.BestCaseScenario;
                 $scope.data.Summary = output.Summary;

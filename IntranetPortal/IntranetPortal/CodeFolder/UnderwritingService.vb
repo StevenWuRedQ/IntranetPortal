@@ -1,12 +1,16 @@
-﻿Imports System.Net
+﻿Imports System.IO
+Imports System.Net
 Imports IntranetPortal.Data
 Imports Microsoft.AspNet.SignalR.Client
-Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 
 Public Class UnderwritingService
+    Shared HubURL As String
+
 
     Shared Sub New()
+        Dim ConfigJson = JObject.Parse(File.ReadAllText(HttpRuntime.AppDomainAppPath + "\Webconfig.json"))
+        HubURL = ConfigJson("UnderwritingServiceServer").ToString & "/signalr"
         ServicePointManager.DefaultConnectionLimit = 10
     End Sub
 
@@ -79,7 +83,6 @@ Public Class UnderwritingService
     End Function
 
     Friend Shared Function GetUnderwritingServiceLogs(objectName As String, recordId As String) As IEnumerable(Of AuditLog)
-        Dim HubURL = ConfigurationManager.AppSettings("UnderwritingServiceServer").ToString()
         Dim Connection As HubConnection = New HubConnection(HubURL)
         Dim UnderwritingHub As IHubProxy = Connection.CreateHubProxy("UnderwritingServiceHub")
         Connection.Start().Wait()
@@ -89,7 +92,6 @@ Public Class UnderwritingService
     End Function
 
     Public Shared Function GetUnderwritingByStatus(status As Integer) As IEnumerable(Of Object)
-        Dim HubURL = ConfigurationManager.AppSettings("UnderwritingServiceServer").ToString()
         Dim Connection As HubConnection = New HubConnection(HubURL)
         Dim UnderwritingHub As IHubProxy = Connection.CreateHubProxy("UnderwritingServiceHub")
         Connection.Start().Wait()
@@ -99,7 +101,6 @@ Public Class UnderwritingService
     End Function
 
     Public Shared Sub SyncToUnderwritingService()
-        Dim HubURL = ConfigurationManager.AppSettings("UnderwritingServiceServer").ToString()
         Dim Connection As HubConnection = New HubConnection(HubURL)
         Dim UnderwritingHub As IHubProxy = Connection.CreateHubProxy("UnderwritingServiceHub")
         Using ctx As New PortalEntities
