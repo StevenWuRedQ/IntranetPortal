@@ -9,8 +9,8 @@
         <nav class="nav navbar navbar-default">
             <div class="container-fluid">
                 <div class="nav-form navbar-right">
-                    <button type="button" class="btn btn-orange" ng-click="SearchComplete(true)" style="font-size:18px; padding: 3px 8px">Save</button>
-                    <button type="button" class="btn btn-orange" ng-click="SearchComplete()" style="font-size:18px; padding: 3px 8px">Complete</button>
+                    <button type="button" class="btn btn-orange" style="font-size:18px; padding: 3px 8px" ng-click="SearchComplete(true)">Save</button>
+                    <button type="button" class="btn btn-orange" style="font-size:18px; padding: 3px 8px" ng-click="SearchComplete()" ng-show="DocSearch.Status!=1">Complete</button>
                 </div>
             </div>
         </nav>

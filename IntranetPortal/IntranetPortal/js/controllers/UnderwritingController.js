@@ -116,6 +116,13 @@ angular.module("PortalApp").controller("UnderwritingController", [
         };
         // Core function to apply predefined rule, and update model values.
         $scope.calculate = function () {
+            if (!$scope.data.PropertyInfo) $scope.data.PropertyInfo = {};
+            if (!$scope.data.DealCosts) $scope.data.DealCosts = { HOIRatio: 0.0 };
+            if (!$scope.data.RehabInfo) $scope.data.RehabInfo = {
+                SalesCommission: 0.05,
+                DealROICash: 0.35
+            }
+
             $scope.data.PropertyInfo.PropertyType = (function () {
                 return /.*(A|B|C0|21|R).*/.exec($scope.data.PropertyInfo.TaxClass) ? 1 : 2;
             })();

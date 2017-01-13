@@ -92,7 +92,6 @@
                 onSummaryListItemClick: function (e) {
                     var data = e.data.data;
                     var filterNum = e.data.filter;
-                    debugger;
                     if (data) {
                         var bble = data.data.BBLE.trim();
                         location.href = "/underwriter/PropertiesList.aspx#/" + filterNum + "/" + bble + "/"

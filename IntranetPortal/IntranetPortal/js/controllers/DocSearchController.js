@@ -134,7 +134,7 @@ angular.module("PortalApp").controller("DocSearchController", [
                         }, function error(e) {
                             console.log(e);
                         });
-                        if (gridCase) gridCase.Refresh();
+                        // if (gridCase) gridCase.Refresh();
                     });
                 }
 
