@@ -14,7 +14,7 @@
             padding: 8px 12px;
             border-radius: 5px;
         }
-    </style>
+    </style> 
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContentPH">
