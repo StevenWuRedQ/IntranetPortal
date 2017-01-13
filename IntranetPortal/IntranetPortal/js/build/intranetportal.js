@@ -94,7 +94,6 @@ angular.module('PortalApp')
         }
     }]);
 
-
 (function () {
     var ITEM_ID = 'itemId';
 
@@ -185,7 +184,6 @@ angular.module('PortalApp')
 })();
 
 
-
 (function () {
     var ITEM_ID = 'itemId';
 
@@ -252,7 +250,6 @@ angular.module('PortalApp')
     portalUIRouteProvider.ITEM_ID = ITEM_ID;
     angular.module('PortalApp').provider('portalUIRoute', portalUIRouteProvider);
 })();
-
 angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, CorpEntity, $http, DivError) {
     var _class = function ()
     {
@@ -321,7 +318,6 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
     _class.prototype.newOfferId = 0    
     return _class;
 });
-
 angular.module('PortalApp').factory('AuditLog', function (ptBaseResource) {
     var auditLog = ptBaseResource('AuditLog', 'AuditId', null, {
         load: {
@@ -408,7 +404,6 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 
     return PtBaseResource;
 });
-
 angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
     var businessCheck = ptBaseResource('BusinessCheck', 'Id', null, null);
     businessCheck.CheckStatus = {
@@ -426,7 +421,6 @@ angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
     return businessCheck;
 
 });
-
 angular.module('PortalApp').factory('CheckRequest', function (ptBaseResource, BusinessCheck) {
     var checkRequest =  ptBaseResource("CheckRequest",'Id',null,null);
 
@@ -493,7 +487,6 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
 
     return corpEntity;
 });
-
 
 angular.module('PortalApp')
     .factory('DivError', function () {
@@ -731,7 +724,6 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
     return dxGridModel;
 });
 
-
 function dxModel() {
 
 
@@ -775,7 +767,6 @@ angular.module('PortalApp').factory('EmployeeModel', ['$resource','$http', funct
 
         return resource;
 }])
-
 angular.module('PortalApp').factory('HomeOwner', function (ptBaseResource) {
 
     var homeOwner = ptBaseResource('Homeowner', 'BBLE');
@@ -815,7 +806,6 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
 
     return leadResearch;
 });
-
 angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
 
     var leadsInfo = ptBaseResource('LeadsInfo', 'BBLE',null,
@@ -824,7 +814,6 @@ angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
 
     return leadsInfo;
 });
-
 angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
     var _class = function (data) {
 
@@ -1057,7 +1046,6 @@ angular.module('PortalApp').factory('Team', function ($http) {
     }
     return _class;
 });
-
 angular.module('PortalApp')
     .factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
 
@@ -1729,7 +1717,6 @@ angular.module('PortalApp')
 
         return resource;
     }]);
-
 angular.module('PortalApp').factory('Wizard', function (WizardStep) {
     var _class = function () {
 
@@ -1756,7 +1743,6 @@ angular.module('PortalApp').factory('Wizard', function (WizardStep) {
 
             return _class;
 });
-
 angular.module('PortalApp').factory('WizardStep', function () {
     var _class = function (step) {
 
@@ -2685,7 +2671,6 @@ angular.module("PortalApp")
             }
         }
     }])
-
 angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
@@ -2701,7 +2686,6 @@ angular.module("PortalApp")
 
         }
     }])
-
 angular.module("PortalApp")
     .directive('initGrid', ['$parse', function ($parse) {
         return {
@@ -2724,7 +2708,6 @@ angular.module("PortalApp")
             }
         };
     }]);
-    
 angular.module("PortalApp")
     .directive('preCondition', function () {
         return {
@@ -2792,7 +2775,6 @@ angular.module("PortalApp")
             template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
         }
     })
-
 angular.module("PortalApp")
     .directive('ptEditableDiv', [function () {
         return {
@@ -2864,7 +2846,6 @@ angular.module("PortalApp")
             }
         };
     }])
-
 angular.module("PortalApp")
     .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
@@ -3319,7 +3300,6 @@ angular.module("PortalApp")
             }
         }
     })
-
 angular.module("PortalApp")
     .directive('ptInputMask', function () {
         return {
@@ -3347,7 +3327,6 @@ angular.module("PortalApp")
 
         }
     }])
-
 angular.module("PortalApp")
     .directive('ptNumberMask', function () {
         return {
@@ -3493,7 +3472,6 @@ angular.module("PortalApp")
 
         }
     })
-
 angular.module("PortalApp")
     .directive('ptRadioInit', function () {
         return {
@@ -4266,7 +4244,6 @@ function ($scope, EmployeeModel, ptCom, $http) {
     }
 
 }])
-
 angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
         leadsInfoBBLE = $('#BBLE').val();
@@ -4437,7 +4414,6 @@ angular.module('PortalApp')
             $scope.viewmode = 0;
         }
     });
-
 angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime', '$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
 
     $scope.ptContactServices = ptContactServices;
@@ -5351,7 +5327,6 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
         $window.open('/LegalUI/Legalinfo.aspx?logid=' + logid, '_blank', 'width=1024, height=768')
     }
 }]);
-
 var PreSignHelper = (function () {
     var onAccoutingReview = function (cellinfo) {
         var element = angular.element('#pt-preassign-accouting-ctrl');
@@ -6102,7 +6077,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
     }
 
 });
-
 angular.module('PortalApp')
 .controller("ReportWizardCtrl", function ($scope, $http, $timeout, ptCom) {
     $scope.camel = _.camelCase;
@@ -7841,7 +7815,6 @@ angular.module("PortalApp")
 
 
 }])
-
 angular.module("PortalApp").controller("UnderwriterController",
                 ['$scope', 'ptCom', 'ptUnderwriter', '$location', 'DocSearch', '$state', function ($scope, ptCom, ptUnderwriter, $location, DocSearch, $state) {
 
