@@ -359,26 +359,31 @@
   <PortalNavItem Name="Underwriting" Text="Underwriting" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Underwriter,Sales-Executive</UserRoles>
     <Items>
-      <PortalNavItem Name="UnderwriterSummary2" Text="Summary" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
+      <PortalNavItem Name="UnderwriterSummary" Text="Summary" NavigationUrl="/underwriter/UnderwritingHome.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-
-      <PortalNavItem Name="UnderwriterSummary" Text="Properties" NavigationUrl="/UnderWriter/DocSearchList.aspx" ShowAmount="false">
+      <PortalNavItem Name="UnderwriterProperties2" Text="Properties" NavigationUrl="/underwriter/PropertiesList.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwriterSummary" Text="New Properties" NavigationUrl="/UnderWriter/DocSearchListNew.aspx" ShowAmount="false" Visible="false">
+      <!--<PortalNavItem Name="UnderwriterSummaryOld" Text="Summary Old" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
+        <UserRoles>Underwriter,Sales-Executive</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="UnderwriterProperties1" Text="Properties Old" NavigationUrl="/underwriter/DocSearchList.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <!--<PortalNavItem Name="UnderwritingDocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
+      <PortalNavItem Name="UnderwritingDocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
         <UserRoles>Entity-Manager,Relation-Manager,Underwriter,Sales-Executive,DocSearch-Outside</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
@@ -752,29 +757,6 @@
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>
-      <PortalNavItem Name="DocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
-        <UserRoles>Entity-Manager,Relation-Manager,Sales-Executive,DocSearch-Outside,Underwriter</UserRoles>
-        <FontClass>
-          <![CDATA[<i class="fa fa-search-plus"></i>]]>
-        </FontClass>
-        <Items>
-          <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
-            <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
-            <FontClass>
-              <![CDATA[<i class="fa fa-star"></i>]]>
-            </FontClass>
-            <FrontButton>
-              <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
-            </FrontButton>
-          </PortalNavItem>
-          <PortalNavItem Name="AgentNewLeads" Text="Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=leadsDocSearch" ShowAmount="false">
-            <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
-            <FontClass>
-              <![CDATA[<i class="fa fa-line-chart"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-        </Items>
       </PortalNavItem>
       <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
         <UserRoles>OfficeManager-*,Complaints-Manager</UserRoles>

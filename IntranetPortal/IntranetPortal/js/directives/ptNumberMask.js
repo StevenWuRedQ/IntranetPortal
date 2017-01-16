@@ -58,7 +58,7 @@ angular.module("PortalApp")
                     $(el).formatCurrency(formatConfig);
                 });
                 $(el).on('blur', function () {
-                    debugger;
+                    //debugger;
                     if (isValidate) {
                         var res = validate(this.value);
                         if (!res) {

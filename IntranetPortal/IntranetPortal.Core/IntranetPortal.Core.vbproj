@@ -282,6 +282,7 @@
     <Compile Include="Model\Thumbnail.vb" />
     <Compile Include="QueryBuilder\CustomReport.vb" />
     <Compile Include="QueryBuilder\QueryBuilder.vb" />
+    <Compile Include="Settings.vb" />
     <Compile Include="Utility.vb" />
     <Compile Include="WebGrabber.vb" />
     <Compile Include="WorkingHours.vb" />

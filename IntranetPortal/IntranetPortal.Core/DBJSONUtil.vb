@@ -38,4 +38,13 @@ Public Class DBJSONUtil
         ReplaceField(jobj, fromFiled, toFiled)
         jobj(additional) = "true"
     End Sub
+
+
+    Public Shared Function IsNullOrEmpty(token As JToken) As Boolean
+        Return token Is Nothing OrElse
+               (token.Type = JTokenType.Array AndAlso Not token.HasValues) OrElse
+               (token.Type = JTokenType.Object AndAlso Not token.HasValues) OrElse
+               (token.Type = JTokenType.String And String.IsNullOrEmpty(token.ToString)) OrElse
+               (token.Type = JTokenType.Null)
+    End Function
 End Class

@@ -20,5 +20,5 @@ Partial Public Class AuditLog
     Public Property ColumnName As String
     Public Property OriginalValue As String
     Public Property NewValue As String
-
+    Public Property CustomType As String
 End Class

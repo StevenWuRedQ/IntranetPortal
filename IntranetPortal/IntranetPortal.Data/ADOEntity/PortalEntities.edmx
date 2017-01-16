@@ -55,6 +55,7 @@
           <Property Name="ColumnName" Type="nvarchar" MaxLength="1024" />
           <Property Name="OriginalValue" Type="nvarchar(max)" />
           <Property Name="NewValue" Type="nvarchar(max)" />
+          <Property Name="CustomType" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="BusinessChecks">
           <Key>
@@ -1375,6 +1376,27 @@ warning 6002: The table/view 'IntranetPortal.dbo.AuctionPropertyView' does not h
           <Property Name="TeamName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.DocSearchUnderwritingPropertiesList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocSearchUnderwritingPropertiesList">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="SearchStatus" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="200" />
+          <Property Name="NewOfferStatus" Type="int" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="UnderwritingCreateBy" Type="nvarchar(max)" />
+          <Property Name="UnderwritingCreateDate" Type="datetime" />
+          <Property Name="UnderwritingUpdateDate" Type="datetime" />
+          <Property Name="UnderwritingStatus" Type="int" />
+          <Property Name="SearchCompletedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="SearchCompletedOn" Type="datetime" />
+          <Property Name="SearchStatus" Type="int" Nullable="false" />
+          <Property Name="SearchUpdateDate" Type="datetime" />
+          <Property Name="CompletedOn" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'IntranetPortal.dbo.LegalCaseReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LegalCaseReport">
           <Key>
@@ -1610,6 +1632,23 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
     [AuctionPropertyView].[TeamName] AS [TeamName]
     FROM [dbo].[AuctionPropertyView] AS [AuctionPropertyView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DocSearchUnderwritingPropertiesList" EntityType="Self.DocSearchUnderwritingPropertiesList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DocSearchUnderwritingPropertiesList].[BBLE] AS [BBLE], 
+    [DocSearchUnderwritingPropertiesList].[CaseName] AS [CaseName], 
+    [DocSearchUnderwritingPropertiesList].[NewOfferStatus] AS [NewOfferStatus], 
+    [DocSearchUnderwritingPropertiesList].[Owner] AS [Owner], 
+    [DocSearchUnderwritingPropertiesList].[UnderwritingCreateBy] AS [UnderwritingCreateBy], 
+    [DocSearchUnderwritingPropertiesList].[UnderwritingCreateDate] AS [UnderwritingCreateDate], 
+    [DocSearchUnderwritingPropertiesList].[UnderwritingUpdateDate] AS [UnderwritingUpdateDate], 
+    [DocSearchUnderwritingPropertiesList].[UnderwritingStatus] AS [UnderwritingStatus], 
+    [DocSearchUnderwritingPropertiesList].[SearchCompletedBy] AS [SearchCompletedBy], 
+    [DocSearchUnderwritingPropertiesList].[SearchCompletedOn] AS [SearchCompletedOn], 
+    [DocSearchUnderwritingPropertiesList].[SearchStatus] AS [SearchStatus], 
+    [DocSearchUnderwritingPropertiesList].[SearchUpdateDate] AS [SearchUpdateDate], 
+    [DocSearchUnderwritingPropertiesList].[CompletedOn] AS [CompletedOn]
+    FROM [dbo].[DocSearchUnderwritingPropertiesList] AS [DocSearchUnderwritingPropertiesList]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="LegalCaseReport" EntityType="Self.LegalCaseReport" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [LegalCaseReport].[BBLE] AS [BBLE], 
@@ -1798,6 +1837,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Parameter Name="updateBy" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="DialerContacts" EntityType="IntranetPortalModel.DialerContact" />
+          <EntitySet Name="DocSearchUnderwritingPropertiesList" EntityType="IntranetPortalModel.DocSearchUnderwritingPropertiesList" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2985,6 +3025,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="ColumnName" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="OriginalValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SSLead">
           <Key>
@@ -3283,6 +3324,25 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CallRecordLastAttempt_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CallRecordLastResult_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Callable_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DocSearchUnderwritingPropertiesList">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="SearchStatus" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NewOfferStatus" Type="Int32" />
+          <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnderwritingCreateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UnderwritingCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UnderwritingUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UnderwritingStatus" Type="Int32" />
+          <Property Name="SearchCompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SearchCompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="SearchStatus" Type="Int32" Nullable="false" />
+          <Property Name="SearchUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4515,6 +4575,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="AuditLogs">
             <EntityTypeMapping TypeName="IntranetPortalModel.AuditLog">
               <MappingFragment StoreEntitySet="AuditLogs">
+                <ScalarProperty Name="CustomType" ColumnName="CustomType" />
                 <ScalarProperty Name="NewValue" ColumnName="NewValue" />
                 <ScalarProperty Name="OriginalValue" ColumnName="OriginalValue" />
                 <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
@@ -4833,6 +4894,25 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DocSearchUnderwritingPropertiesList">
+            <EntityTypeMapping TypeName="IntranetPortalModel.DocSearchUnderwritingPropertiesList">
+              <MappingFragment StoreEntitySet="DocSearchUnderwritingPropertiesList">
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="SearchUpdateDate" ColumnName="SearchUpdateDate" />
+                <ScalarProperty Name="SearchStatus" ColumnName="SearchStatus" />
+                <ScalarProperty Name="SearchCompletedOn" ColumnName="SearchCompletedOn" />
+                <ScalarProperty Name="SearchCompletedBy" ColumnName="SearchCompletedBy" />
+                <ScalarProperty Name="UnderwritingStatus" ColumnName="UnderwritingStatus" />
+                <ScalarProperty Name="UnderwritingUpdateDate" ColumnName="UnderwritingUpdateDate" />
+                <ScalarProperty Name="UnderwritingCreateDate" ColumnName="UnderwritingCreateDate" />
+                <ScalarProperty Name="UnderwritingCreateBy" ColumnName="UnderwritingCreateBy" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="NewOfferStatus" ColumnName="NewOfferStatus" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -4847,8 +4927,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

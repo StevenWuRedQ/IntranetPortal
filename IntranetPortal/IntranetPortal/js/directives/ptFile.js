@@ -8,14 +8,14 @@
  * @param enableEdit: if usercan edit file after upload. (optional)
  * @param enableDelete: if user can delete file after upload. (optional)
  */
-angular.module("PortalApp")
+angular.module('PortalApp')
     .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
             restrict: 'E',
             templateUrl: '/js/directives/ptFile.tpl.html',
             scope: {
                 fileModel: '=',
-                fileBble: '=',  
+                fileBble: '=', 
                 uploadType: '@',
                 uploadUrl: '@',
                 fileName: '@', 
@@ -44,8 +44,8 @@ angular.module("PortalApp")
                 scope.delChoosed = function () {
                     scope.File = null;
                     scope.fileChoosed = false;
-                    var fileEl = el.find('input:file')[0]
-                    fileEl.value = ''
+                    var fileEl = el.find('input:file')[0];
+                    fileEl.value = '';
                 }
                 scope.toggleLoading = function () {
                     scope.loading = !scope.loading;

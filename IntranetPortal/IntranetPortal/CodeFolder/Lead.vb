@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
+Imports IntranetPortal.Data
 Imports Newtonsoft.Json
 
 ''' <summary>
@@ -1185,6 +1186,19 @@ Partial Public Class Lead
         End If
         Me.Status = status
     End Sub
+
+    Public Shared Function GetLeadsName(BBLE As String) As String
+        Using ctx As New PortalEntities
+            Dim lead = ctx.SSLeads.FirstOrDefault(Function(s) s.BBLE = BBLE)
+            If lead Is Nothing Then
+                Return ""
+            Else
+                Return lead.LeadsName
+            End If
+        End Using
+    End Function
+
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property Task As UserTask
         Get
