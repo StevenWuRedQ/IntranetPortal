@@ -131,7 +131,6 @@
                         that.changesSubStatus_callback(that.substatusCode, that.updatesSubStatus)
                     }
                 })
-
             }
         },
         changesSubStatus_callback: function (substatusStr, callback) {
@@ -155,11 +154,15 @@
         updateType: function () {
             $("#btnShortSale").removeClass("btn-primary");
             $("#btnStraightSale").removeClass("btn-primary");
+            $("#btnTaxliens").removeClass("btn-primary");
             
             if (LeadTypeCtr.currentType == 10) {
                 $("#btnShortSale").addClass("btn-primary");
             } else if (LeadTypeCtr.currentType == 13) {
                 $("#btnStraightSale").addClass("btn-primary");
+            } else if (LeadTypeCtr.currentType == 3)
+            {
+                $("#btnTaxliens").addClass("btn-primary");
             }
 
             if (gridTrackingClient)
@@ -168,10 +171,11 @@
         changeType: function (type) {
             if (type != undefined && this.currentType != type) {
                 var that = this;                
-                this.currentType = type;
-                var substatusStr = type == 10 ? "Short Sale" : "Straight Sale";
+                
+                var substatusStr = type == 10 ? "Short Sale" : type == 13 ?  "Straight Sale" : "Tax Liens";
                 AngularRoot.confirm("Change the Lead Type to " + substatusStr + "?", function (e) {
                     if (e) {
+                        that.currentType = type;
                         var typeString = String(type);
                         that.changesType_callback(that.currentType, that.updateType)
                     }
@@ -204,6 +208,8 @@
 
     $(document).ready(function () {
         init_currency();
+
+        LeadTypeCtr.initData();
     });
 </script>
 
@@ -320,6 +326,7 @@
                                 <div class="btn-group" style="margin-left:15px">
                                     <button id="btnShortSale" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(10)">Short Sale</button>
                                     <button id="btnStraightSale" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(13)">Straight Sale</button>
+                                    <button id="btnTaxliens" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(3)">Tax Lien</button>
                                 </div>
                             </div>
                         </div>
@@ -691,7 +698,7 @@
             <ClientSideEvents EndCallback="function(s,e){alert('Saved.');}" />
         </dx:ASPxCallbackPanel>
 
-        <% If LeadsInfoData.TaxLiens IsNot Nothing AndAlso LeadsInfoData.TaxLiens.Count > 0 Then%>
+        <% If LeadsInfoData.TaxLiens IsNot Nothing AndAlso LeadsInfoData.TaxLiens.Count > 0 AndAlso False Then%>
         <div style="margin: 20px; margin-top: -219px; margin-left: 230px;" class="clearfix">
             <div class="form_head">Tax Liens</div>
             <ul class="ss_form_box clearfix">

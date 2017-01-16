@@ -909,8 +909,8 @@ Public Class LeadsInfo
                                                                End Function))
 
             str.Add(New Indicator("UnderBuilt", "This property is only built to 50% or less of its total allowable Sqft", Function(li)
-                                                                                                                              If li.UnbuiltSqft.HasValue And li.NYCSqft.HasValue Then
-                                                                                                                                  Return li.UnbuiltSqft / li.NYCSqft <= 0.5
+                                                                                                                              If li.UnbuiltSqft.HasValue AndAlso li.NYCSqft.HasValue AndAlso li.UnbuiltSqft > 0 Then
+                                                                                                                                  Return li.UnbuiltSqft / li.NYCSqft >= 0.5
                                                                                                                               End If
 
                                                                                                                               Return False

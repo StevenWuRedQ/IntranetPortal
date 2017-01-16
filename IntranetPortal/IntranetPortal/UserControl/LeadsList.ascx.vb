@@ -236,8 +236,8 @@ Public Class LeadsList
     Sub BindSharedList()
         Using Context As New Entities
             Dim leads = (From lead In Context.Leads
-                                      Join sharedItem In Context.SharedLeads.Where(Function(s) s.UserName = Page.User.Identity.Name).Distinct On sharedItem.BBLE Equals lead.BBLE
-                                      Select lead).Distinct.ToList
+                         Join sharedItem In Context.SharedLeads.Where(Function(s) s.UserName = Page.User.Identity.Name).Distinct On sharedItem.BBLE Equals lead.BBLE
+                         Select lead).Distinct.ToList
             gridLeads.DataSource = leads
             gridLeads.DataBind()
 
@@ -339,9 +339,9 @@ Public Class LeadsList
         If CategoryName = "Task" Then
             Using Context As New Entities
                 Dim leads = (From lead In Context.Leads
-                                       Join task In Context.UserTasks On task.BBLE Equals lead.BBLE
-                                       Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(Page.User.Identity.Name) And task.CreateDate < newVersionDate
-                                       Select lead).Union(
+                             Join task In Context.UserTasks On task.BBLE Equals lead.BBLE
+                             Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(Page.User.Identity.Name) And task.CreateDate < newVersionDate
+                             Select lead).Union(
                                        From al In Context.Leads
                                        Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
                                        Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name) And appoint.CreateDate < newVersionDate
@@ -433,9 +433,14 @@ Public Class LeadsList
         Dim lbNewBBLE = TryCast(pageRootControl.FindControl("lbNewBBLE"), ASPxListBox)
         Dim bble = TryCast(pageRootControl.FindControl("txtNewBBLE"), ASPxTextBox).Text
         Dim leadsName = TryCast(pageRootControl.FindControl("txtNewLeadsName"), ASPxTextBox).Text
+        Dim leadType = TryCast(pageRootControl.FindControl("rblLeadsType"), ASPxRadioButtonList)
+
+        If leadType.SelectedIndex < 0 Then
+            Throw New CallbackException("Please select lead type.")
+        End If
 
         If String.IsNullOrEmpty(bble.Trim) Then
-            Throw New CallbackException("BBLE is not correct format! Please check.")
+            Throw New CallbackException("BBLE Is Not correct format! Please check.")
         End If
 
         'Check daily limitation on Team's creating new leads. if over the limitation, the creation will throw exception
@@ -457,6 +462,12 @@ Public Class LeadsList
             'Dim lf As LeadsInfo = DataWCFService.UpdateBasicInfo(bble)
             DataWCFService.UpdateLeadInfo(bble, True)
             Dim lf = LeadsInfo.GetInstance(bble)
+
+            If leadType.Value IsNot Nothing Then
+                Dim tp = CType(leadType.Value, LeadsInfo.LeadsType)
+                LeadsInfo.UpdateType(lf.BBLE, tp, Page.User.Identity.Name)
+            End If
+
             'Add to update
             'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)
 
@@ -478,7 +489,6 @@ Public Class LeadsList
 
                 Context.Leads.Add(ld)
                 Context.SaveChanges()
-
             Else
                 'use workflow engine to approval 
                 ld.Status = LeadStatus.MgrApprovalInWf

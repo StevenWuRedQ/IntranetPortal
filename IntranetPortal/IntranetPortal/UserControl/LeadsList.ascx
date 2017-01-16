@@ -317,9 +317,9 @@
             border-width:2px;
         }
 
-    .color_star {
-        cursor: pointer;
-    }
+        .color_star {
+            cursor: pointer;
+        }
 </style>
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack"></dx:ASPxCallback>
 
@@ -343,7 +343,7 @@
         <div style="font-size: 24px;" class="clearfix">
             <div class="clearfix">
                 <% If lblLeadCategory.Text = "New Leads" %>
-                <i class="fa fa-plus with_circle newLeadsButton" style="width: 48px; height: 48px; line-height: 48px; cursor:pointer" onclick="alert('add')"></i>&nbsp;
+                <i class="fa fa-plus with_circle newLeadsButton" title="Add New Lead" style="width: 48px; height: 48px; line-height: 48px; cursor:pointer" onclick="gridLeads.AddNewRow();"></i>&nbsp;
                 <% Else %>
                 <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                 <% End If %>
@@ -511,17 +511,17 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2">
-                                                    <dx:ASPxPageControl Width="100%" EnableViewState="false" ID="pageControlInputData" Height="260px"
+                                                    <dx:ASPxPageControl Width="100%" EnableViewState="false" ID="pageControlInputData" Height="260px" Theme="Moderno"
                                                         runat="server" ActiveTabIndex="0" TabSpacing="3px" EnableHierarchyRecreation="True">
                                                         <TabPages>
                                                             <dx:TabPage Text="Address" Name="tabStreet">
                                                                 <ContentCollection>
                                                                     <dx:ContentControl runat="server">
                                                                         <table style="width: 100%;">
-                                                                            <tr style="height: 45px">
+                                                                            <tr style="height: 60px">
                                                                                 <td>Borough:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxComboBox runat="server" ID="cbStreetBorough" ClientInstanceName="cbStreetBoroughClient" CssClass="edit_drop" Width="100%">
+                                                                                    <dx:ASPxComboBox runat="server" Theme="Moderno" ID="cbStreetBorough" ClientInstanceName="cbStreetBoroughClient" CssClass="edit_drop" Width="100%">
                                                                                         <Items>
                                                                                             <dx:ListEditItem Text="Manhattan" Value="1" />
                                                                                             <dx:ListEditItem Text="Bronx" Value="2" />
@@ -533,16 +533,16 @@
                                                                                     </dx:ASPxComboBox>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr style="margin-bottom: 3px; height: 45px">
+                                                                            <tr style="margin-bottom: 3px; height: 60px">
                                                                                 <td>Number:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox runat="server" ID="txtHouseNum" CssClass="edit_drop" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox runat="server" Theme="Moderno" ID="txtHouseNum" CssClass="edit_drop" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr style="margin-bottom: 3px; height: 45px">
+                                                                            <tr style="margin-bottom: 3px; height: 60px">
                                                                                 <td>Street:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxComboBox runat="server" Width="100%" ID="cbStreetlookup" CssClass="edit_drop" ClientInstanceName="cbStreetlookupClient" DropDownStyle="DropDown" FilterMinLength="2" IncrementalFilteringMode="StartsWith" OnCallback="cbStreetlookup_Callback" TextField="st_name" ValueField="st_name" EnableCallbackMode="true" CallbackPageSize="10">
+                                                                                    <dx:ASPxComboBox runat="server" Theme="Moderno" Width="100%" ID="cbStreetlookup" CssClass="edit_drop" ClientInstanceName="cbStreetlookupClient" DropDownStyle="DropDown" FilterMinLength="2" IncrementalFilteringMode="StartsWith" OnCallback="cbStreetlookup_Callback" TextField="st_name" ValueField="st_name" EnableCallbackMode="true" CallbackPageSize="10">
                                                                                         <ClientSideEvents EndCallback="OnStreetlookupEndCallback" />
                                                                                     </dx:ASPxComboBox>
                                                                                 </td>
@@ -555,10 +555,10 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl runat="server">
                                                                         <table style="width: 100%;">
-                                                                            <tr style="height: 45px">
+                                                                            <tr style="height: 60px">
                                                                                 <td>Borough:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxComboBox CssClass="edit_drop" runat="server" ID="cblegalBorough" Width="100%">
+                                                                                    <dx:ASPxComboBox CssClass="edit_drop" Theme="Moderno" runat="server" ID="cblegalBorough" Width="100%">
                                                                                         <Items>
                                                                                             <dx:ListEditItem Text="Manhattan" Value="1" />
                                                                                             <dx:ListEditItem Text="Bronx" Value="2" />
@@ -569,16 +569,16 @@
                                                                                     </dx:ASPxComboBox>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr style="margin-bottom: 3px; height: 45px">
+                                                                            <tr style="margin-bottom: 3px; height: 60px">
                                                                                 <td>Block:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox CssClass="edit_drop" runat="server" ID="txtLegalBlock" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox CssClass="edit_drop" Theme="Moderno" runat="server" ID="txtLegalBlock" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr style="margin-bottom: 3px; height: 45px">
+                                                                            <tr style="margin-bottom: 3px; height: 60px">
                                                                                 <td>Lot:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox runat="server" CssClass="edit_drop" ID="txtLegalLot" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox runat="server" Theme="Moderno" CssClass="edit_drop" ID="txtLegalLot" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -589,10 +589,10 @@
                                                                 <ContentCollection>
                                                                     <dx:ContentControl runat="server">
                                                                         <table style="width: 100%;">
-                                                                            <tr style="height: 45px">
+                                                                            <tr style="height: 60px">
                                                                                 <td>Borough:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxComboBox CssClass="edit_drop" runat="server" ID="cbNameBorough" Width="100%">
+                                                                                    <dx:ASPxComboBox CssClass="edit_drop" Theme="Moderno" runat="server" ID="cbNameBorough" Width="100%">
                                                                                         <Items>
                                                                                             <dx:ListEditItem Text="Manhattan" Value="1" />
                                                                                             <dx:ListEditItem Text="Bronx" Value="2" />
@@ -603,16 +603,16 @@
                                                                                     </dx:ASPxComboBox>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr style="height: 45px">
+                                                                            <tr style="height: 60px">
                                                                                 <td>First:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox CssClass="edit_drop" ID="txtNameFirst" runat="server" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox CssClass="edit_drop" Theme="Moderno" ID="txtNameFirst" runat="server" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr style="margin-bottom: 3px; height: 45px">
+                                                                            <tr style="margin-bottom: 3px; height: 60px">
                                                                                 <td>Last:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox runat="server" CssClass="edit_drop" ID="txtNameLast" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox runat="server" Theme="Moderno" CssClass="edit_drop" ID="txtNameLast" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -645,7 +645,7 @@
                                         <table style="width: 490px; margin: 10px; border-spacing: 2px;">
                                             <tr style="margin-bottom: 3px;">
                                                 <td colspan="2">
-                                                    <dx:ASPxListBox runat="server" Height="260px" Width="485px" ID="lbNewBBLE" ClientInstanceName="lbNewBBLEClient" OnCallback="lbNewBBLE_Callback">
+                                                    <dx:ASPxListBox Theme="Moderno" runat="server" Height="200" Width="485px" ID="lbNewBBLE" ClientInstanceName="lbNewBBLEClient" OnCallback="lbNewBBLE_Callback">
                                                         <Columns>
                                                             <dx:ListBoxColumn Name="BBLE" FieldName="BBLE" Caption="BBLE" Width="100px" />
                                                             <dx:ListBoxColumn Name="LeadsName" FieldName="LeadsName" Caption="Leads Name" Width="385px" />
@@ -656,6 +656,19 @@
                                                         txtNewLeadsName.SetText(item.GetColumnText(1));
                                                         }" />
                                                     </dx:ASPxListBox>
+                                                </td>                                                
+                                            </tr>
+                                            <tr style="margin-bottom:5px">
+                                                <td style="font-size:larger;padding-top:15px">Leads Type:</td>
+                                                <td style="padding-top:15px">
+                                                    <dx:ASPxRadioButtonList runat="server" ID="rblLeadsType" RepeatDirection="Horizontal" Border-BorderStyle="None" Theme="Moderno" ClientInstanceName="rblTypes">
+                                                        <Items>
+                                                            <dx:ListEditItem Text="Short Sale" Value="10" Selected="true" />
+                                                            <dx:ListEditItem Text="Straight Sale" Value="13" />
+                                                            <dx:ListEditItem Text="Tax Lien" Value="3" />
+                                                        </Items>
+                                                        <ValidationSettings RequiredField-IsRequired="true" ValidationGroup="CreateNew" ErrorDisplayMode="None"></ValidationSettings>
+                                                    </dx:ASPxRadioButtonList>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -669,10 +682,13 @@
                                                     </dx:ASPxButton>
                                                 </td>
                                                 <td style="text-align: right; height: 45px;">
-                                                    <dx:ASPxButton RenderMode="Button" Text="OK" CssClass="rand-button rand-button-blue" AutoPostBack="false" runat="server">
-                                                        <ClientSideEvents Click="function(){
-                                                          IsAddNewLead = true;
-                                                          gridLeads.UpdateEdit();                                                                                                                                                                                                                                      
+                                                    <dx:ASPxButton ValidationGroup="CreateNew" RenderMode="Button" Text="OK" CssClass="rand-button rand-button-blue" AutoPostBack="false" runat="server">
+                                                        <ClientSideEvents Click="function(){                                                              
+                                                            if (ASPxClientEdit.ValidateGroup('CreateNew'))
+                                                            {
+                                                                IsAddNewLead = true;
+                                                                gridLeads.UpdateEdit();                                                                                                                                                                                                                                      
+                                                            }                                                          
                                                         }" />
                                                     </dx:ASPxButton>
                                                     <dx:ASPxButton RenderMode="Button" Text="Cancel" CssClass="rand-button rand-button-gray" AutoPostBack="false" runat="server">

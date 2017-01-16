@@ -146,7 +146,6 @@
 
             // $(_temTelLink).attr("data-undo-wrong", undo_wrong_count);
         }
-
     }
     function SetSameStyle(className, style, value) {
         var list = document.getElementsByClassName(className)
@@ -271,8 +270,6 @@
         tmpAddress = address;
         AspxPopupMenuAddress.ShowAtElement(s);
     }
-
-
 
     function OnCallPhone() {
         if (temTelLink) {
@@ -527,9 +524,7 @@
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxPanel>
-
             <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Width="100%" ClientInstanceName="contentSplitter">
-
                 <Styles>
                     <Pane Paddings-Padding="0">
                         <Paddings Padding="0px"></Paddings>
