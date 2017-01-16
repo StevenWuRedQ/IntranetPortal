@@ -7912,7 +7912,7 @@
     <Content Include="App_Data\test.csv" />
     <Content Include="bower_components\pt-compute-engine\.bower.json" />
     <Content Include="bower_components\pt-compute-engine\README.md" />
-    <None Include="Webconfig.json" />
+    <Content Include="Webconfig.txt" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />
