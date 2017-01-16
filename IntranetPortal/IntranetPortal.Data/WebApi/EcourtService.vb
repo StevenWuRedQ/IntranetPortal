@@ -9,9 +9,7 @@ Imports System.Runtime.CompilerServices
 ''' The Ecourt service object
 ''' </summary>
 Public Class EcourtService
-
-    Private Shared SericeUrl As String = ConfigurationManager.AppSettings("EcourtServiceUrl")
-    Private Shared apiKey As String = "6F43717752E839FD9034B6C426770488A7BA624E9E6D018E26D52451C7A4BCFE56338E92D621F826AC8B8228DDFEC4D7628AAC4917A06F3AE6CD56C978A691CA"
+    Inherits RedqService
 
     ''' <summary>
     ''' The ecourt cases list of property
@@ -72,45 +70,8 @@ Public Class EcourtService
                             End Function).ToList
     End Function
 
-    Private Function Execute(Of T As New)(request As RestRequest) As T
-        Dim result = client.Execute(Of T)(request)
-
-        If result.IsSuccessful Then
-            Return result.Data
-        Else
-            Throw New Exception(HandleErrorResponse(request, result))
-        End If
-    End Function
-
-    Private Function HandleErrorResponse(request As IRestRequest, response As IRestResponse) As String
-        Dim statusString As String = String.Format("{0} {1} - {2}", CInt(response.StatusCode), response.StatusCode, response.StatusDescription)
-        Dim errorString As String = Convert.ToString("Response status: ") & statusString
-
-        Dim resultMessage As String = ""
-        If Not response.StatusCode.IsSuccessStatusCode() Then
-            If String.IsNullOrWhiteSpace(resultMessage) Then
-                resultMessage = "An error occurred while processing the request: " + response.StatusDescription
-            End If
-        End If
-        If response.ErrorException IsNot Nothing Then
-            If String.IsNullOrWhiteSpace(resultMessage) Then
-                resultMessage = "An exception occurred while processing the request: " + response.ErrorException.Message
-            End If
-            errorString = errorString & ", Exception: " & response.ErrorException.Message
-        End If
-
-        Return resultMessage
-    End Function
-
-    Private client As RestClient
-
-    Private Sub New()
-        client = New RestClient(SericeUrl)
-        System.Net.WebRequest.DefaultWebProxy = Nothing
-        client.Proxy = Nothing
-    End Sub
-
     Private Shared _service As EcourtService = Nothing
+
     ''' <summary>
     ''' Return Ecourt service instance
     ''' </summary>
@@ -125,25 +86,11 @@ Public Class EcourtService
         End Get
     End Property
 
-    Private Function GetRequest(url As String, method As RestSharp.Method) As RestRequest
-        Dim request As New RestRequest(url, method)
-        request.AddHeader("apiKey", apiKey)
-        Return request
-    End Function
-
+    Private Sub New()
+        MyBase.New()
+    End Sub
 End Class
 
-Public Module RestSharpExtensionMethods
-    <Extension()>
-    Public Function IsSuccessful(ByVal response As IRestResponse) As Boolean
-        Return response.StatusCode.IsSuccessStatusCode() AndAlso response.ResponseStatus = ResponseStatus.Completed
-    End Function
-
-    <Extension()>
-    Public Function IsSuccessStatusCode(ByVal responseCode As HttpStatusCode) As Boolean
-        Return responseCode >= 200 AndAlso responseCode <= 399
-    End Function
-End Module
 
 Public Class CaseDetail
     Public Property CountyId As String
@@ -268,10 +215,13 @@ Partial Public Class EcourtCase
                 ctx.EcourtCases.RemoveRange(cases)
 
                 If items.Count > 0 Then
-                    ctx.EcourtCases.AddRange(items.Select(Function(a)
-                                                              a.BBLE = bble
-                                                              Return a
-                                                          End Function).ToArray)
+                    For Each item In items
+                        item.BBLE = bble
+
+                        If Not ctx.EcourtCases.Local.Any(Function(a) a.CaseIndexNumber = item.CaseIndexNumber AndAlso a.CountyId = item.CountyId) Then
+                            ctx.EcourtCases.Add(item)
+                        End If
+                    Next
                 End If
                 ctx.SaveChanges()
             End If

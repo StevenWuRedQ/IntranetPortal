@@ -43,6 +43,23 @@ Public Class LeadsEcourtData
     End Property
 
     ''' <summary>
+    '''     The amount of days since the case is inactive
+    ''' </summary>
+    ''' <returns></returns>
+    Public ReadOnly Property InActiveDate As Date?
+        Get
+            If Cases IsNot Nothing AndAlso Cases.Count > 0 Then
+                If Not Active Then
+                    Dim dt = Cases.OrderByDescending(Function(c) c.CaseDispositionDate).Select(Function(c) c.CaseDispositionDate).FirstOrDefault
+                    Return dt
+                End If
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
+    ''' <summary>
     ''' Return the active cases of the property
     ''' </summary>
     ''' <returns></returns>

@@ -28,7 +28,6 @@
         System.ServiceProcess.ServiceBase.Run(ServicesToRun)
     End Sub
 
-
     Protected Overrides Sub OnStart(ByVal args() As String)
         ' Add code here to start your service. This method should set things
         ' in motion so your service can do its work.

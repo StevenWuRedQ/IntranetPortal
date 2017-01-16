@@ -1,4 +1,6 @@
-﻿Public Class PropertyInfo
+﻿Imports Humanizer
+
+Public Class PropertyInfo
     Inherits UserControl
     Implements ICallbackEventHandler
 
@@ -175,6 +177,14 @@
         End If
 
         Return 0
+    End Function
+
+    Public Function HumanizeTime(ts As DateTime?) As String
+        If ts.HasValue Then
+            Return ts.Value.Humanize()
+        End If
+
+        Return Nothing
     End Function
 
     Public Sub RaiseCallbackEvent(eventArgument As String) Implements ICallbackEventHandler.RaiseCallbackEvent

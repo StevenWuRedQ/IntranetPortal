@@ -650,6 +650,7 @@
     <Compile Include="CodeFolder\PortalReport.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
     <Compile Include="CodeFolder\PropertyOfferManage.vb" />
+    <Compile Include="CodeFolder\PropertyServiceProvider.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
     <Compile Include="CodeFolder\RoleBasePage.vb">
@@ -657,6 +658,7 @@
     </Compile>
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
+    <Compile Include="CodeFolder\SimpleAppTokenHandler.vb" />
     <Compile Include="CodeFolder\SummaryItemBase.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -2008,6 +2010,7 @@
       <DependentUpon>Priority.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PublicController\DataServiceController.vb" />
     <Compile Include="Publish\Publish.aspx.designer.vb">
       <DependentUpon>Publish.aspx</DependentUpon>
     </Compile>
