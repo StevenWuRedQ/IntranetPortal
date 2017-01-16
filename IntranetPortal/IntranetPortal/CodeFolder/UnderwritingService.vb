@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports IntranetPortal.Core
 Imports IntranetPortal.Data
 Imports Microsoft.AspNet.SignalR.Client
 Imports Newtonsoft.Json.Linq
@@ -132,33 +133,32 @@ Public Class UnderwritingService
                     result("CreateDate") = search.CreateDate
                     result("CreateBy") = search.CreateBy
                     Select Case search.UnderwriteStatus
-                        Case LeadInfoDocumentSearch.UnderWriterStatus.PendingSearch
-                            result("Status") = 1
-                        Case LeadInfoDocumentSearch.UnderWriterStatus.PendingUnderwriting
+                        Case 0
                             result("Status") = 2
-                        Case LeadInfoDocumentSearch.UnderWriterStatus.CompletedUnderwriting
+                        Case 1
                             result("Status") = 3
-                        Case LeadInfoDocumentSearch.UnderWriterStatus.RejectUnderwriting
+                        Case 2
                             result("Status") = 4
                         Case Else
                             result("Status") = 1
                     End Select
+                    result("StatusNote") = search.UnderwriteCompletedNotes
 
                     Dim searchJson = JObject.Parse(search.LeadResearch)
-                    If searchJson("docSearch") IsNot Nothing AndAlso searchJson("docSearch")("LeadResearch") IsNot Nothing Then
-                        Dim leadResearch = searchJson("docSearch")("LeadResearch")
-                        result("PropertyInfo")("PropertyTaxYear") = If(leadResearch("leadsProperty_Taxes_per_YR_Property_Taxes_Due") Is Nothing, 0.0, leadResearch("leadsProperty_Taxes_per_YR_Property_Taxes_Due"))
-                        result("LienInfo")("FirstMortgage") = If(leadResearch("mortgageAmount") Is Nothing, 0.0, leadResearch("mortgageAmount"))
-                        result("LienInfo")("SecondMortgage") = If(leadResearch("secondMortgageAmount") Is Nothing, 0.0, leadResearch("secondMortgageAmount"))
-                        result("LienInfo")("COSRecorded") = If(leadResearch("Has_COS_Recorded") Is Nothing, False, leadResearch("Has_COS_Recorded"))
-                        result("LienInfo")("DeedRecorded") = If(leadResearch("Has_Deed_Recorded") Is Nothing, False, leadResearch("Has_Deed_Recorded"))
-                        result("LienInfo")("FHA") = If(leadResearch("fha") Is Nothing, False, leadResearch("fha"))
-                        result("LienInfo")("FannieMae") = If(leadResearch("fannie") Is Nothing, False, leadResearch("fannie"))
-                        result("LienInfo")("FreddieMac") = If(leadResearch("Freddie_Mac_") Is Nothing, False, leadResearch("Freddie_Mac_"))
-                        result("LienInfo")("Servicer") = If(leadResearch("servicer") Is Nothing, "", leadResearch("servicer"))
-                        result("LienInfo")("ForeclosureIndexNum") = If(leadResearch("LP_Index___Num_LP_Index___Num") Is Nothing, "", leadResearch("LP_Index___Num_LP_Index___Num"))
-                        result("LienInfo")("ForeclosureNote") = If(leadResearch("notes_LP_Index___Num") Is Nothing, "", leadResearch("notes_LP_Index___Num"))
-                        If (leadResearch("TaxLienCertificate") IsNot Nothing) Then
+                    If searchJson IsNot Nothing Then
+                        Dim leadResearch = searchJson
+                        result("PropertyInfo")("PropertyTaxYear") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("leadsProperty_Taxes_per_YR_Property_Taxes_Due")), 0.0, leadResearch("leadsProperty_Taxes_per_YR_Property_Taxes_Due"))
+                        result("LienInfo")("FirstMortgage") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("mortgageAmount")), 0.0, leadResearch("mortgageAmount"))
+                        result("LienInfo")("SecondMortgage") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("secondMortgageAmount")), 0.0, leadResearch("secondMortgageAmount"))
+                        result("LienInfo")("COSRecorded") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("Has_COS_Recorded")), False, leadResearch("Has_COS_Recorded"))
+                        result("LienInfo")("DeedRecorded") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("Has_Deed_Recorded")), False, leadResearch("Has_Deed_Recorded"))
+                        result("LienInfo")("FHA") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("fha")), False, leadResearch("fha"))
+                        result("LienInfo")("FannieMae") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("fannie")), False, leadResearch("fannie"))
+                        result("LienInfo")("FreddieMac") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("Freddie_Mac_")), False, leadResearch("Freddie_Mac_"))
+                        result("LienInfo")("Servicer") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("servicer")), "", leadResearch("servicer"))
+                        result("LienInfo")("ForeclosureIndexNum") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("LP_Index___Num_LP_Index___Num")), "", leadResearch("LP_Index___Num_LP_Index___Num"))
+                        result("LienInfo")("ForeclosureNote") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("notes_LP_Index___Num")), "", leadResearch("notes_LP_Index___Num"))
+                        If Not DBJSONUtil.IsNullOrEmpty(leadResearch("TaxLienCertificate")) Then
                             Dim total = 0.0
                             Dim taxLienCertificates = JArray.FromObject(leadResearch("TaxLienCertificate"))
                             For Each Token In taxLienCertificates
@@ -166,18 +166,18 @@ Public Class UnderwritingService
                             Next
                             result("LienCosts")("TaxLienCertificate") = total
                         End If
-                        result("LienCosts")("PropertyTaxes") = If(leadResearch("propertyTaxes") Is Nothing, 0.0, leadResearch("propertyTaxes"))
-                        result("LienCosts")("WaterCharges") = If(leadResearch("waterCharges") Is Nothing, 0.0, leadResearch("waterCharges"))
-                        result("LienCosts")("HPDCharges") = If(leadResearch("Open_Amount_HPD_Charges_Not_Paid_Transferred") Is Nothing, 0.0, leadResearch("Open_Amount_HPD_Charges_Not_Paid_Transferred"))
-                        result("LienCosts")("ECBCityPay") = If(leadResearch("Amount_ECB_Tickets") Is Nothing, 0.0, leadResearch("Amount_ECB_Tickets"))
-                        result("LienCosts")("DOBCivilPenalty") = If(leadResearch("DOBCivilPenalty") Is Nothing, 0.0, leadResearch("DOBCivilPenalty"))
-                        result("LienCosts")("PersonalJudgements") = If(leadResearch("Amount_Personal_Judgments") Is Nothing, 0.0, leadResearch("Amount_Personal_Judgments"))
-                        result("LienCosts")("HPDJudgements") = If(leadResearch("HPDjudgementAmount") Is Nothing, 0.0, leadResearch("HPDjudgementAmount"))
-                        result("LienCosts")("NYSTaxWarrants") = If(leadResearch("Amount_NYS_Tax_Lien") Is Nothing, 0.0, leadResearch("Amount_NYS_Tax_Lien"))
-                        result("LienCosts")("FederalTaxLien") = If(leadResearch("irsTaxLien") Is Nothing, 0.0, leadResearch("irsTaxLien"))
-                        result("LienCosts")("VacateOrder") = If(leadResearch("has_Vacate_Order_Vacate_Order") Is Nothing, False, leadResearch("has_Vacate_Order_Vacate_Order"))
-                        If leadResearch("has_Vacate_Order_Vacate_Order") IsNot Nothing AndAlso Boolean.Parse(leadResearch("has_Vacate_Order_Vacate_Order").ToString) = True Then
-                            result("LienCosts")("RelocationLien") = If(leadResearch("Amount_Vacate_Order") Is Nothing, 0.0, leadResearch("Amount_Vacate_Order"))
+                        result("LienCosts")("PropertyTaxes") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("propertyTaxes")), 0.0, leadResearch("propertyTaxes"))
+                        result("LienCosts")("WaterCharges") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("waterCharges")), 0.0, leadResearch("waterCharges"))
+                        result("LienCosts")("HPDCharges") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("Open_Amount_HPD_Charges_Not_Paid_Transferred")), 0.0, leadResearch("Open_Amount_HPD_Charges_Not_Paid_Transferred"))
+                        result("LienCosts")("ECBCityPay") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("Amount_ECB_Tickets")), 0.0, leadResearch("Amount_ECB_Tickets"))
+                        result("LienCosts")("DOBCivilPenalty") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("DOBCivilPenalty")), 0.0, leadResearch("DOBCivilPenalty"))
+                        result("LienCosts")("PersonalJudgements") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("Amount_Personal_Judgments")), 0.0, leadResearch("Amount_Personal_Judgments"))
+                        result("LienCosts")("HPDJudgements") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("HPDjudgementAmount")), 0.0, leadResearch("HPDjudgementAmount"))
+                        result("LienCosts")("NYSTaxWarrants") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("Amount_NYS_Tax_Lien")), 0.0, leadResearch("Amount_NYS_Tax_Lien"))
+                        result("LienCosts")("FederalTaxLien") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("irsTaxLien")), 0.0, leadResearch("irsTaxLien"))
+                        result("LienCosts")("VacateOrder") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("has_Vacate_Order_Vacate_Order")), False, leadResearch("has_Vacate_Order_Vacate_Order"))
+                        If Not DBJSONUtil.IsNullOrEmpty(leadResearch("has_Vacate_Order_Vacate_Order")) AndAlso Boolean.Parse(leadResearch("has_Vacate_Order_Vacate_Order").ToString) = True Then
+                            result("LienCosts")("RelocationLien") = If(DBJSONUtil.IsNullOrEmpty(leadResearch("Amount_Vacate_Order")), 0.0, leadResearch("Amount_Vacate_Order"))
                         End If
                     End If
 

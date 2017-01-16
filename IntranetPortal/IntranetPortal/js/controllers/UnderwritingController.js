@@ -169,6 +169,24 @@ angular.module("PortalApp").controller("UnderwritingController", [
             }, true);
 
         };
+        // Change Underwriting Status Number to actual code.
+        $scope.showStatus = function (enumNumber) {
+            if (enumNumber) {
+                switch (enumNumber) {
+                    case 1:
+                        return "New";
+                    case 2:
+                        return "Processing";
+                    case 3:
+                        return "Completed";
+                    case 4:
+                        return "Rejected";
+                    default:
+                        return "Unknown";
+                }
+            }
+            return "Unknown";
+        }
         $scope.$watch(function () {
             return $state.$current.name;
         }, function (newVal, oldVal) {

@@ -119,7 +119,7 @@
                         <li ui-sref-active="active" ng-show="debugmode">
                     </ul>
                     <div class="nav-form navbar-right">
-                        <button type="button" class="btn btn-orange" ng-click="enableEditing()" ng-show="isProtectedView" style="font-size:18px; padding: 3px 8px">Enable Editing</button>
+                        <button type="button" class="btn btn-orange" ng-click="enableEditing()" ng-show="isProtectedView" style="font-size:18px; padding: 3px 8px">Edit</button>
                         <button type="button" class="btn btn-orange" ng-click="save()" ng-show="!isProtectedView && !archive.isLoaded" style="font-size:18px; padding: 3px 8px">Save</button>
                         <button type="button" class="btn btn-orange" ng-click="archiveFunc()" ng-show="!isProtectedView && !archive.isLoaded" style="font-size:18px; padding: 3px 8px">Archive</button>
                         <button type="button" class="btn btn-orange dropdown-toggle" data-toggle="dropdown" style="font-size:18px; padding: 3px 8px">Change Status</button>
@@ -136,24 +136,24 @@
     </div>
     <!-- Debug: <input type="checkbox" ng-model="debug"> -->
     <div ng-show="archive.isLoaded" style="background-color: #295268; width: 100%; text-align: center; color: white; padding: 2px 2px 0px 2px; border-radius: 3px">
-        <h5>
-            Version: Archived. {{archive.ArchivedDate | date:'medium'}} by {{archive.ArchivedBy}}<br />
+        <h4>
+            Version: <b>Archived. {{archive.ArchivedDate | date:'medium'}} by {{archive.ArchivedBy}}</b><br />
             Note: <b>{{archive.ArchivedNote || "No Note.."}}.</b>
             <span class="fa-stack" type="button" ng-click="restoreCurrent()" tooltip="Restore current version.">
                 <i class="fa fa-circle fa-stack-2x text-danger"></i>
                 <i class="fa fa-undo "></i>
             </span>
-        </h5>
+        </h4>
     </div>
     <div ng-show="!archive.isLoaded" style="background-color: #295268; width: 100%; text-align: center; color: white; padding: 2px; border-radius: 3px">
-        <h5 ng-show="isProtectedView">
-            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span>
-            </span>You are currently in Protected View. &nbsp;
-        </h5>
-        <h5>
-            Version: Current.<br />
-            <span ng-show="data.UpdateBy">Last Update: {{data.UpdateDate | date: 'medium'}} by {{data.UpdateBy}}</span>
-        </h5>
+        <h4>
+            Version: <b>Current.</b> | Status: <b>{{ showStatus(data.Status) }}.</b><br />
+            <span ng-show="data.UpdateBy">Last Update: <b>{{data.UpdateDate | date: 'medium'}} by {{data.UpdateBy}}</b></span><br />
+            <span ng-show="isProtectedView">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span>
+                </span>You are currently in the Protected View, please click "Edit" to start underwriting. &nbsp;
+            </span>
+        </h4>
     </div>
     <br />
     <div class="underwriting-summary">

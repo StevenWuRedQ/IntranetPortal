@@ -191,14 +191,19 @@ angular.module("PortalApp").controller("MainCtrl",
 
 
 (function() {
+
     var ITEM_ID = "itemId";
 
+
     function portalUIRouteProvider($stateProvider) {
+
 
 
         this.super = $stateProvider;
         this.$get = angular.noop;
         this.ITEM_ID = ITEM_ID;
+
+
 
 
         this.statesFor = function(resourceName) {
@@ -213,9 +218,11 @@ angular.module("PortalApp").controller("MainCtrl",
 
                 return "/" + (!statePath ? resourceName : statePath.replace(".", "/"));
             };
+
             var stateControllerName = function(statePath) {
                 return _.camelCase(resourceName + " " + (statePath || "")) + "Ctrl";
             };
+
 
             var templateFile = function(statePath) {
 
@@ -226,6 +233,7 @@ angular.module("PortalApp").controller("MainCtrl",
                 return _.kebabCase(statePath.toLowerCase());
             };
             var stateBuilder = {
+
 
 
                 state: function(statePath, resolveFns) {
@@ -244,6 +252,7 @@ angular.module("PortalApp").controller("MainCtrl",
                 },
                 $stateProvider: $stateProvider
             };
+
             stateBuilder.state(null, null);
             return stateBuilder;
 
@@ -253,10 +262,10 @@ angular.module("PortalApp").controller("MainCtrl",
 
     portalUIRouteProvider.$inject = ["$stateProvider"];
 
+
     portalUIRouteProvider.ITEM_ID = ITEM_ID;
     angular.module("PortalApp").provider("portalUIRoute", portalUIRouteProvider);
 })();
-
 angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, CorpEntity, $http, DivError) {
     var _class = function ()
     {
@@ -325,7 +334,6 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
     _class.prototype.newOfferId = 0    
     return _class;
 });
-
 angular.module('PortalApp').factory('AuditLog', function (ptBaseResource) {
     var auditLog = ptBaseResource('AuditLog', 'AuditId', null, {
         load: {
@@ -412,7 +420,6 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 
     return PtBaseResource;
 });
-
 angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
     var businessCheck = ptBaseResource('BusinessCheck', 'Id', null, null);
     businessCheck.CheckStatus = {
@@ -430,7 +437,6 @@ angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
     return businessCheck;
 
 });
-
 angular.module('PortalApp').factory('CheckRequest', function (ptBaseResource, BusinessCheck) {
     var checkRequest =  ptBaseResource("CheckRequest",'Id',null,null);
 
@@ -497,7 +503,6 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
 
     return corpEntity;
 });
-
 
 angular.module('PortalApp')
     .factory('DivError', function () {
@@ -735,7 +740,6 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
     return dxGridModel;
 });
 
-
 function dxModel() {
 
 
@@ -779,7 +783,6 @@ angular.module('PortalApp').factory('EmployeeModel', ['$resource','$http', funct
 
         return resource;
 }])
-
 angular.module('PortalApp').factory('HomeOwner', function (ptBaseResource) {
 
     var homeOwner = ptBaseResource('Homeowner', 'BBLE');
@@ -819,7 +822,6 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
 
     return leadResearch;
 });
-
 angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
 
     var leadsInfo = ptBaseResource('LeadsInfo', 'BBLE',null,
@@ -828,7 +830,6 @@ angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
 
     return leadsInfo;
 });
-
 angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
     var _class = function (data) {
 
@@ -1023,6 +1024,7 @@ angular.module('PortalApp').factory('QueryUrl', function ($http) {
         return _class;
 });
 
+
 angular.module('PortalApp').factory('ScopeHelper', function ($http) {
     var _class = function () {
 
@@ -1090,7 +1092,6 @@ angular.module('PortalApp')
 
         return resource;
     }]);
-
 angular.module('PortalApp').factory('Wizard', function (WizardStep) {
     var _class = function () {
 
@@ -1117,7 +1118,6 @@ angular.module('PortalApp').factory('Wizard', function (WizardStep) {
 
             return _class;
 });
-
 angular.module('PortalApp').factory('WizardStep', function () {
     var _class = function (step) {
 
@@ -1155,6 +1155,7 @@ angular.module("PortalApp")
         templateUrl: '/js/Views/LeadDocSearch/new_ds_summary.html',
     };
 })
+
 
 
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
@@ -1201,6 +1202,7 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         return result;
     };
     this.ensureArray = function (scope, modelName) {
+
         if (!scope.$eval(modelName)) {
             scope.$eval(modelName + '=[]');
         }
@@ -1294,6 +1296,7 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
+
     this.assignReference = function (target, source,
  skipped,
  keeped) {
@@ -2334,7 +2337,6 @@ angular.module("PortalApp")
             }
         }
     }])
-
 angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
@@ -2350,7 +2352,6 @@ angular.module("PortalApp")
 
         }
     }])
-
 angular.module("PortalApp")
     .directive('initGrid', ['$parse', function ($parse) {
         return {
@@ -2373,7 +2374,6 @@ angular.module("PortalApp")
             }
         };
     }]);
-    
 angular.module("PortalApp")
     .directive('preCondition', function () {
         return {
@@ -2441,7 +2441,6 @@ angular.module("PortalApp")
             template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
         }
     })
-
 angular.module("PortalApp")
     .directive('ptEditableDiv', [function () {
         return {
@@ -2974,7 +2973,6 @@ angular.module("PortalApp")
             }
         }
     })
-
 angular.module("PortalApp")
     .directive('ptInputMask', function () {
         return {
@@ -3147,7 +3145,6 @@ angular.module("PortalApp")
 
         }
     })
-
 angular.module("PortalApp")
     .directive('ptRadioInit', function () {
         return {
@@ -3955,6 +3952,7 @@ angular.module("PortalApp").controller("DocSearchController", [
             $scope.multipleValidated = function (base, boolKey, arraykey) {
                 var boolVal = base[boolKey];
                 var arrayVal = base[arraykey];
+
                 var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
                 return hasWarning;
             };
@@ -3982,7 +3980,10 @@ angular.module("PortalApp").controller("DocSearchController", [
             $scope.init(leadsInfoBBLE);
 
 
+
+
             $scope.newVersionValidate = function () {
+
                 if (!$scope.newVersion) {
                     return true;
                 }
@@ -4079,6 +4080,7 @@ angular.module("PortalApp").controller("DocSearchController", [
             }
         }
 ]);
+
 
 angular.module("PortalApp").controller("LegalCtrl",
 [
@@ -5049,7 +5051,6 @@ angular.module("PortalApp").controller("LegalCtrl",
         };
     }
 ]);
-
 var PreSignHelper = (function () {
     var onAccoutingReview = function (cellinfo) {
         var element = angular.element('#pt-preassign-accouting-ctrl');
@@ -5800,7 +5801,6 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
     }
 
 });
-
 angular.module('PortalApp')
 .controller("ReportWizardCtrl", function ($scope, $http, $timeout, ptCom) {
     $scope.camel = _.camelCase;
@@ -6571,10 +6571,12 @@ portalApp.controller('newofferCtrl', function ($scope) {
 });
 
 
+
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     ptContactServices, $location, PortalHttpInterceptor,
+
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
     Team, NewOfferListGrid, ScopeHelper, QueryUrl, AssignCorp
@@ -6609,6 +6611,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     };
 
         angular.extend($scope.SSpreSign, new PropertyOffer());
+
     $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
     $scope.SSpreSign.assignCrop = new AssignCorp();
 
@@ -6637,6 +6640,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             $scope.SSpreSign.Status = 2;
 
             $scope.constractFromData();
+
             $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
                 $scope.refreshSave(formdata);
                 window.location.href = oldUrl;
@@ -6702,6 +6706,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     }
     $scope.getErrorMessage = function (id) {
         var eMessages = [];
+
         $('#' + id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
             eMessages.push($(this).attr('data-message'));
         });
@@ -6719,6 +6724,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     $scope.DeedNext = function () {
         var deedCrop = $scope.SSpreSign.DealSheet.Deed;
+
 
         if (!deedCrop.EntityId) {
 
@@ -6769,6 +6775,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     $scope.onAssignCorpSuccessed = function (data) {
         $scope.SSpreSign.Status = 1;
+
         $scope.constractFromData();
         $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
             $scope.refreshSave(formdata);
@@ -6846,6 +6853,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     $scope.DeedWizardInit = function () {
         var deedCrop = $scope.SSpreSign.DealSheet.Deed;
 
+
         if (!deedCrop.EntityId) {
             $http.get('/api/CorporationEntities/DeedCorpsByTeam?team=' + $scope.SSpreSign.assignCrop.Name).success(function (data) {
                 $scope.SSpreSign.DealSheet.Deed.Buyer = data;
@@ -6915,7 +6923,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     $scope.CheckCurrentStep = function (BBLE) {
         $scope.SSpreSign = PropertyOffer.getByBBLE({ BBLE: BBLE.trim() }, function (data) {
-            if (data.FormData) {
+
+                        if (data.FormData) {
                 if (data.FormData.DataId == 0)
                 {
                     data.FormData.DataId = data.DataId;
@@ -6958,6 +6967,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                     $scope.SSpreSign.BBLE = BBLE;
                 });
             }
+
             $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
         });
     }
@@ -6968,6 +6978,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
             $scope.SSpreSign.BBLE = BBLE;
         });
+
         $scope.CheckCurrentStep(BBLE);
     }
 
@@ -7047,6 +7058,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         }
     }
 })
+
 portalApp.filter('wizardFilter', function () {
     return function (items, sheetFilter) {
         var filtered = [];
@@ -7688,6 +7700,23 @@ angular.module("PortalApp").controller("UnderwritingController", [
             }, true);
 
         };
+        $scope.showStatus = function (enumNumber) {
+            if (enumNumber) {
+                switch (enumNumber) {
+                    case 1:
+                        return "New";
+                    case 2:
+                        return "Processing";
+                    case 3:
+                        return "Completed";
+                    case 4:
+                        return "Rejected";
+                    default:
+                        return "Unknown";
+                }
+            }
+            return "Unknown";
+        }
         $scope.$watch(function () {
             return $state.$current.name;
         }, function (newVal, oldVal) {
