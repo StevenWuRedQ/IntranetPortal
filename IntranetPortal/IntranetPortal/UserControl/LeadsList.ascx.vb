@@ -725,7 +725,6 @@ Public Class LeadsList
                 Context.SaveChanges()
                 BindLeadsColor()
             End Using
-
         Else
 
         End If
