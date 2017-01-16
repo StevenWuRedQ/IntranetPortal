@@ -2089,7 +2089,7 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
                 var that = this;
                 if (this.serviceURL) return this.serviceURL;
                 $http({
-                    url: "/Webconfig.json",
+                    url: "/Webconfig.txt",
                     method: "GET"
                 }).then(function (d) {
                     that.serviceURL = d.data["UnderwritingServiceServer"] + "/signalr";

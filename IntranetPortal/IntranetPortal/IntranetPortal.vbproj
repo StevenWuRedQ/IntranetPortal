@@ -7915,6 +7915,7 @@
     <None Include="Webconfig.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Webconfig.txt" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />

@@ -10,7 +10,7 @@ Public Class UnderwritingService
 
 
     Shared Sub New()
-        Dim ConfigJson = JObject.Parse(File.ReadAllText(HttpRuntime.AppDomainAppPath + "\Webconfig.json"))
+        Dim ConfigJson = JObject.Parse(File.ReadAllText(HttpRuntime.AppDomainAppPath + "\Webconfig.txt"))
         HubURL = ConfigJson("UnderwritingServiceServer").ToString & "/signalr"
         ServicePointManager.DefaultConnectionLimit = 10
     End Sub
