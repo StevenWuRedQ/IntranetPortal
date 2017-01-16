@@ -405,6 +405,8 @@
     <Compile Include="SignProcess\PropertyOffer.vb" />
     <Compile Include="Title\TitleCase.vb" />
     <Compile Include="Twilio\TwilioClient.vb" />
+    <Compile Include="WebApi\PropertyService.vb" />
+    <Compile Include="WebApi\RedqService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
