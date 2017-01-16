@@ -17,7 +17,6 @@ Public Class UnderwritingService
 
     Public Shared Function GetPropertiesList() As IEnumerable(Of Object)
         Using ctx As New PortalEntities
-            Dim HubURL = ConfigurationManager.AppSettings("UnderwritingServiceServer").ToString()
             Dim Connection As HubConnection = New HubConnection(HubURL)
             Dim UnderwritingHub As IHubProxy = Connection.CreateHubProxy("UnderwritingServiceHub")
             Connection.Start().Wait()
