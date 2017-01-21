@@ -67,7 +67,7 @@ Namespace Controllers
         Public Function GetUnderwritingByStatus(status As Integer) As IHttpActionResult
             Dim list = UnderwritingService.GetUnderwritingByStatus(status)
             Dim jArrayList = JArray.FromObject(list).ToList
-            jArrayList.ForEach(Sub(s) s("CaseName") = Lead.GetLeadsName(s("BBLE")))
+            jArrayList.ForEach(Sub(s) s("CaseName") = LeadsInfo.GetPropertyAddress(s("BBLE").ToString.Trim))
             Dim Result = New With {
                 .data = jArrayList
             }
@@ -76,8 +76,8 @@ Namespace Controllers
 
         <Route("api/underwriting/sync"), HttpPost>
         Public Function SyncToUnderwritingService() As IHttpActionResult
-            UnderwritingService.SyncToUnderwritingService()
-            Return Ok()
+            Dim Errors = UnderwritingService.SyncToUnderwritingService()
+            Return Ok(Errors)
         End Function
     End Class
 End Namespace

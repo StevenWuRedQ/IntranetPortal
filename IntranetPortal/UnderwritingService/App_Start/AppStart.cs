@@ -3,6 +3,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using NLog;
 using Owin;
+using System.Activities.Statements;
+using System.Web.Http;
+
 [assembly: OwinStartup(typeof(RedQ.UnderwritingService.Startup))]
 namespace RedQ.UnderwritingService
 {
@@ -14,7 +17,8 @@ namespace RedQ.UnderwritingService
         // parameter in the WebApp.Start method.
         public void Configuration(IAppBuilder app)
         {
-            // Configure Web API for self-host. 
+
+            // Configure Signarl for self-host. 
             app.Map("/signalr", map =>
             {
                 // Setup the CORS middleware to run before SignalR.
@@ -31,8 +35,18 @@ namespace RedQ.UnderwritingService
                 // Run the SignalR pipeline. We're not using MapSignalR
                 // since this branch already runs under the "/signalr"
                 map.RunSignalR(hubConfiguration);
-                logger.Info("App running.");
+                logger.Info("SignalR running.");
             });
+
+            HttpConfiguration config = new HttpConfiguration();
+            config.EnableCors();
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            app.UseWebApi(config);
         }
     }
 }

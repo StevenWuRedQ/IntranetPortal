@@ -1189,7 +1189,7 @@ Partial Public Class Lead
 
     Public Shared Function GetLeadsName(BBLE As String) As String
         Using ctx As New PortalEntities
-            Dim lead = ctx.SSLeads.FirstOrDefault(Function(s) s.BBLE = BBLE)
+            Dim lead = ctx.SSLeads.FirstOrDefault(Function(s) s.BBLE.Trim = BBLE.Trim)
             If lead Is Nothing Then
                 Return ""
             Else

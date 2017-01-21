@@ -1,4 +1,4 @@
 ﻿{
   "UnderwritingServiceServer": "http://localhost:8887/",
-  "UnderwritingServiceServerClient": "http://104.130.40.122:8887"
+  "UnderwritingServiceServerClient": "http://localhost:8887"
 }

@@ -30,14 +30,17 @@ public class UnderwritingDAO
         {
             if (string.IsNullOrEmpty(underwriting.BBLE)) throw new Exception("Cannot create new underwriting without BBLE.");
             var uw = ctx.Underwritings.FirstOrDefault(u => u.BBLE.Trim() == underwriting.BBLE.Trim());
-            if (uw != null)
-            {
-                return null;
-            }
+            if (uw != null) return null;
             underwriting.UpdateBy = "System";
             underwriting.UpdateDate = DateTime.Now;
             ctx.Underwritings.Add(underwriting);
-            ctx.SaveChanges();
+            try
+            {
+                ctx.SaveChanges();
+            }
+            catch (Exception e) {
+                throw e;
+            }
             return underwriting;
         }
     }

@@ -23,7 +23,6 @@ namespace RedQ.UnderwritingService.Models.NewYork
         public string ForeclosureIndexNum { get; set; }
         [MaxLength(50)]
         public string ForeclosureStatus { get; set; }
-        [MaxLength(256)]
         public string ForeclosureNote { get; set; }
         public DateTime? AuctionDate { get; set; }
         public DateTime? DefaultDate { get; set; }
