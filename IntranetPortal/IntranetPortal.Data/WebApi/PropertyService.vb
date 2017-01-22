@@ -9,7 +9,7 @@ Public Class PropertyService
     Implements IDisposable
 
     ''' <summary>
-    ''' Intialize the property service instance
+    '''     Initialize the property service instance
     ''' </summary>
     Public Sub New()
         MyBase.New
@@ -362,7 +362,6 @@ Public Class Taxbill
     Public Property billAmount As Decimal?
 End Class
 
-
 Public Class PropertyViolations
     Public Property dobPenaltiesAndViolations As Dobpenaltiesandviolations
 End Class
@@ -461,7 +460,6 @@ Public Class ExternalData
     Public Property zillowPorperty As ZillowProperty
 
 End Class
-
 
 Public Class PhysicalData
     Public Property address As NYCAddress
