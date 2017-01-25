@@ -173,6 +173,12 @@ Partial Public Class HomeOwner
 
     End Function
 
+    Public Shared Function GetHomeOwner(bble As String, name As String) As HomeOwner
+        Using ctx As New Entities
+            Return ctx.HomeOwners.Where(Function(h) h.BBLE = bble AndAlso h.Name = name).FirstOrDefault
+        End Using
+    End Function
+
     Public Shared Function LoadOwner(ownerId As Integer) As HomeOwner
         Using ctx As New Entities
             Return ctx.HomeOwners.Find(ownerId)
@@ -214,7 +220,6 @@ Partial Public Class HomeOwner
             Return _bestPhoneNo
         End Get
     End Property
-
 
     Private _bestEmail As List(Of HomeOwnerEmail)
     <IgnoreDataMember>

@@ -37,12 +37,31 @@ Public Class MapService
             Dim lots = ctx.PortalLotInfoes.Where(Function(b) mapBound.Contains(b.ogr_geometry))
 
             For Each lot In lots.ToList
-                
+
                 result.Add(buildLotGeoJson(lot))
             Next
         End Using
 
         Return result
+    End Function
+
+    Public Function LoadLotData(bble As String) As Feature
+        Using ctx As New MapDataEntitiesContainer
+
+            Dim lot = ctx.dtm_0814_tax_lot_polygon.Where(Function(a) a.bbl = bble).FirstOrDefault
+
+            If lot Is Nothing Then
+                Return Nothing
+            End If
+
+            Dim featureProperties As New Dictionary(Of String, Object)
+            featureProperties.Add("BBLE", lot.bbl)
+            Dim polygon = SqlGeometry.Parse(New SqlString(lot.ogr_geometry.WellKnownValue.WellKnownText))
+            Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
+            Dim model = New Feature(obj, featureProperties, lot.ogr_fid.ToString)
+            Return model
+        End Using
+
     End Function
 
     Public Function LoadLotByBBLE(BBLE As String) As List(Of Feature)

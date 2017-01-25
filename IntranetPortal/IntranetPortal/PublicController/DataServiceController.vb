@@ -33,6 +33,19 @@ Namespace PublicController
             End Try
         End Function
 
+        <Route("api/dataservice/property/{bble}/tlo/{name}")>
+        Function GetTLOData(bble As String, name As String) As IHttpActionResult
+            Try
+                If Not ModelState.IsValid Then
+                    Return BadRequest(ModelState)
+                End If
+
+                Dim owner = HomeOwner.GetHomeOwner(bble, name)
+                Return Ok(owner.TLOLocateReport)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
     End Class
 
 End Namespace

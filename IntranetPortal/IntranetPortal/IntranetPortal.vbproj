@@ -2018,6 +2018,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PublicController\DataServiceController.vb" />
+    <Compile Include="PublicController\MapServiceController.vb" />
     <Compile Include="Publish\Publish.aspx.designer.vb">
       <DependentUpon>Publish.aspx</DependentUpon>
     </Compile>
