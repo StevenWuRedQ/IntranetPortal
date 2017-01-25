@@ -41,7 +41,52 @@ Namespace PublicController
                 End If
 
                 Dim owner = HomeOwner.GetHomeOwner(bble, name)
-                Return Ok(owner.TLOLocateReport)
+
+                If owner IsNot Nothing Then
+                    Return Ok(owner.TLOLocateReport)
+                End If
+
+                Return NotFound()
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+        <Route("api/dataservice/property/{bble}")>
+        Function GetLeadsInfo(bble As String) As IHttpActionResult
+            Try
+                Dim ld = LeadsInfo.GetInstance(bble)
+
+                If ld IsNot Nothing Then
+                    ld.Lead = Lead.GetInstance(bble)
+                    Dim result = New With {
+                            .leadsInfo = ld,
+                            .lead = Lead.GetInstance(bble)
+                        }
+
+                    Return Ok(result)
+                End If
+
+                Return Ok()
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+        <Route("api/dataservice/property/{bble}/leadstatus")>
+        Function GetLeadsStatus(bble As String) As IHttpActionResult
+            Try
+                Dim ld = Lead.GetInstance(bble)
+
+                If ld IsNot Nothing Then
+                    Dim status = New With {
+                                        .status = ld.StatusStr,
+                                        .subStatus = ld.SubStatusStr
+                                   }
+                    Return Ok(status)
+                End If
+
+                Return Ok()
             Catch ex As Exception
                 Throw ex
             End Try
