@@ -28,7 +28,43 @@ Namespace PublicController
                 Throw ex
             End Try
         End Function
+        ' GET api/<controller>
+        <Route("api/mapservice/{bble}/sameblock/lots")>
+        Public Function GetSameBlockLotMap(bble As String) As IHttpActionResult
 
+            Try
+                Dim result = service.LoadSameBlockData(bble)
+
+                If result Is Nothing Then
+                    Return NotFound()
+                End If
+
+                Return Ok(New With {
+                .type = "FeatureCollection",
+                .features = result
+                })
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+        <Route("api/mapservice/{bble}/sameblock/footprints")>
+        Public Function GetSameBlockFootPrintMap(bble As String) As IHttpActionResult
+
+            Try
+                Dim result = service.LoadSameBlockFootPrintData(bble)
+
+                If result Is Nothing Then
+                    Return NotFound()
+                End If
+
+                Return Ok(New With {
+                .type = "FeatureCollection",
+                .features = result
+                })
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
     End Class
 End Namespace
 
