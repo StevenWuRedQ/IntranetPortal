@@ -9,6 +9,7 @@ Imports IntranetPortal.Data
         Dim result = client.SendMessge("+19179633481", "this is test twilio message.")
 
         Assert.IsNotNull(result)
+
     End Sub
 
 End Class

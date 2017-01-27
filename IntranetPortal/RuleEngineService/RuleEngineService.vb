@@ -39,7 +39,7 @@
     End Sub
 
     Protected Overrides Sub OnStop()
-        EventLog1.WriteEntry("Engine Stoped")
+        EventLog1.WriteEntry("Engine Stopped")
         ' Add code here to perform any tear-down necessary to stop your service.
         IntranetPortal.RulesEngine.RulesService.GetInstance.StopService()
     End Sub
