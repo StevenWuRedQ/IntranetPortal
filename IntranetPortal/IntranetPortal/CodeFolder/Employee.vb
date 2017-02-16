@@ -21,8 +21,8 @@ Partial Public Class Employee
     '    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 3
     '    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 3
     '#Else
-    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 60
-    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 30
+    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 10000
+    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 10000
     '#End If
 
     Private Shared _ceo As Employee

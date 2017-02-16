@@ -81,9 +81,9 @@ Public Class RulesService
 
     Private Sub InitRules()
         Rules = New List(Of BaseRule)
-        Rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
-        Rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
-        Rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("19:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads business rule"})
+        'Rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
+        'Rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
+        'Rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("19:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads business rule"})
         Rules.Add(New AgentActivitySummaryRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Team Activity Email Rule"})
 
         'Rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("01:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
@@ -91,10 +91,10 @@ Public Class RulesService
         Rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True, .ExecuteOnWeekend = True})
         Rules.Add(New PendingAssignRule With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Import Pending Assign Rule", .ExecuteNow = True, .ExecuteOnWeekend = True})
 
-        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("7:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule Morning", .ExecuteNow = False, .ExecuteOnWeekend = True, .SendingNotifyEmail = True})
-        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Evening", .ExecuteNow = False, .ExecuteOnWeekend = True})
-        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Noon", .ExecuteNow = False, .ExecuteOnWeekend = True})
-        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("23:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Night", .ExecuteNow = False, .ExecuteOnWeekend = True})
+        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("7:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule Morning", .ExecuteNow = False, .ExecuteOnWeekend = True, .SendingNotifyEmail = True})
+        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Evening", .ExecuteNow = False, .ExecuteOnWeekend = True})
+        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Noon", .ExecuteNow = False, .ExecuteOnWeekend = True})
+        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("23:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Night", .ExecuteNow = False, .ExecuteOnWeekend = True})
 
         'Legal
         Rules.Add(New LegalFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Legal Follow up Rule"})
@@ -110,10 +110,10 @@ Public Class RulesService
         Rules.Add(New ShortSaleFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Follow up Rule"})
 
         'Auction
-        Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auction Properties Daily Notify Rule"})
+        'Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auction Properties Daily Notify Rule"})
 
         Dim days = 7 - DateTime.Today.DayOfWeek
-        Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", days)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "Auction Properties Weekly Notify Rule", .ExecuteOnWeekend = True, .IsWeekly = True})
+        'Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", days)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "Auction Properties Weekly Notify Rule", .ExecuteOnWeekend = True, .IsWeekly = True})
 
         ' Auto Assign
         ' Rules.Add(New AutoAssignRule With {.ExecuteOn = TimeSpan.Parse(String.Format("16:00:00", days)), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auto Sign Leads", .ExecuteNow = False})
