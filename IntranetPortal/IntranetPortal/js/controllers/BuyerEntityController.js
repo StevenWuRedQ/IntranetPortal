@@ -65,7 +65,6 @@
     }
     $scope.ExportExcel = function () {
         JSONToCSVConvertor($scope.filteredCorps, true, $scope.GetTitle());
-
     }
     $scope.GroupCount = function (g) {
         if (!$scope.CorpEntites) {

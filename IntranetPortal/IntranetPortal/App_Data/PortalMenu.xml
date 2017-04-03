@@ -441,12 +441,12 @@
           <![CDATA[<i class="fa fa-bell"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <!--<PortalNavItem Name="ShortSale-Category-Deal Release" Text="Deal Release" NavigationUrl="/ShortSale/ShortSale.aspx?category=Deal Release" ShowAmount="true">
+      <PortalNavItem Name="ShortSale-Category-Deal Release" Text="Deal Release" NavigationUrl="/ShortSale/ShortSale.aspx?category=Deal Release" ShowAmount="true">
         <UserRoles>ShortSale-Manager,ShortSale-TeamManager,ShortSale-Processor,ShortSale-Negotiator,ShortSale-OutsideAgent</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-folder-open"></i>]]>
         </FontClass>
-      </PortalNavItem>-->
+      </PortalNavItem>
       <PortalNavItem Name="ShortSale-Category-Valuation" Text="Valuation" NavigationUrl="/ShortSale/ShortSale.aspx?category=Valuation" ShowAmount="true">
         <UserRoles>ShortSale-Manager,ShortSale-TeamManager,ShortSale-Processor,ShortSale-Negotiator,ShortSale-OutsideAgent</UserRoles>
         <FontClass>
