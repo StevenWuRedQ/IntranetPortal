@@ -52,6 +52,35 @@ Namespace PublicController
             End Try
         End Function
 
+        <Route("api/dataservice/property/{bble}/tlo/{name}/death")>
+        Function GetOwnerDeathIndicator(bble As String, name As String) As IHttpActionResult
+            Try
+                If Not ModelState.IsValid Then
+                    Return BadRequest(ModelState)
+                End If
+
+                Dim owner = HomeOwner.GetHomeOwner(bble, name)
+
+                If owner Is Nothing Then
+                    Return Ok(DeathStatus.Unknow)
+                End If
+
+                If owner.TLOLocateReport.dateOfDeathField IsNot Nothing Then
+                    Return Ok(DeathStatus.Death)
+                End If
+
+                Return Ok(DeathStatus.Active)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+        Enum DeathStatus
+            Unknow
+            Active
+            Death
+        End Enum
+
         <Route("api/dataservice/property/{bble}")>
         Function GetLeadsInfo(bble As String) As IHttpActionResult
             Try
