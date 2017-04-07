@@ -43,6 +43,7 @@ Namespace PublicController
                 Dim owner = HomeOwner.GetHomeOwner(bble, name)
 
                 If owner IsNot Nothing Then
+                    owner.TLOLocateReport.LastUpdate = owner.LastUpdate
                     Return Ok(owner.TLOLocateReport)
                 End If
 
