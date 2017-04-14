@@ -90,7 +90,6 @@ Public Class DataWCFService
                 Dim person = result.personSearchOutputRecordsField(0)
 
 
-
                 'relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField 
                 If person IsNot Nothing AndAlso person.namesField IsNot Nothing AndAlso person.namesField.Length > 0 Then
                     Dim owner As New HomeOwner

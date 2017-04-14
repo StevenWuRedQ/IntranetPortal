@@ -80,7 +80,7 @@ Public Class MapService
                                           Return model
                                       End Function).ToList()
             Return results
-    End Using
+        End Using
     End Function
 
     Public Function LoadSameBlockFootPrintData(bble As String) As List(Of Feature)
@@ -153,7 +153,7 @@ Public Class MapService
         Return DbGeometry.PolygonFromText(polygonText, SRID)
     End Function
 
-    
+
 
     Function LoadALLTeamColor() As List(Of Dictionary(Of String, String))
         Dim colors = New List(Of Dictionary(Of String, String))
@@ -168,7 +168,7 @@ Public Class MapService
         End Using
     End Function
 
-    
+
 
 End Class
 
