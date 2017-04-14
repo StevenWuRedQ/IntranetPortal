@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmHomeowner
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmHomeowner
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.btnLoadOwner = New System.Windows.Forms.Button()
         Me.txtRunning = New System.Windows.Forms.TextBox()
@@ -35,6 +35,8 @@ Partial Class FrmHomeowner
         Me.chkUseThreads = New System.Windows.Forms.CheckBox()
         Me.chkSSN = New System.Windows.Forms.CheckBox()
         Me.chkPhone = New System.Windows.Forms.CheckBox()
+        Me.BtnUpdateTLO = New System.Windows.Forms.Button()
+        Me.ThreadCount = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'btnLoadOwner
@@ -102,10 +104,10 @@ Partial Class FrmHomeowner
         Me.txtBBLEs.Location = New System.Drawing.Point(100, 69)
         Me.txtBBLEs.Multiline = True
         Me.txtBBLEs.Name = "txtBBLEs"
+        Me.txtBBLEs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtBBLEs.Size = New System.Drawing.Size(257, 72)
         Me.txtBBLEs.TabIndex = 7
         Me.txtBBLEs.Text = "BBLE/Owner Id"
-        Me.txtBBLEs.Visible = False
         '
         'chkBBLes
         '
@@ -147,11 +149,30 @@ Partial Class FrmHomeowner
         Me.chkPhone.Text = "Phone"
         Me.chkPhone.UseVisualStyleBackColor = True
         '
+        'BtnUpdateTLO
+        '
+        Me.BtnUpdateTLO.Location = New System.Drawing.Point(13, 163)
+        Me.BtnUpdateTLO.Name = "BtnUpdateTLO"
+        Me.BtnUpdateTLO.Size = New System.Drawing.Size(75, 23)
+        Me.BtnUpdateTLO.TabIndex = 12
+        Me.BtnUpdateTLO.Text = "UPdate TLO"
+        Me.BtnUpdateTLO.UseVisualStyleBackColor = True
+        '
+        'ThreadCount
+        '
+        Me.ThreadCount.Location = New System.Drawing.Point(94, 165)
+        Me.ThreadCount.Name = "ThreadCount"
+        Me.ThreadCount.Size = New System.Drawing.Size(100, 20)
+        Me.ThreadCount.TabIndex = 13
+        Me.ThreadCount.Text = "3"
+        '
         'FrmHomeowner
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(398, 155)
+        Me.ClientSize = New System.Drawing.Size(445, 255)
+        Me.Controls.Add(Me.ThreadCount)
+        Me.Controls.Add(Me.BtnUpdateTLO)
         Me.Controls.Add(Me.chkPhone)
         Me.Controls.Add(Me.chkSSN)
         Me.Controls.Add(Me.chkUseThreads)
@@ -184,4 +205,6 @@ Partial Class FrmHomeowner
     Friend WithEvents chkUseThreads As CheckBox
     Friend WithEvents chkSSN As CheckBox
     Friend WithEvents chkPhone As CheckBox
+    Friend WithEvents BtnUpdateTLO As Button
+    Friend WithEvents ThreadCount As TextBox
 End Class

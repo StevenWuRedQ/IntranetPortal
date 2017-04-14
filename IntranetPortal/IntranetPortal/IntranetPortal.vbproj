@@ -7591,7 +7591,9 @@
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
     <Content Include="Content.Master" />
-    <Content Include="css\Web.config" />
+    <Content Include="css\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="pdfViewer\LICENSE" />
     <Content Include="pdfViewer\web\cmaps\78-EUC-H.bcmap" />
     <Content Include="pdfViewer\web\cmaps\78-EUC-V.bcmap" />

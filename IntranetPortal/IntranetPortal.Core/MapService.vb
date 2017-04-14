@@ -66,9 +66,11 @@ Public Class MapService
 
     Public Function LoadSameBlockData(bble As String) As List(Of Feature)
         Using ctx As New MapDataEntitiesContainer
+
+
             Dim lots =
                 ctx.dtm_0814_tax_lot_polygon.
-                Where(Function(a) a.bbl.Contains(bble.Substring(0, 6))).ToList()
+                Where(Function(a) a.bbl.StartsWith(bble.Substring(0, 6))).ToList()
             Dim results = lots.Select(Function(e)
                                           Dim featureProperties As New Dictionary(Of String, Object)
                                           featureProperties.Add("BBLE", e.bbl)
@@ -85,7 +87,7 @@ Public Class MapService
         Using ctx As New MapDataEntitiesContainer
             Dim lots =
                 ctx.building_0117.
-                Where(Function(a) a.bbl.Contains(bble.Substring(0, 6))).ToList()
+                Where(Function(a) a.bbl.StartsWith(bble.Substring(0, 6))).ToList()
             Dim results = lots.Select(Function(e)
                                           Dim featureProperties As New Dictionary(Of String, Object)
                                           featureProperties.Add("BBLE", e.bbl)

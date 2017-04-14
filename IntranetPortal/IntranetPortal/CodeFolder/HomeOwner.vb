@@ -12,7 +12,7 @@ Partial Public Class HomeOwner
     Public Property BankruptcyString As String
 
     Private objLocateReport As DataAPI.TLOLocateReportOutput
-    Public Shared EMPTY_HOMEOWNER As String = "Please Edit Owner"
+    Public Shared ReadOnly EMPTY_HOMEOWNER As String = "Please Edit Owner"
 
     <IgnoreDataMember>
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
@@ -46,7 +46,9 @@ Partial Public Class HomeOwner
                 'save tlo data
                 SaveTloData(value)
 
-                'save phone no to database
+                ' save phone no to database
+                ' don not save phone number now
+                ' remember to uncomment this after fished get TLO report
                 SavePhoneField(value)
 
                 LocateReportContent = Newtonsoft.Json.JsonConvert.SerializeObject(value)
@@ -61,6 +63,26 @@ Partial Public Class HomeOwner
             End If
         End Set
     End Property
+
+    ' update local report use for manually run batch
+
+    Public Shared Function UpdateLocatedRepot(ownerID As Integer) As Integer
+        Using ctx As New Entities
+            Dim owner = ctx.HomeOwners.Find(ownerID)
+            If (owner.ReportToken Is Nothing) Then
+
+                owner.TLOLocateReport = DataWCFService.GetLocateReport2(1, owner.BBLE, owner)
+
+                owner.LastUpdate = DateTime.Now
+                ctx.SaveChanges()
+                If (owner.TLOLocateReport Is Nothing) Then
+                    Return 1
+                End If
+            End If
+
+        End Using
+        Return 0
+    End Function
 
     Public Sub SaveReportData()
         Dim value = TLOLocateReport

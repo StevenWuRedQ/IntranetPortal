@@ -37,6 +37,19 @@ Public Class DataWCFService
             Return result
         End Using
     End Function
+    Public Shared Function GetLocateReport2(apiOrderNum As Integer, bble As String, owner As HomeOwner) As DataAPI.TLOLocateReportOutput
+        If String.IsNullOrEmpty(owner.Address1) AndAlso String.IsNullOrEmpty(owner.Address2) AndAlso String.IsNullOrEmpty(owner.City) Then
+            Return Nothing
+        End If
+
+        Using client As New DataAPI.WCFMacrosClient
+            Dim result = GetLocateReport(apiOrderNum, bble, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country)
+
+
+
+            Return result
+        End Using
+    End Function
 
     Public Shared Function GetOwnerInfoByTLOId(tloId As String, bble As String) As HomeOwner
 
