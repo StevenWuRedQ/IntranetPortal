@@ -2,11 +2,11 @@
 wx_show_bug = false;
 PortalUtility = {
     customizeDateText: function (cellInfo) {
-        if(cellInfo.target == "headerFilter")
+        if (cellInfo.target == "headerFilter")
             return cellInfo.valueText;
 
         if (!cellInfo.value)
-            return ""                                
+            return ""
         var dt = PortalUtility.FormatLocalDateTime(cellInfo.value);
         if (dt)
             return moment(dt).format('MM/DD/YYYY hh:mm a');
@@ -1026,7 +1026,11 @@ function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
         for (var index in arrData[0]) {
 
             //Now convert each value to string and comma-seprated
-            row += index + ',';
+            //Fix angular added property export 
+            if (isFlatProperty(arrData[0], index)) {
+                row += index + ',';
+            }
+
         }
 
         row = row.slice(0, -1);
@@ -1041,7 +1045,10 @@ function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
 
         //2nd loop will extract each column and convert it in string comma-seprated
         for (var index in arrData[i]) {
-            row += '"' + arrData[i][index] + '",';
+            if (isFlatProperty(arrData[i], index)) {
+                row += '"' + arrData[i][index] + '",';
+            }
+
         }
 
         row.slice(0, row.length - 1);
@@ -1084,6 +1091,11 @@ function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
     link.click();
     document.body.removeChild(link);
 }
+// is prop added by angular or is an function in json object
+function isFlatProperty(object, prop) {
+    return !(prop.indexOf("$") >= 0 || typeof object[prop] == 'function');
+}
+
 function STDownloadFile(url, fileName) {
     var link = document.createElement("a");
     link.href = url;
@@ -1112,8 +1124,7 @@ function hashStr(str) {
         return 1000
     } else {
         // do not move working phone and normal phone
-        if (hash > 5000)
-        {
+        if (hash > 5000) {
             return hash;
         }
         return 2;
@@ -1180,17 +1191,14 @@ function wrongPhone(phone) {
     return hcolor == 1000;
 }
 
-function GetPhoneNumber(span)
-{
+function GetPhoneNumber(span) {
     var text = span.find(".phone-text:first").text();
     return text.match(/\d+/g).join("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 }
 
-function GetUndoIndex(span)
-{
+function GetUndoIndex(span) {
     var undo_index = $(span).attr('data-undo-wrong');
-    if (!undo_index)
-    {
+    if (!undo_index) {
         return -1;
     }
     return parseInt(undo_index);
@@ -1209,7 +1217,7 @@ function compareByActive(a, b) {
     var diff = hcolor - hcolorB;
 
     if (diff == 0) {
-       
+
 
         /***********************************************
         // disable sort phone function on release 9/23/2016 //
@@ -1229,7 +1237,7 @@ function compareByActive(a, b) {
         }
         
         *****************************************************/
-       
+
     }
 
     return diff;
@@ -1307,7 +1315,7 @@ function sortPhoneFunc(compareFunc) {
             var ptext = $(this).text();
             html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
         });
-       
+
         phones.parent().html('<div>' + html + '</div>');
         // add split line the first undo phone added
         //var last_undo_wrong =  $("[data-undo-wrong='0']")
@@ -1316,13 +1324,12 @@ function sortPhoneFunc(compareFunc) {
         //{
         //    $("<hr />").insertBefore(last_undo_wrong);
         //}
-        
+
 
     });
 }
 
-function reSortUndoWrongPhone(phones)
-{
+function reSortUndoWrongPhone(phones) {
     var data_undo_wrong_attr = "data-undo-wrong";
     var undoWrongs = $.grep(phones, function (n, i) {
         return $(n).attr(data_undo_wrong_attr) != null;
@@ -1343,8 +1350,7 @@ function reSortUndoWrongPhone(phones)
 
 }
 
-function buildPhonesHtml(phones)
-{
+function buildPhonesHtml(phones) {
     var html = "";
 
     phones.each(function (ind) {
