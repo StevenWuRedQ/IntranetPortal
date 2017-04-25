@@ -66,6 +66,64 @@
             sortPhoneFunc(compareByCallCount);
         }
     }
+    var callFormCtr = {
+        isShow: function () {
+            return $('#divCallForms').hasClass('active');
+        },
+        isSaved: false,
+        show: function () {
+            if (this.isShow()) {
+                return;
+            }
+
+            $('a[href="#divCallForms"]').click();
+
+            $('div#mainContentDiv').overlayMask();
+            $('div#ctl00_MainContentPH_ASPxSplitter1_0i1_CC').addClass('leadsInfo_callmode');
+        },
+        save: function () {
+          
+            $('div#mainContentDiv').overlayMask('hide');
+            $('div#ctl00_MainContentPH_ASPxSplitter1_0i1_CC').removeClass('leadsInfo_callmode');
+            AngularRoot.alert('Saved.');
+        }
+    };
+
+    (function ($) {
+        $.fn.overlayMask = function (action) {
+            var mask = this.find('.overlay-mask');
+
+            // Create the required mask
+
+            if (!mask.length) {
+                this.css({
+                    position: 'relative'
+                });
+                mask = $('<div class="overlay-mask"></div>');
+                mask.css({
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    "background-color": 'black',
+                    opacity: 0.5,
+                    top: '0px',
+                    left: '0px',
+                    zIndex: 100
+                }).appendTo(this);
+            }
+
+            // Act based on params
+
+            if (!action || action === 'show') {
+                mask.show();
+            } else if (action === 'hide') {
+                mask.hide();
+            }
+
+            return this;
+        };
+    })(jQuery);
+
     function OnPhoneNumberClick(s, e) {
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
@@ -74,6 +132,7 @@
                 //if (sortPhones != undefined) {
                 //    sortPhones();
                 //}
+                callFormCtr.show();
             }
 
             if (e.item.index == 1) {
@@ -130,7 +189,7 @@
             var wrong_phones = telDivParent.find("[data-undo-wrong]");
             if (wrong_phones.length > 0) {
                 var max_wrong_count =
-               _.chain( $.makeArray(wrong_phones) )
+               _.chain($.makeArray(wrong_phones))
                .map(function (o) {
                    return parseInt($(o).attr("data-undo-wrong"));
                }).max();
@@ -431,7 +490,7 @@
 
         // reload callback on get lead status in propertyinfo
         if (PropertyInfoCtr) {
-            PropertyInfoCtr.init();          
+            PropertyInfoCtr.init();
         }
     }
 
@@ -506,6 +565,12 @@
     .LeadsContentPanel {
         min-height: 800px;
         /*min-width:1100px;*/
+    }
+
+    .leadsInfo_callmode {
+        position: absolute;
+        z-index: 101;
+        background-color: white;
     }
 </style>
 
@@ -716,10 +781,16 @@
 
                                 <div style="font-size: 12px; color: #9fa1a8;">
                                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 16px; color: white">
-                                        <li class="short_sale_head_tab activity_light_blue">
-                                            <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
+                                        <li class="short_sale_head_tab activity_light_blue active">
+                                            <a href="#divActivitylog" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-history head_tab_icon_padding"></i>
                                                 <div class="font_size_bold" style="font-weight: 900;">Activity Log</div>
+                                            </a>
+                                        </li>
+                                        <li class="short_sale_head_tab activity_light_blue">
+                                            <a href="#divCallForms" role="tab" data-toggle="tab" class="tab_button_a">
+                                                <i class="fa fa-phone head_tab_icon_padding"></i>
+                                                <div class="font_size_bold" style="font-weight: 900;">Call Data</div>
                                             </a>
                                         </li>
 
@@ -746,9 +817,35 @@
                                         </li>
                                     </ul>
                                 </div>
-
-                                <div class="clearfix">
-                                    <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
+                                <div class="tab-content clearfix">
+                                    <div class="tab-pane active clearfix" id="divActivitylog">
+                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
+                                    </div>
+                                    <div class="tab-pane clearfix" id="divCallForms">
+                                        <div class="" style="padding: 10px;">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Mortgages Amount</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Comments</label>
+                                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Comments">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleSelect1">Loan Mod</label>
+                                                <select class="form-control" id="exampleSelect1">
+                                                    <option>Yes</option>
+                                                    <option>No</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="button" class="btn btn-primary" onclick="callFormCtr.save()">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <dx:ASPxCallback ID="callPhoneCallback" runat="server" ClientInstanceName="callPhoneCallbackClient" OnCallback="callPhoneCallback_Callback">
                                     <ClientSideEvents CallbackComplete="OnCallPhoneCallbackComplete" />
