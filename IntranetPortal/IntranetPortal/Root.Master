@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/stevencss.css?v=2016125" />
+    <link rel="stylesheet" href="/css/stevencss.css?v=20161214" />
     <link rel="stylesheet" href="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -30,7 +30,7 @@
     <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
 
     <script src="/Scripts/PortalMessager.js"></script>
-    <script src="/Scripts/stevenjs.js?v=2016125"></script>
+    <script src="/Scripts/stevenjs.js?v=20161115"></script>
 
 
 
@@ -338,12 +338,15 @@
                                 <table style="margin-top: 10px; float: right">
                                     <tr>
                                         <td>
+                                            <% If Not Page.User.IsInRole("Search-Limited") %>
                                             <dx:ASPxTextBox runat="server" ID="txtSearchKey" Width="225px" ClientInstanceName="txtSearchKeyClient" AutoPostBack="false" Height="30px" Border-BorderStyle="None" Font-Size="14px" ForeColor="#0e9ee9">
                                                 <ClientSideEvents KeyDown="function(s,e){if(e.htmlEvent.keyCode == 13){btnSearchClient.DoClick()}}" />
                                                 <Border BorderStyle="None"></Border>
                                             </dx:ASPxTextBox>
+                                            <% End If %>
                                         </td>
                                         <td>
+                                            <% If Not Page.User.IsInRole("Search-Limited") %>
                                             <%--delete search text by steven--%>
                                             <dx:ASPxButton runat="server" RenderMode="Button" ID="btnSearch" ClientInstanceName="btnSearchClient" UseSubmitBehavior="false" Text=" " AutoPostBack="false" BackgroundImage-ImageUrl="/images/search_btn.png" Height="30px" Width="55px" Border-BorderStyle="None" HoverStyle-BackColor="Transparent">
                                                 <%------end-------%>
@@ -353,6 +356,7 @@
                                                 <BackgroundImage ImageUrl="/images/search_btn.png" Repeat="NoRepeat"></BackgroundImage>
                                                 <Border BorderStyle="None"></Border>
                                             </dx:ASPxButton>
+                                            <% End If %>
                                         </td>
                                         <%--replace login menu with a image by steven--%>
                                         <td style="margin-left: 20px; font-size: 18px; margin-right: 0" class="login" valign="middle">
