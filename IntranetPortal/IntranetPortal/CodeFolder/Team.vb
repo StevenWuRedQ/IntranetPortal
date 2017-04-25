@@ -36,6 +36,13 @@ Partial Public Class Team
         End Using
     End Function
 
+    Public Shared ReadOnly Property OutSideTeams As String()
+        Get
+            Dim settingsData = Core.PortalSettings.GetValue("OutsideTeams")
+            Return settingsData.Split(";")
+        End Get
+    End Property
+
     Private Shared _teamFinders As String()
     ''' <summary>
     ''' Return finders in all active teams

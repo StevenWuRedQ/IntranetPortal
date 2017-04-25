@@ -132,7 +132,8 @@
                 //if (sortPhones != undefined) {
                 //    sortPhones();
                 //}
-                callFormCtr.show();
+
+                //callFormCtr.show();
             }
 
             if (e.item.index == 1) {
@@ -636,7 +637,7 @@
                                                 <div class="font_size_bold" style="font-weight: 900;">Documents</div>
                                             </a>
                                         </li>
-                                        <li class="short_sale_head_tab">
+                                        <li class="short_sale_head_tab" style="display:none">
                                             <a href="#titlePane" role="tab" data-toggle="tab" class="tab_button_a" onclick="cbGetJudgementData.PerformCallback(leadsInfoBBLE)">
                                                 <i class="fa fa-key head_tab_icon_padding"></i>
                                                 <div class="font_size_bold" style="font-weight: 900;">Title</div>
@@ -787,7 +788,7 @@
                                                 <div class="font_size_bold" style="font-weight: 900;">Activity Log</div>
                                             </a>
                                         </li>
-                                        <li class="short_sale_head_tab activity_light_blue">
+                                        <li class="short_sale_head_tab activity_light_blue" style="display:none">
                                             <a href="#divCallForms" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-phone head_tab_icon_padding"></i>
                                                 <div class="font_size_bold" style="font-weight: 900;">Call Data</div>

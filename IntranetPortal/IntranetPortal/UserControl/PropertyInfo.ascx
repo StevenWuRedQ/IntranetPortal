@@ -242,7 +242,7 @@
     PropertyInfoCtr = {
         init: function () {
             LeadTypeCtr.initData();
-            LeadTagCtr.init();
+            // LeadTagCtr.init();
 
             if (leadsInfoBBLE)
                 LoanModStatusCtrl.reload();
@@ -297,8 +297,10 @@
                 <%--<span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>--%>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
+                <% If not IntranetPortal.Employee.IsInOutsideTeam(Page.User.Identity.Name) %>
                 <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx?#/preassign/new?BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
+                <% End If %>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("Underwriting Request" + leadsInfoBBLE, "/LeadDocSearch/UnderwritingRequest.aspx?BBLE=<%= LeadsInfoData.BBLE %>#/")'>Request Underwriting</span>
                 <% End If %>
             </div>
@@ -376,6 +378,7 @@
                         </div>
                         <% i += 1%>
 
+                        <!-- disable the lien tags function
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <div style="display: inline-block;">
@@ -387,6 +390,7 @@
                         </div>
                         <% i += 1%>
                         <asp:HiddenField ID="hfBBLE" runat="server" />
+                        -->
 
                         <% For Each comment In LeadsInfoData.UserComments%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>

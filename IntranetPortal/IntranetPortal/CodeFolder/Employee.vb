@@ -67,6 +67,7 @@ Partial Public Class Employee
         End Get
     End Property
 
+
     ''' <summary>
     ''' Get Employee User Profile Data
     ''' </summary>
@@ -626,6 +627,15 @@ Partial Public Class Employee
         End If
 
         Return False
+    End Function
+
+    Public Shared Function IsInOutsideTeam(name As String) As Boolean
+        Dim emp = Employee.GetInstance(name)
+        If emp Is Nothing Then
+            Throw New Exception("can't find the employee.")
+        End If
+
+        Return Team.OutSideTeams.Contains(emp.Department)
     End Function
 
     ''' <summary>
