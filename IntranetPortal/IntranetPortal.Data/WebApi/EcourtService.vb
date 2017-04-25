@@ -20,7 +20,7 @@ Public Class EcourtService
         Dim request = GetRequest("api/cases/mortgageforeclosures/{bble}", Method.GET)
         request.AddUrlSegment("bble", bble.Trim)
 
-        Return Execute(Of List(Of EcourtCase))(request)
+        Return Execute(Of List(Of EcourtCase))(request, True)
     End Function
 
     ''' <summary>

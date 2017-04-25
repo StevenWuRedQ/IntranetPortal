@@ -87,6 +87,7 @@ Partial Public Class LeadsInfo
     Public Property Latitude As Nullable(Of Double)
     Public Property Longitude As Nullable(Of Double)
     Public Property City As String
+    Public Property LeadsTags As String
 
     Public Overridable Property Lead As Lead
 

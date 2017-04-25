@@ -117,5 +117,29 @@ Namespace Controllers
             End Try
         End Function
 
+        <HttpPost>
+        <Route("api/Leads/{bble}/tags")>
+        Public Function PostUpdateLeadsSubstatus(bble As String, <FromBody> tagArray As String()) As IHttpActionResult
+
+            If String.IsNullOrEmpty(bble) Then
+                Return BadRequest()
+            End If
+
+            Dim userName = HttpContext.Current.User.Identity.Name
+
+            If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, bble) Then
+                Return Unauthorized()
+            End If
+
+            Try
+                Dim tags = String.Join(";", tagArray)
+                LeadsInfo.UpdateTags(bble, tags, userName)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, "Change leads tags to " & tags, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString)
+                Return Ok()
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
     End Class
 End Namespace

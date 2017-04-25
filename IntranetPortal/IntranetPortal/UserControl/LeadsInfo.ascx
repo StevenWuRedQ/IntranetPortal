@@ -430,12 +430,8 @@
         }
 
         // reload callback on get lead status in propertyinfo
-        if (LoanModStatusCtrl) {
-            LoanModStatusCtrl.reload();
-        }
-
-        if (LeadTypeCtr) {            
-            LeadTypeCtr.initData();
+        if (PropertyInfoCtr) {
+            PropertyInfoCtr.init();          
         }
     }
 

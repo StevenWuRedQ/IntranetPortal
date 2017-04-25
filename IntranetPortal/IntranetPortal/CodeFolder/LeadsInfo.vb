@@ -35,6 +35,16 @@ Public Class LeadsInfo
         End Using
     End Sub
 
+    Public Shared Sub UpdateTags(bble As String, tags As String, updateby As String)
+        Using ctx As New Entities
+            Dim li = ctx.LeadsInfoes.Find(bble)
+            li.LeadsTags = tags
+            li.UpdateBy = updateby
+            li.LastUpdate = DateTime.Now
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Shared Function GetLeadsInfoByType(type As LeadsType) As IQueryable(Of LeadsInfo)
         Dim ctx As New Entities
         Return ctx.LeadsInfoes.Where(Function(l) l.Type = type).AsQueryable
