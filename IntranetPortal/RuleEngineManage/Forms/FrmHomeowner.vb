@@ -99,4 +99,32 @@ Public Class FrmHomeowner
             txtBBLEs.Visible = False
         End If
     End Sub
+
+    Private Sub BtnUpdateTLO_Click(sender As Object, e As EventArgs) Handles BtnUpdateTLO.Click
+        If (String.IsNullOrEmpty(ThreadCount.Text)) Then
+            MsgBox("Please input update type such as mortgage Owner!")
+            Return
+        End If
+
+        Dim ids = txtBBLEs.Lines()
+
+        Parallel.ForEach(ids,
+                         New ParallelOptions With {.MaxDegreeOfParallelism = CInt(ThreadCount.Text)},
+                         Sub(id)
+                             Try
+                                 Dim result = HomeOwner.UpdateLocatedRepot(id)
+                                 Logger.Log.Info("succeed owner id: " + id)
+                                 If (result = 1) Then
+                                     Logger.Log.Info("missing location report owner id: " + id)
+                                 End If
+                             Catch ex As Exception
+                                 Logger.Log.Error("failed owner id: " + id, ex)
+                             End Try
+                         End Sub)
+
+    End Sub
+
+    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
 End Class
