@@ -122,7 +122,6 @@ Public Class LeadsInfo1
                 HomeOwnerInfo2.OwnerName = leadsinfodata.Owner
                 HomeOwnerInfo2.BindData(bble)
 
-
                 'If String.IsNullOrEmpty(leadsinfodata.CoOwner) Then
                 '    HomeOwnerInfo3.Visible = False
                 'Else
@@ -229,7 +228,6 @@ Public Class LeadsInfo1
             End If
 
             If e.Parameter = "customDays" Then
-
                 Dim tmpdate = If(ASPxCalendar1 IsNot Nothing, ASPxCalendar1.Value, DateTime.Today)
                 UpdateLeadStatus(hfBBLE.Value, LeadStatus.Callback, tmpdate)
             End If
@@ -382,44 +380,46 @@ Public Class LeadsInfo1
             UpdateContact(OwnerContact.ContactStatus.Undo, address, OwnerContact.OwnerContactType.MailAddress)
         End If
 
-
         e.Result = needRefesh
     End Sub
 
     Sub UpdateContact(status As OwnerContact.ContactStatus, phoneNo As String, type As OwnerContact.OwnerContactType)
-        Using Context As New Entities
+        OwnerContact.UpdateContact(hfBBLE.Value, status, phoneNo, type)
+        Return
 
-            Dim contact = Context.OwnerContacts.Where(Function(c) c.BBLE = hfBBLE.Value And c.Contact.Contains(phoneNo)).FirstOrDefault
+        'Using Context As New Entities
+
+        '    Dim contact = Context.OwnerContacts.Where(Function(c) c.BBLE = hfBBLE.Value And c.Contact.Contains(phoneNo)).FirstOrDefault
 
 
-            'Remove the saved info. 
-            If status = OwnerContact.ContactStatus.Undo Then
-                If contact IsNot Nothing Then
-                    Context.OwnerContacts.Remove(contact)
-                    Context.SaveChanges()
-                End If
+        '    'Remove the saved info. 
+        '    If status = OwnerContact.ContactStatus.Undo Then
+        '        If contact IsNot Nothing Then
+        '            Context.OwnerContacts.Remove(contact)
+        '            Context.SaveChanges()
+        '        End If
 
-                Return
-            End If
+        '        Return
+        '    End If
 
-            If contact Is Nothing Then
-                contact = New OwnerContact
-                contact.BBLE = hfBBLE.Value
-                contact.Contact = phoneNo
-                contact.ContactType = type
-                contact.Status = status
-                'contact.OwnerName = home
-                Context.OwnerContacts.Add(contact)
-            Else
-                contact.BBLE = hfBBLE.Value
-                contact.Contact = phoneNo
-                contact.ContactType = type
-                contact.Status = status
-            End If
+        '    If contact Is Nothing Then
+        '        contact = New OwnerContact
+        '        contact.BBLE = hfBBLE.Value
+        '        contact.Contact = phoneNo
+        '        contact.ContactType = type
+        '        contact.Status = status
+        '        'contact.OwnerName = home
+        '        Context.OwnerContacts.Add(contact)
+        '    Else
+        '        contact.BBLE = hfBBLE.Value
+        '        contact.Contact = phoneNo
+        '        contact.ContactType = type
+        '        contact.Status = status
+        '    End If
 
-            Context.SaveChanges()
+        '    Context.SaveChanges()
 
-        End Using
+        'End Using
     End Sub
 
     Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.CallbackEventArgsBase)
@@ -469,7 +469,7 @@ Public Class LeadsInfo1
             Case "All"
                 comments = String.Format("All leads info is refreshed by {0}", username)
                 DataWCFService.UpdateLeadInfo(bble, True)
-                'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)
+            'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)vi
 
             Case "Assessment"
                 comments = String.Format("General property info is refreshed by {0}", username)
@@ -618,7 +618,6 @@ Public Class LeadsInfo1
             End Using
         End If
     End Sub
-
 
     Protected Sub pcMain_WindowCallback(source As Object, e As DevExpress.Web.PopupWindowCallbackArgs)
         If Not pcMainPopupControl.Visible Then

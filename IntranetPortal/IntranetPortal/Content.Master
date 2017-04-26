@@ -76,9 +76,9 @@
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <!-- AngularFire -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/1.1.4/angularfire.min.js"></script>
-    <script src="/Scripts/autosave.js?v=20161214"></script>
+    <script src="/Scripts/autosave.js?v=20161115"></script>
     <!-- pro env -->
-    <script src="/js/build/intranetportal.js?v=20161214"></script>
+    <script src="/js/build/intranetportal.js?v=20161115"></script>
 
     <script>
         // check if devextreme is loaded
@@ -171,9 +171,9 @@
                                                   }
                                               }"></div>
 
-    <script src="/Scripts/autosave.js?v=20161214"></script>
-    <script src="/Scripts/stevenjs.js?v=20161214"></script>
-    <script src="/Scripts/autologout.js?v=20161214"></script>
+    <script src="/Scripts/autosave.js?v=20161115"></script>
+    <script src="/Scripts/stevenjs.js?v=20161115"></script>
+    <script src="/Scripts/autologout.js?v=20161115"></script>
     <script>
         init_tooltip_and_scroll();
     </script>

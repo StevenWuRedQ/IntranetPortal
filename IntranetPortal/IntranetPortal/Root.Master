@@ -30,7 +30,7 @@
     <script src="/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
 
     <script src="/Scripts/PortalMessager.js"></script>
-    <script src="/Scripts/stevenjs.js?v=20161214"></script>
+    <script src="/Scripts/stevenjs.js?v=20161115"></script>
 
 
 

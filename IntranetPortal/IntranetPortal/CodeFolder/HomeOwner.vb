@@ -12,11 +12,10 @@ Partial Public Class HomeOwner
     Public Property BankruptcyString As String
 
     Private objLocateReport As DataAPI.TLOLocateReportOutput
-    Public Shared EMPTY_HOMEOWNER As String = "Please Edit Owner"
+    Public Shared ReadOnly EMPTY_HOMEOWNER As String = "Please Edit Owner"
 
     <IgnoreDataMember>
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
-
         Get
             If objLocateReport Is Nothing Then
 
@@ -46,7 +45,9 @@ Partial Public Class HomeOwner
                 'save tlo data
                 SaveTloData(value)
 
-                'save phone no to database
+                ' save phone no to database
+                ' don not save phone number now
+                ' remember to uncomment this after fished get TLO report
                 SavePhoneField(value)
 
                 LocateReportContent = Newtonsoft.Json.JsonConvert.SerializeObject(value)
@@ -61,6 +62,26 @@ Partial Public Class HomeOwner
             End If
         End Set
     End Property
+
+    ' update local report use for manually run batch
+
+    Public Shared Function UpdateLocatedRepot(ownerID As Integer) As Integer
+        Using ctx As New Entities
+            Dim owner = ctx.HomeOwners.Find(ownerID)
+            If (owner.ReportToken Is Nothing) Then
+
+                owner.TLOLocateReport = DataWCFService.GetLocateReport2(1, owner.BBLE, owner)
+
+                owner.LastUpdate = DateTime.Now
+                ctx.SaveChanges()
+                If (owner.TLOLocateReport Is Nothing) Then
+                    Return 1
+                End If
+            End If
+
+        End Using
+        Return 0
+    End Function
 
     Public Sub SaveReportData()
         Dim value = TLOLocateReport
@@ -173,6 +194,12 @@ Partial Public Class HomeOwner
 
     End Function
 
+    Public Shared Function GetHomeOwner(bble As String, name As String) As HomeOwner
+        Using ctx As New Entities
+            Return ctx.HomeOwners.Where(Function(h) h.BBLE = bble AndAlso h.Name = name).FirstOrDefault
+        End Using
+    End Function
+
     Public Shared Function LoadOwner(ownerId As Integer) As HomeOwner
         Using ctx As New Entities
             Return ctx.HomeOwners.Find(ownerId)
@@ -214,7 +241,6 @@ Partial Public Class HomeOwner
             Return _bestPhoneNo
         End Get
     End Property
-
 
     Private _bestEmail As List(Of HomeOwnerEmail)
     <IgnoreDataMember>
@@ -355,6 +381,17 @@ Partial Public Class HomeOwner
         phone.Phone = item.phoneField
         phone.Type = item.phoneTypeField.ToString
         phone.Source = PhoneSource.TLOLocateReport
+
+        Dim score As Integer = 0
+        If Integer.TryParse(item.scoreField, score) Then
+            phone.Score = score
+        End If
+
+        Dim ListingType = 0
+        If Integer.TryParse(item.listingTypeField, ListingType) Then
+            phone.ListingType = ListingType
+        End If
+
         Return phone
     End Function
 
@@ -464,6 +501,34 @@ Partial Public Class HomeOwner
         End Get
     End Property
 
+    <IgnoreDataMember>
+    Public ReadOnly Property Dob As DateTime?
+        Get
+            If TLOLocateReport.dateOfBirthField IsNot Nothing Then
+                Dim dobfield = TLOLocateReport.dateOfBirthField
+                Dim year = 0
+                Dim month = 1
+                Dim day = 1
+
+                If Not String.IsNullOrEmpty(dobfield.dateOfBirthField.yearField) Then
+                    year = CInt(dobfield.dateOfBirthField.yearField)
+                Else
+                    Return Nothing
+                End If
+
+                If Not String.IsNullOrEmpty(dobfield.dateOfBirthField.monthField) Then
+                    month = CInt(dobfield.dateOfBirthField.monthField)
+                End If
+
+                If Not String.IsNullOrEmpty(dobfield.dateOfBirthField.dayField) Then
+                    day = CInt(dobfield.dateOfBirthField.dayField)
+                End If
+
+                Return New Date(year, month, day)
+            End If
+        End Get
+    End Property
+    
     <IgnoreDataMember>
     Public ReadOnly Property Alive As Boolean
         Get

@@ -70,6 +70,16 @@ Partial Public Class Lead
         End Get
     End Property
 
+    Public ReadOnly Property StatusStr As String
+        Get
+            If Status.HasValue Then
+                Return CType(Status, LeadStatus).ToString
+            End If
+
+            Return ""
+        End Get
+    End Property
+
     Public Shared Function GetLeadsOwner(bble As String) As String
         Using ctx As New Entities
             Return ctx.Leads.Where(Function(l) l.BBLE = bble).Select(Function(a) a.EmployeeName).FirstOrDefault
@@ -599,7 +609,12 @@ Partial Public Class Lead
         End Using
     End Sub
 
-    Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime, Optional addCommend As String = Nothing, Optional subStatus As String = Nothing) As Boolean
+    Public Shared Function UpdateLeadStatus(bble As String,
+                                            status As LeadStatus,
+                                            callbackDate As DateTime,
+                                            Optional addCommend As String = Nothing,
+                                            Optional subStatus As String = Nothing,
+                                            Optional createBy As String = Nothing) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
             Dim addComStr = If(String.IsNullOrEmpty(addCommend), "", "<br/>" & " Comments: " & addCommend)
@@ -621,8 +636,16 @@ Partial Public Class Lead
                 Context.SaveChanges()
 
                 If Not originateStatus = status Then
-                    Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
-                    Dim empName = HttpContext.Current.User.Identity.Name
+                    If createBy Is Nothing Then
+                        If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing Then
+                            createBy = HttpContext.Current.User.Identity.Name
+                        Else
+                            createBy = "Portal"
+                        End If
+                    End If
+
+                    Dim empId = Employee.GetInstance(createBy).EmployeeID
+                    Dim empName = createBy
 
                     Dim comments = String.Format("Change status from {0} to {1}. {2}", CType(originateStatus, LeadStatus).ToString, status.ToString, addComStr)
                     If status = LeadStatus.DoorKnocks Then

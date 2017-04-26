@@ -83,9 +83,6 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v15.1, Version=15.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -120,8 +117,8 @@
     <Reference Include="MyIdealProp.Workflow.Client">
       <HintPath>..\IntranetPortal\DLL\MyIdealProp.Workflow.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -278,7 +275,6 @@
     <WCFMetadataStorage Include="Service References\PortalService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="RuleEngineManage_TemporaryKey.pfx" />
     <None Include="Service References\PortalService\CommonService1.wsdl" />
     <None Include="Service References\PortalService\CommonService3.xsd">
       <SubType>Designer</SubType>

@@ -332,8 +332,8 @@
     <Reference Include="MyIdealProp.Workflow.DBPersistence">
       <HintPath>..\..\..\WorkFlow\SourceCode2\MyIdealProp.Common\MyIdealProp.Workflow.DBPersistence\bin\Debug\MyIdealProp.Workflow.DBPersistence.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -606,6 +606,7 @@
     <Compile Include="CodeFolder\CustomBinder.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
     <Compile Include="CodeFolder\DateTimeJavaScriptConverter.vb" />
+    <Compile Include="CodeFolder\DialerServiceManage.vb" />
     <Compile Include="CodeFolder\EmailTemplateControl.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -643,6 +644,7 @@
     <Compile Include="CodeFolder\PortalReport.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
     <Compile Include="CodeFolder\PropertyOfferManage.vb" />
+    <Compile Include="CodeFolder\PropertyServiceProvider.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
     <Compile Include="CodeFolder\RoleBasePage.vb">
@@ -650,6 +652,7 @@
     </Compile>
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
+    <Compile Include="CodeFolder\SimpleAppTokenHandler.vb" />
     <Compile Include="CodeFolder\SummaryItemBase.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -817,6 +820,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controllers\CorporationEntitiesController.vb" />
+    <Compile Include="Controllers\DialerController.vb" />
+    <Compile Include="Controllers\EmployeeController.vb" />
     <Compile Include="Controllers\FollowUpController.vb" />
     <Compile Include="Controllers\HomeownerController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
@@ -1258,6 +1263,13 @@
     <Compile Include="EmailTemplate\Testing.ascx.vb">
       <DependentUpon>Testing.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\DialerManagement.aspx.designer.vb">
+      <DependentUpon>DialerManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\DialerManagement.aspx.vb">
+      <DependentUpon>DialerManagement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Module\CacheAvoidModule.vb" />
     <Compile Include="Global.asax.vb">
@@ -2005,6 +2017,8 @@
       <DependentUpon>Priority.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PublicController\DataServiceController.vb" />
+    <Compile Include="PublicController\MapServiceController.vb" />
     <Compile Include="Publish\Publish.aspx.designer.vb">
       <DependentUpon>Publish.aspx</DependentUpon>
     </Compile>
@@ -7282,7 +7296,7 @@
     <Content Include="js\controllers\UnderwritingRequestController.js" />
     <Content Include="js\controllers\UnderwritingSummaryController.js" />
     <Content Include="js\controllers\VendorController.js" />
-    <Content Include="js\directives\auditLogs.js" />
+    <Content Include="js\directives\AuditLogs.js" />
     <Content Include="js\directives\bindId.js" />
     <Content Include="js\directives\initGrid.js" />
     <Content Include="js\directives\ptEditableDiv.js" />
@@ -7315,6 +7329,7 @@
     <Content Include="js\models\CheckRequest.js" />
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
+    <Content Include="js\models\Employee.js" />
     <Content Include="js\models\Underwriter.js" />
     <Content Include="js\models\UnderwritingRequest.js" />
     <Content Include="js\services\ptCom.js" />
@@ -7346,14 +7361,14 @@
     <Content Include="js\models\Wizard.js" />
     <Content Include="js\models\WizardStep.js" />
     <Content Include="js\services\ptUnderwritingCaculator.js" />
-    <Content Include="js\templates\ptAudit.html" />
-    <Content Include="js\templates\ptItemList.html" />
+    <Content Include="js\components\ptAudit.tpl.html" />
+    <Content Include="js\components\ptItemList.tpl.html" />
     <Content Include="js\test\model.PreSign.spec.js" />
     <Content Include="js\test\model.underwriting.spec.js" />
     <Content Include="js\test\service.ptDocSearch.spec.js" />
-    <Content Include="js\Views\AuditLogs\AuditLogs.tpl.html" />
+    <Content Include="js\directives\AuditLogs.tpl.html" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.html" />
-    <Content Include="js\templates\ptEditor.html" />
+    <Content Include="js\directives\ptEditor.tpl.html" />
     <Content Include="js\test\conf.js" />
     <Content Include="js\test\controller.ConstructionController.spec.js" />
     <Content Include="js\test\model.PreDealCtrl.spec.js" />
@@ -7416,6 +7431,7 @@
     <Content Include="Management\CombineContact.aspx" />
     <Content Include="Complaints\ComplainsMng.aspx" />
     <Content Include="Management\ComplaintsNotify.aspx" />
+    <Content Include="Management\DialerManagement.aspx" />
     <Content Include="Management\FormGenerator2.aspx" />
     <Content Include="Management\FormGenerator.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
@@ -7575,7 +7591,9 @@
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
     <Content Include="Content.Master" />
-    <Content Include="css\Web.config" />
+    <Content Include="css\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="pdfViewer\LICENSE" />
     <Content Include="pdfViewer\web\cmaps\78-EUC-H.bcmap" />
     <Content Include="pdfViewer\web\cmaps\78-EUC-V.bcmap" />
@@ -8213,10 +8231,9 @@
     <Content Include="Scripts\LeadsSubMenu.js" />
     <Content Include="Scripts\PortalMessager.js" />
     <Content Include="Scripts\stevenjs.js" />
-    <Content Include="js\templates\ptfile.html" />
-    <Content Include="js\templates\ptfiles.html" />
+    <Content Include="js\directives\ptFile.tpl.html" />
+    <Content Include="js\directives\ptFiles.tpl.html" />
     <Content Include="Scripts\Web.config" />
-    <Content Include="scrollbar\Web.config" />
     <Content Include="bower_components\signalr\.bower.json" />
     <Content Include="bower_components\signalr\bower.json" />
     <Content Include="bower_components\signalr\LICENSE.md" />
@@ -8285,10 +8302,6 @@
     <None Include="Service References\CallTrackingService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="scrollbar\jquery-1.11.0.min.js" />
-    <Content Include="scrollbar\jquery.mCustomScrollbar.concat.min.js" />
-    <Content Include="scrollbar\jquery.mCustomScrollbar.css" />
-    <Content Include="scrollbar\jquery.mCustomScrollbar.js" />
     <None Include="Service References\CallTrackingService\item.disco" />
     <None Include="Service References\CallTrackingService\configuration91.svcinfo" />
     <None Include="Service References\CallTrackingService\configuration.svcinfo" />
@@ -8470,6 +8483,7 @@
     <Content Include="App_Data\TitleDoc\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
     <Content Include="App_Data\TitleDoc\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
     <Content Include="TempDataFile\LeadsList.xlsx" />
+    <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -8503,7 +8517,6 @@
     <Folder Include="Content\layouts\Simple\" />
     <Folder Include="Content\layouts\SlideOut\" />
     <Folder Include="Content\layouts\Split\" />
-    <Folder Include="js\controllers\es6\" />
     <Folder Include="Scripts\dx\" />
     <Folder Include="TempDataFile\AuctionFiles\" />
     <Folder Include="TempDataFile\OfferDoc\" />
@@ -8527,6 +8540,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="js\components\Test.ts" />
+    <Content Include="js\controllers\DiarlerManagementController.js" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

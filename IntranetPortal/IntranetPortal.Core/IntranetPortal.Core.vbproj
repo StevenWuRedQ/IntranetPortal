@@ -166,6 +166,9 @@
     <Compile Include="ADOEntity\Application.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\building_0117.vb">
+      <DependentUpon>MapDataEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\CommonData.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>

@@ -25,5 +25,6 @@ Partial Public Class MapDataEntitiesContainer
     Public Overridable Property dtm_0814_tax_block_polygon() As DbSet(Of dtm_0814_tax_block_polygon)
     Public Overridable Property dtm_0814_tax_lot_polygon() As DbSet(Of dtm_0814_tax_lot_polygon)
     Public Overridable Property PortalLotInfoes() As DbSet(Of PortalLotInfo)
+    Public Overridable Property building_0117() As DbSet(Of building_0117)
 
 End Class

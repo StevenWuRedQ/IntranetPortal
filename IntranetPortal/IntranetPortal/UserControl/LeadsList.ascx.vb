@@ -236,8 +236,8 @@ Public Class LeadsList
     Sub BindSharedList()
         Using Context As New Entities
             Dim leads = (From lead In Context.Leads
-                                      Join sharedItem In Context.SharedLeads.Where(Function(s) s.UserName = Page.User.Identity.Name).Distinct On sharedItem.BBLE Equals lead.BBLE
-                                      Select lead).Distinct.ToList
+                         Join sharedItem In Context.SharedLeads.Where(Function(s) s.UserName = Page.User.Identity.Name).Distinct On sharedItem.BBLE Equals lead.BBLE
+                         Select lead).Distinct.ToList
             gridLeads.DataSource = leads
             gridLeads.DataBind()
 
@@ -339,9 +339,9 @@ Public Class LeadsList
         If CategoryName = "Task" Then
             Using Context As New Entities
                 Dim leads = (From lead In Context.Leads
-                                       Join task In Context.UserTasks On task.BBLE Equals lead.BBLE
-                                       Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(Page.User.Identity.Name) And task.CreateDate < newVersionDate
-                                       Select lead).Union(
+                             Join task In Context.UserTasks On task.BBLE Equals lead.BBLE
+                             Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(Page.User.Identity.Name) And task.CreateDate < newVersionDate
+                             Select lead).Union(
                                        From al In Context.Leads
                                        Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
                                        Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name) And appoint.CreateDate < newVersionDate
@@ -433,9 +433,14 @@ Public Class LeadsList
         Dim lbNewBBLE = TryCast(pageRootControl.FindControl("lbNewBBLE"), ASPxListBox)
         Dim bble = TryCast(pageRootControl.FindControl("txtNewBBLE"), ASPxTextBox).Text
         Dim leadsName = TryCast(pageRootControl.FindControl("txtNewLeadsName"), ASPxTextBox).Text
+        Dim leadType = TryCast(pageRootControl.FindControl("rblLeadsType"), ASPxRadioButtonList)
+
+        If leadType.SelectedIndex < 0 Then
+            Throw New CallbackException("Please select lead type.")
+        End If
 
         If String.IsNullOrEmpty(bble.Trim) Then
-            Throw New CallbackException("BBLE is not correct format! Please check.")
+            Throw New CallbackException("BBLE Is Not correct format! Please check.")
         End If
 
         'Check daily limitation on Team's creating new leads. if over the limitation, the creation will throw exception
@@ -457,6 +462,12 @@ Public Class LeadsList
             'Dim lf As LeadsInfo = DataWCFService.UpdateBasicInfo(bble)
             DataWCFService.UpdateLeadInfo(bble, True)
             Dim lf = LeadsInfo.GetInstance(bble)
+
+            If leadType.Value IsNot Nothing Then
+                Dim tp = CType(leadType.Value, LeadsInfo.LeadsType)
+                LeadsInfo.UpdateType(lf.BBLE, tp, Page.User.Identity.Name)
+            End If
+
             'Add to update
             'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)
 
@@ -478,8 +489,6 @@ Public Class LeadsList
 
                 Context.Leads.Add(ld)
                 Context.SaveChanges()
-
-
             Else
                 'use workflow engine to approval 
                 ld.Status = LeadStatus.MgrApprovalInWf
@@ -506,7 +515,7 @@ Public Class LeadsList
             e.Cancel = True
             gridLeads.CancelEdit()
 
-            gridLeads.DataSource = Context.Leads.Where(Function(l) l.Status = LeadStatus.NewLead And l.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(l) l.LastUpdate2)
+            gridLeads.DataSource = Context.Leads.Where(Function(l) l.Status = LeadStatus.NewLead And l.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(l) l.LastUpdate)
             gridLeads.DataBind()
         End Using
     End Sub
@@ -537,14 +546,16 @@ Public Class LeadsList
                 Dim cbStreetBorough = TryCast(pageInputData.FindControl("cbStreetBorough"), ASPxComboBox)
                 Dim txtHouseNum = TryCast(pageInputData.FindControl("txtHouseNum"), ASPxTextBox)
 
-                Dim streenAddress = client.NYC_Address_Search(cbStreetBorough.Value, txtHouseNum.Text, cbStreetlookup.Text)
-
-                For Each item In streenAddress.ToList
-                    Dim newdr = dt.NewRow
-                    newdr(0) = item.BBLE
-                    newdr(1) = String.Format("{0} {1} - {2}", item.NUMBER, item.ST_NAME, item.OWNER_NAME)
-                    dt.Rows.Add(newdr)
-                Next
+                ' Dim streenAddress = client.NYC_Address_Search(cbStreetBorough.Value, txtHouseNum.Text, cbStreetlookup.Text)
+                Dim streenAddress = DataWCFService.AddressSearch(txtHouseNum.Text, cbStreetlookup.Text, cbStreetBorough.Value)
+                If streenAddress IsNot Nothing AndAlso streenAddress.Count > 0 Then
+                    For Each item In streenAddress.ToList
+                        Dim newdr = dt.NewRow
+                        newdr(0) = item.propertyInformation.BBLE
+                        newdr(1) = String.Format("{0} {1} - {2}", item.propertyInformation.StreetNumber, item.propertyInformation.StreetName, item.owners(0).Name)
+                        dt.Rows.Add(newdr)
+                    Next
+                End If
             End If
 
             'Search by legal info
@@ -553,11 +564,22 @@ Public Class LeadsList
                 Dim txtlegalBlock = TryCast(pageInputData.FindControl("txtlegalBlock"), ASPxTextBox)
                 Dim txtLegalLot = TryCast(pageInputData.FindControl("txtLegalLot"), ASPxTextBox)
 
-                For Each item In client.NYC_Legal_Search(cblegalBorough.Value, txtlegalBlock.Text, txtLegalLot.Text)
-                    Dim newdr = dt.NewRow
-                    newdr(0) = item.BBLE
-                    newdr(1) = String.Format("{0} {1} - {2}", item.NUMBER, item.ST_NAME, item.OWNER_NAME)
-                    dt.Rows.Add(newdr)
+                For Each item In DataWCFService.AddressSearch(CInt(cblegalBorough.Value), CInt(txtlegalBlock.Text), CInt(txtLegalLot.Text))
+                    If item.propertyInformation IsNot Nothing Then
+                        Dim newdr = dt.NewRow
+                        newdr(0) = item.propertyInformation.BBLE
+                        If item.owners IsNot Nothing AndAlso item.owners.Count > 0 Then
+                            newdr(1) = String.Format("{0} {1} - {2}", item.propertyInformation.StreetNumber, item.propertyInformation.StreetName, item.owners(0).Name)
+                        Else
+                            If item.address IsNot Nothing Then
+                                newdr(1) = String.Format("{0}", item.address.FormatAddress)
+                            Else
+                                newdr(1) = String.Format("{0} {1}", item.propertyInformation.StreetNumber, item.propertyInformation.StreetName)
+                            End If
+                        End If
+
+                        dt.Rows.Add(newdr)
+                    End If
                 Next
             End If
 
@@ -714,7 +736,6 @@ Public Class LeadsList
                 Context.SaveChanges()
                 BindLeadsColor()
             End Using
-
         Else
 
         End If

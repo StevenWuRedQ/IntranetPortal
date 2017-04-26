@@ -22,7 +22,28 @@ Public Class LeadsInfo
         AEP = 9
         ShortSale = 10
         CoOpConversion = 12
+        StraightSale = 13
     End Enum
+
+    Public Shared Sub UpdateType(bble As String, type As LeadsType, updateby As String)
+        Using ctx As New Entities
+            Dim li = ctx.LeadsInfoes.Find(bble)
+            li.Type = type
+            li.UpdateBy = updateby
+            li.LastUpdate = DateTime.Now
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
+    Public Shared Sub UpdateTags(bble As String, tags As String, updateby As String)
+        Using ctx As New Entities
+            Dim li = ctx.LeadsInfoes.Find(bble)
+            li.LeadsTags = tags
+            li.UpdateBy = updateby
+            li.LastUpdate = DateTime.Now
+            ctx.SaveChanges()
+        End Using
+    End Sub
 
     Public Shared Function GetLeadsInfoByType(type As LeadsType) As IQueryable(Of LeadsInfo)
         Dim ctx As New Entities
@@ -68,11 +89,11 @@ Public Class LeadsInfo
 
         Return False
     End Function
+
     ''' <summary>
     ''' verify lead has right fomat bble  
     ''' todo:
     ''' if lead not exist in leads info table it should be create in leads info
-    ''' 
     ''' </summary>
     Public Sub verifiyAddress()
         If (Not String.IsNullOrEmpty(Me.PropertyAddress)) Then
@@ -87,6 +108,7 @@ Public Class LeadsInfo
             Throw New Exception("Can not find property address " & Me.PropertyAddress)
         End If
     End Sub
+
     Public ReadOnly Property IsApartment() As Boolean
         Get
             If Not String.IsNullOrEmpty(BBLE) Then
@@ -259,7 +281,6 @@ Public Class LeadsInfo
         Dim data As New LeadsData
         Return Core.Utility.CopyTo(GetInstance(bble), data)
     End Function
-
 
     Public Shared Function GetLeadsInfoByStreet(strNum As String, strName As String) As LeadsInfo
         Using ctx As New Entities
@@ -577,15 +598,20 @@ Public Class LeadsInfo
     End Property
 
     <JsonIgnoreAttribute>
-    Public ReadOnly Property EstimatedMortageDefault As Decimal
+    Public ReadOnly Property EstimatedMortageDefault As Decimal?
         Get
             'Return 1234564.123486456
-            Dim EMD As Decimal
+            Dim EMD As Decimal?
             If (LisPens IsNot Nothing AndAlso LisPens.Count > 0) Then
-                Dim ListPensYear = LisPens.Select(Function(f) f.FileDate.Year).ToList
+                Dim activeliens = LisPens.Where(Function(a) a.Active IsNot Nothing AndAlso a.Active).Select(Function(f) f.Docket_Number).ToArray
+                If activeliens IsNot Nothing AndAlso activeliens.Count > 0 Then
+                    Dim ListPensYear = LisPens.Where(Function(a) activeliens.Contains(a.Docket_Number)).Select(Function(a) a.FileDate.Year).ToList
 
-                Dim oldestYear = ListPensYear.Min()
-                EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (Date.Now.Year - oldestYear))
+                    If ListPensYear IsNot Nothing AndAlso ListPensYear.Count > 0 Then
+                        Dim oldestYear = ListPensYear.Min()
+                        EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (Date.Now.Year - oldestYear))
+                    End If
+                End If
             Else
                 Return MortgageCombo
             End If
@@ -893,23 +919,26 @@ Public Class LeadsInfo
                                                                End Function))
 
             str.Add(New Indicator("UnderBuilt", "This property is only built to 50% or less of its total allowable Sqft", Function(li)
-                                                                                                                              If li.UnbuiltSqft.HasValue And li.NYCSqft.HasValue Then
-                                                                                                                                  Return li.UnbuiltSqft / li.NYCSqft >= 0.5
+                                                                                                                              If li.UnbuiltSqft.HasValue AndAlso li.NYCSqft.HasValue AndAlso li.UnbuiltSqft > 0 Then
+                                                                                                                                  Return li.UnbuiltSqft / (li.NYCSqft + li.UnbuiltSqft) <= 0.5
                                                                                                                               End If
 
                                                                                                                               Return False
                                                                                                                           End Function))
-            str.Add(New Indicator("TaxLiens", "This property has tas liens.", Function(li)
-                                                                                  Return Not String.IsNullOrEmpty(li.TaxLiensAmount)
-                                                                              End Function))
+            'str.Add(New Indicator("TaxLiens", "This property has tas liens.", Function(li)
+            '                                                                      Return Not String.IsNullOrEmpty(li.TaxLiensAmount)
+            '                                                                  End Function))
 
-            str.Add(New Indicator("LPDefandant", "Lien is in different name than Deed Holder. Check Acris to ensure this is a good lead.", Function(li)
-                                                                                                                                               If li.LisPens IsNot Nothing AndAlso li.LisPens.Count > 0 AndAlso Not String.IsNullOrEmpty(li.Owner) Then
-                                                                                                                                                   Return Not Utility.IsSimilarName(li.LisPens(0).Defendant, li.Owner)
-                                                                                                                                               End If
+            'str.Add(New Indicator("LPDefandant", "Lien is in different name than Deed Holder. Check Acris to ensure this is a good lead.", Function(li)
+            '                                                                                                                                   If li.LisPens IsNot Nothing AndAlso li.LisPens.Count > 0 AndAlso Not String.IsNullOrEmpty(li.Owner) Then
+            '                                                                                                                                       Dim defendant = li.LisPens.Where(Function(a) a.Active).OrderByDescending(Function(a) a.FileDate).Select(Function(a) a.Defendant).FirstOrDefault
+            '                                                                                                                                       If Not String.IsNullOrEmpty(defendant) Then
+            '                                                                                                                                           Return Not Utility.IsSimilarName(li.LisPens(0).Defendant, li.Owner)
+            '                                                                                                                                       End If
+            '                                                                                                                                   End If
 
-                                                                                                                                               Return False
-                                                                                                                                           End Function))
+            '                                                                                                                                   Return False
+            '                                                                                                                               End Function))
 
             Return str
         End Get

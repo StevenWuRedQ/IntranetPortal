@@ -700,8 +700,6 @@
         </div>
     </div>
     <!-- custom scrollbar plugin -->
-
-    <%--    <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>--%>
     <script>
         (function ($) {
             $(window).load(function () {

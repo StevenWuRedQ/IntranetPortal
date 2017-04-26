@@ -15,6 +15,17 @@
         Return CallCount IsNot Nothing AndAlso CallCount > 0
     End Function
 
+    Public Shared Function GetPhoneNums(bble As String, ownerName As String) As String()
+        Using ctx As New Entities
+            Dim result = From ph In ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = bble AndAlso p.OwnerName = ownerName)
+                         Group ph By ph.Phone Into Max(ph.Score)
+                         Order By Max Descending
+                         Select Phone
+
+            Return result.ToArray
+        End Using
+    End Function
+
     Public Shared Function GetHomeOwnerPhones(BBLE As String, phoneNumber As String) As HomeOwnerPhone
         Using ctx As New Entities
             Return ctx.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE AndAlso p.Phone = phoneNumber).FirstOrDefault

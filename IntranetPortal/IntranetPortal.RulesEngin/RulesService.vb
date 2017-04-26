@@ -81,27 +81,29 @@ Public Class RulesService
 
     Private Sub InitRules()
         Rules = New List(Of BaseRule)
-        'Rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
-        'Rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
-        'Rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("19:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads business rule"})
+
+        ' test leads assign rules
+        Rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True, .ExecuteOnWeekend = True})
+        Rules.Add(New PendingAssignRule With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Import Pending Assign Rule", .ExecuteNow = True, .ExecuteOnWeekend = True})
+
+        Return
+
+        Rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
+        Rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
+        Rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("19:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads business rule"})
         Rules.Add(New AgentActivitySummaryRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Team Activity Email Rule"})
 
-        'Rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("01:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
         Rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("06:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
         Rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True, .ExecuteOnWeekend = True})
         Rules.Add(New PendingAssignRule With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Import Pending Assign Rule", .ExecuteNow = True, .ExecuteOnWeekend = True})
 
-        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("7:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule Morning", .ExecuteNow = False, .ExecuteOnWeekend = True, .SendingNotifyEmail = True})
-        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Evening", .ExecuteNow = False, .ExecuteOnWeekend = True})
-        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Noon", .ExecuteNow = False, .ExecuteOnWeekend = True})
-        'Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("23:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Night", .ExecuteNow = False, .ExecuteOnWeekend = True})
+        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("7:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule Morning", .ExecuteNow = False, .ExecuteOnWeekend = True, .SendingNotifyEmail = True})
+        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Evening", .ExecuteNow = False, .ExecuteOnWeekend = True})
+        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Noon", .ExecuteNow = False, .ExecuteOnWeekend = True})
+        Rules.Add(New DOBComplaintsCheckingRule With {.ExecuteOn = TimeSpan.Parse("23:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "DOB Complaints refresh rule at Night", .ExecuteNow = False, .ExecuteOnWeekend = True})
 
         'Legal
         Rules.Add(New LegalFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Legal Follow up Rule"})
-        'Rules.Add(New ScanECourtsRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:10:00"), .RuleName = "Legal eCourt Email Scan Rule", .ExecuteNow = True})
-        'Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("13:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Noon", .ExecuteOnWeekend = True})
-        'Rules.Add(New LegalActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Activity Rules at Evening", .ExecuteOnWeekend = True})
-        'Rules.Add(New NoticeECourtRule() With {.ExecuteOn = TimeSpan.Parse("07:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Legal Send ECourt Notify Email Rules", .ExecuteOnWeekend = True})
 
         'ShortSale
         Rules.Add(New ShortSaleActivityReportRule() With {.ExecuteOn = TimeSpan.Parse("10:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Activity Email Rule on 10am"})
@@ -124,6 +126,9 @@ Public Class RulesService
 
         'Ecourt data update
         Rules.Add(New EcourtCasesUpdateRule With {.ExecuteOn = TimeSpan.Parse("12:00:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Ecourt Data Syncing Rule", .ExecuteNow = False, .ExecuteOnWeekend = True})
+
+        ' Dialer integration service
+        Rules.Add(New DialerIntegrationRule With {.ExecuteOn = TimeSpan.Parse("20:50:00"), .Period = TimeSpan.Parse("1.00:00:00"), .RuleName = "Dialer integration Rule", .ExecuteNow = False, .ExecuteOnWeekend = True})
     End Sub
 
     ''' <summary>

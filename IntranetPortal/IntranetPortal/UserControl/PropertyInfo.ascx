@@ -99,7 +99,6 @@
         });
     }
 
-
     function openZoningUrl(zoingcode) {
         window.open("http://www.nyc.gov/html/dcp/pdf/zone/zoning_handbook/" + zoingcode + ".pdf");
     }
@@ -132,7 +131,6 @@
                         that.changesSubStatus_callback(that.substatusCode, that.updatesSubStatus)
                     }
                 })
-
             }
         },
         changesSubStatus_callback: function (substatusStr, callback) {
@@ -147,29 +145,121 @@
         }
     }
 
+    LeadTypeCtr = {
+        initData: function () {
+            this.currentType = $('#hdLeadType').val();
+            this.updateType();
+        },
+        currentType: 10,
+        updateType: function () {
+            $("#btnShortSale").removeClass("btn-primary");
+            $("#btnStraightSale").removeClass("btn-primary");
+            $("#btnTaxliens").removeClass("btn-primary");
+
+            if (LeadTypeCtr.currentType == 10) {
+                $("#btnShortSale").addClass("btn-primary");
+            } else if (LeadTypeCtr.currentType == 13) {
+                $("#btnStraightSale").addClass("btn-primary");
+            } else if (LeadTypeCtr.currentType == 3) {
+                $("#btnTaxliens").addClass("btn-primary");
+            }
+
+            if (gridTrackingClient)
+                gridTrackingClient.Refresh();
+        },
+        changeType: function (type) {
+            if (type != undefined && this.currentType != type) {
+                var that = this;
+
+                var substatusStr = type == 10 ? "Short Sale" : type == 13 ? "Straight Sale" : "Tax Liens";
+                AngularRoot.confirm("Change the Lead Type to " + substatusStr + "?", function (e) {
+                    if (e) {
+                        that.currentType = type;
+                        var typeString = String(type);
+                        that.changesType_callback(that.currentType, that.updateType)
+                    }
+                })
+            }
+        },
+        changesType_callback: function (type, callback) {
+            var url = "api/Leads/UpdateLeadsType/" + leadsInfoBBLE.trim() + "/" + type;
+            $.ajax({
+                type: "POST",
+                url: url,
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                success: callback
+            })
+        }
+    }
+
     function ReceiveServerData(rValue) {
         if (rValue.startsWith("getLeadsStatusResult")) {
-
             var temp = rValue.split("|");
             leadStatus = temp[1];
             leadSubstatus = temp[2];
             if (leadStatus && leadStatus === "20") {
                 $("#loanModStatusDiv").css("visibility", "visible");
-
                 LoanModStatusCtrl.updatesSubStatus();
             }
         }
+    }
 
-    }   
+    LeadTagCtr = {
+        inited: false,
+        init: function () {
+            var ctr = this;
+            var tagData = $('#hdLeadTags').val();            
+           
+            if ($("#leadTagBox").children().length == 0) {
+                $("#leadTagBox").dxTagBox({
+                    items: ['Mortgage Foreclosure', 'Tax lien', 'Tax Lien Lp'],
+                    applyValueMode: 'useButtons',
+                    value: (tagData == '' ? [] : tagData.split(';')),
+                    onValueChanged: function (e) {
+                        ctr.save(e.value);
+                    }
+                });
+            }
+        },
+        save: function (tags) {
+            var url = "api/Leads/" + leadsInfoBBLE.trim() + "/tags";
+            $.ajax(
+                {
+                    type: "POST",
+                    url: url,
+                    data: JSON.stringify(tags),
+                    contentType: 'application/json',
+                    success: function () {
+                        AngularRoot.alert('Tags is updated.');
+
+                        if (gridTrackingClient)
+                            gridTrackingClient.Refresh();
+                    }
+                });
+        }
+    }
+
+    PropertyInfoCtr = {
+        init: function () {
+            LeadTypeCtr.initData();
+            // LeadTagCtr.init();
+
+            if (leadsInfoBBLE)
+                LoanModStatusCtrl.reload();
+        }
+    }
 
     $(document).ready(function () {
         init_currency();
+
+        PropertyInfoCtr.init();
     });
 </script>
 
 <input type="hidden" id="borugh_block_lot_data" value='(Borough: <%=  LeadsInfoData.BoroughName %> , Block:<%=LeadsInfoData.Block %> ,Lot:<%=LeadsInfoData.Lot %>)' />
 <input type="hidden" id="LinesDefendantAndIndex" value='<%= LinesDefendantAndIndex()%>' />
-
+<input type="hidden" id="hdLeadType" value="<%=IIf(LeadsInfoData.Type.HasValue, LeadsInfoData.Type, 10) %>" />
+<input type="hidden" id="hdLeadTags" value="<%= LeadsInfoData.LeadsTags %>" />
 <div class="tab-pane active" id="property_info" style="padding-top: 5px">
     <%--witch scroll bar--%>
     <%--/*display:none need delete when realse--%>
@@ -207,8 +297,10 @@
                 <%--<span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>--%>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
+                <% If not IntranetPortal.Employee.IsInOutsideTeam(Page.User.Identity.Name) %>
                 <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx?#/preassign/new?BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
+                <% End If %>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("Underwriting Request" + leadsInfoBBLE, "/LeadDocSearch/UnderwritingRequest.aspx?BBLE=<%= LeadsInfoData.BBLE %>#/")'>Request Underwriting</span>
                 <% End If %>
             </div>
@@ -233,17 +325,18 @@
                                 <% If LeadsInfoData.EcourtData.Active Then %>
                                 Current Active Cases: <b><%= String.Join(",", LeadsInfoData.EcourtData.ActiveCaseNumbers) %> </b>
                                 <% Else %>
-                                <b style="color: red; font-weight: 600">No Active Cases in Ecourt.</b>
+                                <b style="color: red; font-weight: 600">No Active Cases in Ecourt. (Case Inactive <%= HumanizeTime(LeadsInfoData.EcourtData.InActiveDate) %>) </b>
                                 <% End If %>
                             </span>
                             <!-- case status -->
                             <% If LeadsInfoData.EcourtData.LatestUpdatedCases IsNot Nothing %>
-                            <div style="display: block; margin-left:56px">
+                            <div style="display: block; margin-left: 56px">
                                 <% For each cas In LeadsInfoData.EcourtData.LatestUpdatedCases %>
                                 <i class="note_img"></i>
                                 <span style="font-size: 14px;">
                                     <%= String.Format("Case (<b>{0}</b>) changed to {1} on {2:d}.", cas.FormattedCaseIndexNumber, cas.CaseStatus, cas.UpdateDate) %>
-                                </span><br />
+                                </span>
+                                <br />
                                 <% Next %>
                             </div>
                             <% End if %>
@@ -272,17 +365,32 @@
                         <% i += 1%>
                         <% End If%>
 
-                        <%-- <% If LeadsInfoData.Type.HasValue Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text">Leads type: <b><%= CType(LeadsInfoData.Type, IntranetPortal.LeadsInfo.LeadsType).ToString %></b></span>
+                            <div style="display: inline-block;">
+                                <span class="note_text">Lead Type: </span>
+                                <div class="btn-group" style="margin-left: 15px">
+                                    <button id="btnShortSale" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(10)">Short Sale</button>
+                                    <button id="btnStraightSale" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(13)">Straight Sale</button>
+                                    <button id="btnTaxliens" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(3)">Tax Lien</button>
+                                </div>
+                            </div>
                         </div>
                         <% i += 1%>
-                        <% End If%>--%>
 
-
-
+                        <!-- disable the lien tags function
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <div style="display: inline-block;">
+                                <span class="note_text">Lien Type: </span>
+                                <div class="btn-group" style="margin-left: 15px">
+                                    <div class="tagBox" id="leadTagBox" style="width: 500px; margin-right: 15px; display: inline-block; float: left"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <% i += 1%>
                         <asp:HiddenField ID="hfBBLE" runat="server" />
+                        -->
 
                         <% For Each comment In LeadsInfoData.UserComments%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
@@ -370,8 +478,10 @@
                     <label class="ss_form_input_title">BBLE</label>
                     <input class="ss_form_input font_black" id="BBLEId" value="<%= If(LeadsInfoData.IsApartment, LeadsInfoData.BuildingBBLE, LeadsInfoData.BBLE)%>">
                 </li>
-
-
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">City</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.City %>">
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Neighborhood</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Neighborhood %>">
@@ -380,7 +490,6 @@
                     <label class="ss_form_input_title">Block | Lot</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Block & "| " & LeadsInfoData.Lot %>">
                 </li>
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">NYC SQFT</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.NYCSqft %>">
@@ -397,7 +506,6 @@
                     <label class="ss_form_input_title">LOT DEM</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.LotDem %>">
                 </li>
-
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">STORIES</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.NumFloors%>">
@@ -408,7 +516,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">MAX FAR</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.MaxFar%>">
+                    <input class="ss_form_input" value="<%= String.Format("{0:0.##}", LeadsInfoData.MaxFar)%>">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">
@@ -420,7 +528,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">UNBUILT SQFT</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.UnbuiltSqft%>">
+                    <input class="ss_form_input" value="<%= String.Format("{0:0.##}", LeadsInfoData.UnbuiltSqft) %>">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">SALE DATE</label>
@@ -648,7 +756,7 @@
             <ClientSideEvents EndCallback="function(s,e){alert('Saved.');}" />
         </dx:ASPxCallbackPanel>
 
-        <% If LeadsInfoData.TaxLiens IsNot Nothing AndAlso LeadsInfoData.TaxLiens.Count > 0 Then%>
+        <% If LeadsInfoData.TaxLiens IsNot Nothing AndAlso LeadsInfoData.TaxLiens.Count > 0 AndAlso False Then%>
         <div style="margin: 20px; margin-top: -219px; margin-left: 230px;" class="clearfix">
             <div class="form_head">Tax Liens</div>
             <ul class="ss_form_box clearfix">
@@ -688,7 +796,7 @@
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Default</span>
-                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="<%=LeadsInfoData.EstimatedMortageDefault.ToString("C") %>" />
+                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="<%=String.Format("{0:C}", LeadsInfoData.EstimatedMortageDefault) %>" />
             </div>
             <%----end line ----%>
         </div>

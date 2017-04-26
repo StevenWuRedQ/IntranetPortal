@@ -339,8 +339,7 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="PreShortSale" Text="New Offer" NavigationUrl="#" ShowAmount="false" Expanded="false">
-    <!--Temporarily use Admin roles for Eviction-->
+  <PortalNavItem Name="PreShortSale" Text="New Offer" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">    
     <UserRoles>OfficeManager-*,OfficeExecutive</UserRoles>
     <Items>
       <PortalNavItem Name="PSS-Summary" Text="Summary" NavigationUrl="/mydefault.aspx?name=NewOffer" ShowAmount="false">
@@ -708,7 +707,7 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
+  <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">
     <UserRoles>DocSearch-Outside,OfficeManager-*,Entity-Manager,ShortSale-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
