@@ -125,7 +125,9 @@
                             <% End If   %>
                             <li class="pull-right" style="margin-right: 10px; color: #ffa484">
                                 <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" onclick="SaveShortSaleCase()" data-original-title="Save"></i>
+                                <% If not Page.User.IsInRole("ShortSale-OutsideAgent") %>
                                 <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);"></i>
+                                <% End If %>
                                 <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
                                 <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
                             </li>

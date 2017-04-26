@@ -112,10 +112,10 @@ Public Class RulesService
         Rules.Add(New ShortSaleFollowUpRule() With {.ExecuteOn = TimeSpan.Parse("07:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "ShortSale Follow up Rule"})
 
         'Auction
-        Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auction Properties Daily Notify Rule"})
+        'Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auction Properties Daily Notify Rule"})
 
         Dim days = 7 - DateTime.Today.DayOfWeek
-        Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", days)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "Auction Properties Weekly Notify Rule", .ExecuteOnWeekend = True, .IsWeekly = True})
+        'Rules.Add(New AuctionNotifyRule() With {.ExecuteOn = TimeSpan.Parse(String.Format("{0}.08:00:00", days)), .Period = TimeSpan.Parse("7.0:0:0"), .RuleName = "Auction Properties Weekly Notify Rule", .ExecuteOnWeekend = True, .IsWeekly = True})
 
         ' Auto Assign
         ' Rules.Add(New AutoAssignRule With {.ExecuteOn = TimeSpan.Parse(String.Format("16:00:00", days)), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Auto Sign Leads", .ExecuteNow = False})

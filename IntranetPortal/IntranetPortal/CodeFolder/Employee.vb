@@ -21,8 +21,8 @@ Partial Public Class Employee
     '    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 3
     '    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 3
     '#Else
-    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 60
-    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 30
+    Public Shared ReadOnly FOLLOW_UP_COUNT_LIMIT As Integer = 10000
+    Public Shared ReadOnly LOAN_MODS_COUNT_LIMIT As Integer = 10000
     '#End If
 
     Private Shared _ceo As Employee
@@ -66,6 +66,7 @@ Partial Public Class Employee
             End Try
         End Get
     End Property
+
 
     ''' <summary>
     ''' Get Employee User Profile Data
@@ -626,6 +627,15 @@ Partial Public Class Employee
         End If
 
         Return False
+    End Function
+
+    Public Shared Function IsInOutsideTeam(name As String) As Boolean
+        Dim emp = Employee.GetInstance(name)
+        If emp Is Nothing Then
+            Throw New Exception("can't find the employee.")
+        End If
+
+        Return Team.OutSideTeams.Contains(emp.Department)
     End Function
 
     ''' <summary>

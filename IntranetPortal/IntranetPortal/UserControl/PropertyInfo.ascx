@@ -51,7 +51,7 @@
     function init_currency() {
         if (typeof $('.input_currency').formatCurrency != "undefined") {
             $('.input_currency').formatCurrency();
-        }        
+        }
     }
 
     function SaveLeadsComments(s, e) {
@@ -146,7 +146,7 @@
     }
 
     LeadTypeCtr = {
-        initData: function(){
+        initData: function () {
             this.currentType = $('#hdLeadType').val();
             this.updateType();
         },
@@ -155,13 +155,12 @@
             $("#btnShortSale").removeClass("btn-primary");
             $("#btnStraightSale").removeClass("btn-primary");
             $("#btnTaxliens").removeClass("btn-primary");
-            
+
             if (LeadTypeCtr.currentType == 10) {
                 $("#btnShortSale").addClass("btn-primary");
             } else if (LeadTypeCtr.currentType == 13) {
                 $("#btnStraightSale").addClass("btn-primary");
-            } else if (LeadTypeCtr.currentType == 3)
-            {
+            } else if (LeadTypeCtr.currentType == 3) {
                 $("#btnTaxliens").addClass("btn-primary");
             }
 
@@ -170,9 +169,9 @@
         },
         changeType: function (type) {
             if (type != undefined && this.currentType != type) {
-                var that = this;                
-                
-                var substatusStr = type == 10 ? "Short Sale" : type == 13 ?  "Straight Sale" : "Tax Liens";
+                var that = this;
+
+                var substatusStr = type == 10 ? "Short Sale" : type == 13 ? "Straight Sale" : "Tax Liens";
                 AngularRoot.confirm("Change the Lead Type to " + substatusStr + "?", function (e) {
                     if (e) {
                         that.currentType = type;
@@ -184,13 +183,12 @@
         },
         changesType_callback: function (type, callback) {
             var url = "api/Leads/UpdateLeadsType/" + leadsInfoBBLE.trim() + "/" + type;
-            $.ajax(
-                {
-                    type: "POST",
-                    url: url,
-                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                    success: callback
-                })
+            $.ajax({
+                type: "POST",
+                url: url,
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                success: callback
+            })
         }
     }
 
@@ -206,16 +204,62 @@
         }
     }
 
+    LeadTagCtr = {
+        inited: false,
+        init: function () {
+            var ctr = this;
+            var tagData = $('#hdLeadTags').val();            
+           
+            if ($("#leadTagBox").children().length == 0) {
+                $("#leadTagBox").dxTagBox({
+                    items: ['Mortgage Foreclosure', 'Tax lien', 'Tax Lien Lp'],
+                    applyValueMode: 'useButtons',
+                    value: (tagData == '' ? [] : tagData.split(';')),
+                    onValueChanged: function (e) {
+                        ctr.save(e.value);
+                    }
+                });
+            }
+        },
+        save: function (tags) {
+            var url = "api/Leads/" + leadsInfoBBLE.trim() + "/tags";
+            $.ajax(
+                {
+                    type: "POST",
+                    url: url,
+                    data: JSON.stringify(tags),
+                    contentType: 'application/json',
+                    success: function () {
+                        AngularRoot.alert('Tags is updated.');
+
+                        if (gridTrackingClient)
+                            gridTrackingClient.Refresh();
+                    }
+                });
+        }
+    }
+
+    PropertyInfoCtr = {
+        init: function () {
+            LeadTypeCtr.initData();
+            // LeadTagCtr.init();
+
+            if (leadsInfoBBLE)
+                LoanModStatusCtrl.reload();
+        }
+    }
+
     $(document).ready(function () {
         init_currency();
 
-        LeadTypeCtr.initData();
+        PropertyInfoCtr.init();
     });
 </script>
 
 <input type="hidden" id="borugh_block_lot_data" value='(Borough: <%=  LeadsInfoData.BoroughName %> , Block:<%=LeadsInfoData.Block %> ,Lot:<%=LeadsInfoData.Lot %>)' />
 <input type="hidden" id="LinesDefendantAndIndex" value='<%= LinesDefendantAndIndex()%>' />
 <input type="hidden" id="hdLeadType" value="<%=IIf(LeadsInfoData.Type.HasValue, LeadsInfoData.Type, 10) %>" />
+<input type="hidden" id="hdLeadTags" value="<%= LeadsInfoData.LeadsTags %>" />
 <div class="tab-pane active" id="property_info" style="padding-top: 5px">
     <%--witch scroll bar--%>
     <%--/*display:none need delete when realse--%>
@@ -253,8 +297,10 @@
                 <%--<span class="time_buttons" onclick='preAssignPopopClient.Show()'>Pre sign</span>--%>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <% If IntranetPortal.Employee.IsManager(Page.User.Identity.Name) Then %>
+                <% If not IntranetPortal.Employee.IsInOutsideTeam(Page.User.Identity.Name) %>
                 <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx?#/preassign/new?BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
+                <% End If %>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("Underwriting Request" + leadsInfoBBLE, "/LeadDocSearch/UnderwritingRequest.aspx?BBLE=<%= LeadsInfoData.BBLE %>#/")'>Request Underwriting</span>
                 <% End If %>
             </div>
@@ -318,21 +364,33 @@
                         </div>
                         <% i += 1%>
                         <% End If%>
-                                                
+
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
-                            <div style="display:inline-block;">
+                            <div style="display: inline-block;">
                                 <span class="note_text">Lead Type: </span>
-                                <div class="btn-group" style="margin-left:15px">
+                                <div class="btn-group" style="margin-left: 15px">
                                     <button id="btnShortSale" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(10)">Short Sale</button>
                                     <button id="btnStraightSale" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(13)">Straight Sale</button>
                                     <button id="btnTaxliens" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(3)">Tax Lien</button>
                                 </div>
                             </div>
                         </div>
-                        <% i += 1%>                        
+                        <% i += 1%>
 
+                        <!-- disable the lien tags function
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <div style="display: inline-block;">
+                                <span class="note_text">Lien Type: </span>
+                                <div class="btn-group" style="margin-left: 15px">
+                                    <div class="tagBox" id="leadTagBox" style="width: 500px; margin-right: 15px; display: inline-block; float: left"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <% i += 1%>
                         <asp:HiddenField ID="hfBBLE" runat="server" />
+                        -->
 
                         <% For Each comment In LeadsInfoData.UserComments%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>

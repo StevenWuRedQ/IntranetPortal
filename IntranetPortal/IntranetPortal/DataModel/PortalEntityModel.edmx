@@ -348,6 +348,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadsTags" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityType Name="LeadsInThirdParty">
           <Key>
@@ -1239,6 +1240,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadsTags" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="LeadLeadsInfo">
           <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="0..1" />
@@ -2072,6 +2074,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="LeadsInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfo">
               <MappingFragment StoreEntitySet="LeadsInfo">
+                <ScalarProperty Name="LeadsTags" ColumnName="LeadsTags" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />

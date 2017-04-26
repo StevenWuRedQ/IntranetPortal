@@ -16,7 +16,6 @@ Partial Public Class HomeOwner
 
     <IgnoreDataMember>
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
-
         Get
             If objLocateReport Is Nothing Then
 
@@ -502,6 +501,34 @@ Partial Public Class HomeOwner
         End Get
     End Property
 
+    <IgnoreDataMember>
+    Public ReadOnly Property Dob As DateTime?
+        Get
+            If TLOLocateReport.dateOfBirthField IsNot Nothing Then
+                Dim dobfield = TLOLocateReport.dateOfBirthField
+                Dim year = 0
+                Dim month = 1
+                Dim day = 1
+
+                If Not String.IsNullOrEmpty(dobfield.dateOfBirthField.yearField) Then
+                    year = CInt(dobfield.dateOfBirthField.yearField)
+                Else
+                    Return Nothing
+                End If
+
+                If Not String.IsNullOrEmpty(dobfield.dateOfBirthField.monthField) Then
+                    month = CInt(dobfield.dateOfBirthField.monthField)
+                End If
+
+                If Not String.IsNullOrEmpty(dobfield.dateOfBirthField.dayField) Then
+                    day = CInt(dobfield.dateOfBirthField.dayField)
+                End If
+
+                Return New Date(year, month, day)
+            End If
+        End Get
+    End Property
+    
     <IgnoreDataMember>
     Public ReadOnly Property Alive As Boolean
         Get

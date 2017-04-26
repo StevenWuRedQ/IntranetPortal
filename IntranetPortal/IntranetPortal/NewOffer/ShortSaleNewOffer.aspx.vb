@@ -15,7 +15,8 @@ Public Class ShortSaleNewOfferPage
         ' check the if HOI exsited or not 
         Dim record = PreSignRecord.GetInstanceByBBLE(bble)
         If record Is Nothing Then
-            Server.Transfer("/PortalError.aspx?code=1002")
+            ' remove the link between hoi and new offer by 4/25/2017, G
+            ' Server.Transfer("/PortalError.aspx?code=1002")
         End If
 
         ' check offer status

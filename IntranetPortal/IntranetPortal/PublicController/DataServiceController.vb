@@ -76,6 +76,34 @@ Namespace PublicController
             End Try
         End Function
 
+        <Route("api/dataservice/property/{bble}/tlo/{name}/info")>
+        Function GetOwnerInfo(bble As String, name As String) As IHttpActionResult
+            Try
+                If Not ModelState.IsValid Then
+                    Return BadRequest(ModelState)
+                End If
+
+                Dim owner = HomeOwner.GetHomeOwner(bble, name)
+
+                If owner Is Nothing Then
+                    Return NotFound()
+                End If
+
+                Dim result = New With {
+                    .bble = bble,
+                    .name = owner.Name,
+                    .dob = owner.Dob,
+                    .age = owner.Age,
+                    .death = Not owner.Alive,
+                    .ssn = owner.OwnerSSN
+                    }
+
+                Return Ok(result)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
         Enum DeathStatus
             Unknow
             Active

@@ -35,6 +35,16 @@ Public Class LeadsInfo
         End Using
     End Sub
 
+    Public Shared Sub UpdateTags(bble As String, tags As String, updateby As String)
+        Using ctx As New Entities
+            Dim li = ctx.LeadsInfoes.Find(bble)
+            li.LeadsTags = tags
+            li.UpdateBy = updateby
+            li.LastUpdate = DateTime.Now
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Shared Function GetLeadsInfoByType(type As LeadsType) As IQueryable(Of LeadsInfo)
         Dim ctx As New Entities
         Return ctx.LeadsInfoes.Where(Function(l) l.Type = type).AsQueryable
@@ -910,7 +920,7 @@ Public Class LeadsInfo
 
             str.Add(New Indicator("UnderBuilt", "This property is only built to 50% or less of its total allowable Sqft", Function(li)
                                                                                                                               If li.UnbuiltSqft.HasValue AndAlso li.NYCSqft.HasValue AndAlso li.UnbuiltSqft > 0 Then
-                                                                                                                                  Return li.UnbuiltSqft / li.NYCSqft >= 0.5
+                                                                                                                                  Return li.UnbuiltSqft / (li.NYCSqft + li.UnbuiltSqft) <= 0.5
                                                                                                                               End If
 
                                                                                                                               Return False
