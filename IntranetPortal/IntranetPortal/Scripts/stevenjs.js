@@ -1012,6 +1012,21 @@ function OnStatusCategoryChange(selCategory, statusData) {
 
 
 }
+
+function STDownloadFile(url, fileName) {
+    var link = document.createElement("a");
+    link.href = url;
+    link.target = '_blank';
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName;
+
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
