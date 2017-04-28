@@ -1008,9 +1008,6 @@ function OnStatusCategoryChange(selCategory, statusData) {
             }
         });
     }
-
-
-
 }
 
 function STDownloadFile(url, fileName) {

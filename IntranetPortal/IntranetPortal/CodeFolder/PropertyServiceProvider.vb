@@ -648,8 +648,8 @@ Public Class PropertyServiceProvider
         End If
 
         ' zestimate
-        If externalData.zillowPorperty IsNot Nothing Then
-            SaveZEstimate(externalData.zillowPorperty)
+        If externalData.zillowProperty IsNot Nothing Then
+            SaveZEstimate(externalData.zillowProperty)
         End If
 
         ' Water bill

@@ -458,7 +458,7 @@ Public Class ExternalData
     Public Property waterbill As Waterbill
     Public Property mortgageServicer As MortgageServicer
     Public Property dobPenaltiesAndViolationsSummary As Dobpenaltiesandviolations
-    Public Property zillowPorperty As ZillowProperty
+    Public Property zillowProperty As ZillowProperty
 
 End Class
 

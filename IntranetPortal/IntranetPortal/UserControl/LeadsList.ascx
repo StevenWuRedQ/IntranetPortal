@@ -76,7 +76,6 @@
         //InitScrollBar();
         init_currency();
         initToolTips();
-
     }
 
     function InitScrollBar() {
@@ -205,12 +204,12 @@
     function AddScrollbarOnLeadsList() {
         return;
     }
-
-
+    
     function OnColorMark(s, e) {
         var index = e.item.index;
         onColoMarkClick(index);
     }
+
     function GetMarkColor(markColor) {
         if (markColor <= 0 || markColor == 1000) {
             return "gray";
@@ -237,6 +236,7 @@
         MarkColorCallBack.
             PerformCallback("MarkColor|" + temBBLE + "|" + index)
     }
+
     function PopupColorMark(e, BBLE) {
         temBBLE = BBLE;
         AspPopupColorMark.ShowAtElement(e);

@@ -195,11 +195,13 @@ Public Class PropertyInfo
 
             Dim bble = eventArgument.Split("|")(1)
             LeadsData = Lead.GetInstance(bble)
-            callbackResult = "getLeadsStatusResult|" & LeadsData.Status & "|" & LeadsData.SubStatus
+            If LeadsData IsNot Nothing Then
+                callbackResult = "getLeadsStatusResult|" & LeadsData.Status & "|" & LeadsData.SubStatus
+            Else
+                callbackResult = "-1"
+            End If
         Else
             callbackResult = "-1"
-
-
         End If
     End Sub
 
