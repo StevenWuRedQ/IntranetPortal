@@ -172,6 +172,13 @@ Public Class PropertyService
         Return Execute(Of PhysicalData)(request, True)
     End Function
 
+    Public Function GetAllLiens(bble As String) As AllLiens
+        Dim request = GetRequest("api/liens/{bble}", Method.GET)
+        request.AddUrlSegment("bble", bble.Trim)
+
+        Return Execute(Of AllLiens)(request, True)
+    End Function
+
 #Region "IDisposable Support"
     Private disposedValue As Boolean ' To detect redundant calls
 
@@ -204,6 +211,45 @@ Public Class PropertyService
     End Sub
 #End Region
 
+End Class
+
+Public Class AllLiens
+    Public Property localLienData As Localliendata
+    Public Property stateLienData As Stateliendata
+    Public Property federalLienData As Federalliendata
+    Public Property otherLienData As Otherliendata
+End Class
+
+Public Class Localliendata
+    Public Property nYCTaxLiensSold As List(Of Nyctaxlienssold)
+End Class
+
+Public Class Nyctaxlienssold
+    Public Property Year As Integer
+    Public Property BBL As String
+    Public Property Address As String
+    Public Property Owner As String
+    Public Property [Property] As Decimal?
+    Public Property Other As Decimal?
+    Public Property ERP As Decimal?
+    Public Property Environmental As Decimal?
+    Public Property CIS As Decimal?
+    Public Property NoticingFees As Decimal?
+    Public Property Surchages As Decimal?
+    Public Property LienTotal As Decimal?
+    Public Property InterestRate As Decimal?
+    Public Property DOFInterestRate As Decimal?
+    Public Property DEPInterestRate As Decimal?
+    Public Property Schedule As String
+End Class
+
+Public Class Stateliendata
+End Class
+
+Public Class Federalliendata
+End Class
+
+Public Class Otherliendata
 End Class
 
 Public Class DeedDocument

@@ -155,14 +155,15 @@
             $("#btnShortSale").removeClass("btn-primary");
             $("#btnStraightSale").removeClass("btn-primary");
             $("#btnTaxliens").removeClass("btn-primary");
-
             if (LeadTypeCtr.currentType == 10) {
                 $("#btnShortSale").addClass("btn-primary");
             } else if (LeadTypeCtr.currentType == 13) {
                 $("#btnStraightSale").addClass("btn-primary");
             } else if (LeadTypeCtr.currentType == 3) {
-                $("#btnTaxliens").addClass("btn-primary");
+                $("#btnTaxliens").addClass("btn-primary");               
             }
+
+            TaxLiensCtr.init(LeadTypeCtr.currentType);
 
             if (gridTrackingClient)
                 gridTrackingClient.Refresh();
@@ -208,8 +209,8 @@
         inited: false,
         init: function () {
             var ctr = this;
-            var tagData = $('#hdLeadTags').val();            
-           
+            var tagData = $('#hdLeadTags').val();
+
             if ($("#leadTagBox").children().length == 0) {
                 $("#leadTagBox").dxTagBox({
                     items: ['Mortgage Foreclosure', 'Tax lien', 'Tax Lien Lp'],
@@ -236,6 +237,23 @@
                             gridTrackingClient.Refresh();
                     }
                 });
+        }
+    }
+
+    TaxLiensCtr = {
+        init:function(type){
+            if (type == 3) {
+                this.show();
+            } else {
+                this.hide();
+            }
+        },
+        show: function () {
+            $('#divTaxLiens').show();
+            girdTaxliens.PerformCallback("load|" + leadsInfoBBLE.trim());
+        },
+        hide: function () {
+            $('#divTaxLiens').hide();
         }
     }
 
@@ -804,7 +822,7 @@
 
         <%--Liens table--%>
         <div style="margin: 20px;" class="clearfix">
-            <div class="form_head" style="margin-top: 40px;">Liens</div>
+            <div class="form_head" style="margin-top: 40px;">Mortgages Liens</div>
             <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%" ViewStateMode="Disabled">
                 <SettingsBehavior AllowDragDrop="false" AllowSort="false" AllowGroup="false" />
                 <Columns>
@@ -822,6 +840,27 @@
             </dx:ASPxGridView>
         </div>
         <%--end--%>
+
+        <%-- Tax liens --%>        
+        <div style="margin: 20px; display:none" class="clearfix" id="divTaxLiens">
+            <div class="form_head" style="margin-top: 40px;">Tax Liens</div>
+            <dx:ASPxGridView runat="server" ClientInstanceName="girdTaxliens" 
+                OnCustomCallback="ASPxGridView1_CustomCallback" ID="ASPxGridView1" 
+                KeyFieldName="Year" Width="100%" ViewStateMode="Disabled">
+                <SettingsBehavior AllowDragDrop="false" AllowSort="false" AllowGroup="false" />
+                <Columns>
+                    <dx:GridViewDataTextColumn FieldName="Year" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Property" PropertiesTextEdit-DisplayFormatString="c2" Settings-AllowSort="False"></dx:GridViewDataTextColumn>                
+                    <dx:GridViewDataTextColumn FieldName="CIS" PropertiesTextEdit-DisplayFormatString="c2" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="NoticingFees" Settings-AllowSort="False" PropertiesTextEdit-DisplayFormatString="c2"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Surchages" Settings-AllowSort="False" PropertiesTextEdit-DisplayFormatString="c2"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="LienTotal" Settings-AllowSort="False" PropertiesTextEdit-DisplayFormatString="c2"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="InterestRate" Settings-AllowSort="False" PropertiesTextEdit-DisplayFormatString="p1"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Schedule" Settings-AllowSort="False"></dx:GridViewDataTextColumn>                    
+                </Columns>
+            </dx:ASPxGridView>
+        </div>        
+        <%-- end --%>
     </div>
 </div>
 <!-- custom scrollbar plugin -->

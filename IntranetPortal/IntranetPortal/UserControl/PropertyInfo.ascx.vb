@@ -1,4 +1,5 @@
-﻿Imports Humanizer
+﻿Imports DevExpress.Web
+Imports Humanizer
 
 Public Class PropertyInfo
     Inherits UserControl
@@ -208,4 +209,16 @@ Public Class PropertyInfo
     Public Function GetCallbackResult() As String Implements ICallbackEventHandler.GetCallbackResult
         Return callbackResult
     End Function
+
+    Protected Sub ASPxGridView1_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
+        If e.Parameters.StartsWith("load") Then
+            Dim bble = e.Parameters.Split("|")(1)
+            Dim allLiens = DataWCFService.GetAllLiens(bble)
+            If allLiens IsNot Nothing AndAlso allLiens.localLienData IsNot Nothing Then
+                Dim grid = CType(sender, ASPxGridView)
+                grid.DataSource = allLiens.localLienData.nYCTaxLiensSold
+                grid.DataBind()
+            End If
+        End If
+    End Sub
 End Class

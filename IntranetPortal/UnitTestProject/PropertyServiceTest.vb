@@ -75,6 +75,15 @@ Public Class PropertyServiceTest
     End Sub
 
     <TestMethod()>
+    Public Sub GetLiens_ReturnList()
+        Dim bble = "4141760034"
+        Dim service As New PropertyService
+        Dim result = service.GetAllLiens(bble)
+
+        Assert.IsNotNull(result)
+    End Sub
+
+    <TestMethod()>
     Public Sub GetGeneralInformation_BadRequestReturnNull()
         Dim bble = "6004010187"
         Dim service As New PropertyService

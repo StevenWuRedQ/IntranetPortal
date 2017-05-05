@@ -49,6 +49,13 @@ Public Interface IPropertyServiceProvider
     Function GetLiensInfo(bble As String) As List(Of PortalLisPen)
 
     ''' <summary>
+    '''     Return property all liens data
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <returns></returns>
+    Function GetAllLiens(bble As String) As AllLiens
+
+    ''' <summary>
     '''     Update leads owner data to latest
     ''' </summary>
     ''' <param name="bble">Property BBLE</param>
@@ -311,6 +318,10 @@ Public Class PropertyServiceProvider
         Return lisPens
     End Function
 
+    Public Function GetAllLiens(bble As String) As AllLiens Implements IPropertyServiceProvider.GetAllLiens
+        Return svr.GetAllLiens(bble)
+    End Function
+
     ''' <summary>
     '''     Update the apartment homeowner data from TLO
     ''' </summary>
@@ -474,8 +485,9 @@ Public Class PropertyServiceProvider
     Private Sub LoadWaterBill(lead As LeadsInfo, apiOrder As APIOrder)
         lead.WaterOrderTime = DateTime.Now
         lead.WaterOrderStatus = APIOrder.ItemStatus.Calling.ToString
-        apiOrder.WaterBill = APIOrder.ItemStatus.Complete
-        apiOrder.UpdateOrderStatus()
+
+        Dim bills = svr.GetBills(lead.BBLE, apiOrder.ApiOrderID)
+        SaveWaterBill(bills.waterBill, lead, apiOrder)
     End Sub
 
     Private Sub SaveWaterBill(bills As Waterbill, Optional lead As LeadsInfo = Nothing, Optional apiOrder As APIOrder = Nothing)
@@ -879,6 +891,7 @@ Public Class PropertyServiceProvider
         ' TODO: uncomment the following line if Finalize() is overridden above.
         ' GC.SuppressFinalize(Me)
     End Sub
+
 #End Region
 
 

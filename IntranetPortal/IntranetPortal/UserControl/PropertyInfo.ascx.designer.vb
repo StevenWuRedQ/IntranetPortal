@@ -302,6 +302,15 @@ Partial Public Class PropertyInfo
     Protected WithEvents gridLiens As Global.DevExpress.Web.ASPxGridView
     
     '''<summary>
+    '''ASPxGridView1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxGridView1 As Global.DevExpress.Web.ASPxGridView
+    
+    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>

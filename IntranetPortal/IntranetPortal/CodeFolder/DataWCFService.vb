@@ -175,6 +175,15 @@ Public Class DataWCFService
     End Function
 
     ''' <summary>
+    '''     Get All liens data
+    ''' </summary>
+    ''' <param name="bble">Property BBLE</param>
+    ''' <returns></returns>
+    Public Shared Function GetAllLiens(bble As String) As AllLiens
+        Return provider.GetAllLiens(bble)
+    End Function
+
+    ''' <summary>
     '''     Return BBLEs by address data
     ''' </summary>
     ''' <param name="num">Street Number</param>
