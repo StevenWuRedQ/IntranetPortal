@@ -60,9 +60,9 @@
                          Select offer, li.PropertyAddress, ld
 
             Return result.AsEnumerable.Select(Function(a)
-                                                  a.offer.CurrentTeam = ""
-                                                  a.offer.CurrentAgent = a.ld.EmployeeName
-                                                  a.offer.Address = a.PropertyAddress
+                                                  a.offer.CurrentTeam = Nothing
+                                                  a.offer.CurrentAgent = a.ld?.EmployeeName
+                                                  a.offer.Address = a?.PropertyAddress
                                                   Return a.offer
                                               End Function).FirstOrDefault
         End Using
