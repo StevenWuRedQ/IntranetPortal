@@ -409,13 +409,6 @@ Partial Class LeadInfoDocumentSearch
         End If
         Return Nothing
     End Function
-
-    Public Shared Function GetPropertiesList() As IEnumerable(Of Object)
-        Using ctx As New PortalEntities
-            Dim propertiesLists = ctx.DocSearchUnderwritingPropertiesList.ToList()
-            Return propertiesLists
-        End Using
-    End Function
 End Class
 
 Public Class LeadInfoDocumentSearchCaseMetaData

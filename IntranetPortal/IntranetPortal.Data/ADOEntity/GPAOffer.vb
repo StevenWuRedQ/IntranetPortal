@@ -12,27 +12,21 @@ Imports System
 Imports System.Collections.Generic
 
 
-Partial Public Class LawReference
-
-    Public Property RefId As Integer
-
-    Public Property Topic As String
+Partial Public Class GPAOffer
 
     Public Property BBLE As String
 
-    Public Property CaseName As String
+    Public Property OfferPrice As Nullable(Of Decimal)
 
-    Public Property Summary As String
+    Public Property Status As Nullable(Of Integer)
 
-    Public Property Notes As String
-
-    Public Property CreateBy As String
-
-    Public Property CreateTime As Nullable(Of Date)
+    Public Property LastUpdate As Nullable(Of Date)
 
     Public Property UpdateBy As String
 
-    Public Property UpdateTime As Nullable(Of Date)
+    Public Property CreateDate As Nullable(Of Date)
+
+    Public Property CreateBy As String
 
 
 End Class

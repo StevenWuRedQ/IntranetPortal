@@ -29,7 +29,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.CorporationEntity" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="false" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCheckList" Width="2.375" PointX="10.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleLeadsInfo" Width="2.375" PointX="0.75" PointY="10.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="IntranetPortalModel.SSLead" Width="2.375" PointX="10.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.SSLead" Width="2.375" PointX="10.875" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="IntranetPortalModel.SSLeadsStatusLog" Width="2.375" PointX="3.75" PointY="10.75" IsExpanded="false" />
       </Diagram>
       <Diagram DiagramId="2cdf7606e6c24dc895f31f0e80a0c4dd" Name="Legal" >
@@ -54,10 +54,10 @@
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsEcourtData" Width="1.5" PointX="9.5" PointY="7.625" />
         <EntityTypeShape EntityType="IntranetPortalModel.EcourtCaseChange" Width="2" PointX="3.375" PointY="10" />
         <EntityTypeShape EntityType="IntranetPortalModel.DocSearchUnderwritingPropertiesList" Width="1.5" PointX="10.375" PointY="10.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.UnderwritingTrackingView" Width="2.125" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UnderwritingTrackingView" Width="2.125" PointX="9.625" PointY="9.625" />
       </Diagram>
       <Diagram DiagramId="4f83f20108054e3eb3754950694b164a" Name="Construction" >
-        <EntityTypeShape EntityType="IntranetPortalModel.CheckingComplain" Width="1.5" PointX="0.5" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.CheckingComplain" Width="1.5" PointX="0.875" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ConstructionBudget" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ConstructionCase" Width="2.25" PointX="4.5" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ConstructionInitialForm" Width="1.5" PointX="2.5" PointY="4.75" />
@@ -73,7 +73,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.CheckRequest" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PreSignRecord" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyOffer" Width="1.5" PointX="6.625" PointY="0.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.AuditLog" Width="1.5" PointX="8.5" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.AuditLog" Width="1.5" PointX="8.625" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.GPAOffer" Width="1.5" PointX="2.625" PointY="4.125" />
       </Diagram>
       <Diagram DiagramId="b741b009f0c0461e8625ff22708e5e4b" Name="Dialer" ZoomLevel="124" >

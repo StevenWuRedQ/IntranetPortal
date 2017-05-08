@@ -163,9 +163,6 @@
     <Compile Include="EmployeeTest.vb" />
     <Compile Include="LeadTest.vb" />
     <Compile Include="MockDB.vb" />
-    <Compile Include="PortalDBUnitTest.vb">
-      <SubType>Designer</SubType>
-    </Compile>
     <Compile Include="PropertyServiceTest.vb" />
     <Compile Include="QueryBuilderTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -186,7 +183,6 @@
     <Compile Include="ShortSaleUnitTest.vb" />
     <Compile Include="CheckingComplaintsTest.vb" />
     <Compile Include="ConstructionTest.vb" />
-    <Compile Include="SqlDatabaseSetup.vb" />
     <Compile Include="LegalUnitTest.vb" />
     <Compile Include="AuctionPropertyTest.vb" />
     <Compile Include="TitleUnitTest.vb" />
@@ -221,9 +217,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PortalDBUnitTest.resx">
-      <DependentUpon>PortalDBUnitTest.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
