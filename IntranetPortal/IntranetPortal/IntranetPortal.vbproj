@@ -8476,6 +8476,7 @@
     <Content Include="typings\globals\angular\typings.json" />
     <Content Include="typings\globals\jquery\typings.json" />
     <Content Include="typings.json" />
+    <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
