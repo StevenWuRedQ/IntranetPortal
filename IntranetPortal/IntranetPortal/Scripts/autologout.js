@@ -1,4 +1,7 @@
-﻿$(function () {
+﻿/**
+ * 
+ */
+$(function () {
     window.autoLogout_lastCheck = new Date();
     // recheck every 30 minutes
     var CHECK_INTERVAL = 1000 * 60 * 60;

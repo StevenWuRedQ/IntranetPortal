@@ -1,13 +1,8 @@
-﻿Imports System.Data
-Imports System.Data.Entity
+﻿Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
-Imports System.Linq
 Imports System.Net
-Imports System.Net.Http
 Imports System.Web.Http
 Imports System.Web.Http.Description
-Imports System.Web.Http.Results
-Imports System.Web.Mail
 Imports IntranetPortal.Data
 Imports IntranetPortal.LeadsActivityLog
 
@@ -34,10 +29,7 @@ Namespace Controllers
                 Return Ok()
             Else
                 Dim searchs = LeadInfoDocumentSearch.GetDocumentSearchs()
-                searchs.ForEach(Function(s)
-                                    s.Team = Employee.GetEmpTeam(s.Owner)
-                                    Return s
-                                End Function)
+                searchs.ForEach(Function(s) s.Team = Employee.GetEmpTeam(s.Owner))
                 Return Ok(searchs)
             End If
         End Function
@@ -111,7 +103,7 @@ Namespace Controllers
             Dim userName = HttpContext.Current.User.Identity.Name
             search.Complete(userName)
 
-            If (Not String.IsNullOrEmpty(search.ResutContent)) Then
+            If (Not String.IsNullOrEmpty(search.ResultContent)) Then
                 Threading.ThreadPool.QueueUserWorkItem(AddressOf SendCompleteNotify, search)
             Else
                 IntranetPortal.Core.SystemLog.LogError("LeadsDocumentSearchContentError", New Exception("The content is null"), search.ToJsonString, search.CompletedBy, search.BBLE)
@@ -132,7 +124,7 @@ Namespace Controllers
                 End If
 
                 maildata.Add("UserName", leadInfoDocumentSearch.CreateBy)
-                maildata.Add("ResutContent", leadInfoDocumentSearch.ResutContent)
+                maildata.Add("ResutContent", leadInfoDocumentSearch.ResultContent)
 
                 If Not String.IsNullOrEmpty(leadInfoDocumentSearch.CreateBy) Then
                     Dim attachment As Mail.Attachment
@@ -241,25 +233,25 @@ Namespace Controllers
         Private Function LeadInfoDocumentSearchExists(ByVal id As String) As Boolean
             Return db.LeadInfoDocumentSearches.Count(Function(e) e.BBLE = id) > 0
         End Function
-        <HttpPost>
-        <Route("api/LeadInfoDocumentSearches/MarkCompleted")>
+
+        <Route("api/LeadInfoDocumentSearches/MarkCompleted"), HttpPost>
         Public Function MarkUnderWritingCompleted(<FromBody> data As Object) As IHttpActionResult
-            Dim USER = HttpContext.Current.User.Identity.Name
-            Dim BBLE As String
-            Dim Status As Integer
-            Dim Note As String
+            Dim user = HttpContext.Current.User.Identity.Name
+            Dim bble As String
+            Dim status As Integer
+            Dim note As String
             Try
                 If Not data Is Nothing Then
-                    BBLE = data("bble").ToString
-                    Status = CInt(data("status").ToString)
-                    Note = data("note").ToString
+                    bble = data("bble").ToString
+                    status = CInt(data("status").ToString)
+                    note = data("note").ToString
 
-                    If Not String.IsNullOrEmpty(BBLE) Then
-                        Dim search = LeadInfoDocumentSearch.MarkCompletedUnderwriting(BBLE, USER, Status, Note)
+                    If Not String.IsNullOrEmpty(bble) Then
+                        Dim search = LeadInfoDocumentSearch.MarkCompletedUnderwriting(bble, user, status, note)
                         If Nothing IsNot search Then
                             Return Ok(search)
                         Else
-                            Return BadRequest(String.Format("Doc Search With {0} Cannot Be Found!", BBLE))
+                            Return BadRequest(String.Format("Doc Search With {0} Cannot Be Found!", bble))
                         End If
                     End If
                 Else
@@ -270,8 +262,13 @@ Namespace Controllers
             End Try
         End Function
 
-        <HttpGet>
-        <Route("api/LeadInfoDocumentSearches/UnderWritingStatus/{status}")>
+
+        ''' <summary>
+        ''' Deprecated.
+        ''' </summary>
+        ''' <param name="status"></param>
+        ''' <returns></returns>
+        <Route("api/LeadInfoDocumentSearches/UnderWritingStatus/{status}"), HttpGet>
         Public Function GetSearchByUnderWritingStatus(status As Integer) As IHttpActionResult
 
             Try
@@ -289,9 +286,25 @@ Namespace Controllers
             Catch ex As Exception
                 Return BadRequest(ex.Message)
             End Try
-
-
         End Function
 
+        <Route("api/LeadInfoDocumentSearches/Status/{status}")>
+        Public Function GetSearchByStatus(status As Integer) As IhttpActionResult
+            Try
+                Dim searchStatus = CType(status, LeadInfoDocumentSearch.SearchStatus)
+                Dim searches = LeadInfoDocumentSearch.GetSearchByStatus(searchStatus)
+                If (searches Is Nothing) Then
+                    Throw New Exception("Empty request by searches" & status)
+                End If
+
+                Dim data = New With {
+                    .data = searches.OrderByDescending(Function(s) s.UpdateDate).Take(10),
+                    .count = searches.Count()
+                }
+                Return Ok(data)
+            Catch ex As Exception
+                Return BadRequest(ex.Message)
+            End Try
+        End Function
     End Class
 End Namespace

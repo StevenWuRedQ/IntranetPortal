@@ -1,5 +1,4 @@
-﻿Imports System.Text
-Imports IntranetPortal.Data
+﻿Imports IntranetPortal.Data
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Newtonsoft.Json.Linq
 
@@ -25,7 +24,7 @@ Imports Newtonsoft.Json.Linq
         caseData.Item("Owner") = Owner
         caseData.Item("Type") = type
 
-        Dim dataItem = New IntranetPortal.Data.FormDataItem
+        Dim dataItem = New FormDataItem
         dataItem.FormName = "PropertyOffer"
         dataItem.FormData = caseData.ToString
         dataItem.Save("Test")

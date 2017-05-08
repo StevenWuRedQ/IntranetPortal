@@ -18,31 +18,33 @@
         if (!ctrl.disableOptions || !ctrl.options) {
             ctrl.isOtherSelected = true;
         }
-        $scope.$watch('$ctrl.selected', function (newValue, oldValue) {
-            //debugger;
-            if (!newValue) {
-                ctrl.ngModel = "";
-                return;
-            }
-            if (newValue == 'other') {
-                ctrl.isOtherSelected = true;
-                ctrl.ngModel = "";
-                return;
-            }
-            if (ctrl.options.indexOf(newValue) >= 0) {
-                ctrl.isOtherSelected = false;
-                ctrl.ngModel = newValue;
-                return;
-            }
+        $scope.$watch('$ctrl.selected',
+            function(newValue, oldValue) {
+                //debugger;
+                if (!newValue) {
+                    ctrl.ngModel = "";
+                    return;
+                }
+                if (newValue == 'other') {
+                    ctrl.isOtherSelected = true;
+                    ctrl.ngModel = "";
+                    return;
+                }
+                if (ctrl.options.indexOf(newValue) >= 0) {
+                    ctrl.isOtherSelected = false;
+                    ctrl.ngModel = newValue;
+                    return;
+                }
 
-            ctrl.ngModel = "";
+                ctrl.ngModel = "";
 
-        })
-        $scope.$watch('$ctrl.ngModel', function (newValue, oldValue) {
-            if (newValue != "other" && ctrl.options.indexOf(newValue) >= 0) {
-                ctrl.selected = newValue;
-            }
-        })
+            });
+        $scope.$watch('$ctrl.ngModel',
+            function(newValue, oldValue) {
+                if (newValue != "other" && ctrl.options.indexOf(newValue) >= 0) {
+                    ctrl.selected = newValue;
+                }
+            });
     }
 
 })

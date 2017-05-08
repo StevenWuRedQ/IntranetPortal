@@ -36,7 +36,7 @@
 
             bindingOptions: {
                 dataSource: 'list',
-            },
+            }
 
         }
         $scope.bindList = function () {
@@ -44,13 +44,13 @@
             $http({
                 method: 'GET',
                 url: $scope.$ctrl.itemUrl
-            }).then(function (d) {
+            }).then(function(d) {
                 $scope.list = new DevExpress.data.DataSource({
                     searchOperation: "contains",
                     searchExpr: $scope.$ctrl.itemField,
                     store: d.data
                 });
-            })
+            });
         }
 
         $scope.bindList();

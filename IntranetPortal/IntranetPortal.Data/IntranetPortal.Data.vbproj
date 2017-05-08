@@ -131,7 +131,31 @@
     <Compile Include="ADOEntity\BusinessCheck.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\CheckingComplain.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\CheckRequest.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\CleareneceNote.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ConstructionBudget.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ConstructionCase.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ConstructionInitialForm.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ConstructionSpotCheck.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ConstructionViolation.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\CorporationEntity.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\DataStatu.vb">
@@ -152,29 +176,107 @@
     <Compile Include="ADOEntity\EcourtCaseChange.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\Employee.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\EvictionCas.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\FormDataItem.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\GPAOffer.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\GroupType.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\LawReference.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\LeadInfoDocumentSearch.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\LeadsEcourtData.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\LegalCase.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\LegalCaseReport.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\LegalECourt.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\LegalECourtsAll.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\LegalJudge.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\LegalManagerReport.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\LegalRoboSignor.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\MortgageStatusData.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\PartyContact.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\PortalEntities.vb" />
     <Compile Include="ADOEntity\PreSignRecord.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\PropertyBaseInfo.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\PropertyFloor.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\PropertyMortgage.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\PropertyOccupant.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\PropertyOffer.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\PropertyOwner.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\PropertyTitle.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\PropertyValueInfo.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ShortSaleActivityLog.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ShortSaleBuyer.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ShortSaleCase.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ShortSaleCaseComment.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ShortSaleCheckList.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\ShortSaleLeadsInfo.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ShortSaleOffer.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\ShortSaleOverview.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\SSFirstMortgage.vb">
@@ -186,10 +288,22 @@
     <Compile Include="ADOEntity\SSLeadsStatusLog.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\TitleCase.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\TitleClearence.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\TitleJudgementSearch.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\UnderwritingRequest.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\UnderwritingTrackingView.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\UserFollowUp.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="Auction\AuctionProperty.vb" />
@@ -212,19 +326,6 @@
     <Compile Include="WebApi\EcourtService.vb" />
     <Compile Include="WebApi\LeadsEcourtData.vb" />
     <Compile Include="Exception\DataException.vb" />
-    <Compile Include="Migrations\201609291834424_Initial.Designer.vb">
-      <DependentUpon>201609291834424_Initial.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609291834424_Initial.vb" />
-    <Compile Include="Migrations\201610241901293_Initial1.Designer.vb">
-      <DependentUpon>201610241901293_Initial1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610241901293_Initial1.vb" />
-    <Compile Include="Migrations\201610251324198_Initial2.Designer.vb">
-      <DependentUpon>201610251324198_Initial2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610251324198_Initial2.vb" />
-    <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
     <Compile Include="FollowUps\UserFollowUp.vb" />
@@ -261,87 +362,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ADOEntity\CheckingComplain.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\CleareneceNote.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ConstructionBudget.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ConstructionCase.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ConstructionInitialForm.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ConstructionSpotCheck.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ConstructionViolation.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\CorporationEntity.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\Employee.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\EvictionCas.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\FormDataItem.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\GroupType.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\LawReference.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\LeadInfoDocumentSearch.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\LegalCase.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\LegalECourt.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\LegalJudge.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\LegalRoboSignor.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\MortgageStatusData.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\PartyContact.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\PropertyBaseInfo.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\PropertyFloor.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\PropertyMortgage.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\PropertyOccupant.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\PropertyOwner.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\PropertyTitle.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\PropertyValueInfo.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
     <Compile Include="ADOEntity\ShortSale.Context.vb">
       <DependentUpon>ShortSale.Context.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -356,39 +376,6 @@
       <DependentUpon>ShortSale.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="ADOEntity\ShortSaleActivityLog.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ShortSaleBuyer.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ShortSaleCase.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ShortSaleCaseComment.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ShortSaleCheckList.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ShortSaleOffer.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\ShortSaleOverview.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\TitleCase.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\TitleClearence.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\TitleJudgementSearch.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ADOEntity\UserFollowUp.vb">
-      <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\CleareneceNote.vb" />
     <Compile Include="ShortSale\CorporationEntity.vb" />
@@ -425,15 +412,6 @@
     <Compile Include="WebApi\RedqService.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609291834424_Initial.resx">
-      <DependentUpon>201609291834424_Initial.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610241901293_Initial1.resx">
-      <DependentUpon>201610241901293_Initial1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610251324198_Initial2.resx">
-      <DependentUpon>201610251324198_Initial2.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -665,7 +643,6 @@
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="DLL\CMAModels.dll" />
   </ItemGroup>

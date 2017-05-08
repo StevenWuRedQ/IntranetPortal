@@ -208,23 +208,21 @@ FakesAssemblies/
 
 # LightSwitch generated files
 GeneratedArtifacts/
+
+# MISC
 _Pvt_Extensions/
 ModelManifest.xml
+/IntranetPortal/InterPortalSQL
 IntranetPortal/IntranetPortal/TempDataFile/OfferDoc/
 /IntranetPortal/IntranetPortal/bower_components/jquery-steps
 /IntranetPortal/IntranetPortal/TempDataFile/AuctionFiles
 /IntranetPortal/IntranetPortal/TempDataFile/TitleDocs
 /IntranetPortal/IntranetPortal/TempDataFile/title_doc_package.zip
-
-# Visual Studio Code 
-.vscode
-/IntranetPortal/InterPortalSQL
 /IntranetPortal/IntranetPortal/App_Data/SalesContract.docx
 /IntranetPortal/IntranetPortal/App_Data/OfferDoc/AcrisPreparing.docx
 /IntranetPortal/IntranetPortal/App_Data/OfferDoc/ClientInfo.docx
 /IntranetPortal/IntranetPortal/EmailTemplate/ShortSaleActivityReport - Copy.aspx
 /IntranetPortal/IntranetPortal/EmailTemplate/ShortSaleActivityReport - Copy.aspx.vb
-/IntranetPortal/IntranetPortal/js/components
 /IntranetPortal/IntranetPortal/TempDataFile
 /IntranetPortal/RuleEngineManage/My Project/app.manifest
 /IntranetPortal/.idea

@@ -4,6 +4,7 @@
     bindings: {
         label: '@',
         objName: '@',
+        isUnderwriting: "@",
         recordId: '<',
     },
     controller: function ($scope, $element, $attrs, $http) {
@@ -14,7 +15,6 @@
             }
         }
         ctrl.show = function (/* optional */objName, /* optional*/ recordId) {
-            // debugger;
             if (objName != null || recordId != null) {
                 ctrl.objectName = objName || ctrl.objectName;
                 ctrl.recordId = recordId || ctrl.recordId;
@@ -34,9 +34,12 @@
             }
         }
         ctrl.updateData = function () {
+            //debugger;
+            var targetUrlPrefix = '/api/auditlog/';
+            if (ctrl.isUnderwriting) targetUrlPrefix = '/api/underwriting/auditlog/';
             $http({
                 method: 'GET',
-                url: '/api/auditlog/' + ctrl.objName + "/" + ctrl.recordId
+                url: targetUrlPrefix + ctrl.objName + "/" + ctrl.recordId
             }).then(function (d) {
                 var result = _.groupBy(d.data, function (item) {
                     return item.EventDate;

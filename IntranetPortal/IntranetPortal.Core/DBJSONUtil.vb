@@ -38,4 +38,34 @@ Public Class DBJSONUtil
         ReplaceField(jobj, fromFiled, toFiled)
         jobj(additional) = "true"
     End Sub
+
+
+    Public Shared Function IsNullOrEmpty(token As JToken) As Boolean
+        Return token Is Nothing OrElse
+               (token.Type = JTokenType.Array AndAlso Not token.HasValues) OrElse
+               (token.Type = JTokenType.Object AndAlso Not token.HasValues) OrElse
+               (token.Type = JTokenType.String And String.IsNullOrEmpty(token.ToString)) OrElse
+               (token.Type = JTokenType.Null)
+    End Function
+
+    Public Shared Function ParseDouble(token As JToken) As Double
+        Try
+            If token Is Nothing Then
+                Return 0.0
+            ElseIf token.Type = JTokenType.String Then
+                If String.IsNullOrEmpty(token.ToString) Then
+                    Return 0.0
+                Else
+                    Dim cleaned = token.ToString.Replace("$", "").Replace(",", "")
+                    Return Double.Parse(cleaned)
+                End If
+            ElseIf token.Type = JTokenType.Integer OrElse token.Type = JTokenType.Float Then
+                Return CDec(token)
+            Else
+                Return 0.0
+            End If
+        Catch ex As Exception
+            Return 0.0
+        End Try
+    End Function
 End Class

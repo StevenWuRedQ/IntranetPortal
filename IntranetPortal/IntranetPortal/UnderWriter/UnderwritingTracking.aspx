@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="UnderwritingTracking.aspx.vb" Inherits="IntranetPortal.DocSearchList" %>
+﻿<%@ Page Title="Underwriting Tracking" Language="vb" MasterPageFile="~/Content.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -73,10 +73,6 @@
                             }
                         }
                     },
-                    //onSelectionChanged: onSelectionChangedCallback,
-                    //selection: {
-                    //    mode: 'single'
-                    //},
                     summary: {
                         groupItems: [{
                             column: "BBLE",
@@ -101,7 +97,7 @@
                             customizeText: function (cell) {
                                 switch (cell.value) {
                                     case 0:
-                                        return 'Pending'
+                                        return 'Pending';
                                     case 1:
                                         return 'Accepted';
                                     case 2:
@@ -123,7 +119,7 @@
                         },
                         {
                             dataField: "NewOfferStatus",
-                            caption: "NO. Status",
+                            caption: "OF. Status",
                             alignment: "left",
                             customizeText: function (cell) {
                                 switch (cell.value) {
@@ -220,7 +216,6 @@
                     switch (data) {
                         case 1:
                             dataGrid.filter(['UnderwriteStatus', '=', '1'], 'and', ['NewOfferStatus', '<>', '2']);
-                            //hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration'])
                             break;
                     }
                 }

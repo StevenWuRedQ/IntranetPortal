@@ -1,6 +1,5 @@
 ﻿Imports System.Net
 Imports System.Web.Http
-
 Imports IntranetPortal.Data
 
 Namespace Controllers
@@ -13,13 +12,13 @@ Namespace Controllers
         End Function
 
         ' GET: api/UnderwritingRequest/5
-        Public Function GetValue(ByVal id As String) As IHttpActionResult
+        Public Function GetValue(id As String) As IHttpActionResult
 
             If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, id) Then
                 Return Unauthorized()
             End If
 
-            Dim ur = IntranetPortal.Data.UnderwritingRequest.GetInstance(id)
+            Dim ur = Data.UnderwritingRequest.GetInstance(id)
             If ur Is Nothing Then
                 Return StatusCode(HttpStatusCode.NoContent)
             End If
@@ -28,7 +27,7 @@ Namespace Controllers
         End Function
 
         ' POST: api/UnderwritingRequest
-        Public Function PostValue(ByVal value As IntranetPortal.Data.UnderwritingRequest) As IHttpActionResult
+        Public Function PostValue(value As Data.UnderwritingRequest) As IHttpActionResult
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
@@ -42,7 +41,7 @@ Namespace Controllers
         End Function
 
         ' PUT: api/UnderwritingRequest/5
-        Public Function PutValue(ByVal id As Integer, ByVal record As IntranetPortal.Data.UnderwritingRequest) As IHttpActionResult
+        Public Function PutValue(id As Integer, record As Data.UnderwritingRequest) As IHttpActionResult
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
             End If
@@ -62,8 +61,7 @@ Namespace Controllers
         End Function
 
         ' DELETE: api/UnderwritingRequest/5
-        Public Sub DeleteValue(ByVal id As Integer)
-
+        Public Sub DeleteValue(id As Integer)
         End Sub
 
         <HttpGet>
@@ -89,10 +87,10 @@ Namespace Controllers
                         End If
 
                         Return Ok(New With {
-                                        .Status = status,
-                                        .Address = addr,
-                                        .CompletedDate = completedDate
-                        })
+                                     .Status = status,
+                                     .Address = addr,
+                                     .CompletedDate = completedDate
+                                     })
                     End Using
                 End If
             End If

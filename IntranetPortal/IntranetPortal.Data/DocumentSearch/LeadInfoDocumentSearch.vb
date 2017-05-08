@@ -1,21 +1,35 @@
 ﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
-Imports Humanizer
-Imports IntranetPortal
+Imports System.ComponentModel.DataAnnotations.Schema
+Imports System.Data.Entity
+Imports IntranetPortal.Core
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
 
 <MetadataType(GetType(LeadInfoDocumentSearchCaseMetaData))>
-Public Class LeadInfoDocumentSearch
-    Public Property ResutContent As String
+<Table("LeadInfoDocumentSearch")>
+Partial Class LeadInfoDocumentSearch
+
+    <NotMapped()>
+    Public Property ResultContent As String
+    <NotMapped()>
     Public Property IsSave As Boolean
+    <NotMapped()>
     Public Property CaseName As String
+    <NotMapped()>
     Public Property IsInProcess As Integer?
+    <NotMapped()>
     Public Property NewOfferStatus As Integer?
+    <NotMapped()>
     Public Property Team As String
+    <NotMapped()>
     Public Property Owner As String
+
     ''' <summary>
-    ''' The property to indicate if the search is expired
+    '''     The property to indicate if the search is expired
     ''' </summary>
     ''' <returns></returns>
+    <NotMapped()>
     Public ReadOnly Property Expired As Boolean
         Get
             If Status = SearchStatus.Completed AndAlso CompletedOn.HasValue Then
@@ -27,6 +41,7 @@ Public Class LeadInfoDocumentSearch
         End Get
     End Property
 
+    <NotMapped()>
     Public ReadOnly Property Address As String
         Get
             Using ctx As New PortalEntities
@@ -44,9 +59,10 @@ Public Class LeadInfoDocumentSearch
     End Property
 
     ''' <summary>
-    ''' Notify roles when updating or completing
+    '''     Notify roles when updating or completing
     ''' </summary>
     Public Shared ReadOnly NOTIFY_ROLE_WHEN_UPDATING As String = "DocSearch-Updating"
+
     Public Shared ReadOnly NOTIFY_ROLE_WHEN_COMPLETING As String = "DocSearch-Completing"
 
     Public Shared ReadOnly EMAIL_TEMPLATE_UPADATING As String = "DocSearchUpdating"
@@ -69,46 +85,40 @@ Public Class LeadInfoDocumentSearch
             Dim result = From search In ctx.LeadInfoDocumentSearches
                          Join ld In ctx.ShortSaleLeadsInfoes On search.BBLE Equals ld.BBLE
                          Join lead In ctx.SSLeads On ld.BBLE Equals lead.BBLE
-                         Group Join tracking In ctx.UnderwritingTrackingViews On search.BBLE Equals tracking.BBLE Into Group
-                         From tracking In Group.DefaultIfEmpty
                          Select New With {
-                           .BBLE = search.BBLE,
-                           .CaseName = ld.PropertyAddress,
-                           .ExpectedSigningDate = search.ExpectedSigningDate,
-                           .CompletedBy = search.CompletedBy,
-                           .CompletedOn = search.CompletedOn,
-                           .CreateBy = search.CreateBy,
-                           .CreateDate = search.CreateDate,
-                           .Status = search.Status,
-                           .UpdateBy = search.UpdateBy,
-                           .UpdateDate = search.UpdateDate,
-                           .UnderwriteStatus = search.UnderwriteStatus,
-                           .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
-                           .IsInProcess = CType(tracking.IsInProcess, Integer?),
-                           .NewOfferStatus = tracking.NewOfferStatus,
-                           .Owner = lead.EmployeeName
-            }
+                         .BBLE = search.BBLE,
+                         .CaseName = ld.PropertyAddress,
+                         .ExpectedSigningDate = search.ExpectedSigningDate,
+                         .CompletedBy = search.CompletedBy,
+                         .CompletedOn = search.CompletedOn,
+                         .CreateBy = search.CreateBy,
+                         .CreateDate = search.CreateDate,
+                         .Status = search.Status,
+                         .UpdateBy = search.UpdateBy,
+                         .UpdateDate = search.UpdateDate,
+                         .UnderwriteStatus = search.UnderwriteStatus,
+                         .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
+                         .Owner = lead.EmployeeName
+                         }
 
             'Return result.ToList
 
             Return result.AsEnumerable().Select(Function(search)
                                                     Return New LeadInfoDocumentSearch With {
-                                                                   .BBLE = search.BBLE,
-                                                                   .CaseName = search.CaseName,
-                                                                   .ExpectedSigningDate = search.ExpectedSigningDate,
-                                                                   .CompletedBy = search.CompletedBy,
-                                                                   .CompletedOn = search.CompletedOn,
-                                                                   .CreateBy = search.CreateBy,
-                                                                   .CreateDate = search.CreateDate,
-                                                                   .Status = search.Status,
-                                                                   .UpdateBy = search.UpdateBy,
-                                                                   .UpdateDate = search.UpdateDate,
-                                                                   .UnderwriteStatus = search.UnderwriteStatus,
-                                                                   .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
-                                                                   .IsInProcess = CType(search.IsInProcess, Integer?),
-                                                                   .NewOfferStatus = search.NewOfferStatus,
-                                                                   .Owner = search.Owner
-                                                        }
+                                                                                       .BBLE = search.BBLE,
+                                                                                       .CaseName = search.CaseName,
+                                                                                       .ExpectedSigningDate = search.ExpectedSigningDate,
+                                                                                       .CompletedBy = search.CompletedBy,
+                                                                                       .CompletedOn = search.CompletedOn,
+                                                                                       .CreateBy = search.CreateBy,
+                                                                                       .CreateDate = search.CreateDate,
+                                                                                       .Status = search.Status,
+                                                                                       .UpdateBy = search.UpdateBy,
+                                                                                       .UpdateDate = search.UpdateDate,
+                                                                                       .UnderwriteStatus = search.UnderwriteStatus,
+                                                                                       .UnderwriteCompletedOn = search.UnderwriteCompletedOn,
+                                                                                       .Owner = search.Owner
+                                                                                       }
                                                 End Function).ToList
         End Using
     End Function
@@ -124,14 +134,14 @@ Public Class LeadInfoDocumentSearch
             Return Nothing
         End If
 
-        Dim json = Newtonsoft.Json.Linq.JObject.Parse(LeadResearch)
+        Dim json = JObject.Parse(LeadResearch)
         Dim judgementDoc = json("judgementSearchDoc")
 
         If judgementDoc IsNot Nothing Then
             Dim path = judgementDoc("path")
             Dim name = judgementDoc("name")
             If path IsNot Nothing AndAlso Not String.IsNullOrEmpty(path) Then
-                Dim file = IntranetPortal.Core.DocumentService.GetPDFContent(path)
+                Dim file = DocumentService.GetPDFContent(path)
 
                 If file IsNot Nothing AndAlso name IsNot Nothing Then
                     Return New With {.Data = file, .Name = name.ToString}
@@ -143,7 +153,7 @@ Public Class LeadInfoDocumentSearch
     End Function
 
     ''' <summary>
-    ''' Updating doc search
+    '''     Updating doc search
     ''' </summary>
     Public Sub Update(updateBy As String)
         If (String.IsNullOrEmpty(updateBy)) Then
@@ -154,7 +164,7 @@ Public Class LeadInfoDocumentSearch
     End Sub
 
     ''' <summary>
-    ''' Complete the leads search
+    '''     Complete the leads search
     ''' </summary>
     ''' <param name="completeBy"></param>
     Public Sub Complete(completeBy As String)
@@ -171,7 +181,7 @@ Public Class LeadInfoDocumentSearch
     End Sub
 
     ''' <summary>
-    ''' Create the new document search
+    '''     Create the new document search
     ''' </summary>
     ''' <param name="createBy"></param>
     ''' <returns></returns>
@@ -195,13 +205,13 @@ Public Class LeadInfoDocumentSearch
     End Function
 
     ''' <summary>
-    ''' Build email message
+    '''     Build email message
     ''' </summary>
-    ''' <returns> 
-    ''' email data Dictionary of message to use it in Email service send email.
+    ''' <returns>
+    '''     email data Dictionary of message to use it in Email service send email.
     ''' </returns>
     Public Function buildEmailMessge() As Dictionary(Of String, String)
-        If (ResutContent Is Nothing) Then
+        If (ResultContent Is Nothing) Then
             Throw New Exception("Can not build email message with out result content")
         End If
 
@@ -212,12 +222,13 @@ Public Class LeadInfoDocumentSearch
         Dim mailData = New Dictionary(Of String, String)
 
         'mailData.Add("UserName", CreateBy)
-        mailData.Add("ResutContent", ResutContent)
+        mailData.Add("ResutContent", ResultContent)
 
         Return mailData
     End Function
+
     ''' <summary>
-    ''' combine status and under write status to one filed
+    '''     combine status and under write status to one filed
     ''' </summary>
     ''' <returns></returns>
     Public Function GetUnderWritingStatus() As Integer
@@ -230,7 +241,7 @@ Public Class LeadInfoDocumentSearch
     End Function
 
     ''' <summary>
-    ''' check combined under writing status
+    '''     check combined under writing status
     ''' </summary>
     ''' <param name="m_status">under write status</param>
     ''' <returns></returns>
@@ -249,7 +260,7 @@ Public Class LeadInfoDocumentSearch
     End Function
 
     ''' <summary>
-    ''' Submit new search
+    '''     Submit new search
     ''' </summary>
     ''' <param name="submitBy"></param>
     Public Sub SubmitSearch(submitBy As String)
@@ -271,17 +282,17 @@ Public Class LeadInfoDocumentSearch
     End Sub
 
     ''' <summary>
-    ''' Check if need notify user when need search
-    ''' 1. Before completed no need send notify
-    ''' 2. after completed when saving send notify to 
-    ''' user in rule
-    ''' <todo>
-    ''' this function should be private or p not for unit test 
-    ''' I doing it for public.
-    ''' </todo>
+    '''     Check if need notify user when need search
+    '''     1. Before completed no need send notify
+    '''     2. after completed when saving send notify to
+    '''     user in rule
+    '''     <todo>
+    '''         this function should be private or p not for unit test
+    '''         I doing it for public.
+    '''     </todo>
     ''' </summary>
     ''' <returns>
-    ''' ture if this case need to
+    '''     ture if this case need to
     ''' </returns>
     Public Function isNeedNotifyWhenSaving() As Boolean
         Return Status = SearchStatus.Completed
@@ -292,7 +303,7 @@ Public Class LeadInfoDocumentSearch
             If ctx.LeadInfoDocumentSearches.Any(Function(l) l.BBLE = BBLE) Then
                 Me.UpdateDate = DateTime.Now
                 Me.UpdateBy = saveby
-                ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.Entry(Me).State = EntityState.Modified
             Else
                 Me.CreateBy = saveby
                 Me.CreateDate = DateTime.Now
@@ -323,14 +334,15 @@ Public Class LeadInfoDocumentSearch
     End Enum
 
     ' duck type type converting to underwriter type
-    Public Shared Function CUnderWriterStatus(Of InputT)(obj As InputT, lambda As Func(Of InputT, UnderWriterStatus)) As UnderWriterStatus
+    Public Shared Function CUnderWriterStatus(Of InputT)(obj As InputT, lambda As Func(Of InputT, UnderWriterStatus)) _
+        As UnderWriterStatus
         If obj Is Nothing Then
             Throw New Exception("can not covert to underwriter status with empty object")
         End If
         Return lambda(obj)
     End Function
 
-    Public ReadOnly Property MUnderWritingStatus() As UnderWriterStatus
+    Public ReadOnly Property MUnderWritingStatus As UnderWriterStatus
         Get
             Return CUnderWriterStatus(Me, Function(x)
 
@@ -354,14 +366,13 @@ Public Class LeadInfoDocumentSearch
 
 
                                               Return UnderWriterStatus.PendingSearch
-
                                           End Function)
         End Get
     End Property
 
 
     ''' <summary>
-    ''' get under writing status
+    '''     get under writing status
     ''' </summary>
     ''' <param name="status">under writing status</param>
     ''' <returns> list of doc search</returns>
@@ -374,7 +385,9 @@ Public Class LeadInfoDocumentSearch
         End If
         Return Nothing
     End Function
-    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String, Status As Integer, Note As String) As LeadInfoDocumentSearch
+
+    Public Shared Function MarkCompletedUnderwriting(BBLE As String, User As String, Status As Integer, Note As String) _
+        As LeadInfoDocumentSearch
         Using ctx As New PortalEntities
             Dim search = ctx.LeadInfoDocumentSearches.Find(BBLE)
             If Nothing IsNot search Then
@@ -389,10 +402,19 @@ Public Class LeadInfoDocumentSearch
             End If
         End Using
     End Function
-
+    Public Shared Function GetSearchByStatus(status As SearchStatus) As List(Of LeadInfoDocumentSearch)
+        Dim searches = GetDocumentSearchs()
+        If (searches IsNot Nothing) Then
+            Return searches.ToList().Where(Function(s) s.Status = status).ToList
+        End If
+        Return Nothing
+    End Function
 End Class
 
 Public Class LeadInfoDocumentSearchCaseMetaData
-    <Newtonsoft.Json.JsonConverter(GetType(Core.JsObjectToStringConverter))>
+    <Key>
+    Public Property BBLE As String
+
+    <JsonConverter(GetType(JsObjectToStringConverter))>
     Public Property LeadResearch As String
 End Class

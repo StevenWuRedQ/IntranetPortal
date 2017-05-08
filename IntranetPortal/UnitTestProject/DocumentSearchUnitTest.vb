@@ -39,7 +39,7 @@ Imports IntranetPortal.Data
     <TestMethod()> Public Sub CompleteController_Savedata()
         Dim bble = "3003820020"
         Dim search = LeadInfoDocumentSearch.GetInstance(bble)
-        search.ResutContent = Nothing
+        search.ResultContent = Nothing
 
         Dim controller As New IntranetPortal.Controllers.LeadInfoDocumentSearchesController
         Dim result = controller.PostCompleted(bble, search)
@@ -55,7 +55,7 @@ Imports IntranetPortal.Data
     <TestMethod()> Public Sub CompleteController_SendEmail()
         Dim bble = "3003820020 "
         Dim search = LeadInfoDocumentSearch.GetInstance(bble)
-        search.ResutContent = "test"
+        search.ResultContent = "test"
 
         Dim controller As New IntranetPortal.Controllers.LeadInfoDocumentSearchesController
         Dim objController As PrivateObject = New PrivateObject(GetType(IntranetPortal.Controllers.LeadInfoDocumentSearchesController))

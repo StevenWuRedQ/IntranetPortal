@@ -354,8 +354,19 @@ Public Class LeadsInfo
             Return ctx.LeadsInfoes.Where(Function(ld) bbles.Contains(ld.BBLE)).ToArray
 
         End Using
-
     End Function
+
+    Public Shared Function GetPropertyAddress(BBLE As String) As String
+        Using ctx As New PortalEntities
+            Dim lead = ctx.ShortSaleLeadsInfoes.FirstOrDefault(Function(s) s.BBLE.Trim = BBLE.Trim)
+            If lead Is Nothing Then
+                Return ""
+            Else
+                Return lead.PropertyAddress
+            End If
+        End Using
+    End Function
+
 
     <JsonIgnoreAttribute>
     Public ReadOnly Property ReferrelName As String

@@ -1,0 +1,28 @@
+﻿<style type="text/css">
+    .pt-summary-list-item a:hover {
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .pt-summary-list-item .myRow:hover {
+        background-color: #efefef;
+    }
+
+    .pt-summary-list-item label.xlink {
+        color: black;
+    }
+
+        .pt-summary-list-item label.xlink:hover {
+            color: blue;
+        }
+</style>
+<div class="pt-summary-list-item col-md-3 col-lg-3" id="{{$ctrl.listShortName + 'List'}}">
+    <div>
+        <label class='grid-title-icon'>{{$ctrl.listShortName}}</label>
+        <a ng-href="{{$ctrl.listHref}}">
+            <label class="xlink">&nbsp;{{$ctrl.listName}}</label>
+            <label class="total-count" style="margin-left: 5px; color: white;"></label>
+        </a>
+    </div>
+    <div class="gridContainer" dx-data-grid="$ctrl.listOptions"></div>
+</div>

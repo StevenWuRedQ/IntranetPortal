@@ -88,10 +88,6 @@
       <HintPath>..\packages\RestSharp.105.2.2\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Selenium.WebDriverBackedSelenium, Version=2.48.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\Selenium.WebDriverBackedSelenium.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -123,8 +119,9 @@
       <HintPath>..\packages\Twilio.4.4.1\lib\3.5\Twilio.Api.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver">
+    <Reference Include="WebDriver, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.2.53.1\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebDriver.Support, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.Support.2.53.1\lib\net40\WebDriver.Support.dll</HintPath>
@@ -166,9 +163,6 @@
     <Compile Include="EmployeeTest.vb" />
     <Compile Include="LeadTest.vb" />
     <Compile Include="MockDB.vb" />
-    <Compile Include="PortalDBUnitTest.vb">
-      <SubType>Designer</SubType>
-    </Compile>
     <Compile Include="PropertyServiceTest.vb" />
     <Compile Include="QueryBuilderTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -189,7 +183,6 @@
     <Compile Include="ShortSaleUnitTest.vb" />
     <Compile Include="CheckingComplaintsTest.vb" />
     <Compile Include="ConstructionTest.vb" />
-    <Compile Include="SqlDatabaseSetup.vb" />
     <Compile Include="LegalUnitTest.vb" />
     <Compile Include="AuctionPropertyTest.vb" />
     <Compile Include="TitleUnitTest.vb" />
@@ -207,6 +200,7 @@
     <Compile Include="EcourtServiceTest.vb" />
     <Compile Include="LeadsEcourtDataTest.vb" />
     <Compile Include="HomeOwnerTest.vb" />
+    <Compile Include="UnderwritingTest.vb" />
     <Compile Include="DataServiceIntegrationTest.vb" />
     <Compile Include="PropertyServiceProviderUnitTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
@@ -223,9 +217,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PortalDBUnitTest.resx">
-      <DependentUpon>PortalDBUnitTest.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +255,10 @@
     <ProjectReference Include="..\IntranetPortal\IntranetPortal.vbproj">
       <Project>{6ca9f52b-c8d7-4098-8fb4-0626d61a9e32}</Project>
       <Name>IntranetPortal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnderwritingService\UnderwritingService.csproj">
+      <Project>{d373f6bb-a566-43d3-987e-b1f0e3c8353e}</Project>
+      <Name>UnderwritingService</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

@@ -16,7 +16,7 @@ angular.module('PortalApp').factory('ScopeHelper', function ($http) {
     }
     _class.getLeadsSearchScope = function()
     {
-        return _class.getScope('LeadTaxSearchCtrl');
+        return _class.getScope('DocSearchController');
     }
     return _class;
 });

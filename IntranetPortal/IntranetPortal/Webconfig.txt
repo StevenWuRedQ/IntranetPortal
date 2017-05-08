@@ -1,0 +1,4 @@
+﻿{
+  "UnderwritingServiceServer": "http://localhost:8887/",
+  "UnderwritingServiceServerClient": "http://localhost:8887"
+}
