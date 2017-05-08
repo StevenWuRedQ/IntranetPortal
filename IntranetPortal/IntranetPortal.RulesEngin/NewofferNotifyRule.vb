@@ -76,6 +76,12 @@ Public Class NewOfferNotifyRule
 
     Private Function LoadEmails(tm As String, roleName As String) As String
         Dim mgr = Team.GetTeam(tm).Manager
+        Dim emp = Employee.GetInstance(mgr)
+
+        If Not emp.Active Then
+            Return Nothing
+        End If
+
         Dim users = Roles.GetUsersInRole(roleName)
         users = users.Concat({mgr}).ToArray
         Dim emails As String = Employee.GetEmpsEmails(users)

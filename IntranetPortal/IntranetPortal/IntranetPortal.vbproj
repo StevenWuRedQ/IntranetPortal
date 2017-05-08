@@ -650,6 +650,7 @@
     <Compile Include="CodeFolder\PortalReport.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
     <Compile Include="CodeFolder\PropertyOfferManage.vb" />
+    <Compile Include="CodeFolder\PropertyServiceProvider.vb" />
     <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
     <Compile Include="CodeFolder\RoleBasePage.vb">
@@ -657,6 +658,7 @@
     </Compile>
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
+    <Compile Include="CodeFolder\SimpleAppTokenHandler.vb" />
     <Compile Include="CodeFolder\SummaryItemBase.vb">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -827,6 +829,7 @@
     <Compile Include="Controllers\DialerController.vb" />
     <Compile Include="Controllers\EmployeeController.vb" />
     <Compile Include="Controllers\FollowUpController.vb" />
+    <Compile Include="Controllers\GPAOfferController.vb" />
     <Compile Include="Controllers\HomeownerController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
     <Compile Include="Controllers\LeadsController.vb" />
@@ -2008,6 +2011,8 @@
       <DependentUpon>Priority.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PublicController\DataServiceController.vb" />
+    <Compile Include="PublicController\MapServiceController.vb" />
     <Compile Include="Publish\Publish.aspx.designer.vb">
       <DependentUpon>Publish.aspx</DependentUpon>
     </Compile>
@@ -2285,6 +2290,13 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Startup.vb" />
+    <Compile Include="GPAOffer\GPAOfferList.aspx.designer.vb">
+      <DependentUpon>GPAOfferList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GPAOffer\GPAOfferList.aspx.vb">
+      <DependentUpon>GPAOfferList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="StreetView.aspx.designer.vb">
       <DependentUpon>StreetView.aspx</DependentUpon>
     </Compile>
@@ -7564,7 +7576,9 @@
     <Content Include="Scripts\autologout.js" />
     <Content Include="Scripts\autosave.js" />
     <Content Include="Content.Master" />
-    <Content Include="css\Web.config" />
+    <Content Include="css\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="pdfViewer\LICENSE" />
     <Content Include="pdfViewer\web\cmaps\78-EUC-H.bcmap" />
     <Content Include="pdfViewer\web\cmaps\78-EUC-V.bcmap" />
@@ -7918,6 +7932,7 @@
     <Content Include="ShortSale\GeneralParties.ascx" />
     <Content Include="ShortSale\ShortPreSignControl.ascx" />
     <Content Include="SQL\SearchReslut.sql" />
+    <Content Include="GPAOffer\GPAOfferList.aspx" />
     <Content Include="Task\MyTask2.aspx" />
     <Content Include="TempDataFile\reslut.docx" />
     <Content Include="TitleUI\TitleSummaryPage.aspx" />

@@ -155,6 +155,9 @@
     <Compile Include="ADOEntity\EcourtCaseChange.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\GPAOffer.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\LeadsEcourtData.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -208,8 +211,9 @@
     <Compile Include="DialerService\DialerContact.vb" />
     <Compile Include="DialerService\DialerService.vb" />
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
-    <Compile Include="EcourtService\EcourtService.vb" />
-    <Compile Include="EcourtService\LeadsEcourtData.vb" />
+    <Compile Include="GPAOffer\GPAOffer.vb" />
+    <Compile Include="WebApi\EcourtService.vb" />
+    <Compile Include="WebApi\LeadsEcourtData.vb" />
     <Compile Include="Exception\DataException.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />
     <Compile Include="DocumentSearch\LeadInfoDocumentSearch.vb" />
@@ -405,6 +409,10 @@
     <Compile Include="SignProcess\PropertyOffer.vb" />
     <Compile Include="Title\TitleCase.vb" />
     <Compile Include="Twilio\TwilioClient.vb" />
+    <Compile Include="CodeFirstEntity\Underwriting.vb" />
+    <Compile Include="CodeFirstEntity\CodeFirstEntity.vb" />
+    <Compile Include="WebApi\PropertyService.vb" />
+    <Compile Include="WebApi\RedqService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

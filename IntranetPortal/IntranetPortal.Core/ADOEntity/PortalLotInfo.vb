@@ -23,5 +23,6 @@ Partial Public Class PortalLotInfo
     Public Property ogr_fid As Integer
     Public Property LPBBLE As String
     Public Property Unbuild_SQFT As Nullable(Of Double)
+    Public Property ZIP As String
 
 End Class

@@ -11,7 +11,6 @@ Partial Public Class UnderwritingRequest
                 Return r.Count
             End Using
         End Get
-
     End Property
 
     ''' <summary>

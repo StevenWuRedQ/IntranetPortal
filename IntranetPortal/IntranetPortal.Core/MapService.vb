@@ -37,12 +37,68 @@ Public Class MapService
             Dim lots = ctx.PortalLotInfoes.Where(Function(b) mapBound.Contains(b.ogr_geometry))
 
             For Each lot In lots.ToList
-                
+
                 result.Add(buildLotGeoJson(lot))
             Next
         End Using
 
         Return result
+    End Function
+
+    Public Function LoadLotData(bble As String) As Feature
+        Using ctx As New MapDataEntitiesContainer
+
+            Dim lot = ctx.dtm_0814_tax_lot_polygon.Where(Function(a) a.bbl = bble).FirstOrDefault
+
+            If lot Is Nothing Then
+                Return Nothing
+            End If
+
+            Dim featureProperties As New Dictionary(Of String, Object)
+            featureProperties.Add("BBLE", lot.bbl)
+            Dim polygon = SqlGeometry.Parse(New SqlString(lot.ogr_geometry.WellKnownValue.WellKnownText))
+            Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
+            Dim model = New Feature(obj, featureProperties, lot.ogr_fid.ToString)
+            Return model
+        End Using
+
+    End Function
+
+    Public Function LoadSameBlockData(bble As String) As List(Of Feature)
+        Using ctx As New MapDataEntitiesContainer
+
+
+            Dim lots =
+                ctx.dtm_0814_tax_lot_polygon.
+                Where(Function(a) a.bbl.StartsWith(bble.Substring(0, 6))).ToList()
+            Dim results = lots.Select(Function(e)
+                                          Dim featureProperties As New Dictionary(Of String, Object)
+                                          featureProperties.Add("BBLE", e.bbl)
+                                          Dim polygon = SqlGeometry.Parse(New SqlString(e.ogr_geometry.WellKnownValue.WellKnownText))
+                                          Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
+                                          Dim model = New Feature(obj, featureProperties, e.ogr_fid.ToString)
+                                          Return model
+                                      End Function).ToList()
+            Return results
+        End Using
+    End Function
+
+    Public Function LoadSameBlockFootPrintData(bble As String) As List(Of Feature)
+        Using ctx As New MapDataEntitiesContainer
+            Dim lots =
+                ctx.building_0117.
+                Where(Function(a) a.bbl.StartsWith(bble.Substring(0, 6))).ToList()
+            Dim results = lots.Select(Function(e)
+                                          Dim featureProperties As New Dictionary(Of String, Object)
+                                          featureProperties.Add("BBLE", e.bbl)
+                                          featureProperties.Add("LstStatType", e.lststatype)
+                                          Dim polygon = SqlGeometry.Parse(New SqlString(e.ogr_geometry.WellKnownValue.WellKnownText))
+                                          Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
+                                          Dim model = New Feature(obj, featureProperties, e.ogr_fid.ToString)
+                                          Return model
+                                      End Function).ToList()
+            Return results
+        End Using
     End Function
 
     Public Function LoadLotByBBLE(BBLE As String) As List(Of Feature)
@@ -97,7 +153,7 @@ Public Class MapService
         Return DbGeometry.PolygonFromText(polygonText, SRID)
     End Function
 
-    
+
 
     Function LoadALLTeamColor() As List(Of Dictionary(Of String, String))
         Dim colors = New List(Of Dictionary(Of String, String))
@@ -112,7 +168,7 @@ Public Class MapService
         End Using
     End Function
 
-    
+
 
 End Class
 

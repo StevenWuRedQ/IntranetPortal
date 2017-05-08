@@ -71,6 +71,16 @@ Partial Public Class Lead
         End Get
     End Property
 
+    Public ReadOnly Property StatusStr As String
+        Get
+            If Status.HasValue Then
+                Return CType(Status, LeadStatus).ToString
+            End If
+
+            Return ""
+        End Get
+    End Property
+
     Public Shared Function GetLeadsOwner(bble As String) As String
         Using ctx As New Entities
             Return ctx.Leads.Where(Function(l) l.BBLE = bble).Select(Function(a) a.EmployeeName).FirstOrDefault

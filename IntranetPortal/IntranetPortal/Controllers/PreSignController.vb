@@ -223,7 +223,8 @@ Namespace Controllers
                              End If
                          End Sub
 
-            Threading.ThreadPool.QueueUserWorkItem(notify)
+            ' remove the hoi email notification on 4/25/2017 by g
+            ' Threading.ThreadPool.QueueUserWorkItem(notify)
         End Sub
 
     End Class

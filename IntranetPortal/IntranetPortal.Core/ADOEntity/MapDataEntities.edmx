@@ -4,7 +4,30 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MapDataEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MapDataEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MapData.dbo.building_0117' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="building_0117">
+          <Key>
+            <PropertyRef Name="ogr_fid" />
+          </Key>
+          <Property Name="ogr_fid" Type="int" Nullable="false" />
+          <Property Name="ogr_geometry" Type="geometry" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="bin" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="bbl" Type="nvarchar" MaxLength="10" />
+          <Property Name="cnstrct_yr" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="lstmoddate" Type="date" />
+          <Property Name="lststatype" Type="nvarchar" MaxLength="254" />
+          <Property Name="doitt_id" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="heightroof" Type="numeric" Precision="19" Scale="8" />
+          <Property Name="feat_code" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="groundelev" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="num_floors" Type="numeric" Precision="19" Scale="8" />
+          <Property Name="built_code" Type="nvarchar" MaxLength="1" />
+          <Property Name="shape_area" Type="numeric" Precision="19" Scale="11" />
+          <Property Name="shape_len" Type="numeric" Precision="19" Scale="11" />
+        </EntityType>
         <EntityType Name="dtm_0814_tax_block_polygon">
           <Key>
             <PropertyRef Name="ogr_fid" />
@@ -79,10 +102,31 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <Property Name="ogr_fid" Type="int" Nullable="false" />
           <Property Name="LPBBLE" Type="nvarchar" MaxLength="11" />
           <Property Name="Unbuild_SQFT" Type="float" />
+          <Property Name="ZIP" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityContainer Name="MapDataEntitiesStoreContainer">
           <EntitySet Name="dtm_0814_tax_block_polygon" EntityType="Self.dtm_0814_tax_block_polygon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dtm_0814_tax_lot_polygon" EntityType="Self.dtm_0814_tax_lot_polygon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="building_0117" EntityType="Self.building_0117" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [building_0117].[ogr_fid] AS [ogr_fid], 
+    [building_0117].[ogr_geometry] AS [ogr_geometry], 
+    [building_0117].[name] AS [name], 
+    [building_0117].[bin] AS [bin], 
+    [building_0117].[bbl] AS [bbl], 
+    [building_0117].[cnstrct_yr] AS [cnstrct_yr], 
+    [building_0117].[lstmoddate] AS [lstmoddate], 
+    [building_0117].[lststatype] AS [lststatype], 
+    [building_0117].[doitt_id] AS [doitt_id], 
+    [building_0117].[heightroof] AS [heightroof], 
+    [building_0117].[feat_code] AS [feat_code], 
+    [building_0117].[groundelev] AS [groundelev], 
+    [building_0117].[num_floors] AS [num_floors], 
+    [building_0117].[built_code] AS [built_code], 
+    [building_0117].[shape_area] AS [shape_area], 
+    [building_0117].[shape_len] AS [shape_len]
+    FROM [dbo].[building_0117] AS [building_0117]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="PortalLotInfo" EntityType="Self.PortalLotInfo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [PortalLotInfo].[BBLE] AS [BBLE], 
@@ -96,7 +140,8 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
     [PortalLotInfo].[Color] AS [Color], 
     [PortalLotInfo].[ogr_fid] AS [ogr_fid], 
     [PortalLotInfo].[LPBBLE] AS [LPBBLE], 
-    [PortalLotInfo].[Unbuild_SQFT] AS [Unbuild_SQFT]
+    [PortalLotInfo].[Unbuild_SQFT] AS [Unbuild_SQFT], 
+    [PortalLotInfo].[ZIP] AS [ZIP]
     FROM [dbo].[PortalLotInfo] AS [PortalLotInfo]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -108,6 +153,7 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <EntitySet Name="dtm_0814_tax_block_polygon" EntityType="MapDataEntities.dtm_0814_tax_block_polygon" />
           <EntitySet Name="dtm_0814_tax_lot_polygon" EntityType="MapDataEntities.dtm_0814_tax_lot_polygon" />
           <EntitySet Name="PortalLotInfoes" EntityType="MapDataEntities.PortalLotInfo" />
+          <EntitySet Name="building_0117" EntityType="MapDataEntities.building_0117" />
         </EntityContainer>
         <EntityType Name="dtm_0814_tax_block_polygon">
           <Key>
@@ -181,6 +227,28 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <Property Name="ogr_fid" Type="Int32" Nullable="false" />
           <Property Name="LPBBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Unbuild_SQFT" Type="Double" />
+          <Property Name="ZIP" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="building_0117">
+          <Key>
+            <PropertyRef Name="ogr_fid" />
+          </Key>
+          <Property Name="ogr_fid" Type="Int32" Nullable="false" />
+          <Property Name="ogr_geometry" Type="Geometry" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bin" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="bbl" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="cnstrct_yr" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="lstmoddate" Type="DateTime" Precision="0" />
+          <Property Name="lststatype" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="doitt_id" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="heightroof" Type="Decimal" Precision="19" Scale="8" />
+          <Property Name="feat_code" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="groundelev" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="num_floors" Type="Decimal" Precision="19" Scale="8" />
+          <Property Name="built_code" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="shape_area" Type="Decimal" Precision="19" Scale="11" />
+          <Property Name="shape_len" Type="Decimal" Precision="19" Scale="11" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -251,6 +319,7 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <EntitySetMapping Name="PortalLotInfoes">
             <EntityTypeMapping TypeName="MapDataEntities.PortalLotInfo">
               <MappingFragment StoreEntitySet="PortalLotInfo">
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
                 <ScalarProperty Name="Unbuild_SQFT" ColumnName="Unbuild_SQFT" />
                 <ScalarProperty Name="LPBBLE" ColumnName="LPBBLE" />
                 <ScalarProperty Name="ogr_fid" ColumnName="ogr_fid" />
@@ -263,6 +332,28 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
                 <ScalarProperty Name="block" ColumnName="block" />
                 <ScalarProperty Name="boro" ColumnName="boro" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="building_0117">
+            <EntityTypeMapping TypeName="MapDataEntities.building_0117">
+              <MappingFragment StoreEntitySet="building_0117">
+                <ScalarProperty Name="shape_len" ColumnName="shape_len" />
+                <ScalarProperty Name="shape_area" ColumnName="shape_area" />
+                <ScalarProperty Name="built_code" ColumnName="built_code" />
+                <ScalarProperty Name="num_floors" ColumnName="num_floors" />
+                <ScalarProperty Name="groundelev" ColumnName="groundelev" />
+                <ScalarProperty Name="feat_code" ColumnName="feat_code" />
+                <ScalarProperty Name="heightroof" ColumnName="heightroof" />
+                <ScalarProperty Name="doitt_id" ColumnName="doitt_id" />
+                <ScalarProperty Name="lststatype" ColumnName="lststatype" />
+                <ScalarProperty Name="lstmoddate" ColumnName="lstmoddate" />
+                <ScalarProperty Name="cnstrct_yr" ColumnName="cnstrct_yr" />
+                <ScalarProperty Name="bbl" ColumnName="bbl" />
+                <ScalarProperty Name="bin" ColumnName="bin" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ogr_geometry" ColumnName="ogr_geometry" />
+                <ScalarProperty Name="ogr_fid" ColumnName="ogr_fid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

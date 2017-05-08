@@ -166,6 +166,7 @@
     <Compile Include="PortalDBUnitTest.vb">
       <SubType>Designer</SubType>
     </Compile>
+    <Compile Include="PropertyServiceTest.vb" />
     <Compile Include="QueryBuilderTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -204,6 +205,8 @@
     <Compile Include="LeadsEcourtDataTest.vb" />
     <Compile Include="HomeOwnerTest.vb" />
     <Compile Include="UnderwritingTest.vb" />
+    <Compile Include="DataServiceIntegrationTest.vb" />
+    <Compile Include="PropertyServiceProviderUnitTest.vb" />
     <Compile Include="UtilityUnitTest.vb" />
     <Compile Include="TeamUnitTest.vb" />
     <Compile Include="TwilioUnitTest.vb" />

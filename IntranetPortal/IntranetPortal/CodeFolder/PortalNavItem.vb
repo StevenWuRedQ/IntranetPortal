@@ -10,6 +10,8 @@ Public Class PortalNavItem
     Public Property Visible As Boolean = True
     <XmlAttribute()>
     Public Property NavigationUrl As String
+    <XmlAttribute()>
+    Public Property InsideOnly As Boolean = False
     Public Property FontClass As String
     <XmlAttribute()>
     Public Property ShowAmount As Boolean
@@ -125,6 +127,10 @@ Public Class PortalNavItem
             If Not Applications.Contains(Employee.GetInstance(userName).AppId) Then
                 Return False
             End If
+        End If
+
+        If InsideOnly AndAlso Employee.IsInOutsideTeam(userName) Then
+            Return False
         End If
 
         If String.IsNullOrEmpty(ItemType) Then

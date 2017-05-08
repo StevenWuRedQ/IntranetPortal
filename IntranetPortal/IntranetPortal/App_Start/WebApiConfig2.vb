@@ -39,6 +39,9 @@ Public Class WebApiConfig2
 
         config.Filters.Add(New WebApiException)
 
+        ' web api token configure
+        config.MessageHandlers.Add(New SimpleAppTokenHandler())
+
         Dim formatters = GlobalConfiguration.Configuration.Formatters
         formatters.Remove(formatters.XmlFormatter)
     End Sub

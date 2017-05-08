@@ -1008,10 +1008,22 @@ function OnStatusCategoryChange(selCategory, statusData) {
             }
         });
     }
-
-
-
 }
+
+function STDownloadFile(url, fileName) {
+    var link = document.createElement("a");
+    link.href = url;
+    link.target = '_blank';
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName;
+
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
@@ -1026,7 +1038,11 @@ function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
         for (var index in arrData[0]) {
 
             //Now convert each value to string and comma-seprated
-            row += index + ',';
+            //Fix angular added property export 
+            if (isFlatProperty(arrData[0], index)) {
+                row += index + ',';
+            }
+
         }
 
         row = row.slice(0, -1);
@@ -1041,7 +1057,10 @@ function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
 
         //2nd loop will extract each column and convert it in string comma-seprated
         for (var index in arrData[i]) {
-            row += '"' + arrData[i][index] + '",';
+            if (isFlatProperty(arrData[i], index)) {
+                row += '"' + arrData[i][index] + '",';
+            }
+
         }
 
         row.slice(0, row.length - 1);
@@ -1084,18 +1103,9 @@ function JSONToCSVConvertor(JSONData, ShowLabel, tFileName) {
     link.click();
     document.body.removeChild(link);
 }
-function STDownloadFile(url, fileName) {
-    var link = document.createElement("a");
-    link.href = url;
-    link.target = '_blank';
-    //set the visibility hidden so it will not effect on your web-layout
-    link.style = "visibility:hidden";
-    link.download = fileName;
-
-    //this part will append the anchor tag and remove it after automatic click
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+// is prop added by angular or is an function in json object
+function isFlatProperty(object, prop) {
+    return !(prop.indexOf("$") >= 0 || typeof object[prop] == 'function');
 }
 
 function hashStr(str) {

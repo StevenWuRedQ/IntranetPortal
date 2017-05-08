@@ -329,7 +329,8 @@
           <Property Name="EstValue" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
-          <Property Name="NeighName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeighName" Type="nvarchar" MaxLength="250" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nvarchar" MaxLength="50" />
           <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Borough" Type="nvarchar" MaxLength="50" />
@@ -347,6 +348,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadsTags" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityType Name="LeadsInThirdParty">
           <Key>
@@ -524,7 +526,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="LpType" Type="nvarchar" MaxLength="50" />
           <Property Name="Expiration" Type="datetime" />
           <Property Name="Active" Type="bit" />
-          <Property Name="Docket_Number" Type="nchar" MaxLength="10" />
+          <Property Name="Docket_Number" Type="nvarchar" MaxLength="50" />
           <Property Name="CountyNum" Type="int" />
           <Property Name="County" Type="nvarchar" MaxLength="50" />
           <Property Name="Section" Type="nchar" MaxLength="2" />
@@ -1046,7 +1048,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="OrderResponses" EntityType="IntranetPortalModel.OrderRespons" />
           <EntitySet Name="APIOrders" EntityType="IntranetPortalModel.APIOrder" />
           <EntitySet Name="UserMessages" EntityType="IntranetPortalModel.UserMessage" />
-          <EntitySet Name="PortalLisPens" EntityType="IntranetPortalModel.PortalLisPen" />
           <EntitySet Name="NYC_St_Names" EntityType="IntranetPortalModel.NYC_St_Names" />
           <EntitySet Name="PortalQuotes" EntityType="IntranetPortalModel.PortalQuote" />
           <EntitySet Name="OwnerContacts" EntityType="IntranetPortalModel.OwnerContact" />
@@ -1092,6 +1093,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="InProcessBBLEs" EntityType="IntranetPortalModel.InProcessBBLE" />
           <EntitySet Name="TLODatas" EntityType="IntranetPortalModel.TLOData" />
           <EntitySet Name="HomeOwnerPhones" EntityType="IntranetPortalModel.HomeOwnerPhone" />
+          <EntitySet Name="PortalLisPens" EntityType="IntranetPortalModel.PortalLisPen" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1221,7 +1223,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="EstValue" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NeighName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeighName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1237,6 +1239,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="UnitNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadsTags" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="LeadLeadsInfo">
           <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="0..1" />
@@ -1424,38 +1428,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="ReceiveTime" Type="DateTime" Precision="3" />
           <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="MsgUrl" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PortalLisPen">
-          <Key>
-            <PropertyRef Name="LisPenID" />
-          </Key>
-          <Property Name="LisPenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="Active" Type="Boolean" />
-          <Property Name="Docket_Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="CountyNum" Type="Int32" />
-          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Section" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
-          <Property Name="Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ST_Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Zip" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="NEIGH_NAME" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="FileDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Original_Mortgage" Type="Double" />
-          <Property Name="Mortgage_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Interest_Rate" Type="Double" />
-          <Property Name="Monthly_Payment" Type="Double" />
-          <Property Name="Defendant" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="Plaintiff" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="Attorney" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Attorney_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Terms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CollectedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Expiration" Type="DateTime" Precision="3" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="LpType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NYC_St_Names">
           <Key>
@@ -2001,6 +1973,38 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="LastCalledDate" Type="DateTime" Precision="3" />
           <Property Name="CallCount" Type="Int32" />
         </EntityType>
+        <EntityType Name="PortalLisPen">
+          <Key>
+            <PropertyRef Name="LisPenID" />
+          </Key>
+          <Property Name="LisPenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="LpType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Expiration" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Docket_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountyNum" Type="Int32" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ST_Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="NEIGH_NAME" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="FileDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Original_Mortgage" Type="Double" />
+          <Property Name="Mortgage_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Interest_Rate" Type="Double" />
+          <Property Name="Monthly_Payment" Type="Double" />
+          <Property Name="Defendant" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Plaintiff" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Attorney" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Attorney_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Terms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CollectedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2070,6 +2074,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="LeadsInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfo">
               <MappingFragment StoreEntitySet="LeadsInfo">
+                <ScalarProperty Name="LeadsTags" ColumnName="LeadsTags" />
+                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="UnitNum" ColumnName="UnitNum" />
@@ -2273,39 +2279,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="MsgID" ColumnName="MsgID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PortalLisPens">
-            <EntityTypeMapping TypeName="IntranetPortalModel.PortalLisPen">
-              <MappingFragment StoreEntitySet="PortalLisPen">
-                <ScalarProperty Name="LpType" ColumnName="LpType" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
-                <ScalarProperty Name="CollectedOn" ColumnName="CollectedOn" />
-                <ScalarProperty Name="Terms" ColumnName="Terms" />
-                <ScalarProperty Name="Attorney_Phone" ColumnName="Attorney_Phone" />
-                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
-                <ScalarProperty Name="Plaintiff" ColumnName="Plaintiff" />
-                <ScalarProperty Name="Defendant" ColumnName="Defendant" />
-                <ScalarProperty Name="Monthly_Payment" ColumnName="Monthly_Payment" />
-                <ScalarProperty Name="Interest_Rate" ColumnName="Interest_Rate" />
-                <ScalarProperty Name="Mortgage_Date" ColumnName="Mortgage_Date" />
-                <ScalarProperty Name="Original_Mortgage" ColumnName="Original_Mortgage" />
-                <ScalarProperty Name="FileDate" ColumnName="FileDate" />
-                <ScalarProperty Name="NEIGH_NAME" ColumnName="NEIGH_NAME" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="ST_Name" ColumnName="ST_Name" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Lot" ColumnName="Lot" />
-                <ScalarProperty Name="Block" ColumnName="Block" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-                <ScalarProperty Name="County" ColumnName="County" />
-                <ScalarProperty Name="CountyNum" ColumnName="CountyNum" />
-                <ScalarProperty Name="Docket_Number" ColumnName="Docket_Number" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-                <ScalarProperty Name="LisPenID" ColumnName="LisPenID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2887,6 +2860,39 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalLisPens">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PortalLisPen">
+              <MappingFragment StoreEntitySet="PortalLisPen">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CollectedOn" ColumnName="CollectedOn" />
+                <ScalarProperty Name="Terms" ColumnName="Terms" />
+                <ScalarProperty Name="Attorney_Phone" ColumnName="Attorney_Phone" />
+                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
+                <ScalarProperty Name="Plaintiff" ColumnName="Plaintiff" />
+                <ScalarProperty Name="Defendant" ColumnName="Defendant" />
+                <ScalarProperty Name="Monthly_Payment" ColumnName="Monthly_Payment" />
+                <ScalarProperty Name="Interest_Rate" ColumnName="Interest_Rate" />
+                <ScalarProperty Name="Mortgage_Date" ColumnName="Mortgage_Date" />
+                <ScalarProperty Name="Original_Mortgage" ColumnName="Original_Mortgage" />
+                <ScalarProperty Name="FileDate" ColumnName="FileDate" />
+                <ScalarProperty Name="NEIGH_NAME" ColumnName="NEIGH_NAME" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="ST_Name" ColumnName="ST_Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="CountyNum" ColumnName="CountyNum" />
+                <ScalarProperty Name="Docket_Number" ColumnName="Docket_Number" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="LpType" ColumnName="LpType" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LisPenID" ColumnName="LisPenID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

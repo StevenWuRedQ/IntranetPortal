@@ -42,7 +42,7 @@ Partial Class AuditLog
         End Get
     End Property
 
- 
+
 
     Public Sub Delete()
 

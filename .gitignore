@@ -225,3 +225,6 @@ IntranetPortal/IntranetPortal/TempDataFile/OfferDoc/
 /IntranetPortal/IntranetPortal/EmailTemplate/ShortSaleActivityReport - Copy.aspx.vb
 /IntranetPortal/IntranetPortal/TempDataFile
 /IntranetPortal/RuleEngineManage/My Project/app.manifest
+/IntranetPortal/.idea
+/IntranetPortal/InterPortalSQL/InterPortalSQL.jfm
+/IntranetPortal/IntranetPortal.VC.db

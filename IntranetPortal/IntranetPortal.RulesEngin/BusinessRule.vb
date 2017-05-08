@@ -479,7 +479,7 @@ InitialLine:
                     Log("Initial Homeowner failed. No homeowene info loaded. BBLE: " & bble)
                 End If
             Case Core.DataLoopRule.DataLoopType.Mortgage, Core.DataLoopRule.DataLoopType.AllMortgage
-                If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, False) Then
+                If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, False) Then
                     rule.Complete()
                     Log("Initial Data Message " & bble & String.Format(" BBLE: {0} Morgatage data is loaded. ", bble))
                 Else
@@ -495,7 +495,7 @@ InitialLine:
                     Log("Failed to Inital Mortgage Amount Data. BBLE: " & bble)
                 End If
             Case Core.DataLoopRule.DataLoopType.GeneDataAndMortgage
-                If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, False) Then
+                If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, True, False) Then
                     rule.Complete()
                     Log("Initial Data Message " & bble & String.Format(" BBLE: {0} Morgatage Amount data is loaded.", bble))
                 Else
@@ -505,19 +505,19 @@ InitialLine:
             Case Else
                 Dim lead = LeadsInfo.GetInstance(bble)
                 If String.IsNullOrEmpty(lead.Owner) Then
-                    If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True) Then
+                    If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, True, True) Then
                         rule.Complete()
                         Log("All Data is refreshed. BBLE: " & bble)
                     End If
                 Else
                     If Not lead.C1stMotgrAmt.HasValue Then
-                        If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True) Then
+                        If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, True) Then
                             rule.Complete()
                             Log("Initial Data Message " & bble & String.Format(" BBLE: {0} Morgatage data is loaded. ", bble))
                         End If
                     Else
                         If lead.IsUpdating Then
-                            If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True) Then
+                            If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, True) Then
                                 rule.Complete()
                                 Log("Initial Data Message " & bble & String.Format("Refresh BBLE: {0} data is Finished. ", bble))
                             End If

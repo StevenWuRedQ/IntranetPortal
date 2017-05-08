@@ -3,6 +3,7 @@ Imports System.Net.Http
 Imports System.Web.Http
 Imports System.Web.Http.Description
 Imports Newtonsoft.Json
+Imports Humanizer
 
 Namespace Controllers
 
@@ -89,6 +90,54 @@ Namespace Controllers
             Catch ex As Exception
 
                 Return BadRequest(ex.ToString)
+            End Try
+        End Function
+
+        <HttpPost>
+        <Route("api/Leads/UpdateLeadsType/{bble}/{newType}")>
+        Public Function PostUpdateLeadsSubstatus(bble As String, newType As Integer) As IHttpActionResult
+
+            If String.IsNullOrEmpty(bble) Then
+                Return BadRequest()
+            End If
+
+            Dim userName = HttpContext.Current.User.Identity.Name
+
+            If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, bble) Then
+                Return Unauthorized()
+            End If
+
+            Try
+                Dim leadtype = CType(newType, LeadsInfo.LeadsType)
+                LeadsInfo.UpdateType(bble, leadtype, userName)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, "Change leads type to " & leadtype.Humanize, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString)
+                Return Ok()
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
+        <HttpPost>
+        <Route("api/Leads/{bble}/tags")>
+        Public Function PostUpdateLeadsSubstatus(bble As String, <FromBody> tagArray As String()) As IHttpActionResult
+
+            If String.IsNullOrEmpty(bble) Then
+                Return BadRequest()
+            End If
+
+            Dim userName = HttpContext.Current.User.Identity.Name
+
+            If Not Employee.HasControlLeads(HttpContext.Current.User.Identity.Name, bble) Then
+                Return Unauthorized()
+            End If
+
+            Try
+                Dim tags = String.Join(";", tagArray)
+                LeadsInfo.UpdateTags(bble, tags, userName)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, "Change leads tags to " & tags, bble, LeadsActivityLog.LogCategory.SalesAgent.ToString)
+                Return Ok()
+            Catch ex As Exception
+                Throw ex
             End Try
         End Function
 
