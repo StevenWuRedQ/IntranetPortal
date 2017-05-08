@@ -7926,6 +7926,7 @@
     <Content Include="App_Data\test.csv" />
     <Content Include="bower_components\pt-compute-engine\.bower.json" />
     <Content Include="bower_components\pt-compute-engine\README.md" />
+    <Content Include="Underwriter\UnderwritingTracking.aspx" />
     <Content Include="Webconfig.txt" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
@@ -7943,7 +7944,6 @@
     <Content Include="Underwriter\PropertiesList.aspx" />
     <Content Include="Underwriter\DocSearchList.aspx" />
     <Content Include="Underwriter\UnderwritingHome.aspx" />
-    <Content Include="Underwriter\UnderwritingTracking.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
