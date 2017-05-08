@@ -22,9 +22,7 @@ Public Class PropertyInfo
             cm.RegisterClientScriptBlock(Me.GetType(),
                 "CallServer", callbackScript, True)
         End If
-
     End Sub
-
 
     Public Function BindData() As Boolean
         'If LeadsInfoData.IsApartment Then
@@ -214,11 +212,10 @@ Public Class PropertyInfo
         If e.Parameters.StartsWith("load") Then
             Dim bble = e.Parameters.Split("|")(1)
             Dim allLiens = DataWCFService.GetAllLiens(bble)
-            If allLiens IsNot Nothing AndAlso allLiens.localLienData IsNot Nothing Then
-                Dim grid = CType(sender, ASPxGridView)
-                grid.DataSource = allLiens.localLienData.nYCTaxLiensSold
-                grid.DataBind()
-            End If
+
+            Dim grid = CType(sender, ASPxGridView)
+            grid.DataSource = allLiens?.localLienData?.nYCTaxLiensSold
+            grid.DataBind()
         End If
     End Sub
 End Class

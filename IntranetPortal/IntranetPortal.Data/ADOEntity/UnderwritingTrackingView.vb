@@ -19,13 +19,13 @@ Partial Public Class UnderwritingTrackingView
     Public Property NewOfferStatus As Nullable(Of Integer)
     Public Property NewOfferDate As Nullable(Of Date)
     Public Property NewOfferBy As String
+    Public Property ShortSalesStatus As Nullable(Of Integer)
     Public Property IsShortSaleAccpeted As Integer
     Public Property AcceptedBy As String
     Public Property AcceptedDate As Nullable(Of Date)
+    Public Property InProcessType As Nullable(Of Integer)
     Public Property IsInProcess As Integer
     Public Property InProcessDate As Nullable(Of Date)
     Public Property InProcessBy As String
-    Public Property ShortSalesStatus As Nullable(Of Integer)
-    Public Property InProcessType As Nullable(Of Integer)
 
 End Class

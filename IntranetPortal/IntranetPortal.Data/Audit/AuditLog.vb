@@ -44,8 +44,6 @@ Partial Class AuditLog
         End Get
     End Property
 
-    Public Property CustomType As String
-
     Public Sub Delete()
 
         Using ctx As New PortalEntities

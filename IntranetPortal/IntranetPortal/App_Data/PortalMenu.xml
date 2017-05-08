@@ -354,6 +354,18 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
+
+  <PortalNavItem Name="GPAOffer" Text="GPA Offer" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">
+    <UserRoles>Admin</UserRoles>
+    <Items>    
+      <PortalNavItem Name="GPAOfferFiles" Text="Offers" NavigationUrl="/GPAOffer/GPAOfferList.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bullseye"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+  
   <PortalNavItem Name="Underwriting" Text="Underwriting" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Underwriter,Sales-Executive</UserRoles>
     <Items>

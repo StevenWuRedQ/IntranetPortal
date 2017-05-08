@@ -55,6 +55,7 @@
           <Property Name="ColumnName" Type="nvarchar" MaxLength="1024" />
           <Property Name="OriginalValue" Type="nvarchar(max)" />
           <Property Name="NewValue" Type="nvarchar(max)" />
+          <Property Name="CustomType" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="BusinessChecks">
           <Key>
@@ -537,6 +538,18 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="GPAOffers">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="OfferPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="int" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="GroupTypes">
           <Key>
             <PropertyRef Name="Id" />
@@ -675,7 +688,8 @@
           <Property Name="EstValue" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
-          <Property Name="NeighName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeighName" Type="nvarchar" MaxLength="250" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nvarchar" MaxLength="50" />
           <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Borough" Type="nvarchar" MaxLength="50" />
@@ -693,6 +707,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadsTags" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityType Name="LeadsStatusLogs">
           <Key>
@@ -1304,6 +1319,7 @@
           <Property Name="WasHOIOffered" Type="bit" />
           <Property Name="TotalOffered" Type="decimal" Precision="18" Scale="2" />
           <Property Name="UpfrontOffered" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="int" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
@@ -1482,11 +1498,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.SSFirstMortgage' does not have 
 warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UnderwritingTrackingView">
           <Key>
-            
-            
-            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="IsShortSaleAccpeted" />
+            <PropertyRef Name="IsInProcess" />
           </Key>
-          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
           <Property Name="UnderwriteStatus" Type="tinyint" />
           <Property Name="UnderwriteCompletedOn" Type="datetime" />
@@ -1532,6 +1547,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EvictionCases" EntityType="Self.EvictionCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormDataItems" EntityType="Self.FormDataItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GPAOffers" EntityType="Self.GPAOffers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupTypes" EntityType="Self.GroupTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LawReferences" EntityType="Self.LawReferences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadInfoDocumentSearch" EntityType="Self.LeadInfoDocumentSearch" Schema="dbo" store:Type="Tables" />
@@ -1790,7 +1806,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
             <Parameter Name="archiveBy" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="UnderwritingRequests" EntityType="IntranetPortalModel.UnderwritingRequest" />
-          <EntitySet Name="UnderwritingTrackingViews" EntityType="IntranetPortalModel.UnderwritingTrackingView" />
           <EntitySet Name="EcourtCases" EntityType="IntranetPortalModel.EcourtCase" />
           <EntitySet Name="LeadsEcourtDatas" EntityType="IntranetPortalModel.LeadsEcourtData" />
           <EntitySet Name="EcourtCaseChanges" EntityType="IntranetPortalModel.EcourtCaseChange" />
@@ -1798,6 +1813,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Parameter Name="updateBy" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="DialerContacts" EntityType="IntranetPortalModel.DialerContact" />
+          <EntitySet Name="GPAOffers" EntityType="IntranetPortalModel.GPAOffer" />
+          <EntitySet Name="UnderwritingTrackingViews" EntityType="IntranetPortalModel.UnderwritingTrackingView" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -2932,7 +2949,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="EstValue" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NeighName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeighName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -2950,6 +2967,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadsTags" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyOffer">
           <Key>
@@ -2985,6 +3004,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="ColumnName" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="OriginalValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SSLead">
           <Key>
@@ -3041,27 +3061,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="UnderwritingTrackingView">
-          <Key>
-            <PropertyRef Name="BBLE" />
-          </Key>
-          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="UnderwriteStatus" Type="Byte" />
-          <Property Name="UnderwriteCompletedOn" Type="DateTime" Precision="3" />
-          <Property Name="UnderwriteCompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NewOfferStatus" Type="Int32" />
-          <Property Name="NewOfferDate" Type="DateTime" Precision="3" />
-          <Property Name="NewOfferBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsShortSaleAccpeted" Type="Int32" Nullable="false" />
-          <Property Name="AcceptedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AcceptedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsInProcess" Type="Int32" Nullable="false" />
-          <Property Name="InProcessDate" Type="DateTime" Precision="3" />
-          <Property Name="InProcessBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShortSalesStatus" Type="Int32" />
-          <Property Name="InProcessType" Type="Int32" />
         </EntityType>
         <EntityType Name="EcourtCase">
           <Key>
@@ -3283,6 +3282,40 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CallRecordLastAttempt_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CallRecordLastResult_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Callable_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GPAOffer">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="OfferPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UnderwritingTrackingView">
+          <Key>
+            <PropertyRef Name="IsShortSaleAccpeted" />
+            <PropertyRef Name="IsInProcess" />
+          </Key>
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UnderwriteStatus" Type="Byte" />
+          <Property Name="UnderwriteCompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="UnderwriteCompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NewOfferStatus" Type="Int32" />
+          <Property Name="NewOfferDate" Type="DateTime" Precision="3" />
+          <Property Name="NewOfferBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortSalesStatus" Type="Int32" />
+          <Property Name="IsShortSaleAccpeted" Type="Int32" Nullable="false" />
+          <Property Name="AcceptedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AcceptedDate" Type="DateTime" Precision="3" />
+          <Property Name="InProcessType" Type="Int32" />
+          <Property Name="IsInProcess" Type="Int32" Nullable="false" />
+          <Property Name="InProcessDate" Type="DateTime" Precision="3" />
+          <Property Name="InProcessBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4412,6 +4445,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="ShortSaleLeadsInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleLeadsInfo">
               <MappingFragment StoreEntitySet="LeadsInfo">
+                <ScalarProperty Name="LeadsTags" ColumnName="LeadsTags" />
+                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
@@ -4515,6 +4550,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySetMapping Name="AuditLogs">
             <EntityTypeMapping TypeName="IntranetPortalModel.AuditLog">
               <MappingFragment StoreEntitySet="AuditLogs">
+                <ScalarProperty Name="CustomType" ColumnName="CustomType" />
                 <ScalarProperty Name="NewValue" ColumnName="NewValue" />
                 <ScalarProperty Name="OriginalValue" ColumnName="OriginalValue" />
                 <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
@@ -4584,28 +4620,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
                 <ScalarProperty Name="BriefDescription" ColumnName="BriefDescription" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UnderwritingTrackingViews">
-            <EntityTypeMapping TypeName="IntranetPortalModel.UnderwritingTrackingView">
-              <MappingFragment StoreEntitySet="UnderwritingTrackingView">
-                <ScalarProperty Name="InProcessType" ColumnName="InProcessType" />
-                <ScalarProperty Name="ShortSalesStatus" ColumnName="ShortSalesStatus" />
-                <ScalarProperty Name="InProcessBy" ColumnName="InProcessBy" />
-                <ScalarProperty Name="InProcessDate" ColumnName="InProcessDate" />
-                <ScalarProperty Name="IsInProcess" ColumnName="IsInProcess" />
-                <ScalarProperty Name="AcceptedDate" ColumnName="AcceptedDate" />
-                <ScalarProperty Name="AcceptedBy" ColumnName="AcceptedBy" />
-                <ScalarProperty Name="IsShortSaleAccpeted" ColumnName="IsShortSaleAccpeted" />
-                <ScalarProperty Name="NewOfferBy" ColumnName="NewOfferBy" />
-                <ScalarProperty Name="NewOfferDate" ColumnName="NewOfferDate" />
-                <ScalarProperty Name="NewOfferStatus" ColumnName="NewOfferStatus" />
-                <ScalarProperty Name="UnderwriteCompletedBy" ColumnName="UnderwriteCompletedBy" />
-                <ScalarProperty Name="UnderwriteCompletedOn" ColumnName="UnderwriteCompletedOn" />
-                <ScalarProperty Name="UnderwriteStatus" ColumnName="UnderwriteStatus" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4830,6 +4844,41 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="ContactListId" ColumnName="ContactListId" />
                 <ScalarProperty Name="inin_outbound_id" ColumnName="inin-outbound-id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GPAOffers">
+            <EntityTypeMapping TypeName="IntranetPortalModel.GPAOffer">
+              <MappingFragment StoreEntitySet="GPAOffers">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnderwritingTrackingViews">
+            <EntityTypeMapping TypeName="IntranetPortalModel.UnderwritingTrackingView">
+              <MappingFragment StoreEntitySet="UnderwritingTrackingView">
+                <ScalarProperty Name="InProcessBy" ColumnName="InProcessBy" />
+                <ScalarProperty Name="InProcessDate" ColumnName="InProcessDate" />
+                <ScalarProperty Name="IsInProcess" ColumnName="IsInProcess" />
+                <ScalarProperty Name="InProcessType" ColumnName="InProcessType" />
+                <ScalarProperty Name="AcceptedDate" ColumnName="AcceptedDate" />
+                <ScalarProperty Name="AcceptedBy" ColumnName="AcceptedBy" />
+                <ScalarProperty Name="IsShortSaleAccpeted" ColumnName="IsShortSaleAccpeted" />
+                <ScalarProperty Name="ShortSalesStatus" ColumnName="ShortSalesStatus" />
+                <ScalarProperty Name="NewOfferBy" ColumnName="NewOfferBy" />
+                <ScalarProperty Name="NewOfferDate" ColumnName="NewOfferDate" />
+                <ScalarProperty Name="NewOfferStatus" ColumnName="NewOfferStatus" />
+                <ScalarProperty Name="UnderwriteCompletedBy" ColumnName="UnderwriteCompletedBy" />
+                <ScalarProperty Name="UnderwriteCompletedOn" ColumnName="UnderwriteCompletedOn" />
+                <ScalarProperty Name="UnderwriteStatus" ColumnName="UnderwriteStatus" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

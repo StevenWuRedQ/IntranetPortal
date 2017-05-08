@@ -152,6 +152,9 @@
     <Compile Include="ADOEntity\EcourtCaseChange.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\GPAOffer.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\LeadsEcourtData.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -205,6 +208,7 @@
     <Compile Include="DialerService\DialerContact.vb" />
     <Compile Include="DialerService\DialerService.vb" />
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
+    <Compile Include="GPAOffer\GPAOffer.vb" />
     <Compile Include="WebApi\EcourtService.vb" />
     <Compile Include="WebApi\LeadsEcourtData.vb" />
     <Compile Include="Exception\DataException.vb" />
