@@ -84,8 +84,8 @@ Partial Public Class PortalEntities
     Public Overridable Property LeadsEcourtDatas() As DbSet(Of LeadsEcourtData)
     Public Overridable Property EcourtCaseChanges() As DbSet(Of EcourtCaseChange)
     Public Overridable Property DialerContacts() As DbSet(Of DialerContact)
-    Public Overridable Property GPAOffers() As DbSet(Of GPAOffer)
     Public Overridable Property UnderwritingTrackingViews() As DbSet(Of UnderwritingTrackingView)
+    Public Overridable Property GPAOffers() As DbSet(Of GPAOffer)
 
     Public Overridable Function ArchiveDocumentSearch(bble As String, archiveBy As String) As Integer
         Dim bbleParameter As ObjectParameter = If(bble IsNot Nothing, New ObjectParameter("bble", bble), New ObjectParameter("bble", GetType(String)))

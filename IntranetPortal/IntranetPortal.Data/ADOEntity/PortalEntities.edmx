@@ -1813,8 +1813,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Parameter Name="updateBy" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="DialerContacts" EntityType="IntranetPortalModel.DialerContact" />
-          <EntitySet Name="GPAOffers" EntityType="IntranetPortalModel.GPAOffer" />
           <EntitySet Name="UnderwritingTrackingViews" EntityType="IntranetPortalModel.UnderwritingTrackingView" />
+          <EntitySet Name="GPAOffers" EntityType="IntranetPortalModel.GPAOffer" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -3283,18 +3283,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CallRecordLastResult_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Callable_CoOwnerPhone20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="GPAOffer">
-          <Key>
-            <PropertyRef Name="BBLE" />
-          </Key>
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="OfferPrice" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="UnderwritingTrackingView">
           <Key>
             <PropertyRef Name="IsShortSaleAccpeted" />
@@ -3316,6 +3304,18 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="IsInProcess" Type="Int32" Nullable="false" />
           <Property Name="InProcessDate" Type="DateTime" Precision="3" />
           <Property Name="InProcessBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GPAOffer">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="OfferPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4847,19 +4847,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GPAOffers">
-            <EntityTypeMapping TypeName="IntranetPortalModel.GPAOffer">
-              <MappingFragment StoreEntitySet="GPAOffers">
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UnderwritingTrackingViews">
             <EntityTypeMapping TypeName="IntranetPortalModel.UnderwritingTrackingView">
               <MappingFragment StoreEntitySet="UnderwritingTrackingView">
@@ -4878,6 +4865,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
                 <ScalarProperty Name="UnderwriteCompletedOn" ColumnName="UnderwriteCompletedOn" />
                 <ScalarProperty Name="UnderwriteStatus" ColumnName="UnderwriteStatus" />
                 <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GPAOffers">
+            <EntityTypeMapping TypeName="IntranetPortalModel.GPAOffer">
+              <MappingFragment StoreEntitySet="GPAOffers">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
