@@ -1,26 +1,26 @@
 ﻿Partial Public Class GPAOffer
 
-    Private _generateBy As String
-    Public Property GenerateBy As String
-        Get
-            If Not String.IsNullOrEmpty(_generateBy) Then
-                Return _generateBy
-            End If
+    'Private _generateBy As String
+    'Public Property GenerateBy As String
+    '    Get
+    '        If Not String.IsNullOrEmpty(_generateBy) Then
+    '            Return _generateBy
+    '        End If
 
-            If Not String.IsNullOrEmpty(UpdateBy) Then
-                Return UpdateBy
-            End If
+    '        If Not String.IsNullOrEmpty(UpdateBy) Then
+    '            Return UpdateBy
+    '        End If
 
-            If Not String.IsNullOrEmpty(CreateBy) Then
-                Return CreateBy
-            End If
+    '        If Not String.IsNullOrEmpty(CreateBy) Then
+    '            Return CreateBy
+    '        End If
 
-            Return Nothing
-        End Get
-        Set(value As String)
-            _generateBy = value
-        End Set
-    End Property
+    '        Return Nothing
+    '    End Get
+    '    Set(value As String)
+    '        _generateBy = value
+    '    End Set
+    'End Property
 
     Public ReadOnly Property StatusStr As String
         Get
@@ -46,7 +46,7 @@
             Return result.AsEnumerable.Select(Function(a)
                                                   a.offer.CurrentTeam = ""
                                                   a.offer.CurrentAgent = a.ld?.EmployeeName
-                                                  a.offer.Address = a.PropertyAddress
+                                                  a.offer.Address = a?.PropertyAddress
                                                   Return a.offer
                                               End Function).ToList
         End Using
@@ -83,7 +83,13 @@
             If offer IsNot Nothing Then
                 offer.UpdateBy = GenerateBy
                 offer.LastUpdate = DateTime.UtcNow
+
                 offer.OfferPrice = OfferPrice
+                offer.Comments = Comments
+                offer.OfferId = OfferId
+                offer.GenerateBy = GenerateBy
+                offer.OfferFor = OfferFor
+                offer.Description = Description
             Else
                 Me.CreateBy = GenerateBy
                 Me.CreateDate = DateTime.UtcNow

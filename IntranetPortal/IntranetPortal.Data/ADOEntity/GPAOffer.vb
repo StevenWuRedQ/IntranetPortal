@@ -18,5 +18,10 @@ Partial Public Class GPAOffer
     Public Property UpdateBy As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property OfferId As Nullable(Of Integer)
+    Public Property OfferFor As String
+    Public Property GenerateBy As String
+    Public Property Comments As String
+    Public Property Description As String
 
 End Class
