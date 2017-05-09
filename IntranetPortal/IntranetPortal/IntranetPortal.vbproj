@@ -56,82 +56,6 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ActiveQueryBuilder2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web, Version=2.8.7.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control, Version=2.8.7.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server, Version=2.8.7.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.AdvantageMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.AdvantageMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.DB2MetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.DB2MetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.EventMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.EventMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.FirebirdMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.FirebirdMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.InformixMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.InformixMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.MSSQLCEMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.MSSQLCEMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.MSSQLMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.MySQLMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.MySQLMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.ODBCMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ODBCMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.OLEDBMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.OracleMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.OracleMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.OracleNativeMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.OracleNativeMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.PostgreSQLMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.PostgreSQLMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.SybaseMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.SybaseMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.UniversalMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.UniversalMetadataProvider2.dll</HintPath>
-    </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
@@ -1615,13 +1539,6 @@
     <Compile Include="Management\MgrRole.aspx.vb">
       <DependentUpon>MgrRole.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Management\QueryBuilder.aspx.designer.vb">
-      <DependentUpon>QueryBuilder.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Management\QueryBuilder.aspx.vb">
-      <DependentUpon>QueryBuilder.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Management\ShortSaleManagement.aspx.designer.vb">
       <DependentUpon>ShortSaleManagement.aspx</DependentUpon>
@@ -6863,7 +6780,6 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Construction\ConstructionInitialForm.aspx" />
-    <Content Include="css\accessibility.css" />
     <Content Include="css\base.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\budgetTable.css" />
@@ -6872,45 +6788,11 @@
     <Content Include="css\dx.light.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
-    <Content Include="css\jquery.contextMenu.css" />
-    <Content Include="css\jquery.jPaginate.css" />
-    <Content Include="css\jquery.ui.selectmenu.css" />
     <Content Include="css\main.css" />
     <Content Include="css\normalize.css" />
     <Content Include="css\normalize.min.css" />
-    <Content Include="css\qb\qb.ui.grid.css" />
-    <Content Include="css\qb\qb.ui.table.css" />
-    <Content Include="css\qb\qb.ui.tree.css" />
     <Content Include="css\right-pane.css" />
-    <Content Include="css\RightToLeft.css" />
     <Content Include="css\stevencss.css" />
-    <Content Include="css\themes\images\animated-overlay.gif" />
-    <Content Include="css\themes\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
-    <Content Include="css\themes\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
-    <Content Include="css\themes\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="css\themes\images\ui-bg_flat_10_000000_40x100.png" />
-    <Content Include="css\themes\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="css\themes\images\ui-bg_glass_100_f6f6f6_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_100_fdf5ce_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
-    <Content Include="css\themes\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-    <Content Include="css\themes\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="css\themes\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-    <Content Include="css\themes\images\ui-icons_222222_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_228ef1_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_454545_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_888888_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_ef8c08_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_ffd27a_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="css\themes\jquery-ui.css" />
     <Content Include="CustomReport\legalParties.js" />
     <Content Include="CustomReport\legal.js" />
     <Content Include="CustomReport\LeadsDocSearch.js" />
@@ -7081,181 +6963,6 @@
     <Content Include="images\img\logo_landing.png" />
     <Content Include="images\img\submenu_shadow.png" />
     <Content Include="img\construction.svg" />
-    <Content Include="img\ContextMenu\arrow_down.png" />
-    <Content Include="img\ContextMenu\arrow_up.png" />
-    <Content Include="img\ContextMenu\bin.png" />
-    <Content Include="img\ContextMenu\bin_closed.png" />
-    <Content Include="img\ContextMenu\bin_empty.png" />
-    <Content Include="img\ContextMenu\bullet_arrow_down.png" />
-    <Content Include="img\ContextMenu\bullet_arrow_up.png" />
-    <Content Include="img\ContextMenu\check.gif" />
-    <Content Include="img\ContextMenu\checkbox.gif" />
-    <Content Include="img\ContextMenu\checkbox_checked.gif" />
-    <Content Include="img\ContextMenu\checked.png" />
-    <Content Include="img\ContextMenu\checked2.png" />
-    <Content Include="img\ContextMenu\cross.png" />
-    <Content Include="img\ContextMenu\cut.png" />
-    <Content Include="img\ContextMenu\door.png" />
-    <Content Include="img\ContextMenu\field.png" />
-    <Content Include="img\ContextMenu\page_white.png" />
-    <Content Include="img\ContextMenu\page_white_add.png" />
-    <Content Include="img\ContextMenu\page_white_copy.png" />
-    <Content Include="img\ContextMenu\page_white_delete.png" />
-    <Content Include="img\ContextMenu\page_white_edit.png" />
-    <Content Include="img\ContextMenu\page_white_paste.png" />
-    <Content Include="img\ContextMenu\table_row_delete.png" />
-    <Content Include="img\ContextMenu\table_row_insert.png" />
-    <Content Include="img\ContextMenu\uncheck.gif" />
-    <Content Include="img\grippy.png" />
-    <Content Include="img\icons\%28.png" />
-    <Content Include="img\icons\%29.png" />
-    <Content Include="img\icons\arrow_branch.png" />
-    <Content Include="img\icons\arrow_divide.png" />
-    <Content Include="img\icons\arrow_double.png" />
-    <Content Include="img\icons\arrow_down.png" />
-    <Content Include="img\icons\arrow_in.png" />
-    <Content Include="img\icons\arrow_inout.png" />
-    <Content Include="img\icons\arrow_join.png" />
-    <Content Include="img\icons\arrow_left.png" />
-    <Content Include="img\icons\arrow_merge.png" />
-    <Content Include="img\icons\arrow_out.png" />
-    <Content Include="img\icons\arrow_redo.png" />
-    <Content Include="img\icons\arrow_refresh.png" />
-    <Content Include="img\icons\arrow_refresh_small.png" />
-    <Content Include="img\icons\arrow_right.png" />
-    <Content Include="img\icons\arrow_rotate_anticlockwise.png" />
-    <Content Include="img\icons\arrow_rotate_clockwise.png" />
-    <Content Include="img\icons\arrow_switch.png" />
-    <Content Include="img\icons\arrow_turn_left.png" />
-    <Content Include="img\icons\arrow_turn_right.png" />
-    <Content Include="img\icons\bin.png" />
-    <Content Include="img\icons\bin_closed.png" />
-    <Content Include="img\icons\bin_empty.png" />
-    <Content Include="img\icons\bricks.ico" />
-    <Content Include="img\icons\corner-dot.png" />
-    <Content Include="img\icons\corner.png" />
-    <Content Include="img\icons\CriteriaItem.png" />
-    <Content Include="img\icons\CriteriaList.png" />
-    <Content Include="img\icons\cross.png" />
-    <Content Include="img\icons\cross2.png" />
-    <Content Include="img\icons\database.png" />
-    <Content Include="img\icons\database_connect.png" />
-    <Content Include="img\icons\database_go.ico" />
-    <Content Include="img\icons\database_key.png" />
-    <Content Include="img\icons\database_table.png" />
-    <Content Include="img\icons\error.png" />
-    <Content Include="img\icons\except.png" />
-    <Content Include="img\icons\exceptall.png" />
-    <Content Include="img\icons\exclamation.png" />
-    <Content Include="img\icons\field.png" />
-    <Content Include="img\icons\fields.png" />
-    <Content Include="img\icons\filter.png" />
-    <Content Include="img\icons\folder.png" />
-    <Content Include="img\icons\gear.png" />
-    <Content Include="img\icons\icon-gear.gif" />
-    <Content Include="img\icons\information.png" />
-    <Content Include="img\icons\intersect.png" />
-    <Content Include="img\icons\intersectall.png" />
-    <Content Include="img\icons\link.png" />
-    <Content Include="img\icons\minus.png" />
-    <Content Include="img\icons\navbar_%28.png" />
-    <Content Include="img\icons\navbar_%29.png" />
-    <Content Include="img\icons\navbar_op_except.png" />
-    <Content Include="img\icons\navbar_op_exceptall.png" />
-    <Content Include="img\icons\navbar_op_intersect.png" />
-    <Content Include="img\icons\navbar_op_intersectall.png" />
-    <Content Include="img\icons\navbar_op_union.png" />
-    <Content Include="img\icons\navbar_op_unionall.png" />
-    <Content Include="img\icons\navbar_plus.png" />
-    <Content Include="img\icons\navbar_Q.png" />
-    <Content Include="img\icons\navbar_Q_active.png" />
-    <Content Include="img\icons\obscogwheel.png" />
-    <Content Include="img\icons\pencil.png" />
-    <Content Include="img\icons\plus-white.png" />
-    <Content Include="img\icons\plus.png" />
-    <Content Include="img\icons\plus2.png" />
-    <Content Include="img\icons\primary_key.gif" />
-    <Content Include="img\icons\primary_key.png" />
-    <Content Include="img\icons\procedure.png" />
-    <Content Include="img\icons\properties-small.png" />
-    <Content Include="img\icons\properties-small2.png" />
-    <Content Include="img\icons\properties.png" />
-    <Content Include="img\icons\properties2.png" />
-    <Content Include="img\icons\q.png" />
-    <Content Include="img\icons\qt-bg1-hover.png" />
-    <Content Include="img\icons\qt-bg1.png" />
-    <Content Include="img\icons\qt-bg2-hover.png" />
-    <Content Include="img\icons\qt-bg2.png" />
-    <Content Include="img\icons\relation.png" />
-    <Content Include="img\icons\relations.png" />
-    <Content Include="img\icons\schema.png" />
-    <Content Include="img\icons\server.png" />
-    <Content Include="img\icons\synonym.png" />
-    <Content Include="img\icons\table.gif" />
-    <Content Include="img\icons\table.png" />
-    <Content Include="img\icons\tab_cte.png" />
-    <Content Include="img\icons\tab_derived.png" />
-    <Content Include="img\icons\tab_main.png" />
-    <Content Include="img\icons\tab_subquery.png" />
-    <Content Include="img\icons\textfield.png" />
-    <Content Include="img\icons\union.png" />
-    <Content Include="img\icons\unionall.png" />
-    <Content Include="img\icons\UnionSubQuery.png" />
-    <Content Include="img\icons\updown2.gif" />
-    <Content Include="img\icons\view.png" />
-    <Content Include="img\jPaginate\next.png" />
-    <Content Include="img\jPaginate\previous.png" />
-    <Content Include="img\jPaginate\snext.png" />
-    <Content Include="img\jPaginate\sprevious.png" />
-    <Content Include="img\jquery.editable-select\arrow-down-small.gif" />
-    <Content Include="img\jquery.editable-select\arrow-down.gif" />
-    <Content Include="img\openhand.cur" />
-    <Content Include="img\s.gif" />
-    <Content Include="img\separator-arrow-down.gif" />
-    <Content Include="img\separator-arrow.gif" />
-    <Content Include="img\separator.gif" />
-    <Content Include="img\themeroller\buttonbg.png" />
-    <Content Include="img\themeroller\icon_color_arrow.gif" />
-    <Content Include="img\themeroller\menuhoverbg.png" />
-    <Content Include="img\themeroller\theme_90_black_matte.png" />
-    <Content Include="img\themeroller\theme_90_black_tie.png" />
-    <Content Include="img\themeroller\theme_90_blitzer.png" />
-    <Content Include="img\themeroller\theme_90_cupertino.png" />
-    <Content Include="img\themeroller\theme_90_dark_hive.png" />
-    <Content Include="img\themeroller\theme_90_dot_luv.png" />
-    <Content Include="img\themeroller\theme_90_eggplant.png" />
-    <Content Include="img\themeroller\theme_90_excite_bike.png" />
-    <Content Include="img\themeroller\theme_90_flick.png" />
-    <Content Include="img\themeroller\theme_90_hot_sneaks.png" />
-    <Content Include="img\themeroller\theme_90_humanity.png" />
-    <Content Include="img\themeroller\theme_90_le_frog.png" />
-    <Content Include="img\themeroller\theme_90_mint_choco.png" />
-    <Content Include="img\themeroller\theme_90_overcast.png" />
-    <Content Include="img\themeroller\theme_90_pepper_grinder.png" />
-    <Content Include="img\themeroller\theme_90_smoothness.png" />
-    <Content Include="img\themeroller\theme_90_south_street.png" />
-    <Content Include="img\themeroller\theme_90_start_menu.png" />
-    <Content Include="img\themeroller\theme_90_sunny.png" />
-    <Content Include="img\themeroller\theme_90_swanky_purse.png" />
-    <Content Include="img\themeroller\theme_90_trontastic.png" />
-    <Content Include="img\themeroller\theme_90_ui_dark.png" />
-    <Content Include="img\themeroller\theme_90_ui_light.png" />
-    <Content Include="img\themeroller\theme_90_windoze.png" />
-    <Content Include="img\TreeView\file.gif" />
-    <Content Include="img\TreeView\folder-closed.gif" />
-    <Content Include="img\TreeView\folder.gif" />
-    <Content Include="img\TreeView\minus.gif" />
-    <Content Include="img\TreeView\plus.gif" />
-    <Content Include="img\TreeView\treeview-black-line.gif" />
-    <Content Include="img\TreeView\treeview-black.gif" />
-    <Content Include="img\TreeView\treeview-default-line.gif" />
-    <Content Include="img\TreeView\treeview-default.gif" />
-    <Content Include="img\TreeView\treeview-famfamfam-line.gif" />
-    <Content Include="img\TreeView\treeview-famfamfam.gif" />
-    <Content Include="img\TreeView\treeview-gray-line.gif" />
-    <Content Include="img\TreeView\treeview-gray.gif" />
-    <Content Include="img\TreeView\treeview-red-line.gif" />
-    <Content Include="img\TreeView\treeview-red.gif" />
     <Content Include="js\app.js" />
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\common\portalRouteProvider.js" />
@@ -7428,7 +7135,6 @@
     <Content Include="ManagementUI\MgrTeam.aspx" />
     <Content Include="Management\MgrRole.aspx" />
     <Content Include="Management\PortalStatus.aspx" />
-    <Content Include="Management\QueryBuilder.aspx" />
     <Content Include="Management\ShortSaleManagement.aspx" />
     <Content Include="Management\TaskList.aspx" />
     <Content Include="Management\Transfer2Legal.aspx" />
@@ -7862,8 +7568,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="AutoDialer\Web.config" />
-    <Content Include="img\img_files" />
-    <Content Include="css\css_files" />
     <Content Include="App_Data\OSCTemplate.docx" />
     <Content Include="App_Data\DeedReversionTemplate.docx" />
     <Content Include="bower_components\lodash\.bower.json" />

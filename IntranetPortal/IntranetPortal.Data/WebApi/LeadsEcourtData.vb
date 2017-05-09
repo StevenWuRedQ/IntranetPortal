@@ -229,7 +229,7 @@ Public Class LeadsEcourtData
                     cas.CreateDate = DateTime.Now
                     ctx.EcourtCases.Add(cas)
 
-                    If Not ctx.LeadsEcourtDatas.Any(Function(a) a.BBLE = cas.BBLE) Then
+                    If Not ctx.LeadsEcourtDatas.Any(Function(a) a.BBLE = cas.BBLE) AndAlso Not ctx.LeadsEcourtDatas.Local.Any(Function(a) a.BBLE = cas.BBLE) Then
                         Dim data = New LeadsEcourtData
                         data.BBLE = cas.BBLE
                         data.LastUpdate = DateTime.Now

@@ -9,11 +9,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.0/moment-timezone.min.js" type="text/javascript"></script>
 
     <style type="text/css">
-        a.dx-link-MyIdealProp:hover {
-            font-weight: 500;
-            cursor: pointer;
+        a.dx-link-MyIdealProp {
+            margin-left: 5px;
         }
-        
+
+            a.dx-link-MyIdealProp:hover {
+                font-weight: 500;
+                cursor: pointer;
+            }
+
         .myRow:hover {
             background-color: #efefef;
         }
@@ -26,15 +30,15 @@
             top: 0;
             line-height: 38px;
             font-size: 24px;
-            font-weight: 600;             
+            font-weight: 600;
         }
 
-        .apply-filter-option > div:last-child {
-            display: inline-block;
-            vertical-align: top;
-            margin-left: 20px;
-            line-height: normal;
-        }
+            .apply-filter-option > div:last-child {
+                display: inline-block;
+                vertical-align: top;
+                margin-left: 20px;
+                line-height: normal;
+            }
     </style>
     <input type="text" style="display: none" />
     <div class="apply-filter-option">
@@ -43,16 +47,16 @@
     </div>
     <div id="gridContainer" style="margin: 10px"></div>
     <script>
-        $(document).ready(function () {         
+        $(document).ready(function () {
 
             function GoToCase(CaseId) {
                 var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
                 window.location.href = url;
             }
-            
+
             function ShowCaseInfo(CaseId) {
-                var url = '/ViewLeadsInfo.aspx?id=' + CaseId;               
-                PortalUtility.ShowPopWindow("View Case - " + CaseId, url);                
+                var url = '/ViewLeadsInfo.aspx?id=' + CaseId;
+                PortalUtility.ShowPopWindow("View Case - " + CaseId, url);
             }
 
             function enableTitle(bble, data) {
@@ -65,7 +69,7 @@
                 });
             }
 
-            function loadData(view){
+            function loadData(view) {
                 var url = "/api/gpaoffer?view=" + view;
                 $.getJSON(url).done(function (data) {
                     var options = {
@@ -91,7 +95,7 @@
                             rowInfo.rowElement.addClass('myRow');
                         },
                         onContentReady: function (e) {
-                            
+
                         },
                         summary: {
                             groupItems: [{
@@ -101,7 +105,7 @@
                             }],
                             totalItems: [{
                                 column: "Address",
-                                summaryType: "count"                                
+                                summaryType: "count"
                             }]
                         },
                         columns: [{
@@ -132,9 +136,9 @@
                             caption: "Agent",
                             dataField: "CurrentAgent"
                         }, {
-                            caption: "Team",
-                            dataField: "CurrentTeam"
-                        }, {
+                            caption: "Offer For",
+                            dataField: "OfferFor"
+                        }, "Comments", {
                             caption: "Status",
                             dataField: "StatusStr"
                         }, {
@@ -146,11 +150,19 @@
                                         enableTitle(options.data.BBLE, options.data);
                                     })
                                     .appendTo(container);
+
+                                $('<a/>').addClass('dx-link-MyIdealProp')
+                                    .text('History')
+                                    .on('dxclick', function () {
+                                        alert('history');
+                                    })
+                                    .appendTo(container);
                             }
                         }]
-                    };                    
+                    };
 
-                    var dataGrid = $("#gridContainer").dxDataGrid(options).dxDataGrid('instance');});
+                    var dataGrid = $("#gridContainer").dxDataGrid(options).dxDataGrid('instance');
+                });
             }
 
             var applyFilterTypes = [
@@ -169,7 +181,7 @@
                 }];
 
             $("#useFilterApplyButton").dxSelectBox({
-                items: applyFilterTypes,             
+                items: applyFilterTypes,
                 valueExpr: "key",
                 displayExpr: "name",
                 onValueChanged: function (data) {
