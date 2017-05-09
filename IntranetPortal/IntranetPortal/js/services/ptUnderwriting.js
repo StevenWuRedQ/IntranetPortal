@@ -296,5 +296,108 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
                 });
             });
         }
+
+        var _UnderwritingModel = function () {
+            this.Grade = "0",
+                this.PropertyInfo = {
+                    PropertyType: undefined,
+                    PropertyAddress: "",
+                    CurrentOwner: "",
+                    TaxClass: "",
+                    LotSize: "",
+                    BuildingDimension: "",
+                    Zoning: "",
+                    FARActual: 0.0,
+                    FARMax: 0.0,
+                    PropertyTaxYear: 0.0,
+                    ActualNumOfUnits: 0,
+                    OccupancyStatus: undefined,
+                    SellerOccupied: false,
+                    NumOfTenants: 0,
+                    Landmark: false,
+                    SRO: false
+                };
+            this.DealCosts = {
+                MoneySpent: 0.0,
+                HAFA: false,
+                HOI: 0.0,
+                HOIRatio: 0.0,
+                COSTermination: 0.0,
+                AgentCommission: 0.0
+            };
+            this.RehabInfo = {
+                AverageLowValue: 0.0,
+                RenovatedValue: 0.0,
+                RepairBid: 0.0,
+                NeedsPlans: false,
+                DealTimeMonths: 6,
+                SalesCommission: 0.05,
+                DealROICash: 0.35
+            };
+            this.LienInfo = {
+                FirstMortgage: 0.0,
+                SecondMortgage: 0.0,
+                COSRecorded: false,
+                DeedRecorded: false,
+                OtherLiens: 1,
+                LisPendens: false,
+                FHA: false,
+                FannieMae: false,
+                FreddieMac: false,
+                Servicer: "",
+                ForeclosureIndexNum: "",
+                ForeclosureStatus: undefined,
+                ForeclosureNote: "",
+                AuctionDate: undefined,
+                DefaultDate: undefined,
+                CurrentPayoff: 0.0,
+                PayoffDate: undefined,
+                CurrentSSValue: 0.0
+            };
+            this.LienCosts = {
+                TaxLienCertificate: 0.0,
+                PropertyTaxes: 0.0,
+                WaterCharges: 0.0,
+                ECBCityPay: 0.0,
+                DOBCivilPenalty: 0.0,
+                HPDCharges: 0.0,
+                HPDJudgements: 0.0,
+                PersonalJudgements: 0.0,
+                NYSTaxWarrants: 0.0,
+                FederalTaxLien: 0.0,
+                SidewalkLiens: false,
+                ParkingViolation: 0.0,
+                TransitAuthority: 0.0,
+                VacateOrder: false,
+                IsRelocationLien: false,
+                RelocationLien: 0.0,
+                RelocationLienDate: undefined
+            };
+            this.RentalInfo = {
+                DeedPurchase: 0.0,
+                CurrentlyRented: false,
+                RepairBidTotal: 0.0,
+                NumOfUnits: 0,
+                MarketRentTotal: 0.0,
+                RentalTime: 0
+            };
+            this.MinimumBaselineScenario = {};
+            this.BestCaseScenario = {};
+            this.Summary = {
+                MaximumLienPayoff: 0.0,
+                MaximumSSPrice: 0.0,
+                MaxHOI: 0.0
+            };
+            this.CashScenario = {};
+            this.LoanScenario = {};
+            this.FlipScenario = {
+                FlipProfit: 0.0
+            };
+            this.RentalModel = {};
+        };
+        underwriting.create = function () {
+            var data = new _UnderwritingModel();
+            return data;
+        };
         return underwriting;
     }]);

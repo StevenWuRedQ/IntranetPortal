@@ -45,7 +45,7 @@
 
             Return result.AsEnumerable.Select(Function(a)
                                                   a.offer.CurrentTeam = ""
-                                                  a.offer.CurrentAgent = a.ld.EmployeeName
+                                                  a.offer.CurrentAgent = a.ld?.EmployeeName
                                                   a.offer.Address = a.PropertyAddress
                                                   Return a.offer
                                               End Function).ToList

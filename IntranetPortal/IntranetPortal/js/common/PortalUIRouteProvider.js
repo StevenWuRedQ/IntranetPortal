@@ -1,11 +1,4 @@
-﻿/*
- * Portal UI Route will be the main router we use base on UI-router
- * The Portal Route will be Deprecated
- * 
- */
-
-
-(function() {
+﻿;(function () {
     /* Define public shared var of class portalUIRouteProvider register var in the below*/
     var ITEM_ID = "itemId";
 
@@ -111,16 +104,16 @@
          *         list edit view new
          *         
          */
-        this.statesFor = function(resourceName) {
+        this.statesFor = function (resourceName) {
             if (!resourceName) {
                 console.error("resourceName must be defined in $stateProvider");
             }
             // Create the stateTemplateUrl for a route to our resource that does the specified operation.
-            var stateTemplateUrl = function(statePath) {
+            var stateTemplateUrl = function (statePath) {
                 return "/js/Views/" + resourceName.toLowerCase() + "/" + templateFile(statePath) + ".tpl.html";
             };
 
-            var stateUrl = function(statePath) {
+            var stateUrl = function (statePath) {
                 /// get root url name with resourceName
                 /// other get state path url
 
@@ -135,7 +128,7 @@
              *   Use camelCase and capitalize can solve this problem.
              * @example test.edit -> testEditCtrl
              **/
-            var stateControllerName = function(statePath) {
+            var stateControllerName = function (statePath) {
                 return _.camelCase(resourceName + " " + (statePath || "")) + "Ctrl";
             };
 
@@ -152,7 +145,7 @@
              * @return {string} 
              *         The file template file name to bind view         
              */
-            var templateFile = function(statePath) {
+            var templateFile = function (statePath) {
 
                 if (!statePath) {
                     return "index";
@@ -179,18 +172,18 @@
                  */
 
                 // Pass-through to `$stateProvider.state()`
-                state: function(statePath, resolveFns) {
+                state: function (statePath, resolveFns) {
                     $stateProvider.state(resourceName,
-                    {
-                        url: stateUrl(statePath),
-                        templateUrl: stateTemplateUrl(statePath),
-                        controller: stateControllerName(statePath),
-                        resolve: resolveFns
-                    });
+                        {
+                            url: stateUrl(statePath),
+                            templateUrl: stateTemplateUrl(statePath),
+                            controller: stateControllerName(statePath),
+                            resolve: resolveFns
+                        });
                     return stateBuilder;
                 },
                 // Pass-through to `$stateProvider.otherwise()`
-                otherwise: function(params) {
+                otherwise: function (params) {
                     $stateProvider.otherwise(params);
                     return stateBuilder;
                 },
