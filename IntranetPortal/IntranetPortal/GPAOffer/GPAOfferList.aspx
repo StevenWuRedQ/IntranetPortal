@@ -154,7 +154,7 @@
                                 $('<a/>').addClass('dx-link-MyIdealProp')
                                     .text('History')
                                     .on('dxclick', function () {
-                                        alert('history');
+                                        loadHistory(options.data.BBLE);                                      
                                     })
                                     .appendTo(container);
                             }
@@ -162,6 +162,45 @@
                     };
 
                     var dataGrid = $("#gridContainer").dxDataGrid(options).dxDataGrid('instance');
+                });
+            }
+
+            function loadHistory(bble) {
+                var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + bble;
+                $.getJSON(url).done(function (data) {
+                    var options = {
+                        dataSource: data,                     
+                        rowAlternationEnabled: true,
+                        pager: {
+                            showInfo: true,
+                        },
+                        paging: {
+                            enabled: true,
+                        },
+                        onRowPrepared: function (rowInfo) {
+                            if (rowInfo.rowType != 'data')
+                                return;
+                            rowInfo.rowElement.addClass('myRow');
+                        },
+                        columns: [{
+                            dataField: "title",                           
+                        }, {
+                            caption: "Offer",
+                            dataField: "offerPrice"
+                        }, {
+                            caption: "Generate By",
+                            dataField: "createdBy"
+                        }, {
+                            caption: "Offer For",
+                            dataField: "offerFor"
+                        }, "comments", {
+                            dataField: "updatedDate",
+                            dataType: "date"
+                        }]
+                    };
+
+                    var dataGrid = $("#gridHistory").dxDataGrid(options).dxDataGrid('instance');
+                    $('#divHistory').modal();
                 });
             }
 
@@ -192,5 +231,19 @@
             loadData(-1);
         });
     </script>
-
+    <div class="modal fade" id="divHistory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:750px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Offer History</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="gridHistory"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>               
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
