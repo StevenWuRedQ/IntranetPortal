@@ -123,7 +123,8 @@
                             }
                         }, {
                             caption: "Offer",
-                            dataField: "OfferPrice"
+                            dataField: "OfferPrice",
+                            format: 'currency'
                         }, {
                             caption: "Generate By",
                             dataField: "GenerateBy"
@@ -166,7 +167,7 @@
             }
 
             function loadHistory(bble) {
-                var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + bble;
+                var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + bble.trim() + "/offer";
                 $.getJSON(url).done(function (data) {
                     var options = {
                         dataSource: data,                     
@@ -183,20 +184,19 @@
                             rowInfo.rowElement.addClass('myRow');
                         },
                         columns: [{
-                            dataField: "title",                           
-                        }, {
-                            caption: "Offer",
-                            dataField: "offerPrice"
+                            dataField: "updatedDate",
+                            dataType: "date"
                         }, {
                             caption: "Generate By",
                             dataField: "createdBy"
                         }, {
+                            caption: "Offer",
+                            dataField: "price",
+                            format: 'currency'
+                        }, {
                             caption: "Offer For",
-                            dataField: "offerFor"
-                        }, "comments", {
-                            dataField: "updatedDate",
-                            dataType: "date"
-                        }]
+                            dataField: "for"
+                        }, "comments", ]
                     };
 
                     var dataGrid = $("#gridHistory").dxDataGrid(options).dxDataGrid('instance');
