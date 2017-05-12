@@ -108,6 +108,51 @@
                                 summaryType: "count"
                             }]
                         },
+                        masterDetail: {
+                            enabled: true,
+                            template: function (container, options) {
+                                var currentEmployeeData = options.data;
+                                container.addClass("internal-grid-container");
+                                $("<div>").text("Related offers:").appendTo(container);
+
+                                var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + options.data.BBLE.trim() + '/offer';
+                                $.getJSON(url).done(function (data) {
+                                    var options = {
+                                        dataSource: data,
+                                        rowAlternationEnabled: true,
+                                        pager: {
+                                            showInfo: true,
+                                        },
+                                        paging: {
+                                            enabled: true,
+                                        },
+                                        onRowPrepared: function (rowInfo) {
+                                            if (rowInfo.rowType != 'data')
+                                                return;
+                                            rowInfo.rowElement.addClass('myRow');
+                                        },
+                                        columns: [ {
+                                            caption: "Offer",
+                                            dataField: "price"
+                                        }, {
+                                            caption: "Generate By",
+                                            dataField: "createdBy"
+                                        }, {
+                                            caption: "Homeowner",
+                                            dataField: "for"
+                                        }, "comments", {
+                                            dataField: "updatedDate",
+                                            dataType: "updatedDate",
+                                            dataType: "date"
+                                        }]
+                                    };
+
+                                    $("<div>")
+                                    .addClass("internal-grid")
+                                    .dxDataGrid(options).appendTo(container);                                  
+                                });
+                            }
+                        },
                         columns: [{
                             dataField: "Address",
                             width: 450,
@@ -125,20 +170,19 @@
                             caption: "Offer",
                             dataField: "OfferPrice"
                         }, {
+                            caption: "Offer For",
+                            dataField: "OfferFor"
+                        }, {
                             caption: "Generate By",
                             dataField: "GenerateBy"
-                        }, {
+                        }, "Comments", {
                             caption: "Last Update",
                             dataField: "LastUpdate",
                             dataType: "date"
-                        },
-                        {
+                        }, {
                             caption: "Agent",
                             dataField: "CurrentAgent"
                         }, {
-                            caption: "Offer For",
-                            dataField: "OfferFor"
-                        }, "Comments", {
                             caption: "Status",
                             dataField: "StatusStr"
                         }, {
@@ -154,9 +198,16 @@
                                 $('<a/>').addClass('dx-link-MyIdealProp')
                                     .text('History')
                                     .on('dxclick', function () {
-                                        loadHistory(options.data.BBLE);                                      
+                                        loadHistory(options.data.BBLE);
                                     })
                                     .appendTo(container);
+
+                                //$('<a/>').addClass('dx-link-MyIdealProp')
+                                //    .text('History')
+                                //    .on('dxclick', function () {
+                                //        loadHistory(options.data.BBLE);
+                                //    })
+                                //    .appendTo(container);
                             }
                         }]
                     };
@@ -169,7 +220,7 @@
                 var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + bble;
                 $.getJSON(url).done(function (data) {
                     var options = {
-                        dataSource: data,                     
+                        dataSource: data,
                         rowAlternationEnabled: true,
                         pager: {
                             showInfo: true,
@@ -183,7 +234,7 @@
                             rowInfo.rowElement.addClass('myRow');
                         },
                         columns: [{
-                            dataField: "title",                           
+                            dataField: "title",
                         }, {
                             caption: "Offer",
                             dataField: "offerPrice"
@@ -192,7 +243,7 @@
                             dataField: "createdBy"
                         }, {
                             caption: "Offer For",
-                            dataField: "offerFor"
+                            dataField: "for"
                         }, "comments", {
                             dataField: "updatedDate",
                             dataType: "date"
@@ -232,7 +283,7 @@
         });
     </script>
     <div class="modal fade" id="divHistory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width:750px">
+        <div class="modal-dialog" style="width: 750px">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Offer History</h4>
@@ -241,7 +292,22 @@
                     <div id="gridHistory"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>               
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="divDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 750px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Offer Detail</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

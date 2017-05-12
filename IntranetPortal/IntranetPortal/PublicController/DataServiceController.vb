@@ -49,7 +49,7 @@ Namespace PublicController
                 data.Save()
 
                 SystemLog.Log("UpdateGPAOffer", data.ToJsonString, SystemLog.LogCategory.Operation, Nothing, "GPAService")
-                Return Ok(GPAOffer.GetOffer(data.BBLE))
+                Return Ok(GPAOffer.GetOffer(data.Id))
             Catch ex As Exception
                 Throw ex
             End Try

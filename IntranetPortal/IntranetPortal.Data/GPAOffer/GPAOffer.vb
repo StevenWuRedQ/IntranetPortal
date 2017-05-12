@@ -52,9 +52,9 @@
         End Using
     End Function
 
-    Public Shared Function GetOffer(bble As String) As GPAOffer
+    Public Shared Function GetOffer(id As Integer) As GPAOffer
         Using ctx As New PortalEntities
-            Dim result = From offer In ctx.GPAOffers.Where(Function(o) o.BBLE = bble)
+            Dim result = From offer In ctx.GPAOffers.Where(Function(o) o.Id = id)
                          Join li In ctx.ShortSaleLeadsInfoes On offer.BBLE Equals li.BBLE
                          From ld In ctx.SSLeads.Where(Function(l) l.BBLE = offer.BBLE).DefaultIfEmpty
                          Select offer, li.PropertyAddress, ld
@@ -70,7 +70,7 @@
 
     Public Sub UpdateStatus(status As OfferStatus)
         Using ctx As New PortalEntities
-            Dim offer = ctx.GPAOffers.Find(BBLE)
+            Dim offer = ctx.GPAOffers.Find(Id)
             offer.Status = status
             ctx.SaveChanges()
         End Using
@@ -78,9 +78,11 @@
 
     Public Sub Save()
         Using ctx As New PortalEntities
-            Dim offer = ctx.GPAOffers.Find(BBLE)
+            Dim offer = ctx.GPAOffers.Where(Function(a) a.BBLE = BBLE).FirstOrDefault
 
             If offer IsNot Nothing Then
+                Id = offer.Id
+
                 offer.UpdateBy = GenerateBy
                 offer.LastUpdate = DateTime.UtcNow
 
