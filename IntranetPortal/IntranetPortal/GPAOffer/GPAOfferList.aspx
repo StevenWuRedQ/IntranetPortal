@@ -168,7 +168,8 @@
                             }
                         }, {
                             caption: "Offer",
-                            dataField: "OfferPrice"
+                            dataField: "OfferPrice",
+                            format: 'currency'
                         }, {
                             caption: "Offer For",
                             dataField: "OfferFor"
@@ -198,7 +199,7 @@
                                 $('<a/>').addClass('dx-link-MyIdealProp')
                                     .text('History')
                                     .on('dxclick', function () {
-                                        loadHistory(options.data.BBLE);
+                                        loadHistory(options.data.BBLE);                                      
                                     })
                                     .appendTo(container);
 
@@ -217,10 +218,10 @@
             }
 
             function loadHistory(bble) {
-                var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + bble;
+                var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + bble.trim() + "/offer";
                 $.getJSON(url).done(function (data) {
                     var options = {
-                        dataSource: data,
+                        dataSource: data,                     
                         rowAlternationEnabled: true,
                         pager: {
                             showInfo: true,
@@ -234,13 +235,15 @@
                             rowInfo.rowElement.addClass('myRow');
                         },
                         columns: [{
-                            dataField: "title",
-                        }, {
-                            caption: "Offer",
-                            dataField: "offerPrice"
+                            dataField: "updatedDate",
+                            dataType: "date"
                         }, {
                             caption: "Generate By",
                             dataField: "createdBy"
+                        }, {
+                            caption: "Offer",
+                            dataField: "price",
+                            format: 'currency'
                         }, {
                             caption: "Offer For",
                             dataField: "for"
@@ -292,7 +295,7 @@
                     <div id="gridHistory"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>               
                 </div>
             </div>
         </div>
