@@ -324,6 +324,7 @@
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
     <Compile Include="GPAOffer\GPAOffer.vb" />
     <Compile Include="WebApi\EcourtService.vb" />
+    <Compile Include="WebApi\GradingService.vb" />
     <Compile Include="WebApi\LeadsEcourtData.vb" />
     <Compile Include="Exception\DataException.vb" />
     <Compile Include="SignProcess\DeedCorp.vb" />

@@ -59,7 +59,7 @@
                 item-click="summaryListItemHelper.onSummaryListItemClick"></pt-summary-item-list>
             <pt-summary-item-list
                 list-name="Processing Underwriting"
-                list-short-name="NU"
+                list-short-name="PU"
                 list-data-url="/api/underwriting/status/2"
                 list-href="/UnderWriter/PropertiesList.aspx#/12"
                 list-filter="12"

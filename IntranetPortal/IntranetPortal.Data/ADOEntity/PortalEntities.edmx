@@ -540,10 +540,16 @@
         </EntityType>
         <EntityType Name="GPAOffers">
           <Key>
-            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="OfferPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OfferId" Type="int" />
+          <Property Name="OfferFor" Type="nvarchar" MaxLength="50" />
+          <Property Name="GenerateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
           <Property Name="Status" Type="int" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
@@ -3307,10 +3313,16 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
         </EntityType>
         <EntityType Name="GPAOffer">
           <Key>
-            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="OfferPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OfferId" Type="Int32" />
+          <Property Name="OfferFor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GenerateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -4877,8 +4889,14 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="GenerateBy" ColumnName="GenerateBy" />
+                <ScalarProperty Name="OfferFor" ColumnName="OfferFor" />
+                <ScalarProperty Name="OfferId" ColumnName="OfferId" />
                 <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,6 +16,13 @@ Public Class RedqService
         client.Proxy = Nothing
     End Sub
 
+    Protected Sub New(url As String)
+        client = New RestClient(url)
+        System.Net.WebRequest.DefaultWebProxy = Nothing
+        client.Proxy = Nothing
+    End Sub
+
+
     Protected Function GetRequest(url As String, method As RestSharp.Method) As RestRequest
         Dim request As New RestRequest(url, method)
         request.AddHeader("apiKey", apiKey)

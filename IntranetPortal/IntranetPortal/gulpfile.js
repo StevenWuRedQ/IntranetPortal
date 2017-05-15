@@ -7,6 +7,7 @@ var replace = require("gulp-replace");
 var strip = require("gulp-strip-comments");
 
 var buffer = "";
+
 var angularPath = [
     "js/app.js",
     "js/common/*.js",
@@ -19,7 +20,7 @@ var angularPath = [
     "js/components/*.js"
 ];
 
-var getTimeString = function() {
+var getTimeString = function () {
     if (buffer) return buffer;
     var now = new Date();
     buffer = buffer + now.getFullYear() + (now.getMonth() + 1) + now.getDate();
@@ -27,27 +28,20 @@ var getTimeString = function() {
 };
 
 gulp.task("clean",
-    function() {
+    function () {
         del("js/build/*.js");
     });
 
 gulp.task("concat",
-    function() {
+    function () {
         gulp.src(angularPath)
             .pipe(concat(p.name + ".js"))
-            .pipe(strip())
-            .pipe(gulp.dest("js/build/"));
-    });
-
-gulp.task("uglify",
-    function() {
-        gulp.src("js/build/" + p.name + ".js")
-            .pipe(uglify(p.name + ".min.js"))
+            //.pipe(strip())
             .pipe(gulp.dest("js/build/"));
     });
 
 gulp.task("replace",
-    function() {
+    function () {
         gulp.src("Content.Master")
             .pipe(replace(/src="\/js\/build\/intranetportal.js(\?v=\d{0,8})?"/g,
                 'src="/js/build\/intranetportal.js?v=' + getTimeString() + '"'))
@@ -74,9 +68,9 @@ gulp.task("replace",
             .pipe(gulp.dest(""), { overwrite: true });
     });
 
-gulp.task("default", ["concat", "uglify", "replace"]);
+gulp.task("default", ["clean", "concat", "replace"]);
 
 gulp.task("watch",
-    function() {
+    function () {
         gulp.watch(angularPath, ["concat"]);
     });

@@ -1,26 +1,26 @@
 ﻿Partial Public Class GPAOffer
 
-    Private _generateBy As String
-    Public Property GenerateBy As String
-        Get
-            If Not String.IsNullOrEmpty(_generateBy) Then
-                Return _generateBy
-            End If
+    'Private _generateBy As String
+    'Public Property GenerateBy As String
+    '    Get
+    '        If Not String.IsNullOrEmpty(_generateBy) Then
+    '            Return _generateBy
+    '        End If
 
-            If Not String.IsNullOrEmpty(UpdateBy) Then
-                Return UpdateBy
-            End If
+    '        If Not String.IsNullOrEmpty(UpdateBy) Then
+    '            Return UpdateBy
+    '        End If
 
-            If Not String.IsNullOrEmpty(CreateBy) Then
-                Return CreateBy
-            End If
+    '        If Not String.IsNullOrEmpty(CreateBy) Then
+    '            Return CreateBy
+    '        End If
 
-            Return Nothing
-        End Get
-        Set(value As String)
-            _generateBy = value
-        End Set
-    End Property
+    '        Return Nothing
+    '    End Get
+    '    Set(value As String)
+    '        _generateBy = value
+    '    End Set
+    'End Property
 
     Public ReadOnly Property StatusStr As String
         Get
@@ -45,16 +45,16 @@
 
             Return result.AsEnumerable.Select(Function(a)
                                                   a.offer.CurrentTeam = ""
-                                                  a.offer.CurrentAgent = a.ld.EmployeeName
-                                                  a.offer.Address = a.PropertyAddress
+                                                  a.offer.CurrentAgent = a.ld?.EmployeeName
+                                                  a.offer.Address = a?.PropertyAddress
                                                   Return a.offer
                                               End Function).ToList
         End Using
     End Function
 
-    Public Shared Function GetOffer(bble As String) As GPAOffer
+    Public Shared Function GetOffer(id As Integer) As GPAOffer
         Using ctx As New PortalEntities
-            Dim result = From offer In ctx.GPAOffers.Where(Function(o) o.BBLE = bble)
+            Dim result = From offer In ctx.GPAOffers.Where(Function(o) o.Id = id)
                          Join li In ctx.ShortSaleLeadsInfoes On offer.BBLE Equals li.BBLE
                          From ld In ctx.SSLeads.Where(Function(l) l.BBLE = offer.BBLE).DefaultIfEmpty
                          Select offer, li.PropertyAddress, ld
@@ -70,7 +70,7 @@
 
     Public Sub UpdateStatus(status As OfferStatus)
         Using ctx As New PortalEntities
-            Dim offer = ctx.GPAOffers.Find(BBLE)
+            Dim offer = ctx.GPAOffers.Find(Id)
             offer.Status = status
             ctx.SaveChanges()
         End Using
@@ -78,12 +78,20 @@
 
     Public Sub Save()
         Using ctx As New PortalEntities
-            Dim offer = ctx.GPAOffers.Find(BBLE)
+            Dim offer = ctx.GPAOffers.Where(Function(a) a.BBLE = BBLE).FirstOrDefault
 
             If offer IsNot Nothing Then
+                Id = offer.Id
+
                 offer.UpdateBy = GenerateBy
                 offer.LastUpdate = DateTime.UtcNow
+
                 offer.OfferPrice = OfferPrice
+                offer.Comments = Comments
+                offer.OfferId = OfferId
+                offer.GenerateBy = GenerateBy
+                offer.OfferFor = OfferFor
+                offer.Description = Description
             Else
                 Me.CreateBy = GenerateBy
                 Me.CreateDate = DateTime.UtcNow
