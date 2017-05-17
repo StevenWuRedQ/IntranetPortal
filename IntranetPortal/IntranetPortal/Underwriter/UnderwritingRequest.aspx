@@ -25,8 +25,8 @@
                 //debugger;
                 var scope = angular.element('#uwrview').scope();
                 return scope.data.Id;
-
             }
+
             function showHistory() {
                 var id = getUWRID();
                 if (id) {

@@ -133,7 +133,8 @@
                                         },
                                         columns: [ {
                                             caption: "Offer",
-                                            dataField: "price"
+                                            dataField: "price",
+                                            format: 'currency'
                                         }, {
                                             caption: "Generate By",
                                             dataField: "createdBy"
@@ -196,12 +197,12 @@
                                     })
                                     .appendTo(container);
 
-                                $('<a/>').addClass('dx-link-MyIdealProp')
-                                    .text('History')
-                                    .on('dxclick', function () {
-                                        loadHistory(options.data.BBLE);                                      
-                                    })
-                                    .appendTo(container);
+                                //$('<a/>').addClass('dx-link-MyIdealProp')
+                                //    .text('History')
+                                //    .on('dxclick', function () {
+                                //        loadHistory(options.data.BBLE);                                      
+                                //    })
+                                //    .appendTo(container);
 
                                 //$('<a/>').addClass('dx-link-MyIdealProp')
                                 //    .text('History')
@@ -246,7 +247,7 @@
                             format: 'currency'
                         }, {
                             caption: "Offer For",
-                            dataField: "for"
+                            dataField: "offerFor"
                         }, "comments", {
                             dataField: "updatedDate",
                             dataType: "date"

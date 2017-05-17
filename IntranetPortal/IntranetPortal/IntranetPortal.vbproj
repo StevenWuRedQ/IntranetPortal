@@ -6733,7 +6733,6 @@
     <Content Include="bower_components\printelement\test\jquery.printelement_test.js" />
     <Content Include="bower_components\prototypejs\dist\prototype.js" />
     <Content Include="bower_components\prototypejs\dist\prototype.min.js" />
-    <Content Include="bower_components\pt-compute-engine\pt-compute-engine.js" />
     <Content Include="bower_components\react\JSXTransformer.js" />
     <Content Include="bower_components\react\react-with-addons.js" />
     <Content Include="bower_components\react\react-with-addons.min.js" />
@@ -7640,8 +7639,6 @@
     <None Include="App_Data\underwriter.xlsx.bak" />
     <Content Include="App_Data\docsearchmap.csv" />
     <Content Include="App_Data\test.csv" />
-    <Content Include="bower_components\pt-compute-engine\.bower.json" />
-    <Content Include="bower_components\pt-compute-engine\README.md" />
     <Content Include="Underwriter\UnderwritingTracking.aspx" />
     <Content Include="Webconfig.txt" />
     <None Include="Scripts\x_references.js" />

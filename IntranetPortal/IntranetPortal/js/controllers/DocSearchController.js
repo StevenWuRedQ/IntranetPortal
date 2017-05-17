@@ -119,9 +119,8 @@ angular.module("PortalApp").controller("DocSearchController", [
                     };
                 }
 
-
                 $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-                $scope.DocSearch.ResutContent = $("#search_summary_div").html();
+                $scope.DocSearch.ResultContent = $("#search_summary_div").html();
 
                 if (isSave) {
                     $scope.DocSearch.$update(null, function () {
