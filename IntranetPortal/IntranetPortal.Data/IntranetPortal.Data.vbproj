@@ -240,6 +240,9 @@
     <Compile Include="ADOEntity\PropertyMortgage.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\PropertyNote.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\PropertyOccupant.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -323,6 +326,7 @@
     <Compile Include="DialerService\DialerService.vb" />
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
     <Compile Include="GPAOffer\GPAOffer.vb" />
+    <Compile Include="PropertyNote\PropertyNote.vb" />
     <Compile Include="WebApi\EcourtService.vb" />
     <Compile Include="WebApi\GradingService.vb" />
     <Compile Include="WebApi\LeadsEcourtData.vb" />

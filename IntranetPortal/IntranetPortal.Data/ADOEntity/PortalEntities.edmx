@@ -970,6 +970,28 @@
           <Property Name="LenderAttorney" Type="int" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="PropertyNotes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="BPOValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FCStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastPaidInstallmentDt" Type="datetime" />
+          <Property Name="NextPmtDueDt" Type="datetime" />
+          <Property Name="FCStartDt" Type="datetime" />
+          <Property Name="CurrentOccupancy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DelinquentInterest" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CurrentUPB" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ForbearanceAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="EscrowAdvanceBalance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="PropertyOccupants">
           <Key>
             <PropertyRef Name="OccupantId" />
@@ -1572,6 +1594,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySet Name="PropertyBaseInfo" EntityType="Self.PropertyBaseInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyFloors" EntityType="Self.PropertyFloors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyMortgages" EntityType="Self.PropertyMortgages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyNotes" EntityType="Self.PropertyNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyOccupants" EntityType="Self.PropertyOccupants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyOffers" EntityType="Self.PropertyOffers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyOwners" EntityType="Self.PropertyOwners" Schema="dbo" store:Type="Tables" />
@@ -1821,6 +1844,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySet Name="DialerContacts" EntityType="IntranetPortalModel.DialerContact" />
           <EntitySet Name="UnderwritingTrackingViews" EntityType="IntranetPortalModel.UnderwritingTrackingView" />
           <EntitySet Name="GPAOffers" EntityType="IntranetPortalModel.GPAOffer" />
+          <EntitySet Name="PropertyNotes" EntityType="IntranetPortalModel.PropertyNote" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -3328,6 +3352,28 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PropertyNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="BPOValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FCStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastPaidInstallmentDt" Type="DateTime" Precision="3" />
+          <Property Name="NextPmtDueDt" Type="DateTime" Precision="3" />
+          <Property Name="FCStartDt" Type="DateTime" Precision="3" />
+          <Property Name="CurrentOccupancy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DelinquentInterest" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CurrentUPB" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ForbearanceAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EscrowAdvanceBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4895,6 +4941,29 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
                 <ScalarProperty Name="OfferFor" ColumnName="OfferFor" />
                 <ScalarProperty Name="OfferId" ColumnName="OfferId" />
                 <ScalarProperty Name="OfferPrice" ColumnName="OfferPrice" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyNotes">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyNote">
+              <MappingFragment StoreEntitySet="PropertyNotes">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EscrowAdvanceBalance" ColumnName="EscrowAdvanceBalance" />
+                <ScalarProperty Name="ForbearanceAmount" ColumnName="ForbearanceAmount" />
+                <ScalarProperty Name="CurrentUPB" ColumnName="CurrentUPB" />
+                <ScalarProperty Name="DelinquentInterest" ColumnName="DelinquentInterest" />
+                <ScalarProperty Name="CurrentOccupancy" ColumnName="CurrentOccupancy" />
+                <ScalarProperty Name="FCStartDt" ColumnName="FCStartDt" />
+                <ScalarProperty Name="NextPmtDueDt" ColumnName="NextPmtDueDt" />
+                <ScalarProperty Name="LastPaidInstallmentDt" ColumnName="LastPaidInstallmentDt" />
+                <ScalarProperty Name="FCStatus" ColumnName="FCStatus" />
+                <ScalarProperty Name="BPOValue" ColumnName="BPOValue" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

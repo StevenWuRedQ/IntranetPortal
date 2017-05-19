@@ -60,7 +60,6 @@
                         }, onError)
                     getUserGradeDataList($scope.bble);
                 }
-
             }
             function onError(e) {
                 console.log(e);

@@ -365,6 +365,17 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
+    
+  <PortalNavItem Name="PropertyNotes" Text="Property Notes" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">
+    <UserRoles>Admin</UserRoles>
+    <Items>
+      <PortalNavItem Name="PropertyNoteFile" Text="Files" NavigationUrl="/PropertyNote/PropertyNoteList.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bullseye"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
   
   <PortalNavItem Name="Underwriting" Text="Underwriting" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Underwriter,Sales-Executive</UserRoles>
