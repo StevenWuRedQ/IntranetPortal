@@ -356,7 +356,7 @@
   </PortalNavItem>
 
   <PortalNavItem Name="GPAOffer" Text="GPA Offer" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">
-    <UserRoles>Admin</UserRoles>
+    <UserRoles>GPAOffer-User</UserRoles>
     <Items>    
       <PortalNavItem Name="GPAOfferFiles" Text="Offers" NavigationUrl="/GPAOffer/GPAOfferList.aspx" ShowAmount="false">
         <FontClass>
@@ -367,7 +367,7 @@
   </PortalNavItem>
     
   <PortalNavItem Name="PropertyNotes" Text="Property Notes" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">
-    <UserRoles>Admin</UserRoles>
+    <UserRoles>PropertyNotes-User</UserRoles>
     <Items>
       <PortalNavItem Name="PropertyNoteFile" Text="Files" NavigationUrl="/PropertyNote/PropertyNoteList.aspx" ShowAmount="false">
         <FontClass>

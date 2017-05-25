@@ -139,7 +139,7 @@
                                             caption: "Generate By",
                                             dataField: "createdBy"
                                         }, {
-                                            caption: "Homeowner",
+                                            caption: "for",
                                             dataField: "for"
                                         }, "comments", {
                                             dataField: "updatedDate",
