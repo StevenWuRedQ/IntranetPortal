@@ -33,6 +33,7 @@ Public Class RulesService
         If ServiceInstance Is Nothing Then
             ServiceInstance = New RulesService
 
+            ' load the rules settings
             If RulesEngineSection.Settings IsNot Nothing AndAlso RulesEngineSection.Settings.RulesProvider IsNot Nothing Then
                 Dim rp = RulesEngineSection.Settings.RulesProvider
                 If rp IsNot Nothing Then
@@ -93,6 +94,7 @@ Public Class RulesService
     Protected Overridable Sub InitRules()
         If _rulesProvider IsNot Nothing Then
             Rules = _rulesProvider.GetRules()
+            Return
         Else
             Rules = New List(Of BaseRule)
         End If

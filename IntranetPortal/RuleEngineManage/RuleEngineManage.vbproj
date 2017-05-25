@@ -158,7 +158,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="businessRules.vb" />
     <Compile Include="Forms\FrmFillPDF.Designer.vb">
       <DependentUpon>FrmFillPDF.vb</DependentUpon>
     </Compile>
