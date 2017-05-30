@@ -219,6 +219,12 @@ Partial Public Class Lead
                     Return True
                 End If
             End If
+
+            If rl = "PropertyNotes-User" Then
+                If PropertyNote.GetNotes(BBLE) IsNot Nothing Then
+                    Return True
+                End If
+            End If
         Next
 
         If SharedUsers.Contains(name) Then
