@@ -93,7 +93,7 @@ Imports IntranetPortal.Data
         result.waterbill = New Waterbill
         result.mortgageServicer = New MortgageServicer
         result.dobPenaltiesAndViolationsSummary = New Dobpenaltiesandviolations
-        result.zillowPorperty = New ZillowProperty
+        result.zillowProperty = New ZillowProperty
         Dim json = result.ToJsonString
         Assert.IsFalse(String.IsNullOrEmpty(json))
     End Sub

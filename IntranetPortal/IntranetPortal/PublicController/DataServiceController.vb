@@ -33,6 +33,28 @@ Namespace PublicController
             End Try
         End Function
 
+        <Route("api/dataservice/gpaoffer")>
+        Function PostGpaOffer(data As GPAOffer) As IHttpActionResult
+            Try
+                If Not ModelState.IsValid Then
+                    Return BadRequest(ModelState)
+                End If
+
+                Dim li = LeadsInfo.GetInstance(data.BBLE)
+                If li Is Nothing Then
+                    LeadsInfo.CreateLeadsInfo(data.BBLE, LeadsInfo.LeadsType.StraightSale, data.GenerateBy)
+                    DataWCFService.UpdateAssessInfo(data.BBLE)
+                End If
+
+                data.Save()
+
+                SystemLog.Log("UpdateGPAOffer", data.ToJsonString, SystemLog.LogCategory.Operation, Nothing, "GPAService")
+                Return Ok(GPAOffer.GetOffer(data.Id))
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End Function
+
         <Route("api/dataservice/property/{bble}/tlo/{name}")>
         Function GetTLOData(bble As String, name As String) As IHttpActionResult
             Try

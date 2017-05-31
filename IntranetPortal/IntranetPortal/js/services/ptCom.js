@@ -17,8 +17,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
             model.push(data);
         }
     };
-
-
     // delete a element from a array with promte
     this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
@@ -34,8 +32,9 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
             }
         }
     };
-
-    // concat a validate address string by giving infomation
+    this.capitalizeFirstLetter = function (string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
     this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
         var result = '';
         if (strNO) result += strNO + ' ';
@@ -46,11 +45,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         if (zip) result += zip;
         return result;
     };
-
-    this.capitalizeFirstLetter = function (string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
     this.formatName = function (firstName, middleName, lastName) {
         var result = '';
         if (firstName) result += that.capitalizeFirstLetter(firstName) + ' ';
@@ -101,7 +95,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         '</head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
         popupWin.document.close();
     };
-
     this.postRequest = function (url, data) {
         $.post(url, data, function (retData) {
             $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
@@ -110,29 +103,24 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
-
-
     this.confirm = function (message, callback) {
         return $rootScope.confirm(message, callback);
     };
-
     this.prompt = function (message, callback, showArea) {
         return $rootScope.prompt(message, callback, showArea);
     }
-
     this.addOverlay = function () {
         $rootScope.addOverlay();
     };
+    this.removeOverlay = function () {
+        $rootScope.removeOverlay();
+    }; // get next index of value in the array, 
     this.stopLoading = function () {
         $rootScope.stopLoading();
     }
     this.startLoading = function () {
         $rootScope.startLoading();
     }
-
-    this.removeOverlay = function () {
-        $rootScope.removeOverlay();
-    }; // get next index of value in the array, 
     this.next = function (array, value, from) {
         return array.indexOf(value, from);
     };
@@ -161,7 +149,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
-
     /**
      * assign all reference property from source to target
      * @param: target
@@ -169,15 +156,22 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
      * @param: skipped //reference that will not be replaced by source
      * @param: keeped // level two 
      */
-    this.assignReference = function (target, source, /* optional*/ skipped, /* optional*/ keeped) {
-        var temp = {}; // object backup keeped values
+    // Method to copy value to object's reference property.
+    // Caution: didn't use recursive, so only go one level deep.
+    this.assignReference = function (target, source,
+                      /* optional */ skipped,
+                      /* optional */ keeped) {
+
+        var temp = {}; // object for backuping keeped values
         var props = Object.keys(source);
         for (i = 0; i < props.length ; i++) {
+            // init target's property to prevent null point exception.
+            if (target[props[i]] == null) target[props[i]] = {};
+            // skip some reference
+            if (skipped && skipped.indexOf(props[i]) >= 0) {
+                continue;
+            }
             if (typeof source[props[i]] == 'object') {
-                // skip some reference
-                if (skipped && skipped.indexOf(props[i]) >= 0) {
-                    continue;
-                }
                 // keep some value inside reference, usually id or something ;)
                 if (keeped && keeped.length) {
                     temp[props[i]] = {};
@@ -187,7 +181,11 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
                         }
                     }
                 }
-                target[props[i]] = source[props[i]];
+                if (source[props[i]] != null) {
+                    target[props[i]] = source[props[i]];
+                } else {
+                    target[props[i]] = {};
+                }
                 if (keeped && keeped.length) {
                     for (j = 0; j < keeped.length; j++) {
                         if (temp[props[i]] && temp[props[i]][keeped[j]]) {
@@ -199,7 +197,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         }
 
     }
-
     this.parseSearch = function (/*string*/ searchString) {
         var result = {};
         if (!searchString || typeof searchString != 'string')   //not a string
@@ -216,16 +213,18 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         }
         return result;
     }
-
     this.setGlobal = function (key, value) {
-        $rootScope.globaldata[key] = value
+        $rootScope.globaldata[key] = value;
     }
-
     this.getGlobal = function (key) {
         if ($rootScope.globaldata[key] != null) {
             return $rootScope.globaldata[key];
         } else {
             return undefined;
         }
-    }   
+    }
+    this.getCurrentUser = function () {
+        var element = $("#CurrentUser");
+        return element[0].value;
+    }
 }])

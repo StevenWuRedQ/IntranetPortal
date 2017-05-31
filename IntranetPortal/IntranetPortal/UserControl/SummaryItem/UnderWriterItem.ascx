@@ -55,7 +55,7 @@
                         showInfo: true
                     },
                     paging: {
-                        enabled: true,
+                        enabled: true
                     },
                     onRowPrepared: function (rowInfo) {
                         if (rowInfo.rowType != 'data')
@@ -80,7 +80,6 @@
                             if (options.data.Status != 0) {
                                 elem.attr("href", "/UnderWriter/DocSearchList.aspx#/<%=CInt(CaseStatus) + 1 %>/" + options.data.BBLE);
                             }
-
                             else {
                                 // completed search or under writing should go to under writing list page
                                 elem
@@ -94,11 +93,9 @@
                                     <% End IF%>
                                 })
                             }
-
-
                             elem.appendTo(container);
-                        },
-                    }],
+                        }
+                    }]
                 }).dxDataGrid('instance');
             });
         }

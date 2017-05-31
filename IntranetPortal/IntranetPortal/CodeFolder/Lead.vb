@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
+Imports IntranetPortal.Data
 Imports Newtonsoft.Json
 
 ''' <summary>
@@ -215,6 +216,12 @@ Partial Public Class Lead
                 End If
 
                 If owner.ToLower.Contains(dept.ToLower & " office") Then
+                    Return True
+                End If
+            End If
+
+            If rl = "PropertyNotes-User" Then
+                If PropertyNote.GetNotes(BBLE) IsNot Nothing Then
                     Return True
                 End If
             End If
@@ -1195,6 +1202,19 @@ Partial Public Class Lead
         End If
         Me.Status = status
     End Sub
+
+    Public Shared Function GetLeadsName(BBLE As String) As String
+        Using ctx As New PortalEntities
+            Dim lead = ctx.SSLeads.FirstOrDefault(Function(s) s.BBLE.Trim = BBLE.Trim)
+            If lead Is Nothing Then
+                Return ""
+            Else
+                Return lead.LeadsName
+            End If
+        End Using
+    End Function
+
+
     <JsonIgnoreAttribute>
     Public ReadOnly Property Task As UserTask
         Get

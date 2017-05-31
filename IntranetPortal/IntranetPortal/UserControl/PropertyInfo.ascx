@@ -155,14 +155,18 @@
             $("#btnShortSale").removeClass("btn-primary");
             $("#btnStraightSale").removeClass("btn-primary");
             $("#btnTaxliens").removeClass("btn-primary");
-
+            $("#btnNotes").removeClass("btn-primary");
             if (LeadTypeCtr.currentType == 10) {
                 $("#btnShortSale").addClass("btn-primary");
             } else if (LeadTypeCtr.currentType == 13) {
                 $("#btnStraightSale").addClass("btn-primary");
             } else if (LeadTypeCtr.currentType == 3) {
                 $("#btnTaxliens").addClass("btn-primary");
+            } else if (LeadTypeCtr.currentType == 14) {
+                $("#btnNotes").addClass("btn-primary");
             }
+
+            TaxLiensCtr.init(LeadTypeCtr.currentType);
 
             if (gridTrackingClient)
                 gridTrackingClient.Refresh();
@@ -171,14 +175,14 @@
             if (type != undefined && this.currentType != type) {
                 var that = this;
 
-                var substatusStr = type == 10 ? "Short Sale" : type == 13 ? "Straight Sale" : "Tax Liens";
+                var substatusStr = type == 10 ? "Short Sale" : type == 13 ? "Straight Sale" : type == 14 ? "Mortgage Note" : "Tax Liens";
                 AngularRoot.confirm("Change the Lead Type to " + substatusStr + "?", function (e) {
                     if (e) {
                         that.currentType = type;
                         var typeString = String(type);
                         that.changesType_callback(that.currentType, that.updateType)
                     }
-                })
+                });
             }
         },
         changesType_callback: function (type, callback) {
@@ -208,8 +212,8 @@
         inited: false,
         init: function () {
             var ctr = this;
-            var tagData = $('#hdLeadTags').val();            
-           
+            var tagData = $('#hdLeadTags').val();
+
             if ($("#leadTagBox").children().length == 0) {
                 $("#leadTagBox").dxTagBox({
                     items: ['Mortgage Foreclosure', 'Tax lien', 'Tax Lien Lp'],
@@ -236,6 +240,23 @@
                             gridTrackingClient.Refresh();
                     }
                 });
+        }
+    }
+
+    TaxLiensCtr = {
+        init: function (type) {
+            if (type == 3) {
+                this.show();
+            } else {
+                this.hide();
+            }
+        },
+        show: function () {
+            $('#divTaxLiens').show();
+            girdTaxliens.PerformCallback("load|" + leadsInfoBBLE.trim());
+        },
+        hide: function () {
+            $('#divTaxLiens').hide();
         }
     }
 
@@ -301,7 +322,7 @@
                 <span class="time_buttons" onclick='PortalUtility.OpenWindow("/NewOffer/HomeownerIncentive.aspx?#/preassign/new?BBLE=" + leadsInfoBBLE, "Pre-Deal " + leadsInfoBBLE, 800,900)'>HOI</span>
                 <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("New Offer " + leadsInfoBBLE, "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + leadsInfoBBLE)'>New Offer</span>
                 <% End If %>
-                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("Underwriting Request" + leadsInfoBBLE, "/LeadDocSearch/UnderwritingRequest.aspx?BBLE=<%= LeadsInfoData.BBLE %>#/")'>Request Underwriting</span>
+                <span class="time_buttons" onclick='PortalUtility.ShowPopWindow("Underwriting Request" + leadsInfoBBLE, "/Underwriter/UnderwritingRequest.aspx?BBLE=<%= LeadsInfoData.BBLE %>#/")'>Request Underwriting</span>
                 <% End If %>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
@@ -373,6 +394,7 @@
                                     <button id="btnShortSale" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(10)">Short Sale</button>
                                     <button id="btnStraightSale" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(13)">Straight Sale</button>
                                     <button id="btnTaxliens" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(3)">Tax Lien</button>
+                                    <button id="btnNotes" type="button" class="btn btn-sm btn-default" onclick="LeadTypeCtr.changeType(14)">Mortgage Note</button>
                                 </div>
                             </div>
                         </div>
@@ -543,7 +565,7 @@
 
         <% If LeadsInfoData.LeadsStatus = IntranetPortal.LeadStatus.InProcess Then%>
         <uc1:NGShortSaleInLeadsView runat="server" ID="NGShortSaleInLeadsView" />
-        <% end If %>
+        <%  End If %>
 
         <%-------end-----%>
         <dx:ASPxCallbackPanel runat="server" ID="callPanelReferrel" ClientInstanceName="callPanelClientReferrel" OnCallback="callPanelReferrel_Callback">
@@ -789,7 +811,6 @@
         </div>
         <% End If%>
 
-        <%--Estimated Mortgage--%>
         <% If (LeadsInfoData.LisPens IsNot Nothing AndAlso LeadsInfoData.LisPens.Count > 0) Then%>
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">Estimated Mortgage Default</div>
@@ -802,9 +823,60 @@
         </div>
         <%End If%>
 
+        <% If LeadsInfoData.PropertyNotes IsNot Nothing AndAlso LeadsInfoData.PropertyNotes.Count > 0 %>
+        <% dim propNote = LeadsInfoData.PropertyNotes(0) %>
+        <div style="margin: 20px;" class="clearfix">
+            <div class="form_head" style="margin-top: 40px;">Mortgage Notes</div>
+
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">BPO Value</span>
+                <input class="text_input" value="<%= string.Format("{0:c}", propNote.BPOValue) %>" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">FC Status</span>
+                <input class="text_input" value="<%= propNote.FCStatus  %>" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Last Paid Installment</span>
+                <input class="text_input" value="<%= string.Format("{0:d}", propNote.LastPaidInstallmentDt) %>" />
+            </div>
+
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Current Occupancy</span>
+                <input class="text_input" value="<%= propNote.CurrentOccupancy %>" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">DelinquentInterest</span>
+                <input class="text_input" value="<%= string.Format("{0:c}", propNote.DelinquentInterest)  %>" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">CurrentUPB</span>
+                <input class="text_input" value="<%= string.Format("{0:c}", propNote.CurrentUPB) %>" />
+            </div>
+
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Forbearance Amount</span>
+                <input class="text_input" value="<%= string.Format("{0:c}", propNote.ForbearanceAmount) %>" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">EscrowAdvanceBalance</span>
+                <input class="text_input" value="<%= string.Format("{0:c}", propNote.EscrowAdvanceBalance)  %>" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Total Due</span>
+                <input class="text_input" value="<%= string.Format("{0:c}", propNote.TotalDue) %>" />
+            </div>
+        </div>
+        <%  End if %>
         <%--Liens table--%>
         <div style="margin: 20px;" class="clearfix">
-            <div class="form_head" style="margin-top: 40px;">Liens</div>
+            <div class="form_head" style="margin-top: 40px;">Mortgages Liens</div>
             <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%" ViewStateMode="Disabled">
                 <SettingsBehavior AllowDragDrop="false" AllowSort="false" AllowGroup="false" />
                 <Columns>
@@ -822,6 +894,27 @@
             </dx:ASPxGridView>
         </div>
         <%--end--%>
+
+        <%-- Tax liens --%>
+        <div style="margin: 20px; display: none" class="clearfix" id="divTaxLiens">
+            <div class="form_head" style="margin-top: 40px;">Tax Liens</div>
+            <dx:ASPxGridView runat="server" ClientInstanceName="girdTaxliens"
+                OnCustomCallback="ASPxGridView1_CustomCallback" ID="ASPxGridView1"
+                KeyFieldName="Year" Width="100%" ViewStateMode="Disabled">
+                <SettingsBehavior AllowDragDrop="false" AllowSort="false" AllowGroup="false" />
+                <Columns>
+                    <dx:GridViewDataTextColumn FieldName="Year" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Property" PropertiesTextEdit-DisplayFormatString="c2" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="CIS" PropertiesTextEdit-DisplayFormatString="c2" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="NoticingFees" Settings-AllowSort="False" PropertiesTextEdit-DisplayFormatString="c2"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Surchages" Settings-AllowSort="False" PropertiesTextEdit-DisplayFormatString="c2"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="LienTotal" Settings-AllowSort="False" PropertiesTextEdit-DisplayFormatString="c2"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="InterestRate" Settings-AllowSort="False" PropertiesTextEdit-DisplayFormatString="p1"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Schedule" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                </Columns>
+            </dx:ASPxGridView>
+        </div>
+        <%-- end --%>
     </div>
 </div>
 <!-- custom scrollbar plugin -->

@@ -241,10 +241,12 @@
 
                         <div id="DivLeadTaxSearchCtrl" runat="server" visible="false">
                             <div style="padding: 10px" id="LeadTaxSearchCtrl">
-                                <h4 ng-show="!DocSearch||DocSearch.Status!=1" ng-class="{ss_warning2:!DocSearch||DocSearch.Status!=1}"
-                                    data-message="Document search not completed yet please contact document search agent completed search">Document search not completed yet please contact document search agent completed search</h4>
+                                <h4 ng-show="!DocSearch||DocSearch.Status!=1" 
+                                    ng-class="{ss_warning2:!DocSearch||DocSearch.Status!=1}"
+                                    data-message="Document search not completed yet please contact document search agent completed search">
+                                    Document search not completed yet please contact document search agent completed search
+                                </h4>
                                 <ds-summary summary="DocSearch.LeadResearch"></ds-summary>
-                                <%--<uc1:LeadSearchSummery runat="server" ID="LeadSearchSummery" />--%>
                             </div>
                         </div>
                     </div>

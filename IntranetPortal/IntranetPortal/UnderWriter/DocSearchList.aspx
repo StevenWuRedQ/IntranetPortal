@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" CodeBehind="DocSearchList.aspx.vb" Inherits="IntranetPortal.DocSearchList" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Content.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -10,8 +10,8 @@
 
     <style type="text/css">
         a.dx-link-MyIdealProp:hover {
-            font-weight: 500;
             cursor: pointer;
+            font-weight: 500;
         }
 
         .myRow:hover {
@@ -20,8 +20,8 @@
 
         iframe {
             border: none;
-            width: 100%;
             height: 100%;
+            width: 100%;
         }
 
         #xwrapper {
@@ -76,44 +76,40 @@
                     $(highlightedElement).css('background-color', '');
                     highlightedElement = undefined;
                 }
-            }
+            };
         })();
-        //var onSelectionChangedCallback = function (e) {
-        //    //debugger;
-        //    var bble = e.selectedRowKeys[0].BBLE || '';
-        //    var status = e.selectedRowKeys[0].Status || 0;
-        //    previewControl.showCaseInfo(bble, status)
-        //}
+
         var onRowClickCallback = function (e) {
             //debugger;
             var bble = e.key.BBLE || '';
             var status = e.key.Status || 0;
-            previewControl.showCaseInfo(bble, status)
-        }
+            previewControl.showCaseInfo(bble, status);
+        };
         previewControl = (function () {
             var previewShown = false;
             var that = this;
             return {
                 showCaseInfo: function (CaseId, status) {
-                    if (status == 0) {
-                        <% If HttpContext.Current.User.IsInRole("Underwriter") %>
-                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId
-                        <% ELSE %>
-                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId
-                        <% End IF%>
+                    if (status === 0) {
+                    <% If HttpContext.Current.User.IsInRole("Underwriter")%>
+                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=2&BBLE=' + CaseId;
+                    <% ELSE%>
+                        var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId;
+                    <% End IF%>
                         PortalUtility.ShowPopWindow("Doc Search - " + CaseId, url, 1700);
                     } else {
                         $("#xwrapper").css("width", "50%");
                         $("#preview").css("visibility", "visible");
                         $("#preview").css("width", "50%");
-                        <% If HttpContext.Current.User.IsInRole("Underwriter") %>
+                    <% If HttpContext.Current.User.IsInRole("Underwriter")%>
                         var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=3&BBLE=' + CaseId + '#/';
-                        <% ELSE%>
+                    <% ELSE%>
                         var url = '/PopupControl/LeadTaxSearchRequest.aspx?mode=1&BBLE=' + CaseId + '#/';
-                        <% End IF%>
+                    <% End IF%>
                         $("#previewWindow").attr("src", url);
                         $("#hideicon").css("visibility", "visible");
                     }
+
                     that.previewShown = true;
                 },
 
@@ -125,8 +121,7 @@
                     $("#previewWindow").attr("src", "");
                     that.previewShown = false;
                 }
-            }
-
+            };
         })();
 
         $(document).ready(function () {
@@ -157,7 +152,7 @@
                         if (rowInfo.rowType != 'data')
                             return;
                         rowInfo.rowElement
-                        .addClass('myRow');
+                            .addClass('myRow');
                     },
                     onContentReady: function (e) {
                         var spanTotal = e.element.find('.spanTotal')[0];
@@ -166,24 +161,27 @@
                         } else {
                             var panel = e.element.find('.dx-datagrid-pager');
                             if (!panel.find(".dx-pages").length) {
-                                $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()).appendTo(e.element);
+                                $("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount())
+                                    .appendTo(e.element);
                             } else {
-                                panel.append($("<span />").addClass("spanTotal").html("Total Count: " + e.component.totalCount()))
+                                panel.append($("<span />").addClass("spanTotal")
+                                    .html("Total Count: " + e.component.totalCount()));
                             }
                         }
                         highlightcallback(e);
                     },
-                    //onSelectionChanged: onSelectionChangedCallback,
                     onRowClick: onRowClickCallback,
                     selection: {
                         mode: 'single'
                     },
                     summary: {
-                        groupItems: [{
-                            column: "BBLE",
-                            summaryType: "count",
-                            displayFormat: "{0}",
-                        }]
+                        groupItems: [
+                            {
+                                column: "BBLE",
+                                summaryType: "count",
+                                displayFormat: "{0}",
+                            }
+                        ]
                     },
                     columns: [
                         {
@@ -268,8 +266,8 @@
                                     case 2:
                                         return "SS Accepted";
                                     default:
-                                            return ""
-                                        }
+                                        return "";
+                                }
 
                             }
                         }, {
@@ -287,71 +285,80 @@
                                 if (cellInfo.value == Infinity) return "";
                                 return moment.duration(cellInfo.value).humanize();
                             }
-                        }]
+                        }
+                    ]
                 }).dxDataGrid('instance');
-                $(".dx-datagrid-header-panel").prepend($("<div id='uw-properties-title' style='margin-bottom: -35px'><label class='grid-title-icon' style='display: inline-block'>UW</label><span id='useFilterApplyButton' style='z-index: 999'></span></div>"))
-                $(".dx-datagrid-header-panel").prepend($("<span id='hideicon' class='btn btn-blue pull-right' data-toggle='tooltip' data-placement='right' title='hide right panel' onclick='previewControl.undo()'><i class='fa fa-angle-double-right fa-lg'></i></span>"))
+                $(".dx-datagrid-header-panel")
+                    .prepend($("<div id='uw-properties-title' style='margin-bottom: -35px'><label class='grid-title-icon' style='display: inline-block'>UW</label><span id='useFilterApplyButton' style='z-index: 999'></span></div>"));
+                $(".dx-datagrid-header-panel")
+                    .prepend($("<span id='hideicon' class='btn btn-blue pull-right' data-toggle='tooltip' data-placement='right' title='hide right panel' onclick='previewControl.undo()'><i class='fa fa-angle-double-right fa-lg'></i></span>"));
                 var filterDataDelegate = function (data) {
                     previewControl.undo();
                     filterData(data.value);
-                }
-                var columns = ['CaseName', 'Team', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn', 'UnderwriteStatus', 'UnderwriteCompletedOn', 'NewOfferStatus', 'Duration'];
+                };
+                var columns = [
+                    'CaseName', 'Team', 'CreateBy', 'CreateDate', 'Status', 'CompletedBy', 'CompletedOn',
+                    'UnderwriteStatus', 'UnderwriteCompletedOn', 'NewOfferStatus', 'Duration'
+                ];
                 var displayall = function () {
-                    _.forEach(columns, function (v, i) {
-                        dataGrid.columnOption(v, 'visible', true)
-                    })
-
-                }
+                    _.forEach(columns,
+                        function (v, i) {
+                            dataGrid.columnOption(v, 'visible', true);
+                        });
+                };
                 // use to hide some columns that not needed.
                 var hidesome = function (arraylike) {
-                    _.forEach(arraylike, function (v, i) {
-                        dataGrid.columnOption(v, 'visible', false)
-                    })
-                }
+                    _.forEach(arraylike,
+                        function (v, i) {
+                            dataGrid.columnOption(v, 'visible', false);
+                        });
+                };
                 var filterData = function (data) {
                     dataGrid.clearFilter();
                     displayall();
                     switch (data) {
                         case 1:
                             dataGrid.filter(['Status', '=', '0']);
-                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration', 'NewOfferStatus'])
+                            hidesome(['CompletedBy', 'CompletedOn', 'UnderwriteCompletedOn', 'Duration', 'NewOfferStatus']);
                             break;
                         case 2:
                             dataGrid.filter(['Status', '=', '1']);
                             break;
                         case 3:
                             dataGrid.filter([['UnderwriteStatus', '=', '0'], ['Status', '=', '1']]);
-                            hidesome(['UnderwriteCompletedOn', 'Duration'])
+                            hidesome(['UnderwriteCompletedOn', 'Duration']);
                             break;
                         case 4:
                             dataGrid.filter([['UnderwriteStatus', '=', '1'], ['Status', '=', '1']]);
-                            hidesome(['Team'])
+                            hidesome(['Team']);
                             break;
                         case 5:
                             dataGrid.filter([['UnderwriteStatus', '=', '2'], ['Status', '=', '1']]);
-                            hidesome(['Team'])
+                            hidesome(['Team']);
                     }
-                }
+                };
                 var filterBox = $("#useFilterApplyButton").dxSelectBox({
-                    items: [{
-                        key: 0,
-                        name: "All"
-                    }, {
-                        key: 1,
-                        name: "New Search"
-                    }, {
-                        key: 3,
-                        name: "Pending Underwriting"
-                    }, {
-                        key: 2,
-                        name: "Completed Search"
-                    }, {
-                        key: 4,
-                        name: "Accepted Underwriting"
-                    }, {
-                        key: 5,
-                        name: "Rejected Underwriting"
-                    }],
+                    items: [
+                        {
+                            key: 0,
+                            name: "All"
+                        }, {
+                            key: 1,
+                            name: "New Search"
+                        }, {
+                            key: 3,
+                            name: "Pending Underwriting"
+                        }, {
+                            key: 2,
+                            name: "Completed Search"
+                        }, {
+                            key: 4,
+                            name: "Accepted Underwriting"
+                        }, {
+                            key: 5,
+                            name: "Rejected Underwriting"
+                        }
+                    ],
                     valueExpr: "key",
                     displayExpr: "name",
                     width: '250',
@@ -371,11 +378,12 @@
                     if (that.bble) {
                         var grid = e.element.dxDataGrid('instance');
                         var data = grid.option('dataSource');
-                        var items = []
-                        _.forEach(data, function (v, i) {
-                            if (v.BBLE.trim() == that.bble.trim())
-                                items.push(v)
-                        });
+                        var items = [];
+                        _.forEach(data,
+                            function (v, i) {
+                                if (v.BBLE.trim() == that.bble.trim())
+                                    items.push(v);
+                            });
                         if (items.length > 0) {
                             var ibble = items[0].BBLE || '';
                             var istatus = items[0].Status || 0;
@@ -387,15 +395,11 @@
                     location.hash = "";
                     that.bble = undefined;
                     that.hashnum = undefined;
-                }
-
-
+                };
             });
 
 
-        })
-
+        });
     </script>
 
 </asp:Content>
-

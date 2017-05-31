@@ -1,10 +1,7 @@
-Imports System
 Imports System.Data.Entity
 Imports System.ComponentModel.DataAnnotations.Schema
-Imports System.Linq
-Imports System.ComponentModel.DataAnnotations
 Imports System.Data.Entity.Infrastructure
-Imports System.Globalization
+Imports IntranetPortal.Data.CodeFirst
 
 Partial Public Class CodeFirstEntity
     Inherits DbContext

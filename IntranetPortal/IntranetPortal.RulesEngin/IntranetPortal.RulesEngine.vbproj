@@ -139,6 +139,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="NoticeECourtRule.vb" />
+    <Compile Include="RulesEngineConfiguration.vb" />
     <Compile Include="RulesService.vb" />
     <Compile Include="ScanECourtsRule.vb" />
     <Compile Include="Service References\PortalService\Reference.vb">

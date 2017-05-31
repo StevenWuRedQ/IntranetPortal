@@ -11,7 +11,6 @@ Partial Public Class UnderwritingRequest
                 Return r.Count
             End Using
         End Get
-
     End Property
 
     ''' <summary>
@@ -31,6 +30,9 @@ Partial Public Class UnderwritingRequest
     ''' <param name="bble">The property BBLE</param>
     ''' <returns></returns>
     Public Shared Function GetInstance(bble As String) As UnderwritingRequest
+        If String.IsNullOrEmpty(bble)
+            Return Nothing
+        End If
         Using ctx As New PortalEntities
             Return ctx.UnderwritingRequests.Where(Function(ur) ur.BBLE = bble).FirstOrDefault
         End Using

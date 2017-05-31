@@ -23,6 +23,7 @@ Public Class LeadsInfo
         ShortSale = 10
         CoOpConversion = 12
         StraightSale = 13
+        MortgageNote = 14
     End Enum
 
     Public Shared Sub UpdateType(bble As String, type As LeadsType, updateby As String)
@@ -167,6 +168,17 @@ Public Class LeadsInfo
             End If
 
             Return _listPens
+        End Get
+    End Property
+
+    Private _propertyNotes As List(Of PropertyNote)
+    Public ReadOnly Property PropertyNotes As List(Of PropertyNote)
+        Get
+            If _propertyNotes Is Nothing Then
+                _propertyNotes = PropertyNote.GetNotes(BBLE)
+            End If
+
+            Return _propertyNotes
         End Get
     End Property
 
@@ -354,8 +366,19 @@ Public Class LeadsInfo
             Return ctx.LeadsInfoes.Where(Function(ld) bbles.Contains(ld.BBLE)).ToArray
 
         End Using
-
     End Function
+
+    Public Shared Function GetPropertyAddress(BBLE As String) As String
+        Using ctx As New PortalEntities
+            Dim lead = ctx.ShortSaleLeadsInfoes.FirstOrDefault(Function(s) s.BBLE.Trim = BBLE.Trim)
+            If lead Is Nothing Then
+                Return ""
+            Else
+                Return lead.PropertyAddress
+            End If
+        End Using
+    End Function
+
 
     <JsonIgnoreAttribute>
     Public ReadOnly Property ReferrelName As String

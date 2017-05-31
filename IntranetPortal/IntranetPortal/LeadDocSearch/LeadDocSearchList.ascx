@@ -40,7 +40,7 @@
             if (typeof cbpLogs != 'undefined')
                 cbpLogs.PerformCallback(leadsInfoBBLE);
 
-            angular.element('#LeadTaxSearchCtrl').scope().init(leadsInfoBBLE);
+            angular.element('#DocSearchController').scope().init(leadsInfoBBLE);
             angular.element('#pt-homeowner').scope().$ctrl.init(leadsInfoBBLE);
         }
     }

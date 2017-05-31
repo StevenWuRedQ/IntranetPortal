@@ -32,7 +32,8 @@
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,82 +56,6 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ActiveQueryBuilder2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web, Version=2.8.7.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control, Version=2.8.7.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server, Version=2.8.7.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.AdvantageMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.AdvantageMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.DB2MetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.DB2MetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.EventMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.EventMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.FirebirdMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.FirebirdMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.InformixMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.InformixMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.MSSQLCEMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.MSSQLCEMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.MSSQLMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.MySQLMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.MySQLMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.ODBCMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.ODBCMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.OLEDBMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.OracleMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.OracleMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.OracleNativeMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.OracleNativeMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.PostgreSQLMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.PostgreSQLMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.SybaseMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.SybaseMetadataProvider2.dll</HintPath>
-    </Reference>
-    <Reference Include="ActiveDatabaseSoftware.UniversalMetadataProvider2, Version=2.9.6.713, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.8.7\lib\net45\ActiveDatabaseSoftware.UniversalMetadataProvider2.dll</HintPath>
-    </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
@@ -263,11 +188,15 @@
     <Reference Include="JWT">
       <HintPath>..\packages\JWT.1.3.2\lib\3.5\JWT.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.EntityDataSource">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -612,6 +541,7 @@
     </Compile>
     <Compile Include="CodeFolder\Employee.vb" />
     <Compile Include="CodeFolder\EmployeeItemComparer.vb" />
+    <Compile Include="CodeFolder\EmployeeManage.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
     <Compile Include="CodeFolder\ExcelBuilder.vb" />
@@ -659,7 +589,7 @@
     <Compile Include="CodeFolder\SystemModelSetting.vb" />
     <Compile Include="CodeFolder\Team.vb" />
     <Compile Include="CodeFolder\TitleManage.vb" />
-    <Compile Include="CodeFolder\UnderWritingManager.vb" />
+    <Compile Include="CodeFolder\UnderwritingService.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserFollowUpManage.vb" />
     <Compile Include="CodeFolder\UserInTeam.vb" />
@@ -822,7 +752,9 @@
     <Compile Include="Controllers\CorporationEntitiesController.vb" />
     <Compile Include="Controllers\DialerController.vb" />
     <Compile Include="Controllers\EmployeeController.vb" />
+    <Compile Include="Controllers\ExternalDataController.vb" />
     <Compile Include="Controllers\FollowUpController.vb" />
+    <Compile Include="Controllers\GPAOfferController.vb" />
     <Compile Include="Controllers\HomeownerController.vb" />
     <Compile Include="Controllers\LeadInfoDocumentSearchesController.vb" />
     <Compile Include="Controllers\LeadsController.vb" />
@@ -832,6 +764,7 @@
     <Compile Include="Controllers\ManagementController.vb" />
     <Compile Include="Controllers\PortalReportController.vb" />
     <Compile Include="Controllers\PreSignController.vb" />
+    <Compile Include="Controllers\PropertyNoteController.vb" />
     <Compile Include="Controllers\PropertyOfferController.vb" />
     <Compile Include="Controllers\ReportController.vb" />
     <Compile Include="Controllers\ShortSaleController.vb" />
@@ -840,11 +773,12 @@
     <Compile Include="Controllers\TaxLiensODataController.vb" />
     <Compile Include="Controllers\TitleController.vb" />
     <Compile Include="Controllers\TwilioController.vb" />
-    <Compile Include="Controllers\UnderwriterController.vb" />
+    <Compile Include="Controllers\UnderwritingController.vb" />
     <Compile Include="Controllers\UnderwritingRequestController.vb" />
     <Compile Include="Controllers\UserInfoController.vb" />
     <Compile Include="Controllers\WorkflowController.vb" />
     <Compile Include="Controllers\WorkingLogController.vb" />
+    <Compile Include="Controllers\WorkListController.vb" />
     <Compile Include="DataAPITesting.aspx.designer.vb">
       <DependentUpon>DataAPITesting.aspx</DependentUpon>
     </Compile>
@@ -1264,6 +1198,13 @@
       <DependentUpon>Testing.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="GPAOffer\GPAOfferDetail.aspx.designer.vb">
+      <DependentUpon>GPAOfferDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GPAOffer\GPAOfferDetail.aspx.vb">
+      <DependentUpon>GPAOfferDetail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\DialerManagement.aspx.designer.vb">
       <DependentUpon>DialerManagement.aspx</DependentUpon>
     </Compile>
@@ -1302,13 +1243,6 @@
     <Compile Include="LeadDocSearch\LeadDocSearchList.ascx.vb">
       <DependentUpon>LeadDocSearchList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LeadDocSearch\UnderwritingRequest.aspx.designer.vb">
-      <DependentUpon>UnderwritingRequest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LeadDocSearch\UnderwritingRequest.aspx.vb">
-      <DependentUpon>UnderwritingRequest.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="LeadsGenerator\LeadsGenerator.aspx.designer.vb">
       <DependentUpon>LeadsGenerator.aspx</DependentUpon>
@@ -1614,13 +1548,6 @@
     <Compile Include="Management\MgrRole.aspx.vb">
       <DependentUpon>MgrRole.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Management\QueryBuilder.aspx.designer.vb">
-      <DependentUpon>QueryBuilder.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Management\QueryBuilder.aspx.vb">
-      <DependentUpon>QueryBuilder.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Management\ShortSaleManagement.aspx.designer.vb">
       <DependentUpon>ShortSaleManagement.aspx</DependentUpon>
@@ -1954,13 +1881,6 @@
       <DependentUpon>testPopup.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="PopupControl\UnderwritingSummary.aspx.designer.vb">
-      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PopupControl\UnderwritingSummary.aspx.vb">
-      <DependentUpon>UnderwritingSummary.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="PopupControl\VendorsPopup.ascx.designer.vb">
       <DependentUpon>VendorsPopup.ascx</DependentUpon>
     </Compile>
@@ -2016,6 +1936,13 @@
     <Compile Include="Proiority\Priority.aspx.vb">
       <DependentUpon>Priority.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PropertyNote\PropertyNoteList.aspx.designer.vb">
+      <DependentUpon>PropertyNoteList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyNote\PropertyNoteList.aspx.vb">
+      <DependentUpon>PropertyNoteList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PublicController\DataServiceController.vb" />
     <Compile Include="PublicController\MapServiceController.vb" />
@@ -2296,6 +2223,13 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Startup.vb" />
+    <Compile Include="GPAOffer\GPAOfferList.aspx.designer.vb">
+      <DependentUpon>GPAOfferList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GPAOffer\GPAOfferList.aspx.vb">
+      <DependentUpon>GPAOfferList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="StreetView.aspx.designer.vb">
       <DependentUpon>StreetView.aspx</DependentUpon>
     </Compile>
@@ -2477,27 +2411,6 @@
     <Compile Include="TitleUI\TitleTab.ascx.vb">
       <DependentUpon>TitleTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UnderWriter\DocSearchListNew.aspx.designer.vb">
-      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\DocSearchListNew.aspx.vb">
-      <DependentUpon>DocSearchListNew.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="UnderWriter\DocSearchList.aspx.designer.vb">
-      <DependentUpon>DocSearchList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\DocSearchList.aspx.vb">
-      <DependentUpon>DocSearchList.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwritingTracking.aspx.designer.vb">
-      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UnderWriter\UnderwritingTracking.aspx.vb">
-      <DependentUpon>UnderwritingTracking.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="UploadFilePage.aspx.designer.vb">
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
@@ -6882,7 +6795,6 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Construction\ConstructionInitialForm.aspx" />
-    <Content Include="css\accessibility.css" />
     <Content Include="css\base.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\budgetTable.css" />
@@ -6891,45 +6803,11 @@
     <Content Include="css\dx.light.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
-    <Content Include="css\jquery.contextMenu.css" />
-    <Content Include="css\jquery.jPaginate.css" />
-    <Content Include="css\jquery.ui.selectmenu.css" />
     <Content Include="css\main.css" />
     <Content Include="css\normalize.css" />
     <Content Include="css\normalize.min.css" />
-    <Content Include="css\qb\qb.ui.grid.css" />
-    <Content Include="css\qb\qb.ui.table.css" />
-    <Content Include="css\qb\qb.ui.tree.css" />
     <Content Include="css\right-pane.css" />
-    <Content Include="css\RightToLeft.css" />
     <Content Include="css\stevencss.css" />
-    <Content Include="css\themes\images\animated-overlay.gif" />
-    <Content Include="css\themes\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
-    <Content Include="css\themes\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
-    <Content Include="css\themes\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="css\themes\images\ui-bg_flat_10_000000_40x100.png" />
-    <Content Include="css\themes\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="css\themes\images\ui-bg_glass_100_f6f6f6_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_100_fdf5ce_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="css\themes\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
-    <Content Include="css\themes\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-    <Content Include="css\themes\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="css\themes\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-    <Content Include="css\themes\images\ui-icons_222222_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_228ef1_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_454545_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_888888_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_ef8c08_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_ffd27a_256x240.png" />
-    <Content Include="css\themes\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="css\themes\jquery-ui.css" />
     <Content Include="CustomReport\legalParties.js" />
     <Content Include="CustomReport\legal.js" />
     <Content Include="CustomReport\LeadsDocSearch.js" />
@@ -6975,6 +6853,7 @@
     <Content Include="EmailTemplate\TeamActivityReport.aspx" />
     <Content Include="EmailTemplate\Testing.ascx" />
     <Content Include="favicon.ico" />
+    <Content Include="GPAOffer\GPAOfferDetail.aspx" />
     <Content Include="gulpfile.js" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
@@ -7100,181 +6979,6 @@
     <Content Include="images\img\logo_landing.png" />
     <Content Include="images\img\submenu_shadow.png" />
     <Content Include="img\construction.svg" />
-    <Content Include="img\ContextMenu\arrow_down.png" />
-    <Content Include="img\ContextMenu\arrow_up.png" />
-    <Content Include="img\ContextMenu\bin.png" />
-    <Content Include="img\ContextMenu\bin_closed.png" />
-    <Content Include="img\ContextMenu\bin_empty.png" />
-    <Content Include="img\ContextMenu\bullet_arrow_down.png" />
-    <Content Include="img\ContextMenu\bullet_arrow_up.png" />
-    <Content Include="img\ContextMenu\check.gif" />
-    <Content Include="img\ContextMenu\checkbox.gif" />
-    <Content Include="img\ContextMenu\checkbox_checked.gif" />
-    <Content Include="img\ContextMenu\checked.png" />
-    <Content Include="img\ContextMenu\checked2.png" />
-    <Content Include="img\ContextMenu\cross.png" />
-    <Content Include="img\ContextMenu\cut.png" />
-    <Content Include="img\ContextMenu\door.png" />
-    <Content Include="img\ContextMenu\field.png" />
-    <Content Include="img\ContextMenu\page_white.png" />
-    <Content Include="img\ContextMenu\page_white_add.png" />
-    <Content Include="img\ContextMenu\page_white_copy.png" />
-    <Content Include="img\ContextMenu\page_white_delete.png" />
-    <Content Include="img\ContextMenu\page_white_edit.png" />
-    <Content Include="img\ContextMenu\page_white_paste.png" />
-    <Content Include="img\ContextMenu\table_row_delete.png" />
-    <Content Include="img\ContextMenu\table_row_insert.png" />
-    <Content Include="img\ContextMenu\uncheck.gif" />
-    <Content Include="img\grippy.png" />
-    <Content Include="img\icons\%28.png" />
-    <Content Include="img\icons\%29.png" />
-    <Content Include="img\icons\arrow_branch.png" />
-    <Content Include="img\icons\arrow_divide.png" />
-    <Content Include="img\icons\arrow_double.png" />
-    <Content Include="img\icons\arrow_down.png" />
-    <Content Include="img\icons\arrow_in.png" />
-    <Content Include="img\icons\arrow_inout.png" />
-    <Content Include="img\icons\arrow_join.png" />
-    <Content Include="img\icons\arrow_left.png" />
-    <Content Include="img\icons\arrow_merge.png" />
-    <Content Include="img\icons\arrow_out.png" />
-    <Content Include="img\icons\arrow_redo.png" />
-    <Content Include="img\icons\arrow_refresh.png" />
-    <Content Include="img\icons\arrow_refresh_small.png" />
-    <Content Include="img\icons\arrow_right.png" />
-    <Content Include="img\icons\arrow_rotate_anticlockwise.png" />
-    <Content Include="img\icons\arrow_rotate_clockwise.png" />
-    <Content Include="img\icons\arrow_switch.png" />
-    <Content Include="img\icons\arrow_turn_left.png" />
-    <Content Include="img\icons\arrow_turn_right.png" />
-    <Content Include="img\icons\bin.png" />
-    <Content Include="img\icons\bin_closed.png" />
-    <Content Include="img\icons\bin_empty.png" />
-    <Content Include="img\icons\bricks.ico" />
-    <Content Include="img\icons\corner-dot.png" />
-    <Content Include="img\icons\corner.png" />
-    <Content Include="img\icons\CriteriaItem.png" />
-    <Content Include="img\icons\CriteriaList.png" />
-    <Content Include="img\icons\cross.png" />
-    <Content Include="img\icons\cross2.png" />
-    <Content Include="img\icons\database.png" />
-    <Content Include="img\icons\database_connect.png" />
-    <Content Include="img\icons\database_go.ico" />
-    <Content Include="img\icons\database_key.png" />
-    <Content Include="img\icons\database_table.png" />
-    <Content Include="img\icons\error.png" />
-    <Content Include="img\icons\except.png" />
-    <Content Include="img\icons\exceptall.png" />
-    <Content Include="img\icons\exclamation.png" />
-    <Content Include="img\icons\field.png" />
-    <Content Include="img\icons\fields.png" />
-    <Content Include="img\icons\filter.png" />
-    <Content Include="img\icons\folder.png" />
-    <Content Include="img\icons\gear.png" />
-    <Content Include="img\icons\icon-gear.gif" />
-    <Content Include="img\icons\information.png" />
-    <Content Include="img\icons\intersect.png" />
-    <Content Include="img\icons\intersectall.png" />
-    <Content Include="img\icons\link.png" />
-    <Content Include="img\icons\minus.png" />
-    <Content Include="img\icons\navbar_%28.png" />
-    <Content Include="img\icons\navbar_%29.png" />
-    <Content Include="img\icons\navbar_op_except.png" />
-    <Content Include="img\icons\navbar_op_exceptall.png" />
-    <Content Include="img\icons\navbar_op_intersect.png" />
-    <Content Include="img\icons\navbar_op_intersectall.png" />
-    <Content Include="img\icons\navbar_op_union.png" />
-    <Content Include="img\icons\navbar_op_unionall.png" />
-    <Content Include="img\icons\navbar_plus.png" />
-    <Content Include="img\icons\navbar_Q.png" />
-    <Content Include="img\icons\navbar_Q_active.png" />
-    <Content Include="img\icons\obscogwheel.png" />
-    <Content Include="img\icons\pencil.png" />
-    <Content Include="img\icons\plus-white.png" />
-    <Content Include="img\icons\plus.png" />
-    <Content Include="img\icons\plus2.png" />
-    <Content Include="img\icons\primary_key.gif" />
-    <Content Include="img\icons\primary_key.png" />
-    <Content Include="img\icons\procedure.png" />
-    <Content Include="img\icons\properties-small.png" />
-    <Content Include="img\icons\properties-small2.png" />
-    <Content Include="img\icons\properties.png" />
-    <Content Include="img\icons\properties2.png" />
-    <Content Include="img\icons\q.png" />
-    <Content Include="img\icons\qt-bg1-hover.png" />
-    <Content Include="img\icons\qt-bg1.png" />
-    <Content Include="img\icons\qt-bg2-hover.png" />
-    <Content Include="img\icons\qt-bg2.png" />
-    <Content Include="img\icons\relation.png" />
-    <Content Include="img\icons\relations.png" />
-    <Content Include="img\icons\schema.png" />
-    <Content Include="img\icons\server.png" />
-    <Content Include="img\icons\synonym.png" />
-    <Content Include="img\icons\table.gif" />
-    <Content Include="img\icons\table.png" />
-    <Content Include="img\icons\tab_cte.png" />
-    <Content Include="img\icons\tab_derived.png" />
-    <Content Include="img\icons\tab_main.png" />
-    <Content Include="img\icons\tab_subquery.png" />
-    <Content Include="img\icons\textfield.png" />
-    <Content Include="img\icons\union.png" />
-    <Content Include="img\icons\unionall.png" />
-    <Content Include="img\icons\UnionSubQuery.png" />
-    <Content Include="img\icons\updown2.gif" />
-    <Content Include="img\icons\view.png" />
-    <Content Include="img\jPaginate\next.png" />
-    <Content Include="img\jPaginate\previous.png" />
-    <Content Include="img\jPaginate\snext.png" />
-    <Content Include="img\jPaginate\sprevious.png" />
-    <Content Include="img\jquery.editable-select\arrow-down-small.gif" />
-    <Content Include="img\jquery.editable-select\arrow-down.gif" />
-    <Content Include="img\openhand.cur" />
-    <Content Include="img\s.gif" />
-    <Content Include="img\separator-arrow-down.gif" />
-    <Content Include="img\separator-arrow.gif" />
-    <Content Include="img\separator.gif" />
-    <Content Include="img\themeroller\buttonbg.png" />
-    <Content Include="img\themeroller\icon_color_arrow.gif" />
-    <Content Include="img\themeroller\menuhoverbg.png" />
-    <Content Include="img\themeroller\theme_90_black_matte.png" />
-    <Content Include="img\themeroller\theme_90_black_tie.png" />
-    <Content Include="img\themeroller\theme_90_blitzer.png" />
-    <Content Include="img\themeroller\theme_90_cupertino.png" />
-    <Content Include="img\themeroller\theme_90_dark_hive.png" />
-    <Content Include="img\themeroller\theme_90_dot_luv.png" />
-    <Content Include="img\themeroller\theme_90_eggplant.png" />
-    <Content Include="img\themeroller\theme_90_excite_bike.png" />
-    <Content Include="img\themeroller\theme_90_flick.png" />
-    <Content Include="img\themeroller\theme_90_hot_sneaks.png" />
-    <Content Include="img\themeroller\theme_90_humanity.png" />
-    <Content Include="img\themeroller\theme_90_le_frog.png" />
-    <Content Include="img\themeroller\theme_90_mint_choco.png" />
-    <Content Include="img\themeroller\theme_90_overcast.png" />
-    <Content Include="img\themeroller\theme_90_pepper_grinder.png" />
-    <Content Include="img\themeroller\theme_90_smoothness.png" />
-    <Content Include="img\themeroller\theme_90_south_street.png" />
-    <Content Include="img\themeroller\theme_90_start_menu.png" />
-    <Content Include="img\themeroller\theme_90_sunny.png" />
-    <Content Include="img\themeroller\theme_90_swanky_purse.png" />
-    <Content Include="img\themeroller\theme_90_trontastic.png" />
-    <Content Include="img\themeroller\theme_90_ui_dark.png" />
-    <Content Include="img\themeroller\theme_90_ui_light.png" />
-    <Content Include="img\themeroller\theme_90_windoze.png" />
-    <Content Include="img\TreeView\file.gif" />
-    <Content Include="img\TreeView\folder-closed.gif" />
-    <Content Include="img\TreeView\folder.gif" />
-    <Content Include="img\TreeView\minus.gif" />
-    <Content Include="img\TreeView\plus.gif" />
-    <Content Include="img\TreeView\treeview-black-line.gif" />
-    <Content Include="img\TreeView\treeview-black.gif" />
-    <Content Include="img\TreeView\treeview-default-line.gif" />
-    <Content Include="img\TreeView\treeview-default.gif" />
-    <Content Include="img\TreeView\treeview-famfamfam-line.gif" />
-    <Content Include="img\TreeView\treeview-famfamfam.gif" />
-    <Content Include="img\TreeView\treeview-gray-line.gif" />
-    <Content Include="img\TreeView\treeview-gray.gif" />
-    <Content Include="img\TreeView\treeview-red-line.gif" />
-    <Content Include="img\TreeView\treeview-red.gif" />
     <Content Include="js\app.js" />
     <Content Include="js\build\intranetportal.js" />
     <Content Include="js\common\portalRouteProvider.js" />
@@ -7283,16 +6987,20 @@
     <Content Include="js\components\ptHomeowner.js" />
     <Content Include="js\components\ptItemList.js" />
     <Content Include="js\components\ptSelectableInput.js" />
+    <Content Include="js\components\ptSummaryItemList.js" />
+    <Content Include="js\components\ptSummaryItemList.tpl.html" />
     <Content Include="js\controllers\BuyerEntityController.js" />
     <Content Include="js\controllers\ConstructionController.js" />
-    <Content Include="js\controllers\LeadTaxSearchController.js" />
+    <Content Include="js\controllers\DocSearchController.js" />
+    <Content Include="js\controllers\GPAOfferDetailController.js" />
     <Content Include="js\controllers\LegalController.js" />
+    <Content Include="js\controllers\MainController.js" />
     <Content Include="js\controllers\PreSignController.js" />
     <Content Include="js\controllers\ReportWizardController.js" />
     <Content Include="js\controllers\ShortSaleController.js" />
     <Content Include="js\controllers\ShortSalePreSignController.js" />
     <Content Include="js\controllers\TitleController.js" />
-    <Content Include="js\controllers\UnderwriterController.js" />
+    <Content Include="js\controllers\UnderwritingController.js" />
     <Content Include="js\controllers\UnderwritingRequestController.js" />
     <Content Include="js\controllers\UnderwritingSummaryController.js" />
     <Content Include="js\controllers\VendorController.js" />
@@ -7330,7 +7038,8 @@
     <Content Include="js\models\CorpEntity.js" />
     <Content Include="js\models\DivError.js" />
     <Content Include="js\models\Employee.js" />
-    <Content Include="js\models\Underwriter.js" />
+    <None Include="js\models\Underwriter js.bak" />
+    <Content Include="js\services\ptUnderwriting.js" />
     <Content Include="js\models\UnderwritingRequest.js" />
     <Content Include="js\services\ptCom.js" />
     <Content Include="js\services\ptConstructionService.js" />
@@ -7363,10 +7072,12 @@
     <Content Include="js\services\ptUnderwritingCaculator.js" />
     <Content Include="js\components\ptAudit.tpl.html" />
     <Content Include="js\components\ptItemList.tpl.html" />
+    <Content Include="js\services\UserGradeDataService.js" />
     <Content Include="js\test\model.PreSign.spec.js" />
     <Content Include="js\test\model.underwriting.spec.js" />
     <Content Include="js\test\service.ptDocSearch.spec.js" />
     <Content Include="js\directives\AuditLogs.tpl.html" />
+    <Content Include="js\Views\LeadDocSearch\DocSearchForm.html" />
     <Content Include="js\Views\LeadDocSearch\dsSummary.html" />
     <Content Include="js\directives\ptEditor.tpl.html" />
     <Content Include="js\test\conf.js" />
@@ -7387,19 +7098,20 @@
     <Content Include="js\Views\PreAssign\preassign-view.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-list.tpl.html" />
     <Content Include="js\Views\PreAssign\preassign-edit.tpl.html" />
-    <Content Include="js\Views\Underwriter\archived.tpl.html" />
-    <Content Include="js\Views\Underwriter\audit.tpl.html" />
-    <Content Include="js\Views\Underwriter\flipsheets.tpl.html" />
-    <Content Include="js\Views\Underwriter\tables.tpl.html" />
-    <Content Include="js\Views\Underwriter\rentalmodels.tpl.html" />
-    <Content Include="js\Views\Underwriter\datainput.tpl.html" />
-    <Content Include="js\Views\Underwriter\underwriting.tpl.html" />
-    <Content Include="js\Views\Underwriter\underwriting_request.tpl.html" />
+    <Content Include="js\Views\Underwriting\archived.tpl.html" />
+    <Content Include="js\Views\Underwriting\audit.tpl.html" />
+    <Content Include="js\Views\Underwriting\flipsheets.tpl.html" />
+    <Content Include="js\Views\Underwriting\rentalmodels.tpl.html" />
+    <Content Include="js\Views\Underwriting\datainput.tpl.html" />
+    <Content Include="js\Views\Underwriting\underwriting.tpl.html" />
+    <Content Include="js\Views\Underwriting\underwriting_request.tpl.html" />
     <Content Include="LeadDocSearch\DocSearchNewVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
-    <Content Include="LeadDocSearch\UnderwritingRequest.aspx" />
+    <Content Include="PropertyNote\PropertyNoteList.aspx" />
+    <Content Include="Underwriter\DocSearch.aspx" />
+    <Content Include="Underwriter\UnderwritingRequest.aspx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
@@ -7443,7 +7155,6 @@
     <Content Include="ManagementUI\MgrTeam.aspx" />
     <Content Include="Management\MgrRole.aspx" />
     <Content Include="Management\PortalStatus.aspx" />
-    <Content Include="Management\QueryBuilder.aspx" />
     <Content Include="Management\ShortSaleManagement.aspx" />
     <Content Include="Management\TaskList.aspx" />
     <Content Include="Management\Transfer2Legal.aspx" />
@@ -7574,7 +7285,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="NewOffer\ShortSaleNewOffer.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
-    <Content Include="PopupControl\UnderwritingSummary.aspx" />
+    <Content Include="Underwriter\UnderwritingSummary.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\VendorsPopUpContent.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
@@ -7877,8 +7588,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="AutoDialer\Web.config" />
-    <Content Include="img\img_files" />
-    <Content Include="css\css_files" />
     <Content Include="App_Data\OSCTemplate.docx" />
     <Content Include="App_Data\DeedReversionTemplate.docx" />
     <Content Include="bower_components\lodash\.bower.json" />
@@ -7939,11 +7648,14 @@
     <None Include="App_Data\underwriter.xlsx.bak" />
     <Content Include="App_Data\docsearchmap.csv" />
     <Content Include="App_Data\test.csv" />
+    <Content Include="Underwriter\UnderwritingTracking.aspx" />
+    <Content Include="Webconfig.txt" />
     <None Include="Scripts\x_references.js" />
     <Content Include="ShortSale\CaseParties.aspx" />
     <Content Include="ShortSale\GeneralParties.ascx" />
     <Content Include="ShortSale\ShortPreSignControl.ascx" />
     <Content Include="SQL\SearchReslut.sql" />
+    <Content Include="GPAOffer\GPAOfferList.aspx" />
     <Content Include="Task\MyTask2.aspx" />
     <Content Include="TempDataFile\reslut.docx" />
     <Content Include="TitleUI\TitleSummaryPage.aspx" />
@@ -7951,9 +7663,9 @@
     <Content Include="TitleUI\TitleCommentControl.ascx" />
     <Content Include="TitleUI\TitleDocTab.ascx" />
     <Content Include="TitleUI\TitleFeeClearance.ascx" />
-    <Content Include="UnderWriter\DocSearchListNew.aspx" />
-    <Content Include="UnderWriter\DocSearchList.aspx" />
-    <Content Include="UnderWriter\UnderwritingTracking.aspx" />
+    <Content Include="Underwriter\PropertiesList.aspx" />
+    <Content Include="Underwriter\DocSearchList.aspx" />
+    <Content Include="Underwriter\UnderwritingHome.aspx" />
     <Content Include="UserControl\AuditLogs.ascx" />
     <Content Include="UserControl\CreateNew.ascx" />
     <Content Include="UserControl\SummaryItem\FollowUpItem.ascx" />
@@ -8483,6 +8195,9 @@
     <Content Include="App_Data\TitleDoc\MANAGING MEMBER TRANSFER AGREEMENT.docx" />
     <Content Include="App_Data\TitleDoc\SALE AND GENERAL ASSIGNMENT OF SHARES IN.docx" />
     <Content Include="TempDataFile\LeadsList.xlsx" />
+    <Content Include="typings\globals\angular\typings.json" />
+    <Content Include="typings\globals\jquery\typings.json" />
+    <Content Include="typings.json" />
     <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -8539,8 +8254,10 @@
     <None Include="bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="js\components\Test.ts" />
     <Content Include="js\controllers\DiarlerManagementController.js" />
+    <TypeScriptCompile Include="typings\globals\angular\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jquery\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

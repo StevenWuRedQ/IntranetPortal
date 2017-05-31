@@ -1,129 +1,73 @@
-var portalApp = angular.module('PortalApp',
-    ['ngResource', 'ngSanitize', 'ngAnimate', 'dx', 'ngMask', 'ui.bootstrap', 'ui.select', 'ui.layout', 'ngRoute', 'firebase', 'ui.router']);
-
-angular.module('PortalApp')
-    .controller('MainCtrl', ['$rootScope', '$uibModal', '$timeout', '$state', function ($rootScope, $uibModal, $timeout, $state) {
-        $rootScope.globaldata = {};
-        $rootScope.AlertModal = null;
-        $rootScope.ConfirmModal = null;
-        $rootScope.loadingCover = document.getElementById('LodingCover');
-        $rootScope.panelLoading = false;
-        $rootScope.isPromptModalArea = false;
-        $rootScope.loadPanelPosition = (function () {
-            var dataPanelDiv = document.getElementById('dataPanelDiv');
-            if (dataPanelDiv != null) {
-                return { of: '#dataPanelDiv' }
-            } else {
-                return { of: 'body' }
-            }
-        })();
-        $rootScope.$state = $state;
-        $rootScope.alert = function (message) {
-            $rootScope.alertMessage = message ? message : '';
-            $rootScope.AlertModal = $uibModal.open({
-                templateUrl: 'AlertModal',
-            });
-        }
-        $rootScope.alertOK = function () {
-            $rootScope.AlertModal.close();
-        }
-        $rootScope.confirm = function (message, confrimFunc) {
-            $rootScope.confirmMessage = message ? message : '';
-            $rootScope.ConfirmModal = $uibModal.open({
-                templateUrl: 'ConfirmModal'
-            });
-            $rootScope.ConfirmModal.confrimFunc = confrimFunc;
-            return $rootScope.ConfirmModal.result;
-        }
-        $rootScope.confirmYes = function () {
-            $rootScope.ConfirmModal.close(true);
-            if ($rootScope.ConfirmModal.confrimFunc) {
-                $rootScope.ConfirmModal.confrimFunc(true);
-            }
-
-        }
-        $rootScope.confirmNo = function () {
-            $rootScope.ConfirmModal.close(false);
-            if ($rootScope.ConfirmModal.confrimFunc) {
-                $rootScope.ConfirmModal.confrimFunc(false);
-            }
-        }
-        $rootScope.prompt = function (message, callback,  showArea){
-            $rootScope.promptMessage = message ? message : '';
-            $rootScope.promptModalTxt = '';
-            $rootScope.isPromptModalArea = showArea || false;
-            $rootScope.promptModal = $uibModal.open({
-                templateUrl: 'PromptModal'
-            });
-            $rootScope.promptModal.promptFunc = callback;
-
-        }
-        $rootScope.promptYes = function () {
-            $rootScope.promptModal.close($rootScope.promptModalTxt);
-            if ($rootScope.promptModal.promptFunc) {
-                $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
-            }
-
-        }
-        $rootScope.promptNo = function () {
-            $rootScope.promptModal.close(false);
-            if ($rootScope.promptModal.promptFunc) {
-                $rootScope.promptModal.promptFunc(null)
-            }
-        }
-        $rootScope.showLoading = function (divId) {
-            $($rootScope.loadingCover).show();
-        }
-        $rootScope.hideLoading = function (divId) {
-            $($rootScope.loadingCover).hide();
-        }
-        $rootScope.toggleLoading = function () {
-            $timeout(function () {
-                $rootScope.panelLoading = !$scope.panelLoading;
-            })
-        }
-        $rootScope.startLoading = function () {
-            $timeout(function () {
-                $rootScope.panelLoading = true;
-            })
-        }
-        $rootScope.stopLoading = function () {
-            $timeout(function () {
-                $rootScope.panelLoading = false;
-            });
-        }
-    }]);
-
-
-(function () {
+var portalApp = angular.module("PortalApp",
+[
+    "ngResource", "ngSanitize", "ngAnimate", "ngMask", "dx", "ui.bootstrap",
+    "ui.select", "ui.layout", "ngRoute", "ui.router"
+]);
+;(function () {
+    /*define public shared var of class portalRouteProvider register var in the below*/
     var ITEM_ID = 'itemId';
 
     function portalRouteProvider($routeProvider) {
 
+        // This $get noop is because at the moment in AngularJS "providers" must provide something
+        // via a $get method.
+        // When AngularJS has "provider helpers" then this will go away!
 
+        /**/
         this.$get = angular.noop;
         this.ITEM_ID = ITEM_ID;
+        // Again, if AngularJS had "provider helpers" we might be able to return `routesFor()` as the
+        // portalRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
+        // like:
+        //
+        // ```
+        // myMod.config(function(portalRouteProvider) {
+        //   var routeProvider = portalRouteProvider.routesFor('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // but instead have something like:
+        //
+        //
+        // ```
+        // myMod.config(function(portalRouteProvider) {
+        //   var routeProvider = portalRouteProvider('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // In any case, the point is that this function is the key part of this "provider helper".
+        // We use it to create routes for CRUD operations.  We give it some basic information about
+        // the resource and the urls then it it returns our own special routeProvider.
         this.routesFor = function (resourceName, urlPrefix, routePrefix) {
-            var baseUrl = resourceName.toLowerCase();            
+            var baseUrl = resourceName.toLowerCase();
             var baseRoute = '/' + resourceName.toLowerCase();
             routePrefix = routePrefix || urlPrefix;
 
+            // Prepend the urlPrefix if available.
             if (angular.isString(urlPrefix) && urlPrefix !== '') {
                 baseUrl = urlPrefix + '/' + baseUrl;
             }
 
+            // Prepend the routePrefix if it was provided;
             if (routePrefix !== null && routePrefix !== undefined && routePrefix !== '') {
                 baseRoute = '/' + routePrefix + baseRoute;
             }
 
+            // Create the templateUrl for a route to our resource that does the specified operation.
             var templateUrl = function (operation) {
                 return '/js/Views/' + resourceName.toLowerCase() + '/' + resourceName.toLowerCase() + '-' + operation.toLowerCase() + '.tpl.html';
             };
+            // Create the controller name for a route to our resource that does the specified operation.
             var controllerName = function (operation) {
                 return resourceName + operation + 'Ctrl';
             };
 
+            // This is the object that our `routesFor()` function returns.  It decorates `$routeProvider`,
+            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
+            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
             var routeBuilder = {
+                // Create a route that will handle showing a list of items
+                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
                 whenList: function (resolveFns) {
                     routeBuilder.when(baseRoute, {
                         templateUrl: templateUrl('List'),
@@ -132,6 +76,7 @@ angular.module('PortalApp')
                     });
                     return routeBuilder;
                 },
+                // Create a route that will handle creating a new item
                 whenNew: function (resolveFns) {
                     routeBuilder.when(baseRoute + '/new', {
                         templateUrl: templateUrl('Edit'),
@@ -140,6 +85,7 @@ angular.module('PortalApp')
                     });
                     return routeBuilder;
                 },
+                // Create a route that will handle editing an existing item
                 whenEdit: function (resolveFns) {
                     routeBuilder.when(baseRoute + '/:' + ITEM_ID, {
                         templateUrl: templateUrl('Edit'),
@@ -150,13 +96,14 @@ angular.module('PortalApp')
                 },
                 whenOther: function (resolveFns, name, suffixUrl) {
                     var _url = suffixUrl ? suffixUrl : '';
-                    routeBuilder.when(baseRoute +'/'+ name.toLowerCase() +'/'+ _url, {
+                    routeBuilder.when(baseRoute + '/' + name.toLowerCase() + '/' + _url, {
                         templateUrl: templateUrl(name),
                         controller: controllerName(name),
                         resolve: resolveFns
                     });
                     return routeBuilder;
                 },
+                // Readonly views and controllers
                 whenView: function (resolveFns) {
                     routeBuilder.when(baseRoute + '/view/:' + ITEM_ID, {
                         templateUrl: templateUrl('View'),
@@ -165,81 +112,230 @@ angular.module('PortalApp')
                     });
                     return routeBuilder;
                 },
+                // Pass-through to `$routeProvider.when()`
                 when: function (path, route) {
                     $routeProvider.when(path, route);
                     return routeBuilder;
                 },
-                otherwise: function (params) {                    
+                // Pass-through to `$routeProvider.otherwise()`
+                otherwise: function (params) {
                     $routeProvider.otherwise(params);
                     return routeBuilder;
                 },
+                // Access to the core $routeProvider.
                 $routeProvider: $routeProvider
             };
             return routeBuilder;
         };
     }
+    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
+    // we add our injection dependencies using the $inject form
     portalRouteProvider.$inject = ['$routeProvider'];
 
+    /*define public shared var of class portalRouteProvider*/
     portalRouteProvider.ITEM_ID = ITEM_ID;
+    // Create our provider - it would be nice to be able to do something like this instead:
+    //
+    // ```
+    // angular.module('services.portalRouteProvider', [])
+    //   .configHelper('portalRouteProvider', ['$routeProvider, portalRouteProvider]);
+    // ```
+    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
     angular.module('PortalApp').provider('portalRoute', portalRouteProvider);
 })();
+;(function () {
+    /* Define public shared var of class portalUIRouteProvider register var in the below*/
+    var ITEM_ID = "itemId";
 
-
-
-(function () {
-    var ITEM_ID = 'itemId';
-
+    /**
+     * @date 7/25/2016 - 7/26/2016  
+     * by the way 7/25/2016 have some time box to 
+     * monitor Drone make sure finished refresh leads we assgin to
+     * about full day
+     * 
+     * @class
+     * This should be my class in every other language 
+     * class name should be Name capital frist word.
+     * PortalUIRouteProvider
+     * I send two days to find this stupid bug.
+     * portalUIRouteProvider should be in class use 
+     * This should not portalUIRouteProvider
+     * but can not use no capital name like this 
+     * 
+     * @other
+     * also can not use model define such as we do before,
+     * Because this is special provide 
+     */
     function portalUIRouteProvider($stateProvider) {
 
+        // This $get noop is because at the moment in AngularJS "providers" must provide something
+        // via a $get method.
+        // When AngularJS has "provider helpers" then this will go away!
 
+        /**/
         this.super = $stateProvider;
         this.$get = angular.noop;
         this.ITEM_ID = ITEM_ID;
 
+        // Again, if AngularJS had "provider helpers" we might be able to return `statesFor()` as the
+        // portalUIRouteProvider itself.  Then we would have a much cleaner syntax and not have to do stuff
+        // like:
+        //
+        // ```
+        // myMod.config(function(portalUIRouteProvider) {
+        //   var routeProvider = portalUIRouteProvider.statesFor('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // but instead have something like:
+        //
+        //
+        // ```
+        // myMod.config(function(portalUIRouteProvider) {
+        //   var routeProvider = portalUIRouteProvider('MyBook', '/myApp');
+        // });
+        // ```
+        //
+        // In any case, the point is that this function is the key part of this "provider helper".
+        // We use it to create routes for CRUD operations.  We give it some basic information about
+        // the resource and the urls then it it returns our own special routeProvider.
+        /**
+        * @author : Steven Wu
+        * @date   : 7/25/2016
+        *
+        * @summery
+        * like {@link #description} 
+        * to expain what's different OOP style bewteen to define class,
+        * use usually javascrip OOP (such as JQuery) and Agualar OOP 
+        *
+        * @description
+        *  Angular OOP style is different than JQuery OOP style
+        *  Jquery don't have $inject and model, 
+        *  so it design OOB use Function way like this
+        *
+        *  ````````````````````````````````````````````
+        *  `JQuery Style version under v 1.6
+        *  class Base
+        *  function Base {}
+        *
+        *  class 
+        *  var Derived = (function (_super) {
+        *  _extends(Derived, _super)
+        *      
+        *  })(Car)
+        * 
+        *  Derived.prototype = {
+        *   //functions define
+        *  }
+        * 
+        * ````````````````````````````````````````````
+        * `````````````````````````````````````````````
+        *  `JQuery Style version after v 1.6 use AMD model require.
+        *  to manage dependency so AMD and tool babel to generate javascript.
+        *  so I have suggest 
+        *  1. use babel and AMD generate bundle.js
+        *  2. use require js manage dependency in the page themselves.
+        **/
 
+        /**
+         * @description
+         * map views and controllers with ui-router
+         * @param  {string} resourceName 
+         *         main controller name
+         *         in view and map it to index view
+         * @return {StateBuilder}
+         *         $stateProvider build with pre defined function
+         *         such as CRUD router
+         *         list edit view new
+         *         
+         */
         this.statesFor = function (resourceName) {
             if (!resourceName) {
                 console.error("resourceName must be defined in $stateProvider");
             }
+            // Create the stateTemplateUrl for a route to our resource that does the specified operation.
             var stateTemplateUrl = function (statePath) {
-                return '/js/Views/' + resourceName.toLowerCase() + '/' + templateFile(statePath) + '.tpl.html';
+                return "/js/Views/" + resourceName.toLowerCase() + "/" + templateFile(statePath) + ".tpl.html";
             };
 
-            var stateUrl = function(statePath)
-            {
+            var stateUrl = function (statePath) {
+                /// get root url name with resourceName
+                /// other get state path url
 
-                return  '/' +( !statePath ? resourceName : statePath.replace(".","/") );
-            }
+                return "/" + (!statePath ? resourceName : statePath.replace(".", "/"));
+            };
+            /**
+             * @summery
+             * Use camelCase style to name controller and end with Ctrl
+             * @todo 
+             *   For best practice Use pascal case is better 
+             *   but lodash dosen't support pascal case function
+             *   Use camelCase and capitalize can solve this problem.
+             * @example test.edit -> testEditCtrl
+             **/
             var stateControllerName = function (statePath) {
-                return _.camelCase(resourceName + ' ' + (statePath || '') ) + 'Ctrl';
+                return _.camelCase(resourceName + " " + (statePath || "")) + "Ctrl";
             };
 
+            /**
+             * @description
+             * 	find template file name 
+             * 	if the state for root contorller the default view is index.tpl file
+             * 	
+             * @param  {string} statePath 
+             *         1. sate path @example new list
+             *         2. deep path with . to split
+             *            @example list.owner list.manager		
+             *         
+             * @return {string} 
+             *         The file template file name to bind view         
+             */
             var templateFile = function (statePath) {
 
                 if (!statePath) {
-                    return 'index'
+                    return "index";
                 }
 
                 return _.kebabCase(statePath.toLowerCase());
-            }
+            };
+            // This is the object that our `statesFor()` function returns.  It decorates `$stateProvider`,
+            // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
+            // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
             var stateBuilder = {
+                // Create a route that will handle showing a list of items
+                // When list bind { ControllerName } + 'Ctrl' to view 'js/Views/' + { ControllerName } + '-list-tpl.html'
 
+                /**
+                 * @todo 
+                 * better create base curd 
+                 * @example
+                 * 1. stateNew
+                 * 2. stateList
+                 * 3. .........
+                 * And combine it with function
+                 * `stateCURD` will imporve develop effects
+                 */
 
+                // Pass-through to `$stateProvider.state()`
                 state: function (statePath, resolveFns) {
-                    $stateProvider.state(resourceName, {
-                        url: stateUrl(statePath),
-                        templateUrl: stateTemplateUrl(statePath),
-                        controller: stateControllerName(statePath),
-                        resolve: resolveFns
-                    });
+                    $stateProvider.state(resourceName,
+                        {
+                            url: stateUrl(statePath),
+                            templateUrl: stateTemplateUrl(statePath),
+                            controller: stateControllerName(statePath),
+                            resolve: resolveFns
+                        });
                     return stateBuilder;
                 },
+                // Pass-through to `$stateProvider.otherwise()`
                 otherwise: function (params) {
                     $stateProvider.otherwise(params);
                     return stateBuilder;
                 },
+                // Access to the core $stateProvider.
                 $stateProvider: $stateProvider
             };
+            /** config for defaunt controller and view index page  **/
             stateBuilder.state(null, null);
             return stateBuilder;
 
@@ -247,20 +343,32 @@ angular.module('PortalApp')
     }
 
 
-    portalUIRouteProvider.$inject = ['$stateProvider'];
+    // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
+    // we add our injection dependencies using the $inject form
+    portalUIRouteProvider.$inject = ["$stateProvider"];
 
+    /*define public shared var of class portalUIRouteProvider*/
     portalUIRouteProvider.ITEM_ID = ITEM_ID;
-    angular.module('PortalApp').provider('portalUIRoute', portalUIRouteProvider);
+    // Create our provider - it would be nice to be able to do something like this instead:
+    //
+    // ```
+    // angular.module('services.portalUIRouteProvider', [])
+    //   .configHelper('portalUIRouteProvider', ['$stateProvider, portalUIRouteProvider]);
+    // ```
+    // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
+    angular.module("PortalApp").provider("portalUIRoute", portalUIRouteProvider);
 })();
-
+/**
+ * @return {[class]}                 AssignCorp class
+ */
 angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, CorpEntity, $http, DivError) {
     var _class = function ()
     {
         this.onAssignSucceed = null;
         this.BBLE = null;
     }
-
-        _class.prototype.test = function()
+    
+    _class.prototype.test = function()
     {
         this.text = "1234555";
     }
@@ -280,11 +388,13 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
         var _assignCrop = this;
 
         var eMessages = new DivError('assignBtnForm').getMessage();
+        //var eMessages = $scope.getErrorMessage('assignBtnForm');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
         }
 
+        //var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
         var assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
 
         var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
@@ -293,8 +403,8 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
 
             confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and Wells Fargo signer is ' + _assignCrop.Signer + '';
         }
-
-                $http.get(assignApi).success(function (data) {
+        
+        $http.get(assignApi).success(function (data) {
 
             AngularRoot.confirm(confirmMsg).then(function (r) {
                 if (r) {
@@ -318,10 +428,18 @@ angular.module('PortalApp').factory('AssignCorp', function (ptBaseResource, Corp
         });
     }
 
+    /**
+     * This is not right have parent ID
+     * */
     _class.prototype.newOfferId = 0    
     return _class;
 });
-
+/**
+ * rewite audit log in model view
+ */
+/**
+ * @return {[class]}                 AuditLog class
+ */
 angular.module('PortalApp').factory('AuditLog', function (ptBaseResource) {
     var auditLog = ptBaseResource('AuditLog', 'AuditId', null, {
         load: {
@@ -348,6 +466,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
         var primaryKey = {};
         primaryKey[key] = '@' + key;
 
+        /*default actions add put */
         var _actions = {
             'update': { method: 'PUT' }
         };
@@ -357,6 +476,7 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 
         var Resource = $resource(uri, primaryKey, _actions);
 
+        //static function
         Resource.all = function () { }
         Resource.CType = function (obj, Class) {
 
@@ -376,9 +496,12 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
         Resource.prototype.hasId = function () {
             return this[key] != null && this[key] != 0;
         }
+        /*********Use for Derived class implement validation interface *************/
+        /**************** string array to hold error messages **********************/
         Resource.prototype.errorMsg = [];
 
         Resource.prototype.clearErrorMsg = function () {
+            /* maybe cause memory leak if javascript garbage collection is not good */
             this.errorMsg = []
         }
 
@@ -397,6 +520,8 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
             this.errorMsg.push(msg);
         }
 
+        /***************************************************************************/
+        /*base class instance function*/
         Resource.prototype.$put = function () {}
 
         Resource.prototype.$cType = function (_this, Class) {
@@ -408,7 +533,9 @@ angular.module('PortalApp').factory('ptBaseResource', function ($resource) {
 
     return PtBaseResource;
 });
-
+/**
+ * @return {[class]}                 BusinessCheck class
+ */
 angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
     var businessCheck = ptBaseResource('BusinessCheck', 'Id', null, null);
     businessCheck.CheckStatus = {
@@ -416,9 +543,12 @@ angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
         Canceled : 1,
         Completed : 2
     }
+    /*** for instance object to use ****/
     businessCheck.prototype.CheckStatus = {};
     angular.extend(businessCheck.prototype.CheckStatus, businessCheck.CheckStatus);
+    /***********************************/
 
+    /* return true if check status is avoid */
     businessCheck.prototype.isVoid = function ()
     {
         return this.Status == this.CheckStatus.Canceled;
@@ -426,17 +556,21 @@ angular.module('PortalApp').factory('BusinessCheck', function (ptBaseResource) {
     return businessCheck;
 
 });
-
+/**
+ * @return {[class]}                 CheckRequest class
+ */
 angular.module('PortalApp').factory('CheckRequest', function (ptBaseResource, BusinessCheck) {
     var checkRequest =  ptBaseResource("CheckRequest",'Id',null,null);
-
-        checkRequest.prototype.getTotalAmount = function ()
+    
+    checkRequest.prototype.getTotalAmount = function ()
     {
         if(this.Checks)
         {
+            /*** Covert checks data to BusinessCheck type ***/
             var _checks = _.map(this.Checks, function (o) { return checkRequest.CType(o, BusinessCheck) });
-
-                        return _.sum(_.filter(_checks, function (o) { return !o.isVoid() }), 'Amount');
+            /************************************************/
+            
+            return _.sum(_.filter(_checks, function (o) { return !o.isVoid() }), 'Amount');
         }
 
         return 0;
@@ -453,6 +587,12 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
     var corpEntity = ptBaseResource('CorporationEntities', 'EntityId',null,
     { assign: { url: '/api/CorporationEntities/:EntityId/BBLE', method: 'Post' } });
 
+    //corpEntity.prototype.assignCorp = function () {
+    //    this
+    //        self = corpEntity.assign(self.EntityId, JSON.stringify(leadInfo.BBLE));
+    //        //return self.$assign(JSON.stringify(leadInfo.BBLE));
+    //    });
+    //}
 
     corpEntity.prototype.assignDateNow = function()
     {
@@ -461,12 +601,12 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
             var now = Date.now();
             var assignOn = Date.parse(this.AssignOn);
             var times = now - assignOn;
-
-                        return get_time_diff(assignOn);
+            
+            return get_time_diff(assignOn);
         }
     }
-
-        function get_time_diff(datetime) {
+    
+    function get_time_diff(datetime) {
         var datetime = typeof datetime !== 'undefined' ? datetime : "2014-01-01 01:02:03.123456";
 
         var datetime = new Date(datetime).getTime();
@@ -488,30 +628,63 @@ angular.module('PortalApp').factory('CorpEntity', function (ptBaseResource, Lead
 
         var date_diff = new Date(milisec_diff);
 
-        return days  + " Days " 
+        return days  + " Days " //+ date_diff.getHours() + " Hours " + date_diff.getMinutes(); // + " Minutes " + date_diff.getSeconds() + " Seconds";
     }
 
     return corpEntity;
 });
-
+/**
+ * @author Steven
+ * @date   8/17/2016 
+ * @todo
+ *  right now we using this in contoller javascript code
+ *  but it better warp it to Angular directive let it handle error by itself.  
+ * 
+ * @description
+ *  DivError model class
+ * @return {DivError Class}
+ */
 
 angular.module('PortalApp')
     .factory('DivError', function () {
         var _class = function (id) {
             this.id = id;
         }
+        /**
+         * @author Steven
+         * @date   8/16/2016
+         * @description
+         *  return all error messages under div
+         *  which need validate
+         */
         _class.prototype.getMessage = function () {
             var eMessages = [];
+            /*ignore every parent of has form-ignore */
             $('#' + this.id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
                 eMessages.push($(this).attr('data-message'));
             });
             return eMessages;
         }
 
+        /**
+         * @returns {boolen} true if the div pass the validate 
+         */
         _class.prototype.passValidate = function () {
             return this.getMessage().length == 0;
         }
 
+        /**
+          * @author steven
+          * @date   8/17/2016
+          * @description
+          *  check both have yes no bool type with date
+          * @bug
+          *  bugs over here boolVal can not check with null
+          *  @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+          *  @solution
+          * 
+          * @return {boolen} true if it pass validate
+          */
         _class.prototype.boolValidate = function (base, boolKey) {
             if (!base)
             {
@@ -522,6 +695,15 @@ angular.module('PortalApp')
             return boolVal === undefined;
         }
 
+        /**
+         * @author steven
+         * @date   8/17/2016
+         * @description
+         *  check both have yes no and have related array must have at lest one
+         *  row of date
+         * 
+         * @return {boolen} true if it pass validate
+         */
         _class.prototype.multipleValidated = function (base, boolKey, arraykey) {
             if (!base)
             {
@@ -529,6 +711,12 @@ angular.module('PortalApp')
             }
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
+            /**
+             * bugs over here boolVal can not check with null
+             * @see to Jira issue PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+             * @solution
+             *  
+             */
             var hasWarning = (boolVal === undefined) || (boolVal && arrayVal == false);
             return hasWarning;
         }
@@ -537,22 +725,35 @@ angular.module('PortalApp')
         return _class;
     });
 angular.module('PortalApp')
+    /**
+     * @author steven
+     * @date   8/12/2016
+     * @returns class of DocNewVersionConfig 
+     */
     .factory('DocNewVersionConfig', function () {
         CONSTANT_DATE = '8/11/2016';
         var docNewVersionConfig = function()
         {
             this.date = CONSTANT_DATE;
         }
+        /**
+         * CONSTANT value do not allow to change
+         * @returns {DocNewVersionConfig object} 
+         */
         docNewVersionConfig.getInstance = function()
         {
             return new docNewVersionConfig();
         }
-
-                return docNewVersionConfig;
+        
+        return docNewVersionConfig;
     })
 
+/**
+ * @return {[class]}                 DocSearch class
+ */
 angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadResearch, LeadsInfo, $http) {
 
+    /*api service funciton declear*/
     var docSearch = ptBaseResource('LeadInfoDocumentSearches', 'BBLE', null, {
         completed: { method: "post", url: '/api/LeadInfoDocumentSearches/:BBLE/Completed' }
     });
@@ -570,6 +771,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
     }
 
     docSearch.prototype.initLeadsResearch = function () {
+        //debugger;
         var self = this;
         var data1 = null;
         if (self.LeadResearch == null) {
@@ -579,6 +781,7 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
             var _LeadSearch = new LeadResearch();
             angular.extend(_LeadSearch, self.LeadResearch);
             self.LeadResearch = _LeadSearch;
+            /*always get refershed ssn*/
             if (self.LeadResearch.ownerName) {
                 self.LeadResearch.getOwnerSSN(self.BBLE);
             }
@@ -589,10 +792,20 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 
         return data1;
     }
+    /**
+     * static function define use class object docSearch.static function;
+     */
+    /**
+     * instance function defanlt use prototype
+     * @return {[type]} [description]
+     */
     docSearch.prototype.actionTest = function () {
         this.$update()
     }
 
+    /**
+     *If property has type use function get property
+     */
     docSearch.prototype._leadResearch = function () {
         if (this.LeadResearch && !(this instanceof LeadResearch)) {
             angular.extend(this.LeadResearch, new LeadResearch())
@@ -600,6 +813,11 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
         return this.LeadResearch;
     }
 
+    /**
+     * Caution:
+     * this method mark underwriting status but not doc search status.
+     * doc search status is controlled by docSearch.Status.
+     */
     docSearch.prototype.markCompleted = function (bble, status, note) {
 
         payload = {
@@ -619,14 +837,40 @@ angular.module('PortalApp').factory('DocSearch', function (ptBaseResource, LeadR
 });
 
 
+/**
+    * @author steven
+    * 
+    * @fix committed bf79f5e leads task search
+    *  add Doc search version switch
+    * 
+    */
 
 angular.module('PortalApp')
+    /**
+     * @author steven
+     * @date   8/12/2016
+     * @description
+     *  we have do this becuase can not use server side to contorl
+     *  to switch new version.
+     *  and we can not use ng-view and ng-router beacuse we want to it 
+     *  faster we decide to mix ascx and angular.
+     *  
+     *  so we have to wirte a small switch by our self.
+     * 
+     * @returns class of Eaves dropper 
+     */
 
     .factory('DocSearchEavesdropper', function (DocNewVersionConfig) {
         var docSearchEavesdropper = function () {
 
         }
 
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  set evaesdrapper public function very import
+         */
         docSearchEavesdropper.prototype.setEavesdropper = function (_eavesdropper, revFunc) {
             this.eavesDropper = _eavesdropper;
             this.endorseCheckFuncs();
@@ -634,6 +878,12 @@ angular.module('PortalApp')
             this.endorse(revFunc);
         }
 
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  endorse evaesdropper
+         */
         docSearchEavesdropper.prototype.endorse = function (revFunc) {
             if (!this.eavesDropper) {
                 console.error('unable to eavesdropper it not set yet');
@@ -647,6 +897,12 @@ angular.module('PortalApp')
             this.revFunc = revFunc;
         }
 
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description: 
+         *  public function very import start function
+         */
         docSearchEavesdropper.prototype.start2Eaves = function () {
             this.endorseCheckFuncs();
 
@@ -659,6 +915,12 @@ angular.module('PortalApp')
 
         }
 
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  check all necessary check function registered
+         */
         docSearchEavesdropper.prototype.endorseCheckFuncs = function () {
             var eaves = this.eavesDropper;
 
@@ -671,6 +933,12 @@ angular.module('PortalApp')
             }
 
         }
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  registerd check functions
+         */
         docSearchEavesdropper.prototype._registerCheckFuncs = function () {
             var eaves = this.eavesDropper;
             this.endorseCheckFuncs();
@@ -679,6 +947,12 @@ angular.module('PortalApp')
             this.endorseCheckVersion = eaves.endorseCheckVersion;
         }
 
+        /**
+         * @author steven
+         * @date   8/12/2016
+         * @description:
+         *  unendorse evaesdrapper
+         */
         docSearchEavesdropper.prototype.unendorse = function () {
             this.eavesDropper = null;
         }
@@ -702,15 +976,20 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
         {
             this.texts = texts;
         }
-
-            }
-
-
+        
+    }
+   
+    
+    // dxGridModel.prototype.editing = new EditingModel();
 
     dxGridModel.prototype.setNewText = function(texts)
     {
         this.editing = new EditingModel(texts);
     }
+    /**
+     * In devextrme grid view model 
+     * The eidt permission should be handle by itself
+     **/
     dxGridModel.prototype.initFormUrl = function () {
         var path = '';
 
@@ -730,18 +1009,25 @@ angular.module('PortalApp').factory('DxGridModel', function ($location, $routePa
 
     return dxGridModel;
 });
-
+/*should have name space like this dxModel.dxGridModel.confg.dxGridColumnModel */
 
 function dxModel() {
 
 
 }
 
+//function dxGridModel() {
 
 
 
+//}
 
 
+/**
+ * [dxGridColumnModel description]
+ * @param  {dxGridColumn Option} opt [dxGridColumn Option]
+ * @return {[dxGridColumnModel]}     [return model have dx Grid column with special handler]
+ */
 function dxGridColumnModel(opt) {
 
     _.extend(this, opt);
@@ -772,14 +1058,18 @@ angular.module('PortalApp').factory('EmployeeModel', ['$resource','$http', funct
 
         return promise;
     }
-
-        return resource;
+    
+    return resource;
 }])
-
+//Leads/LeadsInfo
 angular.module('PortalApp').factory('HomeOwner', function (ptBaseResource) {
 
     var homeOwner = ptBaseResource('Homeowner', 'BBLE');
-
+   
+    //leadResearch.prototype.func
+    //def function
+    //leadResearch.func
+    //constructor
     return homeOwner;
 });
 
@@ -801,30 +1091,45 @@ angular.module('PortalApp').factory('LeadResearch', function ($http,LeadsInfo) {
     leadResearch.prototype.initFromLeadsInfo = function(BBLE)
     {
         var self = this;
-
+        
+        // bug fix for mortgageAmount secondMortgageAmount not saving
+        // 8/26/2016
         var data1 = LeadsInfo.get({ BBLE: BBLE.trim() }, function () {
             self.ownerName = self.ownerName || data1.Owner;
             self.getOwnerSSN(BBLE);
 
+            // disable the water tax from leads 
+            // @see jira link
+            // https://myidealprop.atlassian.net/browse/PORTAL-484
 
+            //self.waterCharges = self.waterCharges || data1.WaterAmt;
+            //self.propertyTaxes = self.propertyTaxes || data1.TaxesAmt;
+            //self.mortgageAmount = self.mortgageAmount || data1.C1stMotgrAmt;
+            //self.secondMortgageAmount = self.secondMortgageAmount || data1.C2ndMotgrAmt;
 
-
-                    });
+            
+        });
         return data1;
     }
 
     return leadResearch;
 });
-
+//Leads/LeadsInfo
 angular.module('PortalApp').factory('LeadsInfo', function (ptBaseResource) {
 
     var leadsInfo = ptBaseResource('LeadsInfo', 'BBLE',null,
     { verify: { url: '/api/LeadsInfo/Verify' } });
+   
 
-
+    //leadResearch.prototype.func
+    //def function
+    //leadResearch.func
+    //constructor
     return leadsInfo;
 });
-
+/**
+ * @return {[class]}                 NewOfferListGrid class
+ */
 angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
     var _class = function (data) {
 
@@ -885,6 +1190,8 @@ angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
         $('<a/>').addClass('dx-link-MyIdealProp')
             .text(options.value)
             .on('dxclick', function () {
+                //Do something with options.data;
+                //ShowCaseInfo(options.data.BBLE);
                 var request = options.data;
 
                 PortalUtility.ShowPopWindow("New Offer", "/NewOffer/ShortSaleNewOffer.aspx?BBLE=" + request.BBLE);
@@ -895,6 +1202,9 @@ angular.module('PortalApp').factory('NewOfferListGrid', function ($http) {
     return _class;
 });
 
+/**
+ * @return {[class]}                 PreSign class
+ */
 angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckRequest,LeadsInfo) {
 
     var preSign = ptBaseResource('PreSign', 'Id', null, {
@@ -909,25 +1219,28 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
         financeList: {
             method: "GET", url: '/api/PreSign/CheckRequests', isArray: true
         }
-
-      });
+  
+    });
+    /*** here use class desgin super key work spend 3 hours ***/
 
     preSign.prototype.validation = function ()
     {
         this.clearErrorMsg();
         if (!this.ExpectedDate) {
             this.pushErrorMsg("Please fill expected date !");
-
-                   }
+            // throw "Please fill expected date !";
+           
+        }
         if ((!this.Parties) || this.Parties.length < 1) {
+            //$scope.alert("Please fill at least one Party !");
             this.pushErrorMsg("Please fill at least one Party !");
         }
         this.CheckRequestData = preSign.CType(this.CheckRequestData, CheckRequest);
 
         if (this.NeedCheck &&  this.CheckRequestData.Checks.length < 1) {
            this.pushErrorMsg("Check Request is enabled. Please enter checks to be issued.");
-
-                   }
+           
+        }
 
         if (this.CheckRequestData && this.CheckRequestData.getTotalAmount() > this.DealAmount) {
            this.pushErrorMsg("The check's total amount must less than the deal amount, Please correct! ");           
@@ -940,44 +1253,89 @@ angular.module('PortalApp').factory('PreSign', function (ptBaseResource,CheckReq
 
         return this.hasErrorMsg() == false;
     }
+    /** init Id in font end model**/
+    // preSign.prototype.Id = 0;
     preSign.prototype.BBLE = '';
 
+    //preSign.prototype.Parties = [];
+    //Later will change to Checks to Check Class
+    //preSign.prototype.CheckRequestData = new CheckRequest();
 
+    //preSign.prototype.NeedSearch = true;
+    //preSign.prototype.NeedCheck = true;
 
 
     return preSign;
 });
 
+/**
+ * in refactoring need spent time box 
+ * on 7/27/2016 after 1:30PM
+ * stop refactoring
+ */
+/**
+ * @return {[class]}                 PropertyOffer class
+ */
 angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, AssignCorp) {
     var propertyOffer = ptBaseResource('PropertyOffer', 'OfferId', null, {
         getByBBLE: {
             url: '/api/businessform/PropertyOffer/Tag/:BBLE',
             params: {
                 BBLE: '@BBLE',
+                //Test: '@Test'
             }
         }
 
     });
+   
+    /**
+     * @todo
+     * by Steven
+     * worng spelling sorry about that will fix it after we refactory all 
+     **/
 
+    /**
+     * @todo
+     * by Steven
+     * for speed it should be assignCrop type is (AssignCorp) not an Instances 
+     */
 
+    //propertyOffer.prototype.assignCrop = new AssignCorp();
 
-
+    /**
+     * @data 7/28/2016
+     * need carefully test
+     * 1. in check current step called this function
+     * 2. maybe in new PropertyOffer also need call this function
+     */
     propertyOffer.prototype.assignOfferId = function (onAssignCorpSuccessed) {
         this.assignCrop.newOfferId = this.BusinessData.OfferId;
         this.assignCrop.BBLE = this.Tag;
         this.assignCrop.onAssignSucceed = onAssignCorpSuccessed;
-
-           }
+       
+    }
+    // propertyOffer.prototype.BusinessData = new BusinessForm();
 
     propertyOffer.prototype.Type = 'Short Sale';
     propertyOffer.prototype.FormName = 'PropertyOffer';
 
+    /**
+     * reload data
+     * @param {type} formdata
+     */
     propertyOffer.prototype.refreshSave = function (formdata) {
         this.DataId = formdata.DataId;
         this.Tag = formdata.Tag;
         this.CreateDate = formdata.CreateDate;
         this.CreateBy = formdata.CreateBy;
     }
+    /**
+     * @todo
+     * by steven
+     * for speed we define deal sheet class 
+     * like this will move out when I have time
+     * such as Seller class Buyer class and so on
+     */
     propertyOffer.prototype.DealSheetMetaData = {
         ContractOrMemo: {
             Sellers: [{}],
@@ -995,30 +1353,41 @@ angular.module('PortalApp').factory('PropertyOffer', function (ptBaseResource, A
     return propertyOffer;
 });
 
+/**
+ * @return {[class]}                 QueryUrl class
+ */
 
 angular.module('PortalApp').factory('QueryUrl', function ($http) {
     var _class = function () {
+        // This function is anonymous, is executed immediately and 
+        // the return value is assigned to QueryString!
         var query_string = {};
         var query = window.location.search.substring(1);
         var vars = query.split("&");
         for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split("=");
+            // If first entry with this name
             if (typeof query_string[pair[0]] === "undefined") {
                 query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
             } else if (typeof query_string[pair[0]] === "string") {
                 var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
                 query_string[pair[0]] = arr;
+                // If third or later entry with this name
             } else {
                 query_string[pair[0]].push(decodeURIComponent(pair[1]));
             }
         }
         return query_string;
     }
+    
 
-
-        return _class;
+    return _class;
 });
 
+/**
+ * @return {[class]}                 ScopeHelper class
+ */
 angular.module('PortalApp').factory('ScopeHelper', function ($http) {
     var _class = function () {
 
@@ -1029,17 +1398,20 @@ angular.module('PortalApp').factory('ScopeHelper', function ($http) {
     }
     _class.getShortSaleScope = function () {
 
-
-                return _class.getScope('ShortSaleCtrl');
+        
+        return _class.getScope('ShortSaleCtrl');
     }
     _class.getLeadsSearchScope = function()
     {
-        return _class.getScope('LeadTaxSearchCtrl');
+        return _class.getScope('DocSearchController');
     }
     return _class;
 });
 
 
+/**
+ * @return {[class]}                 Team class
+ */
 angular.module('PortalApp').factory('Team', function ($http) {
     var _class = function () {
 
@@ -1057,665 +1429,24 @@ angular.module('PortalApp').factory('Team', function ($http) {
     }
     return _class;
 });
-
-angular.module('PortalApp')
-    .factory('ptUnderwriter', ['$http', 'ptBaseResource', 'DocSearch', 'LeadsInfo', function ($http, ptBaseResource, DocSearch, LeadsInfo) {
-
-        var underwriter = ptBaseResource('underwriter', 'BBLE', null, {});
-
-        var underwritingFactory = {
-            UnderwritingModel: function () {
-                this.PropertyInfo = {
-                    PropertyAddress: '',
-                    CurrentOwner: '',
-                    TaxClass: '',
-                    LotSize: '',
-                    BuildingDimension: '',
-                    Zoning: '',
-                    PropertyTaxYear: 0.0,
-                    ActualNumOfUnits: 0,
-                    OccupancyStatus: undefined,
-                    SellerOccupied: false,
-                    NumOfTenants: 0,
-                }
-                this.DealCosts = {
-                    MoneySpent: 0.0,
-                    HAFA: false,
-                    HOI: 0.0,
-                    HOIRatio: 0.0,
-                    COSTermination: 0.0,
-                    AgentCommission: 0.0
-                }
-                this.RehabInfo = {
-                    AverageLowValue: 0.0,
-                    RenovatedValue: 0.0,
-                    RepairBid: 0.0,
-                    NeedsPlans: false,
-                    DealTimeMonths: 0,
-                    SalesCommission: 0.0,
-                    DealROICash: 0.0
-                }
-                this.LienInfo = {
-                    FirstMortgage: 0.0,
-                    SecondMortgage: 0.0,
-                    COSRecorded: false,
-                    DeedRecorded: false,
-                    OtherLiens: undefined,
-                    LisPendens: false,
-                    FHA: false,
-                    FannieMae: false,
-                    FreddieMac: false,
-                    Servicer: '',
-                    ForeclosureIndexNum: '',
-                    ForeclosureStatus: undefined,
-                    ForeclosureNote: '',
-                    AuctionDate: undefined,
-                    DefaultDate: undefined,
-                    CurrentPayoff: 0.0,
-                    PayoffDate: undefined,
-                    CurrentSSValue: 0.0
-                }
-                this.LienCosts = {
-                    TaxLienCertificate: 0.0,
-                    PropertyTaxes: 0.0,
-                    WaterCharges: 0.0,
-                    ECBCityPay: 0.0,
-                    DOBCivilPenalty: 0.0,
-                    HPDCharges: 0.0,
-                    HPDJudgements: 0.0,
-                    PersonalJudgements: 0.0,
-                    NYSTaxWarrants: 0.0,
-                    FederalTaxLien: 0.0,
-                    SidewalkLiens: false,
-                    ParkingViolation: 0.0,
-                    TransitAuthority: 0.0,
-                    VacateOrder: false,
-                    RelocationLien: 0.0,
-                    RelocationLienDate: undefined
-                }
-                this.MinimumBaselineScenario = {};
-                this.BestCaseScenario = {
-                };
-                this.Others = {};
-
-                this.CashScenario = {};
-                this.LoanScenario = {};
-                this.FlipScenario = {};
-
-                this.RentalInfo = {
-                    DeedPurchase: 0.0,
-                    CurrentlyRented: false,
-                    RepairBidTotal: 0.0,
-                    NumOfUnits: 0,
-                    MarketRentTotal: 0.0,
-                    RentalTime: 0
-                }
-                this.RentalModel = {};
-
-
-                this.Liens = {};
-                this.DealExpenses = {};
-                this.ClosingCost = {};
-                this.Construction = {}; 
-                this.CarryingCosts = {
-                    RETaxs: 0.0,
-                    Utilities: 0,
-                    Insurance: 0,
-                    Sums: 0
-                };
-                this.Resale = {};
-                this.LoanTerms = {};
-                this.LoanCosts = {};
-                this.FlipCalculation = {};
-                this.MoneyFactor = {};
-                this.HOI = {};
-                this.HOIBestCase = {};
-                this.InsurancePremium = {};
-
-            },
-            build: function () {
-                var data = new this.UnderwritingModel();
-                return data;
-            }
-        }
-
-        underwriter.calculator = (function () {
-
-            var insurancePolicyCalculation = function (v1, policyCol, cosCol, fromCol, toCol) {
-                if (v1 < fromCol[0]) {
-                    return 402;
-                } else {
-                    if (v1 <= toCol[0])
-                        return (v1 - fromCol[0]) * policyCol[0];
-                    else {
-                        if (v1 <= toCol[1])
-                            return (v1 - fromCol[1]) * policyCol[1] + cosCol[1];
-                        else {
-                            if (v1 <= toCol[2])
-                                return (v1 - fromCol[2]) * policyCol[2] + cosCol[1];
-                            else {
-                                if (v1 <= toCol[3])
-                                    return (v1 - fromCol[3]) * policyCol[3] + cosCol[2];
-                                else {
-                                    if (v1 <= toCol[4])
-                                        return (v1 - fromCol[4]) * policyCol[4] + cosCol[3];
-                                    else {
-                                        if (v1 <= toCol[5])
-                                            return (v1 - fromCol[5]) * policyCol[5] + cosCol[4];
-                                        else {
-                                            if (v1 <= toCol[6])
-                                                return (v1 - fromCol[6]) * policyCol[6] + cosCol[5];
-                                            else {
-                                                if (v1 <= toCol[7])
-                                                    return (v1 - fromCol[7]) * policyCol[7] + cosCol[6];
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            var RentalHelper = function (isRented, rentalTime, model) {
-                var i, j, k = 0, temp = model.NetMontlyRent;
-                this._model = [];
-                this._model[k] = {
-                    Month: k + 1,
-                    Rent: 0,
-                    Interest: -(model.TotalUpfront * model.CostOfMoneyRate / 12.0)
-                };
-                this._model[k].Total = -(model.TotalUpfront - this._model[k].Interest);
-                k++;
-
-                for (; k < 3; k++) {
-                    this._model[k] = {
-                        Month: k + 1,
-                        Rent: isRented ? 0 : model.NetMontlyRent,
-                        Interest: this._model[k - 1].Total * model.CostOfMoneyRate / 12.0
-                    }
-                    this._model[k].Total = this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent;
-                }
-
-                for (i = 0; i < 7; i++, temp = temp * 1.02) {
-                    for (j = 0; j < 12; j++, k++) {
-                        this._model[k] = {
-                            Month: k + 1,
-                            Rent: temp,
-                        }
-                        if (k < 28) {
-                            this._model[k].Interest = this._model[k - 1].Total < 0 ? this._model[k - 1].Total * model.CostOfMoneyRate / 12 : 0.0;
-                        } else {
-                            this._model[k].Interest = this._model[k - 1].Total < 0 ? this._model[k - 1].Total * 0.18 / 12 : 0.0;
-                        }
-                        this._model[k].Total = this._model[k - 1].Total < 0 ? this._model[k - 1].Total + this._model[k].Interest + this._model[k].Rent : this._model[k - 1].Total + this._model[k].Rent;
-                    }
-
-                }
-
-                this.costOfMoney = 0.0;
-
-                for (i = 0; i < 60; i++) {
-                    this.costOfMoney += this._model[i].Interest;
-                }
-                this.costOfMoney = -this.costOfMoney;
-
-                this.totalCost = model.TotalUpfront + this.costOfMoney;
-                for (var m = 1 ; m < this._model.length; m++) {
-                    this._model[m].ROI = this._model[m].Total / this.totalCost / this._model[m].Month * 12;
-                }
-
-                this.totalMonths = 0;
-                this.targetProfit = 0.0;
-                for (m = 1; m < this._model.length; m++) {
-                    if (this._model[m].ROI > model.MinROI) {
-                        this.totalMonths = this._model[m].Month;
-                        this.targetProfit = this._model[m].Total;
-                        break;
-                    }
-                }
-                this.totalMonths = rentalTime ? rentalTime : this.totalMonths;
-
-                this.breakeven = 0;
-                for (i = 0; i < 60; i++) {
-                    if (this._model[i].Total > 0) {
-                        this.breakeven = this._model[i].Month;
-                        break;
-                    }
-                }
-
-                this.ROIYear = this.targetProfit / this.totalCost / this.totalMonths * 12;
-                this.ROITotal = this.targetProfit / this.totalCost;
-            }
-
-            var importData = function (d) {
-                if (d.docSearch && d.docSearch.LeadResearch) {
-
-                    var r = d.docSearch.LeadResearch;
-
-                    d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
-                    d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
-                    d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
-                    d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
-                    d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
-                    d.LienInfo.FHA = r.fha || false;
-                    d.LienInfo.FannieMae = r.fannie || false;
-                    d.LienInfo.FreddieMac = r.Freddie_Mac_ || false;
-                    d.LienInfo.Servicer = r.servicer;
-                    d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
-                    d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
-                    d.LienCosts.TaxLienCertificate = (function () {
-                        var total = 0.0;
-                        if (r.TaxLienCertificate) {
-                            for (var i = 0; i < r.TaxLienCertificate.length; i++) {
-                                total += parseFloat(r.TaxLienCertificate[i].Amount);
-                            }
-                        }
-                        return total;
-                    })();
-                    d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
-                    d.LienCosts.WaterCharges = r.waterCharges || 0.0;
-                    d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
-                    d.LienCosts.ECBCityPay = r.Amount_ECB_Tickets || 0.0;
-                    d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
-                    d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
-                    d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
-                    d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0; 
-                    d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0; 
-                    d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
-                    d.LienCosts.RelocationLien = (function () {
-                        if (r.has_Vacate_Order_Vacate_Order)
-                            return parseFloat(r.Amount_Vacate_Order) || 0.0;
-                    })()
-
-                }
-                if (d.leadsInfo) {
-                    d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress;
-                    d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner;
-                    d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass;
-                    d.PropertyInfo.LotSize = d.leadsInfo.LotDem;
-                    d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem;
-                    d.PropertyInfo.Zoning = d.leadsInfo.Zoning;
-                    d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
-                    d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
-                }
-            }
-
-            var applyFixedRules = function (d) {
-
-                d.RehabInfo.SalesCommission = 0.05;
-                d.RehabInfo.DealROICash = 0.35;
-                d.InsurancePremium.From = [35001, 50001, 100001, 500001, 1000001, 5000001, 10000001, 15000001];
-                d.InsurancePremium.To = [50000, 100000, 500000, 1000000, 5000000, 10000000, 15000000];
-                d.InsurancePremium.OwnersPolicyRate = [.00667, .00543, .00436, .00398, .00366, .00325, .00307, .00276];
-                d.InsurancePremium.LoanPolicyRate = [0.00555, 0.00454, 0.00364, 0.00331, 0.00305, 0.00271, 0.00255, 0.00231];
-                d.InsurancePremium.CostOwnersPolicy = _.zip(d.InsurancePremium.From,
-                                                            d.InsurancePremium.To,
-                                                            d.InsurancePremium.OwnersPolicyRate).reduce(function (cum, v) {
-                                                                var l = cum.length;
-                                                                cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
-                                                                cum[l] = cum[l - 1];
-                                                                return cum;
-                                                            }, [402])
-
-                d.InsurancePremium.CostLoanPolicy = _.zip(d.InsurancePremium.From,
-                                                          d.InsurancePremium.To,
-                                                          d.InsurancePremium.LoanPolicyRate).reduce(function (cum, v) {
-                                                              var l = cum.length;
-                                                              cum[l - 1] = (v[1] - v[0]) * v[2] + cum[l - 1];
-                                                              cum[l] = cum[l - 1];
-                                                              return cum;
-                                                          }, [344])
-                d.FlipCalculation.FlipROI = 0.15;
-                d.MoneyFactor.CostOfMoney = 0.0;
-                d.MoneyFactor.InterestOnMoney = 0.18;
-                d.Liens.LienPayoffsSettlement = 1.0
-                d.Liens.TaxLienCertificateSettlement = 0.09 / 12;
-                d.Liens.WaterChargesSettlement = 1.0;
-                d.Liens.PropertyTaxesSettlement = 1.0;
-                d.Liens.ECBCityPaySettlement = 1.0;
-                d.Liens.DOBCivilPenaltiesSettlement = 1.0;
-                d.Liens.HPDChargesSettlement = 1.0;
-
-                d.Liens.HPDJudgementsSettlement = 0.15;
-                d.Liens.PersonalJudgementsSettlement = 0.40;
-                d.Liens.ParkingViolationSettlement = 1.0;
-                d.Liens.TransitAuthoritySettlement = 1.0;
-                d.Liens.RelocationLienSettlement = .09 / 365;
-
-
-                d.ClosingCost.TitleBill = 1200.00;
-                d.ClosingCost.BuyerAttorney = 1250.00;
-                d.Resale.Concession = 0.0;
-                d.Resale.Attorney = 1250.0;
-                d.Resale.NDC = 500;
-                d.LoanTerms.LoanRate = 0.12;
-                d.LoanTerms.LoanPoints = 2;
-                d.LoanTerms.LoanTermMonths = 12;
-                d.LoanTerms.LTV = 0.6;
-                d.HOI.Value = 0.25;
-                d.RentalModel.CostOfMoneyRate = 0.16;
-                d.RentalModel.MinROI = 0.18;
-                d.RentalModel.Insurance = 85.0;
-
-            };
-
-            var applyRule = function (d) {
-                var float = function (data) {
-                    if (data)
-                        return parseFloat(data);
-                    else
-                        return 0.0;
-                }
-                var int = function (data) {
-                    if (data)
-                        return parseInt(data);
-                    else
-                        return 0;
-                }
-
-                d.PropertyInfo.PropertyType = (function () { return /.*(A|B|C0|21|R).*/.exec(d.PropertyInfo.TaxClass) ? 1 : 2 })();
-
-                d.Liens.TaxLienCertificate = float(d.LienCosts.TaxLienCertificate) * (1.0 + d.Liens.TaxLienCertificateSettlement * float(d.RehabInfo.DealTimeMonths));
-                d.Liens.PropertyTaxes = float(d.LienCosts.PropertyTaxes) * d.Liens.PropertyTaxesSettlement;
-                d.Liens.WaterCharges = float(d.LienCosts.WaterCharges) * d.Liens.WaterChargesSettlement;
-                d.Liens.ECBCityPay = float(d.LienCosts.ECBCityPay) * d.Liens.ECBCityPaySettlement;
-                d.Liens.DOBCivilPenalties = float(d.LienCosts.DOBCivilPenalty) * d.Liens.DOBCivilPenaltiesSettlement;
-                d.Liens.HPDCharges = float(d.LienCosts.HPDCharges) * d.Liens.HPDChargesSettlement;
-                d.Liens.HPDJudgements = float(d.LienCosts.HPDJudgements) * d.Liens.HPDJudgementsSettlement;
-                d.Liens.PersonalJudgements = float(d.LienCosts.PersonalJudgements) * d.Liens.PersonalJudgementsSettlement;
-                d.Liens.NYSTaxWarrantsSettlement = (function () {
-                    return float(d.LienCosts.NYSTaxWarrantsSettlement) < 12500 ? 1.0 : 0.0
-                })();
-                d.Liens.NYSTaxWarrants = float(d.LienCosts.NYSTaxWarrants) * d.Liens.NYSTaxWarrantsSettlement;
-                d.Liens.FederalTaxLienSettlement = (function () {
-                    return float(d.LienCosts.FederalTaxLien) < 12500 ? 1.0 : 0.0
-                })();
-                d.Liens.FederalTaxLien = float(d.LienCosts.FederalTaxLien) * d.Liens.FederalTaxLienSettlement;
-                d.Liens.ParkingViolation = float(d.LienCosts.ParkingViolation) * d.Liens.ParkingViolationSettlement;
-                d.Liens.TransitAuthority = float(d.LienCosts.TransitAuthority) * d.Liens.TransitAuthoritySettlement;
-                d.Liens.RelocationLien = (function () {
-                    if (!d.LienCosts.RelocationLienDate)
-                        return 0.0;
-                    else {
-                        return float(d.LienCosts.RelocationLien) * (1.0 + (moment().diff(moment(d.LienCosts.RelocationLienDate), 'days') + 180) * d.Liens.RelocationLienSettlement)
-                    }
-                })();
-                d.DealCosts.HAFA = (d.PropertyInfo.SellerOccupied || int(d.PropertyInfo.NumOfTenants) > 0) &&
-                                    !d.LienInfo.FHA &&
-                                    !d.LienInfo.FannieMae &&
-                                    !d.LienInfo.FreddieMac &&
-                                    float(d.DealCosts.HOI) > 0.0;
-
-                d.DealExpenses.MoneySpent = float(d.DealCosts.MoneySpent);
-                d.DealExpenses.HOILienSettlement = float(d.DealCosts.HOIRatio);
-                d.DealExpenses.HOILien = d.DealCosts.HAFA ? float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement - 10000.00 : float(d.DealCosts.HOI) * d.DealExpenses.HOILienSettlement;
-                d.DealExpenses.COSTermination = float(d.DealCosts.COSTermination);
-                d.DealExpenses.Tenants = float(d.PropertyInfo.NumOfTenants) * 7000.00;
-                d.DealExpenses.Agent = float(d.DealCosts.AgentCommission);
-
-                d.Construction.Construction = float(d.RehabInfo.RepairBid);
-                d.Construction.Architect = d.RehabInfo.NeedsPlans ? 8500 : 0;
-
-                d.CarryingCosts.RETaxs = float(d.PropertyInfo.PropertyTaxYear) / 12 * float(d.RehabInfo.DealTimeMonths);
-                d.CarryingCosts.Utilities = 150 * Math.pow(float(d.PropertyInfo.ActualNumOfUnits), 2) + 400 * float(d.PropertyInfo.ActualNumOfUnits);
-
-                d.Resale.ProbableResale = float(d.RehabInfo.RenovatedValue);
-                d.Resale.Commissions = d.Resale.ProbableResale * float(d.RehabInfo.SalesCommission);
-                d.Resale.TransferTax = (function () {
-                    var pr = parseFloat(d.Resale.ProbableResale);
-                    var rate;
-                    if (d.PropertyInfo.PropertyType == 1) {
-                        if (pr <= 500000) {
-                            rate = 0.01;
-                        } else if (pr > 500000) {
-                            rate = 0.01425;
-                        }
-                    } else {
-                        if (pr <= 500000) {
-                            rate = 0.01425;
-                        } else if (pr > 500000) {
-                            rate = 0.02625;
-                        }
-                    }
-
-                    return (rate + 0.004) * pr;
-                })();
-                d.LoanTerms.LoanAmount = d.Resale.ProbableResale * d.LoanTerms.LTV;
-                d.CarryingCosts.Insurance = d.LoanTerms.LoanAmount / 100.0 * 0.45 / 12 * float(d.RehabInfo.DealTimeMonths);
-                d.LoanCosts.LoanClosingCost = (function () {
-                    var la = d.LoanTerms.LoanAmount;
-                    var rate;
-                    if (d.PropertyInfo.PropertyType == 1) {
-                        if (la <= 500000) {
-                            rate = 0.02;
-
-                        } else if (la > 500000) {
-                            rate = 0.02125
-                        }
-                    } else {
-                        if (la <= 500000) {
-                            rate = 0.02;
-
-                        } else if (la > 500000) {
-                            rate = 0.0275;
-                        }
-                    }
-                    return la * rate + 275 + 1500;
-                })();
-                d.LoanCosts.Points = d.LoanTerms.LoanAmount * d.LoanTerms.LoanPoints / 100.0;
-                d.LoanCosts.LoanInterest = d.LoanTerms.LoanAmount * d.LoanTerms.LoanRate / 12.0 * float(d.RehabInfo.DealTimeMonths);
-
-                d.Liens.Sums = d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes + d.Liens.WaterCharges + d.Liens.ECBCityPay + d.Liens.DOBCivilPenalties + d.Liens.HPDCharges + d.Liens.HPDJudgements + d.Liens.PersonalJudgements + d.Liens.NYSTaxWarrants + d.Liens.FederalTaxLien + d.Liens.ParkingViolation + d.Liens.TransitAuthority + d.Liens.RelocationLien;
-                d.DealExpenses.Sums = d.DealExpenses.MoneySpent + d.DealExpenses.HOILien + d.DealExpenses.COSTermination + d.DealExpenses.Tenants + d.DealExpenses.Agent;
-                d.ClosingCost.PartialSums = d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
-                d.Construction.Sums = d.Construction.Construction + d.Construction.Architect;
-                d.CarryingCosts.Sums = d.CarryingCosts.Insurance + d.CarryingCosts.RETaxs + d.CarryingCosts.Utilities;
-                d.Resale.Sums = d.Resale.Concession + d.Resale.Commissions + d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-                d.Liens.LienPayoffs = (d.Resale.ProbableResale - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.PartialSums + d.Construction.Sums + d.CarryingCosts.Sums) * float(d.RehabInfo.DealROICash)) / ((float(d.RehabInfo.DealROICash) + 1) * 1.0058);
-                d.Liens.AdditonalCostsSums = d.Liens.WaterCharges + d.Liens.ECBCityPay + d.Liens.DOBCivilPenalties + d.Liens.HPDCharges + d.Liens.HPDJudgements + d.Liens.PersonalJudgements + d.Liens.NYSTaxWarrants + d.Liens.FederalTaxLien + d.Liens.ParkingViolation + d.Liens.TransitAuthority + d.Liens.RelocationLien;
-
-                d.InsurancePremium.PurchasePrice = d.Liens.LienPayoffs;
-                d.InsurancePremium.LoanAmountDiscounted = d.LoanTerms.LoanAmount >= d.Liens.LienPayoffs ? d.Liens.LienPayoffs : d.LoanTerms.LoanAmount;
-                d.InsurancePremium.LoanAmountFullPremium = d.LoanTerms.LoanAmount - d.InsurancePremium.LoanAmountDiscounted;
-                d.InsurancePremium.OwnersPolicy = insurancePolicyCalculation(d.InsurancePremium.PurchasePrice, d.InsurancePremium.OwnersPolicyRate, d.InsurancePremium.CostOwnersPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
-                d.InsurancePremium.OwnersLoanPolicyDiscounted = insurancePolicyCalculation(d.InsurancePremium.LoanAmountDiscounted, d.InsurancePremium.LoanPolicyRate, d.InsurancePremium.CostLoanPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
-                d.InsurancePremium.OwnersLoanPolicyFullPremium = insurancePolicyCalculation(d.InsurancePremium.LoanAmountFullPremium, d.InsurancePremium.LoanPolicyRate, d.InsurancePremium.CostLoanPolicy, d.InsurancePremium.From, d.InsurancePremium.To)
-                d.InsurancePremium.TitleInsurance = d.InsurancePremium.OwnersLoanPolicyDiscounted * 1.3 + d.InsurancePremium.OwnersLoanPolicyFullPremium;
-                d.ClosingCost.OwnersPolicy = d.InsurancePremium.OwnersPolicy;
-                d.ClosingCost.Sums = d.ClosingCost.OwnersPolicy + d.ClosingCost.TitleBill + d.ClosingCost.BuyerAttorney;
-                d.LoanCosts.LoanPolicy = d.InsurancePremium.TitleInsurance - d.InsurancePremium.OwnersPolicy;
-                d.FlipCalculation.FlipPrice = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums) * d.FlipCalculation.FlipROI) / ((d.FlipCalculation.FlipROI + 1) * 1.0);
-
-                d.LoanCosts.Sums = d.LoanCosts.LoanPolicy + d.LoanCosts.LoanClosingCost + d.LoanCosts.Points + d.LoanCosts.LoanInterest;
-                d.HOI.PurchasePriceAllIn = (d.Resale.ProbableResale - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.Resale.Sums + d.LoanCosts.Sums) - (d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums) * d.HOI.Value) / ((d.HOI.Value + 1) * 1.0);
-                d.HOI.TotalInvestment = d.HOI.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
-                d.HOI.CashRequirement = d.HOI.TotalInvestment - d.LoanTerms.LoanAmount;
-                d.HOI.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOI.TotalInvestment;
-                d.HOI.ROILoan = d.HOI.NetProfit / d.HOI.TotalInvestment;
-
-                d.HOIBestCase.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums - d.DealExpenses.HOILien;
-                d.HOIBestCase.TotalInvestment = d.HOIBestCase.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
-                d.HOIBestCase.CashRequirement = d.HOIBestCase.TotalInvestment - d.LoanTerms.LoanAmount;
-                d.HOIBestCase.NetProfit = d.Resale.ProbableResale - d.Resale.Sums - d.HOIBestCase.TotalInvestment;
-                d.HOIBestCase.ROILoan = d.HOIBestCase.NetProfit / d.HOIBestCase.TotalInvestment;
-
-                d.CashScenario.Purchase_LienPayoffs = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
-                d.CashScenario.Purchase_OffHUDCosts = d.Liens.AdditonalCostsSums;
-                d.CashScenario.Purchase_DealCosts = d.DealExpenses.Sums;
-                d.CashScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
-                d.CashScenario.Purchase_Construction = d.Construction.Sums;
-                d.CashScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
-                d.CashScenario.Purchase_TotalInvestment = d.CashScenario.Purchase_LienPayoffs + d.CashScenario.Purchase_OffHUDCosts + d.CashScenario.Purchase_DealCosts + d.CashScenario.Purchase_ClosingCost + d.CashScenario.Purchase_Construction + d.CashScenario.Purchase_CarryingCosts;
-                d.CashScenario.Resale_SalePrice = d.Resale.ProbableResale;
-                d.CashScenario.Resale_Concession = d.Resale.Concession;
-                d.CashScenario.Resale_Commissions = d.Resale.Commissions;
-                d.CashScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-                d.CashScenario.Resale_NetProfit = d.CashScenario.Resale_SalePrice - (d.CashScenario.Resale_Concession + d.CashScenario.Resale_Commissions + d.CashScenario.Resale_ClosingCost) - d.CashScenario.Purchase_TotalInvestment;
-                d.CashScenario.Time = float(d.RehabInfo.DealTimeMonths);
-                d.CashScenario.CashRequired = d.CashScenario.Purchase_TotalInvestment;
-                d.CashScenario.ROI = d.CashScenario.Resale_NetProfit / d.CashScenario.Purchase_TotalInvestment;
-                d.CashScenario.ROIAnnual = d.CashScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
-                d.LoanScenario.Purchase_PurchasePrice = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
-                d.LoanScenario.Purchase_AdditonalCosts = d.Liens.AdditonalCostsSums;
-                d.LoanScenario.Purchase_DealCosts = d.DealExpenses.Sums;
-                d.LoanScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
-                d.LoanScenario.Purchase_Construction = d.Construction.Sums;
-                d.LoanScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
-                d.LoanScenario.Purchase_LoanClosingCost = d.LoanCosts.LoanPolicy + d.LoanCosts.LoanClosingCost + d.LoanCosts.Points;
-                d.LoanScenario.Purchase_LoanInterest = d.LoanCosts.LoanInterest;
-                d.LoanScenario.Purchase_TotalInvestment = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
-                d.LoanScenario.Resale_SalePrice = d.Resale.ProbableResale;
-                d.LoanScenario.Resale_Concession = d.Resale.Concession;
-                d.LoanScenario.Resale_Commissions = d.Resale.Commissions;
-                d.LoanScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-                d.LoanScenario.Resale_NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - d.LoanScenario.Purchase_TotalInvestment;
-                d.LoanScenario.Time = float(d.RehabInfo.DealTimeMonths);
-                d.LoanScenario.LoanAmount = d.LoanTerms.LoanAmount;
-                d.LoanScenario.LTV = d.LoanScenario.LoanAmount / d.LoanScenario.Resale_SalePrice;
-                d.LoanScenario.CashRequirement = d.LoanScenario.Purchase_TotalInvestment - d.LoanScenario.LoanAmount;
-                d.LoanScenario.ROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.Purchase_TotalInvestment;
-                d.LoanScenario.ROIAnnual = d.LoanScenario.ROI / d.RehabInfo.DealTimeMonths * 12;
-                d.LoanScenario.CashROI = d.LoanScenario.Resale_NetProfit / d.LoanScenario.CashRequirement;
-                d.LoanScenario.CashROIAnnual = d.LoanScenario.CashROI / d.RehabInfo.DealTimeMonths * 12;
-                d.FlipScenario.Purchase_TotalCost = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
-                d.FlipScenario.FlipPrice_SalePrice = d.FlipCalculation.FlipPrice;
-
-                d.FlipScenario.Purchase_PurchasePrice = d.FlipScenario.FlipPrice_SalePrice;
-                d.FlipScenario.Purchase_ClosingCost = d.ClosingCost.Sums;
-                d.FlipScenario.Purchase_Construction = d.Construction.Sums;
-                d.FlipScenario.Purchase_CarryingCosts = d.CarryingCosts.Sums;
-                d.FlipScenario.Purchase_TotalInvestment = d.FlipScenario.Purchase_PurchasePrice + d.FlipScenario.Purchase_ClosingCost + d.FlipScenario.Purchase_Construction + d.FlipScenario.Purchase_CarryingCosts;
-                d.FlipScenario.Resale_SalePrice = d.Resale.ProbableResale;
-                d.FlipScenario.Resale_Concession = d.Resale.Concession;
-                d.FlipScenario.Resale_Commissions = d.Resale.Commissions;
-                d.FlipScenario.Resale_ClosingCost = d.Resale.TransferTax + d.Resale.Attorney + d.Resale.NDC;
-                d.FlipScenario.Resale_NetProfit = d.FlipScenario.Resale_SalePrice - (d.FlipScenario.Resale_Commissions + d.FlipScenario.Resale_ClosingCost) - d.FlipScenario.Purchase_TotalInvestment;
-                d.FlipScenario.FlipProfit = d.FlipScenario.FlipPrice_SalePrice - d.FlipScenario.Purchase_TotalCost;
-                d.FlipScenario.CashRequirement = d.FlipScenario.Purchase_TotalInvestment
-                d.FlipScenario.ROI = d.FlipScenario.Resale_NetProfit / d.FlipScenario.Purchase_TotalInvestment;
-                d.Others.MaximumLienPayoff = d.Liens.LienPayoffs + d.Liens.TaxLienCertificate + d.Liens.PropertyTaxes;
-                d.Others.MaximumSSPrice = d.Liens.LienPayoffs + d.Liens.Sums;
-                d.Others.MaxHOI = d.HOIBestCase.NetProfit - d.HOI.NetProfit;
-                d.MinimumBaselineScenario.PurchasePriceAllIn = d.Liens.LienPayoffs + d.Liens.Sums + d.DealExpenses.Sums;
-                d.MinimumBaselineScenario.TotalInvestment = d.LoanScenario.Purchase_TotalInvestment;
-                d.MinimumBaselineScenario.CashRequirement = d.LoanScenario.CashRequirement;
-                d.MinimumBaselineScenario.NetProfit = d.LoanScenario.Resale_NetProfit;
-                d.MinimumBaselineScenario.ROI = d.LoanScenario.ROI;
-                d.BestCaseScenario.PurchasePriceAllIn = float(d.RehabInfo.AverageLowValue) + d.Liens.AdditonalCostsSums + d.DealExpenses.Sums;
-                d.BestCaseScenario.TotalInvestment = d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums;
-                d.BestCaseScenario.CashRequirement = d.BestCaseScenario.TotalInvestment - d.LoanTerms.LoanAmount;
-                d.BestCaseScenario.NetProfit = d.LoanScenario.Resale_SalePrice - (d.LoanScenario.Resale_Concession + d.LoanScenario.Resale_Commissions + d.LoanScenario.Resale_ClosingCost) - (d.BestCaseScenario.PurchasePriceAllIn + d.ClosingCost.Sums + d.Construction.Sums + d.CarryingCosts.Sums + d.LoanCosts.Sums);
-                d.BestCaseScenario.ROI = d.BestCaseScenario.NetProfit / d.BestCaseScenario.TotalInvestment
-                d.RentalModel.NumOfUnits = int(d.RentalInfo.NumOfUnits);
-                d.RentalModel.DeedPurchase = float(d.RentalInfo.DeedPurchase);
-                d.RentalModel.TotalRepairs = float(d.RentalInfo.RepairBidTotal);
-                d.RentalModel.AgentCommission = float(d.DealCosts.AgentCommission);
-                d.RentalModel.TotalUpfront = d.RentalModel.DeedPurchase + d.RentalModel.TotalRepairs + d.RentalModel.AgentCommission;
-                d.RentalModel.Rent = float(d.RentalInfo.MarketRentTotal);
-                d.RentalModel.ManagementFee = d.RentalModel.Rent * 0.1;
-                d.RentalModel.Maintenance = 50 + (d.RentalModel.NumOfUnits - 1) * 25;
-                d.RentalModel.MiscRepairs = 75 * d.RentalModel.NumOfUnits;
-                d.RentalModel.NetMontlyRent = d.RentalModel.Rent - d.RentalModel.ManagementFee - d.RentalModel.Maintenance - d.RentalModel.Insurance - d.RentalModel.MiscRepairs;
-                var helper = new RentalHelper(d.RentalInfo.CurrentlyRented, d.RentalInfo.RentalTime, d.RentalModel);
-                d.RentalModel.TotalMonth = helper.totalMonths;
-                d.RentalModel.CostOfMoney = helper.costOfMoney;
-                d.RentalModel.TotalCost = helper.totalCost;
-                d.RentalModel.Breakeven = helper.breakeven;
-                d.RentalModel.TargetTime = d.RentalModel.TotalMonth;
-                d.RentalModel.TargetProfit = helper.targetProfit;
-                d.RentalModel.ROIYear = helper.ROIYear;
-                d.RentalModel.ROITotal = helper.ROITotal;
-            }
-
-            return {
-                calculate: applyRule,
-                applyFixedRules: applyFixedRules,
-                importData: importData,
-            }
-        })();
-
-        underwriter.load = function ( bble) {
-            var data = underwritingFactory.build();
-            underwriter.calculator.applyFixedRules(data);
-
-            if (bble) {
-                var _data = underwriter.get({ BBLE: bble.trim() }, function (d) {
-                    _data.BBLE = bble;
-                    _.defaults(_data, data);
-                    if (!_data.Id) {  
-                        data.docSearch = DocSearch.get({ BBLE: bble.trim() }, function () {
-                            data.leadsInfo = LeadsInfo.get({ BBLE: bble.trim() }, function () {
-                                underwriter.calculator.importData(data);
-                            })
-
-                        });
-                    }
-
-                })
-                return _data;
-            }
-            return data;
-        }
-
-        underwriter.save = function (data) {
-            return $http({
-                method: 'POST',
-                url: '/api/underwriter',
-                data: data,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-
-            })
-
-        }
-
-        underwriter.archive = function (data, msg) {
-
-            return $http({
-                method: 'POST',
-                url: '/api/underwriter/archive',
-                data: [data, msg]
-            })
-        }
-
-        underwriter.loadArchivedList = function (bble) {
-            return $http({
-                method: 'GET',
-                url: '/api/underwriter/archived/' + bble
-            })
-        }
-
-        underwriter.loadArchived = function (id) {
-
-            return $http({
-                method: 'GET',
-                url: '/api/underwriter/archived/id/' + id
-            })
-        }
-
-        return underwriter;
-
-    }]);
 angular.module('PortalApp')
     .factory('UnderwritingRequest', ['$http', 'ptBaseResource', 'DocSearch', function ($http, ptBaseResource, DocSearch) {
-
         var resource = ptBaseResource('UnderwritingRequest', 'BBLE', null, {});
         resource.saveByBBLE = function (data, bble) {
             if (bble) {
                 data.BBLE = bble;
             }
+            // debugger;
             var promise = $http({
                 method: 'POST',
                 url: '/api/UnderwritingRequest',
                 data: data
-            })
+            });
             return promise;
         }
 
         resource.createSearch = function (BBLE) {
+            // debugger;
             var promise = $http({
                 method: "POST",
                 url: '/api/LeadInfoDocumentSearches',
@@ -1729,47 +1460,97 @@ angular.module('PortalApp')
 
         return resource;
     }]);
-
+/// <reference path="DocSearch.js" />
+/**
+ * Wizard control to support comstom display and show current step
+ * @return {[class]}                 Wizard class
+ */
 angular.module('PortalApp').factory('Wizard', function (WizardStep) {
+    /**
+     * Wizard class constructor
+     */
     var _class = function () {
-
-           }
+       
+    }
+    /**
+     * valule of steped filted by conditions 
+     */
     _class.prototype.filteredSteps = [];
+    /**
+     * `public set filtered steps
+     * @param {array of WizardStep object} filteredSteps
+     */
     _class.prototype.setFilteredSteps = function(filteredSteps)
     {
         this.filteredSteps = filteredSteps;
     }
+    /**
+     * contorller scope 
+     * similar to other MVC framework context
+     */
     _class.prototype.scope = { step: 1 };
+    /**
+     * get current max step of current steps
+     * @returns {int} 
+     */
     _class.prototype.MaxStep = function()
     {
         return this.filteredSteps.length;
     }
+    /**
+     * get class scope, other MVC framework UI context 
+     * 
+     * @param {angular scope} scope
+     */
     _class.prototype.setScope = function (scope)
     {
         this.scope = scope;
     }
+    /**
+     * get current step
+     * @returns {WizardStep object} current step object
+     */
     _class.prototype.currentStep = function()
     {
         return this.filteredSteps[this.scope.step - 1];
     }
-
-
-            return _class;
+    
+    
+    return _class;
 });
-
+/**
+ * Wizard step item  class
+ * @return {[WizardStep]}                 WizardStep class
+ */
 angular.module('PortalApp').factory('WizardStep', function () {
+    /**
+     * WizardStep constructor
+     * @param {object} step
+     */
     var _class = function (step) {
-
-                this.title = step.title;
+        
+        this.title = step.title;
         this.next = step.next;
         this.init = step.init;
         angular.extend(this, step);
     }
+    /**
+     * wizard title
+     */
     _class.prototype.title = "";
+    /**
+     * interface of wizard can move to next or not default is true
+     * @returns {boolean} wizard can move to next or not
+     */
     _class.prototype.next = function ()
     {
         return true;
     }
+    /**
+     * interface of wizard preload function it will call
+     * before wizard contet showup.
+     * @returns {boolean} wizard preload function
+     */
     _class.prototype.init = function()
     {
         return true;
@@ -1795,6 +1576,15 @@ angular.module("PortalApp")
     };
 })
 
+/**
+ * Author: Shaopeng Zhang
+ * Date: ???
+ * Description: An utility library provide common function in angular
+ * Update: 
+ *          2016/11/02:
+ *              1. add function parseSearch to get paires from Location.Search
+ *          
+ **/
 
 angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope) {
     var that = this;
@@ -1805,8 +1595,7 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
             model.push(data);
         }
     };
-
-
+    // delete a element from a array with promte
     this.arrayRemove = function (model, index, confirm, callback) {
         if (model && index < model.length) {
             if (confirm) {
@@ -1821,7 +1610,9 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
             }
         }
     };
-
+    this.capitalizeFirstLetter = function (string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
     this.formatAddr = function (strNO, strName, aptNO, city, state, zip) {
         var result = '';
         if (strNO) result += strNO + ' ';
@@ -1832,11 +1623,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         if (zip) result += zip;
         return result;
     };
-
-    this.capitalizeFirstLetter = function (string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
     this.formatName = function (firstName, middleName, lastName) {
         var result = '';
         if (firstName) result += that.capitalizeFirstLetter(firstName) + ' ';
@@ -1845,6 +1631,7 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         return result;
     };
     this.ensureArray = function (scope, modelName) {
+        /* caution: due to the ".", don't eval to create an array more than one level*/
         if (!scope.$eval(modelName)) {
             scope.$eval(modelName + '=[]');
         }
@@ -1855,6 +1642,8 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var model = scope.$eval(modelName);
         model.push(data);
     };
+    // when use jquery.extend, jquery will override the dst even src is null,
+    // this function convert null recursively to make the extend works as expected 
     this.nullToUndefined = function (obj) {
         for (var property in obj) {
             if (obj.hasOwnProperty(property)) {
@@ -1884,7 +1673,6 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         '</head><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
         popupWin.document.close();
     };
-
     this.postRequest = function (url, data) {
         $.post(url, data, function (retData) {
             $("body").append("<iframe src='" + retData.url + "' style='display: none;' ></iframe>");
@@ -1893,29 +1681,24 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
     this.alert = function (message) {
         $rootScope.alert(message);
     };
-
-
     this.confirm = function (message, callback) {
         return $rootScope.confirm(message, callback);
     };
-
     this.prompt = function (message, callback, showArea) {
         return $rootScope.prompt(message, callback, showArea);
     }
-
     this.addOverlay = function () {
         $rootScope.addOverlay();
     };
+    this.removeOverlay = function () {
+        $rootScope.removeOverlay();
+    }; // get next index of value in the array, 
     this.stopLoading = function () {
         $rootScope.stopLoading();
     }
     this.startLoading = function () {
         $rootScope.startLoading();
     }
-
-    this.removeOverlay = function () {
-        $rootScope.removeOverlay();
-    }; 
     this.next = function (array, value, from) {
         return array.indexOf(value, from);
     };
@@ -1944,15 +1727,30 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         var tempDate = new Date(d);
         return (tempDate.getUTCMonth() + 1) + "/" + tempDate.getUTCDate() + "/" + tempDate.getUTCFullYear();
     };
+    /**
+     * assign all reference property from source to target
+     * @param: target
+     * @param: source
+     * @param: skipped //reference that will not be replaced by source
+     * @param: keeped // level two 
+     */
+    // Method to copy value to object's reference property.
+    // Caution: didn't use recursive, so only go one level deep.
+    this.assignReference = function (target, source,
+                      /* optional */ skipped,
+                      /* optional */ keeped) {
 
-    this.assignReference = function (target, source,  skipped,  keeped) {
-        var temp = {}; 
+        var temp = {}; // object for backuping keeped values
         var props = Object.keys(source);
         for (i = 0; i < props.length ; i++) {
+            // init target's property to prevent null point exception.
+            if (target[props[i]] == null) target[props[i]] = {};
+            // skip some reference
+            if (skipped && skipped.indexOf(props[i]) >= 0) {
+                continue;
+            }
             if (typeof source[props[i]] == 'object') {
-                if (skipped && skipped.indexOf(props[i]) >= 0) {
-                    continue;
-                }
+                // keep some value inside reference, usually id or something ;)
                 if (keeped && keeped.length) {
                     temp[props[i]] = {};
                     for (j = 0; j < keeped.length; j++) {
@@ -1961,7 +1759,11 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
                         }
                     }
                 }
-                target[props[i]] = source[props[i]];
+                if (source[props[i]] != null) {
+                    target[props[i]] = source[props[i]];
+                } else {
+                    target[props[i]] = {};
+                }
                 if (keeped && keeped.length) {
                     for (j = 0; j < keeped.length; j++) {
                         if (temp[props[i]] && temp[props[i]][keeped[j]]) {
@@ -1973,14 +1775,13 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         }
 
     }
-
-    this.parseSearch = function ( searchString) {
+    this.parseSearch = function (/*string*/ searchString) {
         var result = {};
-        if (!searchString || typeof searchString != 'string')   
+        if (!searchString || typeof searchString != 'string')   //not a string
             return result;
-        if (searchString.slice(0, 1) != '?')    
+        if (searchString.slice(0, 1) != '?')    //not a search string
             return result;
-        var entriesString = searchString.slice(1).replace(/%20/g, '');  
+        var entriesString = searchString.slice(1).replace(/%20/g, '');  //remove leading ?
         var entries = entriesString.split("&");
         for (var i = 0; i < entries.length; i++) {
             entry = entries[i].split("=");
@@ -1990,18 +1791,20 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
         }
         return result;
     }
-
     this.setGlobal = function (key, value) {
-        $rootScope.globaldata[key] = value
+        $rootScope.globaldata[key] = value;
     }
-
     this.getGlobal = function (key) {
         if ($rootScope.globaldata[key] != null) {
             return $rootScope.globaldata[key];
         } else {
             return undefined;
         }
-    }   
+    }
+    this.getCurrentUser = function () {
+        var element = $("#CurrentUser");
+        return element[0].value;
+    }
 }])
 angular.module("PortalApp").service('ptConstructionService', ['$http', function ($http) {
     this.getConstructionCases = function (bble, callback) {
@@ -2087,7 +1890,7 @@ angular.module("PortalApp")
             });
     };
 
-    this.getContacts = function (args,  groupId) {
+    this.getContacts = function (args, /* optional */ groupId) {
         groupId = groupId === undefined ? null : groupId;
         return $http.get('/Services/ContactService.svc/GetContacts?args=' + args, { noIndicator:true})
             .then(function (response) {
@@ -2105,9 +1908,9 @@ angular.module("PortalApp")
     this.getContactsByGroup = function (groupId) {
         if (allContact) return allContact.filter(function (x) { return x.GroupId == groupId });
     };
-
-
-            this.getContact = function (id, name) {
+    
+    
+    this.getContact = function (id, name) {
         if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.ContactId == id && o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0] || {};
         return {};
     };
@@ -2120,9 +1923,9 @@ angular.module("PortalApp")
         if (allContact) return allContact.filter(function (o) { if (o.Name && name) return o.Name.trim().toLowerCase() === name.trim().toLowerCase() })[0];
         return {};
     };
-
-
-            this.getEntities = function (name, status) {
+    
+    
+    this.getEntities = function (name, status) {
         status = status === undefined ? 'Available' : status;
         name = name ? '' : name;
         return $http.get('/Services/ContactService.svc/GetCorpEntityByStatus?n=' + name + '&s=' + status)
@@ -2130,8 +1933,8 @@ angular.module("PortalApp")
                 return limitToFilter(res.data, 10);
             });
     };
-
-        this.getTeamByName = function (teamName) {
+    
+    this.getTeamByName = function (teamName) {
         if (allTeam) {
             return allTeam.filter(function (o) { if (o.Name && teamName) return o.Name.trim() == teamName.trim() })[0];
         }
@@ -2153,10 +1956,11 @@ angular.module("PortalApp")
     };
 }]);
 angular.module("PortalApp").service('ptFileService', function () {
-
-        this.isIE = function (fileName) {
+    
+    this.isIE = function (fileName) {
         return fileName.indexOf(':\\') > -1;
     };
+    // get filename by path
     this.getFileName = function (fullPath) {
         var paths;
         if (fullPath) {
@@ -2197,6 +2001,7 @@ angular.module("PortalApp").service('ptFileService', function () {
         el.prop('files')[0] = null;
         el.replaceWith(el.clone());
     };
+    // replace special character into underscore
     this.cleanName = function (filename) {
         return filename.replace(/[^a-z0-9_\-\.()]/gi, '_');
     };
@@ -2269,6 +2074,7 @@ angular.module("PortalApp").service('ptFileService', function () {
 
         }
     };
+    // if bbleORoption a string, then use old method, if it's a object, use configuration
     this.uploadFile = function (data, bbleORoptions, rename, folder, type, callback) {
         if (typeof bbleORoptions == 'string') {
             switch (type) {
@@ -2305,8 +2111,8 @@ angular.module("PortalApp").service('ptFileService', function () {
 
             })
         }
-
-           };
+       
+    };
     this.uploadTitleFile = function (data, bble, rename, folder, callback) {
         var rename =  rename || '';
         var folder =  folder || '';
@@ -2447,6 +2253,7 @@ angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$ti
         },
         BuildAjaxErrorMessage: function (response) {
             var message = "";
+            /*Only error handle*/
             if (response.status > 300 || response.status < 200 || response.status == 203) {
                 var dataObj = JSON.parse(response.responseText);
                 if (dataObj) {
@@ -2488,13 +2295,16 @@ angular.module("PortalApp").factory('PortalHttpInterceptor', ['$log', '$q', '$ti
             return 'Get error !' + '<br/> <small>( Status: ' + data.status + ' ' + urlName + ' )</small>';
         },
         request: function (config) {
+            /*config some where do not need show indicator like typeahead and get contacts*/
             if (!config.noIndicator) {
                 if (config.url.indexOf('template') < 0) {
                     ptCom.startLoading();
                 }
+                // 
             }
-
-                         return config;
+            //debugger;
+             
+            return config;
         },
         responseError: function (rejection) {
             myInterceptor.delayHide();
@@ -2565,6 +2375,7 @@ angular.module("PortalApp").service("ptTime", [function () {
         var start_date = new Date(start);
         var end_date = new Date(end);
 
+        // Do the math.
         var millisecondsPerDay = 1000 * 60 * 60 * 24;
         var millisBetween = end_date.getTime() - start_date.getTime();
         var days = millisBetween / millisecondsPerDay;
@@ -2579,6 +2390,7 @@ angular.module("PortalApp").service("ptTime", [function () {
         var start_date = new Date(start);
         var end_date = new Date(end);
 
+        // Do the math.
         var millisecondsPerDay = 1000 * 60 * 60 * 24;
         var millisBetween = end_date.getTime() - start_date.getTime();
         var days = millisBetween / millisecondsPerDay;
@@ -2593,6 +2405,7 @@ angular.module("PortalApp").service("ptTime", [function () {
         var start_date = new Date(start);
         var end_date = new Date(end);
 
+        // Do the math.
         var millisecondsPerDay = 1000 * 60 * 60 * 24;
         var millisBetween = end_date.getTime() - start_date.getTime();
         var days = millisBetween / millisecondsPerDay;
@@ -2621,7 +2434,475 @@ angular.module("PortalApp").service("ptTime", [function () {
     }
 
     }])
+/***
+ *  Author: Shaopeng Zhang
+ *  Date: 2016/11/01
+ *  Description:
+ *  Updates: 
+ ***/
+angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', 'DocSearch', 'LeadsInfo',
+    function ($http, ptCom, $q, DocSearch, LeadsInfo) {
+        var underwritingFactory = {
+            UnderwritingModel: function () {
+                this.PropertyInfo = {
+                    PropertyType: undefined,
+                    PropertyAddress: "",
+                    CurrentOwner: "",
+                    TaxClass: "",
+                    LotSize: "",
+                    BuildingDimension: "",
+                    Zoning: "",
+                    FARActual: 0.0,
+                    FARMax: 0.0,
+                    PropertyTaxYear: 0.0,
+                    ActualNumOfUnits: 0,
+                    OccupancyStatus: undefined,
+                    SellerOccupied: false,
+                    NumOfTenants: 0
+                };
+                this.DealCosts = {
+                    MoneySpent: 0.0,
+                    HAFA: false,
+                    HOI: 0.0,
+                    HOIRatio: 0.0,
+                    COSTermination: 0.0,
+                    AgentCommission: 0.0
+                };
+                this.RehabInfo = {
+                    AverageLowValue: 0.0,
+                    RenovatedValue: 0.0,
+                    RepairBid: 0.0,
+                    NeedsPlans: false,
+                    DealTimeMonths: 0,
+                    SalesCommission: 0.05,
+                    DealROICash: 0.35
+                };
+                this.LienInfo = {
+                    FirstMortgage: 0.0,
+                    SecondMortgage: 0.0,
+                    COSRecorded: false,
+                    DeedRecorded: false,
+                    OtherLiens: undefined,
+                    LisPendens: false,
+                    FHA: false,
+                    FannieMae: false,
+                    FreddieMac: false,
+                    Servicer: "",
+                    ForeclosureIndexNum: "",
+                    ForeclosureStatus: undefined,
+                    ForeclosureNote: "",
+                    AuctionDate: undefined,
+                    DefaultDate: undefined,
+                    CurrentPayoff: 0.0,
+                    PayoffDate: undefined,
+                    CurrentSSValue: 0.0
+                };
+                this.LienCosts = {
+                    TaxLienCertificate: 0.0,
+                    PropertyTaxes: 0.0,
+                    WaterCharges: 0.0,
+                    ECBCityPay: 0.0,
+                    DOBCivilPenalty: 0.0,
+                    HPDCharges: 0.0,
+                    HPDJudgements: 0.0,
+                    PersonalJudgements: 0.0,
+                    NYSTaxWarrants: 0.0,
+                    FederalTaxLien: 0.0,
+                    SidewalkLiens: false,
+                    ParkingViolation: 0.0,
+                    TransitAuthority: 0.0,
+                    VacateOrder: false,
+                    RelocationLien: 0.0,
+                    RelocationLienDate: undefined
+                };
+                this.RentalInfo = {
+                    DeedPurchase: 0.0,
+                    CurrentlyRented: false,
+                    RepairBidTotal: 0.0,
+                    NumOfUnits: 0,
+                    MarketRentTotal: 0.0,
+                    RentalTime: 0
+                };
 
+                this.MinimumBaselineScenario = {};
+                this.BestCaseScenario = {};
+                this.Summary = {};
+                this.CashScenario = {};
+                this.LoanScenario = {};
+                this.FlipScenario = {};
+                this.RentalModel = {};
+            },
+            build: function () {
+                var data = new this.UnderwritingModel();
+                return data;
+            }
+        };
+
+        var underwriting = {
+            proxy: undefined,
+            serviceURL: undefined,
+            inited: false,
+            getServiceURL: function () {
+                var that = this;
+                if (this.serviceURL) return this.serviceURL;
+                $http({
+                    url: "/Webconfig.txt",
+                    method: "GET"
+                }).then(function (d) {
+                    that.serviceURL = d.data["UnderwritingServiceServerClient"] + "/signalr";
+                })
+            },
+            init: function () {
+                var that = this;
+                if (!$.connection.logging) {
+                    $.connection.logging = true;
+                    $.connection.hub.disconnected(function () {
+                        setTimeout(this.init, 5000); // Restart connection after 5 seconds.
+                    });
+                };
+                this.getServiceURL();
+                if (!this.serviceURL) return;
+                $.connection.hub.url = this.serviceURL;
+                if (this.proxy) return;
+                $.connection.hub.start().done(function () {
+                    that.proxy = $.connection.underwritingServiceHub;
+                })
+            },
+            // try to a proxy incase signalr is reconnecting.        
+            tryGetProxy: function () {
+                var that = this;
+                if (!this.inited) this.tryInit();
+                return $q(function (resolve, reject) {
+                    if (that.proxy) {
+                        resolve(that.proxy);
+                    } else {
+                        var proxyInterval = setInterval(function () {
+                            if (that.proxy) {
+                                resolve(that.proxy);
+                                clearInterval(proxyInterval);
+                            }
+                        }, 500);
+                        setTimeout(function () {
+                            clearInterval(proxyInterval);
+                            reject("Cannot get proxy.");
+                        }, 2000);
+                    }
+                });
+            },
+            tryInit: function () {
+                if (!$.connection) return;
+                var that = this;
+                that.inited = true;
+                var proxyInterval = setInterval(function () {
+                    if (that.proxy) {
+                        console.log("Init proxy successfully");
+                        clearInterval(proxyInterval);
+                    } else {
+                        that.init();
+                    }
+                }, 100);
+                setTimeout(function () {
+                    if (!that.proxy) console.log("Fail to init proxy");
+                    clearInterval(proxyInterval);
+                }, 2000);
+            }
+        }
+
+        underwriting.tryInit();
+
+        // Load underwriting from database, if not loaded, use factory new one and import infomation from portal
+        // @param bble: if no present, only create new model from factory
+        underwriting.new = function () {
+            var newData = underwritingFactory.build();
+            return newData;
+        }
+        underwriting.load = function (bble) {
+            if (bble) {
+                return this.tryGetProxy().then(function (proxy) {
+                    return proxy.server.getUnderwritingByBBLE(bble);
+                })
+            }
+        }
+        underwriting.save = function (data) {
+            var username = ptCom.getCurrentUser();
+            return this.tryGetProxy().then(function (proxy) {
+                return proxy.server.postUnderwriting(data, username);
+            });
+        }
+        underwriting.importData = function (d) {
+            if (d.docSearch && d.docSearch.LeadResearch) {
+                var r = d.docSearch.LeadResearch;
+                d.PropertyInfo.PropertyTaxYear = r.leadsProperty_Taxes_per_YR_Property_Taxes_Due || 0.0;
+                d.LienInfo.FirstMortgage = r.mortgageAmount || 0.0;
+                d.LienInfo.SecondMortgage = r.secondMortgageAmount || 0.0;
+                d.LienInfo.COSRecorded = r.Has_COS_Recorded || false;
+                d.LienInfo.DeedRecorded = r.Has_Deed_Recorded || false;
+                d.LienInfo.FHA = r.fha || false;
+                d.LienInfo.FannieMae = r.fannie || false;
+                d.LienInfo.FreddieMac = r.Freddie_Mac_ || false;
+                d.LienInfo.Servicer = r.servicer;
+                d.LienInfo.ForeclosureIndexNum = r.LP_Index___Num_LP_Index___Num;
+                d.LienInfo.ForeclosureNote = r.notes_LP_Index___Num;
+                d.LienCosts.TaxLienCertificate = (function () {
+                    var total = 0.0;
+                    if (r.TaxLienCertificate) {
+                        for (var i = 0; i < r.TaxLienCertificate.length; i++) {
+                            total += parseFloat(r.TaxLienCertificate[i].Amount);
+                        }
+                    }
+                    return total;
+                })();
+                d.LienCosts.PropertyTaxes = r.propertyTaxes || 0.0;
+                d.LienCosts.WaterCharges = r.waterCharges || 0.0;
+                d.LienCosts.HPDCharges = r.Open_Amount_HPD_Charges_Not_Paid_Transferred || 0.0;
+                d.LienCosts.ECBCityPay = r.Amount_ECB_Tickets || 0.0;
+                d.LienCosts.DOBCivilPenalty = r.dobWebsites || 0.0;
+                d.LienCosts.PersonalJudgements = r.Amount_Personal_Judgments || 0.0;
+                d.LienCosts.HPDJudgements = r.HPDjudgementAmount || 0.0;
+                d.LienCosts.NYSTaxWarrants = r.Amount_NYS_Tax_Lien || 0.0;
+                d.LienCosts.FederalTaxLien = r.irsTaxLien || 0.0;
+                d.LienCosts.VacateOrder = r.has_Vacate_Order_Vacate_Order || false;
+                d.LienCosts.RelocationLien = (function () {
+                    if (r.has_Vacate_Order_Vacate_Order)
+                        return parseFloat(r.Amount_Vacate_Order) || 0.0;
+                })();
+            }
+            if (d.leadsInfo) {
+                d.PropertyInfo.PropertyAddress = d.leadsInfo.PropertyAddress.trim();
+                d.PropertyInfo.CurrentOwner = d.leadsInfo.Owner.trim();
+                d.PropertyInfo.TaxClass = d.leadsInfo.TaxClass.trim();
+                d.PropertyInfo.LotSize = d.leadsInfo.LotDem.trim();
+                d.PropertyInfo.BuildingDimension = d.leadsInfo.BuildingDem.trim();
+                d.PropertyInfo.Zoning = d.leadsInfo.Zoning.trim();
+                d.PropertyInfo.FARActual = d.leadsInfo.ActualFar;
+                d.PropertyInfo.FARMax = d.leadsInfo.MaxFar;
+            }
+        };
+        underwriting.archive = function (data, msg) {
+            var username = ptCom.getCurrentUser();
+            return this.tryGetProxy().then(function (proxy) {
+                return proxy.server.postArchive(data, msg, username);
+            });
+        }
+        underwriting.loadArchivedList = function (bble) {
+            return this.tryGetProxy().then(function (proxy) {
+                return proxy.server.getArchivedListByBBLE(bble);
+            });
+        }
+        underwriting.loadArchived = function (id) {
+            return this.tryGetProxy().then(function (proxy) {
+                return proxy.server.getArchivedByID(id);
+            });
+        }
+        // remote calculate underwriting throught signalr websocket.
+        underwriting.calculate = function (data, isDebug) {
+            if (isDebug) return this.tryGetProxy().then(function (proxy) { return proxy.server.debugRule(data) });
+            return this.tryGetProxy().then(function (proxy) { return proxy.server.postSingleJob(data) });
+        };
+        // change underwrting status. @param statusNote is must 
+        underwriting.changeStatus = function (bble, status, statusNote) {
+            var username = ptCom.getCurrentUser();
+            return this.tryGetProxy().then(function (proxy) {
+                return proxy.server.changeStatus(bble, status, statusNote, username);
+            })
+        }
+        underwriting.tryCreate = function (bble) {
+            var that = this;
+            return $q(function (resolve, reject) {
+                if (!bble) reject("BBLE cannot be blank.");
+                var username = ptCom.getCurrentUser();
+                var newData = underwriting.new();
+                newData.BBLE = bble;
+                newData.Status = 1;
+                DocSearch.get({ BBLE: bble }).$promise.then(function (search) {
+                    newData.docSearch = search;
+                    LeadsInfo.get({ BBLE: bble.trim() }).$promise.then(function (leadsInfo) {
+                        newData.leadsInfo = leadsInfo;
+                        underwriting.importData(newData);
+                        that.tryGetProxy().then(function (proxy) {
+                            proxy.server.tryCreate(newData).then(function (data) {
+                                resolve(data);
+                            });
+                        }, function (e) {
+                            reject(e);
+                        })
+                    }).catch(function (e) {
+                        reject(e);
+                    });
+                });
+            });
+        }
+
+        var _UnderwritingModel = function () {
+            this.Grade = "0",
+                this.PropertyInfo = {
+                    PropertyType: undefined,
+                    PropertyAddress: "",
+                    CurrentOwner: "",
+                    TaxClass: "",
+                    LotSize: "",
+                    BuildingDimension: "",
+                    Zoning: "",
+                    FARActual: 0.0,
+                    FARMax: 0.0,
+                    PropertyTaxYear: 0.0,
+                    ActualNumOfUnits: 0,
+                    OccupancyStatus: undefined,
+                    SellerOccupied: false,
+                    NumOfTenants: 0,
+                    Landmark: false,
+                    SRO: false
+                };
+            this.DealCosts = {
+                MoneySpent: 0.0,
+                HAFA: false,
+                HOI: 0.0,
+                HOIRatio: 0.0,
+                COSTermination: 0.0,
+                AgentCommission: 0.0
+            };
+            this.RehabInfo = {
+                AverageLowValue: 0.0,
+                RenovatedValue: 0.0,
+                RepairBid: 0.0,
+                NeedsPlans: false,
+                DealTimeMonths: 6,
+                SalesCommission: 0.05,
+                DealROICash: 0.35
+            };
+            this.LienInfo = {
+                FirstMortgage: 0.0,
+                SecondMortgage: 0.0,
+                COSRecorded: false,
+                DeedRecorded: false,
+                OtherLiens: 1,
+                LisPendens: false,
+                FHA: false,
+                FannieMae: false,
+                FreddieMac: false,
+                Servicer: "",
+                ForeclosureIndexNum: "",
+                ForeclosureStatus: undefined,
+                ForeclosureNote: "",
+                AuctionDate: undefined,
+                DefaultDate: undefined,
+                CurrentPayoff: 0.0,
+                PayoffDate: undefined,
+                CurrentSSValue: 0.0
+            };
+            this.LienCosts = {
+                TaxLienCertificate: 0.0,
+                PropertyTaxes: 0.0,
+                WaterCharges: 0.0,
+                ECBCityPay: 0.0,
+                DOBCivilPenalty: 0.0,
+                HPDCharges: 0.0,
+                HPDJudgements: 0.0,
+                PersonalJudgements: 0.0,
+                NYSTaxWarrants: 0.0,
+                FederalTaxLien: 0.0,
+                SidewalkLiens: false,
+                ParkingViolation: 0.0,
+                TransitAuthority: 0.0,
+                VacateOrder: false,
+                IsRelocationLien: false,
+                RelocationLien: 0.0,
+                RelocationLienDate: undefined
+            };
+            this.RentalInfo = {
+                DeedPurchase: 0.0,
+                CurrentlyRented: false,
+                RepairBidTotal: 0.0,
+                NumOfUnits: 0,
+                MarketRentTotal: 0.0,
+                RentalTime: 0
+            };
+            this.MinimumBaselineScenario = {};
+            this.BestCaseScenario = {};
+            this.Summary = {
+                MaximumLienPayoff: 0.0,
+                MaximumSSPrice: 0.0,
+                MaxHOI: 0.0
+            };
+            this.CashScenario = {};
+            this.LoanScenario = {};
+            this.FlipScenario = {
+                FlipProfit: 0.0
+            };
+            this.RentalModel = {};
+        };
+        underwriting.create = function () {
+            var data = new _UnderwritingModel();
+            return data;
+        };
+        return underwriting;
+    }]);
+
+angular.module('PortalApp').service('UserGradeDataService', function ($http) {
+    this.$inject = ['$http'];
+    this.localapi = "/api/ExternalData?source=grading&api=";
+
+    this.get = function (id) {
+        if (!id) throw "Id cannot be empty";
+        var targetapi = "/api/usergradedata/" + id;
+        targetapi = this.localapi + targetapi;
+        return $http.get(targetapi);
+    }
+
+    this.getList = function (refId) {
+        if (!refId) throw "BBLE is empty."
+        var targetapi = "/api/usergradedata/refid/" + refId;
+        targetapi = this.localapi + targetapi;
+        return $http.get(targetapi);
+    }
+
+    this.create = function (refid, username, gradeData, title, offer, comments) {
+        if (!title) return new Promise(function (resolve, reject) { reject("Title cannot be empty.") });
+        if (!username) return new Promise(function (resolve, reject) { reject("Username cannot be empty") });
+        if (!refid) return new Promise(function (resolve, reject) { reject("Failed to create.") });
+        var targetapi = this.localapi + "/api/usergradedata";
+        var data = {
+            refId: refid,
+            username: username,
+            data: gradeData,
+            title: title,
+            offerPrice: offer,
+            comments: comments
+        }
+
+        return $http.post(targetapi, data);
+    }
+
+    this.update = function (id, username, gradeData, offer, comments) {
+        if (!id) return new Promise(function (resolve, reject) { reject("Id cannot be empty") });
+        if (!username) return new Promise(function (resolve, reject) { reject("Must provide username") });
+        comments = comments ? comments : "";
+        var targetapi = "/api/usergradedata/" + id;
+        targetapi = this.localapi + targetapi;
+        var data = {
+            username: username,
+            data: gradeData,
+            offerPrice: offer,
+            comments: comments
+        }
+        return $http.post(targetapi, data);
+    }
+
+    this.delete = function (id) {
+        if (!id) throw "Id cannot be empty";
+        var targetapi = "/api/usergradedata/" + id;
+        targetapi = this.localapi + targetapi;
+        return $http.delete(targetapi);
+    }
+
+    this.getLatest = function (username) {
+        if (!username) throw "User cannot be empty";
+        var targetapi = "api/usergradedata/user/" + username;
+        return $http.get(targetapi);
+    }
+});
+
+ 
 angular.module("PortalApp").filter('booleanToString', function () {
 
     return function (v) {
@@ -2685,7 +2966,7 @@ angular.module("PortalApp")
             }
         }
     }])
-
+// a directive to bind contact with it's contact it
 angular.module("PortalApp")
     .directive('bindId', ['ptContactServices', function (ptContactServices) {
         return {
@@ -2701,7 +2982,28 @@ angular.module("PortalApp")
 
         }
     }])
-
+/**
+ * *********************************************************
+ * @author Steven
+ * @date 8/11/2016
+ * 
+ * sent time to write this initGrid to fix the save bug 
+ * and init data bug
+ *
+ * @returns directive init Grid
+ * 
+ * 
+ * @*********************************************************
+ * @author Steven
+ * @datetime 8/12/2016 2:54
+ * @bug
+ *  When switch to other cases the grid dataSource is empty
+ *  It can not add new rows
+ *  
+ * @fix Steven
+ * @end datetime 
+ * @*********************************************************
+ */
 angular.module("PortalApp")
     .directive('initGrid', ['$parse', function ($parse) {
         return {
@@ -2719,12 +3021,39 @@ angular.module("PortalApp")
                         var array = scope.$eval(option);
                         if (array == null || array == undefined)
                             eval('scope.' + option + '=[];');
+                        // scope.$eval(option + '=[];');
                     });
                 }
             }
         };
     }]);
-    
+    /**
+     * @author steven
+     * @date 8/11/2016
+     * @todo
+     *  the pre condition should will in the control which need
+     *  be controller and cleared by yes or no selected.
+     * 
+     * @param {'ngModel'} ) {
+        return {
+            require
+     * @param {function (scope} link
+     * @param element
+     * @param attrs
+     * @param ngModelController) {
+                scope.$watch(attrs.preCondition
+     * @param function (newVal
+     * @param oldVal) {
+                    if (!newVal)
+                        eval('scope.' + attrs.ngModel + '=null');                  
+                }
+     * @param true);
+
+            }
+        };
+    }
+     * @returns {type} 
+     */
 angular.module("PortalApp")
     .directive('preCondition', function () {
         return {
@@ -2792,7 +3121,11 @@ angular.module("PortalApp")
             template: '<i class="fa fa-times icon_btn text-danger tooltip-examples" title="Delete"></i>',
         }
     })
-
+/***
+ * Author: Shaopeng Zhang
+ * Date: 2016/11/01
+ * Description: A control to lock/unlock are area, make all
+ */
 angular.module("PortalApp")
     .directive('ptEditableDiv', [function () {
         return {
@@ -2801,6 +3134,7 @@ angular.module("PortalApp")
                 ptLock: '='
             },
             link: function (scope, el, attrs) {
+                // debugger;
                 angular.element(el).addClass("pt-editable-div");
                 scope.isLocked = true;
                 scope.unlock = function () {
@@ -2815,6 +3149,7 @@ angular.module("PortalApp")
                     scope.lock();
                 })
                 scope.$on('pt-editable-div-unlock', function () {
+                    // debugger;
                     scope.unlock();
                 })
                 if (scope.ptLock) {
@@ -2824,55 +3159,70 @@ angular.module("PortalApp")
         }
     }])
 angular.module("PortalApp")
-    .directive('ptEditor', [function () {
-        return {
-
-            templateUrl: '/js/directives/ptEditor.html',
-            require: 'ngModel',
-            scope: {
-                ptModel: '=ngModel'
-            },
-            link: function (scope, el, attrs, ctrl) {
-                scope.contentShown = true;
-                var ckdiv = $(el).find("div.ptEditorCK")[0];
-                var ck = CKEDITOR.replace(ckdiv, {
-                    allowedContent: true,
-                    height: 400,
-                });
-                scope.editorShown = false;
-
-                scope.showCK = function () {
-                    scope.contentShown = false;
-                    scope.editorShown = true;
-                }
-                scope.closeCK = function () {
+    .directive("ptEditor",
+    [
+        "$timeout", function($timeout) {
+            return {
+                templateUrl: "/js/directives/ptEditor.tpl.html",
+                require: "ngModel",
+                scope: {
+                    ptModel: "=ngModel"
+                },
+                link: function(scope, el, attrs, ctrl) {
                     scope.contentShown = true;
                     scope.editorShown = false;
+                    scope.showCK = function() {
+                        scope.contentShown = false;
+                        scope.editorShown = true;
+                    };
+                    scope.closeCK = function() {
+                        scope.contentShown = true;
+                        scope.editorShown = false;
+                    };
+                    $timeout(function() {
+                            var ckdiv = $(el).find("div.ptEditorCK")[0];
+                            if (CKEDITOR) {
+                                var ck = CKEDITOR.replace(ckdiv,
+                                {
+                                    allowedContent: true,
+                                    height: 400
+                                });
+                                ck.on("pasteState",
+                                    function() {
+                                        scope.$apply(function() {
+                                            ctrl.$setViewValue(ck.getData());
+                                        });
+                                    });
+                                ctrl.$render = function(value) {
+                                    ck.setData(ctrl.$modelValue);
+                                };
+                                ck.setData(ctrl.$modelValue);
+                            }
+
+                        },
+                        1000);
                 }
-
-                ck.on('pasteState', function () {
-                    scope.$apply(function () {
-                        ctrl.$setViewValue(ck.getData());
-                    });
-                });
-
-                ctrl.$render = function (value) {
-                    ck.setData(ctrl.$modelValue);
-                };
-
-                ck.setData(ctrl.$modelValue);
-            }
-        };
-    }])
-
-angular.module("PortalApp")
+            };
+        }
+    ])
+/**
+ * @param fileModel: the angular model, store url for uploaded file.
+ * @param fileBBLE: if provide, will use old style upload. (compatiable with first version)
+ *                  if not provide, use configuration to upload file.
+ * @param uploadType: come with 
+ * @param uploadUrl: webservice url for uploading file. 
+ * @param fileName: rename uploaded file at server end. (optional)
+ * @param enableEdit: if usercan edit file after upload. (optional)
+ * @param enableDelete: if user can delete file after upload. (optional)
+ */
+angular.module('PortalApp')
     .directive('ptFile', ['ptFileService', '$timeout', 'ptCom',function (ptFileService, $timeout, ptCom) {
         return {
             restrict: 'E',
             templateUrl: '/js/directives/ptFile.tpl.html',
             scope: {
                 fileModel: '=',
-                fileBble: '=',  
+                fileBble: '=', 
                 uploadType: '@',
                 uploadUrl: '@',
                 fileName: '@', 
@@ -2883,10 +3233,10 @@ angular.module("PortalApp")
             link: function (scope, el, attrs) {
                 scope.ptFileService = ptFileService;
                 scope.fileId = "ptFile" + scope.$id;
-                var mode = 0; 
+                var mode = 0; // legency mode, bble is require for uploading 
                 debugger;
                 if (attrs['fileBble'] == undefined) {
-                    mode = 1; 
+                    mode = 1; // new mode, upload based on configuration
                 }
                 scope.uploadType = scope.uploadType || 'construction';
                 scope.ngDisabled = scope.ngDisabled || false;
@@ -2901,8 +3251,8 @@ angular.module("PortalApp")
                 scope.delChoosed = function () {
                     scope.File = null;
                     scope.fileChoosed = false;
-                    var fileEl = el.find('input:file')[0]
-                    fileEl.value = ''
+                    var fileEl = el.find('input:file')[0];
+                    fileEl.value = '';
                 }
                 scope.toggleLoading = function () {
                     scope.loading = !scope.loading;
@@ -3000,21 +3350,22 @@ angular.module("PortalApp")
                 fileColumns: '@',
                 folderEnable: '@',
                 baseFolder: '@',
-                uploadType: '@' 
+                uploadType: '@' // which folder to upload
             },
             link: function (scope, el, attrs) {
                 scope.ptFileService = ptFileService;
                 scope.ptCom = ptCom;
 
-                scope.files = []; 
-                scope.columns = []; 
-                scope.nameTable = []; 
+                // init scope variale
+                scope.files = []; // file to upload
+                scope.columns = []; // addtional infomation for files
+                scope.nameTable = []; // record choosen files
                 scope.currentFolder = '';
                 scope.showFolder = false;
                 scope.uploadType = scope.uploadType || 'construction';
                 scope.loading = false;
                 scope.baseFolder = scope.baseFolder ? scope.baseFolder : '';
-                scope.count = 0; 
+                scope.count = 0; // count for uploaded files
 
 
                 if (scope.fileColumns) {
@@ -3067,6 +3418,7 @@ angular.module("PortalApp")
                     }
                 }
 
+                // utility functions
                 scope.changeFolder = function (folderName) {
                     scope.currentFolder = folderName;
                     scope.showFolder = true;
@@ -3137,7 +3489,7 @@ angular.module("PortalApp")
                     var len = scope.files.length;
 
                     scope.fileModel = scope.fileModel ? scope.fileModel : [];
-                    scope.result = []; 
+                    scope.result = []; // final result will store here, but we build up it first for counting
 
                     scope.showUpoading();
                     scope.uploading = true;
@@ -3289,7 +3641,7 @@ angular.module("PortalApp")
         }
     }])
 angular.module("PortalApp")
-    .directive('ptInitBind', function () { 
+    .directive('ptInitBind', function () { //one way bind of ptInitModel
         return {
             restrict: 'A',
             require: '?ngBind',
@@ -3319,7 +3671,7 @@ angular.module("PortalApp")
             }
         }
     })
-
+/* a mask to automaticly convert number to money value*/
 angular.module("PortalApp")
     .directive('ptInputMask', function () {
         return {
@@ -3347,7 +3699,12 @@ angular.module("PortalApp")
 
         }
     }])
-
+/**
+ * a input attribute directive to automatic convert input to certain data format
+ * example <input pt-number-mask maskformat='money' isvalidate/>
+ * (optional) maskerformat: control how data will present.
+ * (optional) isvalidate: if the attribute present, will validate if the user input is correct
+ */
 angular.module("PortalApp")
     .directive('ptNumberMask', function () {
         return {
@@ -3381,6 +3738,7 @@ angular.module("PortalApp")
                         }
 
                 }
+                //debugger;
                 var rule = /^-?(\d+|\d*\.\d+)$/;
                 var validate = function (val) {
                     if (typeof (val) == 'number') {
@@ -3401,7 +3759,7 @@ angular.module("PortalApp")
                     $(el).formatCurrency(formatConfig);
                 });
                 $(el).on('blur', function () {
-                    debugger;
+                    //debugger;
                     if (isValidate) {
                         var res = validate(this.value);
                         if (!res) {
@@ -3482,6 +3840,7 @@ angular.module("PortalApp")
                 ngDisabled: '='
             },
             link: function (scope, el, attrs) {
+                //scope.ngDisabled = attrs.ngDisabled;
                 scope.trueValue = scope.trueValue ? scope.trueValue : 'yes';
                 scope.falseValue = scope.falseValue ? scope.falseValue : 'no';
                 scope.defaultValue = scope.defaultValue === 'true' ? true : false;
@@ -3493,7 +3852,8 @@ angular.module("PortalApp")
 
         }
     })
-
+// the original attribute apply to regular <input type=radio>
+// @deprecated, use <pt-radio> instead!
 angular.module("PortalApp")
     .directive('ptRadioInit', function () {
         return {
@@ -3513,6 +3873,7 @@ angular.module("PortalApp")
         return {
             restrict: 'A',
             link: function (scope, el, attrs) {
+                // debugger;
                 var eltype = $(el)[0].type;
 
                 if (eltype != 'text' && eltype != 'textarea' && eltype != 'select-one') {
@@ -3535,6 +3896,7 @@ angular.module("PortalApp")
                 }
 
                 var callback = function () {
+                    //debugger
                     var res = validate($(el)[0].value);
                     if (!res) {
                         $(el).css("background-color", "yellow");
@@ -3565,16 +3927,27 @@ angular.module("PortalApp")
     $scope.ptContactServices = ptContactServices;
     $scope.selectType = 'All Entities';
     $scope.loadPanelVisible = true;
+    //for view and upload document -- add by chris
     $scope.encodeURIComponent = window.encodeURIComponent;
 
+    /*new method*/
     $scope.CorpEntites = CorpEntity.query(function () {
         $scope.currentContact = $scope.CorpEntites[0];
         $scope.loadPanelVisible = false;
     }, function () {
         alert('Get All buyers Entities error : ' + JSON.stringify(data));
     });
-
-        $http.get('/Services/TeamService.svc/GetAllTeam')
+    /*old method*/
+    //$http.get('/Services/ContactService.svc/GetAllBuyerEntities')
+    //    .success(function (data) {
+    //        $scope.CorpEntites = data;
+    //        $scope.currentContact = $scope.CorpEntites[0];
+    //        $scope.loadPanelVisible = false;
+    //    }).error(function (data) {
+    //        alert('Get All buyers Entities error : ' + JSON.stringify(data));
+    //    });
+    
+    $http.get('/Services/TeamService.svc/GetAllTeam')
         .success(function (data) {
             $scope.AllTeam = data;
         }).error(function (data) {
@@ -3614,7 +3987,6 @@ angular.module("PortalApp")
     }
     $scope.ExportExcel = function () {
         JSONToCSVConvertor($scope.filteredCorps, true, $scope.GetTitle());
-
     }
     $scope.GroupCount = function (g) {
         if (!$scope.CorpEntites) {
@@ -3670,6 +4042,7 @@ angular.module("PortalApp")
                 return employees.slice(0, 10);
             },
             byKey: function (key, extra) {
+                // . . .
             },
 
 
@@ -3744,8 +4117,8 @@ angular.module("PortalApp")
     $scope.AssginEntity = function () {
 
         $scope.loadPanelVisible = true;
-
-               $scope.currentContact.$assign(function () {
+       
+        $scope.currentContact.$assign(function () {
             $scope.loadPanelVisible = false;
             alert("Assigned succeed !");
         },function () {
@@ -3753,6 +4126,14 @@ angular.module("PortalApp")
             alert('Can not find BBLE of address:(' + $scope.currentContact.PropertyAssigned + ") Please make sure this address is available");
         });
 
+        //$http.post('/Services/ContactService.svc/AssginEntity', { c: JSON.stringify($scope.currentContact) }).success(function (data, status, headers, config) {
+        //    $scope.loadPanelVisible = false;
+        //    $scope.currentContact.BBLE = data;
+        //    alert("Assigned succeed !")
+        //}).error(function (data, status, headers, config) {
+        //    $scope.loadPanelVisible = false;
+        //    alert('Can not find BBLE of address:(' + $scope.currentContact.PropertyAssigned + ") Please make sure this address is available");
+        //});
     }
     $scope.ChangeTeam = function (team) {
         $scope.SelectedTeam = team;
@@ -3768,6 +4149,7 @@ angular.module("PortalApp")
         var contact = $scope.currentContact;
         var entityId = contact.EntityId;
 
+        // grab file object from a file input
         var fileData = document.getElementById(fileUploadId).files[0];
 
         $.ajax({
@@ -3776,8 +4158,8 @@ angular.module("PortalApp")
             data: fileData,
             cache: false,
             dataType: 'json',
-            processData: false, 
-            contentType: "application/octet-stream", 
+            processData: false, // Don't process the files
+            contentType: "application/octet-stream", // Set content type to false as jQuery will tell the server its a query string request
             success: function (data) {
                 alert('successful..');
                 $scope.currentContact[field] = data;
@@ -3792,11 +4174,13 @@ angular.module("PortalApp")
         });
     }
 
+    //end - view and upload document
 }]);
 angular.module('PortalApp')
 .controller('ConstructionCtrl', ['$scope', '$http', '$interpolate', 'ptCom', 'ptContactServices', 'ptEntityService', 'ptShortsSaleService', 'ptLeadsService', 'ptConstructionService',
 function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService, ptShortsSaleService, ptLeadsService, ptConstructionService) {
 
+    //data structure defination
     var CSCaseModel = function () {
         this.CSCase = {
             InitialIntake: {},
@@ -3837,6 +4221,7 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
 
     $scope._ = _;
 
+    // scope variables defination
     $scope.ReloadedData = {}
     $scope.CSCase = new CSCaseModel();
     $scope.percentage = new PercentageModel();
@@ -3903,7 +4288,7 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
         ptCom.startLoading();
         bble = bble.trim();
         $scope.reload();
-        var done1, done2, done3, done4; 
+        var done1, done2, done3, done4; // status marker to indicate all async job finished
 
         ptConstructionService.getConstructionCases(bble, function (res) {
             ptCom.nullToUndefined(res);
@@ -3949,6 +4334,7 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
 
     }
 
+    /* Status change function -- Chris */
     $scope.ChangeStatus = function (scuessfunc, status) {
         $http.post('/api/ConstructionCases/ChangeStatus/' + leadsInfoBBLE, status)
             .success(function () {
@@ -3973,6 +4359,7 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
     }
 
 
+    /* multiple company selection */
     $scope.$watch('CSCase.CSCase.Utilities.Company', function (newValue) {
         if (newValue) {
             var ds = $scope.UTILITY_SHOWN;
@@ -4000,11 +4387,15 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
 
 
     });
+    /* end multiple company selection */
 
+    /* reminder */
     $scope.sendNotice = function (id, name) {
         confirm("Send Intake Sheet To " + name + " ?");
     }
+    /* end reminder */
 
+    /* comments */
     $scope.showPopover = function (e) {
         aspxConstructionCommentsPopover.ShowAtElement(e.target);
     }
@@ -4022,12 +4413,16 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
         $scope.addComment(comment);
         $scope.addCommentTxt = '';
     }
+    /* end comments */
 
+    /* active tab */
     $scope.activeTab = 'CSInitialIntake';
     $scope.updateActive = function (id) {
         $scope.activeTab = id;
     }
+    /* end active tab */
 
+    /* highlight */
     $scope.isHighlight = function (criteria) {
         return $scope.$eval(criteria);
     }
@@ -4052,13 +4447,17 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
         if (res) AddActivityLog(res);
     }
 
+    /* end highlight */
 
+    /* header editing */
     $scope.HeaderEditing = false;
     $scope.toggleHeaderEditing = function (open) {
         $scope.HeaderEditing = !$scope.HeaderEditing;
         if (open) $("#ConstructionTitleInput").focus();
     }
+    /* end header editing */
 
+    /* dob fetch */
     $scope.addNewDOBViolation = function () {
         $scope.ensurePush('CSCase.CSCase.Violations.DOBViolations');
         $scope.setPopupVisible('ReloadedData.DOBViolations_PopupVisible_' + ($scope.CSCase.CSCase.Violations.DOBViolations.length - 1), true);
@@ -4123,7 +4522,9 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
 
         })
     }
+    /* end dob fetch */
 
+    /* intakeComplete */
     $scope.test = $scope.checkIntake;
     $scope.intakeComplete = function () {
         if (!$scope.checkIntake(function (el) {
@@ -4173,7 +4574,9 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
     $scope.updatePercentage = function () {
         $scope.checkIntake();
     }
+    /* end intakeComplte */
 
+    /*check file be modify*/
     $scope.GetTimeUrl = function () {
         return $scope.CSCase.BBLE ? "/api/ConstructionCases/LastLastUpdate/" + $scope.CSCase.BBLE : "";
     }
@@ -4183,17 +4586,22 @@ function ($scope, $http, $interpolate, ptCom, ptContactServices, ptEntityService
     $scope.GetModifyUserUrl = function () {
         return "/api/ConstructionCases/LastModifyUser/" + $scope.CSCase.BBLE;
     }
+    /****** end check file be modify*********/
 
+    /* printWindows*/
     $scope.printWindow = function () {
         window.open("/Construction/ConstructionPrint.aspx?bble=" + $scope.CSCase.BBLE, 'Print', 'width=1024, height=800');
     }
+    /* end printWindows */
 
+    /* open form windows */
     $scope.openInitialForm = function () {
         window.open("/Construction/ConstructionInitialForm.aspx?bble=" + $scope.CSCase.BBLE, 'Initial Form', 'width=1280, height=960')
     }
     $scope.openBudgetForm = function () {
         window.open("/Construction/ConstructionBudgetForm.aspx?bble=" + $scope.CSCase.BBLE, 'Budget Form', 'width=1024, height=768')
     }
+    /* end open form windows */
 
     $scope.updateInitialFormOwner = function () {
         var url = "/api/ConstructionCases/UpdateInitialFormOwner?BBLE=" + $scope.CSCase.BBLE + "&owner=" + $scope.CSCase.CSCase.InitialIntake.InitialFormAssign
@@ -4266,18 +4674,352 @@ function ($scope, EmployeeModel, ptCom, $http) {
     }
 
 }])
+/**
+ * @author Steven Wu
+ * @date 9/15/2016
+ * @fix git committed bde6b6d
+ * add tax search js cotroller
+ * LeadTaxSearchController is doc search. 
+ * naming wrong becuase the name always change from spec guys.
+ */
+angular.module("PortalApp").controller("DocSearchController", [
+        "$scope", "$http", "$element", "$timeout", "ptContactServices",
+        "ptCom", "DocSearch", "LeadsInfo", "DocSearchEavesdropper", "DivError", 'ptUnderwriting',
+        function ($scope, $http, $element, $timeout, ptContactServices,
+         ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, ptUnderwriting) {
 
+            var leadsInfoBBLE = $("#BBLE").val();
+            $scope.ShowInfo = $("#ShowInfo").val();
+            $scope.ptContactServices = ptContactServices;
+            $scope.DivError = new DivError("DocSearchErrorDiv");
+
+            //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
+            // for new version this is not right will suggest use .net MVC redo the page
+            $scope.DocSearch = {};
+
+            ////////// font end switch to new version //////////////
+            $scope.endorseCheckDate = function (date) {
+                return false;
+            };
+            $scope.endorseCheckVersion = function () {
+                var that = $scope.DocSearch;
+                if (that.Version) {
+                    return true;
+                }
+                return false;
+            };
+            $scope.GoToNewVersion = function (versions) {
+                $scope.newVersion = versions;
+            };
+
+            /////////////////// 8/12/2016 //////////////////////////
+
+            $scope.versionController = new DocSearchEavesdropper();
+            $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
+
+            $scope.multipleValidated = function (base, boolKey, arraykey) {
+                var boolVal = base[boolKey];
+                var arrayVal = base[arraykey];
+                /**
+                 * bugs over here bool value can not check with null
+                 * @see Jira #PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+                 */
+                var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
+                return hasWarning;
+            };
+
+            $scope.init = function (bble) {
+                var leadsInfoBBLE = bble || $("#BBLE").val();
+                $scope.ShowInfo = $("#ShowInfo").val();
+                if (!leadsInfoBBLE) {
+                    console.log("Can not load page without BBLE !");
+                    return;
+                }
+                $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() },
+                    function () {
+                        $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() },
+                            function () {
+
+                                $scope.DocSearch.initLeadsResearch();
+                                $scope.DocSearch.initTeam();
+                                ////////// font end switch to new version //////////////
+                                $scope.versionController.start2Eaves();
+                            });
+
+                    });
+
+            };
+            $scope.init(leadsInfoBBLE);
+
+            /**
+             * @author  Steven
+             * @date    8/19/2016
+             * @fix
+             *  git commit f679a81 'finish the new doc search page'
+             *  add javascript version of validate in new version of doc search
+             *  it's not right to add the goal in git commit should create jira task.
+             */
+
+            /**
+             * @author  Steven
+             * @date    8/19/2016
+             *  
+             * @description
+             *  new version validate javascript version validate
+             * @returns {bool} true then pass validate
+             */
+            $scope.newVersionValidate = function () {
+                /**
+                 * change java script version validate 
+                 * to oop model version validate
+                 */
+                if (!$scope.newVersion) {
+                    return true;
+                }
+
+                if (!$scope.DivError.passValidate()) {
+                    return false;
+                }
+
+                return true;
+            };
+
+            $scope.SearchComplete = function (isSave) {
+                // only completed need check validate
+                // when saving don't need validate input.
+                if (!isSave) {
+                    if (!$scope.newVersionValidate()) {
+                        var msg = $scope.DivError.getMessage();
+                        AngularRoot.alert(msg[0]);
+                        return;
+                    };
+                }
+
+                $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
+                $scope.DocSearch.ResultContent = $("#search_summary_div").html();
+
+                if (isSave) {
+                    $scope.DocSearch.$update(null, function () {
+                        AngularRoot.alert("Save successfully!");
+                    });
+                } else {
+                    $scope.DocSearch.$completed(null, function () {
+                        ptUnderwriting.tryCreate($scope.DocSearch.BBLE.trim()).then(function () {
+                            AngularRoot.alert("Document completed!");
+                        }, function error(e) {
+                            console.log(e);
+                        });
+                        // if (gridCase) gridCase.Refresh();
+                    });
+                }
+
+            };
+
+            // only one of fha, fannie, freddie_mac can be yes at the same time
+            $scope.$watch("DocSearch.LeadResearch.fha",
+                function (nv, ov) {
+                    if (nv === true) {
+                        if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                        if ($scope.DocSearch.LeadResearch
+                            .Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+                    }
+                });
+            $scope.$watch("DocSearch.LeadResearch.fannie",
+                function (nv, ov) {
+                    if (nv === true) {
+                        if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+                        if ($scope.DocSearch.LeadResearch
+                            .Freddie_Mac_) $scope.DocSearch.LeadResearch.Freddie_Mac_ = false;
+                    }
+                });
+            $scope.$watch("DocSearch.LeadResearch.Freddie_Mac_",
+                function (nv, ov) {
+                    if (nv === true) {
+                        if ($scope.DocSearch.LeadResearch.fannie) $scope.DocSearch.LeadResearch.fannie = false;
+                        if ($scope.DocSearch.LeadResearch.fha) $scope.DocSearch.LeadResearch.fha = false;
+                    }
+                });
+
+            $scope.markCompleted = function (status, msg) {
+                // because the underwriting completion is not reversible, comfirm it before save to db.
+                msg = msg || "Please provide note or press no to cancel";
+                ptCom.prompt(msg,
+                    function (result) {
+                        //debugger;
+                        if (result != null) {
+                            //debugger;
+                            $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result)
+                                .then(function succ(d) {
+                                    //debugger;
+                                    $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
+                                    $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
+                                    $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
+                                    $scope.DocSearch.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
+                                },
+                                    function err() {
+                                        console.log("fail to update docsearch");
+                                    });
+                        }
+                    },
+                    true);
+            };
+            try {
+                var modePatten = /mode=\d/;
+                var matches = modePatten.exec(location.search);
+                //debugger;
+                if (matches && matches[0]) {
+                    $scope.viewmode = parseInt(matches[0].split("=")[1]);
+                } else {
+                    $scope.viewmode = 0;
+                }
+            } catch (ex) {
+                $scope.viewmode = 0;
+            }
+        }
+]);
+angular.module('PortalApp')
+    .controller('GPAOfferDetailController', ['$scope', '$location', '$http',
+        'ptUnderwriting', 'ptCom', 'UserGradeDataService', function ($scope, $location, $http,
+            ptUnderwriting, ptCom, UserGradeDataService) {
+            $scope.data = {};
+            $scope.form = {};
+            $scope.gradeData = {};
+            $scope.panelState = 0;
+            $scope.modalTitle = "";
+            $scope.isLoadedOpinion = false;
+            $scope.loadedUserGradeData = {}
+
+            $scope.switchPanel = switchPanel;
+            $scope.loadUserGradeData = loadUserGradeData;
+
+            $scope.$watch(function () {
+                return $location.path();
+            }, function (nval, oval) {
+                load(nval);
+            });
+
+            function _init_() {
+                $scope.data = ptUnderwriting.create(); 
+                $scope.bble = "";
+                $scope.isComparables = false;
+                $('.affix-top').affix({ offset: { top: 148 } });
+            }
+            function bindData(data) {
+                if (data) {
+                    $scope.data.gradeData = data;
+                    $scope.data.Grade = $scope.data.gradeData.Grade;
+                    $scope.data.PropertyInfo = $scope.data.gradeData.PropertyInfo;
+                    $scope.data.RehabInfo = $scope.data.gradeData.RehabInfo;
+                    $scope.data.LienInfo = $scope.data.gradeData.LienInfo;
+                    $scope.data.LienCosts = $scope.data.gradeData.LienCosts;
+                    $scope.data.RentalInfo = $scope.data.gradeData.RentalInfo;
+                    $scope.data.MinimumBaselineScenario = $scope.data.gradeData.MinimumBaselineScenario;
+                    $scope.data.BestCaseScenario = $scope.data.gradeData.BestCaseScenario;
+                    $scope.data.Summary = $scope.data.gradeData.Summary;
+                    $scope.data.CashScenario = $scope.data.gradeData.CashScenario;
+                    $scope.data.LoanScenario = $scope.data.gradeData.LoanScenario;
+                    $scope.data.FlipScenario = $scope.data.gradeData.FlipScenario;
+                    $scope.data.RentalModel = $scope.data.gradeData.RentalModel;
+                }
+            }
+            function load(pathVal) {
+                if (pathVal == null || pathVal == "") {
+                    _init_();
+                } else {
+                    _init_();
+                    parts = pathVal.split('/')
+                    $scope.bble = parts[1];
+                    $scope.offerId = parts[2];
+                    UserGradeDataService.get($scope.offerId)
+                        .then(function (d) {
+                            if(d && d.data){
+                                $scope.redqGradeDataString = d.data.gradeDataString;
+                                bindData(angular.fromJson(d.data.gradeDataString));
+                            }
+                        }, onError)
+                    getUserGradeDataList($scope.bble);
+                }
+            }
+            function onError(e) {
+                console.log(e);
+            }
+            function switchPanel(id) {
+                $scope.panelState = id;
+            }
+            function getUserGradeDataList(bble) {
+                UserGradeDataService
+                    .getList(bble)
+                    .then(function (resp) {
+                        $scope.userGradeDataList = resp.data;
+                    })
+            }
+            function getAllLatestUserGradeData(username) {
+                UserGradeDataService
+                    .getLatest(username)
+                    .then(function (resp) {
+                        $scope.allLatestUserGradeData = resp.data;
+                    })
+            }
+
+            /**
+             * Load json data from local usergradedata list
+             * @param {any} id
+             */
+            function loadUserGradeData(id) {
+                var filtered = _.filter($scope.userGradeDataList, function (d) { return d.id == id })
+                $scope.loadedUserGradeData = filtered[0];
+                if (filtered[0] && filtered[0].gradeDataString) {
+                    var gradeData = angular.fromJson(filtered[0].gradeDataString);
+                    bindData(gradeData);
+                }
+                $scope.form.title = $scope.loadedUserGradeData.title;
+                $scope.form.offer = $scope.loadedUserGradeData.offerPrice;
+                $scope.form.comments = $scope.loadedUserGradeData.comments;
+
+                $scope.isLoadedOpinion = true;
+                $("#grading-modal").modal('hide');
+            }
+
+            function showUserGradeDataList() {
+                $scope.modalTitle = "Opinion List";
+                $scope.modalMode = 1;
+                $("#grading-modal").modal('show');
+            }
+            function showCreateUserGradeData() {
+                $scope.modalTitle = "Create My Opinion"
+                $scope.modalMode = 0;
+                $("#grading-modal").modal('show');
+            }
+            function onError(e) {
+                ptCom.alert(e, 'warning')
+            }
+
+
+        }]);
+/**
+ * @author Steven Wu
+ * @date 9/15/2016
+ * @fix git committed bde6b6d
+ * add tax search js cotroller
+ * LeadTaxSearchController is doc search. 
+ * naming wrong becuase the name always change from spec guys.
+ */
 angular.module('PortalApp')
     .controller('LeadTaxSearchCtrl', function ($scope, $http, $element, $timeout, ptContactServices, ptCom, DocSearch, LeadsInfo, DocSearchEavesdropper, DivError, $location) {
+        //New Model(this,arguments)
         leadsInfoBBLE = $('#BBLE').val();
         $scope.ShowInfo = $('#ShowInfo').val();
         $scope.ptContactServices = ptContactServices;
 
         $scope.DivError = new DivError('DocSearchErrorDiv');
 
+        //$scope.DocSearch.LeadResearch = $scope.DocSearch.LeadResearch || {}
+        // for new version this is not right will suggest use .net MVC redo the page
         $scope.DocSearch = {}
 
+        ////////// font end switch to new version //////////////
         $scope.endorseCheckDate = function (date) {
+            // form chris ask delpoy 8/16/2016
             return false;
             var that = $scope.DocSearch;
 
@@ -4300,6 +5042,7 @@ angular.module('PortalApp')
         }
 
 
+        /////////////////// 8/12/2016 //////////////////////////
 
         $scope.versionController = new DocSearchEavesdropper()
         $scope.versionController.setEavesdropper($scope, $scope.GoToNewVersion);
@@ -4307,6 +5050,10 @@ angular.module('PortalApp')
         $scope.multipleValidated = function (base, boolKey, arraykey) {
             var boolVal = base[boolKey];
             var arrayVal = base[arraykey];
+            /**
+             * bugs over here bool value can not check with null
+             * @see Jira #PORTAL-378 https://myidealprop.atlassian.net/browse/PORTAL-378
+             */
             var hasWarning = (boolVal === null) || (boolVal && arrayVal == false);
             return hasWarning;
         }
@@ -4321,9 +5068,10 @@ angular.module('PortalApp')
 
             $scope.DocSearch = DocSearch.get({ BBLE: leadsInfoBBLE.trim() }, function () {
                 $scope.LeadsInfo = LeadsInfo.get({ BBLE: leadsInfoBBLE.trim() }, function () {
-
-                                         $scope.DocSearch.initLeadsResearch();
+                     
+                    $scope.DocSearch.initLeadsResearch();
                     $scope.DocSearch.initTeam();
+                    ////////// font end switch to new version //////////////
                     $scope.versionController.start2Eaves();
                 });
 
@@ -4333,8 +5081,28 @@ angular.module('PortalApp')
 
         $scope.init(leadsInfoBBLE)
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         * @fix
+         *  git commit f679a81 'finish the new doc search page'
+         *  add javascript version of validate in new version of doc search
+         *  it's not right to add the goal in git commit should create jira task.
+         */
 
+        /**
+         * @author  Steven
+         * @date    8/19/2016
+         *  
+         * @description
+         *  new version validate javascript version validate
+         * @returns {bool} true then pass validate
+         */
         $scope.newVersionValidate = function () {
+            /**
+             * change java script version validate 
+             * to oop model version validate
+             */
             if (!$scope.newVersion) {
                 return true;
             }
@@ -4344,15 +5112,81 @@ angular.module('PortalApp')
             }
 
             return true;
+            ////////////under are old validate///////////////////
+            //var errormsg = '';
+            //var validateFields = [
+            //    "Has_Deed_Purchase_Deed",
+            //    "Has_c_1st_Mortgage_c_1st_Mortgage",
+            //    "fha",
+            //    "Has_c_2nd_Mortgage_c_2nd_Mortgage",
+            //    "has_Last_Assignment_Last_Assignment",
+            //    "fannie",
+            //    "Freddie_Mac_",
+            //    "Has_Due_Property_Taxes_Due",
+            //    "Has_Due_Water_Charges_Due",
+            //    "Has_Open_ECB_Violoations",
+            //    "Has_Open_DOB_Violoations",
+            //    "hasCO",
+            //    "Has_Violations_HPD_Violations",
+            //    "Is_Open_HPD_Charges_Not_Paid_Transferred",
+            //    "has_Judgments_Personal_Judgments",
+            //    "has_Judgments_HPD_Judgments",
+            //    "has_IRS_Tax_Lien_IRS_Tax_Lien",
+            //    "hasNysTaxLien",
+            //    "has_Sidewalk_Liens_Sidewalk_Liens",
+            //    "has_Vacate_Order_Vacate_Order",
+            //    "has_ECB_Tickets_ECB_Tickets",
+            //    "has_ECB_on_Name_ECB_on_Name_other_known_address",
 
+            //    /**
+            //     * @author Steven
+            //     * @date   8/19/2016
+            //     * 
+            //     * @fix 
+            //     * git commit bde6b6d tax search
+            //     * add validated to new version doc search at least one item add 
+            //     * when select yes control grid
+            //     */
+            //    // under are one to multiple//
+            //    "Has_Other_Mortgage",
+            //    "Has_Other_Liens",
+            //    "Has_TaxLiensCertifcate",
+            //    "Has_COS_Recorded",
+            //    "Has_Deed_Recorded",
+            //    ///////////////////////////
 
+            //];
+            //var checkedAttrs = [["Has_Other_Mortgage", "OtherMortgage"],
+            //                    ["Has_Other_Liens", "OtherLiens"],
+            //                    ["Has_TaxLiensCertifcate", "TaxLienCertificate"],
+            //                    ["Has_COS_Recorded", "COSRecorded"],
+            //                    ["Has_Deed_Recorded", "DeedRecorded"]];
 
+            //var fields = $scope.DocSearch.LeadResearch;
+            //if (fields) {
+            //    for (var i = 0; i < validateFields.length; i++) {
+            //        var f = validateFields[i];
+            //        if (fields[f] === undefined) {
+            //            errormsg += "The fields marked * must been filled please check them before submit!<br>";
+            //            break;
+            //        }
+            //    }
 
+            //    for (var j = 0; j < checkedAttrs.length; j++) {
+            //        var f1 = checkedAttrs[j];
+            //        if ((fields[f1[0]] === true && !Array.isArray(fields[f1[1]])) || (fields[f1[0]] === true && fields[f1[1]].length === 0)) {
+            //            errormsg = errormsg + f1[1] + " has checked but have no value.<br>";
+            //        }
+            //    }
+            //}
 
+            //return errormsg;
 
         }
 
         $scope.SearchComplete = function (isSave) {
+            // only completed need check validate
+            // when saving don't need validate input.
             if (!isSave) {
                 if (!$scope.newVersionValidate()) {
                     var msg = $scope.DivError.getMessage();
@@ -4364,7 +5198,7 @@ angular.module('PortalApp')
 
 
             $scope.DocSearch.BBLE = $scope.DocSearch.BBLE.trim();
-            $scope.DocSearch.ResutContent = $("#search_summary_div").html();
+            $scope.DocSearch.ResultContent = $("#search_summary_div").html();
 
             if (isSave) {
                 $scope.DocSearch.$update(null, function () {
@@ -4385,6 +5219,7 @@ angular.module('PortalApp')
         }
 
 
+        // only one of fha, fannie, freddie_mac can be yes at the same time
 
         $scope.$watch('DocSearch.LeadResearch.fha', function (nv, ov) {
             if (nv == true) {
@@ -4408,10 +5243,14 @@ angular.module('PortalApp')
 
         $scope.markCompleted = function (status, msg) {
 
+            // because the underwriting completion is not reversible, comfirm it before save to db.
             msg = 'Please provide Note or press no to cancel';
             ptCom.prompt(msg, function (result) {
+                //debugger;
                 if (result != null) {
+                    //debugger;
                     $scope.DocSearch.markCompleted($scope.DocSearch.BBLE, status, result).then(function succ(d) {
+                        //debugger;
                         $scope.DocSearch.UnderwriteStatus = d.data.UnderwriteStatus;
                         $scope.DocSearch.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
                         $scope.DocSearch.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
@@ -4420,14 +5259,15 @@ angular.module('PortalApp')
                         console.log("fail to update docsearch");
                     });
                 }
-
-                            }, true);
+                
+            }, true);
 
         }
 
         try {
             var modePatten = /mode=\d/;
             var matches = modePatten.exec(location.search);
+            //debugger;
             if (matches && matches[0]) {
                 $scope.viewmode = parseInt(matches[0].split('=')[1]);
             } else {
@@ -4437,427 +5277,441 @@ angular.module('PortalApp')
             $scope.viewmode = 0;
         }
     });
+/* global LegalShowAll */
+/* global angular */
+angular.module("PortalApp").controller("LegalCtrl",
+[
+    "$scope", "$http", "ptContactServices", "ptCom", "ptTime", "$window",
+    function($scope, $http, ptContactServices, ptCom, ptTime, $window) {
 
-angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptContactServices', 'ptCom', 'ptTime', '$window', function ($scope, $http, ptContactServices, ptCom, ptTime, $window) {
+        $scope.ptContactServices = ptContactServices;
+        $scope.ptCom = ptCom;
+        $scope.isPassByDays = ptTime.isPassByDays;
+        $scope.isPassOrEqualByDays = ptTime.isPassOrEqualByDays;
+        $scope.isLessOrEqualByDays = ptTime.isLessOrEqualByDays;
+        $scope.isPassByMonths = ptTime.isPassByMonths;
+        $scope.isPassOrEqualByMonths = ptTime.isPassOrEqualByMonths;
 
-    $scope.ptContactServices = ptContactServices;
-    $scope.ptCom = ptCom;
-    $scope.isPassByDays = ptTime.isPassByDays;
-    $scope.isPassOrEqualByDays = ptTime.isPassOrEqualByDays;
-    $scope.isLessOrEqualByDays = ptTime.isLessOrEqualByDays;
-    $scope.isPassByMonths = ptTime.isPassByMonths;
-    $scope.isPassOrEqualByMonths = ptTime.isPassOrEqualByMonths;
-
-    $scope.LegalCase = {
-        PropertyInfo: {},
-        ForeclosureInfo: {
-            PlaintiffId: 638
-        },
-        SecondaryInfo: {
-            StatuteOfLimitations: [],
-        },
-        PreQuestions: {},
-        SecondaryTypes: []
-    };
-    $scope.TestRepeatData = [];
-    $scope.History = [];
-    $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Miscellaneous", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title", ""];
-    if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
-        $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
-    }
-
-    $scope.filterSelected = true;
-    $scope.PickedContactId = null;
-
-    $scope.hSummery = [
-                {
-                    "Name": "CaseStauts",
-                    "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)",
-                    "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "EveryOneIn",
-                    "CallFunc": "LegalCase.ForeclosureInfo.WasEstateFormed != null",
-                    "Description": "There is an estate.",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "BankruptcyFiled",
-                    "CallFunc": "LegalCase.ForeclosureInfo.BankruptcyFiled == true",
-                    "Description": "Bankruptcy filed",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "Efile",
-                    "CallFunc": "LegalCase.ForeclosureInfo.Efile == true",
-                    "Description": "Has E-filed",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "EfileN",
-                    "CallFunc": "LegalCase.ForeclosureInfo.Efile == false",
-                    "Description": "No E-filed",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "ClientPersonallyServed",
-                    "CallFunc": "false",
-                    "Description": "Client personally is not served. ",
-                    "ArrayName": "AffidavitOfServices"
-                },
-                {
-                    "Name": "NailAndMail",
-                    "CallFunc": "true",
-                    "Description": "Nail and Mail.",
-                    "ArrayName": "AffidavitOfServices"
-                },
-                {
-                    "Name": "BorrowerLiveInAddrAtTimeServ",
-                    "CallFunc": "false",
-                    "Description": "Borrower didn\'t live in service Address at time of Serv.",
-                    "ArrayName": "AffidavitOfServices"
-                },
-                {
-                    "Name": "BorrowerEverLiveHere",
-                    "CallFunc": "false",
-                    "Description": "Borrower didn\'t ever live in service address.",
-                    "ArrayName": "AffidavitOfServices"
-                },
-                {
-                    "Name": "ServerInSererList",
-                    "CallFunc": "true",
-                    "Description": "process server is in server list.",
-                    "ArrayName": "AffidavitOfServices"
-                },
-                {
-                    "Name": "isServerHasNegativeInfo",
-                    "CallFunc": "true",
-                    "Description": "Web search provide any negative information on process server. ",
-                    "ArrayName": "AffidavitOfServices"
-                },
-                {
-                    "Name": "AffidavitServiceFiledIn20Day",
-                    "CallFunc": "false",
-                    "Description": "Affidavit of service wasn\'t file within 20 days of service.",
-                    "ArrayName": "AffidavitOfServices"
-                },
-                {
-                    "Name": "AnswerClientFiledBefore",
-                    "CallFunc": "LegalCase.ForeclosureInfo.AnswerClientFiledBefore == false",
-                    "Description": "Client hasn\'t ever filed an answer before.",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "NoteIsPossess",
-                    "CallFunc": "LegalCase.ForeclosureInfo.NoteIsPossess == false",
-                    "Description": "We Don't possess a copy of the note.",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "NoteEndoresed",
-                    "CallFunc": "LegalCase.ForeclosureInfo.NoteEndoresed == false",
-                    "Description": "Note wasn\'t endores.",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "NoteEndorserIsSignors",
-                    "CallFunc": "LegalCase.ForeclosureInfo.NoteEndorserIsSignors == true",
-                    "Description": "The endorser is in signors list.",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "HasDocDraftedByDOCXLLC",
-                    "CallFunc": "true",
-                    "Description": "There are documents drafted by DOCX LLC .",
-                    "ArrayName": "Assignments"
-                },
-                {
-                    "Name": "LisPendesRegDate",
-                    "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)",
-                    "Description": "Date of registration 5 days after Lis Pendens letter",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "AccelerationLetterMailedDate",
-                    "CallFunc": "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )",
-                    "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "AccelerationLetterRegDate",
-                    "CallFunc": "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )",
-                    "Description": "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "AffirmationFiledDate",
-                    "CallFunc": "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)",
-                    "Description": "Affirmation filed after Judgement. ",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "AffirmationReviewerByCompany",
-                    "CallFunc": "LegalCase.ForeclosureInfo.AffirmationReviewerByCompany == false",
-                    "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "MortNoteAssInCert",
-                    "CallFunc": "LegalCase.ForeclosureInfo.MortNoteAssInCert == false",
-                    "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "MissInCert",
-                    "CallFunc": "checkMissInCertValue()",
-                    "Description": "Mortgage Note or Assignment are missing. ",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "CertificateReviewerByCompany",
-                    "CallFunc": "LegalCase.ForeclosureInfo.CertificateReviewerByCompany == false",
-                    "Description": "The certificate  reviewer wasn\'t employe by the servicing company. ",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "LegalCase.ItemsRedacted",
-                    "CallFunc": "LegalCase.ForeclosureInfo.ItemsRedacted == false",
-                    "Description": "Are items of personal information Redacted.",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "RJIDate",
-                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)",
-                    "Description": "RJI filed after 12 months of S&C.",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "ConferenceDate",
-                    "CallFunc": "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)",
-                    "Description": "Conference date scheduled 60 days before RJI",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "OREFDate",
-                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)",
-                    "Description": "O/REF filed after 12 months after RJI.",
-                    "ArrayName": ""
-                },
-                {
-                    "Name": "JudgementDate",
-                    "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)",
-                    "Description": "Judgement submitted 12 months after O/REF. ",
-                    "ArrayName": ""
-                }];
-
-    $scope.querySearch = function (query) {
-        var createFilterFor = function (query) {
-            var lowercaseQuery = angular.lowercase(query);
-            return function filterFn(contact) {
-                return contact.Name && (contact.Name.toLowerCase().indexOf(lowercaseQuery) !== -1);
-            };
+        $scope.LegalCase = {
+            PropertyInfo: {},
+            ForeclosureInfo: {
+                PlaintiffId: 638
+            },
+            SecondaryInfo: {
+                StatuteOfLimitations: [],
+            },
+            PreQuestions: {},
+            SecondaryTypes: []
+        };
+        $scope.TestRepeatData = [];
+        $scope.History = [];
+        $scope.SecondaryTypeSource = [
+            "Statute Of Limitations", "Estate", "Miscellaneous", "Deed Reversal", "Partition", "Breach of Contract",
+            "Quiet Title", ""
+        ];
+        if (typeof LegalShowAll == "undefined" || LegalShowAll == null) {
+            $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
         }
-        var results = query ?
-            $scope.allContacts.filter(createFilterFor(query)) : [];
-        return results;
-    }
-    $scope.loadContacts = function () {
-        var contacts = AllContact ? AllContact : [];
-        return contacts.map(function (c, index) {
-            c.image = 'https://storage.googleapis.com/material-icons/external-assets/v1/icons/svg/ic_account_circle_black_48px.svg';
-            if (c.Name) {
-                c._lowername = c.Name.toLowerCase();
+
+        $scope.filterSelected = true;
+        $scope.PickedContactId = null;
+
+        $scope.hSummery = [
+            {
+                "Name": "CaseStauts",
+                "CallFunc": "HighLightStauts(LegalCase.CaseStauts,4)",
+                "Description": "Last milestone document recorded on Clerk Minutes after O/REF. ",
+                "ArrayName": ""
+            },
+            {
+                "Name": "EveryOneIn",
+                "CallFunc": "LegalCase.ForeclosureInfo.WasEstateFormed != null",
+                "Description": "There is an estate.",
+                "ArrayName": ""
+            },
+            {
+                "Name": "BankruptcyFiled",
+                "CallFunc": "LegalCase.ForeclosureInfo.BankruptcyFiled == true",
+                "Description": "Bankruptcy filed",
+                "ArrayName": ""
+            },
+            {
+                "Name": "Efile",
+                "CallFunc": "LegalCase.ForeclosureInfo.Efile == true",
+                "Description": "Has E-filed",
+                "ArrayName": ""
+            },
+            {
+                "Name": "EfileN",
+                "CallFunc": "LegalCase.ForeclosureInfo.Efile == false",
+                "Description": "No E-filed",
+                "ArrayName": ""
+            },
+            {
+                "Name": "ClientPersonallyServed",
+                "CallFunc": "false",
+                "Description": "Client personally is not served. ",
+                "ArrayName": "AffidavitOfServices"
+            },
+            {
+                "Name": "NailAndMail",
+                "CallFunc": "true",
+                "Description": "Nail and Mail.",
+                "ArrayName": "AffidavitOfServices"
+            },
+            {
+                "Name": "BorrowerLiveInAddrAtTimeServ",
+                "CallFunc": "false",
+                "Description": "Borrower didn\'t live in service Address at time of Serv.",
+                "ArrayName": "AffidavitOfServices"
+            },
+            {
+                "Name": "BorrowerEverLiveHere",
+                "CallFunc": "false",
+                "Description": "Borrower didn\'t ever live in service address.",
+                "ArrayName": "AffidavitOfServices"
+            },
+            {
+                "Name": "ServerInSererList",
+                "CallFunc": "true",
+                "Description": "process server is in server list.",
+                "ArrayName": "AffidavitOfServices"
+            },
+            {
+                "Name": "isServerHasNegativeInfo",
+                "CallFunc": "true",
+                "Description": "Web search provide any negative information on process server. ",
+                "ArrayName": "AffidavitOfServices"
+            },
+            {
+                "Name": "AffidavitServiceFiledIn20Day",
+                "CallFunc": "false",
+                "Description": "Affidavit of service wasn\'t file within 20 days of service.",
+                "ArrayName": "AffidavitOfServices"
+            },
+            {
+                "Name": "AnswerClientFiledBefore",
+                "CallFunc": "LegalCase.ForeclosureInfo.AnswerClientFiledBefore == false",
+                "Description": "Client hasn\'t ever filed an answer before.",
+                "ArrayName": ""
+            },
+            {
+                "Name": "NoteIsPossess",
+                "CallFunc": "LegalCase.ForeclosureInfo.NoteIsPossess == false",
+                "Description": "We Don't possess a copy of the note.",
+                "ArrayName": ""
+            },
+            {
+                "Name": "NoteEndoresed",
+                "CallFunc": "LegalCase.ForeclosureInfo.NoteEndoresed == false",
+                "Description": "Note wasn\'t endores.",
+                "ArrayName": ""
+            },
+            {
+                "Name": "NoteEndorserIsSignors",
+                "CallFunc": "LegalCase.ForeclosureInfo.NoteEndorserIsSignors == true",
+                "Description": "The endorser is in signors list.",
+                "ArrayName": ""
+            },
+            {
+                "Name": "HasDocDraftedByDOCXLLC",
+                "CallFunc": "true",
+                "Description": "There are documents drafted by DOCX LLC .",
+                "ArrayName": "Assignments"
+            },
+            {
+                "Name": "LisPendesRegDate",
+                "CallFunc":
+                    "isPassOrEqualByDays(LegalCase.ForeclosureInfo.LisPendesDate, LegalCase.ForeclosureInfo.LisPendesRegDate, 5)",
+                "Description": "Date of registration 5 days after Lis Pendens letter",
+                "ArrayName": ""
+            },
+            {
+                "Name": "AccelerationLetterMailedDate",
+                "CallFunc":
+                    "isPassOrEqualByMonths(LegalCase.ForeclosureInfo.DefaultDate,LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,12 )",
+                "Description": "Acceleration letter mailed to borrower after 12 months of Default Date. ",
+                "ArrayName": ""
+            },
+            {
+                "Name": "AccelerationLetterRegDate",
+                "CallFunc":
+                    "isPassOrEqualByDays(LegalCase.ForeclosureInfo.AccelerationLetterMailedDate,LegalCase.ForeclosureInfo.AccelerationLetterRegDate,3 )",
+                "Description":
+                    "Date of registration for Acceleration letter filed  3 days after acceleration letter mailed date",
+                "ArrayName": ""
+            },
+            {
+                "Name": "AffirmationFiledDate",
+                "CallFunc":
+                    "isPassByDays(LegalCase.ForeclosureInfo.JudgementDate,LegalCase.ForeclosureInfo.AffirmationFiledDate,0)",
+                "Description": "Affirmation filed after Judgement. ",
+                "ArrayName": ""
+            },
+            {
+                "Name": "AffirmationReviewerByCompany",
+                "CallFunc": "LegalCase.ForeclosureInfo.AffirmationReviewerByCompany == false",
+                "Description": "The affirmation reviewer wasn\'t employe by the servicing company. ",
+                "ArrayName": ""
+            },
+            {
+                "Name": "MortNoteAssInCert",
+                "CallFunc": "LegalCase.ForeclosureInfo.MortNoteAssInCert == false",
+                "Description": "In the Certificate of Merit, the Mortgage, Note and Assignment aren\'t included. ",
+                "ArrayName": ""
+            },
+            {
+                "Name": "MissInCert",
+                "CallFunc": "checkMissInCertValue()",
+                "Description": "Mortgage Note or Assignment are missing. ",
+                "ArrayName": ""
+            },
+            {
+                "Name": "CertificateReviewerByCompany",
+                "CallFunc": "LegalCase.ForeclosureInfo.CertificateReviewerByCompany == false",
+                "Description": "The certificate  reviewer wasn\'t employe by the servicing company. ",
+                "ArrayName": ""
+            },
+            {
+                "Name": "LegalCase.ItemsRedacted",
+                "CallFunc": "LegalCase.ForeclosureInfo.ItemsRedacted == false",
+                "Description": "Are items of personal information Redacted.",
+                "ArrayName": ""
+            },
+            {
+                "Name": "RJIDate",
+                "CallFunc":
+                    "isPassByMonths(LegalCase.ForeclosureInfo.SAndCFiledDate, LegalCase.ForeclosureInfo.RJIDate, 12)",
+                "Description": "RJI filed after 12 months of S&C.",
+                "ArrayName": ""
+            },
+            {
+                "Name": "ConferenceDate",
+                "CallFunc":
+                    "isLessOrEqualByDays(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.ConferenceDate, 60)",
+                "Description": "Conference date scheduled 60 days before RJI",
+                "ArrayName": ""
+            },
+            {
+                "Name": "OREFDate",
+                "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)",
+                "Description": "O/REF filed after 12 months after RJI.",
+                "ArrayName": ""
+            },
+            {
+                "Name": "JudgementDate",
+                "CallFunc": "isPassByMonths(LegalCase.ForeclosureInfo.RJIDate, LegalCase.ForeclosureInfo.OREFDate, 12)",
+                "Description": "Judgement submitted 12 months after O/REF. ",
+                "ArrayName": ""
             }
-            return c;
-        });
-    };
-    $scope.allContacts = $scope.loadContacts();
-    $scope.contacts = [$scope.allContacts[0]];
-    $scope.AllJudges = AllJudges ? AllJudges : [];
+        ];
 
-    $scope.addTest = function () {
-        $scope.TestRepeatData[$scope.TestRepeatData.length] = $scope.TestRepeatData.length;
-    };
+        $scope.querySearch = function(query) {
+            var createFilterFor = function(query) {
+                var lowercaseQuery = angular.lowercase(query);
+                return function filterFn(contact) {
+                    return contact.Name && (contact.Name.toLowerCase().indexOf(lowercaseQuery) !== -1);
+                };
+            };
+            var results = query ? $scope.allContacts.filter(createFilterFor(query)) : [];
+            return results;
+        };
+        $scope.loadContacts = function() {
+            var contacts = AllContact ? AllContact : [];
+            return contacts.map(function(c, index) {
+                c
+                    .image =
+                    "https://storage.googleapis.com/material-icons/external-assets/v1/icons/svg/ic_account_circle_black_48px.svg";
+                if (c.Name) {
+                    c._lowername = c.Name.toLowerCase();
+                }
+                return c;
+            });
+        };
+        $scope.allContacts = $scope.loadContacts();
+        $scope.contacts = [$scope.allContacts[0]];
+        $scope.AllJudges = AllJudges ? AllJudges : [];
 
-    $scope.RoboSingerDataSource = new DevExpress.data.DataSource({
-        store: new DevExpress.data.CustomStore({
-            load: function (loadOptions) {
-                if (AllRoboSignor) {
-                    if (loadOptions.searchValue) {
-                        return AllRoboSignor.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0 } return false });
+        $scope.addTest = function() {
+            $scope.TestRepeatData[$scope.TestRepeatData.length] = $scope.TestRepeatData.length;
+        };
+
+        $scope.RoboSingerDataSource = new DevExpress.data.DataSource({
+            store: new DevExpress.data.CustomStore({
+                load: function(loadOptions) {
+                    if (AllRoboSignor) {
+                        if (loadOptions.searchValue) {
+                            return AllRoboSignor.filter(function(o) {
+                                if (o.Name) {
+                                    return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >= 0
+                                }
+                                return false
+                            });
+                        }
+                        return [];
                     }
-                    return [];
-                }
-            },
-            byKey: function (key) {
-                if (AllRoboSignor) {
-                    return AllRoboSignor.filter(function (o) { return o.ContactId == key })[0];
-                }
+                },
+                byKey: function(key) {
+                    if (AllRoboSignor) {
+                        return AllRoboSignor.filter(function(o) { return o.ContactId == key })[0];
+                    }
 
-            },
-            searchExpr: ["Name"]
-        })
-    });
-    $scope.InitContact = function (id, dataSourceName) {
-        return {
-            dataSource: dataSourceName ? $scope[dataSourceName] : $scope.ContactDataSource,
-            valueExpr: 'ContactId',
-            displayExpr: 'Name',
-            searchEnabled: true,
-            minSearchLength: 2,
-            noDataText: "Please input to search",
-            bindingOptions: { value: id }
-        }
-    };
-    $scope.TestContactId = function (c) {
-        $scope.$eval(c + '=' + '192');
-    };
-    $scope.GetContactById = function (id) {
-        return AllContact.filter(function (o) { return o.ContactId == id })[0];
-    };
+                },
+                searchExpr: ["Name"]
+            })
+        });
+        $scope.InitContact = function(id, dataSourceName) {
+            return {
+                dataSource: dataSourceName ? $scope[dataSourceName] : $scope.ContactDataSource,
+                valueExpr: "ContactId",
+                displayExpr: "Name",
+                searchEnabled: true,
+                minSearchLength: 2,
+                noDataText: "Please input to search",
+                bindingOptions: { value: id }
+            };
+        };
+        $scope.TestContactId = function(c) {
+            $scope.$eval(c + "=" + "192");
+        };
+        $scope.GetContactById = function(id) {
+            return AllContact.filter(function(o) { return o.ContactId == id })[0];
+        };
 
-    $scope.CheckPlace = function (p) {
-        if (p) {
-            return p === 'NY';
-        }
-        return false;
-    };
+        $scope.CheckPlace = function(p) {
+            if (p) {
+                return p === "NY";
+            }
+            return false;
+        };
 
-    $scope.SaveLegal = function (scuessfunc) {
-        if (!LegalCaseBBLE || LegalCaseBBLE !== leadsInfoBBLE) {
-            alert("Case not load completed please wait!");
-            return;
-        }
-        var json = JSON.stringify($scope.LegalCase);
-        var data = { bble: LegalCaseBBLE, caseData: json };
-        $http.post('LegalUI.aspx/SaveCaseData', data).
-            success(function () {
+        $scope.SaveLegal = function(scuessfunc) {
+            if (!LegalCaseBBLE || LegalCaseBBLE !== leadsInfoBBLE) {
+                alert("Case not load completed please wait!");
+                return;
+            }
+            var json = JSON.stringify($scope.LegalCase);
+            var data = { bble: LegalCaseBBLE, caseData: json };
+            $http.post("LegalUI.aspx/SaveCaseData", data).success(function() {
                 if (scuessfunc) {
-                    scuessfunc()
+                    scuessfunc();
                 } else {
                     $scope.LogSaveChange();
                     alert("Save Successed !");
                 }
                 ResetCaseDataChange();
-            }).
-            error(function (data, status) {
+            }).error(function(data, status) {
                 alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
             });
-    };
+        };
 
-    $scope.CompleteResearch = function () {
-        var json = JSON.stringify($scope.LegalCase);
-        var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
-        $http.post('LegalUI.aspx/CompleteResearch', data).success(function () {
-            alert("Submit Success!");
-            if (typeof gridTrackingClient !== 'undefined')
-                gridTrackingClient.Refresh();
-
-        }).error(function (data) {
-            alert("Fail to save data :" + JSON.stringify(data));
-            console.log(data);
-        });
-    }
-
-    $scope.BackToResearch = function (comments) {
-        var json = JSON.stringify($scope.LegalCase);
-
-        var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN, comments: comments };
-        $http.post('LegalUI.aspx/BackToResearch', data).
-            success(function () {
+        $scope.CompleteResearch = function() {
+            var json = JSON.stringify($scope.LegalCase);
+            var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
+            $http.post("LegalUI.aspx/CompleteResearch", data).success(function() {
                 alert("Submit Success!");
-                if (typeof gridTrackingClient !== 'undefined')
-                    gridTrackingClient.Refresh();
-            }).error(function (data1) {
-                alert("Fail to save data :" + JSON.stringify(data1));
-                console.log(data1);
-            });
-    }
-
-    $scope.CloseCase = function (comments) {
-        var data = { bble: leadsInfoBBLE, comments: comments };
-        $http.post('LegalUI.aspx/CloseCase', data).
-            success(function () {
-                alert("Submit Success!");
-                if (typeof gridTrackingClient !== 'undefined')
+                if (typeof gridTrackingClient !== "undefined")
                     gridTrackingClient.Refresh();
 
-            }).error(function (data) {
+            }).error(function(data) {
                 alert("Fail to save data :" + JSON.stringify(data));
                 console.log(data);
             });
-    }
+        };
+        $scope.BackToResearch = function(comments) {
+            var json = JSON.stringify($scope.LegalCase);
 
-    $scope.AttorneyComplete = function () {
-        var json = JSON.stringify($scope.LegalCase);
-
-        var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
-        $http.post('LegalUI.aspx/AttorneyComplete', data).
-            success(function () {
+            var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN, comments: comments };
+            $http.post("LegalUI.aspx/BackToResearch", data).success(function() {
                 alert("Submit Success!");
-                if (typeof gridTrackingClient !== 'undefined')
+                if (typeof gridTrackingClient !== "undefined")
+                    gridTrackingClient.Refresh();
+            }).error(function(data1) {
+                alert("Fail to save data :" + JSON.stringify(data1));
+                console.log(data1);
+            });
+        };
+        $scope.CloseCase = function(comments) {
+            var data = { bble: leadsInfoBBLE, comments: comments };
+            $http.post("LegalUI.aspx/CloseCase", data).success(function() {
+                alert("Submit Success!");
+                if (typeof gridTrackingClient !== "undefined")
                     gridTrackingClient.Refresh();
 
-            }).
-            error(function () {
+            }).error(function(data) {
+                alert("Fail to save data :" + JSON.stringify(data));
+                console.log(data);
+            });
+        };
+        $scope.AttorneyComplete = function() {
+            var json = JSON.stringify($scope.LegalCase);
+
+            var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
+            $http.post("LegalUI.aspx/AttorneyComplete", data).success(function() {
+                alert("Submit Success!");
+                if (typeof gridTrackingClient !== "undefined")
+                    gridTrackingClient.Refresh();
+
+            }).error(function() {
                 alert("Fail to save data.");
             });
 
-    }
+        };
+        $scope.LogSaveChange = function() {
+            for (var i in $scope.LogChange) {
+                var changeObject = $scope.LogChange[i];
+                var old = changeObject.old;
+                var now = changeObject.now();
+                if (old != now) {
+                    var elem = "#LealCaseStatusData";
+                    var OldStatus = $(elem + ' option[value="' + old + '"]').html();
+                    var NowStatus = $(elem + ' option[value="' + now + '"]').html();
 
+                    if (!OldStatus) {
+                        AddActivityLog(changeObject.msg.replace(" from", "") + " to " + NowStatus);
+                    } else {
+                        AddActivityLog(changeObject.msg + OldStatus + " to " + NowStatus);
+                    }
 
-    $scope.LogSaveChange = function () {
-        for (var i in $scope.LogChange) {
-            var changeObject = $scope.LogChange[i];
-            var old = changeObject.old;
-            var now = changeObject.now()
-            if (old != now) {
-                var elem = '#LealCaseStatusData'
-                var OldStatus = $(elem + ' option[value="' + old + '"]').html();
-                var NowStatus = $(elem + ' option[value="' + now + '"]').html();
-
-                if (!OldStatus) {
-                    AddActivityLog(changeObject.msg.replace(" from", '') + ' to ' + NowStatus);
+                    $scope.LogChange[i].old = now;
                 }
-                else {
-                    AddActivityLog(changeObject.msg + OldStatus + ' to ' + NowStatus);
-                }
-
-                $scope.LogChange[i].old = now;
             }
-        }
-    }
+        };
+        $scope.LoadLeadsCase = function(BBLE) {
+            ptCom.startLoading();
+            var data = { bble: BBLE };
+            var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+            var shortsaleUrl = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + BBLE;
+            var taxlienUrl = "/api/TaxLiens/" + BBLE;
+            var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
 
-    $scope.LoadLeadsCase = function (BBLE) {
-        ptCom.startLoading();
-        var data = { bble: BBLE };
-        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
-        var shortsaleUrl = '/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE;
-        var taxlienUrl = '/api/TaxLiens/' + BBLE;
-        var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
-
-        $http.post('LegalUI.aspx/GetCaseData', data).
-            success(function (data, status, headers, config) {
+            $http.post("LegalUI.aspx/GetCaseData", data).success(function(data, status, headers, config) {
                 $scope.LegalCase = $.parseJSON(data.d);
-                $scope.LegalCase.BBLE = BBLE
+                $scope.LegalCase.BBLE = BBLE;
                 $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
                 $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
                 $scope.LogChange = {
-                    'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC status changed from ' },
-                    'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgage foreclosure status changed from ' }
-                }
-
+                    'TaxLienFCStatus': {
+                        "old": $scope.LegalCase.TaxLienFCStatus,
+                        "now": function() { return $scope.LegalCase.TaxLienFCStatus; },
+                        "msg": "Tax Lien FC status changed from "
+                    },
+                    'CaseStauts': {
+                        "old": $scope.LegalCase.CaseStauts,
+                        "now": function() { return $scope.LegalCase.CaseStauts; },
+                        "msg": "Mortgage foreclosure status changed from "
+                    }
+                };
                 var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
                 for (a in arrays) {
-                    var porp = arrays[a]
+                    var porp = arrays[a];
                     var array = $scope.LegalCase.ForeclosureInfo[porp];
                     if (!array || array.length === 0) {
                         $scope.LegalCase.ForeclosureInfo[porp] = [];
                         $scope.LegalCase.ForeclosureInfo[porp].push({});
                     }
                 }
-                $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || []
+                $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || [];
                 $scope.showSAndCFrom();
 
                 LegalCaseBBLE = BBLE;
@@ -4865,493 +5719,635 @@ angular.module('PortalApp').controller('LegalCtrl', ['$scope', '$http', 'ptConta
 
                 ResetCaseDataChange();
                 CaseNeedComment = true;
-            }).
-            error(function () {
+            }).error(function() {
                 ptCom.stopLoading();
                 alert("Fail to load data : " + BBLE);
             });
 
 
-        $http.get(shortsaleUrl)
-            .success(function (data) {
-                $scope.ShortSaleCase = data;
-            }).error(function () {
-                alert("Fail to Short sale case  data : " + BBLE);
-            });
+            $http.get(shortsaleUrl)
+                .success(function(data) {
+                    $scope.ShortSaleCase = data;
+                }).error(function() {
+                    alert("Fail to Short sale case  data : " + BBLE);
+                });
 
 
+            $http.get(leadsInfoUrl)
+                .success(function(data) {
+                    $scope.LeadsInfo = data;
+                    $scope.LPShow = $scope.ModelArray("LeadsInfo.LisPens");
+                }).error(function(data) {
+                    alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
+                });
 
-        $http.get(leadsInfoUrl)
-            .success(function (data) {
-                $scope.LeadsInfo = data;
-                $scope.LPShow = $scope.ModelArray('LeadsInfo.LisPens');
-            }).error(function (data) {
-                alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
-            });
+            $http.get(taxlienUrl)
+                .success(function(data) {
+                    $scope.TaxLiens = data;
+                    $scope.TaxLiensShow = $scope.ModelArray("TaxLiens");
+                }).error(function(data) {
+                    alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
+                });
 
-        $http.get(taxlienUrl)
-            .success(function (data) {
-                $scope.TaxLiens = data;
-                $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
-            }).error(function (data) {
-                alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
-            });
+            $http.get(legalecoursUrl)
+                .success(function(data) {
+                    $scope.LegalECourt = data;
+                }).error(function() {
+                    $scope.LegalECourt = null;
+                });
 
-        $http.get(legalecoursUrl)
-            .success(function (data) {
-                $scope.LegalECourt = data;
-            }).error(function () {
-                $scope.LegalECourt = null;
-            });
+        };
+        $scope.ModelArray = function(model) {
+            var array = $scope.$eval(model);
+            return (array && array.length > 0) ? "Yes" : "";
+        };
 
-    }
+        // return true it hight light check date  
+        $scope.HighLightFunc = function(funcStr) {
+            var args = funcStr.split(",");
 
-    $scope.ModelArray = function (model) {
-        var array = $scope.$eval(model);
-        return (array && array.length > 0) ? 'Yes' : '';
-    }
-
-    $scope.HighLightFunc = function (funcStr) {
-        var args = funcStr.split(",");
-
-    }
-
-    $scope.AddSecondaryArray = function () {
-        var selectType = $scope.LegalCase.SecondaryInfo.SelectedType;
-        if (selectType) {
-            var name = selectType.replace(/\s/g, '');
-            var arr = $scope.LegalCase.SecondaryInfo[name];
-            if (name === 'StatuteOfLimitations') {
-                alert('match');
+        };
+        $scope.AddSecondaryArray = function() {
+            var selectType = $scope.LegalCase.SecondaryInfo.SelectedType;
+            if (selectType) {
+                var name = selectType.replace(/\s/g, "");
+                var arr = $scope.LegalCase.SecondaryInfo[name];
+                if (name === "StatuteOfLimitations") {
+                    alert("match");
+                }
+                if (!arr || !Array.isArray($scope.LegalCase.SecondaryInfo[name])) {
+                    $scope.LegalCase.SecondaryInfo[name] = [];
+                    //arr = $scope.LegalCase.SecondaryInfo[name];
+                }
+                $scope.LegalCase.SecondaryInfo[name].push({});
+                //$scope.LegalCase.SecondaryInfo.StatuteOfLimitations.push({});
             }
-            if (!arr || !Array.isArray($scope.LegalCase.SecondaryInfo[name])) {
-                $scope.LegalCase.SecondaryInfo[name] = [];
+        };
+        $scope.LegalCase.SecondaryInfo.SelectedType = $scope.SecondaryTypeSource[0];
+        $scope.SecondarySelectType = function() {
+            $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes || [];
+            var selectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes;
+            if (!_.contains(selectTypes, $scope.LegalCase.SecondaryInfo.SelectedType)) {
+                selectTypes.push($scope.LegalCase.SecondaryInfo.SelectedType);
             }
-            $scope.LegalCase.SecondaryInfo[name].push({});
-        }
-    }
-    $scope.LegalCase.SecondaryInfo.SelectedType = $scope.SecondaryTypeSource[0];
-    $scope.SecondarySelectType = function () {
-        $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes || [];
-        var selectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes;
-        if (!_.contains(selectTypes, $scope.LegalCase.SecondaryInfo.SelectedType)) {
-            selectTypes.push($scope.LegalCase.SecondaryInfo.SelectedType);
-        }
 
-    }
-    $scope.CheckShow = function (filed) {
-        if (typeof LegalShowAll === 'undefined' || LegalShowAll === null) {
-            return true;
-        }
-        if ($scope.LegalCase.SecondaryInfo) {
-            return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
-        }
-
-        return false;
-    }
-
-    $scope.SaveLegalJson = function () {
-        $scope.LegalCaseJson = JSON.stringify($scope.LegalCase)
-    }
-
-    $scope.ShowContorl = function (m) {
-        var t = typeof m;
-        if (t === "string") {
-            return m === 'true'
-        }
-        return m;
-
-    }
-
-    $scope.DocGenerator = function (tplName) {
-        if (!$scope.LegalCase.SecondaryInfo) {
-            $scope.LegalCase.SecondaryInfo = {}
-        }
-        var Tpls = [{
-            "tplName": 'OSCTemplate.docx',
-            data: {
-                "Plantiff": $scope.LegalCase.ForeclosureInfo.Plantiff,
-                "PlantiffAttorney": $scope.LegalCase.ForeclosureInfo.PlantiffAttorney,
-                "PlantiffAttorneyAddress": $scope.LegalCase.ForeclosureInfo.PlantiffAttorneyAddress,
-                "FCFiledDate": $scope.LegalCase.ForeclosureInfo.FCFiledDate,
-                "FCIndexNum": $scope.LegalCase.ForeclosureInfo.FCIndexNum,
-                "BoroughName": $scope.LeadsInfo.BoroughName,
-                "Block": $scope.LeadsInfo.Block,
-                "Lot": $scope.LeadsInfo.Lot,
-                "Defendant": $scope.LegalCase.SecondaryInfo.Defendant,
-
-                "Defendants": $scope.LegalCase.SecondaryInfo.OSC_Defendants ? ',' + $scope.LegalCase.SecondaryInfo.OSC_Defendants.map(function (o) { return o.Name }).join(",") : ' ',
-                "DefendantAttorneyName": $scope.LegalCase.SecondaryInfo.DefendantAttorneyName,
-                "DefendantAttorneyPhone": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).OfficeNO,
-                "DefendantAttorneyAddress": ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId, $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).Address,
-                "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
-                "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
-
+        };
+        $scope.CheckShow = function(filed) {
+            if (typeof LegalShowAll === "undefined" || LegalShowAll === null) {
+                return true;
             }
-        },
-        {
-            "tplName": 'DeedReversionTemplate.docx',
-            data: {
-                "Plantiff": $scope.LegalCase.SecondaryInfo.DeedReversionPlantiff,
-                "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney,
-                "PlantiffAttorneyAddress": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney).Address,
-                "PlantiffAttorneyPhone": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney).OfficeNO,
-                "IndexNum": $scope.LegalCase.SecondaryInfo.DeedReversionIndexNum || ' ',
-                "BoroughName": $scope.LeadsInfo.BoroughName,
-                "Block": $scope.LeadsInfo.Block,
-                "Lot": $scope.LeadsInfo.Lot,
-                "Defendant": $scope.LegalCase.SecondaryInfo.DeedReversionDefendant,
-                "Defendants": $scope.LegalCase.SecondaryInfo.DeedReversionDefendants ? ',' + $scope.LegalCase.SecondaryInfo.DeedReversionDefendants.map(function (o) { return o.Name }).join(",") : ' ',
-                "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
-                "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+            if ($scope.LegalCase.SecondaryInfo) {
+                return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
+            }
 
-            },
+            return false;
+        };
+        $scope.SaveLegalJson = function() {
+            $scope.LegalCaseJson = JSON.stringify($scope.LegalCase);
+        };
+        $scope.ShowContorl = function(m) {
+            var t = typeof m;
+            if (t === "string") {
+                return m === "true";
+            }
+            return m;
 
+        };
+        $scope.DocGenerator = function(tplName) {
+            if (!$scope.LegalCase.SecondaryInfo) {
+                $scope.LegalCase.SecondaryInfo = {};
+            }
+            var Tpls = [
+                {
+                    "tplName": "OSCTemplate.docx",
+                    data: {
+                        "Plantiff": $scope.LegalCase.ForeclosureInfo.Plantiff,
+                        "PlantiffAttorney": $scope.LegalCase.ForeclosureInfo.PlantiffAttorney,
+                        "PlantiffAttorneyAddress": $scope.LegalCase.ForeclosureInfo
+                            .PlantiffAttorneyAddress,
+                        "FCFiledDate": $scope.LegalCase.ForeclosureInfo.FCFiledDate,
+                        "FCIndexNum": $scope.LegalCase.ForeclosureInfo.FCIndexNum,
+                        "BoroughName": $scope.LeadsInfo.BoroughName,
+                        "Block": $scope.LeadsInfo.Block,
+                        "Lot": $scope.LeadsInfo.Lot,
+                        "Defendant": $scope.LegalCase.SecondaryInfo.Defendant,
 
-        },
-        {
-            "tplName": 'SpecificPerformanceComplaintTemplate.docx',
-            data: {
-                "Plantiff": $scope.LegalCase.SecondaryInfo.SPComplaint_Plantiff,
-                "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney,
-                "PlantiffAttorneyAddress": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney).Address,
-                "PlantiffAttorneyPhone": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney).OfficeNO,
-                "IndexNum": $scope.LegalCase.SecondaryInfo.SPComplaint_IndexNum || ' ',
-                "BoroughName": $scope.LeadsInfo.BoroughName,
-                "Block": $scope.LeadsInfo.Block,
-                "Lot": $scope.LeadsInfo.Lot,
-                "Defendant": $scope.LegalCase.SecondaryInfo.SPComplaint_Defendant,
-                "Defendants": $scope.LegalCase.SecondaryInfo.SPComplaint_Defendants ? ',' + $scope.LegalCase.SecondaryInfo.SPComplaint_Defendants.map(function (o) { return o.Name }).join(",") : ' ',
-                "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
-                "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
-            },
+                        "Defendants": $scope.LegalCase.SecondaryInfo.OSC_Defendants
+                            ? "," +
+                            $scope.LegalCase.SecondaryInfo.OSC_Defendants.map(function(o) { return o.Name }).join(",")
+                            : " ",
+                        "DefendantAttorneyName": $scope.LegalCase.SecondaryInfo.DefendantAttorneyName,
+                        "DefendantAttorneyPhone": ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).OfficeNO,
+                        "DefendantAttorneyAddress": ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.DefendantAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.DefendantAttorneyName).Address,
+                        "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
+                        "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
 
-        },
-        {
-            "tplName": 'QuietTitleComplantTemplate.docx',
-            data: {
-                "Plantiff": $scope.LegalCase.SecondaryInfo.QTA_Plantiff,
-                "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney,
-                "PlantiffAttorneyAddress": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney).Address,
-                "PlantiffAttorneyPhone": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney).OfficeNO,
-                "OriginalMortgageLender": $scope.LegalCase.SecondaryInfo.QTA_OrgMorgLender,
-                "Mortgagee": $scope.LegalCase.SecondaryInfo.QTA_Mortgagee,
-                "IndexNum": $scope.LegalCase.SecondaryInfo.QTA_IndexNum || ' ',
-                "BoroughName": $scope.LeadsInfo.BoroughName,
-                "Block": $scope.LeadsInfo.Block,
-                "Lot": $scope.LeadsInfo.Lot,
-                "Defendant": $scope.LegalCase.SecondaryInfo.QTA_Defendant,
-                "Defendant2": $scope.LegalCase.SecondaryInfo.QTA_Defendant2,
-                "Defendants": $scope.LegalCase.SecondaryInfo.QTA_Defendants ? ',' + $scope.LegalCase.SecondaryInfo.QTA_Defendants.map(function (o) { return o.Name }).join(",") : ' ',
-                "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
-                "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
-                "FCFiledDate": $scope.LegalCase.ForeclosureInfo.FCFiledDate,
-                "FCIndexNum": $scope.LegalCase.ForeclosureInfo.FCIndexNum,
-                "DefaultDate": $scope.LegalCase.ForeclosureInfo.QTA_DefaultDate,
-                "DeedToPlaintiffDate": $scope.LegalCase.SecondaryInfo.QTA_DeedToPlaintiffDate,
-            },
+                    }
+                },
+                {
+                    "tplName": "DeedReversionTemplate.docx",
+                    data: {
+                        "Plantiff": $scope.LegalCase.SecondaryInfo.DeedReversionPlantiff,
+                        "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney,
+                        "PlantiffAttorneyAddress": $scope.ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney).Address,
+                        "PlantiffAttorneyPhone": $scope.ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.DeedReversionPlantiffAttorney).OfficeNO,
+                        "IndexNum": $scope.LegalCase.SecondaryInfo.DeedReversionIndexNum || " ",
+                        "BoroughName": $scope.LeadsInfo.BoroughName,
+                        "Block": $scope.LeadsInfo.Block,
+                        "Lot": $scope.LeadsInfo.Lot,
+                        "Defendant": $scope.LegalCase.SecondaryInfo.DeedReversionDefendant,
+                        "Defendants": $scope.LegalCase.SecondaryInfo.DeedReversionDefendants
+                            ? "," +
+                            $scope.LegalCase.SecondaryInfo.DeedReversionDefendants.map(function(o) { return o.Name })
+                            .join(",")
+                            : " ",
+                        "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
+                        "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
 
-        },
-        {
-            "tplName": 'Partition_Temp.docx',
-            data: {
-                "Plantiff": $scope.LegalCase.SecondaryInfo.PartitionsPlantiff,
-                "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorney,
-                "PlantiffAttorneyAddress": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorney).Address,
-                "PlantiffAttorneyPhone": $scope.ptContactServices.getContact($scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId, $scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorney).OfficeNO,
-                "OriginalMortgageLender": $scope.LegalCase.SecondaryInfo.PartitionsOriginalLender,
-                "MortgageDate": $scope.LegalCase.SecondaryInfo.PartitionsMortgageDate,
-                "IndexNum": $scope.LegalCase.SecondaryInfo.PartitionsIndexNum || ' ',
-                "BoroughName": $scope.LeadsInfo.BoroughName,
-                "Block": $scope.LeadsInfo.Block,
-                "Lot": $scope.LeadsInfo.Lot,
-                "Defendant": $scope.LegalCase.SecondaryInfo.PartitionsDefendant,
-                "Defendant1": $scope.LegalCase.SecondaryInfo.PartitionsDefendant1,
-
-                "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
-                "MortgageAmount": $scope.LegalCase.SecondaryInfo.PartitionsMortgageAmount,
-                "DateOfRecording": $scope.LegalCase.SecondaryInfo.PartitionsDateOfRecording,
-                "CRFN": $scope.LegalCase.SecondaryInfo.PartitionsCRFN,
-                "OriginalLender": $scope.LegalCase.SecondaryInfo.PartitionsOriginalLender,
+                    },
 
 
-            },
+                },
+                {
+                    "tplName": "SpecificPerformanceComplaintTemplate.docx",
+                    data: {
+                        "Plantiff": $scope.LegalCase.SecondaryInfo.SPComplaint_Plantiff,
+                        "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney,
+                        "PlantiffAttorneyAddress": $scope.ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney).Address,
+                        "PlantiffAttorneyPhone": $scope.ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.SPComplaint_PlantiffAttorney).OfficeNO,
+                        "IndexNum": $scope.LegalCase.SecondaryInfo.SPComplaint_IndexNum || " ",
+                        "BoroughName": $scope.LeadsInfo.BoroughName,
+                        "Block": $scope.LeadsInfo.Block,
+                        "Lot": $scope.LeadsInfo.Lot,
+                        "Defendant": $scope.LegalCase.SecondaryInfo.SPComplaint_Defendant,
+                        "Defendants": $scope.LegalCase.SecondaryInfo.SPComplaint_Defendants
+                            ? "," +
+                            $scope.LegalCase.SecondaryInfo.SPComplaint_Defendants.map(function(o) { return o.Name })
+                            .join(",")
+                            : " ",
+                        "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
+                        "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+                    },
 
-        }
+                },
+                {
+                    "tplName": "QuietTitleComplantTemplate.docx",
+                    data: {
+                        "Plantiff": $scope.LegalCase.SecondaryInfo.QTA_Plantiff,
+                        "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney,
+                        "PlantiffAttorneyAddress": $scope.ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney).Address,
+                        "PlantiffAttorneyPhone": $scope.ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.QTA_PlantiffAttorney).OfficeNO,
+                        "OriginalMortgageLender": $scope.LegalCase.SecondaryInfo.QTA_OrgMorgLender,
+                        "Mortgagee": $scope.LegalCase.SecondaryInfo.QTA_Mortgagee,
+                        "IndexNum": $scope.LegalCase.SecondaryInfo.QTA_IndexNum || " ",
+                        "BoroughName": $scope.LeadsInfo.BoroughName,
+                        "Block": $scope.LeadsInfo.Block,
+                        "Lot": $scope.LeadsInfo.Lot,
+                        "Defendant": $scope.LegalCase.SecondaryInfo.QTA_Defendant,
+                        "Defendant2": $scope.LegalCase.SecondaryInfo.QTA_Defendant2,
+                        "Defendants": $scope.LegalCase.SecondaryInfo.QTA_Defendants
+                            ? "," +
+                            $scope.LegalCase.SecondaryInfo.QTA_Defendants.map(function(o) { return o.Name }).join(",")
+                            : " ",
+                        "CourtAddress": $scope.GetCourtAddress($scope.LeadsInfo.Borough),
+                        "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+                        "FCFiledDate": $scope.LegalCase.ForeclosureInfo.FCFiledDate,
+                        "FCIndexNum": $scope.LegalCase.ForeclosureInfo.FCIndexNum,
+                        "DefaultDate": $scope.LegalCase.ForeclosureInfo.QTA_DefaultDate,
+                        "DeedToPlaintiffDate": $scope.LegalCase.SecondaryInfo.QTA_DeedToPlaintiffDate,
+                    },
+
+                },
+                {
+                    "tplName": "Partition_Temp.docx",
+                    data: {
+                        "Plantiff": $scope.LegalCase.SecondaryInfo.PartitionsPlantiff,
+                        "PlantiffAttorney": $scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorney,
+                        "PlantiffAttorneyAddress": $scope.ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorney).Address,
+                        "PlantiffAttorneyPhone": $scope.ptContactServices
+                            .getContact($scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorneyId,
+                                $scope.LegalCase.SecondaryInfo.PartitionsPlantiffAttorney).OfficeNO,
+                        "OriginalMortgageLender": $scope.LegalCase.SecondaryInfo.PartitionsOriginalLender,
+                        "MortgageDate": $scope.LegalCase.SecondaryInfo.PartitionsMortgageDate,
+                        "IndexNum": $scope.LegalCase.SecondaryInfo.PartitionsIndexNum || " ",
+                        "BoroughName": $scope.LeadsInfo.BoroughName,
+                        "Block": $scope.LeadsInfo.Block,
+                        "Lot": $scope.LeadsInfo.Lot,
+                        "Defendant": $scope.LegalCase.SecondaryInfo.PartitionsDefendant,
+                        "Defendant1": $scope.LegalCase.SecondaryInfo.PartitionsDefendant1,
+
+                        "PropertyAddress": $scope.LeadsInfo.PropertyAddress,
+                        "MortgageAmount": $scope.LegalCase.SecondaryInfo.PartitionsMortgageAmount,
+                        "DateOfRecording": $scope.LegalCase.SecondaryInfo.PartitionsDateOfRecording,
+                        "CRFN": $scope.LegalCase.SecondaryInfo.PartitionsCRFN,
+                        "OriginalLender": $scope.LegalCase.SecondaryInfo.PartitionsOriginalLender,
+
+
+                    },
+
+                }
+            ];
+            $scope.DocGenerator2 = function(tplName, data, successFunc) {
+                $http.post("/Services/Documents.svc/DocGenrate",
+                {
+                    "tplName": tplName,
+                    "data": JSON.stringify(data)
+                }).success(function(data) {
+                    successFunc(data);
+                }).error(function(data, status) {
+                    alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
+                });
+            };
+            var tpl = Tpls.filter(function(o) { return o.tplName == tplName })[0];
+
+            if (tpl) {
+                for (var v in tpl.data) {
+                    var filed = tpl.data[v];
+                    if (!filed) {
+                        alert("Some data missing please check " + v + "Please check!");
+                        return;
+                    }
+                }
+                $scope.DocGenerator2(tpl.tplName,
+                    tpl.data,
+                    function(url) {
+                        //window.open(url,'blank');
+                        STDownloadFile(url, tpl.tplName.replace("Template", ""));
+                    });
+            } else {
+                alert("can find tlp " + tplName);
+            }
+        };
+        $scope.CheckSecondaryTags = function(tag) {
+            return $scope.LegalCase.SecondaryTypes.filter(function(t) { return t == tag })[0];
+        };
+        $scope.GetCourtAddress = function(boro) {
+            var address = [
+                "", "851 Grand Concourse Bronx, NY 10451", "360 Adams St. Brooklyn, NY 11201",
+                "8811 Sutphin Boulevard, Jamaica, NY 11435"
+            ];
+            return address[boro - 1];
+        };
+        $scope.evalVisible = function(h) {
+            var result = false;
+            if (h.ArrayName) {
+                if ($scope.LegalCase.ForeclosureInfo[h.ArrayName]) {
+                    angular.forEach($scope.LegalCase.ForeclosureInfo[h.ArrayName],
+                        function(el, idx) {
+                            result = result || (el[h.Name] == (h.CallFunc === "true"));
+                        });
+                }
+            } else {
+                result = $scope.$eval(h.CallFunc);
+            }
+            return result;
+        };
+
+        angular.forEach($scope.hSummery,
+            function(el, idx) {
+                $scope.$watch(function() { return $scope.evalVisible(el); },
+                    function(newV) {
+                        el.visible = newV;
+                    });
+            });
+        $scope.GetCaseInfo = function() {
+            var CaseInfo = { Name: "", Address: "" };
+            var caseName = $scope.LegalCase.CaseName;
+            if (caseName) {
+                CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, "");
+                var matched = caseName.match(/-(?!.*-).*$/);
+                if (matched && matched[0]) {
+                    CaseInfo.Name = matched[0].replace("-", "");
+                }
+            }
+            return CaseInfo;
+        };
+        $scope.AddArrayItem = function(model) {
+            model = model || [];
+            model.push({});
+        };
+        $scope.DeleteItem = function(model, index) {
+            model.splice(index, 1);
+        };
+        $scope.isLess08292013 = false;
+        $scope.isBigger08302013 = false;
+        $scope.isBigger03012015 = false;
+        $scope.showSAndCFormFlag = false;
+
+        $scope.showSAndCFrom = function() {
+            var date = new Date($scope.LegalCase.ForeclosureInfo.SAndCFiledDate);
+            if (date - new Date("08/29/2013") > 0) {
+                $scope.isLess08292013 = false;
+            } else {
+                $scope.isLess08292013 = true;
+            }
+            if ($scope.isLess08292013) {
+                $scope.isBigger08302013 = false;
+            } else {
+                $scope.isBigger08302013 = true;
+            }
+            if (date - new Date("03/01/2015") > 0) {
+                $scope.isBigger03012015 = true;
+            } else {
+                $scope.isBigger03012015 = false;
+            }
+            $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
+        };
+        $scope.HighLightStauts = function(model, index) {
+            return parseInt(model) > index ? true : false;
+        };
+        $scope.addToEstateMembers = function(index) {
+            $scope.LegalCase.ForeclosureInfo.MembersOfEstate
+                .push({ "id": index, "name": $scope.LegalCase.membersText });
+            $scope.LegalCase.membersText = "";
+        };
+        $scope.delEstateMembers = function(index) {
+            $scope.LegalCase.ForeclosureInfo.MembersOfEstate.splice(index, 1);
+        };
+        $scope.ShowECourts = function(borough) {
+            $http.post("/CallBackServices.asmx/GetBroughName", { bro: $scope.LegalCase.PropertyInfo.Borough })
+                .success(function(data) {
+                    var urls = [
+                        "http://bronxcountyclerkinfo.com/law/UI/User/lne.aspx",
+                        " http://iapps.courts.state.ny.us/kcco/", " https://iapps.courts.state.ny.us/qcco/"
+                    ];
+                    var url = urls[borough - 2];
+                    var title = $scope.LegalCase.CaseName;
+                    var subTitle = " (" +
+                        "Brough: " +
+                        data.d +
+                        " Block: " +
+                        $scope.LegalCase.PropertyInfo.Block +
+                        " Lot: " +
+                        $scope.LegalCase.PropertyInfo.Lot +
+                        ")";
+                    ShowPopupMap(url, title, subTitle);
+                });
+        };
+        $scope.missingItems = [
+            { id: 1, label: "Mortgage" },
+            { id: 2, label: "Note" },
+            { id: 3, label: "Assignment" },
         ];
-        $scope.DocGenerator2 = function (tplName, data, successFunc) {
-            $http.post("/Services/Documents.svc/DocGenrate", {
-                "tplName": tplName,
-                "data": JSON.stringify(data)
-            }).success(function (data) {
-                successFunc(data);
-            }).error(function (data, status) {
-                alert("Fail to save data. status: " + status + " Error : " + JSON.stringify(data));
-            });
-        };
-        var tpl = Tpls.filter(function (o) { return o.tplName == tplName })[0];
 
-        if (tpl) {
-            for (var v in tpl.data) {
-                var filed = tpl.data[v];
-                if (!filed) {
-                    alert("Some data missing please check " + v + "Please check!")
-                    return;
+        $scope.updateMissInCertValue = function(value) {
+            $scope.LegalCase.ForeclosureInfo.MissInCert = value;
+        };
+        $scope.checkMissInCertValue = function() {
+            if ($scope.LegalCase.ForeclosureInfo.MortNoteAssInCert) return false;
+            if (!$scope.LegalCase.ForeclosureInfo.MissInCert || $scope.LegalCase.ForeclosureInfo.MissInCert.length == 0)
+                return true;
+            else return false;
+        };
+        $scope.initMissInCert = function() {
+            return {
+                dataSource: $scope.missingItems,
+                valueExpr: "id",
+                displayExpr: "label",
+                onValueChanged: function(e) {
+                    e.model.updateMissInCertValue(e.values);
                 }
-            }
-            $scope.DocGenerator2(tpl.tplName, tpl.data, function (url) {
-                STDownloadFile(url, tpl.tplName.replace("Template", ""));
+            };
+        };
+        $scope.ShowAddPopUp = function(event) {
+            $scope.addCommentTxt = "";
+            aspxAddLeadsComments.ShowAtElement(event.target);
+        };
+        $scope.SaveLegalComments = function() {
+
+            $scope.LegalCase.LegalComments.push({
+                id: $scope.LegalCase.LegalComments.length + 1,
+                Comment: $scope.addCommentTxt
             });
-        } else {
-            alert("can find tlp " + tplName)
-        }
-    }
-
-    $scope.CheckSecondaryTags = function (tag) {
-        return $scope.LegalCase.SecondaryTypes.filter(function (t) { return t == tag })[0];
-    }
-    $scope.GetCourtAddress = function (boro) {
-        var address = ['', '851 Grand Concourse Bronx, NY 10451', '360 Adams St. Brooklyn, NY 11201', '8811 Sutphin Boulevard, Jamaica, NY 11435'];
-        return address[boro - 1];
-    }
-
-    $scope.evalVisible = function (h) {
-        var result = false;
-        if (h.ArrayName) {
-            if ($scope.LegalCase.ForeclosureInfo[h.ArrayName]) {
-                angular.forEach($scope.LegalCase.ForeclosureInfo[h.ArrayName], function (el, idx) {
-                    result = result || (el[h.Name] == (h.CallFunc === 'true'));
-                })
-            }
-        } else {
-            result = $scope.$eval(h.CallFunc);
-        }
-        return result;
-    };
-
-    angular.forEach($scope.hSummery, function (el, idx) {
-        $scope.$watch(function () { return $scope.evalVisible(el); }, function (newV) {
-            el.visible = newV;
-        })
-
-    })
-
-    $scope.GetCaseInfo = function () {
-        var CaseInfo = { Name: '', Address: '' }
-        var caseName = $scope.LegalCase.CaseName
-        if (caseName) {
-            CaseInfo.Address = caseName.replace(/-(?!.*-).*$/, '');
-            var matched = caseName.match(/-(?!.*-).*$/);
-            if (matched && matched[0]) {
-                CaseInfo.Name = matched[0].replace('-', '')
-            }
-        }
-        return CaseInfo;
-    }
-
-    $scope.AddArrayItem = function (model) {
-        model = model || [];
-        model.push({});
-    }
-    $scope.DeleteItem = function (model, index) {
-        model.splice(index, 1);
-    }
-
-    $scope.isLess08292013 = false;
-    $scope.isBigger08302013 = false;
-    $scope.isBigger03012015 = false;
-    $scope.showSAndCFormFlag = false;
-
-    $scope.showSAndCFrom = function () {
-        var date = new Date($scope.LegalCase.ForeclosureInfo.SAndCFiledDate);
-        if (date - new Date("08/29/2013") > 0) {
-            $scope.isLess08292013 = false;
-        } else {
-            $scope.isLess08292013 = true;
-        }
-        if ($scope.isLess08292013) {
-            $scope.isBigger08302013 = false;
-        } else {
-            $scope.isBigger08302013 = true;
-        } if (date - new Date("03/01/2015") > 0) {
-            $scope.isBigger03012015 = true;
-        } else {
-            $scope.isBigger03012015 = false;
-        }
-        $scope.showSAndCFormFlag = $scope.isLess08292013 | $scope.isBigger08302013 | $scope.isBigger03012015;
-    };
-    $scope.HighLightStauts = function (model, index) {
-        return parseInt(model) > index ? true : false;
-    };
-    $scope.addToEstateMembers = function (index) {
-        $scope.LegalCase.ForeclosureInfo.MembersOfEstate.push({ "id": index, "name": $scope.LegalCase.membersText });
-        $scope.LegalCase.membersText = '';
-    }
-    $scope.delEstateMembers = function (index) {
-        $scope.LegalCase.ForeclosureInfo.MembersOfEstate.splice(index, 1);
-    }
-    $scope.ShowECourts = function (borough) {
-        $http.post('/CallBackServices.asmx/GetBroughName', { bro: $scope.LegalCase.PropertyInfo.Borough }).success(function (data) {
-            var urls = ['http://bronxcountyclerkinfo.com/law/UI/User/lne.aspx', ' http://iapps.courts.state.ny.us/kcco/', ' https://iapps.courts.state.ny.us/qcco/'];
-            var url = urls[borough - 2];
-            var title = $scope.LegalCase.CaseName;
-            var subTitle = ' (' + 'Brough: ' + data.d + ' Block: ' + $scope.LegalCase.PropertyInfo.Block + ' Lot: ' + $scope.LegalCase.PropertyInfo.Lot + ')';
-            ShowPopupMap(url, title, subTitle);
-        })
-
-    }
-
-    $scope.missingItems = [
-        { id: 1, label: "Mortgage" },
-        { id: 2, label: "Note" },
-        { id: 3, label: "Assignment" },
-    ];
-
-    $scope.updateMissInCertValue = function (value) {
-        $scope.LegalCase.ForeclosureInfo.MissInCert = value;
-    }
-
-    $scope.checkMissInCertValue = function () {
-        if ($scope.LegalCase.ForeclosureInfo.MortNoteAssInCert) return false;
-        if (!$scope.LegalCase.ForeclosureInfo.MissInCert || $scope.LegalCase.ForeclosureInfo.MissInCert.length == 0)
-            return true;
-        else return false;
-    }
-
-    $scope.initMissInCert = function () {
-        return {
-            dataSource: $scope.missingItems,
-            valueExpr: 'id',
-            displayExpr: 'label',
-            onValueChanged: function (e) {
-                e.model.updateMissInCertValue(e.values);
+            $scope.SaveLegal(function() {
+                console.log("ADD comments" + $scope.addCommentTxt);
+                aspxAddLeadsComments.Hide();
+            });
+        };
+        $scope.DeleteComments = function(index) {
+            $scope.LegalCase.LegalComments.splice(index, 1);
+            $scope.SaveLegal(function() {
+                console.log("Deleted comments");
+            });
+        };
+        $scope.AddActivityLog = function() {
+            if (typeof AddActivityLog === "function") {
+                AddActivityLog($scope.MustAddedComment);
             }
         };
-    }
-
-    $scope.ShowAddPopUp = function (event) {
-        $scope.addCommentTxt = "";
-        aspxAddLeadsComments.ShowAtElement(event.target);
-    }
-
-    $scope.SaveLegalComments = function () {
-
-        $scope.LegalCase.LegalComments.push({ id: $scope.LegalCase.LegalComments.length + 1, Comment: $scope.addCommentTxt });
-        $scope.SaveLegal(function () {
-            console.log("ADD comments" + $scope.addCommentTxt);
-            aspxAddLeadsComments.Hide();
-        });
-    }
-
-    $scope.DeleteComments = function (index) {
-        $scope.LegalCase.LegalComments.splice(index, 1);
-        $scope.SaveLegal(function () {
-            console.log("Deleted comments");
-        });
-    }
-
-
-    $scope.AddActivityLog = function () {
-        if (typeof AddActivityLog === "function") {
-            AddActivityLog($scope.MustAddedComment);
-        }
-    }
-
-    $scope.CheckWorkHours = function () {
-        $http.get("/api/WorkingLogs/Legal/" + $scope.LegalCase.BBLE).success(function (data) {
-            $scope.TotleHours = data;
-            $("#WorkPopUp").modal();
-        });
-    }
-
-    $scope.showHistory = function () {
-        var url = "/api/legal/SaveHistories/" + $scope.LegalCase.BBLE;
-        $scope.History = [];
-        $http.get(url).success(function (data) {
-            $scope.History = data;
-            $("#HistoryPopup").modal();
-        })
-    }
-
-    $scope.loadHistoryData = function (logid) {
-        if (logid) {
-            var url = "/api/Legal/HistoryCaseData/" + logid;
-            $http.get(url).success(function (data) {
-                $scope.LegalCase = $.parseJSON(data);
-                var BBLE = $scope.LegalCase.BBLE;
-                if (BBLE) {
-                    var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
-                    var shortsaleUrl = '/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=' + BBLE;
-                    var taxlienUrl = '/api/TaxLiens/' + BBLE;
-                    var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
+        $scope.CheckWorkHours = function() {
+            $http.get("/api/WorkingLogs/Legal/" + $scope.LegalCase.BBLE).success(function(data) {
+                $scope.TotleHours = data;
+                $("#WorkPopUp").modal();
+            });
+        };
+        $scope.showHistory = function() {
+            var url = "/api/legal/SaveHistories/" + $scope.LegalCase.BBLE;
+            $scope.History = [];
+            $http.get(url).success(function(data) {
+                $scope.History = data;
+                $("#HistoryPopup").modal();
+            });
+        };
+        $scope.loadHistoryData = function(logid) {
+            if (logid) {
+                var url = "/api/Legal/HistoryCaseData/" + logid;
+                $http.get(url).success(function(data) {
+                    $scope.LegalCase = $.parseJSON(data);
+                    var BBLE = $scope.LegalCase.BBLE;
+                    if (BBLE) {
+                        var leadsInfoUrl = "/ShortSale/ShortSaleServices.svc/GetLeadsInfo?bble=" + BBLE;
+                        var shortsaleUrl = "/ShortSale/ShortSaleServices.svc/GetCaseByBBLE?bble=" + BBLE;
+                        var taxlienUrl = "/api/TaxLiens/" + BBLE;
+                        var legalecoursUrl = "/api/LegalECourtByBBLE/" + BBLE;
 
 
-                    $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
-                    $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
-                    $scope.LogChange = {
-                        'TaxLienFCStatus': { "old": $scope.LegalCase.TaxLienFCStatus, "now": function () { return $scope.LegalCase.TaxLienFCStatus; }, "msg": 'Tax Lien FC Status changed from ' },
-                        'CaseStauts': { "old": $scope.LegalCase.CaseStauts, "now": function () { return $scope.LegalCase.CaseStauts; }, "msg": 'Mortgae foreclosure Status changed from ' }
-                    }
-                    var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
-                    for (a in arrays) {
-                        var porp = arrays[a]
-                        var array = $scope.LegalCase.ForeclosureInfo[porp];
-                        if (!array || array.length === 0) {
-                            $scope.LegalCase.ForeclosureInfo[porp] = [];
-                            $scope.LegalCase.ForeclosureInfo[porp].push({});
+                        $scope.LegalCase.LegalComments = $scope.LegalCase.LegalComments || [];
+                        $scope.LegalCase.ForeclosureInfo = $scope.LegalCase.ForeclosureInfo || {};
+                        $scope.LogChange = {
+                            'TaxLienFCStatus': {
+                                "old": $scope.LegalCase.TaxLienFCStatus,
+                                "now": function() { return $scope.LegalCase.TaxLienFCStatus; },
+                                "msg": "Tax Lien FC Status changed from "
+                            },
+                            'CaseStauts': {
+                                "old": $scope.LegalCase.CaseStauts,
+                                "now": function() { return $scope.LegalCase.CaseStauts; },
+                                "msg": "Mortgae foreclosure Status changed from "
+                            }
+                        };
+                        var arrays = ["AffidavitOfServices", "Assignments", "MembersOfEstate"];
+                        for (var a in arrays) {
+                            var porp = arrays[a];
+                            var array = $scope.LegalCase.ForeclosureInfo[porp];
+                            if (!array || array.length === 0) {
+                                $scope.LegalCase.ForeclosureInfo[porp] = [];
+                                $scope.LegalCase.ForeclosureInfo[porp].push({});
+                            }
                         }
+                        $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || [];
+                        $scope.showSAndCFrom();
+
+                        $http.get(shortsaleUrl)
+                            .success(function(data) {
+                                $scope.ShortSaleCase = data;
+                            }).error(function() {
+                                alert("Fail to Short sale case  data : " + BBLE);
+                            });
+
+
+                        $http.get(leadsInfoUrl)
+                            .success(function(data) {
+                                $scope.LeadsInfo = data;
+                                $scope.LPShow = $scope.ModelArray("LeadsInfo.LisPens");
+                            }).error(function(data) {
+                                alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
+                            });
+
+                        $http.get(taxlienUrl)
+                            .success(function(data) {
+                                $scope.TaxLiens = data;
+                                $scope.TaxLiensShow = $scope.ModelArray("TaxLiens");
+                            }).error(function(data) {
+                                alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
+                            });
+
+                        $http.get(legalecoursUrl)
+                            .success(function(data) {
+                                $scope.LegalECourt = data;
+                            }).error(function() {
+                                $scope.LegalECourt = null;
+                            });
+
+                        LegalCaseBBLE = BBLE;
                     }
-                    $scope.LegalCase.SecondaryTypes = $scope.LegalCase.SecondaryTypes || []
-                    $scope.showSAndCFrom();
+                }).error(function() {
+                    alert("Fail to load data : ");
+                });
 
-                    $http.get(shortsaleUrl)
-                        .success(function (data) {
-                            $scope.ShortSaleCase = data;
-                        }).error(function () {
-                            alert("Fail to Short sale case  data : " + BBLE);
-                        });
+            }
 
 
-
-                    $http.get(leadsInfoUrl)
-                        .success(function (data) {
-                            $scope.LeadsInfo = data;
-                            $scope.LPShow = $scope.ModelArray('LeadsInfo.LisPens');
-                        }).error(function (data) {
-                            alert("Get Short Sale Leads failed BBLE =" + BBLE + " error : " + JSON.stringify(data));
-                        });
-
-                    $http.get(taxlienUrl)
-                        .success(function (data) {
-                            $scope.TaxLiens = data;
-                            $scope.TaxLiensShow = $scope.ModelArray('TaxLiens');
-                        }).error(function (data) {
-                            alert("Get Tax Liens failed BBLE = " + BBLE + " error : " + JSON.stringify(data));
-                        });
-
-                    $http.get(legalecoursUrl)
-                        .success(function (data) {
-                            $scope.LegalECourt = data;
-                        }).error(function () {
-                            $scope.LegalECourt = null;
-                        });
-
-                    LegalCaseBBLE = BBLE;
+        };
+        $scope.openHistoryWindow = function(logid) {
+            $window.open("/LegalUI/Legalinfo.aspx?logid=" + logid, "_blank", "width=1024, height=768");
+        };
+    }
+]);
+angular.module("PortalApp").controller("MainCtrl",
+    ["$rootScope", "$uibModal", "$timeout", "$state",
+        function ($rootScope, $uibModal, $timeout, $state) {
+            $rootScope.scope = $rootScope;
+            $rootScope.globaldata = {};
+            $rootScope.AlertModal = null;
+            $rootScope.ConfirmModal = null;
+            $rootScope.loadingCover = document.getElementById("LodingCover");
+            $rootScope.panelLoading = false;
+            $rootScope.isPromptModalArea = false;
+            $rootScope.loadPanelPosition = (function () {
+                var dataPanelDiv = document.getElementById("dataPanelDiv");
+                if (dataPanelDiv != null) {
+                    return { of: "#dataPanelDiv" };
+                } else {
+                    return { of: "body" };
                 }
-            }).error(function () {
-                alert("Fail to load data : ");
-            });
+            })();
+            $rootScope.$state = $state;
+            $rootScope.alert = function (message) {
+                $rootScope.alertMessage = message ? message : "";
+                $rootScope.AlertModal = $uibModal.open({
+                    templateUrl: "AlertModal"
+                });
+            };
+            $rootScope.alertOK = function () {
+                $rootScope.AlertModal.close();
+            };
+            $rootScope.confirm = function (message, confrimFunc) {
+                $rootScope.confirmMessage = message ? message : "";
+                $rootScope.ConfirmModal = $uibModal.open({
+                    templateUrl: "ConfirmModal"
+                });
+                $rootScope.ConfirmModal.confrimFunc = confrimFunc;
+                return $rootScope.ConfirmModal.result;
+            };
+            $rootScope.confirmYes = function () {
+                $rootScope.ConfirmModal.close(true);
+                if ($rootScope.ConfirmModal.confrimFunc) {
+                    $rootScope.ConfirmModal.confrimFunc(true);
+                }
 
-        }
+            };
+            $rootScope.confirmNo = function () {
+                $rootScope.ConfirmModal.close(false);
+                if ($rootScope.ConfirmModal.confrimFunc) {
+                    $rootScope.ConfirmModal.confrimFunc(false);
+                }
+            };
+            $rootScope.prompt = function (message, callback, /*optional*/ showArea) {
+                $rootScope.promptMessage = message ? message : "";
+                $rootScope.promptModalTxt = "";
+                $rootScope.isPromptModalArea = showArea || false;
+                $rootScope.promptModal = $uibModal.open({
+                    templateUrl: "PromptModal"
+                });
+                $rootScope.promptModal.promptFunc = callback;
 
+            };
+            $rootScope.promptYes = function () {
+                $rootScope.promptModal.close($rootScope.promptModalTxt);
+                if ($rootScope.promptModal.promptFunc) {
+                    //UI Modal use async call send result so use jquery instand now 
+                    $rootScope.promptModal.promptFunc($("#promptModalTxt").val());
+                }
 
-    }
-
-    $scope.openHistoryWindow = function (logid) {
-        $window.open('/LegalUI/Legalinfo.aspx?logid=' + logid, '_blank', 'width=1024, height=768')
-    }
-}]);
-
+            };
+            $rootScope.promptNo = function () {
+                $rootScope.promptModal.close(false);
+                if ($rootScope.promptModal.promptFunc) {
+                    $rootScope.promptModal.promptFunc(null);
+                }
+            };
+            $rootScope.showLoading = function (divId) {
+                $($rootScope.loadingCover).show();
+            };
+            $rootScope.hideLoading = function (divId) {
+                $($rootScope.loadingCover).hide();
+            };
+            $rootScope.toggleLoading = function () {
+                $timeout(function () {
+                    $rootScope.panelLoading = !$scope.panelLoading;
+                });
+            };
+            $rootScope.startLoading = function () {
+                $timeout(function () {
+                    $rootScope.panelLoading = true;
+                });
+            };
+            $rootScope.stopLoading = function () {
+                $timeout(function () {
+                    $rootScope.panelLoading = false;
+                });
+            };
+        }]);
+// global item will be called by datagrid celltemplete functions
 var PreSignHelper = (function () {
     var onAccoutingReview = function (cellinfo) {
         var element = angular.element('#pt-preassign-accouting-ctrl');
@@ -5375,6 +6371,7 @@ portalApp.config(function (portalRouteProvider) {
     var newPreSignResolve = ['$route', 'PreSign', function ($route, PreSign) {
         var preSign = new PreSign();
         preSign.BBLE = $route.current.params.BBLE.toString();
+        // debugger;
         return preSign;
     }];
 
@@ -5390,22 +6387,44 @@ portalApp.config(function (portalRouteProvider) {
         return PreSign.financeList();
     }];
 
+    /***
+     * Leave this for example that nomal router resgister   
+     **/
+    //$routeProvider.when('/preAssign/new', {
+    //    templateUrl: '/js/Views/preAssign/preassign-edit.tpl.html',
+    //    controller: 'preAssignEditCtrl',
+    //    resolve:{BBLE:BBLE},
+    //})
 
     var config = portalRouteProvider.routesFor('preAssign')
+        // /preassign/new?BBLE=BBLE becuse javascript case sensitive
+        // so the portalRouteProvider url should be lower case
+        // #/preassign/new?BBLE=123456789
         .whenNew({ PreSignItem: newPreSignResolve })
+        // #/preassign/28
         .whenEdit({ PreSignItem: preSignItemResolve })
+        // #/preassign/view/28
         .whenView({ PreSignItem: preSignItemResolve })
+        // #/preassign
         .whenList({ PreSignList: preSignListResolve })
+        // #/preassign/finance/list
+        // I don not know why need the suffix url list
+        // otherwise it will go to edit view
         .whenOther({ PreSignFinaceList: preSignFinanceListResolve }, 'Finance', 'list')
+    //.when({BBLE:BBLE})
 
 });
+/**************************************** constant define *********************************/
+/* do not change constant value , if you want change make a copy and change copied object */
 var CONSTANT_ASSIGN_PARTIES_GRID_OPTION = {
     bindingOptions: {
         dataSource: 'preAssign.Parties'
     },
+    //dataSource: $scope.preAssign.CheckRequestData.Checks,
     paging: {
         pageSize: 10
     },
+    //editing: { insertEnabled: true },//$.extend({}, $scope.gridEdit),
     pager: {
         showPageSizeSelector: true,
         allowedPageSizes: [5, 10, 20],
@@ -5435,10 +6454,12 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION = {
         dataSource: 'preAssign.CheckRequestData.Checks',
     },
     sorting: { mode: 'none' },
+    //dataSource: $scope.preAssign.CheckRequestData.Checks,
     paging: {
         pageSize: 10
     },
 
+    // editing: $scope.gridEdit,
     pager: {
 
         showInfo: true
@@ -5475,6 +6496,7 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION = {
         dataField: 'Comments',
         caption: 'Void Reason'
     }],
+    //show avoid check any time
     initEdit: function () {
         var self = this;
         var voidReasonColumn = {
@@ -5491,7 +6513,7 @@ var CONSTANT_ASSIGN_CHECK_GRID_OPTION = {
             if (options.name == 'SumAmount') {
                 options.totalValue = _.sum(_.filter(options.component._options.dataSource, function (o) {
                     return o.Status != 1;
-                }), "Amount"); 
+                }), "Amount"); //$scope.CheckTotalAmount();
             }
         },
         totalItems: [{
@@ -5537,6 +6559,8 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
             $('<a/>').addClass('dx-link-MyIdealProp')
                 .text(options.value)
                 .on('dxclick', function () {
+                    //Do something with options.data;
+                    //ShowCaseInfo(options.data.BBLE);
                     var request = options.data;
                     PortalUtility.OpenWindow('/NewOffer/HomeownerIncentive.aspx#/preassign/view/' + request.Id, 'Pre Sign ' + request.BBLE, 800, 900);
                 })
@@ -5562,19 +6586,39 @@ var CONSTANT_ASSIGN_LIST_GRID_OPTION = {
     wordWrapEnabled: true
 }
 
+/**************************************** end constant define ******************************/
+/**
+ * HOI name histroy
+ * Now the pre Assign is named HIO
+ * But the version name history is 
+ * if in code or file named 
+ * please maintenance this list blow if the name changed again 
+ * pre sssign == pre sign ==  pre deal == HOI
+ * 1. pre assign
+ * 2. pre sign  
+ * 3. pre deal
+ * 4. HOI
+ *
+ **/
 
 portalApp.controller('preAssignEditCtrl', ['$scope', 'ptCom', 'PreSignItem', 'DxGridModel', '$location', 'PortalHttpInterceptor', '$http',
 function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpInterceptor, $http) {
-
-        $scope.preAssign = PreSignItem;
+    
+    $scope.preAssign = PreSignItem;
     $scope.preAssign.CreateBy = $scope.preAssign.CreateBy || $('#currentUser').val();
     $scope.preAssign.CheckRequestData = $scope.preAssign.CheckRequestData || { Type: 'Short Sale', Checks: [] };
-    if (!$scope.preAssign.Id) {
-        $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
-        $scope.preAssign.Parties = [];
-        $scope.preAssign.NeedSearch = true;
-        $scope.preAssign.NeedCheck = true;
+    if ($scope.preAssign.$promise) {
+        $scope.preAssign.$promise.then(function() {
+            if (!$scope.preAssign.Id) {
+                $scope.preAssign.CheckRequestData = { Type: 'Short Sale', Checks: [] };
+                $scope.preAssign.Parties = [];
+                $scope.preAssign.NeedSearch = true;
+                $scope.preAssign.NeedCheck = true;
+            }
+        });
     }
+
+    // debugger;
     if ($scope.preAssign.BBLE) {
         $http.get('/api/Leads/LeadsInfo/' + $scope.preAssign.BBLE, { options: { noError: true } })
              .then(function (d) {
@@ -5601,12 +6645,16 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
 
     }
 
+    // check if we need redirect
     $scope.CheckByBBLE = function () {
         var preAssign = $scope.preAssign;
+        // preAssign have already been requested, now in edit mode.
         if (preAssign.$promise != null) {
             return;
         }
+        // if we can get result from database, redirect to view mode.
         if (preAssign.Id == 0 || preAssign.Id == null) {
+            // debugger;
             preAssign.$getByBBLE(function () {
                 $location.path('/preassign/view/' + preAssign.Id);
             })
@@ -5717,6 +6765,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
             e.rowElement.addClass('avoid-check');
         }
     }
+    // add class to cross out void items
     $scope.checkGridOptions.onEditingStart = function (e) {
         if (e.data.Status == 1 || e.data.CheckId) {
             e.cancel = true;
@@ -5727,6 +6776,9 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         var cancel = false;
         e.data.RequestId = $scope.preAssign.CheckRequestData.RequestId;
         e.data.Date = new Date(e.data.Date).toISOString();
+        // can not use anguler model here
+        // for devextreme 15.1 only can use sync call for control the event of grid 
+        // when we moved to 16.1 grid view support 'promise' it can change to ng model function
         var response = $.ajax({
             url: '/api/PreSign/' + $scope.preAssign.Id + '/AddCheck/' + $scope.preAssign.NeedCheck,
             type: 'POST',
@@ -5739,7 +6791,8 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
                 e.component.refresh();
                 var pageExpectedDate = $scope.preAssign.ExpectedDate;
                 var pageParties = $scope.preAssign.Parties;
-                angular.extend($scope.preAssign, data) 
+                //$scope.preAssign.CheckRequestData.RequestId = data.RequestId
+                angular.extend($scope.preAssign, data) //.CheckRequestId = data.RequestId
                 if (pageExpectedDate) {
                     $scope.preAssign.ExpectedDate = pageExpectedDate;
 
@@ -5758,6 +6811,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         return cancel;
     }
     $scope.CancelCheck = function (e) {
+        // debugger;
         if (e.data.Status == 1) {
             $('#gridChecks').dxDataGrid('instance').refresh();
             return;
@@ -5772,6 +6826,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
                     dataType: "json",
                     async: false,
                     success: function (data, textStatus, xhr) {
+                        // debugger;
                         e.data.Status = 1;
                         e.data.Comments = voidReason;
                         $('#gridChecks').dxDataGrid('instance').refresh();
@@ -5786,19 +6841,24 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
 
+    // code for if in edit mode but not new mode, 
     if ($location.path().indexOf('new') < 0) {
         $scope.checkGridOptions.onRowInserting = $scope.AddCheck;
+        // add Accouting Function under editing mode
         var accounting_col = {
             caption: 'Accouting',
             cellTemplate: function (cellElement, cellInfo) {
                 var checkId = cellInfo.data && cellInfo.data.CheckId;
                 var Status = cellInfo.data && cellInfo.data.Status;
+                // condition to view button
+                // if check is not void, accouting priviledge see viewContentLoaded event
                 if (!checkId || Status == 1) return;
                 var $button = $('<span type="button" class="btn btn-sm btn-default">').text('Process').on("click", $.proxy(PreSignHelper.onAccoutingReview, this, cellInfo));
                 cellElement.append($button);
             },
             visible: false,
         }
+        // move void from delete button to a seperate column.
         var void_col = {
             caption: 'Void',
             cellTemplate: function (cellElement, cellInfo) {
@@ -5817,7 +6877,10 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         }
         $scope.scopeColumns.push(accounting_col);
         $scope.scopeColumns.push(void_col);
+        // prevent change from yes to no for check request.
+        // debugger;
         $scope.$watch('preAssign.NeedCheck', function (newvalue, oldvalue) {
+            //debugger;
             if (oldvalue == true && newvalue == false) {
                 $scope.preAssign.NeedCheck = true;
                 ptCom.alert("Cannot change check request from yes to no.")
@@ -5832,6 +6895,7 @@ function ($scope, ptCom, PreSignItem, DxGridModel, $location, PortalHttpIntercep
         if (checkGrid) {
             checkGrid.refresh();
         }
+        // check if user is an accountant, magic number 6!!
         var accoutingMode = $("#accoutingMode");
         if (accoutingMode.length > 0 && $location.path().indexOf('new') < 0) {
             $scope.scopeColumns[6].visible = true;
@@ -5858,6 +6922,7 @@ function ($scope, PreSignItem, DxGridModel, CheckRequest) {
             showInfo: true
         },
         wordWrapEnabled: true,
+        //show avoid check any time
         initEdit: function () {
             var self = this;
             var voidReasonColumn = {
@@ -5959,7 +7024,9 @@ function ($scope, PreSignItem, DxGridModel, CheckRequest) {
         $("#preDealForm select").prop("disabled", true);
 
     });
+    // prevent check request change on view mode
     $scope.$watch('preAssign.NeedCheck', function (newvalue, oldvalue) {
+        //debugger;
         if (oldvalue != null) {
             $scope.preAssign.NeedCheck = oldvalue;
         }
@@ -6043,6 +7110,7 @@ function ($scope, $http, $uibModal, ptCom) {
     $scope.cellinfo = {};
     $scope.editmode = false;
     $scope.toggleEdit = function () {
+        //debugger;
         if ($scope.editmode) {
             $scope.editmode = false;
         } else {
@@ -6050,6 +7118,7 @@ function ($scope, $http, $uibModal, ptCom) {
         }
     }
     $scope.load = function (cellinfo) {
+        // debugger;
         $scope.cellinfo = cellinfo;
         $scope.editmode = false;
         if ($scope.cellinfo.data.Status == 0) {
@@ -6059,6 +7128,7 @@ function ($scope, $http, $uibModal, ptCom) {
             $scope.editmode = true;
         }
 
+        // debugger;
         $scope.modal = $uibModal.open({
             templateUrl: 'pt-preassign-accouting-modal',
             scope: $scope
@@ -6075,6 +7145,7 @@ function ($scope, $http, $uibModal, ptCom) {
                         data: $scope.cellinfo.data
                     }).then(
                        function (d) {
+                           // debugger;
                            $scope.cellinfo.data.Status = 2;
                            $('#gridChecks').dxDataGrid('instance').refresh();
                            ptCom.alert("Save Successful");
@@ -6087,6 +7158,7 @@ function ($scope, $http, $uibModal, ptCom) {
         $('#gridChecks').dxDataGrid('instance').refresh();
     }
     $scope.closeModal = function () {
+        // debugger;
         if ($scope.modal) {
             $scope.modal.close();
         }
@@ -6094,7 +7166,9 @@ function ($scope, $http, $uibModal, ptCom) {
 
 }])
 
+/** fucking below is uesless! **/
 
+/*************************old style contoller******************************/
 portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterceptor, $http) {
 
     $scope.showHistroy = function () {
@@ -6102,7 +7176,7 @@ portalApp.controller('preAssignCtrl', function ($scope, ptCom, PortalHttpInterce
     }
 
 });
-
+/*************************end old style contoller**************************/
 angular.module('PortalApp')
 .controller("ReportWizardCtrl", function ($scope, $http, $timeout, ptCom) {
     $scope.camel = _.camelCase;
@@ -6144,7 +7218,7 @@ angular.module('PortalApp')
             }
         }
 
-    }; 
+    }; // load saved query
     $scope.load = function (q) {
         $scope.reload(
             function () {
@@ -6464,11 +7538,12 @@ angular.module("PortalApp")
             if ($scope.bankNameOptions) {
                 $scope.bankNameOptions.push({Name:'N/A'});
             }
-
-         }).error(function (data) {
+ 
+        }).error(function (data) {
             $scope.bankNameOptions = [];
         });
         $scope.ensurePush = function (modelName, data) { ptCom.ensurePush($scope, modelName, data); }
+        //move to construction - add by chris
         $scope.MoveToConstruction = function (scuessfunc) {
             var json = $scope.SsCase;
             var data = { bble: leadsInfoBBLE };
@@ -6499,7 +7574,7 @@ angular.module("PortalApp")
                 }).error(function (data1, status) {
                     ptCom.alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data1));
                 });
-        }; 
+        }; // -- end --
 
         $scope.GetShortSaleCase = function (caseId, callback) {
             if (!caseId) {
@@ -6538,7 +7613,7 @@ angular.module("PortalApp")
                         }
                     }).error(function (data1) {
                         ptCom.stopLoading();
-                        console.log("Fail to load data : " + leadsInfoBBLE + " :" + JSON.stringify(data1)); 
+                        console.log("Fail to load data : " + leadsInfoBBLE + " :" + JSON.stringify(data1)); // alert("Fail to load data : " + leadsInfoBBLE + " :" + 
                     });
                 }).error(function (data) {
                     ptCom.stopLoading();
@@ -6569,6 +7644,7 @@ angular.module("PortalApp")
             }
         };
 
+        //-- auto save function, add by Chris ---
         var UpdatedProperties = ['UpdateTime', 'UpdateDate', 'UpdateBy', 'OwnerId', 'MortgageId', 'OfferId', 'ValueId', 'CallbackDate', 'LastUpdate'];
         var autoSaveError = false;
 
@@ -6579,8 +7655,10 @@ angular.module("PortalApp")
             $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function (data) {
                         autoSaveError = false;
+                        // Remove deleted mortgages
                         RemoveDeletedMortgages();
 
+                        //Sync objects
                         SyncObjects(data, $scope.SsCase);
 
                         if (!callback) {
@@ -6606,6 +7684,7 @@ angular.module("PortalApp")
         var SyncObjects = function (obj, toObj) {
             var copy = toObj;
 
+            // Handle Date
             if (obj instanceof Date) {
                 if (copy == null)
                     copy = new Date();
@@ -6616,6 +7695,7 @@ angular.module("PortalApp")
                 return;
             }
 
+            // Handle Array
             if (obj instanceof Array) {
                 if (copy == null)
                     copy = [];
@@ -6627,6 +7707,7 @@ angular.module("PortalApp")
                 return;
             }
 
+            // Handle Object
             if (obj instanceof Object) {
                 if (copy == null)
                     copy = {};
@@ -6636,6 +7717,7 @@ angular.module("PortalApp")
                         if (null == obj[attr] || "object" != typeof obj[attr]) {
                             if (typeof copy[attr] == 'undefined' || copy[attr] == null || copy[attr] != obj[attr]) {
                                 if (UpdatedProperties.indexOf(attr) > 0) {
+                                    //console.log("Changed: " + attr + " from " + copy[attr] + " to " + obj[attr]);
                                     copy[attr] = obj[attr];
                                 }
                             }
@@ -6651,6 +7733,7 @@ angular.module("PortalApp")
 
             throw new Error("Unable to copy obj! Its type isn't supported.");
         }
+        //--- end auto save function ---
 
         $scope.SaveShortSale = function (callback) {
             var json = $scope.SsCase;
@@ -6658,6 +7741,7 @@ angular.module("PortalApp")
 
             $http.post('ShortSaleServices.svc/SaveCase', JSON.stringify(data)).
                     success(function () {
+                        // if save scuessed load data again                      
                         $scope.GetShortSaleCase($scope.SsCase.CaseId);
                         if (!callback) {
                             ptCom.alert("Save Successed !");
@@ -6728,8 +7812,9 @@ angular.module("PortalApp")
             $scope.$apply(function () {
                 $scope.Approval_popupVisible = !$scope.Approval_popupVisible;
             });
-        }; 
+        }; /* end approval popup */
 
+        /* valuation popup */
         $scope.ValuationWatchField = {
             Method: 'Type of Valuation',
             DateOfCall: 'Date of Call',
@@ -6791,7 +7876,7 @@ angular.module("PortalApp")
                     }
 
                 }
-            }); 
+            }); //console.log(updates)
             return updates;
         };
         $scope.restorePendingModified = function () {
@@ -6830,8 +7915,9 @@ angular.module("PortalApp")
                 $scope.ensurePendingValue();
                 $scope.Valuation_popupVisible = !$scope.Valuation_popupVisible;
             });
-        }; 
+        }; /* end valuation popup */
 
+        /* update mortage status */
         $scope.UpdateMortgageStatus = function (selType1, selStatusUpdate, selCategory) {
             var index = 0;
             switch (selType1) {
@@ -6852,16 +7938,13 @@ angular.module("PortalApp")
                 }
 
             });
-        }; 
+        }; /* end update mortage status*/
     }]);
 
 var portalApp = angular.module('PortalApp');
 
 portalApp.config(function (portalUIRouteProvider) {
-
-    portalUIRouteProvider
-        .statesFor('newoffer')
-
+    portalUIRouteProvider.statesFor('newoffer');
 });
 
 
@@ -6875,12 +7958,13 @@ portalApp.controller('newofferCtrl', function ($scope) {
     $scope.text = 'newofferCtrl';
 });
 
+/*************old style without model contoller *********************/
 
 var portalApp = angular.module('PortalApp');
 
 portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
-    ptContactServices, $location,PortalHttpInterceptor,
-
+    ptContactServices, $location, PortalHttpInterceptor,
+    /**** Models *****/
     PropertyOffer
     , WizardStep, Wizard, DivError, LeadsInfo, DocSearch,
     Team, NewOfferListGrid, ScopeHelper, QueryUrl, AssignCorp
@@ -6892,8 +7976,8 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     if ($scope.QueryUrl.model == 'List') {
 
         PropertyOffer.query(function (data) {
+            //$http.get('/api/PropertyOffer').success(function (data) {
             $scope.newOfferGridOpt = new NewOfferListGrid(data);
-
         });
     }
 
@@ -6914,17 +7998,64 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             }
         }
     };
-
-        angular.extend($scope.SSpreSign, new PropertyOffer());
+    
+    angular.extend($scope.SSpreSign, new PropertyOffer());
+    /**
+     * @author Steven
+     * @date   8/19/2016
+     * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
+     * @description
+     *  fix the new offer can not save type
+     *  1.It maybe the bug of NG-resource or angular.extend
+     */
     $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
     $scope.SSpreSign.assignCrop = new AssignCorp();
+    //setTimeout(function () {
+    //    $scope.SSpreSign.Type = 'Short Sale';
+    //    $scope.SSpreSign.FormName = 'PropertyOffer';
+    //    angular.extend($scope.SSpreSign,
+    //        {
+    //            ContractOrMemo: {
+    //                Sellers: [{}],
+    //                Buyers: [{}]
+    //            },
+    //            Deed: {
+    //                Sellers: [{}]
+    //            },
+    //            CorrectionDeed: {
+    //                Sellers: [{}],
+    //                Buyers: [{}]
+    //            }
 
+    //        })
 
+    //    //$scope.SSpreSign = 
+    //}, 1000);
+    /// old ////////////
+    //    {
+    //    Type: 'Short Sale',
+    //    FormName: 'PropertyOffer',
+    //    DealSheet: {
+    //        ContractOrMemo: {
+    //            Sellers: [{}],
+    //            Buyers: [{}]
+    //        },
+    //        Deed: {
+    //            Sellers: [{}]
+    //        },
+    //        CorrectionDeed: {
+    //            Sellers: [{}],
+    //            Buyers: [{}]
+    //        }
+    //    }
+    //};
+    ////////////////////////////
+    //var urlParam = //$location.search(); close html model use my libary
     if (PortalUtility.QueryUrl().BBLE) {
         $scope.DocSearch = DocSearch.get(PortalUtility.QueryUrl());
     }
-
-        $scope.DeadType = {
+    
+    $scope.DeadType = {
         ShortSale: false,
         Contract: true,
         Memo: false,
@@ -6944,8 +8075,10 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             $scope.SSpreSign.Status = 2;
 
             $scope.constractFromData();
+            /*for dowload file frist wait 5 second then redecTo file*/
             $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
                 $scope.refreshSave(formdata);
+                //location.reload();
                 window.location.href = oldUrl;
             });
         })
@@ -6958,6 +8091,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         var _dealSheet = $scope.SSpreSign.DealSheet;
         var eMessages = new DivError('ShortSaleCtrl').getMessage();
 
+        //$scope.getErrorMessage('ShortSaleCtrl');
         if (_.any(eMessages)) {
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
@@ -6965,7 +8099,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         _dealSheet.CorrectionDeed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
         var _sellers = _.map(_sellers, function (o) {
             o.Name = ss.formatName(o.FirstName, o.MiddleName, o.LastName);
-            o.Address = $scope.SSpreSign.PropertyAddress; 
+            o.Address = $scope.SSpreSign.PropertyAddress; //ss.formatAddr(o.MailNumber, o.MailStreetName, o.MailApt, o.MailCity, o.MailState, o.MailZip);
             o.PropertyAddress = $scope.SSpreSign.PropertyAddress;
             return o
         });
@@ -6973,6 +8107,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         _dealSheet.ContractOrMemo.Sellers = $.extend(true, _dealSheet.ContractOrMemo.Sellers || [], _sellers);
         _dealSheet.Deed.Sellers = $.extend(true, _dealSheet.Deed.Sellers || [], _sellers);
         _dealSheet.CorrectionDeed.Sellers = _dealSheet.CorrectionDeed.Sellers || [];
+        //_dealSheet.CorrectionDeed.Sellers = $.extend(true, _dealSheet.CorrectionDeed.Sellers || [], _sellers);
         _dealSheet.Deed.PropertyAddress = $scope.SSpreSign.PropertyAddress;
         return true;
     }
@@ -6985,11 +8120,16 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         });
     }
 
+    // $scope.$watch('SSpreSign.assignCrop.Name', function(newValue, oldValue) {
+    //     if (newValue) {
 
+    //     }
+    // });
 
     $scope.constractFromData = function () {
         var ss = ScopeHelper.getShortSaleScope();
 
+        //var _sellers = ss.SsCase.PropertyInfo.Owners;
         $scope.SSpreSign.DeadType = $scope.DeadType
 
         $scope.SSpreSign.SsCase = ss ? ss.SsCase : null;
@@ -7005,10 +8145,15 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         }
 
         var leadSearch = ScopeHelper.getLeadsSearchScope();
+        //do not copy lead search infomation to assignCrop WellsFargo
+        //$.extend($scope.SSpreSign.assignCrop, {
+        //    isWellsFargo: leadSearch.DocSearch.LeadResearch.wellsFargo
+        //});
         return true;
     }
     $scope.getErrorMessage = function (id) {
         var eMessages = [];
+        /*ignore every parent of has form-ignore*/
         $('#' + id + ' ul:not(.form_ignore) .ss_warning:not(.form_ignore)').each(function () {
             eMessages.push($(this).attr('data-message'));
         });
@@ -7026,6 +8171,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     $scope.DeedNext = function () {
         var deedCrop = $scope.SSpreSign.DealSheet.Deed;
+        /*use like synchronously call*/
 
         if (!deedCrop.EntityId) {
 
@@ -7076,7 +8222,9 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     $scope.onAssignCorpSuccessed = function (data) {
         $scope.SSpreSign.Status = 1;
+        /*should save to data base*/
         $scope.constractFromData();
+        //console.log( JSON.stringify($scope.SSpreSign));
         $http.post('/api/businessform/', JSON.stringify($scope.SSpreSign)).success(function (formdata) {
             $scope.refreshSave(formdata);
         });
@@ -7099,6 +8247,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             AngularRoot.alert(eMessages.join(' <br />'));
             return false;
         }
+        //var assignApi = '/api/CorporationEntities/AvailableCorp?team=' + _assignCrop.Name + '&wellsfargo=' + _assignCrop.isWellsFargo;
         var assignApi = "/api/CorporationEntities/AvailableCorpBySigner?team=" + _assignCrop.Name + "&signer=" + _assignCrop.Signer;
 
         var confirmMsg = ' THIS PROCESS CANNOT BE REVERSED. Please confirm - The team is ' + _assignCrop.Name + ', and servicer is not Wells Fargo.';
@@ -7125,6 +8274,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
     });
 
+    //$http.get('/api/CorporationEntities/Teams').success()
     $scope.AssignCropsNext = function () {
 
         var eMessages = $scope.getErrorMessage('preSignAssignCrops');
@@ -7136,6 +8286,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
 
         var _cropData = $scope.SSpreSign.assignCrop.CropData;
         _dealSheet.ContractOrMemo.Buyer = _cropData;
+        //_dealSheet.Deed.Buyer = _cropData;
         return true;
     }
 
@@ -7152,6 +8303,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
     }
     $scope.DeedWizardInit = function () {
         var deedCrop = $scope.SSpreSign.DealSheet.Deed;
+        /*use like synchronously call*/
 
         if (!deedCrop.EntityId) {
             $http.get('/api/CorporationEntities/DeedCorpsByTeam?team=' + $scope.SSpreSign.assignCrop.Name).success(function (data) {
@@ -7182,6 +8334,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             next: $scope.DocRequiredNext
         }),
 
+        //{ title: "Deal Sheet" },
          new WizardStep({
              title: 'Contract',
              caption: 'Contract Or Memo',
@@ -7216,13 +8369,16 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         };
         if (needSearch || searchCompleted) {
             $scope.steps.splice(1, 0, searchWized)
-        } else {
         }
     }
     $scope.CheckSearchInfo($('.pt-need-search-input').val(), $('.pt-search-completed').val());
 
     $scope.CheckCurrentStep = function (BBLE) {
         $scope.SSpreSign = PropertyOffer.getByBBLE({ BBLE: BBLE.trim() }, function (data) {
+            /**
+             * need carefully test 
+             * @see PropertyOffer assignOfferId function
+             **/            
             if (data.FormData) {
                 if (data.FormData.DataId == 0)
                 {
@@ -7236,6 +8392,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                 $scope.DeadType = $scope.SSpreSign.DeadType;                
                 $scope.SSpreSign.Status = data.BusinessData.Status;
 
+                // $scope.refreshSave(data);
 
                 var ss = ScopeHelper.getShortSaleScope();
                 if (ss) {
@@ -7259,13 +8416,21 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             if (!$scope.SSpreSign.DealSheet) {
                 $scope.SSpreSign.DealSheet = $scope.SSpreSign.DealSheetMetaData;
             }
-
-                                    if (BBLE) {
+                        
+            if (BBLE) {
                 LeadsInfo.get({ BBLE: BBLE.trim() }, function (data) {
                     $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
                     $scope.SSpreSign.BBLE = BBLE;
                 });
             }
+            /**
+             * @author Steven
+             * @date   8/19/2016
+             * @see jira bug https://myidealprop.atlassian.net/browse/PORTAL-386
+             * @description
+             *  fix the new offer can not save type
+             *  1.It maybe the bug of NG-resource or angular.extend
+             */
             $scope.SSpreSign.Type = $scope.SSpreSign.Type || 'Short Sale'
         });
     }
@@ -7276,7 +8441,14 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
             $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
             $scope.SSpreSign.BBLE = BBLE;
         });
+        //$http.get('/api/Leads/LeadsInfo/' + BBLE).success(function (data) {
+        //    $scope.SSpreSign.PropertyAddress = data.PropertyAddress;
+        //    $scope.SSpreSign.BBLE = BBLE;
+        //})
+        /*anyc call need time out by Steven */
+        //setTimeout(function () {
         $scope.CheckCurrentStep(BBLE);
+        //}, 1000);
     }
 
     $scope.step = 1;
@@ -7355,6 +8527,7 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
         }
     }
 })
+/************* end old style without model contoller ****************/
 portalApp.filter('wizardFilter', function () {
     return function (items, sheetFilter) {
         var filtered = [];
@@ -7396,6 +8569,7 @@ portalApp.filter('ordered', function () {
 
 angular.module("PortalApp")
 .controller("TitleController", ['$scope', '$http', 'ptCom', 'ptContactServices', 'ptLeadsService', 'ptShortsSaleService', function ($scope, $http, ptCom, ptContactServices, ptLeadsService, ptShortsSaleService) {
+    /* model define*/
     $scope.OwnerModel = function (name) {
         this.name = name;
         this.Mortgages = [{}];
@@ -7470,7 +8644,7 @@ angular.module("PortalApp")
             $scope.updateBuyerTitle();
         }
         return $scope.Form;
-    }; 
+    }; /* end convention function */
 
     $scope.checkReadOnly = function (ro) {
 
@@ -7619,7 +8793,7 @@ angular.module("PortalApp")
     };
     $scope.$on('titleComment', function (e, args) {
         $scope.addComment(args.message);
-    }); 
+    }); /* end comments */
 }])
 .controller('TitleLienCtrl', ['$scope', 'ptCom', '$timeout', function ($scope, ptCom, $timeout) {
     $scope.Form = $scope.$parent.Form;
@@ -7841,311 +9015,399 @@ angular.module("PortalApp")
 
 
 }])
+/**
+ * Author: Shaopeng Zhang
+ * Date: 2016/11/02
+ * Description: General Controller for underwriting
+ * Update: 
+ *          --- 2016/11/02
+ *              1. Add Enable Editing Function to unlock datainput area.
+ */
+angular.module("PortalApp").controller("UnderwritingController", [
+    "$scope", "ptCom", "ptUnderwriting", "$location", "$state", "DocSearch", "LeadsInfo",
+    function ($scope, ptCom, ptUnderwriting, $location, $state, DocSearch, LeadsInfo) {
 
-angular.module("PortalApp").controller("UnderwriterController",
-                ['$scope', 'ptCom', 'ptUnderwriter', '$location', 'DocSearch', '$state', function ($scope, ptCom, ptUnderwriter, $location, DocSearch, $state) {
-
-
-                    $scope.data = {};
-                    $scope.archive = {};
-                    $scope.currentDataCopy = {};
-                    $scope.isProtectedView = true;
-
-                    $scope.init = function (bble) {
-                        $scope.load(bble);
-                        $scope.loadArchivedList(bble);
+        $scope.data = {};
+        $scope.archive = {};
+        $scope.currentDataCopy = {};
+        $scope.isProtectedView = true;
+        $scope.debug = false;
+        var float = function (data) {
+            if (data)
+                return parseFloat(data);
+            else
+                return 0.0;
+        };
+        var int = function (data) {
+            if (data)
+                return parseInt(data);
+            else
+                return 0;
+        };
+        $scope.init = function (bble) {
+            if (bble) {
+                ptUnderwriting.load(bble).then(function (data) {
+                    if (data && data.Id) {
+                        $scope.data = data;
+                        ptUnderwriting.loadArchivedList(bble).then(function (list) {
+                            $scope.archivedList = list;
+                        });
+                    } else {
+                        var newData = ptUnderwriting.new();
+                        newData.BBLE = bble;
+                        DocSearch.get({ BBLE: bble }).$promise.then(function (search) {
+                            newData.docSearch = search;
+                            LeadsInfo.get({ BBLE: bble.trim() }).$promise.then(function (leadsInfo) {
+                                newData.leadsInfo = leadsInfo;
+                                ptUnderwriting.importData(newData);
+                            });
+                        });
+                        $scope.data = newData;
                     }
-
-                    $scope.load = function (bble) {
-                        $scope.data = ptUnderwriter.load(bble);
-                        if ($scope.data.$promise) {
-                            $scope.data.$promise.then(function () {
-                                $scope.calculate();
-                            })
-                        }
-                    }
-
-                    $scope.save = function () {
-                        ptCom.confirm("Are you going to Save?", function (response) {
-                            if (response) {
-                                ptUnderwriter.save($scope.data).then(function (d) {
-                                    if (d.data) {
-                                        $scope.data = d.data;
-                                    }
-                                    ptCom.alert("Save Successful");
-                                }, function () {
-                                    ptCom.alert("fail to save");
-                                })
+                }, function (e) {
+                    console.log(e);
+                    ptCom.alert("Failed to load.");
+                });
+            } else {
+                $scope.data = ptUnderwriting.new();
+            }
+        };
+        $scope.save = function () {
+            ptCom.confirm("Are you going to save?",
+                function (response) {
+                    if (response) {
+                        ptUnderwriting.save($scope.data).then(function done(data) {
+                            if (data) {
+                                $scope.data = data;
                             }
-                        })
-
-
+                            ptCom.alert("Saved Successfully.");
+                        }, function fail(e) {
+                            console.log(e);
+                            ptCom.alert("Failed to save.");
+                        });
                     }
-
-                    $scope.archiveFunc = function () {
-                        ptCom.prompt('Please give a name to this archive.', function (msg) {
-                            if (msg != null) {
-                                ptUnderwriter.archive($scope.data, msg).then(function (d) {
-                                    alert("Archive succesful.")
-                                }, function () {
-                                    alert("Sorry...Some error...")
-                                })
-                            }
-
-                        })
-
-
-                    }
-
-                    $scope.loadArchivedList = function (bble) {
-                        if (bble) {
-                            ptUnderwriter.loadArchivedList(bble).then(function (d) {
-                                $scope.archivedList = d.data;
-                            })
-                        }
-                    }
-
-                    $scope.loadArchived = function (archive) {
-                        if (archive.Id) {
-                            ptUnderwriter.loadArchived(archive.Id).then(function (d) {
-                                if (d.data) {
-                                    angular.copy($scope.data, $scope.currentDataCopy);
-                                    ptCom.assignReference($scope.data, d.data, [], ['Id']);
-                                    $scope.archive = archive;
-                                    $scope.archive.isLoaded = true;
-                                    ptCom.alert("Load successful");
-
-                                }
-                            }, function (d) {
-                                ptCom.alert("Fail to load.");
-                            })
-                        }
-
-                    }
-
-                    $scope.restoreCurrent = function () {
-                        if ($scope.currentDataCopy) {
-                            ptCom.assignReference($scope.data, $scope.currentDataCopy);
-                            $scope.archive.isLoaded = false;
-                            ptCom.alert("Restore to current version.")
-                        }
-                    }
-
-                    $scope.calculate = function () {
-                        $scope.$applyAsync(function () {
-                            ptUnderwriter.calculator.calculate($scope.data);
+                });
+        };
+        // Snapshot current values of forms, and sava copy in database for future analysis
+        $scope.archiveFunc = function () {
+            ptCom.prompt("Please give a name to this archive.",
+                function (msg) {
+                    if (msg != null) {
+                        ptUnderwriting.archive($scope.data, msg).then(function done(data) {
+                            alert("Archived succesful.");
+                        }, function fail(e) {
+                            console.log(e);
+                            alert("Failed to archive.");
                         });
                     }
 
-                    $scope.feedData = function () {
-                        $scope.data.PropertyInfo.TaxClass = 'A0',
-                        $scope.data.PropertyInfo.ActualNumOfUnits = 1
-                        $scope.data.PropertyInfo.SellerOccupied = true;
-                        $scope.data.PropertyInfo.PropertyTaxYear = 4297.0;
-                        $scope.data.DealCosts.HOI = 20000.0;
-                        $scope.data.DealCosts.AgentCommission = 2500;
-                        $scope.data.RehabInfo.AverageLowValue = 205166;
-                        $scope.data.RehabInfo.RenovatedValue = 510000;
-                        $scope.data.RehabInfo.RepairBid = 75000;
-                        $scope.data.RehabInfo.DealTimeMonths = 6;
-
-                        $scope.data.LienInfo.FirstMortgage = 340000;
-                        $scope.data.LienInfo.SecondMortgage = 284000;
-                        $scope.data.LienCosts.PropertyTaxes = 9113.32;
-                        $scope.data.LienCosts.WaterCharges = 1101.33;
-                        $scope.data.LienCosts.PersonalJudgements = 14892.09;
-                        $scope.update();
+                });
+        };
+        // Load a single archived entry in database
+        $scope.loadArchived = function (archive) {
+            //debugger;
+            if (archive.Id) {
+                ptUnderwriting.loadArchived(archive.Id).then(function done(data) {
+                    if (data) {
+                        //debugger;
+                        angular.copy($scope.data, $scope.currentDataCopy);
+                        ptCom.assignReference($scope.data, data, [], ["Id"]);
+                        $scope.archive = archive;
+                        $scope.archive.isLoaded = true;
+                        ptCom.alert("Load successfully");
                     }
-
-                    $scope.enableEditing = function () {
-                        $scope.$broadcast('pt-editable-div-unlock');
-                        $scope.isProtectedView = false;
-                    }
-
-                    $scope.$watch(function () {
-                        return $state.$current.name
-                    }, function (newVal, oldVal) {
-                        if (newVal == 'underwriter.datainput') {
-                            if ($scope.isProtectedView == false) {
-                                $scope.enableEditing();
-                            }
-                        }
-                    })
-
-
-
-
-                    $scope.BBLE = ptCom.getGlobal("BBLE") || "";
-                    $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
-                    $scope.init($scope.BBLE);
-
-                }]);
-angular.module("PortalApp")
-.controller('UnderwritingRequestController', ['$scope', '$http', '$location', '$state', 'UnderwritingRequest', 'ptCom', 'DocSearch', function ($scope, $http, $location, $state, UnderwritingRequest, ptCom, DocSearch) {
-    $scope.init = function (bble) {
-        $scope.data = {};
-        if ($scope.BBLE) {
-            $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim() }, function () {
-                $scope.search = DocSearch.get({ BBLE: bble.trim() });
-            })
-        }
-    }
-
-
-    $scope.cleanForm = function () {
-        var oldId = $scope.data.Id;
-        $scope.data = {};
-        $scope.data.Id = oldId;
-        $scope.formCleaned = true;
-
-    }
-
-    $scope.checkValidate = function (async) {
-        if (!async) {
-            return _.some($('input, textarea, select'), function (v) {
-                return $(v).attr('error') == 'true';
-            })
-        } else {
-            var dfd = $.Deferred();
-
-            var err = _.some($('input, textarea, select'), function (v) {
-                return $(v).attr('error') == 'true';
-            });
-
-            if (err) {
-                dfd.resolve();
-            } else {
-                dfd.reject();
-            }
-
-            return dfd;
-        }
-
-    }
-
-    $scope.selfCheck = function () {
-        $scope.$broadcast('ptSelfCheck');
-        var startFlag = false
-        var checkingcounter = 0;
-        $scope.$on('ptSelfCheckStart', function () {
-            startFlag = true;
-            checkingcounter++;
-        });
-    }
-
-    $scope.save = function (isSlient) {
-        $scope.$broadcast('ptSelfCheck');
-        if ($scope.checkValidate()) {
-            ptCom.alert('Please correct Highlight Field first.');
-            return;
-        }
-        UnderwritingRequest.saveByBBLE($scope.data, $scope.BBLE).then(function () {
-            if (!isSlient) {
-                ptCom.alert('Save Successful!')
-            }
-        }, function () {
-            if (!isSlient) {
-                ptCom.alert('Fail to Save!')
-            }
-        });
-
-    }
-
-    $scope.requestDocSearch = function (isResubmit) {
-        $scope.$broadcast('ptSelfCheck');
-        if ($scope.checkValidate()) {
-            ptCom.alert('Please correct Highlight Field first.');
-            return;
-        }
-        UnderwritingRequest.createSearch($scope.BBLE).then(function (r) {
-            $scope.search.CreateDate = new Date().toISOString();
-            ptCom.alert('Property Search Submitted to Underwriting. Thank you!');
-            $scope.data.Status = 1;
-            if (isResubmit) {
-                debugger;
-                $scope.search.CompletedOn = undefined;
-                $scope.search.Expired = false;
-                $scope.formCleaned = false;
-            }
-            $scope.save(true);
-        }, function () {
-            ptCom.alert('Fail to create search')
-        })
-    }
-
-
-    $scope.remainDays = function () {
-        if (!$scope.search || !$scope.search.CompletedOn) {
-            return "more than 60";
-        } else {
-            var timenow = new Date().getTime();
-            var timeCompleted = new Date($scope.search.CompletedOn);
-            var diff = timenow - timeCompleted;
-            var dayinmsec = 1000 * 60 * 60 * 24;
-            return 60 - Math.ceil(diff / dayinmsec);
-        }
-
-    }
-
-    $scope.completedOver60days = function () {
-        if (!$scope.search || $scope.search.CompletedOn == undefined) {
-            return false;
-        }
-        else {
-            return $scope.remainDays() < 0 ? true : false;
-        }
-
-    }
-
-
-    $scope.viewmode = ptCom.getGlobal("viewmode") || ptCom.parseSearch(location.search).mode || 0;
-    $scope.BBLE = ptCom.getGlobal("BBLE") || ptCom.parseSearch(location.search).BBLE || "";
-    $scope.init($scope.BBLE);
-}]);
-angular.module("PortalApp").controller("UnderwritingSummaryController", ['$scope', 'ptCom', 'ptUnderwriter', 'DocSearch', function ($scope, ptCom, ptUnderwriter, DocSearch) {
-
-    $scope.showStoryHistory = function () {
-        var scope = angular.element('#uwrview').scope();
-        if (scope.data && scope.data.Id) {
-            auditLog.toggle('UnderwritingRequest', scope.data.Id);
-        }
-    }
-
-    $scope.markCompleted = function(status, msg) {
-        msg = 'Please provide Note or press no to cancel';
-        ptCom.prompt(msg, function (result) {
-            if (result != null && $scope.search) {
-                debugger;
-                DocSearch.markCompleted($scope.search.BBLE, status, result).then(function succ(d) {
-                    $scope.search.UnderwriteStatus = d.data.UnderwriteStatus;
-                    $scope.search.UnderwriteCompletedBy = d.data.UnderwriteCompletedBy;
-                    $scope.search.UnderwriteCompletedOn = d.data.UnderwriteCompletedOn;
-                    $scope.search.UnderwriteCompletedNotes = d.data.UnderwriteCompletedNotes;
-                }, function err() {
-                    console.log("fail to update docsearch");
+                }, function fail(e) {
+                    console.log(e);
+                    ptCom.alert("Failed to load archive.");
                 });
             }
 
-        }, true);
+        };
+        // Restore from achived version to current version
+        $scope.restoreCurrent = function () {
+            if ($scope.currentDataCopy) {
+                ptCom.assignReference($scope.data, $scope.currentDataCopy);
+                $scope.archive.isLoaded = false;
+                ptCom.alert("Restored to current version.");
+            }
+        };
+        // Core function to apply predefined rule, and update model values.
+        $scope.calculate = function () {
+            if (!$scope.data.PropertyInfo) $scope.data.PropertyInfo = {};
+            if (!$scope.data.DealCosts) $scope.data.DealCosts = { HOIRatio: 0.0 };
+            if (!$scope.data.RehabInfo) $scope.data.RehabInfo = {
+                SalesCommission: 0.05,
+                DealROICash: 0.35
+            }
 
-    }
-    $scope.loadAdditionalInfo = function (bble) {
-        $scope.search = DocSearch.get({ BBLE: bble.trim()})
-    }
-    try {
-        var searchs = ptCom.parseSearch(location.search);
-        if (searchs) {
-            $scope.BBLE = searchs.BBLE || "";
-            $scope.viewmode = searchs.mode || 0;
+            $scope.data.PropertyInfo.PropertyType = (function () {
+                return /.*(A|B|C0|21|R).*/.exec($scope.data.PropertyInfo.TaxClass) ? 1 : 2;
+            })();
+            $scope.data.DealCosts.HAFA = ($scope.data.PropertyInfo.SellerOccupied || int($scope.data.PropertyInfo.NumOfTenants) > 0)
+                             && !$scope.data.LienInfo.FHA
+                             && !$scope.data.LienInfo.FannieMae
+                             && !$scope.data.LienInfo.FreddieMac
+                             && float($scope.data.DealCosts.HOI) > 0.0;
+            ptUnderwriting.calculate($scope.data, $scope.debug).then(function (output) {
+                if ($scope.debug) console.log(output);
+                $scope.data.MinimumBaselineScenario = output.MinimumBaselineScenario;
+                $scope.data.BestCaseScenario = output.BestCaseScenario;
+                $scope.data.Summary = output.Summary;
+                $scope.data.CashScenario = output.CashScenario;
+                $scope.data.LoanScenario = output.LoanScenario;
+                $scope.data.FlipScenario = output.FlipScenario;
+                $scope.data.RentalModel = output.RentalModel;
+            }, function (e) {
+                console.log(e);
+                console.log("Fail to get proxy: calculate.")
+            });
+        };
+        // Default Disable Editing for preventing accident change.
+        $scope.enableEditing = function () {
+            $scope.$broadcast("pt-editable-div-unlock");
+            $scope.isProtectedView = false;
+        };
+        // Change Status of Underwriting.
+        $scope.changeStatus = function (status, msg) {
+            // because the underwriting completion is not reversible, comfirm it before save to db.
+            msg = msg || "Please provide note or press 'No' to cancel";
+            ptCom.prompt(msg, function then(note) {
+                if (note != null) {
+                    if (!$scope.data || !$scope.BBLE) ptCom.alert("BBLE is missing!");
+                    ptUnderwriting.changeStatus($scope.data.BBLE, status, note).then(function succ(data) {
+                        ptCom.alert("Update status successfully.")
+                    }, function fail(e) {
+                        consoel.log(e);
+                        ptCom.alert("Fail to update underwriting status.");
+                    });
+                } else {
+                    ptCom.alert("Note is required.");
+                }
+            }, true);
+
+        };
+        // Change Underwriting Status Number to actual code.
+        $scope.showStatus = function (enumNumber) {
+            if (enumNumber) {
+                switch (enumNumber) {
+                    case 1:
+                        return "New";
+                    case 2:
+                        return "Processing";
+                    case 3:
+                        return "Completed";
+                    case 4:
+                        return "Rejected";
+                    default:
+                        return "Unknown";
+                }
+            }
+            return "Unknown";
         }
-        ptCom.setGlobal("BBLE", $scope.BBLE);
-        ptCom.setGlobal("viewmode", $scope.viewmode);
-        $scope.loadAdditionalInfo($scope.BBLE);
-    } catch (ex) {
-        ptCom.setGlobal("BBLE", "");
-        ptCom.setGlobal("viewmode", 0);
+        $scope.$watch(function () {
+            return $state.$current.name;
+        }, function (newVal, oldVal) {
+            if (newVal === "underwriter.datainput") {
+                if ($scope.isProtectedView === false) {
+                    $scope.enableEditing();
+                }
+            }
+        });
+        // Init controller;
+        $scope.BBLE = ptCom.getGlobal("BBLE") || "";
+        $scope.viewmode = ptCom.getGlobal("viewmode") || 0;
+        $scope.init($scope.BBLE);
+        // A predefined model to validate with excel data.
+        $scope.feedData = function () {
+            $scope.data.PropertyInfo.TaxClass = "A0",
+            $scope.data.PropertyInfo.ActualNumOfUnits = 1;
+            $scope.data.PropertyInfo.SellerOccupied = true;
+            $scope.data.PropertyInfo.PropertyTaxYear = 4297.0;
+            $scope.data.DealCosts.HOI = 20000.0;
+            $scope.data.DealCosts.AgentCommission = 2500;
+            $scope.data.RehabInfo.AverageLowValue = 205166;
+            $scope.data.RehabInfo.RenovatedValue = 510000;
+            $scope.data.RehabInfo.RepairBid = 75000;
+            $scope.data.RehabInfo.DealTimeMonths = 6;
+
+            $scope.data.LienInfo.FirstMortgage = 340000;
+            $scope.data.LienInfo.SecondMortgage = 284000;
+            $scope.data.LienCosts.PropertyTaxes = 9113.32;
+            $scope.data.LienCosts.WaterCharges = 1101.33;
+            $scope.data.LienCosts.PersonalJudgements = 14892.09;
+            $scope.update();
+        };
     }
-}]);
+]);
+angular.module("PortalApp")
+    .controller("UnderwritingRequestController",
+    [
+        "$scope", "$http", "$location", "$state", "UnderwritingRequest", "ptCom", "DocSearch",
+        function($scope, $http, $location, $state, UnderwritingRequest, ptCom, DocSearch) {
+            $scope.init = function(bble) {
+                $scope.data = {};
+                if ($scope.BBLE) {
+                    $scope.data = UnderwritingRequest.get({ BBLE: $scope.BBLE.trim() },
+                        function() {
+                            $scope.search = DocSearch.get({ BBLE: bble.trim() });
+                        });
+                }
+            };
+            $scope.cleanForm = function() {
+                var oldId = $scope.data.Id;
+                $scope.data = {};
+                $scope.data.Id = oldId;
+                $scope.formCleaned = true;
+            };
+
+            // Check input and textarea to see if there is a error attribute
+            $scope.checkValidate = function(async) {
+                if (!async) {
+                    return _.some($("input, textarea, select"),
+                        function(v) {
+                            return $(v).attr("error") === "true";
+                        });
+                } else {
+                    var dfd = $.Deferred();
+
+                    var err = _.some($("input, textarea, select"),
+                        function(v) {
+                            return $(v).attr("error") === "true";
+                        });
+
+                    if (err) {
+                        dfd.resolve();
+                    } else {
+                        dfd.reject();
+                    }
+
+                    return dfd;
+                }
+
+            };
+
+            // Broadcast ptSelfCheck event make ptRequried directive check it self
+            $scope.selfCheck = function() {
+                $scope.$broadcast("ptSelfCheck");
+                var startFlag = false;
+                var checkingcounter = 0;
+                $scope.$on("ptSelfCheckStart",
+                    function() {
+                        startFlag = true;
+                        checkingcounter++;
+                    });
+            };
+            $scope.save = function(isSlient) {
+                $scope.$broadcast("ptSelfCheck");
+                if ($scope.checkValidate()) {
+                    ptCom.alert("Please correct Highlight Field first.");
+                    return;
+                }
+                UnderwritingRequest.saveByBBLE($scope.data, $scope.BBLE).then(function() {
+                        if (!isSlient) {
+                            ptCom.alert("Save Successful!");
+                        }
+                    },
+                    function() {
+                        if (!isSlient) {
+                            ptCom.alert("Fail to Save!");
+                        }
+                    });
+
+            };
+            $scope.requestDocSearch = function(isResubmit) {
+                $scope.$broadcast("ptSelfCheck");
+                // debugger;
+                if ($scope.checkValidate()) {
+                    ptCom.alert("Please correct Highlight Field first.");
+                    return;
+                }
+                UnderwritingRequest.createSearch($scope.BBLE).then(function(r) {
+                        //debugger;
+                        $scope.search.CreateDate = new Date().toISOString();
+                        ptCom.alert("Property Search Submitted to Underwriting. Thank you!");
+                        $scope.data.Status = 1;
+                        if (isResubmit) {
+                            debugger;
+                            $scope.search.CompletedOn = undefined;
+                            $scope.search.Expired = false;
+                            $scope.formCleaned = false;
+                        }
+                        $scope.save(true);
+                    },
+                    function() {
+                        ptCom.alert("Fail to create search");
+                    });
+            };
+            $scope.remainDays = function() {
+                if (!$scope.search || !$scope.search.CompletedOn) {
+                    return "more than 60";
+                } else {
+                    var timenow = new Date().getTime();
+                    var timeCompleted = new Date($scope.search.CompletedOn);
+                    var diff = timenow - timeCompleted;
+                    var dayinmsec = 1000 * 60 * 60 * 24;
+                    return 60 - Math.ceil(diff / dayinmsec);
+                }
+
+            };
+            $scope.completedOver60days = function() {
+                if (!$scope.search || $scope.search.CompletedOn == undefined) {
+                    return false;
+                } else {
+                    return $scope.remainDays() < 0 ? true : false;
+                }
+
+            };
+            $scope.viewmode = ptCom.getGlobal("viewmode") || ptCom.parseSearch(location.search).mode || 0;
+            $scope.BBLE = ptCom.getGlobal("BBLE") || ptCom.parseSearch(location.search).BBLE || "";
+            $scope.init($scope.BBLE);
+        }
+    ]);
+angular.module("PortalApp").controller("UnderwritingSummaryController",
+[
+    "$scope", "ptCom", "ptUnderwriting", "DocSearch",
+    function ($scope, ptCom, ptUnderwriting, DocSearch) {
+
+        $scope.showStoryHistory = function () {
+            //debugger;
+            var scope = angular.element("#uwrview").scope();
+            if (scope.data && scope.data.Id) {
+                auditLog.toggle("UnderwritingRequest", scope.data.Id);
+            }
+        };
+        $scope.loadAdditionalInfo = function (bble) {
+            $scope.search = DocSearch.get({ BBLE: bble.trim() });
+        };
+        try {
+            var searchs = ptCom.parseSearch(location.search);
+            if (searchs) {
+                $scope.BBLE = searchs.BBLE || "";
+                $scope.viewmode = searchs.mode || 0;
+            }
+            ptCom.setGlobal("BBLE", $scope.BBLE);
+            ptCom.setGlobal("viewmode", $scope.viewmode);
+            $scope.loadAdditionalInfo($scope.BBLE);
+        } catch (ex) {
+            ptCom.setGlobal("BBLE", "");
+            ptCom.setGlobal("viewmode", 0);
+        }
+
+        $scope.$on("$stateChangeSuccess",
+            function (e, arg) {
+                if (arg && arg.name && arg.name === 'underwriter.datainput') {
+                    try {
+                        if (parent.previewControl) {
+                            parent.previewControl.maximize();
+                        }
+                    } catch (e) {
+
+                    }
+
+                }
+            });
+    }
+]);
 angular.module("PortalApp")
     .controller('VendorCtrl', ["$scope", "$http" ,"$element", function ($scope, $http, $element) {
 
@@ -8175,7 +9437,7 @@ angular.module("PortalApp")
     };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
-        var gropData = data;
+        var gropData = data;//groupBy(data, group_func);
         $scope.showingContacts = gropData;
 
         return gropData;
@@ -8184,8 +9446,8 @@ angular.module("PortalApp")
         $http.post('/CallBackServices.asmx/GetAllGroups', {}).
          success(function (data, status, headers, config) {
              $scope.Groups = data.d;
-
-                      }).error(function (data, status, headers, config) {
+             
+         }).error(function (data, status, headers, config) {
 
 
              alert("error get GetAllGroups: " + status + " error :" + data.d);
@@ -8237,10 +9499,15 @@ angular.module("PortalApp")
 
         }
         var addC = $scope.addContact;
+        //addC.OfficeNO = $('#txtOffice').val();
+        //addC.Cell = $('#txtCell').val();
+        //addC.Email = $('#txtEmail').val();
 
         debugger;
         $http.post("/CallBackServices.asmx/AddContact", { contact: $scope.addContact }).
         success(function (data, status, headers, config) {
+            // this callback will be called asynchronously
+            // when the response is available
             if (data.d.Name == 'Same')
             {
                 alert("Already have " + $scope.addContact.Name + " in system please change name to identify !")
@@ -8249,6 +9516,7 @@ angular.module("PortalApp")
             $scope.allContacts.push(data.d);
             $scope.InitData($scope.allContacts);
             var addContact = data.d;
+            //debugger;
 
             $scope.currentContact = addContact;
             m_current_contact = $scope.currentContact;
@@ -8256,17 +9524,23 @@ angular.module("PortalApp")
             var stop = $(".popup_employee_list_item_active:first").position().top;
             $('#employee_list').scrollTop(stop);
             alert("Add" + $scope.currentContact.Name + " succeed !");
+            //debugger;
         }).
         error(function (data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
             var message = data&& data.Message ?data.Message :JSON.stringify(data)
 
             alert("Add contact error: " + message);
         });
     }
-
-        $scope.filterContactFunc = function (e, type) {
+    
+    $scope.filterContactFunc = function (e, type) {
+        //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
+        //$(e).addClass("popup_menu_list_item_active");
 
         var text = angular.element(e.currentTarget).html();
+        //debugger;
         if (typeof (type) == 'string') {
             $scope.query = {};
             $scope.selectType = text;
@@ -8286,8 +9560,8 @@ angular.module("PortalApp")
     }
 
     $scope.SaveCurrent = function () {
-
-                $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
+        
+        $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
         success(function (data, status, headers, config) {
             alert("Save succeed!");
             $scope.initLenderList();
@@ -8324,6 +9598,7 @@ angular.module('PortalApp').component('ptAudit', {
     bindings: {
         label: '@',
         objName: '@',
+        isUnderwriting: "@",
         recordId: '<',
     },
     controller: function ($scope, $element, $attrs, $http) {
@@ -8333,7 +9608,7 @@ angular.module('PortalApp').component('ptAudit', {
                 ctrl.updateData();
             }
         }
-        ctrl.show = function (objName,  recordId) {
+        ctrl.show = function (/* optional */objName, /* optional*/ recordId) {
             if (objName != null || recordId != null) {
                 ctrl.objectName = objName || ctrl.objectName;
                 ctrl.recordId = recordId || ctrl.recordId;
@@ -8353,9 +9628,12 @@ angular.module('PortalApp').component('ptAudit', {
             }
         }
         ctrl.updateData = function () {
+            //debugger;
+            var targetUrlPrefix = '/api/auditlog/';
+            if (ctrl.isUnderwriting) targetUrlPrefix = '/api/underwriting/auditlog/';
             $http({
                 method: 'GET',
-                url: '/api/auditlog/' + ctrl.objName + "/" + ctrl.recordId
+                url: targetUrlPrefix + ctrl.objName + "/" + ctrl.recordId
             }).then(function (d) {
                 var result = _.groupBy(d.data, function (item) {
                     return item.EventDate;
@@ -8451,20 +9729,21 @@ angular.module('PortalApp').component('ptItemList', {
 
             bindingOptions: {
                 dataSource: 'list',
-            },
+            }
 
         }
         $scope.bindList = function () {
+            //debugger;
             $http({
                 method: 'GET',
                 url: $scope.$ctrl.itemUrl
-            }).then(function (d) {
+            }).then(function(d) {
                 $scope.list = new DevExpress.data.DataSource({
                     searchOperation: "contains",
                     searchExpr: $scope.$ctrl.itemField,
                     store: d.data
                 });
-            })
+            });
         }
 
         $scope.bindList();
@@ -8493,30 +9772,101 @@ angular.module('PortalApp').component('ptSelectableInput', {
         if (!ctrl.disableOptions || !ctrl.options) {
             ctrl.isOtherSelected = true;
         }
-        $scope.$watch('$ctrl.selected', function (newValue, oldValue) {
-            if (!newValue) {
-                ctrl.ngModel = "";
-                return;
-            }
-            if (newValue == 'other') {
-                ctrl.isOtherSelected = true;
-                ctrl.ngModel = "";
-                return;
-            }
-            if (ctrl.options.indexOf(newValue) >= 0) {
-                ctrl.isOtherSelected = false;
-                ctrl.ngModel = newValue;
-                return;
-            }
+        $scope.$watch('$ctrl.selected',
+            function(newValue, oldValue) {
+                //debugger;
+                if (!newValue) {
+                    ctrl.ngModel = "";
+                    return;
+                }
+                if (newValue == 'other') {
+                    ctrl.isOtherSelected = true;
+                    ctrl.ngModel = "";
+                    return;
+                }
+                if (ctrl.options.indexOf(newValue) >= 0) {
+                    ctrl.isOtherSelected = false;
+                    ctrl.ngModel = newValue;
+                    return;
+                }
 
-            ctrl.ngModel = "";
+                ctrl.ngModel = "";
 
-        })
-        $scope.$watch('$ctrl.ngModel', function (newValue, oldValue) {
-            if (newValue != "other" && ctrl.options.indexOf(newValue) >= 0) {
-                ctrl.selected = newValue;
-            }
-        })
+            });
+        $scope.$watch('$ctrl.ngModel',
+            function(newValue, oldValue) {
+                if (newValue != "other" && ctrl.options.indexOf(newValue) >= 0) {
+                    ctrl.selected = newValue;
+                }
+            });
     }
 
+})
+/***
+ * @property listStatusId: id used for properties list filter
+ * @property itemFiled: field in json to displayed in html.
+ */
+angular.module("PortalApp").component("ptSummaryItemList",
+{
+    templateUrl: "/js/components/ptSummaryItemList.tpl.html",
+    bindings: {
+        listName: "@",
+        listShortName: "@",
+        listDataUrl: "@",
+        listHref: "@",
+        listFilter: "@",
+        itemField: "@",
+        itemClick: "&"
+    },
+    controller: function ($window, $element, $attrs, $http) {
+        // debugger;
+        var ctrl = this;
+        ctrl.window = $window;
+        ctrl.gridInstance = null;
+        ctrl.listOptions = {
+            columns: [
+                {
+                    dataField: ctrl.itemField,
+                    cellTemplate: function (container, options) {
+                        var result = $("<div>").addClass("list-item");
+                        $("<a>").text(options.data[ctrl.itemField])
+                            .css("padding-left", "10px")
+                            .click({ data: options, filter: ctrl.listFilter }, ctrl.itemClick())
+                            .appendTo(result);
+                        result.appendTo(container);
+                    }
+                }
+            ],
+            rowAlternationEnabled: true,
+            showColumnHeaders: false,
+            pager: {
+                showInfo: true
+            },
+            paging: {
+                enabled: true
+            },
+            onRowPrepared: function (rowInfo) {
+                if (rowInfo.rowType !== "data")
+                    return;
+                rowInfo.rowElement
+                    .addClass("myRow");
+            },
+            onInitialized: function (e) {
+                ctrl.gridInstance = e.component;
+            }
+        };
+        var bindList = function () {
+            $http({
+                method: "GET",
+                url: ctrl.listDataUrl
+            }).then(function (d) {
+                ctrl.gridInstance.option('dataSource', d.data.data);
+                var spanTotal = $("#" + ctrl.listShortName + "List").find(".total-count")[0];
+                if (spanTotal) {
+                    $(spanTotal).html(d.data.count);
+                }
+            });
+        };
+        bindList();
+    }
 })

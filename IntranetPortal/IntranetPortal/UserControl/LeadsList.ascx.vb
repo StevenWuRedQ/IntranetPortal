@@ -565,7 +565,7 @@ Public Class LeadsList
                 Dim txtLegalLot = TryCast(pageInputData.FindControl("txtLegalLot"), ASPxTextBox)
 
                 For Each item In DataWCFService.AddressSearch(CInt(cblegalBorough.Value), CInt(txtlegalBlock.Text), CInt(txtLegalLot.Text))
-                    If item.propertyInformation IsNot Nothing Then
+                    If item IsNot Nothing AndAlso item.propertyInformation IsNot Nothing Then
                         Dim newdr = dt.NewRow
                         newdr(0) = item.propertyInformation.BBLE
                         If item.owners IsNot Nothing AndAlso item.owners.Count > 0 Then

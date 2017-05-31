@@ -1,13 +1,6 @@
-﻿/*
- * Portal UI Route will be the main router we use base on UI-router
- * The Portal Route will be Deprecated
- * 
- */
-
-
-(function () {
-    /*define public shared var of class portalUIRouteProvider register var in the below*/
-    var ITEM_ID = 'itemId';
+﻿;(function () {
+    /* Define public shared var of class portalUIRouteProvider register var in the below*/
+    var ITEM_ID = "itemId";
 
     /**
      * @date 7/25/2016 - 7/26/2016  
@@ -117,16 +110,15 @@
             }
             // Create the stateTemplateUrl for a route to our resource that does the specified operation.
             var stateTemplateUrl = function (statePath) {
-                return '/js/Views/' + resourceName.toLowerCase() + '/' + templateFile(statePath) + '.tpl.html';
+                return "/js/Views/" + resourceName.toLowerCase() + "/" + templateFile(statePath) + ".tpl.html";
             };
 
-            var stateUrl = function(statePath)
-            {
+            var stateUrl = function (statePath) {
                 /// get root url name with resourceName
                 /// other get state path url
 
-                return  '/' +( !statePath ? resourceName : statePath.replace(".","/") );
-            }
+                return "/" + (!statePath ? resourceName : statePath.replace(".", "/"));
+            };
             /**
              * @summery
              * Use camelCase style to name controller and end with Ctrl
@@ -137,7 +129,7 @@
              * @example test.edit -> testEditCtrl
              **/
             var stateControllerName = function (statePath) {
-                return _.camelCase(resourceName + ' ' + (statePath || '') ) + 'Ctrl';
+                return _.camelCase(resourceName + " " + (statePath || "")) + "Ctrl";
             };
 
             /**
@@ -156,11 +148,11 @@
             var templateFile = function (statePath) {
 
                 if (!statePath) {
-                    return 'index'
+                    return "index";
                 }
 
                 return _.kebabCase(statePath.toLowerCase());
-            }
+            };
             // This is the object that our `statesFor()` function returns.  It decorates `$stateProvider`,
             // delegating the `when()` and `otherwise()` functions but also exposing some new functions for
             // creating CRUD routes.  Specifically we have `whenList(), `whenNew()` and `whenEdit()`.
@@ -181,12 +173,13 @@
 
                 // Pass-through to `$stateProvider.state()`
                 state: function (statePath, resolveFns) {
-                    $stateProvider.state(resourceName, {
-                        url: stateUrl(statePath),
-                        templateUrl: stateTemplateUrl(statePath),
-                        controller: stateControllerName(statePath),
-                        resolve: resolveFns
-                    });
+                    $stateProvider.state(resourceName,
+                        {
+                            url: stateUrl(statePath),
+                            templateUrl: stateTemplateUrl(statePath),
+                            controller: stateControllerName(statePath),
+                            resolve: resolveFns
+                        });
                     return stateBuilder;
                 },
                 // Pass-through to `$stateProvider.otherwise()`
@@ -207,7 +200,7 @@
 
     // Currently, v1.0.3, AngularJS does not provide annotation style dependencies in providers so,
     // we add our injection dependencies using the $inject form
-    portalUIRouteProvider.$inject = ['$stateProvider'];
+    portalUIRouteProvider.$inject = ["$stateProvider"];
 
     /*define public shared var of class portalUIRouteProvider*/
     portalUIRouteProvider.ITEM_ID = ITEM_ID;
@@ -218,5 +211,5 @@
     //   .configHelper('portalUIRouteProvider', ['$stateProvider, portalUIRouteProvider]);
     // ```
     // Then we could dispense with the $get, the $inject and the closure wrapper around all this.
-    angular.module('PortalApp').provider('portalUIRoute', portalUIRouteProvider);
+    angular.module("PortalApp").provider("portalUIRoute", portalUIRouteProvider);
 })();

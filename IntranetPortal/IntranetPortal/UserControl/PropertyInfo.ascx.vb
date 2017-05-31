@@ -1,4 +1,5 @@
-﻿Imports Humanizer
+﻿Imports DevExpress.Web
+Imports Humanizer
 
 Public Class PropertyInfo
     Inherits UserControl
@@ -21,9 +22,7 @@ Public Class PropertyInfo
             cm.RegisterClientScriptBlock(Me.GetType(),
                 "CallServer", callbackScript, True)
         End If
-
     End Sub
-
 
     Public Function BindData() As Boolean
         'If LeadsInfoData.IsApartment Then
@@ -195,15 +194,28 @@ Public Class PropertyInfo
 
             Dim bble = eventArgument.Split("|")(1)
             LeadsData = Lead.GetInstance(bble)
-            callbackResult = "getLeadsStatusResult|" & LeadsData.Status & "|" & LeadsData.SubStatus
+            If LeadsData IsNot Nothing Then
+                callbackResult = "getLeadsStatusResult|" & LeadsData.Status & "|" & LeadsData.SubStatus
+            Else
+                callbackResult = "-1"
+            End If
         Else
             callbackResult = "-1"
-
-
         End If
     End Sub
 
     Public Function GetCallbackResult() As String Implements ICallbackEventHandler.GetCallbackResult
         Return callbackResult
     End Function
+
+    Protected Sub ASPxGridView1_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridViewCustomCallbackEventArgs)
+        If e.Parameters.StartsWith("load") Then
+            Dim bble = e.Parameters.Split("|")(1)
+            Dim allLiens = DataWCFService.GetAllLiens(bble)
+
+            Dim grid = CType(sender, ASPxGridView)
+            grid.DataSource = allLiens?.localLienData?.nYCTaxLiensSold
+            grid.DataBind()
+        End If
+    End Sub
 End Class

@@ -1,4 +1,4 @@
-﻿(function () {
+﻿;(function () {
     /*define public shared var of class portalRouteProvider register var in the below*/
     var ITEM_ID = 'itemId';
 
@@ -34,7 +34,7 @@
         // We use it to create routes for CRUD operations.  We give it some basic information about
         // the resource and the urls then it it returns our own special routeProvider.
         this.routesFor = function (resourceName, urlPrefix, routePrefix) {
-            var baseUrl = resourceName.toLowerCase();            
+            var baseUrl = resourceName.toLowerCase();
             var baseRoute = '/' + resourceName.toLowerCase();
             routePrefix = routePrefix || urlPrefix;
 
@@ -91,7 +91,7 @@
                 },
                 whenOther: function (resolveFns, name, suffixUrl) {
                     var _url = suffixUrl ? suffixUrl : '';
-                    routeBuilder.when(baseRoute +'/'+ name.toLowerCase() +'/'+ _url, {
+                    routeBuilder.when(baseRoute + '/' + name.toLowerCase() + '/' + _url, {
                         templateUrl: templateUrl(name),
                         controller: controllerName(name),
                         resolve: resolveFns
@@ -113,7 +113,7 @@
                     return routeBuilder;
                 },
                 // Pass-through to `$routeProvider.otherwise()`
-                otherwise: function (params) {                    
+                otherwise: function (params) {
                     $routeProvider.otherwise(params);
                     return routeBuilder;
                 },

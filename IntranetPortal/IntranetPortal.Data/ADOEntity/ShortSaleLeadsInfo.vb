@@ -86,5 +86,7 @@ Partial Public Class ShortSaleLeadsInfo
     Public Property CreateBy As String
     Public Property LastUpdate As Nullable(Of Date)
     Public Property UpdateBy As String
+    Public Property City As String
+    Public Property LeadsTags As String
 
 End Class
