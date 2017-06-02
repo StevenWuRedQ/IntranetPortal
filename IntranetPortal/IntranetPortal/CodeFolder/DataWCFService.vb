@@ -42,17 +42,13 @@ Public Class DataWCFService
             Return Nothing
         End If
 
-        Using client As New DataAPI.WCFMacrosClient
-            Dim result = GetLocateReport(apiOrderNum, bble, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country)
 
+        Dim result = GetLocateReport(apiOrderNum, bble, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country)
+        Return result
 
-
-            Return result
-        End Using
     End Function
 
     Public Shared Function GetOwnerInfoByTLOId(tloId As String, bble As String) As HomeOwner
-
         'If Not Core.TLOApiLog.IsServiceOn Then
         '    Throw New Exception("HomeOwner Service is temporary closed. Please try later.")
         'End If
@@ -496,22 +492,24 @@ Public Class DataWCFService
 #Region "Server status"
 
     Public Shared Function IsServerBusy(Optional serverAddress As String = Nothing) As Boolean
-        Using client As New DataAPI.WCFMacrosClient()
-            If Not String.IsNullOrEmpty(serverAddress) Then
-                client.Endpoint.Address = New ServiceModel.EndpointAddress(serverAddress)
-            End If
+        Return False
 
-            Try
-                Dim waitingRequest = client.Requests_Waiting
-                Return waitingRequest > 50
-            Catch ex As TimeoutException
-                'Throw New Exception("Check Server is busy. Time out exception: " & ex.Message)
-                Return True
-            Catch ex As Exception
-                'Throw New Exception("Check Server is busy. exception: " & ex.Message)
-                Return True
-            End Try
-        End Using
+        'Using client As New DataAPI.WCFMacrosClient()
+        '    If Not String.IsNullOrEmpty(serverAddress) Then
+        '        client.Endpoint.Address = New ServiceModel.EndpointAddress(serverAddress)
+        '    End If
+
+        '    Try
+        '        Dim waitingRequest = client.Requests_Waiting
+        '        Return waitingRequest > 50
+        '    Catch ex As TimeoutException
+        '        'Throw New Exception("Check Server is busy. Time out exception: " & ex.Message)
+        '        Return True
+        '    Catch ex As Exception
+        '        'Throw New Exception("Check Server is busy. exception: " & ex.Message)
+        '        Return True
+        '    End Try
+        'End Using
     End Function
 
 #End Region

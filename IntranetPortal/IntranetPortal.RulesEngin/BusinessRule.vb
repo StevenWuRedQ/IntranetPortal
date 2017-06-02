@@ -457,7 +457,7 @@ InitialLine:
                     End If
 
                 Catch ex As Exception
-                    Log("Initial Homeower failed. BBLE:" & bble & " Exception: " & ex.Message)
+                    Log("Initial Homeowner failed. BBLE:" & bble & " Exception: " & ex.Message)
                 Finally
                     rule.Complete(Core.DataLoopRule.DataLoopType.AllMortgage)
                 End Try
