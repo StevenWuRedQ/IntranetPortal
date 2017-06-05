@@ -453,7 +453,7 @@ InitialLine:
                     If (DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)) Then
                         Log("Initial Data Message " & bble & String.Format(" Refresh BBLE: {0} homeowner info is finished.", bble))
                     Else
-                        Log("Initial Homeowner failed. No homeowene info loaded. BBLE: " & bble)
+                        Log("Initial Homeowner failed. No homeowner info loaded. BBLE: " & bble)
                     End If
 
                 Catch ex As Exception

@@ -380,7 +380,7 @@
   <PortalNavItem Name="Underwriting" Text="Underwriting" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Underwriter,Sales-Executive</UserRoles>
     <Items>
-      <PortalNavItem Name="UnderwriterSummary" Text="Summary" NavigationUrl="/underwriter/UnderwritingHome.aspx" ShowAmount="false">
+      <!--<PortalNavItem Name="UnderwriterSummary" Text="Summary" NavigationUrl="/underwriter/UnderwritingHome.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
@@ -391,20 +391,20 @@
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
-      </PortalNavItem>
-      <!--<PortalNavItem Name="UnderwriterSummaryOld" Text="Summary Old" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
+      </PortalNavItem>-->
+      <PortalNavItem Name="UnderwriterSummaryOld" Text="Summary" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwriterProperties1" Text="Properties Old" NavigationUrl="/underwriter/DocSearchList.aspx" ShowAmount="false">
+      <PortalNavItem Name="UnderwriterProperties1" Text="Properties" NavigationUrl="/underwriter/DocSearchList.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwritingDocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
+     <!-- <PortalNavItem Name="UnderwritingDocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
         <UserRoles>Entity-Manager,Relation-Manager,Underwriter,Sales-Executive,DocSearch-Outside</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
