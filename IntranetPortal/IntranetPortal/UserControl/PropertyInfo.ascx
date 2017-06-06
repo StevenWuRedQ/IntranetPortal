@@ -777,39 +777,7 @@
             </PanelCollection>
             <ClientSideEvents EndCallback="function(s,e){alert('Saved.');}" />
         </dx:ASPxCallbackPanel>
-
-        <% If LeadsInfoData.TaxLiens IsNot Nothing AndAlso LeadsInfoData.TaxLiens.Count > 0 AndAlso False Then%>
-        <div style="margin: 20px; margin-top: -219px; margin-left: 230px;" class="clearfix">
-            <div class="form_head">Tax Liens</div>
-            <ul class="ss_form_box clearfix">
-                <% For Each lien In LeadsInfoData.TaxLiens%>
-                <li class="ss_form_item" style="width: 50%">
-                    <label class="ss_form_input_title">Tax Liens Date</label>
-                    <input class="ss_form_input" value="<%= lien.TaxLiensYear %>" />
-                </li>
-                <li class="ss_form_item" style="width: 50%">
-                    <label class="ss_form_input_title">Tax Liens Amount</label>
-                    <input class="ss_form_input input_currency" value="<%= lien.Amount %>" />
-                </li>
-
-                <%--  <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden">
-                </li>--%>
-
-                <% Next%>
-
-                <li class="ss_form_item" style="width: 50%">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden">
-                </li>
-                <li class="ss_form_item" style="width: 50%">
-                    <label class="ss_form_input_title" style="color: #ff400d">Total</label>
-                    <input class="ss_form_input input_currency" value="<%= LeadsInfoData.TotalTaxLienAmount %>" />
-                </li>
-            </ul>
-        </div>
-        <% End If%>
+        
 
         <% If (LeadsInfoData.LisPens IsNot Nothing AndAlso LeadsInfoData.LisPens.Count > 0) Then%>
         <div style="margin: 20px;" class="clearfix">
@@ -823,7 +791,7 @@
         </div>
         <%End If%>
 
-        <% If LeadsInfoData.PropertyNotes IsNot Nothing AndAlso LeadsInfoData.PropertyNotes.Count > 0 %>
+        <% If LeadsInfoData.PropertyNotes IsNot Nothing AndAlso LeadsInfoData.PropertyNotes.Count > 0Then %>
         <% dim propNote = LeadsInfoData.PropertyNotes(0) %>
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">Mortgage Notes</div>
