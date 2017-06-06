@@ -552,7 +552,16 @@ Public Class LeadsList
                     For Each item In streenAddress.ToList
                         Dim newdr = dt.NewRow
                         newdr(0) = item.propertyInformation.BBLE
-                        newdr(1) = String.Format("{0} {1} - {2}", item.propertyInformation.StreetNumber, item.propertyInformation.StreetName, item.owners(0).Name)
+
+                        If item.owners IsNot Nothing AndAlso item.owners.Count > 0 Then
+                            newdr(1) = String.Format("{0} {1} - {2}", item.propertyInformation.StreetNumber, item.propertyInformation.StreetName, item.owners(0).Name)
+                        Else
+                            If item.address IsNot Nothing Then
+                                newdr(1) = String.Format("{0}", item.address.FormatAddress)
+                            Else
+                                newdr(1) = String.Format("{0} {1}", item.propertyInformation.StreetNumber, item.propertyInformation.StreetName)
+                            End If
+                        End If
                         dt.Rows.Add(newdr)
                     Next
                 End If
