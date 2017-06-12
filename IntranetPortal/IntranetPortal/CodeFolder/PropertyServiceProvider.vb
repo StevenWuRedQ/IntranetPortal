@@ -781,6 +781,10 @@ Public Class PropertyServiceProvider
                 '    city = "Bronx"
                 'End If
 
+                If city.Trim.ToUpper = "LIC" Then
+                    city = "Queens"
+                End If
+
                 If (city.Trim.ToUpper.Contains("BK")) Then
                     city = "Brooklyn"
                 ElseIf city.Trim.ToUpper.Contains("BX")

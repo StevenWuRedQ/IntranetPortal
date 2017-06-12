@@ -100,45 +100,6 @@ Namespace Controllers
             End Try
         End Function
 
-
-        '' POST: api/AuctionProperties
-        '<ResponseType(GetType(AuctionProperty))>
-        'Function PostAuctionProperty(ByVal auctionProperty As AuctionProperty) As IHttpActionResult
-        '    Throw New Exception("Not Implement")
-
-        '    If Not ModelState.IsValid Then
-        '        Return BadRequest(ModelState)
-        '    End If
-
-        '    db.AuctionProperties.Add(auctionProperty)
-
-        '    Try
-        '        db.SaveChanges()
-        '    Catch ex As DbUpdateException
-        '        If (AuctionPropertyExists(auctionProperty.AuctionId)) Then
-        '            Return Conflict()
-        '        Else
-        '            Throw
-        '        End If
-        '    End Try
-
-        '    Return CreatedAtRoute("DefaultApi", New With {.id = auctionProperty.AuctionId}, auctionProperty)
-        'End Function
-
-        '' DELETE: api/AuctionProperties/5
-        '<ResponseType(GetType(AuctionProperty))>
-        'Function DeleteAuctionProperty(ByVal id As Integer) As IHttpActionResult
-        '    Dim auctionProperty As AuctionProperty = db.AuctionProperties.Find(id)
-        '    If IsNothing(auctionProperty) Then
-        '        Return NotFound()
-        '    End If
-
-        '    db.AuctionProperties.Remove(auctionProperty)
-        '    db.SaveChanges()
-
-        '    Return Ok(auctionProperty)
-        'End Function
-
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
             If (disposing) Then
                 db.Dispose()

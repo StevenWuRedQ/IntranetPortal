@@ -43,7 +43,6 @@ Public Class LoadFileFromSharepoint
 
                 Response.Redirect(objInfo.AnonymousViewLink)
             End If
-            
         End Using
     End Sub
 
