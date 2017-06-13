@@ -333,7 +333,7 @@ Partial Class LeadInfoDocumentSearch
         RejectUnderwriting = 4
     End Enum
 
-    ' duck type type converting to underwriter type
+    ' duck type converting to underwriter type
     Public Shared Function CUnderWriterStatus(Of InputT)(obj As InputT, lambda As Func(Of InputT, UnderWriterStatus)) _
         As UnderWriterStatus
         If obj Is Nothing Then
