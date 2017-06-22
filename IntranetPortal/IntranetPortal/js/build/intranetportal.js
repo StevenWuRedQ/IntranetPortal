@@ -8387,7 +8387,12 @@ portalApp.controller('shortSalePreSignCtrl', function ($scope, ptCom, $http,
                     data.FormData.CreateDate = data.CreateDate;
                 }
 
+                if (data.FormData.BusinessData && data.FormData.BusinessData.BBLE == null && data.BusinessData.BBLE) {
+                    data.FormData.BusinessData = data.BusinessData;
+                }
+
                 angular.extend($scope.SSpreSign, data.FormData);
+                
 
                 $scope.DeadType = $scope.SSpreSign.DeadType;                
                 $scope.SSpreSign.Status = data.BusinessData.Status;

@@ -327,6 +327,12 @@
     <Compile Include="DocumentSearch\UnderwritingRequest.vb" />
     <Compile Include="GPAOffer\GPAOffer.vb" />
     <Compile Include="PropertyNote\PropertyNote.vb" />
+    <Compile Include="Service References\TLOApi\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="TLO\TLOService.vb" />
     <Compile Include="WebApi\EcourtService.vb" />
     <Compile Include="WebApi\GradingService.vb" />
     <Compile Include="WebApi\LeadsEcourtData.vb" />
@@ -603,6 +609,127 @@
       <DependentUpon>PortalEntities.edmx</DependentUpon>
       <LastGenOutput>ShortSale.vb</LastGenOutput>
     </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.BasicPersonSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.EchoTestOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOAbbreviatedPersonSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOAddressSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOAddressSearchV2Output.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOBankruptcyRecordsSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOBusinessBankruptcySearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOBusinessComboSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOBusinessJudgmentSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOBusinessLienSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOBusinessPhoneSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOBusinessSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOComprehensiveBusinessSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOComprehensivePersonSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOComprehensivePhoneSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOCorporateFilingSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOCriminalSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLODriversLicenseSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOEvictionSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOForeclosureSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOGenericSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOIDVerificationOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOLocateReportOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOPersonalJudgmentSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOPersonalLienSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOPersonSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOProfessionalLicenseSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOPropertyDeedSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOPropertySearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOPropertyTaxSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLORelationshipGraphOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOScreeningSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOSocialNetworksSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOUCCSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOUtilityConnectionSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOVehicleSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOVehicleTagSightingsReportOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOVerifyPlusOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOVoterRegistrationSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\IntranetPortal.Data.TLOApi.TLOWatchListSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TLOApi\TLOWebService.wsdl" />
     <None Include="ShortSale\packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -620,6 +747,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DataAPI\" />
     <WCFMetadataStorage Include="Service References\RulesEngine\" />
+    <WCFMetadataStorage Include="Service References\TLOApi\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\DataAPI\configuration91.svcinfo" />
@@ -650,7 +778,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\CMAModels.dll" />
+    <None Include="Service References\TLOApi\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <None Include="Service References\TLOApi\configuration.svcinfo" />
+    <None Include="Service References\TLOApi\configuration91.svcinfo" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

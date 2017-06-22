@@ -391,6 +391,10 @@ Public Class LoopServiceRule
             Dim attemps = 0
 InitialLine:
             attemps += 1
+            If attemps > 2 Then
+                Continue While
+            End If
+
             Try
                 ExecuteDataloopRule(rule)
                 'rule.Complete()

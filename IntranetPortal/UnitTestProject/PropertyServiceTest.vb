@@ -52,7 +52,7 @@ Public Class PropertyServiceTest
 
     <TestMethod()>
     Public Sub GetMortgages_BadBBLE()
-        Dim bble = "4065270031"
+        Dim bble = "2030410000"
         Dim service As New PropertyService
         Dim result = service.GetMortgages(bble)
         Assert.IsNull(result)

@@ -64,7 +64,6 @@ Partial Public Class HomeOwner
     End Property
 
     ' update local report use for manually run batch
-
     Public Shared Function UpdateLocatedRepot(ownerID As Integer) As Integer
         Using ctx As New Entities
             Dim owner = ctx.HomeOwners.Find(ownerID)
