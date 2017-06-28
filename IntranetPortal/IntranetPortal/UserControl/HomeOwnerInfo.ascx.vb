@@ -114,7 +114,7 @@ Public Class HomeOwnerInfo
     Private Function GetAllPhoneComments() As List(Of HomeOwnerPhone)
 
         If (Utility.IsAny(ownerPhones)) Then
-            Return ownerPhones.Where(Function(p) p.OwnerName = OwnerName AndAlso p.Comment IsNot Nothing).ToList()
+            Return ownerPhones.Where(Function(p) p.Comment IsNot Nothing).ToList()
         End If
 
         Return ownerPhones

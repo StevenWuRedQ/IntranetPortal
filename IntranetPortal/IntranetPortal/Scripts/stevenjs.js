@@ -1326,8 +1326,6 @@ function sortPhoneFunc(compareFunc) {
         //{
         //    $("<hr />").insertBefore(last_undo_wrong);
         //}
-        
-
     });
 }
 
@@ -1350,7 +1348,6 @@ function reSortUndoWrongPhone(phones)
         var undoWB = parseInt($(b).attr(data_undo_wrong_attr));
         return undoWA - undoWB;
     })
-
 }
 
 function buildPhonesHtml(phones)
