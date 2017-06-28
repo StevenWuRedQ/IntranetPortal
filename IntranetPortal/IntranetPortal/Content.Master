@@ -70,7 +70,7 @@
 
     <script src="/Scripts/autosave.js?v=2017522"></script>
     <!-- pro env -->
-    <script src="/js/build/intranetportal.js?v=2017522"></script>
+    <script src="/js/build/intranetportal.js?v=2017628"></script>
 
     <script>
         // check if devextreme is loaded
