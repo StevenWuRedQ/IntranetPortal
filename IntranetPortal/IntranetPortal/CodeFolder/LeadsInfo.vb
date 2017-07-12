@@ -24,6 +24,7 @@ Public Class LeadsInfo
         CoOpConversion = 12
         StraightSale = 13
         MortgageNote = 14
+        Deceased = 15
     End Enum
 
     Public Shared Sub UpdateType(bble As String, type As LeadsType, updateby As String)
