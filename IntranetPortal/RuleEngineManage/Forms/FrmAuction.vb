@@ -1,4 +1,5 @@
 ﻿Imports IntranetPortal.Data
+
 Public Class FrmAuction
     Private Sub btnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
         If openDialog.ShowDialog() = DialogResult.OK Then

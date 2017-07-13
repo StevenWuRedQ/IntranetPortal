@@ -12,6 +12,7 @@ Public Class RulesService
     Public Delegate Sub StatusChange(sta As ServiceStatus)
     Public Event OnStatusChange As StatusChange
     Private serviceMode As RunningMode
+    Public _rulesProvider As IRulesProvider
 
     Private _svrStatus As ServiceStatus
     Public Property Status As ServiceStatus
@@ -31,6 +32,17 @@ Public Class RulesService
     Public Shared Function GetInstance() As RulesService
         If ServiceInstance Is Nothing Then
             ServiceInstance = New RulesService
+
+            ' load the rules settings
+            If RulesEngineSection.Settings IsNot Nothing AndAlso RulesEngineSection.Settings.RulesProvider IsNot Nothing Then
+                Dim rp = RulesEngineSection.Settings.RulesProvider
+                If rp IsNot Nothing Then
+                    Dim t = Type.GetType(rp.Type)
+                    If t IsNot Nothing Then
+                        ServiceInstance._rulesProvider = CType(Activator.CreateInstance(t), IRulesProvider)
+                    End If
+                End If
+            End If
         End If
 
         Return ServiceInstance
@@ -79,8 +91,13 @@ Public Class RulesService
 
     Public Property Rules As List(Of BaseRule)
 
-    Private Sub InitRules()
-        Rules = New List(Of BaseRule)
+    Protected Overridable Sub InitRules()
+        If _rulesProvider IsNot Nothing Then
+            Rules = _rulesProvider.GetRules()
+            Return
+        Else
+            Rules = New List(Of BaseRule)
+        End If
 
         ' test leads assign rules
         'Rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:05:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True, .ExecuteOnWeekend = True})
@@ -408,3 +425,7 @@ Public Class RulesService
         Release
     End Enum
 End Class
+
+Public Interface IRulesProvider
+    Function GetRules() As List(Of BaseRule)
+End Interface

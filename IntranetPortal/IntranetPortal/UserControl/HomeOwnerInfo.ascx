@@ -346,7 +346,6 @@
                             </div>
                         </div>
                     </div>
-
                     <% End If%>
                     <% Next%>
                     <% End If%>
@@ -363,8 +362,6 @@
                                     <a href='#' class="PhoneLink <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")'>
                                         <span class="phone-text"><%=FormatPhoneNumber(phone.phoneField)%>
                                             <span class="phone-working-text">- Working phone</span>
-
-
                                         </span>
                                     </a>
                                     <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
@@ -375,8 +372,6 @@
                                             (<%=count%>)
                                         <%End If %>
                                     </span>
-
-
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)

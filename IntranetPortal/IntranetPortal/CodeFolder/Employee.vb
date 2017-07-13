@@ -1,5 +1,4 @@
-﻿
-Imports System.Runtime.Serialization.Formatters.Binary
+﻿Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
 Imports Newtonsoft.Json
 Imports System.ComponentModel.DataAnnotations
@@ -27,8 +26,6 @@ Partial Public Class Employee
     '#End If
 
     Private Shared _ceo As Employee
-
-
 
     ''' <summary>
     ''' Get company CEO
@@ -67,7 +64,6 @@ Partial Public Class Employee
             End Try
         End Get
     End Property
-
 
     ''' <summary>
     ''' Get Employee User Profile Data

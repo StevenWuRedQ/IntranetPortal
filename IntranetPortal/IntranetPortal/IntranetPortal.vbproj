@@ -764,6 +764,7 @@
     <Compile Include="Controllers\ManagementController.vb" />
     <Compile Include="Controllers\PortalReportController.vb" />
     <Compile Include="Controllers\PreSignController.vb" />
+    <Compile Include="Controllers\PropertyNoteController.vb" />
     <Compile Include="Controllers\PropertyOfferController.vb" />
     <Compile Include="Controllers\ReportController.vb" />
     <Compile Include="Controllers\ShortSaleController.vb" />
@@ -1935,6 +1936,13 @@
     <Compile Include="Proiority\Priority.aspx.vb">
       <DependentUpon>Priority.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PropertyNote\PropertyNoteList.aspx.designer.vb">
+      <DependentUpon>PropertyNoteList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyNote\PropertyNoteList.aspx.vb">
+      <DependentUpon>PropertyNoteList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PublicController\DataServiceController.vb" />
     <Compile Include="PublicController\MapServiceController.vb" />
@@ -6733,7 +6741,6 @@
     <Content Include="bower_components\printelement\test\jquery.printelement_test.js" />
     <Content Include="bower_components\prototypejs\dist\prototype.js" />
     <Content Include="bower_components\prototypejs\dist\prototype.min.js" />
-    <Content Include="bower_components\pt-compute-engine\pt-compute-engine.js" />
     <Content Include="bower_components\react\JSXTransformer.js" />
     <Content Include="bower_components\react\react-with-addons.js" />
     <Content Include="bower_components\react\react-with-addons.min.js" />
@@ -7102,6 +7109,7 @@
     <Content Include="LeadDocSearch\DocSearchOldVersion.ascx" />
     <Content Include="LeadDocSearch\DocSearchSummary.aspx" />
     <Content Include="LeadDocSearch\LeadDocSearchList.ascx" />
+    <Content Include="PropertyNote\PropertyNoteList.aspx" />
     <Content Include="Underwriter\DocSearch.aspx" />
     <Content Include="Underwriter\UnderwritingRequest.aspx" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
@@ -7640,8 +7648,6 @@
     <None Include="App_Data\underwriter.xlsx.bak" />
     <Content Include="App_Data\docsearchmap.csv" />
     <Content Include="App_Data\test.csv" />
-    <Content Include="bower_components\pt-compute-engine\.bower.json" />
-    <Content Include="bower_components\pt-compute-engine\README.md" />
     <Content Include="Underwriter\UnderwritingTracking.aspx" />
     <Content Include="Webconfig.txt" />
     <None Include="Scripts\x_references.js" />

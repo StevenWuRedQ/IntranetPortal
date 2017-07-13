@@ -23,6 +23,8 @@ Public Class LeadsInfo
         ShortSale = 10
         CoOpConversion = 12
         StraightSale = 13
+        MortgageNote = 14
+        Deceased = 15
     End Enum
 
     Public Shared Sub UpdateType(bble As String, type As LeadsType, updateby As String)
@@ -167,6 +169,17 @@ Public Class LeadsInfo
             End If
 
             Return _listPens
+        End Get
+    End Property
+
+    Private _propertyNotes As List(Of PropertyNote)
+    Public ReadOnly Property PropertyNotes As List(Of PropertyNote)
+        Get
+            If _propertyNotes Is Nothing Then
+                _propertyNotes = PropertyNote.GetNotes(BBLE)
+            End If
+
+            Return _propertyNotes
         End Get
     End Property
 

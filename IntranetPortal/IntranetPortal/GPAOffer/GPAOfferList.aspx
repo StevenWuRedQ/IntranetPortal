@@ -7,7 +7,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.0/moment-timezone.min.js" type="text/javascript"></script>
-
+        
     <style type="text/css">
         a.dx-link-MyIdealProp {
             margin-left: 5px;
@@ -113,7 +113,7 @@
                             template: function (container, options) {
                                 var currentEmployeeData = options.data;
                                 container.addClass("internal-grid-container");
-                                $("<div>").text("Related offers:").appendTo(container);
+                                $("<div>").text("Offer History:").appendTo(container);
 
                                 var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + options.data.BBLE.trim() + '/offer';
                                 $.getJSON(url).done(function (data) {
@@ -131,25 +131,28 @@
                                                 return;
                                             rowInfo.rowElement.addClass('myRow');
                                         },
-                                        columns: [ {
+                                        columns: [{
                                             caption: "Offer",
-                                            dataField: "price"
+                                            dataField: "price",
+                                            format: 'currency'
                                         }, {
                                             caption: "Generate By",
                                             dataField: "createdBy"
                                         }, {
-                                            caption: "Homeowner",
+                                            caption: "for",
                                             dataField: "for"
                                         }, "comments", {
                                             dataField: "updatedDate",
                                             dataType: "updatedDate",
-                                            dataType: "date"
+                                            dataType: "date",
+                                            sortOrder: 'desc',
+                                            format: "shortDateShortTime"
                                         }]
                                     };
 
                                     $("<div>")
                                     .addClass("internal-grid")
-                                    .dxDataGrid(options).appendTo(container);                                  
+                                    .dxDataGrid(options).appendTo(container);
                                 });
                             }
                         },
@@ -179,7 +182,8 @@
                         }, "Comments", {
                             caption: "Last Update",
                             dataField: "LastUpdate",
-                            dataType: "date"
+                            dataType: "date",
+                            format: "shortDateShortTime"
                         }, {
                             caption: "Agent",
                             dataField: "CurrentAgent"
@@ -196,12 +200,12 @@
                                     })
                                     .appendTo(container);
 
-                                $('<a/>').addClass('dx-link-MyIdealProp')
-                                    .text('History')
-                                    .on('dxclick', function () {
-                                        loadHistory(options.data.BBLE);                                      
-                                    })
-                                    .appendTo(container);
+                                //$('<a/>').addClass('dx-link-MyIdealProp')
+                                //    .text('History')
+                                //    .on('dxclick', function () {
+                                //        loadHistory(options.data.BBLE);                                      
+                                //    })
+                                //    .appendTo(container);
 
                                 //$('<a/>').addClass('dx-link-MyIdealProp')
                                 //    .text('History')
@@ -221,7 +225,7 @@
                 var url = "/api/ExternalData?source=grade&api=api/usergradedata/refid/" + bble.trim() + "/offer";
                 $.getJSON(url).done(function (data) {
                     var options = {
-                        dataSource: data,                     
+                        dataSource: data,
                         rowAlternationEnabled: true,
                         pager: {
                             showInfo: true,
@@ -246,7 +250,7 @@
                             format: 'currency'
                         }, {
                             caption: "Offer For",
-                            dataField: "for"
+                            dataField: "offerFor"
                         }, "comments", {
                             dataField: "updatedDate",
                             dataType: "date"
@@ -295,7 +299,7 @@
                     <div id="gridHistory"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>               
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -307,7 +311,6 @@
                     <h4 class="modal-title">Offer Detail</h4>
                 </div>
                 <div class="modal-body">
-                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

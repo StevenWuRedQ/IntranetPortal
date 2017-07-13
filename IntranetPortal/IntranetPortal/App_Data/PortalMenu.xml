@@ -356,9 +356,20 @@
   </PortalNavItem>
 
   <PortalNavItem Name="GPAOffer" Text="GPA Offer" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">
-    <UserRoles>Admin</UserRoles>
+    <UserRoles>GPAOffer-User</UserRoles>
     <Items>    
       <PortalNavItem Name="GPAOfferFiles" Text="Offers" NavigationUrl="/GPAOffer/GPAOfferList.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bullseye"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+    
+  <PortalNavItem Name="PropertyNotes" Text="Property Notes" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">
+    <UserRoles>PropertyNotes-User</UserRoles>
+    <Items>
+      <PortalNavItem Name="PropertyNoteFile" Text="Files" NavigationUrl="/PropertyNote/PropertyNoteList.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-bullseye"></i>]]>
         </FontClass>
@@ -369,7 +380,7 @@
   <PortalNavItem Name="Underwriting" Text="Underwriting" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Underwriter,Sales-Executive</UserRoles>
     <Items>
-      <PortalNavItem Name="UnderwriterSummary" Text="Summary" NavigationUrl="/underwriter/UnderwritingHome.aspx" ShowAmount="false">
+      <!--<PortalNavItem Name="UnderwriterSummary" Text="Summary" NavigationUrl="/underwriter/UnderwritingHome.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
@@ -380,20 +391,20 @@
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
-      </PortalNavItem>
-      <!--<PortalNavItem Name="UnderwriterSummaryOld" Text="Summary Old" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
+      </PortalNavItem>-->
+      <PortalNavItem Name="UnderwriterSummaryOld" Text="Summary" NavigationUrl="/mydefault.aspx?name=UnderWriter" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwriterProperties1" Text="Properties Old" NavigationUrl="/underwriter/DocSearchList.aspx" ShowAmount="false">
+      <PortalNavItem Name="UnderwriterProperties1" Text="Properties" NavigationUrl="/underwriter/DocSearchList.aspx" ShowAmount="false">
         <UserRoles>Underwriter,Sales-Executive</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-pencil"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="UnderwritingDocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
+     <!-- <PortalNavItem Name="UnderwritingDocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
         <UserRoles>Entity-Manager,Relation-Manager,Underwriter,Sales-Executive,DocSearch-Outside</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>

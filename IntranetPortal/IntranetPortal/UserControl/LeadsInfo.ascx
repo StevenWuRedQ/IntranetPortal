@@ -171,7 +171,7 @@
 
         if (sortPhones && e.item.index != 4 && e.item.index != 0) {
 
-            sortPhones();
+            // sortPhones();
         }
     }
     function clearUndoCount(_tempTelLink) {

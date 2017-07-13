@@ -74,6 +74,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyOffer" Width="1.5" PointX="6.625" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.AuditLog" Width="1.5" PointX="8.5" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.GPAOffer" Width="1.5" PointX="2.75" PointY="4" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyNote" Width="1.875" PointX="8.5" PointY="4" />
       </Diagram>
       <Diagram DiagramId="b741b009f0c0461e8625ff22708e5e4b" Name="Dialer" ZoomLevel="124" >
         <EntityTypeShape EntityType="IntranetPortalModel.DialerContact" Width="1.5" PointX="0.75" PointY="0.75" />

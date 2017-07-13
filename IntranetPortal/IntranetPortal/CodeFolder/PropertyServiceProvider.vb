@@ -773,6 +773,18 @@ Public Class PropertyServiceProvider
             End If
 
             If Not String.IsNullOrEmpty(city) Then
+                'If bble.StartsWith("3") Then
+                '    city = "Brooklyn"
+                'End If
+
+                'If bble.StartsWith("2") Then
+                '    city = "Bronx"
+                'End If
+
+                If city.Trim.ToUpper = "LIC" Then
+                    city = "Queens"
+                End If
+
                 If (city.Trim.ToUpper.Contains("BK")) Then
                     city = "Brooklyn"
                 ElseIf city.Trim.ToUpper.Contains("BX")

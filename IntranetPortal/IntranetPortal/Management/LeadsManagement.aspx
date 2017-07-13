@@ -78,6 +78,19 @@
             gridLeads.ApplyFilter(condtion);
         }
 
+        function filterByType(key)
+        {
+            if (key.trim() == "") {
+                gridLeads.ClearFilter();
+                return;
+            }
+
+            var filterCondition = "";        
+            filterCondition = "[TypeText] LIKE '%" + key + "%'";
+            //filterCondition += " OR [Neighborhood] LIKE '%" + key + "%'";
+            gridLeads.ApplyFilter(filterCondition);
+        }
+
         var lastSearchKey = "";
         function SearchGrid() {
             if (gridLeads.InCallback()) {
@@ -150,21 +163,30 @@
                                                 <span class="upcase_text">Don't Show Recycled Leads</span>
                                             </label>
                                         </span>
+                                        <span style="margin-left: 10px">
+                                            <label for="cbfilterOutRecycel" class="font_12" style="padding-top: 20px; float: none">
+                                                <span class="upcase_text">Leads Type</span>
+                                            </label>
+                                            <select id="selectLeadsType" class="form-control" onchange="filterByType(this.value)" style="width:100px;display:inline-block;">
+                                                <option></option>
+                                                <option value="TaxLien">Tax Lien</option>
+                                                <option value="VacantLand">Vacan Leads</option>
+                                                <option value="Deceased">Deceased</option>
+                                            </select>
+                                        </span>
                                         <div style="float: right">
                                             <asp:LinkButton ID="btnExport" Visible="false" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
                                             </asp:LinkButton>
-                                            <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
+                                            <input type="button" value="Create Leads" hidden="hidden" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
                                         </div>
-                                        <div style="width: 100%">
+                                        <div style="width: 100%">                                           
                                             <div style="text-align: center" class="form-inline">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" style="width:300px" placeholder="Search for BBLE, Address, Neighbor..." id="QuickSearch" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
+                                                    <input type="text" class="form-control" style="width:300px" placeholder="Search for BBLE, Address, Neighbor..." id="QuickSearch" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }" />                                                   
                                                     <span class="input-group-btn">
                                                         <button class="btn btn-secondary" type="button" onclick="SearchGrid()"><i class="fa fa-search tooltip-examples"></i></button>
                                                     </span>
-                                                </div>
-                                               <%-- <input style="margin-left: 20px; width: 300px; height: 30px;" class="form-control" id="QuickSearch" placeholder="Quick Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid();return false; }">
-                                                <i class="fa fa-search tooltip-examples" style="margin-left: 20px" onclick="SearchGrid()"></i>--%>
+                                                </div>                                              
                                             </div>
                                         </div>
                                     </div>

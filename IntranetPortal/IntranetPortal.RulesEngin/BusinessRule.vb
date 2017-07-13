@@ -391,6 +391,10 @@ Public Class LoopServiceRule
             Dim attemps = 0
 InitialLine:
             attemps += 1
+            If attemps > 2 Then
+                Continue While
+            End If
+
             Try
                 ExecuteDataloopRule(rule)
                 'rule.Complete()
@@ -453,11 +457,11 @@ InitialLine:
                     If (DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)) Then
                         Log("Initial Data Message " & bble & String.Format(" Refresh BBLE: {0} homeowner info is finished.", bble))
                     Else
-                        Log("Initial Homeowner failed. No homeowene info loaded. BBLE: " & bble)
+                        Log("Initial Homeowner failed. No homeowner info loaded. BBLE: " & bble)
                     End If
 
                 Catch ex As Exception
-                    Log("Initial Homeower failed. BBLE:" & bble & " Exception: " & ex.Message)
+                    Log("Initial Homeowner failed. BBLE:" & bble & " Exception: " & ex.Message)
                 Finally
                     rule.Complete(Core.DataLoopRule.DataLoopType.AllMortgage)
                 End Try

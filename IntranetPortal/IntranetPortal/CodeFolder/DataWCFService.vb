@@ -15,6 +15,9 @@ Public Class DataWCFService
 #End Region
 
 #Region "TLO Related"
+
+    Private Shared ReadOnly TLOServiceEnabled As Boolean = CBool(System.Configuration.ConfigurationManager.AppSettings("EnableTLOService"))
+
     Public Shared Function GetLocateReport(apiOrderNum As Integer, bble As String, owner As HomeOwner) As DataAPI.TLOLocateReportOutput
         If String.IsNullOrEmpty(owner.Address1) AndAlso String.IsNullOrEmpty(owner.Address2) AndAlso String.IsNullOrEmpty(owner.City) Then
             Return Nothing
@@ -42,24 +45,76 @@ Public Class DataWCFService
             Return Nothing
         End If
 
-        Using client As New DataAPI.WCFMacrosClient
-            Dim result = GetLocateReport(apiOrderNum, bble, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country)
 
+        Dim result = GetLocateReport(apiOrderNum, bble, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country)
+        Return result
 
+    End Function
 
-            Return result
+    Public Shared Function GetOwnerInfoByTLOService(tloId As String, bble As String) As HomeOwner
+
+        Dim orderId = 1
+
+        Using ctx As New Entities
+            Dim order As New APIOrder
+            order.BBLE = bble
+            order.Orderby = GetCurrentIdentityName()
+            order.OrderTime = DateTime.Now
+            order.Status = APIOrder.OrderStatus.Complete
+            ctx.APIOrders.Add(order)
+            ctx.SaveChanges()
+
+            orderId = order.ApiOrderID
         End Using
+
+        Dim result = TLOService.GetTLOPerson(orderId, Nothing, Nothing, False, False, Nothing, tloId, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+
+        If result Is Nothing Then
+            Throw New Exception("Can't find the user. Please check.")
+        End If
+
+        If result.NumberOfRecordsFound > 0 Then
+            Dim person = result.PersonSearchOutputRecords(0)
+
+            'relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField 
+            If person IsNot Nothing AndAlso person.Names IsNot Nothing AndAlso person.Names.Length > 0 Then
+                Dim owner As New HomeOwner
+                Dim name = person.Names(0)
+                owner.Name = name.FirstName & If(name.MiddleName IsNot Nothing, " " & name.MiddleName & " ", " ") & name.LastName
+                owner.Address1 = person.Addresses(0).Address.Line1
+                owner.Address2 = person.Addresses(0).Address.Line2
+                owner.City = person.Addresses(0).Address.City
+                owner.Country = person.Addresses(0).Address.CountryName
+                owner.State = person.Addresses(0).Address.State
+                owner.Zip = person.Addresses(0).Address.Zip
+                If person.DatesOfBirth IsNot Nothing AndAlso person.DatesOfBirth.Length > 0 Then
+                    owner.AgeString = person.DatesOfBirth(0).CurrentAge
+                End If
+
+                If person.DatesOfDeath IsNot Nothing Then
+                    owner.DeathIndicator = If(person.DatesOfDeath.Length > 0, "Death", "Alive")
+                End If
+
+                If Not String.IsNullOrEmpty(person.NumberOfBankruptcies) Then
+                    owner.BankruptcyString = If(CInt(person.NumberOfBankruptcies) > 0, "Yes", "No")
+                End If
+
+                'tlo log
+                Core.TLOApiLog.Log(bble, owner.Name, "UniqueId:" & tloId, Nothing, Nothing, Nothing, Nothing, Nothing, True, GetCurrentIdentityName)
+
+                Return owner
+            End If
+        End If
+
+        Core.TLOApiLog.Log(bble, Nothing, "UniqueId:" & tloId, Nothing, Nothing, Nothing, Nothing, Nothing, False, GetCurrentIdentityName)
+
+        Return Nothing
     End Function
 
     Public Shared Function GetOwnerInfoByTLOId(tloId As String, bble As String) As HomeOwner
-
-        'If Not Core.TLOApiLog.IsServiceOn Then
-        '    Throw New Exception("HomeOwner Service is temporary closed. Please try later.")
-        'End If
-
-        'If Core.TLOApiLog.LimiteIsExceed Then
-        '    Throw New Exception("HomeOwner Load Limit is reached. Please contact Admin!")
-        'End If
+        If TLOServiceEnabled Then
+            Return GetOwnerInfoByTLOService(tloId, bble)
+        End If
 
         Using client As New DataAPI.WCFMacrosClient
             Dim orderId = 1
@@ -82,13 +137,8 @@ Public Class DataWCFService
                 Throw New Exception("Can't find the user. Please check.")
             End If
 
-            'LogTloApiCall
-
-
-
             If result.numberOfRecordsFoundField > 0 Then
                 Dim person = result.personSearchOutputRecordsField(0)
-
 
                 'relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField 
                 If person IsNot Nothing AndAlso person.namesField IsNot Nothing AndAlso person.namesField.Length > 0 Then
@@ -138,14 +188,18 @@ Public Class DataWCFService
             End If
         End If
 
-        Using client As New DataAPI.WCFMacrosClient
+        Dim result = Nothing
 
-            Dim result = client.Get_LocateReport(orderNum, bble, name, address1, address2, city, state, zip, country, "", "")
+        If TLOServiceEnabled Then
+            result = TLOService.GetLocateReport(name, address1, address2, city, state, zip, country, "", "")
+        Else
+            Using client As New DataAPI.WCFMacrosClient
+                result = client.Get_LocateReport(orderNum, bble, name, address1, address2, city, state, zip, country, "", "")
+            End Using
+        End If
 
-            'LogTloApiCall
-            Core.TLOApiLog.Log(bble, name, address1, address2, city, state, zip, country, result IsNot Nothing, GetCurrentIdentityName)
-            Return result
-        End Using
+        Core.TLOApiLog.Log(bble, name, address1, address2, city, state, zip, country, result IsNot Nothing, GetCurrentIdentityName)
+        Return result
     End Function
 
     Private Shared Sub UpdateHomeOwnerApi(orderId As Integer, Optional result As String = "Done")
@@ -496,22 +550,24 @@ Public Class DataWCFService
 #Region "Server status"
 
     Public Shared Function IsServerBusy(Optional serverAddress As String = Nothing) As Boolean
-        Using client As New DataAPI.WCFMacrosClient()
-            If Not String.IsNullOrEmpty(serverAddress) Then
-                client.Endpoint.Address = New ServiceModel.EndpointAddress(serverAddress)
-            End If
+        Return False
 
-            Try
-                Dim waitingRequest = client.Requests_Waiting
-                Return waitingRequest > 50
-            Catch ex As TimeoutException
-                'Throw New Exception("Check Server is busy. Time out exception: " & ex.Message)
-                Return True
-            Catch ex As Exception
-                'Throw New Exception("Check Server is busy. exception: " & ex.Message)
-                Return True
-            End Try
-        End Using
+        'Using client As New DataAPI.WCFMacrosClient()
+        '    If Not String.IsNullOrEmpty(serverAddress) Then
+        '        client.Endpoint.Address = New ServiceModel.EndpointAddress(serverAddress)
+        '    End If
+
+        '    Try
+        '        Dim waitingRequest = client.Requests_Waiting
+        '        Return waitingRequest > 50
+        '    Catch ex As TimeoutException
+        '        'Throw New Exception("Check Server is busy. Time out exception: " & ex.Message)
+        '        Return True
+        '    Catch ex As Exception
+        '        'Throw New Exception("Check Server is busy. exception: " & ex.Message)
+        '        Return True
+        '    End Try
+        'End Using
     End Function
 
 #End Region
