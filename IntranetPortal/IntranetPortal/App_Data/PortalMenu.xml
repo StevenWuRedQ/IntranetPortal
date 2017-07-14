@@ -768,12 +768,12 @@
           <![CDATA[<i class="fa fa-map-marker"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="DayOff" Text="Day Off" NavigationUrl="/ManagementUI/MgrOffDays.aspx" ShowAmount="false">
+      <!--<PortalNavItem Name="DayOff" Text="Day Off" NavigationUrl="/ManagementUI/MgrOffDays.aspx" ShowAmount="false">
         <UserRoles>OfficeManager-*,HR-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
-      </PortalNavItem>
+      </PortalNavItem>-->
       <PortalNavItem Name="EntityManage" Text="Entity Manage" NavigationUrl="/ManagementUI/BuyerEntiyManage.aspx" ShowAmount="false">
         <UserRoles>Entity-Manager</UserRoles>
         <FontClass>
@@ -809,12 +809,12 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
+      <!--<PortalNavItem Name="DOBComplains" Text="DOB Complaints" NavigationUrl="/Complaints/ComplainsMng.aspx" ShowAmount="false">
         <UserRoles>OfficeManager-*,Complaints-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>
+      </PortalNavItem>-->
       <PortalNavItem Name="CustomReport" Text="Custom Report" NavigationUrl="/CustomReport/ReportWizard.aspx" ShowAmount="false">
         <UserRoles>ShortSale-Manager</UserRoles>
         <FontClass>
@@ -856,11 +856,11 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>-->
-      <PortalNavItem Name="LeadsDataManagement" Text="Data Service" NavigationUrl="/Management/LeadsDataManage.aspx" ShowAmount="false">
+      <!--<PortalNavItem Name="LeadsDataManagement" Text="Data Service" NavigationUrl="/Management/LeadsDataManage.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>
+      </PortalNavItem>-->
       <PortalNavItem Name="PortalImportData" Text="Import Leads" NavigationUrl="/Management/ImportAgentData.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>

@@ -68,6 +68,14 @@ Namespace Controllers
             Return Ok(list)
         End Function
 
+        <Route("api/underwriting/config"), HttpGet>
+        Public Function GetConfig() As IHttpActionResult
+            Dim jObj As New JObject
+            jObj("UnderwritingServiceServer") = UnderwritingService.Server
+            jObj("UnderwritingServiceServerClient") = UnderwritingService.ServerClient
+            Return Ok(jObj)
+        End Function
+
         <Route("api/underwriting/status/{status}"), HttpGet>
         Public Function GetUnderwritingByStatus(status As Integer) As IHttpActionResult
             Dim list = UnderwritingService.GetUnderwritingByStatus(status)

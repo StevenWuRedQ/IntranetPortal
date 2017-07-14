@@ -110,9 +110,9 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
                 var that = this;
                 if (this.serviceURL) return this.serviceURL;
                 $http({
-                    url: "/Webconfig.txt",
+                    url: "/api/underwriting/config",
                     method: "GET"
-                }).then(function (d) {
+                }).then(function (d) {                    
                     that.serviceURL = d.data["UnderwritingServiceServerClient"] + "/signalr";
                 })
             },

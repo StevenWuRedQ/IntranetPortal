@@ -74,7 +74,7 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.2.1/jquery.signalR.min.js"></script>
-    <script src="/underwritingservice/signalr/hubs"></script>
+    <script src='<%= IntranetPortal.UnderwritingService.ServerClient + "/signalr/hubs"%>'></script>
     <script>
         angular.module("PortalApp").config(function ($stateProvider) {
             var searchSummary = {
