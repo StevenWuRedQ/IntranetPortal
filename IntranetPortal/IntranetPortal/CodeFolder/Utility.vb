@@ -376,6 +376,11 @@ Public Class Utility
                 userContext = HttpContext.Current
             End If
 
+            If userContext.User.IsInRole("CEO") Then
+                Dim mainpools = {"Main Pool"}
+                Return context.LeadsAssignView2.Where(Function(la) mainpools.Contains(la.EmployeeName)).Count
+            End If
+
             If userContext.User.IsInRole("Admin") Then
                 Return context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing).Count
             Else

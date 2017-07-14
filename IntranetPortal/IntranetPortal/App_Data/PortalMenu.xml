@@ -634,7 +634,7 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
+  <!--<PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false" Visible="false">
     <UserRoles>Legal-*,ShortSale-Manager</UserRoles>
     <Applications>1</Applications>
     <Items>
@@ -733,7 +733,7 @@
         </FontClass>
       </PortalNavItem>
     </Items>
-  </PortalNavItem>
+  </PortalNavItem>-->
 
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false" InsideOnly="true">
     <UserRoles>DocSearch-Outside,OfficeManager-*,Entity-Manager,ShortSale-Manager,Complaints-Manager,HR-Manager,Accounting-Manager,HOI-Viewer,NewOffer-Viewer,Relation-Manager</UserRoles>
@@ -779,6 +779,29 @@
         <FontClass>
           <![CDATA[<i class="fa fa-building"></i>]]>
         </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="DocSearch" Text="Doc Search" NavigationUrl="/PopupControl/LeadTaxSearchRequest.aspx" ShowAmount="false">
+        <UserRoles>Entity-Manager,Relation-Manager,Sales-Executive,DocSearch-Outside,Underwriter</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-search-plus"></i>]]>
+        </FontClass>
+        <Items>
+          <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+            <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
+            <FontClass>
+              <![CDATA[<i class="fa fa-star"></i>]]>
+            </FontClass>
+            <FrontButton>
+              <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
+            </FrontButton>
+          </PortalNavItem>
+          <PortalNavItem Name="AgentNewLeads" Text="Report" NavigationUrl="/CustomReport/ReportWizard.aspx?t=leadsDocSearch" ShowAmount="false">
+            <UserRoles>Entity-Manager,Relation-Manager</UserRoles>
+            <FontClass>
+              <![CDATA[<i class="fa fa-line-chart"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+        </Items>
       </PortalNavItem>
       <PortalNavItem Name="CorpList" Text="Entity List" NavigationUrl="/popupControl/buyerentitypopupcontent.aspx" ShowAmount="false" visible="false">
         <UserRoles>Entity-Manager,Legal-*,ShortSale-*,Title-*</UserRoles>

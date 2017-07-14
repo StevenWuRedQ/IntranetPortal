@@ -57,10 +57,15 @@ Namespace Controllers
 
         <Route("api/underwriting/list"), HttpGet>
         Public Function GetProperties() As IHttpActionResult
-            Dim list = UnderwritingService.GetPropertiesList()
-            Dim jArrayList = JArray.FromObject(list).ToList
-            jArrayList.ForEach(Sub(s) s("Team") = Employee.GetEmpTeam(s("EmployeeName").ToString()))
-            Return Ok(jArrayList)
+            ' the original version
+            'Dim list = UnderwritingService.GetPropertiesList()
+            'Dim jArrayList = JArray.FromObject(list).ToList
+            'jArrayList.ForEach(Sub(s) s("Team") = Employee.GetEmpTeam(s("EmployeeName").ToString()))
+            'Return Ok(jArrayList)
+
+            ' changed by chris - 7/14/2017
+            Dim list = UnderwritingService.GetPropertiesList2()
+            Return Ok(list)
         End Function
 
         <Route("api/underwriting/status/{status}"), HttpGet>

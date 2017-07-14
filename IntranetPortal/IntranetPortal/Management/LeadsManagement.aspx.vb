@@ -47,6 +47,14 @@ Public Class LeadsManagement
 
     Sub BindNewestLeads()
         Using Context As New Entities
+            If User.IsInRole("CEO") Then
+                Dim mainpools = {"Main Pool"}
+                Dim lds = Context.LeadsAssignView2.Where(Function(la) mainpools.Contains(la.EmployeeName)).OrderByDescending(Function(la) la.CreateDate)
+                gridLeads.DataSource = lds.ToList ' Context.LeadsInfoes.Where(Function(l) l.Lead Is Nothing).ToList
+                gridLeads.DataBind()
+                Return
+            End If
+
             If User.IsInRole("Admin") Then
                 Dim lds = Context.LeadsAssignView2.Where(Function(la) String.IsNullOrEmpty(la.EmployeeName)).OrderByDescending(Function(la) la.CreateDate)
                 gridLeads.DataSource = lds.ToList ' Context.LeadsInfoes.Where(Function(l) l.Lead Is Nothing).ToList

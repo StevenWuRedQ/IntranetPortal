@@ -309,6 +309,9 @@
     <Compile Include="ADOEntity\UserFollowUp.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\vwUnderwritingProperty.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="Auction\AuctionProperty.vb" />
     <Compile Include="Audit\AuditLog.vb" />
     <Compile Include="BusinessForm\BusinessDataBase.vb" />

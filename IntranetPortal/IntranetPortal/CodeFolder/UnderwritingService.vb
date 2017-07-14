@@ -14,6 +14,13 @@ Public Class UnderwritingService
         ServicePointManager.DefaultConnectionLimit = 10
     End Sub
 
+    Public Shared Function GetPropertiesList2() As List(Of vwUnderwritingProperty)
+        Using ctx As New PortalEntities
+            Return ctx.vwUnderwritingProperties.ToList
+        End Using
+    End Function
+
+
     Public Shared Function GetPropertiesList() As IEnumerable(Of Object)
         Using ctx As New PortalEntities
             Dim Connection As HubConnection = New HubConnection(HubURL)

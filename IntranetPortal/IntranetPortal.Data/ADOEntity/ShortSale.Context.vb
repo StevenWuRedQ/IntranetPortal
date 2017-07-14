@@ -87,6 +87,7 @@ Partial Public Class PortalEntities
     Public Overridable Property UnderwritingTrackingViews() As DbSet(Of UnderwritingTrackingView)
     Public Overridable Property GPAOffers() As DbSet(Of GPAOffer)
     Public Overridable Property PropertyNotes() As DbSet(Of PropertyNote)
+    Public Overridable Property vwUnderwritingProperties() As DbSet(Of vwUnderwritingProperty)
 
     Public Overridable Function ArchiveDocumentSearch(bble As String, archiveBy As String) As Integer
         Dim bbleParameter As ObjectParameter = If(bble IsNot Nothing, New ObjectParameter("bble", bble), New ObjectParameter("bble", GetType(String)))
