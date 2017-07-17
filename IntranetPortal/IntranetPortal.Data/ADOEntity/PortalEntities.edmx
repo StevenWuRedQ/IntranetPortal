@@ -1546,6 +1546,27 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="InProcessDate" Type="datetime" />
           <Property Name="InProcessBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.vwUnderwritingProperties' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwUnderwritingProperties">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="BBLE" Type="nvarchar" MaxLength="11" />
+          <Property Name="UnderwritingStatus" Type="int" />
+          <Property Name="UnderwritingCreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UnderwritingCreateDate" Type="datetime" />
+          <Property Name="UnderwritingUpdateDate" Type="datetime" />
+          <Property Name="SearchStatus" Type="int" />
+          <Property Name="SearchCompletedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="SearchCompletedOn" Type="datetime" />
+          <Property Name="SearchUpdateDate" Type="datetime" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NewOfferStatus" Type="int" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Team" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Function Name="ArchiveDocumentSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="bble" Type="nchar" Mode="In" />
           <Parameter Name="archiveBy" Type="nvarchar" Mode="In" />
@@ -1769,6 +1790,24 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
     [UnderwritingTrackingView].[InProcessBy] AS [InProcessBy]
     FROM [dbo].[UnderwritingTrackingView] AS [UnderwritingTrackingView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwUnderwritingProperties" EntityType="Self.vwUnderwritingProperties" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwUnderwritingProperties].[ID] AS [ID], 
+    [vwUnderwritingProperties].[BBLE] AS [BBLE], 
+    [vwUnderwritingProperties].[UnderwritingStatus] AS [UnderwritingStatus], 
+    [vwUnderwritingProperties].[UnderwritingCreateBy] AS [UnderwritingCreateBy], 
+    [vwUnderwritingProperties].[UnderwritingCreateDate] AS [UnderwritingCreateDate], 
+    [vwUnderwritingProperties].[UnderwritingUpdateDate] AS [UnderwritingUpdateDate], 
+    [vwUnderwritingProperties].[SearchStatus] AS [SearchStatus], 
+    [vwUnderwritingProperties].[SearchCompletedBy] AS [SearchCompletedBy], 
+    [vwUnderwritingProperties].[SearchCompletedOn] AS [SearchCompletedOn], 
+    [vwUnderwritingProperties].[SearchUpdateDate] AS [SearchUpdateDate], 
+    [vwUnderwritingProperties].[EmployeeName] AS [EmployeeName], 
+    [vwUnderwritingProperties].[NewOfferStatus] AS [NewOfferStatus], 
+    [vwUnderwritingProperties].[CaseName] AS [CaseName], 
+    [vwUnderwritingProperties].[Team] AS [Team]
+    FROM [dbo].[vwUnderwritingProperties] AS [vwUnderwritingProperties]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1845,6 +1884,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <EntitySet Name="UnderwritingTrackingViews" EntityType="IntranetPortalModel.UnderwritingTrackingView" />
           <EntitySet Name="GPAOffers" EntityType="IntranetPortalModel.GPAOffer" />
           <EntitySet Name="PropertyNotes" EntityType="IntranetPortalModel.PropertyNote" />
+          <EntitySet Name="vwUnderwritingProperties" EntityType="IntranetPortalModel.vwUnderwritingProperty" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -3374,6 +3414,25 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwUnderwritingProperty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="UnderwritingStatus" Type="Int32" />
+          <Property Name="UnderwritingCreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnderwritingCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UnderwritingUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="SearchStatus" Type="Int32" />
+          <Property Name="SearchCompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SearchCompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="SearchUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NewOfferStatus" Type="Int32" />
+          <Property Name="CaseName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Team" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4966,6 +5025,26 @@ warning 6002: The table/view 'IntranetPortal.dbo.UnderwritingTrackingView' does 
                 <ScalarProperty Name="BPOValue" ColumnName="BPOValue" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwUnderwritingProperties">
+            <EntityTypeMapping TypeName="IntranetPortalModel.vwUnderwritingProperty">
+              <MappingFragment StoreEntitySet="vwUnderwritingProperties">
+                <ScalarProperty Name="Team" ColumnName="Team" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
+                <ScalarProperty Name="NewOfferStatus" ColumnName="NewOfferStatus" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="SearchUpdateDate" ColumnName="SearchUpdateDate" />
+                <ScalarProperty Name="SearchCompletedOn" ColumnName="SearchCompletedOn" />
+                <ScalarProperty Name="SearchCompletedBy" ColumnName="SearchCompletedBy" />
+                <ScalarProperty Name="SearchStatus" ColumnName="SearchStatus" />
+                <ScalarProperty Name="UnderwritingUpdateDate" ColumnName="UnderwritingUpdateDate" />
+                <ScalarProperty Name="UnderwritingCreateDate" ColumnName="UnderwritingCreateDate" />
+                <ScalarProperty Name="UnderwritingCreateBy" ColumnName="UnderwritingCreateBy" />
+                <ScalarProperty Name="UnderwritingStatus" ColumnName="UnderwritingStatus" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

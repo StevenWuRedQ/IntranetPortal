@@ -1773,8 +1773,8 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
                 }
             }
         }
-
     }
+
     this.parseSearch = function (/*string*/ searchString) {
         var result = {};
         if (!searchString || typeof searchString != 'string')   //not a string
@@ -2546,9 +2546,9 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
                 var that = this;
                 if (this.serviceURL) return this.serviceURL;
                 $http({
-                    url: "/Webconfig.txt",
+                    url: "/api/underwriting/config",
                     method: "GET"
-                }).then(function (d) {
+                }).then(function (d) {                    
                     that.serviceURL = d.data["UnderwritingServiceServerClient"] + "/signalr";
                 })
             },
@@ -2570,6 +2570,7 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
             },
             // try to a proxy incase signalr is reconnecting.        
             tryGetProxy: function () {
+                debugger;
                 var that = this;
                 if (!this.inited) this.tryInit();
                 return $q(function (resolve, reject) {
@@ -2710,7 +2711,7 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
             var that = this;
             return $q(function (resolve, reject) {
                 if (!bble) reject("BBLE cannot be blank.");
-                var username = ptCom.getCurrentUser();
+                //var username = ptCom.getCurrentUser();
                 var newData = underwriting.new();
                 newData.BBLE = bble;
                 newData.Status = 1;
@@ -4812,8 +4813,16 @@ angular.module("PortalApp").controller("DocSearchController", [
                         // if (gridCase) gridCase.Refresh();
                     });
                 }
-
             };
+
+            $scope.MoveToUnderwriting = function(bble)
+            {
+                ptUnderwriting.tryCreate(bble).then(function () {
+                    AngularRoot.alert("Document completed!");
+                }, function error(e) {
+                    console.log(e);
+                });
+            }
 
             // only one of fha, fannie, freddie_mac can be yes at the same time
             $scope.$watch("DocSearch.LeadResearch.fha",

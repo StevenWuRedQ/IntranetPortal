@@ -8,11 +8,23 @@ Imports Newtonsoft.Json.Linq
 Public Class UnderwritingService
     Shared HubURL As String
 
+    Public Shared Server As String = System.Configuration.ConfigurationManager.AppSettings("UnderwritingServiceServer")
+    Public Shared ServerClient As String = System.Configuration.ConfigurationManager.AppSettings("UnderwritingServiceServerClient")
+
     Shared Sub New()
-        Dim ConfigJson = JObject.Parse(File.ReadAllText(HttpRuntime.AppDomainAppPath + "\Webconfig.txt"))
-        HubURL = ConfigJson("UnderwritingServiceServer").ToString & "/signalr"
+        'Dim ConfigJson = JObject.Parse(File.ReadAllText(HttpRuntime.AppDomainAppPath + "\Webconfig.txt"))
+        'HubURL = ConfigJson("UnderwritingServiceServer").ToString & "/signalr"
+
+        HubURL = Server & "/signalr"
         ServicePointManager.DefaultConnectionLimit = 10
     End Sub
+
+    Public Shared Function GetPropertiesList2() As List(Of vwUnderwritingProperty)
+        Using ctx As New PortalEntities
+            Return ctx.vwUnderwritingProperties.ToList
+        End Using
+    End Function
+
 
     Public Shared Function GetPropertiesList() As IEnumerable(Of Object)
         Using ctx As New PortalEntities

@@ -110,9 +110,9 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
                 var that = this;
                 if (this.serviceURL) return this.serviceURL;
                 $http({
-                    url: "/Webconfig.txt",
+                    url: "/api/underwriting/config",
                     method: "GET"
-                }).then(function (d) {
+                }).then(function (d) {                    
                     that.serviceURL = d.data["UnderwritingServiceServerClient"] + "/signalr";
                 })
             },
@@ -134,6 +134,7 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
             },
             // try to a proxy incase signalr is reconnecting.        
             tryGetProxy: function () {
+                debugger;
                 var that = this;
                 if (!this.inited) this.tryInit();
                 return $q(function (resolve, reject) {
@@ -274,7 +275,7 @@ angular.module("PortalApp").factory("ptUnderwriting", ["$http", "ptCom", '$q', '
             var that = this;
             return $q(function (resolve, reject) {
                 if (!bble) reject("BBLE cannot be blank.");
-                var username = ptCom.getCurrentUser();
+                //var username = ptCom.getCurrentUser();
                 var newData = underwriting.new();
                 newData.BBLE = bble;
                 newData.Status = 1;

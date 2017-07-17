@@ -195,8 +195,8 @@ angular.module("PortalApp").service("ptCom", ["$rootScope", function ($rootScope
                 }
             }
         }
-
     }
+
     this.parseSearch = function (/*string*/ searchString) {
         var result = {};
         if (!searchString || typeof searchString != 'string')   //not a string

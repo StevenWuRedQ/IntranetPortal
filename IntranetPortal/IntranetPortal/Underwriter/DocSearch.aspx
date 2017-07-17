@@ -41,7 +41,7 @@ mode 2: Underwriting mode,  user can view but not modified search, user can view
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.2.1/jquery.signalR.min.js"></script>
-    <script src="http://localhost:8887/signalr/hubs"></script>
+    <script src='<%= IntranetPortal.UnderwritingService.ServerClient + "/signalr/hubs"%>'></script>
     <div id="dataPanelDiv">
         <input type="hidden" id="BBLE" value="<%= Request.QueryString("BBLE")%>" />
         <div style="font-size: 12px; color: #9fa1a8;">
@@ -52,7 +52,6 @@ mode 2: Underwriting mode,  user can view but not modified search, user can view
                         <div class="font_size_bold" style="width: 100px">Summary</div>
                     </a>
                 </li>
-
                 <li class="short_sale_head_tab activity_light_blue" ui-sref-active="active">
                     <a role="tab" ui-sref="underwritingRequest" class="tab_button_a">
                         <i class="fa fa-book head_tab_icon_padding"></i>

@@ -136,8 +136,16 @@ angular.module("PortalApp").controller("DocSearchController", [
                         // if (gridCase) gridCase.Refresh();
                     });
                 }
-
             };
+
+            $scope.MoveToUnderwriting = function(bble)
+            {
+                ptUnderwriting.tryCreate(bble).then(function () {
+                    AngularRoot.alert("Document completed!");
+                }, function error(e) {
+                    console.log(e);
+                });
+            }
 
             // only one of fha, fannie, freddie_mac can be yes at the same time
             $scope.$watch("DocSearch.LeadResearch.fha",

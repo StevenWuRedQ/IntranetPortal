@@ -33,7 +33,6 @@ Public Class LeadsInfo1
                 Else
                     doorKnockMapPanel.Visible = False
                 End If
-
             End If
 
             If Not ShowLogPanel Then
