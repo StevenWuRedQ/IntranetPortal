@@ -66,7 +66,7 @@ namespace RedQ.UnderwritingService.Hub
         {
             if (string.IsNullOrEmpty(BBLE)) throw new Exception("BBLE is Required.");
             if (string.IsNullOrEmpty(statusNote)) throw new Exception("Status Note is Required.");
-            if (string.IsNullOrEmpty(updateBy)) throw new Exception("Underwriter's infomation is missing.");
+            if (string.IsNullOrEmpty(updateBy)) throw new Exception("Underwriter's information is missing.");
             Underwriting.UnderwritingStatusEnum estatus = (Underwriting.UnderwritingStatusEnum)status;
             UnderwritingDAO.ChangeStatus(BBLE, estatus, statusNote, updateBy);
             return;

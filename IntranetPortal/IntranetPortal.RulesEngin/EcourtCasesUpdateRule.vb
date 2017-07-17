@@ -1,9 +1,9 @@
 ﻿Imports IntranetPortal.Data
 
 ''' <summary>
-''' The update rule for Ecourt Cases
+''' The update rule for ECourt Cases
 ''' </summary>
-Public Class EcourtCasesUpdateRule
+Public Class ECourtCasesUpdateRule
     Inherits BaseRule
 
     Public Overrides Sub Execute()
@@ -12,7 +12,7 @@ Public Class EcourtCasesUpdateRule
         While try_count < 3
             Try
                 LeadsEcourtData.DailyUpdate()
-                Log("Ecourt Data Daily Update is completed.")
+                Log("ECourt Data Daily Update is completed.")
                 Return
             Catch ex As Exception
                 Log("Error in " & RuleName, ex)

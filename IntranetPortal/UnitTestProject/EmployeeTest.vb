@@ -190,7 +190,7 @@ Public Class EmployeeTest
                                            Return 0
                                        End Function)
 
-                              ' todo
+                              ' TODO
                               ' it should not allow insert
                               ' Do not pass the 
                               ' Lead.UpdateStatus(LeadStatus.Callback)

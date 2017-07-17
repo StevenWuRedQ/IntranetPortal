@@ -55,6 +55,7 @@ Partial Class Troubleshooting
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button22 = New System.Windows.Forms.Button()
         Me.btnNewOfferNotify = New System.Windows.Forms.Button()
         Me.AutoAssignRules = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
@@ -149,7 +150,8 @@ Partial Class Troubleshooting
         Me.tpAuction = New System.Windows.Forms.TabPage()
         Me.txtFiles = New System.Windows.Forms.TextBox()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.Button22 = New System.Windows.Forms.Button()
+        Me.UpdateAcris = New System.Windows.Forms.TabPage()
+        Me.UpdateAcrisBtn = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -178,6 +180,7 @@ Partial Class Troubleshooting
         Me.SplitContainer2.SuspendLayout()
         Me.TitleTab.SuspendLayout()
         Me.tpAuction.SuspendLayout()
+        Me.UpdateAcris.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -446,6 +449,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage10)
         Me.TabControl1.Controls.Add(Me.TitleTab)
         Me.TabControl1.Controls.Add(Me.tpAuction)
+        Me.TabControl1.Controls.Add(Me.UpdateAcris)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -496,6 +500,15 @@ Partial Class Troubleshooting
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Leads and Tasks"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Button22
+        '
+        Me.Button22.Location = New System.Drawing.Point(222, 206)
+        Me.Button22.Name = "Button22"
+        Me.Button22.Size = New System.Drawing.Size(153, 26)
+        Me.Button22.TabIndex = 12
+        Me.Button22.Text = "Update password to MD5"
+        Me.Button22.UseVisualStyleBackColor = True
         '
         'btnNewOfferNotify
         '
@@ -1415,14 +1428,24 @@ Partial Class Troubleshooting
         Me.Button20.Text = "Button20"
         Me.Button20.UseVisualStyleBackColor = True
         '
-        'Button22
+        'UpdateAcris
         '
-        Me.Button22.Location = New System.Drawing.Point(222, 206)
-        Me.Button22.Name = "Button22"
-        Me.Button22.Size = New System.Drawing.Size(153, 26)
-        Me.Button22.TabIndex = 12
-        Me.Button22.Text = "Update password to MD5"
-        Me.Button22.UseVisualStyleBackColor = True
+        Me.UpdateAcris.Controls.Add(Me.UpdateAcrisBtn)
+        Me.UpdateAcris.Location = New System.Drawing.Point(4, 22)
+        Me.UpdateAcris.Name = "UpdateAcris"
+        Me.UpdateAcris.Padding = New System.Windows.Forms.Padding(3)
+        Me.UpdateAcris.Size = New System.Drawing.Size(867, 413)
+        Me.UpdateAcris.TabIndex = 13
+        Me.UpdateAcris.Text = "Update Acris"
+        '
+        'UpdateAcrisBtn
+        '
+        Me.UpdateAcrisBtn.Location = New System.Drawing.Point(24, 15)
+        Me.UpdateAcrisBtn.Name = "UpdateAcrisBtn"
+        Me.UpdateAcrisBtn.Size = New System.Drawing.Size(75, 23)
+        Me.UpdateAcrisBtn.TabIndex = 0
+        Me.UpdateAcrisBtn.Text = "Update Acris"
+        Me.UpdateAcrisBtn.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -1473,6 +1496,7 @@ Partial Class Troubleshooting
         Me.TitleTab.ResumeLayout(False)
         Me.tpAuction.ResumeLayout(False)
         Me.tpAuction.PerformLayout()
+        Me.UpdateAcris.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1603,4 +1627,6 @@ Partial Class Troubleshooting
     Friend WithEvents TestEntitiesBtn As Button
     Friend WithEvents btnNewOfferNotify As Button
     Friend WithEvents Button22 As Button
+    Friend WithEvents UpdateAcris As TabPage
+    Friend WithEvents UpdateAcrisBtn As Button
 End Class

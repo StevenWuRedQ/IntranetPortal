@@ -115,7 +115,7 @@
   <ItemGroup>
     <Compile Include="AssignLeadsRule.vb" />
     <Compile Include="DialerIntegrationRule.vb" />
-    <Compile Include="EcourCasesUpdateRule.vb" />
+    <Compile Include="EcourtCasesUpdateRule.vb" />
     <Compile Include="NewofferNotifyRule.vb" />
     <Compile Include="AuctionNotifyRule.vb" />
     <Compile Include="AutoAssignRule.vb" />
@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="ServiceLog.vb" />
     <Compile Include="TaskSummaryRule.vb" />
+    <Compile Include="UpdateAcrisRule.vb" />
     <Compile Include="WCFServices\IRulesEngineServices.vb" />
     <Compile Include="WCFServices\RulesEngineServices.vb" />
   </ItemGroup>

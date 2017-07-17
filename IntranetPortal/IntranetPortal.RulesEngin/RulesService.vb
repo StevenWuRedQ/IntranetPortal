@@ -80,9 +80,9 @@ Public Class RulesService
 
             ' start the rules
             For Each Rule In Rules
-                Log("Inital Rule: " & Rule.RuleName)
+                Log("Initial Rule: " & Rule.RuleName)
                 RunTimer(Rule)
-                Log("Inital Rule (" & Rule.RuleName & ") Finished. ")
+                Log("Initial Rule (" & Rule.RuleName & ") Finished. ")
             Next
 
             Log("Service is Start")

@@ -7,7 +7,7 @@ Public Class ScanECourtsRule
     ''' Parse each email and send user email when the parse get the right BBLE
     ''' </summary>
     ''' <param name="msg"> the message you want parse</param>
-    ''' <returns>if the message the the right index number and AppearanceDate day</returns>
+    ''' <returns>if the message the right index number and AppearanceDate day</returns>
     Function ParseEourtEmail(msg As ImapX.Message) As Boolean
 
         Dim eCourt = Data.LegalECourt.Parse(msg)
@@ -16,7 +16,7 @@ Public Class ScanECourtsRule
 
 
         If (parseSuccess) Then
-            'Log("sucessed parse mail get Legal Case BBLE :" & eCourt.BBLE & " LegalECourt Id :" & eCourt.Id)
+            'Log("success parse mail get Legal Case BBLE :" & eCourt.BBLE & " LegalECourt Id :" & eCourt.Id)
 
             If (Not eCourt.AppearanceDate.HasValue) Then
                 Log("this email do not contain AppearanceDate id = " & eCourt.Id)
@@ -28,7 +28,7 @@ Public Class ScanECourtsRule
                 Dim lcase = Data.LegalCase.GetCase(eCourt.BBLE)
                 'Log("LegalCase bble: " & lcase.BBLE & "  IndexNumber: " & lcase.FCIndexNum & " == eCourt IndexNumber: " & eCourt.IndexNumber & " eCourt Id: " & eCourt.Id)
                 If (lcase.FCIndexNum <> eCourt.IndexNumber) Then
-                    Log("There are an error happan get woring BBLE eCourt id: " & eCourt.Id)
+                    Log("There are an error happen get wrong BBLE eCourt id: " & eCourt.Id)
                 End If
                 Dim SendList = {lcase.Attorney, lcase.ResearchBy}
                 Dim eList = SendList.Where(Function(e) Not String.IsNullOrEmpty(e)).Select(Function(e) Employee.GetInstance(e)).ToList
@@ -61,7 +61,7 @@ Public Class ScanECourtsRule
 
         Else
             If (msg.Date IsNot Nothing AndAlso msg.Date > Date.Now.AddMinutes(-30)) Then
-                Log("Parse mail Failed ! email subject : " & msg.Subject & " Recived Date: " & msg.Date)
+                Log("Parse mail Failed ! email subject : " & msg.Subject & " Revived Date: " & msg.Date)
 
             End If
         End If
@@ -72,18 +72,18 @@ Public Class ScanECourtsRule
 
         Dim serv = New Core.ParseEmailService("Portal.etrack@myidealprop.com", "ColorBlue1")
         If (Not serv.IsLogedIn()) Then
-            Log("Can not Login Etrack account email please notice !")
+            Log("Can not Login ETrack account email please notice !")
         End If
         serv.ParseNewEmails(AddressOf Me.ParseEourtEmail)
         Log("======================== Scan email for ECourts Completed. ========================================")
 
-        Log("======================== Start Upadate BBLE for all ECourt Email ========================================")
+        Log("======================== Start Update BBLE for all ECourt Email ========================================")
         Dim eCases = Data.LegalECourt.GetIndexLegalECourts()
         For Each c In eCases
             If (c.UpdateBBLE()) Then
-                Log("Update Ecourt :" & c.IndexNumber & "Legal Ecourt Id: " & c.Id & "To BBLE: " & c.BBLE)
+                Log("Update ECourt :" & c.IndexNumber & "Legal ECourt Id: " & c.Id & "To BBLE: " & c.BBLE)
             End If
         Next
-        Log("======================== End Upadate BBLE for all ECourt Email ==========================================")
+        Log("======================== End Update BBLE for all ECourt Email ==========================================")
     End Sub
 End Class

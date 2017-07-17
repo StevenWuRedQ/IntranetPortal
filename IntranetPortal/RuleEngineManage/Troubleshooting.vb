@@ -1174,4 +1174,9 @@ Public Class Troubleshooting
             MsgBox("Update to MD5 is finished !")
         End Using
     End Sub
+
+    Private Sub UpdateAcrisBtn_Click(sender As Object, e As EventArgs) Handles UpdateAcrisBtn.Click
+        Dim rule As UpdateAcrisRule = New UpdateAcrisRule()
+        rule.Execute()
+    End Sub
 End Class

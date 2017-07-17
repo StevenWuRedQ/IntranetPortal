@@ -178,7 +178,20 @@ Public Class PropertyService
 
         Return Execute(Of AllLiens)(request, True)
     End Function
-
+    ''' <summary>
+    ''' Get ACRIS Update Transaction in a data range
+    ''' </summary>
+    ''' <param name="from"></param>
+    ''' <param name="[to]"></param>
+    ''' <returns></returns>
+    Public Function GetAcrisUpdateTransaction(from As DateTime, Optional [to] As DateTime = Nothing) As PropertyUpdateTransaction
+        Dim request = GetRequest("api/leads/acris/transaction", Method.GET)
+        request.AddParameter("fromAsDate", from.ToString("yyyyMMdd"))
+        If ([to] > DateTime.MinValue) Then
+            request.AddParameter("toAsDate", [to].ToString())
+        End If
+        Return Execute(Of PropertyUpdateTransaction)(request, True)
+    End Function
 #Region "IDisposable Support"
     Private disposedValue As Boolean ' To detect redundant calls
 
@@ -660,4 +673,12 @@ Public Class NYCAddress
     Public Property yCoordinateLowAddressEnd As String
     Public Property yCoordinateOfCenterofCurvature As String
     Public Property zipCode As String
+End Class
+
+
+Public Class PropertyUpdateTransaction
+    Public Property Data As List(Of String)
+    Public Property Beginning As Date
+    Public Property Count As Integer
+    Public Property [End] As Date
 End Class
